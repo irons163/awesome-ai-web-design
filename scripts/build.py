@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the static catalog, token specimens, index, and deterministic ZIP."""
+"""Build the catalog and ZIP from preserved Stitch exports; never generate mock previews."""
 import hashlib
 import html
 import json
@@ -64,26 +64,22 @@ def metadata(entry, text):
                 prompts=make_prompts(entry),bytes=len(text.encode()),sha256=hashlib.sha256(text.encode()).hexdigest())
 
 
-def preview(entry, mode):
-    name = html.escape(entry['name'])
-    native = entry['mode']==mode
-    canvas = entry['canvas'] if native else ('#111215' if mode=='dark' else '#fafaf8')
-    ink = contrast_ink(canvas)
-    panel = mix(canvas,ink,.045)
-    muted = mix(canvas,ink,.64)
-    border = mix(canvas,ink,.18)
-    accent = entry['primary']
-    # Retain the documented swatch; select readable foregrounds for interactive samples.
-    styles = f'--canvas:{canvas};--panel:{panel};--ink:{ink};--muted:{muted};--border:{border};--accent:{accent};--on-accent:{contrast_ink(accent)};--display:{entry["previewFont"]}'
-    swatches = ''.join(f'<div class="swatch"><span style="background:{color}"></span><code>{color}</code></div>' for color in entry['colors'])
-    return f'''<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{name} · {mode} token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="{styles}"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/{entry['slug']}">← 回到設計集</a><span>{mode.upper()} / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">{name} · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches">{swatches}</div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · {html.escape(entry['font'])}</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。{'此模式沿用參考底色。' if native else '此模式為本專案延伸配色。'}<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>'''
+def stitch_preview(path):
+    provenance = path / 'STITCH.json'
+    if not provenance.exists():
+        return {'status': 'pending'}
+    data = json.loads(provenance.read_text())
+    for name, digest in data['files'].items():
+        if hashlib.sha256((path / name).read_bytes()).hexdigest() != digest:
+            raise ValueError(f'Stitch export checksum mismatch: {path.name}/{name}')
+    return {'status': 'generated', 'provider': 'Google Stitch',
+            'image': f"design-md/{path.name}/{data['screenshot']}",
+            'thumbnail': f"design-md/{path.name}/{data.get('thumbnail', data['screenshot'])}",
+            'html': f"design-md/{path.name}/preview.html",
+            'provenance': f"design-md/{path.name}/STITCH.json",
+            'prompt': f"design-md/{path.name}/STITCH-PROMPT.md",
+            'projectId': data['project_id'], 'screenId': data['screen_id'],
+            'title': data['title'], 'width': data['width'], 'height': data['height']}
 
 
 def main():
@@ -91,10 +87,9 @@ def main():
     for recipe in json.loads((ROOT/'data/recipes.json').read_text()):
         path=ROOT/'design-md'/recipe['slug']
         entry=metadata(recipe,(path/'DESIGN.md').read_text())
+        entry['preview'] = stitch_preview(path)
         entries.append(entry)
-        (path/'preview.html').write_text(preview(entry,'light'))
-        (path/'preview-dark.html').write_text(preview(entry,'dark'))
-    catalog={'version':1,'count':len(entries),'promptCount':len(entries)*3,'categories':CATEGORY_LABELS,'designs':entries}
+    catalog={'version':2,'generatedCount':sum(e['preview']['status']=='generated' for e in entries),'count':len(entries),'promptCount':len(entries)*3,'categories':CATEGORY_LABELS,'designs':entries}
     (ROOT/'assets/catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,separators=(',',':'))+'\n')
     readme=(ROOT/'README.md').read_text()
     collection=''
@@ -107,7 +102,7 @@ def main():
     readme=re.sub(r'<!-- COLLECTION:START -->.*?<!-- COLLECTION:END -->','<!-- COLLECTION:START -->\n'+collection+'\n<!-- COLLECTION:END -->',readme,flags=re.S)
     (ROOT/'README.md').write_text(readme)
     paths=sorted(p for p in (ROOT/'design-md').rglob('*') if p.is_file())
-    paths += [ROOT/p for p in ['LICENSE','ATTRIBUTION.md','README.md','assets/preview.css','assets/preview.js']]
+    paths += [ROOT/p for p in ['LICENSE','ATTRIBUTION.md','README.md','VALIDATION.md']]
     paths += sorted((ROOT/'prompts').glob('*.md'))
     paths += [ROOT/p for p in ['index.html','assets/style.css','assets/app.js','assets/catalog.json','assets/favicon.svg','package.json','CONTRIBUTING.md','.gitignore']]
     paths += sorted((ROOT/'scripts').glob('*.py')) + sorted((ROOT/'data').glob('*.json')) + sorted((ROOT/'tests').glob('*.py'))
@@ -117,7 +112,7 @@ def main():
             info=zipfile.ZipInfo(str(path.relative_to(ROOT)),date_time=(2026,9,22,0,0,0))
             info.compress_type=zipfile.ZIP_DEFLATED
             archive.writestr(info,path.read_bytes())
-    print(f'Built {len(entries)} designs, {len(entries)*2} previews, and all-designs.zip.')
+    print(f"Built {len(entries)} designs, {catalog['generatedCount']} genuine Stitch previews, and all-designs.zip.")
 
 if __name__=='__main__':
     main()

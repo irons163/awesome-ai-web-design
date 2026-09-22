@@ -1,8 +1,765 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Figma · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/figma">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Figma · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#e6e6e6"></span><code>#e6e6e6</code></div><div class="swatch"><span style="background:#f1f1f1"></span><code>#f1f1f1</code></div><div class="swatch"><span style="background:#f7f7f5"></span><code>#f7f7f5</code></div><div class="swatch"><span style="background:#dceeb1"></span><code>#dceeb1</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · figmaSans</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tangram Studio — Collaborative Design Workshops</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Public Sans Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;family=Public+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#e2e2e2",
+            "error": "#ba1a1a",
+            "on-surface": "#1a1c1c",
+            "surface-container": "#eeeeee",
+            "inverse-primary": "#c6c6c6",
+            "error-container": "#ffdad6",
+            "surface-dim": "#dadada",
+            "secondary-fixed-dim": "#c6c6c6",
+            "on-primary-fixed-variant": "#474747",
+            "surface-variant": "#e2e2e2",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed": "#1b1b1b",
+            "background": "#f9f9f9",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#e2e2e2",
+            "primary": "#000000",
+            "surface-tint": "#5e5e5e",
+            "surface-container-low": "#f3f3f4",
+            "on-primary": "#ffffff",
+            "secondary-container": "#e2e2e2",
+            "outline-variant": "#cfc4c5",
+            "on-tertiary-fixed-variant": "#474747",
+            "on-surface-variant": "#4c4546",
+            "secondary": "#5e5e5e",
+            "surface-container-highest": "#e2e2e2",
+            "secondary-fixed": "#e2e2e2",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "on-background": "#1a1c1c",
+            "on-tertiary-fixed": "#1b1b1b",
+            "primary-container": "#1b1b1b",
+            "on-primary-container": "#848484",
+            "on-error": "#ffffff",
+            "inverse-on-surface": "#f0f1f1",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary-fixed": "#1b1b1b",
+            "surface": "#f9f9f9",
+            "surface-bright": "#f9f9f9",
+            "outline": "#7e7576",
+            "on-secondary-fixed-variant": "#474747",
+            "on-secondary-container": "#646464",
+            "surface-container-high": "#e8e8e8",
+            "inverse-surface": "#2f3131",
+            "tertiary-container": "#1b1b1b",
+            "tertiary": "#000000",
+            "on-tertiary-container": "#848484"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .canvas-dot-grid {
+      background-image: radial-gradient(#1a1c1c 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cfc4c5;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-surface-variant selection:text-primary">
+<!-- TOP APP BAR (Shared Components: TopNavBar) -->
+<header class="w-full bg-surface-container-lowest border-b border-surface-variant sticky top-0 z-50">
+<div class="flex justify-between items-center h-14 w-full px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Brand Logo -->
+<div class="flex items-center gap-6">
+<a class="font-headline text-xl font-bold tracking-tighter text-primary flex items-center gap-2" href="#">
+<div class="w-6 h-6 bg-primary rounded-sm flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-sm">widgets</span>
+</div>
+          Tangram Studio
+        </a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center gap-7 font-body text-sm font-normal tracking-tight">
+<a class="text-primary font-semibold border-b-2 border-primary pb-1" href="#">Workshops</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Spaces</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Pricing</a>
+</nav>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Live multiplayer pulse badge -->
+<div class="hidden lg:flex items-center gap-2 px-3 py-1 bg-surface-container-low border border-surface-variant rounded-full text-xs font-mono">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-on-surface font-medium">128 active</span>
+</div>
+<button class="text-on-surface-variant hover:text-primary p-1.5 transition-colors" title="Collaborators">
+<span class="material-symbols-outlined text-xl">group</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary p-1.5 transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-xl">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-primary rounded-full"></span>
+</button>
+<div class="h-4 w-px bg-surface-variant mx-1 hidden sm:block"></div>
+<button class="text-primary font-body text-sm font-medium hover:text-secondary transition-colors px-2 hidden sm:inline-block">
+          Contact sales
+        </button>
+<button class="bg-primary text-on-primary font-body text-sm font-medium px-4 py-2 rounded-full hover:bg-neutral-800 transition-transform active:scale-[0.99] flex items-center gap-1.5">
+<span>Get started for free</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN EDITORIAL HERO SECTION -->
+<section class="w-full bg-surface-container-lowest border-b border-surface-variant pt-16 pb-20 px-6 md:px-12">
+<div class="max-w-7xl mx-auto flex flex-col items-start">
+<!-- Eyebrow Tag -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container border border-surface-variant rounded-full mb-6 font-mono text-xs uppercase tracking-wider text-on-surface">
+<span class="material-symbols-outlined text-sm">bolt</span>
+        Live Multiplayer Sprints &amp; Wireframe Jams
+      </div>
+<!-- Display Headline -->
+<h1 class="font-headline text-5xl sm:text-6xl md:text-7xl lg:text-[76px] font-normal leading-[1.02] tracking-[-2px] text-primary max-w-5xl mb-6">
+        Where wild design concepts turn into <span class="font-semibold underline decoration-2 underline-offset-8">shippable realities</span>, together.
+      </h1>
+<!-- Subhead Paragraph -->
+<p class="font-body text-lg sm:text-xl text-on-surface-variant max-w-3xl leading-relaxed font-light mb-10">
+        Run frictionless real-time multi-user design sprints, asynchronous critique spaces, and cross-functional prototype labs. No heavyweight licenses or siloed files—just an infinite tactile canvas for high-velocity craft.
+      </p>
+<!-- Quick Action Cluster -->
+<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto mb-10">
+<button class="bg-primary text-on-primary font-body text-base font-medium px-7 py-3 rounded-full hover:bg-neutral-800 transition-all flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+          Create Blank Room
+        </button>
+<a class="bg-surface-container-low text-primary border border-surface-variant font-body text-base font-medium px-6 py-3 rounded-full hover:bg-surface-container transition-all flex items-center gap-2" href="#active-sessions">
+<span class="material-symbols-outlined text-lg">view_stream</span>
+          Browse Live Workshops (14 active)
+        </a>
+</div>
+<!-- Workshop Focus Tracks / Chips -->
+<div class="flex flex-wrap items-center gap-2 pt-2 border-t border-surface-variant w-full font-mono text-xs">
+<span class="text-on-surface-variant uppercase tracking-wider mr-2">Core Tracks:</span>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors">Product Strategy</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors">Design Systems 3.0</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors">Rapid Prototyping</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-surface-container-high rounded-full text-on-surface transition-colors">Spatial &amp; AI UX</button>
+</div>
+</div>
+</section>
+<!-- INTERACTIVE MULTIPLAYER CANVAS DEMONSTRATION -->
+<section class="w-full bg-surface-container-low py-12 px-6 md:px-12 border-b border-surface-variant overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<!-- Demonstration Canvas Header Bar -->
+<div class="bg-surface-container-lowest border border-surface-variant rounded-t-xl px-4 py-3 flex flex-wrap items-center justify-between gap-4">
+<!-- Canvas Status & Document Title -->
+<div class="flex items-center gap-3">
+<span class="flex h-3 w-3 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-50"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</span>
+<div class="flex items-center gap-2">
+<span class="font-headline font-semibold text-sm text-primary">Multi-brand Design System 3.0 Sync</span>
+<span class="bg-surface-container text-xs px-2 py-0.5 rounded font-mono text-on-surface">ROOM #418</span>
+</div>
+</div>
+<!-- Canvas Toolbar Icons -->
+<div class="hidden sm:flex items-center gap-1 bg-surface-container-low p-1 rounded-lg border border-surface-variant">
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-primary transition-colors" title="Select tool">
+<span class="material-symbols-outlined text-sm">near_me</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Pan tool">
+<span class="material-symbols-outlined text-sm">pan_tool</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Frame tool">
+<span class="material-symbols-outlined text-sm">crop_free</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container-lowest border border-surface-variant text-primary shadow-xs transition-colors" title="Sticky Note">
+<span class="material-symbols-outlined text-sm">sticky_note_2</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Draw/Pen">
+<span class="material-symbols-outlined text-sm">draw</span>
+</button>
+<button class="p-1.5 rounded hover:bg-surface-container-highest text-on-surface-variant transition-colors" title="Comment">
+<span class="material-symbols-outlined text-sm">chat_bubble</span>
+</button>
+</div>
+<!-- Zoom & Collaborative Presence -->
+<div class="flex items-center gap-3">
+<div class="flex -space-x-1.5 overflow-hidden">
+<div class="inline-block h-6 w-6 rounded-full bg-primary text-on-primary font-mono text-[10px] font-bold flex items-center justify-center border border-surface-container-lowest">EV</div>
+<div class="inline-block h-6 w-6 rounded-full bg-neutral-700 text-on-primary font-mono text-[10px] font-bold flex items-center justify-center border border-surface-container-lowest">MK</div>
+<div class="inline-block h-6 w-6 rounded-full bg-neutral-500 text-on-primary font-mono text-[10px] font-bold flex items-center justify-center border border-surface-container-lowest">AC</div>
+<div class="inline-block h-6 w-6 rounded-full bg-surface-container text-on-surface font-mono text-[10px] font-medium flex items-center justify-center border border-surface-container-lowest">+4</div>
+</div>
+<span class="text-xs font-mono text-on-surface-variant border-l border-surface-variant pl-3">100%</span>
+<button class="p-1 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-base">fullscreen</span>
+</button>
+</div>
+</div>
+<!-- Live Mock Artboard Area -->
+<div class="bg-surface-container-lowest border-x border-b border-surface-variant rounded-b-xl h-[460px] relative overflow-hidden canvas-dot-grid p-8">
+<!-- Frame 1: Sticky Notes Ideation Cluster -->
+<div class="absolute top-10 left-8 sm:left-14 w-64 bg-surface-container-lowest border-2 border-primary rounded-lg p-4 shadow-sm">
+<div class="flex items-center justify-between border-b border-surface-variant pb-2 mb-3">
+<span class="font-headline text-xs font-bold tracking-tight text-primary">01 / Wireframe Principles</span>
+<span class="font-mono text-[10px] text-on-surface-variant">3 CARDS</span>
+</div>
+<!-- Color Sticky Note 1 (Solid soft block) -->
+<div class="bg-surface-container-high border border-surface-variant p-3 rounded mb-3 shadow-xs transform -rotate-1">
+<p class="font-body text-xs text-primary leading-tight font-medium">"Let's test 3-column modular cards for the new component gallery."</p>
+<div class="flex items-center justify-between mt-2 pt-1 border-t border-surface-variant">
+<span class="font-mono text-[9px] text-on-surface-variant">@Elena V.</span>
+<span class="flex items-center text-[10px] gap-1 font-mono bg-surface-container-lowest px-1.5 py-0.5 rounded border border-surface-variant">
+<span class="material-symbols-outlined text-[11px]">thumb_up</span> 4
+              </span>
+</div>
+</div>
+<!-- Color Sticky Note 2 -->
+<div class="bg-surface-container-low border border-surface-variant p-3 rounded shadow-xs transform rotate-1">
+<p class="font-body text-xs text-primary leading-tight font-medium">"Typography feels confident and airy. Don't compromise padding!"</p>
+<div class="flex items-center justify-between mt-2 pt-1 border-t border-surface-variant">
+<span class="font-mono text-[9px] text-on-surface-variant">@Marcus K.</span>
+<span class="flex items-center text-[10px] gap-1 font-mono bg-surface-container-lowest px-1.5 py-0.5 rounded border border-surface-variant">
+<span class="material-symbols-outlined text-[11px]">favorite</span> 6
+              </span>
+</div>
+</div>
+</div>
+<!-- Flow Connector (SVG representation) -->
+<svg class="absolute top-24 left-72 sm:left-80 w-36 h-28 hidden md:block pointer-events-none" fill="none" viewbox="0 0 140 100">
+<path d="M 10 40 C 60 40, 70 80, 130 80" stroke="#1b1b1b" stroke-dasharray="4 4" stroke-width="2"></path>
+<polygon fill="#1b1b1b" points="128,75 138,80 128,85"></polygon>
+<text fill="#4c4546" font-family="monospace" font-size="9" x="50" y="45">PROTOTYPE</text>
+</svg>
+<!-- Frame 2: UI Mockup Artboard -->
+<div class="absolute top-12 left-72 sm:left-96 sm:ml-20 w-72 sm:w-96 bg-surface-container-lowest border-2 border-primary rounded-lg p-5 shadow-md">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-surface-variant"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-surface-variant"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-surface-variant"></span>
+<span class="font-mono text-[11px] text-on-surface font-semibold ml-2">ProductDetail_v3.canvas</span>
+</div>
+<span class="font-mono text-[10px] bg-primary text-on-primary px-2 py-0.5 rounded">EXPORT READY</span>
+</div>
+<!-- Wireframe mockup content -->
+<div class="space-y-3">
+<div class="h-6 bg-surface-container rounded w-3/4 flex items-center px-2">
+<div class="h-2 bg-surface-tint rounded w-1/3"></div>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<div class="h-16 bg-surface-container-low border border-surface-variant rounded flex flex-col justify-end p-1.5">
+<span class="font-mono text-[8px] text-on-surface-variant">Tokens</span>
+</div>
+<div class="h-16 bg-surface-container border border-primary rounded flex flex-col justify-end p-1.5 ring-2 ring-primary ring-offset-1">
+<span class="font-mono text-[8px] text-primary font-bold">Selected</span>
+</div>
+<div class="h-16 bg-surface-container-low border border-surface-variant rounded flex flex-col justify-end p-1.5">
+<span class="font-mono text-[8px] text-on-surface-variant">Export</span>
+</div>
+</div>
+<div class="h-10 bg-surface-container-low border border-surface-variant rounded flex items-center justify-between px-3">
+<span class="font-mono text-[10px] text-on-surface">Auto-Layout: Spacing 24px</span>
+<span class="material-symbols-outlined text-xs text-primary">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Multiplayer Cursor 1: Elena V. -->
+<div class="absolute top-28 left-64 z-20 flex flex-col items-start pointer-events-none transition-all duration-300">
+<svg class="w-5 h-5 text-primary drop-shadow-sm" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.428z"></path>
+</svg>
+<div class="bg-primary text-on-primary font-mono text-[10px] px-2 py-0.5 rounded shadow-sm whitespace-nowrap -mt-1 ml-3">
+            Elena V. (Staff Designer)
+          </div>
+</div>
+<!-- Multiplayer Cursor 2: Marcus K. -->
+<div class="absolute bottom-20 right-28 sm:right-48 z-20 flex flex-col items-start pointer-events-none transition-all duration-300">
+<svg class="w-5 h-5 text-neutral-800 drop-shadow-sm" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 0l16 12.279-6.951 1.17 4.325 8.817-3.596 1.734-4.35-8.879-5.428 5.428z"></path>
+</svg>
+<div class="bg-neutral-800 text-on-primary font-mono text-[10px] px-2 py-0.5 rounded shadow-sm whitespace-nowrap -mt-1 ml-3">
+            Marcus K. (Design Lead)
+          </div>
+</div>
+<!-- Bottom Canvas Controls Pill -->
+<div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-surface-container-lowest border border-surface-variant px-4 py-2 rounded-full shadow-sm flex items-center gap-4">
+<button class="font-mono text-xs text-on-surface hover:text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">history</span> Session Log
+          </button>
+<div class="h-3 w-px bg-surface-variant"></div>
+<span class="font-mono text-xs text-on-surface-variant">Sync Latency: 14ms</span>
+<div class="h-3 w-px bg-surface-variant"></div>
+<button class="font-mono text-xs font-semibold text-primary hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">play_circle</span> Replay Jam
+          </button>
+</div>
+</div>
+</div>
+</section>
+<!-- WORKSHOP FILTER & TOOLKIT BAR -->
+<section class="w-full bg-surface-container-lowest py-8 px-6 md:px-12 border-b border-surface-variant" id="active-sessions">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+<!-- Filter Categories -->
+<div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 custom-scrollbar">
+<button class="bg-primary text-on-primary font-body text-xs font-medium px-4 py-2 rounded-full whitespace-nowrap">
+          All Rooms (14)
+        </button>
+<button class="bg-surface-container-low text-on-surface hover:text-primary hover:bg-surface-container font-body text-xs font-medium px-4 py-2 rounded-full border border-surface-variant whitespace-nowrap transition-colors">
+          Sprint Sessions
+        </button>
+<button class="bg-surface-container-low text-on-surface hover:text-primary hover:bg-surface-container font-body text-xs font-medium px-4 py-2 rounded-full border border-surface-variant whitespace-nowrap transition-colors">
+          Critique &amp; Review
+        </button>
+<button class="bg-surface-container-low text-on-surface hover:text-primary hover:bg-surface-container font-body text-xs font-medium px-4 py-2 rounded-full border border-surface-variant whitespace-nowrap transition-colors">
+          Async Brainstorms
+        </button>
+<button class="bg-surface-container-low text-on-surface hover:text-primary hover:bg-surface-container font-body text-xs font-medium px-4 py-2 rounded-full border border-surface-variant whitespace-nowrap transition-colors">
+          Masterclasses
+        </button>
+</div>
+<!-- Quick Toggles -->
+<div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+<label class="flex items-center gap-2 cursor-pointer">
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 h-4 w-4" type="checkbox"/>
+<span class="font-mono text-xs text-on-surface font-medium flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+            Live Rooms Only
+          </span>
+</label>
+<div class="h-4 w-px bg-surface-variant"></div>
+<div class="flex items-center gap-1 border border-surface-variant rounded-md p-1 bg-surface-container-lowest">
+<button class="p-1 rounded bg-surface-container text-primary" title="Grid View">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-primary" title="List View">
+<span class="material-symbols-outlined text-sm">view_agenda</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- WORKSHOP CARDS & COLORED PROJECT TILES (EDITORIAL BENTO GRID) -->
+<section class="w-full bg-background py-16 px-6 md:px-12 flex-1">
+<div class="max-w-7xl mx-auto">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-end justify-between mb-10 pb-4 border-b border-surface-variant gap-4">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant block mb-2">Multiplayer Directory</span>
+<h2 class="font-headline text-3xl sm:text-4xl font-normal tracking-tight text-primary">Active &amp; Upcoming Collaborative Sessions</h2>
+</div>
+<p class="font-mono text-xs text-on-surface-variant max-w-xs text-left sm:text-right">
+          Real-time rooms refresh dynamically. Click any session to enter observer or active participant mode.
+        </p>
+</div>
+<!-- Grid of Dedicated Workshop Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- CARD 1: Mint Block Accent (Design Systems) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
+<div>
+<!-- Dedicated Solid Block Accent Header -->
+<div class="bg-surface-container-high border-b-2 border-primary p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-surface-container-lowest px-2.5 py-1 rounded border border-primary">
+                  LIVE NOW • 8m left
+                </span>
+<span class="font-mono text-xs text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span> 45 min sprint
+                </span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-primary leading-tight">
+                Design Systems 3.0: Fluid Tokens &amp; Multi-Brand Themes
+              </h3>
+</div>
+<!-- Content Body -->
+<div class="p-6">
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+                Hands-on token refactoring exercise. We are stress-testing semantic alias tokens, responsive typographic ramps, and contrast-safe dark shifts across 4 imaginary product sub-brands.
+              </p>
+<!-- Track Details & Facilitator -->
+<div class="space-y-3 mb-6 pt-3 border-t border-surface-variant">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Track:</span>
+<span class="text-primary font-semibold">Systems Architecture</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Facilitator:</span>
+<span class="text-primary font-semibold">Kaelen Voss (Staff Systems Arch)</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Space:</span>
+<span class="text-on-surface">Main Artboard A</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="p-6 pt-0 border-t border-surface-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between pt-4 mb-4">
+<!-- Live avatar stack -->
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">KV</span>
+<span class="w-7 h-7 rounded-full bg-neutral-700 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">DR</span>
+<span class="w-7 h-7 rounded-full bg-neutral-500 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">JT</span>
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">+12</span>
+</div>
+<span class="font-mono text-xs text-on-surface-variant">15 designers inside</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-body text-sm font-semibold py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+<span>Join Session</span>
+<span class="material-symbols-outlined text-sm">login</span>
+</button>
+</div>
+</article>
+<!-- CARD 2: Butter/Cream Block Accent (Checkout Teardown) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
+<div>
+<!-- Dedicated Solid Block Accent Header -->
+<div class="bg-surface-container border-b-2 border-primary p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-surface-container-lowest px-2.5 py-1 rounded border border-primary">
+                  STARTING IN 15M
+                </span>
+<span class="font-mono text-xs text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span> 60 min session
+                </span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-primary leading-tight">
+                0-to-1 Checkout Flow Teardown &amp; Rebuild Jam
+              </h3>
+</div>
+<!-- Content Body -->
+<div class="p-6">
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+                Breaking apart legacy multi-step checkout modals into frictionless one-tap accordions. Bring your worst conversion horror stories; leave with clean, wireframed solution matrices.
+              </p>
+<!-- Track Details & Facilitator -->
+<div class="space-y-3 mb-6 pt-3 border-t border-surface-variant">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Track:</span>
+<span class="text-primary font-semibold">Product Strategy &amp; FinTech</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Facilitator:</span>
+<span class="text-primary font-semibold">Maya Patel (Lead Product)</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Space:</span>
+<span class="text-on-surface">Critique Room #02</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="p-6 pt-0 border-t border-surface-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between pt-4 mb-4">
+<!-- Live avatar stack -->
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">MP</span>
+<span class="w-7 h-7 rounded-full bg-neutral-600 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">AL</span>
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">+8</span>
+</div>
+<span class="font-mono text-xs text-on-surface-variant">9 designers RSVP'd</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-body text-sm font-semibold py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+<span>Enter Workshop</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- CARD 3: Lavender/Lilac Block Accent (AI Agent Spatial) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
+<div>
+<!-- Dedicated Solid Block Accent Header -->
+<div class="bg-surface-container-highest border-b-2 border-primary p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-surface-container-lowest px-2.5 py-1 rounded border border-primary">
+                  IN CRITIQUE
+                </span>
+<span class="font-mono text-xs text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span> Live async
+                </span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-primary leading-tight">
+                Autonomous AI Agents UI: Spatial Patterns &amp; State Machines
+              </h3>
+</div>
+<!-- Content Body -->
+<div class="p-6">
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+                How should users interrupt background autonomous web workers? Designing human-in-the-loop fallback screens, streaming diff inspectors, and confidence metric indicators.
+              </p>
+<!-- Track Details & Facilitator -->
+<div class="space-y-3 mb-6 pt-3 border-t border-surface-variant">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Track:</span>
+<span class="text-primary font-semibold">Generative &amp; AI UX</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Facilitator:</span>
+<span class="text-primary font-semibold">Zane Takahashi (Design Eng)</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Space:</span>
+<span class="text-on-surface">Spatial Lab Gamma</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="p-6 pt-0 border-t border-surface-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between pt-4 mb-4">
+<!-- Live avatar stack -->
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">ZT</span>
+<span class="w-7 h-7 rounded-full bg-neutral-700 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">CB</span>
+<span class="w-7 h-7 rounded-full bg-neutral-500 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">RK</span>
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">+18</span>
+</div>
+<span class="font-mono text-xs text-on-surface-variant">21 designers reviewing</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-body text-sm font-semibold py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+<span>Join Critique Session</span>
+<span class="material-symbols-outlined text-sm">visibility</span>
+</button>
+</div>
+</article>
+<!-- CARD 4: Coral Block Accent (Mobile Micro-Interactions) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
+<div>
+<!-- Dedicated Solid Block Accent Header -->
+<div class="bg-surface-container-low border-b-2 border-primary p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-surface-container-lowest px-2.5 py-1 rounded border border-primary">
+                  OPEN WORKBENCH
+                </span>
+<span class="font-mono text-xs text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span> Open floor
+                </span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-primary leading-tight">
+                Mobile First Sprints: Micro-Interactions &amp; Haptic Curves
+              </h3>
+</div>
+<!-- Content Body -->
+<div class="p-6">
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+                Exploring iOS gesture physics, pull-to-refresh elastic damping, and dynamic sheet transformations. Shared live preview mirrors directly onto connected iPhone devices.
+              </p>
+<!-- Track Details & Facilitator -->
+<div class="space-y-3 mb-6 pt-3 border-t border-surface-variant">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Track:</span>
+<span class="text-primary font-semibold">Mobile &amp; Tactile Motion</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Facilitator:</span>
+<span class="text-primary font-semibold">Sofia Morales (Interaction Des.)</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Space:</span>
+<span class="text-on-surface">Device Lab 04</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="p-6 pt-0 border-t border-surface-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between pt-4 mb-4">
+<!-- Live avatar stack -->
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">SM</span>
+<span class="w-7 h-7 rounded-full bg-neutral-600 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">PK</span>
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">+7</span>
+</div>
+<span class="font-mono text-xs text-on-surface-variant">9 jamming</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-body text-sm font-semibold py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+<span>Enter Workshop</span>
+<span class="material-symbols-outlined text-sm">login</span>
+</button>
+</div>
+</article>
+<!-- CARD 5: Sky Soft Block Accent (Brand Strategy) -->
+<article class="bg-surface-container-lowest border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200">
+<div>
+<!-- Dedicated Solid Block Accent Header -->
+<div class="bg-surface-container border-b-2 border-primary p-6">
+<div class="flex items-center justify-between mb-3">
+<span class="font-mono text-xs font-bold uppercase tracking-wider text-primary bg-surface-container-lowest px-2.5 py-1 rounded border border-primary">
+                  STARTING IN 40M
+                </span>
+<span class="font-mono text-xs text-on-surface font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">timer</span> 90 min deep dive
+                </span>
+</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-primary leading-tight">
+                Brand Typography in Product: Hierarchy, Legibility &amp; Identity
+              </h3>
+</div>
+<!-- Content Body -->
+<div class="p-6">
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+                When does display typography start hurting accessibility? Collaborative stress-test with variable grotesque cuts across multi-language localized UI mocks.
+              </p>
+<!-- Track Details & Facilitator -->
+<div class="space-y-3 mb-6 pt-3 border-t border-surface-variant">
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Track:</span>
+<span class="text-primary font-semibold">Brand &amp; Type Systems</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Facilitator:</span>
+<span class="text-primary font-semibold">Jonas Lindqvist (Creative Dir)</span>
+</div>
+<div class="flex items-center justify-between text-xs font-mono">
+<span class="text-on-surface-variant">Space:</span>
+<span class="text-on-surface">Type Foundry Space</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer & Action -->
+<div class="p-6 pt-0 border-t border-surface-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between pt-4 mb-4">
+<!-- Live avatar stack -->
+<div class="flex -space-x-2">
+<span class="w-7 h-7 rounded-full bg-primary text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">JL</span>
+<span class="w-7 h-7 rounded-full bg-neutral-600 text-on-primary text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">TM</span>
+<span class="w-7 h-7 rounded-full bg-surface-container text-on-surface text-[10px] font-mono font-bold flex items-center justify-center border-2 border-surface-container-lowest">+14</span>
+</div>
+<span class="font-mono text-xs text-on-surface-variant">16 registered</span>
+</div>
+<button class="w-full bg-primary text-on-primary font-body text-sm font-semibold py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center justify-center gap-2">
+<span>Reserve Canvas Slot</span>
+<span class="material-symbols-outlined text-sm">bookmark</span>
+</button>
+</div>
+</article>
+<!-- CARD 6: Host Your Own Sprint Banner Block -->
+<article class="bg-primary text-on-primary border-2 border-primary rounded-xl overflow-hidden flex flex-col justify-between p-8">
+<div>
+<div class="inline-flex items-center gap-1.5 font-mono text-xs px-2.5 py-1 rounded bg-neutral-800 text-on-primary mb-6 border border-neutral-700">
+<span class="material-symbols-outlined text-sm">group_add</span> FACILITATOR MODE
+            </div>
+<h3 class="font-headline text-3xl font-bold tracking-tight text-on-primary leading-tight mb-4">
+              Need a private sprint canvas for your product squad?
+            </h3>
+<p class="font-body text-sm text-surface-container leading-relaxed mb-6 font-light">
+              Spin up ephemeral or persistent multiplayer spaces with your company's custom sticker packs, sprint timers, voting rounds, and Slack/Linear webhook relays.
+            </p>
+</div>
+<div class="pt-6 border-t border-neutral-800">
+<button class="w-full bg-on-primary text-primary font-body text-sm font-semibold py-3 rounded-full hover:bg-surface-variant transition-colors flex items-center justify-center gap-2">
+<span>Start an Instant Session</span>
+<span class="material-symbols-outlined text-sm">bolt</span>
+</button>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- COLLABORATIVE TOOLKIT FEATURES -->
+<section class="w-full bg-surface-container-lowest py-20 px-6 md:px-12 border-t border-surface-variant">
+<div class="max-w-7xl mx-auto">
+<div class="max-w-2xl mb-12">
+<span class="font-mono text-xs uppercase tracking-widest text-on-surface-variant block mb-2">Designed for Flow</span>
+<h2 class="font-headline text-3xl sm:text-4xl font-normal tracking-tight text-primary">Everything your team needs to jam without friction.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="border border-surface-variant p-6 rounded-lg bg-surface-container-low">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg">touch_app</span>
+</div>
+<h4 class="font-headline text-lg font-bold text-primary mb-2">Zero-Install Live Multi-Presence</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+            Invite engineers, PMs, and stakeholders with a lightweight web URL. Real-time cursor coordinates and high-frequency vector syncing keep everyone aligned.
+          </p>
+</div>
+<div class="border border-surface-variant p-6 rounded-lg bg-surface-container-low">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg">how_to_vote</span>
+</div>
+<h4 class="font-headline text-lg font-bold text-primary mb-2">Anonymous Dot Voting &amp; Timers</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+            Eliminate loud-voice bias with blind voting rounds, focused 5-minute timeboxes, and automated cluster summaries for design decisions.
+          </p>
+</div>
+<div class="border border-surface-variant p-6 rounded-lg bg-surface-container-low">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg">sync_alt</span>
+</div>
+<h4 class="font-headline text-lg font-bold text-primary mb-2">Direct Git &amp; Figma Token Export</h4>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+            Don't let ideas die on sticky notes. Turn workshop frames directly into code-ready JSON tokens and wireframe component specs with one click.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- FOOTER (Shared Components: Footer) -->
+<footer class="w-full bg-surface-container-lowest border-t border-surface-variant">
+<div class="w-full py-16 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<!-- Brand & Copyright -->
+<div class="flex flex-col gap-2">
+<span class="font-headline text-lg font-bold tracking-tight text-primary">Tangram Studio</span>
+<p class="font-label text-xs uppercase tracking-wider text-on-surface-variant">
+          © 2025 Tangram Studio Inc. All rights reserved.
+        </p>
+</div>
+<!-- Footer Navigation Links -->
+<nav class="flex flex-wrap gap-x-6 gap-y-3 font-label text-xs uppercase tracking-wider">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Overview</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Features</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Design Systems</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Collaboration</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Enterprise</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Community</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Privacy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Terms</a>
+</nav>
+</div>
+</footer>
+</body></html>

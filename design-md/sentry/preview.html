@@ -1,8 +1,906 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sentry · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#150f23;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/sentry">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Sentry · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#150f23"></span><code>#150f23</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#1f1633"></span><code>#1f1633</code></div><div class="swatch"><span style="background:#c2ef4e"></span><code>#c2ef4e</code></div><div class="swatch"><span style="background:#fa7faa"></span><code>#fa7faa</code></div><div class="swatch"><span style="background:#6a5fc1"></span><code>#6a5fc1</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Sentri Display, Rubik, system-ui, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vigilant — Error Triage Workspace</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Rubik:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#150f23",
+            "outline": "#362d59",
+            "on-secondary-container": "#bdb8c0",
+            "primary": "#c2ef4e",
+            "inverse-on-surface": "#150f23",
+            "surface-bright": "#2a1e45",
+            "surface-tint": "#6a5fc1",
+            "on-primary-fixed": "#150f23",
+            "on-surface": "#ffffff",
+            "inverse-surface": "#f9f9f9",
+            "on-tertiary-fixed-variant": "#fa7faa",
+            "surface-container-low": "#19122b",
+            "on-primary-fixed-variant": "#c2ef4e",
+            "tertiary-container": "#422082",
+            "on-tertiary-container": "#fa7faa",
+            "on-secondary-fixed-variant": "#79628c",
+            "secondary-container": "#231a3a",
+            "surface-container": "#1f1633",
+            "secondary": "#9d93b3",
+            "on-error": "#ffffff",
+            "outline-variant": "#2b2244",
+            "secondary-fixed-dim": "#79628c",
+            "secondary-fixed": "#2d2347",
+            "tertiary-fixed": "#422082",
+            "primary-fixed-dim": "#a2d42b",
+            "on-tertiary-fixed": "#ffffff",
+            "on-background": "#ffffff",
+            "tertiary": "#fa7faa",
+            "on-primary": "#150f23",
+            "surface-container-highest": "#2d224b",
+            "surface-container-high": "#261c3f",
+            "primary-container": "#150f23",
+            "surface-variant": "#261c3f",
+            "surface-container-lowest": "#110c1c",
+            "on-surface-variant": "#cfcfdb",
+            "on-secondary": "#ffffff",
+            "inverse-primary": "#150f23",
+            "background": "#150f23",
+            "error-container": "#451221",
+            "primary-fixed": "#c2ef4e",
+            "surface-dim": "#110c1d",
+            "tertiary-fixed-dim": "#6a5fc1",
+            "error": "#f43f5e",
+            "on-secondary-fixed": "#ffffff",
+            "on-tertiary": "#150f23",
+            "on-primary-container": "#cfcfdb",
+            "on-error-container": "#ffd1dc"
+          },
+          borderRadius: {
+            "DEFAULT": "4px",
+            "lg": "6px",
+            "xl": "10px",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Rubik", "Inter", "sans-serif"],
+            display: ["Rubik", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "Monaco", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: rgba(21, 15, 35, 0.4);
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #362d59;
+      border-radius: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #6a5fc1;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body h-screen w-screen overflow-hidden flex select-none antialiased">
+<!-- ========================================================================= -->
+<!-- 1. LEFT SIDE NAVIGATION (SideNavBar: Shared Component Spec adhered)      -->
+<!-- ========================================================================= -->
+<aside class="h-screen w-64 flex flex-col justify-between shrink-0 bg-primary-container border-r border-outline py-4 px-3 z-40 relative">
+<!-- Top Brand & Workspaces -->
+<div class="flex flex-col gap-5">
+<!-- Header / Logo -->
+<div class="flex items-center gap-3 px-2 py-1">
+<div class="h-9 w-9 rounded-xl bg-surface-container-high border border-outline flex items-center justify-center relative shadow-inner">
+<span class="material-symbols-outlined text-primary text-xl">speed</span>
+<span class="absolute -top-1 -right-1 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary"></span>
+</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline text-lg font-bold tracking-tight text-on-surface">Vigilant</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-surface-tint/20 text-on-surface-variant border border-surface-tint/40">PROD</span>
+</div>
+<span class="text-xs text-secondary font-mono tracking-tight">Production • v2.14.0</span>
+</div>
+</div>
+<!-- Quick Action / Resolve Batch -->
+<div class="px-1">
+<button class="w-full flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright border border-outline/70 text-on-surface text-xs font-semibold tracking-wide transition-all group active:scale-[0.98]">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-sm group-hover:rotate-12 transition-transform">task_alt</span>
+<span>Resolve Batch</span>
+</span>
+<kbd class="text-[10px] font-mono text-secondary bg-surface-container-low px-1.5 py-0.5 rounded border border-outline/50">⌘R</kbd>
+</button>
+</div>
+<!-- Navigation Tabs (from Shared Spec) -->
+<nav class="flex flex-col gap-1">
+<!-- Issues (Active) -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-tint text-on-primary font-semibold transition-colors duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">bug_report</span>
+<span class="text-sm">Issues</span>
+</div>
+<span class="px-1.5 py-0.2 rounded-full text-[11px] font-mono font-bold bg-error text-white tracking-tight">24</span>
+</a>
+<!-- Performance -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-primary-container font-normal hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">speed</span>
+<span class="text-sm">Performance</span>
+</a>
+<!-- Releases -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-primary-container font-normal hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+<span class="text-sm">Releases</span>
+</a>
+<!-- Alerts -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-on-primary-container font-normal hover:bg-surface-container-high transition-colors duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined">notifications</span>
+<span class="text-sm">Alerts</span>
+</div>
+<span class="h-2 w-2 rounded-full bg-tertiary"></span>
+</a>
+<!-- Discover -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-primary-container font-normal hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-sm">Discover</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-primary-container font-normal hover:bg-surface-container-high transition-colors duration-150" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+<!-- Sub Filter Streams -->
+<div class="pt-2 border-t border-outline/50 flex flex-col gap-1">
+<div class="px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-secondary">Views</div>
+<a class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs text-on-surface-variant hover:bg-surface-container-high hover:text-white" href="#">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-error">error</span>
+            Unresolved
+          </span>
+<span class="font-mono text-secondary">14</span>
+</a>
+<a class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs text-on-surface-variant hover:bg-surface-container-high hover:text-white" href="#">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">person</span>
+            Assigned to me
+          </span>
+<span class="font-mono text-secondary">3</span>
+</a>
+<a class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs text-on-surface-variant hover:bg-surface-container-high hover:text-white" href="#">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">bookmark</span>
+            Bookmarked
+          </span>
+<span class="font-mono text-secondary">7</span>
+</a>
+</div>
+</div>
+<!-- Bottom Profile & System Status -->
+<div class="flex flex-col gap-2 pt-3 border-t border-outline/60">
+<!-- Footer Nav items from JSON -->
+<div class="flex items-center gap-3 px-3 py-1 text-xs text-secondary">
+<a class="hover:text-white flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-xs">menu_book</span> Docs
+        </a>
+<span class="text-outline">•</span>
+<a class="hover:text-white flex items-center gap-1.5" href="#">
+<span class="material-symbols-outlined text-xs">help</span> Support
+        </a>
+</div>
+<!-- Health Pill -->
+<div class="px-2.5 py-1.5 rounded-lg bg-surface-container-lowest/70 border border-outline flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[11px] font-mono text-on-surface-variant">Cluster: us-east-1</span>
+</div>
+<span class="text-[10px] font-semibold text-primary">99.98%</span>
+</div>
+<!-- User Card -->
+<div class="flex items-center justify-between p-1.5 rounded-xl hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-tint flex items-center justify-center font-bold text-xs text-white border border-outline">
+            ER
+          </div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-on-surface leading-tight">Elena Rostova</span>
+<span class="text-[10px] text-secondary font-mono">DevOps Lead</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN WORKSPACE CONTAINER (TopAppBar + 2 Columns)                           -->
+<!-- ========================================================================= -->
+<div class="flex-1 flex flex-col h-screen min-w-0 overflow-hidden bg-surface-container">
+<!-- 2. TOP HEADER BAR (TopNavBar: Shared Component Spec adhered) -->
+<header class="flex justify-between items-center w-full px-5 py-2.5 bg-surface border-b border-outline/80 shrink-0 z-30">
+<!-- Left: Breadcrumb & Search Syntax Helper -->
+<div class="flex items-center gap-4 flex-1 max-w-3xl">
+<!-- Breadcrumb -->
+<div class="flex items-center gap-1.5 text-xs font-mono text-secondary shrink-0">
+<span class="hover:text-on-surface cursor-pointer">vigilant</span>
+<span class="text-outline">/</span>
+<span class="hover:text-on-surface cursor-pointer">auth-cluster</span>
+<span class="text-outline">/</span>
+<span class="hover:text-on-surface cursor-pointer">issues</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-semibold">VIG-8492</span>
+</div>
+<!-- Search input box with syntax pills -->
+<div class="relative flex-1 group">
+<div class="flex items-center bg-surface-container-low border border-outline/90 rounded-lg px-2.5 py-1.5 focus-within:border-surface-tint focus-within:ring-1 focus-within:ring-surface-tint transition-all">
+<span class="material-symbols-outlined text-secondary text-base mr-2">search</span>
+<input class="w-full bg-transparent border-0 p-0 text-xs font-mono text-on-surface placeholder:text-secondary focus:ring-0 focus:outline-none" placeholder="Search errors or syntax tags..." type="text" value="is:unresolved level:error tag:env:production"/>
+<div class="flex items-center gap-1 shrink-0 ml-2">
+<span class="text-[10px] font-mono text-secondary bg-surface-container px-1 py-0.5 rounded border border-outline">ESC</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Actions: Environment, Time Range, Live Pulse & Primary Actions -->
+<div class="flex items-center gap-3 shrink-0 ml-4">
+<!-- Environment selector -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-surface-container-low border border-outline text-xs cursor-pointer hover:bg-surface-container-high">
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span class="font-medium text-on-surface">Production</span>
+<span class="text-secondary font-mono text-[10px]">(us-east-1)</span>
+<span class="material-symbols-outlined text-xs text-secondary ml-0.5">expand_more</span>
+</div>
+<!-- Time Range -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-low border border-outline text-xs cursor-pointer hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-xs text-secondary">schedule</span>
+<span class="text-on-surface">Last 24h</span>
+<span class="material-symbols-outlined text-xs text-secondary">expand_more</span>
+</div>
+<!-- Live Pulse -->
+<div class="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-surface-container-low border border-outline text-[11px] font-mono text-secondary">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span>5s pulse</span>
+</div>
+<div class="h-4 w-[1px] bg-outline"></div>
+<!-- Trailing action button (Create Alert / Filter) -->
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-lg border border-outline hover:bg-surface-container-high text-secondary hover:text-on-surface transition-colors" title="Filter List">
+<span class="material-symbols-outlined text-sm">tune</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-primary hover:bg-primary-fixed-dim text-on-primary font-headline text-xs font-bold uppercase tracking-wider transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">add_alert</span>
+<span>Create Alert</span>
+</button>
+</div>
+</div>
+</header>
+<!-- WORKSPACE TWO-COLUMN SPLIT -->
+<div class="flex-1 flex overflow-hidden">
+<!-- ========================================================================= -->
+<!-- COLUMN A: ISSUE STREAM LIST (approx 380px)                               -->
+<!-- ========================================================================= -->
+<section class="w-96 shrink-0 border-r border-outline flex flex-col bg-surface-container-lowest/60">
+<!-- Stream Header -->
+<div class="p-3 border-b border-outline/70 flex flex-col gap-2.5 bg-surface-container-low/80">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline font-semibold text-xs text-on-surface tracking-wide">Issue Feed</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-high border border-outline text-[11px] font-mono text-secondary">14 Unresolved</span>
+</div>
+<div class="flex items-center gap-1.5 text-xs text-secondary">
+<span>Sort:</span>
+<button class="font-medium text-on-surface flex items-center hover:text-primary">
+                Last Seen
+                <span class="material-symbols-outlined text-xs">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Quick Micro Filter bar -->
+<div class="flex items-center justify-between gap-1 text-[11px] font-mono">
+<div class="flex items-center gap-1">
+<button class="px-2 py-0.5 rounded bg-surface-tint text-white font-medium">All (14)</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container-high text-secondary">Fatal (3)</button>
+<button class="px-2 py-0.5 rounded hover:bg-surface-container-high text-secondary">Warn (9)</button>
+</div>
+<button class="p-1 text-secondary hover:text-on-surface" title="Refresh Feed">
+<span class="material-symbols-outlined text-sm">sync</span>
+</button>
+</div>
+</div>
+<!-- Issue Scrollable Cards -->
+<div class="flex-1 overflow-y-auto custom-scroll divide-y divide-outline/40">
+<!-- ITEM 1: Active Selected Issue (PaymentGatewayTimeoutException) -->
+<div class="p-3.5 bg-surface-bright/70 border-l-4 border-l-error border-b border-outline/40 cursor-pointer relative group transition-colors">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-error/20 text-error border border-error/40 flex items-center gap-1">
+<span class="h-1.5 w-1.5 rounded-full bg-error animate-ping"></span>
+                  FATAL
+                </span>
+<span class="font-mono text-[11px] text-secondary">VIG-8492</span>
+</div>
+<span class="text-[11px] font-mono text-secondary shrink-0">2m ago</span>
+</div>
+<h3 class="text-xs font-semibold font-headline text-on-surface line-clamp-2 leading-snug mb-1 group-hover:text-primary transition-colors">
+              PaymentGatewayTimeoutException: upstream connection reset by peer
+            </h3>
+<p class="text-[11px] font-mono text-secondary truncate mb-2.5">
+              src/billing/stripe_adapter.ts:142
+            </p>
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary pt-2 border-t border-outline/40">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1" title="Event Count">
+<span class="material-symbols-outlined text-[13px] text-tertiary">bolt</span>
+<span class="text-on-surface font-semibold">4.2k</span>
+</span>
+<span class="flex items-center gap-1" title="Impacted Users">
+<span class="material-symbols-outlined text-[13px] text-primary">group</span>
+<span class="text-on-surface font-semibold">1.1k</span>
+</span>
+</div>
+<!-- Mini SVG Sparkline -->
+<div class="h-4 w-16">
+<svg class="w-full h-full stroke-error fill-none" viewbox="0 0 60 16">
+<path d="M0 14 L10 13 L20 15 L30 8 L40 10 L50 2 L60 1" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- ITEM 2: TypeError JWT -->
+<div class="p-3.5 hover:bg-surface-container-high/60 cursor-pointer border-l-4 border-l-transparent transition-colors">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-rose-500/15 text-rose-400 border border-rose-500/30">
+                  ERROR
+                </span>
+<span class="font-mono text-[11px] text-secondary">VIG-8488</span>
+</div>
+<span class="text-[11px] font-mono text-secondary shrink-0">14m ago</span>
+</div>
+<h3 class="text-xs font-medium font-headline text-on-surface line-clamp-2 leading-snug mb-1">
+              TypeError: Cannot read properties of undefined (reading 'jwt_payload')
+            </h3>
+<p class="text-[11px] font-mono text-secondary truncate mb-2.5">
+              src/middleware/auth.ts:88
+            </p>
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary pt-2 border-t border-outline/30">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+<span>890</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">group</span>
+<span>340</span>
+</span>
+</div>
+<div class="h-4 w-16">
+<svg class="w-full h-full stroke-rose-400/70 fill-none" viewbox="0 0 60 16">
+<path d="M0 15 L12 14 L24 9 L36 12 L48 6 L60 8" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- ITEM 3: DatabasePoolExhaustedWarning -->
+<div class="p-3.5 hover:bg-surface-container-high/60 cursor-pointer border-l-4 border-l-transparent transition-colors">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-amber-400/15 text-amber-300 border border-amber-400/30">
+                  WARNING
+                </span>
+<span class="font-mono text-[11px] text-secondary">VIG-8482</span>
+</div>
+<span class="text-[11px] font-mono text-secondary shrink-0">45m ago</span>
+</div>
+<h3 class="text-xs font-medium font-headline text-on-surface line-clamp-2 leading-snug mb-1">
+              DatabasePoolExhaustedWarning: connection pool queue depth exceeded limit (100)
+            </h3>
+<p class="text-[11px] font-mono text-secondary truncate mb-2.5">
+              crates/db/src/pool_manager.rs:412
+            </p>
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary pt-2 border-t border-outline/30">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+<span>120</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">group</span>
+<span>28</span>
+</span>
+</div>
+<div class="h-4 w-16">
+<svg class="w-full h-full stroke-amber-400/70 fill-none" viewbox="0 0 60 16">
+<path d="M0 15 L15 14 L30 14 L45 8 L60 12" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- ITEM 4: RateLimitExceeded -->
+<div class="p-3.5 hover:bg-surface-container-high/60 cursor-pointer border-l-4 border-l-transparent transition-colors">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-surface-container-high text-secondary border border-outline">
+                  INFO
+                </span>
+<span class="font-mono text-[11px] text-secondary">VIG-8479</span>
+</div>
+<span class="text-[11px] font-mono text-secondary shrink-0">1h ago</span>
+</div>
+<h3 class="text-xs font-medium font-headline text-on-surface line-clamp-2 leading-snug mb-1">
+              RateLimitExceeded: client token bucket empty
+            </h3>
+<p class="text-[11px] font-mono text-secondary truncate mb-2.5">
+              src/gateway/limiter.ts:51
+            </p>
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary pt-2 border-t border-outline/30">
+<div class="flex items-center gap-3">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">bolt</span>
+<span>45</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">group</span>
+<span>12</span>
+</span>
+</div>
+<div class="h-4 w-16">
+<svg class="w-full h-full stroke-secondary/50 fill-none" viewbox="0 0 60 16">
+<path d="M0 14 L15 13 L30 11 L45 14 L60 15" stroke-linecap="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- COLUMN B: MAIN DETAIL VIEW                                               -->
+<!-- ========================================================================= -->
+<main class="flex-1 flex flex-col h-full overflow-y-auto custom-scroll bg-surface-container-lowest">
+<!-- ==================== A. ERROR SUMMARY HEADER CARD ==================== -->
+<section class="p-6 bg-surface-container-low border-b border-outline">
+<div class="max-w-6xl mx-auto flex flex-col gap-4">
+<!-- Top Tagline & Meta status badges -->
+<div class="flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-2 flex-wrap">
+<!-- Glowing crimson FATAL chip -->
+<span class="px-2 py-0.5 rounded text-[11px] font-extrabold uppercase tracking-widest bg-error text-white shadow-[0_0_12px_rgba(244,63,94,0.6)] flex items-center gap-1.5">
+<span class="h-2 w-2 rounded-full bg-white animate-pulse"></span>
+                  FATAL ERROR
+                </span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline text-xs font-mono text-secondary">
+                  #vig-8492-f09b
+                </span>
+<span class="px-2 py-0.5 rounded bg-amber-400/10 border border-amber-400/30 text-amber-300 text-xs font-medium">
+                  Unresolved
+                </span>
+<span class="px-2 py-0.5 rounded bg-surface-tint/20 border border-surface-tint/40 text-on-surface text-xs font-mono">
+                  tier: checkout-core
+                </span>
+</div>
+<!-- Action Toolbar -->
+<div class="flex items-center gap-2">
+<!-- Acknowledge CTA -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-white hover:bg-surface-press-light text-surface font-headline text-xs font-bold uppercase tracking-wider transition-all active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm font-bold text-surface">check_circle</span>
+<span>Acknowledge</span>
+</button>
+<!-- Resolve -->
+<button class="flex items-center gap-1 px-3 py-1.5 rounded-md bg-surface-container-high hover:bg-surface-bright border border-outline text-on-surface font-headline text-xs font-semibold tracking-wider transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm text-primary">done_all</span>
+<span>Resolve</span>
+</button>
+<!-- Ignore Dropdown -->
+<button class="flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-surface-container-high hover:bg-surface-bright border border-outline text-secondary text-xs">
+<span>Ignore</span>
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+</button>
+<!-- Assignee -->
+<div class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-surface-container-high border border-outline text-xs cursor-pointer hover:border-surface-tint">
+<span class="h-4 w-4 rounded-full bg-primary text-surface font-bold text-[9px] flex items-center justify-center">ER</span>
+<span class="text-on-surface font-medium">@dev-oncall</span>
+<span class="material-symbols-outlined text-xs text-secondary">expand_more</span>
+</div>
+<!-- Create Linear / Jira Issue -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-surface-tint/30 hover:bg-surface-tint/50 border border-surface-tint text-on-surface text-xs font-medium">
+<span class="material-symbols-outlined text-sm text-tertiary">near_me</span>
+<span>Linear Issue</span>
+</button>
+<!-- Share -->
+<button class="p-1.5 rounded-md bg-surface-container-high hover:bg-surface-bright border border-outline text-secondary hover:text-white" title="Share Link">
+<span class="material-symbols-outlined text-base">share</span>
+</button>
+</div>
+</div>
+<!-- Exception Headline -->
+<div class="space-y-1">
+<h1 class="text-xl font-bold font-headline text-white tracking-tight leading-snug">
+                PaymentGatewayTimeoutException: Upstream payment provider socket hang up after 15000ms
+              </h1>
+<p class="text-xs font-mono text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-error">pin_drop</span>
+                services/checkout/src/adapters/stripe_client.rs:218
+                <span class="text-outline">•</span>
+<span class="text-on-surface-variant font-mono">checkout::adapters::stripe_client::send_with_retry</span>
+</p>
+</div>
+<!-- Impact Metric Grid (4 Chips) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
+<div class="p-3 rounded-xl bg-surface-container/70 border border-outline/70 flex flex-col">
+<span class="text-[11px] text-secondary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-tertiary">bolt</span> Total Events
+                </span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl font-bold font-headline text-white tracking-tight">4,281</span>
+<span class="text-[10px] font-mono text-error">+48% vs 1h ago</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container/70 border border-outline/70 flex flex-col">
+<span class="text-[11px] text-secondary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">group</span> Impacted Users
+                </span>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-xl font-bold font-headline text-white tracking-tight">1,142</span>
+<span class="text-[10px] font-mono text-secondary">26.7% affected</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container/70 border border-outline/70 flex flex-col">
+<span class="text-[11px] text-secondary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-secondary">history</span> First Seen
+                </span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-sm font-semibold text-white">3 hours ago</span>
+<span class="text-[10px] font-mono text-secondary truncate">v2.14.0-rc3</span>
+</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container/70 border border-outline/70 flex flex-col">
+<span class="text-[11px] text-secondary font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-primary">update</span> Last Seen
+                </span>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-sm font-semibold text-primary">2 mins ago</span>
+<span class="text-[10px] font-mono text-secondary">host: node-12b</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== B. DIAGNOSTIC WORKSPACE TABS ==================== -->
+<div class="border-b border-outline px-6 bg-surface-container flex items-center justify-between">
+<div class="flex items-center gap-6">
+<button class="py-3 text-xs font-headline font-semibold text-white border-b-2 border-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">code</span>
+              Stack Trace
+            </button>
+<button class="py-3 text-xs font-headline font-medium text-secondary hover:text-white flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">timeline</span>
+              Breadcrumbs
+              <span class="px-1.5 py-0.2 rounded-full text-[10px] font-mono bg-surface-container-high border border-outline text-secondary">34</span>
+</button>
+<button class="py-3 text-xs font-headline font-medium text-secondary hover:text-white flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">sell</span>
+              Tags &amp; Context
+            </button>
+<button class="py-3 text-xs font-headline font-medium text-secondary hover:text-white flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">people_outline</span>
+              User Breakdown
+            </button>
+<button class="py-3 text-xs font-headline font-medium text-secondary hover:text-white flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined text-sm">join_inner</span>
+              Similar Issues
+            </button>
+</div>
+<!-- Stack Trace Controls -->
+<div class="flex items-center gap-4 text-xs">
+<label class="flex items-center gap-2 cursor-pointer text-secondary hover:text-white">
+<input checked="" class="rounded border-outline bg-surface-container-high text-surface-tint focus:ring-0" type="checkbox"/>
+<span class="font-mono text-[11px]">In-app frames only</span>
+</label>
+<button class="text-[11px] font-mono text-secondary hover:text-white flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">unfold_more</span>
+              Expand all frames
+            </button>
+</div>
+</div>
+<!-- ==================== C. STACK TRACE VIEWER & CODE INSPECTOR ==================== -->
+<div class="p-6 space-y-6 max-w-6xl mx-auto w-full">
+<!-- Stack Banner -->
+<div class="flex items-center justify-between px-4 py-2.5 rounded-lg bg-surface-container border border-outline/70">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-sm">terminal</span>
+<span class="text-xs font-mono text-on-surface">
+                Stacktrace <span class="text-secondary">(most recent call first)</span> — in <span class="text-white font-semibold">checkout::adapters::stripe_client::process_charge</span>
+</span>
+</div>
+<span class="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-surface-container-high text-secondary border border-outline">Rust 1.76.0</span>
+</div>
+<!-- STACK FRAMES LIST -->
+<div class="flex flex-col gap-4">
+<!-- FRAME 1 (CRASH FRAME - In App with full code preview) -->
+<div class="rounded-xl border border-error/50 bg-surface-container-high/40 overflow-hidden shadow-lg">
+<!-- Frame Header -->
+<div class="p-3.5 bg-surface-container-high/80 border-b border-outline/80 flex items-center justify-between flex-wrap gap-2">
+<div class="flex items-center gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-error text-white font-mono text-[10px] font-bold">1</span>
+<span class="text-xs font-semibold font-mono text-white">services/checkout/src/adapters/stripe_client.rs:218</span>
+<span class="text-secondary text-xs font-mono">in</span>
+<span class="text-xs font-mono text-primary font-medium">send_with_retry</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-tint/20 text-on-surface-variant text-[10px] font-mono border border-surface-tint/40">In-App</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-xs text-secondary hover:text-white font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">content_copy</span> Copy Raw
+                  </button>
+<button class="text-xs text-secondary hover:text-white font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">open_in_new</span> GitHub
+                  </button>
+</div>
+</div>
+<!-- Code Snippet Viewer with Line 218 Flagged -->
+<div class="bg-surface font-mono text-xs overflow-x-auto custom-scroll py-2">
+<table class="w-full text-left border-collapse">
+<tbody>
+<!-- Line 214 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">214</td>
+<td class="py-0.5 text-secondary pl-2"><span class="text-surface-tint">pub async fn</span> <span class="text-primary">send_with_retry</span>(&amp;self, payload: &amp;PaymentPayload) -&gt; Result&lt;Response, GatewayError&gt; {</td>
+</tr>
+<!-- Line 215 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">215</td>
+<td class="py-0.5 text-secondary pl-2">    <span class="text-surface-tint">let</span> url = <span class="text-tertiary">format!</span>(<span class="text-amber-300">"{}/charges"</span>, self.base_url);</td>
+</tr>
+<!-- Line 216 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">216</td>
+<td class="py-0.5 text-secondary pl-2">    <span class="text-surface-tint">let</span> client = self.http_pool.acquire().<span class="text-surface-tint">await</span>?;</td>
+</tr>
+<!-- Line 217 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">217</td>
+<td class="py-0.5 text-secondary pl-2">    </td>
+</tr>
+<!-- Line 218: CRASH LINE HIGHLIGHTED IN SOFT RED -->
+<tr class="bg-error/20 border-y border-error/40 relative">
+<td class="w-12 text-right pr-4 py-1 text-error font-bold select-none text-[11px]">218</td>
+<td class="py-1 text-white font-medium pl-2 flex items-center justify-between pr-4">
+<span>
+                              <span class="text-surface-tint font-bold">let</span> response = client.post(&amp;url).timeout(Duration::from_millis(15000)).send().<span class="text-surface-tint font-bold">await</span>?;
+                        </span>
+<span class="text-[10px] font-sans font-bold px-2 py-0.5 rounded bg-error text-white tracking-wider uppercase ml-4">
+                          Socket Timeout (15000ms)
+                        </span>
+</td>
+</tr>
+<!-- Line 219 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">219</td>
+<td class="py-0.5 text-secondary pl-2">    <span class="text-surface-tint">let</span> status = response.status();</td>
+</tr>
+<!-- Line 220 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">220</td>
+<td class="py-0.5 text-secondary pl-2">    <span class="text-surface-tint">if</span> !status.is_success() {</td>
+</tr>
+<!-- Line 221 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">221</td>
+<td class="py-0.5 text-secondary pl-2">        <span class="text-surface-tint">return</span> <span class="text-tertiary">Err</span>(GatewayError::ProviderRejected(status.as_u16()));</td>
+</tr>
+<!-- Line 222 -->
+<tr class="hover:bg-surface-container-high/30 transition-colors">
+<td class="w-12 text-right pr-4 py-0.5 text-secondary/60 select-none text-[11px]">222</td>
+<td class="py-0.5 text-secondary pl-2">    }</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Local Variables Drawer -->
+<div class="p-3 bg-surface-container-low border-t border-outline/70">
+<div class="text-[11px] font-bold uppercase tracking-wider text-secondary mb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-primary">data_object</span>
+                  Local Variables at Exception Point
+                </div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 font-mono text-xs">
+<div class="p-2 rounded bg-surface border border-outline flex items-center justify-between">
+<span class="text-secondary">timeout_ms:</span>
+<span class="text-amber-300">15000</span>
+</div>
+<div class="p-2 rounded bg-surface border border-outline flex items-center justify-between">
+<span class="text-secondary">retry_count:</span>
+<span class="text-white">3</span>
+</div>
+<div class="p-2 rounded bg-surface border border-outline flex items-center justify-between truncate">
+<span class="text-secondary mr-2">endpoint:</span>
+<span class="text-primary truncate">"https://api.stripe..."</span>
+</div>
+<div class="p-2 rounded bg-surface border border-outline flex items-center justify-between">
+<span class="text-secondary">idempotency_key:</span>
+<span class="text-tertiary">"idem_8f92a10"</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FRAME 2 (In App) -->
+<div class="rounded-xl border border-outline bg-surface-container p-3 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-secondary font-mono text-[10px]">2</span>
+<span class="text-xs font-mono text-white">services/checkout/src/handlers/checkout.rs:94</span>
+<span class="text-secondary text-xs font-mono">in</span>
+<span class="text-xs font-mono text-on-surface-variant font-medium">execute_transaction</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-tint/20 text-on-surface-variant text-[10px] font-mono border border-surface-tint/40">In-App</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm">expand_more</span>
+</div>
+<!-- FRAME 3 (Library frame - collapsible) -->
+<div class="rounded-xl border border-outline/50 bg-surface-container/40 p-2.5 flex items-center justify-between text-secondary hover:text-white transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-lowest text-secondary/70 font-mono text-[10px]">3</span>
+<span class="text-xs font-mono text-secondary">tokio::runtime::task::core::run</span>
+<span class="text-secondary text-xs font-mono">in</span>
+<span class="text-xs font-mono text-secondary">runtime/src/task.rs:312</span>
+<span class="px-1.5 py-0.2 rounded bg-surface-container-lowest text-secondary text-[9px] font-mono">Library</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm">unfold_more</span>
+</div>
+<!-- FRAME 4 (In App) -->
+<div class="rounded-xl border border-outline bg-surface-container p-3 flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-highest text-secondary font-mono text-[10px]">4</span>
+<span class="text-xs font-mono text-white">services/checkout/src/server.rs:65</span>
+<span class="text-secondary text-xs font-mono">in</span>
+<span class="text-xs font-mono text-on-surface-variant font-medium">handle_incoming_connection</span>
+<span class="px-1.5 py-0.5 rounded bg-surface-tint/20 text-on-surface-variant text-[10px] font-mono border border-surface-tint/40">In-App</span>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm">expand_more</span>
+</div>
+</div>
+<!-- ==================== D. RELEASE CONTEXT & DIAGNOSTICS BENTO GRID ==================== -->
+<div class="pt-2">
+<h2 class="text-xs font-bold uppercase tracking-wider text-secondary mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">hub</span>
+              Release Context &amp; Triage Signals
+            </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Bento Card 1: Suspect Commit -->
+<div class="p-4 rounded-xl bg-surface-container border border-outline flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-mono text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-error">commit</span> Suspect Commit
+                    </span>
+<span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-error/20 text-error border border-error/30">HIGH PROBABILITY</span>
+</div>
+<div class="font-mono text-xs font-semibold text-primary mb-1">commit a84f91b</div>
+<p class="text-xs text-on-surface leading-snug mb-2">
+                    "feat: bump client timeout to 15s for external webhooks"
+                  </p>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary pt-2 border-t border-outline/50">
+<span>Elena Rostova</span>
+<span>4 hours ago</span>
+</div>
+</div>
+<!-- Bento Card 2: Release Health -->
+<div class="p-4 rounded-xl bg-surface-container border border-outline flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-mono text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-primary">rocket_launch</span> Active Release
+                    </span>
+<span class="text-[10px] font-mono text-primary">Deployed</span>
+</div>
+<div class="font-mono text-xs font-semibold text-white mb-1">checkout-service@v2.14.0</div>
+<p class="text-xs text-secondary leading-snug">
+                    Production rollout reached 100% traffic across all 6 geographical zones.
+                  </p>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono pt-2 border-t border-outline/50">
+<span class="text-secondary">Crash-free sessions:</span>
+<span class="text-amber-300 font-bold">99.2% (Degraded)</span>
+</div>
+</div>
+<!-- Bento Card 3: Environment Tags Badges -->
+<div class="p-4 rounded-xl bg-surface-container border border-outline flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-mono text-secondary flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-tertiary">tag</span> Runtime Tags
+                  </span>
+<span class="text-[10px] font-mono text-secondary">4 keys</span>
+</div>
+<div class="flex flex-wrap gap-1.5 font-mono text-[11px]">
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline text-secondary">os: Linux 6.1.0-amd64</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline text-secondary">runtime: rustc 1.76.0</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline text-secondary">datacenter: us-east-1b</span>
+<span class="px-2 py-0.5 rounded bg-surface-tint/20 border border-surface-tint/40 text-on-surface">tier: critical-path</span>
+</div>
+<div class="text-[11px] font-mono text-primary hover:underline cursor-pointer pt-2">
+                  + View all 18 metadata attributes
+                </div>
+</div>
+</div>
+<!-- Mini Breadcrumbs Timeline Bar -->
+<div class="mt-4 p-3.5 rounded-xl bg-surface-container border border-outline flex flex-col gap-2">
+<div class="flex items-center justify-between text-[11px] font-mono text-secondary">
+<span class="flex items-center gap-1.5 font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs text-primary">route</span>
+                  Recent Breadcrumb Path Before Crash
+                </span>
+<span>4 recorded operations</span>
+</div>
+<!-- Timeline nodes -->
+<div class="flex items-center gap-2 overflow-x-auto custom-scroll py-1 text-xs font-mono">
+<!-- Node 1 -->
+<div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-container-high border border-outline shrink-0">
+<span class="material-symbols-outlined text-xs text-secondary">http</span>
+<span class="text-white">POST /v1/checkout</span>
+<span class="text-[10px] text-secondary">200ms</span>
+</div>
+<span class="text-outline shrink-0">→</span>
+<!-- Node 2 -->
+<div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-container-high border border-outline shrink-0">
+<span class="material-symbols-outlined text-xs text-tertiary">storage</span>
+<span class="text-white">DB Query UserSession</span>
+<span class="text-[10px] text-secondary">4ms</span>
+</div>
+<span class="text-outline shrink-0">→</span>
+<!-- Node 3 -->
+<div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-surface-container-high border border-outline shrink-0">
+<span class="material-symbols-outlined text-xs text-primary">swap_horiz</span>
+<span class="text-white">Stripe Call Initiated</span>
+<span class="text-[10px] text-secondary">15002ms</span>
+</div>
+<span class="text-outline shrink-0">→</span>
+<!-- Crash Node -->
+<div class="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-error/20 border border-error text-error shrink-0 font-bold">
+<span class="material-symbols-outlined text-xs">cancel</span>
+<span>Socket Hangup Error</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Footer Micro Notice -->
+<div class="pt-4 pb-8 flex items-center justify-between text-xs text-secondary border-t border-outline/40">
+<div class="flex items-center gap-2">
+<span class="h-2 w-2 rounded-full bg-primary"></span>
+<span>Telemetry streaming active on port 4317 (OTel gRPC)</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="hover:text-white cursor-pointer font-mono">VIG-8492</span>
+<span class="hover:text-white cursor-pointer">Keyboard Shortcuts (?)</span>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

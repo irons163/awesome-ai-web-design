@@ -4,7 +4,7 @@
 
 1. 在 `design-md/<slug>/DESIGN.md` 提供有來源的設計分析，記錄觀察日期並區分實際值與推測。保留適用的來源與授權。
 2. 在 `data/recipes.json` 加入名稱、分類、中文摘要、獨立撰寫的頁面情境與元件任務。不要複製其他專案的 prompt。
-3. 執行 `python3 scripts/rewrite_prompts.py` 與 `python3 scripts/build.py`，更新指令、預覽、目錄及下載包。
+3. 用 Google Stitch MCP 根據設計分析及原創情境生成完整頁面，匯出 HTML 與截圖，保留 project/screen ID、生成指令與雜湊。不要用共用模板換色充當生成結果。執行 `python3 scripts/rewrite_prompts.py` 與 `python3 scripts/build.py` 更新指令、目錄及下載包；建置不會重繪預覽。
 4. 執行 `python3 -m unittest discover -s tests -v`。在瀏覽器檢查桌面與手機版、鍵盤操作和必要狀態。
 5. 說明變更理由、來源與實際驗證結果。新增來源需更新 `ATTRIBUTION.md`。
 

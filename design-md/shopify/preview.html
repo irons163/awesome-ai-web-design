@@ -1,8 +1,663 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Shopify · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/shopify">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Shopify · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#fbfbf5"></span><code>#fbfbf5</code></div><div class="swatch"><span style="background:#1e2c31"></span><code>#1e2c31</code></div><div class="swatch"><span style="background:#d4d4d8"></span><code>#d4d4d8</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · NeueHaasGrotesk Display, Helvetica, Arial, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Koto Commerce • Storefront Tools &amp; Catalog Engine</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Script -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#848484",
+            "tertiary": "#000000",
+            "on-tertiary-fixed": "#1b1b1b",
+            "surface-container-highest": "#e2e2e2",
+            "surface": "#f9f9f9",
+            "on-primary-fixed": "#1b1b1b",
+            "primary": "#000000",
+            "inverse-primary": "#c6c6c6",
+            "error": "#ba1a1a",
+            "surface-variant": "#e2e2e2",
+            "background": "#f9f9f9",
+            "surface-container-high": "#e8e8e8",
+            "on-background": "#1a1c1c",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed": "#1b1b1b",
+            "on-tertiary-fixed-variant": "#474747",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "secondary": "#5e5e5e",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#f3f3f4",
+            "on-surface": "#1a1c1c",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#646464",
+            "outline-variant": "#cfc4c5",
+            "on-tertiary-container": "#848484",
+            "primary-container": "#1b1b1b",
+            "on-surface-variant": "#4c4546",
+            "surface-dim": "#dadada",
+            "surface-bright": "#f9f9f9",
+            "tertiary-container": "#1b1b1b",
+            "tertiary-fixed": "#e2e2e2",
+            "inverse-surface": "#2f3131",
+            "inverse-on-surface": "#f0f1f1",
+            "secondary-fixed-dim": "#c6c6c6",
+            "surface-container": "#eeeeee",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-primary-fixed-variant": "#474747",
+            "outline": "#7e7576",
+            "primary-fixed": "#e2e2e2",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed-variant": "#474747",
+            "secondary-fixed": "#e2e2e2",
+            "on-error": "#ffffff",
+            "secondary-container": "#e2e2e2",
+            "surface-tint": "#5e5e5e",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": [
+              "Inter"
+            ],
+            "display": [
+              "Inter"
+            ],
+            "body": [
+              "Inter"
+            ],
+            "label": [
+              "Public Sans"
+            ]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    /* OpenType ss03 character set & sleek typography */
+    body {
+      font-feature-settings: "ss03" 1, "cv02" 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 20;
+    }
+    .thin-display {
+      font-weight: 330;
+      letter-spacing: -0.02em;
+    }
+    .hairline-dark-border {
+      border-color: #1e2c31;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen selection:bg-surface-container-highest flex flex-col font-body">
+<!-- =========================================================================
+       1. TopNavBar (Shared Component: Web Header)
+       ========================================================================= -->
+<header class="bg-primary docked full-width top-0 sticky z-50 border-b border-primary-container">
+<div class="flex items-center justify-between px-6 lg:px-12 py-4 w-full max-w-7xl mx-auto">
+<!-- Brand Logo Anchor -->
+<div class="flex items-center gap-8">
+<a class="font-headline text-lg font-light tracking-widest text-on-primary uppercase flex items-center gap-2" href="#">
+<span class="inline-block w-2.5 h-2.5 rounded-full bg-on-primary"></span>
+          Koto Commerce
+        </a>
+<!-- Desktop Navigation Items -->
+<nav class="hidden md:flex items-center space-x-7 font-headline text-sm">
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150 font-normal tracking-wide" href="#">Solutions</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150 font-normal tracking-wide" href="#">Platform</a>
+<!-- Active tab: Storefront -->
+<a class="text-on-primary font-medium tracking-wide flex items-center gap-1.5" href="#">
+            Storefront
+            <span class="w-1 h-1 rounded-full bg-on-primary"></span>
+</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150 font-normal tracking-wide" href="#">Pricing</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150 font-normal tracking-wide" href="#">Enterprise</a>
+</nav>
+</div>
+<!-- Action Cluster -->
+<div class="flex items-center space-x-4">
+<a class="font-headline text-sm font-medium tracking-tight text-on-primary-container hover:text-on-primary transition-colors duration-150 px-3 py-1.5" href="#">
+          Log in
+        </a>
+<a class="font-headline text-sm font-medium tracking-tight bg-on-primary text-primary px-5 py-2 rounded-full hover:bg-surface-bright transition-all duration-150 shadow-sm active:opacity-80" href="#">
+          Start free trial
+        </a>
+</div>
+</div>
+</header>
+<!-- =========================================================================
+       2. Cinematic Dark Hero Section
+       ========================================================================= -->
+<section class="bg-primary text-on-primary pt-20 pb-24 px-6 lg:px-12 relative overflow-hidden">
+<!-- Atmospheric subtle gradient sheen -->
+<div class="absolute inset-0 bg-gradient-to-b from-primary via-primary-container/30 to-primary pointer-events-none opacity-50"></div>
+<div class="max-w-7xl mx-auto relative z-10">
+<!-- Live Indicator Badge -->
+<div class="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-primary-container border border-surface-container-high/20 mb-8">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-on-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-on-primary"></span>
+</span>
+<span class="font-label text-xs tracking-wider text-on-primary-container uppercase font-medium">ENGINE 4.2 • PRODUCTION READY</span>
+</div>
+<!-- Hero Typography Spread -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end mb-16">
+<div class="lg:col-span-8">
+<h1 class="text-5xl sm:text-6xl lg:text-7xl font-light tracking-tight leading-[1.05] text-on-primary thin-display">
+            A storefront engineered for craft and scale.
+          </h1>
+</div>
+<div class="lg:col-span-4 flex flex-col justify-end">
+<p class="font-body text-base lg:text-lg text-on-primary-container leading-relaxed mb-6 font-normal">
+            Architect custom shopping experiences with modular layouts, sub-millisecond inventory sync, and fluid headless publishing.
+          </p>
+<div class="flex flex-wrap items-center gap-3">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-on-primary text-primary font-medium text-sm hover:bg-surface-variant transition-colors" href="#catalog-console">
+              Explore Storefront Tools
+            </a>
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-full border border-on-primary-container/40 text-on-primary font-medium text-sm hover:border-on-primary transition-colors" href="#merchant-showcase">
+              Preview Live Demo
+            </a>
+</div>
+</div>
+</div>
+<!-- Real-Time Metrics Inspector Strip -->
+<div class="rounded-xl bg-primary-container border border-surface-container-high/15 p-4 lg:p-6 grid grid-cols-2 md:grid-cols-4 gap-6 backdrop-blur-md">
+<div class="border-l border-surface-container-high/20 pl-4">
+<div class="flex items-center justify-between text-xs text-on-primary-container uppercase font-label tracking-wider mb-1">
+<span>Global Uptime</span>
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+<div class="text-2xl font-light tracking-tight text-on-primary font-headline">99.98%</div>
+<div class="text-xs text-on-primary-container mt-1">Multi-region active cluster</div>
+</div>
+<div class="border-l border-surface-container-high/20 pl-4">
+<div class="flex items-center justify-between text-xs text-on-primary-container uppercase font-label tracking-wider mb-1">
+<span>TTFB (P95)</span>
+<span class="material-symbols-outlined text-sm">speed</span>
+</div>
+<div class="text-2xl font-light tracking-tight text-on-primary font-headline">42ms</div>
+<div class="text-xs text-on-primary-container mt-1">Edge cache warm latency</div>
+</div>
+<div class="border-l border-surface-container-high/20 pl-4">
+<div class="flex items-center justify-between text-xs text-on-primary-container uppercase font-label tracking-wider mb-1">
+<span>Active Edge Nodes</span>
+<span class="material-symbols-outlined text-sm">public</span>
+</div>
+<div class="text-2xl font-light tracking-tight text-on-primary font-headline">184 Regions</div>
+<div class="text-xs text-on-primary-container mt-1">Sub-second propagation</div>
+</div>
+<div class="border-l border-surface-container-high/20 pl-4">
+<div class="flex items-center justify-between text-xs text-on-primary-container uppercase font-label tracking-wider mb-1">
+<span>Sync Throughput</span>
+<span class="material-symbols-outlined text-sm">sync_alt</span>
+</div>
+<div class="text-2xl font-light tracking-tight text-on-primary font-headline">24.8k ops/s</div>
+<div class="text-xs text-on-primary-container mt-1">Catalog event streaming</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+       3. Storefront Tool Capabilities (Grid of 3 Precision Cards)
+       ========================================================================= -->
+<section class="py-20 px-6 lg:px-12 max-w-7xl mx-auto w-full">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-surface-container-highest pb-6">
+<div>
+<span class="text-xs font-semibold tracking-wider text-secondary uppercase font-label block mb-2">Core Engine Architecture</span>
+<h2 class="text-3xl font-light text-on-surface tracking-tight thin-display">Precision instruments for modern commerce.</h2>
+</div>
+<p class="text-sm text-secondary max-w-md mt-4 md:mt-0 leading-relaxed">
+        Eliminate traditional CMS bottlenecks. Designed natively for high-velocity merchants demanding bespoke aesthetics and continuous deployment.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container-high flex flex-col justify-between hover:border-outline transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">dashboard_customize</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-on-surface mb-3">Visual Layout Engine</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">
+            Drag-and-drop sectional theme architecture featuring live component trees, responsive canvas previews, and deterministic zero layout shift.
+          </p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-xs font-medium text-secondary">
+<span>Component-Driven AST</span>
+<span class="text-primary font-mono font-medium">0ms Cumulative Shift</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container-high flex flex-col justify-between hover:border-outline transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-on-surface mb-3">Global Edge Distribution</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">
+            Instant static asset hydration with programmatic ISR caches dispersed across 320 points of presence. Never stale, never sluggish.
+          </p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-xs font-medium text-secondary">
+<span>Smart Revalidation</span>
+<span class="text-primary font-mono font-medium">&lt;12ms Edge Resolve</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-8 border border-surface-container-high flex flex-col justify-between hover:border-outline transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex items-center justify-center text-primary mb-6">
+<span class="material-symbols-outlined">point_of_sale</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-on-surface mb-3">Omnichannel Cart &amp; Checkout</h3>
+<p class="text-secondary text-sm leading-relaxed mb-6">
+            Unified checkout tokenization guaranteeing synchronized customer cart states across web, mobile native clients, and pop-up POS touchpoints.
+          </p>
+</div>
+<div class="pt-4 border-t border-surface-container flex items-center justify-between text-xs font-medium text-secondary">
+<span>Federated Cart State</span>
+<span class="text-primary font-mono font-medium">1-Tap Accelerated</span>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+       4. Core Featured Interactive Component: 
+          Product-Management & Publishing Control Center
+       ========================================================================= -->
+<section class="py-16 px-6 lg:px-12 bg-surface-container-low border-y border-surface-container-highest" id="catalog-console">
+<div class="max-w-7xl mx-auto">
+<!-- Section Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+<div>
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-label text-xs font-semibold tracking-wider text-secondary uppercase">Merchant Operations Console</span>
+</div>
+<h2 class="text-2xl lg:text-3xl font-normal tracking-tight text-on-surface mt-1">Catalog &amp; Inventory Operations</h2>
+</div>
+<!-- Live Workspace Meta -->
+<div class="flex items-center gap-3">
+<div class="px-3 py-1.5 bg-surface-container-lowest border border-surface-container-high rounded-full text-xs font-medium text-secondary flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            Store: <strong class="text-on-surface font-semibold">Nara Living flagship</strong>
+</div>
+<button class="px-3.5 py-1.5 bg-primary text-on-primary rounded-full text-xs font-medium hover:bg-tertiary-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">save</span>
+            Save All Changes
+          </button>
+</div>
+</div>
+<!-- Main Operational Canvas -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Primary Product Management Card (8 Cols) -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-surface-container-high shadow-sm overflow-hidden">
+<!-- Product Card Header & Identity -->
+<div class="p-6 border-b border-surface-container flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="flex items-start gap-4">
+<div class="w-16 h-16 rounded-lg bg-surface-container flex-shrink-0 overflow-hidden border border-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A modern minimalist solid oak dining bench positioned in a sunlit architectural studio setting with clean polished concrete floors and warm gentle morning shadows. The furniture piece showcases meticulous Japanese-Nordic joinery with natural wood grain visible in ultra-sharp focus. Light airy mood." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-BCwp1DNFdSt1F-f3_f1_fvST3PNzxSUKRL3YkpmgyrlmLQtrbCE7xKh34M1p7T5Q2RSIoI1BXKmJAaUj_L5JLVYXNdp5SWmx-PO_DBORmh2N4VqtNlnfv2VkgnuIddNELykyZCfltKn8SrsINkkUiu0G7-7LqGVJoRcJvpMlWQHphqbByc42NTEWaaFPm98_tHPy0f3IC9A4vRWf16Q_VqK6nDRWaY9W_07OrZdEcr28JN0Kn3drezpmGjNN3-QsM4FtH4c02B7f"/>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="font-mono text-xs text-secondary font-medium uppercase tracking-wider">SKU: KT-OAK-084</span>
+<span class="text-xs px-2 py-0.5 rounded bg-surface-container text-secondary font-medium">Living &amp; Spatial</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-on-surface">Nara Minimalist Oak Dining Bench</h3>
+</div>
+</div>
+<!-- Price & Base Action -->
+<div class="text-left sm:text-right">
+<div class="text-2xl font-light text-on-surface tracking-tight font-headline">$840.00</div>
+<div class="text-xs text-secondary">Base MSRP • Excl. Taxes</div>
+</div>
+</div>
+<!-- Product Details Body -->
+<div class="p-6 space-y-6">
+<!-- Real-Time Stock Status Strip -->
+<div>
+<div class="flex items-center justify-between text-xs mb-2">
+<span class="font-semibold text-on-surface uppercase tracking-wider text-[11px] font-label">Real-time inventory distribution</span>
+<span class="font-mono text-secondary font-medium">Total: 142 units active</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container">
+<div class="text-xs text-secondary mb-1">In Stock (3 Hubs)</div>
+<div class="text-lg font-medium text-on-surface">142 <span class="text-xs font-normal text-secondary">units</span></div>
+<div class="text-[11px] text-secondary mt-1">Osaka (84) • Rotterdam (58)</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container">
+<div class="text-xs text-secondary mb-1">Restock Threshold</div>
+<div class="text-lg font-medium text-on-surface">25 <span class="text-xs font-normal text-secondary">units</span></div>
+<div class="text-[11px] text-secondary mt-1">Auto-PO reorder enabled</div>
+</div>
+<div class="p-3 bg-surface-container-low rounded-lg border border-surface-container">
+<div class="text-xs text-secondary mb-1">Reserved in Carts</div>
+<div class="text-lg font-medium text-on-surface">18 <span class="text-xs font-normal text-secondary">units</span></div>
+<div class="text-[11px] text-secondary mt-1">15-minute checkout hold</div>
+</div>
+</div>
+</div>
+<!-- Multi-Variant Matrix -->
+<div>
+<label class="block font-semibold text-on-surface uppercase tracking-wider text-[11px] font-label mb-2">
+                Variant &amp; Material Matrix
+              </label>
+<div class="divide-y divide-surface-container border border-surface-container rounded-lg overflow-hidden">
+<!-- Variant 1 -->
+<div class="p-3 bg-surface-container-lowest flex items-center justify-between text-xs">
+<div class="flex items-center gap-3">
+<span class="w-3.5 h-3.5 rounded-full bg-[#D4B996] border border-outline/30"></span>
+<span class="font-medium text-on-surface">Natural Oak</span>
+<span class="text-secondary font-mono text-[11px]">VAR-084-NO</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-secondary font-medium">92 in stock</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-medium bg-surface-container-high text-on-surface">Active</span>
+</div>
+</div>
+<!-- Variant 2 -->
+<div class="p-3 bg-surface-container-lowest flex items-center justify-between text-xs">
+<div class="flex items-center gap-3">
+<span class="w-3.5 h-3.5 rounded-full bg-[#4A3B32] border border-outline/30"></span>
+<span class="font-medium text-on-surface">Smoked Walnut</span>
+<span class="text-secondary font-mono text-[11px]">VAR-084-SW</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-secondary font-medium">38 in stock</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-medium bg-surface-container-high text-on-surface">Active</span>
+</div>
+</div>
+<!-- Variant 3 -->
+<div class="p-3 bg-surface-container-lowest flex items-center justify-between text-xs">
+<div class="flex items-center gap-3">
+<span class="w-3.5 h-3.5 rounded-full bg-[#E5DFD7] border border-outline/30"></span>
+<span class="font-medium text-on-surface">Bleached Ash</span>
+<span class="text-secondary font-mono text-[11px]">VAR-084-BA</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-secondary font-medium">12 in stock (Low)</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-medium bg-surface-container-high text-on-surface">Active</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Editable Publishing Status Switcher -->
+<div class="p-4 bg-surface-container-low rounded-lg border border-surface-container">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+<span class="font-semibold text-on-surface uppercase tracking-wider text-[11px] font-label">Storefront Publishing State</span>
+<span class="text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">cloud_done</span>
+                  Sync across 4 sales channels
+                </span>
+</div>
+<!-- Pill Switcher -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-2 p-1 bg-surface-container rounded-lg">
+<button class="py-2 px-3 rounded-md bg-on-primary text-primary font-medium text-xs shadow-sm flex items-center justify-center gap-1.5 transition-all">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                  Live / Published
+                </button>
+<button class="py-2 px-3 rounded-md text-secondary hover:text-on-surface font-medium text-xs flex items-center justify-center gap-1.5 transition-all">
+                  Draft / Private Review
+                </button>
+<button class="py-2 px-3 rounded-md text-secondary hover:text-on-surface font-medium text-xs flex items-center justify-center gap-1.5 transition-all">
+                  Scheduled Drop (Nov 14)
+                </button>
+</div>
+<!-- Channel Visibility Checklist -->
+<div class="mt-4 pt-3 border-t border-surface-container grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Online Store</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Wholesale B2B</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Shop Mobile App</span>
+</div>
+<div class="flex items-center gap-2 text-secondary">
+<span class="material-symbols-outlined text-sm">pause_circle</span>
+<span class="line-through">Point of Sale</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action Bar -->
+<div class="px-6 py-4 bg-surface-container-low border-t border-surface-container flex items-center justify-between">
+<span class="text-xs text-secondary">Last synchronized: 2 seconds ago via Webhook (API v4.2)</span>
+<button class="px-4 py-1.5 bg-primary text-on-primary text-xs font-medium rounded-full hover:bg-tertiary-container transition-colors">
+              Update status
+            </button>
+</div>
+</div>
+<!-- Right: Mini-Catalog Sidebar (4 Cols) -->
+<div class="lg:col-span-4 space-y-4">
+<div class="flex items-center justify-between pb-1">
+<h4 class="text-xs font-semibold uppercase tracking-wider text-secondary font-label">Active Catalog Items</h4>
+<a class="text-xs text-primary font-medium hover:underline" href="#">View all (148)</a>
+</div>
+<!-- Item 2: Kyoto Ceramic Tea Vessel -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-container-high hover:border-outline transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-12 h-12 rounded bg-surface-container flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Handcrafted dark wabi-sabi ceramic tea vessel with textured earthy tactile glaze standing isolated on neutral stone pedestal with subtle shadow play. Authentic Japanese craft aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmjZlw0AuUZvjs9ZSWHzV0xA0eR1x3XRKuznSDDFQeCPNFKhRtHiABWTdTpXrYEfvOC4i4sFd_dO72vQGiOYTEQkAFic0lbIIE-Y15vNlKsZABNRoPupbwcgr9ArsrxninNALCfkWb9CsvfZEQHOKZ3_GtjDbXxoykxdwQ_gWqbYUuoQvrHtVHg6rhktCd1Ut6-EfJlPISDh_RylTeh-So0ILLhYCexev7y15iaS7RuvH7e8hqPrsf_9AL-AlmUrRvBrqFtEqUBYCG"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<span class="font-mono text-[10px] text-secondary">SKU: KT-CER-019</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface font-medium">Live</span>
+</div>
+<h5 class="text-sm font-medium text-on-surface truncate">Kyoto Ceramic Tea Vessel</h5>
+<div class="flex items-center justify-between mt-2 text-xs">
+<span class="text-secondary font-mono">$115.00</span>
+<span class="text-error font-medium text-[11px]">Low stock: 9 left</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Item 3: Akari Woven Pendant Lamp -->
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-container-high hover:border-outline transition-colors">
+<div class="flex items-start gap-3">
+<div class="w-12 h-12 rounded bg-surface-container flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Sculptural washi paper and bamboo woven pendant lamp suspended gracefully against a warm grey minimalist architectural interior. Soft organic diffused ambient illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV_LFD6wOfu8lI4-6nqimbWBef0EWjXDn5TIl5-lBzJ1SC1U85fRguzVqfXMD81XSJM4YOYkzi289BDkFyzHBfTXk7h51nSxNLs5sugTDiYSKcG9Dtbk0yCoM4vKySy58ucHlvkDibtXi7E3ugp_oUys0ak8KTTdzsOMR4YRms_FcrxlbDUjpyHmF4l0df6gsXzA5-Tg5K-CnAP_N5rEolSmEzlemPtWsWJrADBfbfOSrTMEF72yx-aWFBd25E5ZTaH0l5SAYPfbAp"/>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-1">
+<span class="font-mono text-[10px] text-secondary">SKU: KT-LGT-102</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-surface-container-highest text-secondary font-medium">Draft</span>
+</div>
+<h5 class="text-sm font-medium text-on-surface truncate">Akari Woven Pendant Lamp</h5>
+<div class="flex items-center justify-between mt-2 text-xs">
+<span class="text-secondary font-mono">$460.00</span>
+<span class="text-secondary font-medium text-[11px]">Stock: 64 units</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Stat Callout -->
+<div class="p-4 rounded-xl bg-primary text-on-primary">
+<div class="flex items-center gap-2 mb-2 text-xs text-on-primary-container">
+<span class="material-symbols-outlined text-sm">bolt</span>
+<span>Instant Catalog Re-Indexing</span>
+</div>
+<p class="text-xs text-surface-container-highest leading-relaxed">
+              Modifications published here reflect instantly across GraphQL edge layers in &lt;180ms globally.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+       5. Merchant Storefront Examples Showcase
+       ========================================================================= -->
+<section class="py-24 px-6 lg:px-12 max-w-7xl mx-auto w-full" id="merchant-showcase">
+<div class="max-w-2xl mb-16">
+<span class="text-xs font-semibold tracking-wider text-secondary uppercase font-label block mb-2">Merchant Proof</span>
+<h2 class="text-3xl lg:text-4xl font-light text-on-surface tracking-tight thin-display mb-4">
+        Trusted by discerning global creators.
+      </h2>
+<p class="text-secondary text-base leading-relaxed">
+        Independent brands that refuse generic cookie-cutter store templates run their digital flagships entirely on Koto Commerce.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Brand 1: Moro Studio -->
+<div class="group flex flex-col justify-between">
+<div>
+<div class="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container mb-6 border border-surface-container-high relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Editorial visual of an artisan pottery workshop showcase with bespoke ceramic vases arranged harmoniously on stone slabs. Moody natural directional light from high gallery windows. Clean Japanese minimalist design." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrMOI44pYF-j4TfFBA24SaDZxM3a8eJrWpX_BYEdOCGU_W4RY8MQL-iPPyr5enys_5nI6pkM0qmJmtyPiJOHIqldWRHY2iFODiR4uifZ_NGNxii1xX0NgO7YxGNwIWh_a-4DMQ7Yf8HW0sSwT2PSH6we0zuhdL_bQq-VAuaY8lmmEvSkc214cb0pCMcb_WoF0Ybl4BI7YW3CCLLpk7UrrkGoLJzinmTeU4eA--AorHUhwpXFY3xtCPwNlyCsG5JzJn83gs_uJJ-t0a"/>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary/80 backdrop-blur-md text-on-primary text-[10px] font-label font-medium uppercase tracking-wider">
+              Ceramics • Tokyo
+            </div>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-lg font-medium text-on-surface">Moro Studio</h3>
+<span class="text-xs font-mono font-medium text-primary">+41% Checkouts</span>
+</div>
+<p class="text-secondary text-sm italic mb-4">
+            “Koto gave us complete design sovereignty. Our physical shop in Ginza and global online store feel like one unified canvas.”
+          </p>
+</div>
+<div class="pt-3 border-t border-surface-container text-xs text-secondary flex items-center justify-between">
+<span>Headless Next.js + Koto Edge</span>
+<span class="font-medium text-primary">0.4s Page Load</span>
+</div>
+</div>
+<!-- Brand 2: Atelier Söl -->
+<div class="group flex flex-col justify-between">
+<div>
+<div class="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container mb-6 border border-surface-container-high relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Scandinavian sustainable knitwear fashion lookbook photo featuring a model wearing an un-dyed virgin wool oversized sweater against soft cream plaster architectural walls. Understated Nordic editorial aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBt9152oqnmgiinllBUK5M8AYGnnYmSYtm0AeXGHk9y2FnpHuaPLMpv4Xicj2BzLjRJRGXrGBs0vim84eW7nRDAIwZuMJVdU2JF1PuvZbqip7jvkQLPUDuW31sID9YVa1lc6u16yC7pIoT91tPAzwNem27J-PNcNPhHvdtAZrMVnduuFRriQbYas24AFFMgCIjGGA2ki9635dT677cnLeaaaiVZTgedTg19sDH1nmXUoxORQ-AoSnHmvS0nTWFHk7xIN_BvhrDZZP66"/>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary/80 backdrop-blur-md text-on-primary text-[10px] font-label font-medium uppercase tracking-wider">
+              Knitwear • Copenhagen
+            </div>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-lg font-medium text-on-surface">Atelier Söl</h3>
+<span class="text-xs font-mono font-medium text-primary">+38% Conversion</span>
+</div>
+<p class="text-secondary text-sm italic mb-4">
+            “Handling high-traffic limited edition seasonal drops without queuing lag or inventory oversells has changed our business.”
+          </p>
+</div>
+<div class="pt-3 border-t border-surface-container text-xs text-secondary flex items-center justify-between">
+<span>Modular Section Studio</span>
+<span class="font-medium text-primary">100% Uptime on Drops</span>
+</div>
+</div>
+<!-- Brand 3: Forma Glass -->
+<div class="group flex flex-col justify-between">
+<div>
+<div class="aspect-[4/3] rounded-xl overflow-hidden bg-surface-container mb-6 border border-surface-container-high relative">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Architectural blown glass lighting fixtures glowing with warm amber tone mounted in a grand brutalist concrete interior in Milan. Sophisticated high-contrast lighting highlighting transparent glassware contours." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsBjMtBUqmbjDAZapJI1RZ4MVEZdJcTiC3VoI3YXd1gBlOM5Hxd8iT2e7FKndm7jhp-l41kHw100Wd4UkLN0toCpxwnUjJwyYjKJiheK7QyZp57WXhfqCRapH6PdNb8ld5uy8Nx3uIIHAp0W7R4fF6Pgb6J9UlZhOxOBiBcR3T-SAogyxuytKBP4O4rzVLaJvU3UV2uGgWUv2xGcK6cu4eYzshw1onlkZbKIU09Ijg8ivaEnDN33UZvgCqkYU4bGtSgogZUl4aXDCV"/>
+<div class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-primary/80 backdrop-blur-md text-on-primary text-[10px] font-label font-medium uppercase tracking-wider">
+              Lighting • Milan
+            </div>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-lg font-medium text-on-surface">Forma Glass</h3>
+<span class="text-xs font-mono font-medium text-primary">2.4x B2B Volume</span>
+</div>
+<p class="text-secondary text-sm italic mb-4">
+            “The multi-currency and wholesale pricing tiers allowed us to onboard 200 European interior architects in four weeks.”
+          </p>
+</div>
+<div class="pt-3 border-t border-surface-container text-xs text-secondary flex items-center justify-between">
+<span>Global FX &amp; Wholesale Hub</span>
+<span class="font-medium text-primary">48 Currencies</span>
+</div>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+       6. Merchant Toolkit Quick-Actions Bar
+       ========================================================================= -->
+<section class="py-12 px-6 lg:px-12 bg-surface-container-low border-t border-surface-container-high">
+<div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">terminal</span>
+<div>
+<div class="text-sm font-medium text-on-surface">Developer &amp; Operator Fast-Tracks</div>
+<div class="text-xs text-secondary">Execute core merchant workflows with direct keyboard accelerators</div>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest border border-surface-container-high text-xs font-medium text-on-surface hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">upload_file</span>
+          Bulk CSV Import
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest border border-surface-container-high text-xs font-medium text-on-surface hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">calculate</span>
+          Automated Tax Presets
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest border border-surface-container-high text-xs font-medium text-on-surface hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">currency_exchange</span>
+          Multi-Currency FX Rules
+        </button>
+<button class="px-4 py-2 rounded-full bg-surface-container-lowest border border-surface-container-high text-xs font-medium text-on-surface hover:bg-surface-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">webhook</span>
+          Webhook Triggers
+        </button>
+</div>
+</div>
+</section>
+<!-- =========================================================================
+       7. Footer (Shared Component: Web Footer)
+       ========================================================================= -->
+<footer class="bg-primary docked full-width bottom-0 w-full border-t border-primary-container">
+<div class="w-full max-w-7xl mx-auto px-6 lg:px-12 py-16 flex flex-col md:flex-row justify-between items-start gap-8">
+<!-- Brand & Copyright Side -->
+<div class="space-y-4 max-w-sm">
+<div class="font-headline text-base font-light tracking-widest text-on-primary uppercase flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-on-primary"></span>
+          Koto Commerce
+        </div>
+<p class="font-body text-xs font-normal text-on-primary-container leading-relaxed">
+          © 2025 Koto Commerce Inc. All rights reserved. Crafted for global merchants.
+        </p>
+<div class="pt-2 flex items-center gap-2 text-xs text-on-primary-container font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-on-primary"></span>
+          All systems operational (99.98%)
+        </div>
+</div>
+<!-- Footer Navigation Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-3 font-body text-xs">
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Commerce Engine</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Storefront API</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Headless Checkout</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Merchant Cloud</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Inventory Sync</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Developer Docs</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Security</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors duration-150" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,8 +1,693 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Runway · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/runwayml">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Runway · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#767d88"></span><code>#767d88</code></div><div class="swatch"><span style="background:#7d848e"></span><code>#7d848e</code></div><div class="swatch"><span style="background:#030303"></span><code>#030303</code></div><div class="swatch"><span style="background:#1a1a1a"></span><code>#1a1a1a</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · system-ui, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CINEA / AETHEL — Film Production Archive &amp; Optical Lab</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Public Sans Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;450;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#1b1b1b",
+            "primary-container": "#1b1b1b",
+            "outline-variant": "#cfc4c5",
+            "on-primary-fixed": "#1b1b1b",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "on-tertiary-fixed": "#1b1b1b",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#1a1c1c",
+            "background": "#f9f9f9",
+            "secondary-fixed": "#e2e2e2",
+            "surface-bright": "#f9f9f9",
+            "inverse-surface": "#2f3131",
+            "inverse-primary": "#c6c6c6",
+            "surface-container-low": "#f3f3f4",
+            "surface-dim": "#dadada",
+            "surface": "#f9f9f9",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#646464",
+            "inverse-on-surface": "#f0f1f1",
+            "tertiary": "#000000",
+            "primary": "#000000",
+            "secondary": "#5e5e5e",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "on-background": "#1a1c1c",
+            "surface-tint": "#5e5e5e",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-tertiary-container": "#848484",
+            "on-secondary-fixed": "#1b1b1b",
+            "on-secondary-fixed-variant": "#474747",
+            "on-error-container": "#93000a",
+            "tertiary-fixed": "#e2e2e2",
+            "secondary-fixed-dim": "#c6c6c6",
+            "error": "#ba1a1a",
+            "surface-container": "#eeeeee",
+            "surface-variant": "#e2e2e2",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed-variant": "#474747",
+            "outline": "#7e7576",
+            "on-primary-container": "#848484",
+            "surface-container-high": "#e8e8e8",
+            "primary-fixed": "#e2e2e2",
+            "surface-container-highest": "#e2e2e2",
+            "on-surface-variant": "#4c4546",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#474747"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-block;
+    }
+    /* Monospaced technical stamps & timecodes */
+    .font-mono-cinema {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-feature-settings: "tnum" 1;
+    }
+    /* Precise film strip aspect letterbox */
+    .aspect-239 {
+      aspect-ratio: 2.39 / 1;
+    }
+    .aspect-cinematic {
+      aspect-ratio: 16 / 9;
+    }
+    /* Hairline dividers without shadows */
+    .hairline-b {
+      border-bottom: 1px solid #e8e8e8;
+    }
+    .hairline-t {
+      border-top: 1px solid #e8e8e8;
+    }
+    .hairline-all {
+      border: 1px solid #e8e8e8;
+    }
+    /* Custom video scrubber style */
+    .scrub-track {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  </style>
+</head>
+<body class="bg-surface text-primary antialiased selection:bg-primary selection:text-on-primary min-h-screen flex flex-col font-body">
+<!-- TOP BAR NAVIGATION (SHARED COMPONENT: TopNavBar) -->
+<header class="w-full bg-surface border-b border-surface-container-high sticky top-0 z-50">
+<div class="w-full px-6 md:px-12 flex justify-between items-center h-16 max-w-[1600px] mx-auto">
+<!-- Brand Anchor -->
+<a class="font-display tracking-tighter text-sm uppercase text-primary font-semibold flex items-center gap-3" href="#">
+<span class="inline-block w-2 h-2 bg-primary rounded-none"></span>
+<span>CINEA / AETHEL</span>
+</a>
+<!-- Desktop Nav Links -->
+<nav class="hidden md:flex items-center space-x-8 font-label uppercase text-xs tracking-wider">
+<a class="text-primary font-medium transition-colors duration-200" href="#archive">Archive</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#formats">Formats</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#reels">Reels</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#colophon">Colophon</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#contact">Contact</a>
+</nav>
+<!-- Trailing Action -->
+<div class="flex items-center gap-4">
+<button class="font-label text-xs uppercase tracking-wider text-primary border border-surface-container-highest px-3.5 py-1.5 rounded-lg hover:border-primary transition-colors duration-150 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Screening Room</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN EDITORIAL CANVAS -->
+<main class="flex-grow w-full max-w-[1600px] mx-auto px-6 md:px-12 py-10 md:py-16">
+<!-- EDITORIAL INTRO SECTION -->
+<section class="mb-14">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<div class="lg:col-span-8">
+<div class="font-label uppercase text-[11px] tracking-widest text-secondary mb-3 flex items-center gap-2">
+<span class="inline-block w-4 h-[1px] bg-secondary"></span>
+            CATALOGUE N° 14 / PRODUCTION ARCHIVE
+          </div>
+<h1 class="font-display text-3xl sm:text-4xl lg:text-5xl font-normal tracking-tight text-primary leading-[1.05] max-w-4xl">
+            Motion studies, narrative features, and archival experiments captured on large format emulsion.
+          </h1>
+</div>
+<div class="lg:col-span-4 lg:pt-8">
+<p class="font-body text-sm leading-relaxed text-secondary mb-6">
+            AETHEL maintains an autonomous motion picture laboratory dedicated to photochemical survival. Every production relies exclusively on physical emulsion stocks, non-standard optical glass, and high-density analogue color separations timed at calibrated illuminant D65.
+          </p>
+<div class="flex items-center gap-6 font-mono-cinema text-xs text-secondary-fixed-variant">
+<div>
+<span class="block text-[10px] uppercase font-label text-secondary tracking-widest">STOCK</span>
+<span>50D / 250D / 500T</span>
+</div>
+<div class="h-6 w-[1px] bg-surface-container-high"></div>
+<div>
+<span class="block text-[10px] uppercase font-label text-secondary tracking-widest">GATE SPEC</span>
+<span>65MM 5-PERF &amp; VISTAVISION</span>
+</div>
+<div class="h-6 w-[1px] bg-surface-container-high"></div>
+<div>
+<span class="block text-[10px] uppercase font-label text-secondary tracking-widest">ACOUSTICS</span>
+<span>24-BIT / 96KHZ FIELD</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Technical Telemetry Bar -->
+<div class="mt-10 py-3.5 px-4 bg-surface-container-low border border-surface-container-high rounded flex flex-wrap items-center justify-between gap-4 font-mono-cinema text-[11px] text-secondary">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-primary"></span>
+<span class="text-primary font-medium">TOTAL ACTIVE REELS:</span> 28 ARCHIVED WORKS
+        </div>
+<div class="hidden md:flex items-center gap-6">
+<span>FORMAT RATIO: 65MM IMAX (08) • 35MM VISTAVISION (14) • ANAMORPHIC (06)</span>
+<span class="h-3 w-[1px] bg-surface-dim"></span>
+<span>MONITORING: DCI-P3 / D65 CINEMATIC MASTER</span>
+</div>
+<div>
+<span class="text-primary font-medium">SOUND LAB:</span> 5.1 DOLBY ATMOS &amp; AMBISONIC 3D
+        </div>
+</div>
+</section>
+<!-- FILTER & FORMAT SEGMENTED BAR -->
+<section class="mb-12 border-b border-surface-container-high pb-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<!-- Filter Triggers -->
+<div class="flex flex-wrap items-center gap-2">
+<button class="px-3.5 py-1.5 text-xs font-label uppercase tracking-wider rounded bg-primary text-on-primary transition-colors">
+            All Works [18]
+          </button>
+<button class="px-3.5 py-1.5 text-xs font-label uppercase tracking-wider rounded text-secondary hover:text-primary hover:bg-surface-container-low transition-colors">
+            65mm Large Format [5]
+          </button>
+<button class="px-3.5 py-1.5 text-xs font-label uppercase tracking-wider rounded text-secondary hover:text-primary hover:bg-surface-container-low transition-colors">
+            35mm Photochemical [7]
+          </button>
+<button class="px-3.5 py-1.5 text-xs font-label uppercase tracking-wider rounded text-secondary hover:text-primary hover:bg-surface-container-low transition-colors">
+            Anamorphic Shorts [4]
+          </button>
+<button class="px-3.5 py-1.5 text-xs font-label uppercase tracking-wider rounded text-secondary hover:text-primary hover:bg-surface-container-low transition-colors">
+            Sound &amp; Score Labs [2]
+          </button>
+</div>
+<!-- Sort and View Controls -->
+<div class="flex items-center gap-4 text-xs font-label uppercase tracking-wider text-secondary">
+<div class="flex items-center gap-2">
+<span>Sort:</span>
+<select class="bg-transparent border-0 text-primary font-medium focus:ring-0 cursor-pointer p-0 text-xs uppercase">
+<option>Chronological (2022–2025)</option>
+<option>Aspect Ratio (2.39:1 / 1.43:1)</option>
+<option>Run Time (Ascending)</option>
+<option>Optical Aperture</option>
+</select>
+</div>
+<span class="h-3 w-[1px] bg-surface-dim"></span>
+<div class="flex items-center gap-1">
+<button class="p-1 text-primary" title="Widescreen Grid">
+<span class="material-symbols-outlined text-[18px]">grid_view</span>
+</button>
+<button class="p-1 text-secondary hover:text-primary" title="Detailed List">
+<span class="material-symbols-outlined text-[18px]">view_agenda</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- FEATURED HERO FILM SPOTLIGHT (2.39:1 WIDESCREEN CINEMATIC FRAME) -->
+<section class="mb-20">
+<div class="flex items-center justify-between mb-3">
+<div class="font-label uppercase text-[11px] tracking-widest text-secondary flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px]">stars</span>
+<span>CURATORIAL SPOTLIGHT / ARCHIVAL PREVIEW</span>
+</div>
+<div class="font-mono-cinema text-xs text-secondary">
+          CANISTER REF: AE-65-8849 / EXP 2024
+        </div>
+</div>
+<!-- Hero Video Player Mockup -->
+<div class="relative w-full aspect-239 bg-tertiary overflow-hidden rounded group shadow-none">
+<!-- Cinematic Image Still -->
+<img class="w-full h-full object-cover object-center filter brightness-90 group-hover:scale-[1.01] transition-transform duration-700 ease-out" data-alt="A dramatic cinematic wide shot from a 65mm feature film depicting a monolithic brutalist concrete structure standing isolated on a windswept Nordic glacial coastline. The sky is heavy with moody, deep charcoal clouds, while subtle pale dawn light reflects off wet volcanic rocks in the foreground. Photographed on Kodak Vision3 motion picture film with rich analogue grain and ultra-wide anamorphic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7EdFwDKAj7kJXLBFsc41eNYqQ3Idal3hRGJgaN_8nj3nX4AKzdsmDZfUE2AamQNKehdp03jn8JS4y0RlnxuLiPg94JAu_zxHKAYyCADNsaBMAeO5UZec854qMJ7K0mhv-KVz34DnbuVJosLGpfA6bOtU2rZ6uxkaRgm2J0tiGkN-24E01_0OpRC81jTjOViueJbyMn8GSlxGIfdJl6a5jbkv-eu8vHLFl0QZDBY8-kESPAcgM2tldaS2yHDeoBCuPt5v3HG6LUDPf"/>
+<!-- Top Overlays (Timecode & Telemetry) -->
+<div class="absolute top-4 left-6 right-6 flex items-center justify-between text-on-tertiary font-mono-cinema text-xs z-20 pointer-events-none drop-shadow">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] border border-white/10">
+<span class="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse"></span>
+              TC 01:14:28:12
+            </span>
+<span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] border border-white/10 hidden sm:inline-block">
+              FRAME 107,244
+            </span>
+</div>
+<div class="flex items-center gap-3">
+<span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] border border-white/10">
+              65MM 5-PERF / KODAK VISION3 500T
+            </span>
+<span class="bg-black/60 backdrop-blur-sm px-2 py-0.5 rounded text-[11px] border border-white/10 hidden sm:inline-block">
+              28 MIN
+            </span>
+</div>
+</div>
+<!-- Center Interactive Play Glyphs -->
+<div class="absolute inset-0 flex items-center justify-center z-20">
+<button class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-black/40 backdrop-blur-md border border-white/30 text-on-tertiary flex items-center justify-center hover:bg-black/70 hover:scale-105 transition-all duration-200">
+<span class="material-symbols-outlined text-3xl md:text-4xl pl-1" data-weight="fill">play_arrow</span>
+</button>
+</div>
+<!-- Bottom Integrated Playback Controller Bar -->
+<div class="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-4 md:p-6 z-20 flex flex-col gap-2">
+<!-- Timeline Scrubber -->
+<div class="w-full flex items-center gap-3 group/scrub cursor-pointer">
+<div class="w-full h-1 bg-white/20 relative rounded overflow-hidden">
+<div class="h-full bg-white/80 w-[42%] relative">
+<div class="absolute right-0 top-0 bottom-0 w-2 bg-white shadow"></div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-on-tertiary text-xs">
+<div class="flex items-center gap-4">
+<button class="hover:text-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="hover:text-surface-variant flex items-center">
+<span class="material-symbols-outlined text-[20px]">volume_up</span>
+</button>
+<span class="font-mono-cinema text-[11px] text-white/70">11:42 / 28:00</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="hidden sm:inline font-mono-cinema text-[10px] text-white/60 tracking-wider">AUDIO: 48K 24-BIT DISCRETE 6CH</span>
+<button class="hover:text-surface-variant flex items-center" title="Aspect crop preview">
+<span class="material-symbols-outlined text-[18px]">aspect_ratio</span>
+</button>
+<button class="hover:text-surface-variant flex items-center" title="Fullscreen">
+<span class="material-symbols-outlined text-[18px]">fullscreen</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Featured Film Production Drawer / Notes -->
+<div class="mt-6 pt-6 border-t border-surface-container-high grid grid-cols-1 lg:grid-cols-12 gap-8">
+<div class="lg:col-span-5">
+<div class="font-label uppercase text-[11px] tracking-widest text-secondary mb-1">
+            FEATURE PRODUCTION 2024 / ASPECT 2.39:1
+          </div>
+<h2 class="font-display text-2xl md:text-3xl font-normal text-primary tracking-tight mb-2">
+            THE MONOLITH AT NORDIC REACH
+          </h2>
+<p class="font-body text-xs text-secondary font-medium tracking-wide mb-4">
+            Directed by Elena Vance • Cinematography by Marcus Hällström, FSF
+          </p>
+<p class="font-body text-sm text-secondary leading-relaxed">
+            Filmed on location along the frozen perimeter of the Svalbard archipelago during the 72-hour polar twilight. A sensorial exploration of acoustic resonance within abandoned submarine listening tunnels, recorded with hydrophones beneath 4-meter pack ice.
+          </p>
+</div>
+<div class="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-surface-container-high pt-4 lg:pt-0 lg:pl-8">
+<h3 class="font-label uppercase text-[11px] tracking-widest text-primary mb-3">
+            Optical &amp; Laboratory Specifications
+          </h3>
+<dl class="space-y-2 font-mono-cinema text-xs text-secondary">
+<div class="flex justify-between">
+<dt class="font-body text-secondary">Optics:</dt>
+<dd class="text-primary font-medium">Cooke Anamorphic /i Full Frame Plus</dd>
+</div>
+<div class="flex justify-between">
+<dt class="font-body text-secondary">Emulsion Batch:</dt>
+<dd class="text-primary font-medium">5219-041-023 (Kodak Rochester)</dd>
+</div>
+<div class="flex justify-between">
+<dt class="font-body text-secondary">Push Process:</dt>
+<dd class="text-primary font-medium">+1.5 Stops (ECN-2 Continuous Bath)</dd>
+</div>
+<div class="flex justify-between">
+<dt class="font-body text-secondary">Sound Design:</dt>
+<dd class="text-primary font-medium">Ambisonic B-format spatial field arrays</dd>
+</div>
+<div class="flex justify-between">
+<dt class="font-body text-secondary">Master Telecine:</dt>
+<dd class="text-primary font-medium">Lasergraphics Director 65mm HDR Scan</dd>
+</div>
+</dl>
+</div>
+<div class="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-surface-container-high pt-4 lg:pt-0 lg:pl-8 flex flex-col justify-between">
+<div>
+<h3 class="font-label uppercase text-[11px] tracking-widest text-primary mb-3">
+              Official Honors &amp; Curatorial Selection
+            </h3>
+<div class="space-y-2 text-xs font-body text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Venice Biennale — Orizzonti Award</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Rotterdam IFFR — Tiger Competition</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">verified</span>
+<span>Camerimage — Golden Frog Nominee</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<button class="w-full py-2 bg-surface-container text-primary font-label text-xs uppercase tracking-wider rounded hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">article</span>
+<span>Inspect Full Production Binder</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ARCHIVAL GALLERY GRID (PROJECT REELS) -->
+<section class="mb-20" id="archive">
+<div class="flex items-end justify-between mb-8 border-b border-surface-container-high pb-4">
+<div>
+<span class="font-label uppercase text-[11px] tracking-widest text-secondary block mb-1">
+            CATALOGUE REELS // RESTRICTED ACCESS
+          </span>
+<h2 class="font-display text-2xl font-normal text-primary tracking-tight">
+            Curated Film Project Roster
+          </h2>
+</div>
+<div class="font-mono-cinema text-xs text-secondary hidden sm:block">
+          SHOWING 4 OF 28 MASTER PRINTS
+        </div>
+</div>
+<!-- Bento / Asymmetric 2x2 High Fidelity Project Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+<!-- FILM 1: SOLARIS DIVERGENCE -->
+<article class="flex flex-col group">
+<!-- Card Thumbnail Frame with Controls -->
+<div class="relative aspect-cinematic w-full bg-tertiary overflow-hidden rounded mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="A cinematic medium wide shot of an astronaut or arctic explorer standing beside an intricate brass atmospheric monitoring antenna in a snowy tundra landscape at twilight. The horizon reveals a subtle magenta and ice-blue solar gradient. Shot on 35mm anamorphic film with pronounced horizontal lens flares, organic film grain, and rich shadow rendering in deep black and cold tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8w0lwRJIGYh1pumLUSuNFhXoHuHMNCThCeyqzV8DQTl1YuRUh0Jff-TimihV5jc7k7RLEJOmC5cZpI1Zev3nMxk8hr4Gv5sB7oYKdiqfYzxhJ3zT1KLecYm0A_Z6pJAWeSrUcBxivu-jRUj_TY8RZiehmiXVWKqCZZaeHYTJH7OpBff9wMQU937WWCQyZGyuwKmw283uTuOqzqfq0HIhSxaRjmRWcnQoTv2kk5WPekZXIr6keWprRBBNPdZf3qJhCZEjBeEM02ZjR"/>
+<!-- Metadata badges -->
+<div class="absolute top-3 left-3 flex items-center gap-2 z-10 font-mono-cinema text-[11px]">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                14M 20S
+              </span>
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                35MM VISTAVISION
+              </span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary font-mono-cinema text-[10px] px-2 py-0.5 rounded border border-white/10">
+                2.39:1
+              </span>
+</div>
+<!-- Hover Play Button with Micro Timeline -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-4 z-20">
+<div class="flex justify-end">
+<span class="material-symbols-outlined text-white text-[20px]">open_in_new</span>
+</div>
+<div class="self-center">
+<button class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl pl-0.5" data-weight="fill">play_arrow</span>
+</button>
+</div>
+<!-- Micro Timeline -->
+<div class="w-full flex items-center gap-2 text-white font-mono-cinema text-[10px]">
+<span>00:00</span>
+<div class="flex-grow h-0.5 bg-white/30 rounded">
+<div class="w-1/3 h-full bg-white"></div>
+</div>
+<span>14:20</span>
+</div>
+</div>
+</div>
+<!-- Project Details -->
+<div class="flex flex-col flex-grow">
+<div class="flex items-baseline justify-between mb-1">
+<h3 class="font-display text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
+                SOLARIS DIVERGENCE
+              </h3>
+<span class="font-mono-cinema text-xs text-secondary">2024 / ICELAND</span>
+</div>
+<p class="font-body text-xs text-secondary mb-3">
+              Dir. Thorne Bradley • DP: Sacha Ramos • Score: Jóhann Valur
+            </p>
+<p class="font-body text-sm text-secondary leading-relaxed mb-4">
+              A tactile science-fiction short capturing an uncrewed solar observatory during a geomagnetic storm. Filmed entirely under natural polar night with anamorphic optics tuned to ultraviolet spill.
+            </p>
+<!-- Technical Production Badge -->
+<div class="mt-auto pt-3 border-t border-surface-container-high font-mono-cinema text-[11px] text-secondary flex flex-wrap items-center justify-between gap-2">
+<span>LENSES: LOMO ROUND-FRONT ANAMORPHIC</span>
+<span>LAB: CINELAB LONDON (ECN-2)</span>
+</div>
+</div>
+</article>
+<!-- FILM 2: CHRONOMETRY OF AN EMPTY ROOM -->
+<article class="flex flex-col group">
+<!-- Card Thumbnail Frame with Controls -->
+<div class="relative aspect-cinematic w-full bg-tertiary overflow-hidden rounded mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="An austere architectural interior photograph inside a massive decommissioned brutalist concrete amphitheater. Geometric shafts of natural light stream through high diagonal clerestory windows, cutting through subtle theatrical haze. Photographed in high-contrast black and white on 65mm monochrome stock, exhibiting impeccable architectural lines, deep charcoal tones, and silhouetted audio microphone stands." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIFkzRrlXAMEGRL_lhOA3lTfA6ta7VxrvYkToXl8POzbG6PxOm8vMWbmJOW8bwjz_oZ6vQbQIRUgrMpsTRL7IeYFrd40AUXf-hEJjBqnqxN2pUfNAcXx7Xtj11AckPeNGxjg0NWAKhXulrt7N7ENpw51itgtS9lX1cIwd0hD2S_eDg5EpK-N29aoqS51Rozr0OLyl_7zLzVKwRUrb6suXIPyMwccG893gcng52Zaq6n7eeNVhrpOu9MTsIffpMx_AH50EXLgxZ4HnY"/>
+<!-- Metadata badges -->
+<div class="absolute top-3 left-3 flex items-center gap-2 z-10 font-mono-cinema text-[11px]">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                42M 00S
+              </span>
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                ARRI 65 MONOCHROME
+              </span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary font-mono-cinema text-[10px] px-2 py-0.5 rounded border border-white/10">
+                1.43:1 IMAX
+              </span>
+</div>
+<!-- Hover Play Button with Micro Timeline -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-4 z-20">
+<div class="flex justify-end">
+<span class="material-symbols-outlined text-white text-[20px]">open_in_new</span>
+</div>
+<div class="self-center">
+<button class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl pl-0.5" data-weight="fill">play_arrow</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-2 text-white font-mono-cinema text-[10px]">
+<span>00:00</span>
+<div class="flex-grow h-0.5 bg-white/30 rounded">
+<div class="w-1/2 h-full bg-white"></div>
+</div>
+<span>42:00</span>
+</div>
+</div>
+</div>
+<!-- Project Details -->
+<div class="flex flex-col flex-grow">
+<div class="flex items-baseline justify-between mb-1">
+<h3 class="font-display text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
+                CHRONOMETRY OF AN EMPTY ROOM
+              </h3>
+<span class="font-mono-cinema text-xs text-secondary">2023 / BERLIN</span>
+</div>
+<p class="font-body text-xs text-secondary mb-3">
+              Dir. Anke Van Der Meer • Sound Spatialization: Florian Haas
+            </p>
+<p class="font-body text-sm text-secondary leading-relaxed mb-4">
+              A structural spatial documentary analyzing the decay of acoustic reverb across five defunct radio broadcasting centers. Sound recordings were captured with custom omnidirectional parabolic microphones.
+            </p>
+<div class="mt-auto pt-3 border-t border-surface-container-high font-mono-cinema text-[11px] text-secondary flex flex-wrap items-center justify-between gap-2">
+<span>OPTICS: LEITZ THALIA 45MM</span>
+<span>AUDIO: DPA 4006A STEREO PAIR</span>
+</div>
+</div>
+</article>
+<!-- FILM 3: TERRA INCOGNITA (PART II) -->
+<article class="flex flex-col group">
+<!-- Card Thumbnail Frame with Controls -->
+<div class="relative aspect-cinematic w-full bg-tertiary overflow-hidden rounded mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="An epic cinematic geological panorama of steam rising from volcanic obsidian fissures and sulfur vents across a rugged mountainous terrain. The shot is framed from a low perspective with heavy photographic depth of field, exhibiting natural earth tones, ochre, cold slate, and deep shadows under overcast natural lighting. Captured on large format 65mm film emulsion with crisp crystalline detail." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjWaqxxiFrGYzZcO-_AVVnt2l0AmrSTI_4sDUtpsN2wv9UFkZGQqCd1KH0lOz2Wn20G8b7XDS80vgasa1hiRT-c1S9jV506xgtpcTP05wVinUhkYa0tod7VoTaOC0HeH9XEOPQ_hUCHa0krxGVvDD-YbLhEHSr_ICSimLOhbur18_ur5E8V_WLchU_WCWq9uT74ZeUjVq4CdWM-LLFs_NMslAA2wVI6GNcTLo7c0wD6-4VNWemcoYQMt7XOduorskJIEtH-IuYlQab"/>
+<!-- Metadata badges -->
+<div class="absolute top-3 left-3 flex items-center gap-2 z-10 font-mono-cinema text-[11px]">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                112M 00S
+              </span>
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                65MM LARGE FORMAT
+              </span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary font-mono-cinema text-[10px] px-2 py-0.5 rounded border border-white/10">
+                2.20:1
+              </span>
+</div>
+<!-- Hover Play Button with Micro Timeline -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-4 z-20">
+<div class="flex justify-end">
+<span class="material-symbols-outlined text-white text-[20px]">open_in_new</span>
+</div>
+<div class="self-center">
+<button class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl pl-0.5" data-weight="fill">play_arrow</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-2 text-white font-mono-cinema text-[10px]">
+<span>00:00</span>
+<div class="flex-grow h-0.5 bg-white/30 rounded">
+<div class="w-1/6 h-full bg-white"></div>
+</div>
+<span>112:00</span>
+</div>
+</div>
+</div>
+<!-- Project Details -->
+<div class="flex flex-col flex-grow">
+<div class="flex items-baseline justify-between mb-1">
+<h3 class="font-display text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
+                TERRA INCOGNITA (PART II)
+              </h3>
+<span class="font-mono-cinema text-xs text-secondary">2023 / CHILE</span>
+</div>
+<p class="font-body text-xs text-secondary mb-3">
+              Dir. Mateo Silva • Cinematography: Claire Vane, ASC
+            </p>
+<p class="font-body text-sm text-secondary leading-relaxed mb-4">
+              A landscape chronicle examining low-frequency tectonic murmurs across the Atacama trench. The project was timed directly onto high-density photochemical separation positives for archival preservation.
+            </p>
+<div class="mt-auto pt-3 border-t border-surface-container-high font-mono-cinema text-[11px] text-secondary flex flex-wrap items-center justify-between gap-2">
+<span>STOCK: KODAK 50D 5203</span>
+<span>OPTICS: HASSELBLAD PRIME 65</span>
+</div>
+</div>
+</article>
+<!-- FILM 4: THE GLASS ORCHARD -->
+<article class="flex flex-col group">
+<!-- Card Thumbnail Frame with Controls -->
+<div class="relative aspect-cinematic w-full bg-tertiary overflow-hidden rounded mb-4">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out" data-alt="A delicate and moody interior film frame depicting a woman in 1960s tailored wool standing beside a rain-streaked greenhouse glass wall. Her face is partially reflected in the condensation while soft overcast garden greenery is softly blurred in the background. Photographed on warm 35mm motion picture stock with visible vintage lens aberration, gentle halation, and natural color grading." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnYI2C0N8G6WiWZRMpRWvY1uUIkmrPo0WhThm9FOnb3dvLPFnZllh5VfNFd6Vi7NV0XkZvQE2tWu4Y8mVB3HUR2TBEPDIf_0z8EE52uZXIn8MnvqoHvbPjKVuI8AgkQBIsLdQrPSmF2aABlwIQcvWeezySA0MBMKuz1un2Bjeh4h3OUIuzA65ittMVI4Ea8ZEaqDtHj3-pr9AKmazvrLYQjJOIupmgTmTjSWsGR7yN9dQn-ydcMG8z3npeVSGGzK2hMZ6nLqtUTygj"/>
+<!-- Metadata badges -->
+<div class="absolute top-3 left-3 flex items-center gap-2 z-10 font-mono-cinema text-[11px]">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                08M 45S
+              </span>
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary px-2 py-0.5 rounded border border-white/10">
+                16MM EKTACHROME PUSH+1
+              </span>
+</div>
+<div class="absolute top-3 right-3 z-10">
+<span class="bg-black/75 backdrop-blur-sm text-on-tertiary font-mono-cinema text-[10px] px-2 py-0.5 rounded border border-white/10">
+                1.66:1 EUROPEAN
+              </span>
+</div>
+<!-- Hover Play Button with Micro Timeline -->
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex flex-col justify-between p-4 z-20">
+<div class="flex justify-end">
+<span class="material-symbols-outlined text-white text-[20px]">open_in_new</span>
+</div>
+<div class="self-center">
+<button class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-2xl pl-0.5" data-weight="fill">play_arrow</span>
+</button>
+</div>
+<div class="w-full flex items-center gap-2 text-white font-mono-cinema text-[10px]">
+<span>00:00</span>
+<div class="flex-grow h-0.5 bg-white/30 rounded">
+<div class="w-3/4 h-full bg-white"></div>
+</div>
+<span>08:45</span>
+</div>
+</div>
+</div>
+<!-- Project Details -->
+<div class="flex flex-col flex-grow">
+<div class="flex items-baseline justify-between mb-1">
+<h3 class="font-display text-lg font-medium text-primary tracking-tight group-hover:text-secondary transition-colors">
+                THE GLASS ORCHARD
+              </h3>
+<span class="font-mono-cinema text-xs text-secondary">2024 / NORMANDY</span>
+</div>
+<p class="font-body text-xs text-secondary mb-3">
+              Dir. Camille Laurent • Starring Héloïse Martin
+            </p>
+<p class="font-body text-sm text-secondary leading-relaxed mb-4">
+              An intimate chamber drama filmed entirely within a 19th-century conservatory during an unremitting autumn equinox. Hand-processed reversal film stock pushed by one stop for pronounced tactile grain.
+            </p>
+<div class="mt-auto pt-3 border-t border-surface-container-high font-mono-cinema text-[11px] text-secondary flex flex-wrap items-center justify-between gap-2">
+<span>OPTICS: KOWA PROMINAR VINTAGE SPHERICAL</span>
+<span>EMULSION: EKTACHROME 7294</span>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- CURATORIAL INDEX & LABORATORY TELEMETRY SUMMARY -->
+<section class="mb-16 pt-10 border-t border-surface-container-high">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div>
+<span class="font-label uppercase text-[11px] tracking-widest text-secondary block mb-2">
+            ACCREDITATION &amp; STANDARDS
+          </span>
+<p class="font-body text-xs text-secondary leading-relaxed">
+            All prints preserved under ISO 18911:2010 specifications for processed safety photographic film storage. Maintained at 4°C (39°F) and 30% Relative Humidity in nitrogen-purged hermetic canisters.
+          </p>
+</div>
+<div>
+<span class="font-label uppercase text-[11px] tracking-widest text-secondary block mb-2">
+            OPTICAL CURATION
+          </span>
+<p class="font-body text-xs text-secondary leading-relaxed">
+            Optical testing conducted on collimator benches in our Zurich workshop. Lenses are calibrated for natural field curvature, un-coated flare retention, and authentic chromatic roll-off.
+          </p>
+</div>
+<div>
+<span class="font-label uppercase text-[11px] tracking-widest text-secondary block mb-2">
+            FESTIVAL &amp; LOAN DESK
+          </span>
+<p class="font-body text-xs text-secondary leading-relaxed">
+            Physical 35mm and 70mm exhibition prints are available on loan to accredited cinematheques, archival retrospectives, and DCI-compliant screening facilities worldwide.
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- SHARED COMPONENT: Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-surface-container-high">
+<div class="w-full px-6 md:px-12 py-12 max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<!-- Copyright text & branding -->
+<div>
+<div class="font-display tracking-tighter text-xs uppercase text-primary font-semibold mb-1">
+          CINEA / AETHEL STUDIOS
+        </div>
+<p class="font-body text-xs tracking-tight text-secondary">
+          © 2025 CINEA / AETHEL STUDIOS. 35MM &amp; 65MM LARGE FORMAT ARCHIVE. ALL RIGHTS RESERVED.
+        </p>
+</div>
+<!-- Footer links from JSON -->
+<nav class="flex flex-wrap items-center gap-6 font-label uppercase text-[11px] tracking-widest text-secondary">
+<a class="hover:text-primary transition-colors duration-150" href="#production-log">Production Log</a>
+<a class="hover:text-primary transition-colors duration-150" href="#colophon">Colophon</a>
+<a class="hover:text-primary transition-colors duration-150" href="#aspect-ratios">Aspect Ratios</a>
+<a class="hover:text-primary transition-colors duration-150" href="#inquiries">Festival Inquiries</a>
+<a class="hover:text-primary transition-colors duration-150" href="#privacy">Privacy</a>
+<a class="hover:text-primary transition-colors duration-150" href="#legal">Legal</a>
+</nav>
+</div>
+</footer>
+</body></html>

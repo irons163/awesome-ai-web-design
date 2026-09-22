@@ -1,8 +1,918 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mistral AI · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#fa520f;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/mistral.ai">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Mistral AI · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#fa520f"></span><code>#fa520f</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#1f1f1f"></span><code>#1f1f1f</code></div><div class="swatch"><span style="background:#cc3a05"></span><code>#cc3a05</code></div><div class="swatch"><span style="background:#ffd06a"></span><code>#ffd06a</code></div><div class="swatch"><span style="background:#ffb83e"></span><code>#ffb83e</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · PP Editorial Old</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vespera Weights — Open weights for frontier intelligence</title>
+<!-- Fonts: Newsreader (Editorial Serif) & Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Public+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#ffdbd0",
+            "tertiary": "#005ea4",
+            "secondary-fixed-dim": "#ffb59e",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#fffbff",
+            "on-secondary-fixed": "#3a0b00",
+            "on-primary-fixed-variant": "#842500",
+            "primary-fixed-dim": "#ffb59e",
+            "inverse-surface": "#2f3131",
+            "background": "#f9f9f9",
+            "tertiary-fixed-dim": "#a2c9ff",
+            "secondary-fixed": "#ffdbd0",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#5c4038",
+            "on-secondary-fixed-variant": "#802909",
+            "inverse-on-surface": "#f0f1f1",
+            "error-container": "#ffdad6",
+            "surface-bright": "#f9f9f9",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f3f3f4",
+            "secondary": "#a0401f",
+            "outline": "#907066",
+            "surface-container-high": "#e8e8e8",
+            "on-background": "#1a1c1c",
+            "surface-container": "#eeeeee",
+            "tertiary-container": "#0077ce",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#dadada",
+            "surface-tint": "#ad3300",
+            "on-secondary-container": "#732001",
+            "surface-container-highest": "#e2e2e2",
+            "outline-variant": "#e5beb3",
+            "on-error": "#ffffff",
+            "on-surface": "#1a1c1c",
+            "secondary-container": "#fe8760",
+            "on-primary": "#ffffff",
+            "surface-variant": "#e2e2e2",
+            "surface": "#f9f9f9",
+            "primary-container": "#d34000",
+            "on-tertiary-fixed-variant": "#004881",
+            "on-tertiary-fixed": "#001c38",
+            "on-tertiary-container": "#fdfcff",
+            "primary": "#a93100",
+            "inverse-primary": "#ffb59e",
+            "on-primary-fixed": "#3a0b00",
+            "tertiary-fixed": "#d3e4ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Newsreader", "serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    /* Stepped Pixel Pattern Divider */
+    .pixel-divider {
+      height: 4px;
+      background: repeating-linear-gradient(
+        90deg,
+        #a93100 0px,
+        #a93100 8px,
+        #fe8760 8px,
+        #fe8760 16px,
+        #ffdbd0 16px,
+        #ffdbd0 24px,
+        transparent 24px,
+        transparent 32px
+      );
+    }
+
+    /* Mistral Signature Sunset Gradient Strip */
+    .sunset-band {
+      background: linear-gradient(
+        90deg, 
+        #a93100 0%, 
+        #d34000 25%, 
+        #fe8760 50%, 
+        #ffb59e 75%, 
+        #ffdbd0 100%
+      );
+      height: 6px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="bg-[#FBF9F5] text-on-surface font-body antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed min-h-screen flex flex-col">
+<!-- TOP PROMO BANNER -->
+<aside class="bg-inverse-surface text-inverse-on-surface py-2 px-4 text-xs font-mono tracking-wide border-b border-surface-container">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-secondary-container animate-pulse"></span>
+<span class="font-medium text-surface-container-lowest">LATEST DROP:</span>
+<span class="text-surface-container-highest">Vespera-70B-Instruct-v2 weights with 128k context are live for direct download.</span>
+</div>
+<div class="hidden md:flex items-center gap-4 text-[11px] text-surface-container-highest">
+<span>GGUF · AWQ · FP8 · SAFETENSORS</span>
+<span class="text-outline-variant">|</span>
+<span class="text-secondary-fixed hover:underline cursor-pointer">Verify SHA-256 Hashes →</span>
+</div>
+</div>
+</aside>
+<!-- SHARED COMPONENT: TopNavBar -->
+<header class="w-full bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 md:px-12 max-w-7xl mx-auto h-16">
+<!-- Left: Logo & Top Nav Links -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 group" href="#">
+<!-- Stepped geometric glyph -->
+<div class="w-6 h-6 bg-primary flex flex-col justify-between p-1 rounded-sm shadow-sm group-hover:bg-primary-container transition-colors">
+<div class="w-full h-1 bg-surface-container-lowest"></div>
+<div class="w-2/3 h-1 bg-surface-container-lowest ml-auto"></div>
+<div class="w-1/3 h-1 bg-surface-container-lowest"></div>
+</div>
+<span class="font-headline text-lg font-bold tracking-tight text-on-surface dark:text-inverse-on-surface uppercase">
+            Vespera Weights
+          </span>
+</a>
+<!-- Desktop Navigation Links from JSON (Models is Active) -->
+<nav class="hidden lg:flex items-center space-x-6 font-headline text-sm font-medium tracking-tight pt-4">
+<a class="border-b-2 border-primary text-primary dark:text-inverse-primary font-medium pb-4 hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-80" href="#models">
+            Models
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-4 font-normal hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-80" href="#benchmarks">
+            Benchmarks
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-4 font-normal hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-80" href="#pipelines">
+            Pipelines
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-4 font-normal hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-80" href="#licenses">
+            Licenses
+          </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface pb-4 font-normal hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-80" href="#docs">
+            Documentation
+          </a>
+</nav>
+</div>
+<!-- Right Utility Actions & Trailing Buttons from JSON -->
+<div class="flex items-center gap-3">
+<!-- Search Bar -->
+<div class="hidden sm:flex items-center bg-[#F5EFEB] border border-outline-variant/60 rounded px-2.5 py-1.5 text-xs text-on-surface-variant focus-within:border-primary transition-colors">
+<span class="material-symbols-outlined text-[16px] mr-1.5 text-outline">search</span>
+<input class="bg-transparent border-0 p-0 text-xs text-on-surface placeholder:text-outline focus:ring-0 w-36 outline-none" placeholder="Search weights (⌘K)" type="text"/>
+<kbd class="hidden md:inline-block font-mono bg-surface-container-lowest border border-outline-variant text-[10px] px-1 rounded text-outline ml-1">⌘K</kbd>
+</div>
+<!-- Trailing Icon Actions -->
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded active:opacity-80" title="Quick Terminal">
+<span class="material-symbols-outlined text-[20px]">terminal</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors rounded active:opacity-80" title="Direct Torrent &amp; Mirrors">
+<span class="material-symbols-outlined text-[20px]">download</span>
+</button>
+<!-- Trailing Secondary & Primary Actions -->
+<button class="hidden md:inline-flex items-center text-xs font-medium text-on-surface px-3 py-1.5 rounded hover:text-primary transition-colors active:opacity-75">
+          Sign In
+        </button>
+<button class="bg-primary text-on-primary font-headline text-xs font-semibold px-3.5 py-2 rounded hover:bg-primary-container transition-colors shadow-sm flex items-center gap-1.5 active:opacity-80">
+<span class="material-symbols-outlined text-[15px]">bolt</span>
+          Deploy Endpoint
+        </button>
+</div>
+</div>
+</header>
+<!-- EDITORIAL HERO SECTION -->
+<main class="flex-grow">
+<section class="relative bg-[#FFF9F2] border-b border-outline-variant/70 overflow-hidden">
+<!-- Subtle top decorative ambient radial -->
+<div class="absolute -top-24 right-0 w-96 h-96 bg-primary-fixed/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="max-w-7xl mx-auto px-6 md:px-12 py-16 md:py-20 relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+<div class="lg:col-span-8">
+<div class="inline-flex items-center gap-2 font-mono text-[11px] font-semibold text-primary uppercase tracking-widest bg-secondary-fixed/50 px-2.5 py-1 rounded border border-outline-variant mb-6">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Open Weights · High-Throughput Checkpoints
+            </div>
+<h1 class="font-display text-4xl sm:text-5xl md:text-6xl text-on-surface font-normal tracking-tight leading-[1.08] mb-6">
+              Open Weights for <br class="hidden sm:inline"/>
+<span class="italic font-light text-primary">Frontier Research.</span>
+</h1>
+<p class="font-body text-base md:text-lg text-on-surface-variant max-w-2xl font-normal leading-relaxed mb-8">
+              High-throughput dense and MoE foundational checkpoints released under permissive licenses. 
+              Download GGUF, AWQ, FP8, and raw safetensors directly — no waitlists, no API keys, and zero telemetry.
+            </p>
+<!-- Quick Action Links -->
+<div class="flex flex-wrap items-center gap-4">
+<a class="bg-primary text-on-primary font-headline text-sm font-medium px-5 py-2.5 rounded shadow-sm hover:bg-primary-container transition-all flex items-center gap-2" href="#models">
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+                Browse 8 Models
+              </a>
+<a class="bg-[#F5EFEB] border border-outline-variant text-on-surface font-headline text-sm font-medium px-4 py-2.5 rounded hover:border-primary transition-all flex items-center gap-2" href="#quickstart">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+                Quickstart CLI
+              </a>
+<a class="text-xs font-mono text-on-surface-variant hover:text-primary flex items-center gap-1.5 underline underline-offset-4 ml-2" href="#manifest">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span>
+                Download Weights Manifest (JSON)
+              </a>
+</div>
+</div>
+<!-- Editorial Metric & Guarantee Box -->
+<div class="lg:col-span-4 bg-surface-container-lowest border border-outline-variant p-6 rounded-lg shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container mb-4">
+<span class="font-mono text-xs uppercase text-outline tracking-wider font-semibold">Directory Protocol</span>
+<span class="font-mono text-[11px] bg-secondary-fixed/40 text-secondary px-2 py-0.5 rounded">v2.4.0 Live</span>
+</div>
+<div class="space-y-3 font-mono text-xs">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">License Standard:</span>
+<span class="font-medium text-on-surface">Apache 2.0 / MIT</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Storage Architecture:</span>
+<span class="font-medium text-on-surface">Distributed P2P &amp; CDN</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Direct Mirrors:</span>
+<span class="font-medium text-primary">Paris · Ashburn · Tokyo</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Hash Attestation:</span>
+<span class="font-medium text-on-surface">Sigstore Signed</span>
+</div>
+</div>
+<div class="mt-5 pt-3 border-t border-surface-container text-[11px] font-mono text-outline flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-primary">verified</span>
+              100% Free Weights forever. No SaaS upsell.
+            </div>
+</div>
+</div>
+<!-- Live Metrics Ribbon -->
+<div class="mt-12 pt-8 border-t border-outline-variant/60 grid grid-cols-2 md:grid-cols-4 gap-6">
+<div>
+<div class="font-display text-2xl md:text-3xl text-primary font-medium tracking-tight">8 Checkpoints</div>
+<div class="font-mono text-xs text-on-surface-variant mt-1">Dense &amp; Sparse MoE</div>
+</div>
+<div>
+<div class="font-display text-2xl md:text-3xl text-on-surface font-medium tracking-tight">4.8M Direct</div>
+<div class="font-mono text-xs text-on-surface-variant mt-1">Global Weight Downloads</div>
+</div>
+<div>
+<div class="font-display text-2xl md:text-3xl text-on-surface font-medium tracking-tight">100% Permissive</div>
+<div class="font-mono text-xs text-on-surface-variant mt-1">Commercial &amp; Academic Use</div>
+</div>
+<div>
+<div class="font-display text-2xl md:text-3xl text-on-surface font-medium tracking-tight">128k Tokens</div>
+<div class="font-mono text-xs text-on-surface-variant mt-1">Native Context Window</div>
+</div>
+</div>
+</div>
+<!-- Pixel-stepped separator line in warm terracotta/orange -->
+<div class="pixel-divider"></div>
+</section>
+<!-- TAXONOMY & CAPABILITY FILTER BAR -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-8" id="models">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-outline-variant/50">
+<!-- Filter Pills -->
+<div class="flex flex-wrap items-center gap-2">
+<span class="font-mono text-xs text-outline font-semibold uppercase mr-1">Filter:</span>
+<button class="bg-on-surface text-surface-container-lowest text-xs font-mono font-medium px-3 py-1.5 rounded transition-all">
+            All Architectures (8)
+          </button>
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface text-xs font-mono px-3 py-1.5 rounded transition-all">
+            Dense Reasoning (7B–70B)
+          </button>
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface text-xs font-mono px-3 py-1.5 rounded transition-all">
+            Mixture of Experts (8x7B, 8x22B)
+          </button>
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface text-xs font-mono px-3 py-1.5 rounded transition-all">
+            Multimodal Vision
+          </button>
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant text-on-surface text-xs font-mono px-3 py-1.5 rounded transition-all">
+            Code &amp; Logic
+          </button>
+</div>
+<!-- Quantization & Sort Controls -->
+<div class="flex items-center gap-3">
+<div class="flex items-center bg-surface-container-lowest border border-outline-variant rounded p-1 text-xs font-mono">
+<span class="text-outline text-[11px] px-2 uppercase font-semibold">Format:</span>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-2 py-0.5 rounded font-medium">All</button>
+<button class="hover:bg-surface-container text-on-surface-variant px-2 py-0.5 rounded">GGUF</button>
+<button class="hover:bg-surface-container text-on-surface-variant px-2 py-0.5 rounded">AWQ</button>
+<button class="hover:bg-surface-container text-on-surface-variant px-2 py-0.5 rounded">FP16</button>
+</div>
+<div class="flex items-center text-xs font-mono text-on-surface bg-surface-container-lowest border border-outline-variant rounded px-3 py-1.5">
+<span class="material-symbols-outlined text-[16px] text-outline mr-1.5">sort</span>
+<span>Rank by: Benchmark (MMLU-Pro)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- FEATURED MODEL SPECIFICATION CARDS (HIGH-DENSITY EDITORIAL GRID) -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 pb-16">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- CARD 1: Vespera-70B-Instruct-v2 -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-8 flex flex-col justify-between hover:border-primary/60 transition-colors shadow-sm">
+<div>
+<!-- Top Header & Badges -->
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-secondary-fixed/50 text-secondary px-2 py-0.5 rounded">
+                    Dense Reasoning
+                  </span>
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-surface-container text-outline px-2 py-0.5 rounded">
+                    Apache 2.0
+                  </span>
+</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">
+                  Vespera-70B-Instruct-v2
+                </h2>
+</div>
+<span class="font-mono text-xs font-semibold text-primary bg-primary-fixed/40 px-2.5 py-1 rounded border border-outline-variant/60">
+                Primary Flagship
+              </span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+              State-of-the-art dense architecture with deep synthetic reasoning fine-tuning. Outperforms comparable proprietary models on technical STEM benchmarks with full 128k context fidelity.
+            </p>
+<!-- Technical Specification Tablelet -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] p-4 rounded border border-outline-variant/60 font-mono text-xs mb-6">
+<div>
+<span class="block text-[10px] uppercase text-outline">Parameters</span>
+<span class="font-semibold text-on-surface">70.6B Dense</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Context</span>
+<span class="font-semibold text-primary">128k Tokens</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Hidden Dim</span>
+<span class="font-semibold text-on-surface">4,096 / 80L</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">RoPE Theta</span>
+<span class="font-semibold text-on-surface">500,000</span>
+</div>
+</div>
+<!-- Benchmark Scores Row -->
+<div class="border-t border-b border-surface-container py-3 mb-6 font-mono text-xs flex flex-wrap items-center justify-between gap-2">
+<span class="text-outline uppercase text-[11px] font-semibold">Evaluations:</span>
+<div class="flex items-center gap-4">
+<span>MMLU-Pro: <strong class="text-primary font-semibold">78.4%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>HumanEval: <strong class="text-on-surface font-semibold">84.2%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>MATH-500: <strong class="text-on-surface font-semibold">71.9%</strong></span>
+</div>
+</div>
+<!-- Architecture Details -->
+<div class="text-xs font-mono text-on-surface-variant space-y-1 mb-6">
+<div><span class="text-outline">Attention:</span> Sliding-window attention with grouped-query GQA (8 KV heads)</div>
+<div><span class="text-outline">Vocabulary:</span> 131,072 Tiktoken BPE optimized for multilingual code</div>
+</div>
+</div>
+<!-- Download Action Bar -->
+<div class="pt-4 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<a class="bg-primary hover:bg-primary-container text-on-primary text-xs font-mono font-medium px-3 py-2 rounded flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                Safetensors (141 GB)
+              </a>
+<a class="bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-mono px-3 py-2 rounded flex items-center gap-1 transition-colors" href="#">
+                GGUF Q4 (39.8 GB)
+              </a>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                HuggingFace
+              </a>
+<span class="text-outline-variant">·</span>
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">share</span>
+                Magnet
+              </a>
+</div>
+</div>
+</article>
+<!-- CARD 2: Vespera-8x22B-MoE-Hermes -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-8 flex flex-col justify-between hover:border-primary/60 transition-colors shadow-sm">
+<div>
+<!-- Top Header & Badges -->
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-secondary-fixed/50 text-secondary px-2 py-0.5 rounded">
+                    Sparse MoE
+                  </span>
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-surface-container text-outline px-2 py-0.5 rounded">
+                    Apache 2.0
+                  </span>
+</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">
+                  Vespera-8x22B-MoE-Hermes
+                </h2>
+</div>
+<span class="font-mono text-xs font-semibold text-secondary bg-secondary-fixed/30 px-2.5 py-1 rounded border border-outline-variant/60">
+                Top Routing Efficiency
+              </span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+              High-throughput sparse Mixture-of-Experts checkpoint. 141 Billion total parameters, activating only 39B per token for lightning-fast token generation on dual GPU rigs.
+            </p>
+<!-- Technical Specification Tablelet -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] p-4 rounded border border-outline-variant/60 font-mono text-xs mb-6">
+<div>
+<span class="block text-[10px] uppercase text-outline">Total / Active</span>
+<span class="font-semibold text-on-surface">141B / 39B</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Context</span>
+<span class="font-semibold text-primary">64k Native</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Routing</span>
+<span class="font-semibold text-on-surface">Top-2 Experts</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Capacity</span>
+<span class="font-semibold text-on-surface">1.25 Factor</span>
+</div>
+</div>
+<!-- Terminal Copy Quick Snippet -->
+<div class="bg-inverse-surface text-inverse-on-surface p-3 rounded font-mono text-xs mb-6 flex items-center justify-between border border-surface-container">
+<span class="truncate text-secondary-fixed-dim font-medium">vespera pull vespera-8x22b:q4</span>
+<button class="text-surface-container-highest hover:text-surface-container-lowest text-[11px] uppercase tracking-wider flex items-center gap-1 ml-2 font-mono">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+                Copy
+              </button>
+</div>
+<!-- Architecture Details -->
+<div class="text-xs font-mono text-on-surface-variant space-y-1 mb-6">
+<div><span class="text-outline">Expert Structure:</span> 8 distinct feed-forward sub-networks; 2 selected dynamically</div>
+<div><span class="text-outline">Inference Memory:</span> Requires ~48GB VRAM in 4-bit EXL2/AWQ quantization</div>
+</div>
+</div>
+<!-- Download Action Bar -->
+<div class="pt-4 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<a class="bg-primary hover:bg-primary-container text-on-primary text-xs font-mono font-medium px-3 py-2 rounded flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                Weights (281 GB)
+              </a>
+<a class="bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-mono px-3 py-2 rounded flex items-center gap-1 transition-colors" href="#">
+                AWQ 4-Bit (72 GB)
+              </a>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                HuggingFace
+              </a>
+<span class="text-outline-variant">·</span>
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">share</span>
+                Torrent
+              </a>
+</div>
+</div>
+</article>
+<!-- CARD 3: Vespera-Vision-14B-Omni -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-8 flex flex-col justify-between hover:border-primary/60 transition-colors shadow-sm">
+<div>
+<!-- Top Header & Badges -->
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-secondary-fixed/50 text-secondary px-2 py-0.5 rounded">
+                    Multimodal Vision
+                  </span>
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-surface-container text-outline px-2 py-0.5 rounded">
+                    MIT License
+                  </span>
+</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">
+                  Vespera-Vision-14B-Omni
+                </h2>
+</div>
+<span class="font-mono text-xs font-semibold text-outline bg-surface-container px-2.5 py-1 rounded">
+                Dynamic 4K Patches
+              </span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+              Unified vision-language encoder paired with dense transformer decoder. Native understanding of high-resolution diagrams, complex technical OCR, chart analytics, and visual reasoning.
+            </p>
+<!-- Technical Specification Tablelet -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] p-4 rounded border border-outline-variant/60 font-mono text-xs mb-6">
+<div>
+<span class="block text-[10px] uppercase text-outline">Parameters</span>
+<span class="font-semibold text-on-surface">14.2B Hybrid</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Context</span>
+<span class="font-semibold text-primary">32k Tokens</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Vision Encoder</span>
+<span class="font-semibold text-on-surface">SigLIP-SO400M</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Max Resolution</span>
+<span class="font-semibold text-on-surface">3840×2160 px</span>
+</div>
+</div>
+<!-- Benchmark Scores Row -->
+<div class="border-t border-b border-surface-container py-3 mb-6 font-mono text-xs flex flex-wrap items-center justify-between gap-2">
+<span class="text-outline uppercase text-[11px] font-semibold">Visual Benchmarks:</span>
+<div class="flex items-center gap-4">
+<span>DocVQA: <strong class="text-primary font-semibold">91.2%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>MathVista: <strong class="text-on-surface font-semibold">68.5%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>ChartQA: <strong class="text-on-surface font-semibold">86.4%</strong></span>
+</div>
+</div>
+<!-- Checksum verification info -->
+<div class="bg-surface-container-low p-2.5 rounded font-mono text-[11px] text-on-surface-variant mb-6 flex items-center justify-between">
+<div class="truncate">
+<span class="text-outline">SHA256:</span> e3b0c44298fc1c149afbf4c8996fb92427ae41e4...
+              </div>
+<button class="text-primary hover:underline text-[10px] font-bold uppercase ml-2 flex-shrink-0">Verify</button>
+</div>
+</div>
+<!-- Download Action Bar -->
+<div class="pt-4 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<a class="bg-primary hover:bg-primary-container text-on-primary text-xs font-mono font-medium px-3 py-2 rounded flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                Weights (28.4 GB)
+              </a>
+<a class="bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-mono px-3 py-2 rounded flex items-center gap-1 transition-colors" href="#">
+                GGUF Vision (8.9 GB)
+              </a>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                Weights Mirror
+              </a>
+</div>
+</div>
+</article>
+<!-- CARD 4: Vespera-Codex-32B -->
+<article class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-8 flex flex-col justify-between hover:border-primary/60 transition-colors shadow-sm">
+<div>
+<!-- Top Header & Badges -->
+<div class="flex items-start justify-between gap-4 mb-4">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-secondary-fixed/50 text-secondary px-2 py-0.5 rounded">
+                    Code &amp; Formal Logic
+                  </span>
+<span class="font-mono text-[10px] uppercase font-bold tracking-wider bg-surface-container text-outline px-2 py-0.5 rounded">
+                    Apache 2.0
+                  </span>
+</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-on-surface">
+                  Vespera-Codex-32B
+                </h2>
+</div>
+<span class="font-mono text-xs font-semibold text-primary bg-primary-fixed/40 px-2.5 py-1 rounded border border-outline-variant/60">
+                Repo-Level FIM
+              </span>
+</div>
+<p class="font-body text-sm text-on-surface-variant mb-6 leading-relaxed">
+              Specialized code intelligence foundation. Pre-trained on 4.2 trillion source code tokens with Fill-In-the-Middle (FIM) and multi-turn terminal execution fine-tuning.
+            </p>
+<!-- Technical Specification Tablelet -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-[#FAF7F2] p-4 rounded border border-outline-variant/60 font-mono text-xs mb-6">
+<div>
+<span class="block text-[10px] uppercase text-outline">Parameters</span>
+<span class="font-semibold text-on-surface">32.4B Dense</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Context</span>
+<span class="font-semibold text-primary">128k Tokens</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Infilling</span>
+<span class="font-semibold text-on-surface">Prefix/Suffix/Mid</span>
+</div>
+<div>
+<span class="block text-[10px] uppercase text-outline">Languages</span>
+<span class="font-semibold text-on-surface">80+ Compilers</span>
+</div>
+</div>
+<!-- Benchmark Scores Row -->
+<div class="border-t border-b border-surface-container py-3 mb-6 font-mono text-xs flex flex-wrap items-center justify-between gap-2">
+<span class="text-outline uppercase text-[11px] font-semibold">Coding Evals:</span>
+<div class="flex items-center gap-4">
+<span>SWE-bench: <strong class="text-primary font-semibold">38.6%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>MultiPL-E: <strong class="text-on-surface font-semibold">81.0%</strong></span>
+<span class="text-surface-variant">|</span>
+<span>CruxEval: <strong class="text-on-surface font-semibold">74.2%</strong></span>
+</div>
+</div>
+<!-- Terminal command info -->
+<div class="text-xs font-mono text-on-surface-variant space-y-1 mb-6">
+<div><span class="text-outline">Execution Harness:</span> Compatible with Claude Code and SWE-agent tools</div>
+<div><span class="text-outline">Recommended Quant:</span> EXL2 5.0bpw fits comfortably in 24GB RTX 4090</div>
+</div>
+</div>
+<!-- Download Action Bar -->
+<div class="pt-4 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2">
+<a class="bg-primary hover:bg-primary-container text-on-primary text-xs font-mono font-medium px-3 py-2 rounded flex items-center gap-1.5 transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">download</span>
+                Safetensors (64.8 GB)
+              </a>
+<a class="bg-surface-container hover:bg-surface-container-high text-on-surface text-xs font-mono px-3 py-2 rounded flex items-center gap-1 transition-colors" href="#">
+                GGUF Q5_K_M (22.1 GB)
+              </a>
+</div>
+<div class="flex items-center gap-2 text-xs font-mono">
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                HuggingFace
+              </a>
+<span class="text-outline-variant">·</span>
+<a class="text-on-surface-variant hover:text-primary underline flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[14px]">share</span>
+                Direct CDN
+              </a>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- COMPREHENSIVE COMPARATIVE BENCHMARK & SPECS TABLE -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-12" id="benchmarks">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-outline-variant">
+<div>
+<div class="font-mono text-xs uppercase tracking-widest text-primary font-semibold mb-2">Technical Index</div>
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-surface">Checkpoint Directory &amp; Matrix</h2>
+</div>
+<p class="font-mono text-xs text-on-surface-variant mt-2 md:mt-0">
+          All evaluations performed zero-shot unless specified. Fully reproducible evaluation code in <a class="text-primary underline" href="#">/eval-harness</a>.
+        </p>
+</div>
+<div class="overflow-x-auto bg-surface-container-lowest border border-outline-variant rounded-lg shadow-sm">
+<table class="w-full text-left font-mono text-xs border-collapse">
+<thead>
+<tr class="bg-[#FAF7F2] border-b border-outline-variant text-outline uppercase text-[11px] font-semibold tracking-wider">
+<th class="py-3.5 px-4">Checkpoint Identifier</th>
+<th class="py-3.5 px-3">Type</th>
+<th class="py-3.5 px-3">Active Params</th>
+<th class="py-3.5 px-3">Context</th>
+<th class="py-3.5 px-3">MMLU-Pro</th>
+<th class="py-3.5 px-3">GSM8K</th>
+<th class="py-3.5 px-3">HumanEval</th>
+<th class="py-3.5 px-3">Size (FP16)</th>
+<th class="py-3.5 px-3">License</th>
+<th class="py-3.5 px-4 text-right">Mirrors</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container">
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span>vespera-70b-instruct-v2</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Dense</td>
+<td class="py-3 px-3 font-medium">70.6B</td>
+<td class="py-3 px-3 text-primary font-medium">128,000</td>
+<td class="py-3 px-3 font-semibold text-primary">78.4%</td>
+<td class="py-3 px-3 text-on-surface">94.8%</td>
+<td class="py-3 px-3 text-on-surface">84.2%</td>
+<td class="py-3 px-3 text-outline">141.2 GB</td>
+<td class="py-3 px-3"><span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px]">Apache 2.0</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN · Magnet</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span>vespera-8x22b-moe-hermes</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">MoE (Top-2)</td>
+<td class="py-3 px-3 font-medium">39.1B (141B)</td>
+<td class="py-3 px-3 font-medium">64,000</td>
+<td class="py-3 px-3 font-semibold text-primary">76.9%</td>
+<td class="py-3 px-3 text-on-surface">93.1%</td>
+<td class="py-3 px-3 text-on-surface">82.7%</td>
+<td class="py-3 px-3 text-outline">281.0 GB</td>
+<td class="py-3 px-3"><span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px]">Apache 2.0</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN · Magnet</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>vespera-codex-32b</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Code Dense</td>
+<td class="py-3 px-3 font-medium">32.4B</td>
+<td class="py-3 px-3 text-primary font-medium">128,000</td>
+<td class="py-3 px-3">71.2%</td>
+<td class="py-3 px-3 text-on-surface">90.4%</td>
+<td class="py-3 px-3 font-semibold text-primary">88.5%</td>
+<td class="py-3 px-3 text-outline">64.8 GB</td>
+<td class="py-3 px-3"><span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px]">Apache 2.0</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN · Magnet</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span>vespera-vision-14b-omni</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Multimodal</td>
+<td class="py-3 px-3 font-medium">14.2B</td>
+<td class="py-3 px-3 font-medium">32,000</td>
+<td class="py-3 px-3">67.5%</td>
+<td class="py-3 px-3 text-on-surface">82.0%</td>
+<td class="py-3 px-3 text-on-surface">69.4%</td>
+<td class="py-3 px-3 text-outline">28.4 GB</td>
+<td class="py-3 px-3"><span class="bg-secondary-fixed/50 text-secondary px-1.5 py-0.5 rounded text-[10px]">MIT</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span>vespera-8x7b-v1.5</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">MoE (Top-2)</td>
+<td class="py-3 px-3 font-medium">12.9B (46.7B)</td>
+<td class="py-3 px-3 font-medium">32,000</td>
+<td class="py-3 px-3">69.8%</td>
+<td class="py-3 px-3 text-on-surface">86.4%</td>
+<td class="py-3 px-3 text-on-surface">73.1%</td>
+<td class="py-3 px-3 text-outline">93.4 GB</td>
+<td class="py-3 px-3"><span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px]">Apache 2.0</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN · Magnet</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span>vespera-7b-reasoner</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Dense</td>
+<td class="py-3 px-3 font-medium">7.24B</td>
+<td class="py-3 px-3 text-primary font-medium">128,000</td>
+<td class="py-3 px-3">63.1%</td>
+<td class="py-3 px-3 text-on-surface">81.5%</td>
+<td class="py-3 px-3 text-on-surface">71.0%</td>
+<td class="py-3 px-3 text-outline">14.5 GB</td>
+<td class="py-3 px-3"><span class="bg-surface-container px-1.5 py-0.5 rounded text-[10px]">Apache 2.0</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN · Magnet</a>
+</td>
+</tr>
+<tr class="hover:bg-[#FFF9F2] transition-colors">
+<td class="py-3 px-4 font-semibold text-on-surface flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span>vespera-embed-large-v1</span>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Embedding</td>
+<td class="py-3 px-3 font-medium">1.2B</td>
+<td class="py-3 px-3 font-medium">8,192</td>
+<td class="py-3 px-3 text-outline">—</td>
+<td class="py-3 px-3 text-outline">—</td>
+<td class="py-3 px-3 text-outline">—</td>
+<td class="py-3 px-3 text-outline">2.4 GB</td>
+<td class="py-3 px-3"><span class="bg-secondary-fixed/50 text-secondary px-1.5 py-0.5 rounded text-[10px]">MIT</span></td>
+<td class="py-3 px-4 text-right">
+<a class="text-primary hover:underline font-medium" href="#">HF · CDN</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- DEVELOPER INTEGRATION QUICKSTART -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-12" id="quickstart">
+<div class="bg-inverse-surface text-inverse-on-surface rounded-lg p-6 md:p-10 border border-outline">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-6 border-b border-surface-container/20">
+<div>
+<div class="font-mono text-[11px] text-secondary-fixed uppercase font-semibold tracking-wider mb-1">Frictionless Inference</div>
+<h3 class="font-headline text-2xl font-bold tracking-tight text-surface-container-lowest">Load Weights Locally in Seconds</h3>
+</div>
+<!-- Runtime Switcher Tabs -->
+<div class="flex items-center gap-1 bg-surface-container/10 p-1 rounded font-mono text-xs">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded font-medium shadow-sm">vLLM</button>
+<button class="text-on-dark-muted hover:text-on-dark px-3 py-1.5 rounded">Ollama</button>
+<button class="text-on-dark-muted hover:text-on-dark px-3 py-1.5 rounded">llama.cpp</button>
+<button class="text-on-dark-muted hover:text-on-dark px-3 py-1.5 rounded">Transformers</button>
+</div>
+</div>
+<!-- Code Block with Syntax Emulation -->
+<div class="relative bg-[#161617] p-5 rounded-md font-mono text-xs md:text-sm text-surface-container-high leading-relaxed overflow-x-auto border border-white/5">
+<div class="text-outline-variant/60 pb-2"># 1. Spin up an OpenAI-compatible endpoint with FP8 tensor parallelism</div>
+<div class="text-surface-container-lowest">
+<span class="text-secondary-fixed">python3</span> -m vllm.entrypoints.openai.api_server \
+          </div>
+<div class="pl-4">
+            --model <span class="text-[#ffd06a]">vespera-ai/Vespera-70B-Instruct-v2</span> \
+          </div>
+<div class="pl-4">
+            --tensor-parallel-size <span class="text-secondary-container">2</span> \
+          </div>
+<div class="pl-4">
+            --max-model-len <span class="text-secondary-container">131072</span> \
+          </div>
+<div class="pl-4">
+            --gpu-memory-utilization <span class="text-secondary-container">0.95</span> \
+          </div>
+<div class="pl-4">
+            --quantization fp8 \
+          </div>
+<div class="pl-4">
+            --port 8000
+          </div>
+<div class="pt-4 text-outline-variant/60"># 2. Query seamlessly via curl or any OpenAI SDK</div>
+<div class="text-surface-container-highest">
+            curl http://localhost:8000/v1/chat/completions -H <span class="text-[#ffd06a]">"Content-Type: application/json"</span> -d '{<span class="text-[#ffd06a]">"model"</span>: <span class="text-[#ffd06a]">"vespera-70b-instruct-v2"</span>, <span class="text-[#ffd06a]">"messages"</span>: [{<span class="text-[#ffd06a]">"role"</span>: <span class="text-[#ffd06a]">"user"</span>, <span class="text-[#ffd06a]">"content"</span>: <span class="text-[#ffd06a]">"Prove that sqrt(2) is irrational."</span>}]}'
+          </div>
+<button class="absolute top-4 right-4 bg-surface-container/20 hover:bg-surface-container/40 text-surface-container-lowest text-xs font-mono px-2.5 py-1.5 rounded flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]">content_copy</span>
+            Copy Script
+          </button>
+</div>
+<div class="mt-6 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-outline-variant">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+<span>Zero proprietary drivers needed · Fully standard CUDA 12.4+ / ROCm 6.2 execution</span>
+</div>
+<a class="text-secondary-fixed hover:underline flex items-center gap-1" href="#">
+            Read complete hardware requirements &amp; sizing guide →
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- MISTRAL SIGNATURE SUNSET GRADIENT STRIP (Brand recognizer) -->
+<div class="sunset-band"></div>
+<!-- SHARED COMPONENT: Footer -->
+<footer class="w-full bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline">
+<div class="w-full py-12 px-6 md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+<!-- Brand & Copyright from JSON -->
+<div class="max-w-md space-y-2">
+<div class="font-headline text-base font-bold text-on-surface dark:text-inverse-on-surface tracking-tight uppercase">
+          Vespera Weights
+        </div>
+<p class="font-body text-xs text-on-surface-variant dark:text-outline-variant leading-relaxed">
+          © 2025 Vespera Weights. Open weights for frontier intelligence. Distributed under Apache 2.0 and MIT protocols.
+        </p>
+</div>
+<!-- Links from JSON -->
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2 font-body text-xs">
+<a class="text-primary dark:text-inverse-primary font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#models">
+          Model Index
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#quantization">
+          Quantization Guides
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#manifest">
+          Weights Manifest
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#benchmarks">
+          Benchmarks Archive
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#licenses">
+          License Terms
+        </a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 active:opacity-75" href="#privacy">
+          Privacy Policy
+        </a>
+</div>
+</div>
+</footer>
+</body></html>

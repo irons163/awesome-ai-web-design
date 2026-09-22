@@ -1,8 +1,815 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Webflow · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#080808;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/webflow">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Webflow · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#080808"></span><code>#080808</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#222222"></span><code>#222222</code></div><div class="swatch"><span style="background:#363636"></span><code>#363636</code></div><div class="swatch"><span style="background:#5a5a5a"></span><code>#5a5a5a</code></div><div class="swatch"><span style="background:#898989"></span><code>#898989</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · WF Visual Sans Variable, Inter, system-ui, -apple-system, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stratum Studio — Visual Web Engine</title>
+<!-- Material Symbols Outlined Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Mono Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim injected -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-variant": "#e2e2e2",
+            "surface-tint": "#5f5e5e",
+            "primary-fixed": "#e5e2e1",
+            "background": "#f9f9f9",
+            "on-secondary-container": "#666464",
+            "primary-container": "#1c1b1b",
+            "on-primary-fixed-variant": "#474646",
+            "inverse-on-surface": "#f0f1f1",
+            "on-secondary-fixed": "#1c1b1b",
+            "on-tertiary-container": "#878381",
+            "on-surface": "#1a1c1c",
+            "primary-fixed-dim": "#c9c6c5",
+            "surface-container-high": "#e8e8e8",
+            "on-tertiary-fixed": "#1d1b1a",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#cac5c3",
+            "inverse-primary": "#c9c6c5",
+            "secondary": "#5f5e5e",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#e7e1df",
+            "outline-variant": "#c4c7c7",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#1d1b1a",
+            "surface": "#f9f9f9",
+            "on-tertiary-fixed-variant": "#494645",
+            "surface-container-highest": "#e2e2e2",
+            "outline": "#747878",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "surface-container-low": "#f3f3f4",
+            "tertiary": "#000000",
+            "on-primary-container": "#858383",
+            "primary": "#000000",
+            "on-secondary-fixed-variant": "#484646",
+            "surface-container-lowest": "#ffffff",
+            "surface-container": "#eeeeee",
+            "secondary-fixed-dim": "#c9c6c5",
+            "secondary-fixed": "#e5e2e1",
+            "on-surface-variant": "#444748",
+            "inverse-surface": "#2f3131",
+            "on-background": "#1a1c1c",
+            "surface-dim": "#dadada",
+            "secondary-container": "#e5e2e1",
+            "surface-bright": "#f9f9f9",
+            "on-primary-fixed": "#1c1b1b",
+            "on-error": "#ffffff",
+            "on-error-container": "#93000a",
+            // Dark shell custom palette tokens aligning with technical workbench
+            "shell-dark": "#0e1013",
+            "shell-panel": "#14171d",
+            "shell-surface": "#1c2027",
+            "shell-surface-hover": "#252b34",
+            "shell-border": "#282d37",
+            "shell-text-dim": "#7e889b",
+            "shell-text-bright": "#e6ecf8",
+            "blue-accent": "#2563eb",
+            "blue-glow": "#3b82f6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "system-ui", "sans-serif"],
+            "display": ["Inter", "system-ui", "sans-serif"],
+            "body": ["Inter", "system-ui", "sans-serif"],
+            "mono": ["JetBrains Mono", "SFMono-Regular", "Menlo", "monospace"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 16px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .material-symbols-outlined.fill-active {
+      font-variation-settings: 'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 20;
+    }
+    /* Dotted background pattern for Central Artboard workspace */
+    .artboard-grid-pattern {
+      background-color: #0d0f12;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+    /* Custom thin scrollbars for pro studio panels */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #12151b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2b323e;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3e4757;
+    }
+  </style>
+</head>
+<body class="bg-shell-dark text-shell-text-bright font-body text-xs antialiased overflow-hidden select-none h-screen flex flex-col">
+<!-- ========================================================================= -->
+<!-- 1. TOP HEADER BAR: Workbench Command & Navigation Shell                     -->
+<!-- ========================================================================= -->
+<header class="flex justify-between items-center w-full px-3 h-12 z-50 sticky top-0 bg-shell-panel border-b border-shell-border shrink-0 select-none">
+<!-- Left Region: Logo, Faceted Glyph, Project Selector, Views -->
+<div class="flex items-center gap-3">
+<!-- Stratum Brand Identity -->
+<div class="flex items-center gap-2 pr-3 border-r border-shell-border">
+<div class="w-6 h-6 rounded-sm bg-gradient-to-br from-blue-500 to-indigo-700 flex items-center justify-center text-white shadow-sm ring-1 ring-white/20">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">deployed_code</span>
+</div>
+<span class="font-headline text-sm font-semibold tracking-tight text-white">Stratum</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-blue-500/15 text-blue-400 font-medium border border-blue-500/30">v2.0</span>
+</div>
+<!-- Project Breadcrumb Dropdown -->
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-shell-surface hover:bg-shell-surface-hover cursor-pointer border border-shell-border text-shell-text-dim text-[11px] transition-colors">
+<span class="text-shell-text-dim">Project:</span>
+<span class="font-medium text-white">Apex OS Marketing</span>
+<span class="text-shell-text-dim">/</span>
+<span class="text-emerald-400 font-mono text-[10px]">Home [Prod]</span>
+<span class="material-symbols-outlined text-[14px] text-shell-text-dim ml-0.5">expand_more</span>
+</div>
+<!-- Studio Mode Navigation Tabs (Design active) -->
+<nav class="flex items-center gap-1 ml-1">
+<button class="px-2.5 py-1 rounded font-medium text-xs bg-shell-surface text-white border border-blue-500/40 shadow-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+          Design
+        </button>
+<button class="px-2.5 py-1 rounded font-medium text-xs text-shell-text-dim hover:text-white hover:bg-shell-surface/60 transition-colors">
+          Interactions
+        </button>
+<button class="px-2.5 py-1 rounded font-medium text-xs text-shell-text-dim hover:text-white hover:bg-shell-surface/60 transition-colors flex items-center gap-1">
+          CMS Collections
+          <span class="px-1 py-0.2 rounded text-[9px] bg-shell-surface border border-shell-border text-shell-text-dim">4</span>
+</button>
+<button class="px-2.5 py-1 rounded font-medium text-xs text-shell-text-dim hover:text-white hover:bg-shell-surface/60 transition-colors">
+          Audit
+        </button>
+</nav>
+</div>
+<!-- Center Region: Breakpoints, Dimension Calipers, Zoom, Undo/Redo -->
+<div class="flex items-center gap-3">
+<!-- Responsive Viewport Controls -->
+<div class="flex items-center bg-shell-surface p-0.5 rounded border border-shell-border">
+<!-- Desktop (Active) -->
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-blue-600 text-white font-medium text-[11px] shadow-sm" title="Desktop Viewport (1440px)">
+<span class="material-symbols-outlined text-[14px]">desktop_windows</span>
+<span>1440px</span>
+</button>
+<!-- Tablet -->
+<button class="flex items-center gap-1 px-2 py-1 rounded text-shell-text-dim hover:text-white hover:bg-shell-surface-hover text-[11px] transition-colors" title="Tablet (768px)">
+<span class="material-symbols-outlined text-[14px]">tablet_mac</span>
+<span class="hidden xl:inline text-[10px]">768</span>
+</button>
+<!-- Mobile -->
+<button class="flex items-center gap-1 px-2 py-1 rounded text-shell-text-dim hover:text-white hover:bg-shell-surface-hover text-[11px] transition-colors" title="Mobile (375px)">
+<span class="material-symbols-outlined text-[14px]">phone_iphone</span>
+<span class="hidden xl:inline text-[10px]">375</span>
+</button>
+</div>
+<!-- Zoom Level & Ruler Toggle -->
+<div class="flex items-center gap-1 text-shell-text-dim text-[11px] bg-shell-surface px-2 py-1 rounded border border-shell-border">
+<span class="font-mono text-white font-medium">100%</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</div>
+<!-- Undo / Redo Actions -->
+<div class="flex items-center border-l border-shell-border pl-2 gap-1 text-shell-text-dim">
+<button class="p-1 rounded hover:bg-shell-surface hover:text-white transition-colors" title="Undo (Cmd+Z)">
+<span class="material-symbols-outlined text-[16px]">undo</span>
+</button>
+<button class="p-1 rounded hover:bg-shell-surface hover:text-white transition-colors" title="Redo (Cmd+Shift+Z)">
+<span class="material-symbols-outlined text-[16px]">redo</span>
+</button>
+</div>
+</div>
+<!-- Right Region: Collaborators, Preview, Primary Publish Action -->
+<div class="flex items-center gap-2.5">
+<!-- Live Presence Avatars -->
+<div class="flex items-center -space-x-1.5 mr-1">
+<div class="w-6 h-6 rounded-full border-2 border-shell-panel bg-purple-600 text-[10px] font-semibold flex items-center justify-center text-white" title="Elena Rostova (Editing Typography)">
+          ER
+        </div>
+<div class="w-6 h-6 rounded-full border-2 border-shell-panel bg-amber-600 text-[10px] font-semibold flex items-center justify-center text-white ring-1 ring-emerald-500/50" title="Marcus Vance (Live on Artboard)">
+          MV
+        </div>
+<div class="w-6 h-6 rounded-full border-2 border-shell-panel bg-shell-surface text-shell-text-dim text-[9px] font-medium flex items-center justify-center border-dashed">
+          +1
+        </div>
+</div>
+<!-- Preview Action -->
+<button class="px-2.5 py-1.5 rounded bg-shell-surface hover:bg-shell-surface-hover text-shell-text-dim hover:text-white border border-shell-border flex items-center gap-1.5 text-xs font-medium transition-all">
+<span class="material-symbols-outlined text-[15px]">play_arrow</span>
+<span>Preview</span>
+</button>
+<!-- Primary Publish Button with Dirty State Badge -->
+<div class="flex items-center gap-1.5 pl-1">
+<button class="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 text-white font-medium text-xs px-3 py-1.5 rounded shadow-sm transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-[15px]">cloud_upload</span>
+<span>Publish</span>
+<span class="bg-blue-900/80 text-blue-200 text-[10px] font-mono px-1.5 py-0.2 rounded-full border border-blue-400/30">12 unpushed</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN WORKBENCH GRID: Left Navigator | Central Canvas | Right Preflight     -->
+<!-- ========================================================================= -->
+<main class="flex-1 flex overflow-hidden w-full relative">
+<!-- ----------------------------------------------------------------------- -->
+<!-- 2. LEFT COLUMN - Component Navigator Tree & Element Hierarchy           -->
+<!-- ----------------------------------------------------------------------- -->
+<aside class="w-72 bg-shell-panel border-r border-shell-border flex flex-col justify-between shrink-0 select-none z-30">
+<!-- Panel Header & Quick Actions -->
+<div class="flex flex-col border-b border-shell-border bg-shell-panel/90 backdrop-blur">
+<div class="flex items-center justify-between px-3 h-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-blue-400 text-[18px]">account_tree</span>
+<span class="font-headline text-xs font-semibold text-white tracking-tight">Navigator</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-shell-surface text-shell-text-dim border border-shell-border">DOM</span>
+</div>
+<button class="flex items-center gap-1 text-[11px] font-medium text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 border border-blue-500/30 px-2 py-0.5 rounded transition-colors" title="Insert New Element (A)">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Add</span>
+</button>
+</div>
+<!-- Filter / Search DOM Box -->
+<div class="px-2.5 pb-2">
+<div class="flex items-center gap-1.5 px-2 py-1 rounded bg-shell-surface border border-shell-border text-shell-text-dim focus-within:border-blue-500/70 focus-within:text-white transition-colors">
+<span class="material-symbols-outlined text-[14px]">search</span>
+<input class="w-full bg-transparent border-0 p-0 text-[11px] focus:ring-0 placeholder:text-shell-text-dim/60 font-body" placeholder="Filter layers &amp; tags..." type="text"/>
+<span class="text-[9px] font-mono text-shell-text-dim bg-shell-panel px-1 py-0.5 rounded border border-shell-border">⌘K</span>
+</div>
+</div>
+</div>
+<!-- The Collapsible DOM Tree Container -->
+<div class="flex-1 overflow-y-auto py-1 px-1 font-mono text-[11px] space-y-0.5">
+<!-- Root Node: Body -->
+<div class="flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-amber-400">web</span>
+<span class="font-medium text-white">Body</span>
+<span class="text-[9px] text-shell-text-dim font-body">root</span>
+</div>
+<span class="material-symbols-outlined text-[14px] opacity-0 group-hover:opacity-100 text-shell-text-dim hover:text-white">visibility</span>
+</div>
+<!-- Level 1: Header [Navbar Container] (Collapsed) -->
+<div class="ml-3 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">chevron_right</span>
+<span class="material-symbols-outlined text-[14px] text-purple-400">view_day</span>
+<span class="text-shell-text-bright">Header</span>
+<span class="text-[9px] text-shell-text-dim">.navbar</span>
+</div>
+<div class="flex items-center gap-1 opacity-0 group-hover:opacity-100">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">lock_open</span>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">visibility</span>
+</div>
+</div>
+<!-- Level 1: Section.hero-wrapper (ACTIVE ROW - Focused with blue outline & badge) -->
+<div class="ml-3 flex items-center justify-between px-2 py-1 bg-blue-600/15 border-l-2 border-blue-500 rounded-r text-white ring-1 ring-blue-500/50 cursor-pointer shadow-xs">
+<div class="flex items-center gap-1.5 truncate">
+<span class="material-symbols-outlined text-[13px] text-blue-400">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-blue-400">layers</span>
+<span class="font-semibold text-blue-200">Section</span>
+<span class="text-[9px] text-blue-300 font-mono truncate">.hero-wrapper</span>
+</div>
+<div class="flex items-center gap-1.5 shrink-0">
+<span class="text-[9px] bg-blue-500/30 text-blue-200 px-1 py-0.2 rounded font-sans font-medium">Selected</span>
+<span class="material-symbols-outlined text-[13px] text-blue-300 hover:text-white">visibility</span>
+</div>
+</div>
+<!-- Level 2: Container.max-w-7xl (Inside Hero) -->
+<div class="ml-6 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-emerald-400">crop_square</span>
+<span class="text-white">Container</span>
+<span class="text-[9px] text-shell-text-dim">.max-w-7xl</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+<!-- Level 3: Grid.hero-split-2col -->
+<div class="ml-9 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-amber-400">grid_view</span>
+<span class="text-white">Grid</span>
+<span class="text-[9px] text-shell-text-dim">.split-2col</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+<!-- Level 4: Col.hero-content -->
+<div class="ml-12 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-sky-400">view_column</span>
+<span class="text-white">Col</span>
+<span class="text-[9px] text-shell-text-dim">.hero-content</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+<!-- Level 5: Elements under Col.hero-content -->
+<!-- Badge.pill -->
+<div class="ml-16 flex items-center justify-between px-2 py-0.5 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-pink-400">label</span>
+<span class="text-shell-text-bright">Badge</span>
+<span class="text-[9px] text-shell-text-dim">.pill</span>
+</div>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim group-hover:text-white">visibility</span>
+</div>
+<!-- Heading.h1 -->
+<div class="ml-16 flex items-center justify-between px-2 py-0.5 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-yellow-400">title</span>
+<span class="text-shell-text-bright">Heading</span>
+<span class="text-[9px] text-shell-text-dim">.h1</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-shell-text-dim/80">lock_open</span>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim group-hover:text-white">visibility</span>
+</div>
+</div>
+<!-- Paragraph.lead -->
+<div class="ml-16 flex items-center justify-between px-2 py-0.5 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-gray-400">notes</span>
+<span class="text-shell-text-bright">Paragraph</span>
+<span class="text-[9px] text-shell-text-dim">.lead</span>
+</div>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim group-hover:text-white">visibility</span>
+</div>
+<!-- Stack.button-group -->
+<div class="ml-16 flex items-center justify-between px-2 py-0.5 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group border-l border-shell-border/40">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-indigo-400">view_stream</span>
+<span class="text-shell-text-bright">Stack</span>
+<span class="text-[9px] text-shell-text-dim">.button-group</span>
+</div>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim group-hover:text-white">visibility</span>
+</div>
+<!-- Level 4: Col.hero-visual (Hovered Row state with quick action menu) -->
+<div class="ml-12 flex items-center justify-between px-2 py-1 bg-shell-surface text-white rounded cursor-pointer group border-l border-shell-border/60">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-blue-400">expand_more</span>
+<span class="material-symbols-outlined text-[14px] text-sky-400">view_column</span>
+<span class="font-medium text-white">Col</span>
+<span class="text-[9px] text-blue-400">.hero-visual</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim hover:text-white">more_horiz</span>
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim hover:text-white">visibility</span>
+</div>
+</div>
+<!-- Level 5: Frame.device-mockup (Hidden state: eye-slash) -->
+<div class="ml-16 flex items-center justify-between px-2 py-0.5 text-shell-text-dim/60 hover:text-shell-text-dim bg-shell-panel/40 rounded cursor-pointer group border-l border-shell-border/30">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim/50">desktop_windows</span>
+<span class="line-through text-shell-text-dim/70">Frame</span>
+<span class="text-[9px] text-shell-text-dim/50">.device-mockup</span>
+</div>
+<span class="material-symbols-outlined text-[13px] text-amber-500/80" title="Hidden in Current Viewport">visibility_off</span>
+</div>
+<!-- Collapsed Level 1 siblings -->
+<div class="ml-3 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">chevron_right</span>
+<span class="material-symbols-outlined text-[14px] text-teal-400">view_carousel</span>
+<span>Section</span>
+<span class="text-[9px] text-shell-text-dim">.features-carousel</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+<div class="ml-3 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">chevron_right</span>
+<span class="material-symbols-outlined text-[14px] text-orange-400">reviews</span>
+<span>Section</span>
+<span class="text-[9px] text-shell-text-dim">.social-proof</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+<div class="ml-3 flex items-center justify-between px-2 py-1 text-shell-text-dim hover:text-white hover:bg-shell-surface rounded cursor-pointer group">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[13px] text-shell-text-dim">chevron_right</span>
+<span class="material-symbols-outlined text-[14px] text-rose-400">call_to_action</span>
+<span>Footer</span>
+<span class="text-[9px] text-shell-text-dim">.site-footer</span>
+</div>
+<span class="material-symbols-outlined text-[13px] opacity-0 group-hover:opacity-100 text-shell-text-dim">visibility</span>
+</div>
+</div>
+<!-- Navigator Footer Meta Bar -->
+<div class="p-2 border-t border-shell-border bg-shell-panel flex items-center justify-between text-[11px] text-shell-text-dim">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[14px]">rule</span>
+<span>Audit</span>
+</button>
+<span class="text-shell-border">|</span>
+<button class="flex items-center gap-1 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[14px]">keyboard</span>
+<span>Shortcuts</span>
+</button>
+</div>
+<span class="font-mono text-[10px] text-emerald-400 font-semibold">28 Nodes</span>
+</div>
+</aside>
+<!-- ----------------------------------------------------------------------- -->
+<!-- 3. CENTRAL WORK AREA - The Canvas Preview (1440px Artboard Container)     -->
+<!-- ----------------------------------------------------------------------- -->
+<section class="flex-1 flex flex-col bg-shell-dark artboard-grid-pattern relative overflow-hidden">
+<!-- Canvas Calibration & Viewport Status Header -->
+<div class="h-8 bg-shell-panel/85 backdrop-blur border-b border-shell-border flex items-center justify-between px-4 text-[11px] text-shell-text-dim z-20 shrink-0">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 font-mono text-shell-text-bright">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Breakpoint: Desktop (1280px × 840px)</span>
+</div>
+<span class="text-shell-border">/</span>
+<span class="font-mono text-[10px]">CSS Grid &amp; Flex Engine Active</span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Pixel Ruler Calipers indicator -->
+<div class="flex items-center gap-2 font-mono text-[10px] text-shell-text-dim">
+<span>X: <strong class="text-white">0px</strong></span>
+<span>Y: <strong class="text-white">80px</strong></span>
+<span class="text-shell-border">|</span>
+<span>Scale: <strong class="text-white">1.0x</strong></span>
+</div>
+<div class="flex items-center gap-1 text-shell-text-dim">
+<button class="p-1 hover:text-white rounded" title="Snap to Grid"><span class="material-symbols-outlined text-[15px]">grid_on</span></button>
+<button class="p-1 hover:text-white rounded" title="Toggle Guides"><span class="material-symbols-outlined text-[15px]">straighten</span></button>
+</div>
+</div>
+</div>
+<!-- Scrollable Canvas Stage Area -->
+<div class="flex-1 overflow-auto flex items-center justify-center p-8 relative">
+<!-- =================================================================== -->
+<!-- THE ARTBOARD: Crisp Light Canvas Simulating Rendered Web Product    -->
+<!-- =================================================================== -->
+<div class="w-[1080px] min-h-[680px] bg-canvas text-ink rounded-sm shadow-2xl border border-shell-border/80 flex flex-col relative transition-all duration-150">
+<!-- Mock Browser / Page Nav Bar (Simulated Output) -->
+<div class="w-full bg-white border-b border-hairline px-8 py-3.5 flex items-center justify-between select-none">
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 rounded-xs bg-black flex items-center justify-center text-white font-headline font-bold text-[11px]">
+                A
+              </div>
+<span class="font-headline font-semibold text-sm tracking-tight text-ink">Apex OS</span>
+<span class="text-[11px] font-mono px-2 py-0.5 bg-zinc-100 text-zinc-600 rounded">v2.4-stable</span>
+</div>
+<div class="hidden md:flex items-center gap-6 text-[13px] font-medium text-body">
+<a class="hover:text-ink transition-colors" href="#">Platform</a>
+<a class="hover:text-ink transition-colors" href="#">Engine Architecture</a>
+<a class="hover:text-ink transition-colors" href="#">Integrations</a>
+<a class="hover:text-ink transition-colors" href="#">Enterprise</a>
+</div>
+<div class="flex items-center gap-2.5">
+<button class="text-xs font-medium text-body hover:text-ink px-2.5 py-1.5">Sign In</button>
+<button class="text-xs font-medium bg-primary text-on-primary px-3 py-1.5 rounded-sm hover:bg-zinc-800 transition-colors">
+                Request Access
+              </button>
+</div>
+</div>
+<!-- ================================================================= -->
+<!-- SELECTED ELEMENT BOUNDS: Section.hero-wrapper (Visual Builder Box) -->
+<!-- ================================================================= -->
+<div class="relative m-6 p-8 border-2 border-blue-500 rounded-xs bg-blue-500/[0.015] ring-4 ring-blue-500/10">
+<!-- Dimension Tag Tooltip (Top-Left of Selected Box) -->
+<div class="absolute -top-3 left-3 bg-blue-600 text-white font-mono text-[10px] font-semibold px-2 py-0.5 rounded-xs shadow-md flex items-center gap-1.5 z-30">
+<span class="material-symbols-outlined text-[11px]">aspect_ratio</span>
+<span>1032 × 540 px</span>
+<span class="opacity-70">|</span>
+<span>flex-col</span>
+<span class="opacity-70">|</span>
+<span>gap-6</span>
+</div>
+<!-- Corner Drag Handles for Visual Designer Resizing -->
+<div class="absolute -top-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-nwse-resize shadow-xs"></div>
+<div class="absolute -top-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-nesw-resize shadow-xs"></div>
+<div class="absolute -bottom-1.5 -left-1.5 w-3 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-nesw-resize shadow-xs"></div>
+<div class="absolute -bottom-1.5 -right-1.5 w-3 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-nwse-resize shadow-xs"></div>
+<!-- Midpoint Edge Handles -->
+<div class="absolute top-1/2 -left-1.5 -translate-y-1/2 w-2.5 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-ew-resize"></div>
+<div class="absolute top-1/2 -right-1.5 -translate-y-1/2 w-2.5 h-3 bg-white border-2 border-blue-600 rounded-none z-30 cursor-ew-resize"></div>
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-2.5 bg-white border-2 border-blue-600 rounded-none z-30 cursor-ns-resize"></div>
+<div class="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-2.5 bg-white border-2 border-blue-600 rounded-none z-30 cursor-ns-resize"></div>
+<!-- Floating Mini-Toolbar Above Selected Node -->
+<div class="absolute -top-9 right-4 bg-shell-panel text-white border border-shell-border px-2.5 py-1 rounded-sm shadow-xl flex items-center gap-2.5 text-[11px] z-30 font-headline">
+<span class="font-mono text-blue-400 font-semibold">hero-wrapper</span>
+<span class="text-shell-border">|</span>
+<span class="text-shell-text-dim">Margin: <strong class="text-white">80px</strong></span>
+<span class="text-shell-border">|</span>
+<span class="text-shell-text-dim">Display: <strong class="text-white">Flex</strong></span>
+<button class="bg-blue-600 hover:bg-blue-500 text-white px-2 py-0.5 rounded text-[10px] font-medium flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[11px]">add</span>
+<span>Add Style</span>
+</button>
+</div>
+<!-- --------------------------------------------------------------- -->
+<!-- Rendered Hero Section Content (Light Theme Artboard)             -->
+<!-- --------------------------------------------------------------- -->
+<div class="grid grid-cols-12 gap-8 items-center">
+<!-- Left Column: Content (Col.hero-content) -->
+<div class="col-span-7 flex flex-col items-start gap-4">
+<!-- Pill Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-sm bg-zinc-100 border border-hairline text-body text-[12px] font-medium hover:border-zinc-400 cursor-pointer transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+<span>Announcing Stratum 2.0 • Real-time orchestration</span>
+<span class="material-symbols-outlined text-[13px] text-mute">arrow_forward</span>
+</div>
+<!-- Hero Headline: display-lg with tight tracking -->
+<h1 class="text-4xl lg:text-[44px] font-semibold text-ink leading-[1.08] tracking-[-0.03em] max-w-xl">
+                  Architect digital products at the speed of thought.
+                </h1>
+<!-- Subcopy: body-md -->
+<p class="text-[16px] text-body-mid leading-relaxed max-w-lg font-normal tracking-[-0.01em]">
+                  The visual web engine designed for high-performing engineering and design teams. Seamlessly sync design tokens with production codebases.
+                </p>
+<!-- Stack.button-group: 2 CTAs -->
+<div class="flex items-center gap-3 pt-2">
+<button class="bg-primary hover:bg-zinc-800 text-on-primary font-medium text-sm px-5 py-2.5 rounded-sm shadow-sm transition-all flex items-center gap-2">
+<span>Start Building Live</span>
+<span class="material-symbols-outlined text-[15px]">bolt</span>
+</button>
+<button class="bg-canvas border border-hairline hover:border-zinc-400 text-ink font-medium text-sm px-5 py-2.5 rounded-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px]">widgets</span>
+<span>Explore Components</span>
+</button>
+</div>
+<!-- Trust Micro-stat Row -->
+<div class="flex items-center gap-4 pt-3 border-t border-hairline/80 w-full text-[11px] text-mute">
+<div class="flex items-center gap-1 text-body font-medium">
+<span class="material-symbols-outlined text-emerald-600 text-[14px]">verified</span>
+<span>SOC2 Type II Certified</span>
+</div>
+<span>•</span>
+<span>Zero lock-in AST export</span>
+<span>•</span>
+<span class="font-mono text-zinc-900 font-semibold">99.99% Uptime SLA</span>
+</div>
+</div>
+<!-- Right Column: Visual Preview (Col.hero-visual with abstract 3D card) -->
+<div class="col-span-5 relative">
+<div class="relative rounded-md overflow-hidden border border-hairline shadow-xl bg-gradient-to-br from-zinc-50 via-zinc-100 to-zinc-200 p-2">
+<!-- Abstract Canvas Hero Graphic (Strictly Compliant with data-alt specifications) -->
+<div class="w-full h-72 rounded-sm overflow-hidden relative bg-zinc-900">
+<img class="w-full h-full object-cover mix-blend-luminosity opacity-90 contrast-125" data-alt="A striking minimalist 3D rendering of floating architectural glass prisms and polished graphite computational blocks suspended in a pristine gallery void. The composition features sharp edge specular highlights with crisp studio key lighting in high-contrast neutral monochrome, accented by focused linear laser beams in electric blue. The aesthetic is clean, precision-engineered, and high-density SaaS software visualization with dramatic depth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaHf-FJ0ndBycqMaVlFngRgqyGA6-b2RglCBxqnS6eV4pcVNjBfHt_BqQCCp3X8qxw3Vg9mWHgmQGwqNyEXQXf60eD9uXIlDg-Evk9of8WtEplW4h8ckoeu9zCxxq9ygYiP1Jp07KGrwT_YkzljQcYT2q-BmhExzMdm2SCpzYcXCYSkqvpbYC2W7cRxS6Jecy_TL860LH4urz2HkQdJYurSXAD6Q9u-2Igiz3ex-ZIw9Q5PjgT9ivV5A_zrS-blUfnvsnnaL9R32o"/>
+<!-- Visual Floating Tag Inside Graphic -->
+<div class="absolute bottom-3 left-3 bg-zinc-950/80 backdrop-blur text-white px-2.5 py-1 rounded border border-white/10 text-[10px] font-mono flex items-center gap-2 shadow-lg">
+<span class="w-2 h-2 rounded-full bg-blue-500 animate-ping"></span>
+<span>Canvas AST Sync: Active</span>
+</div>
+<div class="absolute top-3 right-3 bg-blue-600/90 text-white font-mono text-[10px] px-2 py-0.5 rounded font-semibold">
+                      WebGL 2.0
+                    </div>
+</div>
+<!-- Mini Card Status Under Canvas Graphic -->
+<div class="p-3 bg-white border-t border-hairline flex items-center justify-between">
+<div>
+<div class="text-[12px] font-semibold text-ink font-headline">Apex Engine Core</div>
+<div class="text-[10px] text-mute font-mono">Build 94.02-alpha / Hot Module Active</div>
+</div>
+<span class="material-symbols-outlined text-blue-600 text-[18px]">verified_user</span>
+</div>
+</div>
+<!-- Decorative Layer Badge -->
+<div class="absolute -bottom-3 -left-3 bg-white border border-hairline px-3 py-1 rounded-sm shadow-md text-[11px] font-medium text-body flex items-center gap-1.5">
+<span class="material-symbols-outlined text-amber-500 text-[14px]">bolt</span>
+<span>14.2ms TTFB Global Edge</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Canvas Bottom Simulated Page Strip -->
+<div class="mt-auto px-8 py-4 bg-zinc-50 border-t border-hairline flex items-center justify-between text-body-mid text-xs">
+<span>© 2025 Apex Technologies Inc. All rights reserved.</span>
+<div class="flex items-center gap-4 text-xs font-medium">
+<span>Security</span>
+<span>Documentation</span>
+<span>API Reference</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ----------------------------------------------------------------------- -->
+<!-- 4. RIGHT COLUMN - Inspector & Publishing Pre-Flight Checklist           -->
+<!-- ----------------------------------------------------------------------- -->
+<aside class="w-80 bg-shell-panel border-l border-shell-border flex flex-col justify-between shrink-0 select-none z-30">
+<!-- Right Panel Navigation Tabs -->
+<div class="border-b border-shell-border bg-shell-panel">
+<div class="flex items-center h-10 px-2 gap-1 text-xs font-headline">
+<button class="px-3 py-1.5 text-shell-text-dim hover:text-white font-medium rounded hover:bg-shell-surface transition-colors">
+            Style
+          </button>
+<button class="px-3 py-1.5 text-shell-text-dim hover:text-white font-medium rounded hover:bg-shell-surface transition-colors">
+            Settings
+          </button>
+<!-- Active Tab: Publish & Preflight with Status Dot -->
+<button class="px-3 py-1.5 text-white bg-shell-surface font-semibold rounded border border-shell-border shadow-xs flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+<span>Publish &amp; Preflight</span>
+</button>
+</div>
+</div>
+<!-- Pre-Flight Checklist Content Scrollable Area -->
+<div class="flex-1 overflow-y-auto p-3.5 space-y-4 font-body">
+<!-- Readiness Gauge Card -->
+<div class="p-3 bg-shell-surface rounded-md border border-shell-border flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-semibold uppercase tracking-wider text-shell-text-dim font-headline">Release Readiness</span>
+<span class="text-[10px] font-mono bg-emerald-500/15 text-emerald-400 font-semibold px-2 py-0.5 rounded border border-emerald-500/30">Stable Build</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<div class="text-2xl font-bold font-headline text-white tracking-tight flex items-baseline gap-1">
+                96%
+                <span class="text-xs font-normal text-shell-text-dim">Score</span>
+</div>
+<div class="text-[11px] text-shell-text-dim">4 of 5 automated checks passed</div>
+</div>
+<!-- Progress Bar Visualization -->
+<div class="w-24 bg-shell-panel h-2 rounded-full overflow-hidden border border-shell-border/80">
+<div class="bg-gradient-to-r from-blue-500 to-emerald-400 h-full w-[96%] rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Checklist Item Group -->
+<div class="space-y-2">
+<div class="flex items-center justify-between text-[11px] font-semibold uppercase tracking-wider text-shell-text-dim font-headline">
+<span>Automated Pre-Flight Audits</span>
+<button class="text-blue-400 hover:text-blue-300 font-normal normal-case flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[12px]">refresh</span>
+<span>Re-run</span>
+</button>
+</div>
+<!-- Item 1: Page Titles & Meta Descriptions (Passed) -->
+<div class="p-2.5 rounded bg-shell-surface/60 border border-shell-border flex items-start gap-2.5 text-xs">
+<span class="material-symbols-outlined text-emerald-400 text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-white flex items-center justify-between">
+<span>Page Titles &amp; Meta</span>
+<span class="text-[10px] font-mono text-emerald-400">12/12</span>
+</div>
+<div class="text-[11px] text-shell-text-dim truncate mt-0.5">All 12 pages configured for OpenGraph &amp; SEO</div>
+</div>
+</div>
+<!-- Item 2: Responsive Viewport Audit (Passed) -->
+<div class="p-2.5 rounded bg-shell-surface/60 border border-shell-border flex items-start gap-2.5 text-xs">
+<span class="material-symbols-outlined text-emerald-400 text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-white flex items-center justify-between">
+<span>Responsive Viewport Audit</span>
+<span class="text-[10px] font-mono text-emerald-400">0 Errors</span>
+</div>
+<div class="text-[11px] text-shell-text-dim truncate mt-0.5">Zero overflow glitches on mobile/tablet widths</div>
+</div>
+</div>
+<!-- Item 3: Image Asset Compression (Passed) -->
+<div class="p-2.5 rounded bg-shell-surface/60 border border-shell-border flex items-start gap-2.5 text-xs">
+<span class="material-symbols-outlined text-emerald-400 text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-white flex items-center justify-between">
+<span>Asset Compression</span>
+<span class="text-[10px] font-mono text-emerald-400">18/18 WebP</span>
+</div>
+<div class="text-[11px] text-shell-text-dim truncate mt-0.5">Next-gen WebP &amp; AVIF formats generated</div>
+</div>
+</div>
+<!-- Item 4: Alt Text (WARNING - Needs Fix) -->
+<div class="p-2.5 rounded bg-amber-500/10 border border-amber-500/30 flex items-start gap-2.5 text-xs">
+<span class="material-symbols-outlined text-amber-400 text-[16px] shrink-0 mt-0.5">warning</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-amber-200 flex items-center justify-between">
+<span>Alt Text Verification</span>
+<span class="text-[10px] font-mono bg-amber-400/20 text-amber-300 px-1 rounded">1 Missing</span>
+</div>
+<div class="text-[11px] text-amber-200/80 mt-0.5">1 asset in 'Hero Visual' missing accessibility tag</div>
+<div class="mt-2 flex items-center gap-2">
+<button class="bg-amber-400 text-zinc-950 px-2 py-0.5 rounded font-semibold text-[10px] hover:bg-amber-300 transition-colors">
+                  Fix in Layer
+                </button>
+<button class="text-amber-300/80 hover:text-amber-200 text-[10px]">
+                  Ignore for Staging
+                </button>
+</div>
+</div>
+</div>
+<!-- Item 5: SSL & Custom Domain (Passed) -->
+<div class="p-2.5 rounded bg-shell-surface/60 border border-shell-border flex items-start gap-2.5 text-xs">
+<span class="material-symbols-outlined text-emerald-400 text-[16px] shrink-0 mt-0.5">check_circle</span>
+<div class="flex-1 min-w-0">
+<div class="font-medium text-white flex items-center justify-between">
+<span>SSL &amp; Custom Domain</span>
+<span class="text-[10px] font-mono text-emerald-400">Active</span>
+</div>
+<div class="text-[11px] text-shell-text-dim font-mono truncate mt-0.5">staging.stratum.site verified via DNS</div>
+</div>
+</div>
+</div>
+<!-- Target Environment Selector -->
+<div class="pt-2 space-y-2">
+<span class="text-[11px] font-semibold uppercase tracking-wider text-shell-text-dim font-headline">Deployment Target</span>
+<!-- Radio Target 1: Staging (Selected) -->
+<div class="p-2.5 rounded bg-blue-500/10 border-2 border-blue-500/60 cursor-pointer">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3.5 h-3.5 rounded-full border-4 border-blue-500 bg-white"></div>
+<span class="font-mono font-medium text-white text-xs">stratum-apex.dev</span>
+</div>
+<span class="text-[10px] bg-blue-500/20 text-blue-300 px-1.5 py-0.5 rounded font-mono font-medium">Staging</span>
+</div>
+<div class="mt-1 ml-5 text-[11px] text-shell-text-dim flex items-center gap-2">
+<span>Last push: 14m ago</span>
+<span>•</span>
+<span class="text-emerald-400 font-mono">Direct Edge</span>
+</div>
+</div>
+<!-- Radio Target 2: Production (Requires Review) -->
+<div class="p-2.5 rounded bg-shell-surface border border-shell-border opacity-70 hover:opacity-100 cursor-pointer transition-opacity">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3.5 h-3.5 rounded-full border border-shell-text-dim bg-transparent"></div>
+<span class="font-mono font-medium text-shell-text-bright text-xs">apex.io</span>
+</div>
+<span class="text-[10px] bg-zinc-800 text-zinc-300 px-1.5 py-0.5 rounded font-mono font-medium">Production</span>
+</div>
+<div class="mt-1 ml-5 text-[11px] text-shell-text-dim flex items-center justify-between">
+<span>Requires 1 approval</span>
+<span class="material-symbols-outlined text-[14px]">lock</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Panel Footer Action Area -->
+<div class="p-3 border-t border-shell-border bg-shell-panel space-y-2.5">
+<!-- Diff summary text -->
+<div class="flex items-center justify-between text-[11px] font-mono text-shell-text-dim">
+<span>Staged Payload:</span>
+<span class="text-shell-text-bright font-medium">+3 elements, -1 style, 2 assets</span>
+</div>
+<!-- Solid Primary Action: Publish to Staging -->
+<button class="w-full bg-blue-600 hover:bg-blue-500 text-white font-headline font-semibold text-xs py-2.5 rounded shadow-lg transition-all flex items-center justify-center gap-2 active:scale-[0.98]">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+<span>Publish to Staging</span>
+</button>
+<div class="flex items-center justify-center gap-2 text-[10px] text-shell-text-dim">
+<span class="material-symbols-outlined text-[12px] text-emerald-400">sync</span>
+<span>Live AST changes synced with Git branch: <code class="text-white font-mono">main</code></span>
+</div>
+</div>
+</aside>
+</main>
+<!-- ========================================================================= -->
+<!-- BOTTOM STATUS DOCK: Engine Health & Keyboard Shortcuts Bar                -->
+<!-- ========================================================================= -->
+<footer class="h-6 bg-shell-dark border-t border-shell-border flex items-center justify-between px-3 text-[10px] font-mono text-shell-text-dim z-50 shrink-0">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="text-white">Stratum Engine Core: Synchronized</span>
+</div>
+<span class="text-shell-border">|</span>
+<span>Branch: <strong class="text-white font-mono">feat/landing-hero-revamp</strong></span>
+<span class="text-shell-border">|</span>
+<span>Latency: <strong class="text-emerald-400">18ms</strong></span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span>Select: <kbd class="px-1 py-0.2 bg-shell-surface rounded text-white text-[9px] border border-shell-border">V</kbd></span>
+<span>Add: <kbd class="px-1 py-0.2 bg-shell-surface rounded text-white text-[9px] border border-shell-border">A</kbd></span>
+<span>Quick Search: <kbd class="px-1 py-0.2 bg-shell-surface rounded text-white text-[9px] border border-shell-border">⌘K</kbd></span>
+</div>
+<span class="text-shell-border">|</span>
+<div class="flex items-center gap-1 text-shell-text-dim">
+<span class="material-symbols-outlined text-[12px]">code</span>
+<span>AST v4.11</span>
+</div>
+</div>
+</footer>
+</body></html>

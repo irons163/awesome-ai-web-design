@@ -1,8 +1,824 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Together AI · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/together.ai">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Together AI · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#959494"></span><code>#959494</code></div><div class="swatch"><span style="background:#010120"></span><code>#010120</code></div><div class="swatch"><span style="background:#313641"></span><code>#313641</code></div><div class="swatch"><span style="background:#fc4c02"></span><code>#fc4c02</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · The Future, Inter, Helvetica Neue, Arial, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Nexus Infer — Frontier Open-Source AI Inference Cloud</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=Public+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "surface-container": "#eeeeee",
+            "on-surface": "#1a1c1c",
+            "tertiary-container": "#1b1b1b",
+            "on-surface-variant": "#4c4546",
+            "inverse-on-surface": "#f0f1f1",
+            "secondary-container": "#e2e2e2",
+            "on-error-container": "#93000a",
+            "surface-variant": "#e2e2e2",
+            "surface-dim": "#dadada",
+            "on-secondary-fixed-variant": "#474747",
+            "secondary": "#5e5e5e",
+            "on-error": "#ffffff",
+            "surface-tint": "#5e5e5e",
+            "on-tertiary-container": "#848484",
+            "on-tertiary-fixed": "#1b1b1b",
+            "on-tertiary-fixed-variant": "#474747",
+            "on-secondary-fixed": "#1b1b1b",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "error": "#ba1a1a",
+            "on-primary-container": "#848484",
+            "surface-container-highest": "#e2e2e2",
+            "surface-bright": "#f9f9f9",
+            "surface-container-lowest": "#ffffff",
+            "primary-fixed": "#e2e2e2",
+            "primary-container": "#1b1b1b",
+            "outline": "#7e7576",
+            "primary-fixed-dim": "#c6c6c6",
+            "tertiary-fixed": "#e2e2e2",
+            "inverse-surface": "#2f3131",
+            "surface-container-low": "#f3f3f4",
+            "primary": "#000000",
+            "on-secondary": "#ffffff",
+            "on-background": "#1a1c1c",
+            "on-secondary-container": "#646464",
+            "surface": "#f9f9f9",
+            "error-container": "#ffdad6",
+            "surface-container-high": "#e8e8e8",
+            "secondary-fixed": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#c6c6c6",
+            "outline-variant": "#cfc4c5",
+            "on-primary-fixed": "#1b1b1b",
+            "on-primary-fixed-variant": "#474747",
+            "tertiary": "#000000",
+            "secondary-fixed-dim": "#c6c6c6",
+            "background": "#f9f9f9"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #f9f9f9;
+      color: #1a1c1c;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    .brand-gradient-ribbon {
+      background: linear-gradient(135deg, #fc4c02 0%, #ef2cc1 50%, #bdbbff 100%);
+    }
+    .brand-glow {
+      box-shadow: 0 0 60px -15px rgba(239, 44, 193, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-surface-container-highest">
+<!-- TOP APP BAR -->
+<header class="bg-primary-container text-on-primary docked full-width top sticky z-50 border-b border-outline-variant/20">
+<div class="flex justify-between items-center w-full px-6 md:px-8 max-w-7xl mx-auto h-16">
+<!-- Brand Logo & Badge -->
+<div class="flex items-center gap-4">
+<a class="font-headline text-lg font-medium tracking-tight text-on-primary flex items-center gap-2.5" href="#">
+<div class="w-6 h-6 rounded bg-on-primary flex items-center justify-center text-primary font-bold text-xs">N</div>
+<span>Nexus Infer</span>
+</a>
+<div class="hidden sm:inline-flex items-center gap-2 px-2.5 py-1 bg-surface-container-high/10 rounded border border-outline-variant/20 font-mono-code text-[11px] text-on-primary/80">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>Kernel v4.2 • Synthetic benchmark suite</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-8 text-sm">
+<a class="text-on-primary font-medium border-b-2 border-on-primary pb-1" href="#models">Models</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors" href="#benchmarks">Benchmarks</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors" href="#runtime">Endpoints</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors" href="#integration">Docs</a>
+<a class="text-on-primary-container hover:text-on-primary transition-colors" href="#architecture">Architecture</a>
+</nav>
+<!-- Trailing CTAs -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container-high/10 text-on-primary hover:bg-surface-container-high/20 border border-outline-variant/20 font-mono-code text-xs uppercase tracking-wider transition-all" href="#runtime">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+<span>Console</span>
+</a>
+<a class="px-4 py-1.5 rounded bg-on-primary text-primary font-mono-code text-xs uppercase tracking-wider font-semibold hover:bg-surface-bright transition-all shadow-sm" href="#integration">
+          Quickstart SDK
+        </a>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO SECTION (DARK BAND INSPIRATION) -->
+<section class="bg-primary-container text-on-primary border-b border-outline-variant/20 relative overflow-hidden py-16 md:py-24">
+<!-- Background Ambient Geometric Accent -->
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-96 md:w-[600px] h-[500px] opacity-25 pointer-events-none blur-3xl rounded-full brand-gradient-ribbon"></div>
+<div class="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
+<!-- Chapter Marker 01 -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container-high/10 border border-outline-variant/20 rounded font-mono-code text-xs tracking-wider text-on-primary/90 mb-6">
+<span class="text-amber-400">01</span>
+<span class="text-on-primary-container">/</span>
+<span>ARCHITECTURE OVERVIEW</span>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-8">
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-headline font-medium tracking-tight leading-[1.1] mb-6 text-on-primary">
+              Sub-millisecond token dispatch for frontier open models.
+            </h1>
+<p class="text-lg md:text-xl text-on-primary-container max-w-3xl leading-relaxed font-body mb-8">
+              A bare-metal unified inference engine powered by custom speculative decoding kernels, kernel-level tensor parallelism, and non-blocking RDMA clusters over NVLink 4.
+            </p>
+<div class="flex flex-wrap items-center gap-4">
+<a class="px-6 py-3 bg-on-primary text-primary font-mono-code text-xs uppercase tracking-wider font-semibold rounded hover:bg-surface-bright transition-all flex items-center gap-2" href="#runtime">
+<span>Launch Playground</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="px-6 py-3 bg-surface-container-high/10 border border-outline-variant/20 text-on-primary font-mono-code text-xs uppercase tracking-wider rounded hover:bg-surface-container-high/20 transition-all" href="#models">
+                Browse 48+ Weights
+              </a>
+</div>
+</div>
+<!-- Hero Graphic / Code Topology Micro-view -->
+<div class="lg:col-span-4 bg-tertiary-container/90 border border-outline-variant/20 rounded p-5 font-mono-code text-xs shadow-2xl backdrop-blur">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant/20 text-on-primary-container">
+<span class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> RDMA FABRIC CLUSTER-09</span>
+<span class="text-[10px]">P99: 0.8ms</span>
+</div>
+<div class="space-y-3 pt-3">
+<div class="bg-surface-container-high/5 p-2.5 rounded border border-outline-variant/10">
+<div class="text-[10px] text-on-primary-container uppercase">Inter-GPU Bus</div>
+<div class="text-on-primary font-medium">900 GB/s NVLink 4 Topology</div>
+</div>
+<div class="bg-surface-container-high/5 p-2.5 rounded border border-outline-variant/10">
+<div class="text-[10px] text-on-primary-container uppercase">Kernel Dispatch Mode</div>
+<div class="text-on-primary font-medium">Async Speculative Decoupling (k=4)</div>
+</div>
+<div class="bg-surface-container-high/5 p-2.5 rounded border border-outline-variant/10">
+<div class="text-[10px] text-on-primary-container uppercase">KV Cache Memory Bandwidth</div>
+<div class="text-on-primary font-medium">3.35 TB/s HBM3e Contiguous</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Telemetry Stats Grid (Strictly synthetic test conditions) -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 pt-8 border-t border-outline-variant/20">
+<div class="bg-surface-container-high/5 border border-outline-variant/20 p-5 rounded">
+<div class="font-mono-code text-2xl md:text-3xl font-semibold text-on-primary">312 <span class="text-sm font-normal text-on-primary-container">tok/s</span></div>
+<div class="text-xs text-on-primary-container mt-1">Throughput (Llama-3.3-70B)</div>
+<div class="text-[10px] text-on-primary-container/70 font-mono-code mt-2 uppercase">Synthetic fixed load</div>
+</div>
+<div class="bg-surface-container-high/5 border border-outline-variant/20 p-5 rounded">
+<div class="font-mono-code text-2xl md:text-3xl font-semibold text-on-primary">18.4 <span class="text-sm font-normal text-on-primary-container">ms</span></div>
+<div class="text-xs text-on-primary-container mt-1">TTFT (P90 Latency)</div>
+<div class="text-[10px] text-on-primary-container/70 font-mono-code mt-2 uppercase">Isolated harness test</div>
+</div>
+<div class="bg-surface-container-high/5 border border-outline-variant/20 p-5 rounded">
+<div class="font-mono-code text-2xl md:text-3xl font-semibold text-on-primary">99.98<span class="text-sm font-normal text-on-primary-container">%</span></div>
+<div class="text-xs text-on-primary-container mt-1">Cluster Availability</div>
+<div class="text-[10px] text-on-primary-container/70 font-mono-code mt-2 uppercase">Q3 synthetic stress load</div>
+</div>
+<div class="bg-surface-container-high/5 border border-outline-variant/20 p-5 rounded">
+<div class="font-mono-code text-2xl md:text-3xl font-semibold text-on-primary">48+</div>
+<div class="text-xs text-on-primary-container mt-1">Optimized Weights</div>
+<div class="text-[10px] text-on-primary-container/70 font-mono-code mt-2 uppercase">Day-0 weights sync</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 02: CATALOG & WEIGHTS -->
+<section class="py-20 max-w-7xl mx-auto px-6 md:px-8" id="models">
+<!-- Chapter Marker 02 -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container border border-outline-variant/30 rounded font-mono-code text-xs tracking-wider text-on-surface mb-3">
+<span class="text-secondary">02</span>
+<span class="text-outline">/</span>
+<span>CATALOG &amp; WEIGHTS</span>
+</div>
+<h2 class="text-3xl font-headline font-medium tracking-tight text-on-surface">Curated high-throughput weight matrix</h2>
+<p class="text-secondary text-sm mt-1">Engineered runtime containers with pre-warmed weights deployed globally across tier-1 datacenters.</p>
+</div>
+<!-- Category Filter Pills -->
+<div class="flex flex-wrap gap-1.5 p-1 bg-surface-container rounded border border-outline-variant/30 font-mono-code text-xs" id="categoryFilterGroup">
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary font-medium shadow-sm transition-all" data-category="all">All Categories</button>
+<button class="px-3 py-1.5 rounded text-secondary hover:text-on-surface transition-all" data-category="reasoning">Frontier Reasoning</button>
+<button class="px-3 py-1.5 rounded text-secondary hover:text-on-surface transition-all" data-category="multimodal">Vision &amp; Multimodal</button>
+<button class="px-3 py-1.5 rounded text-secondary hover:text-on-surface transition-all" data-category="code">Code Synthesis</button>
+<button class="px-3 py-1.5 rounded text-secondary hover:text-on-surface transition-all" data-category="embeddings">High-Density Embeddings</button>
+</div>
+</div>
+<!-- Model Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Card 1: Llama 3.3 70B -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-5 flex flex-col justify-between hover:border-outline transition-all">
+<div>
+<div class="flex items-center justify-between gap-2 mb-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[11px] font-mono-code uppercase">FP8 Tuned</span>
+<span class="text-[11px] font-mono-code text-secondary">128k context</span>
+</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-1">Nexus-Llama-3.3-70B-Instruct</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">State-of-the-art general-purpose instruction tuned model with custom fused attention kernels.</p>
+</div>
+<div class="pt-4 border-t border-surface-container space-y-2 font-mono-code text-xs">
+<div class="flex justify-between text-secondary">
+<span>Peak Throughput:</span>
+<span class="text-on-surface font-medium">318 tok/s</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Time To First Token:</span>
+<span class="text-on-surface font-medium">14.2 ms TTFT</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2 text-[10px] text-secondary border-t border-surface-container">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span>8x H100 SXM5 / NVLink 4</span>
+</div>
+</div>
+</div>
+<!-- Card 2: DeepSeek R1 Distill Qwen 32B -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-5 flex flex-col justify-between hover:border-outline transition-all">
+<div>
+<div class="flex items-center justify-between gap-2 mb-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[11px] font-mono-code uppercase">BF16 Native</span>
+<span class="text-[11px] font-mono-code text-secondary">64k context</span>
+</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-1">DeepSeek-R1-Distill-Qwen-32B</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">Reasoning-intensive distillation model with step-by-step thinking trace support at low latency.</p>
+</div>
+<div class="pt-4 border-t border-surface-container space-y-2 font-mono-code text-xs">
+<div class="flex justify-between text-secondary">
+<span>Peak Throughput:</span>
+<span class="text-on-surface font-medium">425 tok/s</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Time To First Token:</span>
+<span class="text-on-surface font-medium">11.8 ms TTFT</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2 text-[10px] text-secondary border-t border-surface-container">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span>4x H100 SXM5 / NVLink 4</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Qwen2.5-Coder-32B-Instruct -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-5 flex flex-col justify-between hover:border-outline transition-all">
+<div>
+<div class="flex items-center justify-between gap-2 mb-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[11px] font-mono-code uppercase">FP8 Tuned</span>
+<span class="text-[11px] font-mono-code text-secondary">128k context</span>
+</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-1">Qwen2.5-Coder-32B-Instruct</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">Dedicated code generation, refactoring, and multi-file code editing engine with low speculative miss-rates.</p>
+</div>
+<div class="pt-4 border-t border-surface-container space-y-2 font-mono-code text-xs">
+<div class="flex justify-between text-secondary">
+<span>Peak Throughput:</span>
+<span class="text-on-surface font-medium">460 tok/s</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Time To First Token:</span>
+<span class="text-on-surface font-medium">10.6 ms TTFT</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2 text-[10px] text-secondary border-t border-surface-container">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span>4x H100 SXM5 / NVLink 4</span>
+</div>
+</div>
+</div>
+<!-- Card 4: BGE-M3-DenseEmbedding -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-5 flex flex-col justify-between hover:border-outline transition-all">
+<div>
+<div class="flex items-center justify-between gap-2 mb-3">
+<span class="px-2 py-0.5 rounded bg-surface-container text-on-surface text-[11px] font-mono-code uppercase">BF16 unquantized</span>
+<span class="text-[11px] font-mono-code text-secondary">8k context</span>
+</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-1">BGE-M3-DenseEmbedding</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">Multi-linguality dense vector extraction with 1024-dim output vector representations.</p>
+</div>
+<div class="pt-4 border-t border-surface-container space-y-2 font-mono-code text-xs">
+<div class="flex justify-between text-secondary">
+<span>Batch Throughput:</span>
+<span class="text-on-surface font-medium">1,820 req/s</span>
+</div>
+<div class="flex justify-between text-secondary">
+<span>Time To First Token:</span>
+<span class="text-on-surface font-medium">3.8 ms TTFT</span>
+</div>
+<div class="flex items-center gap-1.5 pt-2 text-[10px] text-secondary border-t border-surface-container">
+<span class="material-symbols-outlined text-[14px]">memory</span>
+<span>2x L40S PCIe Cluster</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 03: BENCHMARK METHODOLOGY -->
+<section class="py-20 bg-surface-container-low border-y border-outline-variant/30" id="benchmarks">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<!-- Chapter Marker 03 -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container border border-outline-variant/30 rounded font-mono-code text-xs tracking-wider text-on-surface mb-3">
+<span class="text-secondary">03</span>
+<span class="text-outline">/</span>
+<span>BENCHMARK METHODOLOGY</span>
+</div>
+<h2 class="text-3xl font-headline font-medium tracking-tight text-on-surface mb-2">Isolated synthetic load harness comparison</h2>
+<p class="text-secondary text-sm max-w-2xl mb-8">Metrics evaluated across three key architectural axes: Time to First Token (TTFT in ms), Generation Throughput (tok/s), and Inter-Token Latency (ITL in ms/tok).</p>
+<!-- Benchmark Table -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded overflow-hidden shadow-sm mb-6">
+<div class="overflow-x-auto">
+<table class="w-full text-left font-mono-code text-xs border-collapse">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant/30 text-secondary uppercase tracking-wider text-[11px]">
+<th class="py-3.5 px-5">Model Descriptor</th>
+<th class="py-3.5 px-4">Topology &amp; Precision</th>
+<th class="py-3.5 px-4">TTFT P90 (ms)</th>
+<th class="py-3.5 px-4">Throughput (tok/s)</th>
+<th class="py-3.5 px-4">ITL Mean (ms/tok)</th>
+<th class="py-3.5 px-5 text-right">Synthetic Delta</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-5 font-semibold text-on-surface">Nexus-Llama-3.3-70B-Instruct</td>
+<td class="py-4 px-4 text-secondary">8x H100 • FP8 Speculative</td>
+<td class="py-4 px-4 font-medium text-on-surface">14.2 ms</td>
+<td class="py-4 px-4 font-medium text-emerald-600">318 tok/s</td>
+<td class="py-4 px-4 text-secondary">3.14 ms/tok</td>
+<td class="py-4 px-5 text-right font-medium text-emerald-600">+41% vs vLLM 0.6</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-5 font-semibold text-on-surface">DeepSeek-R1-Distill-Qwen-32B</td>
+<td class="py-4 px-4 text-secondary">4x H100 • BF16 Continuous</td>
+<td class="py-4 px-4 font-medium text-on-surface">11.8 ms</td>
+<td class="py-4 px-4 font-medium text-emerald-600">425 tok/s</td>
+<td class="py-4 px-4 text-secondary">2.35 ms/tok</td>
+<td class="py-4 px-5 text-right font-medium text-emerald-600">+34% vs TensorRT-LLM</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-5 font-semibold text-on-surface">Qwen2.5-Coder-32B-Instruct</td>
+<td class="py-4 px-4 text-secondary">4x H100 • FP8 PagedKV</td>
+<td class="py-4 px-4 font-medium text-on-surface">10.6 ms</td>
+<td class="py-4 px-4 font-medium text-emerald-600">460 tok/s</td>
+<td class="py-4 px-4 text-secondary">2.17 ms/tok</td>
+<td class="py-4 px-5 text-right font-medium text-emerald-600">+38% vs vLLM 0.6</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-4 px-5 font-semibold text-on-surface">Llama-3.1-8B-Instruct</td>
+<td class="py-4 px-4 text-secondary">1x H100 • FP8 Monolithic</td>
+<td class="py-4 px-4 font-medium text-on-surface">6.8 ms</td>
+<td class="py-4 px-4 font-medium text-emerald-600">890 tok/s</td>
+<td class="py-4 px-4 text-secondary">1.12 ms/tok</td>
+<td class="py-4 px-5 text-right font-medium text-emerald-600">+52% vs standard</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Rigorous Synthetic Disclaimer -->
+<div class="p-4 bg-surface-container border border-outline-variant/30 rounded flex items-start gap-3 text-xs text-secondary font-mono-code">
+<span class="material-symbols-outlined text-[18px] text-outline shrink-0 mt-0.5">info</span>
+<p>
+<strong class="text-on-surface">METHODOLOGY DISCLAIMER:</strong> All performance metrics gathered under isolated synthetic load harnesses (fixed concurrency=32, prompt=1024 tokens, output=512 tokens). Benchmarks do not imply guaranteed live concurrency SLA. Latency values fluctuate according to prefix cache hit rates and request payload entropy.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION 04: INTERACTIVE RUNTIME & ENDPOINT WORKBENCH (CENTRAL REQUIRED FEATURE) -->
+<section class="py-20 max-w-7xl mx-auto px-6 md:px-8" id="runtime">
+<!-- Chapter Marker 04 -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container border border-outline-variant/30 rounded font-mono-code text-xs tracking-wider text-on-surface mb-3">
+<span class="text-secondary">04</span>
+<span class="text-outline">/</span>
+<span>INTERACTIVE RUNTIME</span>
+</div>
+<h2 class="text-3xl font-headline font-medium tracking-tight text-on-surface mb-2">Endpoint dispatch simulator</h2>
+<p class="text-secondary text-sm max-w-2xl mb-8">Test endpoint configurations, calibrate sampling distributions, and evaluate live response token stream timings.</p>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-surface-container-lowest border border-outline-variant/30 rounded overflow-hidden shadow-sm">
+<!-- Left: Workbench Configuration Panel -->
+<div class="lg:col-span-4 p-6 border-b lg:border-b-0 lg:border-r border-outline-variant/30 bg-surface-container-low/50">
+<h3 class="font-headline font-semibold text-sm text-on-surface uppercase tracking-wider mb-5 flex items-center gap-2 font-mono-code">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Sampling Parameters</span>
+</h3>
+<div class="space-y-5 font-mono-code text-xs">
+<!-- Model Picker -->
+<div>
+<label class="block text-secondary mb-1.5 uppercase tracking-wider text-[11px]">Selected Model</label>
+<select class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded px-3 py-2 text-on-surface font-mono-code focus:outline-none focus:border-primary" id="modelSelector">
+<option value="nexus-llama-3.3-70b-instruct">nexus-llama-3.3-70b-instruct</option>
+<option value="deepseek-r1-distill-qwen-32b">deepseek-r1-distill-qwen-32b</option>
+<option value="qwen2.5-coder-32b-instruct">qwen2.5-coder-32b-instruct</option>
+</select>
+</div>
+<!-- Dial 1: Temperature -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-secondary uppercase tracking-wider text-[11px]">Temperature</span>
+<span class="text-on-surface font-semibold" id="tempVal">0.20</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1.5 rounded cursor-pointer" id="tempSlider" max="1" min="0" step="0.05" type="range" value="0.2"/>
+<div class="flex justify-between text-[10px] text-secondary mt-1">
+<span>Deterministic (0.0)</span>
+<span>Exploratory (1.0)</span>
+</div>
+</div>
+<!-- Dial 2: Top_P -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-secondary uppercase tracking-wider text-[11px]">Top_P Nucleus</span>
+<span class="text-on-surface font-semibold" id="topPVal">0.95</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1.5 rounded cursor-pointer" id="topPSlider" max="1.0" min="0.1" step="0.05" type="range" value="0.95"/>
+</div>
+<!-- Dial 3: Max Tokens -->
+<div>
+<div class="flex justify-between items-center mb-1">
+<span class="text-secondary uppercase tracking-wider text-[11px]">Max Generation Tokens</span>
+<span class="text-on-surface font-semibold" id="maxTokensVal">512</span>
+</div>
+<input class="w-full accent-primary bg-surface-container h-1.5 rounded cursor-pointer" id="maxTokensSlider" max="2048" min="64" step="64" type="range" value="512"/>
+</div>
+<!-- System Prompt Sample -->
+<div class="pt-2">
+<label class="block text-secondary mb-1.5 uppercase tracking-wider text-[11px]">Test User Prompt</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/40 rounded p-2.5 text-xs text-on-surface focus:outline-none focus:border-primary font-mono-code resize-none" id="promptInput" rows="3">Explain the advantages of speculative decoding in tensor-parallel LLM serving.</textarea>
+</div>
+<button class="w-full py-2.5 bg-primary text-on-primary rounded font-mono-code text-xs uppercase tracking-wider font-semibold hover:bg-neutral-800 transition-all flex items-center justify-center gap-2" id="dispatchSimulateBtn">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+<span>Execute Synthetic Dispatch</span>
+</button>
+</div>
+</div>
+<!-- Right: Code Snippet & Response Terminal -->
+<div class="lg:col-span-8 flex flex-col justify-between bg-primary-container text-on-primary">
+<!-- Code snippet toggle bar -->
+<div class="flex items-center justify-between px-5 py-3 border-b border-outline-variant/20 bg-surface-container-high/5">
+<div class="flex items-center gap-2 font-mono-code text-xs" id="langTabs">
+<button class="px-3 py-1 rounded bg-surface-container-high/20 text-on-primary font-medium border border-outline-variant/20" data-lang="curl">cURL</button>
+<button class="px-3 py-1 rounded text-on-primary-container hover:text-on-primary" data-lang="python">Python (nexus-sdk)</button>
+<button class="px-3 py-1 rounded text-on-primary-container hover:text-on-primary" data-lang="typescript">TypeScript</button>
+</div>
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high/10 hover:bg-surface-container-high/20 border border-outline-variant/20 text-on-primary font-mono-code text-xs transition-all" id="copySnippetBtn">
+<span class="material-symbols-outlined text-[14px]" id="copyIcon">content_copy</span>
+<span id="copyText">Copy Snippet</span>
+</button>
+</div>
+<!-- Code Preview Block -->
+<div class="p-5 font-mono-code text-xs overflow-x-auto text-on-primary/90 leading-relaxed border-b border-outline-variant/20">
+<pre id="codeDisplay"><span class="text-amber-400">curl</span> https://api.nexusinfer.com/v1/chat/completions \
+  -H <span class="text-emerald-400">"Authorization: Bearer $NEXUS_API_KEY"</span> \
+  -H <span class="text-emerald-400">"Content-Type: application/json"</span> \
+  -d <span class="text-amber-200">'{
+    "model": "<span id="codeModelParam">nexus-llama-3.3-70b-instruct</span>",
+    "messages": [{"role": "user", "content": "Explain speculative decoding..."}],
+    "temperature": <span id="codeTempParam">0.2</span>,
+    "top_p": <span id="codeTopPParam">0.95</span>,
+    "max_tokens": <span id="codeMaxTokensParam">512</span>,
+    "stream": false
+  }'</span></pre>
+</div>
+<!-- Response Panel -->
+<div class="p-5 bg-tertiary-container/80 font-mono-code text-xs">
+<div class="flex items-center justify-between text-on-primary-container pb-2 mb-2 border-b border-outline-variant/10 text-[11px]">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 200 OK • RESPONSE PAYLOAD</span>
+<span>latency: 142ms</span>
+</div>
+<pre class="text-on-primary/80 overflow-x-auto text-[11px] leading-relaxed">{
+  <span class="text-amber-400">"id"</span>: <span class="text-emerald-300">"chatcmpl-nexus-synth-9182a"</span>,
+  <span class="text-amber-400">"object"</span>: <span class="text-emerald-300">"chat.completion"</span>,
+  <span class="text-amber-400">"created"</span>: 1740000000,
+  <span class="text-amber-400">"model"</span>: <span class="text-emerald-300">"nexus-llama-3.3-70b-instruct"</span>,
+  <span class="text-amber-400">"choices"</span>: [{
+    <span class="text-amber-400">"index"</span>: 0,
+    <span class="text-amber-400">"message"</span>: {
+      <span class="text-amber-400">"role"</span>: <span class="text-emerald-300">"assistant"</span>,
+      <span class="text-amber-400">"content"</span>: <span class="text-emerald-300">"Speculative decoding pairs a smaller draft model with a larger target model. The draft model generates candidate tokens concurrently, verified in parallel by the target model in a single forward pass, reducing generation latency by ~2-3x."</span>
+    },
+    <span class="text-amber-400">"finish_reason"</span>: <span class="text-emerald-300">"stop"</span>
+  }],
+  <span class="text-amber-400">"usage"</span>: {
+    <span class="text-amber-400">"prompt_tokens"</span>: 38,
+    <span class="text-amber-400">"completion_tokens"</span>: 114,
+    <span class="text-amber-400">"total_tokens"</span>: 152
+  }
+}</pre>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 05: THREE-STEP INTEGRATION -->
+<section class="py-20 bg-surface border-t border-outline-variant/30" id="integration">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<!-- Chapter Marker 05 -->
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-surface-container border border-outline-variant/30 rounded font-mono-code text-xs tracking-wider text-on-surface mb-3">
+<span class="text-secondary">05</span>
+<span class="text-outline">/</span>
+<span>THREE-STEP INTEGRATION</span>
+</div>
+<h2 class="text-3xl font-headline font-medium tracking-tight text-on-surface mb-2">Native drop-in protocol integration</h2>
+<p class="text-secondary text-sm max-w-2xl mb-12">Zero-dependency client libraries and 100% wire compatibility with the OpenAI SDK specification.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Step 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded bg-primary text-on-primary font-mono-code text-xs font-semibold flex items-center justify-center mb-4">01</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-2">Install client</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">Install via your standard package manager. Fully typed with autocompletion for all models and parameter schemes.</p>
+</div>
+<div class="p-3 bg-surface-container rounded font-mono-code text-xs text-on-surface overflow-x-auto border border-outline-variant/20">
+<code>pip install nexus-infer</code>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded bg-primary text-on-primary font-mono-code text-xs font-semibold flex items-center justify-center mb-4">02</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-2">Initialize provider</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">Point your existing OpenAI library directly to the Nexus base URL or instantiate our native thin client.</p>
+</div>
+<div class="p-3 bg-surface-container rounded font-mono-code text-xs text-on-surface overflow-x-auto border border-outline-variant/20">
+<code>base_url="https://api.nexusinfer.com/v1"</code>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 rounded bg-primary text-on-primary font-mono-code text-xs font-semibold flex items-center justify-center mb-4">03</div>
+<h3 class="font-headline font-semibold text-base text-on-surface mb-2">Stream with zero cold-starts</h3>
+<p class="text-xs text-secondary mb-4 leading-relaxed">All enterprise endpoints remain permanently hot on physical H100 partitions without autoscaling pauses.</p>
+</div>
+<div class="p-3 bg-surface-container rounded font-mono-code text-xs text-on-surface overflow-x-auto border border-outline-variant/20">
+<code>stream = client.chat.create(..., stream=True)</code>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ARCHITECTURE CALLOUT BANNER -->
+<section class="py-16 bg-surface-container-low border-t border-outline-variant/30" id="architecture">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="max-w-2xl">
+<div class="font-mono-code text-[11px] text-secondary uppercase tracking-widest mb-1">Inference Architecture Whitepaper</div>
+<h3 class="text-2xl font-headline font-medium text-on-surface mb-2">Low-level custom CUDA kernels with non-blocking P2P RDMA</h3>
+<p class="text-xs text-secondary leading-relaxed font-body">Review the synthetic harness scripts, hardware interconnect topology diagrams, and reproducible benchmark configurations published open-source on GitHub.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<a class="px-4 py-2.5 bg-surface-container border border-outline-variant/40 rounded text-on-surface font-mono-code text-xs uppercase tracking-wider hover:bg-surface-container-high transition-all flex items-center gap-2" href="https://github.com" rel="noreferrer" target="_blank">
+<span class="material-symbols-outlined text-sm">code</span>
+<span>GitHub Harness</span>
+</a>
+<a class="px-4 py-2.5 bg-primary text-on-primary rounded font-mono-code text-xs uppercase tracking-wider font-medium hover:bg-neutral-800 transition-all" href="#runtime">
+              Launch Console
+            </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- TECHNICAL FOOTER -->
+<footer class="bg-surface-container-lowest border-t border-outline-variant/20 py-16">
+<div class="max-w-7xl mx-auto px-6 md:px-8 flex flex-col gap-12">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8">
+<div class="col-span-2">
+<div class="flex items-center gap-2.5 mb-4">
+<div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-on-primary font-bold text-xs">N</div>
+<span class="font-headline text-base font-semibold tracking-tight text-on-surface">Nexus Infer</span>
+</div>
+<p class="text-xs text-secondary leading-relaxed max-w-sm mb-4">
+            A developer-first inference cloud built exclusively for frontier open-source foundation models. Sub-millisecond kernel dispatch, zero cold-starts, and transparent synthetic testing.
+          </p>
+<div class="flex items-center gap-2 text-[11px] font-mono-code text-secondary">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>All systems nominal • 99.98% availability</span>
+</div>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-semibold mb-3">Inference Engine</h4>
+<ul class="space-y-2 text-sm text-secondary font-body">
+<li><a class="hover:text-on-surface transition-colors" href="#models">Model Catalog</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#benchmarks">Synthetic Benchmarks</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#architecture">RDMA Fabric</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#architecture">Speculative Decoding</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-semibold mb-3">Documentation</h4>
+<ul class="space-y-2 text-sm text-secondary font-body">
+<li><a class="hover:text-on-surface transition-colors" href="#integration">SDK Quickstart</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#runtime">API Reference</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#runtime">OpenAI Compatibility</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#integration">Client Libraries</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-label text-xs uppercase tracking-widest text-on-surface-variant font-semibold mb-3">Platform &amp; Legal</h4>
+<ul class="space-y-2 text-sm text-secondary font-body">
+<li><a class="hover:text-on-surface transition-colors" href="#">Status Dashboard</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Security &amp; SOC2</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a></li>
+</ul>
+</div>
+</div>
+<!-- Massive Signature Watermark Banner -->
+<div class="pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono-code text-secondary">
+<div>
+          © 2025 Nexus Infer Technologies, Inc. All benchmarks measured under synthetic test conditions.
+        </div>
+<div class="flex items-center gap-6">
+<span class="hover:text-on-surface cursor-pointer">Security Center</span>
+<span class="hover:text-on-surface cursor-pointer">Synthetic Harness Repo</span>
+<span class="hover:text-on-surface cursor-pointer">PGP Key</span>
+</div>
+</div>
+<!-- Giant Wordmark Banner (Together AI Inspired) -->
+<div class="w-full text-center select-none pt-4 overflow-hidden">
+<span class="font-headline text-5xl sm:text-7xl md:text-9xl font-bold tracking-tighter text-surface-container-highest/60 inline-block">
+          nexus.infer
+        </span>
+</div>
+</div>
+</footer>
+<!-- Interactive Workbench Scripts -->
+<script>
+    // State
+    const state = {
+      model: 'nexus-llama-3.3-70b-instruct',
+      temperature: 0.20,
+      topP: 0.95,
+      maxTokens: 512,
+      activeLang: 'curl'
+    };
+
+    // Elements
+    const modelSelector = document.getElementById('modelSelector');
+    const tempSlider = document.getElementById('tempSlider');
+    const tempVal = document.getElementById('tempVal');
+    const topPSlider = document.getElementById('topPSlider');
+    const topPVal = document.getElementById('topPVal');
+    const maxTokensSlider = document.getElementById('maxTokensSlider');
+    const maxTokensVal = document.getElementById('maxTokensVal');
+    const codeDisplay = document.getElementById('codeDisplay');
+    const copySnippetBtn = document.getElementById('copySnippetBtn');
+    const copyText = document.getElementById('copyText');
+    const copyIcon = document.getElementById('copyIcon');
+    const langTabs = document.querySelectorAll('#langTabs button');
+    const categoryButtons = document.querySelectorAll('#categoryFilterGroup button');
+
+    function updateCodeView() {
+      const { model, temperature, topP, maxTokens, activeLang } = state;
+
+      if (activeLang === 'curl') {
+        codeDisplay.innerHTML = `<span class="text-amber-400">curl</span> https://api.nexusinfer.com/v1/chat/completions \\
+  -H <span class="text-emerald-400">"Authorization: Bearer $NEXUS_API_KEY"</span> \\
+  -H <span class="text-emerald-400">"Content-Type: application/json"</span> \\
+  -d <span class="text-amber-200">'{
+    "model": "<span class="text-on-primary font-bold">${model}</span>",
+    "messages": [{"role": "user", "content": "Explain speculative decoding..."}],
+    "temperature": <span class="text-on-primary">${temperature}</span>,
+    "top_p": <span class="text-on-primary">${topP}</span>,
+    "max_tokens": <span class="text-on-primary">${maxTokens}</span>,
+    "stream": false
+  }'</span>`;
+      } else if (activeLang === 'python') {
+        codeDisplay.innerHTML = `<span class="text-amber-400">from</span> nexus_infer <span class="text-amber-400">import</span> NexusClient
+
+client = NexusClient(api_key=<span class="text-emerald-400">"$NEXUS_API_KEY"</span>)
+
+response = client.chat.completions.create(
+    model=<span class="text-emerald-400">"${model}"</span>,
+    messages=[{<span class="text-emerald-400">"role"</span>: <span class="text-emerald-400">"user"</span>, <span class="text-emerald-400">"content"</span>: <span class="text-emerald-400">"Explain speculative decoding..."</span>}],
+    temperature=<span class="text-amber-300">${temperature}</span>,
+    top_p=<span class="text-amber-300">${topP}</span>,
+    max_tokens=<span class="text-amber-300">${maxTokens}</span>,
+)
+print(response.choices[0].message.content)`;
+      } else if (activeLang === 'typescript') {
+        codeDisplay.innerHTML = `<span class="text-amber-400">import</span> { Nexus } <span class="text-amber-400">from</span> <span class="text-emerald-400">'@nexus/infer'</span>;
+
+<span class="text-amber-400">const</span> nexus = <span class="text-amber-400">new</span> Nexus({ apiKey: process.env.NEXUS_API_KEY });
+
+<span class="text-amber-400">async function</span> run() {
+  <span class="text-amber-400">const</span> res = <span class="text-amber-400">await</span> nexus.chat.completions.create({
+    model: <span class="text-emerald-400">'${model}'</span>,
+    messages: [{ role: <span class="text-emerald-400">'user'</span>, content: <span class="text-emerald-400">'Explain speculative decoding...'</span> }],
+    temperature: <span class="text-amber-300">${temperature}</span>,
+    topP: <span class="text-amber-300">${topP}</span>,
+    maxTokens: <span class="text-amber-300">${maxTokens}</span>
+  });
+  console.log(res.choices[0].message.content);
+}`;
+      }
+    }
+
+    // Sliders and Selects
+    modelSelector.addEventListener('change', (e) => {
+      state.model = e.target.value;
+      updateCodeView();
+    });
+
+    tempSlider.addEventListener('input', (e) => {
+      state.temperature = parseFloat(e.target.value).toFixed(2);
+      tempVal.textContent = state.temperature;
+      updateCodeView();
+    });
+
+    topPSlider.addEventListener('input', (e) => {
+      state.topP = parseFloat(e.target.value).toFixed(2);
+      topPVal.textContent = state.topP;
+      updateCodeView();
+    });
+
+    maxTokensSlider.addEventListener('input', (e) => {
+      state.maxTokens = parseInt(e.target.value, 10);
+      maxTokensVal.textContent = state.maxTokens;
+      updateCodeView();
+    });
+
+    // Language tabs
+    langTabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        langTabs.forEach(b => {
+          b.className = 'px-3 py-1 rounded text-on-primary-container hover:text-on-primary';
+        });
+        btn.className = 'px-3 py-1 rounded bg-surface-container-high/20 text-on-primary font-medium border border-outline-variant/20';
+        state.activeLang = btn.dataset.lang;
+        updateCodeView();
+      });
+    });
+
+    // Copy to clipboard with visual feedback
+    copySnippetBtn.addEventListener('click', () => {
+      const textToCopy = codeDisplay.innerText;
+      navigator.clipboard.writeText(textToCopy).then(() => {
+        copyText.textContent = 'Copied!';
+        copyIcon.textContent = 'check';
+        copySnippetBtn.classList.add('text-emerald-400');
+        setTimeout(() => {
+          copyText.textContent = 'Copy Snippet';
+          copyIcon.textContent = 'content_copy';
+          copySnippetBtn.classList.remove('text-emerald-400');
+        }, 2000);
+      });
+    });
+
+    // Category filter pills
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        categoryButtons.forEach(b => {
+          b.className = 'px-3 py-1.5 rounded text-secondary hover:text-on-surface transition-all';
+        });
+        btn.className = 'px-3 py-1.5 rounded bg-primary text-on-primary font-medium shadow-sm transition-all';
+      });
+    });
+
+    // Execute button microinteraction
+    const dispatchSimulateBtn = document.getElementById('dispatchSimulateBtn');
+    dispatchSimulateBtn.addEventListener('click', () => {
+      dispatchSimulateBtn.disabled = true;
+      dispatchSimulateBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Dispatching...`;
+      setTimeout(() => {
+        dispatchSimulateBtn.disabled = false;
+        dispatchSimulateBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">check</span> Response 200 OK (138ms)`;
+        setTimeout(() => {
+          dispatchSimulateBtn.innerHTML = `<span class="material-symbols-outlined text-[16px]">play_arrow</span> Execute Synthetic Dispatch`;
+        }, 2500);
+      }, 700);
+    });
+
+    // Initial render
+    updateCodeView();
+  </script>
+</body></html>

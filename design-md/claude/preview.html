@@ -1,8 +1,436 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claude · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#faf9f5;--panel:#efeeea;--ink:#000000;--muted:#5a5a58;--border:#cdccc9;--accent:#cc785c;--on-accent:#000000;--display:Georgia, serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/claude">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Claude · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#cc785c"></span><code>#cc785c</code></div><div class="swatch"><span style="background:#faf9f5"></span><code>#faf9f5</code></div><div class="swatch"><span style="background:#141413"></span><code>#141413</code></div><div class="swatch"><span style="background:#a9583e"></span><code>#a9583e</code></div><div class="swatch"><span style="background:#e6dfd8"></span><code>#e6dfd8</code></div><div class="swatch"><span style="background:#3d3d3a"></span><code>#3d3d3a</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Copernicus, Tiempos Headline, serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cadence — Studio Workspace</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&amp;family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "surface-bright": "#faf9f5",
+            "primary-fixed": "#ffdbd0",
+            "surface-container": "#efeeea",
+            "inverse-on-surface": "#f2f1ed",
+            "outline": "#87736d",
+            "on-primary-container": "#fffbff",
+            "secondary": "#605e5b",
+            "primary": "#8f482f",
+            "on-tertiary-container": "#fffbff",
+            "tertiary-fixed-dim": "#cfc5bb",
+            "surface-tint": "#924a31",
+            "inverse-primary": "#ffb59d",
+            "primary-container": "#ad5f45",
+            "secondary-fixed": "#e6e2de",
+            "on-secondary-container": "#666461",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#ece1d7",
+            "surface-container-low": "#f4f4f0",
+            "on-background": "#1b1c1a",
+            "surface-container-highest": "#e3e2df",
+            "on-secondary-fixed-variant": "#484644",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#2f312e",
+            "on-surface": "#1b1c1a",
+            "on-tertiary-fixed": "#201b15",
+            "on-secondary-fixed": "#1c1b19",
+            "on-surface-variant": "#54433e",
+            "on-primary-fixed": "#390c00",
+            "tertiary-container": "#7b736b",
+            "secondary-fixed-dim": "#cac6c2",
+            "surface-variant": "#e3e2df",
+            "on-tertiary-fixed-variant": "#4c463e",
+            "on-secondary": "#ffffff",
+            "on-primary-fixed-variant": "#75331c",
+            "background": "#faf9f5",
+            "on-primary": "#ffffff",
+            "surface-dim": "#dbdad6",
+            "surface": "#faf9f5",
+            "surface-container-high": "#e9e8e4",
+            "error": "#ba1a1a",
+            "tertiary": "#625b53",
+            "secondary-container": "#e6e2de",
+            "on-error": "#ffffff",
+            "primary-fixed-dim": "#ffb59d",
+            "outline-variant": "#dac1ba"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "3rem",
+            "space-md": "1rem",
+            "space-xl": "2.5rem",
+            "margin-mobile": "1.25rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "body-lg": ["Inter"],
+            "display-lg-mobile": ["EB Garamond"],
+            "label-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["EB Garamond"],
+            "headline-sm": ["EB Garamond"],
+            "body-sm": ["Inter"],
+            "headline-md": ["EB Garamond"],
+            "headline-lg": ["EB Garamond"],
+            "body-md": ["Inter"],
+            "display-lg": ["EB Garamond"],
+            "label-md": ["JetBrains Mono"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "display-lg-mobile": ["38px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.04em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["30px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+            "headline-sm": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "400" }],
+            "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.03em", "fontWeight": "400" }],
+            "label-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar docked full-width -->
+<header class="w-full bg-background border-b border-outline-variant/60 sticky top-0 z-40">
+<div class="w-full max-w-[1360px] mx-auto px-6 flex justify-between items-center h-16">
+<!-- Brand & Document Anchor -->
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 group" href="#">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="asterisk">asterisk</span>
+<span class="font-headline-sm text-headline-sm font-normal text-on-surface tracking-tight">Cadence</span>
+</a>
+<span class="text-outline-variant">/</span>
+<div class="flex items-center space-x-2">
+<span class="font-headline-sm text-headline-sm text-on-surface-variant font-normal">The Resilient Soil: Notes on Urban Flora</span>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full border border-secondary-fixed">Draft v3.4</span>
+</div>
+</div>
+<!-- Navigation Links from Blueprint -->
+<nav class="hidden lg:flex items-center space-x-6">
+<a class="text-primary border-b border-primary pb-1 font-body-md text-body-md" href="#">Essays</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 font-body-md text-body-md" href="#">Intelligence</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 font-body-md text-body-md" href="#">Style Engine</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors duration-150 font-body-md text-body-md" href="#">Manifesto</a>
+</nav>
+<!-- Trailing Controls & Primary CTA -->
+<div class="flex items-center space-x-3">
+<div class="hidden md:flex items-center space-x-2 font-label-sm text-label-sm text-secondary mr-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span>Live Prose Analysis Active</span>
+</div>
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container font-body-sm text-body-sm transition-all duration-200">
+          Export Markdown
+        </button>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-1.5 rounded-lg font-body-sm text-body-sm transition-all duration-200 flex items-center space-x-1.5">
+<span>Apply All Revisions</span>
+<span class="material-symbols-outlined text-sm" data-icon="auto_fix_high">auto_fix_high</span>
+</button>
+</div>
+</div>
+<!-- Editorial Sub-strip with live telemetry metrics -->
+<div class="w-full bg-surface-container-low border-t border-outline-variant/40">
+<div class="w-full max-w-[1360px] mx-auto px-6 py-2 flex flex-wrap items-center justify-between text-secondary font-label-sm text-label-sm">
+<div class="flex items-center space-x-6">
+<span class="flex items-center space-x-1">
+<span class="text-on-surface font-semibold">1,420</span> words
+          </span>
+<span class="flex items-center space-x-1">
+<span class="text-on-surface font-semibold">5m 40s</span> reading measure
+          </span>
+<span class="flex items-center space-x-1">
+<span class="text-on-surface font-semibold">11.2</span> Flesch-Kincaid index
+          </span>
+<span class="hidden sm:inline-flex items-center space-x-1">
+<span class="text-primary font-semibold">89%</span> syntactic coherence
+          </span>
+</div>
+<div class="flex items-center space-x-4">
+<span class="text-secondary">Syntactic Velocity: <strong class="text-on-surface">3.8 clauses/period</strong></span>
+<span class="hidden md:inline text-secondary">Rhetorical Stasis: <strong class="text-primary">Low (Optimal)</strong></span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Canvas Canvas Container -->
+<main class="w-full max-w-[1360px] mx-auto px-6 py-8 flex-1">
+<!-- Editorial Header Unit -->
+<div class="mb-10 max-w-3xl">
+<div class="flex items-center space-x-2 text-primary font-label-sm text-label-sm mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="edit_note">edit_note</span>
+<span class="uppercase tracking-widest text-[10px] font-semibold">Stylistic Laboratory</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight mb-3">
+        Refine your prose rhythm &amp; syntactic architecture.
+      </h1>
+<p class="font-body-lg text-body-lg text-secondary">
+        A focused editorial sanctuary for essayists. Inspect rhetorical friction, diction density, and clausal velocity in real time.
+      </p>
+</div>
+<!-- Split-Pane Workspace: Side-by-Side Comparison Bento -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start mb-12">
+<!-- Left Column: Raw Author Draft (6 Cols) -->
+<div class="lg:col-span-6 bg-surface-container-low rounded-xl border border-outline-variant/70 p-6 flex flex-col justify-between shadow-sm relative">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60 mb-6">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface">Raw Author Draft</h2>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2.5 py-1 rounded-full border border-outline-variant/50">
+            Source Text (Uncurated)
+          </span>
+</div>
+<!-- Essay Text with Stylistic Diff Markers -->
+<article class="space-y-6 font-headline-md text-[19px] leading-[32px] text-on-surface pr-2">
+<p>
+            The abandoned railyard on the canal edge had long been neglected by civic authorities, leaving nothing but cracked ballast and fractured bitumen. Yet along the rusted switch-lines, 
+            <mark class="bg-primary/10 text-on-surface px-1 py-0.5 rounded border-b border-primary font-normal" title="Passive construct with sluggish preposition">
+              a resilient community of wild chicory was found to be expanding
+            </mark>
+            through fissures where moisture pooled beneath the petroleum crust.
+          </p>
+<p>
+            It is universally acknowledged that taproots of ordinary dandelion possess an extraordinary hydraulic vigor. 
+            <span class="border-b-2 border-dashed border-error/70 text-on-surface" title="Clausal drag: 3 nested prepositional phrases">
+              Down through the subterranean layers of post-industrial slag, gravel, and unyielding lime mortar
+            </span>, 
+            they burrow without hesitation, cleaving asphalt apart millimeter by millimeter until the stubborn masonry returns to crumbly earth.
+          </p>
+<p>
+            Within the compost piles quietly tended by neighbors in lot seven, high thermal fermentation is continuously sustained by colonies of actinomycetes. 
+            <mark class="bg-primary/15 text-on-surface px-1 py-0.5 rounded border-b-2 border-primary" title="Repetitive weak passive verb construct">
+              Steam is seen rising by morning walkers in late October
+            </mark>, 
+            signifying that life does not merely survive industrial wreckage; it actively consumes the iron relics of the city.
+          </p>
+</article>
+<!-- Sticky Audit Annotation Card -->
+<div class="mt-8 pt-4 border-t border-outline-variant/60 bg-surface-container rounded-lg p-4">
+<div class="flex items-start space-x-3">
+<span class="material-symbols-outlined text-primary text-xl mt-0.5" data-icon="troubleshoot">troubleshoot</span>
+<div class="flex-1">
+<div class="flex items-center justify-between mb-1">
+<span class="font-label-sm text-label-sm font-semibold text-on-surface">Prosodic Friction Report</span>
+<span class="font-label-sm text-label-sm text-primary">High Drag Index</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">
+                Diagnostic: 2 passive verb clusters dampening momentum in paragraph 3. Repetitive prepositional staging slows reader ingestion speed by ~18%. Metaphor cohesion index: 94%.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Cadence Revision (6 Cols) -->
+<div class="lg:col-span-6 bg-surface-bright rounded-xl border border-outline-variant p-6 flex flex-col justify-between shadow-[0_8px_32px_-4px_rgba(24,23,21,0.06)] relative">
+<div class="flex items-center justify-between pb-4 border-b border-outline-variant/60 mb-6">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<h2 class="font-headline-sm text-headline-sm text-primary">Cadence Revision</h2>
+</div>
+<div class="flex items-center space-x-2">
+<span class="font-label-sm text-label-sm text-primary bg-primary-fixed/40 px-2 py-0.5 rounded-full border border-outline-variant/30">
+              +14% compression
+            </span>
+<span class="font-label-sm text-label-sm text-secondary bg-surface-container px-2 py-0.5 rounded-full border border-outline-variant/40">
+              Iambic cadence tuned
+            </span>
+</div>
+</div>
+<!-- Polished Prose Container -->
+<article class="space-y-6 font-headline-md text-[19px] leading-[32px] text-on-surface pr-2">
+<p>
+            Neglected by municipal planners, the canal railyard lay surrendered to cracked ballast and bitumen. Yet along rusted switch-lines, 
+            <span class="bg-secondary-fixed/70 text-on-surface px-1 py-0.5 rounded font-normal transition-colors hover:bg-secondary-fixed">
+              wild chicory colonized the fissures
+            </span>, 
+            drinking deep from subterranean veins where autumn moisture pooled beneath the old petroleum floor.
+          </p>
+<p>
+            Dandelion taproots deploy a ferocious hydraulic lever. 
+            <span class="bg-secondary-fixed/70 text-on-surface px-1 py-0.5 rounded font-normal transition-colors hover:bg-secondary-fixed">
+              Driving straight through post-industrial slag and lime mortar
+            </span>, 
+            they cleave asphalt millimeter by stubborn millimeter, relentlessly returning rigid masonry into rich, friable humus.
+          </p>
+<p>
+            Behind the wire fencing of lot seven, neighborly compost heaps run feverish with actinomycetes. 
+            <span class="bg-secondary-fixed/70 text-on-surface px-1 py-0.5 rounded font-normal transition-colors hover:bg-secondary-fixed">
+              Dawn walkers watch steam plume into October frost
+            </span>—proof that the flora does not merely endure urban ruins, but digests them whole.
+          </p>
+</article>
+<!-- Revision Action Bar -->
+<div class="mt-8 pt-4 border-t border-outline-variant/60 flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center space-x-2">
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container font-body-sm text-body-sm transition-colors duration-150">
+              Branch Variation
+            </button>
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant text-on-surface hover:bg-surface-container font-body-sm text-body-sm transition-colors duration-150 flex items-center space-x-1">
+<span class="material-symbols-outlined text-xs" data-icon="content_copy">content_copy</span>
+<span>Copy Diff</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-secondary hover:text-error font-body-sm text-body-sm transition-colors duration-150">
+              Discard
+            </button>
+</div>
+<button class="bg-primary hover:bg-primary-container text-on-primary px-4 py-1.5 rounded-lg font-body-sm text-body-sm transition-all duration-200 shadow-sm flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span>Apply Revision to Manuscript</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Technical Dark Window: Telemetry & Review Panel -->
+<section class="rounded-xl bg-inverse-surface text-inverse-on-surface border border-outline/30 overflow-hidden shadow-xl mb-16">
+<!-- Window Title Bar -->
+<div class="bg-[#242623] px-6 py-3 border-b border-outline/20 flex items-center justify-between">
+<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-outline/40"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-outline/40"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-outline/40"></span>
+</div>
+<span class="font-label-sm text-label-sm text-tertiary-fixed-dim">prose-cadence-engine :: metrics daemon (v2.1.0-release)</span>
+</div>
+<div class="flex items-center space-x-4 font-label-sm text-label-sm text-primary-fixed">
+<span>Engine Status: STABLE</span>
+<span>Sample Buffer: 1,420 tokens</span>
+</div>
+</div>
+<!-- Telemetry Bento Interior -->
+<div class="p-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 font-label-sm">
+<!-- Live Sparkline / Sentence Length Variance -->
+<div class="lg:col-span-2 bg-[#20221f] p-4 rounded-lg border border-outline/20">
+<div class="flex items-center justify-between mb-3">
+<span class="text-tertiary-fixed-dim uppercase tracking-wider text-[10px]">Sentence Length Variance (P1–P3)</span>
+<span class="text-primary-fixed">σ = 6.4 words</span>
+</div>
+<!-- Histogram Visualization -->
+<div class="h-24 flex items-end space-x-2 pt-2 border-b border-outline/20 pb-2">
+<div class="flex-1 bg-tertiary-container/40 rounded-t h-[45%] flex items-center justify-center text-[9px] text-tertiary-fixed-dim">18w</div>
+<div class="flex-1 bg-tertiary-container/60 rounded-t h-[70%] flex items-center justify-center text-[9px] text-tertiary-fixed-dim">28w</div>
+<div class="flex-1 bg-primary-container rounded-t h-[30%] flex items-center justify-center text-[9px] text-inverse-on-surface font-semibold">12w</div>
+<div class="flex-1 bg-tertiary-container/80 rounded-t h-[85%] flex items-center justify-center text-[9px] text-tertiary-fixed-dim">34w</div>
+<div class="flex-1 bg-primary-container rounded-t h-[40%] flex items-center justify-center text-[9px] text-inverse-on-surface font-semibold">16w</div>
+<div class="flex-1 bg-tertiary-container/60 rounded-t h-[55%] flex items-center justify-center text-[9px] text-tertiary-fixed-dim">22w</div>
+<div class="flex-1 bg-primary-fixed/50 rounded-t h-[65%] flex items-center justify-center text-[9px] text-inverse-surface font-semibold">26w</div>
+</div>
+<div class="flex justify-between text-[10px] text-outline pt-2">
+<span>Entry clauses (punchy)</span>
+<span>Cadenced expansion</span>
+<span>Clausal resting breath</span>
+</div>
+</div>
+<!-- Telemetry Pill Indicators -->
+<div class="space-y-3 bg-[#20221f] p-4 rounded-lg border border-outline/20">
+<span class="text-tertiary-fixed-dim uppercase tracking-wider text-[10px] block">Syntactic Cohesion Matrix</span>
+<div class="flex justify-between items-center py-1 border-b border-outline/10">
+<span class="text-tertiary-fixed-dim">Rhetorical Balance</span>
+<span class="text-primary-fixed font-bold">92 / 100</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-outline/10">
+<span class="text-tertiary-fixed-dim">Clausal Respiration</span>
+<span class="text-inverse-on-surface">3.8s tempo</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-outline/10">
+<span class="text-tertiary-fixed-dim">Latent Rhythm Index</span>
+<span class="text-inverse-on-surface">0.884</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-tertiary-fixed-dim">Phonemic Dissonance</span>
+<span class="text-emerald-400">0 flags</span>
+</div>
+</div>
+<!-- Engine Evaluation Log Snippet -->
+<div class="bg-[#1b1c19] p-4 rounded-lg border border-outline/20 font-label-sm text-[12px] leading-relaxed overflow-x-auto text-tertiary-fixed-dim">
+<span class="text-outline uppercase tracking-wider text-[10px] block mb-2">// Prosody AST Inspector</span>
+<pre class="text-tertiary-fixed"><span class="text-primary-fixed">fn</span> <span class="text-tertiary-fixed-dim">evaluate_cadence_score</span>(para: &amp;Paragraph) -&gt; Result&lt;Score&gt; {
+  <span class="text-outline">// Strip passive scaffolding</span>
+  <span class="text-primary-fixed">let</span> metrics = para.measure_vowel_flow()
+    .filter_drag_clauses()
+    .balance_meter(Meter::Iambic);
+
+  Ok(Score {
+    clarity_gain: <span class="text-primary-fixed">0.142</span>,
+    friction_drop: <span class="text-primary-fixed">0.68</span>,
+  })
+}</pre>
+</div>
+</div>
+</section>
+</main>
+<!-- Editorial Footer from Blueprint -->
+<footer class="w-full bg-inverse-surface border-t border-tertiary-container dark:border-tertiary-container text-tertiary-fixed-dim">
+<div class="w-full max-w-[1360px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-8">
+<!-- Brand Col -->
+<div class="space-y-4">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-primary-fixed text-xl" data-icon="asterisk">asterisk</span>
+<span class="font-headline-sm text-headline-sm font-normal text-inverse-on-surface">Cadence</span>
+</div>
+<p class="font-body-sm text-body-sm text-tertiary-fixed-dim pr-6">
+          © 2024 Cadence Intelligence Inc. Typeset with care for the disciplined prose artisan.
+        </p>
+</div>
+<!-- Links 1 -->
+<div class="space-y-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-inverse-on-surface mb-3">Platform</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Manifesto</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Style Engine</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Corpus &amp; Models</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Security</a></li>
+</ul>
+</div>
+<!-- Links 2 -->
+<div class="space-y-2">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-inverse-on-surface mb-3">Colophon &amp; Legal</h4>
+<ul class="space-y-2 font-body-sm text-body-sm">
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Colophon</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Changelog</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Privacy &amp; Terms</a></li>
+<li><a class="hover:text-primary-fixed transition-colors duration-150" href="#">Contact Desk</a></li>
+</ul>
+</div>
+<!-- Live Engine Footnote -->
+<div class="space-y-3">
+<h4 class="font-label-sm text-label-sm uppercase tracking-wider text-inverse-on-surface mb-3">Typesetting Engine</h4>
+<div class="bg-[#242623] p-3 rounded-lg border border-outline/20 text-xs font-label-sm space-y-1.5">
+<div class="flex justify-between">
+<span>Kern Precision:</span>
+<span class="text-primary-fixed">0.005em</span>
+</div>
+<div class="flex justify-between">
+<span>Rhythm Quantization:</span>
+<span class="text-primary-fixed">Adaptive</span>
+</div>
+<div class="flex justify-between text-tertiary-fixed-dim/70 pt-1 border-t border-outline/10">
+<span>All systems nominal.</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

@@ -1,8 +1,529 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>xAI · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#ffffff;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/x.ai">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">xAI · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#fafaf7"></span><code>#fafaf7</code></div><div class="swatch"><span style="background:#dadbdf"></span><code>#dadbdf</code></div><div class="swatch"><span style="background:#7d8187"></span><code>#7d8187</code></div><div class="swatch"><span style="background:#212327"></span><code>#212327</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · universalSans, Inter, system-ui, -apple-system, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether-3 Frontier — xAI Research</title>
+<!-- Google Fonts: Inter & Geist Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration Token Injection -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed-dim": "#c6c6c7",
+            "primary-fixed": "#e2e2e2",
+            "on-tertiary": "#2f3131",
+            "on-primary": "#2f3131",
+            "surface-container-low": "#1c1b1b",
+            "on-secondary-fixed-variant": "#474747",
+            "primary-container": "#e2e2e2",
+            "background": "#131313",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-error-container": "#ffdad6",
+            "secondary-container": "#494949",
+            "inverse-on-surface": "#313030",
+            "surface-container-high": "#2a2a2a",
+            "on-background": "#e5e2e1",
+            "on-primary-fixed": "#1a1c1c",
+            "on-secondary-container": "#b9b8b8",
+            "on-tertiary-fixed-variant": "#454747",
+            "error": "#ffb4ab",
+            "tertiary-fixed": "#e2e2e2",
+            "surface": "#131313",
+            "primary": "#ffffff",
+            "outline": "#8e9192",
+            "surface-container-highest": "#353534",
+            "on-secondary": "#303030",
+            "secondary-fixed": "#e4e2e2",
+            "on-surface": "#e5e2e1",
+            "on-primary-fixed-variant": "#454747",
+            "on-error": "#690005",
+            "surface-variant": "#353534",
+            "secondary": "#c8c6c6",
+            "primary-fixed-dim": "#c6c6c7",
+            "surface-dim": "#131313",
+            "inverse-primary": "#5d5f5f",
+            "surface-container": "#201f1f",
+            "inverse-surface": "#e5e2e1",
+            "on-primary-container": "#636565",
+            "secondary-fixed-dim": "#c8c6c6",
+            "outline-variant": "#444748",
+            "surface-tint": "#c6c6c7",
+            "on-tertiary-container": "#636565",
+            "tertiary": "#ffffff",
+            "surface-bright": "#3a3939",
+            "on-surface-variant": "#c4c7c8",
+            "error-container": "#93000a",
+            "on-secondary-fixed": "#1b1c1c",
+            "tertiary-container": "#e2e2e2",
+            "surface-container-lowest": "#0e0e0e"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "monospace"],
+            label: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Strict xAI Engineered Restraint Typographic Rules */
+    body {
+      background-color: #0a0a0a;
+      color: #dadbdf;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    .tracking-tightest {
+      letter-spacing: -0.04em;
+    }
+    .tracking-headline {
+      letter-spacing: -0.03em;
+    }
+    .tracking-mono-wide {
+      letter-spacing: 0.12em;
+    }
+    .hairline-border {
+      border-color: #212327;
+    }
+    .hairline-divide > * + * {
+      border-color: #212327;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background selection:bg-surface-variant selection:text-primary">
+<!-- TOP NAVIGATION COMPONENT (Anchored to TopNavBar JSON specification) -->
+<header class="docked full-width top-0 z-50 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant flat no shadows sticky">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-7xl mx-auto">
+<div class="flex items-center space-x-10">
+<a class="font-headline text-sm font-normal tracking-tight text-primary dark:text-primary uppercase flex items-center gap-2.5 transition-opacity duration-150 active:opacity-70" href="#">
+<span class="w-2.5 h-2.5 bg-primary inline-block"></span>
+<span>xAI Research</span>
+</a>
+<nav class="hidden md:flex items-center space-x-7 text-sm font-headline tracking-tight">
+<a class="text-primary dark:text-primary font-normal transition-colors duration-150" href="#overview">Models</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#benchmarks">Benchmarks</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#architecture">Architecture</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#appendix">Appendix</a>
+</nav>
+</div>
+<div class="flex items-center space-x-3">
+<a class="hidden sm:inline-flex items-center text-xs font-mono tracking-wider px-3.5 py-1.5 rounded-full border border-outline-variant text-secondary hover:text-primary hover:border-outline transition-colors duration-150" href="#appendix">
+          Weights
+        </a>
+<a class="inline-flex items-center gap-1.5 text-xs font-mono tracking-wider px-4 py-1.5 rounded-full bg-primary text-on-primary font-medium hover:bg-primary-fixed transition-colors duration-150" href="#citation">
+<span>Paper PDF</span>
+<span class="material-symbols-outlined text-[13px]" data-icon="north_east">north_east</span>
+</a>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="max-w-7xl mx-auto px-6 pt-16 pb-24 space-y-28">
+<!-- HERO SECTION -->
+<section class="space-y-8 pt-6 border-b border-outline-variant pb-16" id="overview">
+<!-- Section Eyebrow -->
+<div class="flex items-center space-x-3">
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">RESEARCH PREPRINT / ARX-2503.1189</span>
+<span class="h-px w-6 bg-outline-variant"></span>
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">FRONTIER REASONING SERIES</span>
+</div>
+<!-- Main Headline: Uncompromising Engineered Precision -->
+<div class="space-y-6 max-w-5xl">
+<h1 class="text-4xl sm:text-6xl lg:text-7xl font-normal text-primary tracking-tightest leading-[1.05]">
+          Aether-3 Frontier: Autonomous Mathematical Reasoning and Long-Horizon Synthesis
+        </h1>
+<p class="text-lg sm:text-xl text-secondary font-normal leading-relaxed max-w-4xl">
+          An open frontier-class dense transformer model optimized for formal verification, multi-turn tool interaction, and zero-shot symbolic deduction across unified scientific substrates.
+        </p>
+</div>
+<!-- Publication Metadata Bar -->
+<div class="pt-6 flex flex-wrap items-center gap-y-3 gap-x-8 text-xs font-mono text-secondary border-t border-outline-variant/60">
+<div class="flex items-center gap-2">
+<span class="text-outline">RELEASE DATE</span>
+<span class="text-primary font-mono">March 28, 2025</span>
+</div>
+<div class="h-3 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-2">
+<span class="text-outline">ORGANIZATION</span>
+<span class="text-primary font-mono">xAI Research Lab</span>
+</div>
+<div class="h-3 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-2">
+<span class="text-outline">LICENSE</span>
+<span class="text-primary font-mono">Open Weights Apache 2.0</span>
+</div>
+<div class="h-3 w-px bg-outline-variant hidden sm:block"></div>
+<div class="flex items-center gap-2">
+<span class="text-outline">PARAMETRIC PROFILE</span>
+<span class="text-primary font-mono">70.2B Dense Active</span>
+</div>
+</div>
+</section>
+<!-- RESEARCH RELEASE CARD (Prominent Component) -->
+<section class="border border-outline-variant bg-surface-container-lowest p-8 sm:p-10 space-y-8">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-outline-variant/70 pb-6">
+<div class="flex items-center gap-3">
+<span class="font-mono text-xs px-2.5 py-1 bg-surface-container-high text-primary border border-outline-variant tracking-wider">
+            v3.2.0-rc4
+          </span>
+<span class="text-xs font-mono text-secondary">BUILD 89104-SYNTH</span>
+</div>
+<div class="flex items-center gap-6 text-xs font-mono">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-primary uppercase tracking-wider">Weights Available</span>
+</div>
+<span class="text-secondary">SHA-256: 4f88c0a...d7e2</span>
+</div>
+</div>
+<div class="space-y-4">
+<h2 class="text-xl sm:text-2xl font-normal text-primary tracking-tight">
+          Universal Mathematical Solver &amp; Formal Prover Engine
+        </h2>
+<p class="text-secondary text-sm sm:text-base leading-relaxed max-w-4xl">
+          Zero-overhead 128k context reasoning engine demonstrating 94.8% on MATH-500, autonomous formal proof generation in Lean 4, and native dual-stream chain-of-thought verification without iterative fine-tuning drift.
+        </p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
+<div class="p-4 bg-surface-container-low border border-outline-variant">
+<div class="text-xs font-mono text-secondary mb-1">MATH-500</div>
+<div class="text-2xl sm:text-3xl font-normal text-primary tracking-tight">94.8%</div>
+<div class="text-[11px] font-mono text-outline mt-1">+6.4% over frontier baseline</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant">
+<div class="text-xs font-mono text-secondary mb-1">LEAN 4 MINIF2F</div>
+<div class="text-2xl sm:text-3xl font-normal text-primary tracking-tight">72.4%</div>
+<div class="text-[11px] font-mono text-outline mt-1">Formal proof closing rate</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant">
+<div class="text-xs font-mono text-secondary mb-1">SWE-BENCH VERIFIED</div>
+<div class="text-2xl sm:text-3xl font-normal text-primary tracking-tight">56.2%</div>
+<div class="text-[11px] font-mono text-outline mt-1">Autonomous patch resolution</div>
+</div>
+<div class="p-4 bg-surface-container-low border border-outline-variant">
+<div class="text-xs font-mono text-secondary mb-1">CONTEXT WINDOW</div>
+<div class="text-2xl sm:text-3xl font-normal text-primary tracking-tight">131,072</div>
+<div class="text-[11px] font-mono text-outline mt-1">Loss-free self-attention tokens</div>
+</div>
+</div>
+<div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-t border-outline-variant/70">
+<a class="inline-flex items-center gap-2 text-sm text-primary hover:text-secondary transition-colors duration-150 font-normal" href="#benchmarks">
+<span>Inspect Benchmark Splits &amp; Checkpoint Weights</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<div class="flex items-center space-x-3 text-xs font-mono text-secondary">
+<span>HF: <code class="text-primary">xai/aether-3-frontier</code></span>
+<span>·</span>
+<span>TENSOR: <code class="text-primary">SafeTensors (FP8/BF16)</code></span>
+</div>
+</div>
+</section>
+<!-- CORE CAPABILITIES (Bento Architecture) -->
+<section class="space-y-10" id="capabilities">
+<div class="flex flex-col space-y-2">
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">CORE ARCHITECTURAL FACETS</span>
+<h2 class="text-3xl font-normal text-primary tracking-tight">Engineered System Capabilities</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Capability 1 -->
+<div class="p-8 bg-surface-container-lowest border border-outline-variant space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs text-secondary">MODULE 01 // SYMBOLIC</span>
+<span class="material-symbols-outlined text-outline" data-icon="functions">functions</span>
+</div>
+<h3 class="text-xl font-normal text-primary tracking-tight">Formal Symbolic Reasoning</h3>
+<p class="text-secondary text-sm leading-relaxed">
+            Native Lean 4 and Isabelle theorem proving integration. Aether-3 operates with continuous state checkpointing, backtracking through deductive paths upon tactical proof failure without loss of proof context.
+          </p>
+<div class="pt-4 border-t border-outline-variant/60 font-mono text-xs text-outline flex items-center justify-between">
+<span>TACTIC GENERATION: GREEDY LATENT</span>
+<span>VERIFICATION: STRICT</span>
+</div>
+</div>
+<!-- Capability 2 -->
+<div class="p-8 bg-surface-container-lowest border border-outline-variant space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs text-secondary">MODULE 02 // ATTENTION</span>
+<span class="material-symbols-outlined text-outline" data-icon="memory">memory</span>
+</div>
+<h3 class="text-xl font-normal text-primary tracking-tight">Recursive Long-Horizon Synthesis</h3>
+<p class="text-secondary text-sm leading-relaxed">
+            128k native context window equipped with sparse rotary attention decay (RoPE scaled at base frequency 500,000). Needle-in-a-haystack retrieval preserves 100% loss-free recall up to 1M token extrapolated streams.
+          </p>
+<div class="pt-4 border-t border-outline-variant/60 font-mono text-xs text-outline flex items-center justify-between">
+<span>CONTEXT RECALL: 100.0%</span>
+<span>ATTENTION: DUAL-CHUNK FLASH-V4</span>
+</div>
+</div>
+<!-- Capability 3 -->
+<div class="p-8 bg-surface-container-lowest border border-outline-variant space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs text-secondary">MODULE 03 // EXECUTION</span>
+<span class="material-symbols-outlined text-outline" data-icon="terminal">terminal</span>
+</div>
+<h3 class="text-xl font-normal text-primary tracking-tight">Verified Autonomous Tool Use</h3>
+<p class="text-secondary text-sm leading-relaxed">
+            Deterministic sandbox interop for raw POSIX CLI, Python REPL, and theorem provers. Multi-turn execution protocols allow the model to autonomously test intermediate conjectures, inspect runtime stack traces, and recover cleanly.
+          </p>
+<div class="pt-4 border-t border-outline-variant/60 font-mono text-xs text-outline flex items-center justify-between">
+<span>TOOL LATENCY: &lt;14MS IPC</span>
+<span>SANDBOX: ISOLATED KERNEL</span>
+</div>
+</div>
+<!-- Capability 4 -->
+<div class="p-8 bg-surface-container-lowest border border-outline-variant space-y-4">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs text-secondary">MODULE 04 // INTERPRETABILITY</span>
+<span class="material-symbols-outlined text-outline" data-icon="visibility">visibility</span>
+</div>
+<h3 class="text-xl font-normal text-primary tracking-tight">Monitored Mechanistic Alignment</h3>
+<p class="text-secondary text-sm leading-relaxed">
+            Real-time probing of latent safety features during token generation. Sparse autoencoders (SAE) inspect intermediate layer activations to preemptively identify hallucinatory or misaligned cognitive vectors before token commit.
+          </p>
+<div class="pt-4 border-t border-outline-variant/60 font-mono text-xs text-outline flex items-center justify-between">
+<span>SAE ACTIVE FEATURES: 16.3M</span>
+<span>DRIFT ABORT: LATENT COUPLING</span>
+</div>
+</div>
+</div>
+</section>
+<!-- BENCHMARKS COMPARATIVE DATA TABLE -->
+<section class="space-y-8" id="benchmarks">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div class="space-y-2">
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">EMPIRICAL EVALUATION</span>
+<h2 class="text-3xl font-normal text-primary tracking-tight">Standardized Benchmark Splits</h2>
+</div>
+<div class="font-mono text-xs text-outline">
+          EVAL PROTOCOL: 0-SHOT / PASS@1 / DETERMINISTIC GREEDY
+        </div>
+</div>
+<!-- Clean Monochromatic Table -->
+<div class="border border-outline-variant overflow-x-auto bg-surface-container-lowest">
+<table class="w-full text-left text-sm border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low font-mono text-xs text-secondary">
+<th class="py-4 px-6 font-normal">BENCHMARK EVAL</th>
+<th class="py-4 px-6 font-normal">DOMAIN / TARGET</th>
+<th class="py-4 px-6 font-normal text-right">FRONTIER REF-A</th>
+<th class="py-4 px-6 font-normal text-right">FRONTIER REF-B</th>
+<th class="py-4 px-6 font-normal text-right text-primary bg-surface-container-high/40">AETHER-3 FRONTIER</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-mono text-xs">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-6 text-primary font-sans font-medium text-sm">MATH-500</td>
+<td class="py-4 px-6 text-secondary font-sans text-xs">Competition Mathematics</td>
+<td class="py-4 px-6 text-right text-secondary">88.4%</td>
+<td class="py-4 px-6 text-right text-secondary">89.6%</td>
+<td class="py-4 px-6 text-right font-medium text-primary bg-surface-container-high/30">94.8%</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-6 text-primary font-sans font-medium text-sm">GSM8K</td>
+<td class="py-4 px-6 text-secondary font-sans text-xs">Grade School Multi-step</td>
+<td class="py-4 px-6 text-right text-secondary">96.8%</td>
+<td class="py-4 px-6 text-right text-secondary">97.2%</td>
+<td class="py-4 px-6 text-right font-medium text-primary bg-surface-container-high/30">98.9%</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-6 text-primary font-sans font-medium text-sm">HumanEval+</td>
+<td class="py-4 px-6 text-secondary font-sans text-xs">Synthesized Python Exec</td>
+<td class="py-4 px-6 text-right text-secondary">89.1%</td>
+<td class="py-4 px-6 text-right text-secondary">90.2%</td>
+<td class="py-4 px-6 text-right font-medium text-primary bg-surface-container-high/30">93.4%</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-6 text-primary font-sans font-medium text-sm">GPQA Diamond</td>
+<td class="py-4 px-6 text-secondary font-sans text-xs">Graduate-Level Science (Expert)</td>
+<td class="py-4 px-6 text-right text-secondary">62.8%</td>
+<td class="py-4 px-6 text-right text-secondary">64.5%</td>
+<td class="py-4 px-6 text-right font-medium text-primary bg-surface-container-high/30">71.2%</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/40 transition-colors">
+<td class="py-4 px-6 text-primary font-sans font-medium text-sm">SWE-bench Verified</td>
+<td class="py-4 px-6 text-secondary font-sans text-xs">Real-world GitHub Issues</td>
+<td class="py-4 px-6 text-right text-secondary">49.0%</td>
+<td class="py-4 px-6 text-right text-secondary">51.4%</td>
+<td class="py-4 px-6 text-right font-medium text-primary bg-surface-container-high/30">56.2%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p class="text-xs font-mono text-outline">
+        * Baseline evaluations re-run under identical prompt harness and decoding temperatures (T=0.0, TOP_P=1.0) with formal validation pass scripts.
+      </p>
+</section>
+<!-- TECHNICAL ARCHITECTURE & APPENDIX -->
+<section class="space-y-12 border-t border-outline-variant pt-16" id="architecture">
+<div class="space-y-2">
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">SPECIFICATIONS</span>
+<h2 class="text-3xl font-normal text-primary tracking-tight">Model Architecture &amp; Training Compute</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Spec 1: Architecture -->
+<div class="space-y-4">
+<h3 class="font-mono text-xs uppercase tracking-wider text-primary border-b border-outline-variant pb-2">
+            01 / Network Topology
+          </h3>
+<dl class="space-y-3 font-mono text-xs">
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Active Parameters</dt>
+<dd class="text-primary font-medium">70.2 Billion</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Transformer Layers</dt>
+<dd class="text-primary font-medium">64</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Hidden Dimension</dt>
+<dd class="text-primary font-medium">8,192</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Attention Heads</dt>
+<dd class="text-primary font-medium">64 (8 KV Grouped)</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Positional Encoding</dt>
+<dd class="text-primary font-medium">RoPE (θ = 500,000)</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Activation Function</dt>
+<dd class="text-primary font-medium">SwiGLU</dd>
+</div>
+</dl>
+</div>
+<!-- Spec 2: Training Compute -->
+<div class="space-y-4">
+<h3 class="font-mono text-xs uppercase tracking-wider text-primary border-b border-outline-variant pb-2">
+            02 / Training Hardware
+          </h3>
+<dl class="space-y-3 font-mono text-xs">
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Cluster Hardware</dt>
+<dd class="text-primary font-medium">16,384 Accelerators</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Precision Regime</dt>
+<dd class="text-primary font-medium">FP8 Hybrid / BF16</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Compute Budget</dt>
+<dd class="text-primary font-medium">4.8M GPU Hours</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Pre-training Tokens</dt>
+<dd class="text-primary font-medium">15.2 Trillion Tokens</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Formal Data Ratio</dt>
+<dd class="text-primary font-medium">32% Lean/Coq/arXiv</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">MFU (Model Flops)</dt>
+<dd class="text-primary font-medium">58.4% Steady-State</dd>
+</div>
+</dl>
+</div>
+<!-- Spec 3: Evaluation Methodology -->
+<div class="space-y-4">
+<h3 class="font-mono text-xs uppercase tracking-wider text-primary border-b border-outline-variant pb-2">
+            03 / Contamination Control
+          </h3>
+<dl class="space-y-3 font-mono text-xs">
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Filtering Protocol</dt>
+<dd class="text-primary font-medium">13-gram Bloom Filter</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Permutation Match</dt>
+<dd class="text-primary font-medium">&lt; 0.001% Jaccard</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Lean Proof Verifier</dt>
+<dd class="text-primary font-medium">Lean v4.7.0 Kernel</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Decoder Setting</dt>
+<dd class="text-primary font-medium">Greedy (T=0.0)</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Synthetic Trace Filter</dt>
+<dd class="text-primary font-medium">Dual Judge SAE</dd>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<dt class="text-secondary">Release Audit</dt>
+<dd class="text-primary font-medium">Verified Clean</dd>
+</div>
+</dl>
+</div>
+</div>
+</section>
+<!-- BIBTEX CITATION SECTION -->
+<section class="space-y-4" id="citation">
+<div class="flex items-center justify-between">
+<span class="font-mono text-xs tracking-mono-wide text-secondary uppercase">ACADEMIC CITATION</span>
+<button class="font-mono text-xs text-primary hover:text-secondary px-3 py-1 border border-outline-variant rounded-full transition-colors" onclick="navigator.clipboard.writeText(document.getElementById('bibtex-content').innerText); this.innerText='COPIED';">
+          COPY BIBTEX
+        </button>
+</div>
+<div class="border border-outline-variant bg-surface-container-lowest p-6">
+<pre class="font-mono text-xs text-secondary leading-relaxed overflow-x-auto select-all" id="bibtex-content">@article{xai2025aether3,
+  title   = {Aether-3 Frontier: Autonomous Mathematical Reasoning and Long-Horizon Synthesis},
+  author  = {{xAI Research Lab} and Thorne, Julian and Mercer, Elena and Vance, Keith},
+  journal = {arXiv preprint arXiv:2503.11892},
+  year    = {2025},
+  url     = {https://x.ai/research/aether-3-frontier}
+}</pre>
+</div>
+</section>
+</main>
+<!-- WEB FOOTER COMPONENT (Anchored to Footer JSON specification) -->
+<footer class="docked full-width bottom bg-background dark:bg-background border-t border-outline-variant dark:border-outline-variant flat no shadows" id="appendix">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-6 py-12 max-w-7xl mx-auto gap-4">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<span class="font-label uppercase tracking-widest text-xs text-secondary dark:text-secondary">
+          xAI Corp.
+        </span>
+<span class="hidden sm:inline text-outline-variant">/</span>
+<span class="font-body text-xs font-normal text-secondary dark:text-secondary">
+          © 2025 xAI Corp. All rights reserved.
+        </span>
+</div>
+<!-- Mandatory Anchor Links from JSON -->
+<div class="flex items-center space-x-6 font-body text-xs font-normal text-secondary dark:text-secondary">
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Terms</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Privacy</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Model License</a>
+<a class="text-primary dark:text-primary hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#citation">Citation BibTeX</a>
+</div>
+</div>
+</footer>
+</body></html>

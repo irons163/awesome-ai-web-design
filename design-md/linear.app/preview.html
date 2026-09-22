@@ -1,8 +1,720 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linear · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#5e6ad2;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/linear.app">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Linear · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#5e6ad2"></span><code>#5e6ad2</code></div><div class="swatch"><span style="background:#010102"></span><code>#010102</code></div><div class="swatch"><span style="background:#f7f8f8"></span><code>#f7f8f8</code></div><div class="swatch"><span style="background:#0f1011"></span><code>#0f1011</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#828fff"></span><code>#828fff</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Linear Display</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kite — Engineering Issue Workspace</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed-variant": "#673d00",
+            "on-surface": "#e5e1e6",
+            "background": "#131316",
+            "surface-container-low": "#1c1b1f",
+            "surface-container": "#201f23",
+            "on-secondary-container": "#b1b5e3",
+            "on-secondary-fixed": "#13183d",
+            "surface-tint": "#bdc2ff",
+            "secondary": "#c0c3f2",
+            "on-primary-fixed-variant": "#2e3aa2",
+            "on-error-container": "#ffdad6",
+            "surface-variant": "#353438",
+            "secondary-container": "#42466e",
+            "on-tertiary": "#482900",
+            "surface-container-highest": "#353438",
+            "outline": "#908f9e",
+            "tertiary-fixed": "#ffddbb",
+            "primary-fixed-dim": "#bdc2ff",
+            "surface-container-lowest": "#0e0e11",
+            "on-error": "#690005",
+            "primary": "#bdc2ff",
+            "secondary-fixed-dim": "#c0c3f2",
+            "on-primary-fixed": "#000965",
+            "surface-dim": "#131316",
+            "on-secondary-fixed-variant": "#3f446b",
+            "on-secondary": "#292d53",
+            "on-surface-variant": "#c6c5d5",
+            "tertiary-container": "#a56500",
+            "on-primary-container": "#fdfaff",
+            "tertiary-fixed-dim": "#ffb867",
+            "error-container": "#93000a",
+            "surface-container-high": "#2a292d",
+            "on-background": "#e5e1e6",
+            "surface": "#131316",
+            "inverse-surface": "#e5e1e6",
+            "inverse-primary": "#4854bb",
+            "error": "#ffb4ab",
+            "surface-bright": "#39393c",
+            "on-primary": "#121f8b",
+            "primary-fixed": "#dfe0ff",
+            "secondary-fixed": "#dfe0ff",
+            "on-tertiary-container": "#fffaf8",
+            "primary-container": "#5e6ad2",
+            "tertiary": "#ffb867",
+            "outline-variant": "#454652",
+            "on-tertiary-fixed": "#2b1700",
+            "inverse-on-surface": "#313034"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Public Sans", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e11;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a292d;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #454652;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased text-[13px] selection:bg-primary-container selection:text-white overflow-hidden h-screen w-screen flex flex-col">
+<!-- TOP NAVIGATION BAR (Shared Component JSON anchor) -->
+<header class="flex justify-between items-center w-full px-4 h-12 z-40 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant flex-shrink-0">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-primary-container flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[15px]" data-icon="terminal">terminal</span>
+</div>
+<span class="font-headline text-body-lg font-semibold tracking-tighter text-on-surface dark:text-on-surface">Kite</span>
+<span class="text-[11px] font-mono px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant ml-1">v2.4.9</span>
+</div>
+<!-- Search Bar on Left as mandated by Shared JSON -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[14px]" data-icon="search">search</span>
+<input class="bg-surface-container-lowest text-on-surface placeholder:text-outline text-xs rounded pl-8 pr-12 py-1 w-64 border border-outline-variant focus:outline-none focus:border-primary-container transition-colors" placeholder="Search issues, pull requests, docs... (⌘K)" type="text"/>
+<span class="absolute right-2 text-[10px] font-mono text-outline border border-outline-variant px-1 rounded bg-surface-container-high">⌘K</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-5 font-body text-body-sm tracking-tight">
+<a class="text-on-surface dark:text-on-surface font-medium border-b border-primary dark:border-primary pb-1 flex items-center gap-1.5" href="#">
+<span>Issues</span>
+<span class="text-[10px] font-mono bg-surface-container px-1 rounded text-primary">31</span>
+</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors pb-1" href="#">Cycles</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors pb-1" href="#">Roadmap</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors pb-1" href="#">Views</a>
+</nav>
+</div>
+<!-- Right Trailing Cluster -->
+<div class="flex items-center gap-2.5">
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs rounded bg-surface-container hover:bg-surface-container-high text-on-surface border border-outline-variant transition-colors duration-150 ease-out active:scale-95">
+<span class="material-symbols-outlined text-[14px]" data-icon="tune">tune</span>
+<span>Filter</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1 text-xs font-medium rounded bg-primary-container hover:bg-primary-hover text-on-primary-container shadow-sm transition-colors duration-150 ease-out active:scale-95">
+<span class="material-symbols-outlined text-[15px]" data-icon="add">add</span>
+<span>New Issue</span>
+<span class="text-[10px] font-mono opacity-70 ml-0.5">C</span>
+</button>
+<div class="h-4 w-px bg-outline-variant mx-1"></div>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications">notifications</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Tune settings">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" title="Help &amp; Documentation">
+<span class="material-symbols-outlined text-[18px]" data-icon="help">help</span>
+</button>
+<div class="ml-1 relative">
+<img class="w-6 h-6 rounded-full border border-outline-variant object-cover" data-alt="Close-up studio portrait of a modern software engineer wearing dark minimalist attire with subtle ambient indigo lighting reflecting on spectacles, conveying precision and craft in tech." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBMyhGEMcLbELt8DckNoPsZzhkH23aC48tPkVa8J9b2FjnS17vL2tvJsEzg6umk9fDNl3qVgoQZG6YsEf9Soy7atJKhad2mnf3P11uLj12vlkSEw4kxCfMGkRDdrBGrxLDKn16pVgffoTHcec0hIZ20EtGDjLH6LjYtpuCfaE-lWlOYCLHb5UVsr77sm5IBHVm-vUASxw0faGl_ktl22TeqiB7gw5VNkj8NTr6KcWY-pGfa8VdwHjtu6wv-kUvQ9h-ebcPC_eivxkAc"/>
+<span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 border border-surface-container-lowest"></span>
+</div>
+</div>
+</header>
+<!-- MAIN THREE-COLUMN WORKSPACE (1440px target scale) -->
+<div class="flex-1 flex overflow-hidden">
+<!-- 1. LEFT SIDE NAVIGATION RAIL (Approx 220px) -->
+<aside class="w-[220px] flex-shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col justify-between select-none">
+<div class="flex flex-col p-2 space-y-4">
+<!-- Workspace Switcher -->
+<div class="flex items-center justify-between p-2 rounded hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-6 h-6 rounded bg-surface-container-high border border-outline-variant flex items-center justify-center font-mono text-[11px] font-bold text-primary">KC</div>
+<div class="truncate">
+<div class="font-headline text-xs font-semibold text-on-surface truncate">Kite Core</div>
+<div class="text-[10px] text-outline font-mono truncate">kite.build/core</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[16px]" data-icon="unfold_more">unfold_more</span>
+</div>
+<!-- Quick Links / Tabs -->
+<div class="space-y-0.5">
+<div class="text-[10px] font-semibold text-outline uppercase tracking-wider px-2 py-1">Workspace</div>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px]" data-icon="inbox">inbox</span>
+<span class="text-xs">My Issues</span>
+</div>
+<span class="text-[11px] font-mono text-outline group-hover:text-on-surface">14</span>
+</a>
+<!-- Active Selection in SideNav -->
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container-high text-primary font-medium" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px]" data-icon="task_alt">task_alt</span>
+<span class="text-xs">All Issues</span>
+</div>
+<span class="text-[11px] font-mono px-1.5 rounded bg-surface-container text-primary font-semibold">31</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors group" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px]" data-icon="sync">sync</span>
+<span class="text-xs">Active Cycle</span>
+</div>
+<span class="text-[10px] font-mono px-1 rounded bg-surface-container text-emerald-400">72%</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px]" data-icon="flag">flag</span>
+<span class="text-xs">Roadmap</span>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px]" data-icon="inventory_2">inventory_2</span>
+<span class="text-xs">Backlog</span>
+</div>
+<span class="text-[11px] font-mono text-outline">19</span>
+</a>
+</div>
+<!-- Teams Section -->
+<div class="space-y-0.5 pt-2 border-t border-outline-variant/60">
+<div class="flex items-center justify-between px-2 py-1">
+<span class="text-[10px] font-semibold text-outline uppercase tracking-wider">Teams</span>
+<span class="material-symbols-outlined text-outline text-[14px] cursor-pointer hover:text-on-surface" data-icon="add">add</span>
+</div>
+<a class="flex items-center justify-between px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-sm bg-primary-container"></span>
+<span class="text-xs font-medium">Core Engine</span>
+</div>
+<span class="text-[10px] font-mono text-outline">ENG</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-sm bg-teal-500"></span>
+<span class="text-xs">Frontend App</span>
+</div>
+<span class="text-[10px] font-mono text-outline">FE</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-sm bg-amber-500"></span>
+<span class="text-xs">Cloud Infra</span>
+</div>
+<span class="text-[10px] font-mono text-outline">OPS</span>
+</a>
+</div>
+</div>
+<!-- Sidebar Footer (from JSON: Settings & Changelog + user) -->
+<div class="p-2 border-t border-outline-variant space-y-1">
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="article">article</span>
+<span class="text-xs">Changelog</span>
+<span class="text-[9px] bg-primary/20 text-primary border border-primary/30 px-1 rounded ml-auto">v2.4</span>
+</a>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="settings">settings</span>
+<span class="text-xs">Settings</span>
+</a>
+<div class="pt-2 mt-1 border-t border-outline-variant/60 flex items-center justify-between px-1.5 py-1">
+<div class="flex items-center gap-2">
+<div class="relative">
+<img class="w-7 h-7 rounded-full border border-outline-variant object-cover" data-alt="High quality professional headshot of male tech leader in dark charcoal turtleneck against minimalist deep indigo studio backdrop, softly focused." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdByKOgthLUkcVW2tcVn6ua0d10oRl8gCvzRrbFcBTcyZM_Ua5_ro94OC0nOTUtexO0YU9astCHXl_LWKxvMjFWDW2DSyURc5Mm-TzgHP6sPjiBKNFoIpoJ45B4ERTt5aFUvGHCano_rnAsWgYpOGL_iC7I3pTnpQl0pFNyQO9Y4tU_ffEWbGyc1pKpUqiv0mvYgeASpc1JM3nPGWaHI3KolgflWgLvlpb6XZiUXKrTZKZyUuFe4sR7TBNspA1AJT_sMXEHE8Zq-c3"/>
+<span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-400 ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="truncate">
+<div class="text-xs font-medium text-on-surface truncate">Alex Chen</div>
+<div class="text-[10px] text-outline truncate">Staff Infra Eng</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[14px]" data-icon="more_vert">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- 2. CENTER DENSE ISSUE LIST (Primary Canvas) -->
+<main class="flex-1 flex flex-col min-w-0 bg-[#07080a] border-r border-outline-variant overflow-hidden">
+<!-- Toolbar & Breadcrumbs -->
+<div class="h-11 px-4 border-b border-outline-variant flex items-center justify-between flex-shrink-0 bg-surface-container-lowest/80 backdrop-blur">
+<!-- Breadcrumb & Views -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 text-xs text-outline">
+<span class="hover:text-on-surface cursor-pointer">Kite</span>
+<span>/</span>
+<span class="hover:text-on-surface cursor-pointer">Core Engine</span>
+<span>/</span>
+<span class="text-on-surface font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="sync">sync</span>
+              Cycle 28
+            </span>
+</div>
+<div class="h-3.5 w-px bg-outline-variant mx-1"></div>
+<!-- View Switcher -->
+<div class="flex items-center bg-surface-container rounded p-0.5 border border-outline-variant">
+<button class="px-2 py-0.5 rounded text-[11px] font-medium bg-surface-container-highest text-on-surface flex items-center gap-1 shadow-sm">
+<span class="material-symbols-outlined text-[13px]" data-icon="format_list_bulleted">format_list_bulleted</span>
+              List
+            </button>
+<button class="px-2 py-0.5 rounded text-[11px] text-outline hover:text-on-surface flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px]" data-icon="view_kanban">view_kanban</span>
+              Board
+            </button>
+<button class="px-2 py-0.5 rounded text-[11px] text-outline hover:text-on-surface flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px]" data-icon="calendar_month">calendar_month</span>
+              Gantt
+            </button>
+</div>
+</div>
+<!-- Filter Chips & Sort -->
+<div class="flex items-center gap-2 text-xs">
+<!-- Filter: Status -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded border border-outline-variant bg-surface-container hover:bg-surface-container-high cursor-pointer text-on-surface-variant transition-colors">
+<span class="text-outline text-[11px]">Status:</span>
+<span class="text-on-surface font-medium text-[11px]">Open</span>
+<span class="material-symbols-outlined text-[12px] text-outline" data-icon="close">close</span>
+</div>
+<!-- Filter: Assignee -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded border border-outline-variant bg-surface-container hover:bg-surface-container-high cursor-pointer text-on-surface-variant transition-colors">
+<span class="text-outline text-[11px]">Assignee:</span>
+<span class="text-on-surface font-medium text-[11px]">All</span>
+<span class="material-symbols-outlined text-[12px] text-outline" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<!-- Filter: Priority -->
+<div class="flex items-center gap-1 px-2 py-0.5 rounded border border-outline-variant bg-surface-container hover:bg-surface-container-high cursor-pointer text-on-surface-variant transition-colors">
+<span class="text-outline text-[11px]">Priority:</span>
+<span class="text-on-surface font-medium text-[11px]">High+</span>
+<span class="material-symbols-outlined text-[12px] text-outline" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+<div class="h-3.5 w-px bg-outline-variant mx-0.5"></div>
+<!-- Sort Button -->
+<button class="flex items-center gap-1 text-[11px] text-outline hover:text-on-surface transition-colors px-1 py-0.5">
+<span class="material-symbols-outlined text-[13px]" data-icon="swap_vert">swap_vert</span>
+<span>Priority: Desc</span>
+</button>
+</div>
+</div>
+<!-- Issues Scrollable List Area -->
+<div class="flex-1 overflow-y-auto divide-y divide-outline-variant/30">
+<!-- SECTION 1: IN PROGRESS (4) -->
+<div class="pt-3">
+<div class="px-4 py-1.5 flex items-center justify-between bg-surface-container-lowest/60 text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full border-2 border-primary border-t-transparent animate-spin inline-block"></span>
+<span class="font-semibold tracking-wide text-on-surface text-[11px]">IN PROGRESS</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-surface-container text-outline border border-outline-variant">4</span>
+</div>
+<div class="flex items-center gap-3 text-[11px] text-outline">
+<span>Cycle 28: 3 of 4 sub-milestones ready</span>
+<div class="w-16 h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-3/4"></div>
+</div>
+</div>
+</div>
+<!-- Issue Row 1 (THE MANDATED SELECTED ROW) -->
+<div class="group relative flex items-center gap-3 px-4 py-2 border-l-2 border-indigo-500 bg-indigo-950/25 text-indigo-100 cursor-pointer transition-all border-b border-outline-variant/20 hover:bg-indigo-950/35">
+<input checked="" class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer" type="checkbox"/>
+<!-- Status Glyph (spinner) -->
+<span class="material-symbols-outlined text-[15px] text-primary animate-pulse" data-icon="progress_activity">progress_activity</span>
+<!-- Priority Icon (Urgent - Red spark) -->
+<span class="material-symbols-outlined text-[15px] text-rose-400" data-icon="error" title="Urgent">error</span>
+<!-- ID -->
+<span class="font-mono text-xs font-semibold text-primary tracking-tight w-16">KTE-892</span>
+<!-- Title -->
+<span class="font-medium text-xs text-white truncate flex-1 tracking-tight">Optimize cold start WebSocket handshake latency under 45ms</span>
+<!-- Tags -->
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">perf</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">backend</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-primary/10 border border-primary/20 text-primary">v2.4</span>
+</div>
+<!-- Due Date / Cycle pill -->
+<span class="text-[11px] font-mono text-rose-300/80 bg-rose-950/40 px-1.5 py-0.5 rounded border border-rose-900/50">Oct 24</span>
+<!-- Assignee Avatar -->
+<div class="relative group/avatar">
+<img class="w-5 h-5 rounded-full border border-primary object-cover" data-alt="Close up realistic portrait avatar of senior systems developer with glasses and neutral expression on deep dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAduBM0IVy4LpGM30-d2tgcAp6r1R5XdGG4TGA45uO77nXmZA3RhSSC-vrqWatu14YJ6M6SEFyBC3EH8XPJ8GIC4eJveCtuF0DC06WvMaP25mffRHqqgeu8xvAdaQ5EtPM48rMuZLfXC5iw9fjuzCxRjFXHXo1LeBPhqENQDfJ2zQ0U4xebqdwpA0Pv-w76PHb-ZenwHG6FX3PVuhYzZrN2C7YKGR1_VcOg06mrZd3uVSkOEdbx_YXVw_p_ZnVZ82_bUUKFMnN1fXDo"/>
+</div>
+</div>
+<!-- Issue Row 2 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="progress_activity">progress_activity</span>
+<span class="material-symbols-outlined text-[15px] text-amber-400" data-icon="signal_cellular_alt" title="High">signal_cellular_alt</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-891</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Implement optimistic state cache for real-time multiplayer cursor</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">collab</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">frontend</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Oct 26</span>
+<img class="w-5 h-5 rounded-full border border-outline-variant object-cover" data-alt="Portrait of female UI engineer with sleek hair and confident expression against dark slate background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD5b_yyQphPvnz15DsStCcSJxJRetn3fCELYcNLNZ9y6O269Venszf4YVrorAE3ElLek2feFRQZGJZIe5x5W7yyFEeJMXggrYEds3stjmtVzfX1VGE5ktXxxNzvTU1sgp0s9F4hGRD-rZQnf8goCBQ9l8vcNvEFgecAJs-dDQqtayr7Dcf5cgqzJLc1qU1iM_fdSfxNsfaJ9qjZEPs4R4od6XANDfZlE79Ft_vgX86O0T_NFfq6MKrI-fYEw2xGnz_H6m-FKixlNFJq"/>
+</div>
+<!-- Issue Row 3 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="progress_activity">progress_activity</span>
+<span class="material-symbols-outlined text-[15px] text-amber-400" data-icon="signal_cellular_alt" title="High">signal_cellular_alt</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-884</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Zero-downtime schema migration for Postgres partitioned event table</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">database</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">infra</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Oct 28</span>
+<img class="w-5 h-5 rounded-full border border-outline-variant object-cover" data-alt="Portrait photo of a database architect engineer smiling calmly under dim server room lighting conditions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtIg6X38DghZF6s_Z8gzl0b3R3gDGa3YUIowV_r4PhF7U0KWOqD-LOBq9qatexTHZc-D-xhVfpEl4N7znwHCKG65fZXBUNRNAUx-PgC3x_XTBXc11EpBgJWm_Ah1ePCE4v1TP4q4W5kzdD824pjHjj3v_9OvY1nB7j66gj1wdnDjyRQpTyDkDU4rGbNfoNShxQGfiPrt2Pe1-CADbvOoonjaVsWJf0llgWjJq5e16zA3m6Naw0kFtX4qsw3i6DTXy304fX3nt8eBgr"/>
+</div>
+<!-- Issue Row 4 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="progress_activity">progress_activity</span>
+<span class="material-symbols-outlined text-[15px] text-blue-400" data-icon="signal_cellular_alt_2_bar" title="Medium">signal_cellular_alt_2_bar</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-879</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Profile memory leak in Rust WASM text buffer parser worker</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">rust</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">wasm</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Oct 29</span>
+<img class="w-5 h-5 rounded-full border border-outline-variant object-cover" data-alt="Profile avatar of a young developer in hoodie sitting in front of dual code monitors with blue tint." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCd05FnQ_vope1eL-y6pSmdTe7kjTByj89MMEEqcByOCeRYkXhLO1Cmzci07jPOeisc4jEZxA2bZ0Ly3xCNZE7Y7M6dmsFGf4tBcZLAt9-oJdkaeitWBoPA_N48-lnVyDr6s0CttUZ7eIyIQ_1TEhibPZ_JSIJBQI5cKrD_LahBirMvRAtDyO95qfzNBxznaY8msJ4EnCOph1qGEf3O6zfoee9JAJJkfsux7frOQft5FygIa-IgsHq-Xh9szJatIchcrF4n2UaMuVYX"/>
+</div>
+</div>
+<!-- SECTION 2: TODO (8) -->
+<div class="pt-3">
+<div class="px-4 py-1.5 flex items-center justify-between bg-surface-container-lowest/60 text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full border border-outline-variant bg-surface-container inline-block"></span>
+<span class="font-semibold tracking-wide text-on-surface text-[11px]">TODO</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-surface-container text-outline border border-outline-variant">8</span>
+</div>
+<span class="text-[11px] text-outline">Scheduled for Sprint 28b</span>
+</div>
+<!-- Todo Issue 1 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="material-symbols-outlined text-[15px] text-rose-400" data-icon="error" title="Urgent">error</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-876</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Patch CVE-2024-3819 in OpenSSL dynamic library link across alpine builds</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-rose-950/40 text-rose-300 border border-rose-900/50">security</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">infra</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Nov 01</span>
+<img class="w-5 h-5 rounded-full border border-outline-variant object-cover" data-alt="Security engineering specialist avatar in dark environment with faint teal cybersecurity code reflection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuYSubs911xcOXxXq0opKjgNyfDo-1cU0JCNMOvEcE8x-L4QJGtO38T2mbjbeyqqXM2Qf74RIzx6asZKxFQ1LNysfCg8kUAVqz64HIjilqDX716vq5icC3t0G4gva7Ik_f9r1Wm0h5p3k904OLyEGYGLeFNnfTsTlXCBfnjevTLApstgikIjAQypLcGJi8EEORySkRZhrqKvIAEfNnG57pvqAMO-xytImL0VsK4A48g8ByR3dqT6CKa8e2Fln0c2K7kGO4OwqckJ_1"/>
+</div>
+<!-- Todo Issue 2 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="material-symbols-outlined text-[15px] text-amber-400" data-icon="signal_cellular_alt" title="High">signal_cellular_alt</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-871</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Refactor GraphQL federation gateway to support persisted queries</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">api</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">gateway</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Nov 03</span>
+<div class="w-5 h-5 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center text-[10px] font-mono text-outline">MW</div>
+</div>
+<!-- Todo Issue 3 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="material-symbols-outlined text-[15px] text-blue-400" data-icon="signal_cellular_alt_2_bar" title="Medium">signal_cellular_alt_2_bar</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-868</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Implement automated snapshot backup verification harness in staging</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">devops</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Nov 05</span>
+<div class="w-5 h-5 rounded-full bg-surface-container border border-outline-variant flex items-center justify-center text-[10px] font-mono text-outline">SK</div>
+</div>
+<!-- Todo Issue 4 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-40 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+<span class="material-symbols-outlined text-[15px] text-neutral-400" data-icon="signal_cellular_alt_1_bar" title="Low">signal_cellular_alt_1_bar</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-865</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Expose OpenTelemetry tracer span attributes on webhook ingress</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">telemetry</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Nov 08</span>
+<img class="w-5 h-5 rounded-full border border-outline-variant object-cover" data-alt="Technical product designer portrait on deep black backdrop with calm expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiUd5h6aBdj7FHY6H2N6zbgpKgRq08gK3rNHQkbg4b6_5UDwI0FWoEMyOdzRZlF6nypdvp99ZFRtUzjr_11CwAbnZLBgP6HtwnBibDAooLlIPmB_FiYeWAJIgnhpz5PEmR2m3YrH98fA2X8zew-TyWkMIx3AIFC4AFZh1UIS4lOG99eEheOmqOTc33FvCbzTcV7fOblBhcx62zQasCpn_9WWSggD0xgH4sv-R9rFN_yP-CdKJVeI7SIPZI6s6T3ohYsJ8ceMZ-Ot1w"/>
+</div>
+</div>
+<!-- SECTION 3: BACKLOG (19) -->
+<div class="pt-3">
+<div class="px-4 py-1.5 flex items-center justify-between bg-surface-container-lowest/60 text-xs">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="pending">pending</span>
+<span class="font-semibold tracking-wide text-on-surface text-[11px]">BACKLOG</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-surface-container text-outline border border-outline-variant">19</span>
+</div>
+<span class="text-[11px] text-outline">Triage pending</span>
+</div>
+<!-- Backlog Row 1 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20 opacity-80 hover:opacity-100">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-30 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="more_horiz">more_horiz</span>
+<span class="material-symbols-outlined text-[15px] text-blue-400" data-icon="signal_cellular_alt_2_bar" title="Medium">signal_cellular_alt_2_bar</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-850</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Evaluate CockroachDB vs TiDB for cross-region data replication pilot</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">eval</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">db</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Unscheduled</span>
+<div class="w-5 h-5 rounded-full border border-dashed border-outline-variant flex items-center justify-center text-[10px] text-outline">+</div>
+</div>
+<!-- Backlog Row 2 -->
+<div class="group flex items-center gap-3 px-4 py-2 hover:bg-surface-container/50 text-on-surface cursor-pointer transition-colors border-b border-outline-variant/20 opacity-80 hover:opacity-100">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5 cursor-pointer opacity-30 group-hover:opacity-100" type="checkbox"/>
+<span class="material-symbols-outlined text-[15px] text-outline" data-icon="more_horiz">more_horiz</span>
+<span class="material-symbols-outlined text-[15px] text-neutral-400" data-icon="signal_cellular_alt_1_bar" title="Low">signal_cellular_alt_1_bar</span>
+<span class="font-mono text-xs font-medium text-outline tracking-tight w-16">KTE-847</span>
+<span class="text-xs text-on-surface truncate flex-1 tracking-tight">Investigate eBPF packet drop diagnostics for Kubernetes ingress controller</span>
+<div class="flex items-center gap-1.5">
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">ebpf</span>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container border border-outline-variant text-outline">k8s</span>
+</div>
+<span class="text-[11px] font-mono text-outline">Unscheduled</span>
+<div class="w-5 h-5 rounded-full border border-dashed border-outline-variant flex items-center justify-center text-[10px] text-outline">+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Quick Status Strip -->
+<div class="h-7 px-4 bg-surface-container-lowest border-t border-outline-variant flex items-center justify-between text-[11px] text-outline flex-shrink-0">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+            Engine Sync: Realtime 12ms
+          </span>
+<span>Branch: <span class="font-mono text-on-surface">feat/realtime-gw</span></span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-mono">Press <kbd class="px-1 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">J</kbd> / <kbd class="px-1 rounded bg-surface-container text-on-surface border border-outline-variant text-[10px]">K</kbd> to navigate</span>
+</div>
+</div>
+</main>
+<!-- 3. CONTEXTUAL DETAIL INSPECTOR PANEL (Approx 420px) -->
+<aside class="w-[420px] flex-shrink-0 bg-surface-container-lowest flex flex-col justify-between overflow-hidden select-text border-l border-outline-variant">
+<!-- Inspector Header -->
+<div class="h-11 px-4 border-b border-outline-variant flex items-center justify-between flex-shrink-0 bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs font-bold text-primary bg-primary-container/10 px-1.5 py-0.5 rounded border border-primary-container/30">KTE-892</span>
+<span class="material-symbols-outlined text-[14px] text-outline cursor-pointer hover:text-on-surface" data-icon="open_in_new" title="Open in full page">open_in_new</span>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" title="Copy Link">
+<span class="material-symbols-outlined text-[16px]" data-icon="link">link</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" title="Subscribe">
+<span class="material-symbols-outlined text-[16px]" data-icon="notifications">notifications</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" title="Share Issue">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span>
+</button>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container transition-colors" title="More Actions">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Inspector Scrollable Body -->
+<div class="flex-1 overflow-y-auto p-4 space-y-5">
+<!-- Title -->
+<div>
+<h1 class="font-headline text-lg font-semibold text-white tracking-tight leading-snug">
+            Optimize cold start WebSocket handshake latency under 45ms
+          </h1>
+</div>
+<!-- Property Metadata Grid -->
+<div class="grid grid-cols-2 gap-2 p-3 rounded bg-surface-container border border-outline-variant text-xs">
+<!-- Property: Assignee -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Assignee</span>
+<div class="flex items-center gap-1.5 min-w-0">
+<img class="w-4 h-4 rounded-full border border-primary object-cover" data-alt="Close up realistic portrait avatar of senior systems developer with glasses and neutral expression on deep dark background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjy7mzWFifsMF5KNQBViCpbJZhrpmQn1QOpFQcVszJc7y7oqNW_xDQAr6JGvctzNh7gtv2pdxWFCK5WbdGZVsh5UPmgmD8HROXLH0eDGxHKfDK12ucOqTFra9bsE-KYpmt5QKS3rD2RtZHkZlbPxWO37e25sBu0EXk3CO0erdKk2dkxOn4FjZOjeQhDFt6_Kph19yDRfmOSVQYZbfvHITn6f2KMNVe6VKlfdNeTnAlqi7A0XCwm9awxaywVQlfBJIdfwqEla5s68Ub"/>
+<span class="text-on-surface font-medium truncate text-[11px]">Alex Chen</span>
+</div>
+</div>
+<!-- Property: Status -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Status</span>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-primary-container/20 text-primary border border-primary/30 text-[11px] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>In Progress</span>
+</div>
+</div>
+<!-- Property: Priority -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Priority</span>
+<div class="flex items-center gap-1 text-rose-400 font-medium text-[11px]">
+<span class="material-symbols-outlined text-[14px]" data-icon="error">error</span>
+<span>Urgent</span>
+</div>
+</div>
+<!-- Property: Project -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Project</span>
+<span class="text-on-surface font-mono text-[11px] truncate">Realtime GW v2</span>
+</div>
+<!-- Property: Cycle -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Cycle</span>
+<span class="text-on-surface font-medium text-[11px] flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-primary" data-icon="sync">sync</span>
+              Cycle 28
+            </span>
+</div>
+<!-- Property: Due Date -->
+<div class="flex items-center gap-2">
+<span class="text-outline w-16 text-[11px]">Due Date</span>
+<span class="text-rose-300 font-mono text-[11px]">Oct 24 (2d left)</span>
+</div>
+</div>
+<!-- Description Markdown Body -->
+<div class="space-y-3 text-xs leading-relaxed text-on-surface-variant">
+<div class="font-medium text-on-surface text-xs tracking-wide">Problem Statement</div>
+<p>
+            During multi-region client reconnection spikes, cold TLS session negotiation creates severe p99 queue latency at edge envoy nodes. We need session resumption caches backed by memory mapped ring buffers.
+          </p>
+<!-- Monospace Benchmark Code / Target Matrix -->
+<div class="p-2.5 rounded bg-surface-container-high border border-outline-variant font-mono text-[11px] space-y-1">
+<div class="text-outline flex justify-between">
+<span>// Latency Benchmark (p99)</span>
+<span class="text-emerald-400 font-semibold">-69.3% targeted</span>
+</div>
+<div class="text-rose-300">Current p99:  124.6ms (cold handshake)</div>
+<div class="text-primary font-medium">Target p99:   38.0ms (session reuse)</div>
+<div class="text-outline">Tested envoy:  v1.31.0-custom-bpf</div>
+</div>
+<!-- Checklist -->
+<div class="space-y-1.5 pt-1">
+<div class="font-medium text-on-surface text-xs">Sub-task Checklist</div>
+<label class="flex items-center gap-2 text-on-surface cursor-pointer select-none">
+<input checked="" class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5" type="checkbox"/>
+<span class="line-through text-outline">TLS session resumption cache implementation</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface cursor-pointer select-none">
+<input checked="" class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5" type="checkbox"/>
+<span class="line-through text-outline">TLS ticket key rotation daemon (30m intervals)</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface cursor-pointer select-none">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5" type="checkbox"/>
+<span class="text-on-surface">Epoll socket backlog tuning for burst ingress traffic</span>
+</label>
+<label class="flex items-center gap-2 text-on-surface cursor-pointer select-none">
+<input class="rounded border-outline-variant text-primary-container focus:ring-0 bg-surface-container h-3.5 w-3.5" type="checkbox"/>
+<span class="text-on-surface">Deploy loadgen drill with 50,000 concurrent reconnections</span>
+</label>
+</div>
+</div>
+<!-- Activity / Audit Log -->
+<div class="pt-3 border-t border-outline-variant space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="font-medium text-on-surface text-xs">Activity &amp; Commits</span>
+<span class="text-[11px] text-outline font-mono">3 events</span>
+</div>
+<div class="space-y-2 text-[11px]">
+<!-- Audit Entry 1 -->
+<div class="flex items-start gap-2 text-outline">
+<span class="material-symbols-outlined text-[13px] text-primary mt-0.5" data-icon="commit">commit</span>
+<div>
+<span class="text-on-surface font-medium">Alex Chen</span> pushed commit
+                <code class="font-mono text-primary bg-primary/10 px-1 py-0.2 rounded border border-primary/20">8a1f2b</code> to
+                <span class="font-mono text-on-surface">core/gateway</span>
+<div class="text-[10px] text-outline mt-0.5">2 hours ago</div>
+</div>
+</div>
+<!-- Audit Entry 2 -->
+<div class="flex items-start gap-2 text-outline">
+<span class="material-symbols-outlined text-[13px] text-amber-400 mt-0.5" data-icon="label">label</span>
+<div>
+<span class="text-on-surface font-medium">Marcus Wong</span> updated priority to
+                <span class="text-rose-400 font-semibold">Urgent</span>
+<div class="text-[10px] text-outline mt-0.5">4 hours ago</div>
+</div>
+</div>
+<!-- Audit Entry 3 -->
+<div class="flex items-start gap-2 text-outline">
+<span class="material-symbols-outlined text-[13px] text-outline mt-0.5" data-icon="chat_bubble">chat_bubble</span>
+<div>
+<span class="text-on-surface font-medium">Sarah Jenkins</span>: "Validated ticket cache in staging-west cluster. Latency drop is confirmed under 40ms."
+                <div class="text-[10px] text-outline mt-0.5">5 hours ago</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Comment Composer -->
+<div class="p-3 border-t border-outline-variant bg-surface-container-lowest flex-shrink-0 space-y-2">
+<div class="border border-outline-variant rounded bg-surface-container focus-within:border-primary-container transition-colors">
+<textarea class="w-full bg-transparent text-xs text-on-surface placeholder:text-outline p-2 resize-none focus:outline-none" placeholder="Leave a technical update or link PR... (Markdown supported)" rows="2"></textarea>
+<div class="flex items-center justify-between px-2 py-1.5 border-t border-outline-variant/40 bg-surface-container-high/40">
+<div class="flex items-center gap-1 text-outline">
+<button class="p-1 hover:text-on-surface transition-colors" title="Bold">
+<span class="material-symbols-outlined text-[14px]" data-icon="format_bold">format_bold</span>
+</button>
+<button class="p-1 hover:text-on-surface transition-colors" title="Code">
+<span class="material-symbols-outlined text-[14px]" data-icon="code">code</span>
+</button>
+<button class="p-1 hover:text-on-surface transition-colors" title="Attach file">
+<span class="material-symbols-outlined text-[14px]" data-icon="attach_file">attach_file</span>
+</button>
+<button class="p-1 hover:text-on-surface transition-colors" title="Mention engineer">
+<span class="material-symbols-outlined text-[14px]" data-icon="alternate_email">alternate_email</span>
+</button>
+</div>
+<button class="px-2.5 py-1 text-[11px] font-medium rounded bg-primary-container hover:bg-primary-hover text-on-primary-container transition-colors flex items-center gap-1 active:scale-95">
+<span>Comment</span>
+<span class="text-[9px] font-mono opacity-80">⌘↵</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</body></html>

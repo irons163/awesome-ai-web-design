@@ -1,8 +1,848 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>IBM · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#0f62fe;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/ibm">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">IBM · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#0f62fe"></span><code>#0f62fe</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#161616"></span><code>#161616</code></div><div class="swatch"><span style="background:#525252"></span><code>#525252</code></div><div class="swatch"><span style="background:#8c8c8c"></span><code>#8c8c8c</code></div><div class="swatch"><span style="background:#f4f4f4"></span><code>#f4f4f4</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · IBM Plex Sans</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vectis Operations Cloud - Node Fleet Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#445ba1",
+            "outline": "#737687",
+            "primary-fixed-dim": "#b4c5ff",
+            "surface-variant": "#e2e2e2",
+            "on-tertiary-fixed-variant": "#832700",
+            "on-background": "#1a1c1c",
+            "surface-container": "#eeeeee",
+            "on-secondary-fixed-variant": "#2a4387",
+            "inverse-primary": "#b4c5ff",
+            "tertiary-fixed": "#ffdbd0",
+            "secondary-fixed-dim": "#b4c5ff",
+            "inverse-on-surface": "#f0f1f1",
+            "tertiary-container": "#c84000",
+            "secondary-container": "#9db3ff",
+            "surface-container-highest": "#e2e2e2",
+            "tertiary": "#9e3100",
+            "outline-variant": "#c3c6d8",
+            "on-primary-fixed": "#00174c",
+            "error-container": "#ffdad6",
+            "surface-tint": "#0052dd",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "on-surface": "#1a1c1c",
+            "on-primary": "#ffffff",
+            "primary": "#004ccd",
+            "surface-dim": "#dadada",
+            "surface": "#f9f9f9",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2f3131",
+            "on-tertiary-fixed": "#390c00",
+            "on-secondary-container": "#2b4388",
+            "on-primary-fixed-variant": "#003da9",
+            "on-primary-container": "#f3f3ff",
+            "surface-container-high": "#e8e8e8",
+            "on-tertiary-container": "#fff1ed",
+            "surface-bright": "#f9f9f9",
+            "secondary-fixed": "#dbe1ff",
+            "primary-container": "#0f62fe",
+            "on-surface-variant": "#424656",
+            "surface-container-low": "#f3f3f4",
+            "primary-fixed": "#dbe1ff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "background": "#f9f9f9",
+            "tertiary-fixed-dim": "#ffb59d",
+            "on-secondary-fixed": "#00174c",
+            /* Carbon specific tokens mapped */
+            "ibm-blue": "#0f62fe",
+            "ibm-blue-hover": "#0050e6",
+            "ibm-blue-active": "#002d9c",
+            "ibm-gray-10": "#f4f4f4",
+            "ibm-gray-20": "#e0e0e0",
+            "ibm-gray-30": "#c6c6c6",
+            "ibm-gray-50": "#8d8d8d",
+            "ibm-gray-70": "#525252",
+            "ibm-gray-100": "#161616",
+            "carbon-select": "#edf5ff",
+            "carbon-green": "#24a148",
+            "carbon-amber": "#f1c21b",
+            "carbon-red": "#da1e28"
+          },
+          "borderRadius": {
+            "DEFAULT": "0px",
+            "none": "0px",
+            "xs": "2px",
+            "sm": "4px",
+            "lg": "0px",
+            "xl": "0px",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["IBM Plex Sans", "Inter", "sans-serif"],
+            "display": ["IBM Plex Sans", "Inter", "sans-serif"],
+            "body": ["IBM Plex Sans", "Inter", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"],
+            "label": ["IBM Plex Sans", "Inter", "sans-serif"]
+          },
+          "letterSpacing": {
+            "carbon": "0.16px"
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      letter-spacing: 0.16px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-mono {
+      font-family: 'IBM Plex Mono', monospace;
+    }
+    /* Material icons tuning for Carbon precision */
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f4f4f4;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #c6c6c6;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb:hover {
+      background: #8d8d8d;
+    }
+  </style>
+</head>
+<body class="bg-[#f4f4f4] text-on-surface antialiased overflow-x-hidden min-h-screen">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar (Exact JSON Schema Mapping & Style Injections) -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline h-12">
+<div class="w-full px-4 flex justify-between items-center h-12">
+<!-- Left: Brand Logo & Primary Global Nav Links -->
+<div class="flex items-center h-full">
+<!-- Brand Logo -->
+<div class="flex items-center gap-3 pr-6 border-r border-outline-variant dark:border-outline h-full">
+<div class="w-5 h-5 bg-[#0f62fe] flex items-center justify-center text-white text-xs font-mono font-bold tracking-tighter">
+            V
+          </div>
+<span class="font-headline text-sm font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface uppercase select-none">
+            Vectis Operations Cloud
+          </span>
+</div>
+<!-- Navigation Links (Active mapping to 'Clusters') -->
+<nav class="flex items-center h-full text-xs font-normal tracking-normal ml-2">
+<!-- Item 1: Clusters (ACTIVE - as current view is Fleet Telemetry within Cluster) -->
+<a class="border-b-2 border-primary text-primary dark:text-inverse-primary font-semibold h-full flex items-center px-3 hover:bg-surface-container transition-colors duration-150" href="#">
+            Clusters
+          </a>
+<!-- Item 2: Workloads -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center px-3 font-normal hover:bg-surface-container transition-colors duration-150" href="#">
+            Workloads
+          </a>
+<!-- Item 3: Topology -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center px-3 font-normal hover:bg-surface-container transition-colors duration-150" href="#">
+            Topology
+          </a>
+<!-- Item 4: Incident Log -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center px-3 font-normal hover:bg-surface-container transition-colors duration-150" href="#">
+            Incident Log
+          </a>
+<!-- Item 5: Compliance -->
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center px-3 font-normal hover:bg-surface-container transition-colors duration-150" href="#">
+            Compliance
+          </a>
+</nav>
+</div>
+<!-- Right: Search, Actions, Icons & User Profile -->
+<div class="flex items-center h-full gap-2">
+<!-- Search Bar (on_right) -->
+<div class="relative flex items-center mr-2">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-[18px] pointer-events-none">search</span>
+<input class="bg-surface-container-low border border-transparent focus:border-primary text-xs text-on-surface pl-8 pr-3 py-1.5 w-64 rounded-none focus:outline-none focus:ring-1 focus:ring-primary placeholder:text-outline transition-all" placeholder="Search system resources (Ctrl + /)..." type="text"/>
+</div>
+<!-- Trailing Secondary Action -->
+<button class="text-xs px-3 py-1.5 border border-outline-variant hover:border-on-surface text-on-surface bg-surface-container-lowest font-medium hover:bg-surface-container-low transition-colors duration-150 flex items-center gap-1.5 rounded-none">
+<span>Switch System</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<!-- Trailing Primary Action -->
+<button class="text-xs px-3.5 py-1.5 bg-[#0f62fe] hover:bg-[#0050e6] text-white font-medium transition-colors duration-150 flex items-center gap-1 rounded-none shadow-none">
+<span class="material-symbols-outlined text-[15px]">add</span>
+<span>Deploy Node</span>
+</button>
+<!-- Icon Actions Divider -->
+<div class="h-5 w-[1px] bg-outline-variant mx-1"></div>
+<!-- Trailing Icon Actions: notifications, help, settings, account_circle -->
+<div class="flex items-center">
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-150 rounded-none relative" title="Notifications">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-[#da1e28] rounded-full"></span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-150 rounded-none" title="Documentation &amp; Help">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-150 rounded-none" title="Global Settings">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-150 rounded-none ml-1" title="Operator Account">
+<span class="material-symbols-outlined text-[20px]">account_circle</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar (Exact JSON Schema Mapping & Style Injections) -->
+<!-- ========================================================================= -->
+<aside class="fixed top-12 left-0 h-[calc(100vh-3rem)] w-60 rounded-none bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline z-40 select-none">
+<div class="flex flex-col justify-between h-full w-full py-2">
+<!-- Top Rail Cluster -->
+<div class="w-full">
+<!-- Header: Cluster Identification -->
+<div class="px-4 py-3 border-b border-outline-variant mb-2">
+<div class="flex items-center gap-2 mb-0.5">
+<span class="material-symbols-outlined text-[#0f62fe] text-[18px]">shield</span>
+<span class="font-headline text-xs font-bold uppercase tracking-wider text-on-surface dark:text-inverse-on-surface truncate">
+              US-East-Primary
+            </span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-outline font-mono">
+<span>Production v4.19</span>
+<span class="flex items-center gap-1 text-[#24a148] font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148] animate-pulse"></span> live
+            </span>
+</div>
+</div>
+<!-- CTA: Add Cluster -->
+<div class="px-3 mb-3">
+<button class="w-full py-1.5 px-3 bg-surface-container-low hover:bg-surface-container text-xs text-on-surface font-medium border border-outline-variant rounded-none flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px] text-[#0f62fe]">add_box</span>
+<span>Add Cluster</span>
+</button>
+</div>
+<!-- Navigation Tabs (Tabs: Cluster Health, Nodes & Pods, Telemetry & Metrics, Event Broker, Access & RBAC, System Audit) -->
+<nav class="space-y-0.5 text-xs">
+<!-- Tab 1: Cluster Health -->
+<a class="border-l-4 border-transparent text-on-surface-variant dark:text-outline-variant pl-3 pr-4 py-2.5 flex items-center gap-3 font-normal hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Cluster Health</span>
+</a>
+<!-- Tab 2: Nodes & Pods (ACTIVE - Current view matches Node Fleet Telemetry) -->
+<a class="border-l-4 border-primary bg-surface-container dark:bg-surface-variant text-on-surface dark:text-inverse-on-surface font-semibold pl-3 pr-4 py-2.5 flex items-center gap-3 transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary">dns</span>
+<span>Nodes &amp; Pods</span>
+</a>
+<!-- Tab 3: Telemetry & Metrics -->
+<a class="border-l-4 border-transparent text-on-surface-variant dark:text-outline-variant pl-3 pr-4 py-2.5 flex items-center gap-3 font-normal hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">monitoring</span>
+<span>Telemetry &amp; Metrics</span>
+</a>
+<!-- Tab 4: Event Broker -->
+<a class="border-l-4 border-transparent text-on-surface-variant dark:text-outline-variant pl-3 pr-4 py-2.5 flex items-center gap-3 font-normal hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">hub</span>
+<span>Event Broker</span>
+</a>
+<!-- Tab 5: Access & RBAC -->
+<a class="border-l-4 border-transparent text-on-surface-variant dark:text-outline-variant pl-3 pr-4 py-2.5 flex items-center gap-3 font-normal hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">admin_panel_settings</span>
+<span>Access &amp; RBAC</span>
+</a>
+<!-- Tab 6: System Audit -->
+<a class="border-l-4 border-transparent text-on-surface-variant dark:text-outline-variant pl-3 pr-4 py-2.5 flex items-center gap-3 font-normal hover:bg-surface-container-low dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[18px]">receipt_long</span>
+<span>System Audit</span>
+</a>
+</nav>
+</div>
+<!-- Footer Action Links -->
+<div class="border-t border-outline-variant pt-2">
+<a class="border-l-4 border-transparent text-on-surface-variant pl-3 pr-4 py-2 flex items-center gap-3 text-xs hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">menu_book</span>
+<span>Documentation</span>
+</a>
+<a class="border-l-4 border-transparent text-on-surface-variant pl-3 pr-4 py-2 flex items-center gap-3 text-xs hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span>Terminal Console</span>
+</a>
+<div class="px-4 py-2.5 mt-1 text-[11px] text-outline font-mono border-t border-outline-variant/60 flex items-center justify-between">
+<span>Engine rev: 4.19.2</span>
+<span class="text-xs text-[#0f62fe] cursor-pointer hover:underline">CLI</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN CONTENT CANVAS (Offset: top-12 left-60, 1440px desktop workflow)   -->
+<!-- ========================================================================= -->
+<main class="ml-60 mt-12 min-h-[calc(100vh-3rem)] p-6 bg-[#f4f4f4] space-y-5">
+<!-- 1. OPERATIONAL HEADER / CONTEXT BAR -->
+<section class="bg-white border border-outline-variant p-5 shadow-none rounded-none">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<!-- Left: Breadcrumb + Title + Operational Status Badge -->
+<div>
+<!-- Carbon Style Breadcrumbs -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-1.5 text-xs text-outline mb-1 font-normal">
+<span class="hover:text-on-surface cursor-pointer">Clusters</span>
+<span class="text-outline-variant">/</span>
+<span class="hover:text-on-surface cursor-pointer">US-East-Primary</span>
+<span class="text-outline-variant">/</span>
+<span class="text-on-surface font-medium">Node Fleet Telemetry</span>
+</nav>
+<div class="flex items-center gap-3 flex-wrap">
+<h1 class="text-2xl font-light text-on-surface tracking-tight">
+              Node Fleet Management
+            </h1>
+<!-- Status tag: 'Fleet Status: 99.98% Operational' (Carbon dot tag) -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] text-xs font-mono font-medium rounded-none">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span>
+<span>Fleet Status: 99.98% Operational</span>
+</div>
+</div>
+</div>
+<!-- Right: Secondary Operational Action Bar -->
+<div class="flex items-center gap-2 flex-wrap">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-outline-variant hover:bg-surface-container text-xs font-normal text-on-surface rounded-none transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">file_download</span>
+<span>Export CSV</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-outline-variant hover:bg-surface-container text-xs font-normal text-on-surface rounded-none transition-colors">
+<span class="material-symbols-outlined text-[16px] text-primary">sync</span>
+<span>Refresh (15s auto)</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white border border-outline-variant hover:bg-surface-container text-xs font-normal text-on-surface rounded-none transition-colors">
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant">tune</span>
+<span>Cluster Settings</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 2. SYSTEM KPI & TELEMETRY HEALTH STRIP (4 compact tiles with 1px borders) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-0 bg-outline-variant p-[1px] shadow-none">
+<!-- Tile 1: Active Nodes -->
+<div class="bg-white p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-outline font-normal">Active Nodes</span>
+<span class="material-symbols-outlined text-outline text-[18px]">dns</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-light text-on-surface font-mono">
+            128 <span class="text-sm font-normal text-outline">/ 130</span>
+</div>
+<span class="inline-block px-1.5 py-0.5 text-[11px] font-mono bg-[#fff1f1] text-[#da1e28] border border-[#ffd7d9]">
+            2 Degraded
+          </span>
+</div>
+<div class="mt-3 pt-2 border-t border-outline-variant/60 flex items-center justify-between text-[11px] text-outline">
+<span>Target capacity: 140 nodes</span>
+<span class="text-[#24a148] font-medium font-mono">98.4% online</span>
+</div>
+</div>
+<!-- Tile 2: Aggregate CPU Utilization -->
+<div class="bg-white p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-outline font-normal">Aggregate CPU Utilization</span>
+<span class="material-symbols-outlined text-outline text-[18px]">memory</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-light text-on-surface font-mono">
+            68.4%
+          </div>
+<span class="text-[11px] text-outline font-mono">
+            512 Cores Allotted
+          </span>
+</div>
+<!-- Micro sparkline indicator -->
+<div class="mt-3 pt-2 border-t border-outline-variant/60">
+<div class="w-full bg-[#e0e0e0] h-1.5 flex overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 68.4%"></div>
+</div>
+</div>
+</div>
+<!-- Tile 3: Memory Footprint -->
+<div class="bg-white p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-outline font-normal">Memory Footprint</span>
+<span class="material-symbols-outlined text-outline text-[18px]">storage</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-light text-on-surface font-mono">
+            1.42 TB <span class="text-sm font-normal text-outline">/ 2.0 TB</span>
+</div>
+<span class="text-[11px] text-outline font-mono">
+            71% Saturation
+          </span>
+</div>
+<!-- Progress representation -->
+<div class="mt-3 pt-2 border-t border-outline-variant/60">
+<div class="w-full bg-[#e0e0e0] h-1.5 flex overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 71%"></div>
+</div>
+</div>
+</div>
+<!-- Tile 4: Active Pod Scheduling Queue -->
+<div class="bg-white p-4 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs text-outline font-normal">Active Pod Scheduling Queue</span>
+<span class="material-symbols-outlined text-outline text-[18px]">pending_actions</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="text-2xl font-light text-on-surface font-mono">
+            4,219 <span class="text-sm font-normal text-outline">Jobs</span>
+</div>
+<span class="inline-block px-1.5 py-0.5 text-[11px] font-mono bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba]">
+            0 Blocked
+          </span>
+</div>
+<div class="mt-3 pt-2 border-t border-outline-variant/60 flex items-center justify-between text-[11px] text-outline font-mono">
+<span>Latency: 14ms (p99)</span>
+<span class="text-on-surface">Queue OK</span>
+</div>
+</div>
+</section>
+<!-- 3. PRIMARY DATA TABLE CONTAINER WITH TOOLBAR & BULK ACTIONS -->
+<section class="bg-white border border-outline-variant shadow-none">
+<!-- Table Filter Toolbar -->
+<div class="p-3 border-b border-outline-variant flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white">
+<!-- Left Controls -->
+<div class="flex items-center gap-2 flex-wrap flex-1 max-w-3xl">
+<!-- Search input -->
+<div class="relative flex-1 min-w-[260px]">
+<span class="material-symbols-outlined absolute left-2.5 top-2.5 text-outline text-[16px] pointer-events-none">filter_list</span>
+<input class="w-full bg-surface-container-low border border-outline-variant focus:border-primary text-xs text-on-surface pl-8 pr-3 py-1.5 rounded-none focus:outline-none focus:ring-1 focus:ring-primary font-mono placeholder:text-outline" placeholder="Filter nodes by ID, zone, or workload..." type="text" value="node-useast-"/>
+</div>
+<!-- Filter: Zone -->
+<div class="relative">
+<select class="bg-surface-container-low border border-outline-variant text-xs text-on-surface py-1.5 pl-3 pr-7 rounded-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer appearance-none">
+<option>Zone: All</option>
+<option>us-east-1a</option>
+<option>us-east-1b</option>
+<option>us-east-1c</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-2 text-outline text-[16px] pointer-events-none">arrow_drop_down</span>
+</div>
+<!-- Filter: Role -->
+<div class="relative">
+<select class="bg-surface-container-low border border-outline-variant text-xs text-on-surface py-1.5 pl-3 pr-7 rounded-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer appearance-none">
+<option>Role: Worker/Control</option>
+<option>Worker</option>
+<option>Control Plane</option>
+<option>Ingress Gateway</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-2 text-outline text-[16px] pointer-events-none">arrow_drop_down</span>
+</div>
+<!-- Filter: Status -->
+<div class="relative">
+<select class="bg-surface-container-low border border-outline-variant text-xs text-on-surface py-1.5 pl-3 pr-7 rounded-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer appearance-none">
+<option>Status: All</option>
+<option>Active</option>
+<option>Warning</option>
+<option>Degraded</option>
+</select>
+<span class="material-symbols-outlined absolute right-1.5 top-2 text-outline text-[16px] pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<!-- Right Controls (Column config & table density) -->
+<div class="flex items-center gap-1 border-t md:border-t-0 pt-2 md:pt-0 border-outline-variant">
+<button class="p-1.5 hover:bg-surface-container text-on-surface-variant rounded-none border border-outline-variant" title="Customize Columns">
+<span class="material-symbols-outlined text-[18px]">view_column</span>
+</button>
+<div class="flex items-center border border-outline-variant">
+<button class="px-2 py-1 text-xs bg-surface-container text-on-surface font-medium" title="Normal Density">
+              Normal
+            </button>
+<button class="px-2 py-1 text-xs hover:bg-surface-container text-outline" title="Compact Density">
+              Compact
+            </button>
+</div>
+<button class="p-1.5 hover:bg-surface-container text-on-surface-variant rounded-none border border-outline-variant" title="Batch View Toggle">
+<span class="material-symbols-outlined text-[18px]">splitscreen</span>
+</button>
+</div>
+</div>
+<!-- ACTIVE ROW SELECTION & BULK-ACTION BANNER (IBM Carbon Notification Palette) -->
+<div class="bg-[#edf5ff] border-b border-[#0f62fe] px-4 py-2.5 flex items-center justify-between flex-wrap gap-2 text-xs">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#0f62fe] text-[18px]">check_box</span>
+<span class="font-medium text-[#161616] font-mono">
+            3 of 128 nodes selected
+          </span>
+<span class="text-outline-variant">|</span>
+<span class="text-outline">Targets: <code class="font-mono text-on-surface">node-useast-01a-prod</code>, <code class="font-mono text-on-surface">node-useast-02a-prod</code>, <code class="font-mono text-on-surface">node-useast-05c-prod</code></span>
+</div>
+<!-- Bulk Action Buttons -->
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 bg-[#da1e28] hover:bg-[#ba1b23] text-white rounded-none font-normal transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">power_settings_new</span>
+<span>Drain Nodes</span>
+</button>
+<button class="px-2.5 py-1 bg-white hover:bg-surface-container border border-outline-variant text-[#161616] rounded-none font-normal transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">restart_alt</span>
+<span>Restart Kubelet</span>
+</button>
+<button class="px-2.5 py-1 bg-white hover:bg-surface-container border border-outline-variant text-[#161616] rounded-none font-normal transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">label</span>
+<span>Assign Taint / Label</span>
+</button>
+<button class="px-2.5 py-1 bg-white hover:bg-surface-container border border-outline-variant text-[#161616] rounded-none font-normal transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">download</span>
+<span>Export Telemetry Log</span>
+</button>
+<button class="ml-2 text-[#0f62fe] hover:underline font-medium text-xs">
+            Deselect All
+          </button>
+</div>
+</div>
+<!-- 4. HIGH-DENSITY ENTERPRISE DATA TABLE -->
+<div class="overflow-x-auto custom-scroll">
+<table class="w-full text-left border-collapse font-sans text-xs">
+<!-- Table Header -->
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant text-outline font-medium">
+<th class="w-10 px-3 py-3 text-center">
+<input checked="" class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer border-outline" type="checkbox"/>
+</th>
+<th class="px-3 py-3 font-semibold text-on-surface">
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+<span>Node ID</span>
+<span class="material-symbols-outlined text-[14px] text-primary">arrow_upward</span>
+</div>
+</th>
+<th class="px-3 py-3 font-semibold text-on-surface">
+<div class="flex items-center gap-1 cursor-pointer hover:text-primary">
+<span>Status</span>
+<span class="material-symbols-outlined text-[14px]">unfold_more</span>
+</div>
+</th>
+<th class="px-3 py-3 font-semibold text-on-surface">Zone</th>
+<th class="px-3 py-3 font-semibold text-on-surface">Role</th>
+<th class="px-3 py-3 font-semibold text-on-surface w-44">CPU Load</th>
+<th class="px-3 py-3 font-semibold text-on-surface">Memory Load</th>
+<th class="px-3 py-3 font-semibold text-on-surface">Running Pods</th>
+<th class="px-3 py-3 font-semibold text-on-surface">Uptime</th>
+<th class="px-3 py-3 text-right">Actions</th>
+</tr>
+</thead>
+<!-- Table Body: 7 realistic rows (3 Selected with Carbon Blue Accent) -->
+<tbody class="divide-y divide-outline-variant/60">
+<!-- ROW 1 (SELECTED) -->
+<tr class="bg-[#edf5ff] border-l-4 border-[#0f62fe] hover:bg-[#e5f0ff] transition-colors">
+<td class="px-3 py-3 text-center">
+<input checked="" class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-01a-prod</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Active
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1a</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Worker</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 74%"></div>
+</div>
+<span class="font-mono text-on-surface">74%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">18.4 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">42 / 64</td>
+<td class="px-3 py-3 font-mono text-outline">48d 14h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2 (SELECTED) -->
+<tr class="bg-[#edf5ff] border-l-4 border-[#0f62fe] hover:bg-[#e5f0ff] transition-colors">
+<td class="px-3 py-3 text-center">
+<input checked="" class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-02a-prod</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Active
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1a</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Control Plane</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 48%"></div>
+</div>
+<span class="font-mono text-on-surface">48%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">12.1 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">18 / 32</td>
+<td class="px-3 py-3 font-mono text-outline">102d 06h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3 (STANDARD / UNCHECKED) -->
+<tr class="bg-white border-l-4 border-transparent hover:bg-surface-container-low transition-colors">
+<td class="px-3 py-3 text-center">
+<input class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer border-outline" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-03b-ingress</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#fef08a] text-[#854d0e] border border-[#fde047] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#f1c21b]"></span> Warning
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1b</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Ingress</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#f1c21b] h-full" style="width: 88%"></div>
+</div>
+<span class="font-mono text-[#854d0e] font-semibold">88%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">29.6 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">59 / 64</td>
+<td class="px-3 py-3 font-mono text-outline">19d 02h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4 (STANDARD / UNCHECKED - DEGRADED) -->
+<tr class="bg-white border-l-4 border-transparent hover:bg-surface-container-low transition-colors">
+<td class="px-3 py-3 text-center">
+<input class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer border-outline" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-04b-compute</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#fff1f1] text-[#da1e28] border border-[#ffd7d9] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#da1e28]"></span> Degraded
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1b</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Worker</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#da1e28] h-full" style="width: 96%"></div>
+</div>
+<span class="font-mono text-[#da1e28] font-semibold">96%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">31.8 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">64 / 64</td>
+<td class="px-3 py-3 font-mono text-outline">04d 18h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5 (SELECTED) -->
+<tr class="bg-[#edf5ff] border-l-4 border-[#0f62fe] hover:bg-[#e5f0ff] transition-colors">
+<td class="px-3 py-3 text-center">
+<input checked="" class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-05c-prod</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Active
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1c</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Worker</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 55%"></div>
+</div>
+<span class="font-mono text-on-surface">55%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">14.0 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">31 / 64</td>
+<td class="px-3 py-3 font-mono text-outline">61d 11h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 6 (STANDARD / UNCHECKED) -->
+<tr class="bg-white border-l-4 border-transparent hover:bg-surface-container-low transition-colors">
+<td class="px-3 py-3 text-center">
+<input class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer border-outline" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-06c-db</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Active
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1c</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Storage Host</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 62%"></div>
+</div>
+<span class="font-mono text-on-surface">62%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">22.8 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">24 / 48</td>
+<td class="px-3 py-3 font-mono text-outline">142d 01h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 7 (STANDARD / UNCHECKED) -->
+<tr class="bg-white border-l-4 border-transparent hover:bg-surface-container-low transition-colors">
+<td class="px-3 py-3 text-center">
+<input class="rounded-none text-[#0f62fe] focus:ring-0 cursor-pointer border-outline" type="checkbox"/>
+</td>
+<td class="px-3 py-3 font-mono font-medium text-on-surface">
+<a class="text-[#0f62fe] hover:underline" href="#">node-useast-07a-cache</a>
+</td>
+<td class="px-3 py-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] bg-[#defbe6] text-[#0e6027] border border-[#a7f0ba] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Active
+                </span>
+</td>
+<td class="px-3 py-3 font-mono text-outline">us-east-1a</td>
+<td class="px-3 py-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface font-mono text-[11px]">Worker</span>
+</td>
+<td class="px-3 py-3">
+<div class="flex items-center gap-2">
+<div class="w-20 bg-gray-200 h-1.5 overflow-hidden">
+<div class="bg-[#0f62fe] h-full" style="width: 39%"></div>
+</div>
+<span class="font-mono text-on-surface">39%</span>
+</div>
+</td>
+<td class="px-3 py-3 font-mono text-on-surface">9.3 GB / 32 GB</td>
+<td class="px-3 py-3 font-mono">16 / 64</td>
+<td class="px-3 py-3 font-mono text-outline">08d 20h</td>
+<td class="px-3 py-3 text-right">
+<button class="p-1 hover:bg-surface-container rounded-none text-outline hover:text-on-surface" title="Row Actions">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- 5. COMPACT PAGINATION & FOOTER METADATA BAR -->
+<div class="p-3 border-t border-outline-variant flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-outline bg-surface-container-low font-sans">
+<!-- Left: Items Per Page & Total Count -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span>Items per page:</span>
+<div class="relative">
+<select class="bg-white border border-outline-variant text-xs text-on-surface py-1 pl-2 pr-6 rounded-none focus:ring-1 focus:ring-primary focus:border-primary cursor-pointer appearance-none">
+<option>25 per page</option>
+<option>50 per page</option>
+<option>100 per page</option>
+</select>
+<span class="material-symbols-outlined absolute right-1 top-1.5 text-outline text-[14px] pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<span class="text-outline-variant">|</span>
+<span class="font-mono text-on-surface">1–7 of 128 items</span>
+</div>
+<!-- Right: Page Controls -->
+<div class="flex items-center gap-1">
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-outline hover:text-on-surface hover:bg-surface-container rounded-none disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+</button>
+<button class="w-7 h-7 flex items-center justify-center bg-[#0f62fe] text-white font-medium font-mono text-xs rounded-none">
+            1
+          </button>
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-on-surface hover:bg-surface-container font-mono text-xs rounded-none">
+            2
+          </button>
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-on-surface hover:bg-surface-container font-mono text-xs rounded-none">
+            3
+          </button>
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-on-surface hover:bg-surface-container font-mono text-xs rounded-none">
+            4
+          </button>
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-on-surface hover:bg-surface-container font-mono text-xs rounded-none">
+            5
+          </button>
+<button class="w-7 h-7 flex items-center justify-center border border-outline-variant bg-white text-on-surface hover:bg-surface-container rounded-none">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Contextual System Status Footer Banner (Carbon Gray-100 Inverted Footer Bar) -->
+<footer class="mt-8 border-t border-outline-variant pt-4 pb-8 text-xs text-outline flex flex-col md:flex-row items-center justify-between gap-4 font-mono">
+<div class="flex items-center gap-4">
+<span>Vectis Operations Cloud • Control Plane Engine v4.19</span>
+<span class="text-outline-variant">•</span>
+<span class="flex items-center gap-1 text-[#24a148]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#24a148]"></span> Region Sync: 100%
+        </span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#">API Reference</a>
+<a class="hover:text-primary transition-colors" href="#">Audit Logging Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Security Incident Response</a>
+</div>
+</footer>
+</main>
+</body></html>

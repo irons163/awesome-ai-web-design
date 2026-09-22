@@ -1,8 +1,740 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sanity · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#f36458;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/sanity">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Sanity · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#f36458"></span><code>#f36458</code></div><div class="swatch"><span style="background:#0b0b0b"></span><code>#0b0b0b</code></div><div class="swatch"><span style="background:#ededed"></span><code>#ededed</code></div><div class="swatch"><span style="background:#212121"></span><code>#212121</code></div><div class="swatch"><span style="background:#353535"></span><code>#353535</code></div><div class="swatch"><span style="background:#797979"></span><code>#797979</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · system-ui, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KINESIS Content Studio - Operations Command Center</title>
+<!-- Google Fonts: Inter (UI/Headline) and IBM Plex Mono / Public Sans (Metadata & Labels) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,400&amp;family=Inter:wght@300;400;425;500;600;700;800&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config directly adhering to System Tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed-dim": "#ffb4ab",
+            "on-background": "#e5e2e1",
+            "surface-tint": "#ffb4ab",
+            "inverse-surface": "#e5e2e1",
+            "error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#005143",
+            "on-primary-container": "#5f0004",
+            "outline": "#a78a86",
+            "secondary-container": "#72342e",
+            "on-surface-variant": "#e0bfbb",
+            "primary": "#ffb4ab",
+            "inverse-primary": "#ad312a",
+            "on-tertiary-container": "#003229",
+            "on-tertiary-fixed": "#00201a",
+            "primary-container": "#f36458",
+            "on-primary-fixed-variant": "#8b1816",
+            "secondary-fixed": "#ffdad6",
+            "secondary-fixed-dim": "#ffb4ab",
+            "surface-container-highest": "#353534",
+            "surface-container-high": "#2a2a2a",
+            "tertiary-container": "#00a58b",
+            "outline-variant": "#58413e",
+            "on-tertiary": "#00382e",
+            "surface-container-lowest": "#0e0e0e",
+            "surface": "#131313",
+            "on-surface": "#e5e2e1",
+            "on-secondary-container": "#f49f95",
+            "inverse-on-surface": "#313030",
+            "on-secondary-fixed-variant": "#72342e",
+            "surface-dim": "#131313",
+            "tertiary-fixed-dim": "#5cdbbf",
+            "tertiary": "#5cdbbf",
+            "background": "#131313",
+            "tertiary-fixed": "#7bf8da",
+            "on-secondary-fixed": "#3a0a07",
+            "on-error-container": "#ffdad6",
+            "secondary": "#ffb4ab",
+            "surface-bright": "#3a3939",
+            "on-primary": "#690005",
+            "on-primary-fixed": "#410002",
+            "error": "#ffb4ab",
+            "surface-container-low": "#1c1b1b",
+            "on-secondary": "#551f1a",
+            "surface-variant": "#353534",
+            "on-error": "#690005",
+            "surface-container": "#201f1f",
+            "primary-fixed": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Sanity-inspired custom overrides and micro-styling */
+    body {
+      background-color: #0e0e0e;
+      color: #e5e2e1;
+      font-feature-settings: "cv01", "cv11", "cv12", "cv13", "ss07";
+    }
+    .material-symbols-outlined {
+      font-size: 16px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a2a;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #353534;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased selection:bg-primary-container selection:text-white min-w-[1440px] h-screen overflow-hidden flex flex-col">
+<!-- ========================================================================= -->
+<!-- 1. TOP NAVIGATION BAR (Shared Component Protocol)                          -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 z-50 flex items-center justify-between px-6 py-2.5 w-full bg-background/95 backdrop-blur border-b border-surface-container-highest shrink-0 h-14">
+<!-- Brand + Workspace Context Breadcrumb -->
+<div class="flex items-center gap-5">
+<!-- Monogram & Brand -->
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 rounded-sm bg-surface-container-high border border-surface-container-highest flex items-center justify-center text-on-background">
+<span class="material-symbols-outlined text-primary-container font-bold text-sm">widgets</span>
+</div>
+<span class="font-headline text-lg font-bold tracking-tight text-on-background uppercase">KINESIS</span>
+</div>
+<div class="h-4 w-px bg-surface-container-highest"></div>
+<!-- Project Breadcrumb -->
+<div class="flex items-center gap-2 text-xs font-mono tracking-tight text-outline">
+<span class="hover:text-on-surface cursor-pointer transition-colors duration-150">Global Content</span>
+<span class="text-surface-container-highest">/</span>
+<span class="hover:text-on-surface cursor-pointer transition-colors duration-150">Marketing Ecosystem</span>
+<span class="text-surface-container-highest">/</span>
+<span class="text-on-background bg-surface-container-high px-1.5 py-0.5 rounded border border-surface-container-highest font-mono text-[11px]">release-2025.04.1</span>
+</div>
+</div>
+<!-- Center Navigation Links (Mapped from Shared Component JSON) -->
+<nav class="hidden md:flex items-center gap-6 text-xs font-label">
+<!-- Active Link: Content -->
+<a class="text-on-background border-b-2 border-primary-container font-medium pb-2 transition-colors duration-150" href="#content">Content</a>
+<a class="text-on-surface-variant hover:text-on-background font-normal pb-2 transition-colors duration-150" href="#schemas">Schemas</a>
+<a class="text-on-surface-variant hover:text-on-background font-normal pb-2 transition-colors duration-150" href="#groq">GROQ Query</a>
+<a class="text-on-surface-variant hover:text-on-background font-normal pb-2 transition-colors duration-150" href="#pipelines">Pipelines</a>
+<a class="text-on-surface-variant hover:text-on-background font-normal pb-2 transition-colors duration-150" href="#releases">Releases</a>
+<a class="text-on-surface-variant hover:text-on-background font-normal pb-2 transition-colors duration-150" href="#docs">Docs</a>
+</nav>
+<!-- Trailing Actions Cluster -->
+<div class="flex items-center gap-3">
+<!-- Live environment badge -->
+<div class="flex items-center gap-2 px-2.5 py-1 bg-surface-container-high rounded border border-surface-container-highest text-[11px] font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+<span class="text-on-surface">production-us-east</span>
+<span class="text-outline text-[10px] uppercase">(read/write)</span>
+</div>
+<!-- Quick Command Bar Trigger -->
+<button class="flex items-center gap-2 px-2.5 py-1 bg-surface-container rounded border border-surface-container-highest text-outline hover:text-on-surface hover:border-outline text-xs transition-colors duration-150">
+<span class="material-symbols-outlined text-[14px]">search</span>
+<span class="font-mono text-[11px]">⌘K</span>
+</button>
+<!-- Utility Icons -->
+<div class="flex items-center gap-1">
+<button class="p-1.5 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors duration-150" title="Terminal console">
+<span class="material-symbols-outlined text-[17px]">terminal</span>
+</button>
+<button class="p-1.5 text-outline hover:text-on-surface hover:bg-surface-container rounded relative transition-colors duration-150" title="Notifications">
+<span class="material-symbols-outlined text-[17px]">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-primary-container rounded-full"></span>
+</button>
+<button class="p-1.5 text-outline hover:text-on-surface hover:bg-surface-container rounded transition-colors duration-150" title="Settings">
+<span class="material-symbols-outlined text-[17px]">settings</span>
+</button>
+</div>
+<div class="h-4 w-px bg-surface-container-highest"></div>
+<!-- Sole High-Priority Coral Button (Primary Action) -->
+<button class="flex items-center gap-2 px-3.5 py-1.5 bg-primary-container hover:bg-opacity-90 text-white rounded-full text-xs font-headline font-medium shadow-sm transition-all duration-150">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Publish Document (⌘P)</span>
+</button>
+<!-- User Profile Avatar -->
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border border-surface-container-highest flex items-center justify-center text-xs font-mono font-medium text-on-surface" title="User profile avatar">
+        MC
+      </div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 2. EDITORIAL HEADER BAR                                                   -->
+<!-- ========================================================================= -->
+<section class="h-12 border-b border-surface-container-highest bg-surface-container-low px-6 flex items-center justify-between shrink-0">
+<div class="flex items-center gap-4">
+<!-- Back / Document indicator icon -->
+<div class="flex items-center gap-2 text-outline hover:text-on-surface cursor-pointer">
+<span class="material-symbols-outlined text-sm">edit_document</span>
+</div>
+<!-- Document Title -->
+<h1 class="text-sm font-headline font-semibold text-on-surface tracking-tight truncate max-w-[480px]">
+        Enterprise Security Whitepaper: Distributed Zero-Trust Architecture
+      </h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-surface-container-high border border-surface-container-highest text-tertiary">
+        Whitepaper
+      </span>
+<!-- Monospaced Metadata Ribbon -->
+<div class="hidden xl:flex items-center gap-3 text-[11px] font-mono text-outline border-l border-surface-container-highest pl-4">
+<span>ID: <span class="text-on-surface font-normal">doc_99f48a12e</span></span>
+<span class="text-surface-container-highest">•</span>
+<span>rev: <span class="text-on-surface">28</span></span>
+<span class="text-surface-container-highest">•</span>
+<span>locale: <span class="text-on-surface">en-US</span></span>
+<span class="text-surface-container-highest">•</span>
+<span>dataset: <span class="text-on-surface">prod-core</span></span>
+<span class="text-surface-container-highest">•</span>
+<span>latency: <span class="text-tertiary">14ms</span></span>
+</div>
+</div>
+<!-- Secondary Contextual Controls -->
+<div class="flex items-center gap-2">
+<!-- Live query preview trigger -->
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-label text-outline hover:text-on-surface hover:bg-surface-container rounded border border-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[13px]">visibility</span>
+<span>Preview via Live Query</span>
+</button>
+<!-- Compare Diff -->
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-label text-outline hover:text-on-surface hover:bg-surface-container rounded border border-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[13px]">difference</span>
+<span>Compare Diff</span>
+</button>
+<!-- Fork Branch -->
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-label text-outline hover:text-on-surface hover:bg-surface-container rounded border border-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-[13px]">fork_right</span>
+<span>Fork Branch</span>
+</button>
+<div class="h-4 w-px bg-surface-container-highest mx-1"></div>
+<!-- Active Collaborators Stack -->
+<div class="flex items-center gap-1.5 pl-1" title="Activity (4 active editors)">
+<div class="flex -space-x-1.5 overflow-hidden">
+<div class="inline-block h-5 w-5 rounded-full ring-1 ring-surface-container-lowest bg-surface-container-high text-[9px] font-mono flex items-center justify-center text-on-surface">AM</div>
+<div class="inline-block h-5 w-5 rounded-full ring-1 ring-surface-container-lowest bg-tertiary-container text-[9px] font-mono flex items-center justify-center text-white">SK</div>
+<div class="inline-block h-5 w-5 rounded-full ring-1 ring-surface-container-lowest bg-surface-container-highest text-[9px] font-mono flex items-center justify-center text-on-surface">LR</div>
+<div class="inline-block h-5 w-5 rounded-full ring-1 ring-surface-container-lowest bg-secondary-container text-[9px] font-mono flex items-center justify-center text-primary">+1</div>
+</div>
+<span class="text-[11px] font-mono text-outline">4 active</span>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- 3. CENTRAL TRI-PANEL WORKSPACE (Dense Content Command Center)             -->
+<!-- ========================================================================= -->
+<main class="flex-1 flex overflow-hidden">
+<!-- --------------------------------------------------------------------- -->
+<!-- PANEL A: STRUCTURE & DOCUMENT TREE (~280px)                          -->
+<!-- --------------------------------------------------------------------- -->
+<aside class="w-[280px] shrink-0 border-r border-surface-container-highest bg-surface-container-lowest flex flex-col justify-between select-none">
+<!-- Top Section: Dataset Switcher & Filter -->
+<div class="p-3 border-b border-surface-container-highest space-y-2.5">
+<!-- Dataset Selector Dropdown -->
+<div class="flex items-center justify-between bg-surface-container px-2.5 py-1.5 rounded border border-surface-container-highest text-xs cursor-pointer hover:border-outline transition-colors">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="font-mono text-on-surface text-[11px]">dataset: production</span>
+</div>
+<span class="material-symbols-outlined text-outline text-[14px]">expand_more</span>
+</div>
+<!-- Filter Input -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2 top-2 text-outline text-[14px]">filter_alt</span>
+<input class="w-full bg-surface-container-low border border-surface-container-highest rounded pl-7 pr-2 py-1 text-xs text-on-surface placeholder:text-outline focus:outline-none focus:border-tertiary font-mono text-[11px]" placeholder="Filter schemas &amp; records..." type="text"/>
+</div>
+</div>
+<!-- Middle Scrollable Area: Content Types & Documents -->
+<div class="flex-1 overflow-y-auto px-2 py-3 space-y-4">
+<!-- Content Types Registry Group -->
+<div>
+<div class="flex items-center justify-between px-2 pb-1.5 text-[10px] font-label uppercase tracking-wider text-outline font-semibold">
+<span>Content Models</span>
+<span class="hover:text-on-surface cursor-pointer">+ New</span>
+</div>
+<div class="space-y-0.5 text-xs font-label">
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-sm bg-surface-container-high text-on-surface font-medium border border-surface-container-highest/60">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary">article</span>
+<span>Articles &amp; Papers</span>
+</div>
+<span class="text-[10px] font-mono text-outline bg-surface-container px-1 rounded">42</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-sm text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">web</span>
+<span>Landing Pages</span>
+</div>
+<span class="text-[10px] font-mono text-outline">18</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-sm text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">integration_instructions</span>
+<span>API Guides</span>
+</div>
+<span class="text-[10px] font-mono text-outline">64</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-sm text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span>Case Studies</span>
+</div>
+<span class="text-[10px] font-mono text-outline">12</span>
+</button>
+<button class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-sm text-outline hover:text-on-surface hover:bg-surface-container transition-colors">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">badge</span>
+<span>Team Bios</span>
+</div>
+<span class="text-[10px] font-mono text-outline">9</span>
+</button>
+</div>
+</div>
+<div class="h-px bg-surface-container-highest mx-1"></div>
+<!-- Active Documents List (with real-time state dots) -->
+<div>
+<div class="flex items-center justify-between px-2 pb-1.5 text-[10px] font-label uppercase tracking-wider text-outline font-semibold">
+<span>Recent Documents</span>
+<span class="text-[10px] font-mono text-outline">revs</span>
+</div>
+<div class="space-y-1">
+<!-- Selected Document (Zero-Trust Architecture) -->
+<div class="group px-2.5 py-2 rounded bg-surface-container border border-surface-container-highest cursor-pointer">
+<div class="flex items-start justify-between gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-purple-400 mt-0.5 shrink-0" title="State: In Review"></span>
+<span class="text-xs font-headline font-medium text-on-surface line-clamp-1">Zero-Trust Architecture</span>
+</div>
+<span class="text-[10px] font-mono text-tertiary">#28</span>
+</div>
+<div class="flex items-center justify-between mt-1 pl-4 text-[10px] font-mono text-outline">
+<span>whitepaper.mdx</span>
+<span>4m ago</span>
+</div>
+</div>
+<!-- Item 2: Edge CDN Cache Invalidation -->
+<div class="group px-2.5 py-2 rounded hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400 mt-0.5 shrink-0" title="State: Published"></span>
+<span class="text-xs font-headline text-outline group-hover:text-on-surface line-clamp-1">Global Edge Cache Mesh</span>
+</div>
+<span class="text-[10px] font-mono text-outline">#14</span>
+</div>
+<div class="flex items-center justify-between mt-1 pl-4 text-[10px] font-mono text-outline">
+<span>guide.ts</span>
+<span>1h ago</span>
+</div>
+</div>
+<!-- Item 3: SOC2 Type II Attestation 2025 -->
+<div class="group px-2.5 py-2 rounded hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400 mt-0.5 shrink-0" title="State: Published"></span>
+<span class="text-xs font-headline text-outline group-hover:text-on-surface line-clamp-1">SOC2 Type II Attestation</span>
+</div>
+<span class="text-[10px] font-mono text-outline">#09</span>
+</div>
+<div class="flex items-center justify-between mt-1 pl-4 text-[10px] font-mono text-outline">
+<span>compliance.json</span>
+<span>4h ago</span>
+</div>
+</div>
+<!-- Item 4: Multi-Tenant RBAC Policies -->
+<div class="group px-2.5 py-2 rounded hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-400 mt-0.5 shrink-0" title="State: Draft"></span>
+<span class="text-xs font-headline text-outline group-hover:text-on-surface line-clamp-1">Multi-Tenant RBAC Policies</span>
+</div>
+<span class="text-[10px] font-mono text-outline">#03</span>
+</div>
+<div class="flex items-center justify-between mt-1 pl-4 text-[10px] font-mono text-outline">
+<span>article.mdx</span>
+<span>yesterday</span>
+</div>
+</div>
+<!-- Item 5: Webhook Signature Verification -->
+<div class="group px-2.5 py-2 rounded hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-start justify-between gap-1">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-400 mt-0.5 shrink-0" title="State: Draft"></span>
+<span class="text-xs font-headline text-outline group-hover:text-on-surface line-clamp-1">Webhook Signature Spec</span>
+</div>
+<span class="text-[10px] font-mono text-outline">#07</span>
+</div>
+<div class="flex items-center justify-between mt-1 pl-4 text-[10px] font-mono text-outline">
+<span>api-spec.ts</span>
+<span>2d ago</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Panel Footer: Quick Workspace CTA & System Metrics -->
+<div class="p-3 border-t border-surface-container-highest bg-surface-container-low space-y-2">
+<button class="w-full flex items-center justify-center gap-2 py-1.5 px-3 bg-surface-container hover:bg-surface-container-high border border-surface-container-highest text-on-surface rounded text-xs font-label font-medium transition-colors">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>New Document</span>
+</button>
+<div class="flex items-center justify-between text-[10px] font-mono text-outline px-1">
+<span>Storage: 4.8 / 20 GB</span>
+<span class="text-tertiary">99.99% sync</span>
+</div>
+</div>
+</aside>
+<!-- --------------------------------------------------------------------- -->
+<!-- PANEL B: WORKFLOW STAGE & FIELD EDITOR (~680px)                      -->
+<!-- --------------------------------------------------------------------- -->
+<section class="flex-1 overflow-y-auto bg-surface-container-lowest border-r border-surface-container-highest flex flex-col">
+<!-- Structured Workflow Stage Tracker Ribbon -->
+<div class="p-4 border-b border-surface-container-highest bg-surface-container-low">
+<div class="flex items-center justify-between mb-3">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline font-semibold">Content Lifecycle Pipeline</span>
+<span class="text-[11px] font-mono text-outline">Stage 2 of 3 Active</span>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<!-- Stage 1: Draft (Completed) -->
+<div class="p-2.5 rounded bg-surface-container border border-surface-container-highest">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-[14px]">check_circle</span>
+                Draft
+              </span>
+<span class="text-[10px] font-mono text-tertiary uppercase">Done</span>
+</div>
+<p class="text-[11px] text-outline mt-1 leading-snug">3 revisions by <span class="font-mono text-on-surface">@marcus.dev</span></p>
+</div>
+<!-- Stage 2: In Review (Active) -->
+<div class="p-2.5 rounded bg-surface-container-high border border-purple-500/40 relative">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-semibold text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-purple-400 animate-ping"></span>
+                In Review
+              </span>
+<span class="text-[10px] font-mono text-purple-300 font-semibold">2/3 Signed</span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-1 leading-snug">
+              Legal ✓ • SecOps ✓ • <span class="text-white font-medium underline decoration-purple-400">Tech Lead pending</span>
+</p>
+</div>
+<!-- Stage 3: Published (Target) -->
+<div class="p-2.5 rounded bg-surface-container border border-surface-container-highest/60 opacity-60">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-medium text-outline flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">lock_clock</span>
+                Published
+              </span>
+<span class="text-[10px] font-mono text-outline">Target</span>
+</div>
+<p class="text-[11px] text-outline mt-1 leading-snug">Edge Mesh CDN broadcast</p>
+</div>
+</div>
+</div>
+<!-- Main Document Editor Form Fields -->
+<div class="p-6 space-y-6 max-w-3xl">
+<!-- Title & Slug Generator -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-xs font-label uppercase tracking-wider text-outline font-semibold">Document Title</label>
+<span class="text-[11px] font-mono text-outline">schema: string (required)</span>
+</div>
+<input class="w-full bg-surface-container border border-surface-container-highest rounded px-3.5 py-2.5 text-base font-headline font-semibold text-on-surface focus:outline-none focus:border-tertiary transition-colors" type="text" value="Enterprise Security Whitepaper: Distributed Zero-Trust Architecture"/>
+<!-- Generated Slug Field -->
+<div class="flex items-center gap-2 text-xs font-mono text-outline bg-surface-container-low px-3 py-1.5 rounded border border-surface-container-highest">
+<span class="material-symbols-outlined text-[14px] text-outline">link</span>
+<span>slug.current:</span>
+<span class="text-on-surface font-medium selection:bg-tertiary">/insights/whitepapers/zero-trust-architecture-2025</span>
+<button class="ml-auto text-outline hover:text-on-surface flex items-center gap-1 text-[11px]">
+<span class="material-symbols-outlined text-[12px]">refresh</span>
+              Regenerate
+            </button>
+</div>
+</div>
+<!-- Executive Summary Field (Portable Rich Text) -->
+<div class="space-y-2">
+<div class="flex items-center justify-between">
+<label class="text-xs font-label uppercase tracking-wider text-outline font-semibold">Executive Summary (Rich Text Block)</label>
+<div class="flex items-center gap-2 text-outline">
+<span class="text-[11px] font-mono">148 words</span>
+<span class="material-symbols-outlined text-[14px]">format_size</span>
+</div>
+</div>
+<!-- Rich Text Mini-Toolbar -->
+<div class="border border-surface-container-highest rounded bg-surface-container overflow-hidden">
+<div class="flex items-center gap-1 px-2.5 py-1.5 bg-surface-container-high border-b border-surface-container-highest text-outline text-xs">
+<button class="p-1 hover:text-on-surface rounded font-bold">B</button>
+<button class="p-1 hover:text-on-surface rounded italic">I</button>
+<button class="p-1 hover:text-on-surface rounded underline">U</button>
+<div class="h-3 w-px bg-surface-container-highest mx-1"></div>
+<button class="p-1 hover:text-on-surface rounded font-mono text-[11px]">&lt;/&gt;</button>
+<button class="p-1 hover:text-on-surface rounded flex items-center"><span class="material-symbols-outlined text-[14px]">format_quote</span></button>
+<button class="p-1 hover:text-on-surface rounded flex items-center"><span class="material-symbols-outlined text-[14px]">link</span></button>
+<button class="p-1 hover:text-on-surface rounded flex items-center"><span class="material-symbols-outlined text-[14px]">table_chart</span></button>
+<div class="ml-auto flex items-center gap-2 text-[11px] font-mono text-outline">
+<span class="text-tertiary">● Autosaved</span>
+</div>
+</div>
+<!-- Content Area -->
+<div class="p-3.5 text-xs text-on-surface font-body leading-relaxed space-y-3">
+<p>
+                In high-velocity enterprise organizations, perimeter defense topologies are inherently insufficient against sophisticated credential elevation vectors. Modern edge networks mandate deterministic, context-aware verification at every hop—enforcing cryptographically verified mutual TLS (mTLS) combined with continuous ephemeral token rotation.
+              </p>
+<!-- Embedded Callout Quote Object inside editor -->
+<div class="p-3 rounded border-l-2 border-primary-container bg-surface-container-low my-2">
+<div class="flex items-center justify-between text-[11px] font-mono text-primary mb-1">
+<span class="flex items-center gap-1 font-semibold">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+                    SECURITY IMPERATIVE
+                  </span>
+<span>Citation #NIST-SP-800-207</span>
+</div>
+<p class="italic text-on-surface-variant font-headline">
+                  "No implicit trust is granted to assets or user accounts based solely on their physical location or network ownership."
+                </p>
+</div>
+<p class="text-outline">
+                This specification document outlines the operational implementation matrix across edge worker tiers, distributed key management services (KMS), and automated revocation pipelines.
+              </p>
+</div>
+</div>
+</div>
+<!-- Content Hierarchy Blocks (Array of Structured Components) -->
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<label class="text-xs font-label uppercase tracking-wider text-outline font-semibold">Modular Content Blocks</label>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container-high text-on-surface border border-surface-container-highest">Array: 3 Items</span>
+</div>
+<button class="flex items-center gap-1 text-xs font-label text-outline hover:text-on-surface">
+<span class="material-symbols-outlined text-[13px]">add_box</span>
+              Add Block
+            </button>
+</div>
+<!-- Block 1: Hero Header Block -->
+<div class="border border-surface-container-highest rounded bg-surface-container p-3 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[14px]">drag_indicator</span>
+<span class="text-xs font-mono font-medium text-on-surface">Block [0]: heroHeaderBlock</span>
+<span class="text-[10px] font-mono text-outline">#b_8829a</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">expand_less</span></button>
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">delete</span></button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-1 text-xs">
+<div class="bg-surface-container-low p-2 rounded border border-surface-container-highest">
+<span class="text-[10px] font-mono text-outline block mb-1">eyebrowTag</span>
+<span class="font-mono text-on-surface text-[11px]">WHITE-PAPER // 04.2025</span>
+</div>
+<div class="bg-surface-container-low p-2 rounded border border-surface-container-highest">
+<span class="text-[10px] font-mono text-outline block mb-1">readTimeEstimate</span>
+<span class="font-mono text-on-surface text-[11px]">18 min read</span>
+</div>
+</div>
+</div>
+<!-- Block 2: Key Architecture Pillars -->
+<div class="border border-surface-container-highest rounded bg-surface-container p-3 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[14px]">drag_indicator</span>
+<span class="text-xs font-mono font-medium text-on-surface">Block [1]: architecturePillars</span>
+<span class="text-[10px] font-mono text-outline">#b_9912c (4 items)</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">expand_less</span></button>
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">delete</span></button>
+</div>
+</div>
+<div class="space-y-1.5 text-xs font-mono">
+<div class="flex items-center justify-between px-2.5 py-1.5 bg-surface-container-low rounded border border-surface-container-highest text-[11px]">
+<span class="text-on-surface">1. Ephemeral Identity Assertion (SPIFFE/SPIRE)</span>
+<span class="text-tertiary">active</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 bg-surface-container-low rounded border border-surface-container-highest text-[11px]">
+<span class="text-on-surface">2. Hardware Enclave Attestation (SGX/SEV)</span>
+<span class="text-tertiary">active</span>
+</div>
+<div class="flex items-center justify-between px-2.5 py-1.5 bg-surface-container-low rounded border border-surface-container-highest text-[11px]">
+<span class="text-on-surface">3. Distributed eBPF Packet Telemetry</span>
+<span class="text-tertiary">active</span>
+</div>
+</div>
+</div>
+<!-- Block 3: Compliance Grid Matrix -->
+<div class="border border-surface-container-highest rounded bg-surface-container p-3 space-y-2">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-[14px]">drag_indicator</span>
+<span class="text-xs font-mono font-medium text-on-surface">Block [2]: complianceMatrixGrid</span>
+<span class="text-[10px] font-mono text-outline">#b_4431e</span>
+</div>
+<div class="flex items-center gap-1 text-outline">
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">expand_less</span></button>
+<button class="hover:text-on-surface p-1"><span class="material-symbols-outlined text-[13px]">delete</span></button>
+</div>
+</div>
+<div class="text-[11px] font-mono text-outline bg-surface-container-low p-2 rounded border border-surface-container-highest flex items-center justify-between">
+<span>Frameworks: FedRAMP High, ISO 27001, HIPAA BAA</span>
+<span class="text-tertiary">3 references mapped</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- --------------------------------------------------------------------- -->
+<!-- PANEL C: SCHEMA INSPECTOR, GROQ QUERY & METADATA (~480px)           -->
+<!-- --------------------------------------------------------------------- -->
+<aside class="w-[480px] shrink-0 bg-surface-container-lowest flex flex-col justify-between overflow-hidden">
+<!-- Top Inspector Tab Navigation -->
+<div class="flex items-center border-b border-surface-container-highest bg-surface-container-low px-3 pt-2">
+<button class="px-3 py-1.5 text-xs font-label font-medium text-on-surface border-b-2 border-primary-container -mb-px">
+          Schema Definition
+        </button>
+<button class="px-3 py-1.5 text-xs font-label font-normal text-outline hover:text-on-surface -mb-px">
+          GROQ Live Output
+        </button>
+<button class="px-3 py-1.5 text-xs font-label font-normal text-outline hover:text-on-surface -mb-px">
+          Validation &amp; Webhooks
+        </button>
+</div>
+<!-- Tab Body Scrollable Section -->
+<div class="flex-1 overflow-y-auto p-4 space-y-5 font-mono text-xs">
+<!-- Live Schema View (TypeScript / Sanity Schema Definition) -->
+<div>
+<div class="flex items-center justify-between pb-1.5">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline font-semibold">Live Schema Contract</span>
+<span class="text-[11px] font-mono text-tertiary">schema.whitepaper.ts</span>
+</div>
+<div class="bg-surface-container-low rounded border border-surface-container-highest p-3 font-mono text-[11px] leading-relaxed text-on-surface overflow-x-auto">
+<div class="text-outline-variant font-light">// Kinesis Schema Studio v4.18</div>
+<div><span class="text-primary-container">import</span> { defineType, defineField } <span class="text-primary-container">from</span> <span class="text-tertiary">'kinesis/schema'</span>;</div>
+<br/>
+<div><span class="text-primary-container">export default</span> <span class="text-tertiary-fixed">defineType</span>({</div>
+<div class="pl-3">name: <span class="text-tertiary">'whitepaper'</span>,</div>
+<div class="pl-3">title: <span class="text-tertiary">'Technical Whitepaper'</span>,</div>
+<div class="pl-3">type: <span class="text-tertiary">'document'</span>,</div>
+<div class="pl-3">fields: [</div>
+<div class="pl-6"><span class="text-tertiary-fixed">defineField</span>({ name: <span class="text-tertiary">'title'</span>, type: <span class="text-tertiary">'string'</span>, validation: Rule =&gt; Rule.required() }),</div>
+<div class="pl-6"><span class="text-tertiary-fixed">defineField</span>({ name: <span class="text-tertiary">'slug'</span>, type: <span class="text-tertiary">'slug'</span>, options: { source: <span class="text-tertiary">'title'</span> } }),</div>
+<div class="pl-6"><span class="text-tertiary-fixed">defineField</span>({ name: <span class="text-tertiary">'summary'</span>, type: <span class="text-tertiary">'portableText'</span> }),</div>
+<div class="pl-6"><span class="text-tertiary-fixed">defineField</span>({ name: <span class="text-tertiary">'contentBlocks'</span>, type: <span class="text-tertiary">'array'</span>, of: [{ type: <span class="text-tertiary">'heroBlock'</span> }, { type: <span class="text-tertiary">'pillarsBlock'</span> }] })</div>
+<div class="pl-3">]</div>
+<div>});</div>
+</div>
+</div>
+<!-- GROQ Query Playground Snippet -->
+<div>
+<div class="flex items-center justify-between pb-1.5">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline font-semibold">GROQ Query Preview</span>
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+</div>
+<button class="text-[11px] font-mono text-tertiary hover:underline">Execute (⌘Enter)</button>
+</div>
+<div class="bg-surface-container rounded border border-surface-container-highest p-2.5 font-mono text-[11px] text-on-surface">
+<span class="text-primary-container">*</span>[_type == <span class="text-tertiary">"whitepaper"</span> &amp;&amp; slug.current == <span class="text-outline">$slug</span>][0] {
+            <div class="pl-3 text-outline">
+              _id, rev, title,
+              <span class="text-on-surface">author-&gt;</span>{ name, role, avatar },
+              contentBlocks[]{ ..., <span class="text-tertiary">"assetUrl"</span>: asset-&gt;url },
+              publishedAt
+            </div>
+            }
+          </div>
+<!-- GROQ Response Status Bar -->
+<div class="flex items-center justify-between mt-1 text-[10px] font-mono text-outline px-1">
+<span>Query Cost: 0.12 RU</span>
+<span>Result: 1 document (12.4 KB)</span>
+</div>
+</div>
+<!-- Validation Checklist -->
+<div>
+<div class="flex items-center justify-between pb-1.5">
+<span class="text-[10px] font-label uppercase tracking-widest text-outline font-semibold">Schema &amp; SEO Validation</span>
+<span class="text-[10px] font-mono text-outline">4 of 5 Passed</span>
+</div>
+<div class="space-y-1.5 text-xs font-mono">
+<div class="flex items-center gap-2 p-2 rounded bg-surface-container-low border border-surface-container-highest">
+<span class="material-symbols-outlined text-tertiary text-[14px]">check</span>
+<span class="text-on-surface text-[11px]">Primary title length within bounds (68/70 chars)</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded bg-surface-container-low border border-surface-container-highest">
+<span class="material-symbols-outlined text-tertiary text-[14px]">check</span>
+<span class="text-on-surface text-[11px]">Unique canonical slug verified in production</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded bg-surface-container-low border border-surface-container-highest">
+<span class="material-symbols-outlined text-tertiary text-[14px]">check</span>
+<span class="text-on-surface text-[11px]">Required author reference bound (@marcus.dev)</span>
+</div>
+<div class="flex items-center gap-2 p-2 rounded bg-surface-container-low border border-amber-500/30 text-amber-300">
+<span class="material-symbols-outlined text-amber-400 text-[14px]">warning</span>
+<span class="text-[11px]">OpenGraph 1200x630 banner asset recommended</span>
+</div>
+</div>
+</div>
+<!-- Deployment Webhooks Armed Status -->
+<div>
+<span class="text-[10px] font-label uppercase tracking-widest text-outline font-semibold block pb-1.5">Active Deployment Webhooks</span>
+<div class="space-y-1.5 text-xs font-mono">
+<div class="flex items-center justify-between p-2 rounded bg-surface-container border border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-on-surface text-[11px]">Vercel Edge Middleware Revalidate</span>
+</div>
+<span class="text-[10px] text-outline">armed</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-surface-container border border-surface-container-highest">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span>
+<span class="text-on-surface text-[11px]">Algolia Enterprise Search Indexer</span>
+</div>
+<span class="text-[10px] text-outline">armed</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Panel Status / Deploy Preview Drawer Footer -->
+<div class="p-3 border-t border-surface-container-highest bg-surface-container-low flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2 text-outline">
+<span class="material-symbols-outlined text-[14px]">cloud_sync</span>
+<span class="text-[11px]">Live Preview Endpoint</span>
+</div>
+<a class="text-tertiary hover:underline text-[11px] flex items-center gap-1" href="#preview">
+<span>staging-preview.mesh.internal</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+</aside>
+</main>
+</body></html>

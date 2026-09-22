@@ -1,8 +1,548 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Warp · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#f7f5f0;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/warp">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Warp · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#f7f5f0"></span><code>#f7f5f0</code></div><div class="swatch"><span style="background:#2b2622"></span><code>#2b2622</code></div><div class="swatch"><span style="background:#c9c0ad"></span><code>#c9c0ad</code></div><div class="swatch"><span style="background:#dad2c1"></span><code>#dad2c1</code></div><div class="swatch"><span style="background:#aea69c"></span><code>#aea69c</code></div><div class="swatch"><span style="background:#383330"></span><code>#383330</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PulseTerm — Modern Agentic Workspace</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & DM Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&amp;family=Inter:wght@300;400;500;600&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container": "#231f1b",
+            "surface": "#17130f",
+            "on-primary-fixed-variant": "#474744",
+            "tertiary": "#ffffff",
+            "on-surface": "#ebe1da",
+            "inverse-on-surface": "#352f2b",
+            "inverse-surface": "#ebe1da",
+            "on-surface-variant": "#c7c7bf",
+            "tertiary-container": "#e9e0e2",
+            "surface-tint": "#c8c6c2",
+            "secondary-container": "#474745",
+            "secondary-fixed": "#e5e2df",
+            "inverse-primary": "#5f5e5b",
+            "on-secondary-container": "#b7b5b2",
+            "surface-container-highest": "#39342f",
+            "outline-variant": "#464742",
+            "surface-container-lowest": "#110d0a",
+            "surface-container-high": "#2e2925",
+            "primary": "#ffffff",
+            "on-tertiary-container": "#696365",
+            "error-container": "#93000a",
+            "on-tertiary-fixed": "#1e1b1c",
+            "on-error-container": "#ffdad6",
+            "outline": "#90918a",
+            "on-secondary-fixed-variant": "#474745",
+            "primary-fixed-dim": "#c8c6c2",
+            "primary-fixed": "#e4e2dd",
+            "on-tertiary": "#342f31",
+            "error": "#ffb4ab",
+            "primary-container": "#e4e2dd",
+            "tertiary-fixed-dim": "#ccc4c6",
+            "surface-container-low": "#1f1b17",
+            "on-tertiary-fixed-variant": "#4a4547",
+            "on-secondary-fixed": "#1c1c1a",
+            "on-error": "#690005",
+            "surface-bright": "#3e3834",
+            "secondary": "#c8c6c3",
+            "on-secondary": "#31302f",
+            "surface-variant": "#39342f",
+            "background": "#17130f",
+            "on-primary-container": "#656461",
+            "surface-dim": "#17130f",
+            "secondary-fixed-dim": "#c8c6c3",
+            "on-background": "#ebe1da",
+            "tertiary-fixed": "#e9e0e2",
+            "on-primary": "#30312e",
+            "on-primary-fixed": "#1b1c19"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Public Sans", "sans-serif"],
+            mono: ["DM Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom terminal scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #17130f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #39342f;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #464742;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 350, 'GRAD' 0, 'opsz' 20;
+      font-size: 16px;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased h-screen flex flex-col overflow-hidden selection:bg-secondary-container selection:text-primary">
+<!-- TopNavBar (Shared Component implementation) -->
+<header class="flex justify-between items-center w-full px-4 h-12 sticky top-0 z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant flat no shadows select-none">
+<!-- Left: Brand + Search Bar -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="text-xs px-1.5 py-0.5 rounded bg-surface-container-high text-primary font-mono font-medium border border-outline-variant">PT</span>
+<span class="font-display font-medium text-sm text-primary dark:text-primary tracking-tight">PulseTerm</span>
+</div>
+<!-- Quick Session Search bar (search_bar: on_left) -->
+<div class="relative flex items-center ml-2">
+<span class="material-symbols-outlined text-outline absolute left-2.5 pointer-events-none" data-icon="search">search</span>
+<input class="bg-surface-container-low text-on-surface placeholder:text-outline text-xs font-mono pl-8 pr-8 py-1.5 rounded border border-outline-variant focus:outline-none focus:border-outline w-72 h-7 transition-colors" placeholder="Jump to command, workflow, or block (⌘K)" type="text"/>
+<span class="absolute right-2 text-[10px] text-outline font-mono bg-surface-container px-1 py-0.2 rounded border border-outline-variant">⌘K</span>
+</div>
+<!-- Center navigation links -->
+<nav class="hidden md:flex items-center gap-5 ml-4">
+<!-- Active destination matching "Workspaces" -->
+<a class="text-primary dark:text-primary font-medium border-b border-primary dark:border-primary pb-1 font-label text-sm transition-colors" href="#">Workspaces</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-sm font-label transition-colors" href="#">Workflows</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-sm font-label transition-colors" href="#">Agents</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface text-sm font-label transition-colors" href="#">Docs</a>
+</nav>
+</div>
+<!-- Center Context: Breadcrumb and System Telemetry -->
+<div class="hidden lg:flex items-center gap-3 text-xs font-mono text-outline">
+<div class="flex items-center gap-1.5 bg-surface-container-low px-2 py-0.5 rounded border border-outline-variant">
+<span class="material-symbols-outlined text-outline text-[14px]" data-icon="folder_open">folder_open</span>
+<span class="text-on-surface-variant font-medium">~/pulse-core</span>
+<span class="text-outline">/</span>
+<span class="text-primary">feature/agent-mesh</span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary ml-1" title="clean worktree"></span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-outline pl-1">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500/80"></span> 18ms
+        </span>
+<span class="text-outline-variant">|</span>
+<span>ARM64 · 2.1% CPU</span>
+</div>
+</div>
+<!-- Trailing Actions & Icons -->
+<div class="flex items-center gap-2">
+<!-- Trailing Icon Actions: terminal, tune, help -->
+<div class="flex items-center">
+<button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded" title="Toggle Terminal Panels">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded" title="Environment Tune">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</button>
+<button class="p-1.5 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded" title="Documentation &amp; Help">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-4 w-px bg-outline-variant mx-1"></div>
+<!-- Trailing Secondary: Connect SSH -->
+<button class="px-2.5 py-1 text-xs font-label text-on-surface hover:bg-surface-container-high transition-colors rounded border border-outline-variant">
+        Connect SSH
+      </button>
+<!-- Trailing Primary: New Session -->
+<button class="px-2.5 py-1 text-xs font-label bg-primary text-on-primary font-medium hover:opacity-90 active:scale-[0.99] transition-all rounded flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="add">add</span>
+        New Session
+      </button>
+</div>
+</header>
+<!-- App Body Layout: Sidebar + Terminal Canvas -->
+<div class="flex flex-1 overflow-hidden">
+<!-- SideNavBar (Shared Component implementation) -->
+<aside class="flex flex-col justify-between h-[calc(100vh-3rem)] w-64 p-3 shrink-0 bg-surface-container-low dark:bg-surface-container-low border-r border-outline-variant dark:border-outline-variant flat no shadows select-none">
+<!-- Top Section: Header Workspace + Nav Tabs -->
+<div class="flex flex-col gap-3">
+<!-- Header status card -->
+<div class="flex items-center justify-between px-2 py-1.5 rounded bg-surface-container-high border border-outline-variant">
+<div class="flex items-center gap-2">
+<div class="relative flex items-center justify-center w-6 h-6 rounded bg-surface text-primary border border-outline-variant text-[11px] font-mono">
+              λ
+              <span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-emerald-500 ring-2 ring-surface" title="Agent Pulse status online"></span>
+</div>
+<div class="flex flex-col">
+<span class="font-display font-medium text-xs text-on-surface leading-tight">pulse-core</span>
+<span class="font-body text-[10px] text-outline leading-tight">main (staged)</span>
+</div>
+</div>
+<!-- CTA: New Branch -->
+<button class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface hover:bg-surface-bright text-on-surface-variant border border-outline-variant transition-colors" title="Create branch">
+            New Branch
+          </button>
+</div>
+<!-- Rail Navigation List -->
+<nav class="flex flex-col gap-0.5">
+<!-- Active Sessions (Active tab based on workspace activity) -->
+<a class="flex items-center gap-2 bg-surface-container-high dark:bg-surface-container-high text-primary dark:text-primary rounded px-2.5 py-1.5 font-medium transition-transform duration-100 active:scale-[0.99] text-xs" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="terminal">terminal</span>
+<span class="flex-1">Active Sessions</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 bg-surface rounded border border-outline-variant text-outline">3</span>
+</a>
+<!-- Git Worktrees -->
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="fork_right">fork_right</span>
+<span class="flex-1">Git Worktrees</span>
+</a>
+<!-- AI Agents -->
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="smart_toy">smart_toy</span>
+<span class="flex-1">AI Agents</span>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+</a>
+<!-- Pinned Workflows -->
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="bookmark">bookmark</span>
+<span class="flex-1">Pinned Workflows</span>
+</a>
+<!-- History -->
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="history">history</span>
+<span class="flex-1">History</span>
+</a>
+</nav>
+<!-- Command History Quick Filter (Condensed rail feature requested) -->
+<div class="mt-2 pt-2 border-t border-outline-variant flex flex-col gap-1.5">
+<div class="flex items-center justify-between px-1">
+<span class="text-[10px] font-mono text-outline tracking-wider uppercase">Command Stream</span>
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="tune">tune</span>
+</div>
+<!-- Quick Filter Tags -->
+<div class="flex flex-wrap gap-1 px-1">
+<button class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-surface-container-high text-primary border border-outline-variant">all</button>
+<button class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-surface text-outline hover:text-on-surface border border-outline-variant">git</button>
+<button class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-surface text-outline hover:text-on-surface border border-outline-variant">docker</button>
+<button class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-surface text-outline hover:text-on-surface border border-outline-variant">cargo</button>
+</div>
+<!-- Recent Stream Snippets List -->
+<div class="flex flex-col gap-1 mt-1 font-mono text-[11px] overflow-hidden">
+<div class="p-1.5 rounded bg-surface/50 border border-outline-variant/60 flex flex-col gap-0.5 cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-[10px] text-outline">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 0
+                </span>
+<span>10:44 AM</span>
+</div>
+<span class="truncate text-on-surface-variant">cargo test --workspace</span>
+</div>
+<div class="p-1.5 rounded bg-surface/50 border border-outline-variant/60 flex flex-col gap-0.5 cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-[10px] text-outline">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 0
+                </span>
+<span>10:43 AM</span>
+</div>
+<span class="truncate text-on-surface-variant">docker compose ps</span>
+</div>
+<div class="p-1.5 rounded bg-surface/50 border border-outline-variant/60 flex flex-col gap-0.5 cursor-pointer hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between text-[10px] text-outline">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 0
+                </span>
+<span>10:42 AM</span>
+</div>
+<span class="truncate text-on-surface-variant">git status &amp;&amp; git log</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Section: Diagnostics & Settings (from JSON footer_tab_labels) -->
+<div class="flex flex-col gap-1 pt-2 border-t border-outline-variant">
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="analytics">analytics</span>
+<span class="flex-1">Diagnostics</span>
+<span class="text-[10px] font-mono text-outline">v0.9.4</span>
+</a>
+<a class="flex items-center gap-2 text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface rounded px-2.5 py-1.5 text-xs hover:bg-surface-container dark:hover:bg-surface-container transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[15px]" data-icon="settings">settings</span>
+<span class="flex-1">Settings</span>
+<span class="text-[10px] font-mono text-outline">⌘,</span>
+</a>
+</div>
+</aside>
+<!-- Main Terminal Workspace (Central Workspace with Command Blocks) -->
+<main class="flex-1 flex flex-col justify-between overflow-hidden bg-surface relative">
+<!-- Command Blocks Canvas (Scrollable) -->
+<div class="flex-1 overflow-y-auto px-6 py-5 flex flex-col gap-5">
+<!-- Workspace Banner Indicator -->
+<div class="flex items-center justify-between py-1 text-xs font-mono text-outline border-b border-outline-variant/60 pb-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500/80"></span>
+<span>PulseTerm Session: <span class="text-on-surface-variant">mesh-node-alpha</span></span>
+<span class="text-outline-variant">·</span>
+<span>TTY: /dev/ttys004</span>
+</div>
+<div class="flex items-center gap-3">
+<span>Buffer: 4k/100k lines</span>
+<button class="hover:text-on-surface transition-colors" title="Clear Buffer">Clear</button>
+</div>
+</div>
+<!-- ========================================== -->
+<!-- COMMAND BLOCK 1: git status && git log   -->
+<!-- ========================================== -->
+<section class="group rounded bg-surface-container-low border border-outline-variant hover:border-outline transition-colors">
+<!-- Block Header Bar -->
+<div class="flex items-center justify-between px-3.5 py-2 bg-surface-container border-b border-outline-variant text-xs font-mono select-none">
+<div class="flex items-center gap-2.5">
+<span class="text-secondary font-medium select-none">❯</span>
+<span class="text-primary font-medium">git status &amp;&amp; git log -n 2 --oneline</span>
+</div>
+<div class="flex items-center gap-3 text-outline text-[11px]">
+<span class="hidden sm:inline-block">10:42:15 AM</span>
+<span class="px-1.5 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">84ms</span>
+<div class="flex items-center gap-1 border-l border-outline-variant pl-2">
+<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Copy Command">
+<span class="material-symbols-outlined text-[14px]" data-icon="content_copy">content_copy</span>
+</button>
+<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Bookmark block">
+<span class="material-symbols-outlined text-[14px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Block Content / Terminal Output -->
+<div class="p-3.5 font-mono text-xs text-on-surface-variant leading-relaxed">
+<div class="text-on-surface font-medium">On branch feature/agent-mesh</div>
+<div class="text-outline">Your branch is up to date with 'origin/feature/agent-mesh'.</div>
+<div class="mt-2 text-outline">Changes to be committed:</div>
+<div class="pl-4 text-emerald-400">modified:   crates/pulse-agent/src/mesh/peer.rs</div>
+<div class="pl-4 text-emerald-400">new file:   crates/pulse-agent/src/mesh/protocol.rs</div>
+<div class="mt-3 pt-2 border-t border-outline-variant/40 flex flex-col gap-1">
+<div class="flex items-baseline gap-2">
+<span class="text-amber-300 font-medium">e73c9f1</span>
+<span class="text-on-surface">feat(mesh): implements p2p peer heartbeat channel</span>
+<span class="text-outline text-[11px]">(32 mins ago)</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-amber-300 font-medium">0a15b3c</span>
+<span class="text-on-surface">chore: bump tokio and async-trait deps</span>
+<span class="text-outline text-[11px]">(2 hours ago)</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- COMMAND BLOCK 2: docker compose ps | jq   -->
+<!-- Active hover state with independent toolbar -->
+<!-- ========================================== -->
+<section class="group rounded bg-surface-container-low border border-outline relative transition-colors shadow-sm">
+<!-- Block Header Bar -->
+<div class="flex items-center justify-between px-3.5 py-2 bg-surface-container border-b border-outline-variant text-xs font-mono">
+<div class="flex items-center gap-2.5">
+<span class="text-secondary font-medium select-none">❯</span>
+<span class="text-primary font-medium">docker compose ps --format json | jq '.'</span>
+</div>
+<!-- Active / Persistent Tooling (Requested Hover State Toolbar) -->
+<div class="flex items-center gap-2 text-outline text-[11px]">
+<span class="hidden sm:inline-block">10:43:02 AM</span>
+<span class="px-1.5 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">142ms</span>
+<!-- Floating/Docked action cluster -->
+<div class="flex items-center gap-1 bg-surface-container-highest px-1.5 py-0.5 rounded border border-outline-variant text-on-surface">
+<button class="px-1.5 py-0.5 hover:bg-surface rounded text-[11px] flex items-center gap-1 transition-colors" title="Copy Command">
+<span class="material-symbols-outlined text-[13px]" data-icon="terminal">terminal</span>
+<span>Cmd</span>
+</button>
+<button class="px-1.5 py-0.5 hover:bg-surface rounded text-[11px] flex items-center gap-1 transition-colors" title="Copy Raw JSON">
+<span class="material-symbols-outlined text-[13px]" data-icon="data_object">data_object</span>
+<span>Raw Output</span>
+</button>
+<button class="p-1 hover:bg-surface rounded transition-colors" title="Bookmark block">
+<span class="material-symbols-outlined text-[13px]" data-icon="bookmark">bookmark</span>
+</button>
+<div class="h-3 w-px bg-outline-variant"></div>
+<button class="px-1.5 py-0.5 bg-surface text-primary rounded text-[11px] flex items-center gap-1 hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-[13px] text-primary" data-icon="smart_toy">smart_toy</span>
+<span>Ask AI</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Block Content: Syntax-highlighted JSON & Active Container State -->
+<div class="p-3.5 font-mono text-xs leading-relaxed overflow-x-auto">
+<div class="text-outline text-[11px] mb-2 flex items-center gap-2">
+<span class="text-on-surface-variant">2 containers registered in local network:</span>
+<span class="text-outline-variant">pulse_default</span>
+</div>
+<!-- Structured JSON Syntax Highlight Simulation -->
+<pre class="text-[12px] leading-5 font-mono"><span class="text-outline">[</span>
+  <span class="text-outline">{</span>
+    <span class="text-secondary font-medium">"Name"</span><span class="text-outline">:</span> <span class="text-emerald-300">"pulse-mesh-gateway"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Service"</span><span class="text-outline">:</span> <span class="text-emerald-300">"gateway"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"State"</span><span class="text-outline">:</span> <span class="text-emerald-400">"running"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Status"</span><span class="text-outline">:</span> <span class="text-on-surface-variant">"Up 44 minutes (healthy)"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Publishers"</span><span class="text-outline">: [</span>
+      <span class="text-outline">{</span> <span class="text-secondary">"URL"</span>: <span class="text-emerald-300">"0.0.0.0"</span><span class="text-outline">,</span> <span class="text-secondary">"TargetPort"</span>: <span class="text-amber-300">9080</span><span class="text-outline">,</span> <span class="text-secondary">"PublishedPort"</span>: <span class="text-amber-300">9080</span> <span class="text-outline">}</span>
+    <span class="text-outline">]</span>
+  <span class="text-outline">}</span><span class="text-outline">,</span>
+  <span class="text-outline">{</span>
+    <span class="text-secondary font-medium">"Name"</span><span class="text-outline">:</span> <span class="text-emerald-300">"pulse-redis-cache"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Service"</span><span class="text-outline">:</span> <span class="text-emerald-300">"redis"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"State"</span><span class="text-outline">:</span> <span class="text-emerald-400">"running"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Status"</span><span class="text-outline">:</span> <span class="text-on-surface-variant">"Up 2 hours"</span><span class="text-outline">,</span>
+    <span class="text-secondary font-medium">"Publishers"</span><span class="text-outline">: [</span>
+      <span class="text-outline">{</span> <span class="text-secondary">"URL"</span>: <span class="text-emerald-300">"127.0.0.1"</span><span class="text-outline">,</span> <span class="text-secondary">"TargetPort"</span>: <span class="text-amber-300">6379</span><span class="text-outline">,</span> <span class="text-secondary">"PublishedPort"</span>: <span class="text-amber-300">6379</span> <span class="text-outline">}</span>
+    <span class="text-outline">]</span>
+  <span class="text-outline">}</span>
+<span class="text-outline">]</span></pre>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- COMMAND BLOCK 3: cargo test with toast     -->
+<!-- Visible "Copied to clipboard" feedback badge -->
+<!-- ========================================== -->
+<section class="group rounded bg-surface-container-low border border-outline-variant hover:border-outline transition-colors relative">
+<!-- Block Header Bar with inline copied toast -->
+<div class="flex items-center justify-between px-3.5 py-2 bg-surface-container border-b border-outline-variant text-xs font-mono">
+<div class="flex items-center gap-2.5">
+<span class="text-secondary font-medium select-none">❯</span>
+<span class="text-primary font-medium">cargo test --workspace --no-fail-fast</span>
+</div>
+<!-- Header trailing tools + Visible Toast badge -->
+<div class="flex items-center gap-3 text-outline text-[11px]">
+<!-- Inline Feedback Toast Badge -->
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container-highest text-primary border border-outline text-[11px] animate-pulse">
+<span class="material-symbols-outlined text-[13px] text-emerald-400" data-icon="check">check</span>
+<span>Copied to clipboard</span>
+</div>
+<span class="hidden sm:inline-block">10:44:18 AM</span>
+<span class="px-1.5 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">2.4s</span>
+<div class="flex items-center gap-1 border-l border-outline-variant pl-2">
+<button class="p-1 text-primary bg-surface-container-high rounded" title="Copied">
+<span class="material-symbols-outlined text-[14px]" data-icon="check">check</span>
+</button>
+<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Bookmark">
+<span class="material-symbols-outlined text-[14px]" data-icon="bookmark_border">bookmark_border</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cargo test suite output -->
+<div class="p-3.5 font-mono text-xs leading-relaxed">
+<div class="text-outline flex items-center gap-2">
+<span class="text-primary">Compiling</span> pulse-core v0.9.4 (/workspace/pulse-core)
+            </div>
+<div class="text-outline flex items-center gap-2 mb-2">
+<span class="text-emerald-400">Finished</span> test [unoptimized + debuginfo] target(s) in 0.82s
+            </div>
+<div class="space-y-1 mt-2">
+<div class="flex items-center gap-2">
+<span class="text-emerald-400 font-medium">test</span>
+<span class="text-on-surface">mesh::peer::test_heartbeat_ack</span>
+<span class="text-outline text-[11px]">...</span>
+<span class="text-emerald-400 font-medium">ok</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-emerald-400 font-medium">test</span>
+<span class="text-on-surface">mesh::peer::test_reconnect_backoff_jitter</span>
+<span class="text-outline text-[11px]">...</span>
+<span class="text-emerald-400 font-medium">ok</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-emerald-400 font-medium">test</span>
+<span class="text-on-surface">protocol::codec::test_frame_encode_decode</span>
+<span class="text-outline text-[11px]">...</span>
+<span class="text-emerald-400 font-medium">ok</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-emerald-400 font-medium">test</span>
+<span class="text-on-surface">agent::runtime::test_spawn_sandboxed_isolate</span>
+<span class="text-outline text-[11px]">...</span>
+<span class="text-emerald-400 font-medium">ok</span>
+</div>
+</div>
+<!-- Summary line -->
+<div class="mt-3 pt-2 border-t border-outline-variant/40 flex items-center justify-between text-[11px]">
+<span class="text-emerald-400 font-medium">test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out</span>
+<span class="text-outline">finished in 1.48s</span>
+</div>
+</div>
+</section>
+</div>
+<!-- ========================================== -->
+<!-- BOTTOM MODERN PROMPT BAR                    -->
+<!-- Warp-inspired clean prompt + autocomplete pill -->
+<!-- ========================================== -->
+<div class="p-4 bg-surface border-t border-outline-variant">
+<div class="rounded bg-surface-container-low border border-outline-variant focus-within:border-outline focus-within:bg-surface-container transition-all">
+<!-- Context and Agent Bar inside prompt -->
+<div class="flex items-center justify-between px-3 pt-2 pb-1 text-[11px] font-mono select-none text-outline border-b border-outline-variant/40">
+<div class="flex items-center gap-2">
+<span class="text-secondary font-semibold">pulse</span>
+<span class="text-outline">❯</span>
+<span class="text-on-surface-variant font-medium">~/pulse-core</span>
+<span class="text-outline">(main)</span>
+<span class="text-outline-variant">%</span>
+</div>
+<!-- AI Agent Readiness Pill -->
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface border border-outline-variant text-[11px] text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>Agent Pulse ready</span>
+<span class="text-outline text-[10px]">· ⌥ Space</span>
+</div>
+</div>
+</div>
+<!-- Main Input Line with live autocomplete ghosting -->
+<div class="flex items-center px-3 py-2.5 relative">
+<div class="flex-1 flex items-center font-mono text-sm">
+<span class="text-secondary select-none mr-2 font-medium">❯</span>
+<!-- Actively typed snippet -->
+<span class="text-primary font-medium">git commit -m "</span>
+<!-- Autocomplete ghost text -->
+<span class="text-outline select-none">feat(mesh): wire up peer discovery protocol"</span>
+<span class="w-2 h-4 bg-primary inline-block ml-0.5 animate-pulse"></span>
+</div>
+<!-- Keyboard shortcut hint pills -->
+<div class="flex items-center gap-2 shrink-0 select-none">
+<span class="px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant text-[10px] font-mono text-outline">
+<strong class="text-on-surface-variant font-normal">tab</strong> to complete
+              </span>
+<button class="p-1 rounded text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Voice / Agent Assist">
+<span class="material-symbols-outlined text-[15px]" data-icon="mic">mic</span>
+</button>
+</div>
+</div>
+<!-- Prompt Footer Quick Actions / Context Pills -->
+<div class="flex items-center justify-between px-3 py-1.5 bg-surface-container-lowest/60 text-[10px] font-mono text-outline rounded-b">
+<div class="flex items-center gap-3">
+<span class="hover:text-on-surface transition-colors cursor-pointer">↑ previous cmd</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer">⌘+R workflow catalog</span>
+<span class="hover:text-on-surface transition-colors cursor-pointer"># git tag search</span>
+</div>
+<div class="flex items-center gap-2">
+<span>UTF-8</span>
+<span>LF</span>
+<span class="text-on-surface-variant">Rust 1.78</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

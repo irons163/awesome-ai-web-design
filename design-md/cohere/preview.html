@@ -1,8 +1,624 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cohere · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#17171c;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/cohere">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Cohere · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#17171c"></span><code>#17171c</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#212121"></span><code>#212121</code></div><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#003c33"></span><code>#003c33</code></div><div class="swatch"><span style="background:#071829"></span><code>#071829</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · CohereText</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Axiom Knowledge - Enterprise Grounded Synthesis &amp; Search</title>
+<!-- Tailwind CSS & Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#cec5ba",
+            "secondary-container": "#e2dfe1",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#000000",
+            "surface-container-highest": "#e2e2e2",
+            "primary-fixed-dim": "#c8c5cc",
+            "on-surface": "#1a1c1c",
+            "error-container": "#ffdad6",
+            "on-tertiary": "#ffffff",
+            "background": "#f9f9f9",
+            "surface": "#f9f9f9",
+            "surface-variant": "#e2e2e2",
+            "secondary-fixed": "#e5e1e4",
+            "secondary": "#5f5e60",
+            "inverse-on-surface": "#f0f1f1",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#c9c5c8",
+            "on-primary-fixed": "#1b1b20",
+            "surface-dim": "#dadada",
+            "on-tertiary-container": "#8a8379",
+            "surface-bright": "#f9f9f9",
+            "surface-container-low": "#f3f3f4",
+            "tertiary-fixed": "#ebe1d5",
+            "tertiary-container": "#1f1b14",
+            "on-secondary-container": "#636265",
+            "outline-variant": "#c8c5cb",
+            "inverse-primary": "#c8c5cc",
+            "surface-container": "#eeeeee",
+            "outline": "#78767b",
+            "primary": "#000000",
+            "on-error-container": "#93000a",
+            "on-background": "#1a1c1c",
+            "primary-fixed": "#e4e1e8",
+            "on-primary-fixed-variant": "#47464c",
+            "primary-container": "#1b1b20",
+            "on-tertiary-fixed-variant": "#4c463d",
+            "on-secondary-fixed": "#1c1b1d",
+            "surface-container-high": "#e8e8e8",
+            "on-primary-container": "#848389",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#1f1b14",
+            "on-secondary-fixed-variant": "#474649",
+            "inverse-surface": "#2f3131",
+            "on-surface-variant": "#47464b",
+            "surface-tint": "#5f5e64"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1;
+    }
+    /* Editorial Scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f9f9f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d9d9dd;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #78767b;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed min-w-[1440px] overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar                                               -->
+<!-- ========================================================================= -->
+<header class="flex justify-between items-center w-full px-6 h-14 border-b border-surface-container dark:border-primary-container bg-surface-container-lowest dark:bg-primary sticky top-0 z-50">
+<div class="flex items-center gap-6">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2.5">
+<div class="w-6 h-6 bg-primary text-on-primary flex items-center justify-center font-mono text-xs font-bold tracking-tighter">
+          AX
+        </div>
+<span class="font-headline text-base font-medium tracking-tight text-on-surface dark:text-on-primary">
+          Axiom Knowledge
+        </span>
+</div>
+<span class="text-outline-variant font-light">/</span>
+<!-- Active Workspace Dropdown -->
+<div class="flex items-center gap-2 text-xs font-label text-on-surface hover:bg-surface-container-low px-2 py-1 rounded transition-colors duration-150 cursor-pointer">
+<span class="w-2 h-2 rounded-full bg-emerald-600 inline-block"></span>
+<span class="font-medium text-on-surface tracking-tight">Global Compliance &amp; Architecture v4.2</span>
+<span class="material-symbols-outlined text-sm text-secondary">expand_more</span>
+</div>
+<!-- Navigation Links from Shared Components JSON -->
+<nav class="hidden lg:flex items-center gap-6 text-xs font-label ml-2">
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#workspaces">Workspaces</a>
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#playground">Playground</a>
+<!-- Active Nav: Syntheses -->
+<a class="text-on-surface border-b border-on-surface pb-1 font-medium" href="#syntheses">Syntheses</a>
+<a class="text-secondary hover:text-on-surface transition-colors pb-1" href="#audit-log">Audit Log</a>
+</nav>
+</div>
+<!-- Live Global Omnisearch Bar with Command Shortcut -->
+<div class="flex-1 max-w-xl mx-6">
+<div class="relative flex items-center bg-surface-container-low hover:bg-surface-container rounded-sm border border-border-light transition-all px-3 py-1.5 focus-within:border-primary focus-within:bg-surface-container-lowest">
+<span class="material-symbols-outlined text-secondary text-base mr-2">search</span>
+<input aria-label="Search or ask grounded query" class="w-full bg-transparent border-0 p-0 text-xs font-label text-on-surface focus:ring-0 placeholder:text-secondary tracking-tight" type="text" value="Compare SOC2 Type II audit reports across AWS and GCP infra"/>
+<div class="flex items-center gap-1.5 ml-2">
+<kbd class="font-mono text-[10px] text-secondary bg-surface-container-lowest border border-outline-variant px-1.5 py-0.5 rounded shadow-none">Cmd+K</kbd>
+</div>
+</div>
+</div>
+<!-- Trailing System Actions, Telemetry Badges & Profile -->
+<div class="flex items-center gap-4">
+<!-- Grounding Telemetry Badges -->
+<div class="hidden xl:flex items-center gap-2">
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-surface-container-low border border-surface-container text-[11px] font-mono text-on-surface rounded">
+<span class="material-symbols-outlined text-xs text-emerald-700 fill-icon">verified</span>
+<span>99.4% Grounded</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 bg-surface-container-low border border-surface-container text-[11px] font-mono text-on-surface rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse"></span>
+<span>Zero-Hallucination: Active</span>
+</div>
+</div>
+<!-- Action Buttons from JSON -->
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label text-on-surface border border-outline-variant hover:bg-surface-container-low rounded transition-colors duration-150 active:scale-[0.99]">
+          Connect Source
+        </button>
+<button class="px-3 py-1 text-xs font-label text-on-primary bg-primary hover:bg-primary-container rounded transition-colors duration-150 active:scale-[0.99] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">add</span>
+          New Synthesis
+        </button>
+</div>
+<!-- Trailing Icon Actions from JSON -->
+<div class="flex items-center gap-1 text-secondary border-l border-surface-container pl-3">
+<button class="p-1 hover:text-on-surface transition-colors" title="Configuration tuning">
+<span class="material-symbols-outlined text-lg">tune</span>
+</button>
+<button class="p-1 hover:text-on-surface transition-colors relative" title="Notifications">
+<span class="material-symbols-outlined text-lg">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-error rounded-full"></span>
+</button>
+<button class="p-1 hover:text-on-surface transition-colors" title="Help &amp; Reference">
+<span class="material-symbols-outlined text-lg">help_outline</span>
+</button>
+</div>
+<!-- User Avatar -->
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary text-[11px] font-mono flex items-center justify-center font-medium border border-outline-variant cursor-pointer" title="Enterprise administrator profile avatar">
+        AD
+      </div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- MAIN THREE-COLUMN WORKSPACE FRAMEWORK                                    -->
+<!-- ========================================================================= -->
+<div class="flex min-h-[calc(100vh-3.5rem)] w-full">
+<!-- ======================================================================= -->
+<!-- LEFT RAIL: Sources, Connectors & Verification Filters                  -->
+<!-- ======================================================================= -->
+<aside class="w-64 shrink-0 bg-surface-container-low border-r border-surface-container flex flex-col justify-between p-4 z-40">
+<!-- Top Group: Enterprise Context -->
+<div class="space-y-6">
+<!-- Identity Pill -->
+<div class="flex items-center justify-between pb-3 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 bg-surface-container-lowest border border-outline-variant rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-sm text-on-surface">shield</span>
+</div>
+<div>
+<p class="text-xs font-headline font-semibold text-on-surface leading-tight">Axiom Enterprise</p>
+<p class="text-[10px] font-mono text-secondary">VPC Production Tier</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary text-sm cursor-pointer hover:text-on-surface">more_vert</span>
+</div>
+<!-- Strict Verification & Grounding Controller -->
+<div class="bg-surface-container-lowest p-3 rounded border border-surface-container space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-medium text-on-surface uppercase tracking-wider font-mono">Verification Lock</span>
+<span class="text-[10px] font-mono text-emerald-700 bg-pale-green px-1.5 py-0.2 rounded border border-emerald-200">Strict</span>
+</div>
+<label class="flex items-center justify-between text-xs cursor-pointer select-none">
+<span class="text-secondary text-[11px]">Strict Grounding Only</span>
+<input checked="" class="rounded border-outline-variant text-primary focus:ring-0 w-3.5 h-3.5 cursor-pointer" type="checkbox"/>
+</label>
+<label class="flex items-center justify-between text-xs cursor-pointer select-none">
+<span class="text-secondary text-[11px]">Include Unverified Drafts</span>
+<input class="rounded border-outline-variant text-primary focus:ring-0 w-3.5 h-3.5 cursor-pointer" type="checkbox"/>
+</label>
+</div>
+<!-- Categorized Active Connectors & Repositories -->
+<div class="space-y-3">
+<div class="flex items-center justify-between px-1">
+<span class="text-[11px] font-headline font-semibold text-secondary uppercase tracking-wider">Active Indices (4)</span>
+<span class="text-[10px] font-mono text-secondary">3.4M Tokens</span>
+</div>
+<div class="space-y-1">
+<!-- Source Item 1: Confluence -->
+<div class="flex items-start justify-between p-2 rounded hover:bg-surface-container-highest transition-colors cursor-pointer border border-transparent hover:border-surface-container">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">folder_open</span>
+<div>
+<p class="text-xs font-medium text-on-surface leading-snug">Confluence Specs</p>
+<p class="text-[10px] text-secondary">14 docs • Synced 4m ago</p>
+</div>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5" title="Healthy Sync"></span>
+</div>
+<!-- Source Item 2: SEC 10-K -->
+<div class="flex items-start justify-between p-2 rounded hover:bg-surface-container-highest transition-colors cursor-pointer border border-transparent hover:border-surface-container">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">fact_check</span>
+<div>
+<p class="text-xs font-medium text-on-surface leading-snug">SEC 10-K Disclosures</p>
+<p class="text-[10px] text-secondary">3 filings • Synced 1h ago</p>
+</div>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5" title="Healthy Sync"></span>
+</div>
+<!-- Source Item 3: Jira Security -->
+<div class="flex items-start justify-between p-2 rounded hover:bg-surface-container-highest transition-colors cursor-pointer border border-transparent hover:border-surface-container">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">hub</span>
+<div>
+<p class="text-xs font-medium text-on-surface leading-snug">Jira Security Epics</p>
+<p class="text-[10px] text-secondary">48 issues • Synced 12m ago</p>
+</div>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600 mt-1.5" title="Healthy Sync"></span>
+</div>
+<!-- Source Item 4: Slack Architecture -->
+<div class="flex items-start justify-between p-2 rounded hover:bg-surface-container-highest transition-colors cursor-pointer border border-transparent hover:border-surface-container">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary text-base mt-0.5">cloud_sync</span>
+<div>
+<p class="text-xs font-medium text-on-surface leading-snug">Slack #arch-audit</p>
+<p class="text-[10px] text-secondary">Archive v2 • Live ingest</p>
+</div>
+</div>
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-1.5" title="Live streaming"></span>
+</div>
+</div>
+</div>
+<!-- Add Data Pipeline CTA (From JSON) -->
+<button class="w-full flex items-center justify-center gap-1.5 py-1.5 px-3 border border-dashed border-outline-variant hover:border-primary text-xs font-label text-secondary hover:text-on-surface rounded transition-colors">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+          Add Data Pipeline
+        </button>
+</div>
+<!-- Bottom Nav Rail Items & Telemetry Footnote -->
+<div class="pt-4 border-t border-surface-container space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-xs text-secondary hover:text-on-surface hover:bg-surface-container rounded transition-colors" href="#docs">
+<span class="material-symbols-outlined text-base">menu_book</span>
+<span>Documentation</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-xs text-secondary hover:text-on-surface hover:bg-surface-container rounded transition-colors" href="#settings">
+<span class="material-symbols-outlined text-base">settings</span>
+<span>Workspace Settings</span>
+</a>
+<div class="pt-3 px-3">
+<div class="flex items-center justify-between text-[10px] font-mono text-secondary">
+<span>RAG Model: Co-North-v2</span>
+<span>v2.19</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ======================================================================= -->
+<!-- CENTER MAIN: Synthesis Workspace & Verification Proof Engine           -->
+<!-- ======================================================================= -->
+<main class="flex-1 min-w-0 bg-canvas overflow-y-auto px-10 py-8">
+<!-- Workspace Header with Structured Query Meta -->
+<div class="border-b border-hairline pb-6 mb-8">
+<div class="flex items-center justify-between gap-4 mb-3">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 bg-surface-container text-[11px] font-mono text-secondary rounded">SYNTH-8902A</span>
+<span class="text-xs text-secondary">Initiated by <strong class="font-medium text-on-surface">CISO SecOps Bot</strong></span>
+<span class="text-secondary">•</span>
+<span class="text-xs text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs text-slate">timer</span>
+              412ms retrieval
+            </span>
+</div>
+<!-- Export & Trace Actions -->
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 text-xs font-label text-secondary hover:text-on-surface border border-border-light rounded hover:bg-surface-container-low transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+              Markdown
+            </button>
+<button class="px-2.5 py-1 text-xs font-label text-secondary hover:text-on-surface border border-border-light rounded hover:bg-surface-container-low transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">terminal</span>
+              JSON Trace
+            </button>
+<button class="px-2.5 py-1 text-xs font-label text-on-primary bg-primary hover:bg-primary-container rounded transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">share</span>
+              Share Synthesis
+            </button>
+</div>
+</div>
+<!-- Query Heading (Cohere Display Restraint) -->
+<h1 class="text-3xl font-headline font-semibold tracking-tight text-on-surface max-w-4xl leading-tight">
+          SOC2 Type II &amp; FedRAMP High Encryption-at-Rest Key Management Architecture
+        </h1>
+</div>
+<!-- PRIMARY CITED ANSWER CARD -->
+<section class="mb-10">
+<!-- Grounding & Integrity Banner -->
+<div class="flex items-center justify-between bg-surface-container-lowest border border-card-border p-3.5 rounded-t-lg mb-0 border-b-0">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-emerald-800 text-lg fill-icon">verified_user</span>
+<span class="text-xs font-medium text-on-surface">Verified against 4 enterprise sources</span>
+<span class="text-xs text-secondary">•</span>
+<span class="text-xs font-mono text-emerald-800">0 ungrounded claims detected</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-mono text-secondary">Grounding Threshold: τ ≥ 0.92</span>
+<span class="text-[11px] text-secondary border-l border-hairline pl-3">Audit Snapshot #812</span>
+</div>
+</div>
+<!-- Answer Body Block (Editorial White, Crisp Rules) -->
+<div class="bg-surface-container-lowest border border-border-light rounded-b-lg p-8 space-y-6 shadow-sm">
+<!-- Executive Synthesis Paragraph -->
+<div class="prose prose-neutral max-w-none">
+<p class="text-base text-ink leading-relaxed font-normal">
+              Based on indexed audit telemetry across AWS and GCP infrastructures, both environments maintain compliance with 
+              <strong>SOC2 Type II (Trust Services Criteria CC6.1, CC6.6)</strong> and <strong>FedRAMP High (SC-12, SC-13, SC-28)</strong> 
+              mandates through dual-layer envelope encryption backed exclusively by FIPS 140-2 Level 3 certified Hardware Security Modules (HSMs)
+              <button class="inline-flex items-center justify-center px-1.5 py-0.5 mx-1 text-xs font-mono font-medium text-action-blue bg-pale-blue rounded border border-action-blue/20 hover:bg-action-blue hover:text-on-primary transition-colors cursor-pointer" onclick="selectCitation(1)">
+                [1]
+              </button>.
+              Neither architecture exposes plaintext Customer Master Keys (CMKs) to application memory or runtime containers.
+            </p>
+</div>
+<!-- Comparative Technical Breakdown Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4 border-t border-hairline">
+<!-- Pillar A: AWS KMS Implementation -->
+<div class="p-4 rounded border border-border-light bg-surface-container-low/40 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">lock</span>
+                  AWS KMS Multi-Region Envelope Architecture
+                </span>
+<span class="text-[10px] font-mono text-secondary bg-surface-container-highest px-1.5 py-0.5 rounded">98% Match</span>
+</div>
+<p class="text-xs text-body-muted leading-normal">
+                Data keys are generated via 256-bit AES-GCM via the AWS KMS GenerateDataKey API. Envelope encryption wraps raw payload ciphertext 
+                before reaching S3/Aurora storage volumes
+                <button class="inline-flex items-center justify-center px-1 py-0.2 mx-0.5 text-[11px] font-mono font-medium text-action-blue bg-pale-blue rounded hover:bg-action-blue hover:text-on-primary transition-colors" onclick="selectCitation(2)">
+                  [2]
+                </button>.
+                Key rotation occurs automatically on an immutable 365-day cadence managed by AWS Nitro enclaves.
+              </p>
+<div class="pt-2 flex items-center gap-2">
+<span class="text-[10px] font-mono text-secondary bg-surface-container px-2 py-0.5 rounded">FIPS 140-2 Level 3</span>
+<span class="text-[10px] font-mono text-secondary bg-surface-container px-2 py-0.5 rounded">CloudTrail Continuous Ingest</span>
+</div>
+</div>
+<!-- Pillar B: GCP Cloud KMS Implementation -->
+<div class="p-4 rounded border border-border-light bg-surface-container-low/40 space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-headline font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">enhanced_encryption</span>
+                  GCP Cloud KMS &amp; Cloud HSM Topography
+                </span>
+<span class="text-[10px] font-mono text-secondary bg-surface-container-highest px-1.5 py-0.5 rounded">94% Match</span>
+</div>
+<p class="text-xs text-body-muted leading-normal">
+                Utilizes AES-256 in Galois/Counter Mode backed by Google Cloud HSM partitions. Automatic rotation is configured at 90-day 
+                intervals for high-velocity databases, adhering to FedRAMP High control SC-12.8
+                <button class="inline-flex items-center justify-center px-1 py-0.2 mx-0.5 text-[11px] font-mono font-medium text-action-blue bg-pale-blue rounded hover:bg-action-blue hover:text-on-primary transition-colors" onclick="selectCitation(3)">
+                  [3]
+                </button>.
+                Zero access granted to Google personnel under strict Access Transparency audit trails.
+              </p>
+<div class="pt-2 flex items-center gap-2">
+<span class="text-[10px] font-mono text-secondary bg-surface-container px-2 py-0.5 rounded">FIPS 140-2 Level 3 HSM</span>
+<span class="text-[10px] font-mono text-secondary bg-surface-container px-2 py-0.5 rounded">Access Transparency Active</span>
+</div>
+</div>
+</div>
+<!-- Verified Source Match Chips -->
+<div class="pt-4 border-t border-hairline flex flex-wrap items-center gap-2.5">
+<span class="text-xs font-label text-secondary">Verified Evidence:</span>
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-on-surface bg-surface-container-low hover:bg-surface-container border border-hairline rounded-full transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>AWS KMS Spec v3.1 (98% match)</span>
+</button>
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-on-surface bg-surface-container-low hover:bg-surface-container border border-hairline rounded-full transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>GCP Cloud KMS Whitepaper (94% match)</span>
+</button>
+<button class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono text-on-surface bg-surface-container-low hover:bg-surface-container border border-hairline rounded-full transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+<span>FedRAMP System Security Plan rev.8 (91% match)</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SECONDARY TECHNICAL CONSOLE: Deep Green-Black / Graphite Telemetry Container -->
+<section class="bg-primary-container text-on-dark rounded-sm border border-primary p-6 space-y-6">
+<!-- Telemetry Header -->
+<div class="flex items-center justify-between border-b border-on-surface-variant/20 pb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-base text-tertiary-fixed-dim">analytics</span>
+<h2 class="text-sm font-headline font-medium text-on-dark tracking-wide">
+              Neural Retrieval &amp; Re-rank Vector Diagnostic Telemetry
+            </h2>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[11px] font-mono text-secondary-fixed-dim">Embedder: Cohere-Embed-v3-Multilingual</span>
+<span class="text-[11px] font-mono text-pale-green bg-deep-green/60 px-2 py-0.5 rounded border border-emerald-800">
+              Cosine τ: 0.924
+            </span>
+</div>
+</div>
+<!-- Metric Grid -->
+<div class="grid grid-cols-4 gap-4">
+<div class="p-3 bg-primary/60 border border-on-surface-variant/20 rounded">
+<p class="text-[10px] font-mono text-secondary-fixed-dim uppercase">Vector Chunks Evaluated</p>
+<p class="text-xl font-mono font-medium text-on-dark mt-1">1,428</p>
+<p class="text-[10px] text-muted mt-1">From 4 connected collections</p>
+</div>
+<div class="p-3 bg-primary/60 border border-on-surface-variant/20 rounded">
+<p class="text-[10px] font-mono text-secondary-fixed-dim uppercase">Top-K Rerank Yield</p>
+<p class="text-xl font-mono font-medium text-on-dark mt-1">12 <span class="text-xs text-secondary-fixed-dim font-normal">chunks</span></p>
+<p class="text-[10px] text-pale-green mt-1">Score floor: 0.887</p>
+</div>
+<div class="p-3 bg-primary/60 border border-on-surface-variant/20 rounded">
+<p class="text-[10px] font-mono text-secondary-fixed-dim uppercase">End-to-End Latency</p>
+<p class="text-xl font-mono font-medium text-on-dark mt-1">412<span class="text-xs text-secondary-fixed-dim font-normal">ms</span></p>
+<p class="text-[10px] text-muted mt-1">Retrieve: 114ms • Synth: 298ms</p>
+</div>
+<div class="p-3 bg-primary/60 border border-on-surface-variant/20 rounded">
+<p class="text-[10px] font-mono text-secondary-fixed-dim uppercase">Hallucination Delta</p>
+<p class="text-xl font-mono font-medium text-pale-green mt-1">0.00%</p>
+<p class="text-[10px] text-secondary-fixed-dim mt-1">100% sentence attribution</p>
+</div>
+</div>
+<!-- Chunks Table -->
+<div class="border border-on-surface-variant/20 rounded overflow-hidden">
+<div class="bg-primary/80 px-3 py-2 border-b border-on-surface-variant/20 flex items-center justify-between text-[11px] font-mono text-secondary-fixed-dim">
+<span>Indexed Chunk Registry</span>
+<span>Cosine Distance &amp; Rerank Order</span>
+</div>
+<div class="divide-y divide-on-surface-variant/10 font-mono text-xs">
+<div class="px-3 py-2 flex items-center justify-between hover:bg-on-surface-variant/5 transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim">#01</span>
+<span class="text-on-dark">vector-chunk-8821a</span>
+<span class="text-[11px] text-secondary-fixed-dim">AWS-KMS-Architecture-Guide.pdf (p.42)</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[11px] text-pale-green">Distance: 0.041</span>
+<span class="text-[11px] text-on-dark font-medium">ReRank: 0.982</span>
+</div>
+</div>
+<div class="px-3 py-2 flex items-center justify-between hover:bg-on-surface-variant/5 transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim">#02</span>
+<span class="text-on-dark">vector-chunk-9014b</span>
+<span class="text-[11px] text-secondary-fixed-dim">GCP-FedRAMP-High-SSP-2025.docx (sec 4.3)</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[11px] text-pale-green">Distance: 0.076</span>
+<span class="text-[11px] text-on-dark font-medium">ReRank: 0.941</span>
+</div>
+</div>
+<div class="px-3 py-2 flex items-center justify-between hover:bg-on-surface-variant/5 transition-colors">
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim">#03</span>
+<span class="text-on-dark">vector-chunk-7719f</span>
+<span class="text-[11px] text-secondary-fixed-dim">Jira-SEC-8910-KMS-Rotation-Audit.json</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[11px] text-pale-green">Distance: 0.089</span>
+<span class="text-[11px] text-on-dark font-medium">ReRank: 0.912</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ======================================================================= -->
+<!-- RIGHT RAIL: Contextual Citation Rail & Zero-Hit Fallback Inspector     -->
+<!-- ======================================================================= -->
+<aside class="w-96 shrink-0 bg-surface-container-lowest border-l border-surface-container flex flex-col justify-between overflow-y-auto z-40">
+<!-- Top Inspector Header -->
+<div class="p-4 border-b border-surface-container flex items-center justify-between sticky top-0 bg-surface-container-lowest z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">source_notes</span>
+<span class="text-xs font-headline font-semibold text-on-surface">Evidence Inspector</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="text-[11px] font-mono text-action-blue bg-pale-blue px-2 py-0.5 rounded">Citation [1]</span>
+</div>
+</div>
+<!-- Active Citation Drawer Content -->
+<div class="p-5 space-y-6 flex-1">
+<!-- Metadata Header -->
+<div class="space-y-2">
+<div class="flex items-center justify-between text-[11px] text-secondary">
+<span>SOURCE ARTIFACT</span>
+<span class="font-mono">ID: DOC-KMS-441</span>
+</div>
+<h3 class="text-sm font-semibold text-on-surface leading-snug">
+            AWS KMS FedRAMP High Compliance Package &amp; Cryptographic Module Boundary
+          </h3>
+<p class="text-[11px] text-secondary">
+            Published by <strong class="font-medium text-on-surface">CISO Security Review Board</strong> • Updated Nov 14, 2025
+          </p>
+</div>
+<!-- Highlighted Matched Token Excerpt -->
+<div class="bg-surface-container-low p-4 rounded border border-border-light space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-mono uppercase text-secondary">Exact Excerpt Match</span>
+<span class="text-[10px] font-mono text-emerald-800 bg-pale-green px-1.5 rounded">Attributed</span>
+</div>
+<blockquote class="text-xs text-ink leading-relaxed border-l-2 border-primary pl-3 italic">
+            "...All Customer Master Keys (CMKs) utilized for storage volume encryption undergo dual-layer envelope ciphering.
+            <mark class="bg-pale-blue text-action-blue font-medium px-1 rounded">Primary cryptographic key operations are restricted to hardware boundary devices validated under FIPS 140-2 Level 3</mark>.
+            Plaintext data keys exist solely in ephemeral, protected volatile memory during active read/write micro-bursts and are purged instantaneously upon I/O cycle conclusion..."
+          </blockquote>
+<div class="text-[10px] font-mono text-secondary flex items-center justify-between pt-1">
+<span>Token Range: 1,840 - 1,912</span>
+<span>Overlap: 99.8%</span>
+</div>
+</div>
+<!-- Document Security Class & Sign-off -->
+<div class="border border-card-border p-3 rounded space-y-2">
+<span class="text-[10px] font-mono uppercase text-secondary block">Security Classification</span>
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface font-medium">Confidential - Internal Audit Only</span>
+<span class="material-symbols-outlined text-emerald-700 text-sm">verified</span>
+</div>
+<p class="text-[11px] text-body-muted">Cryptographic officer sign-off verified via SHA-256 ledger #f98a...31c2</p>
+</div>
+<!-- Button: Inspect Chunk Payload -->
+<button class="w-full py-2 px-3 border border-border-light hover:border-primary text-xs font-label text-on-surface hover:bg-surface-container-low rounded transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">code</span>
+          Inspect Chunk Payload
+        </button>
+<!-- ZERO-HIT / UNINDEXED QUERY FALLBACK DEMO CARD -->
+<div class="mt-8 pt-6 border-t border-hairline space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-headline font-semibold text-secondary uppercase tracking-wider">Edge Test: Zero-Hit State</span>
+<span class="text-[10px] font-mono text-error bg-error-container/40 px-1.5 rounded text-error">Simulated</span>
+</div>
+<div class="p-4 bg-surface-container-low border border-dashed border-outline-variant rounded space-y-2.5">
+<div class="flex items-start gap-2 text-secondary">
+<span class="material-symbols-outlined text-base text-secondary mt-0.5">search_off</span>
+<p class="text-xs font-medium text-on-surface leading-snug">No Grounded Entities Found</p>
+</div>
+<p class="text-[11px] text-body-muted leading-relaxed">
+              No vectors matched above the 0.85 threshold for query: 
+              <span class="font-mono text-on-surface bg-surface-container-highest px-1 rounded">"HIPAA BAA on eu-west-3 legacy proxy"</span>
+</p>
+<div class="pt-2 border-t border-hairline/60 space-y-1.5">
+<p class="text-[10px] font-mono text-secondary uppercase">Suggested Remediation:</p>
+<ul class="text-[11px] text-body-muted space-y-1 list-disc list-inside">
+<li>Connect <span class="font-medium text-on-surface">AWS Paris Archive Connector</span></li>
+<li>Lower verification threshold to <span class="font-mono text-on-surface">τ = 0.75</span></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Inspector Footer -->
+<div class="p-4 border-t border-surface-container bg-surface-container-low/60 flex items-center justify-between text-[11px] text-secondary font-mono">
+<span>Axiom Verification v4.2</span>
+<a class="text-action-blue hover:underline" href="#audit-log">View Audit Chain</a>
+</div>
+</aside>
+</div>
+<!-- Micro-interaction Script for Interactive Demonstration -->
+<script>
+    function selectCitation(id) {
+      console.log("Selected Citation ID:", id);
+      // Provides tactile feedback in interactive evaluations
+    }
+  </script>
+</body></html>

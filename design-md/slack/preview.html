@@ -1,8 +1,807 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Slack · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#4a154b;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/slack">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Slack · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#4a154b"></span><code>#4a154b</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#1d1d1d"></span><code>#1d1d1d</code></div><div class="swatch"><span style="background:#481a54"></span><code>#481a54</code></div><div class="swatch"><span style="background:#611f69"></span><code>#611f69</code></div><div class="swatch"><span style="background:#592466"></span><code>#592466</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Salesforce-Avant-Garde, system-ui, -apple-system, BlinkMacSystemFont, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kith Workspace - #brand-evolution</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed-dim": "#bfcd8b",
+            "tertiary-container": "#263000",
+            "on-surface": "#1a1c1c",
+            "inverse-primary": "#f6afef",
+            "on-tertiary-fixed": "#171e00",
+            "on-surface-variant": "#4f434c",
+            "on-secondary-container": "#765a72",
+            "on-secondary-fixed-variant": "#583e55",
+            "surface-container-high": "#e8e8e8",
+            "on-primary-container": "#be7db9",
+            "tertiary-fixed": "#dbe9a5",
+            "surface-variant": "#e2e2e2",
+            "outline-variant": "#d2c2cd",
+            "on-primary": "#ffffff",
+            "surface-tint": "#844981",
+            "error-container": "#ffdad6",
+            "inverse-on-surface": "#f0f1f1",
+            "on-tertiary-container": "#8c995d",
+            "outline": "#80737d",
+            "on-background": "#1a1c1c",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f3f4",
+            "on-tertiary-fixed-variant": "#404b17",
+            "on-primary-fixed-variant": "#693168",
+            "background": "#f9f9f9",
+            "tertiary": "#141a00",
+            "primary-fixed": "#ffd6f8",
+            "surface-dim": "#dadada",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "secondary-container": "#f9d5f2",
+            "surface-container-highest": "#e2e2e2",
+            "primary-fixed-dim": "#f6afef",
+            "surface": "#f9f9f9",
+            "secondary": "#71566e",
+            "inverse-surface": "#2f3131",
+            "primary-container": "#4a154b",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#291428",
+            "secondary-fixed": "#fcd8f5",
+            "primary": "#300033",
+            "on-primary-fixed": "#370139",
+            "secondary-fixed-dim": "#dfbcd8",
+            "surface-bright": "#f9f9f9",
+            "surface-container": "#eeeeee",
+            "on-tertiary": "#ffffff",
+            /* Direct design system aliases */
+            "ink": "#1d1d1d",
+            "ink-mute": "#696969",
+            "primary-press": "#611f69",
+            "primary-deep": "#481a54",
+            "link-blue": "#1264a3",
+            "link-hover": "#3860be",
+            "canvas-cream": "#f4ede4",
+            "canvas-warm": "#fbf9f6",
+            "canvas-warm-panel": "#f7f4ee",
+            "canvas-lavender": "#f9f0ff",
+            "hairline": "#e6e6e6",
+            "on-aubergine-mute": "#d9bdde",
+            "semantic-success": "#007a5a"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "xs": "2px",
+            "sm": "4px",
+            "md": "8px",
+            "lg": "12px",
+            "xl": "16px",
+            "xxl": "48px",
+            "pill": "90px",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(105, 105, 105, 0.25);
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(105, 105, 105, 0.45);
+    }
+    .aubergine-scrollbar::-webkit-scrollbar {
+      width: 4px;
+    }
+    .aubergine-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .aubergine-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(217, 189, 222, 0.2);
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased overflow-hidden h-screen flex flex-col select-none">
+<!-- ==================== TOP NAVIGATION BAR (Docked, full width) ==================== -->
+<header class="flex justify-between items-center w-full px-4 h-12 fixed top-0 left-0 right-0 z-50 bg-primary-container text-on-primary border-b border-primary-press shadow-none">
+<!-- Left Section: Brand & Quick Search -->
+<div class="flex items-center gap-5 w-80">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-md bg-white flex items-center justify-center shadow-sm">
+<span class="font-headline font-bold text-primary-container text-base tracking-tighter">K</span>
+</div>
+<span class="font-headline font-bold text-lg tracking-tight text-on-primary">Kith</span>
+</div>
+<!-- Quick global jump / Search bar on left -->
+<div class="relative flex-1">
+<div class="flex items-center bg-primary-deep hover:bg-primary-press/60 text-on-aubergine-mute hover:text-on-primary rounded-md px-2.5 py-1.5 transition-colors cursor-pointer border border-white/10 text-xs">
+<span class="material-symbols-outlined text-sm mr-2 text-on-aubergine-mute">search</span>
+<span class="truncate">Search Kith...</span>
+<kbd class="ml-auto font-label text-[10px] bg-primary-container px-1.5 py-0.5 rounded text-on-aubergine-mute border border-white/15">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Center Section: Top Global Links -->
+<nav class="flex items-center gap-1">
+<a class="text-on-aubergine-mute hover:text-on-primary px-3 py-1 font-medium transition-colors text-xs flex items-center gap-1.5 rounded-full hover:bg-primary-press/40" href="#">
+<span class="material-symbols-outlined text-sm">forum</span>
+        Threads
+      </a>
+<a class="text-on-aubergine-mute hover:text-on-primary px-3 py-1 font-medium transition-colors text-xs flex items-center gap-1.5 rounded-full hover:bg-primary-press/40" href="#">
+<span class="material-symbols-outlined text-sm">dashboard</span>
+        Canvases
+      </a>
+<a class="text-on-aubergine-mute hover:text-on-primary px-3 py-1 font-medium transition-colors text-xs flex items-center gap-1.5 rounded-full hover:bg-primary-press/40" href="#">
+<span class="material-symbols-outlined text-sm">send</span>
+        DMs
+      </a>
+<!-- Active Channel View is active under Activity & Workspace context -->
+<a class="text-on-primary bg-primary-press/80 rounded-full px-3 py-1 font-semibold text-xs flex items-center gap-1.5 shadow-sm" href="#">
+<span class="material-symbols-outlined text-sm">notifications_active</span>
+        Activity
+        <span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span>
+</a>
+</nav>
+<!-- Right Section: Trailing Actions, Status & Profile -->
+<div class="flex items-center gap-3">
+<!-- Status pill toggle -->
+<div class="hidden lg:flex items-center gap-1.5 bg-primary-deep text-on-aubergine-mute px-2.5 py-1 rounded-full text-xs border border-white/10">
+<span class="w-2 h-2 rounded-full bg-semantic-success inline-block"></span>
+<span class="font-medium text-[11px] text-on-primary">In focus mode</span>
+<span class="material-symbols-outlined text-xs cursor-pointer hover:text-on-primary">close</span>
+</div>
+<!-- Secondary Trailing Action: Huddle -->
+<button class="flex items-center gap-1.5 px-3 py-1 bg-primary-press/70 hover:bg-primary-press text-on-primary text-xs font-semibold rounded-pill transition-transform active:scale-95 border border-white/10">
+<span class="material-symbols-outlined text-sm">headphones</span>
+        Huddle
+      </button>
+<!-- Primary Trailing Action: New Message -->
+<button class="flex items-center gap-1.5 px-3.5 py-1 bg-white hover:bg-canvas-lavender text-primary-container text-xs font-bold rounded-pill transition-transform active:scale-95 shadow-sm">
+<span class="material-symbols-outlined text-sm">edit_square</span>
+        New Message
+      </button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1 border-l border-white/15 pl-2 text-on-aubergine-mute">
+<button class="p-1 hover:text-on-primary hover:bg-primary-press/50 rounded transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-base">notifications</span>
+</button>
+<button class="p-1 hover:text-on-primary hover:bg-primary-press/50 rounded transition-colors" title="Tune Settings">
+<span class="material-symbols-outlined text-base">tune</span>
+</button>
+<button class="p-1 hover:text-on-primary hover:bg-primary-press/50 rounded transition-colors" title="Help &amp; Guides">
+<span class="material-symbols-outlined text-base">help</span>
+</button>
+</div>
+<!-- Profile Avatar -->
+<div class="relative cursor-pointer pl-1">
+<div class="w-7 h-7 rounded-md bg-secondary-fixed text-primary-deep font-bold text-xs flex items-center justify-center ring-2 ring-white/20">
+          MR
+        </div>
+<span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-semantic-success rounded-full ring-2 ring-primary-container"></span>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN WORKSPACE CONTAINER (3-COLUMN LAYOUT) ==================== -->
+<div class="pt-12 flex flex-1 h-screen overflow-hidden">
+<!-- ================= COLUMN 1: AUBERGINE SIDEBAR ================= -->
+<aside class="w-64 bg-primary-container text-on-primary flex flex-col justify-between border-r border-outline-variant/10 select-none flex-shrink-0 z-40">
+<!-- Top Workspace Switcher Header -->
+<div class="p-3 border-b border-white/10">
+<div class="flex items-center justify-between p-2 rounded-lg hover:bg-primary-press/40 cursor-pointer transition-colors">
+<div class="flex items-center gap-2.5 overflow-hidden">
+<div class="w-8 h-8 rounded-lg bg-surface-container-lowest text-primary font-bold flex items-center justify-center flex-shrink-0 shadow-sm text-sm">
+              KH
+            </div>
+<div class="truncate text-left">
+<h2 class="font-headline font-bold text-sm text-on-primary leading-tight flex items-center gap-1">
+                Kith HQ
+                <span class="material-symbols-outlined text-xs text-on-aubergine-mute">expand_more</span>
+</h2>
+<p class="text-[11px] text-on-aubergine-mute leading-none mt-0.5">Active Team • Pro Plan</p>
+</div>
+</div>
+<button class="w-6 h-6 rounded flex items-center justify-center hover:bg-primary-press text-on-aubergine-mute hover:text-on-primary" title="Filter Workspace">
+<span class="material-symbols-outlined text-base">filter_list</span>
+</button>
+</div>
+</div>
+<!-- Navigation & Channel Tree Scrollable Area -->
+<div class="flex-1 overflow-y-auto aubergine-scrollbar px-2 py-3 space-y-4 text-xs">
+<!-- Primary Navigation Tabs (From Shared Components) -->
+<div class="space-y-0.5">
+<a class="text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined text-base">home</span>
+<span class="flex-1">Home</span>
+</a>
+<a class="text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined text-base">chat_bubble</span>
+<span class="flex-1">Direct Messages</span>
+<span class="bg-primary-press text-on-primary font-semibold text-[10px] px-1.5 py-0.2 rounded-full">2</span>
+</a>
+<!-- Channels (Active Section) -->
+<a class="bg-primary-press text-on-primary font-semibold rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined text-base">tag</span>
+<span class="flex-1">Channels</span>
+<span class="bg-white/20 text-on-primary text-[10px] px-1.5 rounded-full font-bold">14</span>
+</a>
+<a class="text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined text-base">alternate_email</span>
+<span class="flex-1">Mentions &amp; Reactions</span>
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+</a>
+<a class="text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined text-base">drafts</span>
+<span class="flex-1">Drafts &amp; Sent</span>
+</a>
+<a class="text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary rounded-lg px-2.5 py-1.5 flex items-center gap-2.5 transition-colors font-medium" href="#">
+<span class="material-symbols-outlined text-base">folder</span>
+<span class="flex-1">Files</span>
+</a>
+</div>
+<!-- Starred Channels Group -->
+<div>
+<div class="flex items-center justify-between text-[11px] font-bold tracking-wider text-on-aubergine-mute/70 uppercase px-2 mb-1">
+<span class="flex items-center gap-1 cursor-pointer hover:text-on-primary">
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+              Starred
+            </span>
+<span class="material-symbols-outlined text-xs cursor-pointer hover:text-on-primary">more_horiz</span>
+</div>
+<div class="space-y-0.5">
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md bg-primary-press/90 text-on-primary font-bold" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm font-semibold opacity-80">#</span>
+<span class="truncate">brand-evolution</span>
+</div>
+<span class="bg-secondary-fixed text-primary-deep text-[10px] font-bold px-1.5 rounded-full">14</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm opacity-60">#</span>
+<span class="truncate">design-critique</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm opacity-60">#</span>
+<span class="truncate">product-launch</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Active Channels Group -->
+<div>
+<div class="flex items-center justify-between text-[11px] font-bold tracking-wider text-on-aubergine-mute/70 uppercase px-2 mb-1">
+<span class="flex items-center gap-1 cursor-pointer hover:text-on-primary">
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+              Active Channels
+            </span>
+<button class="material-symbols-outlined text-xs hover:text-on-primary" title="Add Channels">add</button>
+</div>
+<div class="space-y-0.5">
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm opacity-60">#</span>
+<span class="truncate">general</span>
+</div>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-primary font-bold hover:bg-primary-press/40 transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm font-semibold opacity-90">#</span>
+<span class="truncate">tokens-and-system</span>
+</div>
+<span class="bg-primary-press text-on-primary text-[10px] font-semibold px-1.5 rounded-full">3</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm opacity-60">#</span>
+<span class="truncate">kith-announcements</span>
+</div>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="text-sm opacity-60">#</span>
+<span class="truncate">user-research</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Direct Messages Group -->
+<div>
+<div class="flex items-center justify-between text-[11px] font-bold tracking-wider text-on-aubergine-mute/70 uppercase px-2 mb-1">
+<span class="flex items-center gap-1 cursor-pointer hover:text-on-primary">
+<span class="material-symbols-outlined text-xs">arrow_drop_down</span>
+              Direct Messages
+            </span>
+<button class="material-symbols-outlined text-xs hover:text-on-primary">add</button>
+</div>
+<div class="space-y-0.5">
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="w-2 h-2 rounded-full bg-semantic-success flex-shrink-0"></span>
+<span class="truncate">Elena Rostova</span>
+</div>
+<span class="text-[10px] opacity-60">Lead</span>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="w-2 h-2 rounded-full bg-semantic-success flex-shrink-0"></span>
+<span class="truncate">Alex Chen</span>
+</div>
+</a>
+<a class="flex items-center justify-between px-2.5 py-1 rounded-md text-on-aubergine-mute hover:bg-primary-press/40 hover:text-on-primary transition-colors" href="#">
+<div class="flex items-center gap-2 truncate">
+<span class="w-2 h-2 rounded-full bg-outline flex-shrink-0"></span>
+<span class="truncate">Sarah Miller</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Add Channel CTA button -->
+<div class="pt-2">
+<button class="w-full py-1.5 px-3 rounded-lg border border-dashed border-white/20 hover:border-white/40 text-on-aubergine-mute hover:text-on-primary text-xs flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">add</span>
+            Add Channels
+          </button>
+</div>
+</div>
+<!-- Footer Action Links (From Shared Components) -->
+<div class="p-2 border-t border-white/10 bg-primary-deep/40 text-xs">
+<a class="text-on-aubergine-mute hover:text-on-primary hover:bg-primary-press/30 rounded-md px-2 py-1.5 flex items-center gap-2 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">person_add</span>
+<span>Invite Teammates</span>
+</a>
+<a class="text-on-aubergine-mute hover:text-on-primary hover:bg-primary-press/30 rounded-md px-2 py-1.5 flex items-center gap-2 transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span>Preferences</span>
+</a>
+</div>
+</aside>
+<!-- ================= COLUMN 2: CENTRAL CHANNEL OVERVIEW & READING CANVAS ================= -->
+<main class="flex-1 bg-canvas-warm flex flex-col overflow-hidden min-w-0 border-r border-hairline">
+<!-- Top Channel Header -->
+<section class="bg-surface-container-lowest border-b border-hairline px-6 py-3 flex-shrink-0">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5">
+<span class="font-headline font-bold text-xl text-ink">#brand-evolution</span>
+<button class="text-ink-mute hover:text-ink transition-colors p-0.5" title="Star channel">
+<span class="material-symbols-outlined text-base">star</span>
+</button>
+</div>
+<span class="text-xs px-2.5 py-0.5 rounded-full bg-canvas-lavender text-primary-container font-semibold">Active Sprint</span>
+</div>
+<div class="flex items-center gap-2.5">
+<!-- Canvas Button -->
+<button class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-low hover:bg-surface-container text-ink text-xs font-semibold rounded-pill transition-colors border border-hairline">
+<span class="material-symbols-outlined text-sm text-link-blue">space_dashboard</span>
+              Canvas
+            </button>
+<!-- Member count cluster -->
+<div class="flex items-center gap-2 border-l border-hairline pl-3">
+<div class="flex -space-x-1.5">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary text-[10px] font-bold flex items-center justify-center ring-2 ring-white">ER</div>
+<div class="w-6 h-6 rounded-full bg-secondary text-on-primary text-[10px] font-bold flex items-center justify-center ring-2 ring-white">AC</div>
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed-dim text-on-tertiary-fixed text-[10px] font-bold flex items-center justify-center ring-2 ring-white">SM</div>
+<div class="w-6 h-6 rounded-full bg-secondary-fixed text-primary-deep text-[10px] font-bold flex items-center justify-center ring-2 ring-white">+21</div>
+</div>
+<span class="text-xs text-ink-mute font-medium">24 members</span>
+</div>
+<!-- Header tool options -->
+<button class="p-1 text-ink-mute hover:text-ink rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-base">person_add</span>
+</button>
+<button class="p-1 text-ink-mute hover:text-ink rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined text-base">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Description & Bookmarks Bar -->
+<div class="mt-1 flex flex-wrap items-center justify-between text-xs text-ink-mute gap-2">
+<p class="truncate max-w-xl">Evolving visual guidelines, brand kits &amp; typography updates across Kith workspace apps.</p>
+<!-- Bookmarks -->
+<div class="flex items-center gap-2 text-xs">
+<span class="text-[11px] font-bold uppercase tracking-wider text-ink-mute/70">Bookmarks:</span>
+<a class="flex items-center gap-1 px-2 py-0.5 rounded bg-canvas-warm-panel hover:bg-surface-container text-ink font-medium border border-hairline transition-colors" href="#">
+<span class="material-symbols-outlined text-xs text-primary-container">polyline</span>
+              Figma: Brand_2025.fig
+            </a>
+<a class="flex items-center gap-1 px-2 py-0.5 rounded bg-canvas-warm-panel hover:bg-surface-container text-ink font-medium border border-hairline transition-colors" href="#">
+<span class="material-symbols-outlined text-xs text-semantic-success">menu_book</span>
+              Brand Guide v2.4
+            </a>
+<a class="flex items-center gap-1 px-2 py-0.5 rounded bg-canvas-warm-panel hover:bg-surface-container text-ink font-medium border border-hairline transition-colors" href="#">
+<span class="material-symbols-outlined text-xs text-link-blue">task_alt</span>
+              Milestone Tracker
+            </a>
+</div>
+</div>
+</section>
+<!-- Scrollable Message Stream & Activity Card Hub -->
+<section class="flex-1 overflow-y-auto custom-scrollbar px-6 py-4 space-y-5">
+<!-- Featured Channel Activity Card (Requested High-Signal Card) -->
+<div class="bg-surface-container-lowest border border-hairline rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-canvas-lavender text-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-xl">palette</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-bold text-sm text-ink">#brand-evolution Activity Pulse</h3>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary text-[11px] font-bold">14 new updates</span>
+<span class="text-xs text-ink-mute">• Updated 4m ago</span>
+</div>
+<p class="text-xs text-ink-mute mt-0.5">Focus: Refined typography tokens, Aubergine 60-30-10 palette rules &amp; iconography weights.</p>
+</div>
+</div>
+<!-- Follow / Following Interactive Toggle -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-pill bg-canvas-lavender hover:bg-secondary-container text-primary-container text-xs font-bold transition-colors">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">notifications_active</span>
+              Following
+            </button>
+</div>
+<!-- Participants & Signal Summary Preview Snippet -->
+<div class="mt-3 pt-3 border-t border-hairline flex items-center justify-between text-xs">
+<div class="flex items-center gap-3">
+<span class="text-ink-mute font-medium text-[11px]">Active Contributors:</span>
+<div class="flex items-center gap-1.5">
+<span class="w-6 h-6 rounded-full bg-secondary-fixed text-primary-deep font-bold text-[10px] flex items-center justify-center" title="Elena Rostova">ER</span>
+<span class="w-6 h-6 rounded-full bg-tertiary-fixed text-tertiary font-bold text-[10px] flex items-center justify-center" title="Marcus Vance">MV</span>
+<span class="w-6 h-6 rounded-full bg-secondary-container text-on-secondary-container font-bold text-[10px] flex items-center justify-center" title="Tara Lin">TL</span>
+<span class="w-6 h-6 rounded-full bg-surface-variant text-ink font-bold text-[10px] flex items-center justify-center" title="James Davis">JD</span>
+</div>
+</div>
+<!-- Signal Snippet -->
+<div class="flex items-center gap-2 text-ink-mute max-w-md truncate">
+<span class="font-semibold text-ink">Latest signal:</span>
+<span class="truncate">"New Display-XXL kerning pass exported to design tokens repository."</span>
+</div>
+</div>
+</div>
+<!-- Date Divider -->
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-hairline"></div>
+<span class="flex-shrink mx-4 text-[11px] font-semibold text-ink-mute bg-canvas-warm px-3 py-0.5 rounded-full border border-hairline">Today, October 24</span>
+<div class="flex-grow border-t border-hairline"></div>
+</div>
+<!-- Message Item 1: Elena Rostova (Product Design Lead) -->
+<div class="group flex gap-3.5 hover:bg-canvas-cream/50 -mx-3 px-3 py-2 rounded-lg transition-colors">
+<div class="w-9 h-9 rounded-lg bg-primary-container text-on-primary font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            ER
+          </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-bold text-xs text-ink">Elena Rostova</span>
+<span class="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.2 rounded bg-surface-container text-ink-mute">Staff Designer</span>
+<span class="text-[11px] text-ink-mute">10:42 AM</span>
+</div>
+<div class="text-xs text-ink mt-1.5 leading-relaxed space-y-2">
+<p>
+                Morning team! We just finalized the <span class="font-semibold text-primary-container">#brand-evolution</span> core palette guidelines. We're strictly committing to our deep aubergine (<code class="bg-surface-container-high px-1 py-0.5 rounded text-[11px] font-mono text-ink">#4a154b</code>) as our chromatic primary, paired with warm cream canvas surfaces for optimal reading comfort.
+              </p>
+<p>
+                Please review the updated typography lockup and token values below. Note the tighter optical density on the display tiers:
+              </p>
+</div>
+<!-- Attached Design Preview Asset Card -->
+<div class="mt-3 bg-surface-container-lowest border border-hairline rounded-lg p-3 max-w-lg shadow-sm">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-hairline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-base">image</span>
+<span class="font-headline font-bold text-xs text-ink">Kith_Design_Tokens_Matrix_v2.svg</span>
+</div>
+<span class="text-[10px] text-ink-mute font-medium">1.4 MB • Vector Preview</span>
+</div>
+<!-- Subtle Vector/Token preview box -->
+<div class="bg-gradient-to-r from-canvas-cream to-canvas-lavender p-3 rounded border border-hairline flex items-center justify-between">
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-primary-container"></span>
+<span class="font-mono text-[11px] font-semibold text-ink">primary-aubergine: #4a154b</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-4 h-4 rounded-full bg-canvas-cream border border-hairline"></span>
+<span class="font-mono text-[11px] font-semibold text-ink">canvas-warm-cream: #f4ede4</span>
+</div>
+</div>
+<div class="text-right">
+<span class="text-[11px] font-bold text-link-blue hover:text-link-hover cursor-pointer flex items-center gap-1">
+                    Open in Inspector
+                    <span class="material-symbols-outlined text-xs">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Reactions Bar -->
+<div class="flex flex-wrap items-center gap-1.5 mt-2.5">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-hairline text-xs transition-colors">
+<span>🎉</span>
+<span class="font-bold text-[11px] text-ink">8</span>
+</button>
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 border border-secondary-container text-xs transition-colors">
+<span>👀</span>
+<span class="font-bold text-[11px] text-primary-container">5</span>
+</button>
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-hairline text-xs transition-colors">
+<span>🔥</span>
+<span class="font-bold text-[11px] text-ink">12</span>
+</button>
+<button class="p-1 rounded-full text-ink-mute hover:text-ink hover:bg-surface-container transition-colors" title="Add reaction">
+<span class="material-symbols-outlined text-sm">add_reaction</span>
+</button>
+</div>
+<!-- Thread Reply Count Button -->
+<div class="mt-2">
+<button class="flex items-center gap-2 text-xs font-semibold text-link-blue hover:text-link-hover group/thread">
+<div class="flex -space-x-1">
+<div class="w-4 h-4 rounded-full bg-tertiary-fixed-dim text-[8px] font-bold flex items-center justify-center text-tertiary ring-1 ring-white">AC</div>
+<div class="w-4 h-4 rounded-full bg-secondary text-[8px] font-bold flex items-center justify-center text-on-primary ring-1 ring-white">MV</div>
+</div>
+<span>6 replies</span>
+<span class="text-ink-mute font-normal text-[11px]">• Last reply 12m ago</span>
+<span class="material-symbols-outlined text-xs opacity-0 group-hover/thread:opacity-100 transition-opacity">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Message Item 2: Alex Chen (Senior Design Systems Engineer) -->
+<div class="group flex gap-3.5 hover:bg-canvas-cream/50 -mx-3 px-3 py-2 rounded-lg transition-colors">
+<div class="w-9 h-9 rounded-lg bg-secondary text-on-primary font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            AC
+          </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-bold text-xs text-ink">Alex Chen</span>
+<span class="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.2 rounded bg-surface-container text-ink-mute">Core Eng</span>
+<span class="text-[11px] text-ink-mute">11:18 AM</span>
+</div>
+<div class="text-xs text-ink mt-1.5 leading-relaxed space-y-2">
+<p>
+                Tokens sync beautifully into Figma! I noticed the pill CTA buttons need to retain their full 28px horizontal padding (<code class="bg-surface-container-high px-1 py-0.5 rounded text-[11px] font-mono text-ink">padding: 14px 28px</code>) with a 90px radius. It preserves that tactile, comfortable feel.
+              </p>
+<div class="bg-surface-container-lowest border-l-2 border-link-blue pl-3 py-1 my-1 text-ink-mute text-xs">
+                "Pill buttons at rounded-pill (90px) with generous 28–30px horizontal padding — over-padded by SaaS-default standards, deliberately so."
+              </div>
+</div>
+<!-- Reactions Bar -->
+<div class="flex flex-wrap items-center gap-1.5 mt-2">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-hairline text-xs transition-colors">
+<span>🙌</span>
+<span class="font-bold text-[11px] text-ink">4</span>
+</button>
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-low hover:bg-surface-container border border-hairline text-xs transition-colors">
+<span>💯</span>
+<span class="font-bold text-[11px] text-ink">7</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Message Item 3: Marcus Vance (Brand Lead) -->
+<div class="group flex gap-3.5 hover:bg-canvas-cream/50 -mx-3 px-3 py-2 rounded-lg transition-colors">
+<div class="w-9 h-9 rounded-lg bg-tertiary-container text-on-tertiary font-bold text-xs flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            MV
+          </div>
+<div class="flex-1 min-w-0">
+<div class="flex items-baseline gap-2">
+<span class="font-headline font-bold text-xs text-ink">Marcus Vance</span>
+<span class="text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.2 rounded bg-surface-container text-ink-mute">Brand Lead</span>
+<span class="text-[11px] text-ink-mute">11:35 AM</span>
+</div>
+<p class="text-xs text-ink mt-1.5 leading-relaxed">
+              Agreed Alex. Let's make sure the inline links stick strictly to <span class="text-link-blue font-semibold">#1264a3</span> as our only chromatic departure. I'm initiating a quick 10-minute huddle at 2:00 PM to confirm the marketing hero composite gradients.
+            </p>
+<div class="flex flex-wrap items-center gap-1.5 mt-2">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/30 border border-secondary-container text-xs transition-colors">
+<span>👍</span>
+<span class="font-bold text-[11px] text-primary-container">6</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom Rich Input Composer -->
+<footer class="p-4 bg-canvas-warm-panel border-t border-hairline flex-shrink-0">
+<div class="bg-surface-container-lowest border border-outline-variant/60 focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container rounded-lg shadow-sm transition-all">
+<!-- Formatting Toolbar -->
+<div class="flex items-center justify-between px-3 py-1.5 border-b border-hairline/80 text-ink-mute">
+<div class="flex items-center gap-1">
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Bold"><span class="material-symbols-outlined text-sm">format_bold</span></button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Italic"><span class="material-symbols-outlined text-sm">format_italic</span></button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Strikethrough"><span class="material-symbols-outlined text-sm">strikethrough_s</span></button>
+<span class="w-[1px] h-3.5 bg-hairline mx-1"></span>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Link"><span class="material-symbols-outlined text-sm">link</span></button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Numbered List"><span class="material-symbols-outlined text-sm">format_list_numbered</span></button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Bulleted List"><span class="material-symbols-outlined text-sm">format_list_bulleted</span></button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Code Block"><span class="material-symbols-outlined text-sm">code_blocks</span></button>
+</div>
+<div class="text-[11px] font-mono text-ink-mute/70">Markdown supported</div>
+</div>
+<!-- Textarea Area -->
+<div class="p-3">
+<textarea class="w-full bg-transparent border-0 p-0 text-xs text-ink placeholder:text-ink-mute focus:ring-0 resize-none font-body leading-relaxed" placeholder="Message #brand-evolution..." rows="2"></textarea>
+</div>
+<!-- Bottom Actions & Send Button -->
+<div class="flex items-center justify-between px-3 py-2 border-t border-hairline/60 bg-surface-container-lowest rounded-b-lg">
+<div class="flex items-center gap-2 text-ink-mute">
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Add File / Attachment">
+<span class="material-symbols-outlined text-base">attach_file</span>
+</button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Add Emoji">
+<span class="material-symbols-outlined text-base">sentiment_satisfied</span>
+</button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Mention someone">
+<span class="material-symbols-outlined text-base">alternate_email</span>
+</button>
+<button class="p-1 hover:text-ink hover:bg-surface-container rounded" title="Record Audio Clip">
+<span class="material-symbols-outlined text-base">mic</span>
+</button>
+</div>
+<!-- Send button pill -->
+<button class="flex items-center gap-1.5 px-4 py-1.5 bg-primary-container hover:bg-primary-press text-on-primary text-xs font-bold rounded-pill transition-transform active:scale-95 shadow-sm">
+<span>Send</span>
+<span class="material-symbols-outlined text-xs">send</span>
+</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- ================= COLUMN 3: RIGHT-HAND CONCISE ACTIVITY & MENTIONS FEED ================= -->
+<aside class="w-80 bg-canvas-warm-panel flex flex-col justify-between overflow-hidden flex-shrink-0 select-none">
+<!-- Panel Header -->
+<div class="p-4 border-b border-hairline flex-shrink-0 bg-surface-container-lowest">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-lg">bolt</span>
+<h3 class="font-headline font-bold text-sm text-ink">Activity &amp; Mentions</h3>
+</div>
+<button class="p-1 text-ink-mute hover:text-ink rounded hover:bg-surface-container">
+<span class="material-symbols-outlined text-base">close</span>
+</button>
+</div>
+<!-- Filter Tabs -->
+<div class="flex items-center gap-1 mt-3 p-0.5 bg-surface-container-low rounded-lg text-xs">
+<button class="flex-1 py-1 px-2 rounded-md bg-white text-ink font-bold shadow-xs text-center transition-all">Mentions</button>
+<button class="flex-1 py-1 px-2 rounded-md text-ink-mute hover:text-ink font-medium text-center transition-colors">Threads</button>
+<button class="flex-1 py-1 px-2 rounded-md text-ink-mute hover:text-ink font-medium text-center transition-colors">Reactions</button>
+</div>
+</div>
+<!-- Scrollable Activity Stream -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-3 space-y-3">
+<!-- Activity Item 1: Direct Mention -->
+<div class="bg-surface-container-lowest border border-hairline rounded-lg p-3 hover:border-primary-container/40 transition-colors cursor-pointer group shadow-2xs">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-container text-on-primary text-[10px] font-bold flex items-center justify-center">
+                ER
+              </div>
+<span class="font-headline font-bold text-xs text-ink group-hover:text-primary-container transition-colors">Elena Rostova</span>
+</div>
+<span class="text-[10px] text-ink-mute">5m ago</span>
+</div>
+<p class="text-xs text-ink mt-1.5 leading-snug">
+            Tagged you in <span class="font-semibold text-primary-container">#design-critique</span>:
+          </p>
+<div class="bg-canvas-warm p-2 rounded border border-hairline/80 mt-1.5 text-xs text-ink-mute italic">
+            "Can we review the kerning on the new wordmark before 2 PM?"
+          </div>
+</div>
+<!-- Activity Item 2: Thread Reply -->
+<div class="bg-surface-container-lowest border border-hairline rounded-lg p-3 hover:border-primary-container/40 transition-colors cursor-pointer group shadow-2xs">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary text-on-primary text-[10px] font-bold flex items-center justify-center">
+                TL
+              </div>
+<span class="font-headline font-bold text-xs text-ink group-hover:text-primary-container transition-colors">Tara Lin</span>
+</div>
+<span class="text-[10px] text-ink-mute">18m ago</span>
+</div>
+<p class="text-xs text-ink mt-1.5 leading-snug">
+            Replied in thread <span class="font-semibold text-link-blue">#product-launch</span>:
+          </p>
+<div class="bg-canvas-warm p-2 rounded border border-hairline/80 mt-1.5 text-xs text-ink leading-relaxed">
+            "Deployment scheduled for Thursday 10:00 AM UTC. Release checklist is ready."
+          </div>
+</div>
+<!-- Activity Item 3: File Reaction -->
+<div class="bg-surface-container-lowest border border-hairline rounded-lg p-3 hover:border-primary-container/40 transition-colors cursor-pointer group shadow-2xs">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-canvas-lavender text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-xs">thumb_up</span>
+</span>
+<span class="font-headline font-bold text-xs text-ink">Alex Chen + 3 others</span>
+</div>
+<span class="text-[10px] text-ink-mute">42m ago</span>
+</div>
+<p class="text-xs text-ink-mute mt-1.5 leading-snug">
+            Reacted with 🔥 to your file <span class="font-mono text-[11px] text-ink font-semibold">Design_Tokens_v1.4.json</span>
+</p>
+</div>
+<!-- Pinned Items Widget -->
+<div class="pt-2">
+<div class="flex items-center justify-between text-[11px] font-bold text-ink-mute uppercase tracking-wider mb-2 px-1">
+<span>Pinned Resources</span>
+<span class="material-symbols-outlined text-xs cursor-pointer hover:text-ink">push_pin</span>
+</div>
+<div class="space-y-1.5 text-xs">
+<a class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest border border-hairline hover:bg-canvas-cream transition-colors" href="#">
+<span class="material-symbols-outlined text-primary-container text-base">description</span>
+<div class="truncate flex-1">
+<p class="font-semibold text-ink truncate leading-tight">Q4 Brand Architecture Spec</p>
+<p class="text-[10px] text-ink-mute mt-0.5">Updated by Elena • Oct 22</p>
+</div>
+</a>
+<a class="flex items-center gap-2 p-2 rounded-lg bg-surface-container-lowest border border-hairline hover:bg-canvas-cream transition-colors" href="#">
+<span class="material-symbols-outlined text-semantic-success text-base">link</span>
+<div class="truncate flex-1">
+<p class="font-semibold text-ink truncate leading-tight">Figma Typography Matrix</p>
+<p class="text-[10px] text-ink-mute mt-0.5">Shared via Figma API</p>
+</div>
+</a>
+</div>
+</div>
+<!-- Upcoming Huddle Preview Card -->
+<div class="bg-gradient-to-br from-primary-container to-primary-press text-on-primary rounded-xl p-3.5 shadow-sm mt-3">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase tracking-wider bg-white/20 text-on-primary px-2 py-0.5 rounded-full">Upcoming Huddle</span>
+<span class="material-symbols-outlined text-sm">headphones</span>
+</div>
+<h4 class="font-headline font-bold text-xs mt-2 leading-tight">Brand Token QA &amp; Alignment</h4>
+<p class="text-[11px] text-on-aubergine-mute mt-1">Today at 2:00 PM • In #brand-evolution</p>
+<div class="flex items-center justify-between mt-3 pt-2 border-t border-white/10">
+<div class="flex -space-x-1">
+<span class="w-5 h-5 rounded-full bg-white text-primary-deep text-[9px] font-bold flex items-center justify-center">ER</span>
+<span class="w-5 h-5 rounded-full bg-secondary-fixed text-primary text-[9px] font-bold flex items-center justify-center">MV</span>
+<span class="w-5 h-5 rounded-full bg-surface-variant text-ink text-[9px] font-bold flex items-center justify-center">+4</span>
+</div>
+<button class="px-2.5 py-1 rounded-pill bg-white hover:bg-canvas-lavender text-primary-container text-[11px] font-bold transition-transform active:scale-95 shadow-sm">
+              RSVP Yes
+            </button>
+</div>
+</div>
+</div>
+<!-- Quick status footer info -->
+<div class="p-3 border-t border-hairline bg-surface-container-lowest flex items-center justify-between text-[11px] text-ink-mute">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-semantic-success"></span>
+<span>Workspace synced: 1440px wide</span>
+</div>
+<span class="font-mono text-[10px]">Kith v4.8</span>
+</div>
+</aside>
+</div>
+</body></html>

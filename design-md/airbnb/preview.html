@@ -1,8 +1,838 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Airbnb · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#ff385c;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/airbnb">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Airbnb · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#ff385c"></span><code>#ff385c</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#222222"></span><code>#222222</code></div><div class="swatch"><span style="background:#e00b41"></span><code>#e00b41</code></div><div class="swatch"><span style="background:#ffd1da"></span><code>#ffd1da</code></div><div class="swatch"><span style="background:#c13515"></span><code>#c13515</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Airbnb Cereal VF&#x27;, Circular, -apple-system, system-ui, Roboto, &#x27;Helvetica Neue&#x27;, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HavenStay | Vacation Rentals, Cabins, Beachfront Stays &amp; More</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Public Sans Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-fixed-variant": "#920029",
+            "error": "#ba1a1a",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#fffbff",
+            "secondary-fixed": "#ffdada",
+            "on-primary-fixed": "#40000d",
+            "on-secondary-fixed-variant": "#871d2f",
+            "primary-fixed": "#ffdada",
+            "inverse-on-surface": "#f0f1f1",
+            "on-primary": "#ffffff",
+            "tertiary-fixed-dim": "#62dca3",
+            "on-background": "#1a1c1c",
+            "surface-container-low": "#f3f3f4",
+            "secondary-container": "#fd7682",
+            "inverse-primary": "#ffb2b6",
+            "outline": "#906f70",
+            "on-surface-variant": "#5c3f41",
+            "surface": "#f9f9f9",
+            "on-tertiary-container": "#f6fff6",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "outline-variant": "#e5bdbe",
+            "on-tertiary-fixed": "#002113",
+            "primary-container": "#e21e4a",
+            "surface-container-high": "#e8e8e8",
+            "surface-container": "#eeeeee",
+            "surface-variant": "#e2e2e2",
+            "on-secondary-container": "#710920",
+            "tertiary-fixed": "#80f9bd",
+            "background": "#f9f9f9",
+            "surface-bright": "#f9f9f9",
+            "primary": "#ba0036",
+            "surface-dim": "#dadada",
+            "surface-container-highest": "#e2e2e2",
+            "on-error": "#ffffff",
+            "inverse-surface": "#2f3131",
+            "surface-tint": "#be0038",
+            "secondary-fixed-dim": "#ffb2b6",
+            "on-tertiary-fixed-variant": "#005234",
+            "tertiary-container": "#008558",
+            "on-secondary-fixed": "#40000d",
+            "on-surface": "#1a1c1c",
+            "secondary": "#a73544",
+            "tertiary": "#006a45",
+            "primary-fixed-dim": "#ffb2b6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-outlined.fill-icon {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Hide scrollbar for category rail */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Card float shadow matching system specifications */
+    .hover-card-lift {
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.2s cubic-bezier(0.2, 0, 0, 1);
+    }
+    .hover-card-lift:hover {
+      box-shadow: rgba(0, 0, 0, 0.04) 0 4px 14px 0, rgba(0, 0, 0, 0.08) 0 8px 24px 0;
+      transform: translateY(-2px);
+    }
+    .search-bar-shadow {
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .search-bar-shadow:hover {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 6px 16px rgba(0,0,0,0.08);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ==================== TOP NAVIGATION BAR (Shared Component) ==================== -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline shadow-sm dark:shadow-none docked full-width top-0 sticky z-50 transition-all duration-200">
+<div class="w-full px-6 md:px-12 max-w-7xl mx-auto flex items-center justify-between h-20">
+<!-- Brand Logo / Product Name -->
+<a class="flex items-center gap-2.5 focus:outline-none group" href="#">
+<div class="w-9 h-9 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm group-hover:opacity-95 transition-opacity">
+<!-- Geometric house & compass mark -->
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M12 2.5L2 10.5V20.5C2 21.0523 2.44772 21.5 3 21.5H9C9.55228 21.5 10 21.0523 10 20.5V15.5C10 14.9477 10.4477 14.5 11 14.5H13C13.5523 14.5 14 14.9477 14 15.5V20.5C14 21.0523 14.4477 21.5 15 21.5H21C21.5523 21.5 22 21.0523 22 20.5V10.5L12 2.5Z"></path>
+</svg>
+</div>
+<span class="font-headline font-bold text-xl tracking-tight text-primary dark:text-inverse-primary">HavenStay</span>
+</a>
+<!-- Compact 3-Segment Global Search Bar -->
+<div class="hidden md:flex items-center bg-surface-container-lowest rounded-full border border-surface-container-high search-bar-shadow h-12 pl-2 pr-1.5 py-1 text-sm transition-all duration-200 divide-x divide-surface-container cursor-pointer hover:border-outline-variant/60" id="global-search-pill">
+<div class="px-4 py-1 text-left flex flex-col justify-center hover:bg-surface-container-low rounded-full transition-colors" onclick="focusSearch('where')">
+<span class="text-xs font-semibold text-on-surface">Where</span>
+<span class="text-xs text-on-surface-variant font-normal">Search destinations</span>
+</div>
+<div class="px-4 py-1 text-left flex flex-col justify-center hover:bg-surface-container-low rounded-full transition-colors" onclick="focusSearch('when')">
+<span class="text-xs font-semibold text-on-surface">When</span>
+<span class="text-xs text-on-surface-variant font-normal">Add dates</span>
+</div>
+<div class="pl-4 pr-2 py-1 text-left flex items-center gap-3 hover:bg-surface-container-low rounded-full transition-colors" onclick="focusSearch('who')">
+<div class="flex flex-col justify-center">
+<span class="text-xs font-semibold text-on-surface">Who</span>
+<span class="text-xs text-on-surface-variant font-normal">Add guests</span>
+</div>
+<!-- Red Circular Search Orb Button -->
+<button aria-label="Search" class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary hover:bg-primary-container active:scale-95 transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-base font-bold">search</span>
+</button>
+</div>
+</div>
+<!-- Right Header Actions / Trailing Controls -->
+<div class="flex items-center gap-1 sm:gap-2">
+<!-- Switch to hosting -->
+<a class="hidden sm:inline-block font-headline font-semibold text-sm tracking-tight text-on-surface px-3.5 py-2.5 rounded-full hover:bg-surface-container-low active:scale-95 transition-all duration-150" href="#host">
+          Switch to hosting
+        </a>
+<!-- Language / Region Icon Button -->
+<button aria-label="Choose language and currency" class="p-2.5 rounded-full text-on-surface hover:bg-surface-container-low active:scale-95 transition-transform duration-100 flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-xl">language</span>
+</button>
+<!-- User Menu Pill Profile Anchor -->
+<div class="relative">
+<button aria-label="User navigation menu" class="flex items-center gap-3 py-1.5 pl-3.5 pr-1.5 border border-outline-variant/60 rounded-full hover:shadow-md transition-shadow active:scale-95 duration-150 bg-surface-container-lowest" id="user-menu-button" type="button">
+<span class="material-symbols-outlined text-xl text-on-surface">menu</span>
+<div class="w-7 h-7 rounded-full bg-surface-container-highest text-on-surface-variant flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</button>
+<!-- Dropdown Popover (Interactive Demo) -->
+<div class="hidden absolute right-0 mt-2 w-56 bg-surface-container-lowest rounded-2xl shadow-xl border border-surface-container-high py-2 z-50 text-sm" id="user-dropdown">
+<div class="px-4 py-2 border-b border-surface-container">
+<span class="block text-xs font-semibold text-primary">HavenStay Guest</span>
+<span class="block text-xs text-on-surface-variant truncate">guest@havenstay.example</span>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low text-on-surface font-medium transition-colors" href="#wishlist">
+<span class="material-symbols-outlined text-lg">favorite</span> Wishlists
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low text-on-surface font-medium transition-colors" href="#trips">
+<span class="material-symbols-outlined text-lg">flight_takeoff</span> Trips &amp; Bookings
+            </a>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low text-on-surface font-medium transition-colors" href="#account">
+<span class="material-symbols-outlined text-lg">manage_accounts</span> Account settings
+            </a>
+<div class="my-1 border-t border-surface-container"></div>
+<a class="flex items-center gap-3 px-4 py-2.5 hover:bg-surface-container-low text-on-surface font-medium transition-colors" href="#help">
+<span class="material-symbols-outlined text-lg">help</span> Help Centre
+            </a>
+</div>
+</div>
+</div>
+</div>
+<!-- Product Sub-Tabs (Homes / Experiences / Services) -->
+<div class="hidden md:flex justify-center items-center gap-8 -mt-2 pb-2">
+<button class="text-on-surface dark:text-inverse-on-surface border-b-2 border-on-surface dark:border-inverse-on-surface pb-1.5 font-semibold text-sm flex items-center gap-2 transition-all">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">home</span> Stays
+      </button>
+<button class="text-on-surface-variant dark:text-outline-variant font-medium text-sm flex items-center gap-2 hover:text-on-surface transition-colors pb-1.5">
+<span class="material-symbols-outlined text-lg">hiking</span> Experiences
+        <span class="bg-surface-container-high text-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded-full tracking-wider uppercase">NEW</span>
+</button>
+<button class="text-on-surface-variant dark:text-outline-variant font-medium text-sm flex items-center gap-2 hover:text-on-surface transition-colors pb-1.5">
+<span class="material-symbols-outlined text-lg">room_service</span> Services
+        <span class="bg-surface-container-high text-on-surface text-[10px] font-bold px-1.5 py-0.5 rounded-full tracking-wider uppercase">NEW</span>
+</button>
+</div>
+</header>
+<!-- ==================== HORIZONTALLY SCROLLABLE CATEGORY FILTER RAIL ==================== -->
+<section class="sticky top-20 z-40 bg-surface-container-lowest/95 backdrop-blur-md border-b border-surface-container-high">
+<div class="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between gap-4 py-3">
+<!-- Scroll Left Button (Optional desktop aid) -->
+<button aria-label="Scroll categories left" class="hidden md:flex p-1.5 rounded-full border border-surface-container-high hover:border-on-surface text-on-surface hover:shadow-sm transition-all" onclick="scrollCategories(-240)">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<!-- Category Tabs Rail -->
+<div class="flex items-center gap-7 overflow-x-auto no-scrollbar scroll-smooth py-1 flex-1" id="category-rail">
+<!-- Amazing views (Active by default) -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-on-surface text-on-surface" data-category="amazing-views">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">landscape</span>
+<span class="text-xs font-semibold tracking-tight whitespace-nowrap">Amazing views</span>
+</button>
+<!-- Cabins -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="cabins">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">cabin</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Cabins</span>
+</button>
+<!-- Beachfront -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="beachfront">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">beach_access</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Beachfront</span>
+</button>
+<!-- Tiny homes -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="tiny-homes">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">cottage</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Tiny homes</span>
+</button>
+<!-- Lakefront -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="lakefront">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">houseboat</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Lakefront</span>
+</button>
+<!-- Treehouses -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="treehouses">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">forest</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Treehouses</span>
+</button>
+<!-- Countryside -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="countryside">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">agriculture</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Countryside</span>
+</button>
+<!-- Off-the-grid -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="off-the-grid">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">solar_power</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Off-the-grid</span>
+</button>
+<!-- Design icons -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="design-icons">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">architecture</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Design icons</span>
+</button>
+<!-- Islands -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="islands">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">water</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Islands</span>
+</button>
+<!-- Ski-in/out -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="ski-in-out">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">downhill_skiing</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Ski-in/out</span>
+</button>
+<!-- Tropical -->
+<button class="category-btn group flex flex-col items-center gap-1.5 flex-shrink-0 cursor-pointer pb-1 transition-all border-b-2 border-transparent text-on-surface-variant hover:text-on-surface" data-category="tropical">
+<span class="material-symbols-outlined text-2xl transition-transform group-hover:scale-110">chrome_maximize</span>
+<span class="text-xs font-medium tracking-tight whitespace-nowrap">Tropical</span>
+</button>
+</div>
+<!-- Scroll Right Button -->
+<button aria-label="Scroll categories right" class="hidden md:flex p-1.5 rounded-full border border-surface-container-high hover:border-on-surface text-on-surface hover:shadow-sm transition-all" onclick="scrollCategories(240)">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+<!-- Right Pill Filter Toggle -->
+<div class="flex items-center gap-3 pl-2 flex-shrink-0">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-surface-container-high hover:border-on-surface text-on-surface text-xs font-semibold hover:bg-surface-container-low transition-all" id="open-filters">
+<span class="material-symbols-outlined text-base">tune</span>
+<span>Filters</span>
+<span class="w-5 h-5 rounded-full bg-on-surface text-surface-container-lowest text-[11px] font-bold flex items-center justify-center">2</span>
+</button>
+<!-- Display Total before Taxes Switch -->
+<div class="hidden xl:flex items-center gap-3 px-3.5 py-2 rounded-xl border border-surface-container-high text-xs">
+<span class="font-medium text-on-surface">Display total before taxes</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" id="tax-toggle" type="checkbox"/>
+<div class="w-9 h-5 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-on-surface"></div>
+</label>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== MAIN CONTENT: RICH STAY LISTINGS GRID ==================== -->
+<main class="flex-1 max-w-7xl mx-auto px-6 md:px-12 py-8 w-full">
+<!-- Toast Feedback for Favorites -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-on-surface text-surface-container-lowest px-5 py-3 rounded-full text-sm font-medium shadow-2xl flex items-center gap-2 opacity-0 pointer-events-none transition-opacity duration-300 z-50" id="favorite-toast">
+<span class="material-symbols-outlined text-primary text-base" style="font-variation-settings: 'FILL' 1;">favorite</span>
+<span id="toast-message">Added to your Wishlist</span>
+</div>
+<!-- Stay Listings Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10">
+<!-- ================= CARD 1 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<!-- Media Container -->
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A pristine luxury whitewashed villa overlooking the azure Aegean Sea in Oia, Santorini at dusk. The warm golden hour lighting illuminates private infinity pools, soft curved architecture, and vibrant bougainvillea flowers against high-key architectural lines. The ambiance is elegant, tranquil, and distinctly Mediterranean." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKN14H6JDs72OT3vrKQzW9QI8w0cR_qN6sQQFR4iYTv04zzA-bQAkEBOC4KWg3n0LWETJXSI3xkVL7GyGPjmz-1nqv2lriF3YYuV7RCmr00D7QjgQVDzJNzPi9EXfbmwAp1aG6tJYNkZWz6QPrUNtbHBBnoKXiGCWcD7WUc2Wtf1QCwmbSe5Q7WYB5AylCdqpJeMRIvTL74hI93xRDfoX5g4_KsBOW_iFh5G5dSdo4NyEOaJxI73gxhUkNK5RiO7At2I_CoyyZ88vG"/>
+<!-- Guest Favorite Badge -->
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="text-[11px] font-bold text-on-surface tracking-tight">Guest favorite</span>
+</div>
+<!-- Favorite Heart Button -->
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Oia Villa')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<!-- Carousel Dots Overlay -->
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<!-- Meta Content -->
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Oia, Santorini, Greece</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.98</span>
+<span class="text-on-surface-variant font-normal">(124)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Caldera cliff view • 4,812 km away</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Apr 12 – 17</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$340</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$1,700 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 2 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Modern Scandinavian timber ski chalet nestled in the snowy pine forests of Aspen, Colorado. Large floor-to-ceiling windows reflect the dramatic snow-capped Rocky Mountains under clear blue alpine skies. Soft interior warm lighting spills out onto snow-dusted cedar deck boards, conveying secluded alpine luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7_GmeJh6VuyHGN-od-G7t3JDpOXxi5kz4DREho7D61IwwfepV8160uf1IT5ZiThipqEpUALI2qQlyzFv2tmrMM8e--5MZMKTJy0MRJCzr8Gyw-w-iTMmCm_GEtoKoy9rVOBQ2zYXPQK9qPWDKPtEJqVF-6K-Uz22r-k885PN3vaJgMSieZO9Zx_R3ax60oPCE3IcT3ohRq0PqAetfUxfRT6ZoG11-6TWup3PZNctRAmfJdqqqsZlNbkgR8nDtAF64qeQ1lfZOXaID"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="text-[11px] font-bold text-on-surface tracking-tight">Guest favorite</span>
+</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Aspen Chalet')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Aspen, Colorado, US</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.95</span>
+<span class="text-on-surface-variant font-normal">(89)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Ski-in luxury chalet • Mountain view</p>
+<p class="text-on-surface-variant text-xs mt-0.5">May 3 – 8</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$620</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$3,100 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 3 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An organic architectural biophilic villa set within the dense jungle canopy of Tulum, Mexico. Sunlight filters through lush palm leaves illuminating a private emerald cenote-style plunge pool, raw concrete textures, and natural woven rattan furniture. Modern earthy bohemian ambiance with soft cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCf6lyB_QSDDNA_Kzi-kmdlb3NeO47WjO4mTxUaigbFKzGAGfTExeSKvksWfHs0Iwhh0pHhgWfnE6mjAl7AfnBZNurpY1whYGvA2vHsoLxrc2bzo2DM8oc2yn2DQ1imKMwTbfg4yxDs_C_BfZNvEzLIvsxyXzp8kV71_Gh9gRUDSgG0VNkYFfr0972rvftkmG4AcZQkjjtl8L7_dJsvJzscNObwT8Mu8uHtkFjdHsZvvmiK-s5VKTH1wXgntXmkdkzK3Vvuh9VKRx-u"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Tulum Villa')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Tulum, Quintana Roo, Mexico</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.92</span>
+<span class="text-on-surface-variant font-normal">(210)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Private cenote access • Steps to beach</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Jun 14 – 19</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$285</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$1,425 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 4 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A cliffside pastel Italian villa perched high over the Tyrrhenian Sea in Amalfi, Italy. Terrazzo balconies are draped in aromatic lemon trees and purple wisteria overlooking dramatic coastal cliffs and shimmering turquoise waves. The atmosphere conveys effortless European glamour, bright midday warmth, and timeless elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg4dRn5YaCNsW1YCJAOiS0b7_rXzhs_DLXhJyf6JRjZYlYVEV_jSoFzmB8CovBsaAoGnPz9pc7pCJNHOcSSys_hp824XSs5mfYQPsSCaagRlE-PGRa4MKdHOqe3jq1QUddnEh2M7JPRO8AVQEZEUv82VzHNSyugbj4pmcI-CZuXwjLQOOhAGRpk50m5Efg0xPV0Nv40gWzVR6n7iCF5SDriwRZQLHV9KIBzvsJajQK2mDQK7yTFkrd73Md1m5mY7hlonuanXhi-R30"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="text-[11px] font-bold text-on-surface tracking-tight">Guest favorite</span>
+</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Amalfi Cliff House')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Amalfi, Salerno, Italy</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.99</span>
+<span class="text-on-surface-variant font-normal">(184)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Cliffside terrace • Panoramic ocean view</p>
+<p class="text-on-surface-variant text-xs mt-0.5">May 18 – 23</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$480</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$2,400 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 5 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A historic serene Japanese machiya residence in Kyoto with minimalist cedar architecture, traditional shoji screens, and an authentic meditative Zen rock and moss garden. Soft diffused morning daylight creates peaceful shadows across tatami mats and bamboo water spouts, capturing sublime Japanese tranquility." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDuNLBbNlaKTk8QR7SuTXGcdkn5FKUR_JNO9MNQcsDVvaYpJ7A8BnweK3ll-t6E5nozUfVcjMpbv_vNJnjbL_1cjC6dgFBUjeyqg7AjWP4EjP9bmpYl1NiHAJnvc9ScJdcgK2xrbXIUgb0sYq-YjC81f9fuQl3_UXD0Y-kBNfMvfuALmHtaLeOzdtOtGIV4L4bqAiMjkgvFBdZwukf8KlSKOw3t1SnyBOPgmKm7wU26Mp9EJkabh46KTHpCybebgNmR23ou5sSg8M9H"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="text-[11px] font-bold text-on-surface tracking-tight">Guest favorite</span>
+</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Kyoto Machiya')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Kyoto, Kansai, Japan</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.97</span>
+<span class="text-on-surface-variant font-normal">(96)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Historic garden villa • Bamboo forest</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Apr 26 – May 1</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$310</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$1,550 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 6 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An avant-garde glass architectural cabin situated in the volcanic moss fields of southern Iceland near Reykjavík. The night sky is electrified by luminous green and purple Aurora Borealis dancing overhead, softly mirrored in an outdoor geothermal thermal bath with rising steam. Pure Nordic otherworldly wonder." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAlB_JzLiVucmcHYYmhgnb024ZxrEOLmnkDj5aByUM9HcpXS-p0Au8_PV8xZKob1wcoQNmZR2HUvBhuCZrCBtSO6IOJH-n7_pfiFLT96iyACHe_01hTuwJFiLeIYPS6Yg2fa55g_Zce_d-oP_icg2-HXbj4rYjVIDrzqNT2_skMOvyG6Skx7-IWWl8AiZJTsZ-RlQu8ssdNTPpHZod0tz0JX9KNQ-OtYB-4pgZbbupod-yBLnRoCxGhWyUY8goRGwZbpXDmAdi46Zg"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Iceland Aurora Dome')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Reykjavík, Iceland</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.96</span>
+<span class="text-on-surface-variant font-normal">(142)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Aurora glass dome • Geothermal hot tub</p>
+<p class="text-on-surface-variant text-xs mt-0.5">May 8 – 13</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$410</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$2,050 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 7 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An expansive timber and stone mountain lodge located on the crystal-clear turquoise waters of Lake Louise in Banff, Canada. Towering snow-dusted coniferous pines and massive glaciers rise into bright morning sunshine. A hand-carved cedar dock with vintage red canoes rests quietly on the mirror-still lake." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTy1jjEdyqhodIlIOdyb0F1ZIHP5_QtlLX5-4QiznIEH_hIACADoje-3MOJINJYDQbf-QvU0bapzm4cekix9aZT8Vig4Nq17PnBstiRL1esWJ9idvzTPFTE7Jy7P-GhldXR6sRv6zJPcG7npAIkaumBiu-xKpl3rPdbI7CUO6NTqhnPaTcNJbKsGal2-NWLqW9-9uZn80THJEjQlFFaaZxR2nzoDvBKjH3TPO3a7vdfBcKCRYsxH9aZjNjo-kkqSvr4zPImbD3Vq-0"/>
+<div class="absolute top-3 left-3 bg-surface-container-lowest/95 backdrop-blur-md px-2.5 py-1 rounded-full shadow-sm flex items-center gap-1">
+<span class="text-[11px] font-bold text-on-surface tracking-tight">Guest favorite</span>
+</div>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Banff Lake Lodge')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Banff, Alberta, Canada</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.94</span>
+<span class="text-on-surface-variant font-normal">(175)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Glacial lakefront • Private canoe dock</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Jun 2 – 7</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$395</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$1,975 total before taxes</span>
+</div>
+</div>
+</article>
+<!-- ================= CARD 8 ================= -->
+<article class="group flex flex-col cursor-pointer hover-card-lift rounded-2xl p-2 bg-surface-container-lowest transition-all">
+<div class="relative aspect-square w-full rounded-2xl overflow-hidden bg-surface-container-low mb-3">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A historic Swiss chalet perched on the lush green rolling foothills above Lake Brienz in Interlaken, Switzerland. Snow-clad peaks of the Eiger and Jungfrau mountains tower majestically in the distance beneath an immaculate blue sky. Flowing window flower boxes filled with crimson geraniums evoke alpine charm." src="https://lh3.googleusercontent.com/aida-public/AB6AXuADDaI7fOlZhE1Q9AQojRi_mc78UG2JsHqBKcEsAg1_gewFQYPo71DQNmejOj0kHa7V9iBfWcHe7J6qDGeExUxa9lGZ-3diuJZuYq4c-qvtjvQDAjgCSFX1arO6ADy2tLrx7cnxbjEcWrdxCX1txH5PRYj2VvtelfunSRsJPaC-sgr4hN1MPSx5yo0qcFPITKyTFL2JOhre86f028YS8QhatrhOr7jUX-JSjkAhvHCsR7ZpyXGzmfmtdRRlW1hT-SHIN3BqtxqZ4h_D"/>
+<button aria-label="Add to wishlist" class="absolute top-3 right-3 p-1.5 rounded-full text-surface-container-lowest hover:scale-110 active:scale-95 transition-all drop-shadow-md focus:outline-none" onclick="toggleFavorite(event, this, 'Swiss Alpine Chalet')" type="button">
+<svg class="w-6 h-6 stroke-white stroke-2 fill-black/30 transition-colors" viewbox="0 0 24 24">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path>
+</svg>
+</button>
+<div class="absolute bottom-2.5 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-white shadow-sm"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-white/60"></span>
+</div>
+</div>
+<div class="flex flex-col text-sm">
+<div class="flex items-center justify-between gap-1">
+<h3 class="font-semibold text-on-surface tracking-tight truncate">Interlaken, Bern, Switzerland</h3>
+<div class="flex items-center gap-1 text-on-surface text-xs font-semibold flex-shrink-0">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">star</span>
+<span>4.98</span>
+<span class="text-on-surface-variant font-normal">(118)</span>
+</div>
+</div>
+<p class="text-on-surface-variant text-xs truncate mt-0.5">Jungfrau mountain views • Fireplace</p>
+<p class="text-on-surface-variant text-xs mt-0.5">Jul 10 – 15</p>
+<div class="mt-2 text-on-surface">
+<span class="font-bold text-sm">$465</span>
+<span class="font-normal text-xs text-on-surface-variant"> night</span>
+<span class="block text-[11px] text-on-surface-variant font-normal mt-0.5 price-total">$2,325 total before taxes</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Bottom Showcase / Load More Trigger -->
+<div class="mt-16 text-center flex flex-col items-center">
+<h3 class="text-base font-semibold text-on-surface mb-2">Continue exploring remarkable stays</h3>
+<p class="text-xs text-on-surface-variant max-w-md mx-auto mb-6">Explore thousands of verified homes, architect-designed retreats, and remote sanctuaries across over 190 countries.</p>
+<button class="px-6 py-3 rounded-lg bg-on-surface text-surface-container-lowest text-sm font-semibold hover:bg-on-surface/90 active:scale-95 transition-all" type="button">
+        Show more stays
+      </button>
+</div>
+</main>
+<!-- ==================== SEARCH MODAL / OVERLAY (Micro-interaction) ==================== -->
+<div class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 flex items-start justify-center pt-28 opacity-0 pointer-events-none transition-opacity duration-200" id="search-modal">
+<div class="bg-surface-container-lowest rounded-3xl shadow-2xl border border-surface-container-high p-6 w-full max-w-2xl mx-4 transform scale-95 transition-transform duration-200" id="search-modal-content">
+<div class="flex items-center justify-between pb-4 border-b border-surface-container">
+<h4 class="font-headline font-bold text-base text-on-surface">Where to next?</h4>
+<button class="p-1 rounded-full hover:bg-surface-container-low text-on-surface" onclick="closeSearch()">
+<span class="material-symbols-outlined text-lg">close</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<div class="p-3.5 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<span class="block text-xs font-semibold text-on-surface">Destination</span>
+<input class="w-full bg-transparent border-none p-0 text-sm font-medium text-on-surface focus:ring-0 placeholder:text-on-surface-variant" placeholder="I'm flexible" type="text"/>
+</div>
+<div class="p-3.5 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<span class="block text-xs font-semibold text-on-surface">Check in / out</span>
+<input class="w-full bg-transparent border-none p-0 text-sm font-medium text-on-surface focus:ring-0 placeholder:text-on-surface-variant" placeholder="Add dates" type="text"/>
+</div>
+<div class="p-3.5 rounded-2xl bg-surface-container-low hover:bg-surface-container transition-colors cursor-pointer border border-transparent hover:border-outline-variant">
+<span class="block text-xs font-semibold text-on-surface">Guests</span>
+<input class="w-full bg-transparent border-none p-0 text-sm font-medium text-on-surface focus:ring-0 placeholder:text-on-surface-variant" placeholder="Add guests" type="text"/>
+</div>
+</div>
+<div class="flex items-center justify-between pt-2">
+<span class="text-xs text-on-surface-variant">Popular: Amalfi Coast, Kyoto, Santorini, Swiss Alps</span>
+<button class="px-5 py-2.5 rounded-xl bg-primary text-on-primary text-sm font-semibold hover:bg-primary-container active:scale-95 transition-all flex items-center gap-2 shadow-sm" onclick="closeSearch()">
+<span class="material-symbols-outlined text-sm">search</span> Search
+        </button>
+</div>
+</div>
+</div>
+<!-- ==================== FOOTER (Shared Component) ==================== -->
+<footer class="bg-surface-container-lowest dark:bg-inverse-surface border-t border-outline-variant dark:border-outline mt-auto">
+<!-- Top Destination Links Matrix -->
+<div class="w-full px-6 md:px-12 py-10 max-w-7xl mx-auto border-b border-surface-container">
+<h4 class="font-headline font-semibold text-sm text-on-surface mb-4">Inspiration for future getaways</h4>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-y-4 gap-x-6 text-xs">
+<div>
+<span class="font-semibold text-on-surface block">Santorini</span>
+<span class="text-on-surface-variant">Villa rentals</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block">Aspen</span>
+<span class="text-on-surface-variant">Chalet rentals</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block">Tulum</span>
+<span class="text-on-surface-variant">Beachfront stays</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block">Amalfi</span>
+<span class="text-on-surface-variant">Cliffside suites</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block">Kyoto</span>
+<span class="text-on-surface-variant">Historic machiya</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block">Interlaken</span>
+<span class="text-on-surface-variant">Alpine cabins</span>
+</div>
+</div>
+</div>
+<!-- Mandatory Shared Component Structure -->
+<div class="w-full px-6 md:px-12 py-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-center sm:text-left">
+<span class="font-headline font-bold text-base text-primary dark:text-inverse-primary">HavenStay</span>
+<span class="font-body text-sm font-normal text-on-surface-variant dark:text-outline-variant">© 2026 HavenStay, Inc. All rights reserved.</span>
+</div>
+<!-- Links List from Shared Components JSON -->
+<div class="flex flex-wrap justify-center items-center gap-x-5 gap-y-2 font-body text-sm font-normal">
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#privacy">Privacy</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#terms">Terms</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#sitemap">Sitemap</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#company">Company details</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#destinations">Destinations</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150 font-medium text-on-surface" href="#host">Host your home</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#aircover">AirCover</a>
+<span class="text-outline-variant">•</span>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#help">Help Centre</a>
+</div>
+<!-- Locale and Currency Selector -->
+<div class="flex items-center gap-4 text-xs font-semibold text-on-surface">
+<button class="flex items-center gap-1.5 hover:underline">
+<span class="material-symbols-outlined text-sm">language</span>
+<span>English (US)</span>
+</button>
+<button class="hover:underline">
+<span>$ USD</span>
+</button>
+</div>
+</div>
+</footer>
+<!-- ==================== MICRO-INTERACTIONS JAVASCRIPT ==================== -->
+<script>
+    // 1. Wishlist Heart Toggle Interaction
+    function toggleFavorite(event, button, stayName) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      const svg = button.querySelector('svg');
+      const isFavorited = svg.classList.contains('text-primary');
+
+      if (!isFavorited) {
+        // Turn active: coral-red fill
+        svg.classList.remove('stroke-white', 'fill-black/30');
+        svg.classList.add('text-primary', 'fill-primary', 'stroke-primary');
+        svg.style.fill = '#ba0036';
+        svg.style.stroke = '#ba0036';
+        showToast(`Saved "${stayName}" to Wishlist!`);
+      } else {
+        // Reset inactive
+        svg.classList.remove('text-primary', 'fill-primary', 'stroke-primary');
+        svg.classList.add('stroke-white', 'fill-black/30');
+        svg.style.fill = 'rgba(0, 0, 0, 0.3)';
+        svg.style.stroke = 'white';
+        showToast(`Removed from Wishlist`);
+      }
+    }
+
+    // 2. Toast Feedback Manager
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('favorite-toast');
+      const msgSpan = document.getElementById('toast-message');
+      msgSpan.textContent = message;
+
+      clearTimeout(toastTimeout);
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      toast.classList.add('opacity-100');
+
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2600);
+    }
+
+    // 3. Category Filter Horizontal Scroll and Active State
+    function scrollCategories(distance) {
+      const rail = document.getElementById('category-rail');
+      rail.scrollBy({ left: distance, behavior: 'smooth' });
+    }
+
+    const categoryButtons = document.querySelectorAll('.category-btn');
+    categoryButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Deactivate all
+        categoryButtons.forEach(b => {
+          b.classList.remove('border-on-surface', 'text-on-surface');
+          b.classList.add('border-transparent', 'text-on-surface-variant');
+          const span = b.querySelector('span:last-child');
+          if (span) {
+            span.classList.remove('font-semibold');
+            span.classList.add('font-medium');
+          }
+        });
+
+        // Activate clicked
+        btn.classList.add('border-on-surface', 'text-on-surface');
+        btn.classList.remove('border-transparent', 'text-on-surface-variant');
+        const activeSpan = btn.querySelector('span:last-child');
+        if (activeSpan) {
+          activeSpan.classList.add('font-semibold');
+          activeSpan.classList.remove('font-medium');
+        }
+      });
+    });
+
+    // 4. Tax Switcher Toggle (Hide/Show subtotal line)
+    const taxToggle = document.getElementById('tax-toggle');
+    const priceTotals = document.querySelectorAll('.price-total');
+    if (taxToggle) {
+      taxToggle.addEventListener('change', (e) => {
+        priceTotals.forEach(el => {
+          el.style.display = e.target.checked ? 'block' : 'none';
+        });
+      });
+    }
+
+    // 5. User Menu Dropdown Toggle
+    const userMenuBtn = document.getElementById('user-menu-button');
+    const userDropdown = document.getElementById('user-dropdown');
+    userMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      userDropdown.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!userDropdown.contains(e.target) && !userMenuBtn.contains(e.target)) {
+        userDropdown.classList.add('hidden');
+      }
+    });
+
+    // 6. Search Modal / Popover Interaction
+    const searchModal = document.getElementById('search-modal');
+    const searchModalContent = document.getElementById('search-modal-content');
+    
+    function focusSearch(segment) {
+      searchModal.classList.remove('opacity-0', 'pointer-events-none');
+      searchModal.classList.add('opacity-100');
+      searchModalContent.classList.remove('scale-95');
+      searchModalContent.classList.add('scale-100');
+    }
+
+    function closeSearch() {
+      searchModal.classList.remove('opacity-100');
+      searchModal.classList.add('opacity-0', 'pointer-events-none');
+      searchModalContent.classList.remove('scale-100');
+      searchModalContent.classList.add('scale-95');
+    }
+
+    searchModal.addEventListener('click', (e) => {
+      if (e.target === searchModal) {
+        closeSearch();
+      }
+    });
+
+    // Filter pill button interaction
+    const filterBtn = document.getElementById('open-filters');
+    filterBtn.addEventListener('click', () => {
+      focusSearch('filter');
+    });
+  </script>
+</body></html>

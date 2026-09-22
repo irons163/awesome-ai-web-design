@@ -3,7 +3,7 @@ const $ = selector => document.querySelector(selector);
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
-let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'light';
+let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'image';
 let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
 try { const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); saved = new Set(Array.isArray(value) ? value.filter(x => typeof x === 'string') : []); }
@@ -25,11 +25,11 @@ function renderCategories(categories) {
 }
 function card(item) {
   const picked = saved.has(item.slug);
-  const style = ['claude','notion','wired','clay'].includes(item.slug) ? 'editorial' : ['nike','nvidia','bmw-m','ferrari'].includes(item.slug) ? 'block' : '';
-  const onCanvas = item.mode === 'dark' ? '#f5f5f3' : '#222320';
-  const titles = {claude:'A little space<br>for big ideas.', 'linear.app':'Made for<br>the details.', stripe:'An idea.<br>In motion.', notion:'Room for<br>what matters.', vercel:'Make it.<br>Ship it.', supabase:'Build something<br>worth keeping.', figma:'A place<br>to create.', apple:'Simply.<br>Considered.', spotify:'Find your<br>next favorite.'};
-  const title = titles[item.slug] || 'Your next<br>great idea.';
-  return `<article class="design-card"><a href="#/design/${encodeURIComponent(item.slug)}" class="card-link" aria-label="查看 ${escapeHTML(item.name)} 設計"><div class="card-art ${style} ${item.mode}" style="--card-bg:${escapeHTML(item.canvas)};--card-ink:${onCanvas};--card-accent:${escapeHTML(item.primary)};--card-font:${escapeHTML(item.previewFont)}" aria-hidden="true"><div class="mini-nav"><span>${escapeHTML(item.name)}</span><span class="mini-menu"><i></i><i></i><i></i></span></div><div class="mini-title">${title}</div><div class="mini-description"></div><div class="mini-action"></div><div class="mini-grid"><i></i><i></i><i></i></div></div><div class="card-body"><div class="card-name-row"><h3>${escapeHTML(item.name)}</h3><span>↗</span></div><p class="card-description">${escapeHTML(item.description)}</p><div class="card-meta"><span>${escapeHTML(item.categoryLabel)}</span><span class="card-palette" aria-hidden="true">${item.colors.slice(0,4).map(color => `<i style="background:${escapeHTML(color)}"></i>`).join('')}</span></div></div></a><button class="save-button" data-save="${escapeHTML(item.slug)}" aria-label="${picked ? '取消收藏' : '收藏'} ${escapeHTML(item.name)}" aria-pressed="${picked}">${picked ? '♥' : '♡'}</button></article>`;
+  const preview = item.preview;
+  const art = preview.status === 'generated'
+    ? `<div class="card-art"><img src="${escapeHTML(preview.thumbnail)}" alt="${escapeHTML(item.name)} 風格的 Stitch 生成頁面" loading="lazy" decoding="async" width="${preview.width}" height="${preview.height}"><span class="stitch-badge">STITCH</span></div>`
+    : `<div class="card-art pending-art"><span>${escapeHTML(item.name)}</span><small>Stitch 範例待生成</small></div>`;
+  return `<article class="design-card"><a href="#/design/${encodeURIComponent(item.slug)}" class="card-link" aria-label="查看 ${escapeHTML(item.name)} 設計">${art}<div class="card-body"><div class="card-name-row"><h3>${escapeHTML(item.name)}</h3><span>↗</span></div><p class="card-description">${escapeHTML(item.description)}</p><div class="card-meta"><span>${escapeHTML(item.categoryLabel)}</span><span class="card-palette" aria-hidden="true">${item.colors.slice(0,4).map(color => `<i style="background:${escapeHTML(color)}"></i>`).join('')}</span></div></div></a><button class="save-button" data-save="${escapeHTML(item.slug)}" aria-label="${picked ? '取消收藏' : '收藏'} ${escapeHTML(item.name)}" aria-pressed="${picked}">${picked ? '♥' : '♡'}</button></article>`;
 }
 function render() {
   const query = $('#search').value.trim().toLocaleLowerCase();
@@ -73,14 +73,33 @@ function setTab(name, focus = false) {
   ['preview','document','prompts'].forEach(id => { $(`#panel-${id}`).hidden = id !== name; });
   if (name === 'document' && !documentText) loadDocument();
 }
-function setPreview(mode) {
-  previewMode = mode;
-  const path = `design-md/${encodeURIComponent(currentDesign.slug)}/preview${mode === 'dark' ? '-dark' : ''}.html`;
-  $('#preview-frame').src = path;
-  $('#preview-frame').title = `${currentDesign.name} ${mode === 'dark' ? '深色' : '淺色'}設計元件預覽`;
-  $('#open-preview').href = path;
-  document.querySelectorAll('[data-preview]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.preview === mode)));
+function setPreview(view) {
+  previewMode = view;
+  const preview = currentDesign.preview;
+  const ready = preview.status === 'generated';
+  $('#preview-pending').hidden = ready;
+  $('#preview-image').hidden = !ready || view !== 'image';
+  $('#preview-frame').hidden = !ready || view !== 'html';
+  $('#preview-actions').hidden = !ready;
+  $('#preview-controls').hidden = !ready;
+  if (ready) {
+    $('#preview-image').src = preview.image;
+    $('#preview-image').alt = `${currentDesign.name} 風格：${preview.title}，Google Stitch 原始生成截圖`;
+    if (view === 'html') $('#preview-frame').src = preview.html;
+    else $('#preview-frame').removeAttribute('src');
+    $('#preview-frame').title = `${currentDesign.name} — Stitch 生成的 HTML 頁面`;
+    $('#open-preview').href = preview.html;
+    $('#download-html').href = preview.html;
+    $('#generation-record').href = preview.provenance;
+    $('#generation-prompt').href = preview.prompt;
+  } else {
+    $('#preview-frame').removeAttribute('src');
+    $('#preview-image').removeAttribute('src');
+  }
+  $('#open-preview').hidden = !ready;
+  document.querySelectorAll('[data-preview]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.preview === view)));
 }
+
 async function loadDocument() {
   const request = ++documentRequest;
   const slug = currentDesign.slug;
@@ -109,7 +128,7 @@ function openDesign(item) {
   $('#download-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
   $('#download-prompts').download = `${item.slug}-PROMPTS.md`;
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
-  setTab('preview'); setPreview(item.mode);
+  setTab('preview'); setPreview('image');
   if (!$('#design-dialog').open) $('#design-dialog').showModal();
   $('#design-dialog').scrollTop = 0;
   $('#close-dialog').focus();
@@ -145,6 +164,7 @@ async function loadCatalog() {
     if (!response.ok) throw new Error('Catalog unavailable');
     const data = await response.json();
     if (!Array.isArray(data.designs) || !data.designs.length) throw new Error('Invalid catalog');
+    $('#stitch-count').textContent = `${data.generatedCount} / ${data.count} 個 Stitch 生成範例`;
     designs = data.designs.sort((a,b) => {
       const first = FEATURED.indexOf(a.slug), second = FEATURED.indexOf(b.slug);
       return (first < 0 ? 100 : first) - (second < 0 ? 100 : second) || a.name.localeCompare(b.name);

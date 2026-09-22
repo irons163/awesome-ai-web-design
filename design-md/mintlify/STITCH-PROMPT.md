@@ -1,0 +1,8 @@
+Generate ONE complete DESKTOP web page now, including the actual rendered screen and its HTML output. Use the existing Mintlify-inspired design system provided with this request. The design system is already configured; do not generate a design-system sheet or merely describe what to build.
+
+PAGE BRIEF
+A documentation portal with a stable left navigation, central article, and compact on-page outline. Make code examples horizontally scrollable, keep green for current context and useful actions, and make search keyboard accessible.
+Include this component in its proper context: a documentation code example with language tabs and a copy action.
+
+COMPOSITION
+Use the design system's specific composition, typography, content density, spacing, visual hierarchy, imagery and native light/dark treatment. Make this page unmistakably distinct from a generic SaaS template. Give the demo a new original product name. Use meaningful, believable sample content tailored to this scenario. Do not copy brand logos. Generate one coherent detailed screen with real UI elements and relevant imagery when the product calls for it. Avoid pricing plans, paid subscriptions and upgrade buttons. The example is free. Do not add a palette chart, typography specimen or a marketing page about design systems. Render the finished page now. Target a normal desktop width around 1440px; use readable type and enough content for the selected page, without unnecessary extra sections.

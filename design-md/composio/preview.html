@@ -1,8 +1,846 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Composio · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#0007cd;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/composio">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Composio · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#0007cd"></span><code>#0007cd</code></div><div class="swatch"><span style="background:#0f0f0f"></span><code>#0f0f0f</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#0005a3"></span><code>#0005a3</code></div><div class="swatch"><span style="background:#1a26ff"></span><code>#1a26ff</code></div><div class="swatch"><span style="background:#a8a8a8"></span><code>#a8a8a8</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · abcDiatype&#x27;, ui-sans-serif, system-ui, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NexusOps: Agent Tooling &amp; Integration Explorer</title>
+<!-- Typography & Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Public+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "canvas": "#0f0f0f",
+            "canvas-deep": "#000000",
+            "surface-card": "#181818",
+            "surface-card-elevated": "#222222",
+            "surface-strong": "#2a2a2a",
+            "hairline": "#222222",
+            "hairline-soft": "#1a1a1a",
+            "hairline-strong": "#333333",
+            "primary": "#0007cd",
+            "primary-active": "#0005a3",
+            "primary-glow": "#1a26ff",
+            "ink": "#ffffff",
+            "body": "#a8a8a8",
+            "body-strong": "#ffffff",
+            "muted": "#888888",
+            "muted-soft": "#666666",
+            "on-primary": "#ffffff",
+            "on-dark": "#ffffff",
+            "accent-cyan": "#00d4ff",
+            "accent-violet": "#7b3aed",
+            "semantic-error": "#ff4d4d",
+            "semantic-success": "#33d17a"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "xs": "4px",
+            "sm": "6px",
+            "md": "8px",
+            "lg": "12px",
+            "xl": "16px",
+            "pill": "9999px",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "headline": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            "display": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            "body": ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+            "label": ["Public Sans", "Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Custom scanline and precision utility */
+    body {
+      background-color: #0f0f0f;
+      color: #a8a8a8;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .material-symbols-outlined {
+      font-size: 18px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+    /* Subtle custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f0f0f;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #222222;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #333333;
+    }
+    .glow-primary-radial {
+      background: radial-gradient(circle at 60% 20%, rgba(26, 38, 255, 0.12) 0%, rgba(0, 7, 205, 0.04) 45%, transparent 75%);
+    }
+  </style>
+</head>
+<body class="bg-canvas text-body min-h-screen flex flex-col antialiased selection:bg-primary selection:text-ink">
+<!-- ================= TOP NAVIGATION BAR (Shared Component Anchor) ================= -->
+<header class="flex justify-between items-center w-full px-6 h-16 border-b border-hairline bg-canvas sticky top-0 z-50">
+<!-- Left: Brand Logo + System Indicator + Breadcrumbs -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-md bg-primary flex items-center justify-center text-ink shadow-[0_0_12px_rgba(26,38,255,0.4)]">
+<span class="material-symbols-outlined text-ink" style="font-size: 20px;">terminal</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline text-base font-semibold tracking-tight text-ink">NexusOps</span>
+<span class="text-[10px] font-mono text-muted tracking-wider uppercase -mt-0.5">Agent Runtime v2.4</span>
+</div>
+</div>
+<div class="h-4 w-px bg-hairline-strong"></div>
+<!-- Live Environment Badge -->
+<div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-surface-card border border-hairline text-xs font-mono">
+<span class="w-2 h-2 rounded-full bg-semantic-success animate-pulse"></span>
+<span class="text-body-strong font-medium">prod-us-east-1</span>
+<span class="text-muted text-[10px] pl-1">· 99.98%</span>
+</div>
+<!-- Breadcrumbs navigation -->
+<div class="hidden xl:flex items-center gap-2 text-xs font-body text-muted">
+<span>Workspaces</span>
+<span class="material-symbols-outlined text-muted" style="font-size: 14px;">chevron_right</span>
+<span>Agents</span>
+<span class="material-symbols-outlined text-muted" style="font-size: 14px;">chevron_right</span>
+<span class="text-ink font-medium">Integration Explorer</span>
+</div>
+</div>
+<!-- Center: Global Nav Links with Active State Mapping -->
+<nav class="hidden md:flex items-center gap-6 h-full text-sm font-medium">
+<!-- "Explorer" is active -->
+<a class="text-ink font-medium border-b-2 border-primary h-full flex items-center pt-0.5 transition-colors" href="#explorer">Explorer</a>
+<a class="text-muted hover:text-body-strong transition-colors h-full flex items-center pt-0.5" href="#workflows">Workflows</a>
+<a class="text-muted hover:text-body-strong transition-colors h-full flex items-center pt-0.5" href="#logs">Logs</a>
+<a class="text-muted hover:text-body-strong transition-colors h-full flex items-center pt-0.5" href="#telemetry">Telemetry</a>
+<a class="text-muted hover:text-body-strong transition-colors h-full flex items-center pt-0.5" href="#settings">Settings</a>
+</nav>
+<!-- Right: Command Search + Trailing Secondary + Primary Actions -->
+<div class="flex items-center gap-3">
+<!-- Search Input with CMD+K prompt -->
+<div class="relative hidden lg:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-muted" style="font-size: 16px;">search</span>
+<input class="bg-surface-card text-body-strong text-xs font-body rounded-md pl-9 pr-14 py-2 h-9 border border-hairline focus:border-hairline-strong focus:outline-none w-52 placeholder:text-muted" placeholder="Filter tools, scopes..." type="text"/>
+<div class="absolute right-2 px-1.5 py-0.5 rounded bg-surface-card-elevated border border-hairline text-[10px] font-mono text-muted tracking-wide">
+          ⌘K
+        </div>
+</div>
+<!-- Quick Action: Environment Switcher / Production -->
+<button class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 h-9 rounded-md bg-surface-card-elevated border border-hairline-strong text-body-strong text-xs font-medium hover:bg-surface-strong transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-semantic-success" style="font-size: 14px;">circle</span>
+<span>Production</span>
+<span class="material-symbols-outlined text-muted" style="font-size: 14px;">expand_more</span>
+</button>
+<!-- Primary Action: Create Key -->
+<button class="flex items-center gap-2 px-3.5 py-1.5 h-9 rounded-md bg-primary text-on-primary text-xs font-medium hover:bg-primary-active transition-colors active:scale-[0.98] shadow-[0_1px_8px_rgba(0,7,205,0.4)]">
+<span class="material-symbols-outlined" style="font-size: 16px;">key</span>
+<span>Create Key</span>
+</button>
+<!-- Trailing Action: Terminal Toggle -->
+<button class="p-2 rounded-md bg-surface-card hover:bg-surface-card-elevated text-body hover:text-ink border border-hairline transition-colors" title="Toggle System Terminal">
+<span class="material-symbols-outlined" style="font-size: 18px;">terminal</span>
+</button>
+<!-- Profile Avatar -->
+<div class="w-8 h-8 rounded-full bg-surface-card-elevated border border-hairline-strong flex items-center justify-center text-ink text-xs font-mono font-medium ml-1">
+        OP
+      </div>
+</div>
+</header>
+<!-- ================= MAIN WORKSPACE CANVAS ================= -->
+<div class="flex-1 flex overflow-hidden w-full relative">
+<!-- ================= LEFT SIDEBAR (Shared Component: SideNavBar) ================= -->
+<aside class="w-64 flex-shrink-0 border-r border-hairline bg-canvas flex flex-col justify-between p-4 hidden md:flex h-[calc(100vh-4rem)] overflow-y-auto">
+<div class="flex flex-col gap-6">
+<!-- Header Info Plate -->
+<div class="flex items-center justify-between pb-3 border-b border-hairline">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded-md bg-surface-card-elevated border border-hairline flex items-center justify-center text-accent-cyan">
+<span class="material-symbols-outlined" style="font-size: 16px;">hub</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline font-semibold text-sm text-ink leading-tight">Integrations</span>
+<span class="font-mono text-[11px] text-muted">68 Active Modules</span>
+</div>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-card border border-hairline text-semantic-success">SYNC</span>
+</div>
+<!-- Filter View Pills -->
+<div class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold px-2 mb-1">Status Filter</span>
+<div class="grid grid-cols-2 gap-1.5 px-1">
+<button class="text-left px-2 py-1 rounded text-xs font-medium bg-surface-card-elevated text-ink border border-hairline-strong">All (68)</button>
+<button class="text-left px-2 py-1 rounded text-xs text-body hover:text-ink hover:bg-surface-card transition-colors">Connected (42)</button>
+<button class="text-left px-2 py-1 rounded text-xs text-body hover:text-ink hover:bg-surface-card transition-colors">Attention (3)</button>
+<button class="text-left px-2 py-1 rounded text-xs text-body hover:text-ink hover:bg-surface-card transition-colors">Custom (8)</button>
+</div>
+</div>
+<!-- Primary Navigation Categories -->
+<div class="flex flex-col gap-1">
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold px-2 mb-1">Service Categories</span>
+<!-- Category 1: Developer Tools (ACTIVE) -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-card-elevated text-ink font-medium border border-hairline-strong shadow-sm group" href="#dev-tools">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-accent-cyan" style="font-size: 18px;">code</span>
+<span class="text-sm font-headline">Developer Tools</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">18</span>
+</a>
+<!-- Category 2: CRM & Sales -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-body hover:text-ink hover:bg-surface-card transition-colors group" href="#crm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-muted" style="font-size: 18px;">handshake</span>
+<span class="text-sm font-headline">CRM &amp; Sales</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">12</span>
+</a>
+<!-- Category 3: Data & Analytics -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-body hover:text-ink hover:bg-surface-card transition-colors group" href="#data">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-muted" style="font-size: 18px;">analytics</span>
+<span class="text-sm font-headline">Data &amp; Analytics</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">14</span>
+</a>
+<!-- Category 4: Productivity -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-body hover:text-ink hover:bg-surface-card transition-colors group" href="#productivity">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-muted" style="font-size: 18px;">task_alt</span>
+<span class="text-sm font-headline">Productivity</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">9</span>
+</a>
+<!-- Category 5: Communication -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-body hover:text-ink hover:bg-surface-card transition-colors group" href="#comm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-muted" style="font-size: 18px;">chat</span>
+<span class="text-sm font-headline">Communication</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">8</span>
+</a>
+<!-- Category 6: Cloud Infrastructure -->
+<a class="flex items-center justify-between px-3 py-2 rounded-lg text-body hover:text-ink hover:bg-surface-card transition-colors group" href="#cloud">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-muted" style="font-size: 18px;">cloud</span>
+<span class="text-sm font-headline">Cloud Infrastructure</span>
+</div>
+<span class="font-mono text-xs text-muted-soft group-hover:text-ink">7</span>
+</a>
+</div>
+<!-- Add Custom Tool CTA button -->
+<button class="w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md bg-surface-card hover:bg-surface-card-elevated border border-hairline-strong text-ink text-xs font-medium transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-accent-cyan" style="font-size: 16px;">add</span>
+<span>Add Custom Tool</span>
+</button>
+</div>
+<!-- Sidebar Bottom: Telemetry Resource Widget & Docs -->
+<div class="pt-4 border-t border-hairline flex flex-col gap-4">
+<!-- Telemetry Widget -->
+<div class="p-3 rounded-lg bg-surface-card border border-hairline flex flex-col gap-2">
+<div class="flex justify-between items-center text-[11px] font-mono">
+<span class="text-muted">Agent Sockets</span>
+<span class="text-ink font-semibold">14 / 20 Active</span>
+</div>
+<div class="w-full h-1.5 bg-canvas-deep rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 70%;"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-muted-soft font-mono pt-0.5">
+<span>Quota: 8.4k / 10k op/s</span>
+<span class="text-semantic-success">Normal</span>
+</div>
+</div>
+<!-- Footer Tab Links (JSON Mandate) -->
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-2 text-xs text-muted hover:text-ink py-1 px-2 rounded transition-colors" href="#docs">
+<span class="material-symbols-outlined" style="font-size: 16px;">description</span>
+<span>Documentation</span>
+</a>
+<a class="flex items-center gap-2 text-xs text-muted hover:text-ink py-1 px-2 rounded transition-colors" href="#api">
+<span class="material-symbols-outlined" style="font-size: 16px;">code_blocks</span>
+<span>API Reference</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ================= CENTER WORKSPACE: INTEGRATION CATALOG ================= -->
+<main class="flex-1 flex flex-col min-w-0 bg-canvas overflow-y-auto glow-primary-radial">
+<!-- Catalog Control Header -->
+<section class="p-6 pb-4 border-b border-hairline flex flex-col gap-4 bg-canvas/60 backdrop-blur-md sticky top-0 z-20">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-2">
+<h1 class="text-xl font-headline font-semibold text-ink tracking-tight">Developer &amp; Code Execution Tools</h1>
+<span class="px-2 py-0.5 rounded-full text-[11px] font-mono bg-surface-card-elevated border border-hairline text-accent-cyan">18 Modules</span>
+</div>
+<p class="text-xs text-body font-body mt-1">Autonomous toolkits, sandboxed terminals, and source-control sockets configured for agent runtime.</p>
+</div>
+<div class="flex items-center gap-2.5">
+<!-- View toggles (Grid/List) -->
+<div class="flex items-center bg-surface-card p-0.5 rounded-md border border-hairline">
+<button class="p-1.5 rounded bg-surface-card-elevated text-ink" title="Grid View">
+<span class="material-symbols-outlined" style="font-size: 16px;">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-muted hover:text-body transition-colors" title="Table View">
+<span class="material-symbols-outlined" style="font-size: 16px;">view_list</span>
+</button>
+</div>
+<button class="flex items-center gap-2 px-3 py-2 rounded-md bg-surface-card-elevated border border-hairline-strong text-body-strong text-xs font-medium hover:bg-surface-strong transition-colors">
+<span class="material-symbols-outlined" style="font-size: 16px;">tune</span>
+<span>Filter Parameters</span>
+</button>
+<button class="flex items-center gap-2 px-3.5 py-2 rounded-md bg-primary hover:bg-primary-active text-on-primary text-xs font-medium transition-colors active:scale-[0.98] shadow-sm">
+<span class="material-symbols-outlined" style="font-size: 16px;">add_box</span>
+<span>Register Custom Tool</span>
+</button>
+</div>
+</div>
+<!-- Filter Bar Tags & Live Search -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+<div class="flex items-center gap-2 overflow-x-auto pb-1">
+<span class="text-xs text-muted font-medium">Quick Filter:</span>
+<button class="px-2.5 py-1 rounded text-xs font-mono bg-primary/20 text-accent-cyan border border-primary/40 font-medium">All Types</button>
+<button class="px-2.5 py-1 rounded text-xs font-mono bg-surface-card hover:bg-surface-card-elevated text-body hover:text-ink border border-hairline transition-colors">Source Control (4)</button>
+<button class="px-2.5 py-1 rounded text-xs font-mono bg-surface-card hover:bg-surface-card-elevated text-body hover:text-ink border border-hairline transition-colors">Vector Stores (3)</button>
+<button class="px-2.5 py-1 rounded text-xs font-mono bg-surface-card hover:bg-surface-card-elevated text-body hover:text-ink border border-hairline transition-colors">Stream Queues (5)</button>
+<button class="px-2.5 py-1 rounded text-xs font-mono bg-surface-card hover:bg-surface-card-elevated text-body hover:text-ink border border-hairline transition-colors">Sandboxed CLI (6)</button>
+</div>
+<div class="text-xs font-mono text-muted">
+            Sort by: <span class="text-body-strong cursor-pointer hover:underline">Latency (Lowest)</span>
+</div>
+</div>
+</section>
+<!-- Connection Cards Grid (Bento style, high technical fidelity) -->
+<div class="p-6 grid grid-cols-1 xl:grid-cols-2 gap-4">
+<!-- ================= CARD 1: GitNexus Bridge (Connected & Focused) ================= -->
+<div class="rounded-xl bg-surface-card border-2 border-primary/80 p-5 flex flex-col justify-between gap-4 relative overflow-hidden shadow-[0_0_24px_rgba(0,7,205,0.18)]">
+<div class="absolute -right-8 -top-8 w-24 h-24 bg-primary/10 rounded-full blur-xl pointer-events-none"></div>
+<div>
+<!-- Top bar inside card -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-hairline-strong flex items-center justify-center text-accent-cyan shadow-inner">
+<span class="material-symbols-outlined" style="font-size: 22px;">terminal</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink tracking-tight">GitNexus Bridge</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v2.4.1</span>
+</div>
+<p class="text-xs text-muted mt-0.5">Bi-directional git trees, commit signing &amp; pull-request autonomous patch agent.</p>
+</div>
+</div>
+<!-- Status Badge (Luminous Success) -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-semantic-success/10 border border-semantic-success/30 text-[11px] font-mono text-semantic-success flex-shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-semantic-success animate-pulse"></span>
+<span>Connected · Active Polling</span>
+</div>
+</div>
+<!-- Technical Parameter Matrix -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-hairline text-xs font-mono">
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">AUTH PROTOCOL</span>
+<span class="text-body-strong font-medium">OAuth 2.0 PKCE</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">AVG LATENCY</span>
+<span class="text-semantic-success font-medium">14ms · p99 26ms</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">EXECUTIONS TODAY</span>
+<span class="text-body-strong font-medium">1,248,310 ops</span>
+</div>
+</div>
+<!-- Active Exposed Agent Tools Chips -->
+<div class="flex flex-wrap items-center gap-1.5 mt-3">
+<span class="text-[10px] font-mono text-muted">Exposed Tools:</span>
+<span class="px-2 py-0.5 rounded bg-surface-card-elevated border border-hairline text-[11px] font-mono text-ink">git_clone</span>
+<span class="px-2 py-0.5 rounded bg-surface-card-elevated border border-hairline text-[11px] font-mono text-ink">create_pr</span>
+<span class="px-2 py-0.5 rounded bg-surface-card-elevated border border-hairline text-[11px] font-mono text-ink">read_tree</span>
+<span class="px-2 py-0.5 rounded bg-surface-card-elevated border border-hairline text-[11px] font-mono text-ink">merge_branch</span>
+</div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+<span class="text-[11px] font-mono text-accent-cyan">Active In Inspector Panel</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-medium text-ink transition-colors">
+                Configure
+              </button>
+<button class="px-3 py-1.5 rounded-md bg-primary hover:bg-primary-active text-on-primary text-xs font-medium transition-colors flex items-center gap-1">
+<span>Inspect</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- ================= CARD 2: CloudDeploy Daemon (Connecting State) ================= -->
+<div class="rounded-xl bg-surface-card border border-hairline hover:border-hairline-strong p-5 flex flex-col justify-between gap-4 transition-all">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-hairline flex items-center justify-center text-accent-violet">
+<span class="material-symbols-outlined" style="font-size: 22px;">deployed_code</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink">CloudDeploy Daemon</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v1.1.0</span>
+</div>
+<p class="text-xs text-muted mt-0.5">Isolated ephemeral Docker &amp; Kubernetes cluster deployment orchestrator.</p>
+</div>
+</div>
+<!-- Status Badge (Pulsing Amber/Blue Connecting) -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-[11px] font-mono text-accent-cyan flex-shrink-0">
+<span class="material-symbols-outlined animate-spin text-accent-cyan" style="font-size: 13px;">sync</span>
+<span>Connecting · Step 2/3</span>
+</div>
+</div>
+<!-- Progress bar -->
+<div class="mt-4 pt-3 border-t border-hairline">
+<div class="flex justify-between items-center text-[11px] font-mono mb-1.5">
+<span class="text-muted">Verifying Mutual TLS Certificate Handshake...</span>
+<span class="text-accent-cyan font-medium">66%</span>
+</div>
+<div class="w-full h-1.5 bg-canvas-deep rounded-full overflow-hidden">
+<div class="h-full bg-accent-cyan animate-pulse" style="width: 66%;"></div>
+</div>
+</div>
+<!-- Connection Diagnostics Specs -->
+<div class="grid grid-cols-2 gap-2 mt-3 text-xs font-mono">
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">ENDPOINT TARGET</span>
+<span class="text-body-strong truncate block">k8s-ingress.internal:9443</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">WEBHOOK AUDIT</span>
+<span class="text-accent-cyan">Validating HMAC sha256</span>
+</div>
+</div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-muted">Socket tunnel opening...</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-medium text-ink transition-colors">
+                Cancel Handshake
+              </button>
+<button class="px-3 py-1.5 rounded-md bg-surface-card hover:bg-surface-card-elevated border border-hairline text-xs font-medium text-body hover:text-ink transition-colors">
+                Live Output
+              </button>
+</div>
+</div>
+</div>
+<!-- ================= CARD 3: QueryLens Vector DB (Disconnected State) ================= -->
+<div class="rounded-xl bg-surface-card border border-hairline hover:border-hairline-strong p-5 flex flex-col justify-between gap-4 transition-all">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-hairline flex items-center justify-center text-muted">
+<span class="material-symbols-outlined" style="font-size: 22px;">dataset</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink">QueryLens Vector DB</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v3.0.2</span>
+</div>
+<p class="text-xs text-muted mt-0.5">High-dimensional semantic memory storage &amp; HNSW index lookup agent module.</p>
+</div>
+</div>
+<!-- Status Badge (Disconnected Neutral) -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-card-elevated border border-hairline text-[11px] font-mono text-muted flex-shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-muted"></span>
+<span>Disconnected · Idle</span>
+</div>
+</div>
+<!-- Module details -->
+<p class="text-xs text-body font-body mt-4 pt-3 border-t border-hairline">
+              Execute read-only vector embeddings, cosine distance filtering, and semantic graph lookups for autonomous agents without elevated write privileges.
+            </p>
+<div class="grid grid-cols-2 gap-2 mt-3 text-xs font-mono">
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">INDEX TYPE</span>
+<span class="text-body">HNSW Cosine (1536 dims)</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">LAST ACTIVE</span>
+<span class="text-body">3 days ago via Agent-7</span>
+</div>
+</div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-muted-soft">Requires API key credential</span>
+<button class="px-3.5 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline-strong text-xs font-medium text-ink transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 15px;">power</span>
+<span>Connect Module</span>
+</button>
+</div>
+</div>
+<!-- ================= CARD 4: SalesPulse CRM Connector (Attention / Error State) ================= -->
+<div class="rounded-xl bg-surface-card border border-semantic-error/40 p-5 flex flex-col justify-between gap-4 transition-all">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-semantic-error/30 flex items-center justify-center text-semantic-error">
+<span class="material-symbols-outlined" style="font-size: 22px;">contacts_product</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink">SalesPulse CRM Connector</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v4.8.0</span>
+</div>
+<p class="text-xs text-muted mt-0.5">Enterprise pipeline record ingestion &amp; automated customer ticket resolution.</p>
+</div>
+</div>
+<!-- Status Badge (Error Alert) -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-semantic-error/10 border border-semantic-error/30 text-[11px] font-mono text-semantic-error flex-shrink-0">
+<span class="material-symbols-outlined" style="font-size: 14px;">warning</span>
+<span>Error · Token Expired</span>
+</div>
+</div>
+<!-- Error Banner -->
+<div class="mt-3.5 p-2.5 rounded-md bg-semantic-error/5 border border-semantic-error/20 flex items-start gap-2.5">
+<span class="material-symbols-outlined text-semantic-error mt-0.5" style="font-size: 16px;">error</span>
+<div class="text-xs font-mono">
+<span class="text-semantic-error font-medium">RefreshTokenExpired:</span>
+<p class="text-body text-[11px] mt-0.5">OAuth token was revoked by upstream administrator at 14:02 UTC. Agent autonomous calls blocked.</p>
+</div>
+</div>
+<!-- Sub stats -->
+<div class="grid grid-cols-2 gap-2 mt-3 text-xs font-mono">
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">FAILED ATTEMPTS</span>
+<span class="text-semantic-error">12 consecutive 401s</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">BLOCKED AGENTS</span>
+<span class="text-body-strong">LeadQualifier-v4</span>
+</div>
+</div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<button class="text-xs font-mono text-muted hover:text-ink transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined" style="font-size: 14px;">receipt_long</span>
+<span>View Diagnostic Log</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-md bg-semantic-error hover:bg-semantic-error/90 text-ink text-xs font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 15px;">lock_reset</span>
+<span>Resolve Error</span>
+</button>
+</div>
+</div>
+<!-- ================= CARD 5: TaskGrid Issue Manager (Connected) ================= -->
+<div class="rounded-xl bg-surface-card border border-hairline hover:border-hairline-strong p-5 flex flex-col justify-between gap-4 transition-all">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-hairline flex items-center justify-center text-accent-cyan">
+<span class="material-symbols-outlined" style="font-size: 22px;">checklist</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink">TaskGrid Issue Manager</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v1.9.4</span>
+</div>
+<p class="text-xs text-muted mt-0.5">Sprint board automation, autonomous ticket assignment, and roadmap syncing.</p>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-semantic-success/10 border border-semantic-success/30 text-[11px] font-mono text-semantic-success flex-shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-semantic-success"></span>
+<span>Connected · Standby</span>
+</div>
+</div>
+<!-- Active Exposed Agent Tools Chips -->
+<div class="mt-4 pt-3 border-t border-hairline">
+<span class="text-[10px] font-mono text-muted block mb-2">4 Active Tools Exposed to LLM Agents:</span>
+<div class="grid grid-cols-2 gap-2 text-xs font-mono">
+<div class="p-1.5 rounded bg-canvas border border-hairline flex items-center gap-2">
+<span class="material-symbols-outlined text-muted text-[14px]">bolt</span>
+<span class="text-ink text-[11px]">create_issue</span>
+</div>
+<div class="p-1.5 rounded bg-canvas border border-hairline flex items-center gap-2">
+<span class="material-symbols-outlined text-muted text-[14px]">bolt</span>
+<span class="text-ink text-[11px]">update_status</span>
+</div>
+<div class="p-1.5 rounded bg-canvas border border-hairline flex items-center gap-2">
+<span class="material-symbols-outlined text-muted text-[14px]">bolt</span>
+<span class="text-ink text-[11px]">get_sprint</span>
+</div>
+<div class="p-1.5 rounded bg-canvas border border-hairline flex items-center gap-2">
+<span class="material-symbols-outlined text-muted text-[14px]">bolt</span>
+<span class="text-ink text-[11px]">assign_agent</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-muted">Polling every 30s</span>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-medium text-ink transition-colors">
+                Configure
+              </button>
+<button class="px-3 py-1.5 rounded-md bg-surface-card hover:bg-surface-card-elevated border border-hairline text-xs font-medium text-body hover:text-ink transition-colors">
+                Permissions
+              </button>
+</div>
+</div>
+</div>
+<!-- ================= CARD 6: StreamPipe Kafka Event Hub (Connecting State) ================= -->
+<div class="rounded-xl bg-surface-card border border-hairline hover:border-hairline-strong p-5 flex flex-col justify-between gap-4 transition-all">
+<div>
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-card-elevated border border-hairline flex items-center justify-center text-primary-glow">
+<span class="material-symbols-outlined" style="font-size: 22px;">stream</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-semibold text-sm text-ink">StreamPipe Kafka Event Hub</h3>
+<span class="text-[10px] font-mono text-muted bg-surface-card-elevated px-1.5 py-0.5 rounded border border-hairline">v2.1.2</span>
+</div>
+<p class="text-xs text-muted mt-0.5">High-throughput event streaming pub/sub pipeline for agent orchestration telemetry.</p>
+</div>
+</div>
+<!-- Status Badge -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 border border-primary/30 text-[11px] font-mono text-accent-cyan flex-shrink-0">
+<span class="material-symbols-outlined animate-spin text-accent-cyan" style="font-size: 13px;">sync</span>
+<span>Connecting · SSL Tunnel</span>
+</div>
+</div>
+<!-- Parameter specs -->
+<div class="grid grid-cols-3 gap-2 mt-4 pt-3 border-t border-hairline text-xs font-mono">
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">TOPIC CONSUMER</span>
+<span class="text-body-strong">telemetry.events</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">PARTITIONS</span>
+<span class="text-body-strong">12 Partitions</span>
+</div>
+<div class="bg-canvas p-2 rounded-md border border-hairline">
+<span class="text-muted block text-[10px]">COMPRESSION</span>
+<span class="text-body-strong">zstd level 3</span>
+</div>
+</div>
+<!-- Terminal mini output -->
+<div class="mt-3 p-2 rounded bg-canvas-deep border border-hairline font-mono text-[11px] text-muted">
+<span class="text-accent-cyan">[STREAM]</span> Negotiating SASL_SSL handshake with 3 brokers...
+            </div>
+</div>
+<!-- Card Action Footer -->
+<div class="flex items-center justify-between pt-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-muted-soft">Broker ping: 8ms</span>
+<button class="px-3 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-medium text-ink transition-colors">
+              Manage Credentials
+            </button>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= RIGHT PANEL: CONNECTION INSPECTOR ================= -->
+<aside class="w-96 flex-shrink-0 border-l border-hairline bg-canvas flex flex-col justify-between hidden 2xl:flex h-[calc(100vh-4rem)] overflow-y-auto">
+<!-- Top Inspector Header -->
+<div class="p-5 border-b border-hairline bg-surface-card/40">
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold">Active Inspector</span>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-semantic-success/10 border border-semantic-success/30 text-[10px] font-mono text-semantic-success">
+<span class="w-1.5 h-1.5 rounded-full bg-semantic-success"></span>
+<span>Healthy · 99.98% Uptime</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-ink">
+<span class="material-symbols-outlined" style="font-size: 18px;">terminal</span>
+</div>
+<div>
+<h2 class="text-sm font-headline font-semibold text-ink">GitNexus v2.4.1</h2>
+<span class="text-[11px] font-mono text-muted">bridge-id: gnx_8923a9d</span>
+</div>
+</div>
+<!-- Test Ping Button -->
+<button class="px-2.5 py-1.5 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline-strong text-xs font-mono text-body-strong flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-semantic-success" style="font-size: 14px;">bolt</span>
+<span>Ping</span>
+</button>
+</div>
+</div>
+<!-- Inspector Body Scrollable -->
+<div class="p-5 flex-1 flex flex-col gap-6 overflow-y-auto">
+<!-- ================= CONNECTION SETUP STEPPER ================= -->
+<div>
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold block mb-3">Connection Pipeline</span>
+<div class="flex flex-col relative pl-4 border-l border-hairline-strong space-y-4">
+<!-- Step 1: Completed -->
+<div class="relative group">
+<div class="absolute -left-[23px] top-0.5 w-4 h-4 rounded-full bg-semantic-success text-canvas-deep flex items-center justify-center">
+<span class="material-symbols-outlined font-bold" style="font-size: 12px;">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-ink">Client Credentials Verification</span>
+<span class="text-[11px] font-mono text-muted">OAuth 2.0 PKCE handshake validated</span>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative group">
+<div class="absolute -left-[23px] top-0.5 w-4 h-4 rounded-full bg-semantic-success text-canvas-deep flex items-center justify-center">
+<span class="material-symbols-outlined font-bold" style="font-size: 12px;">check</span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-ink">Grant Permissions &amp; Scopes</span>
+<span class="text-[11px] font-mono text-muted">Read/Write repo &amp; issue privileges granted</span>
+</div>
+</div>
+<!-- Step 3: ACTIVE (Vivid Electric Blue #0007cd / #1a26ff Glow) -->
+<div class="relative group">
+<div class="absolute -left-[25px] top-0 w-5 h-5 rounded-full bg-primary border-2 border-primary-glow shadow-[0_0_12px_rgba(26,38,255,0.8)] flex items-center justify-center">
+<span class="w-2 h-2 rounded-full bg-ink animate-ping"></span>
+</div>
+<div class="p-3 rounded-lg bg-surface-card-elevated border border-primary/60 shadow-[0_0_16px_rgba(0,7,205,0.25)] flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-ink">Webhook &amp; Socket Handshake</span>
+<span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-primary text-on-primary">CURRENT</span>
+</div>
+<p class="text-[11px] font-mono text-accent-cyan leading-snug">
+                  Awaiting first test payload on:
+                  <span class="text-ink block break-all mt-1 bg-canvas p-1.5 rounded border border-hairline select-all">wss://gateway.nexusops.io/v1/hooks/gn-9823</span>
+</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-[10px] font-mono text-muted">Listening for ping event...</span>
+</div>
+</div>
+</div>
+<!-- Step 4: Upcoming -->
+<div class="relative group opacity-40">
+<div class="absolute -left-[23px] top-0.5 w-4 h-4 rounded-full bg-surface-card-elevated border border-hairline-strong flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-muted"></span>
+</div>
+<div class="flex flex-col">
+<span class="text-xs font-semibold text-body">Agent Tool Authorization</span>
+<span class="text-[11px] font-mono text-muted-soft">Attach to Autonomous Lead Runner</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= ACTIVE AGENT TOOL PERMISSIONS ================= -->
+<div>
+<div class="flex items-center justify-between mb-2.5">
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold">Active Agent Scopes</span>
+<span class="text-[11px] font-mono text-muted">3 Enabled</span>
+</div>
+<div class="space-y-2">
+<!-- Scope 1 -->
+<div class="p-2.5 rounded-md bg-surface-card border border-hairline flex items-center justify-between">
+<div>
+<span class="text-xs font-mono font-medium text-ink block">repo:read</span>
+<span class="text-[10px] text-muted">Access trees, blobs, commit hashes</span>
+</div>
+<!-- Toggle switch (Active) -->
+<div class="w-8 h-4 rounded-full bg-primary relative cursor-pointer flex items-center px-0.5">
+<div class="w-3 h-3 rounded-full bg-ink ml-auto shadow-sm"></div>
+</div>
+</div>
+<!-- Scope 2 -->
+<div class="p-2.5 rounded-md bg-surface-card border border-hairline flex items-center justify-between">
+<div>
+<span class="text-xs font-mono font-medium text-ink block">issues:write</span>
+<span class="text-[10px] text-muted">Create tickets, update labels &amp; assign</span>
+</div>
+<!-- Toggle switch (Active) -->
+<div class="w-8 h-4 rounded-full bg-primary relative cursor-pointer flex items-center px-0.5">
+<div class="w-3 h-3 rounded-full bg-ink ml-auto shadow-sm"></div>
+</div>
+</div>
+<!-- Scope 3 -->
+<div class="p-2.5 rounded-md bg-surface-card border border-hairline flex items-center justify-between">
+<div>
+<span class="text-xs font-mono font-medium text-ink block">pull_requests:admin</span>
+<span class="text-[10px] text-muted">Merge pull requests upon CI pass</span>
+</div>
+<!-- Toggle switch (Active) -->
+<div class="w-8 h-4 rounded-full bg-primary relative cursor-pointer flex items-center px-0.5">
+<div class="w-3 h-3 rounded-full bg-ink ml-auto shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= LIVE DIAGNOSTIC TELEMETRY LOG ================= -->
+<div>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label text-[10px] uppercase tracking-wider text-muted font-semibold">Diagnostic Terminal</span>
+<span class="text-[10px] font-mono text-semantic-success flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-semantic-success animate-pulse"></span>
+              STREAMING
+            </span>
+</div>
+<div class="rounded-lg bg-canvas-deep border border-hairline-strong p-3 font-mono text-[11px] leading-relaxed flex flex-col gap-1.5 select-text shadow-inner">
+<div class="flex items-start gap-1.5 text-muted-soft">
+<span class="text-muted">[14:48:12]</span>
+<span class="text-accent-cyan">HANDSHAKE_OK</span>
+<span>TLS 1.3 negotiated</span>
+</div>
+<div class="flex items-start gap-1.5 text-muted-soft">
+<span class="text-muted">[14:48:15]</span>
+<span class="text-semantic-success">SCOPES_VALIDATED</span>
+<span>repo:read granted</span>
+</div>
+<div class="flex items-start gap-1.5 text-muted-soft">
+<span class="text-muted">[14:49:01]</span>
+<span class="text-primary-glow font-semibold">WEBSOCKET_OPENED</span>
+<span>tunnel id gn-9823</span>
+</div>
+<div class="flex items-start gap-1.5 text-body">
+<span class="text-muted">[14:49:10]</span>
+<span class="text-ink animate-pulse">&gt; waiting_for_frame</span>
+<span class="text-muted-soft">keep-alive 15s</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Action Footer for Inspector -->
+<div class="p-4 border-t border-hairline bg-surface-card/60 flex flex-col gap-2">
+<div class="grid grid-cols-2 gap-2">
+<button class="px-3 py-2 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-mono text-body hover:text-ink transition-colors text-center">
+            Rotate Secret
+          </button>
+<button class="px-3 py-2 rounded-md bg-surface-card-elevated hover:bg-surface-strong border border-hairline text-xs font-mono text-body hover:text-ink transition-colors text-center">
+            Export Audit
+          </button>
+</div>
+<button class="w-full py-2 rounded-md bg-transparent hover:bg-semantic-error/10 border border-semantic-error/30 text-semantic-error text-xs font-medium transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 15px;">link_off</span>
+<span>Disconnect Module</span>
+</button>
+</div>
+</aside>
+</div>
+</body></html>

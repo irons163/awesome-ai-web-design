@@ -1,8 +1,535 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Clay · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fffaf0;--panel:#f4efe5;--ink:#000000;--muted:#5c5a56;--border:#d1cdc5;--accent:#0a0a0a;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/clay">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Clay · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#fffaf0"></span><code>#fffaf0</code></div><div class="swatch"><span style="background:#1f1f1f"></span><code>#1f1f1f</code></div><div class="swatch"><span style="background:#e5e5e5"></span><code>#e5e5e5</code></div><div class="swatch"><span style="background:#3a3a3a"></span><code>#3a3a3a</code></div><div class="swatch"><span style="background:#1a1a1a"></span><code>#1a1a1a</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Plain Black, Inter, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Atelier Forma — Spatial Systems, Architectural Identities &amp; Brand Systems</title>
+<!-- Google Fonts: Inter & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#858383",
+            "on-surface-variant": "#444748",
+            "surface-dim": "#dedad0",
+            "primary": "#000000",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#c9c6c5",
+            "secondary-fixed-dim": "#c9c6c5",
+            "primary-fixed-dim": "#c9c6c5",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed": "#1c1b1b",
+            "on-error-container": "#93000a",
+            "on-surface": "#1d1c16",
+            "on-secondary-fixed-variant": "#484646",
+            "background": "#fef9ef",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e7e2d8",
+            "secondary": "#5f5e5e",
+            "on-primary-fixed": "#1c1b1b",
+            "secondary-container": "#e5e2e1",
+            "outline-variant": "#c4c7c7",
+            "primary-container": "#1c1b1b",
+            "tertiary": "#000000",
+            "surface-container-low": "#f8f3e9",
+            "surface-container-high": "#ece8de",
+            "surface-bright": "#fef9ef",
+            "tertiary-fixed": "#e6e1df",
+            "on-secondary-container": "#666464",
+            "surface-tint": "#5f5e5e",
+            "inverse-on-surface": "#f5f0e6",
+            "on-tertiary-fixed-variant": "#484645",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed": "#e5e2e1",
+            "on-tertiary-container": "#868381",
+            "surface-container": "#f2ede4",
+            "tertiary-container": "#1d1b1a",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#fef9ef",
+            "outline": "#747878",
+            "error": "#ba1a1a",
+            "on-error": "#ffffff",
+            "inverse-surface": "#32302a",
+            "on-primary-fixed-variant": "#474646",
+            "surface-variant": "#e7e2d8",
+            "primary-fixed": "#e5e2e1",
+            "on-tertiary-fixed": "#1d1b1a",
+            "on-background": "#1d1c16",
+            "tertiary-fixed-dim": "#cac6c3"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": [
+              "Inter"
+            ],
+            "display": [
+              "Inter"
+            ],
+            "body": [
+              "Inter"
+            ],
+            "label": [
+              "Public Sans"
+            ]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-surface-container-highest selection:text-primary min-h-screen flex flex-col justify-between">
+<!-- ============================================================ -->
+<!-- TOP NAV BAR (Strict JSON Mapping) -->
+<!-- ============================================================ -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant dark:border-outline docked full-width top-0 z-50 sticky">
+<div class="w-full h-16 max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
+<!-- Studio Brand Anchor -->
+<a class="font-headline text-lg font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface flex items-center gap-2" href="#">
+<span class="inline-block w-2.5 h-2.5 bg-primary dark:bg-inverse-primary rounded-full"></span>
+<span>Atelier Forma</span>
+</a>
+<!-- Desktop Navigation Links (Work is active) -->
+<nav class="hidden md:flex items-center space-x-8 font-body text-sm">
+<a class="text-on-surface dark:text-inverse-on-surface font-semibold hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#work">Work</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#disciplines">Disciplines</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#archive">Archive</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#philosophy">Philosophy</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-medium hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#about">About</a>
+</nav>
+<!-- Trailing Action Group -->
+<div class="flex items-center space-x-6">
+<span class="hidden lg:inline-block font-label text-xs tracking-wider text-secondary">Index (08)</span>
+<a class="inline-flex items-center font-headline text-sm font-semibold tracking-tight bg-primary text-on-primary dark:bg-inverse-primary dark:text-inverse-surface px-4 py-2 rounded-xl hover:opacity-90 transition-opacity duration-150 ease-in-out" href="#inquiry">
+          Initiate Inquiry
+        </a>
+</div>
+</div>
+</header>
+<!-- ============================================================ -->
+<!-- MAIN CONTENT CANVAS -->
+<!-- ============================================================ -->
+<main class="w-full flex-grow">
+<!-- HERO SECTION -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 pt-16 pb-20 md:pt-24 md:pb-28">
+<div class="grid grid-cols-12 gap-y-10 md:gap-x-12 border-b border-outline-variant pb-16">
+<!-- Studio Statement Column (Major Span) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col justify-between">
+<div class="space-y-6">
+<div class="inline-flex items-center gap-3 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label text-xs uppercase tracking-wider text-on-surface-variant font-medium">Accepting Selected Commissions — Q3/Q4</span>
+</div>
+<h1 class="font-headline text-3xl sm:text-5xl lg:text-6xl font-medium tracking-tight text-on-surface leading-[1.08] max-w-4xl">
+              Spatial systems, architectural identities, and brand manifestations engineered for cultural longevity.
+            </h1>
+</div>
+<div class="mt-12 flex flex-wrap gap-x-12 gap-y-4 pt-6 text-xs font-label uppercase tracking-widest text-on-surface-variant border-t border-outline-variant">
+<div>Zurich <span class="text-secondary font-mono ml-1">47°22'N</span></div>
+<div>Tokyo <span class="text-secondary font-mono ml-1">35°41'N</span></div>
+<div>New York <span class="text-secondary font-mono ml-1">40°42'N</span></div>
+</div>
+</div>
+<!-- Studio Manifesto & Dispatch (Asymmetric Side Rail) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col justify-between space-y-8 lg:pl-6 border-l-0 lg:border-l border-outline-variant">
+<div class="space-y-4">
+<span class="font-label text-xs tracking-wider uppercase text-secondary">Practice Dispatch / Folio 2025</span>
+<p class="font-body text-sm leading-relaxed text-on-surface-variant">
+              Atelier Forma operates at the convergence of structural mass, tactile typography, and spatial acoustics. Rejecting transient novelty, we sculpt quiet, enduring environments and bespoke identities for architectural trusts, cultural foundations, and visionary custodians.
+            </p>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl border border-outline-variant space-y-4">
+<div class="flex justify-between items-center text-xs font-label text-secondary">
+<span>Current Studio Cadence</span>
+<span class="text-primary font-mono">[84% Capacity]</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[84%]"></div>
+</div>
+<p class="text-xs text-on-surface-variant font-body leading-normal">
+              Direct oversight by Principals Helene Vance &amp; Kenjiro Moriyama on all spatial interventions.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================ -->
+<!-- ASYMMETRIC FEATURED CASE STUDIES SECTION -->
+<!-- ============================================================ -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-20" id="work">
+<!-- Section Intro Header -->
+<div class="flex flex-col md:flex-row justify-between items-baseline border-b border-outline-variant pb-6 mb-16">
+<div>
+<span class="font-label text-xs uppercase tracking-wider text-secondary">Curated Works [2022–2025]</span>
+<h2 class="font-headline text-2xl md:text-3xl font-medium tracking-tight text-on-surface mt-1">Spatial Architecture &amp; Identity Inquiries</h2>
+</div>
+<span class="font-label text-xs tracking-wider text-secondary mt-2 md:mt-0 font-mono">Archive Series 01–04</span>
+</div>
+<!-- CASE STUDY 01: 7/12 Major Span (Komorebi Pavilion) -->
+<article class="grid grid-cols-12 gap-y-8 md:gap-x-12 items-start mb-28 border-b border-outline-variant pb-20">
+<div class="col-span-12 lg:col-span-7">
+<div class="aspect-[16/10] overflow-hidden rounded-xl bg-surface-container-high relative group">
+<img class="w-full h-full object-cover grayscale contrast-105 group-hover:scale-102 transition-transform duration-700 ease-out" data-alt="A tranquil Japanese botanical sanctuary pavilion featuring textured cast volcanic plaster walls and floor-to-ceiling fluted smoked glass panels. Warm, natural diffused sunlight streams softly through dense canopy foliage, casting delicate geometric leaf shadows across polished pale sandstone floors. The architectural design is minimalist and monolithic, styled in understated warm neutral tones of stone, linen, and aged cedar. Atmosphere is serene, high-end, and meditative." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDK_ZMn5uaGSsnW00xyw_EPGsDJGSKzRGGwzZWFCWuUFgrmwC3z5p9yUo2URPA0kU2qqtBjOMsetRYs2v8Quyt00lTG2UZglUR8hWe1nK9_U2Dd8tAdnBDEgZRLco_Cq3Fgt2yx2aHCaMki_dY6Yv1fmtsKUXnPNtkdJqDocM46VYYOk5xgYdUa5OzsX5xSXJKzm5BwFCNCpwqQcRZGP20dyDHCO-w8_uXbYQcRzJFWwAiYCpcnLF7TmB5c7IsY3BaiW9uxngEn2JQq"/>
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-label uppercase tracking-widest text-on-surface">
+              Spatial Index 01/04
+            </div>
+</div>
+</div>
+<div class="col-span-12 lg:col-span-5 flex flex-col justify-between h-full space-y-6 lg:py-2">
+<div>
+<div class="flex items-center gap-2 text-xs font-label uppercase tracking-wider text-secondary mb-3">
+<span>Client: Nippon Botanic Trust</span>
+<span>•</span>
+<span>Kyoto, JP</span>
+</div>
+<h3 class="font-headline text-2xl md:text-4xl font-medium tracking-tight text-on-surface mb-4">
+              Komorebi Pavilion &amp; Botanical Sanctuary
+            </h3>
+<p class="font-body text-sm md:text-base leading-relaxed text-on-surface-variant mb-6">
+              A 1,400-square-metre meditative conservatory integrating tectonic thermal mass with seasonal rainwater hydrology. Designed to cultivate endangered Alpine moss species within an urban micro-climate.
+            </p>
+<!-- Material Taxonomy Grid -->
+<div class="border-t border-outline-variant pt-4 space-y-2 mb-8">
+<span class="font-label text-xs uppercase tracking-wider text-secondary">Material Taxonomy</span>
+<div class="grid grid-cols-2 gap-2 text-xs font-mono text-on-surface-variant">
+<div class="bg-surface-container-low p-2 rounded">Cast Volcanic Plaster</div>
+<div class="bg-surface-container-low p-2 rounded">Fluted Smoked Glass</div>
+<div class="bg-surface-container-low p-2 rounded">Charred Cedar (Yakisugi)</div>
+<div class="bg-surface-container-low p-2 rounded">Honed Basalt Pavers</div>
+</div>
+</div>
+</div>
+<a class="inline-flex items-center gap-2 font-headline text-sm font-semibold tracking-tight text-on-surface hover:text-secondary transition-colors underline underline-offset-8" href="#inquiry">
+            Explore Case Study 
+            <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- CASE STUDY 02 & CASE STUDY 03: Asymmetric Staggered Split (5/12 Offset + Stagger) -->
+<div class="grid grid-cols-12 gap-y-20 md:gap-x-12 mb-28 border-b border-outline-variant pb-24 items-start">
+<!-- Case Study 02: Vanguard Acoustic Labs (Offset 5/12 Col) -->
+<article class="col-span-12 lg:col-span-5 space-y-6 lg:mt-8">
+<div class="aspect-[4/5] overflow-hidden rounded-xl bg-surface-container-high relative group">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out" data-alt="A refined product packaging and industrial acoustic system crafted from bead-blasted dark anodized aluminum and dense unbleached cotton pulp casing. Crisp Swiss typographic labeling with precise mechanical calibrations is printed in matte micro-silver ink. The background is an immaculate atelier bench composed of pale raw oak with directional gallery spotlighting emphasizing sharp edges and soft matte finishes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvRyaQ0UDerHEB205SOS5mAa7bgxUeheTk0_TMpMFqQNDrBhv7UNwzm3BnLYGhzu5_HqtIZ5XDwLO0Zj6TBL4q9gphdI7CsdHIIaGpBFQVkwwFhm6dA5iPOQRrvpSCOso-oEOxqfwKpHtXIW9Setbz1kaccrbhFlmY0qbOnPv5Y1rRP955NGYZ-zuo3xv_YuWJWxTW-JG_qhLFF3ARG3NTF2dYyA4Bs41X1rRHBaBJ9dGzQIe9nDw2SWDaoE20K2vkajACRLC4LhOy"/>
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-label uppercase tracking-widest text-on-surface">
+              Acoustic 02/04
+            </div>
+</div>
+<div>
+<div class="flex items-center gap-2 text-xs font-label uppercase tracking-wider text-secondary mb-2">
+<span>Hardware &amp; Visual Identity</span>
+<span>•</span>
+<span>Zurich</span>
+</div>
+<h3 class="font-headline text-2xl font-medium tracking-tight text-on-surface mb-3">
+              Vanguard Acoustic Labs
+            </h3>
+<p class="font-body text-sm leading-relaxed text-on-surface-variant mb-6">
+              Complete brand articulation, tactile acoustic chassis engineering, and precision packaging system for a next-generation bespoke sound chamber manufacturer.
+            </p>
+<a class="inline-flex items-center gap-2 font-headline text-sm font-semibold text-on-surface hover:text-secondary transition-colors underline underline-offset-8" href="#inquiry">
+              View Documentation 
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</article>
+<!-- Case Study 03: Alva Museum of Contemporary Ceramics (7/12 Col with rich metadata) -->
+<article class="col-span-12 lg:col-span-7 space-y-6">
+<div class="aspect-[16/11] overflow-hidden rounded-xl bg-surface-container-high relative group">
+<img class="w-full h-full object-cover grayscale group-hover:scale-102 transition-transform duration-700 ease-out" data-alt="A museum gallery exhibition scenography showing unglazed stoneware vessels displayed upon low cantilevered platforms made of cast raw concrete. In the background, expansive linen scrims hang from tall ceiling tracks, softly diffusing daylight. Architectural typography on the alabaster plaster wall features clean, understated sans-serif lettering. The aesthetic evokes quiet Scandinavian and Japanese minimalist harmony." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaWkNm8VSkxq5kTAmI6bXoEr1VYaJYsIwgjMnmW6q-RpKBfspoorUnIug5h-ULKR_cqf6_sDIZ0aA8rjj5o9mEN72QRN_oIlUewoAmQ9OVk-o64otHavPoweVSoFPbzByxPNUI91hiuWPhfswi1U3B4Dbb1PRP38dvA5kBdPtx1WUeIwgXzxZ-vxghV-zFJhwTuFRxX3bzSExRvh_rvL30G-K1vaNhC6YbsSzzEY-7N7FVHVSHF0-rGC1TrBEgbHwJuKXL-klPuF7u"/>
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-label uppercase tracking-widest text-on-surface">
+              Scenography 03/04
+            </div>
+</div>
+<div class="grid grid-cols-12 gap-6 pt-2">
+<div class="col-span-12 md:col-span-7">
+<div class="flex items-center gap-2 text-xs font-label uppercase tracking-wider text-secondary mb-2">
+<span>Exhibition &amp; Monograph</span>
+<span>•</span>
+<span>Stockholm</span>
+</div>
+<h3 class="font-headline text-2xl md:text-3xl font-medium tracking-tight text-on-surface mb-3">
+                Alva Museum of Contemporary Ceramics
+              </h3>
+<p class="font-body text-sm leading-relaxed text-on-surface-variant">
+                Scenography choreography guiding patrons through unvarnished clay iterations, accompanied by a 280-page hardbound catalog printed on uncoated Swedish cotton paper.
+              </p>
+</div>
+<!-- Metadata Box -->
+<div class="col-span-12 md:col-span-5 bg-surface-container-low p-4 rounded-xl border border-outline-variant space-y-3">
+<div>
+<span class="text-[10px] font-label uppercase tracking-widest text-secondary block">Curators</span>
+<span class="text-xs font-medium text-on-surface">Ingrid Lindqvist &amp; H. Vance</span>
+</div>
+<div>
+<span class="text-[10px] font-label uppercase tracking-widest text-secondary block">Timeline</span>
+<span class="text-xs font-mono text-on-surface">May 2024 — Nov 2024</span>
+</div>
+<div>
+<span class="text-[10px] font-label uppercase tracking-widest text-secondary block">Format</span>
+<span class="text-xs font-medium text-on-surface">Monograph, Spatial Wayfinding</span>
+</div>
+</div>
+</div>
+<div class="pt-2">
+<a class="inline-flex items-center gap-2 font-headline text-sm font-semibold text-on-surface hover:text-secondary transition-colors underline underline-offset-8" href="#inquiry">
+              Read Monograph 
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</article>
+</div>
+<!-- CASE STUDY 04: Panoramic Span with Side-rail Notes (Maison Söl) -->
+<article class="grid grid-cols-12 gap-y-8 md:gap-x-12 mb-16">
+<div class="col-span-12 lg:col-span-9">
+<div class="aspect-[21/9] overflow-hidden rounded-xl bg-surface-container-high relative group">
+<img class="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700 ease-out" data-alt="An editorial still life featuring high-end perfume flacons made of heavy fluted glass and brushed bronze hardware arranged on an aged travertine slab. Subdued golden-hour sunlight rakes horizontally across the scene, illuminating delicate liquid reflections and tactile paper packaging foil-stamped with minimal geometric monogram marks. Elegant, ultra-luxurious, and contemporary." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpzAEWeaHwhDP17xV4boBiBUCqZVZ7rMZ5skf5DiAN_m_YqP1j8HaZpMQ7JWhx5-DD6ISd2tQ5hFe0C6IwnvdL8x5TXE0DBny40E-Z8VexIJrh4qmu-01wwgJ_sgvImeyrFLV6sMHrUYIPoLm0OMmH8uuRW7hqrINregCjRBpbhcZ5URJnAhrLWONZVxbADZwXiKE7o5PE5dfYzBsnRwuHbSI8v51py0cQVMwhyOmjxLLo2_4bACFLa98FX7cUg6o1yVvQDwYfKSaq"/>
+<div class="absolute top-4 left-4 bg-surface/90 backdrop-blur-sm px-3 py-1 rounded text-xs font-label uppercase tracking-widest text-on-surface">
+              Olfactory 04/04
+            </div>
+</div>
+<div class="mt-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<span class="text-xs font-label uppercase tracking-wider text-secondary">Luxury Brand Identity &amp; Olfactory Packaging</span>
+<h3 class="font-headline text-2xl md:text-3xl font-medium tracking-tight text-on-surface">
+                Maison Söl Brand Synthesis
+              </h3>
+</div>
+<a class="inline-flex items-center gap-2 font-headline text-sm font-semibold text-on-surface hover:text-secondary transition-colors underline underline-offset-8" href="#inquiry">
+              Examine Identity System 
+              <span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Side-Rail Curatorial Note -->
+<div class="col-span-12 lg:col-span-3 flex flex-col justify-between border-l-0 lg:border-l border-outline-variant lg:pl-6 space-y-6">
+<div class="space-y-3">
+<span class="font-label text-xs uppercase tracking-wider text-secondary">Field Note #109</span>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant">
+              "We constructed Söl's signature vessels using heavy-walled cold cast glass that captures ambient temperature changes, allowing the user's hand warmth to gently awaken top notes prior to atomization."
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant text-[11px] font-mono text-secondary space-y-1">
+<div>Edition: 2,500 Signed Flacons</div>
+<div>Distributor: Paris / Geneve / Tokyo</div>
+<div>Award: Pentaward Gold 2024</div>
+</div>
+</div>
+</article>
+</section>
+<!-- ============================================================ -->
+<!-- STUDIO PHILOSOPHY & METHODOLOGY INDEX (3-Column Layout) -->
+<!-- ============================================================ -->
+<section class="border-t border-b border-outline-variant bg-surface-container-low py-20 md:py-28" id="disciplines">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="grid grid-cols-12 gap-8 mb-16 items-baseline">
+<div class="col-span-12 lg:col-span-4">
+<span class="font-label text-xs uppercase tracking-wider text-secondary">Practice Foundations</span>
+<h2 class="font-headline text-3xl font-medium tracking-tight text-on-surface mt-2">Disciplines &amp; Spatial Rigor</h2>
+</div>
+<div class="col-span-12 lg:col-span-8">
+<p class="font-body text-base text-on-surface-variant max-w-2xl">
+              We operate without decorative surplus. Every plane, line of leaded typography, and acoustic proportion is grounded in contextual heritage and physical permanence.
+            </p>
+</div>
+</div>
+<!-- 3-Column Core Disciplines -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Column 01 -->
+<div class="bg-surface p-8 rounded-xl border border-outline-variant flex flex-col justify-between space-y-8">
+<div class="space-y-4">
+<span class="font-mono text-xs text-secondary">[01]</span>
+<h3 class="font-headline text-xl font-medium tracking-tight text-on-surface">Spatial &amp; Environmental Architecture</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                Site-specific architectural interventions, monolithic pavilion pavilions, gallery scenography, and acoustic sanctuary environments engineered with regional materials.
+              </p>
+</div>
+<ul class="text-xs font-mono text-secondary space-y-2 border-t border-outline-variant pt-6">
+<li>— Adaptive Structural Re-use</li>
+<li>— Climate-passive Envelope Design</li>
+<li>— Sound Damping Acoustics</li>
+</ul>
+</div>
+<!-- Column 02 -->
+<div class="bg-surface p-8 rounded-xl border border-outline-variant flex flex-col justify-between space-y-8">
+<div class="space-y-4">
+<span class="font-mono text-xs text-secondary">[02]</span>
+<h3 class="font-headline text-xl font-medium tracking-tight text-on-surface">Identity &amp; Type Systems</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                Typographic architectures, bespoke foundry typefaces, editorial publications, tactile packaging systems, and structural identity programs for architectural entities.
+              </p>
+</div>
+<ul class="text-xs font-mono text-secondary space-y-2 border-t border-outline-variant pt-6">
+<li>— Custom Display &amp; Book Type</li>
+<li>— Tactile Editorial Monographs</li>
+<li>— Material Packaging Guidelines</li>
+</ul>
+</div>
+<!-- Column 03 -->
+<div class="bg-surface p-8 rounded-xl border border-outline-variant flex flex-col justify-between space-y-8">
+<div class="space-y-4">
+<span class="font-mono text-xs text-secondary">[03]</span>
+<h3 class="font-headline text-xl font-medium tracking-tight text-on-surface">Digital Ephemera &amp; Archival Tools</h3>
+<p class="font-body text-sm text-on-surface-variant leading-relaxed">
+                Quiet digital repositories, interactive collection catalogs, spatial soundscapes, and digital interfaces that respect the user’s cognitive stillness.
+              </p>
+</div>
+<ul class="text-xs font-mono text-secondary space-y-2 border-t border-outline-variant pt-6">
+<li>— Archival Research Indexing</li>
+<li>— High-Resolution 3D Spatial Scans</li>
+<li>— Custom Gallery Tablets</li>
+</ul>
+</div>
+</div>
+<!-- Studio Metrics Ribbon -->
+<div class="mt-16 pt-12 border-t border-outline-variant grid grid-cols-2 md:grid-cols-4 gap-6 text-center md:text-left">
+<div>
+<span class="font-headline text-3xl font-semibold tracking-tight text-on-surface">12</span>
+<span class="block font-label text-xs uppercase tracking-wider text-secondary mt-1">Global Monographs</span>
+</div>
+<div>
+<span class="font-headline text-3xl font-semibold tracking-tight text-on-surface">03</span>
+<span class="block font-label text-xs uppercase tracking-wider text-secondary mt-1">AIA Spatial Honors</span>
+</div>
+<div>
+<span class="font-headline text-3xl font-semibold tracking-tight text-on-surface">2018</span>
+<span class="block font-label text-xs uppercase tracking-wider text-secondary mt-1">Established in Zurich</span>
+</div>
+<div>
+<span class="font-headline text-3xl font-semibold tracking-tight text-on-surface">100%</span>
+<span class="block font-label text-xs uppercase tracking-wider text-secondary mt-1">Independent Ownership</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================ -->
+<!-- STUDIO INQUIRIES & CONTACT SECTION -->
+<!-- ============================================================ -->
+<section class="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28" id="inquiry">
+<div class="bg-surface-container rounded-xl p-8 md:p-16 border border-outline-variant grid grid-cols-12 gap-y-12 md:gap-x-12">
+<div class="col-span-12 lg:col-span-7 space-y-6">
+<span class="font-label text-xs uppercase tracking-wider text-secondary">Initiate Engagement</span>
+<h2 class="font-headline text-3xl md:text-5xl font-medium tracking-tight text-on-surface leading-tight">
+            Commission a spatial intervention or brand inquiry.
+          </h2>
+<p class="font-body text-base text-on-surface-variant max-w-xl">
+            We partner with a limited roster of 4 to 6 clients annually to guarantee absolute focus. We welcome architectural briefs, monograph proposals, and cultural commission requests.
+          </p>
+<div class="pt-4 flex flex-wrap gap-4">
+<a class="inline-flex items-center gap-3 bg-primary text-on-primary px-6 py-3.5 rounded-xl font-headline text-sm font-semibold tracking-tight hover:opacity-90 transition-opacity" href="mailto:commissions@atelierforma.ch">
+<span>studio@atelierforma.ch</span>
+<span class="material-symbols-outlined text-base">mail</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-surface text-on-surface border border-outline-variant px-6 py-3.5 rounded-xl font-headline text-sm font-medium hover:bg-surface-container-high transition-colors" href="#archive">
+<span>Download Studio Dossier [PDF 18MB]</span>
+<span class="material-symbols-outlined text-base">download</span>
+</a>
+</div>
+</div>
+<!-- Studio Timezones & Locations -->
+<div class="col-span-12 lg:col-span-5 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant pt-8 lg:pt-0 lg:pl-10 space-y-6">
+<div>
+<span class="font-label text-xs uppercase tracking-wider text-secondary block mb-4">Direct Studio Desks</span>
+<div class="space-y-4 font-mono text-xs">
+<div class="flex justify-between items-center py-2 border-b border-outline-variant">
+<span class="font-medium text-on-surface">Zurich (Headquarters)</span>
+<span class="text-secondary font-semibold" id="zurich-time">14:42 CET</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant">
+<span class="font-medium text-on-surface">Tokyo (Research Lab)</span>
+<span class="text-secondary font-semibold" id="tokyo-time">22:42 JST</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-outline-variant">
+<span class="font-medium text-on-surface">New York (Project Office)</span>
+<span class="text-secondary font-semibold" id="nyc-time">08:42 EST</span>
+</div>
+</div>
+</div>
+<div class="bg-surface p-4 rounded-lg border border-outline-variant text-xs text-on-surface-variant font-body">
+<p>
+<strong class="text-on-surface font-semibold block mb-1">Mailing Address:</strong>
+              Atelier Forma AG, Neugasse 29, 8005 Zürich, Switzerland
+            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- ============================================================ -->
+<!-- FOOTER (Strict JSON Mapping) -->
+<!-- ============================================================ -->
+<footer class="bg-surface-container-low dark:bg-surface-container border-t border-outline-variant dark:border-outline docked full-width bottom">
+<div class="w-full max-w-7xl mx-auto px-6 md:px-12 py-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+<!-- Studio Brand & Copyright Block -->
+<div class="space-y-4 max-w-md">
+<span class="font-headline text-base font-semibold text-on-surface dark:text-inverse-on-surface block tracking-tight">
+          Atelier Forma
+        </span>
+<p class="font-body text-xs text-on-surface-variant dark:text-surface-variant leading-relaxed">
+          © 2025 Atelier Forma. Architecture, Brand Systems &amp; Spatial Inquiries. All rights reserved.
+        </p>
+</div>
+<!-- Footer Navigation Cluster -->
+<nav class="flex flex-wrap gap-x-8 gap-y-3 font-body text-xs text-on-surface-variant dark:text-surface-variant">
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#journal">Editorial Journal</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#cases">Case Studies</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#capabilities">Capabilities Index</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#studio">Studio Direct</a>
+<a class="text-on-surface dark:text-inverse-on-surface underline underline-offset-4 hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#colophon">Colophon</a>
+</nav>
+</div>
+</footer>
+<!-- Real-time Atmospheric World Clock Script -->
+<script>
+    function updateStudioClocks() {
+      const now = new Date();
+      
+      const formatTime = (timeZone) => {
+        return new Intl.DateTimeFormat('en-GB', {
+          hour: '2-digit',
+          minute: '2-digit',
+          timeZone: timeZone,
+          hour12: false
+        }).format(now);
+      };
+
+      const zTime = document.getElementById('zurich-time');
+      const tTime = document.getElementById('tokyo-time');
+      const nTime = document.getElementById('nyc-time');
+
+      if (zTime) zTime.textContent = formatTime('Europe/Zurich') + ' CET';
+      if (tTime) tTime.textContent = formatTime('Asia/Tokyo') + ' JST';
+      if (nTime) nTime.textContent = formatTime('America/New_York') + ' EST';
+    }
+
+    updateStudioClocks();
+    setInterval(updateStudioClocks, 30000);
+  </script>
+</body></html>

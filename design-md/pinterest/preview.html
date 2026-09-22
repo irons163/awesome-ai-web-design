@@ -1,8 +1,682 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pinterest · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#e60023;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/pinterest">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Pinterest · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#e60023"></span><code>#e60023</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#cc001f"></span><code>#cc001f</code></div><div class="swatch"><span style="background:#211922"></span><code>#211922</code></div><div class="swatch"><span style="background:#33332e"></span><code>#33332e</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Pin Sans</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Pinpoint — Visual Discovery &amp; Curated Inspiration</title>
+<!-- Google Fonts: Inter for Clean Body & Display Hierarchy -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Public+Sans:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined (Exact link specification) -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Play CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Exact Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#005f90",
+            "surface-variant": "#e2e2e2",
+            "surface-bright": "#f9f9f9",
+            "tertiary-fixed": "#cce5ff",
+            "secondary-container": "#fc635d",
+            "on-primary-container": "#fff7f6",
+            "primary-fixed-dim": "#ffb3ad",
+            "on-background": "#1a1c1c",
+            "error-container": "#ffdad6",
+            "error": "#ba1a1a",
+            "on-secondary-fixed-variant": "#8f1017",
+            "surface-dim": "#dadada",
+            "surface-container-highest": "#e2e2e2",
+            "on-surface": "#1a1c1c",
+            "on-surface-variant": "#5e3f3c",
+            "secondary": "#b12c2c",
+            "on-secondary-container": "#650009",
+            "on-tertiary-fixed": "#001e31",
+            "outline-variant": "#e8bcb8",
+            "outline": "#936e6b",
+            "inverse-primary": "#ffb3ad",
+            "primary": "#b7001a",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#92ccff",
+            "surface-container": "#eeeeee",
+            "surface": "#f9f9f9",
+            "on-primary-fixed-variant": "#930012",
+            "on-error-container": "#93000a",
+            "on-tertiary-fixed-variant": "#004b73",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed-dim": "#ffb3ad",
+            "on-primary-fixed": "#410004",
+            "inverse-surface": "#2f3131",
+            "on-secondary": "#ffffff",
+            "on-primary": "#ffffff",
+            "inverse-on-surface": "#f0f1f1",
+            "primary-fixed": "#ffdad7",
+            "surface-container-high": "#e8e8e8",
+            "background": "#f9f9f9",
+            "tertiary-container": "#0079b6",
+            "primary-container": "#e60023",
+            "on-tertiary-container": "#f7f9ff",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#410004",
+            "surface-tint": "#c0001b",
+            "surface-container-low": "#f3f3f4",
+            "secondary-fixed": "#ffdad7"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Material Icon Configuration */
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Native CSS Columns Masonry to preserve organic staggered heights */
+    .pin-masonry-grid {
+      column-count: 1;
+      column-gap: 16px;
+    }
+    @media (min-width: 640px) {
+      .pin-masonry-grid {
+        column-count: 2;
+      }
+    }
+    @media (min-width: 960px) {
+      .pin-masonry-grid {
+        column-count: 3;
+      }
+    }
+    @media (min-width: 1240px) {
+      .pin-masonry-grid {
+        column-count: 4;
+      }
+    }
+    @media (min-width: 1440px) {
+      .pin-masonry-grid {
+        column-count: 4;
+        column-gap: 18px;
+      }
+    }
+
+    .pin-card-item {
+      break-inside: avoid;
+      margin-bottom: 24px;
+    }
+
+    /* Custom Hide Scrollbar for filter bar */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary-container selection:text-white">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar (from JSON Specification)                     -->
+<!-- ========================================================================= -->
+<header class="sticky top-0 w-full flex items-center justify-between px-4 sm:px-6 lg:px-8 max-w-full bg-surface-container-lowest border-b border-surface-container-high z-50 h-16 transition-colors">
+<!-- Left Section: Brand Logo & Navigation Links -->
+<div class="flex items-center gap-6 shrink-0">
+<a class="flex items-center gap-2 group cursor-pointer" href="#">
+<div class="w-9 h-9 rounded-full bg-primary-container flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105 active:scale-95 duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<span class="text-xl font-headline font-bold text-primary tracking-tight">Pinpoint</span>
+</a>
+<!-- Navigation Links from JSON: ["Explore", "Today", "Watch"] -->
+<nav class="hidden md:flex items-center gap-1.5 font-headline text-sm font-semibold">
+<!-- Active link: Explore (JSON Active Rule Execution) -->
+<a class="text-on-surface font-bold bg-surface-container rounded-full px-4 py-2 transition-colors duration-150" href="#">
+          Explore
+        </a>
+<!-- Inactive link: Today -->
+<a class="text-on-surface-variant font-medium px-4 py-2 hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors duration-150 active:scale-95" href="#">
+          Today
+        </a>
+<!-- Inactive link: Watch -->
+<a class="text-on-surface-variant font-medium px-4 py-2 hover:bg-surface-container-high hover:text-on-surface rounded-full transition-colors duration-150 active:scale-95" href="#">
+          Watch
+        </a>
+</nav>
+</div>
+<!-- Center Section: Expanded Search Bar (search_bar: "on_left" / centered in desktop layout) -->
+<div class="flex-1 max-w-2xl mx-4 lg:mx-8">
+<div class="relative flex items-center w-full">
+<div class="absolute left-4 flex items-center pointer-events-none text-outline">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</div>
+<input class="w-full h-11 pl-11 pr-10 bg-surface-container-low text-on-surface text-sm font-body rounded-full border border-transparent hover:border-surface-container-high focus:border-outline focus:bg-surface-container-lowest focus:ring-2 focus:ring-tertiary-fixed outline-none transition-all placeholder:text-outline" placeholder="Search editorial photography, architecture, tactile textures..." type="text"/>
+<button class="absolute right-3 p-1 text-outline hover:text-on-surface rounded-full transition-colors" title="Clear or filters">
+<span class="material-symbols-outlined text-[18px]" data-icon="tune">tune</span>
+</button>
+</div>
+</div>
+<!-- Right Section: Actions & Profile -->
+<div class="flex items-center gap-2 sm:gap-3 shrink-0">
+<!-- Trailing Primary Action from JSON: 'Create' -->
+<button class="flex items-center gap-1.5 bg-primary-container hover:bg-primary text-white text-sm font-headline font-semibold px-4 py-2 rounded-full transition-all duration-150 shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+<span class="hidden sm:inline">Create</span>
+</button>
+<!-- Trailing Icon Action 1: 'notifications' -->
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-95 relative" title="Notifications">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Trailing Icon Action 2: 'chat_bubble' -->
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors active:scale-95" title="Messages">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</button>
+<!-- Profile Avatar -->
+<div class="relative ml-1 cursor-pointer group">
+<div class="w-9 h-9 rounded-full overflow-hidden border border-surface-container-high hover:ring-2 hover:ring-primary-container transition-all">
+<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="Close-up portrait of a thoughtful creative director with soft natural studio lighting, modern minimalist aesthetics, neutral warm tones, and clean light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBDpqaa7a_hEt9_yLz-7yOl5TUBsnfKOGw17zYGGh8_WqabvBRUzEvMG5_kZ8W3OjnpT53LL2ekUMi9nMHgldbq6ePp5yGArj8PNcB0BWWOaCE4cVDbTjHqSQOBYeyftpLxYgpTEhQWN32yGRypG1IADx-7Jo5JWbWwDZLAQmGwYdSQ8ZByiSfRgmzJKR02yTHZjDYUOrWl0kFeXM98M3g7eHuiFvMi77qvlrmPNkzW9gmsrzUnMNRdRGOsQKu2ZfDnFEtFZIy7wcY"/>
+</div>
+<div class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-surface-container-lowest flex items-center justify-center shadow-xs">
+<span class="material-symbols-outlined text-[10px] text-outline font-bold" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- CATEGORY & TOPIC FILTER STRIP (High-Fidelity Subheader)                   -->
+<!-- ========================================================================= -->
+<section class="sticky top-16 z-40 bg-surface/95 backdrop-blur-md px-4 sm:px-6 lg:px-8 py-3 border-b border-surface-container">
+<div class="max-w-[1440px] mx-auto flex items-center justify-between gap-4">
+<!-- Horizontal Scrollable Tag Pills -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 flex-1 mask-fade">
+<!-- Active Tag: "All Ideas" -->
+<button class="shrink-0 bg-on-surface text-surface-container-lowest text-xs font-headline font-semibold px-4 py-2 rounded-full shadow-sm transition-all active:scale-95 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]" data-icon="sparkles" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span>
+<span>All Ideas</span>
+</button>
+<!-- Inactive Filter Pills -->
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Warm Architecture
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Nordic Interior
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Ceramic &amp; Clay
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Brutalist Graphic
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Botanical Studies
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Film Grain Mood
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Typography in Print
+        </button>
+<button class="shrink-0 bg-surface-container-low hover:bg-surface-container text-on-surface text-xs font-headline font-medium px-4 py-2 rounded-full transition-colors active:scale-95">
+          Slow Living
+        </button>
+</div>
+<!-- Controls Right: View Density Toggle & Sorting Dropdown -->
+<div class="hidden lg:flex items-center gap-3 shrink-0 pl-3 border-l border-surface-container-high">
+<!-- Quick View Mode Segmented Controls -->
+<div class="flex items-center bg-surface-container-low p-1 rounded-full border border-surface-container">
+<button class="p-1.5 rounded-full bg-surface-container-lowest shadow-xs text-on-surface" title="Masonry Layout">
+<span class="material-symbols-outlined text-[18px]" data-icon="dashboard">dashboard</span>
+</button>
+<button class="p-1.5 rounded-full text-outline hover:text-on-surface transition-colors" title="Editorial Grid">
+<span class="material-symbols-outlined text-[18px]" data-icon="grid_view">grid_view</span>
+</button>
+</div>
+<!-- Curation Sorting -->
+<button class="flex items-center gap-1.5 text-xs font-headline font-semibold text-on-surface bg-surface-container-low hover:bg-surface-container px-3 py-2 rounded-full transition-colors">
+<span>Curated For You</span>
+<span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- MAIN CANVASES: Masonry Inspiration Board                                 -->
+<!-- ========================================================================= -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6">
+<!-- Top Editorial Header Strip with Subtitle Context -->
+<div class="flex flex-col sm:flex-row sm:items-baseline justify-between mb-6 pb-2 border-b border-surface-container/60">
+<div>
+<h1 class="text-2xl sm:text-3xl font-headline font-extrabold text-on-surface tracking-tight">
+          Visual Discovery
+        </h1>
+<p class="text-xs sm:text-sm text-outline font-body mt-1">
+          Daily curation of architectural forms, tactile materials, and editorial compositions.
+        </p>
+</div>
+<div class="mt-3 sm:mt-0 flex items-center gap-2 text-xs font-headline font-semibold text-outline">
+<span class="inline-block w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span>2,840 fresh ideas surfaced today</span>
+</div>
+</div>
+<!-- Masonry Grid Canvas -->
+<div class="pin-masonry-grid">
+<!-- ==================== PIN CARD 1: Architectural Stairwell (Tall Portrait 3:4) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<!-- Image Container with Hover Effects -->
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Warm ochre sculptural spiral staircase in a contemporary Mediterranean gallery, sharp architectural sun shadows, warm plaster texture, bright clean natural lighting, architectural photography aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaH0aWbq-q07_K_lZglEv81w_3l3Leb_THjFghJ65G9VWky7-JMjEluldh0O0C0UFN60F1Q79HS6rA7fGFborlzs_HT5k9GtzPytuEAIhijx5LhiU4fnaKUEnUeI112W5slui_PemRbraT-D5yapbaZqmpHYdhG5NHFvKH0yrdH39tz59S8HOCABNK0o94fP_aUSWSfyEEOELdzl2N33oUoP0g0HuAmbKzfmzOUE3TkHHjU4Pk43JiV6fWORJ1fIYqNAyU_L7MmpM"/>
+<!-- Hover Overlay -->
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<!-- Top Row: Board Selector & Save Button -->
+<div class="flex items-center justify-between gap-2">
+<button class="bg-surface-container-lowest/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm transition-transform active:scale-95">
+<span class="truncate max-w-[100px]">Architecture 2026</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow transition-transform active:scale-95">
+                  Save
+                </button>
+</div>
+<!-- Bottom Row: Overlay Quick Actions & Category Pill -->
+<div class="flex items-center justify-between">
+<span class="bg-surface-container-lowest/90 backdrop-blur-md text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Valencia, Spain
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95 transition-transform" title="Inspect">
+<span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</button>
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95 transition-transform" title="More Options">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card Footer Metadata -->
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Sculptural Ochre Stairwell in Valencia
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Curated by Studio Aalto</span>
+<span class="text-[11px]">4.2k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 2: SAVED STATE SHOWCASE (Matte Ceramics) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ring-2 ring-primary-container/20">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Handcrafted matte stoneware ceramic tableware on natural coarse raw linen tablecloth, dappled morning daylight, warm neutral earth tones, slow living culinary still life." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2GZJ_Q8zedIWBeU2hiFJ1RGZEU8arCKHSiZeiaTCGUMfRUBA2T-USonocmZp-AHtcYwrDwGaunTJCcEG6_CRmmkgNgsoAPcGJurqP2S3tdks8Vef8GycHIobvZPWw7DRwZvRv5ThX6bLXAx_cvbFEqgNniyWuS-OWESWtQOTXSzZikAIccG-S_x2_CW2HaSqaXoogBjchMGITm_65l-CP0L-iB0fYYf-MhEhaLHOj_8ek0GHlGKzdllZD2F-flw2XrKVUH09zJKE"/>
+<!-- Constant Feedback Badge: "Saved to Studio Warmth ✓" as required in brief -->
+<div class="absolute top-3 left-3 z-10">
+<div class="bg-inverse-surface/90 backdrop-blur-md text-white text-[11px] font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[15px] text-secondary-container" data-icon="check" style="font-variation-settings: 'FILL' 1;">check</span>
+<span>Saved to Studio Warmth</span>
+</div>
+</div>
+<!-- Hover overlay -->
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-end">
+<button class="bg-inverse-surface text-white text-xs font-headline font-semibold px-3 py-1.5 rounded-full shadow transition-colors hover:bg-black">
+                  Edit Board
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Ceramics
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Metadata -->
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Raw Linen &amp; Matte Ceramic Tableware
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Maison Terre Studio</span>
+<span class="text-[11px]">890 saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 3: Typographic Print (2:3 Aspect) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Vintage Swiss modernist typography poster from 1974 with bold black sans-serif geometric composition on unbleached warm cream paper, editorial graphic design archive." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMiPQ92H1u3W7lGsrl9Xi3W8ZSvPAuUsRUPLbA_YFEiS33XXEICJCrcz-cjOwjNq3UCWnCpgCYNIrcb_9ZNo6x94Nvu0NVvSrV8H2LXO6XpBPOIRSkqjST-C4PLI0FDJrYESjlN-0F8AzvS2nvGtshFQQBalMGo-TkMrM87jAs96JBG5WwDZw_2PSQ9lBj0dwUyHoU43W7Cn7QEoXLaMQiWAu2SF_k4nddWukWw22DGCqmrsjFF0MA8Gham3vXaH19vDOXSyNDy90"/>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-2">
+<button class="bg-white/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span>Moodboard: Studio</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow active:scale-95 transition-transform">
+                  Save
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Graphic Design
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Typographic Poster Explorations 1974
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Zurich Archives</span>
+<span class="text-[11px]">3.1k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 4: Nordic Interior Kitchen (Square/Landscape) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Minimalist Scandinavian oak kitchen island with brushed brass fixtures, limewash beige walls, soft diffused north light, clean modern calm interior architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-aD9Yj_g-6KhmHM01t7XakAAWZ8lz9qOSM8E9kCbI733t7xSldOUexM2u58pErdsedlHS6pqTyjA-90EmbyF4Z2N7U2DLLZ9AwYViJuFbh64zx-FQh1ptrUr7G8oMWcIH4f3eXL6s5AL1QAiwLp5M0Fj_mSX-R1oG35bWGPgCB1aZCDZROGes3hhf31dfNU3bAuIhRV1FAwO7A01CccLyTO1cJxspLQeiNvb0h1CALxm7woQzoiE64_oOl1QdV19MPZ0NIa3w-gI"/>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-2">
+<button class="bg-white/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span>Quick Saves</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow active:scale-95 transition-transform">
+                  Save
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Copenhagen
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Warm Oak &amp; Brushed Limestone Kitchen
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Norm Architects Inspo</span>
+<span class="text-[11px]">5.8k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 5: Botanical Herbarium (Tall 4:5) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Pressed botanical specimen herbarium pressed on handmade cotton rag paper with delicate handwritten taxonomy notes, soft shadow, warm vintage natural history print." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxB1SEgO0mHhSVj02H5p6zqX9WITz23EKSqPQBQ8j2-rMas_7tIxmLRX6yb9pYjeoYTeRMNxOCDkffRncQkyK2E7mkHW9Q7_Ui75TJpr06Sdi1KfqL1BQtgKYAsahZffsgkPElPvVdmO4zNcPeeElPSPrMsje4V5wndJMMJ5gZ1DqKIa3zC1zG1upQ6aXGMtC22uRu7ti5vu27BjjZhIk0Qj7LP8N4eWHPuqYKX_t1gas6xo3yyrG18NUqv7Khd2Ge9VEyz_fytDY"/>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-2">
+<button class="bg-white/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span>Moodboard: Studio</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow active:scale-95 transition-transform">
+                  Save
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Botanical
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="share">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Wild Fern Herbarium Study No. 12
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Botanica Editions</span>
+<span class="text-[11px]">1.2k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 6: Brutalist Concrete Facade (Portrait) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Brutalist textured concrete building facade with bold cantilevered geometric balconies, deep angular shadows under late afternoon golden sun, modernist architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1pOfPm5F6VUfmBktFsuZAVineyEU32sIO06OO87DeiS1fKGBT94gTl8LJr9UqwC2rElbGgpA75vC2aSbWfbCtLOON6ru39LP2QZePQuxqvSDZDu4AgxOUT648OAKMby0FjvV30dJZKA3c6SLhugrPD1Jp90E56LfM931n0M_Hg4BcaORt5czytoraFycEf41k46DIoPiFoFumMWjssqghL5qcSbyjSvMojLtojUSfv8AWlkiLnyUGPFZdrCcrjw5suLwjYCEOCGg"/>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-2">
+<button class="bg-white/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span>Architecture 2026</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow active:scale-95 transition-transform">
+                  Save
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Modernism
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Fluted Concrete Volumes &amp; Cantilevers
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Curated by Form &amp; Void</span>
+<span class="text-[11px]">2.7k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 7: Film Grain Fashion Lookbook (Tall 2:3) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300 ring-2 ring-primary-container/20">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Editorial 35mm film photography of a model wearing tailored oversized wool trench coat in autumnal morning mist, warm nostalgic tones, subtle film grain texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeDhQZ-oKTjHGbOQn-dv5qfW4iu-2HlnEdPqONOysSulLtwIvjWNzZBJWd6AkWBuTfaR99E2POfrZvCBXzx4Q7pjM2UHBr8O1_Bqu4duGvtzXbXT_ujNR7X9uL83hNaIVE1KW4A9HG9WZdUJ-Jt0TUhhzYL1TTTuNSYMAfHiGx8gGRY0WQDOeAVVX2M55M481EYI9xrCfybvQNcoTSKvUEjSlCpvg8jLNcqTIKgkrD6MerQCAJUfhX-dRzTvHnbm7hMI_43Bt6lBI"/>
+<!-- Second Saved State Badge Demonstration -->
+<div class="absolute top-3 left-3 z-10">
+<div class="bg-inverse-surface/90 backdrop-blur-md text-white text-[11px] font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">
+<span class="material-symbols-outlined text-[15px] text-secondary-container" data-icon="bookmark" style="font-variation-settings: 'FILL' 1;">bookmark</span>
+<span>Saved to Wardrobe Vision</span>
+</div>
+</div>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-end">
+<button class="bg-inverse-surface text-white text-xs font-headline font-semibold px-3 py-1.5 rounded-full shadow transition-colors hover:bg-black">
+                  Edit Board
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Editorial
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Wool Overcoat Study in Morning Mist
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">The Sartorial Journal</span>
+<span class="text-[11px]">6.4k saves</span>
+</div>
+</div>
+</article>
+<!-- ==================== PIN CARD 8: Wabi-Sabi Tea Corner (Square) ==================== -->
+<article class="pin-card-item group">
+<div class="relative bg-surface-container-low rounded-xl overflow-hidden shadow-xs hover:shadow-md transition-all duration-300">
+<div class="relative w-full overflow-hidden cursor-zoom-in">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-[1.02]" data-alt="Japanese wabi-sabi chashitsu tea room with tatami mats, paper shoji screen filtering soft warm light, hand-carved cedar wooden bowl, serene contemplative atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD-uNiYKchShByzVb04iIYkBCRwu8PbwMG-xdf4v7KIb7WksBCbbQ6_pXBGWaU4sRqjE519GFxIDDnQ1zlWLM6dsY7qqS2ufueIKqsohRgPwAsJSrtBgcG6l5jXLx1T0T-JJ7INwYpWdelrNtZMGkEMNv727C6nN33NuZJHM79A4H55XhyS7EfbvKG2snJTJhexSwV52tIiZfC7EfRRMgcvn2qhqoIriJaUbUCBdQnNyO0jPZc6rxyyni1vfYZWk2Oqec6IULyazE"/>
+<div class="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity duration-200 p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between gap-2">
+<button class="bg-white/90 backdrop-blur-md hover:bg-white text-on-surface text-xs font-headline font-semibold px-3 py-1.5 rounded-full flex items-center gap-1 shadow-sm">
+<span>Slow Living</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-white text-xs font-headline font-bold px-4 py-2 rounded-full shadow active:scale-95 transition-transform">
+                  Save
+                </button>
+</div>
+<div class="flex items-center justify-between">
+<span class="bg-white/95 text-on-surface text-[11px] font-headline font-medium px-2.5 py-1 rounded-full shadow-xs">
+                  Kyoto, Japan
+                </span>
+<div class="flex items-center gap-1.5">
+<button class="w-8 h-8 rounded-full bg-white text-on-surface flex items-center justify-center shadow hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined text-[16px]" data-icon="more_horiz">more_horiz</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-3 px-1">
+<h2 class="font-headline font-bold text-sm text-on-surface leading-snug line-clamp-1 group-hover:text-primary transition-colors">
+            Contemplative Tea Corner &amp; Shoji
+          </h2>
+<div class="flex items-center justify-between mt-1 text-xs text-outline">
+<span class="font-medium truncate">Curated by Kissa Journal</span>
+<span class="text-[11px]">3.9k saves</span>
+</div>
+</div>
+</article>
+</div>
+<!-- Infinite Scroll Loading Indicator / Discover More Feed Signal -->
+<div class="w-full py-12 flex flex-col items-center justify-center gap-3">
+<div class="flex items-center gap-2 text-outline">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-bounce"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-outline animate-bounce" style="animation-delay: 0.15s"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-surface-variant animate-bounce" style="animation-delay: 0.3s"></span>
+</div>
+<p class="text-xs font-headline font-semibold text-outline tracking-wide">
+        Loading more curated tactile discoveries...
+      </p>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: Footer (from JSON Specification)                        -->
+<!-- ========================================================================= -->
+<footer class="w-full py-6 px-4 md:px-8 flex flex-col md:flex-row justify-between items-center gap-4 bg-surface border-t border-surface-container-high text-xs font-body text-on-surface-variant">
+<!-- Brand Logo & Copyright from JSON -->
+<div class="flex items-center gap-3">
+<span class="text-sm font-headline font-bold text-primary">Pinpoint</span>
+<span class="text-outline">•</span>
+<span class="text-on-surface-variant">© 2026 Pinpoint. All rights reserved.</span>
+</div>
+<!-- Mandatory Footer Navigation Links from JSON: ["About", "Terms of Service", "Privacy Policy", "Help", "Discover"] -->
+<nav class="flex flex-wrap items-center justify-center gap-4 sm:gap-6 font-medium">
+<a class="text-on-surface-variant hover:text-on-surface underline transition-colors duration-150 active:opacity-80" href="#">
+        About
+      </a>
+<a class="text-on-surface-variant hover:text-on-surface underline transition-colors duration-150 active:opacity-80" href="#">
+        Terms of Service
+      </a>
+<a class="text-on-surface-variant hover:text-on-surface underline transition-colors duration-150 active:opacity-80" href="#">
+        Privacy Policy
+      </a>
+<a class="text-on-surface-variant hover:text-on-surface underline transition-colors duration-150 active:opacity-80" href="#">
+        Help
+      </a>
+<!-- Active link representation if Discover maps to visual discovery -->
+<a class="text-on-surface font-semibold hover:text-on-surface underline transition-colors duration-150 active:opacity-80" href="#">
+        Discover
+      </a>
+</nav>
+<!-- Language & Region Selector -->
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 text-xs text-on-surface-variant hover:text-on-surface transition-colors py-1 px-2 rounded hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[16px]" data-icon="language">language</span>
+<span>English (US)</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_drop_down">arrow_drop_down</span>
+</button>
+</div>
+</footer>
+<!-- Light Vanilla Script for Interactive Board Tag Selection & Micro-interactivity -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Dynamic Tag Filter Selection
+      const filterPills = document.querySelectorAll('section button.shrink-0');
+      filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+          filterPills.forEach(p => {
+            p.classList.remove('bg-on-surface', 'text-surface-container-lowest', 'font-semibold', 'shadow-sm');
+            p.classList.add('bg-surface-container-low', 'text-on-surface', 'font-medium');
+          });
+          pill.classList.remove('bg-surface-container-low', 'font-medium');
+          pill.classList.add('bg-on-surface', 'text-surface-container-lowest', 'font-semibold', 'shadow-sm');
+        });
+      });
+    });
+  </script>
+</body></html>

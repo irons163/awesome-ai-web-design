@@ -1,8 +1,715 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>VoltAgent · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#00d992;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/voltagent">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">VoltAgent · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#00d992"></span><code>#00d992</code></div><div class="swatch"><span style="background:#101010"></span><code>#101010</code></div><div class="swatch"><span style="background:#f2f2f2"></span><code>#f2f2f2</code></div><div class="swatch"><span style="background:#2fd6a1"></span><code>#2fd6a1</code></div><div class="swatch"><span style="background:#10b981"></span><code>#10b981</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SynapseCore — Agent Workflow Inspector</title>
+<!-- Inter & Mono Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-bright": "#3a3939",
+            "on-primary-container": "#005939",
+            "on-tertiary-fixed-variant": "#6c3a00",
+            "on-secondary-fixed-variant": "#135136",
+            "inverse-on-surface": "#313030",
+            "tertiary-container": "#ffac5f",
+            "on-secondary": "#003823",
+            "tertiary": "#ffd1ad",
+            "surface-tint": "#21e199",
+            "on-primary-fixed-variant": "#005234",
+            "on-surface": "#e5e2e1",
+            "on-primary": "#003823",
+            "on-tertiary": "#4c2700",
+            "inverse-surface": "#e5e2e1",
+            "primary-fixed": "#51ffb4",
+            "outline": "#859589",
+            "surface-container": "#201f1f",
+            "surface-container-highest": "#353534",
+            "primary-fixed-dim": "#21e199",
+            "on-error-container": "#ffdad6",
+            "background": "#101010",
+            "secondary-fixed": "#b2f0cc",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-dim": "#131313",
+            "secondary-fixed-dim": "#97d4b1",
+            "primary-container": "#00d992",
+            "surface-variant": "#1c1b1b",
+            "inverse-primary": "#006c47",
+            "on-primary-fixed": "#002112",
+            "on-secondary-container": "#86c2a0",
+            "error": "#ffb4ab",
+            "secondary": "#97d4b1",
+            "on-background": "#e5e2e1",
+            "tertiary-fixed-dim": "#ffb778",
+            "surface-container-high": "#2a2a2a",
+            "on-secondary-fixed": "#002112",
+            "surface-container-low": "#161616",
+            "surface": "#101010",
+            "secondary-container": "#135136",
+            "outline-variant": "#3d3a39",
+            "on-tertiary-fixed": "#2e1500",
+            "on-tertiary-container": "#754000",
+            "on-error": "#690005",
+            "primary": "#00d992",
+            "error-container": "#93000a",
+            "tertiary-fixed": "#ffdcc1",
+            "on-surface-variant": "#bacbbe"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "SFMono-Regular", "Menlo", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #101010;
+      color: #e5e2e1;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      vertical-align: middle;
+      display: inline-block;
+      line-height: 1;
+    }
+    /* Voltagent style hairline border & subtle scanline */
+    .hairline-border {
+      border: 1px solid #3d3a39;
+    }
+    .hairline-dashed {
+      border-style: dashed;
+      border-color: rgba(79, 93, 117, 0.4);
+    }
+    /* Custom scrollbar for technical logs */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a2a;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3d3a39;
+    }
+    @keyframes pulse-emerald {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.9); }
+    }
+    .animate-beacon {
+      animation: pulse-emerald 1.8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor-stream {
+      display: inline-block;
+      width: 7px;
+      height: 14px;
+      background-color: #00d992;
+      vertical-align: middle;
+      animation: blink 0.9s infinite;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body selection:bg-primary-container selection:text-on-primary">
+<!-- TOP APP BAR (Shared Component JSON: TopNavBar) -->
+<header class="docked full-width top-0 sticky z-40 bg-surface dark:bg-surface border-b border-outline-variant flat no shadows hairline border">
+<div class="flex justify-between items-center w-full px-6 py-3 border-b border-outline-variant">
+<!-- Brand & Product Identification -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-sm bg-surface-container-low border border-outline-variant flex items-center justify-center relative overflow-hidden group">
+<div class="absolute inset-0 bg-primary/10 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<span class="font-headline text-base font-semibold text-on-surface dark:text-on-surface tracking-tight">SynapseCore</span>
+</div>
+<div class="h-4 w-px bg-outline-variant"></div>
+<!-- Search Bar on left -->
+<div class="relative w-64 hidden lg:block">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-sm">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-sm pl-8 pr-3 py-1.5 text-xs text-on-surface placeholder:text-outline font-mono focus:outline-none focus:border-primary transition-colors" placeholder="Search run traces, nodes, tools..." type="text"/>
+</div>
+<!-- Navigation Links (Runs active) -->
+<nav class="hidden md:flex items-center gap-5 font-headline text-body-sm font-normal">
+<a class="text-primary dark:text-primary font-medium border-b-2 border-primary pb-1" href="#">Runs</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">Agents</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">Tools</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">Evaluations</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface dark:hover:text-on-surface transition-colors" href="#">Logs</a>
+</nav>
+</div>
+<!-- Execution Status Pill & Action Buttons -->
+<div class="flex items-center gap-3">
+<!-- Live Run Pill -->
+<div class="flex items-center gap-2 bg-surface-container-low border border-outline-variant px-2.5 py-1 rounded-sm text-xs font-mono">
+<span class="w-2 h-2 rounded-full bg-primary animate-beacon"></span>
+<span class="text-on-surface font-medium">Running</span>
+<span class="text-outline">Step 4/6</span>
+</div>
+<div class="h-4 w-px bg-outline-variant hidden sm:block"></div>
+<!-- Secondary Action: Cancel Run -->
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-on-surface-variant hover:text-on-surface border border-outline-variant hover:bg-surface-container rounded-sm transition-colors active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm">cancel</span>
+<span>Cancel Run</span>
+</button>
+<!-- Primary Action: Rerun Workflow -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold bg-primary text-on-primary rounded-sm hover:bg-primary-soft transition-all active:scale-[0.98]">
+<span class="material-symbols-outlined text-sm">replay</span>
+<span>Rerun Workflow</span>
+</button>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1 border-l border-outline-variant pl-2 ml-1 text-on-surface-variant">
+<button class="p-1.5 hover:bg-surface-container rounded-sm hover:text-on-surface transition-colors" title="Terminal View">
+<span class="material-symbols-outlined text-base">terminal</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container rounded-sm hover:text-on-surface transition-colors" title="Refresh">
+<span class="material-symbols-outlined text-base">refresh</span>
+</button>
+<button class="p-1.5 hover:bg-surface-container rounded-sm hover:text-on-surface transition-colors" title="Settings">
+<span class="material-symbols-outlined text-base">settings</span>
+</button>
+</div>
+<!-- Engineer Avatar -->
+<div class="w-7 h-7 rounded-sm border border-outline-variant bg-surface-container-high flex items-center justify-center font-mono text-xs text-primary font-semibold" title="Lead Agent Engineer Avatar">
+          LE
+        </div>
+</div>
+</div>
+</header>
+<!-- SECONDARY RUN METRICS BAR (Voltagent Styled Hairline Strip) -->
+<section class="w-full bg-surface-container-lowest border-b border-outline-variant px-6 py-2.5 flex flex-wrap items-center justify-between gap-4 text-xs font-mono">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans font-semibold">Run ID:</span>
+<span class="text-on-surface bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant text-[11px] font-mono text-primary">run_4f89d02c_prod</span>
+<span class="inline-flex items-center gap-1 text-[11px] text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+          Production • us-east-1
+        </span>
+</div>
+<div class="hidden xl:flex items-center gap-6 text-on-surface-variant">
+<div>
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans">Duration:</span>
+<span class="text-on-surface ml-1 font-semibold text-primary">14.82s</span>
+</div>
+<div>
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans">Total Tokens:</span>
+<span class="text-on-surface ml-1 font-semibold">3,480</span>
+</div>
+<div>
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans">Est. Cost:</span>
+<span class="text-on-surface ml-1 font-semibold text-secondary">$0.0142</span>
+</div>
+<div>
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans">Model Hybrid:</span>
+<span class="text-on-surface ml-1 bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant text-[10px]">claude-3-7-sonnet + gpt-4o</span>
+</div>
+</div>
+</div>
+<!-- Quick Tool Action buttons -->
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant rounded-sm transition-colors">
+<span class="material-symbols-outlined text-xs">file_download</span>
+        Export Trace JSON
+      </button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface border border-outline-variant rounded-sm transition-colors">
+<span class="material-symbols-outlined text-xs">pause</span>
+        Pause
+      </button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] bg-surface-container-low hover:bg-error/10 text-error hover:border-error/40 border border-outline-variant rounded-sm transition-colors">
+<span class="material-symbols-outlined text-xs">block</span>
+        Abort
+      </button>
+</div>
+</section>
+<!-- MAIN MULTI-PANE DEVELOPER WORKBENCH CANVAS -->
+<main class="flex-1 flex overflow-hidden w-full max-w-[1920px] mx-auto">
+<!-- LEFT PANE: RUN TIMELINE & STEP TREE -->
+<aside class="w-80 lg:w-96 flex-shrink-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col h-[calc(100vh-6.25rem)] overflow-hidden">
+<!-- Timeline Header & Filter -->
+<div class="p-3.5 border-b border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">account_tree</span>
+<span class="text-xs font-semibold tracking-wider uppercase text-on-surface font-headline">Execution Graph</span>
+</div>
+<span class="text-[10px] font-mono text-outline bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant">6 Nodes</span>
+</div>
+<!-- Filter Input -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-xs">filter_list</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-sm pl-8 pr-3 py-1.5 text-xs text-on-surface placeholder:text-outline font-mono focus:outline-none focus:border-primary transition-colors" placeholder="Filter steps, tools, agents..." type="text"/>
+</div>
+<!-- Step Status Badges Summary -->
+<div class="flex items-center gap-2 mt-2.5 text-[10px] font-mono">
+<span class="inline-flex items-center gap-1 text-on-surface-variant bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span> 3 Done
+          </span>
+<span class="inline-flex items-center gap-1 text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-beacon"></span> 1 Running
+          </span>
+<span class="inline-flex items-center gap-1 text-outline bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-surface-container-highest"></span> 2 Queued
+          </span>
+<span class="inline-flex items-center gap-1 text-tertiary-fixed-dim bg-tertiary-container/10 px-1.5 py-0.5 rounded border border-tertiary-container/30">
+            1 Retried
+          </span>
+</div>
+</div>
+<!-- Timeline Scrollable Step List -->
+<div class="flex-1 overflow-y-auto p-3 space-y-2">
+<!-- Step 1: UserIntentClassifier (Completed) -->
+<div class="group relative rounded-sm p-3 bg-surface-container-low border border-outline-variant hover:border-outline transition-all cursor-pointer">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-surface-container border border-outline-variant flex items-center justify-center text-outline text-xs mt-0.5">
+<span class="material-symbols-outlined text-xs text-secondary">check</span>
+</div>
+<div>
+<div class="text-xs font-semibold text-on-surface font-headline group-hover:text-primary transition-colors">1. UserIntentClassifier</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">Agent • Zero-shot classification</div>
+</div>
+</div>
+<span class="text-[10px] font-mono text-outline">420ms</span>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/60 flex items-center justify-between text-[10px] font-mono text-outline">
+<span>Tokens: 142</span>
+<span class="text-secondary font-medium">99.4% confidence</span>
+</div>
+</div>
+<!-- Step 2: VectorContextRetriever (Completed with Sub-action) -->
+<div class="group relative rounded-sm p-3 bg-surface-container-low border border-outline-variant hover:border-outline transition-all cursor-pointer">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-surface-container border border-outline-variant flex items-center justify-center text-outline text-xs mt-0.5">
+<span class="material-symbols-outlined text-xs text-secondary">check</span>
+</div>
+<div>
+<div class="text-xs font-semibold text-on-surface font-headline group-hover:text-primary transition-colors">2. VectorContextRetriever</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">Embedding: text-embedding-3-small</div>
+</div>
+</div>
+<span class="text-[10px] font-mono text-outline">1.14s</span>
+</div>
+<!-- Sub-action pill -->
+<div class="mt-2 flex items-center gap-1.5 bg-surface-container-lowest p-1.5 rounded border border-outline-variant text-[10px] font-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-xs text-primary">hub</span>
+<span class="text-primary">vector_search</span>
+<span class="text-outline">k=8 documents (0.89 cosine)</span>
+</div>
+<div class="mt-2 pt-1.5 flex items-center justify-between text-[10px] font-mono text-outline">
+<span>Tokens: 1,280</span>
+<span>index: prod_knowledge_v3</span>
+</div>
+</div>
+<!-- Step 3: QueryPlannerAgent (Completed) -->
+<div class="group relative rounded-sm p-3 bg-surface-container-low border border-outline-variant hover:border-outline transition-all cursor-pointer">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-surface-container border border-outline-variant flex items-center justify-center text-outline text-xs mt-0.5">
+<span class="material-symbols-outlined text-xs text-secondary">check</span>
+</div>
+<div>
+<div class="text-xs font-semibold text-on-surface font-headline group-hover:text-primary transition-colors">3. QueryPlannerAgent</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">ReAct Loop • Sub-task DAG</div>
+</div>
+</div>
+<span class="text-[10px] font-mono text-outline">2.85s</span>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant/60 flex items-center justify-between text-[10px] font-mono text-outline">
+<span>Tokens: 890</span>
+<span class="text-on-surface-variant">Generated 2 parallel tasks</span>
+</div>
+</div>
+<!-- Step 4: ToolExecutionLoop (ACTIVE / SELECTED) -->
+<div class="relative rounded-sm p-3 bg-surface-container-high border-2 border-primary shadow-[0_0_15px_rgba(0,217,146,0.15)] cursor-pointer">
+<!-- Neon Indicator Badge -->
+<div class="absolute -left-[2px] top-0 bottom-0 w-1 bg-primary rounded-l-sm"></div>
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-primary/20 border border-primary flex items-center justify-center text-primary text-xs mt-0.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-beacon"></span>
+</div>
+<div>
+<div class="text-xs font-bold text-on-surface font-headline flex items-center gap-1.5">
+<span>4. ToolExecutionLoop</span>
+<span class="text-[9px] bg-primary text-on-primary font-mono font-bold px-1.5 py-0.2 rounded">ACTIVE</span>
+</div>
+<div class="text-[10px] text-primary font-mono mt-0.5">web_search &amp; execute_sql</div>
+</div>
+</div>
+<span class="text-[10px] font-mono font-bold text-primary">4.62s</span>
+</div>
+<!-- Active Invocation Preview -->
+<div class="mt-2.5 bg-surface-container-lowest p-2 rounded border border-outline-variant text-[10px] font-mono space-y-1">
+<div class="flex items-center justify-between text-on-surface">
+<span class="text-primary font-semibold">⚡ execute_sql_analytics_query</span>
+<span class="text-secondary text-[9px]">200 OK</span>
+</div>
+<div class="text-outline truncate">analytics_replica_02 • 5 rows returned</div>
+</div>
+<div class="mt-2 pt-2 border-t border-outline-variant flex items-center justify-between text-[10px] font-mono">
+<span class="text-primary">Tokens: 1,168 in flight</span>
+<span class="text-outline">Live streaming</span>
+</div>
+</div>
+<!-- Prior Retry/Failure Annotation -->
+<div class="p-2 rounded bg-tertiary-container/10 border border-tertiary-container/30 text-[11px] font-mono text-tertiary flex items-start gap-2">
+<span class="material-symbols-outlined text-sm text-tertiary-fixed-dim mt-0.5">warning</span>
+<div>
+<span class="font-semibold text-tertiary-fixed-dim">Notice: DB timeout on retry 1</span>
+<p class="text-[10px] text-outline mt-0.5">Primary cluster latency spiked &gt;5000ms. Rerouted to replica_02 successfully.</p>
+</div>
+</div>
+<!-- Step 5: ResponseSynthesizer (Waiting) -->
+<div class="rounded-sm p-3 bg-surface-container-low/50 border border-outline-variant/60 opacity-60">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-outline text-xs mt-0.5">
+<span class="material-symbols-outlined text-xs">hourglass_empty</span>
+</div>
+<div>
+<div class="text-xs font-medium text-on-surface font-headline">5. ResponseSynthesizer</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">Prompt LLM with aggregated payload</div>
+</div>
+</div>
+<span class="text-[10px] font-mono text-outline">Queued</span>
+</div>
+</div>
+<!-- Step 6: SafetyGuardrailValidator (Waiting) -->
+<div class="rounded-sm p-3 bg-surface-container-low/50 border border-outline-variant/60 opacity-60">
+<div class="flex items-start justify-between">
+<div class="flex items-start gap-2.5">
+<div class="w-5 h-5 rounded-sm bg-surface-container-lowest border border-outline-variant flex items-center justify-center text-outline text-xs mt-0.5">
+<span class="material-symbols-outlined text-xs">verified_user</span>
+</div>
+<div>
+<div class="text-xs font-medium text-on-surface font-headline">6. SafetyGuardrailValidator</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">Llama-Guard-3 check • PII Scrubber</div>
+</div>
+</div>
+<span class="text-[10px] font-mono text-outline">Queued</span>
+</div>
+</div>
+</div>
+<!-- Left Pane Footer Status -->
+<div class="p-3 border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between text-[11px] font-mono text-outline">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+          Telemetry link active
+        </span>
+<a class="text-primary hover:underline flex items-center gap-1" href="#">
+          DAG View <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</aside>
+<!-- RIGHT/MAIN PANE: ACTIVE STEP DETAILS & DEEP INSPECTOR -->
+<section class="flex-1 flex flex-col h-[calc(100vh-6.25rem)] overflow-y-auto bg-surface">
+<!-- Selected Step Header Strip -->
+<div class="p-5 border-b border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-primary text-on-primary rounded-sm uppercase tracking-wider">Node 04</span>
+<h1 class="text-lg font-bold text-on-surface font-headline flex items-center gap-2">
+                ToolExecutionLoop
+                <span class="text-xs font-normal text-outline font-mono">(Agentic Tool Call Pattern)</span>
+</h1>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-sm bg-primary/10 border border-primary/30 text-primary text-xs font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-beacon"></span>
+<span>Executing Tool Call</span>
+</div>
+</div>
+<p class="text-xs text-outline font-mono mt-1.5">
+              Thread ID: <span class="text-on-surface">th_9921_alpha</span> • Model: <span class="text-on-surface">claude-3-7-sonnet</span> • Temperature: <span class="text-on-surface">0.20</span> • Top_P: <span class="text-on-surface">0.95</span>
+</p>
+</div>
+<!-- Context Window Usage Gauge & Duration Timer -->
+<div class="flex items-center gap-6 bg-surface-container-low px-4 py-2 rounded-sm border border-outline-variant">
+<div>
+<div class="text-[10px] uppercase tracking-wider text-outline font-sans">Step Duration</div>
+<div class="text-sm font-mono font-bold text-primary">00:04.62</div>
+</div>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="w-36">
+<div class="flex justify-between text-[10px] font-mono text-outline mb-1">
+<span>Context Window</span>
+<span class="text-on-surface font-semibold">68% (136k / 200k)</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-none overflow-hidden">
+<div class="bg-primary h-full w-[68%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Tabs (Execution Inspector, Tool Call Active, Memory, Traces) -->
+<div class="flex items-center gap-6 mt-5 border-t border-outline-variant/60 pt-3 text-xs font-headline">
+<button class="text-primary font-medium border-b-2 border-primary pb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">build_circle</span>
+            Tool Call (Active)
+            <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors pb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">tune</span>
+            Execution Inspector
+          </button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors pb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">memory</span>
+            Memory &amp; State Store
+          </button>
+<button class="text-on-surface-variant hover:text-on-surface transition-colors pb-2 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">data_object</span>
+            Raw Trace JSON
+          </button>
+</div>
+</div>
+<!-- Inspector Content Body -->
+<div class="p-6 space-y-6">
+<!-- Latency Breakdown Bar Component -->
+<div class="bg-surface-container-low border border-outline-variant rounded-sm p-3.5">
+<div class="flex items-center justify-between text-xs font-mono mb-2">
+<span class="text-outline uppercase text-[10px] tracking-wider font-sans font-semibold">Step Latency Waterfall</span>
+<span class="text-on-surface font-semibold">Total: 4,620ms</span>
+</div>
+<!-- Bar visual -->
+<div class="w-full h-3 bg-surface-container flex rounded-none overflow-hidden border border-outline-variant">
+<div class="h-full bg-secondary-container" style="width: 4.5%" title="TTFT: 210ms (4.5%)"></div>
+<div class="h-full bg-outline-variant" style="width: 46.3%" title="LLM Inference: 2,140ms (46.3%)"></div>
+<div class="h-full bg-primary" style="width: 49.2%" title="Tool Execution: 2,270ms (49.2%)"></div>
+</div>
+<div class="flex flex-wrap items-center gap-6 mt-2.5 text-[11px] font-mono">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-secondary-container rounded-xs"></span>
+<span class="text-outline">TTFT:</span>
+<span class="text-on-surface font-medium">210ms</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-outline-variant rounded-xs"></span>
+<span class="text-outline">LLM Inference:</span>
+<span class="text-on-surface font-medium">2,140ms</span>
+</div>
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 bg-primary rounded-xs"></span>
+<span class="text-outline">Tool Execution:</span>
+<span class="text-primary font-bold">2,270ms</span>
+</div>
+</div>
+</div>
+<!-- Bento Grid: Input Prompt Accordion & Streaming Output -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- System Prompt & Instructions (Left Bento Cell) -->
+<div class="bg-surface-container-low border border-outline-variant rounded-sm overflow-hidden flex flex-col">
+<div class="px-4 py-2.5 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-outline">description</span>
+<span class="text-xs font-semibold text-on-surface uppercase tracking-wider font-mono">Agent Directives &amp; Prompt Context</span>
+</div>
+<span class="text-[10px] font-mono text-outline">tokens: 540</span>
+</div>
+<div class="p-4 font-mono text-xs text-on-surface-variant space-y-3 overflow-y-auto max-h-56 bg-surface-container-lowest">
+<div>
+<span class="text-primary font-semibold">[System Instruction]</span>
+<p class="text-on-surface mt-1 leading-relaxed text-[11px]">
+                  "You are the SynapseCore Analytics Agent. Your goal is to inspect user cohort telemetry across the Postgres replica, calculate 30-day retention averages, and extract high-performing user cohorts for downstream reporting. Invoke `execute_sql_analytics_query` with sanitized SQL."
+                </p>
+</div>
+<div class="pt-2 border-t border-outline-variant/40">
+<span class="text-outline font-semibold">[Injected Variables]</span>
+<div class="mt-1 text-[11px] text-on-surface space-y-0.5">
+<div>target_date_threshold: <span class="text-secondary">'2025-01-01'</span></div>
+<div>cohort_granularity: <span class="text-secondary">'weekly_rollup'</span></div>
+<div>max_rows: <span class="text-secondary">5</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Reasoning Trace & Streaming Thought (Right Bento Cell) -->
+<div class="bg-surface-container-low border border-outline-variant rounded-sm overflow-hidden flex flex-col">
+<div class="px-4 py-2.5 bg-surface-container border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">psychology</span>
+<span class="text-xs font-semibold text-on-surface uppercase tracking-wider font-mono">Agent Reasoning Stream</span>
+</div>
+<span class="text-[10px] font-mono text-primary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-beacon"></span>
+                Generating thought...
+              </span>
+</div>
+<div class="p-4 font-mono text-xs space-y-2 bg-surface-container-lowest flex-1 overflow-y-auto max-h-56">
+<p class="text-outline leading-relaxed text-[11px]">
+<span class="text-on-surface-variant font-semibold">1. Thought:</span> "The user requests an aggregation of retention cohorts starting Q1 2025. I have retrieved schema definitions from `prod_knowledge_v3`. The relevant table is `cohort_metrics` with column `retention_d30`."
+              </p>
+<p class="text-outline leading-relaxed text-[11px]">
+<span class="text-on-surface-variant font-semibold">2. Action:</span> "Formulating target SQL query with descending sort order on retention, limited to 5 records for optimal token utilization."
+              </p>
+<div class="p-2.5 rounded bg-surface-container-low border border-primary/30 text-on-surface text-[11px] leading-relaxed">
+<span class="text-primary font-semibold">Synthesizing SQL output with prior user cohort trend data...</span>
+<span class="cursor-stream"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- HIGHLIGHT SECTION: TOOL CALL INVOCATION & RESULT ACCORDION -->
+<div class="border border-outline-variant rounded-sm overflow-hidden bg-surface-container-lowest">
+<!-- Tool Invocation Master Header -->
+<div class="px-5 py-3.5 bg-surface-container-low border-b border-outline-variant flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 rounded-sm bg-primary/10 border border-primary flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-base">database</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-xs font-mono font-bold text-primary">execute_sql_analytics_query</span>
+<span class="px-2 py-0.5 text-[9px] font-mono font-bold bg-secondary-container text-secondary rounded border border-secondary/30">SUCCESS 200 OK</span>
+</div>
+<div class="text-[10px] text-outline font-mono mt-0.5">Execution target: Postgres cluster (replica_02) • Read-only connection</div>
+</div>
+</div>
+<div class="flex items-center gap-4 text-xs font-mono">
+<span class="text-outline">Latency: <span class="text-on-surface font-semibold">184ms</span></span>
+<span class="text-outline">Rows: <span class="text-primary font-bold">5</span></span>
+<button class="px-2.5 py-1 text-[11px] bg-surface-container hover:bg-surface-container-high border border-outline-variant text-on-surface rounded-sm transition-colors flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">content_copy</span>
+                Copy Invocation
+              </button>
+</div>
+</div>
+<!-- Tool Input Parameters (JSON Inspector) -->
+<div class="border-b border-outline-variant">
+<div class="px-5 py-2 bg-surface-container flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2 text-on-surface font-semibold text-[11px]">
+<span class="material-symbols-outlined text-xs text-outline">input</span>
+                TOOL CALL ARGUMENTS (JSON Payload)
+              </div>
+<span class="text-[10px] text-outline">schema: v2.1-strict</span>
+</div>
+<div class="p-4 bg-surface-container-lowest overflow-x-auto">
+<pre class="font-mono text-xs leading-relaxed"><span class="text-outline">{</span>
+  <span class="text-secondary font-medium">"query"</span><span class="text-outline">:</span> <span class="text-primary">"SELECT user_cohort, AVG(retention_d30) as avg_retention FROM cohort_metrics WHERE date &gt;= '2025-01-01' GROUP BY user_cohort ORDER BY avg_retention DESC LIMIT 5;"</span><span class="text-outline">,</span>
+  <span class="text-secondary font-medium">"database_cluster"</span><span class="text-outline">:</span> <span class="text-primary">"analytics_replica_02"</span><span class="text-outline">,</span>
+  <span class="text-secondary font-medium">"timeout_ms"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">5000</span><span class="text-outline">,</span>
+  <span class="text-secondary font-medium">"cache_hit"</span><span class="text-outline">:</span> <span class="text-error">false</span>
+<span class="text-outline">}</span></pre>
+</div>
+</div>
+<!-- Tool Return Payload (JSON Result Accordion) -->
+<div>
+<div class="px-5 py-2 bg-surface-container flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2 text-on-surface font-semibold text-[11px]">
+<span class="material-symbols-outlined text-xs text-secondary">output</span>
+                TOOL RETURN DATA (Structured Output)
+              </div>
+<div class="flex items-center gap-3 text-[10px] font-mono">
+<span class="text-outline">Size: <span class="text-on-surface">412 B</span></span>
+<span class="text-secondary font-semibold">Valid JSON</span>
+</div>
+</div>
+<div class="p-4 bg-surface-container-lowest overflow-x-auto">
+<pre class="font-mono text-xs leading-relaxed"><span class="text-outline">{</span>
+  <span class="text-secondary font-medium">"rows_returned"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">5</span><span class="text-outline">,</span>
+  <span class="text-secondary font-medium">"execution_time_ms"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">184</span><span class="text-outline">,</span>
+  <span class="text-secondary font-medium">"data"</span><span class="text-outline">: [</span>
+    <span class="text-outline">{</span>
+      <span class="text-secondary font-medium">"user_cohort"</span><span class="text-outline">:</span> <span class="text-primary">"2025_w03_power_users"</span><span class="text-outline">,</span>
+      <span class="text-secondary font-medium">"avg_retention"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">0.842</span>
+    <span class="text-outline">},</span>
+    <span class="text-outline">{</span>
+      <span class="text-secondary font-medium">"user_cohort"</span><span class="text-outline">:</span> <span class="text-primary">"2025_w02_developers"</span><span class="text-outline">,</span>
+      <span class="text-secondary font-medium">"avg_retention"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">0.791</span>
+    <span class="text-outline">},</span>
+    <span class="text-outline">{</span>
+      <span class="text-secondary font-medium">"user_cohort"</span><span class="text-outline">:</span> <span class="text-primary">"2025_w01_enterprise_tier"</span><span class="text-outline">,</span>
+      <span class="text-secondary font-medium">"avg_retention"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">0.748</span>
+    <span class="text-outline">},</span>
+    <span class="text-outline">{</span>
+      <span class="text-secondary font-medium">"user_cohort"</span><span class="text-outline">:</span> <span class="text-primary">"2025_w04_api_integrators"</span><span class="text-outline">,</span>
+      <span class="text-secondary font-medium">"avg_retention"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">0.715</span>
+    <span class="text-outline">},</span>
+    <span class="text-outline">{</span>
+      <span class="text-secondary font-medium">"user_cohort"</span><span class="text-outline">:</span> <span class="text-primary">"2025_w05_self_serve"</span><span class="text-outline">,</span>
+      <span class="text-secondary font-medium">"avg_retention"</span><span class="text-outline">:</span> <span class="text-tertiary-fixed-dim">0.680</span>
+    <span class="text-outline">}</span>
+  <span class="text-outline">]</span>
+<span class="text-outline">}</span></pre>
+</div>
+</div>
+</div>
+<!-- Voltagent Hairline Divider Rhythm Cue -->
+<div class="w-full border-t hairline-dashed my-2"></div>
+<!-- Live Step Console & Telemetry Log Stream -->
+<div class="bg-surface-container-low border border-outline-variant rounded-sm p-4">
+<div class="flex items-center justify-between mb-3 text-xs font-mono">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-xs text-primary">terminal</span>
+<span class="text-on-surface font-semibold uppercase tracking-wider">Live Agent Telemetry Stream</span>
+</div>
+<div class="flex items-center gap-3 text-outline text-[11px]">
+<span>level: DEBUG</span>
+<span>encoding: UTF-8</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded font-mono text-[11px] space-y-1.5 border border-outline-variant">
+<div class="text-outline">
+<span class="text-outline-variant">[14:22:04.102]</span> <span class="text-primary">INFO</span> [runner.core] Dispatched step 4 to sandbox worker node `pod-agent-us-east-1a-9`
+            </div>
+<div class="text-outline">
+<span class="text-outline-variant">[14:22:05.312]</span> <span class="text-primary">INFO</span> [tool.sql] Initializing connection pool to Postgres `analytics_replica_02`
+            </div>
+<div class="text-outline">
+<span class="text-outline-variant">[14:22:05.496]</span> <span class="text-secondary">DEBUG</span> [tool.sql] Query executed successfully in 184ms with 5 rows returned.
+            </div>
+<div class="text-outline">
+<span class="text-outline-variant">[14:22:06.120]</span> <span class="text-primary">INFO</span> [agent.loop] Invoking parallel tool `web_search` for industry cohort benchmarks...
+            </div>
+<div class="text-on-surface flex items-center gap-2">
+<span class="text-outline-variant">[14:22:06.742]</span>
+<span class="text-primary font-semibold">STREAM</span>
+<span>Synthesizing output token buffer [id: tok_stream_88192]</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-beacon"></span>
+</div>
+</div>
+</div>
+</div>
+<!-- Main Pane Bottom Persistent Bar -->
+<div class="mt-auto border-t border-outline-variant bg-surface-container-lowest px-6 py-2.5 flex items-center justify-between text-xs font-mono text-outline">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1 text-on-surface">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+            Cluster: synapse-cluster-prod-04
+          </span>
+<span class="text-outline">Memory: 412MB / 1024MB</span>
+<span class="text-outline">Worker PID: 8812</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="hover:text-on-surface cursor-pointer">Keyboard shortcuts (?)</span>
+<span>•</span>
+<span class="hover:text-on-surface cursor-pointer">Raw gRPC Stream</span>
+</div>
+</div>
+</section>
+</main>
+</body></html>

@@ -1,8 +1,666 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Resend · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#fcfdff;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/resend">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Resend · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#fcfdff"></span><code>#fcfdff</code></div><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#a1a4a5"></span><code>#a1a4a5</code></div><div class="swatch"><span style="background:#888e90"></span><code>#888e90</code></div><div class="swatch"><span style="background:#464a4d"></span><code>#464a4d</code></div><div class="swatch"><span style="background:#0a0a0c"></span><code>#0a0a0c</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Domaine Display</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CourierX — Email Delivery &amp; Activity Logs</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Fonts: Inter & Geist Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600&amp;family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-container": "#e4e4c7",
+            "primary-fixed-dim": "#c5c7c9",
+            "outline-variant": "#444749",
+            "on-error-container": "#ffdad6",
+            "surface-container-lowest": "#0e0e0e",
+            "inverse-primary": "#5c5f60",
+            "secondary-fixed": "#e3e2e2",
+            "on-secondary": "#303031",
+            "surface-tint": "#c5c7c9",
+            "on-tertiary-fixed-variant": "#474833",
+            "on-surface-variant": "#c4c7c9",
+            "on-tertiary-fixed": "#1b1d0b",
+            "on-primary-fixed-variant": "#444749",
+            "background": "#131313",
+            "on-tertiary": "#30321e",
+            "surface-container-highest": "#353535",
+            "primary": "#ffffff",
+            "on-secondary-fixed": "#1b1c1c",
+            "inverse-on-surface": "#303030",
+            "on-tertiary-container": "#65664f",
+            "on-surface": "#e2e2e2",
+            "error": "#ffb4ab",
+            "primary-container": "#e1e2e4",
+            "on-background": "#e2e2e2",
+            "primary-fixed": "#e1e2e4",
+            "surface": "#131313",
+            "secondary-container": "#464747",
+            "on-secondary-fixed-variant": "#464747",
+            "surface-variant": "#353535",
+            "tertiary-fixed": "#e4e4c7",
+            "on-primary-fixed": "#191c1e",
+            "on-primary": "#2e3132",
+            "outline": "#8e9193",
+            "surface-bright": "#393939",
+            "secondary": "#c7c6c7",
+            "on-secondary-container": "#b6b5b5",
+            "surface-dim": "#131313",
+            "tertiary": "#ffffff",
+            "surface-container-low": "#1b1b1b",
+            "secondary-fixed-dim": "#c7c6c7",
+            "inverse-surface": "#e2e2e2",
+            "tertiary-fixed-dim": "#c8c8ac",
+            "on-error": "#690005",
+            "surface-container-high": "#2a2a2a",
+            "surface-container": "#1f1f1f",
+            "on-primary-container": "#626566",
+            "error-container": "#93000a"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["Geist Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #27272a;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3f3f46;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased font-body min-h-screen selection:bg-surface-container-highest selection:text-primary">
+<!-- ================= TOP NAV BAR (Shared Component) ================= -->
+<header class="flex justify-between items-center w-full px-6 h-16 border-b border-outline-variant bg-background fixed top-0 left-0 right-0 z-40">
+<div class="flex items-center space-x-6">
+<!-- Logo & Environment Switcher -->
+<div class="flex items-center space-x-3">
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded bg-primary flex items-center justify-center text-on-primary font-bold text-xs">
+            CX
+          </div>
+<span class="font-display text-base font-semibold tracking-tight text-primary">CourierX</span>
+</div>
+<span class="text-outline-variant text-xs">/</span>
+<div class="flex items-center space-x-1.5 text-xs text-secondary hover:text-primary cursor-pointer px-2 py-1 rounded hover:bg-surface-container transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block"></span>
+<span class="font-mono text-xs text-on-surface">acme-production</span>
+<span class="text-outline text-[11px]">/ us-east-1</span>
+<span class="material-symbols-outlined text-[14px] text-outline">unfold_more</span>
+</div>
+</div>
+<!-- Search Bar -->
+<div class="relative w-80 hidden md:block">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[16px]">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant text-xs text-primary placeholder-outline pl-8 pr-12 py-1.5 rounded focus:outline-none focus:border-outline focus:ring-0 transition-colors font-body" placeholder="Search logs, message ID, or recipient" type="text"/>
+<kbd class="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] text-outline bg-surface-container border border-outline-variant px-1.5 py-0.5 rounded font-mono">⌘K</kbd>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center space-x-5 text-xs font-label">
+<a class="text-primary font-medium border-b border-primary pb-1" href="#">Emails</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Templates</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Domains</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Webhooks</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Analytics</a>
+<a class="text-on-surface-variant font-normal hover:text-primary transition-colors" href="#">Settings</a>
+</nav>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center space-x-3">
+<!-- Status Badge -->
+<div class="hidden sm:flex items-center space-x-2 px-2.5 py-1 rounded-full bg-surface-container border border-outline-variant text-[11px] text-secondary">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span class="font-body">All systems operational</span>
+</div>
+<a class="text-xs text-on-surface-variant hover:text-primary font-label px-2 py-1 transition-colors hidden md:inline-block" href="#">
+        Documentation
+      </a>
+<button class="bg-primary text-on-primary font-headline text-xs font-medium px-3 py-1.5 rounded hover:bg-primary-container transition-colors flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[14px]">add</span>
+<span>Create API Key</span>
+</button>
+<!-- Trailing icon actions -->
+<button class="text-on-surface-variant hover:text-primary p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+<!-- Profile Avatar -->
+<div class="w-7 h-7 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center cursor-pointer text-xs font-mono text-primary">
+        AP
+      </div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- ================= SIDE NAV BAR (Shared Component) ================= -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 flex flex-col justify-between p-3 border-r border-outline-variant bg-surface-container-lowest z-30">
+<div class="flex flex-col space-y-4">
+<!-- Workspace Switcher / Header -->
+<div class="flex items-center justify-between px-2.5 py-2 rounded-lg bg-surface-container border border-outline-variant">
+<div class="flex items-center space-x-2.5">
+<div class="w-6 h-6 rounded bg-surface-container-highest flex items-center justify-center font-mono text-xs text-primary">
+              ⚡
+            </div>
+<div class="flex flex-col">
+<span class="font-headline text-sm font-bold text-primary">Production</span>
+<span class="font-body text-[11px] text-outline leading-none mt-0.5 font-mono">acme-prod-us-east</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-outline">unfold_more</span>
+</div>
+<!-- Primary CTA in Sidebar -->
+<button class="w-full bg-surface-container text-primary hover:bg-surface-container-high border border-outline-variant text-xs font-headline font-medium py-2 px-3 rounded-lg transition-colors flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined text-[15px]">send</span>
+<span>Send Test Email</span>
+</button>
+<!-- Main Navigation Links -->
+<nav class="flex flex-col space-y-1">
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Active tab: Activity Log -->
+<a class="bg-surface-container text-primary rounded-lg font-medium px-3 py-2 flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px] text-primary">history</span>
+<span>Activity Log</span>
+<span class="ml-auto text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-container-highest text-primary">LIVE</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">send</span>
+<span>Broadcasts</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">block</span>
+<span>Suppression Lists</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">call_split</span>
+<span>Inbound Routing</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">key</span>
+<span>API Keys</span>
+</a>
+</nav>
+</div>
+<!-- Footer Rail Tabs -->
+<div class="flex flex-col space-y-1 pt-3 border-t border-outline-variant">
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">check_circle</span>
+<span>System Status</span>
+</a>
+<a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low rounded-lg px-3 py-2 transition-colors flex items-center space-x-2.5 text-xs font-body" href="#">
+<span class="material-symbols-outlined text-[18px]">settings</span>
+<span>Settings</span>
+</a>
+</div>
+</aside>
+<!-- ================= MAIN CONTENT AREA ================= -->
+<main class="ml-64 flex-1 p-6 md:p-8 bg-surface-container-lowest overflow-y-auto max-w-[1600px]">
+<!-- Top Title & Global Action Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-outline-variant gap-4">
+<div>
+<div class="flex items-center space-x-3">
+<h1 class="font-headline text-xl md:text-2xl font-semibold text-primary tracking-tight">Email Activity</h1>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-surface-container border border-outline-variant text-secondary">
+              production:live
+            </span>
+</div>
+<p class="text-xs text-outline mt-1">Real-time transactional and broadcast delivery logs</p>
+</div>
+<div class="flex items-center space-x-2.5">
+<!-- Time Range Selector -->
+<div class="inline-flex rounded-lg border border-outline-variant bg-surface-container-low p-0.5 text-xs font-label">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary font-medium transition-all shadow-sm">Past 24 Hours</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-primary transition-all">Past 7 Days</button>
+</div>
+<!-- Export CSV -->
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant bg-surface-container-low hover:bg-surface-container text-xs font-body text-secondary hover:text-primary transition-colors flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[15px]">download</span>
+<span>Export CSV</span>
+</button>
+<!-- Primary Quick Action -->
+<button class="px-3.5 py-1.5 rounded-lg bg-primary text-on-primary hover:bg-primary-container text-xs font-headline font-medium transition-colors flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-[15px]">send</span>
+<span>Send Test Email</span>
+</button>
+</div>
+</div>
+<!-- Metric Stat Cards (3 Compact Cards) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 my-6">
+<!-- Delivery Rate -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-outline transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-xs text-outline font-label">Delivery Rate</span>
+<span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-1.5 py-0.5 rounded flex items-center space-x-1">
+<span>+0.12%</span>
+<span class="text-[9px]">vs 24h</span>
+</span>
+</div>
+<div class="mt-2 flex items-baseline space-x-2">
+<span class="text-2xl font-semibold font-mono text-primary tracking-tight">99.84%</span>
+<span class="text-xs text-outline font-body">guaranteed SLA</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-emerald-400 h-1 rounded-full w-[99.84%]"></div>
+</div>
+</div>
+<!-- Average Latency -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-outline transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-xs text-outline font-label">Average Latency</span>
+<span class="text-[11px] font-mono text-secondary bg-surface-container border border-outline-variant px-1.5 py-0.5 rounded">
+              p95: 680ms
+            </span>
+</div>
+<div class="mt-2 flex items-baseline space-x-2">
+<span class="text-2xl font-semibold font-mono text-primary tracking-tight">412ms</span>
+<span class="text-xs text-outline font-body">MTA dispatch</span>
+</div>
+<div class="w-full bg-surface-container h-1 rounded-full mt-3 overflow-hidden">
+<div class="bg-primary h-1 rounded-full w-[42%]"></div>
+</div>
+</div>
+<!-- Total Sent -->
+<div class="p-4 rounded-xl bg-surface-container-low border border-outline-variant hover:border-outline transition-colors">
+<div class="flex justify-between items-start">
+<span class="text-xs text-outline font-label">Total Sent</span>
+<span class="text-[11px] font-mono text-emerald-400">148,053 delivered</span>
+</div>
+<div class="mt-2 flex items-baseline space-x-2">
+<span class="text-2xl font-semibold font-mono text-primary tracking-tight">148,290</span>
+<span class="text-xs text-outline font-body">emails</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-outline font-mono mt-3 pt-2 border-t border-outline-variant">
+<span class="text-secondary">142 bounced</span>
+<span class="text-outline">·</span>
+<span class="text-secondary">95 pending</span>
+<span class="text-outline">·</span>
+<span class="text-secondary">0 complaints</span>
+</div>
+</div>
+</div>
+<!-- Two-Column Work Surface: Activity Table (65%) & Inspector / Snippet (35%) -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Filter Toolbar & Activity Table (~65% / 8 cols) -->
+<div class="xl:col-span-8 flex flex-col space-y-3">
+<!-- Filters Toolbar -->
+<div class="flex flex-wrap items-center justify-between gap-3 p-2 rounded-lg bg-surface-container-low border border-outline-variant">
+<!-- Search bar -->
+<div class="relative flex-1 min-w-[200px]">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-outline text-[15px]">filter_list</span>
+<input class="w-full bg-surface-container border-none text-xs text-primary placeholder-outline pl-8 pr-3 py-1.5 rounded focus:ring-1 focus:ring-outline font-body" placeholder="Filter by recipient, subject, or ID..." type="text"/>
+</div>
+<!-- Status filter tabs -->
+<div class="flex items-center space-x-1 text-xs font-label">
+<button class="px-2.5 py-1 rounded bg-surface-container text-primary font-medium">All</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-primary transition-colors flex items-center space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>Delivered</span>
+</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-primary transition-colors flex items-center space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+<span>Pending</span>
+</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-primary transition-colors flex items-center space-x-1">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+<span>Bounced</span>
+</button>
+<button class="px-2.5 py-1 rounded text-outline hover:text-primary transition-colors">Complaints</button>
+</div>
+<!-- Domain Dropdown filter -->
+<div class="relative">
+<button class="flex items-center space-x-1.5 text-xs text-secondary bg-surface-container px-2.5 py-1.5 rounded border border-outline-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">domain</span>
+<span>All Domains</span>
+<span class="material-symbols-outlined text-[14px] text-outline">expand_more</span>
+</button>
+</div>
+</div>
+<!-- Table Container -->
+<div class="rounded-xl border border-outline-variant bg-surface-container-low overflow-hidden shadow-2xl">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse text-xs">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container text-outline font-label text-[11px] uppercase tracking-wider">
+<th class="py-3 px-3.5 font-medium">Status</th>
+<th class="py-3 px-3.5 font-medium">Recipient</th>
+<th class="py-3 px-3.5 font-medium">Subject</th>
+<th class="py-3 px-3.5 font-medium">Event ID</th>
+<th class="py-3 px-3.5 font-medium text-right">Latency</th>
+<th class="py-3 px-3.5 font-medium text-right">Timestamp</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-body">
+<!-- Row 1: Selected Delivered Row -->
+<tr class="bg-surface-container hover:bg-surface-container-high transition-colors cursor-pointer border-l-2 border-l-primary">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>Delivered</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-primary font-medium whitespace-nowrap">
+                      alex.turner@prisma.io
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Welcome to Acme Pro — API Credentials
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_89f02a9b31cd
+                    </td>
+<td class="py-3 px-3.5 font-mono text-secondary text-right whitespace-nowrap">
+                      320ms
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:32:15 UTC
+                    </td>
+</tr>
+<!-- Row 2: Pending -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-amber-400 bg-amber-950/40 border border-amber-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse"></span>
+<span>Pending</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-secondary whitespace-nowrap">
+                      dev-team@linear.app
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Security Alert: New sign-in from Safari on macOS
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_77c19f2a89ee
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-right whitespace-nowrap">
+                      —
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:31:52 UTC
+                    </td>
+</tr>
+<!-- Row 3: Bounced (Mailbox not found) -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-rose-400 bg-rose-950/40 border border-rose-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+<span>Bounced (550)</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-secondary whitespace-nowrap">
+                      unknown_user_992@yahoo.com
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Invoice #INV-2024-892 Receipt
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_61d882bb041a
+                    </td>
+<td class="py-3 px-3.5 font-mono text-rose-400 text-right whitespace-nowrap">
+                      1,240ms
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:28:11 UTC
+                    </td>
+</tr>
+<!-- Row 4: Delivered -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>Delivered</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-secondary whitespace-nowrap">
+                      sophia@supabase.com
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Your monthly usage report for September
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_54e190cc98bb
+                    </td>
+<td class="py-3 px-3.5 font-mono text-secondary text-right whitespace-nowrap">
+                      410ms
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:22:04 UTC
+                    </td>
+</tr>
+<!-- Row 5: Delivered -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>Delivered</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-secondary whitespace-nowrap">
+                      marcus.vance@stripe.com
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Password reset request for CourierX console
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_42a001ff33bc
+                    </td>
+<td class="py-3 px-3.5 font-mono text-secondary text-right whitespace-nowrap">
+                      295ms
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:15:39 UTC
+                    </td>
+</tr>
+<!-- Row 6: Bounced -->
+<tr class="hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-3 px-3.5 whitespace-nowrap">
+<span class="inline-flex items-center space-x-1.5 px-2 py-0.5 rounded text-[11px] font-mono text-rose-400 bg-rose-950/40 border border-rose-800/40">
+<span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+<span>Bounced (DNS)</span>
+</span>
+</td>
+<td class="py-3 px-3.5 font-mono text-secondary whitespace-nowrap">
+                      support@invalid-domain-test.co
+                    </td>
+<td class="py-3 px-3.5 text-on-surface truncate max-w-[200px]">
+                      Notification test dispatch
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] whitespace-nowrap">
+                      msg_33a829dd1189
+                    </td>
+<td class="py-3 px-3.5 font-mono text-rose-400 text-right whitespace-nowrap">
+                      850ms
+                    </td>
+<td class="py-3 px-3.5 font-mono text-outline text-[11px] text-right whitespace-nowrap">
+                      Oct 24, 14:02:18 UTC
+                    </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination / Footer Summary -->
+<div class="flex items-center justify-between px-4 py-3 bg-surface-container/50 border-t border-outline-variant text-xs text-outline">
+<div class="flex items-center space-x-2">
+<span>Showing 1 to 6 of 148,290 emails</span>
+<span class="text-outline">·</span>
+<span class="text-secondary font-mono">Realtime streaming enabled</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<button class="px-2.5 py-1 rounded bg-surface-container border border-outline-variant text-outline hover:text-primary disabled:opacity-40" disabled="">
+                  Previous
+                </button>
+<button class="px-2.5 py-1 rounded bg-surface-container border border-outline-variant text-secondary hover:text-primary">
+                  Next
+                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Message Inspector & SDK Code Snippet (~35% / 4 cols) -->
+<div class="xl:col-span-4 flex flex-col space-y-4">
+<!-- Card 1: Message Detail Inspector -->
+<div class="p-5 rounded-xl bg-surface-container-low border border-outline-variant">
+<div class="flex items-center justify-between pb-3 border-b border-outline-variant">
+<div>
+<span class="text-xs font-label text-outline uppercase tracking-wider">Message Details</span>
+<div class="flex items-center space-x-2 mt-0.5">
+<span class="font-mono text-xs text-primary font-semibold">msg_89f02a9b31cd</span>
+<button class="text-outline hover:text-primary transition-colors" title="Copy Message ID">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-800/40">
+                Delivered
+              </span>
+</div>
+<!-- Details List -->
+<div class="mt-4 space-y-3 text-xs">
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<span class="text-outline font-label">To</span>
+<span class="font-mono text-primary select-all">alex.turner@prisma.io</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<span class="text-outline font-label">From</span>
+<span class="font-mono text-primary select-all">noreply@courierx.dev</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<span class="text-outline font-label">Subject</span>
+<span class="text-on-surface truncate max-w-[200px] text-right">Welcome to Acme Pro — API Credentials</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<span class="text-outline font-label">IP Pool</span>
+<span class="font-mono text-secondary">Dedicated IP pool 2</span>
+</div>
+<div class="flex justify-between py-1 border-b border-outline-variant/40">
+<span class="text-outline font-label">Encryption</span>
+<span class="font-mono text-secondary flex items-center space-x-1">
+<span class="material-symbols-outlined text-[13px] text-emerald-400">lock</span>
+<span>TLS 1.3 encrypted</span>
+</span>
+</div>
+<!-- Delivery Timeline Breakdown -->
+<div class="pt-2">
+<span class="text-[11px] font-label text-outline uppercase tracking-wider">Delivery Timeline</span>
+<div class="mt-2.5 relative pl-4 border-l border-outline-variant space-y-3 font-mono text-[11px]">
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container border border-outline"></div>
+<p class="text-secondary font-medium">Queued in Dispatch</p>
+<p class="text-outline text-[10px]">14:32:14.210 UTC</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-surface-container border border-outline"></div>
+<p class="text-secondary font-medium">Accepted by MTA (mx.prisma.io)</p>
+<p class="text-outline text-[10px]">14:32:14.850 UTC (+640ms)</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[21px] top-1 w-2.5 h-2.5 rounded-full bg-emerald-400"></div>
+<p class="text-emerald-400 font-medium">Delivered (250 2.0.0 OK: queued)</p>
+<p class="text-outline text-[10px]">14:32:15.120 UTC (+270ms)</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Action buttons in Inspector -->
+<div class="mt-5 pt-4 border-t border-outline-variant flex items-center justify-between">
+<button class="text-xs text-secondary hover:text-primary flex items-center space-x-1 font-label">
+<span class="material-symbols-outlined text-[14px]">visibility</span>
+<span>Preview Email HTML</span>
+</button>
+<button class="text-xs text-secondary hover:text-primary flex items-center space-x-1 font-label">
+<span class="material-symbols-outlined text-[14px]">replay</span>
+<span>Resend Payload</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Tabbed SDK Code Example Card -->
+<div class="rounded-xl bg-surface-deep border border-outline-variant overflow-hidden">
+<!-- Code Tab Strip & Traffic Lights -->
+<div class="flex items-center justify-between px-3 py-2 bg-surface-card border-b border-outline-variant">
+<!-- Traffic lights -->
+<div class="flex items-center space-x-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-amber-400/80"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-400/80"></div>
+</div>
+<!-- Language Tabs -->
+<div class="flex items-center space-x-1 text-[11px] font-mono">
+<button class="px-2 py-0.5 rounded text-outline hover:text-primary transition-colors">cURL</button>
+<button class="px-2 py-0.5 rounded bg-surface-container text-primary font-medium border border-outline-variant">Node.js</button>
+<button class="px-2 py-0.5 rounded text-outline hover:text-primary transition-colors">Python</button>
+<button class="px-2 py-0.5 rounded text-outline hover:text-primary transition-colors">Go</button>
+</div>
+<!-- Copy snippet button -->
+<button class="text-outline hover:text-primary transition-colors p-1" title="Copy code">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<!-- Code Block with Syntax Accent -->
+<div class="p-4 font-mono text-[12px] leading-relaxed overflow-x-auto text-on-surface">
+<pre><code><span class="text-secondary">import</span> { <span class="text-emerald-400">CourierX</span> } <span class="text-secondary">from</span> <span class="text-amber-300">'@courierx/sdk'</span>;
+
+<span class="text-secondary">const</span> courier = <span class="text-secondary">new</span> <span class="text-emerald-400">CourierX</span>(process.env.<span class="text-primary">COURIERX_API_KEY</span>);
+
+<span class="text-secondary">await</span> courier.emails.<span class="text-primary">send</span>({
+  <span class="text-outline">from</span>: <span class="text-amber-300">'Acme &lt;onboarding@resend.dev&gt;'</span>,
+  <span class="text-outline">to</span>: <span class="text-amber-300">'alex.turner@prisma.io'</span>,
+  <span class="text-outline">subject</span>: <span class="text-amber-300">'Welcome to Acme Pro'</span>,
+  <span class="text-outline">react</span>: WelcomeEmail({ firstName: <span class="text-amber-300">'Alex'</span> }),
+});</code></pre>
+</div>
+<!-- Terminal output footer -->
+<div class="px-4 py-2 bg-surface-card border-t border-outline-variant flex items-center justify-between text-[11px] font-mono text-outline">
+<span class="flex items-center space-x-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span class="text-emerald-400">Response 200 OK</span>
+</span>
+<span>id: msg_89f02a9b31cd</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,8 +1,575 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Expo · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/expo">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Expo · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#171717"></span><code>#171717</code></div><div class="swatch"><span style="background:#0d74ce"></span><code>#0d74ce</code></div><div class="swatch"><span style="background:#1a1a1a"></span><code>#1a1a1a</code></div><div class="swatch"><span style="background:#476cff"></span><code>#476cff</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Inter&#x27;, -apple-system, system-ui, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aether Runtime - Developer Console</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Public+Sans:wght@500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#000000",
+            "tertiary-container": "#1b1b1b",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "outline-variant": "#cfc4c5",
+            "on-tertiary-container": "#848484",
+            "on-secondary": "#ffffff",
+            "inverse-primary": "#c6c6c6",
+            "secondary-container": "#e2e2e2",
+            "on-tertiary-fixed": "#1b1b1b",
+            "on-error-container": "#93000a",
+            "primary-container": "#1b1b1b",
+            "inverse-surface": "#2f3131",
+            "primary": "#000000",
+            "on-surface-variant": "#4c4546",
+            "on-primary-fixed": "#1b1b1b",
+            "surface-container": "#eeeeee",
+            "surface-bright": "#f9f9f9",
+            "outline": "#7e7576",
+            "on-tertiary-fixed-variant": "#474747",
+            "on-background": "#1a1c1c",
+            "primary-fixed": "#e2e2e2",
+            "secondary-fixed-dim": "#c6c6c6",
+            "tertiary-fixed": "#e2e2e2",
+            "on-secondary-fixed": "#1b1b1b",
+            "surface-variant": "#e2e2e2",
+            "on-secondary-container": "#646464",
+            "surface-container-highest": "#e2e2e2",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "on-tertiary": "#ffffff",
+            "surface-tint": "#5e5e5e",
+            "surface": "#f9f9f9",
+            "on-primary-fixed-variant": "#474747",
+            "background": "#f9f9f9",
+            "secondary": "#5e5e5e",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-secondary-fixed-variant": "#474747",
+            "on-surface": "#1a1c1c",
+            "on-primary-container": "#848484",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-low": "#f3f3f4",
+            "on-primary": "#ffffff",
+            "surface-container-high": "#e8e8e8",
+            "surface-dim": "#dadada",
+            "inverse-on-surface": "#f0f1f1",
+            "secondary-fixed": "#e2e2e2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter"],
+            "display": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Public Sans"],
+            "mono": ["'JetBrains Mono'", "monospace"]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #474747;
+      border-radius: 4px;
+    }
+    .custom-scrollbar-light::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scrollbar-light::-webkit-scrollbar-thumb {
+      background: #cfc4c5;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased flex flex-col min-h-screen overflow-x-hidden selection:bg-surface-container-highest">
+<!-- Top Navigation Bar -->
+<header class="bg-surface-container-lowest border-b border-surface-container-high sticky top-0 z-50 flex justify-between items-center w-full px-6 h-16">
+<div class="flex items-center gap-6">
+<!-- Product Brand Anchor -->
+<div class="flex items-center gap-3">
+<div class="w-7 h-7 bg-primary rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-size: 17px;">terminal</span>
+</div>
+<span class="font-headline font-semibold text-base text-on-surface tracking-tight">Aether Runtime</span>
+</div>
+<!-- Repo & Branch Pill Selector -->
+<div class="hidden lg:flex items-center gap-2 pl-3 border-l border-surface-container-high text-xs">
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low rounded-xl text-on-surface font-mono font-medium">
+<span class="material-symbols-outlined text-secondary" style="font-size: 15px;">folder</span>
+<span>mobile-client-v2</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 bg-surface-container-low rounded-xl text-secondary hover:text-on-surface cursor-pointer transition-colors font-mono">
+<span class="material-symbols-outlined text-secondary" style="font-size: 15px;">alt_route</span>
+<span>main (commit #8f4b2c)</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">arrow_drop_down</span>
+</div>
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container text-secondary text-[11px] font-medium tracking-wide">
+<span class="w-1.5 h-1.5 rounded-full bg-black"></span>
+<span>Engine Operational</span>
+</div>
+</div>
+<!-- Main Navigation Tabs -->
+<nav class="hidden md:flex items-center gap-6 ml-4">
+<a class="text-secondary font-medium hover:text-on-surface transition-colors pb-5 pt-5 text-sm" href="#">Overview</a>
+<a class="text-secondary font-medium hover:text-on-surface transition-colors pb-5 pt-5 text-sm" href="#">Workflows</a>
+<a class="text-primary font-medium border-b-2 border-primary pb-5 pt-5 text-sm" href="#">Builds</a>
+<a class="text-secondary font-medium hover:text-on-surface transition-colors pb-5 pt-5 text-sm" href="#">Devices</a>
+<a class="text-secondary font-medium hover:text-on-surface transition-colors pb-5 pt-5 text-sm" href="#">Insights</a>
+</nav>
+</div>
+<!-- Actions & User Profile -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1 text-secondary">
+<button class="p-2 rounded-xl hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150" title="Notifications">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-xl hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150" title="Daemon CLI status">
+<span class="material-symbols-outlined">terminal</span>
+</button>
+<button class="p-2 rounded-xl hover:bg-surface-container-low hover:text-on-surface transition-colors duration-150" title="Help &amp; Reference">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 bg-surface-container-lowest border border-surface-container-high hover:border-outline text-on-surface text-xs font-medium rounded-xl transition-colors duration-150">
+<span class="material-symbols-outlined" style="font-size: 15px;">feedback</span>
+<span>Feedback</span>
+</button>
+<button class="inline-flex items-center gap-1.5 px-3.5 py-2 bg-primary text-on-primary text-xs font-medium rounded-xl hover:bg-primary-container active:scale-[0.99] transition-all duration-150">
+<span class="material-symbols-outlined" style="font-size: 15px;">play_arrow</span>
+<span>Trigger Build</span>
+</button>
+<!-- Clean User Profile Pill -->
+<div class="flex items-center gap-2 pl-2 border-l border-surface-container-high cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-mono text-xs font-semibold text-on-surface">
+          AE
+        </div>
+</div>
+</div>
+</header>
+<!-- Workbench Sub-Header Strip -->
+<section class="bg-surface-container-lowest border-b border-surface-container-high px-6 py-3.5">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-3 max-w-[1680px] mx-auto">
+<div>
+<div class="flex items-center gap-2.5">
+<h1 class="font-headline font-semibold text-sm tracking-tight text-on-surface">Build &amp; Live Runtime Simulator</h1>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-[11px] font-mono text-secondary border border-surface-container-high">Aether SDK 52.0.4</span>
+<span class="text-[11px] font-mono text-secondary">React Native 0.76.2</span>
+</div>
+<p class="text-xs text-secondary mt-0.5 flex items-center gap-2">
+<span class="font-mono text-on-surface font-medium">feat(core): implement biometric auth &amp; offline cache sync</span>
+<span class="text-outline-variant">·</span>
+<span>Committed 14m ago by <span class="text-on-surface font-medium">alex.dev</span></span>
+</p>
+</div>
+<div class="flex items-center gap-2 text-xs">
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-surface-container-low border border-surface-container-high">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="text-secondary font-mono">Metro Port:</span>
+<span class="font-mono text-on-surface font-semibold">8081</span>
+</div>
+<div class="flex items-center gap-1 px-2.5 py-1 rounded-xl bg-surface-container-low border border-surface-container-high">
+<span class="text-secondary font-mono">Live Bridge:</span>
+<span class="font-mono text-on-surface font-semibold">Ready</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Main 3-Column Studio Workbench Layout -->
+<main class="flex-1 px-6 py-5 max-w-[1680px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-5">
+<!-- LEFT PANEL: Build Health & Statuses (4 Cols) -->
+<section class="lg:col-span-4 flex flex-col gap-4">
+<div class="bg-surface-container-lowest border border-surface-container-high rounded-xl p-4 shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container-high">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">precision_manufacturing</span>
+<h2 class="font-headline font-semibold text-sm text-on-surface">Build Pipeline Health</h2>
+</div>
+<span class="text-[11px] font-mono text-secondary">Workflow #482</span>
+</div>
+<!-- Quick State Tabs / Count Filter -->
+<div class="grid grid-cols-4 gap-1.5 py-3 border-b border-surface-container-high text-center text-xs">
+<div class="p-1.5 rounded-lg bg-surface-container-low">
+<div class="text-[11px] text-secondary font-medium">Queued</div>
+<div class="font-mono text-xs font-semibold text-on-surface">1</div>
+</div>
+<div class="p-1.5 rounded-lg bg-surface-container-low border border-primary/20">
+<div class="text-[11px] text-secondary font-medium">Running</div>
+<div class="font-mono text-xs font-semibold text-on-surface">1</div>
+</div>
+<div class="p-1.5 rounded-lg bg-surface-container-low">
+<div class="text-[11px] text-secondary font-medium">Success</div>
+<div class="font-mono text-xs font-semibold text-on-surface">2</div>
+</div>
+<div class="p-1.5 rounded-lg bg-surface-container-low">
+<div class="text-[11px] text-secondary font-medium">Failed</div>
+<div class="font-mono text-xs font-semibold text-on-surface">1</div>
+</div>
+</div>
+<!-- Build Status Cards List -->
+<div class="flex flex-col gap-3 pt-3 overflow-y-auto max-h-[580px] custom-scrollbar-light pr-1">
+<!-- 1. Running State Card -->
+<div class="p-3.5 rounded-xl border border-primary/30 bg-surface-container-lowest hover:border-primary transition-all">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-headline font-semibold text-xs text-on-surface">iOS Development Simulator</span>
+</div>
+<span class="font-mono text-[11px] text-secondary">02m 14s</span>
+</div>
+<div class="mt-2 text-xs text-secondary flex items-center justify-between">
+<span>Compiling workspace Pods (xcodebuild)</span>
+<span class="font-mono font-medium text-on-surface">68%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-primary h-full rounded-full transition-all duration-300" style="width: 68%;"></div>
+</div>
+<div class="mt-2.5 pt-2 border-t border-surface-container-high flex items-center justify-between text-[11px] font-mono text-secondary">
+<span>Target: iPhone 16 Pro (Debug)</span>
+<span class="text-on-surface font-semibold">Runner macos-14-m2</span>
+</div>
+</div>
+<!-- 2. Queued State Card -->
+<div class="p-3.5 rounded-xl border border-surface-container-high bg-surface-container-lowest">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-headline font-semibold text-xs text-on-surface">Android Release APK / AAB</span>
+</div>
+<span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-surface-container text-secondary">PENDING</span>
+</div>
+<p class="mt-1.5 text-xs text-secondary leading-snug">Waiting for runner allocation in us-east queue · Priority Normal</p>
+<div class="mt-2.5 pt-2 border-t border-surface-container-high flex items-center justify-between text-[11px] font-mono text-secondary">
+<span>Gradle bundleRelease</span>
+<span>Est: ~4m 30s</span>
+</div>
+</div>
+<!-- 3. Successful State Card -->
+<div class="p-3.5 rounded-xl border border-surface-container-high bg-surface-container-lowest">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="font-headline font-semibold text-xs text-on-surface">Web Static Bundle (Production)</span>
+</div>
+<span class="font-mono text-[11px] text-secondary">00m 52s</span>
+</div>
+<div class="mt-2 text-xs text-secondary flex items-center gap-2">
+<span class="font-mono text-[11px] text-on-surface bg-surface-container-low px-1.5 py-0.5 rounded">sha: 4e98f01</span>
+<span>Artifacts: 4.8MB (.tar.gz)</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-surface-container-high flex items-center justify-between text-xs">
+<a class="text-on-surface hover:underline inline-flex items-center gap-1 font-mono text-[11px]" href="#">
+<span class="material-symbols-outlined" style="font-size: 13px;">open_in_new</span>
+<span>preview-8f4b2c.aether.run</span>
+</a>
+<button class="text-secondary hover:text-on-surface text-[11px] font-mono">Download</button>
+</div>
+</div>
+<!-- 4. Failed State Card -->
+<div class="p-3.5 rounded-xl border border-surface-container-high bg-surface-container-lowest">
+<div class="flex items-start justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-error"></span>
+<span class="font-headline font-semibold text-xs text-on-surface">Edge End-to-End Jest Matrix</span>
+</div>
+<span class="font-mono text-[11px] text-error font-medium">Exit Code 1</span>
+</div>
+<div class="mt-1.5 p-2 rounded bg-surface-container-low border border-surface-container-high font-mono text-[11px] text-on-surface leading-snug">
+              FAIL: BiometricAuth.spec.tsx<br/>
+<span class="text-secondary">Error: LocalAuthentication timeout exceeded (5000ms)</span>
+</div>
+<div class="mt-2.5 pt-2 border-t border-surface-container-high flex items-center justify-between text-xs">
+<span class="text-secondary text-[11px]">Run #109 · 22m ago</span>
+<button class="inline-flex items-center gap-1 text-[11px] font-medium text-on-surface hover:underline">
+<span class="material-symbols-outlined" style="font-size: 13px;">replay</span>
+<span>Re-run Test</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Controls Footprint -->
+<div class="mt-4 pt-3 border-t border-surface-container-high flex items-center justify-between gap-2">
+<button class="w-1/2 py-1.5 px-2 bg-surface-container-low hover:bg-surface-container text-on-surface rounded-xl text-xs font-medium transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 15px;">download</span>
+<span>Download All Artifacts</span>
+</button>
+<button class="w-1/2 py-1.5 px-2 bg-surface-container-low hover:bg-surface-container text-on-surface rounded-xl text-xs font-medium transition-colors flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 15px;">analytics</span>
+<span>Raw Telemetry</span>
+</button>
+</div>
+</div>
+</section>
+<!-- CENTER PANEL: Device-Sized Live Preview (4 Cols) -->
+<section class="lg:col-span-4 flex flex-col items-center gap-3">
+<!-- Platform Selector Tabs -->
+<div class="w-full flex items-center justify-center">
+<div class="inline-flex p-1 bg-surface-container-lowest border border-surface-container-high rounded-xl gap-1 text-xs">
+<!-- Active iOS Platform with the single consistent blue accent indicator -->
+<button class="px-3 py-1.5 rounded-lg bg-surface-container-low font-medium text-on-surface flex items-center gap-2 border-b-2 border-[#0d74ce] transition-colors">
+<span class="w-1.5 h-1.5 rounded-full bg-[#0d74ce]"></span>
+<span>iOS (iPhone 16 Pro)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-secondary hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span>Android (Pixel 9)</span>
+</button>
+<button class="px-3 py-1.5 rounded-lg text-secondary hover:text-on-surface transition-colors flex items-center gap-1.5">
+<span>Web (Safari Mobile)</span>
+</button>
+</div>
+</div>
+<!-- Mobile Device Frame Container -->
+<div class="relative w-full max-w-[380px] bg-surface-container-lowest border border-surface-container-high rounded-[36px] p-3 shadow-md">
+<!-- Physical Speaker / Dynamic Island Notch -->
+<div class="w-full flex justify-center mb-1">
+<div class="w-24 h-4 bg-tertiary rounded-full flex items-center justify-end px-2">
+<div class="w-2 h-2 rounded-full bg-surface-container-low opacity-40"></div>
+</div>
+</div>
+<!-- Screen Canvas (Simulated App: Pulse Health & Activity) -->
+<div class="w-full bg-[#ffffff] rounded-[28px] overflow-hidden border border-surface-container-high flex flex-col h-[520px] select-none text-on-surface">
+<!-- iOS Status Bar -->
+<div class="px-5 pt-2 pb-1 flex justify-between items-center text-[11px] font-semibold tracking-tight text-on-surface">
+<span>9:41</span>
+<div class="flex items-center gap-1.5 text-secondary">
+<span class="material-symbols-outlined" style="font-size: 13px;">signal_cellular_alt</span>
+<span class="material-symbols-outlined" style="font-size: 13px;">wifi</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">battery_full</span>
+</div>
+</div>
+<!-- App Navigation Bar inside device -->
+<div class="px-5 py-2.5 flex items-center justify-between border-b border-surface-container-low">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-lg bg-primary text-on-primary flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-size: 14px;">favorite</span>
+</div>
+<span class="font-headline font-semibold text-xs tracking-tight">Pulse Health</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-1.5 py-0.5 rounded-full bg-surface-container text-[10px] font-mono text-secondary">LIVE DEV</span>
+</div>
+</div>
+<!-- App Viewport Body with Health Metrics -->
+<div class="p-4 flex-1 overflow-y-auto custom-scrollbar-light flex flex-col gap-3">
+<!-- Daily Goal Card -->
+<div class="p-3.5 rounded-xl bg-surface-container-lowest border border-surface-container-high shadow-xs">
+<div class="flex items-center justify-between">
+<span class="text-xs text-secondary font-medium">Activity Ring</span>
+<span class="font-mono text-xs font-semibold text-on-surface">82%</span>
+</div>
+<div class="mt-2 flex items-baseline gap-2">
+<span class="font-headline font-semibold text-2xl tracking-tight text-on-surface">8,420</span>
+<span class="text-xs text-secondary">/ 10,000 steps</span>
+</div>
+<!-- Simulated Step Chart Bar -->
+<div class="mt-3 grid grid-cols-7 gap-1.5 items-end h-10">
+<div class="bg-surface-container-high h-[40%] rounded-t-sm"></div>
+<div class="bg-surface-container-high h-[65%] rounded-t-sm"></div>
+<div class="bg-surface-container-high h-[50%] rounded-t-sm"></div>
+<div class="bg-surface-container-high h-[85%] rounded-t-sm"></div>
+<div class="bg-surface-container-high h-[70%] rounded-t-sm"></div>
+<div class="bg-primary h-[95%] rounded-t-sm"></div>
+<div class="bg-surface-container h-[20%] rounded-t-sm"></div>
+</div>
+<div class="mt-1 flex justify-between text-[9px] text-secondary font-mono">
+<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span class="font-bold text-on-surface">S</span><span>S</span>
+</div>
+</div>
+<!-- Two Metric Grid -->
+<div class="grid grid-cols-2 gap-2.5">
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container-high">
+<div class="flex items-center justify-between text-secondary">
+<span class="text-[11px] font-medium">Heart Rate</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">vital_signs</span>
+</div>
+<div class="mt-1 font-headline font-semibold text-lg">71 <span class="text-[10px] text-secondary font-normal">BPM</span></div>
+<div class="text-[10px] text-secondary mt-0.5">Resting regular</div>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container-high">
+<div class="flex items-center justify-between text-secondary">
+<span class="text-[11px] font-medium">Active Burn</span>
+<span class="material-symbols-outlined" style="font-size: 14px;">local_fire_department</span>
+</div>
+<div class="mt-1 font-headline font-semibold text-lg">542 <span class="text-[10px] text-secondary font-normal">KCAL</span></div>
+<div class="text-[10px] text-secondary mt-0.5">+14% vs yesterday</div>
+</div>
+</div>
+<!-- Offline Cache Sync Banner (Testing our feat branch) -->
+<div class="p-2.5 rounded-xl bg-surface-container-low border border-surface-container-high flex items-center justify-between text-[11px]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary" style="font-size: 14px;">sync_saved_locally</span>
+<span class="font-medium text-on-surface">Offline Queue: 4 items</span>
+</div>
+<span class="font-mono text-secondary">Cached</span>
+</div>
+<!-- Biometric Test Trigger Button -->
+<button class="w-full py-2 bg-primary text-on-primary rounded-xl text-xs font-medium flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined" style="font-size: 14px;">fingerprint</span>
+<span>Test FaceID / Biometric Modal</span>
+</button>
+</div>
+<!-- Bottom Home Indicator -->
+<div class="py-2 flex justify-center bg-surface-container-lowest">
+<div class="w-32 h-1 bg-on-surface rounded-full opacity-60"></div>
+</div>
+</div>
+</div>
+<!-- Viewport & Simulator Controls -->
+<div class="flex items-center gap-2 p-1.5 bg-surface-container-lowest border border-surface-container-high rounded-xl text-xs">
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-on-surface transition-colors" title="Rotate Orientation">
+<span class="material-symbols-outlined" style="font-size: 16px;">screen_rotation</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-on-surface transition-colors" title="Reload JS Bundle (Cmd+R)">
+<span class="material-symbols-outlined" style="font-size: 16px;">refresh</span>
+</button>
+<button class="p-1.5 rounded-lg hover:bg-surface-container-low text-secondary hover:text-on-surface transition-colors" title="Inspect React Component Tree">
+<span class="material-symbols-outlined" style="font-size: 16px;">developer_mode</span>
+</button>
+<span class="w-[1px] h-4 bg-surface-container-high"></span>
+<button class="px-2.5 py-1 rounded-lg hover:bg-surface-container-low text-secondary hover:text-on-surface font-medium flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 15px;">qr_code_2</span>
+<span>Open on Device</span>
+</button>
+</div>
+</section>
+<!-- RIGHT PANEL: Live Build Log Stream & Telemetry (4 Cols) -->
+<section class="lg:col-span-4 flex flex-col gap-3">
+<div class="bg-tertiary-container border border-surface-container-high rounded-xl flex flex-col h-full min-h-[580px] shadow-sm overflow-hidden text-on-dark">
+<!-- Terminal Header -->
+<div class="bg-[#121212] px-4 py-3 border-b border-[#2b2b2b] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#3a3a3a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#3a3a3a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#3a3a3a]"></span>
+</div>
+<span class="font-mono text-xs font-semibold text-surface-container-lowest ml-2">aether-telemetry.log</span>
+</div>
+<!-- Log Tools -->
+<div class="flex items-center gap-2">
+<button class="px-2 py-1 rounded bg-[#242424] hover:bg-[#323232] text-on-tertiary-container text-[11px] font-mono flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined" style="font-size: 13px;">content_copy</span>
+<span>Copy</span>
+</button>
+<button class="p-1 rounded bg-[#242424] hover:bg-[#323232] text-on-tertiary-container transition-colors" title="Toggle Auto-Scroll">
+<span class="material-symbols-outlined" style="font-size: 15px;">vertical_align_bottom</span>
+</button>
+</div>
+</div>
+<!-- Terminal Filter Strip -->
+<div class="bg-[#171717] px-3 py-2 border-b border-[#262626] flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2 text-on-tertiary-container flex-1">
+<span class="material-symbols-outlined" style="font-size: 14px;">filter_list</span>
+<input class="bg-transparent border-0 text-xs font-mono text-surface-container-lowest focus:ring-0 p-0 w-full placeholder:text-[#555]" placeholder="grep filter output..." type="text"/>
+</div>
+<span class="text-[10px] text-[#666] uppercase">Stream Active</span>
+</div>
+<!-- Monospaced Code Log Stream -->
+<div class="p-4 font-mono text-xs text-surface-container leading-relaxed flex-1 overflow-y-auto custom-scrollbar flex flex-col gap-1.5 bg-[#171717]">
+<div class="text-[#777]">[14:22:01.104] $ aether build --profile development --platform ios</div>
+<div class="text-[#777]">[14:22:02.430] [INIT] Environment resolved: macOS 14.4.1 (Sonoma) Apple M2</div>
+<div class="text-[#777]">[14:22:03.118] [DEPS] Validating lockfile checksums integrity... verified.</div>
+<div>
+<span class="text-[#999999]">[INFO]</span>
+<span class="text-[#cfe7ff]">Metro bundler initialized at ws://localhost:8081</span>
+</div>
+<div>
+<span class="text-[#999999]">[INFO]</span>
+<span>Bundling complete (1,428 modules in 1,120ms)</span>
+</div>
+<div>
+<span class="text-[#e2e2e2] font-semibold">[SUCCESS]</span>
+<span>Fast Refresh WebSocket client attached</span>
+</div>
+<div>
+<span class="text-[#d97706]">[WARN]</span>
+<span class="text-[#fcd34d]">react-native-svg: peer dependency mismatch, falling back to bundled C++ bindings</span>
+</div>
+<div>
+<span class="text-[#999999]">[RUN]</span>
+<span>Compiling native targets: <span class="text-surface-container-lowest">AetherBiometrics.swift</span> (14/14)</span>
+</div>
+<div class="text-[#777]">[14:23:41.201] [RUN] Linking Pods_mobile_client_v2.framework</div>
+<div class="text-[#777]">[14:24:02.890] [RUN] Generating embedded dSYM debug symbols...</div>
+<div>
+<span class="text-[#e2e2e2] font-semibold">[READY]</span>
+<span>App payload launched in iPhone 16 Pro Simulator (UDID: 80B1-E4)</span>
+</div>
+<div class="mt-2 pt-2 border-t border-[#262626] text-[#777]">
+            [14:24:15.002] Live telemetry bridge heartbeat acknowledged. Frame rate: 60.0 fps
+          </div>
+<div class="flex items-center gap-1 text-[#888] animate-pulse">
+<span>_</span>
+</div>
+</div>
+<!-- Telemetry Execution Metrics Footer Inside Console -->
+<div class="bg-[#121212] p-3 border-t border-[#262626] grid grid-cols-3 gap-2 text-center font-mono">
+<div class="p-2 rounded bg-[#1c1c1c] border border-[#2b2b2b]">
+<div class="text-[10px] text-on-tertiary-container">Build Duration</div>
+<div class="text-xs font-semibold text-surface-container-lowest mt-0.5">1m 42s</div>
+</div>
+<div class="p-2 rounded bg-[#1c1c1c] border border-[#2b2b2b]">
+<div class="text-[10px] text-on-tertiary-container">Bundle Size</div>
+<div class="text-xs font-semibold text-surface-container-lowest mt-0.5">4.8 MB</div>
+</div>
+<div class="p-2 rounded bg-[#1c1c1c] border border-[#2b2b2b]">
+<div class="text-[10px] text-on-tertiary-container">Memory</div>
+<div class="text-xs font-semibold text-surface-container-lowest mt-0.5">210 MB</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Docked Minimal Status Footer -->
+<footer class="bg-surface-container-lowest border-t border-surface-container-high w-full px-6 h-9 flex justify-between items-center text-xs mt-auto">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 font-mono text-[11px] text-secondary">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="text-on-surface font-medium">Aether Daemon v2.14.0</span>
+<span class="text-outline-variant">·</span>
+<span>Infrastructure Operational</span>
+</div>
+<div class="hidden sm:flex items-center gap-1 font-mono text-[11px] text-secondary pl-3 border-l border-surface-container-high">
+<span>Ping:</span>
+<span class="text-on-surface font-semibold">24ms</span>
+<span class="text-outline-variant ml-1">·</span>
+<span class="ml-1">Cluster: us-east-worker-4</span>
+</div>
+</div>
+<!-- Doc & Policy Links -->
+<div class="flex items-center gap-4 text-[11px] text-secondary">
+<a class="hover:text-on-surface transition-colors" href="#">Network Status</a>
+<a class="hover:text-on-surface transition-colors" href="#">CLI Documentation</a>
+<a class="hover:text-on-surface transition-colors hidden md:inline" href="#">Privacy Policy</a>
+<a class="hover:text-on-surface transition-colors hidden md:inline" href="#">Terms of Service</a>
+</div>
+</footer>
+</body></html>

@@ -34,8 +34,32 @@ class CollectionTests(unittest.TestCase):
         self.assertEqual(slugs,{p.parent.name for p in (ROOT/'design-md').glob('*/DESIGN.md')})
         self.assertEqual(self.catalog['count'],len(slugs))
         for slug in slugs:
-            for filename in ('DESIGN.md','PROMPTS.md','README.md','preview.html','preview-dark.html'):
+            for filename in ('DESIGN.md','PROMPTS.md','README.md','preview.html','STITCH.json','STITCH-PROMPT.md'):
                 self.assertTrue((ROOT/'design-md'/slug/filename).is_file(),f'{slug}/{filename}')
+
+    def test_stitch_exports_are_real_unique_and_preserved(self):
+        screens, html_hashes = set(), set()
+        self.assertEqual(self.catalog['generatedCount'], len(self.recipes))
+        for entry in self.catalog['designs']:
+            folder = ROOT / 'design-md' / entry['slug']
+            record = json.loads((folder / 'STITCH.json').read_text())
+            self.assertEqual(record['provider'], 'Google Stitch')
+            self.assertEqual(record['transport'], 'MCP')
+            self.assertEqual(entry['preview']['status'], 'generated')
+            self.assertEqual(record['screen_name'], f"projects/{record['project_id']}/screens/{record['screen_id']}")
+            self.assertNotIn(record['screen_name'], screens)
+            screens.add(record['screen_name'])
+            for name, checksum in record['files'].items():
+                self.assertEqual(hashlib.sha256((folder / name).read_bytes()).hexdigest(), checksum)
+            self.assertNotIn(record['files']['preview.html'], html_hashes)
+            html_hashes.add(record['files']['preview.html'])
+            self.assertNotIn('TOKEN SPECIMEN', (folder / 'preview.html').read_text())
+            self.assertFalse((folder / 'preview-dark.html').exists())
+            self.assertTrue((ROOT / entry['preview']['image']).is_file())
+            image_data = (ROOT / entry['preview']['image']).read_bytes()
+            if image_data.startswith(b'\x89PNG'):
+                self.assertGreaterEqual(int.from_bytes(image_data[16:20], 'big'), min(1280, record['width']))
+            self.assertEqual(record['files']['STITCH-PROMPT.md'], hashlib.sha256((folder / 'STITCH-PROMPT.md').read_bytes()).hexdigest())
 
     def test_prompts_are_original_and_brand_specific(self):
         prompts=[]
@@ -78,7 +102,7 @@ class CollectionTests(unittest.TestCase):
                 self.assertGreaterEqual((values[1]+.05)/(values[0]+.05),4.5)
 
     def test_static_links_resolve_without_commercial_routes(self):
-        files=[ROOT/'index.html']+list((ROOT/'design-md').glob('*/*.html'))
+        files=[ROOT/'index.html']
         for path in files:
             parser=Links(); parser.feed(path.read_text())
             for link in parser.links:
@@ -98,13 +122,16 @@ class CollectionTests(unittest.TestCase):
         with zipfile.ZipFile(ROOT/'assets/all-designs.zip') as archive:
             self.assertIsNone(archive.testzip())
             for entry in self.recipes:
-                for filename in ('DESIGN.md','PROMPTS.md','preview.html','preview-dark.html'):
+                for filename in ('DESIGN.md','PROMPTS.md','preview.html','STITCH.json','STITCH-PROMPT.md'):
                     name=f"design-md/{entry['slug']}/{filename}"
                     self.assertEqual(archive.read(name),(ROOT/name).read_bytes())
+                record = json.loads((ROOT / 'design-md' / entry['slug'] / 'STITCH.json').read_text())
+                for filename, checksum in record['files'].items():
+                    self.assertEqual(hashlib.sha256(archive.read(f"design-md/{entry['slug']}/{filename}")).hexdigest(), checksum)
             self.assertIn('Copyright (c) 2026 VoltAgent',archive.read('LICENSE').decode())
             self.assertIn('ATTRIBUTION.md',archive.namelist())
-            self.assertIn('assets/preview.css',archive.namelist())
-            self.assertIn('assets/preview.js',archive.namelist())
+            self.assertNotIn('assets/preview.css',archive.namelist())
+            self.assertNotIn('assets/preview.js',archive.namelist())
 
 if __name__=='__main__':
     unittest.main()

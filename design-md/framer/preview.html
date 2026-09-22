@@ -1,8 +1,515 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Framer · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fafaf8;--panel:#efefed;--ink:#000000;--muted:#5a5a59;--border:#cdcdcb;--accent:#ffffff;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/framer">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Framer · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#090909"></span><code>#090909</code></div><div class="swatch"><span style="background:#0099ff"></span><code>#0099ff</code></div><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#999999"></span><code>#999999</code></div><div class="swatch"><span style="background:#141414"></span><code>#141414</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · GT Walsheim Framer Medium</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式為本專案延伸配色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Canvas — Portfolio Publishing Engine</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Public Sans Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with CDN Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim from Design System -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#2f3131",
+            "surface-dim": "#131313",
+            "surface-container-lowest": "#0e0e0e",
+            "inverse-on-surface": "#313030",
+            "tertiary-fixed": "#e2e2e2",
+            "on-surface": "#e5e2e1",
+            "primary": "#ffffff",
+            "on-error": "#690005",
+            "on-tertiary-fixed-variant": "#454747",
+            "surface-variant": "#353534",
+            "primary-fixed-dim": "#c6c6c7",
+            "inverse-surface": "#e5e2e1",
+            "surface-tint": "#c6c6c7",
+            "secondary-container": "#494949",
+            "primary-fixed": "#e2e2e2",
+            "error-container": "#93000a",
+            "on-secondary-fixed-variant": "#474747",
+            "on-primary-container": "#636565",
+            "surface": "#131313",
+            "on-tertiary-fixed": "#1a1c1c",
+            "on-tertiary-container": "#636565",
+            "on-primary": "#2f3131",
+            "secondary-fixed": "#e4e2e2",
+            "surface-bright": "#3a3939",
+            "surface-container-high": "#2a2a2a",
+            "on-primary-fixed": "#1a1c1c",
+            "on-secondary": "#303030",
+            "tertiary": "#ffffff",
+            "on-secondary-container": "#b9b8b8",
+            "tertiary-container": "#e2e2e2",
+            "surface-container": "#201f1f",
+            "background": "#131313",
+            "secondary-fixed-dim": "#c8c6c6",
+            "on-error-container": "#ffdad6",
+            "outline": "#8e9192",
+            "on-surface-variant": "#c4c7c8",
+            "on-primary-fixed-variant": "#454747",
+            "secondary": "#c8c6c6",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "outline-variant": "#444748",
+            "primary-container": "#e2e2e2",
+            "on-secondary-fixed": "#1b1c1c",
+            "inverse-primary": "#5d5f5f",
+            "on-background": "#e5e2e1",
+            "surface-container-low": "#1c1b1b",
+            "surface-container-highest": "#353534",
+            "error": "#ffb4ab",
+            "accent-blue": "#0099ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #090909;
+      color: #e5e2e1;
+      font-feature-settings: "cv01", "cv05", "cv09", "cv11", "ss03", "ss07";
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .display-hero {
+      letter-spacing: -0.05em;
+      line-height: 0.94;
+    }
+    .display-tight {
+      letter-spacing: -0.04em;
+    }
+    .editorial-grid {
+      background-size: 24px 24px;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface min-h-screen selection:bg-accent-blue selection:text-white">
+<!-- ==================== TOP NAVIGATION BAR ==================== -->
+<!-- Shared Component: TopNavBar conforming strictly to JSON definition & style tokens -->
+<header class="sticky top-0 w-full z-50 bg-surface dark:bg-surface border-b border-outline-variant dark:border-outline-variant backdrop-blur-md bg-opacity-90">
+<div class="flex justify-between items-center h-14 px-6 w-full max-w-7xl mx-auto">
+<!-- Logo & Status Indicator -->
+<div class="flex items-center gap-4">
+<a class="font-display font-medium text-base tracking-tighter text-on-surface dark:text-on-surface flex items-center gap-2 hover:opacity-90 transition-opacity" href="#">
+<span class="w-4 h-4 bg-primary text-on-primary rounded-sm flex items-center justify-center font-mono text-[10px] font-bold">C</span>
+<span>Canvas</span>
+</a>
+<div class="hidden sm:flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-container-high border border-outline-variant text-[11px] font-label text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse"></span>
+<span>v2.4 Live</span>
+</div>
+</div>
+<!-- Navigation Links (Exact Shared Component anchors: Showcase, Templates, Features, Pricing) -->
+<nav class="hidden md:flex items-center gap-7 text-sm font-label">
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-primary dark:hover:text-primary transition-colors duration-150 active:scale-95 transition-transform duration-100 ease-out" href="#showcase">Showcase</a>
+<a class="text-primary dark:text-primary font-medium hover:text-primary dark:hover:text-primary transition-colors duration-150 active:scale-95 transition-transform duration-100 ease-out" href="#templates">Templates</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-primary dark:hover:text-primary transition-colors duration-150 active:scale-95 transition-transform duration-100 ease-out" href="#features">Features</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-primary dark:hover:text-primary transition-colors duration-150 active:scale-95 transition-transform duration-100 ease-out" href="#editor-preview">Pricing</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Icon Actions from JSON: devices, tune -->
+<div class="hidden lg:flex items-center gap-1 text-on-surface-variant pr-2 border-r border-outline-variant">
+<button class="p-1.5 rounded hover:text-primary hover:bg-surface-container-high transition-colors" title="Responsive Viewports">
+<span class="material-symbols-outlined text-[18px]">devices</span>
+</button>
+<button class="p-1.5 rounded hover:text-primary hover:bg-surface-container-high transition-colors" title="Editor Parameters">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+</button>
+</div>
+<!-- Secondary Action: Sign in -->
+<a class="text-sm font-label text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="#">Sign in</a>
+<!-- Primary Action: Publish live -->
+<button class="bg-primary text-on-primary font-label text-xs font-semibold px-4 py-2 rounded-full hover:bg-surface-tint active:scale-95 transition-all duration-150 flex items-center gap-1.5 shadow-sm">
+<span>Publish live</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</button>
+</div>
+</div>
+</header>
+<!-- ==================== HERO SECTION & ARTBOARD HEADLINE ==================== -->
+<main class="w-full">
+<section class="relative pt-20 pb-16 px-6 max-w-7xl mx-auto flex flex-col items-center text-center">
+<!-- Atmosphere ambient gradient glows -->
+<div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[320px] bg-gradient-to-tr from-accent-blue/10 via-purple-600/5 to-transparent blur-3xl -z-10 pointer-events-none"></div>
+<!-- Eyebrow Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1 mb-8 rounded-full border border-outline-variant bg-surface-container-low text-xs font-mono text-on-surface-variant uppercase tracking-wider">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-accent-blue"></span>
+<span>Portfolio Publishing Engine • Zero Config</span>
+</div>
+<!-- Poster-Grade Tight Headline -->
+<h1 class="text-5xl sm:text-7xl lg:text-8xl font-display font-medium text-primary display-hero max-w-5xl tracking-tight mb-8">
+        From artboard to live web in one keypress.
+      </h1>
+<!-- Precise Subtitle -->
+<p class="text-base sm:text-lg lg:text-xl font-body text-on-surface-variant max-w-2xl mx-auto mb-10 leading-relaxed font-normal">
+        Design your portfolio visually with fluid breakpoint control, instant domain setup, and sub-second asset delivery. No build steps, completely free for creators.
+      </p>
+<!-- Quick Action Buttons -->
+<div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+<button class="bg-primary text-on-primary font-label text-sm font-medium px-6 py-3 rounded-full hover:opacity-95 active:scale-95 transition-all shadow-md flex items-center gap-2">
+<span>Open Web Canvas</span>
+<span class="material-symbols-outlined text-[18px]">north_east</span>
+</button>
+<a class="bg-surface-container text-on-surface hover:text-primary font-label text-sm font-medium px-6 py-3 rounded-full border border-outline-variant hover:border-outline transition-all active:scale-95" href="#templates">
+          Explore Templates
+        </a>
+</div>
+<!-- ==================== INTERACTIVE WORKSTATION CANVAS PREVIEW ==================== -->
+<div class="w-full max-w-6xl mx-auto rounded-xl border border-outline-variant bg-surface-container-lowest overflow-hidden shadow-2xl relative text-left" id="editor-preview">
+<!-- Window Frame Header -->
+<div class="h-12 bg-surface-container-low border-b border-outline-variant px-4 flex items-center justify-between">
+<!-- Window Dots -->
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-container-high border border-outline-variant"></span>
+<span class="w-3 h-3 rounded-full bg-surface-container-high border border-outline-variant"></span>
+<span class="w-3 h-3 rounded-full bg-surface-container-high border border-outline-variant"></span>
+<span class="ml-3 text-xs font-mono text-on-surface-variant hidden sm:inline-block">elena-rostova.design / Project Archive 2025</span>
+</div>
+<!-- URL Preview Bar -->
+<div class="hidden md:flex items-center gap-2 px-3 py-1 rounded bg-surface-container text-xs font-mono text-outline border border-outline-variant/60 w-72 justify-between">
+<span class="truncate">https://elena-rostova.canvas.site</span>
+<span class="material-symbols-outlined text-[14px]">lock</span>
+</div>
+<!-- Viewport Toggle Pills -->
+<div class="flex items-center gap-1 bg-surface-container p-0.5 rounded-lg border border-outline-variant">
+<button class="px-2.5 py-1 rounded bg-surface-bright text-primary text-xs font-label flex items-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-[14px]">desktop_windows</span>
+<span class="hidden sm:inline">Desktop</span>
+</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-primary text-xs font-label flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[14px]">tablet_mac</span>
+</button>
+<button class="px-2.5 py-1 rounded text-on-surface-variant hover:text-primary text-xs font-label flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[14px]">smartphone</span>
+</button>
+</div>
+</div>
+<!-- Canvas Artboard Interior Preview -->
+<div class="p-6 sm:p-10 lg:p-12 editorial-grid bg-surface-container-lowest relative min-h-[500px]">
+<!-- Editorial Case Study Header Inside Workspace -->
+<div class="max-w-4xl mx-auto space-y-8">
+<div class="flex flex-col sm:flex-row sm:items-end justify-between border-b border-outline-variant pb-6 gap-4">
+<div>
+<span class="text-xs font-mono text-accent-blue uppercase tracking-widest block mb-2">Architectural Exhibition &amp; Identity</span>
+<h2 class="text-3xl sm:text-5xl font-display font-medium text-primary tracking-tight">
+                  Elena Rostova — Spatial &amp; Brand Direction
+                </h2>
+</div>
+<div class="text-right sm:text-right flex sm:flex-col items-center sm:items-end gap-3 sm:gap-1">
+<span class="text-xs font-mono text-on-surface-variant">2023 — 2025</span>
+<span class="text-xs font-label px-2 py-0.5 rounded bg-surface-container-high border border-outline-variant text-on-surface">Basel / Berlin</span>
+</div>
+</div>
+<!-- Visual Showcase Tiles in Editor -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+<!-- Big Visual Card -->
+<div class="md:col-span-8 rounded-lg overflow-hidden border border-outline-variant bg-surface-container relative group">
+<div class="aspect-[16/10] w-full overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A striking minimalist architectural pavilion rendered in high contrast concrete and obsidian glass, bathed in cool twilight mood lighting with subtle atmospheric fog. Deep blacks and pristine architectural planes create an ultra-modern aesthetic tailored for creative directors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpNORNqhLzG7gHZH-MkONpO4vsDJfCD9Es8L7AwhDKdUeJboMWN1fb3WUOFmRnQG15_VvRdsFSQoQjOGqBgrx_s6F6KEMGBGqXw7xL1uWU192cuH7cWXL0dcmtifqWMTYxHACmlxRilSpgNaj_5NnU6ajFV1bPN5Tcka9nqHHxWSsshq0FHRcLsh5bJuI6IblmrGLOwZU_7Dyg0PAuUcoM6AXOHzVvsTtHDwsxyQlYtG2xXsg8zyIyHBwSC9CaWVIUcQc4IDYSsZZ9"/>
+</div>
+<div class="p-4 bg-surface-container flex items-center justify-between border-t border-outline-variant">
+<span class="text-xs font-mono text-on-surface">Fig 01. Concrete Monolith Installation — Pavillon 04</span>
+<div class="flex gap-2">
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant">Spatial</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant">Identity</span>
+</div>
+</div>
+</div>
+<!-- Side Column Typography & Micro Detail -->
+<div class="md:col-span-4 flex flex-col justify-between gap-6">
+<div class="p-6 rounded-lg border border-outline-variant bg-surface-container flex-1">
+<span class="text-[11px] font-mono text-on-surface-variant uppercase tracking-wider block mb-3">Curatorial Statement</span>
+<p class="text-sm font-body text-on-surface leading-relaxed">
+                    Sculpting tactile brand environments through raw materiality, light gradients, and typographic rigor. Built for monumental spaces and living archives.
+                  </p>
+<div class="mt-6 pt-4 border-t border-outline-variant flex items-center justify-between text-xs font-mono text-on-surface-variant">
+<span>Index Ref: ER-902</span>
+<span class="text-accent-blue font-medium">Selected Case Study</span>
+</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant bg-surface-container">
+<div class="aspect-[16/9] w-full bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A macro studio still life of brutalist typography printed on raw tactile linen paper with deep black ink and precise Swiss grid layout. The lighting is crisp and directional, casting subtle razor-thin shadows across the paper texture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJK9VmGSUxk0Kf5gIMD8i8JYr5MIs7swEzvlV4Phnj6Q8Kd3_syFPjbtyCxg6meBKRVLH4OU44HM7kM7PLYbx4Cfqx0Z7VyefROd-c51DvwKQhbwmQlFmymGL206SpHmzehUXD0yp6zdzUQvBR56E5hxbRZDrOJbI_EKz-3Aia1sV6AKG71PU-AuU8iYJJAHm9tVIbUDR3jbUyRo_qYLw8NhgsK2MkHXgf47qMf9XjbBMm_NEkcoG8dBfQqADr6JFNNDqV0FxZAi-l"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- FLOATING WORKSTATION TOOL DOCK -->
+<div class="sticky sm:absolute bottom-6 left-1/2 sm:-translate-x-1/2 w-full sm:w-auto px-4 sm:px-0 mt-8 sm:mt-0 flex items-center justify-center z-20">
+<div class="flex items-center gap-3 px-3 py-2 rounded-full bg-surface-container-high/95 backdrop-blur-md border border-outline shadow-2xl">
+<!-- Status indicator -->
+<div class="flex items-center gap-2 pl-2 pr-1 border-r border-outline-variant text-xs font-mono text-on-surface-variant">
+<span class="w-2 h-2 rounded-full bg-semantic-success"></span>
+<span class="hidden sm:inline">Changes saved · CDN synced</span>
+<span class="sm:hidden">Synced</span>
+</div>
+<!-- Share Preview Button -->
+<button class="px-3 py-1.5 rounded-full text-xs font-label text-on-surface hover:text-primary hover:bg-surface-container transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+<span class="hidden sm:inline">Share Preview</span>
+</button>
+<!-- Publish Live Button -->
+<button class="px-4 py-1.5 rounded-full bg-accent-blue text-white text-xs font-label font-medium hover:bg-blue-600 transition-colors flex items-center gap-1.5 shadow-sm active:scale-95">
+<span class="material-symbols-outlined text-[16px]">send</span>
+<span>Publish live</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== COMPACT FEATURE SEQUENCE ==================== -->
+<section class="border-y border-outline-variant bg-surface-container-low py-16 px-6" id="features">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<!-- Feature 01 -->
+<div class="py-6 md:py-0 md:px-8 first:pl-0 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-accent-blue font-semibold">01 / RESPONSIVE ENGINE</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">responsive_layout</span>
+</div>
+<h3 class="text-xl font-display font-medium text-primary tracking-tight">Fluid Canvas Architecture</h3>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+              Fluid typography &amp; layout fluidity across all custom viewport aspect ratios without media query maintenance. No broken mobile states.
+            </p>
+</div>
+<!-- Feature 02 -->
+<div class="py-6 md:py-0 md:px-8 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-accent-blue font-semibold">02 / EDGE INFRASTRUCTURE</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">public</span>
+</div>
+<h3 class="text-xl font-display font-medium text-primary tracking-tight">Instant Custom Domains</h3>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+              Publish instantly to your custom root domain with automated SSL, Brotli compression, and worldwide edge caching. Sub-second asset delivery.
+            </p>
+</div>
+<!-- Feature 03 -->
+<div class="py-6 md:py-0 md:px-8 last:pr-0 space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-accent-blue font-semibold">03 / INLINE CURATION</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">auto_stories</span>
+</div>
+<h3 class="text-xl font-display font-medium text-primary tracking-tight">Visual Case Study CMS</h3>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+              Manage case studies, high-resolution imagery, and project credits directly on-canvas with inline editing. What you view is what visitors experience.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== CURATED TEMPLATE GALLERY ==================== -->
+<section class="py-24 px-6 max-w-7xl mx-auto" id="templates">
+<!-- Section Header with Category Tabs -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<span class="text-xs font-mono text-on-surface-variant uppercase tracking-wider block mb-2">Handcrafted Archetypes</span>
+<h2 class="text-3xl sm:text-4xl font-display font-medium text-primary tracking-tight">
+            Engineered for studios and independents
+          </h2>
+</div>
+<!-- Filter Pill Chips -->
+<div class="flex flex-wrap items-center gap-1.5 p-1 rounded-full bg-surface-container border border-outline-variant text-xs font-label">
+<button class="px-3.5 py-1.5 rounded-full bg-surface-bright text-primary font-medium shadow-sm">All Templates</button>
+<button class="px-3.5 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors">Minimalist</button>
+<button class="px-3.5 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors">Editorial</button>
+<button class="px-3.5 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors">Studio</button>
+<button class="px-3.5 py-1.5 rounded-full text-on-surface-variant hover:text-primary transition-colors">Architecture</button>
+</div>
+</div>
+<!-- Template Cards Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- CARD 1 (Featured Hero Card): Monolith Studio (Spans 12 cols or 7 cols) -->
+<div class="lg:col-span-7 rounded-xl border border-outline-variant bg-surface-container-low overflow-hidden hover:border-outline transition-all duration-300 group flex flex-col justify-between">
+<div class="p-6 border-b border-outline-variant flex items-center justify-between">
+<div>
+<span class="text-xs font-mono text-accent-blue block mb-1">Architecture &amp; Spatial</span>
+<h3 class="text-2xl font-display font-medium text-primary">Monolith Studio</h3>
+</div>
+<!-- Viewport Switcher -->
+<div class="flex items-center gap-1 bg-surface-container px-2 py-1 rounded border border-outline-variant text-[11px] font-mono text-on-surface-variant">
+<span class="text-primary font-medium">Desktop</span>
+<span>·</span>
+<span class="hover:text-primary cursor-pointer">Tablet</span>
+<span>·</span>
+<span class="hover:text-primary cursor-pointer">Mobile</span>
+</div>
+</div>
+<!-- Mockup Visual -->
+<div class="p-6 bg-surface-container-lowest">
+<div class="rounded-lg overflow-hidden border border-outline-variant aspect-[16/10] bg-surface-container relative">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" data-alt="An expansive modern architectural portfolio website mockup showcasing clean concrete facades, minimalist interior voids, and brutalist geometric framing in low-key moody atmospheric lighting with extreme attention to negative space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWURzA0Hw78ujulCs7Olw9W9HwtMGubrVOGBRz6QdeEIyzeSXjmXi3Z-5qDnkOAJ5bMJryDG3cWQ8dFc2wr2mPT56FaXYbyZmJ3jUqK0yiWYJETH-YQcLcW8USwPnjMLQRLWpviH9sVM10cM4vWnoHlVrCTOxnEqN5x1zyUVq_xC0xUT-RYnS5NOB9WE9eRPJ5oCi-wmdHa9qIG79IlwpazLkf2_mKG4-CZ0oNUZZbWi2gbu1Srd6knVGy618VfqqhxRhbBT0TdvpD"/>
+<!-- Subtle Tag Overlay -->
+<div class="absolute bottom-3 left-3 flex gap-1.5">
+<span class="px-2 py-0.5 rounded bg-surface-dim/90 backdrop-blur border border-outline-variant text-[10px] font-mono text-on-surface">Editorial</span>
+<span class="px-2 py-0.5 rounded bg-surface-dim/90 backdrop-blur border border-outline-variant text-[10px] font-mono text-on-surface">Dark Mode</span>
+<span class="px-2 py-0.5 rounded bg-surface-dim/90 backdrop-blur border border-outline-variant text-[10px] font-mono text-on-surface">Grid</span>
+</div>
+</div>
+</div>
+<!-- Card Footer Action -->
+<div class="p-6 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<p class="text-xs font-body text-on-surface-variant max-w-sm">
+              Monospaced index, full-bleed spatial imagery cards, and asymmetric editorial projects layout.
+            </p>
+<button class="bg-accent-blue hover:bg-blue-600 text-white font-label text-xs font-medium px-4 py-2 rounded-full transition-all flex items-center gap-1.5 shadow-sm active:scale-95">
+<span>Use Template</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 2 & CARD 3 STACK (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-8">
+<!-- Card 2: Komorebi Archive -->
+<div class="rounded-xl border border-outline-variant bg-surface-container-low overflow-hidden hover:border-outline transition-all duration-300 group">
+<div class="p-5 border-b border-outline-variant flex items-center justify-between">
+<div>
+<span class="text-xs font-mono text-on-surface-variant block mb-0.5">Interaction &amp; Industrial</span>
+<h4 class="text-lg font-display font-medium text-primary">Komorebi Archive</h4>
+</div>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-on-surface-variant">Typography-First</span>
+</div>
+<div class="p-4 bg-surface-container-lowest">
+<div class="rounded-lg overflow-hidden border border-outline-variant aspect-[16/9] bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" data-alt="A sleek minimalist interaction design portfolio interface layout displaying industrial audio equipment prototypes on deep charcoal backgrounds with sleek hairline dividers and crisp white typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqm9WAV1HuLVsL2lluBO_F7v6KgYWkoOZO0qnmhMpw5qVEM8KpRCXMNQVPPp4uK28S6tmb4sBC52EmbJTUQY7e6hjQ0xdPncFdyXK12rSIaX5Dp9smhcH1X7PVhAARLQ3YQKNVvetNbHiekbCEU5qLjEkMlSjPm1mIOujNxWIab6OSXVVgAEjEDvNUKCMY0nRvsH9OIJbV8JzjSW48XnwKukhYbjEprVMBIKREAi1njCqj7M6vjFvy2F6wNBblBOqy7Kw3ZV5ggalI"/>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<span class="text-xs font-mono text-on-surface-variant">Smooth transition states</span>
+<button class="border border-outline-variant hover:border-outline text-on-surface hover:text-primary font-label text-xs font-medium px-3.5 py-1.5 rounded-full transition-all">
+                Use Template
+              </button>
+</div>
+</div>
+<!-- Card 3: Vanguard Brand -->
+<div class="rounded-xl border border-outline-variant bg-surface-container-low overflow-hidden hover:border-outline transition-all duration-300 group">
+<div class="p-5 border-b border-outline-variant flex items-center justify-between">
+<div>
+<span class="text-xs font-mono text-on-surface-variant block mb-0.5">Creative Director Index</span>
+<h4 class="text-lg font-display font-medium text-primary">Vanguard Brand</h4>
+</div>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-on-surface-variant">Client Index Table</span>
+</div>
+<div class="p-4 bg-surface-container-lowest">
+<div class="rounded-lg overflow-hidden border border-outline-variant aspect-[16/9] bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-500" data-alt="A high fashion and brand identity digital case study layout on pure obsidian surface, showcasing Swiss posters, metallic foil finishes, and monochrome typography on an art gallery background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAshNy4vO0224hJJ-681NU9hjn2YEOYGMPgUmasudUaktuWRBg5PLkNRT39ovtX4_tISNWMzT4FCUFjjXYfFno-4f92poLtI11J2Mqj9jC_q9-wVt_dRe_YmlhwuL0YlNxhSV3FYosllYCoRyH3vopMvb-upnzmMojQS-d19wO_aTeQ4g2UJ7DwsoMOeccgoUJ4888NpUCLIdnhNEE5ao3mlYb0mASiZKLjk1UgSJJDSdiGj5-5R273bnKJoc9LfHBEZDwoq_Yx9Xlv"/>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-outline-variant flex items-center justify-between">
+<span class="text-xs font-mono text-on-surface-variant">Client index with dynamic hover</span>
+<button class="border border-outline-variant hover:border-outline text-on-surface hover:text-primary font-label text-xs font-medium px-3.5 py-1.5 rounded-full transition-all">
+                Use Template
+              </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== PRE-FOOTER LIVE PUBLISHING STRIP ==================== -->
+<section class="px-6 pb-20 max-w-7xl mx-auto">
+<div class="rounded-2xl border border-outline-variant bg-surface-container-low p-8 sm:p-12 relative overflow-hidden">
+<!-- Background subtle glow -->
+<div class="absolute right-0 bottom-0 w-96 h-96 bg-accent-blue/10 blur-3xl pointer-events-none"></div>
+<div class="max-w-2xl space-y-4 mb-8">
+<div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-surface-container-high border border-outline-variant text-[11px] font-mono text-accent-blue">
+<span class="w-1.5 h-1.5 rounded-full bg-semantic-success"></span>
+<span>Free forever for personal portfolios</span>
+</div>
+<h3 class="text-3xl sm:text-4xl font-display font-medium text-primary tracking-tight">
+            Claim your namespace. Publish tonight.
+          </h3>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+            Reserve your unique studio handle or link your custom root apex record in seconds. No credit card, no deployment scripts, no subscriptions.
+          </p>
+</div>
+<!-- Interactive Domain Claim Input Group -->
+<div class="max-w-xl flex flex-col sm:flex-row items-center gap-3">
+<div class="relative w-full">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+</div>
+<input class="w-full bg-surface-container-lowest text-primary font-mono text-sm pl-10 pr-32 py-3 rounded-lg border border-outline-variant focus:border-accent-blue focus:ring-1 focus:ring-accent-blue outline-none transition-all" placeholder="studio-name" type="text" value="yourname"/>
+<span class="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-xs font-mono text-on-surface-variant">
+              .canvas.site
+            </span>
+</div>
+<button class="w-full sm:w-auto shrink-0 bg-primary text-on-primary hover:bg-surface-tint font-label text-sm font-medium px-6 py-3 rounded-lg transition-all active:scale-95 shadow-md flex items-center justify-center gap-2">
+<span>Claim URL</span>
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+</button>
+</div>
+<!-- Micro Meta Specs -->
+<div class="mt-6 flex flex-wrap items-center gap-6 text-xs font-mono text-on-surface-variant">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-semantic-success">check</span>
+            Custom root CNAME support
+          </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-semantic-success">check</span>
+            Automatic SSL cert issuance
+          </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-semantic-success">check</span>
+            Uncapped edge bandwidth
+          </span>
+</div>
+</div>
+</section>
+</main>
+<!-- ==================== FOOTER ==================== -->
+<!-- Shared Component: Footer conforming verbatim to JSON specifications -->
+<footer class="docked full-width bottom bg-surface dark:bg-surface border-t border-outline-variant dark:border-outline-variant flat no shadows">
+<div class="w-full max-w-7xl mx-auto px-6 py-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+<!-- Brand & Copyright -->
+<div class="space-y-2">
+<div class="font-display font-medium text-sm tracking-tight text-on-surface dark:text-on-surface flex items-center gap-2">
+<span class="w-3.5 h-3.5 bg-primary text-on-primary rounded-sm flex items-center justify-center font-mono text-[9px] font-bold">C</span>
+<span>Canvas</span>
+</div>
+<p class="font-body text-xs tracking-tight text-on-surface-variant dark:text-on-surface-variant">
+          © 2025 Canvas Inc. Built for creative independent studios.
+        </p>
+</div>
+<!-- Links defined in Shared Components JSON: ["Templates", "Showcase", "Documentation", "Domain Setup", "Changelog", "Privacy"] -->
+<div class="flex flex-wrap items-center gap-6 font-body text-xs tracking-tight">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#templates">Templates</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#showcase">Showcase</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#">Documentation</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#">Domain Setup</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#">Changelog</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-primary dark:hover:text-primary transition-colors duration-150 active:opacity-80" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+</body></html>

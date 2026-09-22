@@ -16,7 +16,7 @@ def main():
     for name in ('index.html', 'README.md', 'ATTRIBUTION.md', 'LICENSE', 'CONTRIBUTING.md'):
         shutil.copy2(ROOT / name, OUTPUT / name)
     for name in ('assets', 'design-md', 'prompts'):
-        shutil.copytree(ROOT / name, OUTPUT / name)
+        shutil.copytree(ROOT / name, OUTPUT / name, ignore=shutil.ignore_patterns('all-designs.zip') if name == 'assets' else None)
     print(f'Staged public website in {OUTPUT}')
 
 

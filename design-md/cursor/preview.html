@@ -1,8 +1,573 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cursor · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#f7f7f4;--panel:#ecece9;--ink:#000000;--muted:#595958;--border:#cbcbc8;--accent:#f54e00;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/cursor">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Cursor · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#f54e00"></span><code>#f54e00</code></div><div class="swatch"><span style="background:#f7f7f4"></span><code>#f7f7f4</code></div><div class="swatch"><span style="background:#26251e"></span><code>#26251e</code></div><div class="swatch"><span style="background:#d04200"></span><code>#d04200</code></div><div class="swatch"><span style="background:#5a5852"></span><code>#5a5852</code></div><div class="swatch"><span style="background:#807d72"></span><code>#807d72</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · CursorGothic&#x27;, system-ui, &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Prism — AI-first Code Synthesis</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#a1401d",
+            "on-secondary-container": "#732000",
+            "surface-container-high": "#e8e8e5",
+            "surface": "#f9f9f6",
+            "surface-container": "#eeeeeb",
+            "on-error-container": "#93000a",
+            "on-surface": "#1a1c1b",
+            "primary-fixed-dim": "#ffb59d",
+            "surface-bright": "#f9f9f6",
+            "on-tertiary-fixed-variant": "#004689",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-container": "#fefcff",
+            "secondary-fixed": "#ffdbd0",
+            "on-primary-fixed": "#390b00",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed": "#d5e3ff",
+            "outline-variant": "#e5beb2",
+            "tertiary-container": "#0074db",
+            "on-primary": "#ffffff",
+            "surface-tint": "#ac3400",
+            "outline": "#907066",
+            "error-container": "#ffdad6",
+            "tertiary": "#005baf",
+            "surface-variant": "#e2e3e0",
+            "on-surface-variant": "#5c4038",
+            "on-error": "#ffffff",
+            "on-primary-container": "#fffbff",
+            "inverse-surface": "#2f312f",
+            "surface-container-highest": "#e2e3e0",
+            "on-secondary-fixed": "#390b00",
+            "surface-container-low": "#f4f4f1",
+            "on-tertiary-fixed": "#001b3c",
+            "on-background": "#1a1c1b",
+            "tertiary-fixed-dim": "#a8c8ff",
+            "secondary-container": "#ff875e",
+            "surface-dim": "#dadad7",
+            "inverse-primary": "#ffb59d",
+            "inverse-on-surface": "#f1f1ee",
+            "secondary-fixed-dim": "#ffb59d",
+            "primary-container": "#d24200",
+            "on-primary-fixed-variant": "#832600",
+            "primary": "#a83300",
+            "error": "#ba1a1a",
+            "primary-fixed": "#ffdbd0",
+            "background": "#f9f9f6",
+            "on-secondary-fixed-variant": "#812906"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "code": ["'JetBrains Mono'", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #f9f9f6;
+      color: #1a1c1b;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f4f4f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #dadad7;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar (Shared Component JSON Blueprint Compliant) -->
+<header class="w-full bg-surface border-b border-surface-container-highest sticky top-0 z-50">
+<div class="flex justify-between items-center h-16 w-full max-w-7xl mx-auto px-6 sm:px-8">
+<!-- Brand Logo / Product Name -->
+<a class="flex items-center gap-2.5 font-headline text-lg font-medium tracking-tight text-on-surface hover:opacity-85 transition-opacity" href="#">
+<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polygon points="12 2 22 20 2 20"></polygon>
+<path class="opacity-60" d="M12 2v18" stroke-dasharray="2 2"></path>
+<path class="text-primary" d="M7 15l5-4 5 4"></path>
+</svg>
+<span class="tracking-tight text-on-surface font-semibold text-[17px]">Prism</span>
+</a>
+<!-- Center Links -->
+<nav class="hidden md:flex items-center space-x-7 font-body text-sm font-normal">
+<a class="text-primary font-medium transition-colors duration-150" href="#overview">Overview</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#changelog">Changelog</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#docs">Docs</a>
+<a class="text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#download">Download</a>
+</nav>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-3.5">
+<a class="hidden sm:inline-flex items-center gap-1.5 text-xs font-medium text-on-surface hover:text-primary px-3 py-1.5 rounded-lg border border-surface-container-highest bg-surface-container-lowest transition-colors duration-150" href="https://github.com" rel="noreferrer" target="_blank">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+</svg>
+<span>GitHub</span>
+</a>
+<!-- Download Action -->
+<a class="inline-flex items-center gap-2 bg-on-surface text-surface px-3.5 py-1.5 rounded-lg text-xs font-medium hover:bg-black transition-colors duration-150" href="#download">
+<span>Download</span>
+<kbd class="hidden sm:inline-block bg-surface/20 text-surface/90 px-1.5 py-0.5 rounded text-[10px] code-font tracking-wide">⌘D</kbd>
+</a>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-7xl mx-auto px-6 sm:px-8 py-14 sm:py-20 flex flex-col items-center">
+<!-- Hero Section -->
+<section class="w-full max-w-3xl mx-auto text-center mb-16" id="overview">
+<!-- Version & Spec Badge -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container border border-surface-container-highest text-xs text-on-surface-variant mb-8 code-font">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span>Latest build: v0.14.2 · Apple Silicon &amp; Linux x86_64 · 100% Local Indexing</span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline text-4xl sm:text-5xl lg:text-[56px] leading-[1.12] font-normal tracking-[-0.03em] text-on-surface mb-6">
+        Code synthesis that respects <br class="hidden sm:inline"/>your context.
+      </h1>
+<!-- Subhead -->
+<p class="font-body text-base sm:text-lg text-on-surface-variant font-normal leading-relaxed max-w-2xl mx-auto mb-9">
+        Prism understands your full repository graph, proposing inline diffs with surgical precision so you stay entirely in flow.
+      </p>
+<!-- Primary Action Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-on-surface text-surface hover:bg-black px-6 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm" href="#download">
+<svg class="w-4 h-4 text-surface" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>Download Prism v0.14</span>
+<span class="text-surface/60 text-xs pl-1">Free &amp; Open Source</span>
+</a>
+<a class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-on-surface hover:text-primary text-sm font-medium px-4 py-2.5 transition-colors" href="#philosophy">
+<span>Read the Architecture</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Core Component: High-Fidelity Editor Change Preview (Focal Feature) -->
+<section class="w-full max-w-5xl mb-24">
+<!-- Editor Window Frame -->
+<div class="w-full bg-surface-container-lowest rounded-xl border border-surface-container-highest shadow-sm overflow-hidden flex flex-col">
+<!-- Window Chrome / Titlebar -->
+<div class="bg-surface-container-low px-4 py-3 border-b border-surface-container-highest flex items-center justify-between select-none">
+<!-- Left: Mac Window Controls & Tab -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-dim"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-dim"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-surface-dim"></div>
+</div>
+<div class="h-4 w-px bg-surface-container-highest mx-0.5"></div>
+<!-- Active Tab -->
+<div class="flex items-center gap-2 px-2.5 py-1 bg-surface-container-lowest rounded text-xs font-medium text-on-surface border border-surface-container-highest">
+<svg class="w-3.5 h-3.5 text-primary" fill="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="6"></circle>
+</svg>
+<span class="code-font text-[12px]">src/indexer/graph_walker.rs</span>
+<span class="text-[10px] text-primary bg-primary-fixed px-1 rounded font-mono">diff</span>
+</div>
+</div>
+<!-- Center: Branch & Workspace state -->
+<div class="hidden sm:flex items-center gap-2 text-xs text-on-surface-variant code-font">
+<span class="material-symbols-outlined text-[15px]">fork_right</span>
+<span>feat/semantic-traversal</span>
+</div>
+<!-- Right: Status indicator -->
+<div class="flex items-center gap-2 text-xs">
+<span class="inline-flex items-center gap-1.5 text-secondary font-medium px-2 py-0.5 bg-secondary-fixed/50 rounded text-[11px] code-font">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+              1 modification pending
+            </span>
+</div>
+</div>
+<!-- Diff Sub-Header / Metadata Banner -->
+<div class="px-5 py-2.5 bg-surface-bright border-b border-surface-container flex flex-wrap items-center justify-between text-xs text-on-surface-variant code-font">
+<div class="flex items-center gap-3">
+<span class="text-on-surface font-medium">graph_walker::walk_dependencies()</span>
+<span class="text-surface-dim">|</span>
+<span class="text-[#cf2d56]">-22 lines</span>
+<span class="text-[#1f8a65]">+14 lines</span>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[14px]">psychology</span>
+<span>LLM context: AST + 4 imported types (in-memory)</span>
+</div>
+</div>
+<!-- The Code Diff Canvas -->
+<div class="w-full overflow-x-auto code-font text-[13px] leading-relaxed bg-surface-container-lowest divide-y divide-surface-container">
+<!-- Context lines (Pre-diff) -->
+<div class="flex hover:bg-surface-container-low/50 transition-colors">
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">114</div>
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">114</div>
+<div class="w-6 py-1 text-center text-surface-dim select-none"> </div>
+<div class="py-1 px-4 text-on-surface-variant"><span class="text-[#807d72]">// Resolve cyclic edges using generation bounds</span></div>
+</div>
+<div class="flex hover:bg-surface-container-low/50 transition-colors">
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">115</div>
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">115</div>
+<div class="w-6 py-1 text-center text-surface-dim select-none"> </div>
+<div class="py-1 px-4 text-on-surface"><span class="text-secondary font-medium">pub fn</span> <span class="text-on-surface font-semibold">walk_dependencies</span>(&amp;<span class="text-secondary">mut self</span>, node_id: <span class="text-tertiary">NodeId</span>) -&gt; <span class="text-tertiary">Result</span>&lt;()&gt; {</div>
+</div>
+<!-- REMOVED SECTION (Naive recursive traversal) -->
+<div class="bg-[#fdeded] border-l-2 border-[#cf2d56] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-[#cf2d56]/70 select-none text-xs">116</div>
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-6 py-1 text-center text-[#cf2d56] font-bold select-none">-</div>
+<div class="py-1 px-4 text-[#732000]/80 line-through decoration-[#cf2d56]/60">
+<span class="opacity-70">let mut visited = HashSet::new();</span>
+</div>
+</div>
+<div class="bg-[#fdeded] border-l-2 border-[#cf2d56] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-[#cf2d56]/70 select-none text-xs">117</div>
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-6 py-1 text-center text-[#cf2d56] font-bold select-none">-</div>
+<div class="py-1 px-4 text-[#732000]/80 line-through decoration-[#cf2d56]/60">
+<span class="opacity-70">for neighbor in self.graph.neighbors(node_id) {</span>
+</div>
+</div>
+<div class="bg-[#fdeded] border-l-2 border-[#cf2d56] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-[#cf2d56]/70 select-none text-xs">118</div>
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-6 py-1 text-center text-[#cf2d56] font-bold select-none">-</div>
+<div class="py-1 px-4 text-[#732000]/80 line-through decoration-[#cf2d56]/60 pl-8">
+<span class="opacity-70">self.walk_dependencies(neighbor)?; // BUG: O(N^2) recursion stack explosion</span>
+</div>
+</div>
+<div class="bg-[#fdeded] border-l-2 border-[#cf2d56] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-[#cf2d56]/70 select-none text-xs">119</div>
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-6 py-1 text-center text-[#cf2d56] font-bold select-none">-</div>
+<div class="py-1 px-4 text-[#732000]/80 line-through decoration-[#cf2d56]/60">
+<span class="opacity-70">}</span>
+</div>
+</div>
+<!-- ADDED SECTION (Optimized async arena traversal) -->
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">116</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface">
+<span class="text-secondary font-medium">let</span> arena = <span class="text-on-surface font-semibold">self.arena.acquire_traversal_scope()</span>;
+            </div>
+</div>
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">117</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface">
+<span class="text-secondary font-medium">let</span> stream = arena.<span class="text-tertiary">memoized_traversal_stream</span>(node_id, <span class="text-secondary">&amp;self</span>.cache);
+            </div>
+</div>
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">118</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface">
+<span class="text-primary font-medium">tokio::pin!</span>(stream);
+            </div>
+</div>
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">119</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface">
+<span class="text-secondary font-medium">while let</span> <span class="text-tertiary">Some</span>(batch) = stream.<span class="text-on-surface font-semibold">next_batch()</span>.<span class="text-primary font-medium">await</span> {
+            </div>
+</div>
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">120</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface pl-8">
+<span class="text-secondary font-medium">self</span>.collector.<span class="text-tertiary">extend_fast_concurrent</span>(batch)?;
+            </div>
+</div>
+<div class="bg-[#eef8f2] border-l-2 border-[#1f8a65] flex items-center">
+<div class="w-12 py-1 px-3 text-right text-transparent select-none text-xs">...</div>
+<div class="w-12 py-1 px-3 text-right text-[#1f8a65] select-none text-xs">121</div>
+<div class="w-6 py-1 text-center text-[#1f8a65] font-bold select-none">+</div>
+<div class="py-1 px-4 text-on-surface">
+              }
+            </div>
+</div>
+<!-- Context lines (Post-diff) -->
+<div class="flex hover:bg-surface-container-low/50 transition-colors">
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">120</div>
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">122</div>
+<div class="w-6 py-1 text-center text-surface-dim select-none"> </div>
+<div class="py-1 px-4 text-on-surface"><span class="text-tertiary">Ok</span>(())</div>
+</div>
+<div class="flex hover:bg-surface-container-low/50 transition-colors">
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">121</div>
+<div class="w-12 py-1 px-3 text-right text-surface-dim select-none text-xs">123</div>
+<div class="w-6 py-1 text-center text-surface-dim select-none"> </div>
+<div class="py-1 px-4 text-on-surface">}</div>
+</div>
+</div>
+<!-- Floating Diff Action Toolbar -->
+<div class="px-4 py-3 bg-surface-container-low border-t border-surface-container-highest flex flex-col sm:flex-row items-center justify-between gap-3">
+<!-- Confidence telemetry -->
+<div class="flex items-center gap-2.5 text-xs text-on-surface-variant">
+<span class="inline-flex items-center gap-1 text-[#1f8a65] font-medium bg-surface-container-lowest border border-surface-container-highest px-2 py-0.5 rounded">
+<span class="material-symbols-outlined text-[14px]">verified</span>
+<span>Confidence 98%</span>
+</span>
+<span class="hidden md:inline text-surface-dim">·</span>
+<span class="hidden md:inline text-on-surface-variant font-mono text-[11px]">Zero hallucinated symbols in AST check</span>
+</div>
+<!-- Action buttons -->
+<div class="flex items-center gap-2">
+<!-- Diff Side-by-side Toggle -->
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs text-on-surface-variant hover:text-on-surface bg-surface-container-lowest border border-surface-container-highest rounded transition-colors">
+<span class="material-symbols-outlined text-[14px]">view_column</span>
+<span>Side-by-side</span>
+</button>
+<!-- Reject Button -->
+<button class="inline-flex items-center gap-1.5 px-3 py-1 text-xs font-medium text-on-surface-variant hover:text-on-surface bg-surface-container-lowest border border-surface-container-highest rounded transition-colors">
+<span>Reject</span>
+<kbd class="text-[10px] code-font text-surface-dim bg-surface-container px-1 rounded">Esc</kbd>
+</button>
+<!-- Accept Change Button (Subtle Orange Accent) -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1 text-xs font-medium text-on-primary bg-primary hover:bg-primary-container rounded transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[14px]">check</span>
+<span>Accept Change</span>
+<kbd class="text-[10px] code-font text-on-primary/80 bg-black/20 px-1 rounded">Tab</kbd>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Thoughtful Architecture / Philosophy Section -->
+<section class="w-full max-w-5xl mb-24" id="philosophy">
+<div class="mb-10 text-left border-b border-surface-container-highest pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-mono uppercase tracking-wider text-secondary">Engine Architecture</span>
+<h2 class="font-headline text-2xl sm:text-3xl font-normal text-on-surface mt-1">
+            Built for determinism, not guesswork.
+          </h2>
+</div>
+<p class="text-xs text-on-surface-variant code-font">
+          Target latency: &lt;18ms per speculative token
+        </p>
+</div>
+<!-- 3 Columns with distinct densities -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Column 1: Repository Awareness -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-5">
+<span class="material-symbols-outlined text-[18px]">account_tree</span>
+</div>
+<h3 class="font-headline text-base font-semibold text-on-surface mb-2">Repository Awareness</h3>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant mb-4">
+              In-memory topological index parsing types, function signatures, call graphs, and recent git history. Prism creates a continuous vector-AST hybrid map without taxing CPU cycles.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container text-[11px] code-font text-on-surface-variant flex items-center justify-between">
+<span>Index sync: incremental</span>
+<span class="text-primary font-medium">Tree-Sitter + Rust</span>
+</div>
+</div>
+<!-- Column 2: Multi-token Speculation -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-5">
+<span class="material-symbols-outlined text-[18px]">bolt</span>
+</div>
+<h3 class="font-headline text-base font-semibold text-on-surface mb-2">Multi-token Speculation</h3>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant mb-4">
+              Parallel speculative execution streams draft tokens ahead of user keystrokes. Accepted suggestions apply immediately with zero layout jitter and accurate indentation matching.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container text-[11px] code-font text-on-surface-variant flex items-center justify-between">
+<span>Ghost text p99</span>
+<span class="text-primary font-medium">16ms draft queue</span>
+</div>
+</div>
+<!-- Column 3: Privacy Boundary -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="w-8 h-8 rounded-lg bg-surface-container flex items-center justify-center text-primary mb-5">
+<span class="material-symbols-outlined text-[18px]">shield</span>
+</div>
+<h3 class="font-headline text-base font-semibold text-on-surface mb-2">Privacy Boundary</h3>
+<p class="font-body text-xs leading-relaxed text-on-surface-variant mb-4">
+              Embeddings and project graphs reside strictly on your local machine. Route completions through local Ollama/LM Studio servers, or opt-in to zero-retention cloud endpoints.
+            </p>
+</div>
+<div class="pt-4 border-t border-surface-container text-[11px] code-font text-on-surface-variant flex items-center justify-between">
+<span>Telemetry: 0% data sent</span>
+<span class="text-primary font-medium">Air-gapped safe</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Releases & Changelog Section -->
+<section class="w-full max-w-5xl mb-20" id="changelog">
+<div class="mb-10 text-left border-b border-surface-container-highest pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+<div>
+<span class="text-xs font-mono uppercase tracking-wider text-secondary">Changelog</span>
+<h2 class="font-headline text-2xl sm:text-3xl font-normal text-on-surface mt-1">
+            Engine updates &amp; releases
+          </h2>
+</div>
+<a class="text-xs font-medium text-primary hover:underline code-font" href="#changelog">
+          Subscribe to RSS feed →
+        </a>
+</div>
+<!-- Release List Timeline -->
+<div class="space-y-6">
+<!-- Entry 1 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 bg-primary-fixed text-on-primary-fixed text-xs font-semibold code-font rounded">v0.14.2</span>
+<h3 class="text-sm font-semibold text-on-surface">Tree-sitter AST upgrade &amp; Zig Language Server</h3>
+</div>
+<span class="text-xs text-on-surface-variant code-font">February 18, 2025</span>
+</div>
+<ul class="text-xs text-on-surface-variant space-y-1.5 list-disc list-inside mb-4">
+<li>Re-architected diff generator to prioritize syntactic blocks over lexical line additions.</li>
+<li>Native indexing support for Zig 0.13 language server definitions and compile-time reflection.</li>
+<li>Sub-second workspace symbol reindexing on repositories containing over 150k files.</li>
+</ul>
+<div class="flex items-center gap-4 text-[11px] code-font text-on-surface-variant pt-3 border-t border-surface-container">
+<span class="text-on-surface">Commit: <span class="text-primary">8fd2e4a</span></span>
+<span>·</span>
+<a class="hover:text-primary transition-colors" href="#">View git commit diff</a>
+<span>·</span>
+<span class="text-[#1f8a65]">Verified stable build</span>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 bg-surface-container text-on-surface text-xs font-semibold code-font rounded border border-surface-container-highest">v0.14.1</span>
+<h3 class="text-sm font-semibold text-on-surface">Ghost completion pipeline &amp; local Ollama routing</h3>
+</div>
+<span class="text-xs text-on-surface-variant code-font">January 24, 2025</span>
+</div>
+<ul class="text-xs text-on-surface-variant space-y-1.5 list-disc list-inside mb-4">
+<li>Reduced keystroke-to-suggestion latency by 40ms via asynchronous speculative stream caching.</li>
+<li>Seamless fallback to local Ollama endpoints when network disconnected with automatic quantization detect.</li>
+<li>Fixed cyclic symbol bug in TypeScript barrel file resolution.</li>
+</ul>
+<div class="flex items-center gap-4 text-[11px] code-font text-on-surface-variant pt-3 border-t border-surface-container">
+<span class="text-on-surface">Commit: <span class="text-primary">c4190ba</span></span>
+<span>·</span>
+<a class="hover:text-primary transition-colors" href="#">View git commit diff</a>
+<span>·</span>
+<span>Verified stable build</span>
+</div>
+</div>
+<!-- Entry 3 -->
+<div class="bg-surface-container-lowest border border-surface-container-highest rounded-xl p-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-0.5 bg-surface-container text-on-surface text-xs font-semibold code-font rounded border border-surface-container-highest">v0.13.8</span>
+<h3 class="text-sm font-semibold text-on-surface">Multi-file refactor agent with interactive confirmation</h3>
+</div>
+<span class="text-xs text-on-surface-variant code-font">December 14, 2024</span>
+</div>
+<ul class="text-xs text-on-surface-variant space-y-1.5 list-disc list-inside mb-4">
+<li>Multi-file refactor engine previews atomic staged patches across related test files and interface boundaries.</li>
+<li>Added interactive visual review drawer with single-keystroke jump to file discrepancies.</li>
+<li>Support for custom `.prism/rules` workspace guidelines.</li>
+</ul>
+<div class="flex items-center gap-4 text-[11px] code-font text-on-surface-variant pt-3 border-t border-surface-container">
+<span class="text-on-surface">Commit: <span class="text-primary">19a7ee2</span></span>
+<span>·</span>
+<a class="hover:text-primary transition-colors" href="#">View git commit diff</a>
+<span>·</span>
+<span>Verified stable build</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Download Section Callout -->
+<section class="w-full max-w-5xl bg-surface-container-lowest border border-surface-container-highest rounded-2xl p-8 sm:p-12 mb-20 text-center" id="download">
+<div class="max-w-xl mx-auto">
+<h2 class="font-headline text-3xl font-normal text-on-surface mb-3">Get Prism for your workflow</h2>
+<p class="text-sm text-on-surface-variant mb-8">
+          Free, independent software. Available as a stand-alone synthesized editor or a companion daemon for your existing terminal and editor setups.
+        </p>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="inline-flex items-center gap-2.5 bg-on-surface text-surface hover:bg-black px-5 py-2.5 rounded-lg text-sm font-medium transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.61-.75 1.04-1.8 0.92-2.87-.9.04-2 .61-2.65 1.37-.58.67-.99 1.74-.86 2.78.99.08 1.98-.53 2.59-1.28z"></path>
+</svg>
+<span>macOS (Apple Silicon &amp; Intel)</span>
+</a>
+<a class="inline-flex items-center gap-2.5 bg-surface-container-lowest border border-surface-container-highest text-on-surface hover:bg-surface-container-low px-5 py-2.5 rounded-lg text-sm font-medium transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.53 1.03 1.53 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.111-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"></path>
+</svg>
+<span>Linux .deb / .AppImage</span>
+</a>
+</div>
+<div class="mt-6 text-xs text-on-surface-variant code-font">
+          curl -sSL https://get.prism.dev | sh
+        </div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component JSON Blueprint Compliant) -->
+<footer class="w-full bg-surface border-t border-surface-container-highest">
+<div class="w-full max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<!-- Brand & Copyright -->
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<a class="font-headline text-sm font-medium tracking-tight text-on-surface hover:text-primary transition-colors" href="#">Prism</a>
+<span class="hidden sm:inline text-surface-dim">/</span>
+<span class="font-body text-xs font-normal text-on-surface-variant">© 2025 Prism Technologies Inc. Quietly confident code synthesis.</span>
+</div>
+<!-- Links matching JSON -->
+<div class="flex flex-wrap items-center justify-center gap-6 font-body text-xs font-normal text-on-surface-variant">
+<a class="hover:text-primary transition-colors duration-150" href="#overview">Overview</a>
+<a class="hover:text-primary transition-colors duration-150" href="#changelog">Changelog</a>
+<a class="hover:text-primary transition-colors duration-150" href="#docs">Documentation</a>
+<a class="hover:text-primary transition-colors duration-150" href="#download">Download</a>
+<a class="hover:text-primary transition-colors duration-150" href="#">Privacy</a>
+<a class="hover:text-primary transition-colors duration-150" href="#">Terms</a>
+<a class="hover:text-primary transition-colors duration-150 flex items-center gap-1" href="https://github.com" rel="noreferrer" target="_blank">
+<span>GitHub</span>
+<span class="material-symbols-outlined text-[13px]">arrow_outward</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>

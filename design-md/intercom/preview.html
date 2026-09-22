@@ -1,8 +1,828 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Intercom · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#f5f1ec;--panel:#eae6e1;--ink:#000000;--muted:#585755;--border:#c9c6c2;--accent:#111111;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/intercom">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Intercom · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#111111"></span><code>#111111</code></div><div class="swatch"><span style="background:#f5f1ec"></span><code>#f5f1ec</code></div><div class="swatch"><span style="background:#ff5600"></span><code>#ff5600</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#626260"></span><code>#626260</code></div><div class="swatch"><span style="background:#7b7b78"></span><code>#7b7b78</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Saans</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kith Desk — Priority Support Workstation</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim matching Design Tokens -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary": "#ffffff",
+            "tertiary-fixed": "#e6e1df",
+            "primary-fixed": "#e5e2e1",
+            "inverse-primary": "#c8c6c5",
+            "primary-container": "#1c1b1b",
+            "tertiary-fixed-dim": "#cac6c3",
+            "secondary-fixed-dim": "#c9c6c5",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "surface": "#fdf9f4",
+            "on-surface-variant": "#444748",
+            "surface-variant": "#e6e2dd",
+            "surface-container-high": "#ebe8e3",
+            "on-tertiary-fixed": "#1d1b1a",
+            "primary-fixed-dim": "#c8c6c5",
+            "on-primary-container": "#858383",
+            "error-container": "#ffdad6",
+            "secondary": "#5f5e5e",
+            "tertiary": "#000000",
+            "surface-container-highest": "#e6e2dd",
+            "surface-tint": "#5f5e5e",
+            "on-secondary-fixed": "#1c1b1b",
+            "surface-dim": "#ddd9d5",
+            "background": "#fdf9f4",
+            "on-primary-fixed": "#1c1b1b",
+            "on-tertiary-fixed-variant": "#484645",
+            "on-secondary-container": "#656464",
+            "on-background": "#1c1c19",
+            "inverse-on-surface": "#f4f0eb",
+            "on-tertiary": "#ffffff",
+            "tertiary-container": "#1d1b1a",
+            "on-surface": "#1c1c19",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#868381",
+            "surface-container-low": "#f7f3ee",
+            "on-secondary": "#ffffff",
+            "secondary-container": "#e5e2e1",
+            "inverse-surface": "#31302d",
+            "primary": "#000000",
+            "outline-variant": "#c4c7c7",
+            "on-secondary-fixed-variant": "#484646",
+            "surface-container": "#f1ede8",
+            "surface-bright": "#fdf9f4",
+            "on-primary-fixed-variant": "#474646",
+            "secondary-fixed": "#e5e2e1",
+            "outline": "#747878"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #e6e2dd;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #c4c7c7;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased h-screen overflow-hidden flex flex-col selection:bg-surface-variant">
+<!-- ================= UNIVERSAL TOP BAR (Shared Component: TopNavBar Anchor) ================= -->
+<!-- Executing style_shell_layout, style_bg_color, style_separation_logic -->
+<header class="flex justify-between items-center w-full px-4 h-14 bg-surface border-b border-surface-variant z-30 select-none">
+<!-- Left Cluster: Brand & Breadcrumb View Switcher -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-lg bg-primary flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[14px]">desk</span>
+</div>
+<span class="font-headline text-base font-semibold tracking-tight text-on-background flex items-center gap-1.5">
+          Kith Desk
+          <span class="inline-block w-1.5 h-1.5 rounded-full bg-[#ff5600]"></span>
+</span>
+</div>
+<div class="h-4 w-px bg-surface-variant"></div>
+<!-- Navigation Links from Shared Components JSON with active 'Inbox' state -->
+<nav class="hidden md:flex items-center gap-5 text-sm font-medium tracking-tight">
+<a class="text-on-background font-medium border-b-2 border-on-background pb-1 flex items-center gap-1.5" href="#inbox">
+<span>Inbox</span>
+<span class="text-xs px-1.5 py-0.2 rounded-full bg-surface-container-highest text-on-surface">14</span>
+</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 transition-colors duration-150 ease-in-out" href="#customers">
+          Customers
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 transition-colors duration-150 ease-in-out" href="#reporting">
+          Reporting
+        </a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 transition-colors duration-150 ease-in-out" href="#settings">
+          Settings
+        </a>
+</nav>
+<div class="hidden lg:flex items-center text-xs text-on-surface-variant gap-1.5 pl-2">
+<span class="text-outline-variant">/</span>
+<span class="font-medium text-on-surface">Tier 2 Escalations</span>
+<span class="text-outline-variant">/</span>
+<span class="text-secondary font-mono">TK-8941</span>
+</div>
+</div>
+<!-- Center Search Bar (on_left per JSON specification aligned with left work canvas) -->
+<div class="flex-1 max-w-md mx-6 hidden sm:block">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-secondary text-[16px] pointer-events-none">search</span>
+<input class="w-full bg-surface-container-low border border-surface-variant rounded-lg pl-9 pr-14 py-1.5 text-xs text-on-surface placeholder:text-secondary focus:outline-none focus:border-outline focus:bg-surface-container-lowest transition-all" placeholder="Search tickets, customers, docs..." type="text"/>
+<div class="absolute right-2 flex items-center gap-1">
+<kbd class="px-1.5 py-0.5 text-[10px] font-mono rounded bg-surface-variant text-secondary border border-outline-variant">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Trailing Actions (from Shared Components JSON: New Ticket, Status, Notifications, Help, Tune) -->
+<div class="flex items-center gap-2.5">
+<!-- Status pill -->
+<button class="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container border border-surface-variant text-xs text-on-surface font-medium hover:bg-surface-container-high transition-colors">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Available</span>
+<span class="text-secondary text-[11px]">• 3 active</span>
+<span class="material-symbols-outlined text-[14px] text-secondary">expand_more</span>
+</button>
+<!-- Primary Action: New Ticket -->
+<button class="flex items-center gap-1.5 bg-[#ff5600] text-on-primary px-3 py-1.5 rounded-lg text-xs font-medium hover:brightness-105 active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[16px]">add</span>
+<span class="hidden sm:inline">New Ticket</span>
+</button>
+<div class="h-4 w-px bg-surface-variant mx-1"></div>
+<!-- Trailing Icon Actions: notifications, help, tune -->
+<button class="relative p-1.5 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[19px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#ff5600] ring-2 ring-surface"></span>
+</button>
+<button class="p-1.5 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" title="Help Guide">
+<span class="material-symbols-outlined text-[19px]">help</span>
+</button>
+<button class="p-1.5 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container transition-colors" title="Tune Views">
+<span class="material-symbols-outlined text-[19px]">tune</span>
+</button>
+<!-- Profile Avatar -->
+<div class="flex items-center gap-2 pl-1">
+<div class="relative group cursor-pointer">
+<img class="w-7 h-7 rounded-full object-cover border border-surface-variant group-hover:border-outline transition-colors" data-alt="A portrait of Evelyn Vance, a professional female support lead with warm indoor studio lighting against a clean neutral architectural background. The tone matches an editorial modern enterprise software aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8uMFzIoGwBC0GrJmSakUvQT8o2oZX599G_fzLC8naTn87b5cKOJeajKRCUbuhFVU_js6GwOjo5kb34gmNfHI9rAXoYts5H51cboA3YAJWzdq9a690hqxVCWFHXp4oppgn1cp6ze02etywG-D0ThJ1W27M6HEqLjOllG5RrgawEpOeufo9KTaCPRE32iEmeeyaSCdHlJ-4FOSbbpXXLGuzIXhsc1c3H8sVn0214xOotmL2G3K6PeqEcEY7SMzUW1_-a2mTbKESWU4"/>
+<span class="absolute bottom-0 right-0 w-2 h-2 rounded-full bg-emerald-500 ring-1 ring-surface"></span>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN WORKSTATION CANVAS (3 PANE DESK) ================= -->
+<main class="flex-1 flex overflow-hidden bg-surface">
+<!-- ================= PANE 1: LEFT CONVERSATION QUEUE (~340px) ================= -->
+<aside class="w-80 lg:w-[350px] shrink-0 border-r border-surface-variant flex flex-col bg-surface-container-low overflow-hidden">
+<!-- Subheader with Filter Tabs & Queue Metrics -->
+<div class="p-3 border-b border-surface-variant bg-surface-container-low flex flex-col gap-2.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-headline text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Queue Views</span>
+<span class="px-1.5 py-0.5 text-[10px] font-mono font-medium rounded bg-surface-variant text-on-surface">14 Pending</span>
+</div>
+<button class="text-secondary hover:text-on-surface p-1 rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+</button>
+</div>
+<!-- Filter Pill Chips -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 custom-scrollbar text-xs">
+<button class="px-2.5 py-1 rounded-full bg-surface-container-lowest text-on-surface font-medium border border-surface-variant shadow-xs shrink-0 flex items-center gap-1">
+<span>Mine</span>
+<span class="w-4 h-4 rounded-full bg-surface text-secondary text-[10px] flex items-center justify-center font-mono">4</span>
+</button>
+<button class="px-2.5 py-1 rounded-full bg-transparent text-secondary hover:text-on-surface hover:bg-surface-container transition-colors shrink-0 flex items-center gap-1">
+<span>Unassigned</span>
+<span class="w-4 h-4 rounded-full bg-surface-variant text-secondary text-[10px] flex items-center justify-center font-mono">6</span>
+</button>
+<button class="px-2.5 py-1 rounded-full bg-transparent text-secondary hover:text-on-surface hover:bg-surface-container transition-colors shrink-0 flex items-center gap-1">
+<span>Priority</span>
+<span class="w-4 h-4 rounded-full bg-[#ff5600]/10 text-[#ff5600] text-[10px] flex items-center justify-center font-mono font-bold">2</span>
+</button>
+<button class="px-2.5 py-1 rounded-full bg-transparent text-secondary hover:text-on-surface hover:bg-surface-container transition-colors shrink-0">
+<span>All (28)</span>
+</button>
+</div>
+</div>
+<!-- Conversation List (Scrollable) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1.5">
+<!-- CARD 1: ACTIVE TICKET (Soren Lindqvist) -->
+<article class="p-3 rounded-lg bg-surface-container-lowest border-2 border-primary shadow-xs cursor-pointer relative transition-all">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-2">
+<div class="relative">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Editorial close portrait of Soren Lindqvist, CTO at Northstar Studio, wearing minimalist charcoal attire with soft Nordic ambient daylight in a modern Stockholm studio setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATgU3OZ7ItaPwaJWnQw8MEQbm8ZLG2hrqmJQQjM5ujueYgujmQxW7m_zQnFYEJqK8_2kRiY3V7AazrIMvTlbVy-AHEU3pMkG7NoubHsm-nw4fvl4hFGBvju2JkkAvx91YVhEbGNVtLwoKTWk-49XY5pYRewvVtFauGQdMrmJ1C27ILjhHVU2WLFG4z5tC0p_oJLCPnXNKvddyQVcEoqm4a6Cke2BvDk6gQ0wIiWIv_NE7yh_WV3fAyx8LcCkei3-s9XEgmFfGfp9Q"/>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-[#ff5600] ring-1 ring-surface"></span>
+</div>
+<div>
+<h4 class="text-xs font-semibold text-on-surface leading-tight">Soren Lindqvist</h4>
+<p class="text-[11px] text-secondary">Northstar Studio</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-[11px] text-secondary font-mono">3m ago</span>
+<span class="px-1.5 py-0.5 text-[10px] font-mono font-medium rounded bg-[#ff5600]/10 text-[#ff5600] border border-[#ff5600]/20">
+                SLA 12m left
+              </span>
+</div>
+</div>
+<h5 class="text-xs font-medium text-on-surface line-clamp-1 mb-1">
+            Webhook timeout on sync v2 endpoint
+          </h5>
+<p class="text-[11px] text-secondary line-clamp-2 mb-2 leading-relaxed">
+            Our automated synchronization workers received 504 Gateway Timeouts consistently across the Stockholm ingestion node...
+          </p>
+<div class="flex items-center justify-between pt-1 border-t border-surface-variant/60 text-[11px]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px] text-secondary">webhook</span>
+<span class="text-secondary font-mono text-[10px]">API / Webhooks</span>
+</div>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-medium bg-surface-container text-on-surface-variant">Tier 2 Lead</span>
+</div>
+</article>
+<!-- CARD 2: Clara Beauchamp -->
+<article class="p-3 rounded-lg bg-surface hover:bg-surface-container-lowest border border-surface-variant/70 hover:border-surface-variant shadow-none cursor-pointer transition-all">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Editorial portrait of Clara Beauchamp, head of finance at Veloce Retail, in warm natural office lighting with warm beige interior tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhhQxZ5fUIbcMNEeLbeM0ay-jWSzugshOtsw_ZBujvzw-rsw23kCZKDX1g6pCr-Ao0ak0v4eyrD8YsWEVtuNP-NAiBnfjFhne5HRK9i1dGRm5VOgRQsQyt-BT6-qCRWduHM3uuGR-FHug3Pnj2cbC6xvdJEwQEjzXKEy8ClIwiV4RDwchpIQ2jrR7j_Qul85RXpG-tFMaSvokqX0tVUgCNHx8mH2TfDftLfficIoL0vCV7mi-O2bn9EManHcd8VVE3AI10QqKXHLE"/>
+<div>
+<h4 class="text-xs font-medium text-on-surface leading-tight">Clara Beauchamp</h4>
+<p class="text-[11px] text-secondary">Veloce Retail</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-[11px] text-secondary font-mono">18m ago</span>
+<span class="px-1.5 py-0.2 text-[10px] font-mono text-emerald-700 bg-emerald-50 rounded">Resolved</span>
+</div>
+</div>
+<h5 class="text-xs font-normal text-on-surface line-clamp-1 mb-1">Billing statement reconciliation question</h5>
+<p class="text-[11px] text-secondary line-clamp-1 mb-2">Can we get the line item export with individual tax IDs split by subsidiary?</p>
+<div class="flex items-center gap-1.5 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">receipt_long</span>
+<span class="text-[10px] font-mono">Finance</span>
+</div>
+</article>
+<!-- CARD 3: Marcus Thorne -->
+<article class="p-3 rounded-lg bg-surface hover:bg-surface-container-lowest border border-surface-variant/70 hover:border-surface-variant shadow-none cursor-pointer transition-all">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Modern candid headshot of Marcus Thorne, senior engineer at Aether Labs, wearing a dark crewneck against an architect-designed cream wall." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRvjLZNudnsV9Vq00hCh0W5d7iciogl-vzuEL1RKvq-OTOjk0qKZFHXX934sTDQZNslE8xr5mfkg5iJTUWLHc2H0KbDI1b6_VvBzkUSK1N4o7OOD9SMWcIbMonKmLW_Hw3ZcF8QcIPfvmkZMVu5u_7cwGgp3fiyPT1aIbjpBG64wiix7IYL7CNGDTn6np001FTWOUe2EKICMPVSLI1rFgwzMMcaOlYcSUEQ3HQcWM1NtWbRnjMdDTrwwsL8TIgDOCt_gmQByDbztM"/>
+<div>
+<h4 class="text-xs font-medium text-on-surface leading-tight">Marcus Thorne</h4>
+<p class="text-[11px] text-secondary">Aether Labs</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-[11px] text-secondary font-mono">42m ago</span>
+<span class="text-[10px] text-secondary font-medium">Waiting client</span>
+</div>
+</div>
+<h5 class="text-xs font-normal text-on-surface line-clamp-1 mb-1">Custom role permissions not propagating</h5>
+<p class="text-[11px] text-secondary line-clamp-1 mb-2">The editor role isn't inheriting project draft read permission in workspace ID 9012.</p>
+<div class="flex items-center gap-1.5 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">admin_panel_settings</span>
+<span class="text-[10px] font-mono">RBAC / Auth</span>
+</div>
+</article>
+<!-- CARD 4: Elena Rostova -->
+<article class="p-3 rounded-lg bg-surface hover:bg-surface-container-lowest border border-surface-variant/70 hover:border-surface-variant shadow-none cursor-pointer transition-all">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Editorial portrait of Elena Rostova, Director of Infrastructure at Kestrel AI, seated at a light oak table with clean natural daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVpZ2UsUIn-2RHkY1tOgMs0j1H3qNES-LeuTI7s1p6QjBMGY2YoVcDsfC7Eh76n_QbrS2I5AljTpD2_npPHyavmxIVKrBf7XrXOvI_J9L6-xmwc9_FQMrREzFxcoaB_lPuyQdLmSvTrOh6t9KaBQTrU9jYT1ZzxH8yldPXc6sS4mFdZALSyyQMgSPB59gPYREROhnvpTyFFG7Ho0uMCmy0IPb64KGf5CCNO260n-rRnrsQYjMjEhg9tV49tq_MO-27b4V5v2e8IQk"/>
+<div>
+<h4 class="text-xs font-medium text-on-surface leading-tight">Elena Rostova</h4>
+<p class="text-[11px] text-secondary">Kestrel AI</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-[11px] text-secondary font-mono">1h ago</span>
+<span class="text-[10px] text-secondary font-medium">Open</span>
+</div>
+</div>
+<h5 class="text-xs font-normal text-on-surface line-clamp-1 mb-1">SSO SAML authentication certificate rotation</h5>
+<p class="text-[11px] text-secondary line-clamp-1 mb-2">Our Okta cert renewal takes effect Saturday at 00:00 UTC. Can we verify dual-cert staging?</p>
+<div class="flex items-center gap-1.5 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">vpn_key</span>
+<span class="text-[10px] font-mono">Identity / SSO</span>
+</div>
+</article>
+<!-- CARD 5: David Chen -->
+<article class="p-3 rounded-lg bg-surface hover:bg-surface-container-lowest border border-surface-variant/70 hover:border-surface-variant shadow-none cursor-pointer transition-all">
+<div class="flex items-start justify-between gap-2 mb-1.5">
+<div class="flex items-center gap-2">
+<img class="w-7 h-7 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Profile photo of David Chen, Technical Lead at Apex Media, in a warm daylight-infused modern creative studio interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlghAAHIltPxskyh7AswwzyHOfLQ4V7wUqecTkQSBja8kotavC-my7In9jGXkDgV2dK_qc8He73gZsM_bbTI0EfQA81b1fVO-O7Zt0NJ_0FV_IigDUeWjra7Z9hZE8vS20ILJlHzdSF2mibwxczaWq8TSQzcrvmLInHWS0hw-P2qJEMURnMZtCZkS33DyR8aHH0tDZ9eXlroOMCIUJJrJmSR_d-AhPnQ5-VOOtWQ_maggjhjhUh7LzzAsQooqwOmRhQIAARJuH8ug"/>
+<div>
+<h4 class="text-xs font-medium text-on-surface leading-tight">David Chen</h4>
+<p class="text-[11px] text-secondary">Apex Media</p>
+</div>
+</div>
+<span class="text-[11px] text-secondary font-mono">2h ago</span>
+</div>
+<h5 class="text-xs font-normal text-on-surface line-clamp-1 mb-1">GraphQL batching limit question</h5>
+<p class="text-[11px] text-secondary line-clamp-1">Does the complexity score calculate nested fragment depth over 5 layers?</p>
+</article>
+</div>
+<!-- Queue Status Footer Bar -->
+<div class="p-2.5 border-t border-surface-variant bg-surface-container-low flex items-center justify-between text-xs text-secondary">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span>Feed updated live</span>
+</span>
+<button class="hover:text-on-surface flex items-center gap-1 text-[11px] font-medium">
+<span class="material-symbols-outlined text-[14px]">refresh</span>
+<span>Sync</span>
+</button>
+</div>
+</aside>
+<!-- ================= PANE 2: CENTER THREAD & RICH COMPOSER (~640px) ================= -->
+<section class="flex-1 min-w-0 flex flex-col bg-surface border-r border-surface-variant overflow-hidden">
+<!-- Thread Header -->
+<div class="px-6 py-3.5 border-b border-surface-variant bg-surface flex flex-col gap-2 shrink-0">
+<div class="flex items-center justify-between gap-4">
+<div class="flex items-center gap-3 min-w-0">
+<h1 class="text-base font-semibold tracking-tight text-on-surface truncate">
+              Webhook timeout on sync v2 endpoint
+            </h1>
+<span class="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200 shrink-0">
+              Open
+            </span>
+</div>
+<!-- Quick Action Buttons -->
+<div class="flex items-center gap-1.5 shrink-0">
+<button class="px-2.5 py-1 text-xs font-medium rounded-lg border border-surface-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]">auto_fix_high</span>
+<span>Insert macro</span>
+</button>
+<button class="px-2.5 py-1 text-xs font-medium rounded-lg border border-surface-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-[15px]">person_add</span>
+<span>Collaborate</span>
+</button>
+<button class="px-2.5 py-1 text-xs font-medium rounded-lg border border-surface-variant bg-surface-container-lowest hover:bg-surface-container text-on-surface flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[15px]">schedule</span>
+<span>Snooze</span>
+</button>
+<button class="p-1 rounded-lg text-secondary hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Ticket Meta Bar -->
+<div class="flex flex-wrap items-center gap-2 text-xs text-secondary pt-0.5">
+<div class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container border border-surface-variant text-on-surface">
+<span class="material-symbols-outlined text-[14px]">account_circle</span>
+<span class="font-medium">Assigned to Evelyn Vance</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[11px] font-mono">#api-integration</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[11px] font-mono">#enterprise</span>
+<span class="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[11px] font-mono">#tier-2</span>
+</div>
+<span class="text-outline-variant">•</span>
+<span class="font-mono text-[11px]">SLA Response: 12 minutes remaining</span>
+</div>
+</div>
+<!-- Message Stream (Scrollable Container) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar px-6 py-5 space-y-5 bg-background">
+<!-- Customer Message Item -->
+<div class="flex items-start gap-3.5">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-surface-variant shrink-0 mt-0.5" data-alt="Close up profile picture of Soren Lindqvist, technical director at Northstar Studio, looking forward with natural diffused northern lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtXnoQB9_xwBHT0aISFIirw0g3V-GqbmLa1pqyq91zsHIgdMywl9gy1qzemft6eOqpULwqK8yNae2O7DUjePz7Jo0zdaNnApmEhkbdKAwzx3WPpM8asbh8UYSFadrNuroAL4-usrv3lI_TRPiPW55c_uGxIC48TrVPYImAOoj1e7LVR5dTdGJjeaYjipTL2FdAT73HVn-AsoA4NgyBWq5zh1aGV0iOjk1vLMzzg6_U5hL6qi4A8T9hH9iTBGADn3BuBFjaSLm2HfQ"/>
+<div class="flex-1 max-w-2xl">
+<div class="flex items-baseline gap-2 mb-1.5">
+<span class="text-xs font-semibold text-on-surface">Soren Lindqvist</span>
+<span class="text-[11px] text-secondary">CTO at Northstar Studio</span>
+<span class="text-[11px] text-outline-variant font-mono">14:18 (22 mins ago)</span>
+</div>
+<!-- Customer Bubble in warm editorial cream -->
+<div class="p-4 rounded-xl rounded-tl-sm bg-surface-container border border-surface-variant/80 text-xs text-on-surface leading-relaxed space-y-3">
+<p>
+                Hello Kith Team, our synchronization service initiated a heavy delta sync on workspace <code>ws_northstar_prd</code> around 14:10 UTC today, but all downstream webhook dispatches to our ingestion receiver started throwing 504 timeouts.
+              </p>
+<div class="p-3 rounded-lg bg-surface-container-lowest border border-surface-variant font-mono text-[11px] text-on-surface space-y-1">
+<div class="text-secondary text-[10px] uppercase font-semibold">Gateway Trace Log</div>
+<div class="text-error font-medium">POST /v1/sync/delta HTTP/1.1 -&gt; 504 Gateway Timeout</div>
+<div class="text-secondary text-[10px]">Duration: 30,004ms (Ceiling timeout threshold exceeded)</div>
+<div class="text-secondary text-[10px]">Worker Node: eu-north-1a / Target: https://api.northstar.studio/hooks/v2</div>
+</div>
+<p>
+                Could you check if there is an aggressive connection keep-alive timeout on your proxy edge, or if our sync payload was flagged by a rate-limiter? I've attached our raw gateway output below.
+              </p>
+<!-- Attachment Pill -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-surface-variant hover:border-outline transition-colors cursor-pointer text-xs">
+<span class="material-symbols-outlined text-[16px] text-secondary">description</span>
+<span class="font-mono text-[11px] text-on-surface font-medium">server-trace-1004.log</span>
+<span class="text-secondary text-[11px]">(1.4 MB)</span>
+<span class="material-symbols-outlined text-[14px] text-secondary ml-1">download</span>
+</div>
+</div>
+</div>
+</div>
+<!-- System Audit Divider -->
+<div class="flex items-center justify-center my-3">
+<div class="flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-high border border-surface-variant text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px] text-secondary">smart_toy</span>
+<span>Routing rule applied: <strong>Escalate to Platform Tier 2</strong></span>
+<span class="text-outline-variant">•</span>
+<span class="font-mono text-[10px]">14:22</span>
+</div>
+</div>
+<!-- Agent Response Item -->
+<div class="flex items-start gap-3.5">
+<img class="w-9 h-9 rounded-full object-cover ring-1 ring-surface-variant shrink-0 mt-0.5" data-alt="Editorial headshot of Evelyn Vance, Tier 2 Support Lead at Kith Desk, with professional soft studio lighting and crisp linen background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLieU6wokaKT56rL6nJ_VO8J0RR8pkxHcmbm8fAlyt7QaAuj3daFU0XYZlZokImWt1XvdaTdYWM7kyOT1F9v0xl7Rjd25KXQWKFJlSY23nN7NDx9g36VmFW5xCCqC16SBEsQdQfLUzfyfvTj0PI1clsV7BEpf7UXSRcI2uzzUk45-0bpWA9GH_fi_-SKcM8OVPd--WkbOgfBmMj1uJlW4d7nl0IPuPtu5zdSkziPxqYTfQ4JJMzy_o4vQswzONlPIt4Vil-LapBqA"/>
+<div class="flex-1 max-w-2xl">
+<div class="flex items-baseline gap-2 mb-1.5">
+<span class="text-xs font-semibold text-on-surface">Evelyn Vance</span>
+<span class="px-1.5 py-0.2 rounded text-[10px] font-medium bg-primary text-on-primary">Support Lead</span>
+<span class="text-[11px] text-outline-variant font-mono">14:25 (15 mins ago)</span>
+</div>
+<!-- Agent Bubble in elevated pure white card -->
+<div class="p-4 rounded-xl rounded-tl-sm bg-surface-container-lowest border border-surface-variant text-xs text-on-surface leading-relaxed space-y-3 shadow-xs">
+<p>
+                Hi Soren, thanks for providing the log snippet right away. I'm investigating the Stockholm ingestion cluster telemetry now.
+              </p>
+<p>
+                Our proxy layer imposes a strict <strong>30-second handshake ceiling</strong> for webhook sync dispatch. When payloads exceed ~12MB uncompressed, your receiver endpoint must acknowledge with an immediate <code>202 Accepted</code> before background processing to avoid the 504 disconnect.
+              </p>
+<ul class="list-disc list-inside space-y-1 text-on-surface-variant pl-1">
+<li>Checked node health on <code>eu-north-1a</code>: Nominal latency (12ms)</li>
+<li>No system-wide rate limiter was triggered for <code>ws_northstar_prd</code></li>
+<li>Payload batch size in trace appears to contain 4,200 entities at once</li>
+</ul>
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-[#ff5600]">menu_book</span>
+<span class="font-medium text-xs">Docs: Best practices for asynchronous webhook ingestion</span>
+</div>
+<span class="material-symbols-outlined text-[14px] text-secondary">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= RICH INTERACTIVE COMPOSER ================= -->
+<div class="border-t border-surface-variant bg-surface p-4 shrink-0 flex flex-col gap-2.5">
+<!-- Mode Tabs & Composer State Switcher -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1 p-0.5 rounded-lg bg-surface-container-high border border-surface-variant text-xs">
+<button class="px-3 py-1 rounded-md bg-surface-container-lowest text-on-surface font-medium shadow-xs flex items-center gap-1.5 transition-all" id="btn-customer-reply">
+<span class="material-symbols-outlined text-[14px] text-[#ff5600]">reply</span>
+<span>Customer Reply</span>
+</button>
+<button class="px-3 py-1 rounded-md text-secondary hover:text-on-surface font-medium flex items-center gap-1.5 transition-all" id="btn-internal-note">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+<span>Internal Note</span>
+</button>
+</div>
+<!-- Interactive Composer State Indicator Selector (Draft / Sending / Sent / Error) -->
+<div class="flex items-center gap-2 text-xs">
+<span class="text-secondary text-[11px] hidden sm:inline">Simulation State:</span>
+<div class="inline-flex rounded-lg border border-surface-variant p-0.5 bg-surface-container text-[11px]">
+<button class="state-btn px-2 py-0.5 rounded font-medium bg-surface-container-lowest text-on-surface shadow-xs" data-state="draft" onclick="setComposerState('draft')">Draft</button>
+<button class="state-btn px-2 py-0.5 rounded font-medium text-secondary hover:text-on-surface" data-state="sending" onclick="setComposerState('sending')">Sending</button>
+<button class="state-btn px-2 py-0.5 rounded font-medium text-secondary hover:text-on-surface" data-state="sent" onclick="setComposerState('sent')">Sent</button>
+<button class="state-btn px-2 py-0.5 rounded font-medium text-secondary hover:text-on-surface" data-state="error" onclick="setComposerState('error')">Error</button>
+</div>
+</div>
+</div>
+<!-- Composer State Notification Banners -->
+<div class="text-[11px] text-secondary flex items-center gap-1.5 px-1" id="state-banner-draft">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span>Draft autosaved 20s ago</span>
+<span class="text-outline-variant">•</span>
+<span>Recipient: <strong>soren@northstar.studio</strong></span>
+</div>
+<div class="hidden text-[11px] text-on-surface bg-surface-container-high border border-surface-variant px-2.5 py-1.5 rounded-lg items-center gap-2" id="state-banner-sending">
+<svg class="animate-spin h-3.5 w-3.5 text-[#ff5600]" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+<span class="font-medium">Transmitting response to customer inbox &amp; webhook callback...</span>
+</div>
+<div class="hidden text-[11px] text-emerald-800 bg-emerald-50 border border-emerald-200 px-2.5 py-1.5 rounded-lg items-center justify-between" id="state-banner-sent">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-emerald-600">check_circle</span>
+<span class="font-medium">Delivered to soren@northstar.studio (TLS 1.3 verified)</span>
+</div>
+<button class="text-[10px] text-emerald-700 underline font-medium" onclick="setComposerState('draft')">Compose next</button>
+</div>
+<div class="hidden text-[11px] text-error bg-error-container/40 border border-error/20 px-2.5 py-1.5 rounded-lg items-center justify-between" id="state-banner-error">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[15px] text-error">error</span>
+<span class="font-medium">Gateway socket timeout: Connection failed — payload not received.</span>
+</div>
+<button class="px-2 py-0.5 rounded bg-error text-on-error font-medium text-[10px] hover:brightness-110" onclick="setComposerState('sending')">Retry sending</button>
+</div>
+<!-- Rich Text Area Container -->
+<div class="rounded-xl border border-surface-variant bg-surface-container-lowest focus-within:border-outline focus-within:ring-1 focus-within:ring-outline transition-all overflow-hidden shadow-xs">
+<!-- Formatting Toolbar -->
+<div class="flex items-center justify-between px-3 py-1.5 border-b border-surface-variant/80 bg-surface-container-low text-secondary text-xs">
+<div class="flex items-center gap-1">
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Bold">
+<span class="material-symbols-outlined text-[15px]">format_bold</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Italic">
+<span class="material-symbols-outlined text-[15px]">format_italic</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Code snippet">
+<span class="material-symbols-outlined text-[15px]">code</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Link">
+<span class="material-symbols-outlined text-[15px]">link</span>
+</button>
+<div class="h-3 w-px bg-surface-variant mx-1"></div>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Bullet List">
+<span class="material-symbols-outlined text-[15px]">format_list_bulleted</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Attach file">
+<span class="material-symbols-outlined text-[15px]">attach_file</span>
+</button>
+<button class="p-1 rounded hover:bg-surface-variant hover:text-on-surface transition-colors" title="Insert Emoji">
+<span class="material-symbols-outlined text-[15px]">mood</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-mono text-secondary hover:text-on-surface hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[14px]">bolt</span>
+<span>Preset Macro (⌘/)</span>
+</button>
+</div>
+</div>
+<!-- Main Input Field -->
+<textarea class="w-full p-3.5 text-xs text-on-surface bg-transparent border-0 focus:ring-0 resize-none font-body leading-relaxed placeholder:text-secondary" id="composer-input" placeholder="Write a message to Soren Lindqvist..." rows="4">Hi Soren, thanks for providing the delta log. Looking at the trace, the connection pooling on the v2 gateway has a 30s ceiling before retrying.
+
+I recommend switching your webhook listener to return HTTP 202 Accepted synchronously, then process the payload in a worker queue. I can temporarily bump your workspace timeout window to 60s while your team pushes the patch.</textarea>
+<!-- Composer Bottom Meta Bar -->
+<div class="flex items-center justify-between px-3.5 py-2 bg-surface-container-low/50 border-t border-surface-variant/60 text-xs">
+<div class="flex items-center gap-2">
+<button class="text-secondary hover:text-error text-[11px] transition-colors">Discard</button>
+<span class="text-outline-variant">•</span>
+<button class="text-secondary hover:text-on-surface text-[11px] transition-colors">Save draft</button>
+</div>
+<!-- Primary Action: Send Reply (Fin Orange Brand Accent) -->
+<div class="flex items-center">
+<button class="flex items-center gap-1.5 bg-[#ff5600] text-on-primary px-3.5 py-1.5 rounded-l-lg text-xs font-medium hover:brightness-105 active:scale-[0.99] transition-all shadow-xs" onclick="handleSendAction()">
+<span>Send reply</span>
+<kbd class="text-[10px] font-mono opacity-80 pl-1">⌘↵</kbd>
+</button>
+<button class="bg-[#e04d00] text-on-primary px-1.5 py-1.5 rounded-r-lg border-l border-white/20 hover:brightness-110 active:scale-[0.99] transition-all" title="More send options">
+<span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= PANE 3: RIGHT CUSTOMER CONTEXT & COPILOT (~340px) ================= -->
+<aside class="w-80 lg:w-[350px] shrink-0 bg-surface-container-low overflow-y-auto custom-scrollbar flex flex-col p-4 space-y-4">
+<!-- Customer Identity Card (Elevated white surface on cream ground) -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant shadow-xs">
+<div class="flex items-start justify-between gap-2 mb-3">
+<div class="flex items-center gap-3">
+<img class="w-11 h-11 rounded-full object-cover ring-1 ring-surface-variant" data-alt="Close up executive portrait of Soren Lindqvist, Swedish technology leader, with soft Scandinavian architectural background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm1kGwhhWj5AeKXy67cCdthmvQ1k2wYe0fFMfQvtiAisva_FBaI8pXM3SpfgKvUp9Ei3qtW502sXyOt5Mo6ZZFlwtOBCZjyQ-jRcX07NqXNpFp95-p7HzLj20j6RixK1Om5wg-GcV7sfUFsUCSRc6Pi_P8LcWUKDTL41YtVUWMTyaVcYAdC4FptnmqzCRfVdQclkoQG4-dPSqVUBsY3iR-p1LWEY7gxMocru1f89N7FF8FLHOUCQLZz3QajlkTBx9dmc4OH8B16CM"/>
+<div>
+<div class="flex items-center gap-1">
+<h3 class="text-sm font-semibold text-on-surface">Soren Lindqvist</h3>
+<span class="material-symbols-outlined text-[15px] text-blue-600" title="Verified Customer Account">verified</span>
+</div>
+<p class="text-xs text-secondary">Chief Technology Officer</p>
+<p class="text-xs font-medium text-on-surface mt-0.5">Northstar Studio</p>
+</div>
+</div>
+</div>
+<!-- Location & Contact Info -->
+<div class="pt-3 border-t border-surface-variant/80 space-y-2 text-xs">
+<div class="flex items-center justify-between text-secondary">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">mail</span>
+<span>Email</span>
+</span>
+<span class="font-mono text-on-surface font-medium select-all hover:underline cursor-pointer">soren@northstar.studio</span>
+</div>
+<div class="flex items-center justify-between text-secondary">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">schedule</span>
+<span>Local Time</span>
+</span>
+<span class="text-on-surface font-mono">14:35 (Stockholm, +1h)</span>
+</div>
+<div class="flex items-center justify-between text-secondary">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">language</span>
+<span>Language</span>
+</span>
+<span class="text-on-surface">English / Swedish</span>
+</div>
+</div>
+</div>
+<!-- Enterprise Metadata Grid -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant shadow-xs space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-on-surface">Account Tier</span>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#ff5600]/10 text-[#ff5600] border border-[#ff5600]/20">
+            Growth Enterprise
+          </span>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-1 text-xs">
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-variant/60">
+<div class="text-[10px] uppercase font-semibold text-secondary">Monthly ARR</div>
+<div class="text-sm font-semibold font-mono text-on-surface mt-0.5">$4,200/mo</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-variant/60">
+<div class="text-[10px] uppercase font-semibold text-secondary">Health Score</div>
+<div class="text-sm font-semibold text-emerald-700 mt-0.5 flex items-center gap-1">
+<span>94%</span>
+<span class="text-[10px] font-normal text-secondary">(Good)</span>
+</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-variant/60">
+<div class="text-[10px] uppercase font-semibold text-secondary">Joined Date</div>
+<div class="text-xs font-medium text-on-surface mt-1">March 2023</div>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-variant/60">
+<div class="text-[10px] uppercase font-semibold text-secondary">Seats in Use</div>
+<div class="text-xs font-medium text-on-surface mt-1">42 / 50 seats</div>
+</div>
+</div>
+</div>
+<!-- Live App Telemetry / Session Preview -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant shadow-xs space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-secondary">radar</span>
+<span>Live Session Telemetry</span>
+</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+<div class="space-y-1.5 text-xs text-secondary font-mono text-[11px] bg-surface-container-low p-2.5 rounded-lg border border-surface-variant/60">
+<div class="flex justify-between">
+<span class="text-secondary font-sans">App Version:</span>
+<span class="text-on-surface font-semibold">v4.18.2</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-sans">Browser:</span>
+<span class="text-on-surface">Chrome 124 (macOS)</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-sans">Last Active:</span>
+<span class="text-on-surface">2m ago on /webhooks</span>
+</div>
+<div class="flex justify-between">
+<span class="text-secondary font-sans">IP Region:</span>
+<span class="text-on-surface">SE-Stockholm (Cloudflare)</span>
+</div>
+</div>
+</div>
+<!-- Knowledge Copilot Suggestions -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant shadow-xs space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-[#ff5600]">auto_awesome</span>
+<span>Fin AI Assistant</span>
+</span>
+<span class="text-[10px] font-mono uppercase text-secondary">Suggested</span>
+</div>
+<p class="text-xs text-secondary leading-relaxed">
+          Fin detected a <strong>504 Gateway Timeout</strong> on the sync v2 endpoint. Recommended action:
+        </p>
+<div class="space-y-2">
+<button class="w-full text-left p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container border border-surface-variant transition-colors group" onclick="insertMacro('timeout')">
+<div class="flex items-center justify-between text-xs font-medium text-on-surface group-hover:text-[#ff5600]">
+<span>Insert Webhook Timeout FAQ</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</div>
+<p class="text-[11px] text-secondary mt-1 line-clamp-2">
+              Injects pre-configured steps on 30s connection pooling, TLS handshake ceilings, and 202 async queuing.
+            </p>
+</button>
+<button class="w-full text-left p-2.5 rounded-lg bg-surface-container-low hover:bg-surface-container border border-surface-variant transition-colors group" onclick="insertMacro('bump')">
+<div class="flex items-center justify-between text-xs font-medium text-on-surface group-hover:text-[#ff5600]">
+<span>Extend Proxy Timeout to 60s</span>
+<span class="material-symbols-outlined text-[14px]">tune</span>
+</div>
+<p class="text-[11px] text-secondary mt-1">
+              Creates a 24-hour maintenance exception for workspace <code>ws_northstar_prd</code>.
+            </p>
+</button>
+</div>
+</div>
+<!-- Previous Tickets Accordion -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-surface-variant shadow-xs space-y-2.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-on-surface">Ticket History</span>
+<span class="text-xs text-secondary font-mono">3 Total</span>
+</div>
+<div class="space-y-2 text-xs">
+<!-- Past item 1 -->
+<div class="p-2 rounded-lg bg-surface-container-low border border-surface-variant/60 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center justify-between text-on-surface font-medium">
+<span class="truncate pr-2">Rate limit spike during migration</span>
+<span class="text-[10px] font-mono text-secondary shrink-0">Closed</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-secondary mt-1">
+<span>Nov 14, 2023</span>
+<span class="font-mono">TK-6209</span>
+</div>
+</div>
+<!-- Past item 2 -->
+<div class="p-2 rounded-lg bg-surface-container-low border border-surface-variant/60 hover:bg-surface-container transition-colors cursor-pointer">
+<div class="flex items-center justify-between text-on-surface font-medium">
+<span class="truncate pr-2">Custom webhook signature validation</span>
+<span class="text-[10px] font-mono text-secondary shrink-0">Closed</span>
+</div>
+<div class="flex items-center justify-between text-[11px] text-secondary mt-1">
+<span>Aug 02, 2023</span>
+<span class="font-mono">TK-4180</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</main>
+<!-- ================= INLINE INTERACTION SCRIPT ================= -->
+<script>
+    // Tab Mode Toggle (Customer Reply vs Internal Note)
+    const btnCustomer = document.getElementById('btn-customer-reply');
+    const btnInternal = document.getElementById('btn-internal-note');
+    const composerInput = document.getElementById('composer-input');
+
+    btnCustomer.addEventListener('click', () => {
+      btnCustomer.className = "px-3 py-1 rounded-md bg-surface-container-lowest text-on-surface font-medium shadow-xs flex items-center gap-1.5 transition-all";
+      btnInternal.className = "px-3 py-1 rounded-md text-secondary hover:text-on-surface font-medium flex items-center gap-1.5 transition-all";
+      composerInput.placeholder = "Write a message to Soren Lindqvist...";
+    });
+
+    btnInternal.addEventListener('click', () => {
+      btnInternal.className = "px-3 py-1 rounded-md bg-surface-container-lowest text-on-surface font-medium shadow-xs flex items-center gap-1.5 transition-all";
+      btnCustomer.className = "px-3 py-1 rounded-md text-secondary hover:text-on-surface font-medium flex items-center gap-1.5 transition-all";
+      composerInput.placeholder = "Add an internal note visible only to Kith Desk team members...";
+    });
+
+    // Composer State Switcher (Draft, Sending, Sent, Error)
+    function setComposerState(state) {
+      const states = ['draft', 'sending', 'sent', 'error'];
+      states.forEach(s => {
+        const el = document.getElementById(`state-banner-${s}`);
+        if (el) {
+          if (s === state) {
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+          } else {
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+          }
+        }
+      });
+
+      // Update state button pills
+      document.querySelectorAll('.state-btn').forEach(btn => {
+        if (btn.getAttribute('data-state') === state) {
+          btn.className = "state-btn px-2 py-0.5 rounded font-medium bg-surface-container-lowest text-on-surface shadow-xs";
+        } else {
+          btn.className = "state-btn px-2 py-0.5 rounded font-medium text-secondary hover:text-on-surface";
+        }
+      });
+    }
+
+    // Interactive Trigger from Primary Button
+    function handleSendAction() {
+      setComposerState('sending');
+      setTimeout(() => {
+        setComposerState('sent');
+      }, 1200);
+    }
+
+    // Macro insertion
+    function insertMacro(type) {
+      if (type === 'timeout') {
+        composerInput.value += "\n\nNote: If you need to temporarily bypass the 30-second gateway limit, please acknowledge incoming deliveries with HTTP 202 and delegate delta batch serialization to background workers.";
+      } else if (type === 'bump') {
+        composerInput.value += "\n\nI have provisioned a 24-hour timeout override on our proxy router for workspace ws_northstar_prd up to 60,000ms.";
+      }
+      composerInput.focus();
+    }
+  </script>
+</body></html>

@@ -1,0 +1,8 @@
+Generate ONE complete DESKTOP web page now, including the actual rendered screen and its HTML output. Use the existing MongoDB-inspired design system provided with this request. The design system is already configured; do not generate a design-system sheet or merely describe what to build.
+
+PAGE BRIEF
+A document database explorer with a collection rail, readable JSON detail, and an example query panel. Combine deep teal structure with selective green actions; keep nested data expandable without relying on tiny targets.
+Include this component in its proper context: a collection summary with document count, index status, and an empty-collection state.
+
+COMPOSITION
+Use the design system's specific composition, typography, content density, spacing, visual hierarchy, imagery and native light/dark treatment. Make this page unmistakably distinct from a generic SaaS template. Give the demo a new original product name. Use meaningful, believable sample content tailored to this scenario. Do not copy brand logos. Generate one coherent detailed screen with real UI elements and relevant imagery when the product calls for it. Avoid pricing plans, paid subscriptions and upgrade buttons. The example is free. Do not add a palette chart, typography specimen or a marketing page about design systems. Render the finished page now. Target a normal desktop width around 1440px; use readable type and enough content for the selected page, without unnecessary extra sections.

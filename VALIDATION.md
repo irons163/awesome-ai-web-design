@@ -1,38 +1,35 @@
 # Validation
 
-Verified locally on 2026-09-22.
+The collection is checked locally before publication. This revision replaces the previous token specimens with individual Google Stitch generations over MCP.
 
 ## Automated checks
 
-Run `python3 -m unittest discover -s tests -v` after building. Coverage includes:
+Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The eight checks cover:
 
-- Every imported public design is present with a design document, task prompts, README, and both previews.
-- All generated task prompts are present in both DESIGN.md and PROMPTS.md; each prompt contains its specific brand context.
-- Original prompt and iteration sections are removed without discarding following analysis sections.
-- Catalog hashes and byte counts match the served design documents.
-- Generated HTML and README local links resolve.
-- Download archive integrity, complete documents, previews, and MIT notices.
-- Preview accent foreground colors meet a 4.5:1 calculated contrast ratio.
+- All 74 designs have their analysis, rewritten task prompts, README, original Stitch HTML export, generation prompt, and provenance record.
+- All 222 task prompts are distinct and include their corresponding design context.
+- Removing upstream AI instructions preserves the surrounding design analysis.
+- Every preview has a distinct Stitch screen ID and HTML checksum. Exported HTML, screenshots, thumbnails, and generation prompts match their SHA-256 records.
+- Full screenshots retain desktop resolution; old alternate-theme specimens are absent.
+- Catalog document hashes, byte counts, categories, and color values match the files.
+- Catalog and README links resolve; the collection has no paid-access routes.
+- The complete ZIP contains the same exported files, design documents, and MIT notices.
 
-`node --check assets/app.js` also passes. The application has no installed JavaScript dependencies.
+`node --check assets/app.js` verifies JavaScript syntax. Rebuilding must leave tracked generated files unchanged. The catalog has no installed JavaScript dependencies.
 
 ## Browser checks
 
-Using the Codex in-app browser against the local server:
+The local catalog is checked in the Codex in-app browser:
 
-- Catalog renders 74 items; Claude search produces one result.
-- Automotive category produces 7 results; dark reference filter produces 17 results.
-- Unknown search produces an empty state; clearing filters restores 74 results.
-- Saving Claude persists through reload; removing it from the saved-only list shows the empty state.
-- Claude detail opens from its hash URL; all three prompt panels are present.
-- Copied task prompt and full document were checked against the browser clipboard.
-- Light/dark preview switching updates the iframe target.
-- Preview project form displays a confirmation containing the entered project name.
-- Single Markdown and complete ZIP links both trigger browser download events.
-- Tab navigation responds to arrow keys; Escape dismisses the detail dialog.
-- Main page width equals viewport width at 390, 768, and 1440 pixels.
-- Desktop catalog, mobile catalog, and mobile detail were visually inspected.
+- Search and category filters display the matching designs.
+- Detail views show actual Stitch screenshots and switch to the exported HTML.
+- Claude, Spotify, and retro designs have visibly distinct page structures.
+- Screenshot previews and HTML download links are accompanied by the actual generation prompt and provenance JSON.
+- Escape dismisses the detail dialog.
+- The mobile catalog and detail layout fit a 390-pixel viewport without horizontal overflow.
 
 ## Scope
 
-This verifies the local implementation, not a public deployment or every browser engine. Brand analyses are preserved from the pinned upstream revision and have not all been checked against live brand sites. Previews are token specimens and alternate themes are interpretations, as labeled in the UI.
+These are static generated UI examples, not official brand websites or working product backends. Their illustrative forms and links are not end-to-end product features. The HTML exports are preserved as supplied by Stitch and may depend on external fonts, Tailwind, and image hosts. Screenshots and catalog thumbnails are stored locally. The embedded HTML uses a sandbox without same-origin access.
+
+The checks do not certify every generated demo's accessibility, business logic, responsive behavior, external assets, or compatibility with every browser. The design analyses remain based on the pinned upstream revision, rather than a new audit of every live brand website.

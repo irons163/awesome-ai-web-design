@@ -1,8 +1,522 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Ollama · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/ollama">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Ollama · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#090909"></span><code>#090909</code></div><div class="swatch"><span style="background:#525252"></span><code>#525252</code></div><div class="swatch"><span style="background:#737373"></span><code>#737373</code></div><div class="swatch"><span style="background:#a3a3a3"></span><code>#a3a3a3</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · SF Pro Rounded</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Forge — Local Model Registry</title>
+<!-- Google Fonts: Inter & Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config verbatim matching system specification -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-surface-variant": "#4c4546",
+            "surface-container-low": "#f3f3f4",
+            "on-secondary": "#ffffff",
+            "on-secondary-fixed-variant": "#474747",
+            "inverse-surface": "#2f3131",
+            "on-primary-fixed": "#1b1b1b",
+            "surface-variant": "#e2e2e2",
+            "background": "#f9f9f9",
+            "surface-dim": "#dadada",
+            "on-background": "#1a1c1c",
+            "secondary-fixed": "#e2e2e2",
+            "secondary": "#5e5e5e",
+            "surface": "#f9f9f9",
+            "outline": "#7e7576",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#646464",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "inverse-primary": "#c6c6c6",
+            "on-error-container": "#93000a",
+            "primary-container": "#1b1b1b",
+            "inverse-on-surface": "#f0f1f1",
+            "surface-container-highest": "#e2e2e2",
+            "on-secondary-fixed": "#1b1b1b",
+            "primary-fixed": "#e2e2e2",
+            "surface-container": "#eeeeee",
+            "secondary-fixed-dim": "#c6c6c6",
+            "on-tertiary-container": "#848484",
+            "secondary-container": "#e2e2e2",
+            "tertiary-fixed": "#e2e2e2",
+            "tertiary-container": "#1b1b1b",
+            "on-tertiary-fixed": "#1b1b1b",
+            "surface-bright": "#f9f9f9",
+            "on-tertiary-fixed-variant": "#474747",
+            "on-primary-fixed-variant": "#474747",
+            "on-surface": "#1a1c1c",
+            "primary-fixed-dim": "#c6c6c6",
+            "tertiary": "#000000",
+            "error": "#ba1a1a",
+            "primary": "#000000",
+            "error-container": "#ffdad6",
+            "surface-tint": "#5e5e5e",
+            "surface-container-high": "#e8e8e8",
+            "outline-variant": "#cfc4c5",
+            "on-primary-container": "#848484"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": [
+              "Inter", "system-ui", "sans-serif"
+            ],
+            "display": [
+              "Inter", "system-ui", "sans-serif"
+            ],
+            "body": [
+              "Inter", "system-ui", "sans-serif"
+            ],
+            "label": [
+              "Public Sans", "sans-serif"
+            ],
+            "mono": [
+              "JetBrains Mono", "ui-monospace", "SFMono-Regular", "Menlo", "monospace"
+            ]
+          },
+          "fontSize": {}
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    ::selection {
+      background-color: #000000;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased min-h-screen flex flex-col selection:bg-primary selection:text-on-primary">
+<!-- Top Navigation Bar (Shared Component: TopNavBar with active 'Models') -->
+<header class="bg-surface-container-lowest dark:bg-surface-container-lowest border-b border-outline-variant dark:border-outline-variant sticky top-0 z-50 h-14">
+<div class="flex justify-between items-center w-full px-6 max-w-7xl mx-auto h-14">
+<!-- Brand & Search cluster -->
+<div class="flex items-center gap-6">
+<a class="font-display font-semibold text-lg tracking-tight text-on-surface dark:text-on-surface flex items-center gap-2" href="#">
+<!-- Minimalist Geometric Anvil / Forge mark -->
+<svg class="w-5 h-5 text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M4 5h16a1 1 0 0 1 1 1v2a2 2 0 0 1-2 2h-1.5l-2.2 6.6A3 3 0 0 1 12.45 19H8a1 1 0 0 1-1-1v-4H5a2 2 0 0 1-2-2V6a1 1 0 0 1 1-1zm3 10v2h5.45a1 1 0 0 0 .95-.68L15.35 10H7v5z"></path>
+</svg>
+<span>Forge</span>
+</a>
+<!-- Search Bar: on_left specification -->
+<div class="relative hidden sm:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-secondary text-sm">search</span>
+<input class="bg-surface-container-low text-on-surface font-body text-sm rounded-full pl-9 pr-8 py-1.5 h-8 w-64 lg:w-72 border-none focus:ring-1 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="registry-search" placeholder="Search models, weights, licenses..." type="text"/>
+<kbd class="absolute right-2.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-secondary bg-surface-container rounded border border-outline-variant">/</kbd>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center gap-7">
+<a class="text-on-surface dark:text-on-surface font-semibold underline underline-offset-8 text-sm" href="#models">Models</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container-low px-2 py-1 rounded transition-colors duration-150 text-sm" href="#docs">Docs</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container-low px-2 py-1 rounded transition-colors duration-150 text-sm" href="#activity">Activity</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-normal hover:text-on-surface dark:hover:text-on-surface hover:bg-surface-container-low px-2 py-1 rounded transition-colors duration-150 text-sm" href="#settings">Settings</a>
+</nav>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3">
+<!-- Terminal Quick Action -->
+<button class="text-on-surface hover:text-primary p-1.5 rounded-full hover:bg-surface-container-low transition-colors duration-150" title="Quick Terminal CLI">
+<span class="material-symbols-outlined text-lg">terminal</span>
+</button>
+<a class="text-xs font-label font-medium text-on-surface px-3 py-1.5 rounded-full hover:bg-surface-container-low transition-colors" href="#signin">
+          Sign In
+        </a>
+<!-- Trailing Primary Action -->
+<a class="bg-primary text-on-primary font-body text-xs font-medium px-3.5 py-1.5 rounded-full hover:bg-primary-container active:scale-[0.98] transition-transform duration-100 flex items-center gap-1.5" href="#download">
+<span class="material-symbols-outlined text-sm">download</span>
+<span>Download CLI</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Hero Header Sub-cluster (Documentation-First README style) -->
+<section class="max-w-7xl mx-auto w-full px-6 pt-10 pb-6 border-b border-outline-variant bg-surface-container-lowest">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-surface-container-low rounded-full border border-outline-variant mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[11px] font-mono text-secondary tracking-tight">registry v0.14.2 • 100% open weights</span>
+</div>
+<h1 class="text-3xl font-display font-medium tracking-tight text-on-surface mb-2">
+        Local Model Registry
+      </h1>
+<p class="text-sm font-body text-on-surface-variant leading-relaxed">
+        Run high-performance open weights locally on CPU &amp; GPU with single-line terminal commands. No external subscriptions, completely free, with private local inference.
+      </p>
+</div>
+<!-- Filter Pills Bar -->
+<div class="flex items-center gap-2 mt-6 overflow-x-auto pb-1 scrollbar-none">
+<button class="bg-primary text-on-primary text-xs font-label font-medium px-3.5 py-1 rounded-full whitespace-nowrap">All Models</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">General LLM</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">Coding &amp; Math</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">Reasoning</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">Vision &amp; Multimodal</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">Embeddings</button>
+<button class="bg-surface-container-low hover:bg-surface-container text-on-surface-variant hover:text-on-surface text-xs font-label font-medium px-3 py-1 rounded-full border border-outline-variant transition-colors whitespace-nowrap">Small (&lt;4B)</button>
+</div>
+</section>
+<!-- Main Canvas: Two-column Desktop Layout (1440px target, max-w-7xl) -->
+<main class="max-w-7xl mx-auto w-full px-6 py-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left / Primary Column: Dense Model Catalog (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-3">
+<div class="flex items-center justify-between pb-2">
+<span class="text-xs font-mono uppercase tracking-wider text-secondary">Verified Local Weights (6)</span>
+<div class="flex items-center gap-3 text-xs text-secondary font-mono">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-primary inline-block"></span> GGUF v3 ready</span>
+<span class="text-outline-variant">•</span>
+<span>Sort: Popularity</span>
+</div>
+</div>
+<!-- Item 1: deepseek-r1:8b (Active Selection) -->
+<div class="group p-4 bg-surface-container-lowest border-2 border-primary rounded-xl cursor-pointer transition-all hover:bg-surface-container-low shadow-sm" onclick="selectModel('deepseek-r1:8b', 'DeepSeek Reasoning Model', '8B', 'Apache 2.0', '4.9 GB', '2.4M', '2d ago', 'deepseek-ai', 'Q4_K_M', '128k', 'Dense Transformer', '8GB Unified Memory / VRAM recommended')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">deepseek-r1:8b</h3>
+<span class="px-2 py-0.5 text-[10px] font-mono bg-primary text-on-primary rounded-full">active</span>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">Q4_K_M</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 2d ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          State-of-the-art open reasoning model distilled from 671B parameters. Excels in chain-of-thought logic, math, and step-by-step synthetic coding.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 8B params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 4.9 GB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 2.4M pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Apache 2.0</span>
+</div>
+</div>
+<!-- Item 2: llama3.3:70b -->
+<div class="group p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer transition-all hover:border-outline hover:bg-surface-container-low" onclick="selectModel('llama3.3:70b', 'Meta State-of-the-Art General LLM', '70B', 'Llama 3.3 Community', '42.5 GB', '5.1M', '1w ago', 'meta-llama', 'Q4_K_M', '128k', 'Grouped-Query Attention Transformer', '48GB Unified Memory / Dual RTX 3090+')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">llama3.3:70b</h3>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">Q4_K_M</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 1w ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          Meta flagship open-weight general foundation model. Industry baseline for multilingual comprehension, tool calling, and long-context synthesis.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 70B params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 42.5 GB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 5.1M pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Llama 3.3</span>
+</div>
+</div>
+<!-- Item 3: qwen2.5-coder:14b -->
+<div class="group p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer transition-all hover:border-outline hover:bg-surface-container-low" onclick="selectModel('qwen2.5-coder:14b', 'Qwen High-Accuracy Code Synthesis', '14B', 'Apache 2.0', '9.0 GB', '890K', '4d ago', 'qwen-lm', 'Q4_K_M', '128k', 'RoPE Multi-Head Attention', '16GB Unified Memory / RTX 4080')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">qwen2.5-coder:14b</h3>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">Q4_K_M</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 4d ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          Specialized programming &amp; software architecture model trained on 5.5T code tokens. Outperforms larger models on EvalPlus HumanEval benchmarks.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 14B params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 9.0 GB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 890K pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Apache 2.0</span>
+</div>
+</div>
+<!-- Item 4: mistral-small:24b -->
+<div class="group p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer transition-all hover:border-outline hover:bg-surface-container-low" onclick="selectModel('mistral-small:24b', 'Mistral Reasoning Powerhouse', '24B', 'Apache 2.0', '14.8 GB', '1.2M', '3d ago', 'mistralai', 'Q4_K_M', '32k', 'Sliding Window Attention', '24GB Unified Memory / RTX 3090')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">mistral-small:24b</h3>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">Q4_K_M</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 3d ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          Mistral AI's compact powerhouse designed for low latency, zero-shot structured JSON extraction, and high-throughput conversational agents.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 24B params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 14.8 GB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 1.2M pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Apache 2.0</span>
+</div>
+</div>
+<!-- Item 5: phi-4:14b -->
+<div class="group p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer transition-all hover:border-outline hover:bg-surface-container-low" onclick="selectModel('phi-4:14b', 'Microsoft Compact Synthetic Reasoning', '14B', 'MIT License', '9.1 GB', '640K', '5d ago', 'microsoft', 'Q4_K_M', '16k', 'Dense Multi-Layer Perceptron', '16GB Unified Memory / Apple M2+')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">phi-4:14b</h3>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">Q4_K_M</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 5d ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          Microsoft's breakthrough small language model trained primarily on synthetic data and curated organic textbooks for high-density academic reasoning.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 14B params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 9.1 GB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 640K pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">MIT</span>
+</div>
+</div>
+<!-- Item 6: nomic-embed-text -->
+<div class="group p-4 bg-surface-container-lowest border border-outline-variant rounded-xl cursor-pointer transition-all hover:border-outline hover:bg-surface-container-low" onclick="selectModel('nomic-embed-text', 'High-Dimensional Open Embedding Model', '137M', 'Apache 2.0', '274 MB', '3.8M', '2w ago', 'nomic-ai', 'FP16', '8k', 'Bidirectional Text Encoder', '2GB RAM minimum / Any CPU')">
+<div class="flex items-start justify-between mb-1.5">
+<div class="flex items-center gap-2">
+<h3 class="font-mono font-medium text-base text-on-surface group-hover:text-primary">nomic-embed-text</h3>
+<span class="text-[11px] font-mono text-secondary px-1.5 py-0.2 bg-surface-container rounded border border-outline-variant">FP16</span>
+</div>
+<span class="text-xs font-mono text-secondary">Updated 2w ago</span>
+</div>
+<p class="text-xs font-body text-on-surface-variant mb-3 leading-normal">
+          State-of-the-art text embedding architecture with 8192 context length. Specifically optimized for local RAG pipelines and vector database indexing.
+        </p>
+<div class="flex items-center gap-4 text-xs font-mono text-secondary">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">tune</span> 137M params</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">database</span> 274 MB</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">download</span> 3.8M pulls</span>
+<span class="ml-auto text-[11px] font-mono text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Apache 2.0</span>
+</div>
+</div>
+</div>
+<!-- Right Column: Highlighted Model Detail & Installation Panel (5 cols, sticky) -->
+<div class="lg:col-span-5 sticky top-20 flex flex-col gap-5">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-6 shadow-sm">
+<!-- Header Info -->
+<div class="flex items-start justify-between mb-3 pb-3 border-b border-outline-variant">
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-xs font-mono text-secondary" id="detail-publisher">deepseek-ai</span>
+<span class="material-symbols-outlined text-xs text-primary" title="Verified Publisher">verified</span>
+</div>
+<h2 class="text-xl font-mono font-semibold tracking-tight text-on-surface" id="detail-name">deepseek-r1:8b</h2>
+<p class="text-xs text-on-surface-variant font-body mt-0.5" id="detail-desc">DeepSeek Reasoning Model</p>
+</div>
+<span class="px-2 py-1 text-[11px] font-mono font-medium bg-surface-container-low text-on-surface border border-outline-variant rounded" id="detail-license">Apache 2.0</span>
+</div>
+<!-- Quantization & Size Selector -->
+<div class="mb-4">
+<label class="block text-xs font-label font-medium text-secondary mb-2">Quantization Weight &amp; Memory Footprint</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="quant-btn active p-2 border border-primary bg-primary text-on-primary rounded text-left" onclick="setQuant(this, '4.9 GB', 'Q4_K_M')">
+<div class="text-[11px] font-mono font-medium">Q4_K_M</div>
+<div class="text-[10px] opacity-80">4.9 GB (Default)</div>
+</button>
+<button class="quant-btn p-2 border border-outline-variant bg-surface-container-lowest text-on-surface rounded text-left hover:border-outline" onclick="setQuant(this, '8.5 GB', 'Q8_0')">
+<div class="text-[11px] font-mono font-medium">Q8_0</div>
+<div class="text-[10px] text-secondary">8.5 GB (High Prec)</div>
+</button>
+<button class="quant-btn p-2 border border-outline-variant bg-surface-container-lowest text-on-surface rounded text-left hover:border-outline" onclick="setQuant(this, '15.9 GB', 'FP16')">
+<div class="text-[11px] font-mono font-medium">FP16</div>
+<div class="text-[10px] text-secondary">15.9 GB (Lossless)</div>
+</button>
+</div>
+</div>
+<!-- Terminal Command Box (Signature Installation Pill/Terminal) -->
+<div class="mb-4">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-xs font-label font-medium text-secondary">Instant Run Command</span>
+<div class="flex items-center gap-1.5 text-[11px] font-mono text-secondary">
+<span class="cursor-pointer font-medium text-primary underline" onclick="switchCmd('run')">run</span>
+<span>/</span>
+<span class="cursor-pointer hover:text-primary" onclick="switchCmd('pull')">pull</span>
+</div>
+</div>
+<div class="relative bg-inverse-surface text-inverse-on-surface rounded-lg p-3 font-mono text-xs flex items-center justify-between border border-primary-container">
+<div class="flex items-center gap-2 overflow-x-auto scrollbar-none py-0.5">
+<span class="text-secondary select-none font-bold">$</span>
+<span class="text-inverse-on-surface font-mono tracking-tight" id="terminal-command-string">forge run deepseek-r1:8b</span>
+</div>
+<button class="ml-2 text-inverse-on-surface hover:text-white p-1 rounded hover:bg-primary-container transition-colors flex items-center gap-1 flex-shrink-0" id="copy-btn" onclick="copyTerminalCmd()" title="Copy to clipboard">
+<span class="material-symbols-outlined text-sm" id="copy-icon">content_copy</span>
+<span class="text-[10px] font-mono hidden sm:inline" id="copy-text">copy</span>
+</button>
+</div>
+</div>
+<!-- Quick Specs Grid -->
+<div class="pt-3 border-t border-outline-variant">
+<span class="block text-xs font-label font-medium text-secondary mb-2">Hardware Requirements &amp; Architecture</span>
+<div class="grid grid-cols-2 gap-2 text-xs font-mono">
+<div class="p-2 bg-surface-container-low rounded border border-outline-variant">
+<div class="text-[10px] text-secondary">Context Window</div>
+<div class="font-medium text-on-surface" id="spec-context">128k tokens</div>
+</div>
+<div class="p-2 bg-surface-container-low rounded border border-outline-variant">
+<div class="text-[10px] text-secondary">Architecture</div>
+<div class="font-medium text-on-surface" id="spec-arch">Dense Transformer</div>
+</div>
+<div class="col-span-2 p-2 bg-surface-container-low rounded border border-outline-variant">
+<div class="text-[10px] text-secondary">Minimum Hardware Recommendation</div>
+<div class="font-medium text-on-surface text-[11px]" id="spec-hardware">8GB Unified Memory / VRAM recommended</div>
+</div>
+</div>
+</div>
+<!-- Code Snippet Previews (CLI, Python SDK, cURL) -->
+<div class="mt-4 pt-3 border-t border-outline-variant">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-label font-medium text-secondary">Integration Preview</span>
+<div class="flex gap-2">
+<button class="text-[11px] font-mono px-2 py-0.5 rounded bg-primary text-on-primary" id="tab-cli" onclick="switchIntegrationTab('cli')">CLI</button>
+<button class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container-low text-secondary hover:text-on-surface" id="tab-py" onclick="switchIntegrationTab('py')">Python</button>
+<button class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container-low text-secondary hover:text-on-surface" id="tab-curl" onclick="switchIntegrationTab('curl')">cURL</button>
+</div>
+</div>
+<pre class="bg-surface-container-low p-3 rounded font-mono text-[11px] text-on-surface leading-relaxed overflow-x-auto border border-outline-variant" id="integration-snippet"># Interactive terminal chat
+forge run deepseek-r1:8b</pre>
+</div>
+</div>
+<!-- Quick Platform Support Banner (Ollama minimalist documentation style) -->
+<div class="p-4 bg-surface-container-lowest border border-outline-variant rounded-xl flex items-center justify-between text-xs font-mono text-secondary">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-on-surface">laptop_mac</span>
+<span class="text-on-surface font-medium">macOS, Linux &amp; Windows</span>
+</div>
+<span class="text-[11px] text-secondary">Zero driver configuration</span>
+</div>
+</div>
+</main>
+<!-- Global Footer (Shared Component: Footer) -->
+<footer class="bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant mt-16">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-6 py-8 max-w-7xl mx-auto gap-4">
+<!-- Brand & Copyright -->
+<div class="flex items-center gap-3">
+<span class="font-display font-semibold text-xs text-on-surface dark:text-on-surface">Forge</span>
+<span class="text-outline-variant">•</span>
+<span class="font-body text-xs font-normal text-on-surface-variant dark:text-on-surface-variant">
+          © 2026 Forge. All rights reserved. Open local model architecture.
+        </span>
+</div>
+<!-- Links matching JSON exactly -->
+<div class="flex flex-wrap items-center gap-5 font-body text-xs font-normal text-on-surface-variant dark:text-on-surface-variant">
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#docs">Documentation</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#cli">CLI Reference</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#github">GitHub</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#discord">Discord</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#status">Status</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#terms">Terms</a>
+<a class="hover:text-on-surface dark:hover:text-on-surface underline underline-offset-4 transition-colors duration-150" href="#privacy">Privacy</a>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions Script -->
+<script>
+    let activeModelTag = 'deepseek-r1:8b';
+    let currentVerb = 'run';
+    let activeQuant = 'Q4_K_M';
+
+    function updateCommand() {
+      const cmd = `forge ${currentVerb} ${activeModelTag}`;
+      document.getElementById('terminal-command-string').textContent = cmd;
+      
+      // Update integration tabs if on CLI tab
+      const cliTab = document.getElementById('tab-cli');
+      if (cliTab && cliTab.classList.contains('bg-primary')) {
+        document.getElementById('integration-snippet').textContent = `# Interactive terminal chat\n${cmd}`;
+      }
+    }
+
+    function switchCmd(verb) {
+      currentVerb = verb;
+      updateCommand();
+    }
+
+    function selectModel(tag, desc, params, license, size, pulls, updated, pub, quant, context, arch, hardware) {
+      activeModelTag = tag;
+      document.getElementById('detail-name').textContent = tag;
+      document.getElementById('detail-desc').textContent = desc;
+      document.getElementById('detail-publisher').textContent = pub;
+      document.getElementById('detail-license').textContent = license;
+      document.getElementById('spec-context').textContent = context + ' tokens';
+      document.getElementById('spec-arch').textContent = arch;
+      document.getElementById('spec-hardware').textContent = hardware;
+      
+      updateCommand();
+
+      // Update snippet tabs
+      switchIntegrationTab('cli');
+    }
+
+    function setQuant(el, size, label) {
+      document.querySelectorAll('.quant-btn').forEach(btn => {
+        btn.classList.remove('bg-primary', 'text-on-primary', 'border-primary');
+        btn.classList.add('bg-surface-container-lowest', 'text-on-surface', 'border-outline-variant');
+      });
+      el.classList.remove('bg-surface-container-lowest', 'text-on-surface', 'border-outline-variant');
+      el.classList.add('bg-primary', 'text-on-primary', 'border-primary');
+      activeQuant = label;
+    }
+
+    function copyTerminalCmd() {
+      const cmd = document.getElementById('terminal-command-string').textContent;
+      navigator.clipboard.writeText(cmd).then(() => {
+        const text = document.getElementById('copy-text');
+        const icon = document.getElementById('copy-icon');
+        text.textContent = 'Copied!';
+        icon.textContent = 'check';
+        setTimeout(() => {
+          text.textContent = 'copy';
+          icon.textContent = 'content_copy';
+        }, 2000);
+      });
+    }
+
+    function switchIntegrationTab(tab) {
+      const cliBtn = document.getElementById('tab-cli');
+      const pyBtn = document.getElementById('tab-py');
+      const curlBtn = document.getElementById('tab-curl');
+      const snippet = document.getElementById('integration-snippet');
+
+      [cliBtn, pyBtn, curlBtn].forEach(b => {
+        b.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container-low text-secondary hover:text-on-surface';
+      });
+
+      if (tab === 'cli') {
+        cliBtn.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-primary text-on-primary';
+        snippet.textContent = `# Interactive terminal chat\nforge run ${activeModelTag}`;
+      } else if (tab === 'py') {
+        pyBtn.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-primary text-on-primary';
+        snippet.textContent = `import forge\n\nresponse = forge.chat(model='${activeModelTag}', messages=[\n  {'role': 'user', 'content': 'Explain quantum decoherence.'}\n])\nprint(response['message']['content'])`;
+      } else if (tab === 'curl') {
+        curlBtn.className = 'text-[11px] font-mono px-2 py-0.5 rounded bg-primary text-on-primary';
+        snippet.textContent = `curl http://localhost:11434/api/generate -d '{\n  "model": "${activeModelTag}",\n  "prompt": "Why is the sky blue?",\n  "stream": false\n}'`;
+      }
+    }
+
+    // Keyboard shortcut '/' to search
+    window.addEventListener('keydown', (e) => {
+      if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+        e.preventDefault();
+        const search = document.getElementById('registry-search');
+        if (search) search.focus();
+      }
+    });
+  </script>
+</body></html>

@@ -36,11 +36,11 @@ python3 scripts/serve.py
 
 若連接埠已被使用，可改成 `python3 scripts/serve.py --port 4178`。
 
-從 ZIP 解壓後，請先執行 `python3 scripts/build.py` 重建下載包，再啟動伺服器。ZIP 不會將自己遞迴封裝在內。
+從 ZIP 解壓後可直接啟動伺服器。網站的完整下載包由 GitHub Releases 提供；`python3 scripts/build.py` 可在本機重建同名 ZIP，ZIP 不會將自己遞迴封裝在內。
 
-開啟 **http://127.0.0.1:4173**。可搜尋品牌或關鍵字、依領域和明暗模式篩選、收藏設計、預覽元件、閱讀全文、複製指令，以及下載單一檔案或全部 ZIP。收藏只儲存在目前瀏覽器。
+開啟 **http://127.0.0.1:4173**。可搜尋品牌或關鍵字、依領域和明暗模式篩選、收藏設計、比較 Stitch 生成頁面、閱讀全文、複製指令，以及下載單一檔案或全部 ZIP。收藏只儲存在目前瀏覽器。
 
-網站預覽是依 token 製作的元件示意，並非品牌原站截圖。沒有外部字體、圖片、追蹤或第三方 JavaScript。直接開 `index.html` 時瀏覽器可能阻擋讀取資料；請使用上述本機伺服器。
+網站預覽由 Google Stitch MCP 依各份設計分析與專屬情境實際生成，保留原始 HTML 與截圖，不是品牌原站截圖。每份範例附有生成指令、Stitch project/screen ID 與檔案 SHA-256。HTML 是靜態介面範例，可能使用 Google Fonts、Tailwind CDN 或 Stitch 匯出的外部圖片，部分操作與資料僅供展示。直接開 `index.html` 時瀏覽器可能阻擋讀取資料；請使用上述本機伺服器。
 
 ## 開發與驗證
 
@@ -54,17 +54,19 @@ python3 -m unittest discover -s tests -v
 
 - `design-md/<slug>/DESIGN.md`：完整設計分析，加上全新 AI 指令。
 - `design-md/<slug>/PROMPTS.md`：三種任務指令與迭代流程。
-- `design-md/<slug>/preview.html` / `preview-dark.html`：可獨立開啟的元件示意。
+- `design-md/<slug>/preview.html`：Stitch 匯出的原始 HTML。
+- `design-md/<slug>/preview.png`：Stitch 原始生成截圖。
+- `design-md/<slug>/STITCH-PROMPT.md` / `STITCH.json`：生成指令與可追溯的來源紀錄。
 - `data/recipes.json`：本專案撰寫的品牌情境與元件需求。
 - `data/upstream.json`：匯入版本、每份原始文件的 SHA-256。
 - `assets/catalog.json`：由設計檔案與情境資料產生的網站目錄。
-- `assets/all-designs.zip`：全部設計、prompt、預覽、展示網站原始碼與授權。
+- `assets/all-designs.zip`：建置產出的完整下載包，包含設計、prompt、HTML、原始截圖、網站原始碼與授權；不提交二進位 ZIP，發布到 GitHub Releases。
 
-修改情境後先執行 `rewrite_prompts.py`；修改分析或情境後執行 `build.py` 更新目錄、預覽和下載包。這兩個指令不會連線到上游，也不會收費。一般檢查流程由 `.github/workflows/check.yml` 提供。
+修改情境後先執行 `rewrite_prompts.py`；再執行 `build.py` 更新目錄和下載包。`build.py` 只驗證並封裝既有 Stitch 匯出，不會產生、重繪或覆蓋預覽，也不會發起 AI 請求。要更新範例，需在 Stitch 重新生成並透過 `scripts/import_stitch.py` 匯入 MCP 結果。金鑰只供生成工具使用，不會放入網站或下載包。一般檢查流程由 `.github/workflows/check.yml` 提供。
 
 ## 網站發布
 
-網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。
+網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。 完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結。`dist/` 不包含這個大型 ZIP。
 
 ## 免費與來源
 

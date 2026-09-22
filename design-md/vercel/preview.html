@@ -1,8 +1,533 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vercel · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#171717;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/vercel">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Vercel · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#171717"></span><code>#171717</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#4d4d4d"></span><code>#4d4d4d</code></div><div class="swatch"><span style="background:#888888"></span><code>#888888</code></div><div class="swatch"><span style="background:#ebebeb"></span><code>#ebebeb</code></div><div class="swatch"><span style="background:#a1a1a1"></span><code>#a1a1a1</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Geist, Inter, system-ui, -apple-system, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kiteflow - Deployment Overview</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & Geist/Geist Mono equivalents -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#171717",
+            "on-primary": "#ffffff",
+            ink: "#171717",
+            body: "#4d4d4d",
+            mute: "#888888",
+            hairline: "#eaeaea",
+            "hairline-strong": "#a1a1a1",
+            canvas: "#ffffff",
+            "canvas-soft": "#fafafa",
+            "canvas-soft-2": "#f5f5f5",
+            link: "#0070f3",
+            "link-deep": "#0761d1",
+            "link-bg-soft": "#d3e5ff",
+            success: "#0070f3",
+            error: "#ee0000",
+            warning: "#f5a623"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "ui-monospace", "monospace"]
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            xs: "4px",
+            sm: "6px",
+            md: "8px",
+            lg: "12px",
+            xl: "16px",
+            "pill-sm": "64px",
+            pill: "100px",
+            full: "9999px"
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    /* Hairline borders and subtle terminal glow */
+    .hairline-border {
+      border: 1px solid #eaeaea;
+    }
+  </style>
+</head>
+<body class="bg-canvas text-ink font-body antialiased selection:bg-primary selection:text-canvas">
+<!-- TopNavBar (Shared Component JSON anchored) -->
+<header class="docked full-width top-0 h-16 bg-canvas border-b border-hairline sticky z-40">
+<div class="flex justify-between items-center w-full px-6 max-w-7xl mx-auto h-16">
+<!-- Left: Logo & Project context switcher & Search -->
+<div class="flex items-center space-x-4">
+<!-- Logo -->
+<a class="font-headline font-semibold text-lg tracking-tighter text-ink flex items-center gap-2" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 2L2 19.5h20L12 2z"></path>
+</svg>
+<span>Kiteflow</span>
+</a>
+<!-- Breadcrumb / Team Switcher -->
+<div class="hidden sm:flex items-center text-xs font-mono text-mute space-x-1 pl-2 border-l border-hairline">
+<span class="hover:text-ink cursor-pointer transition-colors">kiteflow-team</span>
+<span>/</span>
+<span class="text-ink font-medium bg-canvas-soft px-1.5 py-0.5 rounded border border-hairline">core-edge-api</span>
+</div>
+<!-- Search Bar (on_left) -->
+<div class="relative hidden md:block w-56 ml-3">
+<div class="absolute inset-y-0 left-0 pl-2.5 flex items-center pointer-events-none text-mute">
+<span class="material-symbols-outlined text-[16px]">search</span>
+</div>
+<input class="w-full pl-8 pr-7 py-1 text-xs bg-canvas-soft border border-hairline rounded text-ink placeholder-mute focus:outline-none focus:border-ink transition-colors font-mono" placeholder="Search deployments..." type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2 flex items-center pointer-events-none">
+<kbd class="text-[10px] text-mute border border-hairline rounded px-1 bg-canvas">⌘K</kbd>
+</div>
+</div>
+</div>
+<!-- Center: Main Navigation Links -->
+<nav class="hidden lg:flex items-center space-x-6 text-sm h-full pt-4">
+<!-- Active Tab: Overview -->
+<a class="text-ink font-medium border-b-2 border-primary pb-5" href="#overview">Overview</a>
+<a class="text-body font-normal hover:text-ink pb-5 transition-colors" href="#deployments">Deployments</a>
+<a class="text-body font-normal hover:text-ink pb-5 transition-colors" href="#analytics">Analytics</a>
+<a class="text-body font-normal hover:text-ink pb-5 transition-colors" href="#logs">Logs</a>
+<a class="text-body font-normal hover:text-ink pb-5 transition-colors" href="#storage">Storage</a>
+<a class="text-body font-normal hover:text-ink pb-5 transition-colors" href="#settings">Settings</a>
+</nav>
+<!-- Right: Trailing Actions -->
+<div class="flex items-center space-x-3">
+<!-- Secondary: Feedback -->
+<button class="hidden sm:inline-flex items-center text-xs font-medium text-body hover:text-ink px-2.5 py-1.5 rounded border border-hairline hover:bg-canvas-soft transition-colors">
+          Feedback
+        </button>
+<!-- Trailing Icons: Notifications & Help -->
+<button aria-label="Notifications" class="text-body hover:text-ink p-1.5 rounded transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-[18px]">notifications</span>
+</button>
+<button aria-label="Help" class="text-body hover:text-ink p-1.5 rounded transition-colors" title="Help">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+<!-- Primary Action: Deploy -->
+<button class="bg-primary text-on-primary text-xs font-medium px-3.5 py-1.5 rounded-full hover:bg-black transition-colors flex items-center gap-1.5 active:scale-[0.99]">
+<span class="material-symbols-outlined text-[14px]">rocket_launch</span>
+<span>Deploy</span>
+</button>
+<!-- User Avatar -->
+<div class="w-7 h-7 rounded-full bg-canvas-soft-2 border border-hairline flex items-center justify-center font-mono text-[11px] font-semibold text-ink ml-1 overflow-hidden" title="User avatar profile photo">
+          AV
+        </div>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<main class="max-w-7xl mx-auto px-6 py-8">
+<!-- Project Header & Operational Summary Bar -->
+<section class="border-b border-hairline pb-7 mb-8">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<!-- Title & Badges -->
+<div class="flex items-center flex-wrap gap-2.5">
+<h1 class="font-headline font-semibold text-2xl tracking-tight text-ink">kiteflow-edge-runtime</h1>
+<a class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono text-body bg-canvas-soft hover:bg-canvas-soft-2 border border-hairline rounded transition-colors" href="https://github.com/kiteflow/runtime" rel="noreferrer" target="_blank">
+<span class="material-symbols-outlined text-[14px]">code</span>
+<span>github.com/kiteflow/runtime</span>
+</a>
+<a class="inline-flex items-center gap-1 px-2 py-0.5 text-xs font-mono text-link hover:underline bg-link-bg-soft/30 border border-link-bg-soft rounded transition-colors" href="https://kiteflow-runtime.edge.app" rel="noreferrer" target="_blank">
+<span>kiteflow-runtime.edge.app</span>
+<span class="material-symbols-outlined text-[12px]">open_in_new</span>
+</a>
+</div>
+<!-- Metadata byline -->
+<div class="flex items-center gap-2 mt-2 text-xs text-body font-mono">
+<span class="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse"></span>
+<span class="text-ink font-medium">Production: Ready</span>
+<span class="text-mute">•</span>
+<span>Deployed 4m ago by <span class="text-ink">@alexv</span> via Git CLI</span>
+<span class="text-mute">•</span>
+<span class="text-mute">commit: 7a82c9f</span>
+</div>
+</div>
+<!-- Operational Metric Quick-Pills (Telemetry) -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-left">
+<div class="px-3 py-2 border border-hairline rounded bg-canvas-soft">
+<div class="text-[10px] uppercase font-mono tracking-wider text-mute">Edge Uptime</div>
+<div class="font-mono text-sm font-semibold text-ink mt-0.5">99.98%</div>
+</div>
+<div class="px-3 py-2 border border-hairline rounded bg-canvas-soft">
+<div class="text-[10px] uppercase font-mono tracking-wider text-mute">P95 Latency</div>
+<div class="font-mono text-sm font-semibold text-ink mt-0.5">38ms</div>
+</div>
+<div class="px-3 py-2 border border-hairline rounded bg-canvas-soft">
+<div class="text-[10px] uppercase font-mono tracking-wider text-mute">Req / 24h</div>
+<div class="font-mono text-sm font-semibold text-ink mt-0.5">2.41M</div>
+</div>
+<div class="px-3 py-2 border border-hairline rounded bg-canvas-soft">
+<div class="text-[10px] uppercase font-mono tracking-wider text-mute">Edge Points</div>
+<div class="font-mono text-sm font-semibold text-ink mt-0.5">18 PoPs</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Deployment Stages (Bento/Card Grid) -->
+<section class="mb-10">
+<div class="flex items-center justify-between mb-3">
+<h2 class="font-headline font-semibold text-sm tracking-tight text-ink uppercase tracking-wider text-[11px] text-mute">Target Environments</h2>
+<span class="text-xs text-mute font-mono">3 Active Environments</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1: Production (Active) -->
+<div class="border border-hairline rounded-md p-4 bg-canvas hover:border-hairline-strong transition-colors relative">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-ink font-mono">Production</span>
+</div>
+<span class="text-[11px] font-mono text-mute">4m ago</span>
+</div>
+<div class="font-mono text-xs text-ink font-medium truncate mb-1">
+            fix(cache): edge stale-while-revalidate
+          </div>
+<div class="text-[11px] font-mono text-mute flex items-center justify-between mt-3 pt-2.5 border-t border-hairline">
+<span class="truncate">branch: <strong class="text-body font-normal">main (7a82c9f)</strong></span>
+<span class="text-emerald-700 font-medium">18 PoPs active</span>
+</div>
+</div>
+<!-- Card 2: Preview / Staging (Building state) -->
+<div class="border border-hairline rounded-md p-4 bg-canvas hover:border-hairline-strong transition-colors relative">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-ink font-mono">Preview / Staging</span>
+</div>
+<span class="text-[11px] font-mono text-blue-600 bg-link-bg-soft/40 px-1.5 py-0.2 rounded font-medium">Building (42s)</span>
+</div>
+<div class="font-mono text-xs text-ink font-medium truncate mb-1">
+            feat/distributed-kv: replicate replica set
+          </div>
+<div class="text-[11px] font-mono text-mute flex items-center justify-between mt-3 pt-2.5 border-t border-hairline">
+<span class="truncate">branch: <strong class="text-body font-normal">feat/distributed-kv</strong></span>
+<span class="text-mute font-mono">#8c1e4d2</span>
+</div>
+</div>
+<!-- Card 3: Canary / Edge-V2 (Split Traffic) -->
+<div class="border border-hairline rounded-md p-4 bg-canvas hover:border-hairline-strong transition-colors relative">
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-semibold uppercase tracking-wider text-ink font-mono">Canary / Edge-v2</span>
+</div>
+<span class="text-[11px] font-mono text-ink bg-canvas-soft-2 px-1.5 py-0.2 rounded border border-hairline">10% Traffic Weight</span>
+</div>
+<div class="font-mono text-xs text-ink font-medium truncate mb-1">
+            canary-v2.4: wasm compute runtime baseline
+          </div>
+<div class="text-[11px] font-mono text-mute flex items-center justify-between mt-3 pt-2.5 border-t border-hairline">
+<span class="truncate">branch: <strong class="text-body font-normal">canary-v2.4</strong></span>
+<span class="text-mute font-mono">#1b90f4a</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Builds & Deployments Section (Core Requirement) -->
+<section class="border border-hairline rounded-lg overflow-hidden bg-canvas">
+<!-- Table Header Bar / Filter Bar -->
+<div class="px-5 py-3.5 border-b border-hairline bg-canvas-soft flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<h3 class="font-headline font-semibold text-sm tracking-tight text-ink">Recent Deployments</h3>
+<span class="text-xs text-mute font-mono">Showing last 4 builds</span>
+</div>
+<!-- Quick Environment Filter Tabs -->
+<div class="flex items-center space-x-1 text-xs font-mono">
+<button class="px-2 py-1 rounded bg-canvas text-ink font-medium border border-hairline shadow-xs">All (28)</button>
+<button class="px-2 py-1 rounded text-body hover:text-ink transition-colors">Production</button>
+<button class="px-2 py-1 rounded text-body hover:text-ink transition-colors">Preview</button>
+</div>
+</div>
+<!-- Deployment Table Structure -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-hairline text-[11px] uppercase font-mono tracking-wider text-mute bg-canvas">
+<th class="py-2.5 px-4 font-medium">Deployment / Commit</th>
+<th class="py-2.5 px-3 font-medium">Env</th>
+<th class="py-2.5 px-3 font-medium">Status</th>
+<th class="py-2.5 px-3 font-medium">Branch</th>
+<th class="py-2.5 px-3 font-medium">Duration</th>
+<th class="py-2.5 px-3 font-medium">Triggered</th>
+<th class="py-2.5 px-4 font-medium text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-hairline text-xs font-mono">
+<!-- ROW 1 (EXPANDED TO SHOW REAL OPERATIONAL LOG PANEL) -->
+<tr class="bg-canvas-soft/40 hover:bg-canvas-soft transition-colors cursor-pointer" onclick="toggleLogs('log-container-1')">
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mute transform transition-transform" id="arrow-icon-1">expand_more</span>
+<div>
+<div class="font-medium text-ink flex items-center gap-1.5">
+<span>fix(cache): edge stale-while-revalidate header</span>
+</div>
+<div class="text-[11px] text-mute mt-0.5">dep_8a91f4b82c • commit: 7a82c9f</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-1.5 py-0.5 bg-canvas-soft border border-hairline text-ink rounded text-[11px] font-medium">Production</span>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 text-ink font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Ready</span>
+</div>
+</td>
+<td class="py-3 px-3 text-body">main</td>
+<td class="py-3 px-3 text-body">42.6s</td>
+<td class="py-3 px-3 text-mute">4m ago by @alexv</td>
+<td class="py-3 px-4 text-right">
+<button class="text-mute hover:text-ink transition-colors p-1" title="Deployment Menu">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- EXPANDED LOG STREAM DRAWER FOR ROW 1 -->
+<tr id="log-container-1">
+<td class="p-0 border-b border-hairline bg-[#0d0d0d] text-[#e0e0e0]" colspan="7">
+<div class="p-4 sm:p-5 font-mono text-xs">
+<!-- Terminal Header Bar -->
+<div class="flex flex-wrap items-center justify-between pb-3 mb-3 border-b border-neutral-800 text-neutral-400 gap-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span class="text-neutral-200 font-medium text-[11px] uppercase tracking-wider">Build Output: dep_8a91f4b82c (production)</span>
+<span class="text-neutral-600">|</span>
+<span class="text-[11px]">Duration: 42.6s</span>
+<span class="text-neutral-600">|</span>
+<span class="text-[11px]">Target: Node 20.x / ES2022</span>
+</div>
+<!-- Search filter & copy buttons -->
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="bg-neutral-900 border border-neutral-800 text-neutral-200 text-[11px] px-2 py-0.5 rounded w-32 sm:w-48 placeholder-neutral-600 focus:outline-none focus:border-neutral-600 font-mono" placeholder="Filter logs..." type="text"/>
+</div>
+<button class="flex items-center gap-1 text-[11px] bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 px-2 py-0.5 rounded text-neutral-300 transition-colors" onclick="copyLogs()">
+<span class="material-symbols-outlined text-[13px]">content_copy</span>
+<span id="copy-label">Copy</span>
+</button>
+</div>
+</div>
+<!-- Terminal Operational Lines -->
+<div class="space-y-1.5 font-mono text-[11.5px] leading-relaxed overflow-x-auto text-neutral-300">
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:01.12]</span>
+<span class="text-neutral-400">INFO:</span>
+<span>Kiteflow Edge Compiler v3.8.2 detected in execution environment</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:02.04]</span>
+<span class="text-neutral-400">INFO:</span>
+<span>Resolved runner node: edge-build-iad1-c4.kiteflow.net</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:03.45]</span>
+<span class="text-blue-400 font-medium">STEP 1/4:</span>
+<span>Cloning git repository ref: <code class="text-neutral-200 font-semibold">main</code> (commit: 7a82c9f) via SSH... done (0.8s)</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:08.20]</span>
+<span class="text-blue-400 font-medium">STEP 2/4:</span>
+<span>Installing dependencies via pnpm (frozen lockfile validation enabled)... done (4.1s)</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:14.33]</span>
+<span class="text-blue-400 font-medium">STEP 3/4:</span>
+<span>Compiling edge bundle with esbuild &amp; SWC target <code class="text-amber-400">es2022</code>...</span>
+</div>
+<div class="flex gap-3 pl-16 text-neutral-400 text-[11px]">
+<span>└─ Created entry worker: dist/worker.js (214.2 kB gzipped)</span>
+</div>
+<div class="flex gap-3 pl-16 text-neutral-400 text-[11px]">
+<span>└─ WASM cache bindings resolved: kv_store_v2.wasm (64.1 kB)</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:28.19]</span>
+<span class="text-blue-400 font-medium">STEP 4/4:</span>
+<span>Deploying to global edge mesh across 18 Points of Presence (PoPs)...</span>
+</div>
+<div class="flex gap-3 pl-16 text-neutral-400 text-[11px]">
+<span>└─ iad1, lhr1, nrt1, syd1, fra1, cdg1: synced and warmed (1.2s)</span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:41.80]</span>
+<span class="text-emerald-400 font-medium">SUCCESS:</span>
+<span class="text-emerald-300">Edge worker live at <a class="underline hover:text-emerald-200" href="https://kiteflow-runtime.edge.app" target="_blank">https://kiteflow-runtime.edge.app</a></span>
+</div>
+<div class="flex gap-3">
+<span class="text-neutral-500 select-none">[00:42.10]</span>
+<span class="text-neutral-400">INFO:</span>
+<span>Build cache uploaded (24.3 MB). Total run time: 42.6s. Deployment verified.</span>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- ROW 2 (BUILDING / IN-PROGRESS) -->
+<tr class="hover:bg-canvas-soft transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mute">chevron_right</span>
+<div>
+<div class="font-medium text-ink">feat(worker): zero-copy buffer serialization</div>
+<div class="text-[11px] text-mute mt-0.5">dep_902a7b11d4 • commit: 8c1e4d2</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-1.5 py-0.5 bg-canvas-soft border border-hairline text-ink rounded text-[11px] font-medium">Preview</span>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 text-blue-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+<span>Building...</span>
+</div>
+</td>
+<td class="py-3 px-3 text-body">feat/distributed-kv</td>
+<td class="py-3 px-3 text-blue-600 font-medium">28s elapsed</td>
+<td class="py-3 px-3 text-mute">22m ago by @mchen</td>
+<td class="py-3 px-4 text-right">
+<button class="text-mute hover:text-ink transition-colors p-1" title="Deployment Menu">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3 (CANARY) -->
+<tr class="hover:bg-canvas-soft transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mute">chevron_right</span>
+<div>
+<div class="font-medium text-ink">chore: sync telemetry collector schema v2</div>
+<div class="text-[11px] text-mute mt-0.5">dep_3f1b490e21 • commit: 1b90f4a</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-1.5 py-0.5 bg-canvas-soft border border-hairline text-ink rounded text-[11px] font-medium">Canary</span>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 text-ink font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Ready</span>
+</div>
+</td>
+<td class="py-3 px-3 text-body">canary-v2.4</td>
+<td class="py-3 px-3 text-body">39.1s</td>
+<td class="py-3 px-3 text-mute">2h ago by @sarahk</td>
+<td class="py-3 px-4 text-right">
+<button class="text-mute hover:text-ink transition-colors p-1" title="Deployment Menu">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4 (PREVIEW) -->
+<tr class="hover:bg-canvas-soft transition-colors cursor-pointer">
+<td class="py-3 px-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-mute">chevron_right</span>
+<div>
+<div class="font-medium text-ink">test(e2e): mock redis timeout failover handler</div>
+<div class="text-[11px] text-mute mt-0.5">dep_11fa9904bb • commit: 5e3810c</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3">
+<span class="px-1.5 py-0.5 bg-canvas-soft border border-hairline text-ink rounded text-[11px] font-medium">Preview</span>
+</td>
+<td class="py-3 px-3">
+<div class="inline-flex items-center gap-1.5 text-ink font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Ready</span>
+</div>
+</td>
+<td class="py-3 px-3 text-body">test/failover</td>
+<td class="py-3 px-3 text-body">34.8s</td>
+<td class="py-3 px-3 text-mute">4h ago by @mchen</td>
+<td class="py-3 px-4 text-right">
+<button class="text-mute hover:text-ink transition-colors p-1" title="Deployment Menu">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination / Bottom Table Info -->
+<div class="px-4 py-2.5 bg-canvas border-t border-hairline flex items-center justify-between text-xs text-mute font-mono">
+<span>Showing 4 of 142 total deployments</span>
+<div class="flex items-center gap-1">
+<button class="px-2 py-1 border border-hairline rounded hover:bg-canvas-soft text-ink disabled:opacity-40" disabled="">Previous</button>
+<button class="px-2 py-1 border border-hairline rounded hover:bg-canvas-soft text-ink">Next</button>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Shared Component JSON anchored) -->
+<footer class="docked full-width bottom-0 bg-canvas border-t border-hairline mt-16">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-6 py-8 max-w-7xl mx-auto text-xs text-mute">
+<!-- Brand & Copyright -->
+<div class="flex items-center gap-3 mb-4 md:mb-0">
+<span class="font-headline font-semibold text-sm tracking-tight text-ink">Kiteflow</span>
+<span class="text-mute">© 2025 Kiteflow Inc. All rights reserved.</span>
+</div>
+<!-- Footer navigation links -->
+<nav class="flex flex-wrap justify-center gap-x-6 gap-y-2">
+<a class="text-mute hover:text-body transition-colors" href="#docs">Documentation</a>
+<a class="text-mute hover:text-body transition-colors" href="#api">API Reference</a>
+<a class="text-mute hover:text-body transition-colors flex items-center gap-1.5" href="#status">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span>Status</span>
+</a>
+<a class="text-mute hover:text-body transition-colors" href="#changelog">Changelog</a>
+<a class="text-mute hover:text-body transition-colors" href="#privacy">Privacy Policy</a>
+</nav>
+</div>
+</footer>
+<!-- Micro-interactions: Log drawer toggle and copy code snippet -->
+<script>
+    function toggleLogs(id) {
+      const container = document.getElementById(id);
+      const icon = document.getElementById('arrow-icon-1');
+      if (container.style.display === 'none') {
+        container.style.display = 'table-row';
+        icon.innerText = 'expand_more';
+      } else {
+        container.style.display = 'none';
+        icon.innerText = 'chevron_right';
+      }
+    }
+
+    function copyLogs() {
+      const label = document.getElementById('copy-label');
+      label.innerText = 'Copied!';
+      setTimeout(() => {
+        label.innerText = 'Copy';
+      }, 1800);
+    }
+  </script>
+</body></html>

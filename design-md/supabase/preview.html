@@ -1,8 +1,733 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Supabase · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#3ecf8e;--on-accent:#000000;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/supabase">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Supabase · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#3ecf8e"></span><code>#3ecf8e</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#171717"></span><code>#171717</code></div><div class="swatch"><span style="background:#24b47e"></span><code>#24b47e</code></div><div class="swatch"><span style="background:#4ade80"></span><code>#4ade80</code></div><div class="swatch"><span style="background:#212121"></span><code>#212121</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Circular, &#x27;Helvetica Neue&#x27;, Helvetica, Arial, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Aetherbase — prod-cluster-01 Dashboard</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with custom theme config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-primary-container": "#005434",
+            "surface-container-low": "#18191d",
+            "on-primary-fixed": "#002112",
+            "surface-tint": "#006c45",
+            "inverse-primary": "#51df9c",
+            "tertiary": "#934a23",
+            "surface-dim": "#121316",
+            "on-tertiary-container": "#78350f",
+            "primary-container": "#3ecf8e",
+            "on-error": "#ffffff",
+            "on-tertiary-fixed": "#351000",
+            "error": "#ba1a1a",
+            "on-primary": "#171717",
+            "on-secondary-fixed-variant": "#1f5037",
+            "surface-container": "#1f2025",
+            "tertiary-container": "#ffa072",
+            "on-secondary-fixed": "#002112",
+            "error-container": "#ffdad6",
+            "primary-fixed-dim": "#51df9c",
+            "secondary-fixed-dim": "#9fd2b2",
+            "secondary-fixed": "#baeecd",
+            "surface": "#121316",
+            "secondary": "#38684e",
+            "outline": "#33363f",
+            "inverse-surface": "#2f3131",
+            "on-surface-variant": "#9a9a9a",
+            "on-surface": "#f0f1f1",
+            "surface-bright": "#27292f",
+            "tertiary-fixed": "#ffdbcc",
+            "on-error-container": "#93000a",
+            "primary": "#3ecf8e",
+            "on-tertiary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb694",
+            "on-primary-fixed-variant": "#005233",
+            "primary-fixed": "#71fcb6",
+            "surface-container-highest": "#27292f",
+            "outline-variant": "#27292f",
+            "background": "#121316",
+            "on-secondary-container": "#3c6c52",
+            "secondary-container": "#b7ecca",
+            "surface-container-lowest": "#121316",
+            "on-tertiary-fixed-variant": "#76330d",
+            "on-background": "#f0f1f1",
+            "inverse-on-surface": "#121316",
+            "surface-variant": "#1f2025",
+            "surface-container-high": "#23252b",
+            "on-secondary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"],
+            "mono": ["ui-monospace", "Menlo", "Monaco", "Consolas", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #121316;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #27292f;
+      border-radius: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: #33363f;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased flex h-screen w-screen overflow-hidden selection:bg-primary-container selection:text-on-primary">
+<!-- ============================================================== -->
+<!-- 1. COMPACT SIDEBAR NAVIGATION (SideNavBar Anchor)             -->
+<!-- ============================================================== -->
+<aside class="fixed top-0 left-0 bottom-0 z-40 flex flex-col w-64 h-screen bg-surface-container-lowest border-r border-outline-variant select-none justify-between">
+<!-- Top Section -->
+<div class="flex flex-col">
+<!-- Brand & Project Switcher Header -->
+<div class="h-14 px-4 flex items-center justify-between border-b border-outline-variant bg-surface-container-low/40">
+<div class="flex items-center gap-2.5">
+<!-- Logo Glyph -->
+<div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center border border-outline/50 shadow-inner">
+<svg class="w-4 h-4 text-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-1.5">
+<span class="font-headline font-semibold text-on-surface text-sm tracking-tight">Aetherbase</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" title="System Online"></span>
+</div>
+<span class="font-mono text-[11px] text-on-surface-variant font-normal leading-none mt-0.5">prod-cluster-01</span>
+</div>
+</div>
+<button aria-label="Switch project" class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="unfold_more">unfold_more</span>
+</button>
+</div>
+<!-- Quick Action CTA -->
+<div class="px-3 pt-4 pb-2">
+<button class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg bg-surface-container-high hover:bg-surface-bright border border-outline-variant text-on-surface text-xs font-medium transition-all duration-150 active:scale-[0.99] group shadow-sm" onclick="triggerQuickQuery()">
+<span class="material-symbols-outlined text-primary group-hover:rotate-45 transition-transform" data-icon="add">add</span>
+<span>New Query</span>
+<span class="ml-auto text-[10px] font-mono text-on-surface-variant bg-surface-container-low px-1.5 py-0.5 rounded border border-outline-variant/60">⌘N</span>
+</button>
+</div>
+<!-- Nav Items Group -->
+<nav aria-label="Main Navigation" class="px-2 py-2 space-y-0.5">
+<!-- 1. Table Editor (Active Anchor match) -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-low text-primary font-medium transition-all duration-150 relative group" href="#table-editor">
+<span class="absolute left-0 top-1.5 bottom-1.5 w-1 bg-primary rounded-r"></span>
+<span class="material-symbols-outlined text-primary" data-icon="table_chart" data-weight="fill" style="font-variation-settings: 'FILL' 1;">table_chart</span>
+<span class="text-sm">Table Editor</span>
+<span class="ml-auto text-[10px] font-mono px-1.5 py-0.2 rounded bg-primary/10 text-primary border border-primary/20">4.8k</span>
+</a>
+<!-- 2. SQL Editor -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-normal transition-colors duration-150" href="#sql-editor">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="text-sm">SQL Editor</span>
+</a>
+<!-- 3. Auth -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-normal transition-colors duration-150" href="#auth">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-sm">Auth</span>
+</a>
+<!-- 4. Storage -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-normal transition-colors duration-150" href="#storage">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="text-sm">Storage</span>
+</a>
+<!-- 5. Edge Functions -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-normal transition-colors duration-150" href="#edge-functions">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+<span class="text-sm">Edge Functions</span>
+</a>
+<!-- 6. Settings -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface font-normal transition-colors duration-150" href="#settings">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Footer Controls -->
+<div class="p-2 border-t border-outline-variant space-y-1 bg-surface-container-low/20">
+<div class="px-3 py-1.5 flex items-center justify-between text-xs text-on-surface-variant">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span class="font-mono text-[11px]">99.99% Operational</span>
+</div>
+</div>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface text-xs transition-colors" href="#docs">
+<span class="material-symbols-outlined text-base" data-icon="menu_book">menu_book</span>
+<span>Docs</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-on-surface-variant hover:bg-surface-container hover:text-on-surface text-xs transition-colors" href="#support">
+<span class="material-symbols-outlined text-base" data-icon="headset_mic">headset_mic</span>
+<span>Support</span>
+</a>
+</div>
+</aside>
+<!-- ============================================================== -->
+<!-- 2. MAIN APPLICATION CONTENT CANVAS                             -->
+<!-- ============================================================== -->
+<div class="flex-1 flex flex-col pl-64 h-screen overflow-hidden">
+<!-- TopNavBar (JSON Anchor Specification) -->
+<header class="sticky top-0 right-0 z-30 flex items-center justify-between px-6 h-14 w-full bg-surface border-b border-outline-variant flex-shrink-0">
+<!-- Left: Breadcrumb Cluster & Status -->
+<div class="flex items-center gap-3">
+<nav class="flex items-center gap-2 text-xs font-medium font-headline">
+<span class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer">Projects</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface-variant hover:text-on-surface transition-colors cursor-pointer">prod-cluster-01</span>
+<span class="text-outline">/</span>
+<span class="text-on-surface-variant">Table Editor</span>
+<span class="text-outline">/</span>
+<span class="text-primary font-semibold font-mono bg-surface-container-high px-2 py-0.5 rounded border border-outline-variant/60 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]" data-icon="grid_on">grid_on</span>
+            public.workspaces
+          </span>
+</nav>
+<!-- Environment Pill -->
+<div class="hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-surface-container-high border border-outline-variant text-[11px] font-mono text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary animate-ping"></span>
+<span>Production</span>
+<span class="text-outline">•</span>
+<span>us-east-1</span>
+</div>
+</div>
+<!-- Center: Quick Command Palette Trigger -->
+<div class="flex-1 max-w-sm mx-6 hidden md:block">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-on-surface-variant text-[16px]" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant hover:border-outline text-xs text-on-surface placeholder:text-on-surface-variant/70 pl-8 pr-12 py-1.5 rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary font-mono transition-colors" placeholder="Search tables, columns, or docs... (Cmd + K)" type="text"/>
+<kbd class="absolute right-2 px-1.5 py-0.5 text-[10px] font-mono text-on-surface-variant bg-surface-container border border-outline-variant rounded">⌘K</kbd>
+</div>
+</div>
+<!-- Right: Trailing Actions Cluster -->
+<div class="flex items-center gap-3">
+<!-- Live Connection Chip -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-primary/10 border border-primary/20 text-primary text-xs font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-medium">Connected</span>
+</div>
+<a class="text-xs text-on-surface-variant hover:text-on-surface transition-colors font-medium hidden sm:inline-block" href="#docs">Docs</a>
+<button aria-label="Notifications" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors relative">
+<span class="material-symbols-outlined text-[18px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-1.5 h-1.5 bg-primary rounded-full"></span>
+</button>
+<button aria-label="Help" class="p-1.5 rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-[18px]" data-icon="help_outline">help_outline</span>
+</button>
+<!-- User Avatar -->
+<div class="flex items-center gap-2 pl-2 border-l border-outline-variant">
+<div class="w-7 h-7 rounded-full bg-surface-container-high border border-outline flex items-center justify-center text-xs font-medium text-primary">
+            AD
+          </div>
+</div>
+</div>
+</header>
+<!-- Scrollable Canvas Area -->
+<main class="flex-1 overflow-y-auto custom-scrollbar px-6 py-5 space-y-5 bg-background">
+<!-- ============================================================== -->
+<!-- 3. PROJECT HEALTH & TELEMETRY COMPACT TILES                     -->
+<!-- ============================================================== -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+<!-- Tile 1: Compute & CPU -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant hover:border-outline transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span class="font-medium">Compute &amp; CPU</span>
+<span class="font-mono text-[10px] text-primary bg-primary/10 px-1 rounded">2 vCPU</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<div class="text-lg font-semibold font-headline tracking-tight text-on-surface">14.2% <span class="text-xs font-normal text-on-surface-variant">avg</span></div>
+<!-- Micro SVG Sparkline -->
+<svg class="w-20 h-5 overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0 20 L15 18 L30 22 L45 12 L60 14 L75 8 L90 10 L100 6" stroke="#3ecf8e" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75"></path>
+<circle cx="100" cy="6" fill="#3ecf8e" r="2.5"></circle>
+</svg>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Load peak: 22.4% (12m ago)</div>
+</div>
+<!-- Tile 2: RAM Usage -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant hover:border-outline transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span class="font-medium">RAM Allocation</span>
+<span class="font-mono text-[10px] text-on-surface-variant bg-surface-container px-1 rounded">8 GB Max</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<div class="text-lg font-semibold font-headline tracking-tight text-on-surface">2.18 <span class="text-xs font-normal text-on-surface-variant">/ 8 GB (27%)</span></div>
+<div class="w-16 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 27%;"></div>
+</div>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono">Buffer cache: 1.4 GB warmed</div>
+</div>
+<!-- Tile 3: Active Connections -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant hover:border-outline transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span class="font-medium">Active Connections</span>
+<span class="flex items-center gap-1 font-mono text-[10px] text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+              Healthy
+            </span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<div class="text-lg font-semibold font-headline tracking-tight text-on-surface">42 <span class="text-xs font-normal text-on-surface-variant">/ 120 clients</span></div>
+<span class="text-xs font-mono text-on-surface-variant">Pool: 35%</span>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono">PgBouncer port 6543 warm</div>
+</div>
+<!-- Tile 4: P95 Query Latency -->
+<div class="p-3.5 rounded-lg bg-surface-container-low border border-outline-variant hover:border-outline transition-colors flex flex-col justify-between">
+<div class="flex items-center justify-between text-xs text-on-surface-variant">
+<span class="font-medium">P95 Query Latency</span>
+<span class="font-mono text-[10px] text-primary bg-primary/10 px-1 rounded">-0.3ms</span>
+</div>
+<div class="my-2 flex items-baseline justify-between">
+<div class="text-lg font-semibold font-headline tracking-tight text-on-surface">4.8 <span class="text-xs font-normal text-on-surface-variant">ms</span></div>
+<svg class="w-20 h-5 overflow-visible" fill="none" viewbox="0 0 100 25">
+<path d="M0 14 L20 13 L40 15 L60 11 L80 12 L100 10" stroke="#3ecf8e" stroke-linecap="round" stroke-width="1.75"></path>
+<circle cx="100" cy="10" fill="#3ecf8e" r="2.5"></circle>
+</svg>
+</div>
+<div class="text-[11px] text-on-surface-variant font-mono">99.8% queries &lt; 10ms</div>
+</div>
+</section>
+<!-- ============================================================== -->
+<!-- 4. DATABASE CONNECTION CARD                                    -->
+<!-- ============================================================== -->
+<section class="rounded-lg bg-surface-container-low border border-outline-variant p-4">
+<!-- Card Header -->
+<div class="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-outline-variant">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[20px]" data-icon="database">database</span>
+<h2 class="text-sm font-semibold font-headline text-on-surface">Direct Database Connection</h2>
+<span class="text-[11px] font-mono px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-on-surface-variant">
+              production • primary pool
+            </span>
+</div>
+<!-- Protocol Selector Tabs -->
+<div class="flex items-center p-0.5 rounded-md bg-surface-container-lowest border border-outline-variant text-xs">
+<button class="px-2.5 py-1 rounded font-medium bg-surface-container text-on-surface text-[11px] shadow-sm">PostgreSQL URI</button>
+<button class="px-2.5 py-1 rounded font-normal text-on-surface-variant hover:text-on-surface text-[11px] transition-colors">Session Pooler</button>
+<button class="px-2.5 py-1 rounded font-normal text-on-surface-variant hover:text-on-surface text-[11px] transition-colors">Transaction Pooler (Port 6543)</button>
+</div>
+</div>
+<!-- Connection String Input & Actions -->
+<div class="pt-3.5 space-y-3">
+<div class="relative flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+<div class="relative flex-1">
+<input class="w-full bg-surface-container-lowest border border-outline-variant rounded-md py-2 pl-3 pr-20 font-mono text-xs text-on-surface focus:outline-none focus:border-primary select-all" id="connection-uri-input" readonly="" type="password" value="postgresql://postgres.aetherbase:kL9#mQ2$xP99vB@pooler.us-east-1.aetherbase.internal:5432/postgres"/>
+<button class="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-on-surface-variant hover:text-on-surface transition-colors" id="toggle-pwd-btn" onclick="togglePasswordVisibility()" title="Toggle password view">
+<span class="material-symbols-outlined text-[18px]" data-icon="visibility" id="pwd-icon">visibility</span>
+</button>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-2">
+<button class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-md bg-primary-container text-on-primary font-medium text-xs hover:bg-[#32b57b] active:scale-[0.98] transition-all shadow-sm" onclick="copyConnectionURI()">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+<span id="copy-btn-text">Copy URI</span>
+</button>
+<button class="px-2.5 py-2 rounded-md bg-surface-container hover:bg-surface-bright border border-outline-variant text-on-surface-variant hover:text-on-surface text-xs transition-colors" title="Download .env">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<!-- Helper Meta Bar -->
+<div class="flex flex-wrap items-center justify-between text-[11px] text-on-surface-variant pt-1 font-mono">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>SSL Mode: <strong class="text-on-surface font-semibold">require</strong></span>
+</span>
+<span>Default Port: <strong class="text-on-surface">5432</strong></span>
+<span>Host IP: <strong class="text-on-surface">10.0.12.89</strong></span>
+</div>
+<div class="flex items-center gap-1.5 mt-1 sm:mt-0">
+<span class="text-on-surface-variant">Snippets:</span>
+<button class="px-1.5 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface text-[10px]">psql</button>
+<button class="px-1.5 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface text-[10px]">node-pg</button>
+<button class="px-1.5 py-0.5 rounded bg-surface-container hover:bg-surface-bright text-on-surface text-[10px]">prisma</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ============================================================== -->
+<!-- 5. TABLE BROWSER & DATA GRID COMPONENT                         -->
+<!-- ============================================================== -->
+<section class="rounded-lg bg-surface-container-low border border-outline-variant flex flex-col overflow-hidden">
+<!-- Table Browser Control Header -->
+<div class="p-3 border-b border-outline-variant bg-surface-container-lowest/60 flex flex-wrap items-center justify-between gap-3">
+<!-- Schema & Table Selectors -->
+<div class="flex items-center gap-2">
+<!-- Schema Dropdown -->
+<div class="flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container border border-outline-variant text-xs font-mono text-on-surface cursor-pointer hover:border-outline transition-colors">
+<span class="text-on-surface-variant">schema:</span>
+<span class="font-semibold text-primary">public</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Table Indicator -->
+<div class="flex items-center gap-1.5 text-xs">
+<span class="font-mono text-on-surface font-medium">workspaces</span>
+<span class="text-[11px] font-mono text-on-surface-variant bg-surface-container px-1.5 py-0.5 rounded border border-outline-variant/60">
+                4,821 records • 1.2 MB
+              </span>
+</div>
+</div>
+<!-- Controls Toolbar -->
+<div class="flex flex-wrap items-center gap-1.5">
+<!-- Filter Button -->
+<button class="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-surface-container hover:bg-surface-bright border border-outline-variant text-xs text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="filter_list">filter_list</span>
+<span>Filter</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+</button>
+<!-- Sort Button -->
+<button class="flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-surface-container hover:bg-surface-bright border border-outline-variant text-xs text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[15px]" data-icon="swap_vert">swap_vert</span>
+<span>Sort</span>
+</button>
+<div class="h-4 w-px bg-outline-variant mx-1"></div>
+<!-- Add Row CTA -->
+<button class="flex items-center gap-1 px-2.5 py-1.5 rounded bg-primary-container text-on-primary text-xs font-medium hover:bg-[#32b57b] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[16px]" data-icon="add">add</span>
+<span>Insert Record</span>
+</button>
+<!-- Secondary Actions Dropdown Trigger -->
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-bright border border-outline-variant text-on-surface transition-colors" title="Import Data">
+<span class="material-symbols-outlined text-[16px]" data-icon="upload">upload</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container hover:bg-surface-bright border border-outline-variant text-on-surface transition-colors" title="Export CSV">
+<span class="material-symbols-outlined text-[16px]" data-icon="download">download</span>
+</button>
+<button class="flex items-center gap-1 px-2 py-1.5 rounded bg-surface-container hover:bg-surface-bright border border-outline-variant text-xs text-on-surface transition-colors" title="Execute Direct SQL">
+<span class="material-symbols-outlined text-[15px] text-primary" data-icon="play_arrow">play_arrow</span>
+<span class="font-mono text-[11px]">SQL</span>
+</button>
+</div>
+</div>
+<!-- Active Filter Condition Chip Strip -->
+<div class="px-3 py-1.5 bg-surface border-b border-outline-variant/70 flex items-center gap-2 text-xs">
+<span class="text-on-surface-variant font-mono text-[11px]">Active Filters:</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-surface-container border border-outline-variant text-[11px] font-mono text-on-surface">
+<span class="text-primary font-medium">tier</span>
+<span class="text-on-surface-variant">=</span>
+<span class="text-on-surface">'enterprise' OR 'pro'</span>
+<button class="hover:text-error text-on-surface-variant transition-colors ml-1">
+<span class="material-symbols-outlined text-[12px]" data-icon="close">close</span>
+</button>
+</div>
+<button class="text-[11px] text-on-surface-variant hover:text-on-surface underline ml-1">+ Add condition</button>
+</div>
+<!-- High-Contrast Dense Data Grid Table -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse text-xs">
+<thead>
+<tr class="bg-surface-container border-b border-outline-variant text-on-surface-variant font-mono select-none">
+<th class="w-10 px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</th>
+<!-- Column: uuid -->
+<th class="px-3 py-2 border-r border-outline-variant/60 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">id</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">uuid</span>
+</div>
+</th>
+<!-- Column: slug -->
+<th class="px-3 py-2 border-r border-outline-variant/60 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">slug</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">varchar</span>
+</div>
+</th>
+<!-- Column: display_name -->
+<th class="px-3 py-2 border-r border-outline-variant/60 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">display_name</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">text</span>
+</div>
+</th>
+<!-- Column: tier -->
+<th class="px-3 py-2 border-r border-outline-variant/60 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">tier</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">enum</span>
+</div>
+</th>
+<!-- Column: is_active -->
+<th class="px-3 py-2 border-r border-outline-variant/60 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">is_active</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">bool</span>
+</div>
+</th>
+<!-- Column: created_at -->
+<th class="px-3 py-2 font-medium">
+<div class="flex items-center justify-between gap-2">
+<span class="text-on-surface">created_at</span>
+<span class="text-[10px] px-1 py-0.2 rounded bg-surface text-on-surface-variant border border-outline-variant">timestamptz</span>
+</div>
+</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/60 font-mono text-[12px] bg-surface-container-lowest">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface-variant group-hover:text-primary transition-colors">
+                  018e47bf-192a-79a0-9c12-ef451290aa01
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface font-semibold">
+                  acme-corp
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface">
+                  Acme Corporation Global
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">
+                    enterprise
+                  </span>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    true
+                  </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">
+                  2024-03-15T09:24:11.042Z
+                </td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface-variant group-hover:text-primary transition-colors">
+                  018e47bf-20bc-7110-8b43-44112233ff02
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface font-semibold">
+                  linear-labs
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface">
+                  Linear Labs Engineering
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">
+                    enterprise
+                  </span>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    true
+                  </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">
+                  2024-03-14T18:11:00.119Z
+                </td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface-variant group-hover:text-primary transition-colors">
+                  018e47bf-31df-78b2-a4f5-55667788cc03
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface font-semibold">
+                  vercel-edge
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface">
+                  Vercel Edge Gateway
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-surface-container text-on-surface border border-outline-variant">
+                    pro
+                  </span>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    true
+                  </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">
+                  2024-03-12T11:02:45.892Z
+                </td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface-variant group-hover:text-primary transition-colors">
+                  018e47bf-42fa-7ce3-8901-aa998877ee04
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface font-semibold">
+                  raycast-sync
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface">
+                  Raycast Extension Cloud
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-surface-container text-on-surface border border-outline-variant">
+                    pro
+                  </span>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center gap-1.5 text-primary">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+                    true
+                  </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">
+                  2024-03-10T14:55:20.671Z
+                </td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low/70 transition-colors group">
+<td class="px-3 py-2 text-center border-r border-outline-variant/60">
+<input class="rounded bg-surface border-outline-variant text-primary focus:ring-0 focus:ring-offset-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface-variant group-hover:text-primary transition-colors">
+                  018e47bf-55ea-7ef4-b234-11002299bb05
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface font-semibold">
+                  supastack
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60 text-on-surface">
+                  Supastack DB Node
+                </td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20">
+                    enterprise
+                  </span>
+</td>
+<td class="px-3 py-2 border-r border-outline-variant/60">
+<span class="inline-flex items-center gap-1.5 text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+                    false
+                  </span>
+</td>
+<td class="px-3 py-2 text-on-surface-variant">
+                  2024-03-08T04:12:09.510Z
+                </td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination & Footer Bar -->
+<div class="px-4 py-2.5 bg-surface-container border-t border-outline-variant flex flex-wrap items-center justify-between gap-3 text-xs font-mono">
+<div class="text-on-surface-variant">
+            Showing <span class="text-on-surface font-semibold">1-5</span> of <span class="text-on-surface font-semibold">4,821</span> rows
+          </div>
+<div class="flex items-center gap-3">
+<!-- Rows per page -->
+<div class="flex items-center gap-1.5 text-on-surface-variant">
+<span>Rows per page:</span>
+<select class="bg-surface-container-low border border-outline-variant rounded px-2 py-0.5 text-xs text-on-surface focus:outline-none">
+<option>25</option>
+<option>50</option>
+<option>100</option>
+</select>
+</div>
+<!-- Page Buttons -->
+<div class="flex items-center gap-1">
+<button class="p-1 rounded bg-surface-container-low border border-outline-variant text-on-surface-variant hover:text-on-surface disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="px-2 py-0.5 rounded bg-primary/20 text-primary border border-primary/30 font-semibold">1</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface">2</button>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface">3</button>
+<span class="text-on-surface-variant">...</span>
+<button class="px-2 py-0.5 rounded bg-surface-container-low text-on-surface-variant hover:text-on-surface">97</button>
+<button class="p-1 rounded bg-surface-container-low border border-outline-variant text-on-surface-variant hover:text-on-surface">
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Toast Notification Container for interactive copy -->
+<div class="fixed bottom-5 right-5 z-50 transform translate-y-12 opacity-0 pointer-events-none transition-all duration-200 flex items-center gap-2 px-3 py-2 rounded-lg bg-surface-container-highest border border-primary/40 shadow-xl text-xs font-mono text-on-surface" id="toast-notification">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+<span id="toast-message">Copied URI to clipboard!</span>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    function togglePasswordVisibility() {
+      const input = document.getElementById('connection-uri-input');
+      const icon = document.getElementById('pwd-icon');
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    function copyConnectionURI() {
+      const input = document.getElementById('connection-uri-input');
+      navigator.clipboard.writeText(input.value).then(() => {
+        showToast('Connection string copied to clipboard!');
+        const btnText = document.getElementById('copy-btn-text');
+        const oldText = btnText.textContent;
+        btnText.textContent = 'Copied!';
+        setTimeout(() => {
+          btnText.textContent = oldText;
+        }, 2000);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast-notification');
+      const toastMsg = document.getElementById('toast-message');
+      toastMsg.textContent = msg;
+      toast.classList.remove('translate-y-12', 'opacity-0', 'pointer-events-none');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.add('translate-y-12', 'opacity-0', 'pointer-events-none');
+        toast.classList.remove('translate-y-0', 'opacity-100');
+      }, 2600);
+    }
+
+    function triggerQuickQuery() {
+      showToast('Opening Query Scratchpad (⌘N)...');
+    }
+  </script>
+</body></html>

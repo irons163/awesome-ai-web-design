@@ -1,8 +1,1190 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MiniMax · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#0a0a0a;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/minimax">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">MiniMax · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#181e25"></span><code>#181e25</code></div><div class="swatch"><span style="background:#ff5530"></span><code>#ff5530</code></div><div class="swatch"><span style="background:#ea5ec1"></span><code>#ea5ec1</code></div><div class="swatch"><span style="background:#1456f0"></span><code>#1456f0</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · DM Sans</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SYNAPSE // MODEL MATRIX</title>
+<!-- Material Symbols Outlined font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: DM Sans and Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#0a0a0a",
+            "on-primary": "#ffffff",
+            "primary-soft": "#181e25",
+            "brand-coral": "#ff5530",
+            "brand-magenta": "#ea5ec1",
+            "brand-blue": "#1456f0",
+            "brand-blue-mid": "#3b82f6",
+            "brand-blue-deep": "#1d4ed8",
+            "brand-cyan": "#3daeff",
+            "brand-blue-200": "#bfdbfe",
+            "brand-purple": "#a855f7",
+            canvas: "#ffffff",
+            surface: "#f7f8fa",
+            "surface-soft": "#f2f3f5",
+            hairline: "#e5e7eb",
+            "hairline-soft": "#eaecf0",
+            ink: "#0a0a0a",
+            "ink-strong": "#000000",
+            charcoal: "#222222",
+            slate: "#45515e",
+            steel: "#5f5f5f",
+            stone: "#8e8e93",
+            muted: "#a8aab2",
+            "success-bg": "#e8ffea",
+            "success-text": "#1ba673",
+            "on-dark": "#ffffff",
+            "footer-bg": "#0a0a0a"
+          },
+          borderRadius: {
+            DEFAULT: "0.125rem",
+            lg: "0.25rem",
+            xl: "0.5rem",
+            full: "0.75rem",
+            pill: "9999px"
+          },
+          fontFamily: {
+            sans: ["DM Sans", "Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"],
+            headline: ["DM Sans", "sans-serif"],
+            display: ["DM Sans", "sans-serif"],
+            body: ["DM Sans", "sans-serif"],
+            label: ["DM Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: #ffffff;
+      color: #0a0a0a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f7f8fa;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #e5e7eb;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8aab2;
+    }
+  </style>
+</head>
+<body class="bg-white text-ink min-h-screen flex flex-col selection:bg-black selection:text-white">
+<!-- Promo / Cluster Operational Banner -->
+<aside aria-label="System Notice" class="w-full bg-primary text-on-primary py-2 px-6 text-xs font-mono flex items-center justify-between border-b border-gray-800">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800/80 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        SYSTEM OPERATIONAL
+      </span>
+<span class="text-gray-300 font-sans text-xs">Cluster: <span class="text-white font-mono">us-east-4</span> · Multi-Modal Distributed Mesh v4.9.2 · 99.99% nominal throughput</span>
+</div>
+<div class="hidden md:flex items-center gap-4 text-xs font-sans text-gray-300">
+<span>Zero Data Retention Verified (SOC2 Type II)</span>
+<a class="text-white hover:underline flex items-center gap-1" href="#benchmarks">
+        Inspect Verified Benchmarks
+        <span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</a>
+</div>
+</aside>
+<!-- Sticky TopNavBar -->
+<header class="sticky top-0 z-50 bg-white border-b border-hairline w-full">
+<div class="max-w-[1680px] mx-auto px-6 h-16 flex items-center justify-between gap-6">
+<!-- Brand Logo & Cluster Node -->
+<div class="flex items-center gap-8 shrink-0">
+<div class="flex items-center gap-3 cursor-pointer">
+<div class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold tracking-tighter text-sm">
+<span class="material-symbols-outlined text-[20px] text-white">grid_view</span>
+</div>
+<div>
+<div class="font-headline text-sm font-bold tracking-tight text-ink uppercase flex items-center gap-2">
+              SYNAPSE <span class="text-gray-400 font-normal">/</span> MODEL MATRIX
+            </div>
+<div class="text-[11px] font-mono text-steel leading-none">v2.8 Production · High-Throughput Engine</div>
+</div>
+</div>
+<!-- Global Navigation Links -->
+<nav class="hidden lg:flex items-center gap-1">
+<a class="text-black font-semibold border-b-2 border-black pb-[22px] pt-[22px] px-3 text-sm flex items-center gap-1.5" href="#catalog">
+<span class="material-symbols-outlined text-[16px]">view_in_ar</span>
+            Model Catalog
+          </a>
+<a class="text-gray-500 font-medium pb-[22px] pt-[22px] px-3 text-sm hover:text-black transition-colors duration-150 flex items-center gap-1.5" href="#playground">
+<span class="material-symbols-outlined text-[16px]">science</span>
+            Playground
+          </a>
+<a class="text-gray-500 font-medium pb-[22px] pt-[22px] px-3 text-sm hover:text-black transition-colors duration-150 flex items-center gap-1.5" href="#tokenomics">
+<span class="material-symbols-outlined text-[16px]">payments</span>
+            Tokenomics &amp; Context
+          </a>
+<a class="text-gray-500 font-medium pb-[22px] pt-[22px] px-3 text-sm hover:text-black transition-colors duration-150 flex items-center gap-1.5" href="#api">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+            API Reference
+          </a>
+<a class="text-gray-500 font-medium pb-[22px] pt-[22px] px-3 text-sm hover:text-black transition-colors duration-150 flex items-center gap-1.5" href="#benchmarks">
+<span class="material-symbols-outlined text-[16px]">leaderboard</span>
+            Benchmarks
+          </a>
+</nav>
+</div>
+<!-- Quick Command Bar Search -->
+<div class="flex-1 max-w-xl hidden xl:block">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-gray-400 pointer-events-none">search</span>
+<input class="w-full bg-surface border border-hairline rounded-md pl-10 pr-14 py-2 text-xs font-sans text-ink placeholder:text-stone focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition" placeholder="Filter models by name, slug, capability or modality (⌘K)..." type="text"/>
+<kbd class="absolute right-3 px-1.5 py-0.5 text-[10px] font-mono text-gray-500 bg-white border border-hairline rounded shadow-sm">⌘K</kbd>
+</div>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-3 shrink-0">
+<a class="hidden sm:inline-flex items-center gap-1 text-xs font-semibold px-3 py-2 text-charcoal hover:text-black transition" href="#docs">
+<span class="material-symbols-outlined text-[16px]">menu_book</span>
+          Documentation
+        </a>
+<button class="inline-flex items-center gap-2 bg-primary text-on-primary text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-charcoal active:scale-[0.98] transition-all shadow-sm">
+<span class="material-symbols-outlined text-[16px]">rocket_launch</span>
+          Deploy Endpoint
+        </button>
+<div class="h-5 w-px bg-hairline mx-1"></div>
+<button aria-label="Terminal Console" class="w-8 h-8 rounded-full border border-hairline flex items-center justify-center text-charcoal hover:bg-surface transition">
+<span class="material-symbols-outlined text-[16px]">terminal</span>
+</button>
+<button aria-label="System Notifications" class="relative w-8 h-8 rounded-full border border-hairline flex items-center justify-center text-charcoal hover:bg-surface transition">
+<span class="material-symbols-outlined text-[16px]">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-brand-coral"></span>
+</button>
+<!-- Organization / User Avatar -->
+<button class="flex items-center gap-2 pl-1 pr-2 py-1 rounded-full border border-hairline hover:border-gray-300 transition">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-gray-900 to-gray-700 text-white flex items-center justify-center text-[10px] font-mono font-bold">
+            NX
+          </div>
+<span class="text-xs font-medium text-ink hidden md:inline">nexus-core</span>
+<span class="material-symbols-outlined text-[14px] text-gray-400">expand_more</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Secondary Filter, Architecture Matrix & Capability Controller -->
+<section class="border-b border-hairline bg-surface/50 backdrop-blur sticky top-16 z-30">
+<div class="max-w-[1680px] mx-auto px-6 py-3.5 space-y-3">
+<!-- Primary Architecture Tabs -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0 scrollbar-none">
+<button class="px-3.5 py-1.5 rounded-full bg-primary text-on-primary text-xs font-medium shadow-sm shrink-0 flex items-center gap-2">
+<span>All Architectures</span>
+<span class="bg-white/20 text-[10px] font-mono px-1.5 py-0.2 rounded-full">42</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-white border border-hairline text-steel hover:text-ink hover:border-gray-400 text-xs font-medium shrink-0 flex items-center gap-2 transition">
+<span>Deep Reasoning</span>
+<span class="bg-gray-100 text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate">8</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-white border border-hairline text-steel hover:text-ink hover:border-gray-400 text-xs font-medium shrink-0 flex items-center gap-2 transition">
+<span>Multimodal Vision</span>
+<span class="bg-gray-100 text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate">11</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-white border border-hairline text-steel hover:text-ink hover:border-gray-400 text-xs font-medium shrink-0 flex items-center gap-2 transition">
+<span>Realtime Speech &amp; Audio</span>
+<span class="bg-gray-100 text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate">6</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-white border border-hairline text-steel hover:text-ink hover:border-gray-400 text-xs font-medium shrink-0 flex items-center gap-2 transition">
+<span>Code &amp; Agentic</span>
+<span class="bg-gray-100 text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate">12</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-full bg-white border border-hairline text-steel hover:text-ink hover:border-gray-400 text-xs font-medium shrink-0 flex items-center gap-2 transition">
+<span>Ultra-Low Latency</span>
+<span class="bg-gray-100 text-[10px] font-mono px-1.5 py-0.2 rounded-full text-slate">5</span>
+</button>
+</div>
+<!-- View Controls & Sorters -->
+<div class="flex items-center gap-3 ml-auto shrink-0">
+<div class="flex items-center border border-hairline rounded-md bg-white p-0.5">
+<span class="text-[11px] font-mono text-steel pl-2 pr-1">Sort:</span>
+<select class="bg-transparent text-xs font-medium text-ink focus:outline-none border-none pr-6 py-1 cursor-pointer">
+<option>Throughput (tps: high to low)</option>
+<option>Context Window (1M → 32k)</option>
+<option>MMLU-Pro Score</option>
+<option>Time-to-First-Token (TTFT)</option>
+<option>Release Date (Latest)</option>
+</select>
+</div>
+<div class="flex items-center border border-hairline rounded-md bg-white p-0.5">
+<button aria-label="Grid Matrix View" class="p-1.5 rounded bg-gray-100 text-ink">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+</button>
+<button aria-label="Table View" class="p-1.5 rounded text-gray-400 hover:text-ink">
+<span class="material-symbols-outlined text-[16px]">table_rows</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Secondary Detailed Criteria Filters -->
+<div class="flex flex-wrap items-center gap-2 pt-1 border-t border-hairline text-xs">
+<span class="text-steel font-mono text-[11px] uppercase tracking-wider mr-2">Filters:</span>
+<!-- Context Filter -->
+<div class="relative inline-block">
+<button class="px-2.5 py-1 rounded-md bg-white border border-hairline text-charcoal hover:border-gray-400 flex items-center gap-1.5">
+<span class="text-stone">Context:</span>
+<span class="font-medium">All Windows</span>
+<span class="material-symbols-outlined text-[14px] text-gray-400">expand_more</span>
+</button>
+</div>
+<!-- Modality Filter -->
+<div class="relative inline-block">
+<button class="px-2.5 py-1 rounded-md bg-white border border-hairline text-charcoal hover:border-gray-400 flex items-center gap-1.5">
+<span class="text-stone">Modality:</span>
+<span class="font-medium">All Types (Text/Vision/Audio)</span>
+<span class="material-symbols-outlined text-[14px] text-gray-400">expand_more</span>
+</button>
+</div>
+<!-- License Filter -->
+<div class="relative inline-block">
+<button class="px-2.5 py-1 rounded-md bg-white border border-hairline text-charcoal hover:border-gray-400 flex items-center gap-1.5">
+<span class="text-stone">License:</span>
+<span class="font-medium">Open Weights &amp; API</span>
+<span class="material-symbols-outlined text-[14px] text-gray-400">expand_more</span>
+</button>
+</div>
+<!-- Status Filter -->
+<div class="relative inline-block">
+<button class="px-2.5 py-1 rounded-md bg-white border border-hairline text-charcoal hover:border-gray-400 flex items-center gap-1.5">
+<span class="text-stone">Status:</span>
+<span class="font-medium">Production Ready (GA)</span>
+<span class="material-symbols-outlined text-[14px] text-gray-400">expand_more</span>
+</button>
+</div>
+<button class="text-brand-blue font-medium hover:underline ml-2 text-xs">Reset All</button>
+<div class="ml-auto text-stone font-mono text-[11px]">Displaying 6 of 42 deployable base engines</div>
+</div>
+</div>
+</section>
+<!-- Main Viewport Split Layout -->
+<main class="flex-1 max-w-[1680px] w-full mx-auto px-6 py-6">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- ========================================== -->
+<!-- LEFT COLUMN: Model Capability Cards Matrix -->
+<!-- ========================================== -->
+<section class="lg:col-span-7 xl:col-span-8 space-y-6">
+<!-- Section Subheading -->
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline text-2xl font-bold tracking-tight text-ink">Production Foundation Models</h1>
+<p class="text-slate text-sm">Ultra-low latency inference cluster with guaranteed dedicated FP8 hardware acceleration</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-xs font-mono text-emerald-700 bg-emerald-50 px-2 py-1 rounded border border-emerald-200">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              99.98% SLA
+            </span>
+</div>
+</div>
+<!-- Cards Bento Grid (2 columns on desktop) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<!-- CARD 1: Synapse-Titan 2.5-Omni (Active/Featured Flagship) -->
+<article class="bg-white rounded-xl border-2 border-black p-5 relative shadow-[0_4px_16px_rgba(0,0,0,0.06)] flex flex-col justify-between transition group">
+<div class="space-y-4">
+<!-- Header & Tag -->
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-semibold tracking-wide border border-emerald-300 uppercase">
+                      Multimodal Flagship
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">MoE 8x22B</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-blue-50 text-blue-700 font-semibold">SELECTED</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight flex items-center gap-2">
+                    Synapse-Titan 2.5-Omni
+                    <span class="material-symbols-outlined text-[16px] text-emerald-600" title="Zero data retention certified">verified</span>
+</h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/titan-2.5-omni</div>
+</div>
+<!-- Circular Action -->
+<button aria-label="Copy Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black hover:border-black transition" title="Copy model identifier">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<!-- Modality Matrix Chips -->
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">text_fields</span> Text
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">photo_camera</span> High-Res Vision
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">graphic_eq</span> 48kHz Audio I/O
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                Omni-modal reasoning engine engineered for native cross-modality synthesis. Processes audio stream transcripts, visual graphs, and recursive code planning in unified FP8 latents.
+              </p>
+<!-- Technical Metric Badges -->
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Throughput</div>
+<div class="font-mono text-sm font-bold text-ink">142 <span class="text-[10px] font-normal text-stone">tps</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Window</div>
+<div class="font-mono text-sm font-bold text-ink">256,000 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">MMLU-Pro</div>
+<div class="font-mono text-sm font-bold text-emerald-600">92.4%</div>
+</div>
+</div>
+<!-- Needle Accuracy & Specs -->
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-emerald-500">task_alt</span>
+                  100% Needle-in-Haystack (256k)
+                </span>
+<span>HumanEval: 84.1%</span>
+</div>
+</div>
+<!-- Card Bottom Controls -->
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                GA · 4 Regions · Zero-Data
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Inspect Specs
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-black text-white hover:bg-charcoal transition flex items-center gap-1">
+<span>Playground</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD 2: Synapse-Reason-R1 (Deep Inference) -->
+<article class="bg-white rounded-xl border border-hairline p-5 relative hover:border-gray-400 transition flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-purple-100 text-purple-900 text-[11px] font-semibold tracking-wide border border-purple-200 uppercase">
+                      Deep Inference &amp; Math
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">Dense 70B</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight">
+                    Synapse-Reason-R1
+                  </h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/reason-r1-heavy</div>
+</div>
+<button aria-label="Copy Model Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black transition">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">text_snippet</span> Pure Text
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">data_object</span> Structured Code
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">psychology</span> Step-by-Step Chain
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                Trained specifically with reinforcement learning on mathematical proof systems and algorithmic verification. Built-in recursive validation loop guarantees zero hallucination on formal theorems.
+              </p>
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Throughput</div>
+<div class="font-mono text-sm font-bold text-ink">94 <span class="text-[10px] font-normal text-stone">tps</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Window</div>
+<div class="font-mono text-sm font-bold text-ink">131,072 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">MATH-500</div>
+<div class="font-mono text-sm font-bold text-purple-700">95.8%</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span>TTFT: 110ms</span>
+<span>Self-Refinement: Active</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-slate bg-gray-100 px-2 py-0.5 rounded">
+                Production Ready · Open Weights
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Specs
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-primary text-on-primary hover:bg-charcoal transition">
+                  Select
+                </button>
+</div>
+</div>
+</article>
+<!-- CARD 3: Synapse-Voice-Realtime -->
+<article class="bg-white rounded-xl border border-hairline p-5 relative hover:border-gray-400 transition flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-900 text-[11px] font-semibold tracking-wide border border-amber-200 uppercase">
+                      Low Latency Audio
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">Duplex 12B</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight">
+                    Synapse-Voice-Realtime
+                  </h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/voice-duplex-rt</div>
+</div>
+<button aria-label="Copy Model Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black transition">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">mic</span> Bidirectional Duplex
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">translate</span> 24 Native Languages
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                Direct speech-to-speech architecture bypassing text intermediate tokens. Handles human interruptions, pitch inflection, and room ambient acoustics seamlessly.
+              </p>
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">End-to-End Latency</div>
+<div class="font-mono text-sm font-bold text-amber-700">180 <span class="text-[10px] font-normal text-stone">ms</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Buffer</div>
+<div class="font-mono text-sm font-bold text-ink">64,000 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">WER Benchmark</div>
+<div class="font-mono text-sm font-bold text-ink">3.1%</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span>Format: Opus / PCM 24k</span>
+<span>WebRTC Native</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                GA · Global Edge Nodes
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Audio Samples
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-primary text-on-primary hover:bg-charcoal transition">
+                  Select
+                </button>
+</div>
+</div>
+</article>
+<!-- CARD 4: Synapse-Coder-Apex -->
+<article class="bg-white rounded-xl border border-hairline p-5 relative hover:border-gray-400 transition flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-cyan-100 text-cyan-900 text-[11px] font-semibold tracking-wide border border-cyan-200 uppercase">
+                      Software Engineering
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">MoE 16x12B</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight">
+                    Synapse-Coder-Apex
+                  </h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/coder-apex-v2</div>
+</div>
+<button aria-label="Copy Model Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black transition">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">code</span> Git Diff Patches
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">account_tree</span> Terminal AST
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                Repository-scale engineering agent. Ingests full directory graphs, handles semantic refactoring, and outputs compile-safe PRs without truncation.
+              </p>
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Throughput</div>
+<div class="font-mono text-sm font-bold text-ink">168 <span class="text-[10px] font-normal text-stone">tps</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Window</div>
+<div class="font-mono text-sm font-bold text-cyan-800">512,000 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">SWE-Bench Lite</div>
+<div class="font-mono text-sm font-bold text-ink">49.4%</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span>Multi-File Repository Ingestion</span>
+<span>Language Count: 68</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-slate bg-gray-100 px-2 py-0.5 rounded">
+                Production Ready
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Specs
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-primary text-on-primary hover:bg-charcoal transition">
+                  Select
+                </button>
+</div>
+</div>
+</article>
+<!-- CARD 5: Synapse-Vision-Flash -->
+<article class="bg-white rounded-xl border border-hairline p-5 relative hover:border-gray-400 transition flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-blue-100 text-blue-900 text-[11px] font-semibold tracking-wide border border-blue-200 uppercase">
+                      Fast Vision &amp; Video OCR
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">Dense 14B</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight">
+                    Synapse-Vision-Flash
+                  </h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/vision-flash-4k</div>
+</div>
+<button aria-label="Copy Model Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black transition">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">image</span> 4K Ultra Frames
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">document_scanner</span> High-Speed OCR
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                Ultra-high-throughput document parsing and video frame keypoint labeling. Extracts tabular records from chaotic PDFs and temporal camera feeds.
+              </p>
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Throughput</div>
+<div class="font-mono text-sm font-bold text-ink">220 <span class="text-[10px] font-normal text-stone">tps</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Window</div>
+<div class="font-mono text-sm font-bold text-ink">128,000 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">DocVQA</div>
+<div class="font-mono text-sm font-bold text-blue-700">93.8%</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span>Native PDF Tokenization</span>
+<span>FP8 Accelerated</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-slate bg-gray-100 px-2 py-0.5 rounded">
+                Production Ready
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Specs
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-primary text-on-primary hover:bg-charcoal transition">
+                  Select
+                </button>
+</div>
+</div>
+</article>
+<!-- CARD 6: Synapse-Lite-Embed -->
+<article class="bg-white rounded-xl border border-hairline p-5 relative hover:border-gray-400 transition flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-start justify-between gap-2">
+<div>
+<div class="flex items-center gap-2 mb-1.5">
+<span class="px-2.5 py-0.5 rounded-full bg-gray-100 text-gray-800 text-[11px] font-semibold tracking-wide border border-gray-300 uppercase">
+                      Dense Vector Embeddings
+                    </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-gray-100 text-gray-700">3072-dim</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-ink tracking-tight">
+                    Synapse-Lite-Embed
+                  </h3>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/embed-v3-dense</div>
+</div>
+<button aria-label="Copy Model Slug" class="w-7 h-7 rounded-full border border-hairline flex items-center justify-center text-gray-400 hover:text-black transition">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+<div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">hub</span> Semantic Search
+                </span>
+<span class="inline-flex items-center gap-1 bg-surface px-2 py-1 rounded text-charcoal border border-hairline font-mono">
+<span class="material-symbols-outlined text-[13px] text-stone">dataset</span> Matryoshka Repr
+                </span>
+</div>
+<p class="text-xs text-charcoal leading-relaxed">
+                State-of-the-art dense semantic embedding representation with native dimension truncation down to 256 dimensions without vector drift.
+              </p>
+<div class="grid grid-cols-3 gap-2 py-2 border-y border-hairline text-center bg-surface/40 rounded-lg p-2">
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Batch Speed</div>
+<div class="font-mono text-sm font-bold text-ink">1,400 <span class="text-[10px] font-normal text-stone">doc/s</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">Context Window</div>
+<div class="font-mono text-sm font-bold text-ink">8,192 <span class="text-[10px] font-normal text-stone">tok</span></div>
+</div>
+<div>
+<div class="text-[10px] font-mono uppercase text-steel">MTEB Leaderboard</div>
+<div class="font-mono text-sm font-bold text-ink">68.2</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-stone">
+<span>Vector Dimension: 3072</span>
+<span>Normalized Cosine</span>
+</div>
+</div>
+<div class="mt-4 pt-3 flex items-center justify-between gap-2 border-t border-hairline">
+<span class="text-[11px] font-mono text-slate bg-gray-100 px-2 py-0.5 rounded">
+                Production Ready
+              </span>
+<div class="flex items-center gap-1.5">
+<button class="px-2.5 py-1 text-xs font-semibold rounded-full border border-hairline hover:border-black text-ink transition">
+                  Specs
+                </button>
+<button class="px-3 py-1 text-xs font-semibold rounded-full bg-primary text-on-primary hover:bg-charcoal transition">
+                  Select
+                </button>
+</div>
+</div>
+</article>
+</div>
+<!-- Infrastructure Callout Card -->
+<div class="rounded-2xl border border-hairline bg-surface p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="space-y-1.5">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-black text-white text-[11px] font-mono font-medium">
+<span class="material-symbols-outlined text-[13px] text-brand-coral">bolt</span>
+              Dedicated GPU Partitioning
+            </div>
+<h4 class="font-headline text-base font-bold text-ink">Need custom LoRA weights or private VPC cluster deployment?</h4>
+<p class="text-xs text-slate">Deploy weights onto dedicated NVIDIA H100 SXM5 / B200 nodes with multi-tenant sub-millisecond isolation.</p>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2 text-xs font-semibold rounded-full border border-black hover:bg-gray-100 text-ink transition">
+              Enterprise Specs
+            </button>
+<button class="px-4 py-2 text-xs font-semibold rounded-full bg-black text-white hover:bg-charcoal transition shadow-sm">
+              Provision Cluster
+            </button>
+</div>
+</div>
+</section>
+<!-- ============================================================== -->
+<!-- RIGHT COLUMN: Interactive Model Detail Sheet & Live Playground -->
+<!-- ============================================================== -->
+<section class="lg:col-span-5 xl:col-span-4 sticky top-36 space-y-5">
+<div class="bg-white rounded-xl border border-hairline shadow-sm overflow-hidden">
+<!-- Detail Inspector Header -->
+<div class="bg-surface p-5 border-b border-hairline">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-100 text-emerald-800 font-semibold border border-emerald-200">
+                ACTIVE INSPECTOR
+              </span>
+<span class="text-xs font-mono text-stone">Node: us-east-4a</span>
+</div>
+<h2 class="font-headline text-xl font-bold text-ink tracking-tight">Synapse-Titan 2.5-Omni</h2>
+<div class="text-xs font-mono text-steel mt-0.5">synapse/titan-2.5-omni:latest</div>
+<div class="mt-4 grid grid-cols-2 gap-2 text-xs font-mono">
+<div class="bg-white p-2.5 rounded border border-hairline">
+<span class="text-[10px] text-stone block">ARCHITECTURE</span>
+<span class="font-bold text-ink text-xs">MoE 8x22B (39B Active)</span>
+</div>
+<div class="bg-white p-2.5 rounded border border-hairline">
+<span class="text-[10px] text-stone block">HARDWARE RUNTIME</span>
+<span class="font-bold text-ink text-xs">8x H100 SXM5 FP8</span>
+</div>
+</div>
+</div>
+<!-- Technical Specs Strip -->
+<div class="p-5 border-b border-hairline space-y-3">
+<h4 class="text-xs font-mono uppercase tracking-wider text-steel font-semibold">Technical Profile</h4>
+<div class="space-y-2 text-xs">
+<div class="flex justify-between items-center py-1 border-b border-hairline-soft">
+<span class="text-slate">Context Breakdown</span>
+<span class="font-mono text-ink font-medium">Input 256k / Completion 16,384</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-hairline-soft">
+<span class="text-slate">Average Latency (TTFT)</span>
+<span class="font-mono text-emerald-600 font-medium">115 ms (P95)</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-hairline-soft">
+<span class="text-slate">Throughput Execution</span>
+<span class="font-mono text-ink font-medium">142 tokens/sec (streaming)</span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-hairline-soft">
+<span class="text-slate">Community Tier Pricing</span>
+<span class="font-mono text-ink font-semibold">$0.00 / 1M tokens (Free eval)</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-slate">Commercial Endpoint</span>
+<span class="font-mono text-ink font-medium">$0.35 in / $1.40 out per 1M</span>
+</div>
+</div>
+</div>
+<!-- Embedded Interactive Playground -->
+<div class="p-5 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<h4 class="text-xs font-mono uppercase tracking-wider text-ink font-bold">Embedded Test Sandbox</h4>
+</div>
+<!-- Tab toggle (Playground / cURL) -->
+<div class="flex border border-hairline rounded bg-surface p-0.5 text-[11px] font-mono">
+<button class="px-2 py-0.5 rounded bg-white text-ink font-medium shadow-xs" id="tab-play-btn">Prompt</button>
+<button class="px-2 py-0.5 rounded text-steel hover:text-ink" id="tab-curl-btn">cURL</button>
+</div>
+</div>
+<!-- Playground Form Controls -->
+<div class="space-y-3" id="playground-panel">
+<!-- Modality Selection Checkboxes -->
+<div class="flex items-center gap-2 text-[11px] font-mono text-charcoal">
+<label class="flex items-center gap-1 cursor-pointer bg-surface px-2 py-1 rounded border border-hairline">
+<input checked="" class="rounded text-black focus:ring-0 w-3 h-3" type="checkbox"/>
+<span>Text</span>
+</label>
+<label class="flex items-center gap-1 cursor-pointer bg-surface px-2 py-1 rounded border border-hairline">
+<input checked="" class="rounded text-black focus:ring-0 w-3 h-3" type="checkbox"/>
+<span>Vision (Chart 4K)</span>
+</label>
+<label class="flex items-center gap-1 cursor-pointer bg-surface px-2 py-1 rounded border border-hairline">
+<input class="rounded text-black focus:ring-0 w-3 h-3" type="checkbox"/>
+<span>Audio Stream</span>
+</label>
+</div>
+<!-- System/User Prompt Input -->
+<div class="space-y-1">
+<label class="text-[11px] font-mono text-steel block">PROMPT / PAYLOAD</label>
+<textarea class="w-full text-xs font-mono bg-surface border border-hairline rounded-lg p-2.5 focus:border-black focus:outline-none focus:ring-1 focus:ring-black text-ink resize-none leading-relaxed" rows="3">Analyze Q3 cross-modal revenue chart &amp; synthesize a structured executive summary with breakdown of hardware margins.</textarea>
+</div>
+<!-- Sliders Parameter Row -->
+<div class="grid grid-cols-2 gap-3 text-xs font-mono">
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] text-stone">
+<span>Temp:</span>
+<span class="text-ink font-semibold" id="temp-val">0.7</span>
+</div>
+<input class="w-full accent-black cursor-pointer h-1.5 bg-gray-200 rounded" max="1" min="0" step="0.1" type="range" value="0.7"/>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-[11px] text-stone">
+<span>Max Tokens:</span>
+<span class="text-ink font-semibold">2048</span>
+</div>
+<input class="w-full accent-black cursor-pointer h-1.5 bg-gray-200 rounded" max="8192" min="256" step="256" type="range" value="2048"/>
+</div>
+</div>
+<!-- Run Action Button -->
+<button class="w-full py-2 rounded-full bg-primary text-on-primary text-xs font-semibold hover:bg-charcoal active:scale-[0.99] transition flex items-center justify-center gap-2 shadow-sm" id="run-inference-btn">
+<span class="material-symbols-outlined text-[16px]">play_arrow</span>
+                Run Test Inference
+              </button>
+<!-- Live Output Snippet Mock -->
+<div class="space-y-1 pt-1">
+<div class="flex items-center justify-between text-[10px] font-mono text-stone">
+<span>RESPONSE STREAM (142 TPS · 318 TOKENS)</span>
+<span class="text-emerald-600 font-semibold">200 OK · 112ms TTFT</span>
+</div>
+<div class="bg-primary text-on-primary rounded-lg p-3 font-mono text-[11px] leading-relaxed border border-gray-800 overflow-x-auto max-h-48">
+<div class="text-gray-400 mb-1">// Synapse Vision Parser v2.5</div>
+<p class="text-emerald-400 font-medium">✓ Visual tokens parsed: 2,400 x 1,800 px matrix</p>
+<p class="text-gray-300 mt-1.5">
+<span class="text-amber-300">Executive Summary:</span> Q3 compute revenue surged +38.4% YoY. Hardware gross margin contracted slightly to 64.2% due to H100 cluster ramp amortizations. Recommendation: Optimize FP8 cache layer.
+                  </p>
+<div class="mt-2 text-[10px] text-gray-500 pt-2 border-t border-gray-800 flex justify-between">
+<span>usage.prompt_tokens: 412</span>
+<span>usage.completion_tokens: 318</span>
+</div>
+</div>
+</div>
+</div>
+<!-- cURL Code Block (Hidden by default, togglable) -->
+<div class="hidden space-y-2" id="curl-panel">
+<div class="flex items-center justify-between text-[11px] font-mono text-steel">
+<span>BASH / SDK INITIALIZER</span>
+<button class="text-black hover:underline flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">content_copy</span> Copy
+                </button>
+</div>
+<pre class="bg-primary text-gray-200 p-3 rounded-lg text-[11px] font-mono overflow-x-auto border border-gray-800 leading-relaxed"><code>curl https://api.synapse.ai/v1/chat/completions \
+  -H "Authorization: Bearer $SYNAPSE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "synapse/titan-2.5-omni",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {"type": "text", "text": "Analyze financial chart"},
+          {"type": "image_url", "image_url": {"url": "https://data.synapse.ai/chart.png"}}
+        ]
+      }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 2048,
+    "stream": true
+  }'</code></pre>
+</div>
+</div>
+<!-- Bottom Footer for Sheet -->
+<div class="bg-surface px-5 py-3 border-t border-hairline flex items-center justify-between text-xs">
+<a class="text-charcoal font-medium hover:text-black flex items-center gap-1" href="#docs">
+<span>View full model card documentation</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+<span class="text-stone font-mono text-[11px]">JSON-Schema Compliant</span>
+</div>
+</div>
+<!-- Quick Status Card -->
+<div class="bg-white rounded-xl border border-hairline p-4 space-y-2 text-xs">
+<div class="flex items-center justify-between">
+<span class="font-mono text-stone uppercase text-[10px]">Global Edge Routing</span>
+<span class="font-mono text-emerald-600 font-semibold">Active</span>
+</div>
+<div class="flex items-center justify-between font-mono text-[11px] text-charcoal">
+<span>US-East (N. Virginia)</span>
+<span class="text-stone">12ms · 0 drop</span>
+</div>
+<div class="flex items-center justify-between font-mono text-[11px] text-charcoal">
+<span>EU-Central (Frankfurt)</span>
+<span class="text-stone">24ms · 0 drop</span>
+</div>
+<div class="flex items-center justify-between font-mono text-[11px] text-charcoal">
+<span>AP-East (Tokyo)</span>
+<span class="text-stone">38ms · 0 drop</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Model Comparison Benchmark Data Table Section -->
+<section class="border-t border-hairline bg-surface/30 py-12 mt-12" id="benchmarks">
+<div class="max-w-[1680px] mx-auto px-6 space-y-6">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<div class="text-xs font-mono uppercase tracking-wider text-steel mb-1">Standardized Metric Matrix</div>
+<h2 class="font-headline text-2xl font-bold tracking-tight text-ink">Comprehensive Benchmark Verifications</h2>
+<p class="text-sm text-slate">Strictly evaluated on un-contaminated test sets under identical temperature (0.0) settings.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-3.5 py-1.5 rounded-full border border-hairline bg-white text-xs font-semibold text-charcoal hover:border-black transition">
+            Export JSON Benchmark
+          </button>
+<button class="px-3.5 py-1.5 rounded-full bg-black text-white text-xs font-semibold hover:bg-charcoal transition">
+            Submit Custom Benchmark
+          </button>
+</div>
+</div>
+<!-- Comparison Data Table -->
+<div class="overflow-x-auto rounded-lg border border-hairline bg-white shadow-sm">
+<table class="w-full text-left text-xs">
+<thead class="bg-surface text-steel font-mono uppercase text-[11px] border-b border-hairline">
+<tr>
+<th class="py-3 px-4 font-semibold">Model Identifier</th>
+<th class="py-3 px-4 font-semibold">Architecture</th>
+<th class="py-3 px-4 font-semibold">Context</th>
+<th class="py-3 px-4 font-semibold">MMLU-Pro</th>
+<th class="py-3 px-4 font-semibold">MATH-500</th>
+<th class="py-3 px-4 font-semibold">HumanEval</th>
+<th class="py-3 px-4 font-semibold">Throughput</th>
+<th class="py-3 px-4 font-semibold">TTFT</th>
+<th class="py-3 px-4 font-semibold text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-hairline font-mono text-charcoal">
+<tr class="hover:bg-surface/50 transition">
+<td class="py-3.5 px-4 font-sans font-semibold text-ink flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                Synapse-Titan 2.5-Omni
+              </td>
+<td class="py-3.5 px-4 text-stone">MoE 8x22B</td>
+<td class="py-3.5 px-4 font-medium text-ink">256,000</td>
+<td class="py-3.5 px-4 text-emerald-600 font-bold">92.4%</td>
+<td class="py-3.5 px-4">88.2%</td>
+<td class="py-3.5 px-4">84.1%</td>
+<td class="py-3.5 px-4 font-semibold">142 tps</td>
+<td class="py-3.5 px-4 text-stone">115 ms</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-sans text-xs text-black font-semibold hover:underline" href="#playground">Launch</a>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition">
+<td class="py-3.5 px-4 font-sans font-semibold text-ink flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                Synapse-Reason-R1
+              </td>
+<td class="py-3.5 px-4 text-stone">Dense 70B</td>
+<td class="py-3.5 px-4 font-medium text-ink">131,072</td>
+<td class="py-3.5 px-4 font-bold text-ink">91.1%</td>
+<td class="py-3.5 px-4 text-purple-600 font-bold">95.8%</td>
+<td class="py-3.5 px-4">89.6%</td>
+<td class="py-3.5 px-4 font-semibold">94 tps</td>
+<td class="py-3.5 px-4 text-stone">110 ms</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-sans text-xs text-black font-semibold hover:underline" href="#playground">Launch</a>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition">
+<td class="py-3.5 px-4 font-sans font-semibold text-ink flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                Synapse-Coder-Apex
+              </td>
+<td class="py-3.5 px-4 text-stone">MoE 16x12B</td>
+<td class="py-3.5 px-4 font-medium text-cyan-800">512,000</td>
+<td class="py-3.5 px-4">86.7%</td>
+<td class="py-3.5 px-4">89.1%</td>
+<td class="py-3.5 px-4 text-cyan-600 font-bold">93.4%</td>
+<td class="py-3.5 px-4 font-semibold">168 tps</td>
+<td class="py-3.5 px-4 text-stone">98 ms</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-sans text-xs text-black font-semibold hover:underline" href="#playground">Launch</a>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition">
+<td class="py-3.5 px-4 font-sans font-semibold text-ink flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                Synapse-Vision-Flash
+              </td>
+<td class="py-3.5 px-4 text-stone">Dense 14B</td>
+<td class="py-3.5 px-4 font-medium text-ink">128,000</td>
+<td class="py-3.5 px-4">81.2%</td>
+<td class="py-3.5 px-4">74.5%</td>
+<td class="py-3.5 px-4">76.0%</td>
+<td class="py-3.5 px-4 font-semibold text-emerald-600">220 tps</td>
+<td class="py-3.5 px-4 text-stone">65 ms</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-sans text-xs text-black font-semibold hover:underline" href="#playground">Launch</a>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition">
+<td class="py-3.5 px-4 font-sans font-semibold text-ink flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                Synapse-Voice-Realtime
+              </td>
+<td class="py-3.5 px-4 text-stone">Duplex 12B</td>
+<td class="py-3.5 px-4 font-medium text-ink">64,000</td>
+<td class="py-3.5 px-4 text-stone">—</td>
+<td class="py-3.5 px-4 text-stone">—</td>
+<td class="py-3.5 px-4 text-stone">—</td>
+<td class="py-3.5 px-4 font-semibold">180 ms Latency</td>
+<td class="py-3.5 px-4 text-stone">80 ms</td>
+<td class="py-3.5 px-4 text-right">
+<a class="font-sans text-xs text-black font-semibold hover:underline" href="#playground">Launch</a>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- Production Grade Web Footer -->
+<footer class="bg-black text-white w-full border-t border-gray-800">
+<div class="max-w-[1680px] mx-auto py-12 px-6">
+<!-- Top Row: Brand & Infrastructure Stats -->
+<div class="flex flex-col lg:flex-row justify-between items-start lg:items-center pb-10 border-b border-gray-800 gap-6">
+<div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded bg-white text-black flex items-center justify-center font-bold text-xs">
+<span class="material-symbols-outlined text-[16px] text-black">grid_view</span>
+</div>
+<span class="font-headline text-base font-bold tracking-tight text-white uppercase">SYNAPSE AI INFRASTRUCTURE</span>
+</div>
+<p class="text-xs text-gray-400 mt-1 max-w-md">
+            High-throughput distributed multi-modal foundation models. Engineered for enterprise latency guarantees and zero data retention.
+          </p>
+</div>
+<div class="flex flex-wrap items-center gap-6 text-xs font-mono text-gray-400">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>All Global Datacenters Active</span>
+</div>
+<div class="h-3 w-px bg-gray-700 hidden sm:block"></div>
+<div>Avg Global P99: <span class="text-white">124ms</span></div>
+<div class="h-3 w-px bg-gray-700 hidden sm:block"></div>
+<div>SOC2 Type II / HIPAA Certified</div>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 py-10 border-b border-gray-800 text-xs">
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Architectures</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">Synapse Titan 2.5</a></li>
+<li><a class="hover:text-white transition" href="#">Synapse Reason R1</a></li>
+<li><a class="hover:text-white transition" href="#">Synapse Coder Apex</a></li>
+<li><a class="hover:text-white transition" href="#">Synapse Voice Duplex</a></li>
+<li><a class="hover:text-white transition" href="#">Dense Embedding 3072</a></li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Platform</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">Inference Clusters</a></li>
+<li><a class="hover:text-white transition" href="#">Fine-Tuning Engine</a></li>
+<li><a class="hover:text-white transition" href="#">Private VPC Enclaves</a></li>
+<li><a class="hover:text-white transition" href="#">Batch Token Queue</a></li>
+<li><a class="hover:text-white transition" href="#">Edge Routing Mesh</a></li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Documentation</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">REST API Reference</a></li>
+<li><a class="hover:text-white transition" href="#">Python &amp; TypeScript SDK</a></li>
+<li><a class="hover:text-white transition" href="#">Audio Stream Protocols</a></li>
+<li><a class="hover:text-white transition" href="#">Function Calling &amp; Tools</a></li>
+<li><a class="hover:text-white transition" href="#">Rate Limits &amp; Quotas</a></li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Benchmarks</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">MMLU-Pro Verification</a></li>
+<li><a class="hover:text-white transition" href="#">HumanEval &amp; SWE-Bench</a></li>
+<li><a class="hover:text-white transition" href="#">Needle in Haystack 1M</a></li>
+<li><a class="hover:text-white transition" href="#">Speech WER Analytics</a></li>
+<li><a class="hover:text-white transition" href="#">Hallucination Audits</a></li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Compliance</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">Zero Data Retention</a></li>
+<li><a class="hover:text-white transition" href="#">Enterprise SLA Policies</a></li>
+<li><a class="hover:text-white transition" href="#">Security Whitepaper</a></li>
+<li><a class="hover:text-white transition" href="#">Data Processing (DPA)</a></li>
+<li><a class="hover:text-white transition" href="#">Vulnerability Bounty</a></li>
+</ul>
+</div>
+<div class="space-y-3">
+<h4 class="font-semibold text-white uppercase tracking-wider text-[11px] font-mono">Developers</h4>
+<ul class="space-y-2 text-gray-400">
+<li><a class="hover:text-white transition" href="#">Discord Community</a></li>
+<li><a class="hover:text-white transition" href="#">GitHub Org</a></li>
+<li><a class="hover:text-white transition" href="#">Changelog &amp; Releases</a></li>
+<li><a class="hover:text-white transition" href="#">System Status (99.99%)</a></li>
+<li><a class="hover:text-white transition" href="#">Status RSS Feed</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal Row -->
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-normal text-gray-400">
+<div>
+          © 2025 SYNAPSE Matrix AI Inc. High-throughput multi-modal infrastructure. All rights reserved.
+        </div>
+<div class="flex items-center gap-6">
+<a class="hover:text-white transition" href="#">Security &amp; Compliance</a>
+<a class="hover:text-white transition" href="#">Terms of Service</a>
+<a class="hover:text-white transition" href="#">Privacy Policy</a>
+<a class="hover:text-white transition" href="#">Cookie Settings</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro-interactions JavaScript -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Toggle between Playground interactive prompt and cURL code view
+      const tabPlayBtn = document.getElementById('tab-play-btn');
+      const tabCurlBtn = document.getElementById('tab-curl-btn');
+      const playPanel = document.getElementById('playground-panel');
+      const curlPanel = document.getElementById('curl-panel');
+
+      if (tabPlayBtn && tabCurlBtn && playPanel && curlPanel) {
+        tabPlayBtn.addEventListener('click', () => {
+          tabPlayBtn.classList.add('bg-white', 'text-ink', 'font-medium', 'shadow-xs');
+          tabPlayBtn.classList.remove('text-steel');
+          tabCurlBtn.classList.remove('bg-white', 'text-ink', 'font-medium', 'shadow-xs');
+          tabCurlBtn.classList.add('text-steel');
+          playPanel.classList.remove('hidden');
+          curlPanel.classList.add('hidden');
+        });
+
+        tabCurlBtn.addEventListener('click', () => {
+          tabCurlBtn.classList.add('bg-white', 'text-ink', 'font-medium', 'shadow-xs');
+          tabCurlBtn.classList.remove('text-steel');
+          tabPlayBtn.classList.remove('bg-white', 'text-ink', 'font-medium', 'shadow-xs');
+          tabPlayBtn.classList.add('text-steel');
+          curlPanel.classList.remove('hidden');
+          playPanel.classList.add('hidden');
+        });
+      }
+
+      // Simulation trigger for Run Test Inference button
+      const runBtn = document.getElementById('run-inference-btn');
+      if (runBtn) {
+        runBtn.addEventListener('click', () => {
+          const originalText = runBtn.innerHTML;
+          runBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] animate-spin">refresh</span> Synthesizing Latents...`;
+          runBtn.classList.add('opacity-80');
+          setTimeout(() => {
+            runBtn.innerHTML = `<span class="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span> Stream Complete (112ms)`;
+            setTimeout(() => {
+              runBtn.innerHTML = originalText;
+              runBtn.classList.remove('opacity-80');
+            }, 1800);
+          }, 600);
+        });
+      }
+    });
+  </script>
+</body></html>

@@ -72,7 +72,7 @@ def main():
         notice = '\n\n## Provenance and scope\n\nVisual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.\n'
         # Idempotent regeneration: the provenance notice belongs to the generated section.
         (folder/'DESIGN.md').write_text(base + MARKER + notice + '\n' + prompt_doc.replace('# '+entry['name']+' — original AI prompts', '## Original AI task prompts', 1))
-        (folder/'README.md').write_text(f"# {entry['name']}\n\n{entry['description']}\n\n這套設計規格與所有指令均可免費使用，無須登入。\n\n- [完整設計規格](DESIGN.md)\n- [重新撰寫的 AI 指令](PROMPTS.md)\n- [淺色元件預覽](preview.html)\n- [深色元件預覽](preview-dark.html)\n- [回到總目錄](../../README.md)\n\n設計分析源自 VoltAgent 的 MIT 開源資料；AI 指令與預覽由本專案重新製作。預覽是 token 元件示意，不是品牌官方網站截圖。\n")
+        (folder/'README.md').write_text(f"# {entry['name']}\n\n{entry['description']}\n\n這套設計規格與所有指令均可免費使用，無須登入。\n\n- [完整設計規格](DESIGN.md)\n- [重新撰寫的 AI 指令](PROMPTS.md)\n- [Google Stitch 頁面](preview.html)\n- [生成用指令](STITCH-PROMPT.md)\n- [生成紀錄](STITCH.json)\n- [回到總目錄](../../README.md)\n\n設計分析源自 VoltAgent 的 MIT 開源資料；AI 指令由本專案重新撰寫。範例透過 Google Stitch MCP 生成，包含原始 HTML、截圖及生成紀錄，不是品牌官方網站。\n")
     count = len(json.loads((ROOT/'data/recipes.json').read_text()))
     print(f'Wrote {count * 3} original task prompts across {count} design systems.')
 

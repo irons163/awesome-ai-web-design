@@ -1,8 +1,826 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mintlify · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#0a0a0a;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/mintlify">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Mintlify · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#00d4a4"></span><code>#00d4a4</code></div><div class="swatch"><span style="background:#00b48a"></span><code>#00b48a</code></div><div class="swatch"><span style="background:#7cebcb"></span><code>#7cebcb</code></div><div class="swatch"><span style="background:#3772cf"></span><code>#3772cf</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Inter</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quickstart: Real-time Event Ingestion — AetherDocs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['Fira Code', 'monospace']
+          },
+          colors: {
+            brand: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar for horizontal code blocks & sidebars */
+    .code-scroll::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .code-scroll::-webkit-scrollbar-track {
+      background: #1e293b;
+      border-radius: 4px;
+    }
+    .code-scroll::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 4px;
+    }
+    .code-scroll::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+    .thin-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .thin-scroll::-webkit-scrollbar-thumb {
+      background: #e2e8f0;
+      border-radius: 4px;
+    }
+    .thin-scroll:hover::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+    }
+  </style>
+</head>
+<body class="bg-white text-slate-800 font-sans antialiased min-h-screen selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Top Sticky Navigation Bar -->
+  <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+    <div class="max-w-[1440px] mx-auto px-6 h-16 flex items-center justify-between gap-6">
+      
+      <!-- Brand & Version Segment -->
+      <div class="flex items-center gap-6">
+        <a href="#home" class="flex items-center gap-2.5 group">
+          <div class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-300 flex items-center justify-center text-emerald-600 font-bold text-lg shadow-xs group-hover:border-emerald-400 group-hover:shadow-sm transition-all">
+            <svg class="w-5 h-5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span class="text-slate-900 font-bold tracking-tight text-lg">Aether<span class="text-emerald-600">Docs</span></span>
+        </a>
+        <div class="hidden sm:flex items-center gap-2">
+          <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-600 border border-slate-200">v2.4.0</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+          <span class="text-xs text-slate-500 font-medium">All APIs Operational</span>
+        </div>
+      </div>
+
+      <!-- Top Primary Sections -->
+      <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+        <a href="#guides" class="px-3 py-1.5 rounded-md text-emerald-700 bg-emerald-50 font-semibold transition-colors">Documentation</a>
+        <a href="#api" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">API Reference</a>
+        <a href="#sdks" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">SDKs</a>
+        <a href="#changelog" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Changelog</a>
+        <a href="#community" class="px-3 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors">Community</a>
+      </nav>
+
+      <!-- Search & Utility Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Keyboard Accessible Search Bar -->
+        <div class="relative w-64 lg:w-72">
+          <button id="search-trigger" onclick="alert('Quick Search modal opened (Keyboard shortcut ⌘K triggered)')" class="w-full h-9 pl-9 pr-3 text-left rounded-lg bg-slate-50 border border-slate-200 text-slate-400 hover:text-slate-600 hover:border-slate-300 hover:bg-white text-xs flex items-center justify-between transition-all group shadow-2xs">
+            <span class="flex items-center gap-2 pointer-events-none">
+              <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+              <span>Search documentation...</span>
+            </span>
+            <kbd class="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] font-mono font-medium text-slate-500 bg-white border border-slate-200 rounded shadow-xs">
+              <abbr title="Command" class="no-underline">⌘</abbr>K
+            </kbd>
+          </button>
+        </div>
+
+        <!-- GitHub / Community Quick Link -->
+        <a href="#github" class="hidden xl:flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition-colors border border-transparent hover:border-slate-200">
+          <svg class="w-4 h-4 text-slate-700" fill="currentColor" viewBox="0 0 24 24">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
+          </svg>
+          <span>Star</span>
+          <span class="text-[11px] bg-slate-100 text-slate-600 px-1 rounded font-mono">3.8k</span>
+        </a>
+
+        <!-- Live Playground CTA -->
+        <a href="#playground" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-slate-900 hover:bg-slate-800 rounded-lg shadow-2xs transition-all">
+          <span>Sandbox</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3-Column Main Documentation Viewport (1440px target) -->
+  <div class="max-w-[1440px] mx-auto px-6 flex">
+
+    <!-- LEFT COLUMN: Stable Left Navigation Sidebar -->
+    <aside class="w-64 shrink-0 py-8 pr-6 border-r border-slate-200/80 hidden lg:block sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto thin-scroll">
+      
+      <!-- Quick Group Selector -->
+      <div class="mb-6">
+        <label class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 block mb-2">Select Architecture</label>
+        <div class="relative">
+          <select class="w-full bg-slate-50 border border-slate-200 rounded-lg py-1.5 px-2.5 text-xs font-medium text-slate-700 focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 appearance-none cursor-pointer">
+            <option>Telemetry Streaming v2 (Current)</option>
+            <option>Batch Ingest Engine v1</option>
+            <option>Serverless Edge Relays</option>
+          </select>
+          <div class="absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tree -->
+      <nav class="space-y-6 text-sm">
+        
+        <!-- Group 1: Getting Started -->
+        <div>
+          <h3 class="font-semibold text-xs text-slate-900 tracking-wider uppercase mb-2 flex items-center justify-between">
+            <span>Getting Started</span>
+            <span class="text-[10px] text-slate-400 font-normal">3 steps</span>
+          </h3>
+          <ul class="space-y-1">
+            <li>
+              <a href="#overview" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Platform Overview</span>
+              </a>
+            </li>
+            <li>
+              <!-- Current Active Item: Mintlify Green Accent Treatment -->
+              <a href="#quickstart" class="flex items-center justify-between px-2.5 py-1.5 rounded-md bg-emerald-50/80 text-emerald-700 font-semibold text-xs border border-emerald-200/60 shadow-2xs">
+                <span class="flex items-center gap-2">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                  <span>Quickstart Ingestion</span>
+                </span>
+                <span class="text-[10px] bg-emerald-100/70 text-emerald-800 px-1.5 py-0.5 rounded font-mono font-medium">5m</span>
+              </a>
+            </li>
+            <li>
+              <a href="#auth" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path></svg>
+                <span>API Authentication</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Group 2: Core Concepts -->
+        <div>
+          <h3 class="font-semibold text-xs text-slate-900 tracking-wider uppercase mb-2">Core Concepts</h3>
+          <ul class="space-y-1">
+            <li>
+              <a href="#pipeline" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span>Event Pipelines & Topics</span>
+              </a>
+            </li>
+            <li>
+              <a href="#schema" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span>Schema Validation (Avro/JSON)</span>
+              </a>
+            </li>
+            <li>
+              <a href="#routing" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span>Dynamic Edge Routing</span>
+              </a>
+            </li>
+            <li>
+              <a href="#idempotency" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span>Idempotency & Replay</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Group 3: Real-Time APIs -->
+        <div>
+          <h3 class="font-semibold text-xs text-slate-900 tracking-wider uppercase mb-2">APIs & Telemetry</h3>
+          <ul class="space-y-1">
+            <li>
+              <a href="#post-events" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span class="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 px-1 rounded">POST</span>
+                <span class="font-mono text-[11px]">/v2/events/publish</span>
+              </a>
+            </li>
+            <li>
+              <a href="#batch-publish" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span class="text-[10px] font-mono font-bold text-emerald-600 bg-emerald-50 px-1 rounded">POST</span>
+                <span class="font-mono text-[11px]">/v2/events/batch</span>
+              </a>
+            </li>
+            <li>
+              <a href="#subscribe" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span class="text-[10px] font-mono font-bold text-sky-600 bg-sky-50 px-1 rounded">WS</span>
+                <span class="font-mono text-[11px]">/v2/stream/sub</span>
+              </a>
+            </li>
+            <li>
+              <a href="#query" class="flex items-center gap-2 px-2.5 py-1.5 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors text-xs font-medium">
+                <span class="text-[10px] font-mono font-bold text-indigo-600 bg-indigo-50 px-1 rounded">GET</span>
+                <span class="font-mono text-[11px]">/v2/metrics/latency</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Group 4: SDKs & Tools -->
+        <div>
+          <h3 class="font-semibold text-xs text-slate-900 tracking-wider uppercase mb-2">SDK Client Libraries</h3>
+          <ul class="space-y-1">
+            <li><a href="#node" class="block px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs">Node.js / TypeScript</a></li>
+            <li><a href="#python" class="block px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs">Python (AsyncIO)</a></li>
+            <li><a href="#go" class="block px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs">Go (Golang SDK)</a></li>
+            <li><a href="#rust" class="block px-2.5 py-1 rounded-md text-slate-600 hover:text-slate-900 hover:bg-slate-50 text-xs">Rust Crates</a></li>
+          </ul>
+        </div>
+
+      </nav>
+
+      <!-- Sidebar Footer Badge -->
+      <div class="mt-8 pt-4 border-t border-slate-200">
+        <div class="p-3 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600">
+          <div class="flex items-center gap-2 text-slate-800 font-semibold mb-1">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>US-East Cluster (Ashburn)</span>
+          </div>
+          <p class="text-[11px] text-slate-500">Latency: <strong>4.2ms</strong> • 99.999% SLA</p>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- CENTER COLUMN: Main Article Documentation -->
+    <main class="flex-1 py-8 px-0 lg:px-12 max-w-[820px] mx-auto min-w-0">
+      
+      <!-- Breadcrumb Nav -->
+      <nav class="flex items-center gap-2 text-xs text-slate-400 mb-4 font-medium" aria-label="Breadcrumb">
+        <a href="#docs" class="hover:text-slate-600 transition-colors">Documentation</a>
+        <span>/</span>
+        <a href="#getting-started" class="hover:text-slate-600 transition-colors">Getting Started</a>
+        <span>/</span>
+        <span class="text-slate-700 font-semibold">Quickstart Ingestion</span>
+      </nav>
+
+      <!-- Article Header -->
+      <div class="border-b border-slate-200 pb-8 mb-8">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            Guide
+          </span>
+          <span class="text-xs text-slate-400">•</span>
+          <span class="text-xs text-slate-500">5 min read</span>
+          <span class="text-xs text-slate-400">•</span>
+          <span class="text-xs text-slate-500">Updated 2 days ago</span>
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+          Quickstart: Real-time Event Ingestion
+        </h1>
+        <p class="text-lg text-slate-600 leading-relaxed">
+          Learn how to authenticate and stream your first batch of microsecond events into the AetherDocs telemetry bus. Within minutes, your applications can publish structured payloads to partitioned edge topics.
+        </p>
+      </div>
+
+      <!-- Article Content Sections -->
+      <article class="space-y-10 text-slate-700 leading-7">
+
+        <!-- Prerequisites Section -->
+        <section id="prerequisites" class="scroll-mt-24">
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight mb-3 flex items-center gap-2">
+            <span class="text-emerald-600">1.</span> Prerequisites & Environment
+          </h2>
+          <p class="mb-4">
+            Before executing telemetry requests, verify that you have obtained your project API key and configured an ingestion environment:
+          </p>
+          
+          <ul class="list-disc pl-5 space-y-2 mb-4 text-sm text-slate-600 marker:text-emerald-500">
+            <li>An active Aether workspace with an initialized organization ID</li>
+            <li>API credentials with <code class="px-1.5 py-0.5 bg-slate-100 rounded text-xs font-mono text-slate-800 font-medium">events:write</code> permission scope</li>
+            <li>Node.js version 18.0+, Python 3.9+, or Go 1.20+ installed on your local workstation</li>
+          </ul>
+
+          <!-- Mintlify Callout Box: Tip -->
+          <div class="my-6 rounded-xl border border-emerald-200/90 bg-emerald-50/50 p-4.5 flex items-start gap-3.5">
+            <div class="mt-0.5 p-1 rounded-md bg-emerald-500 text-white shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <div class="text-sm">
+              <strong class="font-semibold text-emerald-950 block mb-0.5">Development Key Availability</strong>
+              <p class="text-emerald-900 leading-normal">
+                For local debugging, you can utilize the public sandbox key <code class="px-1.5 py-0.5 bg-emerald-100/70 border border-emerald-200 rounded font-mono text-xs font-bold text-emerald-900">aether_test_99f2e7b1</code>. It includes a soft rate limit of 100 requests per minute with automatic data purging every 6 hours.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 2: Install SDK -->
+        <section id="install-sdk" class="scroll-mt-24">
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight mb-3 flex items-center gap-2">
+            <span class="text-emerald-600">2.</span> Install the Client Library
+          </h2>
+          <p class="mb-4">
+            Install the official lightweight driver for your runtime platform. The package bundles zero native dependencies and includes compile-time TypeScript signatures:
+          </p>
+
+          <!-- Interactive Code Snippet with Language Tabs & Copy Action -->
+          <div class="rounded-xl border border-slate-700/60 bg-slate-900 shadow-lg overflow-hidden my-4">
+            
+            <!-- Code Header / Language Bar -->
+            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-950/80 border-b border-slate-800 text-xs">
+              <!-- Language Tabs -->
+              <div class="flex items-center gap-1.5" role="tablist">
+                <button onclick="switchTab('install', 'npm')" id="tab-install-npm" class="tab-btn px-2.5 py-1 rounded-md font-medium text-emerald-400 bg-slate-800 border border-slate-700/80 transition-all flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>npm</span>
+                </button>
+                <button onclick="switchTab('install', 'pnpm')" id="tab-install-pnpm" class="tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>pnpm</span>
+                </button>
+                <button onclick="switchTab('install', 'python')" id="tab-install-python" class="tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>pip (Python)</span>
+                </button>
+                <button onclick="switchTab('install', 'go')" id="tab-install-go" class="tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>go get</span>
+                </button>
+              </div>
+
+              <!-- Copy Action Button -->
+              <button onclick="copySnippet('code-install')" class="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-slate-400 hover:text-white bg-slate-800/60 hover:bg-slate-800 border border-slate-700 transition-colors">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                </svg>
+                <span id="copy-label-install">Copy</span>
+              </button>
+            </div>
+
+            <!-- Scrollable Terminal Body -->
+            <div class="p-4 font-mono text-xs overflow-x-auto code-scroll text-slate-200 leading-relaxed bg-[#0b1120]">
+              <pre id="code-install"><code><span class="text-slate-500 select-none">$ </span>npm install @aetherdocs/telemetry-sdk</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Step 3: Publish Your First Event -->
+        <section id="publish-first-event" class="scroll-mt-24">
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight mb-3 flex items-center gap-2">
+            <span class="text-emerald-600">3.</span> Send an Ingestion Payload
+          </h2>
+          <p class="mb-4">
+            Initialize the client with your key and emit a structured event. The SDK validates payloads against your team's schema registry before dispatching over persistent HTTP/2 keep-alive sockets:
+          </p>
+
+          <!-- COMPONENT IN PROPER CONTEXT: Documentation code example with language tabs and copy action -->
+          <div class="rounded-xl border border-slate-700/60 bg-slate-900 shadow-xl overflow-hidden my-6">
+            
+            <!-- Code Example Top Navigation Header -->
+            <div class="flex items-center justify-between px-4 py-2.5 bg-slate-950/90 border-b border-slate-800 text-xs">
+              <div class="flex items-center gap-1.5" role="tablist">
+                <!-- Tab: Node.js / TS (Active) -->
+                <button onclick="switchCodeLang('ts')" id="tab-code-ts" class="code-tab-btn px-2.5 py-1 rounded-md font-medium text-emerald-400 bg-slate-800/90 border border-slate-700 transition-all flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                  <span>TypeScript</span>
+                </button>
+                <!-- Tab: Python -->
+                <button onclick="switchCodeLang('py')" id="tab-code-py" class="code-tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>Python</span>
+                </button>
+                <!-- Tab: Go -->
+                <button onclick="switchCodeLang('go')" id="tab-code-go" class="code-tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>Go</span>
+                </button>
+                <!-- Tab: cURL -->
+                <button onclick="switchCodeLang('curl')" id="tab-code-curl" class="code-tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all">
+                  <span>cURL (HTTP)</span>
+                </button>
+              </div>
+
+              <!-- Interactive Copy Action Button -->
+              <div class="flex items-center gap-2">
+                <span class="text-[11px] text-slate-500 font-mono hidden sm:inline">main.ts</span>
+                <button onclick="copySnippet('code-example-content')" class="flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700/80 border border-slate-700 transition-all shadow-xs">
+                  <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                  </svg>
+                  <span id="copy-label-main">Copy snippet</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Horizontally Scrollable High-Fidelity Code Pane -->
+            <div class="p-4 sm:p-5 font-mono text-xs overflow-x-auto code-scroll leading-relaxed bg-[#0a0f1d]">
+<pre id="code-example-content" class="text-slate-300"><code><span class="text-purple-400">import</span> { <span class="text-sky-300">AetherClient</span> } <span class="text-purple-400">from</span> <span class="text-emerald-300">'@aetherdocs/telemetry-sdk'</span>;
+
+<span class="text-slate-500">// Initialize client instance with your scoped project token</span>
+<span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> <span class="text-sky-300">AetherClient</span>({
+  apiKey: process.env.<span class="text-amber-300">AETHER_API_KEY</span> || <span class="text-emerald-300">'aether_test_99f2e7b1'</span>,
+  region: <span class="text-emerald-300">'us-east-1'</span>,
+  flushIntervalMs: <span class="text-amber-300">250</span>, <span class="text-slate-500">// Auto-batch every 250ms</span>
+  retryCount: <span class="text-amber-300">3</span>
+});
+
+<span class="text-slate-500">// Dispatch structured event payload with telemetry attributes</span>
+<span class="text-purple-400">async function</span> <span class="text-blue-400">trackUserAction</span>() {
+  <span class="text-purple-400">const</span> response = <span class="text-purple-400">await</span> client.<span class="text-blue-400">publish</span>({
+    topic: <span class="text-emerald-300">'user.checkout.completed'</span>,
+    partitionKey: <span class="text-emerald-300">'usr_9824_na'</span>,
+    payload: {
+      transactionId: <span class="text-emerald-300">'tx_78119028'</span>,
+      totalAmountUsd: <span class="text-amber-300">149.50</span>,
+      itemCount: <span class="text-amber-300">3</span>,
+      channel: <span class="text-emerald-300">'web-storefront'</span>,
+      clientTimestamp: <span class="text-purple-400">new</span> <span class="text-sky-300">Date</span>().<span class="text-blue-400">toISOString</span>()
+    }
+  });
+
+  console.<span class="text-blue-400">log</span>(<span class="text-emerald-300">'[Aether] Event ingested with offset:'</span>, response.offset);
+}
+
+<span class="text-blue-400">trackUserAction</span>();</code></pre>
+            </div>
+
+            <!-- Code Output Status Bar -->
+            <div class="px-4 py-2 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+              <div class="flex items-center gap-2">
+                <span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span>Type Safe • Auto-batching enabled</span>
+              </div>
+              <div class="text-slate-500">HTTP/2 TLS 1.3 • Compression: zstd</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Response Schema Section -->
+        <section id="response-format" class="scroll-mt-24">
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight mb-3 flex items-center gap-2">
+            <span class="text-emerald-600">4.</span> Expected JSON Response
+          </h2>
+          <p class="mb-4">
+            Upon successful ingest, the Aether ingest cluster acknowledges with an offset acknowledgement and trace ID:
+          </p>
+
+          <div class="rounded-xl border border-slate-700/60 bg-slate-900 shadow-md overflow-hidden my-4">
+            <div class="flex items-center justify-between px-4 py-2 bg-slate-950 border-b border-slate-800 text-xs">
+              <span class="text-slate-400 font-mono">Status 202 Accepted</span>
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800/60">schema: v2.event.ack</span>
+            </div>
+            <div class="p-4 font-mono text-xs overflow-x-auto code-scroll text-slate-200 bg-[#0a0f1d]">
+<pre class="text-slate-300"><code>{
+  <span class="text-sky-300">"status"</span>: <span class="text-emerald-300">"accepted"</span>,
+  <span class="text-sky-300">"traceId"</span>: <span class="text-emerald-300">"trace_c89b21f0088921a"</span>,
+  <span class="text-sky-300">"partition"</span>: <span class="text-amber-300">4</span>,
+  <span class="text-sky-300">"offset"</span>: <span class="text-amber-300">8940129</span>,
+  <span class="text-sky-300">"latencyMs"</span>: <span class="text-amber-300">1.84</span>,
+  <span class="text-sky-300">"idempotentReplay"</span>: <span class="text-purple-400">false</span>
+}</code></pre>
+            </div>
+          </div>
+        </section>
+
+        <!-- Parameter Reference Table -->
+        <section id="parameter-table" class="scroll-mt-24">
+          <h2 class="text-xl font-bold text-slate-900 tracking-tight mb-3">
+            Payload Parameters
+          </h2>
+          <p class="text-sm text-slate-600 mb-4">
+            The telemetry pipeline enforces strict attribute validation based on your topic definition:
+          </p>
+
+          <div class="overflow-hidden border border-slate-200 rounded-xl shadow-2xs">
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="bg-slate-50 border-b border-slate-200 text-slate-700 font-semibold">
+                  <th class="py-3 px-4">Parameter</th>
+                  <th class="py-3 px-4">Type</th>
+                  <th class="py-3 px-4">Required</th>
+                  <th class="py-3 px-4">Description</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-200 text-slate-600">
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">topic</td>
+                  <td class="py-3 px-4 font-mono text-emerald-700">string</td>
+                  <td class="py-3 px-4"><span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Required</span></td>
+                  <td class="py-3 px-4 leading-normal">The destination event stream (e.g. <code class="bg-slate-100 px-1 py-0.5 rounded text-slate-800">user.signup</code>).</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">partitionKey</td>
+                  <td class="py-3 px-4 font-mono text-emerald-700">string</td>
+                  <td class="py-3 px-4"><span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Required</span></td>
+                  <td class="py-3 px-4 leading-normal">Guarantees strict ordering per partition (e.g. customer ID, account UUID).</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">payload</td>
+                  <td class="py-3 px-4 font-mono text-purple-700">object</td>
+                  <td class="py-3 px-4"><span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-emerald-100 text-emerald-800">Required</span></td>
+                  <td class="py-3 px-4 leading-normal">Arbitrary JSON or Avro object containing telemetry attributes up to 1MB.</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition-colors">
+                  <td class="py-3 px-4 font-mono font-medium text-slate-900">idempotencyKey</td>
+                  <td class="py-3 px-4 font-mono text-emerald-700">string</td>
+                  <td class="py-3 px-4"><span class="px-1.5 py-0.5 text-[10px] font-medium rounded bg-slate-100 text-slate-600">Optional</span></td>
+                  <td class="py-3 px-4 leading-normal">Unique token to de-duplicate retried network calls over a 24h rolling window.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Warning Admonition -->
+        <section id="best-practices" class="scroll-mt-24">
+          <div class="rounded-xl border border-amber-200/90 bg-amber-50/50 p-4.5 flex items-start gap-3.5">
+            <div class="mt-0.5 p-1 rounded-md bg-amber-500 text-white shrink-0">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+              </svg>
+            </div>
+            <div class="text-sm">
+              <strong class="font-semibold text-amber-950 block mb-0.5">Partition Key Distribution</strong>
+              <p class="text-amber-900 leading-normal">
+                Avoid using low-cardinality keys like region codes or static constants. Skewed partitions can lead to hot-spotting on specific edge broker nodes. We recommend hashing composite identifiers like <code class="px-1 py-0.5 bg-amber-100/70 border border-amber-200 rounded font-mono text-xs font-bold text-amber-900">{tenant_id}:{entity_id}</code>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Next Steps / Navigation Card Footer -->
+        <div class="pt-8 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a href="#prev" class="group p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all">
+            <span class="text-xs text-slate-400 group-hover:text-emerald-700 font-medium flex items-center gap-1 mb-1">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+              Previous
+            </span>
+            <span class="text-sm font-semibold text-slate-800 group-hover:text-emerald-900">Platform Architecture Overview</span>
+          </a>
+
+          <a href="#next" class="group p-4 rounded-xl border border-slate-200 hover:border-emerald-300 hover:bg-emerald-50/30 transition-all text-right">
+            <span class="text-xs text-slate-400 group-hover:text-emerald-700 font-medium flex items-center justify-end gap-1 mb-1">
+              Next
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </span>
+            <span class="text-sm font-semibold text-slate-800 group-hover:text-emerald-900">Configuring Schema Validations</span>
+          </a>
+        </div>
+
+      </article>
+
+    </main>
+
+    <!-- RIGHT COLUMN: Compact On-Page Outline / Table of Contents -->
+    <aside class="w-64 shrink-0 py-8 pl-8 hidden xl:block sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto thin-scroll">
+      
+      <!-- Outline Title -->
+      <div class="mb-4">
+        <h4 class="text-xs font-semibold text-slate-900 uppercase tracking-wider">On this page</h4>
+      </div>
+
+      <!-- Outline List with Active Mint Green Treatment -->
+      <ul class="space-y-2 text-xs border-l border-slate-200 pl-3">
+        <li>
+          <a href="#prerequisites" class="text-slate-500 hover:text-slate-900 block py-0.5 transition-colors">Prerequisites & Setup</a>
+        </li>
+        <li>
+          <a href="#install-sdk" class="text-slate-500 hover:text-slate-900 block py-0.5 transition-colors">Install the Client Library</a>
+        </li>
+        <li>
+          <!-- Active Current Section Highlight -->
+          <a href="#publish-first-event" class="text-emerald-600 font-semibold block py-0.5 relative -left-[13px] border-l-2 border-emerald-500 pl-2.5 transition-colors">
+            Send an Ingestion Payload
+          </a>
+        </li>
+        <li>
+          <a href="#response-format" class="text-slate-500 hover:text-slate-900 block py-0.5 transition-colors">Expected JSON Response</a>
+        </li>
+        <li>
+          <a href="#parameter-table" class="text-slate-500 hover:text-slate-900 block py-0.5 transition-colors">Payload Parameters</a>
+        </li>
+        <li>
+          <a href="#best-practices" class="text-slate-500 hover:text-slate-900 block py-0.5 transition-colors">Partition Best Practices</a>
+        </li>
+      </ul>
+
+      <!-- Community & Feedback Micro-Widgets -->
+      <div class="mt-8 pt-6 border-t border-slate-200/80 space-y-4">
+        
+        <!-- Helpful Widget -->
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200/80 text-xs">
+          <p class="font-medium text-slate-700 mb-2">Was this guide helpful?</p>
+          <div class="flex items-center gap-2">
+            <button onclick="this.classList.toggle('bg-emerald-100'); this.classList.toggle('border-emerald-300'); this.classList.toggle('text-emerald-800')" class="px-2.5 py-1 bg-white border border-slate-200 rounded-md text-slate-600 hover:bg-slate-100 transition-colors flex items-center gap-1 font-medium text-[11px]">
+              <svg class="w-3.5 h-3.5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2m-7 0H5a2 2 0 00-2 2v6a2 2 0 002 2h2"></path></svg>
+              <span>Yes</span>
+            </button>
+            <button onclick="this.classList.toggle('bg-slate-200')" class="px-2.5 py-1 bg-white border border-slate-200 rounded-md text-slate-600 hover:bg-slate-100 transition-colors flex items-center gap-1 font-medium text-[11px]">
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.736 3h4.018a2 2 0 01.485.06l3.76 1.341M10 14v5a2 2 0 002 2h.096c.5 0 .905-.405.905-.905 0-.714.211-1.412.608-2.006L17 13V4m-7 10h2m7 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2"></path></svg>
+              <span>No</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Help & Feedback Links -->
+        <div class="space-y-2 text-xs">
+          <a href="#edit-github" class="flex items-center gap-2 text-slate-500 hover:text-emerald-700 transition-colors group">
+            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+            <span>Edit this page on GitHub</span>
+          </a>
+          <a href="#ask-community" class="flex items-center gap-2 text-slate-500 hover:text-emerald-700 transition-colors group">
+            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+            <span>Join our Discord server</span>
+          </a>
+        </div>
+
+      </div>
+
+    </aside>
+
+  </div>
+
+  <!-- Interactive Scripts for Tabs & Copy -->
+  <script>
+    // Copy snippet functionality
+    function copySnippet(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const label = elementId === 'code-install' ? document.getElementById('copy-label-install') : document.getElementById('copy-label-main');
+        if (label) {
+          const original = label.innerText;
+          label.innerText = 'Copied!';
+          setTimeout(() => { label.innerText = original; }, 2000);
+        }
+      });
+    }
+
+    // Install Tabs Switcher
+    function switchTab(group, tool) {
+      const codeEl = document.getElementById('code-install');
+      const tabs = ['npm', 'pnpm', 'python', 'go'];
+      tabs.forEach(t => {
+        const btn = document.getElementById('tab-install-' + t);
+        if (btn) {
+          if (t === tool) {
+            btn.className = 'tab-btn px-2.5 py-1 rounded-md font-medium text-emerald-400 bg-slate-800 border border-slate-700/80 transition-all flex items-center gap-1.5';
+          } else {
+            btn.className = 'tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all';
+          }
+        }
+      });
+
+      if (tool === 'npm') {
+        codeEl.innerHTML = `<code><span class="text-slate-500 select-none">$ </span>npm install @aetherdocs/telemetry-sdk</code>`;
+      } else if (tool === 'pnpm') {
+        codeEl.innerHTML = `<code><span class="text-slate-500 select-none">$ </span>pnpm add @aetherdocs/telemetry-sdk</code>`;
+      } else if (tool === 'python') {
+        codeEl.innerHTML = `<code><span class="text-slate-500 select-none">$ </span>pip install aether-telemetry</code>`;
+      } else if (tool === 'go') {
+        codeEl.innerHTML = `<code><span class="text-slate-500 select-none">$ </span>go get github.com/aetherdocs/telemetry-go</code>`;
+      }
+    }
+
+    // Language Tab Switcher for Main Code Component
+    function switchCodeLang(lang) {
+      const langs = ['ts', 'py', 'go', 'curl'];
+      langs.forEach(l => {
+        const btn = document.getElementById('tab-code-' + l);
+        if (btn) {
+          if (l === lang) {
+            btn.className = 'code-tab-btn px-2.5 py-1 rounded-md font-medium text-emerald-400 bg-slate-800/90 border border-slate-700 transition-all flex items-center gap-1.5';
+          } else {
+            btn.className = 'code-tab-btn px-2.5 py-1 rounded-md font-medium text-slate-400 hover:text-slate-200 hover:bg-slate-800/50 transition-all';
+          }
+        }
+      });
+
+      const container = document.getElementById('code-example-content');
+      if (lang === 'ts') {
+        container.innerHTML = `<code><span class="text-purple-400">import</span> { <span class="text-sky-300">AetherClient</span> } <span class="text-purple-400">from</span> <span class="text-emerald-300">'@aetherdocs/telemetry-sdk'</span>;
+
+<span class="text-slate-500">// Initialize client instance with your scoped project token</span>
+<span class="text-purple-400">const</span> client = <span class="text-purple-400">new</span> <span class="text-sky-300">AetherClient</span>({
+  apiKey: process.env.<span class="text-amber-300">AETHER_API_KEY</span> || <span class="text-emerald-300">'aether_test_99f2e7b1'</span>,
+  region: <span class="text-emerald-300">'us-east-1'</span>,
+  flushIntervalMs: <span class="text-amber-300">250</span>, <span class="text-slate-500">// Auto-batch every 250ms</span>
+  retryCount: <span class="text-amber-300">3</span>
+});
+
+<span class="text-slate-500">// Dispatch structured event payload with telemetry attributes</span>
+<span class="text-purple-400">async function</span> <span class="text-blue-400">trackUserAction</span>() {
+  <span class="text-purple-400">const</span> response = <span class="text-purple-400">await</span> client.<span class="text-blue-400">publish</span>({
+    topic: <span class="text-emerald-300">'user.checkout.completed'</span>,
+    partitionKey: <span class="text-emerald-300">'usr_9824_na'</span>,
+    payload: {
+      transactionId: <span class="text-emerald-300">'tx_78119028'</span>,
+      totalAmountUsd: <span class="text-amber-300">149.50</span>,
+      itemCount: <span class="text-amber-300">3</span>,
+      channel: <span class="text-emerald-300">'web-storefront'</span>,
+      clientTimestamp: <span class="text-purple-400">new</span> <span class="text-sky-300">Date</span>().<span class="text-blue-400">toISOString</span>()
+    }
+  });
+
+  console.<span class="text-blue-400">log</span>(<span class="text-emerald-300">'[Aether] Event ingested with offset:'</span>, response.offset);
+}
+
+<span class="text-blue-400">trackUserAction</span>();</code>`;
+      } else if (lang === 'py') {
+        container.innerHTML = `<code><span class="text-purple-400">import</span> os
+<span class="text-purple-400">from</span> aether <span class="text-purple-400">import</span> <span class="text-sky-300">AsyncAetherClient</span>
+
+client = <span class="text-sky-300">AsyncAetherClient</span>(
+    api_key=os.getenv(<span class="text-emerald-300">"AETHER_API_KEY"</span>, <span class="text-emerald-300">"aether_test_99f2e7b1"</span>),
+    region=<span class="text-emerald-300">"us-east-1"</span>
+)
+
+<span class="text-purple-400">async def</span> <span class="text-blue-400">track_event</span>():
+    ack = <span class="text-purple-400">await</span> client.publish(
+        topic=<span class="text-emerald-300">"user.checkout.completed"</span>,
+        partition_key=<span class="text-emerald-300">"usr_9824_na"</span>,
+        payload={
+            <span class="text-emerald-300">"transaction_id"</span>: <span class="text-emerald-300">"tx_78119028"</span>,
+            <span class="text-emerald-300">"total_amount_usd"</span>: <span class="text-amber-300">149.50</span>,
+            <span class="text-emerald-300">"item_count"</span>: <span class="text-amber-300">3</span>
+        }
+    )
+    print(<span class="text-emerald-300">f"Event recorded at offset: {ack.offset}"</span>)</code>`;
+      } else if (lang === 'go') {
+        container.innerHTML = `<code><span class="text-purple-400">package</span> main
+
+<span class="text-purple-400">import</span> (
+    <span class="text-emerald-300">"context"</span>
+    <span class="text-emerald-300">"log"</span>
+    <span class="text-emerald-300">"github.com/aetherdocs/telemetry-go"</span>
+)
+
+<span class="text-purple-400">func</span> <span class="text-blue-400">main</span>() {
+    client := telemetry.<span class="text-blue-400">NewClient</span>(&telemetry.Config{
+        APIKey: <span class="text-emerald-300">"aether_test_99f2e7b1"</span>,
+        Region: <span class="text-emerald-300">"us-east-1"</span>,
+    })
+
+    ack, err := client.<span class="text-blue-400">Publish</span>(context.Background(), telemetry.Event{
+        Topic:        <span class="text-emerald-300">"user.checkout.completed"</span>,
+        PartitionKey: <span class="text-emerald-300">"usr_9824_na"</span>,
+        Payload: <span class="text-purple-400">map</span>[<span class="text-purple-400">string</span>]<span class="text-purple-400">interface</span>{}{
+            <span class="text-emerald-300">"transactionId"</span>: <span class="text-emerald-300">"tx_78119028"</span>,
+            <span class="text-emerald-300">"totalAmountUsd"</span>: <span class="text-amber-300">149.50</span>,
+        },
+    })
+    <span class="text-purple-400">if</span> err != nil { log.<span class="text-blue-400">Fatal</span>(err) }
+    log.<span class="text-blue-400">Printf</span>(<span class="text-emerald-300">"Offset: %d"</span>, ack.Offset)
+}</code>`;
+      } else if (lang === 'curl') {
+        container.innerHTML = `<code><span class="text-slate-500 select-none">$ </span>curl -X POST https://api.aetherdocs.io/v2/events/publish \\
+  -H <span class="text-emerald-300">"Authorization: Bearer aether_test_99f2e7b1"</span> \\
+  -H <span class="text-emerald-300">"Content-Type: application/json"</span> \\
+  -d <span class="text-amber-300">'{
+    "topic": "user.checkout.completed",
+    "partitionKey": "usr_9824_na",
+    "payload": {
+      "transactionId": "tx_78119028",
+      "totalAmountUsd": 149.50,
+      "itemCount": 3
+    }
+  }'</span></code>`;
+      }
+    }
+
+    // Keyboard shortcut ⌘K / Ctrl+K search listener
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchBtn = document.getElementById('search-trigger');
+        if (searchBtn) searchBtn.click();
+      }
+    });
+  </script>
+
+</body>
+</html>

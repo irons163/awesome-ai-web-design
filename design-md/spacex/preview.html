@@ -1,8 +1,464 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpaceX · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#000000;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/spacex">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">SpaceX · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#000000"></span><code>#000000</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#f0f0fa"></span><code>#f0f0fa</code></div><div class="swatch"><span style="background:#0a0a0a"></span><code>#0a0a0a</code></div><div class="swatch"><span style="background:#3a3a3f"></span><code>#3a3a3f</code></div><div class="swatch"><span style="background:#e0e0e8"></span><code>#e0e0e8</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · D-DIN-Bold, Arial Narrow, Arial, Verdana, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ASTRAEA // FLIGHT ARCHIVE &amp; TELEMETRY</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;800;900&amp;family=Public+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {},
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .tracking-widest-ultra {
+      letter-spacing: 0.25em;
+    }
+    .tracking-cinematic {
+      letter-spacing: 0.18em;
+    }
+    .hairline-b {
+      border-bottom: 1px solid #1c1c1f;
+    }
+    .hairline-t {
+      border-top: 1px solid #1c1c1f;
+    }
+    .hairline-all {
+      border: 1px solid #222226;
+    }
+  </style>
+</head>
+<body class="bg-black text-white antialiased selection:bg-white selection:text-black">
+<!-- Shared Component: TopNavBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 max-w-full bg-transparent border-none">
+<div class="flex items-center gap-12">
+<a class="font-display font-bold text-xl tracking-[0.2em] text-white uppercase hover:opacity-70 transition-opacity duration-150" href="#">
+        ASTRAEA
+      </a>
+<nav class="hidden md:flex items-center space-x-8">
+<a class="text-white/80 font-normal tracking-widest text-xs uppercase hover:text-white transition-opacity duration-150" href="#missions">MISSIONS</a>
+<a class="text-white/80 font-normal tracking-widest text-xs uppercase hover:text-white transition-opacity duration-150" href="#vehicles">VEHICLES</a>
+<a class="text-white/80 font-normal tracking-widest text-xs uppercase hover:text-white transition-opacity duration-150" href="#telemetry">TELEMETRY</a>
+<a class="text-white font-bold tracking-widest text-xs uppercase border-b border-white pb-1" href="#launch-index">LAUNCH INDEX</a>
+<a class="text-white/80 font-normal tracking-widest text-xs uppercase hover:text-white transition-opacity duration-150" href="#shop">SHOP</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<a class="hidden sm:inline-block font-label font-bold text-xs uppercase tracking-widest px-6 py-2 border border-white rounded-[32px] text-white hover:bg-white hover:text-black transition-all duration-200" href="#telemetry">
+        LAUNCH PORTAL
+      </a>
+<button aria-label="Menu" class="text-white hover:opacity-70 transition-opacity duration-150 focus:outline-none">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</div>
+</header>
+<!-- Hero Section: Chapter 01 -->
+<section class="relative w-full min-h-screen flex flex-col justify-end pb-20 pt-36 px-6 sm:px-12 md:px-16 overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 w-full h-full -z-10">
+<img alt="Apollo Saturn V rocket night launch showing powerful fiery thrust exhaust trail lighting the dark night sky" class="w-full h-full object-cover object-center filter brightness-90 contrast-110" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCO2mpFAI-SYvt0mI2IZUqmhOh6BA6k-HA-atb0lZ8aZ3q2-HRmUx1Qe5igPdumGwG5_dmSbEKUaTP1JS_zemCUjBKQRcGkwn9n642kf8-88GDGiQ9fholqIYpaUe_QV2KrKQbfYmX0J-ZNMv_Zm1Wdc4Jc0GsMFH6A7YwyZMjafL2Ny0QYec-UJeNq6wToz_2RYQsxrkO2zeJdTv3VlfsT7Cojd8V0mN66WIoYxYwtO1Uqs-F17sq-x5BA1VmRusESL_YbDR4aL0nc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+</div>
+<!-- Telemetry Badges & Eyebrow -->
+<div class="max-w-6xl mx-auto w-full">
+<div class="flex flex-wrap items-center gap-3 sm:gap-6 mb-6 text-xs uppercase font-label tracking-widest text-neutral-300">
+<span class="inline-flex items-center gap-2 border border-neutral-700 bg-black/60 px-3 py-1 rounded-[32px] text-white">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          FLIGHT RECORD 148
+        </span>
+<span class="text-neutral-400">SLC-40 CANAVERAL</span>
+<span class="text-neutral-500">•</span>
+<span class="text-neutral-400">OCTOBER 24, 2024</span>
+<span class="text-neutral-500">•</span>
+<span class="text-white border border-neutral-700 px-3 py-1 rounded-[32px] bg-black/50">MISSION COMPLETE // NOMINAL</span>
+</div>
+<h1 class="text-4xl sm:text-6xl md:text-8xl font-black font-headline tracking-tighter uppercase leading-[0.9] text-white mb-6 max-w-4xl">
+        ORBITAL TRANSLATION
+      </h1>
+<p class="max-w-2xl text-neutral-300 text-sm sm:text-base font-normal leading-relaxed tracking-wide mb-10">
+        Primary orbital injection for the Synchronous Synthetic Aperture Radar Array aboard vehicle Astraea V Heavy. Stage separation, booster retro-propulsion, and drone ship recovery finalized at 02:44:18 UTC with zero variance.
+      </p>
+<div class="flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center justify-center font-headline font-bold text-xs uppercase tracking-widest px-8 py-4 border border-white text-white rounded-[32px] hover:bg-white hover:text-black transition-all duration-200" href="#technical-facts">
+          EXPLORE MISSION TELEMETRY
+        </a>
+<a class="inline-flex items-center justify-center font-headline font-bold text-xs uppercase tracking-widest px-8 py-4 text-neutral-300 hover:text-white transition-colors duration-150" href="#mission-matrix">
+          VIEW CHRONOLOGY →
+        </a>
+</div>
+</div>
+</section>
+<!-- Technical Telemetry & Summary Bento Bar -->
+<section class="w-full bg-[#050505] hairline-t hairline-b py-12 px-6 sm:px-12 md:px-16" id="telemetry">
+<div class="max-w-6xl mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-4">
+<div class="border-l border-neutral-800 pl-6">
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-500 mb-1">VEHICLE ASSIGNMENT</div>
+<div class="text-xl sm:text-2xl font-bold font-headline uppercase text-white tracking-tight">ASTRAEA V HEAVY</div>
+<div class="text-xs text-neutral-400 mt-1">CORE B1069.14 (FLOWN 14X)</div>
+</div>
+<div class="border-l border-neutral-800 pl-6">
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-500 mb-1">PRIMARY PAYLOAD</div>
+<div class="text-xl sm:text-2xl font-bold font-headline uppercase text-white tracking-tight">SYNCHRONOUS SAR</div>
+<div class="text-xs text-neutral-400 mt-1">8,920 KG APOGEE APX</div>
+</div>
+<div class="border-l border-neutral-800 pl-6">
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-500 mb-1">TARGET ORBIT</div>
+<div class="text-xl sm:text-2xl font-bold font-headline uppercase text-white tracking-tight">35,786 KM GEO</div>
+<div class="text-xs text-neutral-400 mt-1">INCLINATION 28.50°</div>
+</div>
+<div class="border-l border-neutral-800 pl-6">
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-500 mb-1">RECOVERY STATUS</div>
+<div class="text-xl sm:text-2xl font-bold font-headline uppercase text-white tracking-tight">RECOVERED // DRONE</div>
+<div class="text-xs text-emerald-400 mt-1 font-mono uppercase">AS-04 ATLANTIC LZ</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Technical Fact List -->
+<section class="w-full bg-black py-20 px-6 sm:px-12 md:px-16" id="technical-facts">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 hairline-b">
+<div>
+<span class="text-xs uppercase font-label tracking-widest-ultra text-neutral-500 block mb-2">SYSTEM PARAMETERS</span>
+<h2 class="text-3xl sm:text-4xl font-headline font-black uppercase tracking-tight text-white">FLIGHT RECORD SPECIFICATION</h2>
+</div>
+<p class="text-neutral-400 text-xs sm:text-sm font-normal max-w-md mt-4 md:mt-0">
+          Granular mechanical timestamps, staging metrics, and structural pressures captured via high-rate S-band downlinks.
+        </p>
+</div>
+<div class="divide-y divide-neutral-900 border-t border-neutral-900">
+<!-- Fact Item 1 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">01</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">STAGE 1 BURN DURATION</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">T+ 00:02:42</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">162.4 SEC</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Fact Item 2 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">02</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">MAX Q (MAXIMUM DYNAMIC PRESSURE)</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">T+ 00:01:14</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">34.2 KPA</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Fact Item 3 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">03</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">STAGE SEPARATION VELOCITY</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">T+ 00:02:46</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">2,840 M/S</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Fact Item 4 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">04</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">FAIRING JETTISON ALTITUDE</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">T+ 00:03:12</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">114.2 KM</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Fact Item 5 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">05</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">MERLIN VACUUM DELTA-V (TOTAL CAPACITY)</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">STAGE 02</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">3,150 M/S</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+<!-- Fact Item 6 -->
+<div class="py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 group cursor-pointer hover:bg-neutral-950/60 transition-colors px-4 -mx-4 rounded">
+<div class="flex items-center gap-4">
+<span class="text-xs font-mono text-neutral-600">06</span>
+<span class="text-sm font-label font-bold tracking-widest uppercase text-white">NET PAYLOAD MASS TO INSERTION</span>
+</div>
+<div class="flex items-center gap-8 justify-between sm:justify-end">
+<span class="text-sm font-mono text-neutral-400">GTO ARCHITECTURE</span>
+<span class="text-lg font-bold font-headline tracking-widest text-white">8,920 KG</span>
+<span class="material-symbols-outlined text-neutral-500 group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chapter 02: Full-width Visual Break with Stage Separation Image -->
+<section class="relative w-full min-h-[90vh] flex flex-col justify-end px-6 sm:px-12 md:px-16 py-16 overflow-hidden">
+<!-- Background Image -->
+<div class="absolute inset-0 w-full h-full -z-10">
+<img alt="Rocket stage separation event in low earth orbit with Earth curve and cosmic deep space" class="w-full h-full object-cover object-center filter brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcgeOxRTREHS0FoJmj1R_uLIB-bpsMP7PXu_VxBiKxjOJiviA2zEjUYfIs-PT2GjMH4y82klba53_eP3xtF7USnGQtDma7J5tdA3EnVXNca_sk97tGLqgUpb8a93uPUMsFDFYUqdlvFoNCc7SR5hDZHgn-W-dsoEQeFfL5Kksmo04uEuKnB-U3beLGmOZR8Yq4bwoGSrBkYncT24LuIlV_cCs8xCYVkKybJnbbD6vSWr1qf0_W-2rmcH5U2bK-n8wdcnoFeMg956RB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+</div>
+<div class="max-w-6xl mx-auto w-full">
+<span class="text-xs uppercase font-label tracking-widest-ultra text-neutral-400 block mb-3">
+        CHAPTER 02 // MULTI-STAGE RECONFIG
+      </span>
+<h2 class="text-4xl sm:text-6xl md:text-7xl font-headline font-black uppercase tracking-tight text-white mb-6">
+        STAGE SEPARATION &amp; UPPER STAGE INSERTION
+      </h2>
+<p class="max-w-2xl text-neutral-300 text-sm sm:text-base font-normal leading-relaxed mb-10">
+        Pneumatic pushers impart relative separation velocity above atmospheric interference. Vacuum-optimized expansion nozzle ignites to transfer the radar satellite directly toward transfer orbit.
+      </p>
+<!-- Overlay Telemetry Stats Bar -->
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-6 border-t border-neutral-700/80 max-w-3xl">
+<div>
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-400 mb-1">STAGING ALTITUDE</div>
+<div class="text-3xl font-headline font-bold text-white tracking-tight">184 KM</div>
+<div class="text-xs text-neutral-400 font-mono mt-0.5">EXOSPHERE BOUNDARY</div>
+</div>
+<div>
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-400 mb-1">CURRENT VELOCITY</div>
+<div class="text-3xl font-headline font-bold text-white tracking-tight">7,650 M/S</div>
+<div class="text-xs text-neutral-400 font-mono mt-0.5">MACH 22.4 RELATIVE</div>
+</div>
+<div>
+<div class="text-[10px] tracking-widest font-label uppercase text-neutral-400 mb-1">CHAMBER PRESSURE</div>
+<div class="text-3xl font-headline font-bold text-white tracking-tight">9.7 MPA</div>
+<div class="text-xs text-emerald-400 font-mono mt-0.5">NOMINAL FLOW 100%</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Chronological Mission Index Table -->
+<section class="w-full bg-black py-24 px-6 sm:px-12 md:px-16" id="launch-index">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<span class="text-xs uppercase font-label tracking-widest-ultra text-neutral-500 block mb-2">COMPLETE ARCHIVAL LOGS</span>
+<h2 class="text-3xl sm:text-5xl font-headline font-black uppercase tracking-tight text-white">MISSION INDEX</h2>
+</div>
+<!-- Filter Tabs -->
+<div class="flex flex-wrap items-center gap-2 overflow-x-auto pb-2">
+<button class="px-4 py-2 border border-white text-white text-xs font-label uppercase tracking-widest rounded-[32px] bg-white text-black font-semibold">ALL FLIGHTS</button>
+<button class="px-4 py-2 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 text-xs font-label uppercase tracking-widest rounded-[32px] transition-colors">LOW EARTH ORBIT</button>
+<button class="px-4 py-2 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 text-xs font-label uppercase tracking-widest rounded-[32px] transition-colors">GEOSTATIONARY</button>
+<button class="px-4 py-2 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 text-xs font-label uppercase tracking-widest rounded-[32px] transition-colors">LUNAR INSERTION</button>
+<button class="px-4 py-2 border border-neutral-800 text-neutral-400 hover:text-white hover:border-neutral-600 text-xs font-label uppercase tracking-widest rounded-[32px] transition-colors">DEEP SPACE</button>
+</div>
+</div>
+<!-- Search & Status bar -->
+<div class="flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-4 bg-neutral-950/80 border border-neutral-900 rounded mb-6">
+<div class="flex items-center gap-3 w-full sm:w-auto">
+<span class="material-symbols-outlined text-neutral-500 text-lg">search</span>
+<input class="bg-transparent border-none text-xs text-white placeholder-neutral-600 focus:outline-none focus:ring-0 uppercase tracking-wider w-full sm:w-80" placeholder="FILTER MISSIONS BY ID, CORE, OR PAYLOAD..." type="text"/>
+</div>
+<div class="text-xs font-mono text-neutral-500 tracking-wider w-full sm:w-auto text-left sm:text-right">
+          TOTAL SORTED: 148 ARCHIVED FLIGHTS // SUCCESS RATE: 99.3%
+        </div>
+</div>
+<!-- Chronological Table -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-neutral-800 text-[11px] font-label uppercase text-neutral-500 tracking-widest">
+<th class="py-4 px-4 font-normal">FLIGHT #</th>
+<th class="py-4 px-4 font-normal">MISSION &amp; PAYLOAD</th>
+<th class="py-4 px-4 font-normal">VEHICLE CORE</th>
+<th class="py-4 px-4 font-normal">TARGET ORBIT</th>
+<th class="py-4 px-4 font-normal">LAUNCH DATE</th>
+<th class="py-4 px-4 font-normal text-right">OUTCOME</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-neutral-900 text-xs font-mono">
+<!-- Row 1 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-148</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                SYNCHRONOUS SAR ARRAY
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">EARTH OBSERVATION TELEMETRY</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V (B1069.14)</td>
+<td class="py-5 px-4 text-neutral-300">GEOSTATIONARY</td>
+<td class="py-5 px-4 text-neutral-400">2024-10-24</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // LZ-04
+                </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-147</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                LUNAR PROSPECTOR III
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">POLAR VOLATILE MAPPING SUITE</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V (B1062.19)</td>
+<td class="py-5 px-4 text-neutral-300">TLI (TRANS-LUNAR)</td>
+<td class="py-5 px-4 text-neutral-400">2024-09-18</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // LZ-01
+                </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-146</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                HELIOS DIVERGENT PROBE
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">LAGRANGE POINT L1 CORONA OBSERVER</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V HEAVY</td>
+<td class="py-5 px-4 text-neutral-300">SOLAR ESCAPE</td>
+<td class="py-5 px-4 text-neutral-400">2024-08-30</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // EXPENDED
+                </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-145</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                CONSTELLATION BATCH IX
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">24X BROADBAND OPTICAL NODES</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V (B1075.08)</td>
+<td class="py-5 px-4 text-neutral-300">550 KM LEO</td>
+<td class="py-5 px-4 text-neutral-400">2024-08-11</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // LZ-04
+                </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-144</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                CRYOGENIC DEPOT DEMO-2
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">LIQUID METHALOX MICROGRAVITY TEST</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V (B1080.02)</td>
+<td class="py-5 px-4 text-neutral-300">320 KM LEO</td>
+<td class="py-5 px-4 text-neutral-400">2024-07-29</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // LZ-02
+                </span>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-neutral-950 transition-colors group cursor-pointer">
+<td class="py-5 px-4 font-bold text-white tracking-wider">FL-143</td>
+<td class="py-5 px-4 font-headline uppercase font-semibold text-white group-hover:text-neutral-300">
+                PULSAR INTERFEROMETER 01
+                <span class="block text-[11px] font-mono text-neutral-500 font-normal">DEEP SPACE RADIO ASTRONOMY</span>
+</td>
+<td class="py-5 px-4 text-neutral-400">ASTRAEA V HEAVY</td>
+<td class="py-5 px-4 text-neutral-300">HIGH ELLIPTIC ORBIT</td>
+<td class="py-5 px-4 text-neutral-400">2024-06-14</td>
+<td class="py-5 px-4 text-right">
+<span class="inline-block px-3 py-1 bg-emerald-950/60 border border-emerald-800 text-emerald-400 text-[10px] tracking-wider rounded-[32px] uppercase">
+                  SUCCESS // DRONE LZ
+                </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-8 flex justify-center">
+<button class="inline-flex items-center justify-center font-headline font-bold text-xs uppercase tracking-widest px-10 py-4 border border-neutral-700 text-white rounded-[32px] hover:border-white transition-all duration-200">
+          LOAD PREVIOUS FLIGHT REGISTERS (FL-100 TO FL-142)
+        </button>
+</div>
+</div>
+</section>
+<!-- Technical Telemetry Footer Spec Summary -->
+<section class="w-full bg-[#030303] hairline-t py-16 px-6 sm:px-12 md:px-16 text-neutral-400">
+<div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-12 text-xs">
+<div>
+<h4 class="font-headline font-bold uppercase tracking-widest text-white mb-3">DOWNLINK VALIDATION</h4>
+<p class="leading-relaxed text-neutral-500">
+          All trajectory records and separation metrics are timestamped via redundant GPS/INS transponders and cross-validated against DoD space surveillance tracking networks.
+        </p>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase tracking-widest text-white mb-3">API &amp; RAW TELEMETRY</h4>
+<p class="leading-relaxed text-neutral-500">
+          Public research institutions may request raw 100Hz CSV data streams, thermal thermocouple mappings, and post-flight acoustics directly via the Astraea Open Telemetry protocol.
+        </p>
+</div>
+<div>
+<h4 class="font-headline font-bold uppercase tracking-widest text-white mb-3">FLEET REUSABILITY STATS</h4>
+<div class="space-y-1 font-mono text-[11px] text-neutral-400">
+<div>TOTAL BOOSTER LANDINGS: 139</div>
+<div>REFURBISHMENT CYCLE RECORD: 21 DAYS</div>
+<div>FAIRING HALF RECOVERIES: 264</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Shared Component: Footer -->
+<footer class="w-full bg-black py-8 px-8 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left border-t border-neutral-800">
+<div class="font-display font-bold text-sm tracking-widest text-white uppercase">
+      ASTRAEA © 2025 ALL RIGHTS RESERVED
+    </div>
+<div class="flex flex-wrap justify-center gap-6 font-body font-normal text-xs uppercase tracking-wider text-neutral-400">
+<a class="hover:text-white transition-colors duration-150" href="#">PRIVACY POLICY</a>
+<a class="hover:text-white transition-colors duration-150" href="#">MISSION PROTOCOL</a>
+<a class="hover:text-white transition-colors duration-150" href="#">PRESS ARCHIVE</a>
+<a class="hover:text-white transition-colors duration-150" href="#">TELEMETRY SPEC</a>
+<a class="hover:text-white transition-colors duration-150" href="#">TWITTER</a>
+</div>
+</footer>
+</body></html>

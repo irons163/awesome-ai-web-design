@@ -1,8 +1,486 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cal.com · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#111111;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/cal">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">Cal.com · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#111111"></span><code>#111111</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#242424"></span><code>#242424</code></div><div class="swatch"><span style="background:#e5e7eb"></span><code>#e5e7eb</code></div><div class="swatch"><span style="background:#374151"></span><code>#374151</code></div><div class="swatch"><span style="background:#6b7280"></span><code>#6b7280</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Cal Sans, Inter, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elena Rostova | Product Strategy &amp; Architecture Review — Kalyx</title>
+<!-- Inter Font Family -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-background": "#1a1c1c",
+            "surface-container-high": "#e8e8e8",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#c8c6c5",
+            "surface-dim": "#dadada",
+            "tertiary-container": "#1d1b1a",
+            "surface-container-low": "#f3f3f4",
+            "primary-fixed-dim": "#c8c6c5",
+            "outline-variant": "#c4c7c7",
+            "on-tertiary-fixed": "#1d1b1a",
+            "tertiary-fixed": "#e6e1df",
+            "on-error-container": "#93000a",
+            "primary-fixed": "#e5e2e1",
+            "primary": "#000000",
+            "on-primary-fixed-variant": "#474646",
+            "on-tertiary-container": "#868381",
+            "tertiary-fixed-dim": "#cac6c3",
+            "surface-container-highest": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "tertiary": "#000000",
+            "on-secondary-fixed-variant": "#484646",
+            "error": "#ba1a1a",
+            "secondary-container": "#e5e2e1",
+            "on-secondary": "#ffffff",
+            "surface": "#f9f9f9",
+            "on-surface-variant": "#444748",
+            "inverse-on-surface": "#f0f1f1",
+            "on-error": "#ffffff",
+            "surface-variant": "#e2e2e2",
+            "surface-container": "#eeeeee",
+            "primary-container": "#1c1b1b",
+            "background": "#f9f9f9",
+            "surface-bright": "#f9f9f9",
+            "secondary-fixed-dim": "#c9c6c5",
+            "on-surface": "#1a1c1c",
+            "secondary-fixed": "#e5e2e1",
+            "inverse-surface": "#2f3131",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#858383",
+            "secondary": "#5f5e5e",
+            "surface-tint": "#5f5e5e",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#656464",
+            "on-primary-fixed": "#1c1b1b",
+            "on-secondary-fixed": "#1c1b1b",
+            "outline": "#747878"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+            display: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "sans-serif"],
+            code: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Cal-Sans precise letter tracking mimic */
+    .tracking-tight-cal {
+      letter-spacing: -0.04em;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #e2e2e2;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-[#fafafa] text-on-surface antialiased min-h-screen flex flex-col font-body selection:bg-black selection:text-white">
+<!-- TOP MINIMAL NAV BAR -->
+<header class="w-full bg-surface-container-lowest border-b border-surface-container-highest/80 sticky top-0 z-30">
+<div class="max-w-[1240px] mx-auto h-14 px-4 sm:px-6 md:px-8 flex items-center justify-between">
+<!-- Brand & Path Context -->
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2 group focus:outline-none" href="#">
+<div class="w-7 h-7 bg-primary rounded-xl flex items-center justify-center text-on-primary font-bold text-sm tracking-tight shadow-sm">
+            k
+          </div>
+<span class="font-headline font-bold text-base tracking-tight-cal text-primary">kalyx</span>
+</a>
+<span class="text-surface-variant text-sm font-light select-none">/</span>
+<div class="flex items-center gap-2 text-xs text-secondary font-medium">
+<span class="hover:text-primary transition-colors cursor-pointer">elena-rostova</span>
+<span class="text-surface-variant font-light">/</span>
+<span class="text-primary font-semibold truncate max-w-[140px] sm:max-w-none">product-review</span>
+</div>
+</div>
+<!-- Quick Context Actions / Status -->
+<div class="flex items-center gap-3">
+<div class="hidden sm:flex items-center gap-2 px-2.5 py-1 bg-surface-container-low rounded-full border border-surface-container-highest/60 text-[11px] text-secondary font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Elena's calendar connected</span>
+</div>
+<button aria-label="Keyboard Shortcuts" class="w-8 h-8 rounded-xl border border-surface-container-highest/80 hover:border-outline text-secondary hover:text-primary flex items-center justify-center transition-colors" title="Shortcuts" type="button">
+<span class="material-symbols-outlined text-[18px]">keyboard</span>
+</button>
+<button aria-label="Toggle Help" class="w-8 h-8 rounded-xl border border-surface-container-highest/80 hover:border-outline text-secondary hover:text-primary flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">help</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN CANVAS -->
+<main class="flex-1 max-w-[1240px] w-full mx-auto px-4 sm:px-6 md:px-8 py-8 md:py-12 flex flex-col justify-center">
+<!-- FLOATING UNIFIED BOOKING CARD CONTAINER (3 COLUMNS) -->
+<div class="bg-surface-container-lowest rounded-xl border border-surface-container-highest/90 shadow-[0_4px_24px_-4px_rgba(0,0,0,0.05),0_1px_3px_rgba(0,0,0,0.03)] overflow-hidden transition-all duration-200">
+<div class="grid grid-cols-1 lg:grid-cols-12 divide-y lg:divide-y-0 lg:divide-x divide-surface-container-highest/90">
+<!-- ========================================== -->
+<!-- ZONE 1: HOST & MEETING CONTEXT (4 COLS)     -->
+<!-- ========================================== -->
+<section class="lg:col-span-4 p-6 md:p-8 flex flex-col justify-between bg-surface-container-lowest">
+<div>
+<!-- Host Avatar Profile Row -->
+<div class="flex items-center gap-3.5 mb-6">
+<div class="relative">
+<img class="w-12 h-12 rounded-full object-cover ring-2 ring-surface-container-low shadow-sm" data-alt="A clean, professional close-up studio portrait of Elena Rostova, a senior female product design executive with sleek tied-back dark hair, wearing a high-neck charcoal minimalist sweater. Shot against a pristine soft neutral-gray background with soft directional natural daylight. The mood is calm, articulate, and modern architectural elegance." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdYuxw3uU8HDeZBc87axO_SIKl9KpzdEft7FOqncuaODaNcYJdWpLewbZYpNdGd_ATZR1Fsywk7DW_Cc37K5bD8OlG2xwX7qmgDYwvvYrgx0cviLj_GFD3oQjJpCBk99T2jMhtX5_aEVO88mHiDitYxQ1c_thcpU358gUWtL5DWgMT3Mlv4RWBKgbagakv-C71oXATHPU8ohI7bCQWNc0FykJzu_s27ZV-I9X8qvQS_3jMzypERio6xX2ZWZDpkdG0RZ6c60QGVw"/>
+<span class="absolute bottom-0 right-0 w-3.5 h-3.5 bg-emerald-500 border-2 border-surface-container-lowest rounded-full" title="Active now"></span>
+</div>
+<div>
+<h2 class="text-sm font-semibold text-primary leading-tight flex items-center gap-1.5">
+                  Elena Rostova
+                  <span class="material-symbols-outlined text-[15px] text-blue-600" title="Verified Host">verified</span>
+</h2>
+<p class="text-xs text-secondary mt-0.5">Head of Product Design @ Kalyx</p>
+</div>
+</div>
+<!-- Meeting Headline Title -->
+<h1 class="text-2xl font-bold font-headline tracking-tight-cal text-primary leading-snug mb-4">
+              Product Strategy &amp; Architecture Review
+            </h1>
+<!-- Meta Badges Cluster -->
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface-container-low text-xs font-medium text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">schedule</span>
+                45 min
+              </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface-container-low text-xs font-medium text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">video_camera_front</span>
+                Google Meet
+              </span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-surface-container-low text-xs font-medium text-on-surface">
+<span class="material-symbols-outlined text-[16px] text-secondary">sync_disabled</span>
+                One-off session
+              </span>
+</div>
+<!-- Meeting Agenda & Description -->
+<div class="space-y-3.5 text-xs text-secondary leading-relaxed border-t border-surface-container-highest/60 pt-5">
+<p class="text-on-surface font-medium">In this 45-minute deep-dive session we will cover:</p>
+<ul class="space-y-2 list-none">
+<li class="flex items-start gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+<span>End-to-end design system scalability &amp; multi-brand tokens alignment.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+<span>Component governance, friction points, and handoff telemetry.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+<span>Q4 roadmap review and cross-functional feedback workflows.</span>
+</li>
+</ul>
+<div class="bg-surface-container-low/70 border border-surface-container-highest/50 rounded-xl p-3 text-[11px] text-secondary space-y-1 mt-4">
+<p class="font-medium text-on-surface flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                  Preparation note
+                </p>
+<p>Please share Figma URLs, component libraries, or live prototypes at least 2 hours before the call for prior review.</p>
+</div>
+</div>
+</div>
+<!-- Timezone Selector (Communicated prior to slot selection) -->
+<div class="mt-8 pt-5 border-t border-surface-container-highest/70">
+<label class="text-[11px] font-semibold text-secondary uppercase tracking-wider block mb-2">Timezone</label>
+<div class="relative">
+<button class="w-full flex items-center justify-between px-3 py-2.5 bg-surface-container-low hover:bg-surface-container text-left rounded-xl border border-surface-container-highest/80 transition-all text-xs group focus:outline-none focus:ring-1 focus:ring-primary" type="button">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-[17px] text-secondary group-hover:text-primary transition-colors flex-shrink-0">globe</span>
+<div class="truncate">
+<p class="font-semibold text-primary truncate">Europe/London (GMT+1 / BST)</p>
+<p class="text-[11px] text-secondary font-code">14:24 local time</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[16px] text-secondary group-hover:text-primary transition-colors">unfold_more</span>
+</button>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- ZONE 2: CALENDAR PICKER (4 COLS)           -->
+<!-- ========================================== -->
+<section class="lg:col-span-4 p-6 md:p-8 flex flex-col justify-between bg-surface-container-lowest">
+<div>
+<!-- Calendar Navigation Header -->
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<h3 class="text-base font-bold text-primary font-headline tracking-tight-cal">
+                  October <span class="text-secondary font-normal">2025</span>
+</h3>
+</div>
+<div class="flex items-center gap-1 bg-surface-container-low p-0.5 rounded-xl border border-surface-container-highest/70">
+<button aria-label="Previous month" class="w-7 h-7 rounded-lg hover:bg-surface-container-lowest text-secondary hover:text-primary flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button aria-label="Next month" class="w-7 h-7 rounded-lg hover:bg-surface-container-lowest text-secondary hover:text-primary flex items-center justify-center transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Days of Week Header -->
+<div class="grid grid-cols-7 text-center mb-3">
+<span class="text-[11px] font-semibold text-secondary tracking-wider">MON</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider">TUE</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider">WED</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider">THU</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider">FRI</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider text-secondary/60">SAT</span>
+<span class="text-[11px] font-semibold text-secondary tracking-wider text-secondary/60">SUN</span>
+</div>
+<!-- Month Calendar Grid -->
+<div class="grid grid-cols-7 gap-y-1.5 gap-x-1 text-center text-xs">
+<!-- Previous month padding (Sept 29, 30) -->
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none text-[11px]">29</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none text-[11px]">30</span>
+<!-- Oct 1 - Oct 5 (Past days) -->
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">1</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">2</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">3</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">4</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">5</span>
+<!-- Week 2: Oct 6 - Oct 12 -->
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">6</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">7</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">8</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">9</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">10</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">11</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">12</span>
+<!-- Week 3: Oct 13 - Oct 19 -->
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">13</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">14</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">15</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">16</span>
+<span class="h-10 flex items-center justify-center text-secondary/40 select-none line-through decoration-secondary/30">17</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">18</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">19</span>
+<!-- Week 4: Oct 20 - Oct 26 (Current Active Week) -->
+<!-- Oct 20 (Booked) -->
+<button class="h-10 flex flex-col items-center justify-center text-secondary/50 cursor-not-allowed" disabled="" type="button">
+<span>20</span>
+<span class="text-[9px] font-normal tracking-tighter">Full</span>
+</button>
+<!-- Oct 21 (Available) -->
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>21</span>
+<span class="w-1 h-1 rounded-full bg-primary/60 group-hover:bg-primary"></span>
+</button>
+<!-- Oct 22 (Available) -->
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>22</span>
+<span class="w-1 h-1 rounded-full bg-primary/60 group-hover:bg-primary"></span>
+</button>
+<!-- Oct 23: CURRENT SELECTED DATE -->
+<button class="h-10 flex flex-col items-center justify-center rounded-xl bg-primary text-on-primary font-bold shadow-sm transition-transform active:scale-95" type="button">
+<span>23</span>
+<span class="w-1 h-1 rounded-full bg-white"></span>
+</button>
+<!-- Oct 24 (Available) -->
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>24</span>
+<span class="w-1 h-1 rounded-full bg-primary/60 group-hover:bg-primary"></span>
+</button>
+<!-- Oct 25, 26 (Weekend) -->
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">25</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none bg-surface-container-low/40 rounded-xl">26</span>
+<!-- Week 5: Oct 27 - Oct 31 -->
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>27</span>
+<span class="w-1 h-1 rounded-full bg-primary/60"></span>
+</button>
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>28</span>
+<span class="w-1 h-1 rounded-full bg-primary/60"></span>
+</button>
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>29</span>
+<span class="w-1 h-1 rounded-full bg-primary/60"></span>
+</button>
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>30</span>
+<span class="w-1 h-1 rounded-full bg-primary/60"></span>
+</button>
+<button class="h-10 flex flex-col items-center justify-center rounded-xl hover:bg-surface-container-low font-medium text-primary transition-colors group relative" type="button">
+<span>31</span>
+<span class="w-1 h-1 rounded-full bg-primary/60"></span>
+</button>
+<!-- Next month padding -->
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none text-[11px]">1</span>
+<span class="h-10 flex items-center justify-center text-secondary/30 select-none text-[11px]">2</span>
+</div>
+</div>
+<!-- Calendar Keyboard Navigation Prompt footer -->
+<div class="mt-8 pt-4 border-t border-surface-container-highest/60 flex items-center justify-between text-[11px] text-secondary">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[14px]">touch_app</span>
+<span>Use <kbd class="px-1 py-0.5 bg-surface-container-low border border-surface-container-highest rounded text-[10px] font-code">←</kbd> <kbd class="px-1 py-0.5 bg-surface-container-low border border-surface-container-highest rounded text-[10px] font-code">→</kbd> to shift days</span>
+</span>
+<span class="flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>Available</span>
+</span>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- ZONE 3: TIME-SLOT PICKER & SUMMARY (4 COLS)-->
+<!-- ========================================== -->
+<section class="lg:col-span-4 p-6 md:p-8 flex flex-col justify-between bg-surface-container-lowest">
+<div>
+<!-- Date Title & 12h/24h Switcher -->
+<div class="flex items-start justify-between mb-4">
+<div>
+<h3 class="text-base font-bold text-primary font-headline tracking-tight-cal">
+                  Thursday, Oct 23
+                </h3>
+<p class="text-xs text-secondary mt-0.5">Select an available time slot</p>
+</div>
+<!-- 12h / 24h Toggle Pill -->
+<div class="bg-surface-container-low p-0.5 rounded-full border border-surface-container-highest/80 flex items-center">
+<button class="px-2.5 py-0.5 rounded-full bg-surface-container-lowest text-primary text-[11px] font-bold shadow-xs" type="button">12h</button>
+<button class="px-2.5 py-0.5 rounded-full text-secondary hover:text-primary text-[11px] font-medium transition-colors" type="button">24h</button>
+</div>
+</div>
+<!-- Slots Scrollable List -->
+<div class="space-y-2.5 max-h-[300px] overflow-y-auto pr-1 custom-scroll py-1">
+<!-- Available Slot 1 -->
+<button class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low text-xs font-semibold text-primary transition-all group" type="button">
+<span class="tracking-tight">09:30 AM</span>
+<span class="text-[11px] text-secondary group-hover:text-primary transition-colors flex items-center gap-1">
+                  Select <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</button>
+<!-- Available Slot 2 -->
+<button class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low text-xs font-semibold text-primary transition-all group" type="button">
+<span class="tracking-tight">10:30 AM</span>
+<span class="text-[11px] text-secondary group-hover:text-primary transition-colors flex items-center gap-1">
+                  Select <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</button>
+<!-- Unavailable / Booked Slot -->
+<div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest/50 bg-surface-container-low/40 text-xs text-secondary/50 cursor-not-allowed select-none">
+<span class="line-through decoration-secondary/40 font-code">11:15 AM</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-surface-container rounded">Booked</span>
+</div>
+<!-- Available Slot 3 -->
+<button class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low text-xs font-semibold text-primary transition-all group" type="button">
+<span class="tracking-tight">01:15 PM</span>
+<span class="text-[11px] text-secondary group-hover:text-primary transition-colors flex items-center gap-1">
+                  Select <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</button>
+<!-- ACTIVE SELECTED SLOT -->
+<div class="w-full flex items-center justify-between p-1 pl-3.5 bg-primary text-on-primary rounded-xl border border-primary shadow-sm">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-emerald-400">check_circle</span>
+<span class="text-xs font-bold tracking-tight">02:00 PM</span>
+<span class="text-[10px] text-on-dark-soft font-normal">(45m)</span>
+</div>
+<button class="text-[11px] font-medium px-2 py-1 bg-surface-dark-elevated hover:bg-primary-active rounded-lg transition-colors text-on-dark-soft hover:text-white flex items-center gap-1" title="Deselect slot" type="button">
+<span>Deselect</span>
+<span class="material-symbols-outlined text-[12px]">close</span>
+</button>
+</div>
+<!-- Available Slot 4 -->
+<button class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest hover:border-primary bg-surface-container-lowest hover:bg-surface-container-low text-xs font-semibold text-primary transition-all group" type="button">
+<span class="tracking-tight">03:00 PM</span>
+<span class="text-[11px] text-secondary group-hover:text-primary transition-colors flex items-center gap-1">
+                  Select <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</span>
+</button>
+<!-- Unavailable Slot 2 -->
+<div class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-surface-container-highest/50 bg-surface-container-low/40 text-xs text-secondary/50 cursor-not-allowed select-none">
+<span class="line-through decoration-secondary/40 font-code">04:30 PM</span>
+<span class="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 bg-surface-container rounded">Unavailable</span>
+</div>
+</div>
+</div>
+<!-- INTEGRATED CONFIRMATION SUMMARY CARD -->
+<div class="mt-6 pt-5 border-t border-surface-container-highest/70">
+<div class="bg-surface-container-low p-3.5 rounded-xl border border-surface-container-highest/80 mb-4 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-secondary font-medium">Selected Slot</span>
+<span class="font-bold text-primary">2:00 PM – 2:45 PM BST</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">event</span>
+<span>Thursday, October 23, 2025</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-secondary">
+<span class="material-symbols-outlined text-[14px]">videocam</span>
+<span>Google Meet link auto-generated</span>
+</div>
+</div>
+<!-- CTA Primary Action Button -->
+<button class="w-full h-10 px-5 bg-primary hover:bg-primary-container text-on-primary font-semibold text-sm rounded-xl flex items-center justify-center gap-2 transition-all active:scale-[0.99] shadow-sm" type="button">
+<span>Next: Enter Details</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</button>
+<div class="flex items-center justify-between mt-3 px-1 text-[11px] text-secondary">
+<button class="hover:text-primary transition-colors underline" type="button">Reset selection</button>
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-emerald-600">lock</span>
+<span>Instant reservation</span>
+</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- SUBTLE HELPER BRAND NOTE -->
+<div class="mt-6 text-center">
+<p class="text-xs text-secondary/70 inline-flex items-center gap-1.5">
+<span>Powered by</span>
+<span class="font-bold text-primary">kalyx</span>
+<span>— no-friction open calendar scheduling.</span>
+</p>
+</div>
+</main>
+<!-- FOOTER (Docked Dark Visual Closure as per Design System) -->
+<footer class="w-full bg-surface-dark text-on-dark-soft mt-auto border-t border-surface-dark-elevated">
+<div class="max-w-[1240px] mx-auto py-8 px-4 sm:px-6 md:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
+<!-- Brand & Copyright -->
+<div class="flex items-center gap-3">
+<div class="w-5 h-5 bg-surface-dark-elevated border border-surface-container-highest/20 rounded flex items-center justify-center text-white text-[10px] font-bold">
+          k
+        </div>
+<p class="text-on-dark-soft font-body">© 2025 Chronosync, Inc. All rights reserved.</p>
+</div>
+<!-- Links adhering strictly to Shared Components JSON -->
+<div class="flex flex-wrap items-center justify-center gap-6 text-xs">
+<a class="hover:text-on-dark transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="hover:text-on-dark transition-colors duration-150" href="#">Terms of Service</a>
+<a class="hover:text-on-dark transition-colors duration-150" href="#">Security</a>
+<a class="hover:text-on-dark transition-colors duration-150" href="#">System Status</a>
+<a class="hover:text-on-dark transition-colors duration-150" href="#">Contact Support</a>
+</div>
+<!-- Live Service Ping indicator -->
+<div class="hidden sm:flex items-center gap-2 text-[11px] text-on-dark-soft">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+<span>All systems operational</span>
+</div>
+</div>
+</footer>
+</body></html>

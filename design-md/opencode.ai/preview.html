@@ -1,8 +1,551 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpenCode · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#fdfcfc;--panel:#f2f1f1;--ink:#000000;--muted:#5b5b5b;--border:#cfcfcf;--accent:#201d1d;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/opencode.ai">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">OpenCode · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#201d1d"></span><code>#201d1d</code></div><div class="swatch"><span style="background:#fdfcfc"></span><code>#fdfcfc</code></div><div class="swatch"><span style="background:#0f0000"></span><code>#0f0000</code></div><div class="swatch"><span style="background:#302c2c"></span><code>#302c2c</code></div><div class="swatch"><span style="background:#424245"></span><code>#424245</code></div><div class="swatch"><span style="background:#646262"></span><code>#646262</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · Berkeley Mono</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AXIOM_CLI — Local-First Terminal Coding Assistant</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#4d4545",
+            "on-tertiary-container": "#868684",
+            "surface-tint": "#625d5d",
+            "primary-container": "#201d1d",
+            "secondary-fixed-dim": "#cac5c5",
+            "tertiary-fixed": "#e4e2e0",
+            "primary": "#050404",
+            "inverse-primary": "#ccc5c4",
+            "surface-container": "#eeeeee",
+            "surface-container-high": "#e9e8e8",
+            "on-tertiary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "error": "#ba1a1a",
+            "surface-dim": "#dadada",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#e3e2e2",
+            "on-primary-fixed-variant": "#4a4646",
+            "secondary-fixed": "#e7e1e1",
+            "inverse-surface": "#2f3131",
+            "tertiary-container": "#1d1e1d",
+            "on-background": "#1a1c1c",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#ccc5c4",
+            "tertiary-fixed-dim": "#c7c6c4",
+            "secondary-container": "#e7e1e1",
+            "surface": "#faf9f9",
+            "secondary": "#615e5d",
+            "on-tertiary-fixed": "#1b1c1b",
+            "inverse-on-surface": "#f1f0f0",
+            "on-primary-container": "#8a8484",
+            "background": "#faf9f9",
+            "on-surface": "#1a1c1c",
+            "outline-variant": "#d0c4c3",
+            "tertiary": "#040404",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#1d1b1b",
+            "primary-fixed": "#e8e1e0",
+            "on-secondary-container": "#676463",
+            "on-primary-fixed": "#1e1b1b",
+            "surface-container-low": "#f4f3f3",
+            "on-tertiary-fixed-variant": "#464746",
+            "surface-variant": "#e3e2e2",
+            "on-error": "#ffffff",
+            "outline": "#7f7575",
+            "on-secondary-fixed-variant": "#494646",
+            "surface-bright": "#faf9f9"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+            headline: ['"JetBrains Mono"', 'monospace'],
+            body: ['"JetBrains Mono"', 'monospace'],
+            label: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #faf9f9;
+      color: #050404;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection {
+      background-color: #201d1d;
+      color: #faf9f9;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #7f7575;
+    }
+  </style>
+</head>
+<body class="bg-surface text-primary selection:bg-primary-container selection:text-surface antialiased font-mono min-h-screen flex flex-col justify-between">
+<!-- ================= TOP NAV BAR (SHARED COMPONENT JSON COMPLIANT) ================= -->
+<header class="w-full bg-surface dark:bg-primary-container border-b border-outline-variant dark:border-on-surface-variant sticky top-0 z-50">
+<div class="flex justify-between items-center w-full px-6 max-w-6xl mx-auto h-14">
+<!-- Product Name & Version Tag -->
+<div class="flex items-center gap-3">
+<a class="font-mono text-base font-bold tracking-tight text-primary dark:text-inverse-primary hover:text-primary transition-colors" href="#">
+          AXIOM_CLI
+        </a>
+<span class="text-xs px-1.5 py-0.5 border border-outline-variant dark:border-on-surface-variant text-secondary">
+          v0.8.4
+        </span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center space-x-6 text-sm">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#docs">
+          Docs
+        </a>
+<a class="text-primary dark:text-inverse-primary font-bold border-b border-primary dark:border-inverse-primary pb-1" href="#architecture">
+          Architecture
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#benchmarks">
+          Benchmarks
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="https://github.com" rel="noreferrer" target="_blank">
+          GitHub [42K]
+        </a>
+</nav>
+<!-- Trailing Primary Action -->
+<div class="flex items-center gap-3">
+<a class="px-3 py-1 bg-primary text-on-primary text-xs font-mono font-medium rounded-sm hover:bg-surface-tint active:scale-[0.99] transition-all" href="#install">
+          Install
+        </a>
+</div>
+</div>
+</header>
+<!-- ================= MAIN CONTENT CANVAS ================= -->
+<main class="w-full max-w-6xl mx-auto px-6 pt-12 pb-24 space-y-24">
+<!-- HERO SECTION -->
+<section class="space-y-6 pt-4 border-b border-outline-variant pb-14">
+<div class="flex flex-wrap items-center gap-2 text-xs text-secondary">
+<span class="text-primary font-bold">[OPEN SOURCE / MIT]</span>
+<span>•</span>
+<span>LOCAL-FIRST CONTEXT ENGINE</span>
+<span>•</span>
+<span class="text-secondary">AST-LEVEL IN-MEMORY INDEX</span>
+</div>
+<div class="max-w-4xl space-y-4">
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight text-primary leading-tight">
+          The terminal agent that understands your codebase in microseconds.
+        </h1>
+<p class="text-base text-secondary leading-relaxed max-w-3xl">
+          Axiom indexes abstract syntax trees, Git working graphs, and type definitions directly in-memory. Zero cloud telemetry. Zero proprietary black boxes. Works natively inside tmux, Neovim, and raw POSIX shells.
+        </p>
+</div>
+<!-- Quickstart Command Snippet Box -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-3">
+<div class="flex items-center justify-between bg-surface-container-low border border-outline-variant px-4 py-2.5 rounded-sm text-sm flex-1 max-w-xl font-mono">
+<div class="flex items-center gap-2 overflow-x-auto custom-scroll py-0.5">
+<span class="text-secondary select-none">$</span>
+<span class="text-primary font-medium whitespace-nowrap">curl -fsSL https://axiom.sh/install | sh</span>
+</div>
+<button class="ml-4 text-xs text-secondary hover:text-primary uppercase tracking-wider shrink-0 transition-colors focus:outline-none" onclick="navigator.clipboard.writeText('curl -fsSL https://axiom.sh/install | sh')">
+            [COPY]
+          </button>
+</div>
+<div class="flex items-center gap-2 text-xs text-secondary px-3 py-2 bg-surface-container-lowest border border-outline-variant rounded-sm">
+<span class="font-bold text-primary">SHA-256</span>
+<span class="text-outline">6e0b7f8...c81b</span>
+<span class="text-secondary">•</span>
+<span class="text-primary">GPG: VERIFIED</span>
+</div>
+</div>
+</section>
+<!-- CORE HERO COMPONENT: BOUNDED TERMINAL COMMAND PANEL -->
+<section class="space-y-4">
+<div class="flex items-center justify-between text-xs text-secondary px-1">
+<span>FIG 1.0 // ACTIVE REFACTOR PIPELINE SESSION</span>
+<span>TMUX SESSION: 01 (WINDOW: KV_STORE)</span>
+</div>
+<!-- Terminal Shell Outer Frame -->
+<div class="w-full bg-primary-container text-surface border border-outline-variant rounded-none overflow-hidden shadow-none">
+<!-- Terminal Titlebar -->
+<div class="flex flex-wrap items-center justify-between px-4 py-2 bg-tertiary-container border-b border-on-surface-variant text-xs text-secondary-fixed-dim font-mono">
+<div class="flex items-center gap-2">
+<span class="text-outline">● ● ●</span>
+<span class="text-surface font-medium">~/projects/hyper-kv (git: main*) — axiom prompt</span>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-secondary-fixed-dim">
+<span class="px-2 py-0.5 bg-primary-container border border-on-surface-variant text-surface">
+              [1] inspect-query.go
+            </span>
+<span class="px-2 py-0.5 bg-tertiary-container text-outline">
+              [2] diff-preview*
+            </span>
+<span class="px-2 py-0.5 bg-tertiary-container text-outline">
+              [3] ast-graph
+            </span>
+</div>
+</div>
+<!-- Terminal Command Input Line -->
+<div class="px-5 py-3.5 bg-primary-container border-b border-on-surface-variant flex items-start gap-3 text-sm">
+<span class="text-inverse-primary select-none">&gt;</span>
+<div class="font-mono text-surface font-medium break-all">
+            axiom refactor --target ./pkg/engine --goal <span class="text-inverse-primary">"Eliminate heap allocations in hot path"</span>
+</div>
+</div>
+<!-- Terminal Execution Logs & Unified Diff Block -->
+<div class="p-6 space-y-4 font-mono text-xs md:text-sm text-surface-container-high leading-relaxed overflow-x-auto custom-scroll">
+<!-- Structural Meta Tags -->
+<div class="space-y-1 text-xs">
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim font-bold">[AST:PARSED]</span>
+<span class="text-surface-container-low">8 symbols mapped in 1.4ms (Tree-Sitter Go runtime)</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim font-bold">[SCAN:1,420 SLOC]</span>
+<span class="text-surface-container-low">Identified 3 escaping pointers in query_engine.go:142</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-secondary-fixed-dim font-bold">[PATCH:GEN]</span>
+<span class="text-surface-container-low">Transformed dynamic slice allocation into fixed ring-buffer</span>
+</div>
+</div>
+<!-- Unified Diff Preview Frame -->
+<div class="mt-4 border border-on-surface-variant bg-tertiary-container p-4 text-xs leading-5">
+<div class="text-outline pb-2 mb-2 border-b border-on-surface-variant flex justify-between">
+<span>--- a/pkg/engine/query_engine.go</span>
+<span>+++ b/pkg/engine/query_engine.go</span>
+</div>
+<div class="text-secondary-fixed-dim">@@ -142,8 +142,9 @@ func (e *Engine) Evaluate(query Query) (*Result, error) {</div>
+<div class="text-surface-dim">   ctx := context.Background()</div>
+<div class="bg-error/20 text-inverse-primary px-1 -mx-1">
+              -  buf := make([]byte, query.EstimatedPayloadSize())
+            </div>
+<div class="bg-error/20 text-inverse-primary px-1 -mx-1">
+              -  e.allocCounter.Add(int64(len(buf)))
+            </div>
+<div class="bg-surface-tint/30 text-surface px-1 -mx-1">
+              +  buf := e.ringPool.Get().(*[4096]byte)
+            </div>
+<div class="bg-surface-tint/30 text-surface px-1 -mx-1">
+              +  defer e.ringPool.Put(buf)
+            </div>
+<div class="text-surface-dim">   return e.executeInternal(ctx, buf[:query.PayloadSize()])</div>
+<div class="text-surface-dim"> }</div>
+</div>
+<!-- ASCII Verification Summary -->
+<div class="pt-2 text-xs text-secondary-fixed-dim">
+<div>[VERIFY] Local compilation test passed: `go test -benchmem ./pkg/engine/...`</div>
+<div class="text-surface">
+              &gt; BenchmarkEngineExecute-12: <span class="line-through text-outline">184 allocs/op</span> → <span class="font-bold">0 allocs/op [100% REDUCTION]</span>
+</div>
+</div>
+</div>
+<!-- Terminal Status Bar & Interactive Controls -->
+<div class="px-5 py-3 bg-tertiary-container border-t border-on-surface-variant flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
+<div class="flex flex-wrap items-center gap-2 text-secondary-fixed-dim">
+<span class="text-surface font-bold">[OK 200]</span>
+<span>•</span>
+<span>EXIT 0</span>
+<span>•</span>
+<span>TIME: 38ms</span>
+<span>•</span>
+<span>TOKENS: 412 local</span>
+<span>•</span>
+<span>MEM: 14.2MB</span>
+<span>•</span>
+<span>CACHE: HIT</span>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-2.5 py-1 bg-primary-container border border-on-surface-variant text-surface hover:text-white transition-colors" onclick="navigator.clipboard.writeText('patch -p1 &lt;&lt; EOF\n--- a/pkg/engine/query_engine.go\n+++ b/pkg/engine/query_engine.go\n@@ -142,8 +142,9 @@\n- buf := make([]byte, query.EstimatedPayloadSize())\n+ buf := e.ringPool.Get().(*[4096]byte)\nEOF')">
+              [COPY PATCH]
+            </button>
+<button class="px-3 py-1 bg-surface text-primary font-bold hover:bg-secondary-fixed transition-colors">
+              [APPLY DIRECTLY (Enter)]
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- ARCHITECTURAL TENETS (4-COLUMN MONOSPACE BRUTALIST GRID) -->
+<section class="space-y-6 border-t border-outline-variant pt-12" id="architecture">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+<div>
+<span class="text-xs text-secondary tracking-widest uppercase">[SPECIFICATION // ARCH]</span>
+<h2 class="text-2xl font-bold tracking-tight text-primary mt-1">Local-First System Guarantees</h2>
+</div>
+<span class="text-xs text-secondary font-mono">SPEC_VERSION: 2026.04 // NO_CLOUD_CALLS</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-outline-variant divide-y md:divide-y-0 md:divide-x divide-outline-variant bg-surface">
+<!-- Tenet 01 -->
+<div class="p-6 space-y-3">
+<div class="text-xs font-bold text-secondary">01 // CONTEXT</div>
+<h3 class="text-base font-bold text-primary">In-Memory Tree-Sitter Graphs</h3>
+<p class="text-xs text-secondary leading-relaxed">
+            Instant AST construction for 34 languages. Axiom creates a unified graph of symbols, imports, and calls inside a 40MB heap. No vector DB lag or network serialization.
+          </p>
+<div class="pt-2 text-[11px] text-outline">
+            &gt; avg lookup: 1.2ms
+          </div>
+</div>
+<!-- Tenet 02 -->
+<div class="p-6 space-y-3">
+<div class="text-xs font-bold text-secondary">02 // INFERENCE</div>
+<h3 class="text-base font-bold text-primary">BYO-LLM &amp; Offline Weights</h3>
+<p class="text-xs text-secondary leading-relaxed">
+            First-class adapters for local Ollama, vLLM, llama.cpp, or custom local OpenAI-compatible endpoints. Zero prompts leave your machine unless explicitly configured.
+          </p>
+<div class="pt-2 text-[11px] text-outline">
+            &gt; unix socket / http
+          </div>
+</div>
+<!-- Tenet 03 -->
+<div class="p-6 space-y-3">
+<div class="text-xs font-bold text-secondary">03 // SAFETY</div>
+<h3 class="text-base font-bold text-primary">Deterministic Patch Engine</h3>
+<p class="text-xs text-secondary leading-relaxed">
+            Every candidate diff is syntactically checked and tree-verified before touching disk. If a patch creates broken brackets or invalid AST tokens, it self-heals before preview.
+          </p>
+<div class="pt-2 text-[11px] text-outline">
+            &gt; git tree invariant
+          </div>
+</div>
+<!-- Tenet 04 -->
+<div class="p-6 space-y-3">
+<div class="text-xs font-bold text-secondary">04 // INTEGRATION</div>
+<h3 class="text-base font-bold text-primary">Shell-Native Unix IPC</h3>
+<p class="text-xs text-secondary leading-relaxed">
+            Works cleanly over standard stdin/stdout streams. Pipe compiler errors directly into Axiom or emit unified diffs into <code class="bg-surface-container px-1 py-0.5">git apply</code> without opening a GUI editor.
+          </p>
+<div class="pt-2 text-[11px] text-outline">
+            &gt; posix conformant
+          </div>
+</div>
+</div>
+</section>
+<!-- LIVE TERMINAL WORKFLOWS / COMMAND EXAMPLES -->
+<section class="space-y-8 border-t border-outline-variant pt-12" id="docs">
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xs text-secondary tracking-widest uppercase">[COMMAND INTERFACES]</span>
+<h2 class="text-2xl font-bold tracking-tight text-primary mt-1">Terminal-Native Subcommands</h2>
+</div>
+<span class="text-xs text-secondary">POSIX &amp; TMUX TESTED</span>
+</div>
+<!-- Command 1: Trace Runtime Deadlocks -->
+<div class="border border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-wrap items-center justify-between px-4 py-2 border-b border-outline-variant bg-surface-container-low text-xs">
+<span class="font-bold text-primary">$ axiom trace --deadlock-detect</span>
+<span class="text-secondary">SUBCOMMAND: RUNTIME_INSPECTOR</span>
+</div>
+<div class="p-5 font-mono text-xs text-primary leading-relaxed space-y-3">
+<p class="text-secondary">
+            [+] Attaching eBPF probes to Go runtime goroutines (PID: 41890)
+            <br/>
+            [+] Building lock acquisition order graph across 12 worker channels...
+          </p>
+<div class="bg-surface-container p-3 border border-outline-variant">
+<span class="text-error font-bold">[DEADLOCK FOUND]</span> Circular wait detected in mutex hierarchy:
+            <br/>
+            ├─ Goroutine #44 holds sync.RWMutex (0x104b2a8) waiting on chan struct{} (0x104b2e0)
+            <br/>
+            └─ Goroutine #89 holds chan struct{} (0x104b2e0) waiting on sync.RWMutex (0x104b2a8)
+            <br/>
+<br/>
+<span class="text-primary font-bold">Recommended remediation:</span>
+<br/>
+            &gt; Move chan send outside critical section at <span class="underline">worker_pool.go:88</span>
+</div>
+</div>
+</div>
+<!-- Command 2: Auto-repair Failing Tests -->
+<div class="border border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-wrap items-center justify-between px-4 py-2 border-b border-outline-variant bg-surface-container-low text-xs">
+<span class="font-bold text-primary">$ axiom test --fix ./...</span>
+<span class="text-secondary">SUBCOMMAND: CONTEXTUAL_TEST_REPAIR</span>
+</div>
+<div class="p-5 font-mono text-xs text-primary leading-relaxed space-y-3">
+<div class="text-secondary">
+            [1/4] Running test harness: `cargo test` ... FAILED (1 assert error)
+            <br/>
+            [2/4] Parsing Rust compiler diagnostics and call stack...
+            <br/>
+            [3/4] Synthesizing correction in src/codec/frame.rs:94
+          </div>
+<div class="border border-outline-variant p-3 bg-surface text-primary">
+<div class="text-secondary">// Patch applied &amp; re-verified locally in 182ms:</div>
+<div class="text-secondary">- assert_eq!(frame.len(), expected_len + 4);</div>
+<div class="text-primary font-bold">+ assert_eq!(frame.len(), expected_len + HEADER_OFFSET);</div>
+<div class="pt-2 text-secondary">&gt; Result: 48 passed; 0 failed; 0 ignored; finished in 0.04s</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BENCHMARKS COMPARISON TABLE -->
+<section class="space-y-6 border-t border-outline-variant pt-12" id="benchmarks">
+<div>
+<span class="text-xs text-secondary tracking-widest uppercase">[BENCHMARKS // IN-MEMORY LATENCY]</span>
+<h2 class="text-2xl font-bold tracking-tight text-primary mt-1">Microsecond AST Traversal vs Remote SaaS</h2>
+<p class="text-xs text-secondary mt-1">Measured on Apple M2 Pro, 32GB RAM, linux-kernel repo (12M SLOC index).</p>
+</div>
+<div class="border border-outline-variant overflow-x-auto">
+<table class="w-full text-left text-xs font-mono">
+<thead class="bg-surface-container-low border-b border-outline-variant text-secondary">
+<tr>
+<th class="p-3">BENCHMARK TEST SUITE</th>
+<th class="p-3">AXIOM_CLI (LOCAL)</th>
+<th class="p-3">REMOTE SAAS AGENTS</th>
+<th class="p-3">DELTA</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant text-primary">
+<tr>
+<td class="p-3 font-bold">Full repo symbol resolution</td>
+<td class="p-3 text-primary font-bold">14.2 ms</td>
+<td class="p-3 text-secondary">1,480 ms</td>
+<td class="p-3 text-primary font-bold">[104x FASTER]</td>
+</tr>
+<tr>
+<td class="p-3 font-bold">Working tree diff synthesis</td>
+<td class="p-3 text-primary font-bold">3.8 ms</td>
+<td class="p-3 text-secondary">840 ms</td>
+<td class="p-3 text-primary font-bold">[221x FASTER]</td>
+</tr>
+<tr>
+<td class="p-3 font-bold">Cold boot context load</td>
+<td class="p-3 text-primary font-bold">42.0 ms</td>
+<td class="p-3 text-secondary">4,200 ms</td>
+<td class="p-3 text-primary font-bold">[100x FASTER]</td>
+</tr>
+<tr>
+<td class="p-3 font-bold">Telemetry packets dispatched</td>
+<td class="p-3 text-primary font-bold">0 packets</td>
+<td class="p-3 text-secondary">48 events/min</td>
+<td class="p-3 text-primary font-bold">[ZERO BYTES]</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- INSTALLATION & VERIFICATION SECTION -->
+<section class="space-y-6 border-t border-outline-variant pt-12" id="install">
+<div>
+<span class="text-xs text-secondary tracking-widest uppercase">[INSTALLATION // PACKAGES]</span>
+<h2 class="text-2xl font-bold tracking-tight text-primary mt-1">Binary Distribution</h2>
+</div>
+<div class="border border-outline-variant">
+<!-- Tabs Header -->
+<div class="flex flex-wrap border-b border-outline-variant bg-surface-container-low text-xs">
+<button class="px-4 py-2 border-r border-outline-variant bg-surface font-bold text-primary">
+            macOS (Homebrew)
+          </button>
+<button class="px-4 py-2 border-r border-outline-variant text-secondary hover:text-primary">
+            Linux (APT / Pacman / Nix)
+          </button>
+<button class="px-4 py-2 border-r border-outline-variant text-secondary hover:text-primary">
+            Rust / Cargo
+          </button>
+<button class="px-4 py-2 text-secondary hover:text-primary">
+            Go Toolchain
+          </button>
+</div>
+<!-- Tab Body -->
+<div class="p-6 bg-surface space-y-4 font-mono text-xs">
+<div class="space-y-1">
+<span class="text-secondary"># 1. Tap official Axiom repository</span>
+<div class="bg-surface-container-lowest border border-outline-variant p-3 text-primary font-medium flex justify-between items-center">
+<span>brew tap axiom-project/axiom &amp;&amp; brew install axiom</span>
+<button class="text-xs text-secondary hover:text-primary uppercase" onclick="navigator.clipboard.writeText('brew tap axiom-project/axiom &amp;&amp; brew install axiom')">[COPY]</button>
+</div>
+</div>
+<div class="space-y-1">
+<span class="text-secondary"># 2. Verify binary release signature</span>
+<div class="bg-surface-container-lowest border border-outline-variant p-3 text-secondary">
+              $ gpg --keyserver keys.openpgp.org --recv-keys 4A8F908BE128D3F1
+              <br/>
+              $ axiom --version --verify
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ SECTION WITH BRACKET EXPANDERS -->
+<section class="space-y-6 border-t border-outline-variant pt-12">
+<div>
+<span class="text-xs text-secondary tracking-widest uppercase">[SYSTEM FAQ]</span>
+<h2 class="text-2xl font-bold tracking-tight text-primary mt-1">Frequently Examined Questions</h2>
+</div>
+<div class="border-t border-outline-variant divide-y divide-outline-variant text-xs">
+<div class="py-4">
+<div class="font-bold text-primary flex items-center gap-2">
+<span>[+]</span> How does Axiom stay local without GPU dependencies?
+          </div>
+<p class="mt-2 text-secondary pl-5 leading-relaxed">
+            AST indexing, syntax traversal, and heuristic patches happen via compiled C/Rust binaries in-memory. For generative tasks, Axiom connects to your local Ollama or llama.cpp daemon, or any custom API key you provision. No intermediary servers ever touch your buffers.
+          </p>
+</div>
+<div class="py-4">
+<div class="font-bold text-primary flex items-center gap-2">
+<span>[+]</span> Can I use Axiom inside Neovim or tmux?
+          </div>
+<p class="mt-2 text-secondary pl-5 leading-relaxed">
+            Yes. We ship <code class="bg-surface-container px-1">axiom.nvim</code> (a zero-dependency Lua plugin) and standard tmux bindings. It behaves like any Unix filter utility (<code class="bg-surface-container px-1">cat</code>, <code class="bg-surface-container px-1">grep</code>, <code class="bg-surface-container px-1">sed</code>).
+          </p>
+</div>
+<div class="py-4">
+<div class="font-bold text-primary flex items-center gap-2">
+<span>[+]</span> What languages are supported by the AST engine?
+          </div>
+<p class="mt-2 text-secondary pl-5 leading-relaxed">
+            Go, Rust, TypeScript, Python, C/C++, Zig, Java, Kotlin, Ruby, Elixir, and SQL. Tree-Sitter grammars are compiled statically directly into the single binary.
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- ================= FOOTER (SHARED COMPONENT JSON COMPLIANT) ================= -->
+<footer class="w-full bg-surface dark:bg-primary-container border-t border-outline-variant dark:border-on-surface-variant font-mono">
+<div class="w-full px-6 py-8 max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm leading-relaxed">
+<!-- Copyright text exact match -->
+<div class="text-xs text-secondary dark:text-secondary-fixed-dim">
+        ©2026 Axiom Project. Free and open-source software under MIT License. No telemetry.
+      </div>
+<!-- Links list exact match -->
+<div class="flex flex-wrap items-center gap-5 text-xs">
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="https://github.com" rel="noreferrer" target="_blank">
+          GitHub
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#docs">
+          Docs
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#architecture">
+          Architecture
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#benchmarks">
+          Benchmarks
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="https://discord.com" rel="noreferrer" target="_blank">
+          Discord
+        </a>
+<a class="text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-inverse-primary transition-colors" href="#changelog">
+          Changelog
+        </a>
+</div>
+</div>
+</footer>
+</body></html>

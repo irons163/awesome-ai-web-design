@@ -1,8 +1,970 @@
-<!doctype html>
-<html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BMW · light token preview</title><link rel="stylesheet" href="../../assets/preview.css"></head>
-<body style="--canvas:#ffffff;--panel:#f4f4f4;--ink:#000000;--muted:#5c5c5c;--border:#d1d1d1;--accent:#1c69d4;--on-accent:#ffffff;--display:system-ui, sans-serif"><main class="specimen"><header class="specimen-header"><a target="_top" href="../../index.html#/design/bmw">← 回到設計集</a><span>LIGHT / TOKEN SPECIMEN</span></header>
-<section class="sample-hero"><p class="eyebrow">BMW · DESIGN REFERENCE</p><h1>Good design.<br>Clear direction.</h1><p>把色彩、文字與元件放在一起，找到適合你的設計語言。</p><div class="actions"><a class="primary" href="DESIGN.md" download>下載 DESIGN.md ↗</a><a class="secondary" href="PROMPTS.md" download>取得 AI 指令</a></div></section>
-<section class="palette"><h2>01 / Color palette</h2><div class="swatches"><div class="swatch"><span style="background:#1c69d4"></span><code>#1c69d4</code></div><div class="swatch"><span style="background:#ffffff"></span><code>#ffffff</code></div><div class="swatch"><span style="background:#262626"></span><code>#262626</code></div><div class="swatch"><span style="background:#0653b6"></span><code>#0653b6</code></div><div class="swatch"><span style="background:#d6d6d6"></span><code>#d6d6d6</code></div><div class="swatch"><span style="background:#3c3c3c"></span><code>#3c3c3c</code></div></div></section>
-<section class="samples"><article class="sample-card"><p class="eyebrow">02 / TYPOGRAPHY</p><h2>A little more<br>room to think.</h2><p>以清楚的層級引導閱讀，讓每段文字都有合適的位置。</p><small>系統替代字體示意 · BMW Type Next Latin&#x27;, system-ui, -apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, Roboto, sans-serif</small></article>
-<form class="sample-card" id="sample-form"><p class="eyebrow">03 / COMPONENTS</p><h2>Make it yours.</h2><label for="project">專案名稱</label><input id="project" name="project" placeholder="我的下一個作品" required maxlength="100"><button class="primary" type="submit">儲存示範設定 →</button><p id="sample-status" role="status">這是本機互動示範，資料不會送出。</p></form></section>
-<footer>設計 token 示意，非品牌網站截圖。此模式沿用參考底色。<br>視覺分析：VoltAgent（MIT）；預覽：Awesome AI Web Design。</footer></main><script src="../../assets/preview.js"></script></body></html>
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VOLTIS Mobility — Vehicle Discovery &amp; Technical Specification Matrix</title>
+<!-- Material Symbols Outlined Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Google Font for European Automotive Typography (Weights 300, 400, 700) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&amp;family=Public+Sans:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Official Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration matching Design System & Theme -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#ffdbcb",
+            "surface-container-low": "#f3f3f4",
+            "surface-bright": "#f9f9f9",
+            "on-surface": "#1a1c1c",
+            "error": "#ba1a1a",
+            "surface-container-high": "#e8e8e8",
+            "on-secondary-fixed": "#011a41",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb691",
+            "on-tertiary-fixed-variant": "#783100",
+            "primary": "#0051ae",
+            "on-secondary": "#ffffff",
+            "surface-container": "#eeeeee",
+            "outline": "#727784",
+            "on-secondary-fixed-variant": "#32466f",
+            "inverse-on-surface": "#f0f1f1",
+            "on-primary-fixed": "#001a41",
+            "surface-dim": "#dadada",
+            "on-primary-container": "#ebefff",
+            "on-primary-fixed-variant": "#004494",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "surface-container-highest": "#e2e2e2",
+            "background": "#f9f9f9",
+            "primary-fixed": "#d8e2ff",
+            "surface": "#f9f9f9",
+            "on-tertiary-fixed": "#341100",
+            "on-background": "#1a1c1c",
+            "primary-container": "#1c69d4",
+            "tertiary-container": "#b44d00",
+            "inverse-surface": "#2f3131",
+            "surface-container-lowest": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-tertiary-container": "#ffebe2",
+            "secondary-container": "#bacfff",
+            "inverse-primary": "#adc6ff",
+            "secondary-fixed-dim": "#b2c6f6",
+            "primary-fixed-dim": "#adc6ff",
+            "tertiary": "#8d3b00",
+            "on-surface-variant": "#424753",
+            "secondary": "#4a5e88",
+            "secondary-fixed": "#d8e2ff",
+            "surface-tint": "#005bc1",
+            "on-error": "#ffffff",
+            "on-secondary-container": "#435881",
+            "outline-variant": "#c2c6d5"
+          },
+          "borderRadius": {
+            "DEFAULT": "0px",
+            "none": "0px",
+            "xs": "2px",
+            "sm": "4px",
+            "md": "8px",
+            "lg": "12px",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* BMW Architectural crisp 0px radius discipline */
+    button, input, select {
+      border-radius: 0px !important;
+    }
+    .spec-advantage-badge {
+      background-color: #0051ae;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 6px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-primary selection:text-white">
+<!-- ========================================== -->
+<!-- 1. TOP NAVIGATION BAR (Shared Components JSON) -->
+<!-- ========================================== -->
+<header class="bg-surface-container-lowest dark:bg-inverse-surface border-b border-outline-variant dark:border-outline docked full-width top-0 sticky z-50 h-16 rounded-none">
+<div class="flex justify-between items-center w-full px-8 max-w-7xl mx-auto h-16">
+<!-- Left: Brand Logo & Primary Navigation Links -->
+<div class="flex items-center space-x-10 h-full">
+<a class="font-headline font-bold text-xl tracking-widest text-on-surface dark:text-inverse-on-surface uppercase flex items-center space-x-2" href="#">
+<span>VOLTIS</span>
+</a>
+<!-- Desktop Navigation Items (Models is active) -->
+<nav class="hidden lg:flex items-center space-x-8 h-full font-headline font-normal text-sm tracking-wide">
+<a class="text-primary dark:text-inverse-primary border-b-2 border-primary dark:border-inverse-primary font-bold h-full flex items-center" href="#models">
+            Models
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center transition-colors" href="#electric">
+            Electric
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center transition-colors" href="#innovation">
+            Innovation
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center transition-colors" href="#build-price">
+            Build &amp; Price
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface h-full flex items-center transition-colors" href="#inventory">
+            Inventory
+          </a>
+</nav>
+</div>
+<!-- Right Utility Actions: Dealers, Test Drive, Icons -->
+<div class="flex items-center space-x-6 h-full font-headline font-normal text-sm tracking-wide">
+<div class="hidden md:flex items-center space-x-4">
+<a class="text-on-surface hover:text-primary transition-colors duration-150 flex items-center gap-1.5 font-bold text-xs uppercase tracking-wider" href="#dealers">
+            Dealers
+          </a>
+<a class="bg-primary hover:bg-primary-container text-white px-5 py-2.5 font-bold text-xs uppercase tracking-wider transition-colors duration-150" href="#test-drive">
+            Test Drive
+          </a>
+</div>
+<div class="flex items-center space-x-3 text-on-surface-variant">
+<button aria-label="Search" class="p-1.5 hover:text-primary transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button aria-label="Global" class="p-1.5 hover:text-primary transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined">public</span>
+</button>
+<button aria-label="Account Profile" class="p-1.5 hover:text-primary transition-colors duration-150 cursor-pointer" type="button">
+<span class="material-symbols-outlined">person</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================== -->
+<!-- 2. ARCHITECTURAL HERO SECTION (Hero Band Dark) -->
+<!-- ========================================== -->
+<section class="bg-inverse-surface text-inverse-on-surface relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 py-20 lg:py-24">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Hero Text Content -->
+<div class="lg:col-span-6 space-y-6">
+<div class="inline-flex items-center gap-2 border border-outline px-3 py-1">
+<span class="w-1.5 h-1.5 bg-primary"></span>
+<span class="text-xs font-bold tracking-widest uppercase text-inverse-primary">Flagship Global Release</span>
+</div>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-none font-display">
+            VOLTIS i700 Grand Executive
+          </h1>
+<p class="text-surface-dim font-light text-lg sm:text-xl leading-relaxed max-w-xl">
+            Engineered for pure velocity and zero compromise. Discover the next evolution of executive grand touring. 480 mi WLTP range. 0–60 mph in 3.1s. Dual permanent-magnet synchronous architecture.
+          </p>
+<!-- Action Buttons -->
+<div class="flex flex-wrap items-center gap-4 pt-4">
+<a class="bg-primary hover:bg-primary-container text-white px-8 py-3.5 font-bold text-sm uppercase tracking-wider transition-colors duration-150 inline-flex items-center justify-center" href="#matrix-view">
+              Explore Fleet
+            </a>
+<a class="border border-white/40 hover:border-white text-white px-8 py-3.5 font-bold text-sm uppercase tracking-wider transition-colors duration-150 inline-flex items-center gap-2" href="#technical-bulletin">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+              Technical Bulletin
+            </a>
+</div>
+<!-- Hero Micro Performance Specs -->
+<div class="grid grid-cols-3 pt-8 border-t border-outline/30">
+<div>
+<p class="text-2xl font-bold text-white font-headline">480 <span class="text-xs font-light text-surface-dim">mi</span></p>
+<p class="text-[11px] font-bold uppercase tracking-wider text-surface-dim mt-0.5">WLTP Range</p>
+</div>
+<div>
+<p class="text-2xl font-bold text-white font-headline">3.1 <span class="text-xs font-light text-surface-dim">s</span></p>
+<p class="text-[11px] font-bold uppercase tracking-wider text-surface-dim mt-0.5">0–60 MPH</p>
+</div>
+<div>
+<p class="text-2xl font-bold text-white font-headline">350 <span class="text-xs font-light text-surface-dim">kW</span></p>
+<p class="text-[11px] font-bold uppercase tracking-wider text-surface-dim mt-0.5">800V DC Max</p>
+</div>
+</div>
+</div>
+<!-- Hero Vehicle Photography Canvas -->
+<div class="lg:col-span-6 relative">
+<div class="aspect-[16/10] bg-surface-dark-elevated overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A pristine luxury executive electric sedan, the VOLTIS i700, photographed in a high-contrast architectural concrete pavilion. The studio car lighting glints off the sculpted metallic mineral silver bodywork, emphasizing muscular aero haunches and the signature illuminated kidney glass structure. The environment features subtle neutral charcoal and architectural tones with crisp European automotive perfection." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVpb6qURi7alagRqi_lYA6Oj8Fjlm1c8JneVqtR-i-6-_bSrfn8QSMXNj1j9czOY6CLSDPvSrOZ93TKJ1rLJ2TSrYtdwL0xxa6hsb_KzPAv96EpN2-DDhvt-qI-GlIJ73A2O-N0iAsaKPXfSRTlKvGj9WB5RQ6EwmEilNzFIzR5SvX7XXZmFe5IPOoCsFXoZShE4pMi49zFlrB-DZOTjXNuaKC8KV3T2QfsmIM07RgSCiE0vGRABzenCOOBlfddNPm4WmTTqFNyBhH"/>
+<div class="absolute bottom-4 left-4 bg-inverse-surface/80 backdrop-blur-sm px-3 py-1.5 border border-white/10 text-[11px] uppercase tracking-widest text-surface-container-high">
+              Platform Architecture: EVA-800 Ultra
+            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Fleet Technical Statistics Ribbon Ticker -->
+<div class="border-t border-outline/30 bg-black/40 py-3 px-8 text-xs font-headline">
+<div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center text-surface-dim gap-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
+<span class="text-white font-bold">8 Active Production Platforms</span>
+</div>
+<div class="hidden md:flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary">bolt</span>
+<span>350 kW Ultra-Fast DC Architecture Standard on 700 &amp; eX600</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-surface-dim">factory</span>
+<span>100% Green Energy Manufacturing Facility Leipzig, Germany</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 3. TACTILE FILTER & DISCOVERY CONTROLS -->
+<!-- ========================================== -->
+<section class="bg-surface-container-lowest border-b border-outline-variant sticky top-16 z-40">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Primary Body-Style Segmented Control Tabs -->
+<div class="flex items-center overflow-x-auto space-x-1 sm:space-x-4 border-b border-outline-variant/60 py-2">
+<button class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-on-surface border-b-2 border-primary whitespace-nowrap">
+          All Models (12)
+        </button>
+<button class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">
+          Executive Sedans
+        </button>
+<button class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">
+          Gran Coupés
+        </button>
+<button class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">
+          Performance SAVs / SUVs
+        </button>
+<button class="py-3 px-4 text-xs font-bold uppercase tracking-wider text-on-surface-variant hover:text-on-surface transition-colors whitespace-nowrap">
+          Touring &amp; Sportback
+        </button>
+</div>
+<!-- Secondary Technical Filter Controls Bar -->
+<div class="py-4 flex flex-wrap items-center justify-between gap-4 text-xs font-headline">
+<div class="flex flex-wrap items-center gap-3">
+<span class="text-on-surface-variant font-bold uppercase tracking-wider mr-1 text-[11px]">Filters:</span>
+<!-- Powertrain Filter Chip Active -->
+<button class="bg-on-surface text-on-primary px-3.5 py-1.5 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider">
+<span>Powertrain: All-Electric (BEV)</span>
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+<!-- Drivetrain Filter Chip Inactive -->
+<button class="bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface px-3.5 py-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider">
+<span>Drivetrain: Intelligent Dual AWD</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+<!-- Availability Filter Chip -->
+<button class="bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface px-3.5 py-1.5 flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider">
+<span>Availability: All Allocations</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</button>
+</div>
+<!-- Right Side: Comparison Selected Counter Alert -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-surface-container px-3 py-1.5 border border-outline-variant">
+<span class="w-2 h-2 bg-primary"></span>
+<span class="font-bold uppercase tracking-wider text-[11px] text-on-surface">3 Vehicles Staged for Comparison</span>
+</div>
+<a class="text-primary font-bold text-xs uppercase tracking-wider hover:underline flex items-center gap-1" href="#matrix-view">
+            Jump to Matrix <span class="material-symbols-outlined text-sm">arrow_downward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 4. VEHICLE SELECTION CATALOG GRID -->
+<!-- ========================================== -->
+<section class="max-w-7xl mx-auto px-8 py-16" id="models">
+<div class="flex justify-between items-baseline mb-8">
+<div>
+<h2 class="text-2xl font-bold tracking-tight text-on-surface font-headline uppercase">
+          Model Lineup &amp; Engineering Specifications
+        </h2>
+<p class="text-sm font-light text-on-surface-variant mt-1">
+          Select up to 4 models to evaluate telemetry, charging curves, and cabin technology side by side.
+        </p>
+</div>
+<div class="text-right text-xs font-light text-on-surface-variant">
+        Pricing excludes regional destination charges, registration, &amp; local VAT.
+      </div>
+</div>
+<!-- 4-Up Automotive Card Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+<!-- CARD 1: VOLTIS i500 Performance Coupé (Selected) -->
+<article class="bg-surface-container-lowest border-2 border-primary flex flex-col justify-between relative">
+<div class="p-5">
+<!-- Selection Toggle Header -->
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5">
+              Gran Coupé
+            </span>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<span class="text-[11px] font-bold uppercase tracking-wider text-primary">Compared</span>
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded-none border-outline focus:ring-0" type="checkbox"/>
+</label>
+</div>
+<!-- Vehicle Thumbnail Photo -->
+<div class="bg-surface-card aspect-[16/10] overflow-hidden relative mb-4">
+<img class="w-full h-full object-cover" data-alt="Sleek side profile of the VOLTIS i500 Performance Coupé in deep carbon sapphire metallic finish. The electric grand coupé features aerodynamic carbon-composite blade wheels, lowered stance, and crisp German exterior styling in a bright studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsjh7h5PmxIfOzzDOoP6iOaRPrb5etOj2BL71uco0_N2cJexcRj_CvfgZIWwY2P5PqpaaWbG94U-TqiAW-M4fq8o9C5l3zwqPBgsvrAH8Lg_LCQnEFjKqgffR-YW4UVTg-IGk8jCeqF750TeEVCTngxLJTg5PH-2FVqeb4Ipxg4Mj99Y0R8zVHb6-o4ak5D7u8BluF_ymlW9DKQUaSgl_AkOn58uW1MtrMUab5YtfaDukN-4895w1W7hT5S1tizDnCVm7cIHEz0pDj"/>
+</div>
+<!-- Title & Price -->
+<div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug">
+              VOLTIS i500 Performance
+            </h3>
+<p class="text-xs text-on-surface-variant font-light mb-1">
+              Dual-Motor Intelligent All-Wheel Drive
+            </p>
+<p class="text-sm font-bold text-on-surface font-headline mt-2">
+              $74,200 <span class="text-[11px] font-light text-on-surface-variant">MSRP Starting</span>
+</p>
+</div>
+<!-- Spec Matrix Row Inside Card -->
+<div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-outline-variant text-xs">
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Output</span>
+<span class="font-bold text-on-surface">536 HP / 400 kW</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Acceleration</span>
+<span class="font-bold text-on-surface">0–60 in 3.5s</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Range (EPA)</span>
+<span class="font-bold text-on-surface">380 mi</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Peak Charge</span>
+<span class="font-bold text-on-surface">205 kW DC</span>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 mt-2 space-y-2">
+<a class="block w-full py-2.5 text-center bg-primary text-white font-bold text-xs uppercase tracking-wider hover:bg-primary-container transition-colors" href="#configure-i500">
+            Configure Model
+          </a>
+<a class="block w-full py-2 text-center text-xs font-bold uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="#details-i500">
+            Technical Dossier ›
+          </a>
+</div>
+</article>
+<!-- CARD 2: VOLTIS i700 Executive Flagship (Selected) -->
+<article class="bg-surface-container-lowest border-2 border-primary flex flex-col justify-between relative">
+<div class="p-5">
+<!-- Selection Toggle Header -->
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5">
+              Executive Saloon
+            </span>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<span class="text-[11px] font-bold uppercase tracking-wider text-primary">Compared</span>
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded-none border-outline focus:ring-0" type="checkbox"/>
+</label>
+</div>
+<!-- Vehicle Thumbnail Photo -->
+<div class="bg-surface-card aspect-[16/10] overflow-hidden relative mb-4">
+<img class="w-full h-full object-cover" data-alt="The flagship VOLTIS i700 ultra-luxury electric saloon parked on reflective polished white limestone. Elegant long-wheelbase proportions, crystal-cut adaptive LED headlights, and signature aero-spoke 22-inch alloy wheels under pristine studio light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgFGX4ysAuhGtsW1w8hSZP3XWruztWqzX6Zc3WBjCj8ZnFJP59FDTMGAYbEt8-gU1DYy7IDwlKOy6t0WVa02rI4M0sy3xLMfeKdH1v1rW4NYU-R2aC5odNGWEMHB1mieXLML_ZyP7r9MfQSWimahiXgP6BjjHU2cYIISeSsRd1SruKV9z8vbPgmoMJ-AL-Psc3ROwoFkDuf5VV_0rCuraWgQ9prh4cUMSqvfUGHlckWhqJwRY_UQd-l2Dr8A29Ilk5i2FzyUXd3wgM"/>
+</div>
+<!-- Title & Price -->
+<div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug">
+              VOLTIS i700 Flagship
+            </h3>
+<p class="text-xs text-on-surface-variant font-light mb-1">
+              Synchronous AWD Executive Chassis
+            </p>
+<p class="text-sm font-bold text-on-surface font-headline mt-2">
+              $119,800 <span class="text-[11px] font-light text-on-surface-variant">MSRP Starting</span>
+</p>
+</div>
+<!-- Spec Matrix Row Inside Card -->
+<div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-outline-variant text-xs">
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Output</span>
+<span class="font-bold text-on-surface">650 HP / 485 kW</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Acceleration</span>
+<span class="font-bold text-on-surface">0–60 in 3.1s</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Range (EPA)</span>
+<span class="font-bold text-on-surface">420 mi</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Peak Charge</span>
+<span class="font-bold text-on-surface">350 kW (800V)</span>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 mt-2 space-y-2">
+<a class="block w-full py-2.5 text-center bg-primary text-white font-bold text-xs uppercase tracking-wider hover:bg-primary-container transition-colors" href="#configure-i700">
+            Configure Model
+          </a>
+<a class="block w-full py-2 text-center text-xs font-bold uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="#details-i700">
+            Technical Dossier ›
+          </a>
+</div>
+</article>
+<!-- CARD 3: VOLTIS eX600 Sport Activity Vehicle (Selected) -->
+<article class="bg-surface-container-lowest border-2 border-primary flex flex-col justify-between relative">
+<div class="p-5">
+<!-- Selection Toggle Header -->
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary bg-primary/10 px-2 py-0.5">
+              Performance SAV
+            </span>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<span class="text-[11px] font-bold uppercase tracking-wider text-primary">Compared</span>
+<input checked="" class="form-checkbox h-4 w-4 text-primary rounded-none border-outline focus:ring-0" type="checkbox"/>
+</label>
+</div>
+<!-- Vehicle Thumbnail Photo -->
+<div class="bg-surface-card aspect-[16/10] overflow-hidden relative mb-4">
+<img class="w-full h-full object-cover" data-alt="Aggressive three-quarter front view of the VOLTIS eX600 Sport Activity Vehicle in matte glacier grey paint. Commanding ride height, muscular wheel arches, roof rack system, and aerodynamic flush door handles in modern architectural daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDsGoW1XoT4elT7Da2gPrPO_qhwovDN9U0gr4QS6IZ4qMAJxu94vJoAjmkXs7KBvFA6SnD0Wwobpk-CfdYXlxceLL3o7JV_5teKR5816ChA-__9_Oa82S-TAw47X8D46LVFCdLtp53nQi-MJ4RerQW2ZpHT8qVMdNCKO8EfqZtFL2QvkIzr58cIBkMVVgTN2mhRvtiZevGOjdYxJHdmfD1E88WidW9-MPZ4GqevQZ7uyAgF9BoEhhe4UA1ktZq-ckO3rrTB3j6vsnCl"/>
+</div>
+<!-- Title & Price -->
+<div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug">
+              VOLTIS eX600 SAV
+            </h3>
+<p class="text-xs text-on-surface-variant font-light mb-1">
+              Active Air Suspension Dual Motor
+            </p>
+<p class="text-sm font-bold text-on-surface font-headline mt-2">
+              $89,500 <span class="text-[11px] font-light text-on-surface-variant">MSRP Starting</span>
+</p>
+</div>
+<!-- Spec Matrix Row Inside Card -->
+<div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-outline-variant text-xs">
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Output</span>
+<span class="font-bold text-on-surface">590 HP / 440 kW</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Acceleration</span>
+<span class="font-bold text-on-surface">0–60 in 3.7s</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Range (EPA)</span>
+<span class="font-bold text-on-surface">360 mi</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Peak Charge</span>
+<span class="font-bold text-on-surface">350 kW (800V)</span>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 mt-2 space-y-2">
+<a class="block w-full py-2.5 text-center bg-primary text-white font-bold text-xs uppercase tracking-wider hover:bg-primary-container transition-colors" href="#configure-ex600">
+            Configure Model
+          </a>
+<a class="block w-full py-2 text-center text-xs font-bold uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="#details-ex600">
+            Technical Dossier ›
+          </a>
+</div>
+</article>
+<!-- CARD 4: VOLTIS i400 Sportback (Unselected) -->
+<article class="bg-surface-container-lowest border border-outline-variant flex flex-col justify-between relative hover:border-outline transition-colors">
+<div class="p-5">
+<!-- Selection Toggle Header -->
+<div class="flex justify-between items-start mb-3">
+<span class="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container px-2 py-0.5">
+              Compact Executive
+            </span>
+<label class="inline-flex items-center gap-2 cursor-pointer">
+<span class="text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">Compare</span>
+<input class="form-checkbox h-4 w-4 text-primary rounded-none border-outline focus:ring-0" type="checkbox"/>
+</label>
+</div>
+<!-- Vehicle Thumbnail Photo -->
+<div class="bg-surface-card aspect-[16/10] overflow-hidden relative mb-4">
+<img class="w-full h-full object-cover" data-alt="The compact executive VOLTIS i400 Sportback in alpine white finish positioned in a minimalist architectural courtyard. Dynamic fastback roofline, clean frameless glass doors, and flush body surfacing in sharp European automotive style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjy4VyyvDhKNd7ykwVnOyzpXojovJ-3yssgVjEWbRCvraVhwF6oM02fW302ZUg9LQluKYvWL22qsrlvzX5MiYOGMkBA0005kn9vjIi0vkLFCdzydBsOogBTYJ1p8yaTHQhhkDmbi8265koYlSFPKRT_erfzFsmI4oaL3VN3kSsBY5THXoBmUMuWGQG9k11fXzM1ZWQsfFrs59M7iQWU0eVo6awku1UHarLDT7sR94DqVwyhN6hWrEK9roZBmLiVTsy9X42Tdyaa9gn"/>
+</div>
+<!-- Title & Price -->
+<div>
+<h3 class="text-lg font-bold text-on-surface font-headline leading-snug">
+              VOLTIS i400 Sportback
+            </h3>
+<p class="text-xs text-on-surface-variant font-light mb-1">
+              Rear-Wheel Dynamic Drive Architecture
+            </p>
+<p class="text-sm font-bold text-on-surface font-headline mt-2">
+              $58,900 <span class="text-[11px] font-light text-on-surface-variant">MSRP Starting</span>
+</p>
+</div>
+<!-- Spec Matrix Row Inside Card -->
+<div class="grid grid-cols-2 gap-2 mt-4 pt-4 border-t border-outline-variant text-xs">
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Output</span>
+<span class="font-bold text-on-surface">395 HP / 295 kW</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Acceleration</span>
+<span class="font-bold text-on-surface">0–60 in 4.4s</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Range (EPA)</span>
+<span class="font-bold text-on-surface">320 mi</span>
+</div>
+<div>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant tracking-wider block">Peak Charge</span>
+<span class="font-bold text-on-surface">180 kW DC</span>
+</div>
+</div>
+</div>
+<!-- Card Actions -->
+<div class="p-5 pt-0 mt-2 space-y-2">
+<a class="block w-full py-2.5 text-center bg-surface-container hover:bg-surface-container-high text-on-surface font-bold text-xs uppercase tracking-wider transition-colors" href="#configure-i400">
+            Configure Model
+          </a>
+<a class="block w-full py-2 text-center text-xs font-bold uppercase tracking-wider text-on-surface hover:text-primary transition-colors" href="#details-i400">
+            Technical Dossier ›
+          </a>
+</div>
+</article>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 5. SPECIFICATION COMPARISON MATRIX SECTION -->
+<!-- ========================================== -->
+<section class="bg-surface-container-low border-t border-outline-variant py-20" id="matrix-view">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Section Header with Comparison Meta Tools -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-outline-variant">
+<div>
+<span class="text-xs font-bold uppercase tracking-widest text-primary font-headline block mb-1">
+            Engineered Benchmarks &amp; Telemetry
+          </span>
+<h2 class="text-3xl font-bold tracking-tight text-on-surface font-headline uppercase">
+            Direct Technical Comparison Matrix
+          </h2>
+<p class="text-sm font-light text-on-surface-variant mt-1 max-w-2xl">
+            Examine standardized DIN certified values, curb weight allocations, and digital thermal capabilities across the three active selections.
+          </p>
+</div>
+<!-- Matrix View Utility Switches -->
+<div class="flex items-center gap-4">
+<label class="inline-flex items-center gap-2 cursor-pointer bg-surface-container-lowest border border-outline-variant px-3 py-2 text-xs font-bold uppercase tracking-wider">
+<input checked="" class="form-checkbox text-primary rounded-none border-outline focus:ring-0" type="checkbox"/>
+<span>Highlight Advantage Values</span>
+</label>
+<button class="bg-surface-container-lowest hover:bg-surface-container border border-outline-variant px-3 py-2 text-xs font-bold uppercase tracking-wider text-on-surface flex items-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-sm">print</span>
+<span>Export PDF Spec</span>
+</button>
+</div>
+</div>
+<!-- The Comparative Table Architecture -->
+<div class="mt-8 bg-surface-container-lowest border border-outline-variant overflow-hidden">
+<!-- Table Column Headers: Models Overview -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant bg-surface-container-lowest">
+<!-- Lead Spec Category Column -->
+<div class="col-span-3 p-6 flex flex-col justify-end">
+<span class="text-xs font-bold uppercase tracking-widest text-on-surface-variant">Specification Parameter</span>
+<span class="text-xs font-light text-on-surface-variant mt-0.5">DIN &amp; EPA Harmonized</span>
+</div>
+<!-- Model 1 Header -->
+<div class="col-span-3 p-6 space-y-3">
+<div class="aspect-[16/9] bg-surface-card overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Detailed frontal studio render of the VOLTIS i500 Performance Coupé showing aerodynamic bumper splitters and illuminated signature German grille." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdS6CDGefBIC3UTr-ElG3JqgLWpTegjBqrNVuGew6FcjJFyNFlE5w13vcNgDI4k8m-kEGAyh4P3KgQFMNe95HfdT3Rr5X03MBMtZjIswWa2-rRvkffaQKiIkA-_NBas_PmnR81z5LE_X72D48r9rOxP4I21u_wywmGp2GoPWEmH2yPXErajdnj9Tux9P4mTftcWqfjleYDODVMm8G-ItnEHsIfxq3-5Hd1nhWP99QiNbLuIJ5Vs9LSqzOdqPjfUmgCsrR4giL4UuwK"/>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Gran Coupé</span>
+<h4 class="text-base font-bold text-on-surface font-headline leading-tight">VOLTIS i500 Performance</h4>
+<p class="text-xs font-bold text-on-surface mt-1">$74,200 Base</p>
+</div>
+</div>
+<!-- Model 2 Header -->
+<div class="col-span-3 p-6 space-y-3 bg-surface-bright">
+<div class="aspect-[16/9] bg-surface-card overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Detailed frontal studio render of the flagship VOLTIS i700 showing elongated bonnet, flush door handles, and crystal LED lighting architecture." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwAY7_hYssoiON4GU3OTzg_kc8NtjfBMM8gz0IIS-0jaXyfsvyKVP_ZV1Ib6SF8pvCRHv8Zrzqo6x3Vvmy6DoAaJII5GzGRox715pLS0jkDFEuNMssqCcHyPkQHKWoLYhvoBSgVACqLgD3zMYSLtzRFaGhb9LQSQR9FUtkJQTzQXOB08eWQOcmD9m5IyzJMuCF5oIPv_qIe9fEogqLDiko-Gx317YFhBauo1_bOqG2z4I79_QQtq3Vk29Ox6WESTD5E0fwZBm1nMQf"/>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Executive Saloon</span>
+<h4 class="text-base font-bold text-on-surface font-headline leading-tight">VOLTIS i700 Flagship</h4>
+<p class="text-xs font-bold text-on-surface mt-1">$119,800 Base</p>
+</div>
+</div>
+<!-- Model 3 Header -->
+<div class="col-span-3 p-6 space-y-3">
+<div class="aspect-[16/9] bg-surface-card overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Detailed frontal studio render of the VOLTIS eX600 Sport Activity Vehicle showing high-ride chassis stance and wide protective aero cladding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3Yg8FqOfyY810B0dUG2B5JNfxXdgIeCh6KOAtKUrJJ9ky2Teiis7AyvkmuxNyEuJaLwb4Pu3aVdzmrckFq1lW11dUKY9ud2ofY3xbmLQciBlqmXR3mNp3lihuw211BHXjJb3mTPdKonqr2utZE1GzF6c5PcjiR71DSFe1wzjmzlBjOGXnE8YVDOXv9l5fcj_PAvbkJ9wjfqnuOA5OoFDnmtHIdRjp1ANd8w0sEARvxmUWBPQHN43omUntD80tn8fwUDoWKUR_PElx"/>
+</div>
+<div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Performance SAV</span>
+<h4 class="text-base font-bold text-on-surface font-headline leading-tight">VOLTIS eX600 SAV</h4>
+<p class="text-xs font-bold text-on-surface mt-1">$89,500 Base</p>
+</div>
+</div>
+</div>
+<!-- ============================================== -->
+<!-- CATEGORY 1: POWERTRAIN & PERFORMANCE -->
+<!-- ============================================== -->
+<div class="bg-surface-container py-3 px-6 border-b border-outline-variant flex items-center justify-between">
+<h5 class="text-xs font-bold uppercase tracking-widest text-on-surface font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary">speed</span>
+            1. Powertrain &amp; Dynamic Performance
+          </h5>
+<span class="text-[11px] font-light text-on-surface-variant">Permanently Excited Synchronous Machines (PSM)</span>
+</div>
+<!-- Row: Motors / Configuration -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            E-Motor Configuration
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">Dual Synchronous Motor (Front/Rear)</div>
+<div class="col-span-3 p-4 font-light text-on-surface bg-surface-bright">Dual Synchronous High-RPM (Front/Rear)</div>
+<div class="col-span-3 p-4 font-light text-on-surface">Dual High-Torque Synchronous (Front/Rear)</div>
+</div>
+<!-- Row: Total System Output -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Combined Output
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">536 HP (400 kW)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>650 HP (485 kW)</span>
+<span class="spec-advantage-badge">Peak Power</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">590 HP (440 kW)</div>
+</div>
+<!-- Row: Peak Torque -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Peak System Torque
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">586 lb-ft (795 Nm)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>745 lb-ft (1,010 Nm)</span>
+<span class="spec-advantage-badge">Max Torque</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">710 lb-ft (960 Nm)</div>
+</div>
+<!-- Row: 0–60 MPH Acceleration -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            0–60 MPH Sprint
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">3.5 seconds</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>3.1 seconds</span>
+<span class="spec-advantage-badge">Fastest</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">3.7 seconds</div>
+</div>
+<!-- Row: Top Track Speed -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Top Track Velocity
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">155 mph (250 km/h)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright">155 mph (250 km/h)</div>
+<div class="col-span-3 p-4 font-light text-on-surface">150 mph (240 km/h)</div>
+</div>
+<!-- ============================================== -->
+<!-- CATEGORY 2: BATTERY & CHARGING ARCHITECTURE -->
+<!-- ============================================== -->
+<div class="bg-surface-container py-3 px-6 border-b border-outline-variant flex items-center justify-between">
+<h5 class="text-xs font-bold uppercase tracking-widest text-on-surface font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary">battery_charging_full</span>
+            2. High-Voltage Battery &amp; Thermal Management
+          </h5>
+<span class="text-[11px] font-light text-on-surface-variant">Prismatic NMC Lithium-Ion Cells</span>
+</div>
+<!-- Row: Battery Capacity -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Usable Battery Capacity
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">84.3 kWh Net (89.0 Gross)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>108.6 kWh Net (115.0 Gross)</span>
+<span class="spec-advantage-badge">Largest</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">105.2 kWh Net (111.5 Gross)</div>
+</div>
+<!-- Row: System Voltage Architecture -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            System Voltage
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">400V Standard Bus</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>800V Silicon Carbide (SiC)</span>
+<span class="spec-advantage-badge">Next-Gen</span>
+</div>
+<div class="col-span-3 p-4 font-bold text-on-surface flex items-center justify-between">
+<span>800V Silicon Carbide (SiC)</span>
+<span class="spec-advantage-badge">Next-Gen</span>
+</div>
+</div>
+<!-- Row: Peak DC Fast Charge -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Peak DC Fast Charge Rate
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">205 kW</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>350 kW Ultra-Fast</span>
+<span class="spec-advantage-badge">Fastest</span>
+</div>
+<div class="col-span-3 p-4 font-bold text-on-surface flex items-center justify-between">
+<span>350 kW Ultra-Fast</span>
+<span class="spec-advantage-badge">Fastest</span>
+</div>
+</div>
+<!-- Row: 10% to 80% DC Time -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            10% to 80% Fast Charge
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">29 minutes</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>19 minutes</span>
+<span class="spec-advantage-badge">Optimized</span>
+</div>
+<div class="col-span-3 p-4 font-bold text-on-surface flex items-center justify-between">
+<span>21 minutes</span>
+<span class="spec-advantage-badge">Optimized</span>
+</div>
+</div>
+<!-- Row: Range (EPA Estimated) -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Estimated Max Range (EPA)
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">380 miles</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>420 miles (480 mi WLTP)</span>
+<span class="spec-advantage-badge">Longest</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">360 miles</div>
+</div>
+<!-- ============================================== -->
+<!-- CATEGORY 3: DIMENSIONS & CHASSIS DYNAMICS -->
+<!-- ============================================== -->
+<div class="bg-surface-container py-3 px-6 border-b border-outline-variant flex items-center justify-between">
+<h5 class="text-xs font-bold uppercase tracking-widest text-on-surface font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary">straighten</span>
+            3. Dimensions &amp; Chassis Dynamics
+          </h5>
+<span class="text-[11px] font-light text-on-surface-variant">Architectural Air Suspension &amp; Integral Steering</span>
+</div>
+<!-- Row: Wheelbase -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Wheelbase Length
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">112.4 in (2,856 mm)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>126.6 in (3,215 mm)</span>
+<span class="spec-advantage-badge">Executive</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">118.1 in (3,000 mm)</div>
+</div>
+<!-- Row: Curb Weight -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Curb Weight (DIN)
+          </div>
+<div class="col-span-3 p-4 font-bold text-on-surface flex items-center justify-between">
+<span>4,860 lbs (2,204 kg)</span>
+<span class="spec-advantage-badge">Lightest / Agile</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface bg-surface-bright">5,720 lbs (2,594 kg)</div>
+<div class="col-span-3 p-4 font-light text-on-surface">5,450 lbs (2,472 kg)</div>
+</div>
+<!-- Row: Cargo Capacity -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Max Cargo Capacity (Seats Down)
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">16.6 cu ft (470 L)</div>
+<div class="col-span-3 p-4 font-light text-on-surface bg-surface-bright">18.2 cu ft (515 L)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface flex items-center justify-between">
+<span>61.8 cu ft (1,750 L)</span>
+<span class="spec-advantage-badge">Max Utility</span>
+</div>
+</div>
+<!-- Row: Suspension Standard -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Suspension System
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">Adaptive M-Sport Multi-Link Steel Dampers</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright">Dual-Chamber Adaptive Air with Active Roll</div>
+<div class="col-span-3 p-4 font-bold text-on-surface">Dual-Chamber Height-Adjustable Air Suspension</div>
+</div>
+<!-- ============================================== -->
+<!-- CATEGORY 4: DIGITAL COCKPIT & PILOT SYSTEMS -->
+<!-- ============================================== -->
+<div class="bg-surface-container py-3 px-6 border-b border-outline-variant flex items-center justify-between">
+<h5 class="text-xs font-bold uppercase tracking-widest text-on-surface font-headline flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary">tv</span>
+            4. Digital Cockpit &amp; Autonomous Pilot Systems
+          </h5>
+<span class="text-[11px] font-light text-on-surface-variant">VOLTIS Operating System 9.5</span>
+</div>
+<!-- Row: Cockpit Display -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Curved Display Layout
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">12.3" Cluster + 14.9" Central Curved OLED</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>Panoramic Pillar-to-Pillar 31.3" 8K Theater</span>
+<span class="spec-advantage-badge">Theater HUD</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">14.9" Central OLED + Augmented Reality HUD</div>
+</div>
+<!-- Row: Highway Pilot Level -->
+<div class="grid grid-cols-12 border-b border-outline-variant divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Driver Assistance Rating
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">Driving Assistant Professional (Level 2)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>Personal Pilot L3 (Hands-Off to 85 mph)</span>
+<span class="spec-advantage-badge">Level 3</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">Highway Assistant Hands-Free (Level 2+)</div>
+</div>
+<!-- Row: Audio Acoustic Package -->
+<div class="grid grid-cols-12 divide-x divide-outline-variant text-sm">
+<div class="col-span-3 p-4 font-bold text-on-surface-variant text-xs uppercase tracking-wider flex items-center">
+            Acoustic Studio System
+          </div>
+<div class="col-span-3 p-4 font-light text-on-surface">Harman Studio 12-Speaker (465W)</div>
+<div class="col-span-3 p-4 font-bold text-on-surface bg-surface-bright flex items-center justify-between">
+<span>Bowers &amp; Wilkins 4D Diamond (36 Spk / 1,965W)</span>
+<span class="spec-advantage-badge">4D Audio</span>
+</div>
+<div class="col-span-3 p-4 font-light text-on-surface">Harman Reference 18-Speaker (655W)</div>
+</div>
+</div>
+<!-- Matrix Footer Actions -->
+<div class="mt-8 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-light">
+<span class="inline-block w-3 h-3 bg-primary"></span>
+<span>Blue tag badges indicate superior engineering threshold in category.</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-surface-container-lowest border border-outline-variant hover:border-outline text-on-surface px-6 py-3 font-bold text-xs uppercase tracking-wider transition-colors">
+            Reset Selections
+          </button>
+<a class="bg-primary hover:bg-primary-container text-white px-8 py-3 font-bold text-xs uppercase tracking-wider transition-colors inline-block" href="#build-price">
+            Initiate Custom Build Order
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 6. PRE-FOOTER CTA BAND (Dark Navy Hero Band) -->
+<!-- ========================================== -->
+<section class="bg-inverse-surface text-inverse-on-surface py-20 border-t border-outline/30">
+<div class="max-w-7xl mx-auto px-8 text-center space-y-6">
+<span class="text-xs font-bold uppercase tracking-widest text-inverse-primary font-headline block">
+        Direct Manufacturer Allocation
+      </span>
+<h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white font-headline uppercase max-w-2xl mx-auto">
+        Experience Grounded Precision in Your City.
+      </h2>
+<p class="text-surface-dim font-light text-base max-w-xl mx-auto">
+        VOLTIS Certified Retailers provide private closed-track evaluations, dynamic telemetry analysis, and white-glove home delivery arrangements.
+      </p>
+<div class="flex flex-wrap justify-center gap-4 pt-2">
+<a class="bg-primary hover:bg-primary-container text-white px-8 py-3.5 font-bold text-xs uppercase tracking-wider transition-colors" href="#retailer-locator">
+          Locate Certified Partner
+        </a>
+<a class="border border-white/40 hover:border-white text-white px-8 py-3.5 font-bold text-xs uppercase tracking-wider transition-colors" href="#test-drive">
+          Request Extended Test Drive
+        </a>
+</div>
+</div>
+</section>
+<!-- ========================================== -->
+<!-- 7. FOOTER (Shared Components JSON) -->
+<!-- ========================================== -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant dark:border-outline w-full rounded-none">
+<div class="w-full px-8 py-16 max-w-7xl mx-auto flex flex-col gap-12">
+<!-- Top Row: Brand Header & Disclaimers Navigation -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 border-b border-outline-variant/60 pb-8">
+<div>
+<span class="font-headline font-bold text-sm tracking-widest text-on-surface dark:text-inverse-on-surface uppercase">
+            VOLTIS MOBILITY AG
+          </span>
+<p class="text-xs font-light text-on-surface-variant dark:text-surface-dim mt-1">
+            Global Headquarters: Maximilianallee 42, 04129 Leipzig, Germany.
+          </p>
+</div>
+<!-- Shared Component Footer Links -->
+<nav class="flex flex-wrap gap-x-6 gap-y-2 font-body font-light text-xs leading-relaxed">
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#legal">
+            Legal Notice
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#privacy">
+            Privacy Policy
+          </a>
+<a class="text-on-surface dark:text-inverse-on-surface underline transition-colors duration-150" href="#wltp-disclaimers">
+            WLTP / EPA Disclaimers
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#recycling">
+            Battery Recycling
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#compliance">
+            Regulatory Compliance
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#contact">
+            Contact
+          </a>
+<a class="text-on-surface-variant dark:text-surface-dim hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#whistleblower">
+            Whistleblower System
+          </a>
+</nav>
+</div>
+<!-- Legal Disclaimers & Copyright Body -->
+<div class="space-y-4 font-body font-light text-xs leading-relaxed text-on-surface-variant dark:text-surface-dim">
+<p>
+          © 2025 VOLTIS Mobility AG. All rights reserved. Technical specifications according to WLTP and EPA test cycles. Energy consumption and CO2 emission values depend on configuration and wheel/tire choice.
+        </p>
+<p class="text-[11px] leading-relaxed text-on-surface-variant/80 dark:text-surface-dim/80">
+          *All figures relating to performance, charging speed, and range are provisional values computed under standardized dynamometer conditions in accordance with Regulation (EC) No 715/2007. Real-world operating range will vary depending on driving style, ambient temperature, battery state-of-health, HVAC load, payload, route elevation profile, and optional equipment fitted. Charging times from 10% to 80% SoC assume a CCS Type 2 ultra-fast charging terminal delivering rated peak DC current at minimum 800V with active high-voltage battery preconditioning enabled.
+        </p>
+</div>
+</div>
+</footer>
+</body></html>
