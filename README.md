@@ -66,7 +66,7 @@ python3 -m unittest discover -s tests -v
 
 ## 網站發布
 
-網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。 完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結。`dist/` 不包含這個大型 ZIP。
+網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。 完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結。`dist/` 不包含這個大型 ZIP。正式網站的原始截圖與縮圖引用 GitHub 固定 commit 的原檔，避免部署包過大；來源設定在 `data/hosting-assets.json`。更新 Stitch 圖片時，先推送完整匯出，再把該檔的 commit 更新為實際推送版本。下載包與一般本機預覽仍使用完整本機圖片。
 
 ## 免費與來源
 

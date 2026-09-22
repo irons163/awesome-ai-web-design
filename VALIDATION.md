@@ -4,7 +4,7 @@ The collection is checked locally before publication. This revision replaces the
 
 ## Automated checks
 
-Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The eight checks cover:
+Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The nine checks cover:
 
 - All 74 designs have their analysis, rewritten task prompts, README, original Stitch HTML export, generation prompt, and provenance record.
 - All 222 task prompts are distinct and include their corresponding design context.
@@ -13,6 +13,7 @@ Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `pyth
 - Full screenshots retain desktop resolution; old alternate-theme specimens are absent.
 - Catalog document hashes, byte counts, categories, and color values match the files.
 - Catalog and README links resolve; the collection has no paid-access routes.
+- The hosted catalog uses immutable GitHub image URLs, while local exports and the complete ZIP retain all original image files. Hosted HTML, prompts, and provenance remain local assets.
 - The complete ZIP contains the same exported files, design documents, and MIT notices.
 
 `node --check assets/app.js` verifies JavaScript syntax. Rebuilding must leave tracked generated files unchanged. The catalog has no installed JavaScript dependencies.
@@ -30,6 +31,6 @@ The local catalog is checked in the Codex in-app browser:
 
 ## Scope
 
-These are static generated UI examples, not official brand websites or working product backends. Their illustrative forms and links are not end-to-end product features. The HTML exports are preserved as supplied by Stitch and may depend on external fonts, Tailwind, and image hosts. Screenshots and catalog thumbnails are stored locally. The embedded HTML uses a sandbox without same-origin access.
+These are static generated UI examples, not official brand websites or working product backends. Their illustrative forms and links are not end-to-end product features. The HTML exports are preserved as supplied by Stitch and may depend on external fonts, Tailwind, and image hosts. Screenshots and catalog thumbnails are preserved in the repository and ZIP. The hosted catalog loads those same files from an immutable GitHub commit. The embedded HTML uses a sandbox without same-origin access.
 
 The checks do not certify every generated demo's accessibility, business logic, responsive behavior, external assets, or compatibility with every browser. The design analyses remain based on the pinned upstream revision, rather than a new audit of every live brand website.

@@ -118,6 +118,25 @@ class CollectionTests(unittest.TestCase):
                 if not link.startswith(('http:','https:','#')):
                     self.assertTrue((path.parent/link).exists(),f'{path}: {link}')
 
+    def test_hosted_images_match_pinned_exports(self):
+        from build_site import main as build_site
+        build_site()
+        hosted = json.loads((ROOT / 'dist/assets/catalog.json').read_text())
+        base = json.loads((ROOT / 'data/hosting-assets.json').read_text())['image_base_url']
+        self.assertRegex(base, r'^https://raw\.githubusercontent\.com/irons163/awesome-ai-web-design/[a-f0-9]{40}/$')
+        self.assertFalse((ROOT / 'dist/assets/all-designs.zip').exists())
+        for local, remote in zip(self.catalog['designs'], hosted['designs']):
+            self.assertEqual(local['slug'], remote['slug'])
+            for key in ('image', 'thumbnail'):
+                relative = local['preview'][key]
+                self.assertEqual(remote['preview'][key], base + relative)
+                self.assertTrue((ROOT / relative).is_file())
+                self.assertFalse((ROOT / 'dist' / relative).exists())
+            for key in ('html', 'prompt', 'provenance'):
+                self.assertEqual(remote['preview'][key], local['preview'][key])
+                relative = local['preview'][key]
+                self.assertEqual((ROOT / 'dist' / relative).read_bytes(), (ROOT / relative).read_bytes())
+
     def test_bundle_contains_complete_designs_and_license(self):
         with zipfile.ZipFile(ROOT/'assets/all-designs.zip') as archive:
             self.assertIsNone(archive.testzip())
