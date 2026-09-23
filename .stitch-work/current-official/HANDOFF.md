@@ -2,7 +2,7 @@
 
 User target: all 74 examples should resemble each brand's current public official website. Preserve design analysis, rewrite AI instructions, and keep the collection free. All 74 remain unfinished until individually verified. Do not use raw Stitch export existence as fidelity proof.
 
-4 native regenerated examples staged: Spotify, Linear, Claude, and Notion. None has passed whole-page and responsive verification. Remaining 70 are not regenerated. 59 public reference source fetches succeeded, but metadata is not a visual review.
+5 native regenerated examples staged: Spotify, Linear, Claude, Notion, and Figma. None has passed whole-page and responsive verification. Figma is raw generation only; the other four have refined local drafts. Remaining 69 are not regenerated. 59 public reference source fetches succeeded, but metadata is not a visual review.
 
 ## Rebuild commands
 
@@ -15,6 +15,7 @@ python3 .stitch-work/current-official/extend-linear.py
 python3 .stitch-work/current-official/refine-claude.py
 python3 .stitch-work/current-official/fetch-notion-assets.py
 python3 .stitch-work/current-official/refine-notion.py
+python3 .stitch-work/current-official/fetch-figma-assets.py
 ```
 
 Spotify: Taiwan public page observed 2026-09-22T21:23:17Z at 1280×720 and saved in `spotify-tw-browser-reference.json`. All 54 observed card images, labels, destination links and Taiwan footer links are in the Stitch-derived preview `spotify.html`. The five section headings match the current Taiwan page y positions within 0.01px (87, 437.789, 742.516, 1073.242, 1376.969). First viewport and footer were visually compared. Canada public page observed 2026-09-23T12:27:47Z at 1280×720 and saved in `spotify-ca-browser-reference.json`; `spotify-ca.html` contains its separate 54 cards and Canada footer links. The Canada preview has passed static content checks only, not visual comparison. `refine-spotify.py` writes the common `spotify-base.html`; `extend-spotify-tw.py` now accepts `tw` or `ca` to build both locale variants from that base. These are regional snapshots, not universal live content. Remaining: typography, header icon details, final image loading while scrolling, interactions, and responsive checks. `extend-spotify-ca.py` is an obsolete older Canada refinement retained for provenance.
@@ -25,7 +26,9 @@ Claude: native Stitch project `5880004248551648334`, design system `assets/48204
 
 Notion: native Stitch project `9159430735492729198`, design system `assets/10627265804314086532`, screen `0de4921291454131b4d9748e7d01b63b`. Public desktop homepage observed 2026-09-23 at 1280×720; `notion-browser-reference.json`, `notion-assets-browser-reference.json`, and `notion-logo-browser-reference.json` save browser-observed details. `notion-stitch.html`/`.png` preserve the raw Google Stitch output. Stitch inserted image placeholders and made-up agent usage counts. `fetch-notion-assets.py` saves the official public hero video, font files, customer logos, feature imagery, case icons and customer portraits with URL provenance. `refine-notion.py` writes `notion.html` with actual media and observed copy. Static audit passed: 24 local media references and 46 links, no missing local files or placeholders. Refined HTML has not been visually checked due the agent browser's local-file URL policy; do not retry the same preview through localhost or another browser path. Responsive fidelity, animations, menu controls, full-page comparison and catalog integration remain. Stitch suggested optional pill-state interactivity, a 390px mobile layout, and use-case preview modals; only the first two reflect obvious source behavior and still need evaluation against the official page.
 
-Raw `*-stitch.html` exports, native response JSON and request JSON are preserved separately from refined HTML. Original `spotify.png`, `linear-stitch.png`, and `claude-stitch.png` are raw Stitch screenshots, not screenshots of refined pages; never publish them as refined screenshots.
+Figma: native Stitch project `11088334930772031811`, design system `assets/4110242592213013878`, screen `60b71e0e3cca429e8427cc23b9468a15`. Public Figma homepage observed 2026-09-23 at 1280×720. `figma-browser-reference.json` stores current visible heading geometry, hero copy, public Vimeo player/poster and footer links; `figma-assets-browser-reference.json` stores public page assets. `figma-stitch.html`/`.png` preserve the raw native generation. The raw hero is clearly wrong: it substitutes an invented artboard stack and fabricated collaborator names for the site's live collage/video. It has not been refined, verified, added to the catalog, or published. `fetch-figma-assets.py` saves the observed Vimeo hero poster and site font with URL provenance to support the next iteration. Do not present the raw Stitch screenshot as an official match. Stitch suggested hero hover/entrance motion, a 390px mobile version, and a detailed Dev Mode / Figma Make view; these remain optional until the current official behavior is verified.
+
+Raw `*-stitch.html` exports, native response JSON and request JSON are preserved separately from refined HTML. Original `spotify.png`, `linear-stitch.png`, `claude-stitch.png`, `notion-stitch.png`, and `figma-stitch.png` are raw Stitch screenshots, not screenshots of refined pages; never publish them as refined screenshots.
 
 ## Publication
 

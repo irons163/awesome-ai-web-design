@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Figma: The Collaborative Interface Design Tool</title>
+<!-- Inter Google Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed": "#e2e2e2",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-container": "#848484",
+            "inverse-on-surface": "#f0f1f1",
+            "primary-fixed-dim": "#c6c6c6",
+            "secondary-fixed-dim": "#c6c6c6",
+            "on-surface": "#1a1c1c",
+            "on-primary": "#ffffff",
+            "surface": "#f9f9f9",
+            "on-error-container": "#93000a",
+            "background": "#f9f9f9",
+            "on-surface-variant": "#4c4546",
+            "on-background": "#1a1c1c",
+            "inverse-primary": "#c6c6c6",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "surface-container": "#eeeeee",
+            "secondary-container": "#e2e2e2",
+            "primary-container": "#1b1b1b",
+            "on-tertiary-fixed-variant": "#474747",
+            "surface-container-low": "#f3f3f4",
+            "secondary-fixed": "#e2e2e2",
+            "on-primary-fixed-variant": "#474747",
+            "surface-container-highest": "#e2e2e2",
+            "surface-tint": "#5e5e5e",
+            "on-primary-fixed": "#1b1b1b",
+            "on-primary-container": "#848484",
+            "on-secondary-fixed-variant": "#474747",
+            "surface-bright": "#f9f9f9",
+            "outline": "#7e7576",
+            "surface-dim": "#dadada",
+            "tertiary-container": "#1b1b1b",
+            "surface-container-high": "#e8e8e8",
+            "error": "#ba1a1a",
+            "inverse-surface": "#2f3131",
+            "on-tertiary-fixed": "#1b1b1b",
+            "on-error": "#ffffff",
+            "error-container": "#ffdad6",
+            "primary": "#000000",
+            "on-secondary-fixed": "#1b1b1b",
+            "on-secondary-container": "#646464",
+            "on-secondary": "#ffffff",
+            "surface-variant": "#e2e2e2",
+            "outline-variant": "#cfc4c5",
+            "primary-fixed": "#e2e2e2",
+            "secondary": "#5e5e5e",
+            "tertiary": "#000000",
+            "on-tertiary": "#ffffff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .border-gray-clean {
+      border-color: #e5e5e5;
+    }
+    /* Smooth custom cursor tags styling */
+    .figma-cursor {
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.18));
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-primary min-w-[1280px]">
+<!-- Top Header (Sticky, y0–78, white bg, subtle 1px gray bottom border #e5e5e5) -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest border-b border-gray-clean h-[78px] px-8 flex items-center justify-between">
+<div class="flex items-center space-x-9">
+<!-- Authentic 5-part Figma Logo Mark + Wordmark -->
+<a class="flex items-center space-x-3 group" href="#">
+<svg class="w-[30px] h-[45px] transition-transform duration-150 group-hover:scale-105" fill="none" viewbox="0 0 38 57" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-display font-bold text-2xl text-primary tracking-tight">Figma</span>
+</a>
+<!-- Primary Navigation Links with Carats -->
+<nav class="hidden md:flex items-center space-x-7 font-body text-[14px] font-medium text-on-surface">
+<button class="flex items-center space-x-1 hover:text-primary transition-colors duration-150">
+<span>Products</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">expand_more</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-primary transition-colors duration-150">
+<span>Solutions</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">expand_more</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-primary transition-colors duration-150">
+<span>Community</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">expand_more</span>
+</button>
+<button class="flex items-center space-x-1 hover:text-primary transition-colors duration-150">
+<span>Resources</span>
+<span class="material-symbols-outlined text-[16px] text-secondary">expand_more</span>
+</button>
+<a class="hover:text-primary transition-colors duration-150" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center space-x-4">
+<a class="font-body text-[14px] font-medium text-primary hover:opacity-75 transition-opacity px-2" href="#">Log in</a>
+<a class="font-body text-[14px] font-medium text-primary border border-primary rounded-full px-4 py-2 hover:bg-surface-container transition duration-150" href="#">Contact sales</a>
+<a class="font-body text-[14px] font-medium text-on-primary bg-primary rounded-full px-5 py-2.5 hover:bg-opacity-90 transition duration-150" href="#">Get started for free</a>
+</div>
+</header>
+<!-- Hero Viewport (1280x720 clean canvas + creative layer stack) -->
+<section class="relative w-full max-w-[1280px] mx-auto min-h-[720px] pt-14 pb-20 px-10 flex flex-col justify-between overflow-hidden">
+<div class="grid grid-cols-12 gap-8 items-start relative z-10">
+<!-- Left Column: Big stark typography and CTA -->
+<div class="col-span-5 pt-8">
+<h1 class="font-display text-[76px] font-normal leading-[1.04] tracking-[-0.035em] text-primary">
+          The full-<br/>
+          stack<br/>
+          creative<br/>
+          canvas
+        </h1>
+<div class="mt-10 flex items-center space-x-4">
+<a class="inline-flex items-center justify-center bg-primary text-on-primary font-medium text-[16px] rounded-full px-7 py-3.5 hover:bg-opacity-85 transition duration-150" href="#">
+            Get started
+          </a>
+<div class="h-10 w-10 rounded-full border border-gray-clean flex items-center justify-center text-primary hover:border-primary transition cursor-pointer">
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Overlapping Middle & Right: Authentic creative workspace stack -->
+<div class="col-span-7 relative h-[560px]">
+<!-- Live Multiplayer Cursor 1 (Marcus - AI) -->
+<div class="absolute -top-4 right-52 z-30 figma-cursor flex items-start pointer-events-none">
+<svg class="w-5 h-5 text-[#A259FF] fill-current" viewbox="0 0 24 24">
+<path d="M4 2l16 11-8 2-3 7L4 2z"></path>
+</svg>
+<div class="bg-[#A259FF] text-white text-[11px] font-medium px-2 py-0.5 rounded-full ml-1 whitespace-nowrap">
+            Marcus (AI)
+          </div>
+</div>
+<!-- Live Multiplayer Cursor 2 (Elena) -->
+<div class="absolute bottom-28 left-16 z-40 figma-cursor flex items-start pointer-events-none">
+<svg class="w-5 h-5 text-[#0ACF83] fill-current" viewbox="0 0 24 24">
+<path d="M4 2l16 11-8 2-3 7L4 2z"></path>
+</svg>
+<div class="bg-[#0ACF83] text-white text-[11px] font-medium px-2 py-0.5 rounded-full ml-1 whitespace-nowrap">
+            Elena
+          </div>
+</div>
+<!-- Layer 1 (Back-tilt): Graphic Editorial Poster 'NEO-GROTESK 2026' -->
+<div class="absolute top-2 right-4 w-[340px] h-[460px] bg-[#1b1b1b] rounded-lg shadow-2xl p-5 text-white transform rotate-3 border border-outline/30 flex flex-col justify-between">
+<div class="flex justify-between items-center text-[10px] tracking-widest text-neutral-400 uppercase font-mono">
+<span>Specimen 04 / Type</span>
+<span>Var Wght: 900</span>
+</div>
+<div class="space-y-1">
+<div class="text-[52px] font-black leading-none tracking-tighter text-[#F24E1E]">KINETIC</div>
+<div class="text-[52px] font-black leading-none tracking-tighter text-white">SYSTEM</div>
+<div class="text-xs font-mono text-neutral-400 mt-2">128.00 pt — OpenType Glyphs Active</div>
+</div>
+<div class="grid grid-cols-4 gap-2 pt-4 border-t border-neutral-800">
+<div class="h-10 bg-neutral-900 rounded flex items-center justify-center font-mono text-xs">Aa</div>
+<div class="h-10 bg-neutral-900 rounded flex items-center justify-center font-mono text-xs">Bb</div>
+<div class="h-10 bg-neutral-900 rounded flex items-center justify-center font-mono text-xs">Gg</div>
+<div class="h-10 bg-[#FF7262] text-black rounded flex items-center justify-center font-mono font-bold text-xs">01</div>
+</div>
+</div>
+<!-- Layer 2 (Middle-overlap): Mobile Audio Synthesizer Interface -->
+<div class="absolute top-12 left-10 w-[300px] h-[450px] bg-white rounded-2xl shadow-xl border border-gray-clean p-4 transform -rotate-2 flex flex-col justify-between">
+<div class="flex items-center justify-between pb-3 border-b border-gray-clean">
+<div class="flex items-center space-x-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+</div>
+<span class="text-[11px] font-medium text-secondary">Audio_Engine.fig</span>
+<span class="material-symbols-outlined text-sm text-secondary">tune</span>
+</div>
+<!-- Synthesizer Visual Mock -->
+<div class="my-auto py-2">
+<div class="w-full h-32 rounded-xl bg-gradient-to-tr from-[#1ABCFE] via-[#A259FF] to-[#F24E1E] p-3 flex flex-col justify-between text-white shadow-inner">
+<span class="text-[10px] font-mono tracking-wider">HARMONIC REVERB</span>
+<div class="flex items-end space-x-1 h-16 pt-2">
+<div class="flex-1 bg-white/70 h-30 rounded-t-sm"></div>
+<div class="flex-1 bg-white/90 h-14 rounded-t-sm"></div>
+<div class="flex-1 bg-white h-10 rounded-t-sm"></div>
+<div class="flex-1 bg-white/80 h-16 rounded-t-sm"></div>
+<div class="flex-1 bg-white/60 h-8 rounded-t-sm"></div>
+<div class="flex-1 bg-white/95 h-12 rounded-t-sm"></div>
+<div class="flex-1 bg-white h-5 rounded-t-sm"></div>
+</div>
+</div>
+<!-- Vector handles & controller knobs -->
+<div class="mt-4 flex items-center justify-between px-1">
+<div>
+<div class="text-[10px] text-secondary">OSC-1 ATTACK</div>
+<div class="text-xs font-semibold text-primary">0.42 ms</div>
+</div>
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded bg-surface-container text-[10px] font-mono">#0ACF83</span>
+<span class="w-4 h-4 rounded-full bg-[#0ACF83] border border-black/10"></span>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-gray-clean">
+<span class="text-[11px] text-secondary">Frame: 390 × 844</span>
+<span class="text-[11px] font-semibold text-primary">100% Exported</span>
+</div>
+</div>
+<!-- Layer 3 (Foreground Right): Chromatic Vector Inspection Artboard -->
+<div class="absolute bottom-6 right-20 w-[270px] bg-white rounded-xl shadow-2xl border-2 border-[#1ABCFE] p-3.5 z-20">
+<div class="flex items-center justify-between text-[11px] font-medium text-secondary mb-2">
+<span class="text-[#1ABCFE] font-semibold flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-[#1ABCFE]"></span> Component Spec
+            </span>
+<span>Auto Layout (H)</span>
+</div>
+<div class="bg-surface p-2.5 rounded-lg border border-gray-clean space-y-2">
+<div class="flex justify-between text-[11px]">
+<span class="text-secondary">Padding:</span>
+<span class="font-mono text-primary font-medium">16px 24px</span>
+</div>
+<div class="flex justify-between text-[11px]">
+<span class="text-secondary">Corner Radius:</span>
+<span class="font-mono text-primary font-medium">9999px (Pill)</span>
+</div>
+<div class="flex justify-between text-[11px]">
+<span class="text-secondary">Tokens:</span>
+<span class="font-mono text-[#A259FF] font-medium">$brand-primary</span>
+</div>
+</div>
+<!-- Live Cursor Sarah -->
+<div class="absolute -bottom-3 -right-2 figma-cursor flex items-start pointer-events-none">
+<svg class="w-5 h-5 text-[#F24E1E] fill-current" viewbox="0 0 24 24">
+<path d="M4 2l16 11-8 2-3 7L4 2z"></path>
+</svg>
+<div class="bg-[#F24E1E] text-white text-[11px] font-medium px-2 py-0.5 rounded-full ml-1 whitespace-nowrap">
+              Sarah
+            </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Lavender Event Strip: Config India 15 October -->
+<div class="mt-8 w-full bg-[#E6D6FA] rounded-xl px-6 py-3.5 flex items-center justify-between border border-[#d2b8f7]" id="event-strip">
+<div class="flex items-center space-x-4">
+<div class="bg-primary text-white font-black text-xs px-2.5 py-1 rounded tracking-wider uppercase">
+          CONFIG INDIA
+        </div>
+<span class="font-medium text-sm text-primary">
+          Join Config India virtually 15 October for free.
+        </span>
+</div>
+<div class="flex items-center space-x-3">
+<a class="bg-primary text-on-primary text-xs font-medium px-4 py-2 rounded-full hover:bg-neutral-800 transition" href="#">
+          Register
+        </a>
+<button aria-label="Dismiss" class="text-primary hover:text-neutral-700 transition p-1" onclick="document.getElementById('event-strip').style.display='none'">
+<span class="material-symbols-outlined text-lg leading-none">close</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 2 (~y1050): Unified Workspace -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Center Title -->
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="font-display text-[44px] font-semibold text-primary leading-[1.1] tracking-tight">
+          One workspace for your entire product development process.
+        </h2>
+<p class="font-body text-lg text-secondary mt-4">
+          Made so your whole team can go from WIP to ship, together.
+        </p>
+</div>
+<!-- Pale Green Showcase Container (#E8F5E9 / #EDF8F2) -->
+<div class="w-full bg-[#EDF8F2] border border-[#d0ecd9] rounded-2xl p-8 mb-16 shadow-sm">
+<!-- App Workspace Frame UI -->
+<div class="bg-white rounded-xl shadow-lg border border-gray-clean overflow-hidden">
+<!-- Mock Figma Canvas Header Bar -->
+<div class="h-11 bg-white border-b border-gray-clean px-4 flex items-center justify-between">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-secondary text-lg">menu</span>
+<div class="flex items-center space-x-2 text-xs font-medium text-primary">
+<span>Fintech Core 2.0</span>
+<span class="text-neutral-300">/</span>
+<span class="text-secondary">Checkout Flow &amp; Tokens</span>
+</div>
+</div>
+<!-- Center Tool Cluster -->
+<div class="flex items-center space-x-1 bg-surface p-1 rounded-md border border-gray-clean">
+<span class="material-symbols-outlined text-sm px-2 py-0.5 rounded bg-white shadow-xs">near_me</span>
+<span class="material-symbols-outlined text-sm px-2 py-0.5 text-secondary">crop_din</span>
+<span class="material-symbols-outlined text-sm px-2 py-0.5 text-secondary">edit</span>
+<span class="material-symbols-outlined text-sm px-2 py-0.5 text-secondary">title</span>
+</div>
+<!-- Dev Mode Toggle -->
+<div class="flex items-center space-x-3">
+<div class="flex items-center bg-[#EDF8F2] text-[#0ACF83] border border-[#0ACF83]/30 px-2.5 py-1 rounded-full text-xs font-semibold space-x-1">
+<span class="material-symbols-outlined text-sm">code</span>
+<span>Dev Mode</span>
+</div>
+<div class="w-7 h-7 rounded-full bg-[#1ABCFE] text-white flex items-center justify-center font-bold text-xs">M</div>
+</div>
+</div>
+<!-- Product Interface Content Grid -->
+<div class="grid grid-cols-12 min-h-[460px]">
+<!-- Left: Design System Sidebar -->
+<div class="col-span-3 border-r border-gray-clean p-4 bg-surface text-xs space-y-4">
+<div class="font-semibold text-secondary uppercase tracking-wider text-[10px]">Components (Design System)</div>
+<div class="space-y-1.5 font-medium">
+<div class="p-2 rounded bg-white border border-gray-clean flex items-center justify-between text-primary">
+<span>Button / Primary / Large</span>
+<span class="material-symbols-outlined text-xs text-[#0ACF83]">check_circle</span>
+</div>
+<div class="p-2 rounded hover:bg-neutral-100 flex items-center justify-between text-secondary">
+<span>Input / Currency Selector</span>
+</div>
+<div class="p-2 rounded hover:bg-neutral-100 flex items-center justify-between text-secondary">
+<span>Card / Account Summary</span>
+</div>
+<div class="p-2 rounded hover:bg-neutral-100 flex items-center justify-between text-secondary">
+<span>Sheet / Instant Transfer</span>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-clean">
+<div class="font-semibold text-secondary uppercase tracking-wider text-[10px] mb-2">Variables &amp; Tokens</div>
+<div class="space-y-1 font-mono text-[11px]">
+<div class="flex justify-between py-1 px-1.5 bg-neutral-100 rounded">
+<span>--radius-pill</span>
+<span class="text-neutral-500">9999px</span>
+</div>
+<div class="flex justify-between py-1 px-1.5 bg-neutral-100 rounded">
+<span>--emerald-500</span>
+<span class="text-[#0ACF83]">#0ACF83</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Middle: Mobile Canvas Screens -->
+<div class="col-span-6 p-8 bg-[#fafafa] flex items-center justify-center space-x-6 relative">
+<!-- Artboard 1 -->
+<div class="w-56 bg-white rounded-2xl shadow-md border border-gray-clean p-4 space-y-3">
+<div class="flex justify-between items-center text-xs font-medium text-secondary">
+<span>09:41</span>
+<span class="material-symbols-outlined text-xs">battery_full</span>
+</div>
+<div class="text-sm font-bold text-primary">Send Payment</div>
+<div class="bg-surface rounded-xl p-3 text-center border border-gray-clean">
+<span class="text-xs text-secondary">Amount</span>
+<div class="text-2xl font-black text-primary mt-1">$1,250.00</div>
+<div class="text-[10px] text-[#0ACF83] font-medium mt-0.5">No fee transfer</div>
+</div>
+<button class="w-full bg-primary text-white py-2 rounded-full text-xs font-semibold">Confirm transfer</button>
+</div>
+<!-- Artboard 2 (Active selection with blue bounding box) -->
+<div class="w-56 bg-white rounded-2xl shadow-lg border-2 border-[#1ABCFE] p-4 space-y-3 relative">
+<div class="absolute -top-3 -left-1 bg-[#1ABCFE] text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                  Success Screen (Selected)
+                </div>
+<div class="flex justify-between items-center text-xs font-medium text-secondary">
+<span>09:41</span>
+<span class="material-symbols-outlined text-xs">wifi</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-[#EDF8F2] text-[#0ACF83] flex items-center justify-center mx-auto">
+<span class="material-symbols-outlined">check</span>
+</div>
+<div class="text-center font-bold text-sm text-primary">Transfer complete</div>
+<div class="text-[11px] text-center text-secondary">Receipt #FIG-92842 has been dispatched.</div>
+<button class="w-full border border-gray-clean text-primary py-2 rounded-full text-xs font-medium">Done</button>
+</div>
+</div>
+<!-- Right: Code & Inspection Panel -->
+<div class="col-span-3 border-l border-gray-clean p-4 bg-white text-xs space-y-4">
+<div class="flex items-center justify-between border-b border-gray-clean pb-2">
+<span class="font-bold text-primary">Inspect</span>
+<span class="text-secondary font-mono text-[10px]">React / Tailwind</span>
+</div>
+<div class="bg-[#1b1b1b] text-neutral-200 p-3 rounded-lg font-mono text-[10px] leading-relaxed overflow-x-auto">
+<span class="text-[#FF7262]">&lt;Button</span><br/>
+                  variant=<span class="text-[#0ACF83]">"primary"</span><br/>
+                  size=<span class="text-[#0ACF83]">"lg"</span><br/>
+                  className=<span class="text-[#1ABCFE]">"rounded-full px-6 py-3"</span><br/>
+<span class="text-[#FF7262]">&gt;</span><br/>
+                  Confirm transfer<br/>
+<span class="text-[#FF7262]">&lt;/Button&gt;</span>
+</div>
+<div class="space-y-2">
+<span class="font-semibold text-secondary uppercase text-[10px]">CSS Properties</span>
+<div class="font-mono text-[11px] text-secondary space-y-1">
+<div>background: <span class="text-primary font-semibold">var(--primary)</span>;</div>
+<div>border-radius: <span class="text-primary font-semibold">9999px</span>;</div>
+<div>box-shadow: <span class="text-primary font-semibold">0 1px 2px rgba(0,0,0,0.05)</span>;</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Balanced Side-by-Side Summaries -->
+<div class="grid grid-cols-2 gap-16 pt-4">
+<div class="border-t border-gray-clean pt-8">
+<h3 class="font-display text-2xl font-bold text-primary">Design anything you can imagine</h3>
+<p class="font-body text-secondary mt-2 text-base">Turn your ideas into apps, websites, and products.</p>
+<a class="inline-flex items-center space-x-1.5 font-medium text-primary hover:underline mt-4 text-sm" href="#">
+<span>Explore design tools</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="border-t border-gray-clean pt-8">
+<h3 class="font-display text-2xl font-bold text-primary">Build with intention</h3>
+<p class="font-body text-secondary mt-2 text-base">Dev tools that take you all the way to production.</p>
+<a class="inline-flex items-center space-x-1.5 font-medium text-primary hover:underline mt-4 text-sm" href="#">
+<span>Explore build tools</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3 (~y2040): AI-Native Canvas -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Heading -->
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="font-display text-[44px] font-semibold text-primary leading-[1.15] tracking-tight">
+          Move fast in the right direction on an AI-native canvas.
+        </h2>
+<p class="font-body text-lg text-secondary mt-4 max-w-2xl mx-auto">
+          Teammates and AI agents work in the same space with shared context. Generate new design directions, refine, and align—together.
+        </p>
+</div>
+<!-- AI Collaborative Workspace UI Container -->
+<div class="relative bg-white rounded-2xl border border-gray-clean shadow-sm p-10 overflow-hidden">
+<!-- Live AI Prompt Pill Floating Header -->
+<div class="max-w-2xl mx-auto bg-surface-container-lowest border border-gray-clean shadow-lg rounded-full p-2.5 flex items-center justify-between mb-12">
+<div class="flex items-center space-x-3 pl-4 flex-1">
+<span class="material-symbols-outlined text-[#A259FF] text-xl">auto_awesome</span>
+<input class="w-full bg-transparent border-none text-sm font-medium text-primary focus:ring-0 cursor-default" readonly="" type="text" value="Generate 3 alternate layout directions for checkout flow..."/>
+</div>
+<button class="bg-primary text-white text-xs font-semibold px-4 py-2 rounded-full hover:bg-neutral-800 transition">
+            Generate
+          </button>
+</div>
+<!-- 3 Generative Variant Artboards -->
+<div class="grid grid-cols-3 gap-6 relative">
+<!-- Variant 1: Minimalist Split -->
+<div class="border border-gray-clean rounded-xl p-5 bg-surface hover:border-primary/40 transition">
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs font-semibold text-primary">Direction A: Minimal Split</span>
+<span class="text-[10px] bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded font-mono">Tokens Matched</span>
+</div>
+<div class="h-56 bg-white rounded-lg border border-gray-clean p-3 flex flex-col justify-between">
+<div class="flex items-center justify-between border-b border-gray-clean pb-2">
+<div class="w-16 h-3 bg-neutral-200 rounded"></div>
+<div class="w-6 h-6 rounded-full bg-neutral-200"></div>
+</div>
+<div class="space-y-2">
+<div class="w-full h-8 bg-neutral-100 rounded"></div>
+<div class="w-full h-8 bg-neutral-100 rounded"></div>
+</div>
+<div class="w-full h-8 bg-primary text-white rounded flex items-center justify-center text-xs font-medium">Continue</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-secondary">
+<span>Fidelity: High</span>
+<span class="text-[#0ACF83] font-medium">0 accessibility issues</span>
+</div>
+</div>
+<!-- Variant 2: Card Stepper (With Claude Agent presence tag) -->
+<div class="border-2 border-[#A259FF] rounded-xl p-5 bg-surface relative shadow-sm">
+<div class="absolute -top-3 left-4 bg-[#A259FF] text-white text-[10px] font-semibold px-2.5 py-0.5 rounded-full flex items-center space-x-1">
+<span class="material-symbols-outlined text-[12px]">smart_toy</span>
+<span>Claude Agent exploring</span>
+</div>
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs font-bold text-primary">Direction B: Expressive Accordion</span>
+<span class="text-[10px] bg-[#A259FF]/15 text-[#A259FF] font-semibold px-2 py-0.5 rounded">Active Choice</span>
+</div>
+<div class="h-56 bg-white rounded-lg border border-gray-clean p-3 flex flex-col justify-between">
+<div class="space-y-2">
+<div class="w-full p-2 bg-[#EDF8F2] border border-[#0ACF83]/30 rounded text-[11px] font-medium text-[#0ACF83]">✓ 1. Delivery Address</div>
+<div class="w-full p-2 bg-neutral-100 rounded text-[11px] font-semibold text-primary">2. Payment Method</div>
+<div class="pl-2 space-y-1">
+<div class="w-3/4 h-2 bg-neutral-200 rounded"></div>
+<div class="w-1/2 h-2 bg-neutral-200 rounded"></div>
+</div>
+</div>
+<div class="w-full h-8 bg-[#A259FF] text-white rounded flex items-center justify-center text-xs font-medium">Review Order</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-secondary">
+<span>Conversion Model: +14%</span>
+<span class="text-primary font-medium">Synced with Design Sys</span>
+</div>
+</div>
+<!-- Variant 3: One-Tap Express -->
+<div class="border border-gray-clean rounded-xl p-5 bg-surface hover:border-primary/40 transition">
+<div class="flex justify-between items-center mb-3">
+<span class="text-xs font-semibold text-primary">Direction C: One-Tap Express</span>
+<span class="text-[10px] bg-neutral-200 text-neutral-700 px-2 py-0.5 rounded font-mono">Mobile-First</span>
+</div>
+<div class="h-56 bg-white rounded-lg border border-gray-clean p-3 flex flex-col justify-between">
+<div class="w-full h-12 bg-neutral-100 rounded flex items-center justify-center font-bold text-xs">Apple Pay / Passkey</div>
+<div class="text-center text-[10px] text-secondary">or pay with stored credit card</div>
+<div class="w-full h-10 border border-gray-clean rounded flex items-center justify-center text-xs font-medium">Enter Details</div>
+<div class="w-full h-8 bg-neutral-900 text-white rounded flex items-center justify-center text-xs font-medium">Pay $1,250</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-xs text-secondary">
+<span>Tap target: 48px</span>
+<span class="text-neutral-500">Ready for review</span>
+</div>
+</div>
+</div>
+<!-- Node connections & Presence Footer -->
+<div class="mt-8 pt-6 border-t border-gray-clean flex items-center justify-between text-xs text-secondary">
+<div class="flex items-center space-x-3">
+<span class="flex items-center space-x-1 text-primary font-medium">
+<span class="w-2 h-2 rounded-full bg-[#0ACF83]"></span>
+<span>Model: Figma AI 4.5 Turbo</span>
+</span>
+<span>•</span>
+<span>Context: Brand Guidelines 2026, Checkout Repo v3.1</span>
+</div>
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-sm">history</span>
+<span class="hover:text-primary cursor-pointer transition">Revert prompt (2 mins ago)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4 (~y3075): Powerfully Expressive & Editorial Grid -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Section Header -->
+<div class="flex items-end justify-between mb-16">
+<div>
+<h2 class="font-display text-[44px] font-semibold text-primary leading-[1.1] tracking-tight">
+            Powerfully expressive.<br/>Incredibly precise.
+          </h2>
+<p class="font-body text-lg text-secondary mt-3">
+            Every technical tool you need to dial in the details.
+          </p>
+</div>
+<div>
+<a class="inline-flex items-center space-x-1 font-medium text-primary hover:underline text-base" href="#">
+<span>Explore Figma Design</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Rich Editorial Visual Mosaic Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Tile 1: Expressive Kinetic Typography Poster (Col 7) -->
+<div class="col-span-7 bg-[#0d0d0d] text-white rounded-2xl p-8 border border-neutral-800 flex flex-col justify-between min-h-[440px] relative overflow-hidden">
+<div class="flex justify-between items-start z-10">
+<div>
+<span class="text-[11px] font-mono text-[#0ACF83] uppercase tracking-wider">VARIABLE TYPE ENGINE</span>
+<h3 class="text-3xl font-black tracking-tight text-white mt-1">CHROMA KINETIC</h3>
+</div>
+<div class="bg-neutral-800/80 backdrop-blur px-3 py-1.5 rounded-full border border-neutral-700 text-xs font-mono">
+              Weight: 100 → 900
+            </div>
+</div>
+<!-- Variable Font Graphic Display -->
+<div class="my-6 z-10 space-y-1">
+<div class="text-[72px] font-light leading-none tracking-tight text-neutral-400">FLUIDITY</div>
+<div class="text-[72px] font-black leading-none tracking-tighter bg-gradient-to-r from-[#FF7262] via-[#A259FF] to-[#1ABCFE] bg-clip-text text-transparent">
+              PRECISION
+            </div>
+<div class="text-[72px] font-medium leading-none tracking-normal text-white">RESONANCE</div>
+</div>
+<div class="flex items-center justify-between text-xs text-neutral-400 z-10 border-t border-neutral-800 pt-4 font-mono">
+<span>Optical size: 144pt</span>
+<span>Slant: -12°</span>
+<span>Glyph Alternates: Active</span>
+</div>
+<!-- Decorative vector background glow -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-[#A259FF]/20 rounded-full blur-3xl pointer-events-none"></div>
+</div>
+<!-- Tile 2: Vector Pen Tool with Precise Bezier Handles (Col 5) -->
+<div class="col-span-5 bg-surface border border-gray-clean rounded-2xl p-6 flex flex-col justify-between min-h-[440px]">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-mono text-secondary uppercase tracking-wider">Vector Network</span>
+<span class="material-symbols-outlined text-primary text-xl">gesture</span>
+</div>
+<h4 class="font-display text-xl font-bold text-primary">Complex curve handles &amp; nodes</h4>
+<p class="text-xs text-secondary mt-1">Non-destructive vector manipulation with infinite node branches.</p>
+</div>
+<!-- Vector Editor Canvas Simulation -->
+<div class="my-auto py-4 flex items-center justify-center relative">
+<svg class="w-full h-44" fill="none" viewbox="0 0 320 180">
+<!-- Grid background -->
+<defs>
+<pattern height="20" id="grid" patternunits="userSpaceOnUse" width="20">
+<path d="M 20 0 L 0 0 0 20" fill="none" stroke="#e5e5e5" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<rect fill="url(#grid)" height="100%" width="100%"></rect>
+<!-- Bezier Curve -->
+<path d="M 40 140 C 90 20, 220 20, 280 130" fill="none" stroke="#000000" stroke-width="3"></path>
+<!-- Control Handles -->
+<line stroke="#1ABCFE" stroke-dasharray="3 3" stroke-width="1.5" x1="90" x2="40" y1="20" y2="140"></line>
+<line stroke="#1ABCFE" stroke-dasharray="3 3" stroke-width="1.5" x1="220" x2="280" y1="20" y2="130"></line>
+<!-- Nodes & Handle Points -->
+<circle cx="40" cy="140" fill="#1ABCFE" r="4.5" stroke="#ffffff" stroke-width="2"></circle>
+<circle cx="280" cy="130" fill="#1ABCFE" r="4.5" stroke="#ffffff" stroke-width="2"></circle>
+<rect fill="#FF7262" height="8" stroke="#ffffff" stroke-width="1.5" width="8" x="86" y="16"></rect>
+<rect fill="#FF7262" height="8" stroke="#ffffff" stroke-width="1.5" width="8" x="216" y="16"></rect>
+</svg>
+</div>
+<div class="bg-white p-3 rounded-xl border border-gray-clean flex items-center justify-between text-xs font-mono">
+<span class="text-secondary">Bezier: C1 (90, 20)</span>
+<span class="text-primary font-bold">Smart Curves: ON</span>
+</div>
+</div>
+<!-- Tile 3: Vivid Chromatic Biological Mosaic Art piece (Col 4) -->
+<div class="col-span-4 bg-white border border-gray-clean rounded-2xl p-5 flex flex-col justify-between">
+<div class="relative h-60 rounded-xl overflow-hidden border border-gray-clean mb-4">
+<img class="w-full h-full object-cover" data-alt="A vivid, high-fidelity biological specimen macro photograph of an exotic chromatic butterfly wing with iridescent teal, orange, and deep violet micro-scales under crisp studio lighting. The aesthetic is ultra-sharp, artistic, and modern, blending natural organic textures with graphic overlay grid lines and vector precision markers in a clean light-mode studio context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiPVSYnuozGsXJ5gAtYG-I-KDGzuiCHU65ItcoWB3-ynLw0b3Aysw20Ee3FGJLQLYFVoXKm3UBrf6lpCh9jezCphB0m_0zkUkg7iEHFdSNJ2NoVnPx7CUHYvDGYnfVSF2jOuHjhOMkv4rnjaHIa1ZXqVfIV4ItjmOGt7m9SJQSwipnpooigZOTH2Zsnd2n9VO5VltBERGlESWUwqfKswnmiWxrxTdI6Oz6uY0AK0WlQW2rxRyC7PZf38gkGtx7cMAHkFki-JD3N4_z"/>
+<div class="absolute top-3 left-3 bg-black/75 text-white backdrop-blur text-[10px] font-mono px-2 py-0.5 rounded">
+              Overlay: Difference (75%)
+            </div>
+</div>
+<div>
+<h4 class="font-display font-bold text-base text-primary">Blend modes &amp; color profiles</h4>
+<p class="text-xs text-secondary mt-1">Full Display P3 color gamut support with real-time composite rendering.</p>
+</div>
+</div>
+<!-- Tile 4: Type on Path Circular Graphic (Col 4) -->
+<div class="col-span-4 bg-white border border-gray-clean rounded-2xl p-6 flex flex-col items-center justify-between text-center">
+<span class="text-xs font-mono text-secondary uppercase self-start">Typography Toolset</span>
+<div class="w-48 h-48 my-4 flex items-center justify-center relative">
+<svg class="w-full h-full animate-[spin_24s_linear_infinite]" viewbox="0 0 200 200">
+<path d="M 100, 100 m -70, 0 a 70,70 0 1,1 140,0 a 70,70 0 1,1 -140,0" fill="transparent" id="circlePath"></path>
+<text class="text-[12px] font-mono font-bold uppercase tracking-[0.2em] fill-black">
+<textpath href="#circlePath">
+                  FIGMA DESIGN • POWERFUL EXPRESSION • PRECISION •
+                </textpath>
+</text>
+</svg>
+<div class="absolute w-16 h-16 rounded-full bg-surface border border-gray-clean flex items-center justify-center">
+<span class="font-display font-black text-xs">2026</span>
+</div>
+</div>
+<div class="w-full text-left">
+<h4 class="font-display font-bold text-base text-primary">Text on path &amp; layout grids</h4>
+<p class="text-xs text-secondary mt-1">Bend, warp, and position typographic hierarchies organically.</p>
+</div>
+</div>
+<!-- Tile 5: Shader Noise & Gradients Panel (Col 4) -->
+<div class="col-span-4 bg-white border border-gray-clean rounded-2xl p-6 flex flex-col justify-between">
+<div class="flex justify-between items-center">
+<span class="text-xs font-mono text-secondary uppercase">Generative Shaders</span>
+<span class="material-symbols-outlined text-secondary">blur_on</span>
+</div>
+<div class="h-40 rounded-xl my-4 bg-gradient-to-tr from-[#1ABCFE] via-[#A259FF] to-[#FF7262] p-4 flex flex-col justify-end text-white shadow-inner">
+<span class="text-[10px] font-mono">Shader: Voronoi Glass Distortion</span>
+<span class="text-xs font-bold">120 FPS Native Canvas WebGL</span>
+</div>
+<div>
+<h4 class="font-display font-bold text-base text-primary">Surface texture &amp; noise</h4>
+<p class="text-xs text-secondary mt-1">GPU-accelerated atmospheric grain, glass blur, and chromatic dispersion.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5 (~y4534): Design Context to Code -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Header -->
+<div class="text-center max-w-2xl mx-auto mb-16">
+<h2 class="font-display text-[44px] font-semibold text-primary leading-[1.1] tracking-tight">
+          Start with design context.<br/>Build with consistency.
+        </h2>
+<p class="font-body text-lg text-secondary mt-4">
+          Your context, codebase, and agents stay connected so what you design is what gets shipped.
+        </p>
+</div>
+<!-- Large Pale Cyan Showcase Container (#E0F7FA / #E6F4F8) -->
+<div class="w-full bg-[#E6F4F8] border border-[#bce2ed] rounded-2xl p-8 shadow-sm">
+<div class="bg-white rounded-xl shadow-lg border border-gray-clean overflow-hidden">
+<!-- Top Bar with Git Integration -->
+<div class="h-12 bg-surface border-b border-gray-clean px-6 flex items-center justify-between">
+<div class="flex items-center space-x-3 text-xs font-medium text-primary">
+<span class="material-symbols-outlined text-sm text-[#1ABCFE]">terminal</span>
+<span class="font-mono text-xs">figma-dev-mode / billing-v2.tsx</span>
+<span class="px-2 py-0.5 rounded bg-[#EDF8F2] text-[#0ACF83] text-[10px] font-semibold">Ready for Dev</span>
+</div>
+<div class="flex items-center space-x-4 text-xs">
+<div class="flex items-center space-x-1.5 text-secondary">
+<span class="material-symbols-outlined text-sm">merge</span>
+<span class="font-mono">PR #481 Linked</span>
+</div>
+<button class="bg-primary text-white text-xs font-medium px-3 py-1.5 rounded-full hover:bg-neutral-800">
+                Copy Code
+              </button>
+</div>
+</div>
+<!-- Code & Tokens Mapping Layout -->
+<div class="grid grid-cols-12">
+<!-- Left Inspect Side -->
+<div class="col-span-5 p-6 border-r border-gray-clean space-y-6">
+<div>
+<span class="text-[11px] font-mono text-secondary uppercase">Source Component</span>
+<h4 class="font-display text-lg font-bold text-primary mt-1">PaymentMethodCard</h4>
+<p class="text-xs text-secondary mt-1">Found in @design-system/core-components v4.12.0</p>
+</div>
+<!-- Tokens Mapping Table -->
+<div class="border border-gray-clean rounded-lg overflow-hidden text-xs">
+<div class="bg-surface px-3 py-2 font-semibold text-secondary border-b border-gray-clean">Design Token → Code Alias</div>
+<div class="p-3 space-y-2 font-mono text-[11px]">
+<div class="flex justify-between">
+<span class="text-neutral-600">color.border.subtle</span>
+<span class="text-[#0ACF83]">tokens.gray[200]</span>
+</div>
+<div class="flex justify-between">
+<span class="text-neutral-600">spacing.card.padding</span>
+<span class="text-[#1ABCFE]">theme.spacing.p6</span>
+</div>
+<div class="flex justify-between">
+<span class="text-neutral-600">radius.container</span>
+<span class="text-[#A259FF]">borderRadius.lg</span>
+</div>
+</div>
+</div>
+<div class="pt-2">
+<a class="inline-flex items-center space-x-1.5 font-medium text-primary hover:underline text-sm" href="#">
+<span>Explore Figma Make</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Right: Production TypeScript Output -->
+<div class="col-span-7 bg-[#1b1b1b] text-neutral-200 p-6 font-mono text-xs leading-relaxed overflow-x-auto">
+<div class="text-neutral-500 mb-2">// Generated by Figma Dev Mode with React + TypeScript</div>
+<div class="space-y-1">
+<div><span class="text-[#FF7262]">import</span> React <span class="text-[#FF7262]">from</span> <span class="text-[#0ACF83]">'react'</span>;</div>
+<div><span class="text-[#FF7262]">import</span> { Card, Badge, Icon } <span class="text-[#FF7262]">from</span> <span class="text-[#0ACF83]'">'@tokens/figma-ui'</span>;</div>
+<div class="text-neutral-500 my-2">// Ready-for-dev spec: 3 variants</div>
+<div><span class="text-[#FF7262]">export const</span> <span class="text-[#1ABCFE]">PaymentCard</span> = ({ selected, account }) =&gt; {</div>
+<div class="pl-4"><span class="text-[#FF7262]">return</span> (</div>
+<div class="pl-8 text-neutral-400">&lt;<span class="text-[#FF7262]">Card</span> className=<span class="text-[#0ACF83]">"border border-gray-clean p-6 rounded-xl hover:shadow-sm"</span>&gt;</div>
+<div class="pl-12 text-neutral-400">&lt;<span class="text-[#FF7262]">Badge</span> variant=<span class="text-[#0ACF83]">"success"</span>&gt;Verified&lt;/<span class="text-[#FF7262]">Badge</span>&gt;</div>
+<div class="pl-12 text-neutral-400">&lt;<span class="text-[#FF7262]">span</span> className=<span class="text-[#0ACF83]">"font-semibold text-primary"</span>&gt;{account.name}&lt;/<span class="text-[#FF7262]">span</span>&gt;</div>
+<div class="pl-8 text-neutral-400">&lt;/<span class="text-[#FF7262]">Card</span>&gt;</div>
+<div class="pl-4">);</div>
+<div>};</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6 (~y5525): Social Proof & Testimonial -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Headline -->
+<h2 class="font-display text-[44px] font-semibold text-primary text-center mb-16 tracking-tight">
+        The products you love are designed in Figma
+      </h2>
+<!-- Featured Testimonial Block -->
+<div class="max-w-4xl mx-auto border border-gray-clean rounded-2xl p-12 bg-white shadow-sm mb-20 text-center">
+<blockquote class="font-display text-2xl font-medium text-primary leading-relaxed">
+          “Everyone is able to influence, inspire, and give input without ever leaving the design file. That creates a really transparent, open, and honest process throughout the whole project.”
+        </blockquote>
+<div class="mt-8 flex flex-col items-center">
+<div class="font-bold text-base text-primary">Francisco Seiz</div>
+<div class="text-secondary text-sm">Senior Design Director, Code and Theory</div>
+</div>
+</div>
+<!-- Stat Block -->
+<div class="text-center mb-16 border-b border-gray-clean pb-16">
+<div class="font-display text-7xl font-extrabold text-primary tracking-tight">95%</div>
+<div class="font-display text-2xl font-bold text-primary mt-2">of the Fortune 500 uses Figma</div>
+<div class="font-body text-xs text-secondary mt-1">Based on data from March 2025.</div>
+</div>
+<!-- Monochrome Customer Logo Grid (13 exact brands) -->
+<div class="grid grid-cols-6 gap-8 items-center justify-items-center opacity-85 text-primary">
+<span class="font-display font-bold text-xl tracking-tight">airbnb</span>
+<span class="font-display font-black text-xl tracking-wider">ATLASSIAN</span>
+<span class="font-display font-bold text-xl tracking-normal">Dropbox</span>
+<span class="font-display font-black text-xl tracking-tight">duolingo</span>
+<span class="font-display font-extrabold text-xl tracking-tight">GitHub</span>
+<span class="font-display font-bold text-xl tracking-tight">mercado libre</span>
+<span class="font-display font-semibold text-xl tracking-tight">Microsoft</span>
+<span class="font-display font-extrabold text-xl tracking-widest uppercase">NETFLIX</span>
+<span class="font-display font-bold text-xl tracking-tight">Pentagram</span>
+<span class="font-display font-black text-xl tracking-tight">slack</span>
+<span class="font-display font-bold text-xl tracking-tight">stripe</span>
+<span class="font-serif italic font-bold text-lg tracking-tight">The New York Times</span>
+</div>
+<div class="flex justify-center mt-6">
+<span class="font-display font-black text-2xl tracking-normal text-primary">zoom</span>
+</div>
+</div>
+</section>
+<!-- Section 7 (~y6634): Community Resources & Templates -->
+<section class="w-full border-t border-gray-clean py-24 bg-surface-container-lowest">
+<div class="max-w-[1280px] mx-auto px-8">
+<!-- Heading & Action -->
+<div class="flex items-end justify-between mb-14">
+<div>
+<h2 class="font-display text-[44px] font-semibold text-primary leading-[1.1] tracking-tight">
+            Explore what you can do in Figma.
+          </h2>
+<p class="font-body text-lg text-secondary mt-2">
+            Browse resources made by the community.
+          </p>
+</div>
+<div>
+<a class="inline-flex items-center space-x-1 font-medium text-primary hover:underline text-base" href="#">
+<span>Browse all templates</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Community Carousel / Cards Grid (5 Distinct Categories) -->
+<div class="grid grid-cols-5 gap-6">
+<!-- Card 1: iOS 19 Design Kit (UI Kit) -->
+<div class="border border-gray-clean rounded-xl p-4 bg-white hover:shadow-md transition group cursor-pointer flex flex-col justify-between">
+<div class="h-44 bg-surface rounded-lg border border-gray-clean p-3 flex flex-col justify-between mb-4 group-hover:border-primary/40 transition">
+<div class="flex justify-between items-center text-[10px] text-secondary font-mono">
+<span>UI KIT</span>
+<span>iOS 19</span>
+</div>
+<div class="w-full bg-white rounded-lg p-2.5 shadow-xs border border-gray-clean text-center">
+<span class="text-xs font-bold text-primary">Dynamic Island Spec</span>
+<div class="h-1.5 w-12 bg-primary mx-auto rounded-full mt-2"></div>
+</div>
+<div class="text-[10px] text-secondary">420+ Components</div>
+</div>
+<div>
+<h4 class="font-display font-semibold text-sm text-primary">iOS 19 Core Design Kit</h4>
+<p class="text-xs text-secondary mt-1">Official Apple UI components and dark mode tokens.</p>
+</div>
+</div>
+<!-- Card 2: Modern SaaS Landing Template (Websites) -->
+<div class="border border-gray-clean rounded-xl p-4 bg-white hover:shadow-md transition group cursor-pointer flex flex-col justify-between">
+<div class="h-44 bg-[#EDF8F2] rounded-lg border border-[#d0ecd9] p-3 flex flex-col justify-between mb-4 group-hover:border-primary/40 transition">
+<div class="flex justify-between items-center text-[10px] text-[#0ACF83] font-mono">
+<span>WEBSITE</span>
+<span>RESPONSIVE</span>
+</div>
+<div class="space-y-1.5">
+<div class="w-full h-3 bg-white rounded shadow-2xs"></div>
+<div class="w-3/4 h-2 bg-white/70 rounded"></div>
+<div class="w-1/2 h-2 bg-white/70 rounded"></div>
+</div>
+<div class="text-[10px] text-[#0ACF83] font-medium">Auto-layout 5.0 ready</div>
+</div>
+<div>
+<h4 class="font-display font-semibold text-sm text-primary">Modern SaaS Landing</h4>
+<p class="text-xs text-secondary mt-1">High conversion hero layouts, bento grids, and footer.</p>
+</div>
+</div>
+<!-- Card 3: Brand Social Assets (Social Media) -->
+<div class="border border-gray-clean rounded-xl p-4 bg-white hover:shadow-md transition group cursor-pointer flex flex-col justify-between">
+<div class="h-44 bg-[#E6D6FA] rounded-lg border border-[#d2b8f7] p-3 flex flex-col justify-between mb-4 group-hover:border-primary/40 transition">
+<div class="flex justify-between items-center text-[10px] text-[#A259FF] font-mono">
+<span>SOCIAL</span>
+<span>MULTICHANNEL</span>
+</div>
+<div class="w-20 h-20 bg-white rounded-xl shadow-xs mx-auto flex items-center justify-center font-bold text-xs text-[#A259FF]">
+              1:1 POST
+            </div>
+<div class="text-[10px] text-[#A259FF] font-medium">Stories &amp; Reels kit</div>
+</div>
+<div>
+<h4 class="font-display font-semibold text-sm text-primary">Brand Social Suite</h4>
+<p class="text-xs text-secondary mt-1">Multi-format template collection for product launches.</p>
+</div>
+</div>
+<!-- Card 4: Fintech Wallet Flow (Mobile Apps) -->
+<div class="border border-gray-clean rounded-xl p-4 bg-white hover:shadow-md transition group cursor-pointer flex flex-col justify-between">
+<div class="h-44 bg-[#E6F4F8] rounded-lg border border-[#bce2ed] p-3 flex flex-col justify-between mb-4 group-hover:border-primary/40 transition">
+<div class="flex justify-between items-center text-[10px] text-[#1ABCFE] font-mono">
+<span>MOBILE APP</span>
+<span>PROTOTYPE</span>
+</div>
+<div class="w-24 bg-white rounded-lg p-2 mx-auto shadow-xs border border-gray-clean text-center">
+<span class="text-[10px] font-bold text-primary">$4,850.20</span>
+<div class="text-[8px] text-[#0ACF83] mt-0.5">+12.4%</div>
+</div>
+<div class="text-[10px] text-[#1ABCFE] font-medium">Smart animate included</div>
+</div>
+<div>
+<h4 class="font-display font-semibold text-sm text-primary">Fintech Wallet Flow</h4>
+<p class="text-xs text-secondary mt-1">Complete mobile onboarding, send, and receive interactions.</p>
+</div>
+</div>
+<!-- Card 5: Minimal Slide Deck (Presentations) -->
+<div class="border border-gray-clean rounded-xl p-4 bg-white hover:shadow-md transition group cursor-pointer flex flex-col justify-between">
+<div class="h-44 bg-surface rounded-lg border border-gray-clean p-3 flex flex-col justify-between mb-4 group-hover:border-primary/40 transition">
+<div class="flex justify-between items-center text-[10px] text-secondary font-mono">
+<span>SLIDES</span>
+<span>16:9 DECK</span>
+</div>
+<div class="bg-primary text-white p-3 rounded text-left">
+<span class="text-[10px] font-bold tracking-tight">Q3 STRATEGY</span>
+<div class="text-[8px] text-neutral-400 mt-1">45 Keynote Slides</div>
+</div>
+<div class="text-[10px] text-secondary">Figma Slides Native</div>
+</div>
+<div>
+<h4 class="font-display font-semibold text-sm text-primary">Minimal Keynote Deck</h4>
+<p class="text-xs text-secondary mt-1">Clean, typography-driven presentation templates.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer (Comprehensive authentic Figma multi-column footer) -->
+<footer class="w-full border-t border-gray-clean bg-surface-container-lowest">
+<div class="w-full max-w-[1280px] mx-auto px-8 py-20">
+<div class="grid grid-cols-12 gap-10">
+<!-- Col 1: Figma Logo & Social Links (Col 3) -->
+<div class="col-span-3 space-y-6">
+<a class="flex items-center space-x-3" href="#">
+<svg class="w-6 h-9" fill="none" viewbox="0 0 38 57">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-display font-bold text-2xl text-primary tracking-tight">Figma</span>
+</a>
+<!-- Social Icon Links -->
+<div class="flex items-center space-x-4 text-primary">
+<!-- Twitter/X -->
+<a aria-label="X (Twitter)" class="w-8 h-8 rounded-full border border-gray-clean flex items-center justify-center hover:bg-neutral-100 transition" href="#">
+<span class="font-bold text-xs">𝕏</span>
+</a>
+<!-- YouTube -->
+<a aria-label="YouTube" class="w-8 h-8 rounded-full border border-gray-clean flex items-center justify-center hover:bg-neutral-100 transition" href="#">
+<span class="material-symbols-outlined text-sm">smart_display</span>
+</a>
+<!-- LinkedIn -->
+<a aria-label="LinkedIn" class="w-8 h-8 rounded-full border border-gray-clean flex items-center justify-center hover:bg-neutral-100 transition" href="#">
+<span class="font-bold text-xs">in</span>
+</a>
+<!-- Instagram -->
+<a aria-label="Instagram" class="w-8 h-8 rounded-full border border-gray-clean flex items-center justify-center hover:bg-neutral-100 transition" href="#">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</a>
+</div>
+<div class="text-xs text-secondary">
+            © 2026 Figma, Inc.
+          </div>
+</div>
+<!-- Col 2: PRODUCT -->
+<div class="col-span-2 space-y-3">
+<div class="font-body font-semibold text-xs text-primary uppercase tracking-wider">PRODUCT</div>
+<ul class="space-y-2 text-sm text-secondary font-normal">
+<li><a class="hover:text-primary transition" href="#">Figma Design</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Make</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Weave</a></li>
+<li><a class="hover:text-primary transition" href="#">Dev Mode</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Motion</a></li>
+<li><a class="hover:text-primary transition" href="#">FigJam</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Slides</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Draw</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Sites</a></li>
+<li><a class="hover:text-primary transition" href="#">Figma Buzz</a></li>
+</ul>
+</div>
+<!-- Col 3: PLANS -->
+<div class="col-span-2 space-y-3">
+<div class="font-body font-semibold text-xs text-primary uppercase tracking-wider">PLANS</div>
+<ul class="space-y-2 text-sm text-secondary font-normal">
+<li><a class="hover:text-primary transition" href="#">Starter</a></li>
+<li><a class="hover:text-primary transition" href="#">Professional</a></li>
+<li><a class="hover:text-primary transition" href="#">Organization</a></li>
+<li><a class="hover:text-primary transition" href="#">Enterprise</a></li>
+</ul>
+</div>
+<!-- Col 4: USE CASES -->
+<div class="col-span-2 space-y-3">
+<div class="font-body font-semibold text-xs text-primary uppercase tracking-wider">USE CASES</div>
+<ul class="space-y-2 text-sm text-secondary font-normal">
+<li><a class="hover:text-primary transition" href="#">UI Design</a></li>
+<li><a class="hover:text-primary transition" href="#">UX Design</a></li>
+<li><a class="hover:text-primary transition" href="#">Prototyping</a></li>
+<li><a class="hover:text-primary transition" href="#">Wireframing</a></li>
+<li><a class="hover:text-primary transition" href="#">Diagramming</a></li>
+<li><a class="hover:text-primary transition" href="#">Brainstorming</a></li>
+</ul>
+</div>
+<!-- Col 5: RESOURCES -->
+<div class="col-span-2 space-y-3">
+<div class="font-body font-semibold text-xs text-primary uppercase tracking-wider">RESOURCES</div>
+<ul class="space-y-2 text-sm text-secondary font-normal">
+<li><a class="hover:text-primary transition" href="#">Blog</a></li>
+<li><a class="hover:text-primary transition" href="#">Best practices</a></li>
+<li><a class="hover:text-primary transition" href="#">Support</a></li>
+<li><a class="hover:text-primary transition" href="#">Status</a></li>
+<li><a class="hover:text-primary transition" href="#">Releases</a></li>
+</ul>
+</div>
+<!-- Col 6: COMPANY -->
+<div class="col-span-1 space-y-3">
+<div class="font-body font-semibold text-xs text-primary uppercase tracking-wider">COMPANY</div>
+<ul class="space-y-2 text-sm text-secondary font-normal">
+<li><a class="hover:text-primary transition" href="#">About</a></li>
+<li><a class="hover:text-primary transition" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition" href="#">Newsroom</a></li>
+<li><a class="hover:text-primary transition" href="#">Contact</a></li>
+<li><a class="hover:text-primary transition" href="#">Legal</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
