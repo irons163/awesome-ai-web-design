@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-black" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Spotify – Web Player</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'SpotifyMixUI';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUI-Regular-76c92fb1a35c462f73429fa8865163eb.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpotifyMixUI';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUI-Bold-09c45a3a0ce9d2971e62cb26e97760fb.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'SpotifyMixUITitle';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUITitleVariable-08bab3354d40f74e5177917b5ae80894.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: 'SpotifyMixUI', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      width: 1280px;
+      height: 720px;
+      overflow: hidden;
+      background-color: #000000;
+      color: #ffffff;
+      user-select: none;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .font-title {
+      font-family: 'SpotifyMixUITitle', 'SpotifyMixUI', sans-serif;
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Card hover styling */
+    .card-item {
+      padding: 12px;
+      border-radius: 8px;
+      transition: background-color 0.2s ease;
+      background-color: transparent;
+    }
+    .card-item:hover {
+      background-color: #1f1f1f;
+    }
+    .play-btn {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+    }
+    .card-item:hover .play-btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="relative w-[1280px] h-[720px] bg-black overflow-hidden flex flex-col justify-between">
+<!-- TOP NAVIGATION (y=0..64) -->
+<header class="absolute top-0 left-0 w-[1280px] h-[64px] bg-black flex items-center px-6 z-30 select-none">
+<!-- Spotify Logo (x=28, y=16, 32x32) -->
+<a aria-label="Spotify Home" class="absolute left-[28px] top-[16px] text-white hover:scale-105 transition-transform" href="https://open.spotify.com/">
+<svg class="w-8 h-8 fill-current text-white" viewbox="0 0 24 24">
+<path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.503 17.306c-.217.356-.677.469-1.033.252-2.827-1.728-6.386-2.119-10.579-1.162-.405.092-.813-.158-.905-.563-.092-.405.158-.813.563-.905 4.593-1.049 8.528-.609 11.702 1.345.356.217.469.677.252 1.033zm1.47-3.267c-.273.444-.855.586-1.299.313-3.236-1.99-8.168-2.565-11.996-1.401-.5.152-1.032-.132-1.184-.632-.152-.5.132-1.032.632-1.184 4.378-1.33 9.816-.689 13.534 1.605.444.273.586.855.313 1.299zm.126-3.411c-3.881-2.304-10.287-2.516-14.004-1.388-.596.181-1.23-.162-1.411-.758-.181-.596.162-1.23.758-1.411 4.271-1.297 11.339-1.045 15.801 1.604.536.318.71 1.012.392 1.548-.318.536-1.012.71-1.536.405z"></path>
+</svg>
+</a>
+<!-- Home Button (x=88, y=8, 48x48) -->
+<a class="absolute left-[88px] top-[8px] w-[48px] h-[48px] rounded-full bg-[#1f1f1f] hover:bg-[#2a2a2a] hover:scale-104 flex items-center justify-center text-white transition-all" href="https://open.spotify.com/" title="Home">
+<svg class="w-6 h-6 fill-current text-white" viewbox="0 0 24 24">
+<path d="M12 2.1a1 1 0 0 0-.962.038l-8.5 5.5A1 1 0 0 0 2 8.5V20a2 2 0 0 0 2 2h6a1 1 0 0 0 1-1v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5a1 1 0 0 0 1 1h6a2 2 0 0 0 2-2V8.5a1 1 0 0 0-.538-.862l-8.5-5.5A1 1 0 0 0 12 2.1z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<!-- Search Pill (x=144, y=8, w=474, h=48) -->
+<div class="absolute left-[144px] top-[8px] w-[474px] h-[48px] rounded-full bg-[#1f1f1f] hover:bg-[#2a2a2a] border border-transparent hover:border-[#333] transition-all flex items-center px-3 group focus-within:border-white focus-within:bg-[#242424]">
+<!-- Search Icon -->
+<button aria-label="Search" class="w-10 h-10 flex items-center justify-center text-[#b3b3b3] group-hover:text-white transition-colors">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M10.533 1.279c-5.18 0-9.407 4.14-9.407 9.279s4.226 9.279 9.407 9.279c2.234 0 4.29-.77 5.907-2.058l4.353 4.353a1 1 0 1 0 1.414-1.414l-4.344-4.344a9.157 9.157 0 0 0 2.077-5.816c0-5.14-4.226-9.279-9.407-9.279zm-7.407 9.279c0-4.006 3.302-7.279 7.407-7.279s7.407 3.273 7.407 7.279-3.302 7.279-7.407 7.279-7.407-3.273-7.407-7.279z"></path>
+</svg>
+</button>
+<!-- Input Field -->
+<input class="flex-1 bg-transparent border-none outline-none text-[14px] text-white placeholder-[#b3b3b3] font-normal px-2 truncate" placeholder="What do you want to play?" spellcheck="false" type="text"/>
+<!-- Thin Vertical Divider -->
+<div class="h-6 w-[1px] bg-[#3a3a3a] mx-2"></div>
+<!-- Browse Icon at right -->
+<button aria-label="Browse" class="w-10 h-10 flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Browse">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M15 15.5c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2z"></path>
+<path d="M4 3a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H4zm1 2h14v14H5V5zm6 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm-2 4a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"></path>
+<path d="M3 3h18v18H3V3zm16 2H5v14h14V5zm-8 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8zm0 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4z"></path>
+</svg>
+</button>
+</div>
+<!-- Top Right Links (Premium / Support / Download start x=692, y=8, h=48) -->
+<div class="absolute left-[692px] top-[8px] h-[48px] flex items-center space-x-6 text-[16px] font-bold text-[#b3b3b3]">
+<a class="hover:text-white transition-colors hover:scale-104 transform" href="https://www.spotify.com/premium/">Premium</a>
+<a class="hover:text-white transition-colors hover:scale-104 transform" href="https://support.spotify.com/">Support</a>
+<a class="hover:text-white transition-colors hover:scale-104 transform" href="https://www.spotify.com/download/">Download</a>
+</div>
+<!-- Divider (x=937, h=25) -->
+<div class="absolute left-[937px] top-[20px] w-[1px] h-[25px] bg-[#333333]"></div>
+<!-- Install App (x=962, y=8, h=48) -->
+<a class="absolute left-[962px] top-[8px] h-[48px] flex items-center gap-2 text-[14px] font-bold text-[#b3b3b3] hover:text-white transition-all" href="https://www.spotify.com/download/">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 3a1 1 0 0 1 1 1v9.586l2.293-2.293a1 1 0 0 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L11 13.586V4a1 1 0 0 1 1-1zm-7 15a1 1 0 0 1 1-1h12a1 1 0 1 1 0 2H6a1 1 0 0 1-1-1z"></path>
+</svg>
+<span>Install App</span>
+</a>
+<!-- Sign up link (x=1091, y=8) -->
+<a class="absolute left-[1091px] top-[8px] h-[48px] flex items-center text-[16px] font-bold text-[#b3b3b3] hover:text-white hover:scale-104 transition-all" href="https://www.spotify.com/signup">
+      Sign up
+    </a>
+<!-- White Log in Pill (x=1164, y=8, w=108, h=48) -->
+<a class="absolute left-[1164px] top-[8px] w-[108px] h-[48px] rounded-full bg-white text-black font-bold text-[16px] flex items-center justify-center hover:scale-104 transition-transform active:scale-98" href="https://accounts.spotify.com/login">
+      Log in
+    </a>
+</header>
+<!-- MIDDLE SECTION: LEFT LIBRARY PANEL & MAIN CONTENT VIEWPORT (y=64..638, h=574) -->
+<main class="absolute top-[64px] left-0 w-[1280px] h-[574px] px-2 flex gap-2">
+<!-- LEFT LIBRARY PANEL (x=8, y=64, w=294, h=574, bg #121212, rounded 8px) -->
+<aside class="w-[294px] h-[574px] bg-[#121212] rounded-[8px] flex flex-col relative select-none shrink-0 overflow-hidden">
+<!-- Library Header (x=28 -> padding left 20px, y=91 -> offset top 27px) -->
+<div class="pt-[22px] px-4 flex items-center justify-between">
+<button class="flex items-center gap-3 text-[#b3b3b3] hover:text-white transition-colors group">
+<svg class="w-6 h-6 fill-current text-[#b3b3b3] group-hover:text-white transition-colors" viewbox="0 0 24 24">
+<path d="M14.5 2.134a1 1 0 0 1 1 0l6 3.464a1 1 0 0 1 .5.866V21a1 1 0 0 1-1 1h-6a1 1 0 0 1-1-1V3a1 1 0 0 1 .5-.866zM16 4.732V20h4V7.041l-4-2.309zM3 22a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H3zm1-2h4V4H4v16z"></path>
+</svg>
+<span class="text-[16px] font-bold tracking-tight">Your Library</span>
+</button>
+<!-- Circular Plus Button (x=251, y=80, 35px) -->
+<button class="w-[35px] h-[35px] rounded-full hover:bg-[#1f1f1f] flex items-center justify-center text-[#b3b3b3] hover:text-white transition-colors" title="Create playlist or folder">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M11 11V4h2v7h7v2h-7v7h-2v-7H4v-2h7z"></path>
+</svg>
+</button>
+</div>
+<!-- Scrollable Inner Cards Container -->
+<div class="flex-1 overflow-y-auto mt-4 px-2 space-y-4">
+<!-- Box 1: Create your first playlist (x=16, y=155, w=278, h=133, bg #1f1f1f, rounded 8px) -->
+<div class="w-[278px] min-h-[133px] bg-[#1f1f1f] rounded-[8px] p-4 flex flex-col justify-between">
+<div>
+<div class="text-[16px] font-bold text-white tracking-tight">Create your first playlist</div>
+<div class="text-[14px] font-normal text-white mt-1">It's easy, we'll help you</div>
+</div>
+<!-- White Create playlist pill (126x32) -->
+<button class="mt-3 w-[126px] h-[32px] rounded-full bg-white text-black font-bold text-[14px] flex items-center justify-center hover:scale-104 transition-transform active:scale-98">
+            Create playlist
+          </button>
+</div>
+<!-- Box 2: Let's find some podcasts to follow (y=312) -->
+<div class="w-[278px] min-h-[133px] bg-[#1f1f1f] rounded-[8px] p-4 flex flex-col justify-between">
+<div>
+<div class="text-[16px] font-bold text-white tracking-tight">Let's find some podcasts to follow</div>
+<div class="text-[14px] font-normal text-white mt-1">We'll keep you updated on new episodes</div>
+</div>
+<!-- White Browse podcasts pill -->
+<button class="mt-3 w-[140px] h-[32px] rounded-full bg-white text-black font-bold text-[14px] flex items-center justify-center hover:scale-104 transition-transform active:scale-98">
+            Browse podcasts
+          </button>
+</div>
+<!-- Small Muted Legal Links (x=32, y=450) -->
+<div class="pt-6 px-3">
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-[11px] text-[#b3b3b3] font-normal">
+<a class="hover:underline" href="https://www.spotify.com/legal/">Legal</a>
+<a class="hover:underline" href="https://www.spotify.com/safety-and-privacy-center/">Safety &amp; Privacy Center</a>
+<a class="hover:underline" href="https://www.spotify.com/legal/privacy-policy/">Privacy Policy</a>
+<a class="hover:underline" href="https://www.spotify.com/legal/cookies-policy/">Cookies</a>
+<a class="hover:underline" href="https://www.spotify.com/legal/privacy-policy/#s3">About Ads</a>
+<a class="hover:underline" href="https://www.spotify.com/accessibility/">Accessibility</a>
+</div>
+<!-- English outline pill (x=32, y=574, 101x32) -->
+<div class="mt-6 mb-4">
+<button class="h-[32px] px-3 rounded-full border border-[#727272] hover:border-white text-white font-bold text-[13px] flex items-center gap-1.5 hover:scale-104 transition-all">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8.009 8.009 0 0 1-8 8zm6.92-9h-3.05a14.7 14.7 0 0 0-1.12-5.08A8.04 8.04 0 0 1 18.92 11zm-5.06 0h-3.72a12.8 12.8 0 0 1 1.86-5.46A12.8 12.8 0 0 1 13.86 11zm-5.65 0H5.16a8.04 8.04 0 0 1 4.17-5.08A14.7 14.7 0 0 0 8.21 11zm-3.05 2h3.05a14.7 14.7 0 0 0 1.12 5.08A8.04 8.04 0 0 1 5.16 13zm5.05 0h3.72a12.8 12.8 0 0 1-1.86 5.46A12.8 12.8 0 0 1 10.21 13zm5.66 0h3.05a8.04 8.04 0 0 1-4.17 5.08 14.7 14.7 0 0 0 1.12-5.08z"></path>
+</svg>
+<span>English</span>
+</button>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT REGION (x=310, y=64, w=962 [remaining width to 1272], h=574, rounded 8px, #121212 with top gradient from #222) -->
+<section class="flex-1 h-[574px] bg-[#121212] rounded-[8px] overflow-y-auto relative select-none" style="background: linear-gradient(180deg, #222222 0%, #121212 280px);">
+<!-- Sticky Sub-Bar with Inner Left aligned at x=350 (i.e. padding-left: 32px inside 962px container) -->
+<div class="px-8 pt-6 pb-20">
+<!-- SECTION 1: TRENDING SONGS -->
+<div class="mb-8">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-[24px] font-bold font-title tracking-tight text-white hover:underline cursor-pointer">Trending songs</h2>
+<a class="text-[14px] font-bold text-[#b3b3b3] hover:underline cursor-pointer" href="https://open.spotify.com/section/trending">Show all</a>
+</div>
+<!-- Horizontal scrolling row with 24px gaps, not wrapping grid. 153.73px cards -->
+<div class="flex gap-6 overflow-x-hidden pt-1 pb-2">
+<!-- Card 1: Nicole Kidman — ADÉLA -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="ADÉLA" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play ADÉLA" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="ADÉLA">ADÉLA</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Nicole Kidman">Nicole Kidman</div>
+</div>
+</div>
+<!-- Card 2: Last Thing You Need (from GTAVI: The Album) -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Last Thing You Need" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Last Thing You Need" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Last Thing You Need (from GTAVI: The Album)">Last Thing You Need</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Morgan Wallen, Grand Theft Auto VI">Morgan Wallen, Grand Theft Auto VI</div>
+</div>
+</div>
+<!-- Card 3: MISS MY DAWG (feat. Drake) -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="MISS MY DAWG" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play MISS MY DAWG" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="MISS MY DAWG (feat. Drake)">MISS MY DAWG</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Yeat, Drake">Yeat, Drake</div>
+</div>
+</div>
+<!-- Card 4: Let's Get Married -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Let's Get Married" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Let's Get Married" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Let's Get Married">Let's Get Married</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Miley Cyrus">Miley Cyrus</div>
+</div>
+</div>
+<!-- Card 5: RHYNO (from GTAVI: The Album) -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="RHYNO" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play RHYNO" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="RHYNO (from GTAVI: The Album)">RHYNO</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Travis Scott, Grand Theft Auto VI">Travis Scott, Grand Theft Auto VI</div>
+</div>
+</div>
+<!-- Card 6: That's Just Me -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-[4px] overflow-hidden shadow-lg bg-[#282828]">
+<img alt="That's Just Me" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play That's Just Me" class="play-btn absolute bottom-2 right-2 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="That's Just Me">That's Just Me</div>
+<div class="text-[14px] text-[#b3b3b3] line-clamp-2 mt-1 leading-snug" title="Riley Green">Riley Green</div>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION 2: POPULAR ARTISTS (y=438, circular portraits y=483) -->
+<div class="mb-12">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-[24px] font-bold font-title tracking-tight text-white hover:underline cursor-pointer">Popular artists</h2>
+<a class="text-[14px] font-bold text-[#b3b3b3] hover:underline cursor-pointer" href="https://open.spotify.com/section/artists">Show all</a>
+</div>
+<!-- Circular portraits row with same x positions and sizes -->
+<div class="flex gap-6 overflow-x-hidden pt-1 pb-2">
+<!-- Artist 1: The Weeknd -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="The Weeknd" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play The Weeknd" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="The Weeknd">The Weeknd</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+<!-- Artist 2: Lady Gaga -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Lady Gaga" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Lady Gaga" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Lady Gaga">Lady Gaga</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+<!-- Artist 3: Drake -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Drake" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Drake" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Drake">Drake</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+<!-- Artist 4: Kendrick Lamar -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Kendrick Lamar" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Kendrick Lamar" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Kendrick Lamar">Kendrick Lamar</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+<!-- Artist 5: Rihanna -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Rihanna" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Rihanna" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Rihanna">Rihanna</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+<!-- Artist 6: Post Malone -->
+<div class="w-[153.73px] shrink-0 card-item cursor-pointer group">
+<div class="relative w-[129.73px] h-[129.73px] mx-auto rounded-full overflow-hidden shadow-lg bg-[#282828]">
+<img alt="Post Malone" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Play Post Malone" class="play-btn absolute bottom-1 right-1 w-11 h-11 rounded-full bg-[#1ed760] hover:bg-[#1fdf64] hover:scale-106 flex items-center justify-center text-black shadow-xl">
+<svg class="w-5 h-5 fill-current ml-0.5" viewbox="0 0 24 24"><path d="M7.05 3.606l13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606z"></path></svg>
+</button>
+</div>
+<div class="mt-3 px-1">
+<div class="text-[16px] font-bold text-white line-clamp-1 leading-snug hover:underline" title="Post Malone">Post Malone</div>
+<div class="text-[14px] text-[#b3b3b3] mt-1 leading-snug">Artist</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BOTTOM FIXED PROMOTIONAL BAR (x=8, y=646, w=1264, h=66, radius 0, gradient left #ae2997 to right #519bf5) -->
+<footer class="absolute left-[8px] top-[646px] w-[1264px] h-[66px] px-6 flex items-center justify-between select-none z-40 cursor-pointer" style="background: linear-gradient(90deg, #ae2997 0%, #519bf5 100%);">
+<!-- Left text -->
+<div class="flex flex-col justify-center">
+<div class="text-[12px] font-bold uppercase tracking-wider text-white">Preview of Spotify</div>
+<div class="text-[14px] font-medium text-white mt-0.5">Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</div>
+</div>
+<!-- Right Sign up free pill (x=1094, y=657 -> offset within bar, 162x48) -->
+<a class="w-[162px] h-[48px] rounded-full bg-white text-black font-bold text-[16px] flex items-center justify-center hover:scale-104 transition-transform active:scale-98 shrink-0" href="https://www.spotify.com/signup">
+      Sign up free
+    </a>
+</footer>
+</body>
+</html>
