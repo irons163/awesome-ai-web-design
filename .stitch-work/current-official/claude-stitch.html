@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1280, initial-scale=1.0">
+<title>Claude - Anthropic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          claude: {
+            bg: '#141413',
+            card: '#1c1c1a',
+            border: '#2a2a28',
+            borderLight: '#383735',
+            panel: '#faf9f5',
+            accent: '#d97706',
+            terra: '#cc785c',
+            textMuted: '#9c9a95',
+            textLight: '#f4f3ef',
+          }
+        },
+        fontFamily: {
+          serif: ['Newsreader', 'Georgia', 'serif'],
+          sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    background-color: #141413;
+    color: #f4f3ef;
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    width: 1280px;
+    overflow-x: hidden;
+  }
+  .serif-title {
+    font-family: 'Newsreader', Georgia, serif;
+  }
+</style>
+</head>
+<body class="w-[1280px] bg-[#141413] text-[#f4f3ef] antialiased selection:bg-[#cc785c] selection:text-white">
+
+  <!-- TOP HEADER (Height 84px) -->
+  <header class="h-[84px] w-full border-b border-[#242422] flex items-center justify-between px-10 bg-[#141413] sticky top-0 z-50">
+    <div class="flex items-center space-x-9">
+      <!-- Claude Sunburst & Wordmark -->
+      <a href="https://claude.com" class="flex items-center space-x-2 text-[#f4f3ef] group">
+        <!-- Sunburst Mark -->
+        <svg class="w-6 h-6 text-[#cc785c]" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zm8-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1h-2a1 1 0 1 1 0-2h2zM6 11a1 1 0 0 1 1 1 1 1 0 0 1-1 1H4a1 1 0 1 1 0-2h2zm11.657-6.243a1 1 0 0 1 1.414 0 1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414zm-11.314 11.314a1 1 0 0 1 1.414 0 1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 0 1-1.414-1.414l1.414-1.414zm12.728 0a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 0 1-1.414-1.414l1.414-1.414a1 1 0 0 1 1.414 0zM6.343 4.757a1 1 0 0 1 0 1.414L4.93 7.586A1 1 0 0 1 3.515 6.17l1.414-1.414a1 1 0 0 1 1.414 0zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" />
+        </svg>
+        <span class="serif-title text-[23px] font-medium tracking-tight text-[#f4f3ef]">Claude</span>
+      </a>
+
+      <!-- Primary Nav -->
+      <nav class="flex items-center space-x-7 text-[14.5px] font-medium text-[#c4c2bc]">
+        <a href="#product" class="hover:text-white transition-colors">Product</a>
+        <a href="#developers" class="hover:text-white transition-colors">Developers</a>
+        <a href="#enterprise" class="hover:text-white transition-colors">Enterprise</a>
+        <a href="#resources" class="hover:text-white transition-colors">Resources</a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+      </nav>
+    </div>
+
+    <!-- Right Header CTAs -->
+    <div class="flex items-center space-x-3 text-[14.5px]">
+      <a href="https://claude.com/login" class="px-3 py-2 text-[#c4c2bc] hover:text-white font-medium transition-colors">Log in</a>
+      <a href="https://claude.com/contact-sales" class="px-4 py-2 rounded-full border border-[#383735] text-[#f4f3ef] hover:bg-[#1f1f1d] font-medium transition-all">Contact sales</a>
+      <a href="https://claude.com/try" class="px-4 py-2 rounded-full bg-[#f4f3ef] text-[#141413] hover:bg-white font-semibold transition-all">Try Claude</a>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (y: 0–716 approx relative) -->
+  <section class="w-full relative min-h-[632px] border-b border-[#242422] flex overflow-hidden">
+    <!-- Left Hero Column -->
+    <div class="w-[660px] pl-[100px] pr-8 pt-[64px] pb-12 flex flex-col justify-start">
+      <h1 class="serif-title text-[74px] leading-[1.08] tracking-[-0.02em] font-normal text-[#faf9f5]">
+        Think fast,<br>
+        <span class="italic font-light">build faster</span>
+      </h1>
+      
+      <p class="mt-5 text-[17px] text-[#9c9a95] font-normal tracking-wide">
+        Brainstorm in chat, build in Cowork
+      </p>
+
+      <!-- Outlined Login Card (approx width 449px) -->
+      <div class="mt-8 w-[449px] rounded-2xl border border-[#383735] bg-[#1a1a18]/60 p-6 backdrop-blur-sm shadow-xl">
+        <!-- Google Button -->
+        <button class="w-full h-[46px] rounded-full bg-[#20201e] border border-[#343431] hover:bg-[#282825] text-white flex items-center justify-center space-x-3 text-[14.5px] font-medium transition-all cursor-pointer">
+          <svg class="w-4 h-4" viewBox="0 0 24 24">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+
+        <!-- OR Divider -->
+        <div class="flex items-center my-3.5">
+          <div class="flex-grow border-t border-[#2d2d2a]"></div>
+          <span class="px-3 text-[11px] uppercase tracking-widest text-[#787672] font-semibold">or</span>
+          <div class="flex-grow border-t border-[#2d2d2a]"></div>
+        </div>
+
+        <!-- Continue with email -->
+        <button class="w-full h-[46px] rounded-full bg-[#f4f3ef] hover:bg-white text-[#141413] text-[14.5px] font-semibold transition-all cursor-pointer">
+          Continue with email
+        </button>
+
+        <!-- Terms note -->
+        <p class="mt-4 text-center text-[12px] text-[#787672] leading-relaxed">
+          By signing up, you agree to our <a href="#" class="underline hover:text-[#aba8a1]">Terms of Service</a> and acknowledge our <a href="#" class="underline hover:text-[#aba8a1]">Privacy Policy</a>.
+        </p>
+      </div>
+
+      <!-- Download desktop app button -->
+      <div class="mt-4">
+        <a href="#download" class="inline-flex items-center space-x-2 px-5 py-2.5 rounded-full border border-[#383735] text-[13.5px] text-[#c4c2bc] hover:text-white hover:border-[#4f4d48] transition-all">
+          <svg class="w-4 h-4 text-[#9c9a95]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+          </svg>
+          <span>Download desktop app</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Right Hero App Demo Panel (x:665, w:555, ending y:716, pale warm-white #faf9f5) -->
+    <div class="w-[555px] pt-[24px] pr-[30px] flex items-end">
+      <div class="w-full h-[580px] bg-[#faf9f5] rounded-t-[28px] border-t border-l border-r border-[#e5e4de] shadow-2xl p-7 flex flex-col justify-between text-[#141413]">
+        <!-- Demo Top Bar -->
+        <div>
+          <div class="flex items-center justify-between pb-4 border-b border-[#eceae3]">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-3 h-3 rounded-full bg-[#e27352]"></div>
+              <span class="text-[14px] font-semibold text-[#141413] tracking-tight">Claude Cowork</span>
+              <span class="text-[11px] bg-[#edece6] px-2 py-0.5 rounded text-[#686660] font-medium">Sprint v2.4</span>
+            </div>
+            <div class="text-[12px] text-[#86847e] font-mono">Synced 2m ago</div>
+          </div>
+
+          <!-- Prompt / Objective Card -->
+          <div class="mt-5 p-4 rounded-xl bg-[#f0eee6] border border-[#e2e0d6]">
+            <div class="text-[11px] font-semibold uppercase tracking-wider text-[#79776f]">Current Objective</div>
+            <div class="mt-1 text-[15px] font-medium text-[#1c1c1b] leading-snug">
+              Refactor customer checkout pipeline with real-time inventory validation and automated receipts.
+            </div>
+          </div>
+
+          <!-- Task Execution List -->
+          <div class="mt-5 space-y-3">
+            <div class="text-[12px] font-semibold text-[#575651] uppercase tracking-wider">Completed Actions</div>
+
+            <!-- Item 1 -->
+            <div class="flex items-start space-x-3 p-3 rounded-lg bg-white border border-[#e8e6df] shadow-sm">
+              <div class="w-5 h-5 rounded-full bg-[#2563eb] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <div class="text-[13.5px] font-semibold text-[#1a1a19]">Drafted multi-region webhook handlers</div>
+                <div class="text-[12px] text-[#6d6b64]">Generated TypeScript types & verified API contracts</div>
+              </div>
+              <span class="text-[11px] font-mono text-[#8a8881]">0.8s</span>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="flex items-start space-x-3 p-3 rounded-lg bg-white border border-[#e8e6df] shadow-sm">
+              <div class="w-5 h-5 rounded-full bg-[#2563eb] text-white flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <div class="flex-grow">
+                <div class="text-[13.5px] font-semibold text-[#1a1a19]">Run unit and integration test suite</div>
+                <div class="text-[12px] text-[#6d6b64]">42 tests passed, 0 failures, 98.4% code coverage</div>
+              </div>
+              <span class="text-[11px] font-mono text-[#8a8881]">1.4s</span>
+            </div>
+
+            <!-- Item 3 - In Progress -->
+            <div class="flex items-start space-x-3 p-3 rounded-lg bg-[#ffffff]/70 border border-[#e2e0d7]">
+              <div class="w-5 h-5 rounded-full border-2 border-[#2563eb] border-t-transparent animate-spin flex-shrink-0 mt-0.5"></div>
+              <div class="flex-grow">
+                <div class="text-[13.5px] font-semibold text-[#1a1a19]">Synthesizing PR summary and rollback playbook</div>
+                <div class="text-[12px] text-[#6d6b64]">Analyzing diff across 14 files in workspace</div>
+              </div>
+              <span class="text-[11px] text-[#2563eb] font-medium">Running...</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer indicator in Demo Panel -->
+        <div class="pt-3 border-t border-[#eceae3] flex items-center justify-between text-[12px] text-[#7a7872]">
+          <span class="flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Claude Code environment active</span>
+          </span>
+          <span class="font-mono text-[11px]">claude-3-7-sonnet</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING SECTION -->
+  <section id="pricing" class="w-full pt-24 pb-28 px-10 border-b border-[#242422] bg-[#141413]">
+    <!-- Centered Header -->
+    <div class="text-center max-w-2xl mx-auto">
+      <h2 class="serif-title text-[56px] font-normal tracking-tight text-[#faf9f5]">Explore plans</h2>
+      
+      <!-- Segmented Tab: Individual / Team and Enterprise -->
+      <div class="mt-8 inline-flex p-1 rounded-full bg-[#1e1e1c] border border-[#343431]">
+        <button class="px-6 py-2 rounded-full bg-[#2a2a27] text-white text-[14px] font-medium shadow-sm transition-all">Individual</button>
+        <button class="px-6 py-2 rounded-full text-[#9c9a95] hover:text-white text-[14px] font-medium transition-all">Team and Enterprise</button>
+      </div>
+    </div>
+
+    <!-- 3 Equal Dark Cards (Free, Pro, Max) -->
+    <div class="mt-14 grid grid-cols-3 gap-6 max-w-[1160px] mx-auto">
+      
+      <!-- CARD 1: FREE -->
+      <div class="rounded-[24px] border border-[#383735] bg-[#1a1a18] p-8 flex flex-col justify-between hover:border-[#4d4c48] transition-all">
+        <div>
+          <!-- Plan Icon -->
+          <div class="w-10 h-10 rounded-xl bg-[#252522] border border-[#343431] flex items-center justify-center text-[#d6d4ce] mb-6">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+            </svg>
+          </div>
+
+          <h3 class="serif-title text-[28px] font-normal text-white">Free</h3>
+          <p class="mt-1 text-[14px] text-[#9c9a95]">Try Claude</p>
+
+          <div class="mt-6 flex items-baseline">
+            <span class="text-[42px] font-semibold text-white tracking-tight">$0</span>
+          </div>
+          <p class="text-[13px] text-[#7d7b75] mt-1">Free for everyone</p>
+
+          <div class="mt-7">
+            <a href="https://claude.com/try" class="block w-full py-3 text-center rounded-full bg-[#f4f3ef] hover:bg-white text-[#141413] text-[14.5px] font-semibold transition-all">
+              Try Claude
+            </a>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-[#2a2a27] my-8"></div>
+
+          <!-- Feature List -->
+          <div class="text-[12.5px] uppercase tracking-wider font-semibold text-[#8a8882] mb-4">Included in Free:</div>
+          <ul class="space-y-3.5 text-[14px] text-[#d6d4ce]">
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Chat on web, iOS, Android, and desktop</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Code and data visualization</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Writing and editing assistance</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Web search access</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Memory across conversations</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Files, documents, and code analysis</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Built-in third party connectors</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARD 2: PRO (Featured) -->
+      <div class="rounded-[24px] border-2 border-[#cc785c] bg-[#1a1a18] p-8 flex flex-col justify-between relative shadow-xl">
+        <div class="absolute -top-3.5 left-8 bg-[#cc785c] text-white text-[11px] font-semibold uppercase tracking-widest px-3 py-0.5 rounded-full">
+          Most Popular
+        </div>
+
+        <div>
+          <!-- Plan Icon -->
+          <div class="w-10 h-10 rounded-xl bg-[#2c231f] border border-[#4d3329] flex items-center justify-center text-[#cc785c] mb-6">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+          </div>
+
+          <h3 class="serif-title text-[28px] font-normal text-white">Pro</h3>
+          <p class="mt-1 text-[14px] text-[#9c9a95]">For everyday productivity</p>
+
+          <div class="mt-6 flex items-baseline space-x-2">
+            <span class="text-[42px] font-semibold text-white tracking-tight">$23</span>
+            <span class="text-[14px] text-[#9c9a95]">/ month</span>
+          </div>
+          <p class="text-[13px] text-[#cc785c] mt-1 font-medium">Annual subscription discount ($28 if billed monthly)</p>
+
+          <div class="mt-7">
+            <a href="https://claude.com/upgrade" class="block w-full py-3 text-center rounded-full bg-[#f4f3ef] hover:bg-white text-[#141413] text-[14.5px] font-semibold transition-all">
+              Try Claude
+            </a>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-[#2a2a27] my-8"></div>
+
+          <!-- Feature List -->
+          <div class="text-[12.5px] uppercase tracking-wider font-semibold text-[#8a8882] mb-4">Everything in Free, plus:</div>
+          <ul class="space-y-3.5 text-[14px] text-[#d6d4ce]">
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Significantly more usage than Free tier</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Access to Claude Code & terminal workflows</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Full Cowork multi-step execution agent</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Design mode and interactive preview tools</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Advanced Science & Deep Research reasoning</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#cc785c] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Projects to organize chats, files, and custom context</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CARD 3: MAX -->
+      <div class="rounded-[24px] border border-[#383735] bg-[#1a1a18] p-8 flex flex-col justify-between hover:border-[#4d4c48] transition-all">
+        <div>
+          <!-- Plan Icon -->
+          <div class="w-10 h-10 rounded-xl bg-[#252522] border border-[#343431] flex items-center justify-center text-[#d6d4ce] mb-6">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+            </svg>
+          </div>
+
+          <h3 class="serif-title text-[28px] font-normal text-white">Max</h3>
+          <p class="mt-1 text-[14px] text-[#9c9a95]">5–20x more usage than Pro</p>
+
+          <div class="mt-6 flex items-baseline space-x-2">
+            <span class="text-[42px] font-semibold text-white tracking-tight">From $140</span>
+          </div>
+          <p class="text-[13px] text-[#7d7b75] mt-1">Per month</p>
+
+          <div class="mt-7">
+            <a href="https://claude.com/upgrade" class="block w-full py-3 text-center rounded-full bg-[#f4f3ef] hover:bg-white text-[#141413] text-[14.5px] font-semibold transition-all">
+              Try Claude
+            </a>
+          </div>
+
+          <!-- Divider -->
+          <div class="border-t border-[#2a2a27] my-8"></div>
+
+          <!-- Feature List -->
+          <div class="text-[12.5px] uppercase tracking-wider font-semibold text-[#8a8882] mb-4">Everything in Pro, plus:</div>
+          <ul class="space-y-3.5 text-[14px] text-[#d6d4ce]">
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>5x to 20x higher rate limits and message volume</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Priority access during peak high-traffic hours</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Early access to next-generation frontier models</span>
+            </li>
+            <li class="flex items-start space-x-3">
+              <svg class="w-4 h-4 text-[#9c9a95] flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M5 13l4 4L19 7"></path></svg>
+              <span>Expanded context processing capacity</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Pricing Disclaimer -->
+    <div class="mt-12 text-center text-[12.5px] text-[#787672]">
+      Prices exclude applicable taxes. Usage limits, rate caps, and fair use terms apply to all tiers.
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="w-full py-24 px-10 border-b border-[#242422] bg-[#141413]">
+    <div class="max-w-[820px] mx-auto">
+      <h2 class="serif-title text-[44px] font-normal tracking-tight text-white mb-10 text-center">FAQ</h2>
+
+      <div class="space-y-4">
+        <!-- FAQ 1 -->
+        <div class="border border-[#2a2a28] rounded-2xl p-6 bg-[#181816]/70">
+          <div class="flex items-center justify-between text-[18px] font-medium text-[#f4f3ef]">
+            <span>What is Claude and how does it work?</span>
+            <svg class="w-5 h-5 text-[#8a8882]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+          <p class="mt-3 text-[14.5px] leading-relaxed text-[#9c9a95]">
+            Claude is an AI assistant developed by Anthropic, built on Constitutional AI to be helpful, harmless, and honest. It is capable of sophisticated writing, complex code generation, document analysis, multi-agent collaboration, and logical problem solving.
+          </p>
+        </div>
+
+        <!-- FAQ 2 -->
+        <div class="border border-[#2a2a28] rounded-2xl p-6 bg-[#181816]/70">
+          <div class="flex items-center justify-between text-[18px] font-medium text-[#f4f3ef]">
+            <span>What should I use Claude for?</span>
+            <svg class="w-5 h-5 text-[#8a8882]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+          <p class="mt-3 text-[14.5px] leading-relaxed text-[#9c9a95]">
+            People use Claude across coding, writing, research, and analysis. From running full multi-file software builds via Claude Code and Cowork to drafting nuanced executive communications, translating technical papers, and synthesizing massive databases of documentation.
+          </p>
+        </div>
+
+        <!-- FAQ 3 -->
+        <div class="border border-[#2a2a28] rounded-2xl p-6 bg-[#181816]/70">
+          <div class="flex items-center justify-between text-[18px] font-medium text-[#f4f3ef]">
+            <span>How much does it cost to use?</span>
+            <svg class="w-5 h-5 text-[#8a8882]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </div>
+          <p class="mt-3 text-[14.5px] leading-relaxed text-[#9c9a95]">
+            Claude is free to use on web and mobile with access to standard features. For professionals requiring heavier usage, extended model thinking, Claude Code, and project workspaces, Claude Pro is $23/month billed annually ($28/month billed monthly), and Claude Max starts at $140/month.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LARGE PUBLIC ANTHROPIC FOOTER -->
+  <footer class="w-full bg-[#111110] pt-20 pb-16 px-12 text-[#9c9a95]">
+    <div class="max-w-[1200px] mx-auto">
+      
+      <!-- Top Row: Brand, Ask Claude input, Anthropic line -->
+      <div class="flex items-start justify-between pb-16 border-b border-[#242422]">
+        <div class="space-y-4 max-w-sm">
+          <div class="flex items-center space-x-2">
+            <svg class="w-6 h-6 text-[#cc785c]" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V3a1 1 0 0 1 1-1zm0 16a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zm8-7a1 1 0 0 1 1 1 1 1 0 0 1-1 1h-2a1 1 0 1 1 0-2h2zM6 11a1 1 0 0 1 1 1 1 1 0 0 1-1 1H4a1 1 0 1 1 0-2h2zm11.657-6.243a1 1 0 0 1 1.414 0 1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 1 1-1.414-1.414l1.414-1.414zm-11.314 11.314a1 1 0 0 1 1.414 0 1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 0 1-1.414-1.414l1.414-1.414zm12.728 0a1 1 0 0 1 0 1.414l-1.414 1.414a1 1 0 0 1-1.414-1.414l1.414-1.414a1 1 0 0 1 1.414 0zM6.343 4.757a1 1 0 0 1 0 1.414L4.93 7.586A1 1 0 0 1 3.515 6.17l1.414-1.414a1 1 0 0 1 1.414 0zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z" />
+            </svg>
+            <span class="serif-title text-[24px] text-white font-medium">Claude</span>
+          </div>
+          <p class="text-[13.5px] text-[#787672]">
+            Claude is an AI assistant created by Anthropic to be helpful, harmless, and honest.
+          </p>
+        </div>
+
+        <!-- Ask Claude field -->
+        <div class="w-[360px]">
+          <div class="text-[13px] text-white font-medium mb-2">Ask Claude anything</div>
+          <div class="relative">
+            <input type="text" placeholder="What would you like to know?" class="w-full h-11 bg-[#1a1a18] border border-[#343431] rounded-full px-4 text-[13.5px] text-white placeholder-[#686661] focus:outline-none focus:border-[#cc785c]">
+            <button class="absolute right-1.5 top-1.5 h-8 w-8 rounded-full bg-[#cc785c] text-white flex items-center justify-center hover:bg-[#d97d62] transition-colors">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-Column Links -->
+      <div class="pt-16 grid grid-cols-5 gap-8 text-[13.5px]">
+        <!-- Col 1 -->
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-white font-semibold mb-3">Products</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Claude for Web</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude for Desktop</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude for iOS</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude for Android</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude Code</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Cowork</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Capabilities</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Vision & Analysis</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Code Execution</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Artifacts</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Extended Thinking</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-white font-semibold mb-3">Extensions</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Chrome Extension</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">VS Code Plugin</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">GitHub Action</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Models</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Claude 3.7 Sonnet</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude 3.5 Haiku</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Claude 3 Opus</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Enterprise</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Overview</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Security & Trust</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Pricing & Volume</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-white font-semibold mb-3">Departments</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Engineering</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Product Design</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Customer Support</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Legal & Compliance</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Industries</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Financial Services</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Healthcare & Life Sciences</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Education</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Public Sector</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Programs</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Startups Program</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Anthropic Fellows</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 4 -->
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-white font-semibold mb-3">Developers</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">API Documentation</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">SDKs & Client Libraries</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">API Status</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Developer Forum</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Platform</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Anthropic Console</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">AWS Bedrock Integration</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Google Cloud Vertex AI</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Resources</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Customer Stories</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Interactive Prompt Guide</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Research Papers</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 5 -->
+        <div class="space-y-6">
+          <div>
+            <h4 class="text-white font-semibold mb-3">Help and security</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Help Center</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Trust Center</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Responsible Disclosure</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Company</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">About Anthropic</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">News & Announcements</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold mb-3">Terms and policies</h4>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+              <li><a href="#" class="hover:text-white transition-colors">Usage Policy</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar -->
+      <div class="pt-16 mt-8 border-t border-[#1f1f1d] flex items-center justify-between text-[12.5px] text-[#6e6c66]">
+        <div>
+          © 2026 Anthropic, PBC. Claude and the Anthropic logo are trademarks of Anthropic.
+        </div>
+        <div class="flex items-center space-x-6">
+          <a href="#" class="hover:text-[#9c9a95]">English (US)</a>
+          <a href="#" class="hover:text-[#9c9a95]">Privacy Choices</a>
+          <a href="#" class="hover:text-[#9c9a95]">Cookie Preferences</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

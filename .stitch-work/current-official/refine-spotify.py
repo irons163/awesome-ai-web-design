@@ -59,5 +59,6 @@ css=re.sub(r'(^|})([^{}]+)\{', lambda m: m[1]+','.join(('#reference-replica'+par
 s=s.replace('<body ', '<body id="reference-replica" ',1)
 s=s.replace('</head>','<style>'+css+'</style></head>').replace('</body>','<button class="reference-now-playing" aria-label="Show Now Playing view">‹</button></body>')
 s=s.replace('PREVIEW OF SPOTIFY','Preview of Spotify')
+(p/'spotify-base.html').write_text(s)
 (p/'spotify.html').write_text(s)
 (p/'spotify-refinements.json').write_text(json.dumps({'base_screen':'projects/17774991018148174598/screens/c3ec8812116f4795b959f071c398543b','reference_url':'https://open.spotify.com/','viewport':{'width':1280,'height':720},'status':'in_visual_review','edits':['Restore exact observed public album/artist asset URLs','Correct initial viewport positions and typography','Restore official labels and library structure'],'raw_stitch_sha256':hashlib.sha256(raw.read_bytes()).hexdigest(),'refined_sha256':hashlib.sha256(s.encode()).hexdigest()},indent=2))

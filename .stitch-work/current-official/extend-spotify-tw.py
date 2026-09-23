@@ -3,10 +3,14 @@ from pathlib import Path
 from html import escape
 import hashlib
 import json
+import sys
 
 root = Path(__file__).parent
-reference = json.loads((root / 'spotify-tw-browser-reference.json').read_text())
-screen = (root / 'spotify.html').read_text()
+region = sys.argv[1] if len(sys.argv) > 1 else 'tw'
+if region not in ('tw', 'ca'):
+    raise ValueError('Use tw or ca')
+reference = json.loads((root / f'spotify-{region}-browser-reference.json').read_text())
+screen = (root / 'spotify-base.html').read_text()
 section_ids = [
     '0JQ5DB5E8N831KzFzsBBQ2',
     '0JQ5DAnM3wGh0gz1MXnu3C',
@@ -91,14 +95,31 @@ style = '''
 #reference-replica>footer>a{width:154px;height:48px}
 '''
 screen = screen.replace('</head>', '<style>' + style + '</style></head>')
-(root / 'spotify.html').write_text(screen)
+if region == 'ca':
+    for old, new in {
+        'https://www.spotify.com/legal/privacy-policy/': 'https://www.spotify.com/ca-en/legal/privacy-policy/',
+        'https://www.spotify.com/legal/cookies-policy/': 'https://www.spotify.com/ca-en/legal/cookies-policy/',
+        'https://www.spotify.com/safety-and-privacy-center/': 'https://www.spotify.com/ca-en/safetyandprivacy/',
+        'https://www.spotify.com/accessibility/': 'https://www.spotify.com/ca-en/accessibility/',
+        'https://www.spotify.com/legal/': 'https://www.spotify.com/ca-en/legal/',
+    }.items():
+        screen = screen.replace(old, new)
+    screen = screen.replace(
+        '<a href="https://www.spotify.com/ca-en/legal/privacy-policy/">About Ads</a>',
+        '<a href="https://www.spotify.com/ca-en/legal/privacy-policy/#s3">About Ads</a>',
+    )
+    screen = screen.replace(
+        '<a class="cookies-link" href="https://www.spotify.com/ca-en/legal/cookies-policy/">Cookies</a>',
+        '<a class="cookies-link" href="https://www.spotify.com/legal/cookies-policy/">Cookies</a>',
+    )
+(root / ('spotify.html' if region == 'tw' else 'spotify-ca.html')).write_text(screen)
 metadata = json.loads((root / 'spotify-refinements.json').read_text())
 metadata.update({
-    'reference_region': 'Taiwan',
+    'reference_region': 'Taiwan' if region == 'tw' else 'Canada',
     'reference_observed_at': reference['observedAt'],
     'observed_card_count': sum(len(row['cards']) for row in reference['sections']),
     'status': 'in_visual_review',
     'refined_sha256': hashlib.sha256(screen.encode()).hexdigest(),
-    'remaining': ['Visual comparison of complete Taiwan page', 'Responsive comparison', 'Navigation and buttons', 'Capture refined screenshot for catalog'],
+    'remaining': [f'Visual comparison of complete {"Taiwan" if region == "tw" else "Canada"} page', 'Responsive comparison', 'Navigation and buttons', 'Capture refined screenshot for catalog'],
 })
-(root / 'spotify-refinements.json').write_text(json.dumps(metadata, indent=2, ensure_ascii=False))
+(root / ('spotify-refinements.json' if region == 'tw' else 'spotify-ca-refinements.json')).write_text(json.dumps(metadata, indent=2, ensure_ascii=False))
