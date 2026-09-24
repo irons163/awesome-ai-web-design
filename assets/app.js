@@ -3,6 +3,7 @@ const $ = selector => document.querySelector(selector);
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
+const OFFICIAL_DRAFTS = {'spotify':'spotify','linear.app':'linear','claude':'claude','notion':'notion','figma':'figma','framer':'framer'};
 let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'image';
 let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
@@ -127,6 +128,10 @@ function openDesign(item) {
   $('#download-design').download = `${item.slug}-DESIGN.md`;
   $('#download-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
   $('#download-prompts').download = `${item.slug}-PROMPTS.md`;
+  const draft = OFFICIAL_DRAFTS[item.slug];
+  $('#official-draft-note').hidden = !draft;
+  if (draft) $('#official-draft-link').href = `official-drafts/${draft}.html`;
+  else $('#official-draft-link').removeAttribute('href');
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
   setTab('preview'); setPreview('image');
   if (!$('#design-dialog').open) $('#design-dialog').showModal();

@@ -17,7 +17,7 @@ class Links(HTMLParser):
         super().__init__(); self.links=[]
     def handle_starttag(self,tag,attrs):
         for key,value in attrs:
-            if key in ('href','src') and value:
+            if key in ('href','src','poster') and value:
                 self.links.append(value)
 
 class CollectionTests(unittest.TestCase):
@@ -102,12 +102,24 @@ class CollectionTests(unittest.TestCase):
                 self.assertGreaterEqual((values[1]+.05)/(values[0]+.05),4.5)
 
     def test_static_links_resolve_without_commercial_routes(self):
-        files=[ROOT/'index.html']
+        from build_site import main as build_site
+        build_site()
+        files=[ROOT/'dist/index.html']
         for path in files:
             parser=Links(); parser.feed(path.read_text())
             for link in parser.links:
                 if link.startswith(('#','http:','https:','mailto:')): continue
                 self.assertTrue((path.parent/link.split('#')[0].split('?')[0]).exists(),f'{path}: {link}')
+        for name in ('spotify','linear','claude','notion','figma','framer'):
+            draft=ROOT/'dist/official-drafts'/f'{name}.html'
+            self.assertTrue(draft.is_file(),draft)
+            html=draft.read_text()
+            self.assertIn('尚未視覺驗收',html)
+            parser=Links(); parser.feed(html)
+            for link in parser.links+re.findall(r'url\(([^)]+)\)',html):
+                link=link.strip(' \t\n\r\'"')
+                if link.startswith(('#','http:','https:','data:','mailto:','/')): continue
+                self.assertTrue((draft.parent/link.split('#')[0].split('?')[0]).exists(),f'{draft}: {link}')
         for path in [ROOT/'index.html',ROOT/'assets/app.js',ROOT/'README.md']:
             self.assertNotRegex(path.read_text(),r'https?://(?:[^/]*\.)?(?:getdesign\.md/(?:request|design-md-pass)|everyfeed\.ai|sponsors\.voltagent\.dev)')
         self.assertNotRegex((ROOT/'index.html').read_text(),r'<script[^>]+src=["\']https?:')
