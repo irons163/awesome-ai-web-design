@@ -66,7 +66,7 @@ style = '''
 #reference-replica .official-row-0{height:350.789px}
 #reference-replica .official-row-1{height:304.727px}
 #reference-replica .official-row-2{height:330.727px}
-#reference-replica .official-row-3{height:303.727px}
+#reference-replica .official-row-3{height:301.727px}
 #reference-replica .official-heading{height:29px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-right:8px}
 #reference-replica .official-heading h2{font-family:'SpotifyMixUITitle','SpotifyMixUI',sans-serif;font-size:24px;font-weight:700;line-height:29px;letter-spacing:0}
 #reference-replica .official-heading a{font-size:14px;font-weight:700;color:#b3b3b3}
@@ -94,6 +94,8 @@ style = '''
 #reference-replica>footer{border-radius:16px!important;padding:0 16px!important}
 #reference-replica>footer>a{width:154px;height:48px}
 '''
+if region == 'ca':
+    style = style.replace('.official-row-3{height:301.727px}', '.official-row-3{height:303.727px}')
 screen = screen.replace('</head>', '<style>' + style + '</style></head>')
 if region == 'ca':
     for old, new in {
