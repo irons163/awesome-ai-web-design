@@ -142,9 +142,18 @@
 #reference-replica .linear-roadmap-row>div{height:24px;margin-top:8px;background:#1c1d1f;border:1px solid #303134;position:relative}
 #reference-replica .linear-roadmap-row i{position:absolute;top:0;height:100%;background:#343537}
 #reference-replica .linear-roadmap-row small{position:absolute;top:28px;left:30%;color:#777}
+#reference-replica .linear-roadmap-gridlines,#reference-replica .linear-roadmap-dates{display:none}
+#reference-replica .linear-roadmap-row>div.linear-roadmap-milestones{display:flex;gap:24px;height:auto;margin-top:6px;background:none;border:0;color:#777;font-size:11px}
 #reference-replica .linear-cycle-chart{border-left:1px solid #303134;background:#191a1c;padding:32px}
 #reference-replica .linear-cycle-chart p{font-size:14px;color:#c3c5c7}
 #reference-replica .linear-cycle-chart svg{width:100%;height:460px;margin-top:40px}
+#reference-replica .linear-cycle-chart{position:relative;overflow:hidden;border-left:0;border-radius:12px;background:radial-gradient(circle at 25% 0%,#28292b 0,#1c1d1e 36%,#171819 100%);padding:0}
+#reference-replica .linear-cycle-chart p{position:absolute;top:32px;left:32px;margin:0;color:#d0d6e0;line-height:20px}
+#reference-replica .linear-cycle-plot{position:absolute;top:80px;left:32px;width:825px;height:400px}
+#reference-replica .linear-cycle-gridline{position:absolute;top:calc(var(--tick) * 1px);left:0;width:825px;height:1px;background:repeating-linear-gradient(to right,#2e2e32 0 2px,transparent 2px 6px)}
+#reference-replica .linear-cycle-gridline:last-of-type{background:#2e2e32}
+#reference-replica .linear-cycle-plot img{position:absolute;inset:0;display:block;width:825px;max-width:none;height:400px;margin:0}
+#reference-replica .linear-cycle-labels{position:absolute;top:504px;left:32px;display:grid;grid-template-columns:repeat(5,165px);width:825px;color:#777a80;font-size:11px;line-height:16px}
 #reference-replica .linear-chart-grid{stroke:#2d2f31;stroke-width:1;stroke-dasharray:2 5;fill:none}
 #reference-replica .linear-chart-line{fill:none;stroke-width:1.3;opacity:.48}
 #reference-replica .linear-chart-line.one{stroke:#a96266}.linear-chart-line.two{stroke:#b48559}.linear-chart-line.three{stroke:#697a8d}
@@ -221,6 +230,25 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
   #reference-replica .linear-planning-copy p { color: #d0d6e0; font-size: 21px; line-height: 27px; letter-spacing: -.25px; margin-bottom: 50px; }
   #reference-replica .linear-planning-copy a { font-size: 16px; line-height: 24px; font-weight: 400; }
   #reference-replica .linear-planning-visual { width: calc(100% + 60px); height: 632.5px; margin-left: -30px; grid-template-columns: 588px 1fr; }
+  #reference-replica .linear-roadmap { position: relative; z-index: 0; width: 588px; height: 632.5px; padding: 0; overflow: hidden; background: #101112; }
+  #reference-replica .linear-roadmap-gridlines { position: absolute; inset: 32px 0 0; display: block; }
+  #reference-replica .linear-roadmap-gridlines span { position: absolute; left: calc(16px + var(--index) * 160px); top: 0; width: 1px; height: 600px; background: repeating-linear-gradient(to bottom,#ffffff14 0 3px,transparent 3px 6px); }
+  #reference-replica .linear-roadmap-months { position: absolute; top: 42px; left: 342px; display: flex; justify-content: flex-start; gap: 0; width: max-content; color: #8a8f98; font-size: 10px; line-height: 16px; }
+  #reference-replica .linear-roadmap-months span { flex: none; width: 160px; }
+  #reference-replica .linear-roadmap-dates { position: absolute; top: 68px; left: 36px; display: grid; grid-template-columns: repeat(35,40px); width: 1400px; color: #55585f; font-size: 10px; line-height: 16px; text-align: center; }
+  #reference-replica .linear-roadmap-row { position: absolute; margin: 0; font-size: 13px; line-height: 20px; }
+  #reference-replica .linear-roadmap-ui { top: 148px; left: 214px; width: 448px; }
+  #reference-replica .linear-roadmap-fares { top: 256px; left: 303px; width: 750px; }
+  #reference-replica .linear-roadmap-clarity { top: 364px; left: 684px; width: 750px; }
+  #reference-replica .linear-roadmap-reliability { top: 472px; left: 12px; width: 519px; }
+  #reference-replica .linear-roadmap-row > span { display: block; height: 20px; color: #b5b7bc; }
+  #reference-replica .linear-roadmap-row > div.linear-roadmap-bar { position: relative; height: 24px; margin-top: 8px; border: 1px solid #36383b; border-radius: 4px; background: #222325; }
+  #reference-replica .linear-roadmap-row .linear-roadmap-bar i { display: block; top: 0; left: 0 !important; height: 100%; width: 71% !important; background: #292a2c; }
+  #reference-replica .linear-roadmap-row > div.linear-roadmap-milestones { position: relative; display: block; height: 16px; margin-top: 8px; border: 0; background: none; color: #6f737a; font-size: 10px; line-height: 16px; }
+  #reference-replica .linear-roadmap-milestones span { position: absolute; top: 0; white-space: nowrap; }
+  #reference-replica .linear-roadmap-milestones span::before { content: ''; position: absolute; top: -24px; left: 50%; width: 6px; height: 6px; transform: rotate(45deg); background: #60646c; border: 1px solid #858992; }
+  #reference-replica .linear-roadmap-ui .linear-roadmap-milestones span:nth-child(2)::before { border-color: #d36d77; }
+  #reference-replica .linear-cycle-chart { z-index: 1; }
 }
 @media (max-width: 800px) {
   html { overflow-x: clip; }
@@ -437,13 +465,22 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
     </div>
 
     <div class="linear-planning-visual">
-  <div class="linear-roadmap"><div class="linear-roadmap-months"><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span></div>
-    <div class="linear-roadmap-row"><span>UI Refresh</span><div><i style="left:8%;width:41%"></i><small>Core screens &nbsp; Polish</small></div></div>
-    <div class="linear-roadmap-row"><span>Split fares</span><div><i style="left:23%;width:44%"></i><small>Internal &nbsp; Public Beta</small></div></div>
-    <div class="linear-roadmap-row"><span>Autonomy status clarity</span><div><i style="left:39%;width:43%"></i><small>Alpha</small></div></div>
-    <div class="linear-roadmap-row"><span>Autonomy telemetry reliability</span><div><i style="left:55%;width:40%"></i><small>Beta &nbsp; GA</small></div></div>
+  <div class="linear-roadmap">
+    <div class="linear-roadmap-gridlines" aria-hidden="true"><span style="--index:0"></span><span style="--index:1"></span><span style="--index:2"></span><span style="--index:3"></span></div>
+    <div class="linear-roadmap-months" aria-hidden="true"><span>MAR</span><span>APR</span><span>MAY</span><span>JUN</span><span>JUL</span><span>AUG</span><span>SEP</span></div>
+    <div class="linear-roadmap-dates" aria-hidden="true"><span>2</span><span>9</span><span>16</span><span>23</span><span>6</span><span>13</span><span>20</span><span>27</span><span>4</span><span>11</span><span>18</span><span>25</span><span>1</span><span>8</span><span>15</span><span>22</span><span>6</span><span>13</span><span>20</span><span>27</span><span>3</span><span>10</span><span>17</span><span>24</span><span>7</span><span>14</span><span>21</span><span>28</span></div>
+    <div class="linear-roadmap-row linear-roadmap-ui"><span>UI Refresh</span><div class="linear-roadmap-bar"><i></i></div><div class="linear-roadmap-milestones"><span style="left:129px">Core screens</span><span style="left:265px">Polish</span></div></div>
+    <div class="linear-roadmap-row linear-roadmap-fares"><span>Split fares</span><div class="linear-roadmap-bar"><i></i></div><div class="linear-roadmap-milestones"><span style="left:146px">Internal</span><span style="left:282px">Public Beta</span></div></div>
+    <div class="linear-roadmap-row linear-roadmap-clarity"><span>Autonomy status clarity</span><div class="linear-roadmap-bar"><i></i></div><div class="linear-roadmap-milestones"><span style="left:138px">Alpha</span></div></div>
+    <div class="linear-roadmap-row linear-roadmap-reliability"><span>Autonomy telemetry reliability</span><div class="linear-roadmap-bar"><i></i></div><div class="linear-roadmap-milestones"><span style="left:127px">Beta</span><span style="left:275px">GA</span></div></div>
   </div>
-  <div class="linear-cycle-chart"><p>Cycle time by agent</p><svg viewBox="0 0 520 330" preserveAspectRatio="none" aria-label="Cycle time by agent line chart"><path class="linear-chart-grid" d="M0 40H520 M0 120H520 M0 200H520 M0 280H520"/><path class="linear-chart-line one" d="M0 168H150L172 138H272L297 187H390L414 172H520"/><path class="linear-chart-line two" d="M0 227H146L168 247H273L297 231H390L413 249H520"/><path class="linear-chart-line three" d="M0 250H145L168 298H271L294 323H389L414 287H520"/></svg></div>
+  <div class="linear-cycle-chart"><p>Cycle time by agent</p>
+    <div class="linear-cycle-plot" role="img" aria-label="Cycle time by agent chart with monthly data points and three percentile lines">
+      <span class="linear-cycle-gridline" style="--tick:0"></span><span class="linear-cycle-gridline" style="--tick:80"></span><span class="linear-cycle-gridline" style="--tick:160"></span><span class="linear-cycle-gridline" style="--tick:240"></span><span class="linear-cycle-gridline" style="--tick:320"></span><span class="linear-cycle-gridline" style="--tick:400"></span>
+      <img src="linear-assets/planning-cycle.svg" alt="" aria-hidden="true">
+    </div>
+    <div class="linear-cycle-labels" aria-hidden="true"><span>Oct 2025</span><span>Nov 2025</span><span>Dec 2025</span><span>Jan 2026</span><span>Feb 2026</span></div>
+  </div>
 </div>
 
           <!-- Features badges list -->
