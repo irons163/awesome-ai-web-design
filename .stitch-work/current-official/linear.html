@@ -222,6 +222,29 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
   #reference-replica .linear-planning-copy a { font-size: 16px; line-height: 24px; font-weight: 400; }
   #reference-replica .linear-planning-visual { width: calc(100% + 60px); height: 632.5px; margin-left: -30px; grid-template-columns: 588px 1fr; }
 }
+@media (max-width: 800px) {
+  html { overflow-x: clip; }
+  #reference-replica > header { height: 65px; padding: 0 23px; }
+  #reference-replica .linear-mobile-menu { display: flex; width: 18px; height: 24px; flex-direction: column; justify-content: center; gap: 5px; padding: 0; }
+  #reference-replica .linear-mobile-menu span { display: block; width: 16px; height: 1px; background: #f7f8f8; }
+  #reference-replica > section:first-of-type { min-height: 511px; padding: 196px 23px 0; }
+  #reference-replica > section:first-of-type h1 { font-size: 38px; line-height: 41.8px; font-weight: 510; letter-spacing: -.836px; }
+  #reference-replica > section:first-of-type h1 + div { margin-top: 20px; gap: 20px; }
+  #reference-replica > section:first-of-type p { max-width: 276px; margin-left: 1px; font-size: 15px; line-height: 24px; }
+  #reference-replica > section:first-of-type p br { display: none; }
+  #reference-replica > section:first-of-type [href$="introducing-loops"] { align-self: flex-start; width: auto; height: 24px; margin-left: 1px; gap: 12px; align-items: center; }
+  #reference-replica > section:first-of-type [href$="introducing-loops"] span { font-size: 13px; line-height: 19.5px; }
+  #reference-replica > section:first-of-type [href$="introducing-loops"] > span:first-child { font-size: 13px; }
+  #reference-replica > section:first-of-type [href$="introducing-loops"] span:nth-child(2)::after { content: " \2192"; }
+  #reference-replica > section:first-of-type [href$="introducing-loops"] span:nth-child(3) { display: none; }
+  #reference-replica .linear-mobile-nav { position: fixed; z-index: 49; top: 65px; left: 0; right: 0; padding: 20px 23px 28px; background: #08090a; border-bottom: 1px solid #232426; box-shadow: 0 20px 35px #0008; }
+  #reference-replica .linear-mobile-nav[hidden] { display: none; }
+  #reference-replica .linear-mobile-nav a { display: block; padding: 10px 0; color: #f7f8f8; font-size: 18px; line-height: 28px; }
+  #reference-replica .linear-mobile-menu[aria-expanded="true"] span:first-child { transform: translateY(3px) rotate(45deg); }
+  #reference-replica .linear-mobile-menu[aria-expanded="true"] span:last-child { transform: translateY(-3px) rotate(-45deg); }
+  #reference-replica .linear-demo-reference { height: 400px; padding: 11px 18px 0; }
+  #reference-replica .linear-app-reference { width: 1240px; height: 720px; transform: scale(.5); transform-origin: top left; }
+}
 </style></head>
 <body id="reference-replica" class="bg-[#08090a] text-[#f7f8f8] selection:bg-[#5e6ad2]/30 selection:text-white">
 
@@ -253,8 +276,17 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
       <a href="https://linear.app/signup" class="w-[72px] h-[32px] rounded-full bg-white text-[#08090a] font-medium text-[13px] flex items-center justify-center hover:bg-[#e2e4e8] transition-colors shadow-sm">
         Sign up
       </a>
+      <button class="linear-mobile-menu hidden" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="linear-mobile-nav"><span></span><span></span></button>
     </nav>
   </header>
+  <nav class="linear-mobile-nav" id="linear-mobile-nav" aria-label="Mobile navigation" hidden>
+    <a href="https://linear.app/features">Product</a>
+    <a href="https://linear.app/resources">Resources</a>
+    <a href="https://linear.app/customers">Customers</a>
+    <a href="https://linear.app/pricing">Pricing</a>
+    <a href="https://linear.app/now">Now</a>
+    <a href="https://linear.app/contact">Contact</a>
+  </nav>
 
   <!-- HERO SECTION (Target exact coordinates: top272 left40 width1198 height128) -->
   <section class="relative pt-[200px] md:pt-[272px] px-[40px] max-w-[1280px] mx-auto min-h-[550px]">
@@ -567,5 +599,28 @@ export const HomeScreen = () =&gt; {
 
   <footer class="linear-current-footer"><div class="linear-footer-main"><a class="linear-footer-mark" aria-label="Linear home" href="https://linear.app/"><svg width="24" height="24" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><path d="M12.927 16.371a1.47 1.47 0 0 0 .061 2.027l68.595 68.594c.555.555 1.446.59 2.026.062 10.058-9.152 16.372-22.348 16.372-37.018C99.98 22.402 77.579 0 49.945 0c-14.67 0-27.866 6.313-37.018 16.371M4.353 29.39a1.47 1.47 0 0 0 .309 1.648L68.943 95.32c.434.434 1.09.562 1.648.308a50 50 0 0 0 4.335-2.227c.834-.482.962-1.62.28-2.3L8.882 24.773c-.68-.68-1.818-.553-2.3.281a50 50 0 0 0-2.228 4.334m-3.9 18.407a1.48 1.48 0 0 1-.432-1.14q.2-2.986.74-5.866c.215-1.15 1.62-1.55 2.448-.722l56.703 56.704c.828.827.429 2.233-.722 2.448a50 50 0 0 1-5.865.74 1.48 1.48 0 0 1-1.14-.433zm3.48 13.963c-1.033-1.033-2.7-.143-2.322 1.268C6.221 80.22 19.761 93.76 36.954 98.37c1.41.379 2.3-1.289 1.268-2.322z"></path></svg></a><div><h3>Product</h3><a href="https://linear.app/intake">Intake</a><a href="https://linear.app/plan">Plan</a><a href="https://linear.app/ai">AI</a><a href="https://linear.app/build">Build</a><a href="https://linear.app/pricing">Pricing</a><a href="https://linear.app/security">Security</a></div><div><h3>Features</h3><a href="https://linear.app/asks">Asks</a><a href="https://linear.app/agents">Agents</a><a href="https://linear.app/coding-sessions">Coding Sessions</a><a href="https://linear.app/customer-requests">Customer Requests</a><a href="https://linear.app/insights">Insights</a><a href="https://linear.app/mobile">Mobile</a><a href="https://linear.app/integrations">Integrations</a><a href="https://linear.app/changelog">Changelog</a></div><div><h3>Company</h3><a href="https://linear.app/about">About</a><a href="https://linear.app/customers">Customers</a><a href="https://linear.app/careers">Careers</a><a href="https://linear.app/now">Now</a><a href="https://linear.app/method">Method</a><a href="https://linear.app/quality">Quality</a><a href="https://linear.app/brand">Brand</a></div><div><h3>Resources</h3><a href="https://linear.app/switch">Switch</a><a href="https://linear.app/download">Download</a><a href="https://linear.app/docs">Documentation</a><a href="https://linear.app/developers">Developers</a><a href="https://linearstatus.com/">Status</a><a href="https://linear.app/enterprise">Enterprise</a><a href="https://linear.app/startups">Startups</a></div><div><h3>Connect</h3><a href="https://linear.app/contact">Contact us</a><a href="https://linear.app/join-slack">Community</a><a href="https://x.com/linear">X (Twitter)</a><a href="https://github.com/linear">GitHub</a><a href="https://www.youtube.com/@linear">YouTube</a></div></div><div class="linear-footer-legal"><span>Linear Orbital, Inc.</span><a href="https://linear.app/privacy">Privacy</a><a href="https://linear.app/terms">Terms</a><a href="https://linear.app/dpa">DPA</a><a href="https://linear.app/legal/aup">AUP</a></div></footer>
 
+  <script>
+    (() => {
+      const menuButton = document.querySelector('.linear-mobile-menu');
+      const mobileNav = document.querySelector('#linear-mobile-nav');
+      const closeMenu = () => {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open menu');
+        mobileNav.hidden = true;
+      };
+      menuButton.addEventListener('click', () => {
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!expanded));
+        menuButton.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
+        mobileNav.hidden = expanded;
+      });
+      mobileNav.addEventListener('click', event => {
+        if (event.target.closest('a')) closeMenu();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeMenu();
+      });
+    })();
+  </script>
 </body>
 </html>
