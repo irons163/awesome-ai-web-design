@@ -375,9 +375,15 @@
       library.classList.toggle('library-compact', width <= 350);
     };
     const currentWidth = () => parseInt(getComputedStyle(page).getPropertyValue('--library-width'), 10);
-    setWidth(currentWidth());
+    const defaultWidth = () => window.innerWidth <= 800 ? 320 : 420;
+    let manuallyResized = false;
+    setWidth(defaultWidth());
+    window.addEventListener('resize', () => {
+      if (!manuallyResized) setWidth(defaultWidth());
+    });
 
     handle.addEventListener('pointerdown', (event) => {
+      manuallyResized = true;
       handle.setPointerCapture(event.pointerId);
       setWidth(event.clientX - 8);
     });
@@ -391,6 +397,7 @@
       else if (event.key === 'Home') setWidth(280);
       else if (event.key === 'End') setWidth(420);
       else return;
+      manuallyResized = true;
       event.preventDefault();
     });
   })();
