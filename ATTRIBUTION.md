@@ -17,4 +17,6 @@ The currently published catalog previews are actual Google Stitch generations ba
 
 The separate `.stitch-work/current-official/` working area contains public-site observations, native Stitch outputs, and, for visual comparison, some brand logos, media, and fonts from the brands' own public websites. Six working HTML pages and only their referenced assets are also served under `official-drafts/`, clearly labeled as unfinished, unofficial snapshots. None has passed complete visual or responsive review. Those third-party assets retain their owners' rights and are not covered by the MIT grant for this collection's original code and writing. The working area and official drafts are not included in `assets/all-designs.zip`.
 
+The Linear draft also loads three mobile illustration images and its variable font from Linear's public CDN. These are Linear-owned reference assets, not part of this project's MIT-licensed work.
+
 The project offers its entire collection free of charge. It has no paid tier, checkout, affiliate program, paid request form, or account requirement. It is not affiliated with or endorsed by VoltAgent or the brands used as design references.
