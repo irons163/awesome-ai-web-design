@@ -296,8 +296,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar { width: 0; height: 0; }
 #reference-replica .linear-thread-toolbar { position: absolute; left: 16px; right: 16px; bottom: 14px; display: flex; align-items: center; gap: 14px; color: #8a8f98; font-size: 18px; }
 #reference-replica .linear-thread-send { margin-left: auto; color: #afb1d8; }
 @media (min-width: 1100px) {
-  #reference-replica .linear-intake-visual { background: #0f1011; mask-image: linear-gradient(to top, transparent 0, #000 63%), linear-gradient(to right, #000 0, #000 70%, transparent 100%); mask-composite: intersect, intersect; }
-  #reference-replica .linear-intake-columns { padding-left: 274px; }
+  #reference-replica .linear-intake-visual { background: transparent; }
+  #reference-replica .linear-intake-visual::before { content: ''; position: absolute; top: 9px; left: -110px; right: 3px; height: 608px; background: #0f1011; opacity: .8; pointer-events: none; }
+  #reference-replica .linear-intake-columns { position: relative; z-index: 1; padding-left: 274px; mask-image: linear-gradient(to top, transparent 0, #000 63%), linear-gradient(to right, #000 0, #000 70%, transparent 100%); mask-composite: intersect, intersect; }
+  #reference-replica .linear-intake-visual .linear-thread { z-index: 2; }
 }
 @media (max-width: 800px) {
   html { overflow-x: clip; }
