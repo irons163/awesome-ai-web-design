@@ -82,6 +82,7 @@ page = f'''<!doctype html>
 .nav-logo{{display:block;width:33px;height:34px}}.nav-logo svg{{display:block;width:33px;height:34px}}.nav-links,.nav-actions{{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:500;white-space:nowrap}}.nav-actions{{justify-self:end;gap:26px}}.nav-links a:hover,.nav-actions a:not(.button):hover{{text-decoration:underline}}.chev{{font-size:13px;padding-left:4px}}
 .button{{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 18px;border-radius:8px;font-size:16px;font-weight:500;white-space:nowrap}}.button.primary{{background:#2e73c5;color:white}}.button.primary:hover{{background:#215eaa}}.button.secondary{{background:#eaf3ff;color:#284e75}}.nav-actions .button{{font-size:15px;min-height:36px;padding:0 14px}}
 .hero{{height:1425px;position:relative;text-align:center;padding-top:80px;overflow:hidden}}.hero h1{{margin:0 auto;font-size:96px;line-height:1.09;letter-spacing:-.046em;font-weight:700;max-width:1152px}}.pill{{display:inline-flex;align-items:center;gap:12px;border-radius:80px;background:#fff0c8;padding:0 20px;white-space:nowrap;font-size:.88em;line-height:1.05;vertical-align:baseline;letter-spacing:-.04em}}.pill-dot{{width:31px;height:31px;background:#fac350;border-radius:50%;display:inline-block;flex:none}}.hero-subtitle{{font-size:20px;line-height:1.4;margin:23px 20px 20px}}.actions{{display:flex;justify-content:center;gap:16px}}.hero-video{{display:block;position:absolute;top:469px;left:50%;transform:translateX(-50%);width:958px;height:599px;object-fit:cover;border-radius:10px 10px 0 0;box-shadow:0 0 3px #ddd}}
+.hero h1{{font-weight:600;line-height:100px;letter-spacing:-4.6px;margin-bottom:12px}}.pill{{font-size:72px;line-height:87.12px;font-weight:500;letter-spacing:-2px;padding:8px 28px;background:#ffe4af}}.pill-dot{{width:32px;height:32px;background:#ffb110}}.hero-subtitle{{margin-top:0}}
 .brand-strip{{position:absolute;left:0;right:0;top:611px;height:59px;background:#fff;z-index:2;display:flex;align-items:center;justify-content:space-around;gap:28px;overflow:hidden;padding:0 7.5%}}.brand-strip img{{display:block;max-width:100px;max-height:32px;object-fit:contain;filter:grayscale(1)}}
 .content{{width:min(1094px,calc(100% - 48px));margin:auto}}h2{{font-size:52px;line-height:1.08;letter-spacing:-.038em;margin:0;font-weight:700}}.features{{margin-top:0}}.feature-grid{{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:25px}}.feature{{background:#fbfbfa;border-radius:12px;min-height:530px;padding:24px;overflow:hidden;position:relative}}.feature-kicker{{font-size:15px;margin:0 0 10px;color:#444}}.feature h3{{font-size:24px;line-height:1.17;letter-spacing:-.027em;margin:0;max-width:460px}}.arrow-circle{{position:absolute;right:24px;top:76px;background:#000;color:#fff;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:24px;line-height:1}}.feature-visual{{position:absolute;left:24px;right:24px;top:164px;height:487px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 3px 20px #00000009}}.feature-visual img{{display:block;width:100%;height:100%;object-fit:cover}}.feature-visual .overlay{{position:absolute;width:100%;height:auto;left:0;bottom:0;object-fit:contain}}.feature-wide{{height:300px;min-height:0;margin-top:24px}}.feature-wide .feature-visual{{left:auto;right:0;top:0;width:52%;height:100%;background:transparent;box-shadow:none}}.feature-wide .feature-visual img{{position:absolute;width:62%;height:auto;object-fit:contain;right:0;bottom:0}}.feature-wide .feature-visual img:first-child{{right:34%;bottom:-20px}}
 .usecases{{margin-top:30px}}.section-kicker{{color:#6b6b6b;font-size:15px;margin:0 0 12px}}.usecase-grid{{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}}.usecase{{border:1px solid #ddd;border-radius:12px;height:160px;padding:24px;display:flex;flex-direction:column;justify-content:space-between}}.usecase:hover{{background:#f8f8f8}}.case-icon{{display:grid;place-items:center;width:39px;height:39px;border-radius:50%;position:relative}}.case-icon img{{width:35px;height:35px;object-fit:contain}}.case-icon img.worker{{position:absolute;width:20px;height:20px;right:-16px;bottom:-3px}}.usecase strong{{font-size:16px;line-height:1.4;letter-spacing:-.01em}}
@@ -94,13 +95,37 @@ page = f'''<!doctype html>
 <body>
 <nav class="site-nav" aria-label="Main"><a class="nav-logo" href="https://www.notion.com/product" aria-label="Notion – Home">{logo_data['svg']}</a><div class="nav-links"><a href="https://www.notion.com/product">Product <span class="chev">⌄</span></a><a href="https://www.notion.com/resources">Resources <span class="chev">⌄</span></a><a href="https://www.notion.com/pricing">Pricing</a><a href="https://www.notion.com/contact-sales">Request a demo</a></div><div class="nav-actions"><a href="https://www.notion.com/login">Log in</a><a class="button primary" href="https://www.notion.com/signup">Get Notion free</a></div></nav>
 <main>
-<section class="hero"><h1>Where teams and<br>agents <span class="pill"><span class="pill-dot"></span>Build</span> together.</h1><p class="hero-subtitle">{esc(reference['hero']['subheading'])}</p>{cta()}<video class="hero-video" autoplay muted loop playsinline poster="{assets}hero-poster.jpg" src="{assets}hero.mp4"></video><div class="brand-strip" aria-label="Customers">{brand_logos}</div></section>
+<section class="hero"><h1>Where teams and agents <span class="pill"><span class="pill-dot"></span><span class="pill-label">Build</span></span> together.</h1><p class="hero-subtitle">{esc(reference['hero']['subheading'])}</p>{cta()}<video class="hero-video" autoplay muted loop playsinline poster="{assets}hero-poster.jpg" src="{assets}hero.mp4"></video><div class="brand-strip" aria-label="Customers">{brand_logos}</div></section>
 <section class="content features"><h2>AI where your team works.</h2><div class="feature-grid"><a class="feature" href="https://www.notion.com/product/docs"><p class="feature-kicker">Capture knowledge</p><h3>Bring everything into one system of record.</h3><span class="arrow-circle">→</span><div class="feature-visual"><img src="{assets}feature-capture.jpg" alt="Notion Meetings knowledge base"></div></a><a class="feature" href="https://www.notion.com/product/ai"><p class="feature-kicker">Find answers</p><h3>Get answers, instantly—with citations.</h3><span class="arrow-circle">→</span><div class="feature-visual"><img src="{assets}feature-find.png" alt="Notion AI answers"><img class="overlay" src="{assets}feature-find-overlay.png" alt=""></div></a></div><a class="feature feature-wide" href="https://www.notion.com/product/ai/agents"><p class="feature-kicker">Automate busywork</p><h3>Keep work moving 24/7 with agents.</h3><span class="arrow-circle">→</span><div class="feature-visual"><img src="{assets}feature-automate-back.png" alt="Notion engineering tasks"><img src="{assets}feature-automate-front.jpg" alt="Notion coding agent"></div></a></section>
 <section class="content usecases"><p class="section-kicker">See what Notion can do</p><div class="usecase-grid">{use_case_html}</div></section>
 <section class="content stories"><h2>Trusted by teams that ship.</h2><div class="story-grid">{story_html}</div></section><div class="metrics"><span>62% of Fortune 100 use Notion</span><span>G2’s #1 knowledge base for 3 consecutive years</span><span>100M users in over 50 countries</span></div>
 <section class="end-cta"><h2>Get started today.</h2>{cta()}</section>
 </main>
 <footer class="site-footer"><div class="footer-layout"><div class="footer-brand"><div class="footer-mark">{logo_data['svg']}<span>Notion</span></div><p class="quote">“We shape our tools,<br>and thereafter our tools shape us.”</p><p class="quote-credit">Marshall McLuhan</p></div>{footer_html}</div><div class="footer-bottom"><span>© 2026 Notion Labs, Inc.</span><span>Cookie settings</span><span>English (US)⌄</span></div></footer>
+<script>
+(() => {{
+  const states = [
+    {{ label: 'Build', background: '#ffe4af', dot: '#ffb110' }},
+    {{ label: 'Think', background: '#e6f3fe', dot: '#097fe8' }},
+    {{ label: 'Create', background: '#ffdec4', dot: '#ff6d00' }},
+    {{ label: 'Scale', background: '#bde6e4', dot: '#27918d' }},
+    {{ label: 'Ship', background: '#d0f4d8', dot: '#1aae39' }},
+    {{ label: 'Jam', background: '#eadbfa', dot: '#9849e8' }}
+  ];
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pill = document.querySelector('.pill');
+  const dot = pill.querySelector('.pill-dot');
+  const label = pill.querySelector('.pill-label');
+  let index = 0;
+  window.setInterval(() => {{
+    index = (index + 1) % states.length;
+    const state = states[index];
+    label.textContent = state.label;
+    pill.style.backgroundColor = state.background;
+    dot.style.backgroundColor = state.dot;
+  }}, 2800);
+}})();
+</script>
 </body></html>'''
 
 (ROOT / "notion.html").write_text(page)
