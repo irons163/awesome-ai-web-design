@@ -68,7 +68,7 @@ python3 -m unittest discover -s tests -v
 
 網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。 完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結。`dist/` 不包含這個大型 ZIP。正式網站的原始截圖與縮圖引用 GitHub 固定 commit 的原檔，避免部署包過大；來源設定在 `data/hosting-assets.json`。更新 Stitch 圖片時，先推送完整匯出，再把該檔的 commit 更新為實際推送版本。下載包與一般本機預覽仍使用完整本機圖片。
 
-網站另提供 Spotify、Linear、Claude、Notion、Figma、Framer 六份官網重製草稿。它們由 Stitch 原始生成稿衍生並依公開官網校正，但尚未完成整頁、互動和響應式視覺驗收，因此明確標為草稿，不能宣稱與品牌官網一致。`build_site.py` 僅將這六份 HTML 與實際引用的素材放入 `dist/official-drafts/`；這些品牌素材仍屬原權利人，亦不包含在下載 ZIP 中。
+網站另提供逐步製作的官網重製草稿，並在 [74 站進度頁](https://awesome-ai-web-design.philqq100.chatgpt.site/official-progress.html) 註明各品牌狀態與參考日期。它們由 Google Stitch 原始生成稿衍生，部分再依保存的官方頁面資料校正；尚未完成整頁、互動和響應式視覺驗收，不能宣稱與品牌現行官網一致。`build_site.py` 僅將草稿 HTML 與實際引用的素材放入 `dist/official-drafts/`；這些品牌素材仍屬原權利人，亦不包含在下載 ZIP 中。
 
 ## 免費與來源
 

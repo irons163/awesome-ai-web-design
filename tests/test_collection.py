@@ -102,7 +102,7 @@ class CollectionTests(unittest.TestCase):
                 self.assertGreaterEqual((values[1]+.05)/(values[0]+.05),4.5)
 
     def test_static_links_resolve_without_commercial_routes(self):
-        from build_site import main as build_site
+        from build_site import OFFICIAL_DRAFTS, main as build_site
         build_site()
         files=[ROOT/'dist/index.html']
         for path in files:
@@ -110,7 +110,7 @@ class CollectionTests(unittest.TestCase):
             for link in parser.links:
                 if link.startswith(('#','http:','https:','mailto:')): continue
                 self.assertTrue((path.parent/link.split('#')[0].split('?')[0]).exists(),f'{path}: {link}')
-        for name in ('spotify','linear','claude','notion','figma','framer','vercel','airbnb'):
+        for name in OFFICIAL_DRAFTS:
             draft=ROOT/'dist/official-drafts'/f'{name}.html'
             self.assertTrue(draft.is_file(),draft)
             html=draft.read_text()
