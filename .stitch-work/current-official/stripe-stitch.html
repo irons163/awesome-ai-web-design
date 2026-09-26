@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stripe | Financial Infrastructure for the Internet (Canada)</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config Verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-surface": "#2d3133",
+            "surface-container": "#ebeef1",
+            "secondary-fixed": "#e2dfff",
+            "on-tertiary-container": "#fffaf9",
+            "surface-container-highest": "#e0e3e6",
+            "on-primary": "#ffffff",
+            "outline": "#777587",
+            "on-surface": "#181c1e",
+            "tertiary-fixed-dim": "#ffb68f",
+            "surface-container-high": "#e5e8eb",
+            "secondary-container": "#b0aefe",
+            "on-error-container": "#93000a",
+            "background": "#f7fafd",
+            "surface-dim": "#d7dadd",
+            "on-tertiary-fixed-variant": "#773200",
+            "error-container": "#ffdad6",
+            "surface-tint": "#4c42e9",
+            "surface-bright": "#f7fafd",
+            "surface-variant": "#e0e3e6",
+            "tertiary-container": "#be5400",
+            "tertiary": "#974100",
+            "on-primary-container": "#fefaff",
+            "on-secondary-fixed-variant": "#403e85",
+            "error": "#ba1a1a",
+            "surface-container-low": "#f1f4f7",
+            "secondary": "#58569f",
+            "on-background": "#181c1e",
+            "on-secondary": "#ffffff",
+            "secondary-fixed-dim": "#c3c0ff",
+            "on-surface-variant": "#464555",
+            "on-secondary-container": "#413e86",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#321ed2",
+            "primary-fixed": "#e2dfff",
+            "outline-variant": "#c7c4d8",
+            "on-secondary-fixed": "#130c59",
+            "on-primary-fixed": "#0f0069",
+            "primary": "#493ee5",
+            "on-tertiary-fixed": "#331100",
+            "inverse-primary": "#c3c0ff",
+            "inverse-on-surface": "#eef1f4",
+            "primary-fixed-dim": "#c3c0ff",
+            "primary-container": "#635bff",
+            "surface": "#f7fafd",
+            "tertiary-fixed": "#ffdbca",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Stripe Canvas Angled Mesh Background */
+    .hero-canvas-slice {
+      clip-path: polygon(0 0, 100% 0, 100% 86%, 0 100%);
+    }
+    .custom-mesh {
+      background: radial-gradient(at 10% 20%, #ffd4bf 0px, transparent 50%),
+                  radial-gradient(at 85% 15%, #b5afff 0px, transparent 50%),
+                  radial-gradient(at 40% 70%, #9be2ff 0px, transparent 60%),
+                  radial-gradient(at 90% 80%, #ffc0a9 0px, transparent 55%),
+                  linear-gradient(135deg, #fbfafd 0%, #ece9ff 50%, #f6f8fc 100%);
+    }
+    .card-shadow-stripe {
+      box-shadow: 0 24px 60px -12px rgba(50, 50, 93, 0.16), 0 12px 28px -18px rgba(0, 0, 0, 0.12);
+    }
+    .card-shadow-soft {
+      box-shadow: 0 15px 35px rgba(50, 50, 93, 0.08), 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes floatDelayed {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    .animate-float-1 { animation: floatSlow 6s ease-in-out infinite; }
+    .animate-float-2 { animation: floatDelayed 7s ease-in-out infinite 1.2s; }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar (Shared Component JSON Conformance) -->
+<header class="docked full-width top-0 z-50 backdrop-blur-md bg-surface-container-lowest/80 dark:bg-inverse-surface/80 shadow-none sticky top-0 transition-all duration-150">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-6 py-4 w-full">
+<!-- Left: Logo & Navigation Links -->
+<div class="flex items-center gap-10">
+<a class="font-headline text-2xl font-black tracking-tight text-on-surface dark:text-inverse-on-surface transform -skew-x-6 flex items-center select-none" href="#">
+          stripe
+        </a>
+<nav class="hidden md:flex items-center gap-7">
+<a class="font-headline text-sm tracking-normal text-on-surface dark:text-inverse-on-surface font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 flex items-center gap-1" href="#">
+            Products
+            <span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</a>
+<a class="font-headline text-sm tracking-normal text-on-surface dark:text-inverse-on-surface font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 flex items-center gap-1" href="#">
+            Solutions
+            <span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</a>
+<a class="font-headline text-sm tracking-normal text-on-surface dark:text-inverse-on-surface font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 flex items-center gap-1" href="#">
+            Developers
+            <span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</a>
+<a class="font-headline text-sm tracking-normal text-on-surface dark:text-inverse-on-surface font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150 flex items-center gap-1" href="#">
+            Resources
+            <span class="material-symbols-outlined text-[16px] text-outline" data-icon="expand_more">expand_more</span>
+</a>
+<a class="font-headline text-sm tracking-normal text-on-surface dark:text-inverse-on-surface font-medium hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150" href="#">
+            Pricing
+          </a>
+</nav>
+</div>
+<!-- Right Actions: Sign in, Contact sales -->
+<div class="flex items-center gap-4">
+<a class="hidden sm:inline-flex items-center text-sm font-semibold text-on-surface hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-150" href="#">
+          Sign in
+          <span class="material-symbols-outlined text-sm ml-1" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="hidden lg:inline-flex items-center text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors duration-150" href="#contact">
+          Contact sales
+        </a>
+<a class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-primary-container text-on-primary font-headline text-sm font-semibold hover:bg-primary transition-all duration-150 active:scale-95 shadow-sm" href="#get-started">
+<span>Start now</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="relative overflow-hidden pt-8 pb-32 lg:pt-14 lg:pb-44">
+<!-- Atmospheric Multi-tone Mesh Shader / Fallback Canvas Area -->
+<div class="absolute inset-0 hero-canvas-slice custom-mesh -z-10 opacity-90"></div>
+<div class="absolute inset-0 hero-canvas-slice bg-cover bg-center mix-blend-soft-light opacity-60 -z-10" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCx44OXRP1qFF55JOPo8EkcFGh6kdY8Q6wuV1rMtoTmc9MTLnpu6_edplsT_C9D05mD2bmUK6VWdb-GEiYh71cjS5KE2Vs2VQJ08_-KkH3nmEc4S98cOEAbp_gXGvGnzFd5-x6kK-aXLwPoMguG0m11OXdaJTzkAtQ184wdBRXQhmT-lenO4fuW29WCN8ThzO_v0OyBsvorMy-wpCeaQB7x11b_nB8b9ED7w5op8mZ4Ez57QMQv12VjK1H9JZa364NXbuN9KbOm3prq');"></div>
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+<!-- Hero Copy Column (Left) -->
+<div class="lg:col-span-6 z-10">
+<!-- Live Ticker Eyebrow -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container-lowest/80 backdrop-blur-md border border-outline-variant/40 shadow-sm text-xs font-semibold text-on-surface mb-6">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-on-surface-variant">Global GDP running on Stripe:</span>
+<span class="font-bold text-primary font-mono tracking-tight" id="gdp-counter">1.18%</span>
+</div>
+<!-- Main Headline -->
+<h1 class="font-headline text-5xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight text-on-surface leading-[1.08] mb-6">
+          Financial infrastructure to grow your revenue.
+        </h1>
+<!-- Supporting Copy -->
+<p class="font-body text-lg sm:text-xl text-on-surface-variant leading-relaxed max-w-xl mb-9">
+          Accept payments, offer financial services and implement custom revenue models – from your first transaction to your billionth.
+        </p>
+<!-- CTA Buttons -->
+<div class="flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary-container text-on-primary font-headline text-base font-semibold hover:bg-primary transition-all duration-150 active:scale-95 shadow-md" href="#get-started">
+<span>Get started</span>
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</a>
+<button class="inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-surface-container-lowest text-on-surface font-headline text-base font-semibold border border-outline-variant/60 hover:bg-surface-container-low transition-all duration-150 shadow-sm active:scale-95">
+<!-- Google Multicolor 'G' Icon -->
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.27 21.39 7.35 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 10.03 0 12s.45 3.83 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.27 2.61 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span>Sign up with Google</span>
+</button>
+</div>
+<!-- Micro Feature Guarantee Line -->
+<div class="mt-8 flex items-center gap-6 text-xs text-on-surface-variant font-medium">
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="check_circle">check_circle</span>
+            No setup or monthly fees
+          </span>
+<span class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="check_circle">check_circle</span>
+            Instant sandbox API keys
+          </span>
+</div>
+</div>
+<!-- Hero Layered Graphical UI Showcase (Right) -->
+<div class="lg:col-span-6 relative flex justify-center items-center min-h-[440px] sm:min-h-[500px]">
+<!-- Floating Card 1: Live Payment Element Checkout Sheet -->
+<div class="animate-float-1 absolute top-2 sm:top-4 right-2 sm:right-6 w-[310px] sm:w-[350px] bg-surface-container-lowest rounded-2xl p-5 card-shadow-stripe border border-outline-variant/30 z-20">
+<div class="flex items-center justify-between pb-3 border-b border-surface-container">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-tertiary-container/30 flex items-center justify-center">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+</span>
+<span class="font-headline text-xs font-semibold text-on-surface">Payment Sheet</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high text-[11px] font-mono font-medium text-on-surface-variant">CAD $128.00</span>
+</div>
+<!-- Express Pay Buttons Mock -->
+<div class="mt-3.5 grid grid-cols-2 gap-2">
+<div class="h-9 rounded-lg bg-on-surface text-surface flex items-center justify-center text-xs font-medium cursor-pointer hover:opacity-90">
+<span class="font-bold tracking-tight"> Pay</span>
+</div>
+<div class="h-9 rounded-lg bg-surface-container-high text-on-surface flex items-center justify-center text-xs font-semibold border border-outline-variant/30 cursor-pointer">
+              G Pay
+            </div>
+</div>
+<div class="relative flex py-2 items-center">
+<div class="flex-grow border-t border-surface-container"></div>
+<span class="flex-shrink mx-2 text-[10px] font-medium text-outline uppercase tracking-wider">Or card</span>
+<div class="flex-grow border-t border-surface-container"></div>
+</div>
+<!-- Inputs -->
+<div class="space-y-2">
+<div class="p-2.5 rounded-lg border border-outline-variant/60 bg-surface flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 text-on-surface font-medium">
+<span class="font-mono text-primary font-bold">VISA</span>
+<span>•••• 4242</span>
+</div>
+<span class="text-[11px] text-outline font-mono">08/28</span>
+</div>
+<button class="w-full py-2.5 rounded-lg bg-primary-container text-on-primary font-headline text-xs font-bold shadow-sm flex items-center justify-center gap-1.5 hover:bg-primary transition-colors">
+<span>Pay $128.00 CAD</span>
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+</button>
+</div>
+<div class="mt-3 pt-2.5 flex items-center justify-between text-[11px] text-on-surface-variant border-t border-surface-container">
+<span class="flex items-center gap-1 text-[#00875a] font-semibold">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+              1-Click Checkout
+            </span>
+<span class="text-outline">Protected by Radar</span>
+</div>
+</div>
+<!-- Floating Card 2: Revenue Optimization Analytics Card -->
+<div class="animate-float-2 absolute -bottom-4 sm:bottom-0 left-0 sm:left-4 w-[280px] sm:w-[320px] bg-surface-container-lowest/95 backdrop-blur-md rounded-2xl p-4 card-shadow-soft border border-outline-variant/40 z-30">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-on-surface">Adaptive Acceptance</span>
+<span class="px-2 py-0.5 rounded-full bg-[#e3fcef] text-[#006644] text-[11px] font-bold">
+              +14.2% Boost
+            </span>
+</div>
+<p class="text-[11px] text-on-surface-variant leading-tight">AI rerouting recovered $428,950 in authorizations this month.</p>
+<!-- Mini SVG Sparkline -->
+<div class="mt-3 h-10 w-full flex items-end">
+<svg class="w-full h-9 overflow-visible" viewbox="0 0 200 40">
+<path d="M 0 35 Q 25 30 50 28 T 100 18 T 150 14 T 200 4" fill="none" stroke="#635bff" stroke-linecap="round" stroke-width="2.5"></path>
+<circle cx="200" cy="4" fill="#635bff" r="4" stroke="#ffffff" stroke-width="2"></circle>
+</svg>
+</div>
+</div>
+<!-- Floating Card 3: Modern Stripe Terminal Physical POS Reader Mock -->
+<div class="hidden sm:block absolute top-1/2 left-2 sm:-left-6 transform -translate-y-1/2 w-48 bg-gradient-to-b from-surface-container-lowest to-surface-container-low rounded-2xl p-4 card-shadow-soft border border-outline-variant/40 z-10 rotate-[-4deg]">
+<div class="flex items-center justify-between mb-3">
+<div class="w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<span class="text-[10px] font-mono uppercase font-bold text-outline">Terminal WisePOS</span>
+</div>
+<div class="bg-surface-container-high rounded-xl p-3 text-center border border-outline-variant/30">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="contactless">contactless</span>
+<p class="text-[11px] font-bold text-on-surface mt-1">Tap, insert or swipe</p>
+<p class="text-[9px] text-on-surface-variant font-mono">$48.50 CAD</p>
+</div>
+<div class="mt-3 flex justify-center gap-1.5">
+<span class="w-6 h-1 rounded-full bg-primary/40"></span>
+<span class="w-2 h-1 rounded-full bg-surface-container-highest"></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Solutions Grid Section -->
+<section class="py-24 bg-surface-container-low border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-3xl mb-16">
+<h2 class="font-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mb-4">
+          Flexible solutions for every business model.
+        </h2>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+          Grow your business with a comprehensive set of payments and financial tools – designed to work individually or together.
+        </p>
+</div>
+<!-- 6 Bento Grid Cards in Exact Order -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Global Payments (Feature Image URL provided) -->
+<div class="bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div class="h-48 relative overflow-hidden bg-surface-container">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean modern high-fidelity visual composition highlighting digital and card payment interfaces, physical cards, and digital wallet payment options set on an elegant neutral background with soft studio lighting reflecting modern fintech aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDy6VzfbgIM5Jg60JupZqnTDVrWsCsxjnhY0SdOTIP289LXk-zsSrhTQXBM6_ryrKKOAJXbdXpWpAPVXmAb8sJJlt87qv2aDv6EEYsO_c_uFe-EYn7wWKfmbnUxjtbHPbvx_Fv1S-8p4dbXdbBscas8xD_trlvDg2Q8jwDUp9LdMqnwsunnHD0S85BH-wFDzb8u8YluYPD8kaOATwv8JE9klOLAGA8UAor-J30he-j0EOogRocL1-mUbOJdyq8QhKsIqF8HLjJcSFbT"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-transparent"></div>
+<!-- Interac & Payment Badges -->
+<div class="absolute bottom-3 left-4 flex items-center gap-1.5">
+<span class="px-2 py-0.5 bg-surface-container-lowest/95 backdrop-blur-md rounded-md text-[10px] font-bold text-on-surface border border-outline-variant/30">Interac Debit</span>
+<span class="px-2 py-0.5 bg-surface-container-lowest/95 backdrop-blur-md rounded-md text-[10px] font-bold text-on-surface border border-outline-variant/30">Apple Pay</span>
+<span class="px-2 py-0.5 bg-surface-container-lowest/95 backdrop-blur-md rounded-md text-[10px] font-bold text-on-surface border border-outline-variant/30">100+ Methods</span>
+</div>
+</div>
+<div class="p-6">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="credit_card">credit_card</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Accept and optimise payments globally – online and in person
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-4">
+              Increase authorization rates, offer localized payment methods in Canada and globally, and streamline checkout with pre-built UI components.
+            </p>
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Payments <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Enable any billing model -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-secondary text-xl" data-icon="sync">sync</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Enable any billing model
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Launch subscription tiers, flexible usage-based plans, automatic prorations, and smart retry algorithms with Stripe Billing.
+            </p>
+<!-- UI Preview Box -->
+<div class="bg-surface-container-low rounded-xl p-3 border border-outline-variant/30 text-xs space-y-2">
+<div class="flex items-center justify-between text-on-surface font-semibold">
+<span>Enterprise Tier (Monthly)</span>
+<span class="font-mono text-primary">$4,500/mo</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-1.5 overflow-hidden">
+<div class="bg-primary h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+<div class="flex justify-between text-[11px] text-on-surface-variant">
+<span>Usage: 782,100 / 1,000,000 API calls</span>
+<span class="text-primary font-medium">Smart Invoiced</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container">
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Billing <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: Monetise through agentic commerce -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-xl bg-primary-fixed-dim/40 flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Monetise through agentic commerce
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Equip autonomous AI agents to initiate checkouts, pay micro-invoices, and negotiate transactional contracts on programmed limits.
+            </p>
+<!-- Agentic Terminal Code Mockup -->
+<div class="bg-inverse-surface rounded-xl p-3 font-mono text-[11px] text-inverse-on-surface leading-snug">
+<div class="text-outline-variant mb-1">// Agent API Session #4928</div>
+<div class="text-[#c3c0ff]">agent.checkout.create({</div>
+<div class="pl-3 text-surface-variant">model: <span class="text-tertiary-fixed-dim">"gpt-5o-agent"</span>,</div>
+<div class="pl-3 text-surface-variant">max_budget: <span class="text-tertiary-fixed-dim">"$250 CAD"</span></div>
+<div class="text-[#c3c0ff]">}); // Authorized ✓</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container">
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Agentic APIs <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: Create a card issuing programme -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-xl bg-tertiary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-tertiary text-xl" data-icon="credit_card_heart">credit_card_heart</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Create a card issuing programme
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Create, distribute, and manage physical and virtual payment cards instantly with granular spending controls and real-time ledger hooks.
+            </p>
+<!-- Card Graphic Preview -->
+<div class="h-28 rounded-xl bg-gradient-to-tr from-inverse-surface to-secondary p-3.5 text-surface flex flex-col justify-between shadow-inner">
+<div class="flex justify-between items-start">
+<span class="text-[11px] font-mono tracking-widest text-outline-variant">CORPORATE</span>
+<span class="material-symbols-outlined text-base" data-icon="contactless">contactless</span>
+</div>
+<div>
+<span class="text-xs font-mono tracking-widest">•••• 8920</span>
+<div class="flex justify-between items-center text-[10px] text-surface-dim mt-1">
+<span>EXP 10/29</span>
+<span class="font-bold tracking-wider">STRIPE ISSUING</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container">
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Issuing <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 5: Stablecoins & Crypto -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="currency_exchange">currency_exchange</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Access borderless money movement with stablecoins and crypto
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Accept USDC from customers across 150+ countries with automatic settlement into your Canadian bank account in CAD or preferred fiat.
+            </p>
+<!-- Settlement Flow Preview -->
+<div class="bg-surface-container-low rounded-xl p-3 border border-outline-variant/30 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-container text-on-primary flex items-center justify-center font-bold text-[10px]">
+                  $
+                </div>
+<div>
+<div class="font-bold text-on-surface">USDC Pay-in</div>
+<div class="text-[10px] text-on-surface-variant">Solana &amp; Ethereum</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline" data-icon="trending_flat">trending_flat</span>
+<div class="text-right">
+<div class="font-bold text-on-surface">CAD Direct</div>
+<div class="text-[10px] text-[#00875a] font-semibold">Instant EFT</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container">
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Crypto Rails <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 6: Stripe Connect Platform -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 card-shadow-soft flex flex-col justify-between group hover:border-primary/40 transition-all duration-200">
+<div>
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="hub">hub</span>
+</div>
+<h3 class="font-headline text-lg font-bold text-on-surface mb-2 leading-snug">
+              Embed payments in your platform
+            </h3>
+<p class="text-sm text-on-surface-variant leading-relaxed mb-6">
+              Power marketplaces, software platforms, and split payouts across thousands of sellers with turnkey onboarding and automated tax reporting.
+            </p>
+<!-- Connect Split Visual -->
+<div class="bg-surface-container-low rounded-xl p-3 border border-outline-variant/30 space-y-2 text-xs">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Gross platform transaction</span>
+<span class="font-mono font-medium text-on-surface">$200.00 CAD</span>
+</div>
+<div class="flex justify-between items-center text-[#00875a]">
+<span>Platform take rate (15%)</span>
+<span class="font-mono font-bold">+$30.00 CAD</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant border-t border-outline-variant/30 pt-1 text-[11px]">
+<span>Vendor Net Transfer</span>
+<span class="font-mono font-medium">$170.00 CAD</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-container">
+<a class="inline-flex items-center text-sm font-semibold text-primary group-hover:translate-x-1 transition-transform" href="#">
+              Explore Connect <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Enterprise Proof & Metrics Section -->
+<section class="py-24 bg-surface-container-lowest border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-3xl mb-16">
+<span class="font-headline text-sm font-bold text-primary tracking-wide uppercase">Scale &amp; Reliability</span>
+<h2 class="font-headline text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-on-surface mt-2 mb-4">
+          The backbone of global commerce
+        </h2>
+<p class="font-body text-lg text-on-surface-variant leading-relaxed">
+          From fast-growing startups to Fortune 500 leaders, businesses rely on Stripe’s bulletproof infrastructure to run and expand critical revenue engines.
+        </p>
+</div>
+<!-- 4 Key Authentic Stats -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 pt-6 pb-12 border-y border-outline-variant/30">
+<div>
+<div class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-on-surface tracking-tight mb-2">
+            135+
+          </div>
+<div class="text-sm sm:text-base text-on-surface-variant font-medium leading-snug">
+            Currencies and payment methods supported
+          </div>
+</div>
+<div>
+<div class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-on-surface tracking-tight mb-2">
+            US$1.9tn
+          </div>
+<div class="text-sm sm:text-base text-on-surface-variant font-medium leading-snug">
+            Payments volume processed in 2025
+          </div>
+</div>
+<div>
+<div class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-primary-container tracking-tight mb-2">
+            99.999%
+          </div>
+<div class="text-sm sm:text-base text-on-surface-variant font-medium leading-snug">
+            Historical uptime for Stripe core services
+          </div>
+</div>
+<div>
+<div class="font-headline text-4xl sm:text-5xl lg:text-6xl font-black text-on-surface tracking-tight mb-2">
+            200M+
+          </div>
+<div class="text-sm sm:text-base text-on-surface-variant font-medium leading-snug">
+            Active subscriptions managed on Stripe Billing
+          </div>
+</div>
+</div>
+<!-- Enterprise Logos Row -->
+<div class="mt-14 flex flex-wrap items-center justify-between gap-8 opacity-70 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="font-headline font-black text-xl tracking-tighter text-on-surface">Amazon</span>
+<span class="font-headline font-bold text-xl tracking-tight text-on-surface">Salesforce</span>
+<span class="font-headline font-extrabold text-xl tracking-tight text-on-surface">Shopify</span>
+<span class="font-headline font-bold text-xl tracking-wider text-on-surface">HERTZ</span>
+<span class="font-headline font-black text-xl tracking-tight text-on-surface">BMW</span>
+<span class="font-headline font-bold text-xl tracking-tight text-on-surface">URBANSPACER</span>
+</div>
+</div>
+</section>
+<!-- Customer Story Spotlight Section (Hertz) -->
+<section class="py-24 bg-surface-container-low border-t border-outline-variant/30">
+<div class="max-w-7xl mx-auto px-6">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<h2 class="font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-on-surface">
+          Powering businesses of all sizes.
+        </h2>
+<p class="font-body text-base text-on-surface-variant mt-3">
+          Discover how industry leaders reinvent customer journeys and unlock operational velocity.
+        </p>
+</div>
+<!-- Hertz Spotlight Bento Unit -->
+<div class="bg-surface-container-lowest rounded-3xl border border-outline-variant/30 p-8 sm:p-12 card-shadow-stripe grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-container text-xs font-bold tracking-wider text-on-surface mb-6">
+            CUSTOMER CASE STUDY
+          </div>
+<h3 class="font-headline text-2xl sm:text-3xl lg:text-4xl font-extrabold text-on-surface tracking-tight mb-4">
+            Hertz unifies commerce with Stripe.
+          </h3>
+<p class="font-body text-base sm:text-lg text-on-surface-variant leading-relaxed mb-6">
+            To power global car rentals and vehicle maintenance operations, Hertz partnered with Stripe to unify its fragmented payments landscape. With Terminal for thousands of rental desks and online Payment Element checkout for mobile apps, Hertz unlocked effortless reservations, reduced fraud chargebacks, and built cohesive digital and in-person experiences worldwide.
+          </p>
+<div class="flex items-center gap-6">
+<a class="inline-flex items-center gap-2 text-base font-bold text-primary hover:underline" href="#">
+<span>Read the Hertz story</span>
+<span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-5 bg-surface-container rounded-2xl p-6 sm:p-8 flex flex-col justify-between border border-outline-variant/40 min-h-[280px]">
+<div>
+<div class="text-2xl font-black italic tracking-wider text-on-surface mb-6">
+              Hertz.
+            </div>
+<blockquote class="text-sm sm:text-base text-on-surface font-medium italic leading-relaxed">
+              “Stripe gives us the agility to deploy frictionless in-person pickup counters and rapid mobile checkouts across international locations on a unified backend.”
+            </blockquote>
+</div>
+<div class="pt-6 border-t border-outline-variant/30 flex items-center justify-between">
+<div>
+<div class="text-xs font-bold text-on-surface">Global Fleet Payments</div>
+<div class="text-[11px] text-on-surface-variant">Unified online &amp; POS infrastructure</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-primary-fixed text-primary font-mono text-xs font-bold">
+              100% Unified
+            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ready to Start CTA Banner -->
+<section class="py-20 bg-surface-container-lowest border-t border-outline-variant/30" id="get-started">
+<div class="max-w-5xl mx-auto px-6 text-center">
+<h2 class="font-headline text-3xl sm:text-4xl font-extrabold text-on-surface tracking-tight mb-4">
+        Ready to get started?
+      </h2>
+<p class="font-body text-lg text-on-surface-variant max-w-xl mx-auto mb-8">
+        Create an account instantly or contact our team to design a customized pricing package for your high-volume organization.
+      </p>
+<div class="flex flex-wrap justify-center items-center gap-4">
+<a class="px-7 py-3 rounded-full bg-primary-container text-on-primary font-headline text-base font-semibold hover:bg-primary transition-all duration-150 active:scale-95 shadow-md flex items-center gap-2" href="#">
+<span>Start now</span>
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="px-7 py-3 rounded-full bg-surface-container text-on-surface font-headline text-base font-semibold hover:bg-surface-container-high transition-all duration-150 active:scale-95" href="#contact">
+          Contact sales
+        </a>
+</div>
+</div>
+</section>
+<!-- Footer (Shared Component JSON Conformance) -->
+<footer class="bg-surface-container-low dark:bg-inverse-surface border-t border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-6 py-16">
+<!-- Multi-column links grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+<div class="col-span-2 lg:col-span-1">
+<div class="font-headline text-2xl font-black tracking-tight text-on-surface dark:text-inverse-on-surface transform -skew-x-6 mb-4">
+            stripe
+          </div>
+<div class="flex items-center gap-1.5 text-xs text-on-surface-variant dark:text-outline-variant font-medium cursor-pointer hover:text-on-surface mb-3">
+<span class="material-symbols-outlined text-sm" data-icon="public">public</span>
+<span>Canada (English)</span>
+</div>
+<p class="text-xs text-on-surface-variant dark:text-outline-variant leading-relaxed">
+            Financial infrastructure for the internet.
+          </p>
+</div>
+<div>
+<h4 class="font-headline text-xs font-bold uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-4">
+            Products
+          </h4>
+<ul class="space-y-2.5 text-xs text-on-surface-variant dark:text-outline-variant">
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Payments</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Billing</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Connect</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Issuing</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Radar</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Terminal</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-xs font-bold uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-4">
+            Solutions
+          </h4>
+<ul class="space-y-2.5 text-xs text-on-surface-variant dark:text-outline-variant">
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">E-commerce</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">SaaS</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Marketplaces</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Platforms</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Global businesses</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-xs font-bold uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-4">
+            Developers
+          </h4>
+<ul class="space-y-2.5 text-xs text-on-surface-variant dark:text-outline-variant">
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Documentation</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">API reference</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">API status</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">API changelog</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Build with Agentic</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline text-xs font-bold uppercase tracking-wider text-on-surface dark:text-inverse-on-surface mb-4">
+            Company
+          </h4>
+<ul class="space-y-2.5 text-xs text-on-surface-variant dark:text-outline-variant">
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">About Stripe</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Customers</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Enterprise</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Newsroom</a></li>
+<li><a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Careers</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Layout Bar from Shared Components JSON -->
+<div class="border-t border-outline-variant/30 pt-8 flex flex-col md:flex-row justify-between items-center gap-6 w-full">
+<div class="font-body text-xs text-on-surface-variant dark:text-outline-variant">
+          © 2026 Stripe, Inc.
+        </div>
+<div class="flex flex-wrap items-center gap-6 font-body text-xs text-on-surface-variant dark:text-outline-variant">
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Canada (English)</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Privacy &amp; terms</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Sitemap</a>
+<a class="hover:text-on-surface dark:hover:text-inverse-on-surface transition-colors duration-150" href="#">Cookie settings</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Micro Interaction Script -->
+<script>
+    // Live subtle fluctuating GDP counter simulation
+    const gdpEl = document.getElementById('gdp-counter');
+    if (gdpEl) {
+      let base = 1.18;
+      setInterval(() => {
+        const delta = (Math.random() * 0.004) - 0.002;
+        base = Math.max(1.17, Math.min(1.22, base + delta));
+        gdpEl.textContent = base.toFixed(3) + '%';
+      }, 3500);
+    }
+  </script>
+</body></html>
