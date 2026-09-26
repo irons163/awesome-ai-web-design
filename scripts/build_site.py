@@ -9,7 +9,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 
 

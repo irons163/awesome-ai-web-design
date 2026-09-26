@@ -110,7 +110,7 @@ class CollectionTests(unittest.TestCase):
             for link in parser.links:
                 if link.startswith(('#','http:','https:','mailto:')): continue
                 self.assertTrue((path.parent/link.split('#')[0].split('?')[0]).exists(),f'{path}: {link}')
-        for name in ('spotify','linear','claude','notion','figma','framer','vercel'):
+        for name in ('spotify','linear','claude','notion','figma','framer','vercel','airbnb'):
             draft=ROOT/'dist/official-drafts'/f'{name}.html'
             self.assertTrue(draft.is_file(),draft)
             html=draft.read_text()
