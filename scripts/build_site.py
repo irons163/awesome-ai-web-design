@@ -29,6 +29,7 @@ def stage_official_drafts():
     destination = OUTPUT / 'official-drafts'
     destination.mkdir()
     source_root = DRAFT_SOURCE.resolve()
+    progress = json.loads((DRAFT_SOURCE / 'progress.json').read_text())
     for name in OFFICIAL_DRAFTS:
         source = DRAFT_SOURCE / f'{name}.html'
         html = source.read_text()
@@ -47,10 +48,14 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
+        record = progress['linear.app' if name == 'linear' else name]
+        observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
+        note = record.get('review_note')
         badge = ('<div class="official-draft-badge" role="note">'
                  '<strong>官網重製草稿 · 尚未視覺驗收</strong>'
-                 '<span>非品牌官方網站，內容是特定日期的參考快照。</span>'
-                 '<a href="../#official-drafts">返回設計集 ↗</a></div>')
+                 f'<span>參考資料：{observed}；非品牌官方網站。</span>'
+                 + (f'<span>{escape(note)}</span>' if note else '')
+                 + '<a href="../official-progress.html">查看 74 站進度 ↗</a></div>')
         style = '''<meta name="robots" content="noindex"><style>
 .official-draft-badge{position:fixed;right:16px;bottom:16px;z-index:2147483647;max-width:min(340px,calc(100vw - 32px));padding:12px 16px;background:#fffdf7;color:#20211f;border:1px solid #d5d3ca;border-radius:9px;box-shadow:0 8px 34px #0004;font:12px/1.5 system-ui,sans-serif;display:grid;gap:3px}
 .official-draft-badge strong{font-size:13px}.official-draft-badge span{color:#555}.official-draft-badge a{color:#a53d22;text-decoration:underline}
@@ -84,10 +89,12 @@ def stage_official_progress():
         draft_name = 'linear' if slug == 'linear.app' else slug
         href = (f'official-drafts/{draft_name}.html' if kind == 'draft'
                 else f'index.html#/design/{slug}')
-        date = (record.get('observed_at') or '')[:10] or '—'
+        date = (record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '—'
+        note = record.get('review_note')
         rows.append('<tr><th scope="row"><a href="' + escape(href, quote=True) + '">' +
                     escape(item['name']) + ' ↗</a></th><td class="' + kind + '">' +
-                    label + '</td><td>' + escape(date) + '</td></tr>')
+                    label + (f'<br><small>{escape(note)}</small>' if note else '') +
+                    '</td><td>' + escape(date) + '</td></tr>')
     assert sum(counts.values()) == 74 and counts['draft'] == len(OFFICIAL_DRAFTS), counts
     page = '''<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>74 個網站重製進度 · Awesome AI Web Design</title><style>
 body{font:16px/1.6 system-ui,sans-serif;background:#f8f7f3;color:#20211f;margin:0}main{max-width:1040px;margin:auto;padding:48px 24px 96px}a{color:inherit}a:hover{color:#bf421e}header a{font-weight:700;text-decoration:none}h1{font-size:clamp(32px,5vw,54px);line-height:1.1;margin:32px 0 16px}p{max-width:760px}table{border-collapse:collapse;width:100%;background:white;margin-top:36px}th,td{text-align:left;border-bottom:1px solid #e2e0da;padding:13px 18px}thead th{background:#eeeae1;font-size:13px;letter-spacing:.04em}tbody th{font-weight:600}tbody th a{text-decoration:none}.draft{color:#a34317}.snapshot{color:#4d6381}.pending{color:#777}small{color:#666}@media(max-width:600px){main{padding:28px 14px}th,td{padding:10px 8px;font-size:13px}}
