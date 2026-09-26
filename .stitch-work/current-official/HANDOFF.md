@@ -1,5 +1,11 @@
 # Current official rebuild — 2026-09-25
 
+## Status update — 2026-09-27
+
+The collection and all six official-site drafts are now public at `https://awesome-ai-web-design.philqq100.chatgpt.site/`. The publication notes below describe the earlier 2026-09-25 state. No draft has passed whole-page and responsive visual review, and the other 68 examples still need current-site regeneration.
+
+Framer was compared with the current `framer.com` public homepage at 1280×720. Its section heading positions and official hero video matched the published draft closely, but the platform area did not: the live site uses a 400/800-pixel asymmetric grid with 480/240-pixel card rows, while the draft had nine equal 430-pixel cards. `refine-framer.py` now reconstructs that measured card layout and more of the visible product UI, and omits a cookie banner that was not present in the observed official page. This is a targeted correction, not whole-page acceptance; the lower panels, footer, responsive layouts and interactions still need comparison.
+
 User target: all 74 examples should resemble each brand's current public official website. Preserve design analysis, rewrite AI instructions, and keep the collection free. All 74 remain unfinished until individually verified. Do not use raw Stitch export existence as fidelity proof.
 
 6 native regenerated examples staged: Spotify, Linear, Claude, Notion, Figma, and Framer. All six now have refined local drafts, but none has passed whole-page and responsive verification. Remaining 68 are not regenerated. 59 public reference source fetches succeeded, but metadata is not a visual review.
