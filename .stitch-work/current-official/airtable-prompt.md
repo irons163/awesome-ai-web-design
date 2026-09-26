@@ -1,0 +1,12 @@
+# Airtable official homepage reconstruction request
+
+Reconstruct Airtable's public marketing homepage as captured in a saved official HTML snapshot on 2026-09-22 at https://www.airtable.com/. This is a fidelity exercise from a dated source, not a redesign. Produce one responsive desktop landing page (target 1440×900). Use Airtable's actual name and branding, no invented product or fictional headlines.
+
+Observed official structure in the saved HTML:
+- White site canvas; top narrow announcement "Bring your Airtable data into Claude. Try it now"; navigation carries Airtable logo on left, Platform, Solutions, Resources, Enterprise, Pricing, and actions Book demo, Sign in, Sign up for free. The expanded mega menu content should not appear until interacted with.
+- Hero section in the central content rail. Exact H1 with line break: "Teams, workflows,\nagents — one space". Exact subcopy: "Other tools let you build with agents. Airtable lets you build with your whole team (agents included)." Two actions: dark filled "Start building for free", white outlined "Book a demo". Do not replace with another slogan.
+- Under headline, a full-width product visualization with a sky/background video frame and layered Airtable collaborative app UI. Source poster URL from the saved public HTML: https://cdn.sanity.io/images/hlcyrtq5/production/b9ca4dd53c0c97beff89fca2827f7e51e-1540x866.jpg ; use as a background if supported. Tabs: Operations, Project Management, Marketing, Sales, Build anything. Active Operations tab shows an app called Intake HQ with left navigation Requests, Open requests, Dashboard, All requests, Renewals Calendar, Approvals, Vendors, Budget. Table columns Priority, Requester, Status. Make this visually dense and convincing, not a generic SaaS dashboard.
+- Beneath, an actual-logo customer strip (Schaeffler, Cisco, Intuit, eBay, Google, Levi's), followed by a section headed "Builder speed becomes business momentum" with text "Use structured workflows and AI summaries to surface risks, align teams, and keep launches moving."
+- Typography should resemble official Neue Haas / Haas Grotesk; dark #181d26 ink, generous whitespace, dark button, mostly square-to-subtly rounded panels. Use Airtable's distinctive multicolor mark. Responsive mobile stacking.
+
+Preserve the saved source hierarchy and exact visible copy above. The source is dated 2026-09-22, so do not invent claim of current-site parity or pixel-identical verification. Output complete HTML/CSS and screenshot.

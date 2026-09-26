@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Airtable | The platform for operational momentum</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Haas Grot Text R Web", "Helvetica Neue", Inter, Arial, sans-serif;
+      color: #181d26;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-heading {
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      font-weight: 700;
+    }
+    .custom-shadow {
+      box-shadow: 0 24px 64px -12px rgba(18, 28, 45, 0.16), 0 8px 24px -6px rgba(18, 28, 45, 0.08);
+    }
+    .badge-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#181d26] antialiased selection:bg-[#fcb400]/20 selection:text-[#181d26]">
+<!-- Top Announcement Bar -->
+<aside class="w-full bg-[#f4f5f8] border-b border-[#e5e7eb] py-2 px-4 text-center text-xs md:text-sm font-normal text-[#181d26]">
+<div class="max-w-7xl mx-auto flex items-center justify-center gap-1.5 flex-wrap">
+<span class="text-[#374151]">Bring your Airtable data into Claude.</span>
+<a class="font-medium text-[#181d26] underline underline-offset-2 hover:text-[#2563eb] transition-colors inline-flex items-center gap-1" href="#claude-airtable">
+        Try it now
+        <svg class="w-3.5 h-3.5 inline-block" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</aside>
+<!-- Main Navigation -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f0f2f5]">
+<nav aria-label="Main Navigation" class="max-w-[1400px] mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-9">
+<!-- Airtable Official Logo -->
+<a aria-label="Airtable Home" class="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-[#181d26] rounded-sm py-1" href="/">
+<svg class="w-8 h-8 flex-shrink-0" fill="none" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<!-- Airtable Multicolor Mark (Yellow, Red/Orange, Blue, Green geometry) -->
+<path d="M15.027 3.693a1.8 1.8 0 0 1 1.946 0l11.458 6.944a1.8 1.8 0 0 1-.973 3.363H4.542a1.8 1.8 0 0 1-.973-3.363L15.027 3.693z" fill="#FCB400"></path>
+<path d="M14.73 16.5v11.854a1.6 1.6 0 0 1-2.483 1.343L3.89 24.186a1.6 1.6 0 0 1-.79-1.378V16.5h11.63z" fill="#18BFFF"></path>
+<path d="M17.27 16.5H28.9v6.308a1.6 1.6 0 0 1-.79 1.378l-8.357 5.511a1.6 1.6 0 0 1-2.483-1.343V16.5z" fill="#D9383A"></path>
+<path d="M17.27 16.5h-2.54v11.854a1.6 1.6 0 0 0 .805-.213l.93-.614a1.6 1.6 0 0 0 .805-1.378V16.5z" fill="#1480D9" opacity="0.4"></path>
+</svg>
+<span class="text-[22px] font-bold tracking-tight text-[#181d26]">Airtable</span>
+</a>
+<!-- Desktop Navigation Links (Mega menu content hidden until hovered/focused) -->
+<div class="hidden lg:flex items-center gap-6 text-[15px] font-medium text-[#181d26]">
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Platform
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Solutions
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Resources
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<a class="py-2 text-[#242b35] hover:text-black transition-colors" href="#enterprise">Enterprise</a>
+<a class="py-2 text-[#242b35] hover:text-black transition-colors" href="#pricing">Pricing</a>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-block text-[14px] font-medium text-[#242b35] hover:text-black px-3.5 py-2 rounded-md transition-colors" href="#demo">
+          Book demo
+        </a>
+<a class="text-[14px] font-medium text-[#242b35] hover:text-black px-3 py-2 rounded-md transition-colors" href="#signin">
+          Sign in
+        </a>
+<a class="text-[14px] font-medium text-white bg-[#181d26] hover:bg-[#2b3340] px-4 py-2 rounded-md shadow-sm transition-all duration-150" href="#signup">
+          Sign up for free
+        </a>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<main class="overflow-hidden">
+<section class="max-w-[1400px] mx-auto px-6 pt-16 md:pt-20 pb-12 text-center">
+<div class="max-w-4xl mx-auto flex flex-col items-center">
+<!-- Exact H1 with line break -->
+<h1 class="hero-heading text-[48px] sm:text-[64px] lg:text-[76px] tracking-[-0.035em] text-[#181d26] mb-6">
+          Teams, workflows,<br class="hidden sm:block"/>
+          agents — one space
+        </h1>
+<!-- Exact Subcopy -->
+<p class="text-[18px] sm:text-[21px] text-[#4b5563] max-w-2xl font-normal leading-relaxed mb-8">
+          Other tools let you build with agents. Airtable lets you build with your whole team (agents included).
+        </p>
+<!-- Two CTA actions -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+<a class="w-full sm:w-auto bg-[#181d26] hover:bg-[#2c3442] text-white font-medium text-[15px] px-6 py-3.5 rounded-md shadow-sm transition-colors text-center" href="#signup">
+            Start building for free
+          </a>
+<a class="w-full sm:w-auto bg-white border border-[#d1d5db] hover:border-[#9ca3af] hover:bg-[#f9fafb] text-[#181d26] font-medium text-[15px] px-6 py-3.5 rounded-md transition-colors text-center" href="#demo">
+            Book a demo
+          </a>
+</div>
+</div>
+</section>
+<!-- Product Visualization with Sky Background & Layered Airtable UI -->
+<section class="max-w-[1360px] mx-auto px-4 sm:px-6 pb-20">
+<!-- Container with Sky Poster Background -->
+<div class="relative rounded-2xl overflow-hidden p-3 sm:p-6 lg:p-8 bg-[#0b1528] custom-shadow border border-[#d5dbe5]">
+<!-- Sky/ambient backdrop photo -->
+<div class="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-90" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg'); background-color: #0b1528;">
+<div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+</div>
+<div class="relative z-10 flex flex-col">
+<!-- Interactive / Display Navigation Tabs -->
+<div class="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-3 no-scrollbar">
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-[#181d26] shadow-md flex items-center gap-2 flex-shrink-0 transition-colors">
+<span class="w-2 h-2 rounded-full bg-[#18bfff]"></span>
+              Operations
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Project Management
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Marketing
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Sales
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Build anything
+            </button>
+</div>
+<!-- Product App Canvas: Intake HQ -->
+<div class="bg-white rounded-xl shadow-2xl border border-gray-200/80 overflow-hidden flex flex-col min-h-[580px]">
+<!-- Top App Bar & Window Controls -->
+<div class="h-12 bg-[#ffffff] border-b border-[#e5e7eb] px-4 flex items-center justify-between select-none">
+<div class="flex items-center gap-3">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
+</div>
+<div class="h-4 w-[1px] bg-[#e5e7eb] mx-1"></div>
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-[#2563eb] text-white flex items-center justify-center text-[11px] font-bold">I</span>
+<span class="font-semibold text-sm text-[#181d26]">Intake HQ</span>
+<span class="badge-pill bg-[#e0f2fe] text-[#0369a1] px-2 py-0.5 rounded-full ml-1 font-medium">Operations app</span>
+</div>
+</div>
+<!-- Top right actions inside app -->
+<div class="flex items-center gap-3 text-xs">
+<div class="hidden sm:flex items-center gap-1.5 bg-[#f8fafc] border border-[#e2e8f0] px-2.5 py-1 rounded-md text-[#475569]">
+<svg class="w-3.5 h-3.5 text-[#2563eb]" fill="currentColor" viewbox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+<span>4 Collaborators</span>
+</div>
+<div class="flex items-center -space-x-1.5">
+<div class="w-6 h-6 rounded-full bg-[#fed7aa] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#c2410c]">TL</div>
+<div class="w-6 h-6 rounded-full bg-[#bfdbfe] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#1d4ed8]">SR</div>
+<div class="w-6 h-6 rounded-full bg-[#bbf7d0] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#15803d]">AI</div>
+</div>
+<button class="bg-[#181d26] text-white px-3 py-1 rounded text-xs font-medium flex items-center gap-1 hover:bg-[#2b3340]">
+<span>Share</span>
+</button>
+</div>
+</div>
+<!-- Main App Body: Sidebar + Data Table Grid -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Sidebar: Requests, Open requests, Dashboard, etc. -->
+<aside class="w-56 bg-[#f9fafb] border-r border-[#e5e7eb] flex flex-col p-3 shrink-0 hidden md:flex">
+<div class="text-[11px] font-semibold uppercase tracking-wider text-[#9ca3af] px-2 mb-2">Workflows &amp; Views</div>
+<ul class="space-y-0.5 text-xs text-[#374151]">
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-medium text-[#181d26] hover:bg-[#f3f4f6]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Requests
+                      </span>
+<span class="text-[10px] bg-[#e5e7eb] px-1.5 py-0.2 rounded-full font-semibold">142</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-semibold text-[#2563eb] bg-[#eff6ff]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#2563eb]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Open requests
+                      </span>
+<span class="text-[10px] bg-[#2563eb] text-white px-1.5 py-0.2 rounded-full font-bold">18</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      All requests
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Renewals Calendar
+                    </a>
+</li>
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Approvals
+                      </span>
+<span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Vendors
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Budget
+                    </a>
+</li>
+</ul>
+<!-- AI Agent Assist summary module inside sidebar -->
+<div class="mt-auto pt-3 border-t border-[#e5e7eb]">
+<div class="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200/80 rounded-lg p-2.5 text-[11px]">
+<div class="flex items-center gap-1.5 font-semibold text-purple-900 mb-1">
+<svg class="w-3.5 h-3.5 text-purple-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" fill-rule="evenodd"></path></svg>
+                      Airtable AI Agent
+                    </div>
+<p class="text-purple-700 leading-tight">3 procurement requests pre-reviewed &amp; routed to Legal.</p>
+</div>
+</div>
+</aside>
+<!-- Central Content: Table with Priority, Requester, Status, AI Summary -->
+<div class="flex-1 flex flex-col bg-white overflow-x-auto">
+<!-- Table toolbar -->
+<div class="h-10 border-b border-[#e5e7eb] px-4 flex items-center justify-between text-xs text-[#4b5563] bg-white">
+<div class="flex items-center gap-4">
+<span class="font-medium text-[#181d26] flex items-center gap-1">
+<svg class="w-3.5 h-3.5 text-[#2563eb]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Filtered by Open Status
+                    </span>
+<span class="text-[#9ca3af]">|</span>
+<span class="hover:text-black cursor-pointer">Group: Department</span>
+<span class="hover:text-black cursor-pointer">Sort: Priority</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-[#6b7280]">Real-time sync active</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+</div>
+<!-- Structured Table Grid -->
+<div class="w-full text-left text-xs divide-y divide-gray-100">
+<!-- Header row -->
+<div class="grid grid-cols-12 bg-[#f9fafb] text-[#6b7280] font-semibold border-b border-gray-200 py-2.5 px-4 uppercase text-[10px] tracking-wider">
+<div class="col-span-4 flex items-center gap-1">Request Title</div>
+<div class="col-span-2 flex items-center gap-1">Priority</div>
+<div class="col-span-3 flex items-center gap-1">Requester</div>
+<div class="col-span-3 flex items-center gap-1">Status</div>
+</div>
+<!-- Row 1 -->
+<div class="grid grid-cols-12 py-3 px-4 items-center hover:bg-[#f8fafc] transition-colors border-b border-gray-100">
+<div class="col-span-4 flex items-center gap-2 font-medium text-[#181d26]">
+<span class="w-1.5 h-1.5 rounded-full bg-red-500"></span>
+                      Enterprise Cloud Infrastructure Expansion
+                    </div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-red-50 text-red-700 border border-red-200">
+                        Critical (P0)
+                      </span>
+</div>
+<div class="col-span-3 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#fed7aa] flex items-center justify-center text-[10px] font-semibold text-[#c2410c]">MC</div>
+<div>
+<div class="font-medium text-[#181d26]">Maya Chen</div>
+<div class="text-[10px] text-[#9ca3af]">Cloud Arch</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center justify-between pr-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#fef3c7] text-[#92400e]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#f59e0b]"></span>
+                        Pending VP Sign-off
+                      </span>
+<span class="text-[10px] text-purple-700 font-medium bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200 hidden lg:inline">Agent summarized</span>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-12 py-3 px-4 items-center hover:bg-[#f8fafc] transition-colors border-b border-gray-100">
+<div class="col-span-4 flex items-center gap-2 font-medium text-[#181d26]">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
+                      Customer Success AI Copilot Seat Renewal
+                    </div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                        High (P1)
+                      </span>
+</div>
+<div class="col-span-3 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#bfdbfe] flex items-center justify-center text-[10px] font-semibold text-[#1e40af]">DK</div>
+<div>
+<div class="font-medium text-[#181d26]">David Kim</div>
+<div class="text-[10px] text-[#9ca3af]">CS Enablement</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center justify-between pr-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#dbeafe] text-[#1e40af]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></span>
+                        Legal Review
+                      </span>
+<span class="text-[10px] text-purple-700 font-medium bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200 hidden lg:inline">Auto-routed</span>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="grid grid-cols-12 py-3 px-4 items-center hover:bg-[#f8fafc] transition-colors border-b border-gray-100">
+<div class="col-span-4 flex items-center gap-2 font-medium text-[#181d26]">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      Q4 Global Brand Campaign Production Vendor
+                    </div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                        Medium (P2)
+                      </span>
+</div>
+<div class="col-span-3 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#e9d5ff] flex items-center justify-center text-[10px] font-semibold text-[#6b21a8]">AL</div>
+<div>
+<div class="font-medium text-[#181d26]">Aria Lopez</div>
+<div class="text-[10px] text-[#9ca3af]">Brand Operations</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center justify-between pr-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#d1fae5] text-[#065f46]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10b981]"></span>
+                        Budget Approved
+                      </span>
+<span class="text-[10px] text-emerald-700 font-medium bg-emerald-50 px-1.5 py-0.5 rounded border border-emerald-200 hidden lg:inline">Under cap</span>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="grid grid-cols-12 py-3 px-4 items-center hover:bg-[#f8fafc] transition-colors border-b border-gray-100">
+<div class="col-span-4 flex items-center gap-2 font-medium text-[#181d26]">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+                      Zero-Trust Endpoint Security Licensing
+                    </div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-blue-50 text-blue-800 border border-blue-200">
+                        Medium (P2)
+                      </span>
+</div>
+<div class="col-span-3 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#fecdd3] flex items-center justify-center text-[10px] font-semibold text-[#9f1239]">JH</div>
+<div>
+<div class="font-medium text-[#181d26]">James Howard</div>
+<div class="text-[10px] text-[#9ca3af]">SecOps</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center justify-between pr-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#f3f4f6] text-[#374151]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#9ca3af]"></span>
+                        In Intake Triage
+                      </span>
+<span class="text-[10px] text-purple-700 font-medium bg-purple-50 px-1.5 py-0.5 rounded border border-purple-200 hidden lg:inline">SOC-2 Verified</span>
+</div>
+</div>
+<!-- Row 5 -->
+<div class="grid grid-cols-12 py-3 px-4 items-center hover:bg-[#f8fafc] transition-colors">
+<div class="col-span-4 flex items-center gap-2 font-medium text-[#181d26]">
+<span class="w-1.5 h-1.5 rounded-full bg-gray-400"></span>
+                      Quarterly All-Hands Studio AV Production
+                    </div>
+<div class="col-span-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold bg-gray-100 text-gray-700 border border-gray-200">
+                        Routine (P3)
+                      </span>
+</div>
+<div class="col-span-3 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-[#dcfce7] flex items-center justify-center text-[10px] font-semibold text-[#166534]">SW</div>
+<div>
+<div class="font-medium text-[#181d26]">Sarah Wu</div>
+<div class="text-[10px] text-[#9ca3af]">Internal Comms</div>
+</div>
+</div>
+<div class="col-span-3 flex items-center justify-between pr-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#dbeafe] text-[#1e40af]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#3b82f6]"></span>
+                        Vendor Sourcing
+                      </span>
+</div>
+</div>
+</div>
+<!-- Live Agent AI banner footer inside collaborative app -->
+<div class="mt-auto bg-[#fafbfc] border-t border-[#e5e7eb] px-4 py-2.5 flex items-center justify-between text-xs text-[#4b5563]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#18bfff]"></span>
+<span class="font-medium text-[#181d26]">Airtable Agent workflow active:</span>
+<span>Monitoring 14 intake channels, syncing Jira &amp; Salesforce contracts</span>
+</div>
+<div class="font-medium text-[#2563eb] hover:underline cursor-pointer">
+                    View automation rule →
+                  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Actual-Logo Customer Strip -->
+<section class="border-y border-[#f0f2f5] bg-[#fafbfc] py-12 px-6">
+<div class="max-w-[1400px] mx-auto">
+<p class="text-center text-xs font-semibold uppercase tracking-wider text-[#6b7280] mb-8">
+          Trusted by innovators and builders at leading global organizations
+        </p>
+<!-- Customer Logos Strip: Schaeffler, Cisco, Intuit, eBay, Google, Levi's -->
+<div class="flex flex-wrap items-center justify-center gap-10 sm:gap-14 lg:gap-20 opacity-80 grayscale hover:grayscale-0 transition-all duration-300">
+<!-- Schaeffler -->
+<div class="flex items-center justify-center h-8" title="Schaeffler">
+<span class="text-xl sm:text-2xl font-black tracking-tighter text-[#181d26]">SCHAEFFLER</span>
+</div>
+<!-- Cisco -->
+<div class="flex items-center justify-center h-8" title="Cisco">
+<div class="flex items-center gap-1.5">
+<svg class="h-6 w-8 text-[#181d26]" fill="currentColor" viewbox="0 0 100 60">
+<rect height="25" rx="3" width="8" x="5" y="30"></rect>
+<rect height="40" rx="3" width="8" x="25" y="15"></rect>
+<rect height="55" rx="3" width="8" x="45" y="0"></rect>
+<rect height="40" rx="3" width="8" x="65" y="15"></rect>
+<rect height="25" rx="3" width="8" x="85" y="30"></rect>
+</svg>
+<span class="text-xl font-bold tracking-tight text-[#181d26]">CISCO</span>
+</div>
+</div>
+<!-- Intuit -->
+<div class="flex items-center justify-center h-8" title="Intuit">
+<span class="text-2xl font-bold tracking-tight text-[#181d26] lowercase">intuit</span>
+</div>
+<!-- eBay -->
+<div class="flex items-center justify-center h-8" title="eBay">
+<span class="text-2xl font-black tracking-tight flex items-baseline">
+<span class="text-[#e53238]">e</span><span class="text-[#0064d2]">b</span><span class="text-[#f5af02]">a</span><span class="text-[#86b817]">y</span>
+</span>
+</div>
+<!-- Google -->
+<div class="flex items-center justify-center h-8" title="Google">
+<span class="text-2xl font-medium tracking-tight text-[#181d26]">Google</span>
+</div>
+<!-- Levi's -->
+<div class="flex items-center justify-center h-8" title="Levi's">
+<div class="bg-[#c41230] text-white px-3 py-1 rounded-[2px] font-black tracking-wider text-sm transform -rotate-1 shadow-sm">
+              LEVI'S
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- Narrative Section: Builder speed becomes business momentum -->
+<section class="max-w-[1400px] mx-auto px-6 py-24 lg:py-32">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl sm:text-4xl lg:text-[46px] font-bold text-[#181d26] tracking-tight leading-tight mb-5">
+          Builder speed becomes business momentum
+        </h2>
+<p class="text-lg sm:text-xl text-[#4b5563] leading-relaxed">
+          Use structured workflows and AI summaries to surface risks, align teams, and keep launches moving.
+        </p>
+</div>
+<!-- Feature Highlights & Three Pillars Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Pillar 1 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#eff6ff] text-[#2563eb] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">Structured, reliable data</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              Build on a shared relational foundation. Connect tables, automate schema validation, and ensure enterprise governance across every business unit.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#platform">
+              Explore data platform →
+            </a>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#faf5ff] text-[#9333ea] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">Native AI workflows</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              Surface actionable summaries, route complex tasks to autonomous agents, and synthesize feedback across thousands of records automatically.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#ai">
+              See Airtable AI in action →
+            </a>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">Empowered teams</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              Empower product, marketing, and operations teams to build customized software and custom interfaces without waiting on engineering sprint backlogs.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#solutions">
+              Discover team solutions →
+            </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA Bar -->
+<section class="bg-[#181d26] text-white py-16 px-6">
+<div class="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left">
+<div>
+<h2 class="text-2xl sm:text-3xl font-bold tracking-tight mb-2">Build what your team needs next</h2>
+<p class="text-[#9ca3af] text-sm sm:text-base">Start free today or connect with our enterprise architecture team.</p>
+</div>
+<div class="flex items-center gap-3">
+<a class="bg-white hover:bg-gray-100 text-[#181d26] font-medium text-sm px-6 py-3 rounded-md transition-colors" href="#signup">
+            Start building for free
+          </a>
+<a class="bg-transparent hover:bg-white/10 text-white border border-gray-600 font-medium text-sm px-6 py-3 rounded-md transition-colors" href="#demo">
+            Book a demo
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Global Footer -->
+<footer class="border-t border-[#e5e7eb] bg-white text-xs text-[#6b7280] py-12 px-6">
+<div class="max-w-[1400px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-3">
+<svg class="w-6 h-6 flex-shrink-0" fill="none" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.027 3.693a1.8 1.8 0 0 1 1.946 0l11.458 6.944a1.8 1.8 0 0 1-.973 3.363H4.542a1.8 1.8 0 0 1-.973-3.363L15.027 3.693z" fill="#FCB400"></path>
+<path d="M14.73 16.5v11.854a1.6 1.6 0 0 1-2.483 1.343L3.89 24.186a1.6 1.6 0 0 1-.79-1.378V16.5h11.63z" fill="#18BFFF"></path>
+<path d="M17.27 16.5H28.9v6.308a1.6 1.6 0 0 1-.79 1.378l-8.357 5.511a1.6 1.6 0 0 1-2.483-1.343V16.5z" fill="#D9383A"></path>
+</svg>
+<span class="font-medium text-[#181d26]">© 2026 Airtable, Inc. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-[#181d26] transition-colors" href="#privacy">Privacy</a>
+<a class="hover:text-[#181d26] transition-colors" href="#terms">Terms</a>
+<a class="hover:text-[#181d26] transition-colors" href="#security">Security</a>
+<a class="hover:text-[#181d26] transition-colors" href="#status">Status</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

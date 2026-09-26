@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Airtable: Build Enterprise-ready AI Workflows, Apps &amp; Agents | Airtable</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Haas Grot Text R Web", "Helvetica Neue", Inter, Arial, sans-serif;
+      color: #181d26;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-heading {
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      font-weight: 700;
+    }
+    .custom-shadow {
+      box-shadow: 0 24px 64px -12px rgba(18, 28, 45, 0.16), 0 8px 24px -6px rgba(18, 28, 45, 0.08);
+    }
+    .badge-pill {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+  @font-face{font-family:AirtableHaas;src:url(https://static.airtable.com/font/NeueHaasGrotTextRound-55Roman-Web.woff2) format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:AirtableHaas;src:url(https://static.airtable.com/font/NeueHaasGrotTextRound-65Medium-Web.woff2) format('woff2');font-weight:500;font-display:swap}
+body{font-family:AirtableHaas,Arial,sans-serif}
+.source-table{min-width:790px}.source-table-row{display:grid;grid-template-columns:2.1fr .65fr .85fr 1fr 1fr .75fr 1.35fr;gap:10px;align-items:center;padding:12px 16px;border-bottom:1px solid #eef0f2;font-size:12px}
+.source-table-row:first-child{background:#f8f9fa;color:#59616b;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.source-table-row:nth-child(even){background:#fff}.source-table-row b{font-weight:600}
+</style>
+</head>
+<body class="bg-white text-[#181d26] antialiased selection:bg-[#fcb400]/20 selection:text-[#181d26]">
+<!-- Top Announcement Bar -->
+<aside class="w-full bg-[#f4f5f8] border-b border-[#e5e7eb] py-2 px-4 text-center text-xs md:text-sm font-normal text-[#181d26]">
+<div class="max-w-7xl mx-auto flex items-center justify-center gap-1.5 flex-wrap">
+<span class="text-[#374151]">Bring your Airtable data into Claude.</span>
+<a class="font-medium text-[#181d26] underline underline-offset-2 hover:text-[#2563eb] transition-colors inline-flex items-center gap-1" href="#claude-airtable">
+        Try it now
+        <svg class="w-3.5 h-3.5 inline-block" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</aside>
+<!-- Main Navigation -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f0f2f5]">
+<nav aria-label="Main Navigation" class="max-w-[1400px] mx-auto px-6 h-18 py-3.5 flex items-center justify-between">
+<div class="flex items-center gap-9">
+<!-- Airtable Official Logo -->
+<a aria-label="Airtable Home" class="flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-[#181d26] rounded-sm py-1" href="/">
+<svg class="w-8 h-8 flex-shrink-0" fill="none" viewbox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+<!-- Airtable Multicolor Mark (Yellow, Red/Orange, Blue, Green geometry) -->
+<path d="M15.027 3.693a1.8 1.8 0 0 1 1.946 0l11.458 6.944a1.8 1.8 0 0 1-.973 3.363H4.542a1.8 1.8 0 0 1-.973-3.363L15.027 3.693z" fill="#FCB400"></path>
+<path d="M14.73 16.5v11.854a1.6 1.6 0 0 1-2.483 1.343L3.89 24.186a1.6 1.6 0 0 1-.79-1.378V16.5h11.63z" fill="#18BFFF"></path>
+<path d="M17.27 16.5H28.9v6.308a1.6 1.6 0 0 1-.79 1.378l-8.357 5.511a1.6 1.6 0 0 1-2.483-1.343V16.5z" fill="#D9383A"></path>
+<path d="M17.27 16.5h-2.54v11.854a1.6 1.6 0 0 0 .805-.213l.93-.614a1.6 1.6 0 0 0 .805-1.378V16.5z" fill="#1480D9" opacity="0.4"></path>
+</svg>
+<span class="text-[22px] font-bold tracking-tight text-[#181d26]">Airtable</span>
+</a>
+<!-- Desktop Navigation Links (Mega menu content hidden until hovered/focused) -->
+<div class="hidden lg:flex items-center gap-6 text-[15px] font-medium text-[#181d26]">
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Platform
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Solutions
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<div class="relative group">
+<button class="inline-flex items-center gap-1 py-2 text-[#242b35] hover:text-black transition-colors focus:outline-none">
+              Resources
+              <svg class="w-4 h-4 text-[#64748b] group-hover:text-[#181d26] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<a class="py-2 text-[#242b35] hover:text-black transition-colors" href="https://www.airtable.com/solutions/enterprise">Enterprise</a>
+<a class="py-2 text-[#242b35] hover:text-black transition-colors" href="https://airtable.com/pricing">Pricing</a>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:inline-block text-[14px] font-medium text-[#242b35] hover:text-black px-3.5 py-2 rounded-md transition-colors" href="https://www.airtable.com/contact-sales">
+          Book demo
+        </a>
+<a class="text-[14px] font-medium text-[#242b35] hover:text-black px-3 py-2 rounded-md transition-colors" href="https://airtable.com/login">
+          Sign in
+        </a>
+<a class="text-[14px] font-medium text-white bg-[#181d26] hover:bg-[#2b3340] px-4 py-2 rounded-md shadow-sm transition-all duration-150" href="https://airtable.com/signup">
+          Sign up for free
+        </a>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<main class="overflow-hidden">
+<section class="max-w-[1400px] mx-auto px-6 pt-16 md:pt-20 pb-12 text-center">
+<div class="max-w-4xl mx-auto flex flex-col items-center">
+<!-- Exact H1 with line break -->
+<h1 class="hero-heading text-[48px] sm:text-[64px] lg:text-[76px] tracking-[-0.035em] text-[#181d26] mb-6">
+          Teams, workflows,<br class="hidden sm:block"/>
+          agents — one space
+        </h1>
+<!-- Exact Subcopy -->
+<p class="text-[18px] sm:text-[21px] text-[#4b5563] max-w-2xl font-normal leading-relaxed mb-8">
+          Other tools let you build with agents. Airtable lets you build with your whole team (agents included).
+        </p>
+<!-- Two CTA actions -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+<a class="w-full sm:w-auto bg-[#181d26] hover:bg-[#2c3442] text-white font-medium text-[15px] px-6 py-3.5 rounded-md shadow-sm transition-colors text-center" href="https://airtable.com/signup">
+            Start building for free
+          </a>
+<a class="w-full sm:w-auto bg-white border border-[#d1d5db] hover:border-[#9ca3af] hover:bg-[#f9fafb] text-[#181d26] font-medium text-[15px] px-6 py-3.5 rounded-md transition-colors text-center" href="https://www.airtable.com/contact-sales">
+            Book a demo
+          </a>
+</div>
+</div>
+</section>
+<!-- Product Visualization with Sky Background & Layered Airtable UI -->
+<section class="max-w-[1360px] mx-auto px-4 sm:px-6 pb-20">
+<!-- Container with Sky Poster Background -->
+<div class="relative rounded-2xl overflow-hidden p-3 sm:p-6 lg:p-8 bg-[#0b1528] custom-shadow border border-[#d5dbe5]">
+<!-- Sky/ambient backdrop photo -->
+<div class="absolute inset-0 z-0 bg-cover bg-center pointer-events-none opacity-90" style="background-image: url('https://cdn.sanity.io/images/hlcyrtq5/production/b9ca4dd53c0c97beff89fca2827f7e51e-1540x866.jpg'); background-color: #0b1528;">
+<div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40"></div>
+</div>
+<div class="relative z-10 flex flex-col">
+<!-- Interactive / Display Navigation Tabs -->
+<div class="flex items-center justify-start sm:justify-center gap-1.5 overflow-x-auto pb-4 mb-3 no-scrollbar">
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-white text-[#181d26] shadow-md flex items-center gap-2 flex-shrink-0 transition-colors">
+<span class="w-2 h-2 rounded-full bg-[#18bfff]"></span>
+              Operations
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Project Management
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Marketing
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Sales
+            </button>
+<button class="px-4 py-1.5 rounded-full text-xs sm:text-sm font-medium bg-black/40 hover:bg-black/60 text-white/90 backdrop-blur-md flex-shrink-0 transition-colors">
+              Build anything
+            </button>
+</div>
+<!-- Product App Canvas: Intake HQ -->
+<div class="bg-white rounded-xl shadow-2xl border border-gray-200/80 overflow-hidden flex flex-col min-h-[580px]">
+<!-- Top App Bar & Window Controls -->
+<div class="h-12 bg-[#ffffff] border-b border-[#e5e7eb] px-4 flex items-center justify-between select-none">
+<div class="flex items-center gap-3">
+<div class="flex gap-1.5">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56] border border-[#e0443e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e] border border-[#dea123]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f] border border-[#1aab29]"></div>
+</div>
+<div class="h-4 w-[1px] bg-[#e5e7eb] mx-1"></div>
+<div class="flex items-center gap-2">
+<span class="w-5 h-5 rounded bg-[#2563eb] text-white flex items-center justify-center text-[11px] font-bold">I</span>
+<span class="font-semibold text-sm text-[#181d26]">Intake HQ</span>
+<span class="badge-pill bg-[#e0f2fe] text-[#0369a1] px-2 py-0.5 rounded-full ml-1 font-medium">Operations</span>
+</div>
+</div>
+<!-- Top right actions inside app -->
+<div class="flex items-center gap-3 text-xs">
+<div class="hidden sm:flex items-center gap-1.5 bg-[#f8fafc] border border-[#e2e8f0] px-2.5 py-1 rounded-md text-[#475569]">
+<svg class="w-3.5 h-3.5 text-[#2563eb]" fill="currentColor" viewbox="0 0 20 20"><path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z"></path></svg>
+<span>Share</span>
+</div>
+<div class="flex items-center -space-x-1.5">
+<div class="w-6 h-6 rounded-full bg-[#fed7aa] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#c2410c]">TL</div>
+<div class="w-6 h-6 rounded-full bg-[#bfdbfe] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#1d4ed8]">SR</div>
+<div class="w-6 h-6 rounded-full bg-[#bbf7d0] border-2 border-white flex items-center justify-center text-[10px] font-bold text-[#15803d]">AI</div>
+</div>
+<button class="bg-[#181d26] text-white px-3 py-1 rounded text-xs font-medium flex items-center gap-1 hover:bg-[#2b3340]">
+<span>Share</span>
+</button>
+</div>
+</div>
+<!-- Main App Body: Sidebar + Data Table Grid -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Sidebar: Requests, Open requests, Dashboard, etc. -->
+<aside class="w-56 bg-[#f9fafb] border-r border-[#e5e7eb] flex flex-col p-3 shrink-0 hidden md:flex">
+<div class="text-[11px] font-semibold uppercase tracking-wider text-[#9ca3af] px-2 mb-2">Requests</div>
+<ul class="space-y-0.5 text-xs text-[#374151]">
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-medium text-[#181d26] hover:bg-[#f3f4f6]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Requests
+                      </span>
+<span class="text-[10px] bg-[#e5e7eb] px-1.5 py-0.2 rounded-full font-semibold">142</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-semibold text-[#2563eb] bg-[#eff6ff]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#2563eb]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Open requests
+                      </span>
+<span class="text-[10px] bg-[#2563eb] text-white px-1.5 py-0.2 rounded-full font-bold">18</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Dashboard
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      All requests
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Renewals Calendar
+                    </a>
+</li>
+<li>
+<a class="flex items-center justify-between px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<span class="flex items-center gap-2">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Approvals
+                      </span>
+<span class="w-2 h-2 rounded-full bg-[#f59e0b]"></span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Vendors
+                    </a>
+</li>
+<li>
+<a class="flex items-center gap-2 px-2.5 py-1.5 rounded font-medium text-[#374151] hover:bg-[#f3f4f6]" href="#">
+<svg class="w-4 h-4 text-[#6b7280]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Budget
+                    </a>
+</li>
+</ul>
+<!-- AI Agent Assist summary module inside sidebar -->
+<div class="mt-auto pt-3 border-t border-[#e5e7eb]">
+<div class="bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200/80 rounded-lg p-2.5 text-[11px]">
+<div class="flex items-center gap-1.5 font-semibold text-purple-900 mb-1">
+<svg class="w-3.5 h-3.5 text-purple-600" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" fill-rule="evenodd"></path></svg>
+                      Latest activity
+                    </div>
+<p class="text-purple-700 leading-tight">New request — Loom · captured from #software-requests</p>
+</div>
+</div>
+</aside>
+<!-- Central Content: Table with Priority, Requester, Status, AI Summary -->
+<div class="flex-1 flex flex-col bg-white overflow-x-auto">
+<!-- Table toolbar -->
+<div class="h-10 border-b border-[#e5e7eb] px-4 flex items-center justify-between text-xs text-[#4b5563] bg-white">
+<div class="flex items-center gap-4">
+<span class="font-medium text-[#181d26] flex items-center gap-1">
+<svg class="w-3.5 h-3.5 text-[#2563eb]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                      Software &amp; vendor requests
+                    </span>
+<span class="text-[#9ca3af]">|</span>
+<span class="hover:text-black cursor-pointer">Priority</span>
+<span class="hover:text-black cursor-pointer">This quarter</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[11px] text-[#6b7280]">Share</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+</div>
+<!-- Source-backed first-frame table from 2026-09-22 HTML -->
+<div class="source-table"><div class="source-table-row"><span>Account name</span><span>Logo</span><span>Tier</span><span>Estimated ARR</span><span>Funding stage</span><span>Employees</span><span>Website</span></div><div class="source-table-row"><span><b>Snowflake</b></span><span>S</span><span>Tier 2</span><span>$4-4.5B</span><span>IPO</span><span>7500</span><span>www.snowflake.com</span></div><div class="source-table-row"><span><b>Figma</b></span><span>F</span><span>Tier 1</span><span>$600-700M</span><span>Series F</span><span>2500</span><span>www.figma.com</span></div><div class="source-table-row"><span><b>HubSpot</b></span><span>H</span><span>Tier 1</span><span>$1.7-2.3B</span><span>IPO</span><span>7500</span><span>www.hubspot.com</span></div><div class="source-table-row"><span><b>Canva</b></span><span>C</span><span>Tier 3</span><span>$3-4B</span><span>Series F</span><span>5000</span><span>www.canva.com</span></div><div class="source-table-row"><span><b>Databricks</b></span><span>D</span><span>Tier 1</span><span>$3-4B</span><span>Series J</span><span>8000</span><span>www.databricks.com</span></div><div class="source-table-row"><span><b>Miro</b></span><span>M</span><span>Tier 1</span><span>$500-560M</span><span>Series C</span><span>2500</span><span>www.miro.com</span></div></div>
+<!-- Live Agent AI banner footer inside collaborative app -->
+<div class="mt-auto bg-[#fafbfc] border-t border-[#e5e7eb] px-4 py-2.5 flex items-center justify-between text-xs text-[#4b5563]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#18bfff]"></span>
+<span class="font-medium text-[#181d26]">Software &amp; vendor requests</span>
+<span>New request — Loom · captured from #software-requests</span>
+</div>
+<div class="font-medium text-[#2563eb] hover:underline cursor-pointer">
+                    Share →
+                  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section aria-label="Airtable customers" class="border-y border-[#f0f2f5] bg-[#fafbfc] py-12 px-6"><div class="max-w-[1400px] mx-auto flex flex-wrap items-center justify-center gap-10 sm:gap-14 lg:gap-20"><img alt="Schaeffler" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/schaeffler.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"><img alt="Cisco" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/cisco.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"><img alt="Intuit" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/intuit.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"><img alt="eBay" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/ebay.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"><img alt="Google" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/google.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"><img alt="Levi&#x27;s" loading="lazy" src="https://static.airtable.com/images/homepage-variant-b/logos-grid/levis.svg" style="max-width:130px;max-height:38px;width:auto;height:auto"></div></section>
+<!-- Narrative Section: Builder speed becomes business momentum -->
+<section class="max-w-[1400px] mx-auto px-6 py-24 lg:py-32">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl sm:text-4xl lg:text-[46px] font-bold text-[#181d26] tracking-tight leading-tight mb-5">
+          Builder speed becomes business momentum
+        </h2>
+<p class="text-lg sm:text-xl text-[#4b5563] leading-relaxed">
+          Use structured workflows and AI summaries to surface risks, align teams, and keep launches moving.
+        </p>
+</div>
+<!-- Feature Highlights & Three Pillars Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Pillar 1 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#eff6ff] text-[#2563eb] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">From a sentence to a system</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              Describe the app you need in plain words, or drop in a spreadsheet you already have.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#platform">
+              AI Play: Campaign Concept Generation →
+            </a>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#faf5ff] text-[#9333ea] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">Automate the busywork</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              Set agents on approvals, follow-ups, and updates — and check their work anytime.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#ai">
+              AI Play: Brand Checker →
+            </a>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="bg-[#fafbfc] border border-[#e5e7eb] rounded-xl p-8 flex flex-col justify-between hover:border-[#cbd5e1] hover:shadow-sm transition-all">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#f0fdf4] text-[#16a34a] flex items-center justify-center mb-6">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h3 class="text-xl font-bold text-[#181d26] mb-3">Run on shared data</h3>
+<p class="text-sm text-[#4b5563] leading-relaxed mb-6">
+              All your teams and their agents build on the same records. Change one thing, everyone sees it.
+            </p>
+</div>
+<div class="pt-4 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-[#181d26] hover:text-[#2563eb] inline-flex items-center gap-1" href="#solutions">
+              AI Play: Customer Insights for Product →
+            </a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-[#e5e7eb] bg-white text-sm text-[#323842] px-6 py-16">
+<div class="max-w-[1400px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8">
+<div><b>Platform</b><p><a href="https://www.airtable.com/platform/app-building">AI App Building</a></p><p><a href="https://www.airtable.com/platform/ai-agents">AI Agents</a></p><p><a href="https://www.airtable.com/platform">Airtable Platform</a></p></div>
+<div><b>Solutions</b><p>Product</p><p>Marketing</p><p>Project Management</p><p>Operations</p><p>Sales</p></div>
+<div><b>Resources</b><p><a href="https://www.airtable.com/lp/resources">Resources Hub</a></p><p>Templates</p><p>AI Plays</p><p>Blog</p><p>Customer Stories</p></div>
+<div><b>Learn</b><p><a href="https://www.airtable.com/guides">How-to guides</a></p><p><a href="https://airtable.com/developers">Developer docs</a></p><p><a href="https://academy.airtable.com/">Airtable Academy</a></p><p><a href="https://community.airtable.com/">Airtable Community</a></p><p><a href="https://support.airtable.com/">Help center</a></p></div>
+<div><b>Company</b><p><a href="https://airtable.com/pricing">Pricing</a></p><p><a href="https://www.airtable.com/contact-sales">Contact sales</a></p><p><a href="https://www.airtable.com/company/trust-and-security">Security</a></p><p><a href="https://www.airtable.com/company/privacy">Privacy</a></p><p><a href="https://www.airtable.com/company/terms-and-policies">Terms</a></p></div>
+</div></footer>
+</body>
+</html>
