@@ -10,7 +10,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 
 
@@ -48,6 +48,11 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
+        if name == 'slack':
+            # The official hero and AI switchers select additional local media
+            # at runtime, so their assets do not appear in static src attributes.
+            shutil.copytree(DRAFT_SOURCE / 'slack-assets',
+                            destination / 'slack-assets', dirs_exist_ok=True)
         record = progress['linear.app' if name == 'linear' else name]
         observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
         note = record.get('review_note')
