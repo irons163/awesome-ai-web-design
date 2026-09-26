@@ -1,5 +1,9 @@
 # Current official rebuild — 2026-09-25
 
+## Vercel continuation — 2026-09-27
+
+Seven brand-specific native Stitch screens have now been generated; Vercel is the seventh. Zero of 74 examples has passed whole-page and responsive visual acceptance, and 67 still need a current-official-site generation. `vercel-prompt.md` captures the current black `vercel.com` homepage, separately from the older white/gradient `design-md/vercel/DESIGN.md` analysis. Google Stitch project `2903885160330421578`, screen `41cb8785dfca4a9ea7a17bc0cf487c1f`, raw export `vercel-stitch.html`/`.png`, observed official content `vercel-browser-reference.json`, and browser-observed public media in `vercel-assets/` are preserved. `refine-vercel.py` creates `vercel.html` with the official hero image and Notion/Zapier/Mintlify product imagery. The raw screen added invented copy and product details, so it must not be presented as verified. The refined page still needs published desktop and mobile comparisons, customer logo recreation, exact footer links, and interactions.
+
 ## Status update — 2026-09-27
 
 The collection and all six official-site drafts are now public at `https://awesome-ai-web-design.philqq100.chatgpt.site/`. The publication notes below describe the earlier 2026-09-25 state. No draft has passed whole-page and responsive visual review, and the other 68 examples still need current-site regeneration.
@@ -28,6 +32,7 @@ python3 .stitch-work/current-official/fetch-figma-assets.py
 python3 .stitch-work/current-official/refine-figma.py
 python3 .stitch-work/current-official/fetch-framer-assets.py
 python3 .stitch-work/current-official/refine-framer.py
+python3 .stitch-work/current-official/refine-vercel.py
 ```
 
 Spotify: Taiwan public page re-observed 2026-09-24T18:44:32Z (2026-09-25 Taiwan time) at 1280×720 and saved in `spotify-tw-browser-reference.json`. All 54 card images, labels and destination links were captured from the live page; deterministic fingerprints of each of the five sections matched the refreshed JSON. The Trending songs row changed by six songs and reordered; radio recommendations changed; the other four rows retained the same image/link sets. Footer links remained the same. The five live section headings were observed at approximately y=87, 437.789, 742.516, 1073.227 and 1374.953 after scrolling the relevant rows into view; the refined row height was adjusted for the last position. The Stitch-derived `spotify.html` was regenerated from this source snapshot. The first viewport and footer had been visually compared against the earlier 2026-09-22 source, **not** against this refreshed content, and full visual review remains open. Canada public page observed 2026-09-23T12:27:47Z at 1280×720 and saved in `spotify-ca-browser-reference.json`; `spotify-ca.html` contains its separate 54 cards and Canada footer links. The Canada preview has passed static content checks only, not visual comparison. `refine-spotify.py` writes the common `spotify-base.html`; `extend-spotify-tw.py` accepts `tw` or `ca` to build both locale variants from that base. These are regional snapshots, not universal live content. Remaining: typography, header icon details, final image loading while scrolling, interactions, and responsive checks. `extend-spotify-ca.py` is an obsolete older Canada refinement retained for provenance. The agent browser's local-file URL policy blocked opening the Spotify preview in this turn; do not retry through localhost or another browser URL as a workaround.

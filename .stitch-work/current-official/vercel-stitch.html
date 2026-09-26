@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vercel: Build and deploy agentic infrastructure</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary": "#c6c6c6",
+            "secondary-fixed": "#c6c6c6",
+            "tertiary": "#e2e2e2",
+            "surface-container-lowest": "#0e0e0e",
+            "secondary-container": "#474747",
+            "secondary-fixed-dim": "#ababab",
+            "on-primary": "#1b1b1b",
+            "surface": "#131313",
+            "primary-fixed-dim": "#474747",
+            "on-secondary-fixed-variant": "#3b3b3b",
+            "on-secondary-container": "#e2e2e2",
+            "on-primary-fixed-variant": "#e2e2e2",
+            "surface-bright": "#393939",
+            "primary": "#ffffff",
+            "on-secondary": "#1b1b1b",
+            "surface-container": "#1f1f1f",
+            "on-error-container": "#ffdad6",
+            "inverse-on-surface": "#303030",
+            "on-primary-fixed": "#ffffff",
+            "primary-container": "#d4d4d4",
+            "on-tertiary-fixed": "#ffffff",
+            "tertiary-fixed": "#5e5e5e",
+            "on-tertiary-container": "#000000",
+            "surface-variant": "#353535",
+            "background": "#131313",
+            "tertiary-fixed-dim": "#474747",
+            "primary-fixed": "#5e5e5e",
+            "on-surface": "#e2e2e2",
+            "error-container": "#93000a",
+            "surface-tint": "#c6c6c6",
+            "surface-container-low": "#1b1b1b",
+            "outline": "#919191",
+            "tertiary-container": "#919191",
+            "on-tertiary-fixed-variant": "#e2e2e2",
+            "surface-dim": "#131313",
+            "outline-variant": "#474747",
+            "on-surface-variant": "#c6c6c6",
+            "on-error": "#690005",
+            "inverse-surface": "#e2e2e2",
+            "error": "#ffb4ab",
+            "surface-container-high": "#2a2a2a",
+            "on-secondary-fixed": "#1b1b1b",
+            "on-primary-container": "#000000",
+            "on-background": "#e2e2e2",
+            "inverse-primary": "#5e5e5e",
+            "surface-container-highest": "#353535",
+            "on-tertiary": "#1b1b1b"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Geist", "sans-serif"],
+            display: ["Geist", "sans-serif"],
+            body: ["Geist", "sans-serif"],
+            label: ["Geist", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: #EDEDED;
+      font-family: 'Geist', sans-serif;
+      overflow-x: hidden;
+    }
+    .halo-radial {
+      background: radial-gradient(circle at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.25) 30%, rgba(255,255,255,0.05) 55%, transparent 75%);
+    }
+  </style>
+</head>
+<body class="bg-black text-[#EDEDED] antialiased selection:bg-neutral-800 selection:text-white">
+<!-- TopNavBar (Shared Component JSON Conformance) -->
+<header class="docked full-width top-0 sticky z-50 h-16 bg-background dark:bg-background border-b border-outline-variant dark:border-outline-variant transition-opacity duration-150 active:opacity-80">
+<div class="flex justify-between items-center w-full px-6 max-w-7xl mx-auto h-16">
+<!-- Brand Logo & Main Nav Cluster -->
+<div class="flex items-center gap-8">
+<a aria-label="Vercel Homepage" class="flex items-center gap-2 text-primary dark:text-primary font-bold tracking-tight text-base" href="#">
+<svg fill="currentColor" height="19" viewbox="0 0 115 100" width="22">
+<polygon points="57.5,0 115,100 0,100"></polygon>
+</svg>
+<span class="text-sm font-semibold tracking-tight text-primary">Vercel</span>
+</a>
+<!-- Desktop Navigation Links from JSON -->
+<nav class="hidden md:flex items-center gap-6 font-body text-sm font-medium tracking-tight">
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150" href="#products">Products</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150" href="#resources">Resources</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150" href="#enterprise">Enterprise</a>
+<a class="text-secondary dark:text-secondary hover:text-primary dark:hover:text-primary font-medium transition-colors duration-150" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Trailing Action Controls -->
+<div class="flex items-center gap-4 text-xs font-medium">
+<a class="hidden sm:inline-block text-[#888888] hover:text-white transition-colors duration-150" href="#demo">Get a Demo</a>
+<a class="text-[#888888] hover:text-white transition-colors duration-150" href="#login">Log In</a>
+<a class="bg-white text-black font-medium text-xs px-3.5 py-1.5 rounded-full hover:bg-neutral-200 transition-colors duration-150" href="#signup">Sign Up</a>
+</div>
+</div>
+</header>
+<!-- Main Stage Canvas -->
+<main class="w-full relative">
+<!-- Announcement Pill -->
+<div class="pt-8 pb-4 flex justify-center px-4">
+<a class="border border-[#262626] bg-[#0c0c0c] hover:bg-[#141414] text-xs px-3.5 py-1.5 rounded-full text-[#888888] inline-flex items-center gap-2 transition-all" href="#ship26">
+<span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+<span>Ship 26 is coming to SF</span>
+<span class="text-[#333333]">•</span>
+<span class="text-white flex items-center font-medium">Get your ticket <span class="material-symbols-outlined text-[14px] ml-0.5" data-icon="arrow_forward">arrow_forward</span></span>
+</a>
+</div>
+<!-- Hero Viewport -->
+<section class="h-[calc(100vh-120px)] min-h-[660px] relative px-6 flex flex-col justify-between max-w-7xl mx-auto w-full pt-6 pb-6">
+<!-- Upper Tri-Section Stage (Left / Key Art / Right) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center my-auto w-full">
+<!-- Left: Headline & Buttons -->
+<div class="lg:col-span-4 z-10 space-y-8">
+<div>
+<h1 class="text-5xl md:text-6xl font-normal tracking-tight text-white leading-[1.05]">
+              Agentic<br/>Infrastructure
+            </h1>
+<p class="text-secondary text-sm md:text-base mt-4 max-w-sm font-normal leading-relaxed">
+              Deploy, coordinate, and orchestrate autonomous systems at internet scale. Built for software engineering teams.
+            </p>
+</div>
+<div class="flex items-center gap-3 pt-2">
+<a class="bg-white text-black font-medium px-5 py-2.5 rounded-full text-sm hover:bg-neutral-200 transition-colors duration-150" href="#deploy">
+              Deploy now
+            </a>
+<a class="border border-[#333333] text-white font-medium px-5 py-2.5 rounded-full text-sm hover:border-[#666666] bg-transparent transition-colors duration-150" href="#sales">
+              Talk to sales
+            </a>
+</div>
+</div>
+<!-- Center: Official Key Art (Luminous Halo + Black Triangle) -->
+<div class="lg:col-span-5 flex items-center justify-center relative py-12 select-none pointer-events-none">
+<!-- Ambient Halo -->
+<div class="absolute w-72 h-72 md:w-96 md:h-96 halo-radial rounded-full blur-2xl opacity-90"></div>
+<!-- Black Triangle with delicate edge glow -->
+<div class="relative z-10 w-44 h-40 md:w-56 md:h-52 drop-shadow-[0_0_24px_rgba(255,255,255,0.3)]">
+<svg class="w-full h-full filter drop-shadow-[0_0_2px_rgba(255,255,255,0.7)]" viewbox="0 0 115 100">
+<polygon fill="#000000" points="57.5,5 110,95 5,95" stroke="#222222" stroke-width="2"></polygon>
+</svg>
+</div>
+</div>
+<!-- Right: Expandable interactive specs -->
+<div class="lg:col-span-3 z-10 border-l border-[#222222] pl-6 space-y-6">
+<div class="group cursor-pointer">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Architecture</div>
+<div class="text-sm font-medium text-white flex items-center justify-between">
+              For coding agents
+              <span class="material-symbols-outlined text-sm text-[#888888] group-hover:translate-x-0.5 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<p class="text-xs text-[#888888] mt-1 leading-normal">Deterministic tool access and sandboxed compute runners.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Scale</div>
+<div class="text-sm font-medium text-white flex items-center justify-between">
+              To ship apps and agents
+              <span class="material-symbols-outlined text-sm text-[#888888] group-hover:translate-x-0.5 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<p class="text-xs text-[#888888] mt-1 leading-normal">Zero cold starts, global replication, and auto-provisioning.</p>
+</div>
+<div class="group cursor-pointer">
+<div class="text-xs font-semibold text-neutral-500 uppercase tracking-wider mb-1">Telemetry</div>
+<div class="text-sm font-medium text-white flex items-center justify-between">
+              Automated by agents
+              <span class="material-symbols-outlined text-sm text-[#888888] group-hover:translate-x-0.5 transition-transform" data-icon="chevron_right">chevron_right</span>
+</div>
+<p class="text-xs text-[#888888] mt-1 leading-normal">Real-time trace debugging and policy enforcement.</p>
+</div>
+</div>
+</div>
+<!-- Bottom Customer Logos Row -->
+<div class="border-t border-[#1a1a1a] pt-6 flex flex-wrap items-center justify-between gap-6 text-neutral-500 font-medium text-xs tracking-wider uppercase">
+<span class="hover:text-neutral-300 transition-colors">Blackbox</span>
+<span class="hover:text-neutral-300 transition-colors">Charles Schwab</span>
+<span class="hover:text-neutral-300 transition-colors">DoorDash</span>
+<span class="hover:text-neutral-300 transition-colors">OpenAI</span>
+<span class="hover:text-neutral-300 transition-colors">Supreme</span>
+<span class="hover:text-neutral-300 transition-colors">The Weather Company</span>
+<span class="hover:text-neutral-300 transition-colors">Polymarket</span>
+</div>
+</section>
+<!-- Editorial Product Section 1: Notion -->
+<section class="py-24 border-t border-[#202020] bg-black" id="products">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 space-y-6">
+<div class="text-xs font-medium uppercase tracking-widest text-[#888888]">Intelligence Layer</div>
+<h2 class="text-3xl md:text-4xl font-normal text-white leading-tight">
+            Build agents on infrastructure that thinks like them
+          </h2>
+<p class="text-[#888888] text-base leading-relaxed">
+            “Notion powers millions of agent conversations daily on Vercel.”
+          </p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-[#202020]">
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Durable Orchestration</div>
+<div class="text-[11px] text-[#888888] mt-1">Stateful execution surviving restarts</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Sandboxed Environments</div>
+<div class="text-[11px] text-[#888888] mt-1">Isolated micro-vms per user session</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">AI Model Gateway</div>
+<div class="text-[11px] text-[#888888] mt-1">Multi-provider unified latency fallback</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Fluid Compute</div>
+<div class="text-[11px] text-[#888888] mt-1">Sub-millisecond elastic scale</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<!-- Dark Bezel Frame -->
+<div class="rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden shadow-2xl">
+<!-- Browser Chrome Header -->
+<div class="px-4 py-3 border-b border-[#202020] bg-[#141414] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+</div>
+<div class="text-[11px] font-mono text-[#777777] bg-[#000000] px-3 py-0.5 rounded-md border border-[#222222]">
+                notion.so/agents/orchestrator
+              </div>
+<div class="w-6"></div>
+</div>
+<!-- Notion App Surface Placeholder -->
+<div class="p-6 bg-[#0a0a0a] min-h-[340px] flex flex-col justify-between">
+<div class="flex items-center justify-between pb-4 border-b border-[#1b1b1b]">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded bg-[#1e1e1e] flex items-center justify-center font-bold text-xs">N</span>
+<span class="text-xs font-medium text-white">Notion AI Workspaces</span>
+</div>
+<span class="text-[11px] px-2 py-0.5 rounded bg-[#162a19] text-[#4ade80] border border-[#225026]">Cluster: Healthy</span>
+</div>
+<!-- Terminal & Telemetry Mock -->
+<div class="bg-[#050505] border border-[#1c1c1c] rounded-lg p-4 font-mono text-xs text-[#a1a1a1] space-y-2 my-4">
+<div class="text-[#555555]">// Dispatching task to autonomous planner...</div>
+<div class="text-white flex items-center gap-2">
+<span class="text-[#4ade80]">✓</span> [sandbox-inst-492] Memory snapshot hydrated (14ms)
+                </div>
+<div class="text-white flex items-center gap-2">
+<span class="text-[#4ade80]">✓</span> [gateway] Routing prompt to claude-3-5-sonnet via Gateway
+                </div>
+<div class="text-secondary text-[11px] pl-5 border-l border-[#222222]">
+                  Token throughput: 114 tps • Cache hit ratio: 94.2% • Regional egress: iad1
+                </div>
+</div>
+<div class="flex items-center justify-between text-xs text-[#888888] pt-2">
+<span>Active thread: #exec-2026-928</span>
+<span class="text-neutral-400 font-mono">Durable state: Committed</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Product Section 2: Zapier -->
+<section class="py-24 border-t border-[#202020] bg-black">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 space-y-6">
+<div class="text-xs font-medium uppercase tracking-widest text-[#888888]">Global Network</div>
+<h2 class="text-3xl md:text-4xl font-normal text-white leading-tight">
+            Ship apps that scale from zero to millions instantly
+          </h2>
+<p class="text-[#888888] text-base leading-relaxed">
+            “Zapier serves over 100 million monthly website visits on Vercel.”
+          </p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-[#202020]">
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Global Delivery</div>
+<div class="text-[11px] text-[#888888] mt-1">Smart routing across 100+ edge POPs</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Deployment Environments</div>
+<div class="text-[11px] text-[#888888] mt-1">Instant branch URLs for every PR</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Serverless Functions</div>
+<div class="text-[11px] text-[#888888] mt-1">Concurrency without connection limits</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Web Application Firewall</div>
+<div class="text-[11px] text-[#888888] mt-1">Deep packet inspection &amp; DDoS defense</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden shadow-2xl">
+<div class="px-4 py-3 border-b border-[#202020] bg-[#141414] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+</div>
+<div class="text-[11px] font-mono text-[#777777] bg-[#000000] px-3 py-0.5 rounded-md border border-[#222222]">
+                zapier.com/app/dashboard/mesh
+              </div>
+<div class="w-6"></div>
+</div>
+<div class="p-6 bg-[#0a0a0a] min-h-[340px] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<div>
+<div class="text-xs font-semibold text-white">Edge Request Routing</div>
+<div class="text-[11px] text-[#888888]">104M Invocations in past 30 days</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-mono text-white">99.999%</div>
+<div class="text-[11px] text-[#4ade80]">Global Uptime</div>
+</div>
+</div>
+<!-- Minimal Flow Diagram Simulation -->
+<div class="grid grid-cols-3 gap-3 my-6 text-center">
+<div class="p-3 bg-[#111111] border border-[#222222] rounded-lg">
+<div class="text-[10px] uppercase text-[#777] font-semibold">Incoming Trigger</div>
+<div class="text-xs text-white font-mono mt-1">Webhook / API</div>
+<div class="text-[11px] text-[#888] mt-2">P95: 12ms</div>
+</div>
+<div class="p-3 bg-[#111111] border border-[#333333] rounded-lg relative">
+<div class="text-[10px] uppercase text-[#4ade80] font-semibold">Edge Transform</div>
+<div class="text-xs text-white font-mono mt-1">Vercel Functions</div>
+<div class="text-[11px] text-[#888] mt-2">0 Cold Starts</div>
+</div>
+<div class="p-3 bg-[#111111] border border-[#222222] rounded-lg">
+<div class="text-[10px] uppercase text-[#777] font-semibold">Downstream</div>
+<div class="text-xs text-white font-mono mt-1">App Sync Target</div>
+<div class="text-[11px] text-[#888] mt-2">Zero Loss</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs text-[#888888] pt-2 border-t border-[#1a1a1a]">
+<span>Edge POPs active: 102 locations</span>
+<span class="text-neutral-300">Autoscaling status: Dynamic</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Editorial Product Section 3: Mintlify -->
+<section class="py-24 border-t border-[#202020] bg-black">
+<div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-5 space-y-6">
+<div class="text-xs font-medium uppercase tracking-widest text-[#888888]">Multi-Tenant Engine</div>
+<h2 class="text-3xl md:text-4xl font-normal text-white leading-tight">
+            Host platforms that serve every customer
+          </h2>
+<p class="text-[#888888] text-base leading-relaxed">
+            “Mintlify powers documentation for over 20,000 companies on Vercel.”
+          </p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-[#202020]">
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Tenant Isolation</div>
+<div class="text-[11px] text-[#888888] mt-1">Zero cross-account data leakage</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Domain Management</div>
+<div class="text-[11px] text-[#888888] mt-1">Automated programmatic DNS verification</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Custom SSL Certificates</div>
+<div class="text-[11px] text-[#888888] mt-1">Instant TLS provisioning via API</div>
+</div>
+<div class="p-3 rounded-lg bg-[#0e0e0e] border border-[#202020]">
+<div class="text-xs text-white font-medium">Preview URLs</div>
+<div class="text-[11px] text-[#888888] mt-1">Unique review sandbox for each customer commit</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden shadow-2xl">
+<div class="px-4 py-3 border-b border-[#202020] bg-[#141414] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+</div>
+<div class="text-[11px] font-mono text-[#777777] bg-[#000000] px-3 py-0.5 rounded-md border border-[#222222]">
+                docs.mintlify.com/platform/tenants
+              </div>
+<div class="w-6"></div>
+</div>
+<div class="p-6 bg-[#0a0a0a] min-h-[340px] flex flex-col justify-between font-mono text-xs">
+<div class="flex items-center justify-between text-neutral-400 pb-3 border-b border-[#1f1f1f]">
+<span>CUSTOM DOMAINS REGISTRY</span>
+<span class="text-white">20,418 Active Hostnames</span>
+</div>
+<div class="space-y-2 py-4">
+<div class="flex items-center justify-between bg-[#111111] p-2.5 rounded border border-[#222222]">
+<span class="text-white">docs.anthropic.com</span>
+<span class="text-[#4ade80] text-[11px]">SSL Provisioned (0.8s)</span>
+</div>
+<div class="flex items-center justify-between bg-[#111111] p-2.5 rounded border border-[#222222]">
+<span class="text-white">docs.perplexity.ai</span>
+<span class="text-[#4ade80] text-[11px]">SSL Provisioned (0.6s)</span>
+</div>
+<div class="flex items-center justify-between bg-[#111111] p-2.5 rounded border border-[#222222]">
+<span class="text-white">developer.resend.com</span>
+<span class="text-[#4ade80] text-[11px]">SSL Provisioned (0.9s)</span>
+</div>
+</div>
+<div class="text-[11px] text-[#666666] flex items-center justify-between border-t border-[#1a1a1a] pt-3">
+<span>Wildcard ingress route configured</span>
+<span class="text-white">Vercel Multi-Zone Engine</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recently Shipped Section -->
+<section class="py-24 border-t border-[#202020] bg-black">
+<div class="max-w-7xl mx-auto px-6">
+<h2 class="text-2xl font-normal text-white mb-8">Recently shipped</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-[#0a0a0a] border border-[#202020] hover:border-[#333333] transition-colors rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-xs text-[#888888] mb-4">
+<span>September 2026</span>
+<span class="px-2 py-0.5 rounded bg-[#181818] text-neutral-300 font-mono text-[10px]">GA</span>
+</div>
+<h3 class="text-base font-medium text-white mb-2">Durable-agent framework</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+                State management primitive designed for multi-step agent actions. Automatically checkpoint long-running inference jobs.
+              </p>
+</div>
+<div class="pt-6 border-t border-[#1a1a1a] mt-6 flex items-center text-xs text-white gap-1 group font-medium cursor-pointer">
+              Read announcement <span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#0a0a0a] border border-[#202020] hover:border-[#333333] transition-colors rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-xs text-[#888888] mb-4">
+<span>September 2026</span>
+<span class="px-2 py-0.5 rounded bg-[#181818] text-neutral-300 font-mono text-[10px]">Preview</span>
+</div>
+<h3 class="text-base font-medium text-white mb-2">Passport</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+                Secure every internal agent, app, and deployment with your identity provider. Okta, Azure AD, and Google Workspace support out of the box.
+              </p>
+</div>
+<div class="pt-6 border-t border-[#1a1a1a] mt-6 flex items-center text-xs text-white gap-1 group font-medium cursor-pointer">
+              Explore Passport <span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#0a0a0a] border border-[#202020] hover:border-[#333333] transition-colors rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between text-xs text-[#888888] mb-4">
+<span>August 2026</span>
+<span class="px-2 py-0.5 rounded bg-[#181818] text-neutral-300 font-mono text-[10px]">GA</span>
+</div>
+<h3 class="text-base font-medium text-white mb-2">Containers</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+                Run production workloads in isolated containers on Vercel. Native Dockerfile builds with zero orchestrator overhead.
+              </p>
+</div>
+<div class="pt-6 border-t border-[#1a1a1a] mt-6 flex items-center text-xs text-white gap-1 group font-medium cursor-pointer">
+              Learn about Containers <span class="material-symbols-outlined text-xs group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA Section -->
+<section class="py-28 border-t border-[#202020] bg-black text-center relative overflow-hidden">
+<!-- Glow hint -->
+<div class="absolute left-1/2 -top-24 -translate-x-1/2 w-96 h-48 halo-radial opacity-20 blur-3xl pointer-events-none"></div>
+<div class="max-w-4xl mx-auto px-6 relative z-10">
+<h2 class="text-4xl md:text-5xl font-normal text-white mb-6 tracking-tight">
+          Built by you, or your agents
+        </h2>
+<p class="text-secondary text-sm md:text-base max-w-md mx-auto mb-8 font-normal">
+          From the first prompt to global scale. Deploy high-reliability AI apps today on the standard frontend and agent cloud.
+        </p>
+<div class="flex items-center justify-center gap-3">
+<a class="bg-white text-black font-medium px-5 py-2.5 rounded-full text-sm hover:bg-neutral-200 transition-colors duration-150" href="#deploy">
+            Deploy now
+          </a>
+<a class="border border-[#333333] text-white font-medium px-5 py-2.5 rounded-full text-sm hover:border-[#666666] bg-transparent transition-colors duration-150" href="#onboard">
+            Onboard your agent
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Compact Black 6-Column Footer (Shared Component JSON Conformance) -->
+<footer class="docked full-width bottom bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant transition-colors duration-150">
+<div class="w-full px-6 py-16 max-w-7xl mx-auto">
+<!-- 6 Columns of Links -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-8 pb-12 border-b border-[#202020] text-xs">
+<div>
+<div class="font-medium text-white mb-4">Agent Stack</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">AI Gateway</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Durable Agent</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Sandboxes</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Model Routing</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Trace Debugger</a></li>
+</ul>
+</div>
+<div>
+<div class="font-medium text-white mb-4">Core Platform</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Fluid Compute</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Edge Network</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Serverless Storage</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Containers</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Previews</a></li>
+</ul>
+</div>
+<div>
+<div class="font-medium text-white mb-4">Security</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Passport SSO</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Enterprise Firewall</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">DDoS Mitigation</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">SOC2 Type II</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Data Isolation</a></li>
+</ul>
+</div>
+<div>
+<div class="font-medium text-white mb-4">Tools</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">v0 Generative UI</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Vercel CLI</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Speed Insights</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Observability</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Integrations</a></li>
+</ul>
+</div>
+<div>
+<div class="font-medium text-white mb-4">Frameworks</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Next.js</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">SvelteKit</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Remix</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Nuxt</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Astro</a></li>
+</ul>
+</div>
+<div>
+<div class="font-medium text-white mb-4">SDKs</div>
+<ul class="space-y-2.5 text-[#888888]">
+<li><a class="hover:text-primary transition-colors duration-150" href="#">AI SDK</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Workflow SDK</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Python Runtime</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Go Engine</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#">Node.js API</a></li>
+</ul>
+</div>
+</div>
+<!-- Lower Sub-sections and Copyright Bar -->
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-secondary dark:text-secondary">
+<div class="flex items-center gap-2">
+<svg class="text-white" fill="currentColor" height="16" viewbox="0 0 115 100" width="18">
+<polygon points="57.5,0 115,100 0,100"></polygon>
+</svg>
+<span class="text-sm font-bold text-primary dark:text-primary">© 2026 Vercel, Inc.</span>
+</div>
+<!-- Links from JSON -->
+<div class="flex flex-wrap items-center justify-center gap-6">
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Products</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Resources</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Enterprise</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Pricing</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Legal</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#">Privacy</a>
+</div>
+<div class="flex items-center gap-4 text-neutral-400">
+<a aria-label="GitHub" class="hover:text-white transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+</a>
+<a aria-label="X" class="hover:text-white transition-colors" href="#">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
