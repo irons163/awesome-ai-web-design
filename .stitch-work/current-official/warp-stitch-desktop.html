@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Warp - Open Infrastructure for Cloud Software Factories</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            warp: {
+              blue: '#2818F4',
+              yellow: '#FFE500',
+              dark: '#141414',
+              surface: '#FAF8F5',
+              border: '#E5E5E5',
+              borderDark: '#27272A',
+              monoGray: '#71717A'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+<!-- Typography & Styling Adjustments -->
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    body {
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+<style data-purpose="custom-utilities">
+    .hairline-border {
+      box-shadow: 0 0 0 1px #E5E5E5;
+    }
+    .hairline-dark-border {
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #3F3F46;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body class="bg-[#FAF8F5] text-[#141414] font-sans antialiased selection:bg-[#2818F4] selection:text-white">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-md border-b border-[#E5E5E5]">
+<div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Warp Brand Logo -->
+<div class="flex items-center space-x-3">
+<a class="flex items-center space-x-2.5" href="#">
+<img alt="Warp Logo" class="w-8 h-8 rounded-md" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M7 9h4.2l3.4 10.2L17.8 9H22l-5.6 14h-3.6L7 9z' fill='%23FFFFFF'/%3E%3Crect x='23' y='19' width='3' height='4' fill='%232818F4'/%3E%3C/svg%3E"/>
+<span class="font-mono text-xs font-bold tracking-widest text-[#141414]">WARP <span class="text-zinc-400">//</span> FACTORIES</span>
+</a>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden md:flex items-center space-x-7 font-mono text-xs text-zinc-600 uppercase tracking-wider">
+<a class="hover:text-black transition-colors" href="#pipeline">Architecture</a>
+<a class="hover:text-black transition-colors" href="#sdlc">Spec</a>
+<a class="hover:text-black transition-colors" href="#modular">Stack</a>
+<a class="hover:text-black transition-colors" href="#evals">Evals</a>
+<a class="hover:text-black transition-colors" href="#faq">Docs</a>
+</nav>
+<!-- Right Action CTAs -->
+<div class="flex items-center space-x-3 font-mono text-xs">
+<a class="text-zinc-700 hover:text-black px-3 py-1.5 font-medium transition-colors" href="#">Sign In</a>
+<a class="bg-[#FFE500] hover:bg-[#faee1c] text-black border border-black/80 px-3.5 py-1.5 font-medium shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform active:translate-x-0.5 active:translate-y-0.5" href="#">
+          Book a demo
+        </a>
+<a class="bg-[#2818F4] hover:bg-blue-700 text-white px-3.5 py-1.5 font-medium shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-transform active:translate-x-0.5 active:translate-y-0.5" href="#">
+          Deploy Factory
+        </a>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main>
+<!-- BEGIN: HeroSection -->
+<section class="max-w-[1280px] mx-auto px-6 pt-14 pb-20 border-b border-[#E5E5E5]">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Hero Left Column: Headline and Call-to-actions -->
+<div class="lg:col-span-6 flex flex-col justify-center">
+<div class="inline-flex items-center gap-2 mb-6">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] bg-[#2818F4]/5 border border-[#2818F4]/20 px-2.5 py-1 rounded">
+              SEC_01 // THE PRODUCTION PARADIGM
+            </span>
+</div>
+<h1 class="text-[52px] font-bold leading-[1.08] tracking-tight text-[#141414] mb-6">
+            Open infrastructure for cloud software factories
+          </h1>
+<p class="text-lg leading-relaxed text-zinc-600 mb-8 max-w-lg font-normal">
+            Build on Warp: factories as code, any model or harness, with evals, benchmarks, and self-improvement built in.
+          </p>
+<div class="flex flex-wrap items-center gap-3.5 mb-6 font-mono text-xs">
+<a class="bg-[#141414] hover:bg-black text-white px-5 py-3 font-semibold flex items-center gap-2 border border-black shadow-[3px_3px_0px_0px_#2818F4] transition-all" href="#">
+              Request early access <span>→</span>
+</a>
+<a class="bg-white hover:bg-zinc-50 text-zinc-800 border border-[#D4D4D8] px-5 py-3 font-semibold flex items-center gap-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,0.06)]" href="#">
+<svg class="w-4 h-4 text-zinc-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+              Download Warp Terminal
+            </a>
+</div>
+<!-- Bonus Callout Pill -->
+<div class="inline-flex items-center gap-2 border border-[#FFE500] bg-[#FFFDE6] px-3 py-1.5 rounded-sm w-fit font-mono text-[11px] text-zinc-800">
+<span class="bg-[#FFE500] text-black font-bold px-1.5 py-0.5 text-[10px]">BONUS</span>
+<span>Includes $10,000 in free Factory compute for qualified teams.</span>
+</div>
+</div>
+<!-- Hero Right Column: Pipeline Diagram & Factory Spec -->
+<div class="lg:col-span-6 bg-[#141414] rounded-lg border border-[#27272A] p-5 shadow-2xl text-white font-mono text-xs" id="pipeline">
+<!-- Terminal Header -->
+<div class="flex items-center justify-between pb-3 mb-4 border-b border-zinc-800">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-yellow-500 inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-green-500 inline-block"></span>
+<span class="text-zinc-400 text-[11px] pl-2 font-medium">FIG. 1 — THE FACTORY PIPELINE</span>
+</div>
+<span class="text-emerald-400 bg-emerald-950/80 border border-emerald-500/30 text-[10px] px-2 py-0.5 font-bold tracking-wider animate-pulse">
+              ● ACTIVE // KERNEL RUNNING
+            </span>
+</div>
+<!-- Pipeline Stages Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-4">
+<div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">01 / TRIGGER</span>
+<span class="text-zinc-200 font-semibold flex items-center justify-between">
+                PR Event // Webhook
+                <span class="text-[10px] text-blue-400">⚡</span>
+</span>
+</div>
+<div class="bg-zinc-900 border border-[#2818F4]/40 p-2.5 rounded bg-blue-950/10">
+<span class="text-[10px] text-blue-400 block mb-1">02 / ORCHESTRATOR</span>
+<span class="text-white font-semibold flex items-center justify-between">
+                Warp Micro-Kernel
+                <span class="text-[10px] text-blue-400 font-mono">[v4.2]</span>
+</span>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">03 / AGENT RUNNER</span>
+<span class="text-zinc-200 font-semibold">Claude 3.7 + GPT-4.5</span>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-2.5 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">04 / DISPATCH</span>
+<span class="text-emerald-400 font-semibold">Verified Auto-PR</span>
+</div>
+</div>
+<!-- Code Spec Window -->
+<div class="bg-black/75 rounded border border-zinc-800 p-3.5 mb-3 font-mono text-[11px] leading-relaxed">
+<div class="flex justify-between items-center text-zinc-500 text-[10px] mb-2 border-b border-zinc-900 pb-1">
+<span>factory.yaml</span>
+<span>SPEC_VERSION: 2.4.0</span>
+</div>
+<div class="text-zinc-400"><span class="text-zinc-600"># Autonomous Continuous Improvement Factory</span></div>
+<div><span class="text-purple-400">name:</span> <span class="text-zinc-200">enterprise-repo-refactor</span></div>
+<div><span class="text-purple-400">runtime:</span></div>
+<div class="pl-4"><span class="text-zinc-400">sandbox:</span> <span class="text-emerald-300">warp/ubuntu-ephemeral:latest</span></div>
+<div class="pl-4"><span class="text-zinc-400">isolation:</span> <span class="text-yellow-400">microvm-firecracker</span></div>
+<div><span class="text-purple-400">agent:</span></div>
+<div class="pl-4"><span class="text-zinc-400">harness:</span> <span class="text-zinc-200">claude-code-harness</span></div>
+<div class="pl-4"><span class="text-zinc-400">model:</span> <span class="text-blue-400">claude-3-7-sonnet-20250219</span></div>
+<div><span class="text-purple-400">evals:</span></div>
+<div class="pl-4"><span class="text-zinc-400">strict_lint:</span> <span class="text-yellow-400">true</span></div>
+<div class="pl-4"><span class="text-zinc-400">test_command:</span> <span class="text-emerald-300">pytest text --coverage</span></div>
+<div class="pl-4"><span class="text-zinc-400">regression_threshold:</span> <span class="text-yellow-400">0.00</span></div>
+<div><span class="text-purple-400">on_success:</span></div>
+<div class="pl-4"><span class="text-zinc-400">create_pr:</span> <span class="text-yellow-400">true</span></div>
+<div class="pl-4"><span class="text-zinc-400">assign_reviewers:</span> <span class="text-zinc-300">["@staff-eng", "@qa-lead"]</span></div>
+</div>
+<!-- Micro Telemetry Status Bar -->
+<div class="flex items-center justify-between text-[10px] text-zinc-500 pt-2 border-t border-zinc-900 font-mono">
+<span>TEL_METRICS: Latency Index // Jitter &lt;4ms</span>
+<span class="text-blue-400">Memory Persistence: Redis v7.2</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: LogosSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-10 border-b border-[#E5E5E5]">
+<p class="font-mono text-center text-[10px] tracking-widest text-zinc-400 uppercase font-semibold mb-8">
+        TRUSTED BY 800,000+ DEVELOPERS AND FORWARD-THINKING TEAMS
+      </p>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center justify-center opacity-70 grayscale hover:grayscale-0 transition-all text-center font-mono text-sm font-bold text-zinc-800">
+<span class="tracking-tight hover:text-black">asana</span>
+<span class="tracking-tight hover:text-black">docker</span>
+<span class="tracking-tight hover:text-black">GitHub</span>
+<span class="tracking-tight hover:text-black">vmware</span>
+<span class="tracking-tight hover:text-black">Amplitude</span>
+<span class="tracking-tight hover:text-black">TEAMWORKS</span>
+<span class="tracking-tight hover:text-black">NVIDIA</span>
+<span class="tracking-tight hover:text-black">ramp</span>
+</div>
+</section>
+<!-- END: LogosSection -->
+<!-- BEGIN: SystemEvolutionSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]" id="sdlc">
+<div class="max-w-3xl mb-12">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_02 // SYSTEM EVOLUTION
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-4">
+          Beyond CI/CD to automating the whole SDLC
+        </h2>
+<p class="text-zinc-600 text-base leading-relaxed">
+          Traditional CI/CD runs dumb bash scripts when code lands. Warp software factories run autonomous agent loops before, during, and after pull requests, actively self-debugging, reproducing bug reports, and refactoring dependencies.
+        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Accordion / Feature List -->
+<div class="lg:col-span-5 space-y-2.5 font-sans">
+<div class="border border-[#E5E5E5] bg-white p-4 rounded hover:border-zinc-400 transition-colors">
+<div class="flex items-center justify-between">
+<h3 class="font-semibold text-sm text-[#141414]">1. Opinionated, but flexible</h3>
+<span class="text-xs font-mono text-zinc-400">↳</span>
+</div>
+<p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+              Defaults built for hardened engineering factories, customized via composable plugins.
+            </p>
+</div>
+<div class="border-2 border-[#2818F4] bg-[#2818F4]/5 p-4 rounded">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-[#2818F4]">2. Factories as code</h3>
+<span class="text-[10px] font-mono bg-[#2818F4] text-white px-1.5 py-0.5 rounded">SELECTED</span>
+</div>
+<p class="text-xs text-zinc-700 mt-1 leading-relaxed font-medium">
+              Declarative YAML definitions checked directly into your git repository alongside code.
+            </p>
+</div>
+<div class="border border-[#E5E5E5] bg-white p-4 rounded hover:border-zinc-400 transition-colors">
+<div class="flex items-center justify-between">
+<h3 class="font-semibold text-sm text-[#141414]">3. API, CLI, SDK and MCP</h3>
+<span class="text-xs font-mono text-zinc-400">↳</span>
+</div>
+<p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+              Expose your factory runners to Claude Desktop, IDE extensions, or remote curl triggers.
+            </p>
+</div>
+<div class="border border-[#E5E5E5] bg-white p-4 rounded hover:border-zinc-400 transition-colors">
+<div class="flex items-center justify-between">
+<h3 class="font-semibold text-sm text-[#141414]">4. Integrations</h3>
+<span class="text-xs font-mono text-zinc-400">↳</span>
+</div>
+<p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+              Bidirectional sync with GitHub Actions, Linear issues, Jira tickets, and Sentry traces.
+            </p>
+</div>
+<div class="border border-[#E5E5E5] bg-white p-4 rounded hover:border-zinc-400 transition-colors">
+<div class="flex items-center justify-between">
+<h3 class="font-semibold text-sm text-[#141414]">5. Any surface</h3>
+<span class="text-xs font-mono text-zinc-400">↳</span>
+</div>
+<p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+              Trigger from the terminal, automated webhooks, browser console, or scheduled cron jobs.
+            </p>
+</div>
+<div class="border border-[#E5E5E5] bg-white p-4 rounded hover:border-zinc-400 transition-colors">
+<div class="flex items-center justify-between">
+<h3 class="font-semibold text-sm text-[#141414]">6. Evals, self-improvement, and memory</h3>
+<span class="text-xs font-mono text-zinc-400">↳</span>
+</div>
+<p class="text-xs text-zinc-500 mt-1 leading-relaxed">
+              Cross-session episodic memory prevents repeating previous engineering failures.
+            </p>
+</div>
+</div>
+<!-- Terminal Console Execution Mockup -->
+<div class="lg:col-span-7 bg-[#141414] rounded-lg border border-[#27272A] p-5 font-mono text-xs text-white shadow-xl">
+<div class="flex items-center justify-between pb-3 border-b border-zinc-800 text-zinc-400 text-[11px] mb-4">
+<div class="flex items-center space-x-2">
+<span class="w-2.5 h-2.5 rounded-full bg-zinc-600"></span>
+<span class="text-zinc-300 font-semibold">factory-runner.bin</span>
+<span class="text-zinc-600">▪</span>
+<span class="text-emerald-400">EXEC: PR #4192</span>
+</div>
+<span class="text-[10px] text-zinc-500">STREAMING STDOUT</span>
+</div>
+<div class="space-y-2 text-[11px] leading-relaxed overflow-x-auto custom-scroll">
+<p class="text-zinc-500">[00:01.02] [DISPATCH] Initializing Firecracker microVM instance: vm-iad-8401...</p>
+<p class="text-zinc-500">[00:01.44] [ENV] Mounting git workspace: git@github.com:warp/dotdev/core.git#feat/self-heal</p>
+<p class="text-blue-400">[00:02.10] [AGENT] Harness 'claude-code-harness' loaded model weights context (184,391 tokens)</p>
+<p class="text-zinc-300">[00:03.24] [REASONING] Analyzing AST tree for circular dependency in pkg/telemetry/dispatcher.go</p>
+<p class="text-yellow-400">[00:05.12] [PATCH] Generated diff: -4 lines, +18 lines (refactored sync.Mutex to atomic.Pointer)</p>
+<p class="text-zinc-400">[00:05.81] [EVAL] Executing tests: go test -v -race ./pkg/telemetry/...</p>
+<p class="text-emerald-400 font-semibold">[00:08.45] [PASS] 24 of 24 test suites green. 0 race conditions detected.</p>
+<p class="text-purple-300">[00:09.10] [GIT] Committed diff1a38: 'perf(telemetry): eliminate lock contention via atomic.Pointer'</p>
+<p class="text-emerald-300 font-bold">[00:09.65] [GA_PR] Opened PR #18492: https://github.com/warpdotdev/core/pull/18492</p>
+</div>
+<div class="mt-6 pt-3 border-t border-zinc-800/80 flex items-center justify-between text-[10px] text-zinc-500">
+<span class="text-emerald-400 flex items-center gap-1.5 font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+              EVAL LOOP CONVERGED: 1 ITERATION
+            </span>
+<span class="font-mono">TOTAL RUNTIME: 9.65s</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SystemEvolutionSection -->
+<!-- BEGIN: EvalsMetricsSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]" id="evals">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+            SEC_03 // SYS_EVALS_V2
+          </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414]">
+            Baked-in measurement and self-improvement
+          </h2>
+</div>
+<p class="text-zinc-600 text-sm max-w-md mt-4 md:mt-0">
+          AI code without rigorous evals is dangerous guesswork. Warp factories test every suggestion against sandboxed continuous verification.
+        </p>
+</div>
+<!-- 3 Metrics Benchmark Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-white border border-[#E5E5E5] p-6 rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-zinc-500 uppercase font-semibold">METRIC_01 // REAL REPO BENCH</span>
+<span class="w-2.5 h-2.5 border border-[#2818F4] rounded-full"></span>
+</div>
+<h3 class="text-lg font-bold text-[#141414] mb-3">Evals on your own work</h3>
+<p class="text-xs text-zinc-600 mb-6">Autonomous verification against your existing test runners, type systems, and custom linters.</p>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-5xl font-bold font-mono tracking-tight text-[#141414]">96%</span>
+<span class="font-mono text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">+14% VS SWE-BENCH</span>
+</div>
+<!-- Breakdown list -->
+<div class="space-y-2 border-t border-zinc-100 pt-4 font-mono text-xs text-zinc-600">
+<div class="flex justify-between">
+<span>Lint &amp; Format:</span>
+<span class="font-bold text-zinc-800">100%</span>
+</div>
+<div class="flex justify-between">
+<span>Typecheck:</span>
+<span class="font-bold text-zinc-800">98.4%</span>
+</div>
+<div class="flex justify-between">
+<span>Unit &amp; Integration:</span>
+<span class="font-bold text-zinc-800">95.2%</span>
+</div>
+<div class="flex justify-between">
+<span>Regression Suite:</span>
+<span class="font-bold text-zinc-800">89.1%</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-zinc-100 text-[10px] font-mono text-zinc-400">
+            VERIFIED BY CI PARALLEL RUNNERS
+          </div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white border border-[#E5E5E5] p-6 rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-zinc-500 uppercase font-semibold">METRIC_02 // COMPUTE EFFICIENCY</span>
+<span class="w-2.5 h-2.5 border border-[#FFE500] rounded-full"></span>
+</div>
+<h3 class="text-lg font-bold text-[#141414] mb-3">Benchmarks</h3>
+<p class="text-xs text-zinc-600 mb-6">Deterministic caching and prompt tree minimization decrease latency and cloud cost.</p>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-5xl font-bold font-mono tracking-tight text-[#141414]">1.00x</span>
+<span class="font-mono text-xs font-semibold text-[#141414] bg-[#FFE500]/60 px-2 py-0.5 rounded border border-[#FFE500]">BEST IN CLASS</span>
+</div>
+<!-- Breakdown list -->
+<div class="space-y-2 border-t border-zinc-100 pt-4 font-mono text-xs text-zinc-600">
+<div class="flex justify-between">
+<span>Token Consumption:</span>
+<span class="font-bold text-emerald-600">-54% reduction</span>
+</div>
+<div class="flex justify-between">
+<span>Wall Clock Execution:</span>
+<span class="font-bold text-zinc-800">0.2x median</span>
+</div>
+<div class="flex justify-between">
+<span>Compute Sandbox Overhead:</span>
+<span class="font-bold text-zinc-800">42ms init</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-zinc-100 text-[10px] font-mono text-zinc-400">
+            COMPARED ACROSS 1,000 RUNS
+          </div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white border border-[#E5E5E5] p-6 rounded shadow-sm relative flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-zinc-500 uppercase font-semibold">METRIC_03 // HEALING LOOPS</span>
+<span class="w-2.5 h-2.5 border border-purple-500 rounded-full"></span>
+</div>
+<h3 class="text-lg font-bold text-[#141414] mb-3">Self-improvement</h3>
+<p class="text-xs text-zinc-600 mb-6">When a test fails, the orchestrator feeds the compiler error back into the agent harness.</p>
+<div class="flex items-baseline gap-2 mb-6">
+<span class="text-5xl font-bold font-mono tracking-tight text-[#2818F4]">+3.7x</span>
+<span class="font-mono text-xs font-semibold text-blue-800 bg-blue-100 px-2 py-0.5 rounded border border-blue-200">PASS RATE ACCELERATION</span>
+</div>
+<!-- Breakdown list -->
+<div class="space-y-2 border-t border-zinc-100 pt-4 font-mono text-xs text-zinc-600">
+<div class="flex justify-between">
+<span>First-try Success:</span>
+<span class="font-bold text-zinc-800">71%</span>
+</div>
+<div class="flex justify-between">
+<span>Post Auto-Fix Success:</span>
+<span class="font-bold text-emerald-600">98.2%</span>
+</div>
+<div class="flex justify-between">
+<span>Human Intervention Needed:</span>
+<span class="font-bold text-zinc-800">&lt; 1.8%</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-zinc-100 text-[10px] font-mono text-zinc-400">
+            TELEMETRY LOGS OVER 20M WINDOW
+          </div>
+</div>
+</div>
+</section>
+<!-- END: EvalsMetricsSection -->
+<!-- BEGIN: CaseStudyBanner -->
+<section class="bg-[#2818F4] text-white py-16 px-6">
+<div class="max-w-[1280px] mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
+<div class="max-w-3xl">
+<span class="font-mono text-xs tracking-wider uppercase opacity-80 block mb-3 font-semibold">
+            CASE STUDY // ENTERPRISE HORIZONTAL SCALING
+          </span>
+<h2 class="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+            “Cutting our cost per PR from $80 to $30”
+          </h2>
+<blockquote class="text-base md:text-lg leading-relaxed opacity-90 mb-4 font-normal">
+            "Before Warp Factories, every security patch and dependency upgrade consumed 3 to 4 senior engineer hours. Now, Warp provisions isolated microVM sandboxes, spins up Claude agents with our private repos, runs full evals, and opens perfectly verified PRs. We reduced engineering review backlog by 62% in the first quarter alone."
+          </blockquote>
+<p class="font-mono text-xs tracking-wide opacity-80">
+            VP of Platform Engineering — <span class="text-yellow-300">Fortune 100 Fintech Partner</span>
+</p>
+</div>
+<div class="shrink-0">
+<a class="bg-[#FFE500] hover:bg-yellow-300 text-black font-mono text-xs font-bold px-6 py-4 border border-black shadow-[4px_4px_0px_0px_#000000] transition-all flex items-center gap-2" href="#">
+            Read the benchmark report →
+          </a>
+</div>
+</div>
+</section>
+<!-- END: CaseStudyBanner -->
+<!-- BEGIN: SecurityEnterpriseSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_04 // SECURITY &amp; GOVERNANCE
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-3">
+          Warp is enterprise ready
+        </h2>
+<p class="text-zinc-600 text-sm">
+          Designed from bare metal for zero data leakage, audit log fidelity, and total VPC isolation.
+        </p>
+<!-- Compliance Badges -->
+<div class="flex flex-wrap items-center justify-center gap-2.5 mt-6 font-mono text-[11px]">
+<span class="border border-zinc-300 bg-white px-3 py-1 text-zinc-700 shadow-sm flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-zinc-800" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" fill-rule="evenodd"></path></svg>
+            SOC 2 Type II
+          </span>
+<span class="border border-zinc-300 bg-white px-3 py-1 text-zinc-700 shadow-sm flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-zinc-800" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+            ISO 27001
+          </span>
+<span class="border border-zinc-300 bg-white px-3 py-1 text-zinc-700 shadow-sm flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-zinc-800" fill="currentColor" viewbox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path clip-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm9.707 5.707a1 1 0 00-1.414-1.414L9 12.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path></svg>
+            HIPAA Compliant
+          </span>
+<span class="border border-zinc-300 bg-white px-3 py-1 text-zinc-700 shadow-sm flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 text-zinc-800" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" fill-rule="evenodd"></path></svg>
+            Zero-Retention LLM Gateway
+          </span>
+</div>
+</div>
+<!-- 2 Enterprise Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="bg-white border border-[#E5E5E5] p-8 rounded shadow-sm relative">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-xl text-[#141414]">Rectangle Health</h3>
+<span class="font-mono text-[10px] bg-blue-50 text-blue-700 border border-blue-200 px-2 py-0.5 font-semibold">HEALTHCARE COMPLIANCE</span>
+</div>
+<p class="text-sm text-zinc-600 leading-relaxed mb-6">
+            "In healthcare software, you cannot permit unvetted autonomous agents touching patient schema repositories. Warp's sandboxed Firecracker runtime with air-gapped secrets gives us the confidence to automate 80% of our API maintenance without HIPAA exposure."
+          </p>
+<div class="pt-4 border-t border-zinc-100 flex items-center justify-between font-mono text-xs text-zinc-500">
+<span>Lead DevOps Architect</span>
+<span class="text-zinc-800 font-semibold">HIPAA Air-Gapped Runner</span>
+</div>
+</div>
+<div class="bg-white border border-[#E5E5E5] p-8 rounded shadow-sm relative">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-bold text-xl text-[#141414]">Docker</h3>
+<span class="font-mono text-[10px] bg-yellow-50 text-yellow-800 border border-yellow-300 px-2 py-0.5 font-semibold">CONTAINER INFRA</span>
+</div>
+<p class="text-sm text-zinc-600 leading-relaxed mb-6">
+            "Warp Factories seamlessly hook into our containerized builder pipelines. We run hundreds of daily autonomous agent runs that triage flaky integration tests in isolated container sandboxes. It has completely transformed our developer cycle times."
+          </p>
+<div class="pt-4 border-t border-zinc-100 flex items-center justify-between font-mono text-xs text-zinc-500">
+<span>Head of Developer Experience</span>
+<span class="text-zinc-800 font-semibold">Native OCI Container Runtime</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SecurityEnterpriseSection -->
+<!-- BEGIN: ModularArchitectureSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]" id="modular">
+<div class="max-w-3xl mb-12">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_05 // MODULAR ARCHITECTURE
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-3">
+          Open at every layer
+        </h2>
+<p class="text-zinc-600 text-sm">
+          No vendor lock-in. Warp decouples your models, agent harnesses, compute fabrics, and enterprise data backends.
+        </p>
+</div>
+<!-- 4 Stack Tiers -->
+<div class="space-y-4">
+<!-- Tier 1 -->
+<div class="bg-white border border-[#E5E5E5] p-5 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-4">
+<span class="font-mono text-xs font-bold bg-zinc-100 text-zinc-700 px-2.5 py-1 rounded border border-zinc-200">01</span>
+<div>
+<h3 class="font-bold text-sm text-[#141414]">Any agent</h3>
+<p class="text-xs text-zinc-500">Run Claude Code, SWE-agent, bespoke LangGraph state machines, or custom-company harnesses.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 font-mono text-[11px]">
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">Claude Code</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">SWE-agent</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">LangGraph</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">Custom Python/Node</span>
+</div>
+</div>
+<!-- Tier 2 -->
+<div class="bg-white border border-[#E5E5E5] p-5 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-4">
+<span class="font-mono text-xs font-bold bg-zinc-100 text-zinc-700 px-2.5 py-1 rounded border border-zinc-200">02</span>
+<div>
+<h3 class="font-bold text-sm text-[#141414]">Any model</h3>
+<p class="text-xs text-zinc-500">Route requests dynamically to Anthropic, OpenAI, DeepSeek, Google, or local open weights.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 font-mono text-[11px]">
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">Claude 3.7 Sonnet</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">GPT-4.5</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">DeepSeek R1</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">vLLM Self-Hosted</span>
+</div>
+</div>
+<!-- Tier 3 -->
+<div class="bg-white border border-[#E5E5E5] p-5 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-4">
+<span class="font-mono text-xs font-bold bg-zinc-100 text-zinc-700 px-2.5 py-1 rounded border border-zinc-200">03</span>
+<div>
+<h3 class="font-bold text-sm text-[#141414]">Any compute</h3>
+<p class="text-xs text-zinc-500">Execute factories on Warp Cloud, AWS ECS/EKS, GCP Cloud Run, bare metal, or on-prem VPC runners.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 font-mono text-[11px]">
+<span class="bg-blue-50 text-[#2818F4] border border-blue-200 px-2 py-1 font-semibold">Warp Managed Cloud</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">AWS VPC Firecracker</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">GCP Bare Metal</span>
+</div>
+</div>
+<!-- Tier 4 -->
+<div class="bg-white border border-[#E5E5E5] p-5 rounded flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-start md:items-center gap-4">
+<span class="font-mono text-xs font-bold bg-zinc-100 text-zinc-700 px-2.5 py-1 rounded border border-zinc-200">04</span>
+<div>
+<h3 class="font-bold text-sm text-[#141414]">Any data</h3>
+<p class="text-xs text-zinc-500">Stream context bidirectionally between git, issue trackers, production logs, and internal wikis.</p>
+</div>
+</div>
+<div class="flex flex-wrap gap-2 font-mono text-[11px]">
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">GitHub / GitLab</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">Linear / Jira</span>
+<span class="bg-zinc-50 border border-zinc-200 px-2 py-1 text-zinc-700">Notion / Confluence</span>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ModularArchitectureSection -->
+<!-- BEGIN: GovernanceTelemetrySection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]">
+<div class="max-w-3xl mb-12">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_06 // GOVERNANCE &amp; TELEMETRY
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-3">
+          Control your coding agent chaos
+        </h2>
+<p class="text-zinc-600 text-sm">
+          Developers running arbitrary LLM scripts locally creates compliance nightmares. Centralize telemetry, rate limiting, token spend limits, and security guardrails.
+        </p>
+</div>
+<!-- Telemetry Dashboard Mockup -->
+<div class="bg-[#141414] rounded-lg border border-[#27272A] p-6 text-white font-mono shadow-xl">
+<!-- Live Stat Cards -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+<div class="bg-zinc-900 border border-zinc-800 p-4 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">ACTIVE FACTORY RUNNERS</span>
+<div class="text-2xl font-bold text-white flex items-center gap-2">
+              42 <span class="text-xs text-emerald-400 font-normal">● Online</span>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-4 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">MONTHLY SPEND QUOTA</span>
+<div class="text-2xl font-bold text-white">
+              $124.50 <span class="text-xs text-zinc-500 font-normal">/ $500</span>
+</div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-4 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">PR APPROVAL RATE</span>
+<div class="text-2xl font-bold text-[#FFE500]">
+              ENFORCED
+            </div>
+</div>
+<div class="bg-zinc-900 border border-zinc-800 p-4 rounded">
+<span class="text-[10px] text-zinc-500 block mb-1">AIR-GAP AUDIT LOGS</span>
+<div class="text-2xl font-bold text-emerald-400">
+              100% CLEAN
+            </div>
+</div>
+</div>
+<!-- Session Table Mockup -->
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="border-b border-zinc-800 text-[10px] text-zinc-500">
+<th class="pb-3 font-medium">SESSION ID</th>
+<th class="pb-3 font-medium">AGENT &amp; REPO</th>
+<th class="pb-3 font-medium">TRIGGER</th>
+<th class="pb-3 font-medium">TOKEN SPEND</th>
+<th class="pb-3 font-medium">EVAL STATUS</th>
+<th class="pb-3 font-medium text-right">ACTION</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-zinc-900 text-zinc-300">
+<tr>
+<td class="py-3 text-blue-400">sess_9a8d12</td>
+<td class="py-3">Claude 3.7 • <span class="text-zinc-500">auth-service</span></td>
+<td class="py-3 text-zinc-400">Linear T-1948 (BugFix)</td>
+<td class="py-3 font-mono">$1.42</td>
+<td class="py-3"><span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[10px] rounded">ALL PASS</span></td>
+<td class="py-3 text-right"><a class="text-zinc-400 hover:text-white underline text-[11px]" href="#">Inspect Trace →</a></td>
+</tr>
+<tr>
+<td class="py-3 text-blue-400">sess_4b230f</td>
+<td class="py-3">SWE-Agent • <span class="text-zinc-500">web-app</span></td>
+<td class="py-3 text-zinc-400">GitHub PR #892 (Refactor)</td>
+<td class="py-3 font-mono">$3.18</td>
+<td class="py-3"><span class="bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 text-[10px] rounded">ALL PASS</span></td>
+<td class="py-3 text-right"><a class="text-zinc-400 hover:text-white underline text-[11px]" href="#">Inspect Trace →</a></td>
+</tr>
+<tr>
+<td class="py-3 text-blue-400">sess_11c8e4</td>
+<td class="py-3">GPT-4.5 • <span class="text-zinc-500">billing-engine</span></td>
+<td class="py-3 text-zinc-400">Cron / Nightly Dep Audit</td>
+<td class="py-3 font-mono">$0.85</td>
+<td class="py-3"><span class="bg-amber-950/80 text-yellow-400 border border-yellow-500/30 px-2 py-0.5 text-[10px] rounded">HEALING (ITER 1)</span></td>
+<td class="py-3 text-right"><a class="text-zinc-400 hover:text-white underline text-[11px]" href="#">Inspect Trace →</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- END: GovernanceTelemetrySection -->
+<!-- BEGIN: EcosystemProductsSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]">
+<div class="max-w-3xl mb-12">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_07 // ECOSYSTEM PRODUCTS
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-3">
+          Use Warp everywhere
+        </h2>
+<p class="text-zinc-600 text-sm">
+          From high-velocity terminal work on macOS/Linux to massive autonomous cloud software factories.
+        </p>
+</div>
+<!-- 3 Products Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Warp Factories -->
+<div class="border-2 border-[#2818F4] bg-white p-7 rounded shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-blue-100 text-[#2818F4] flex items-center justify-center rounded font-mono font-bold mb-5">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="font-mono text-[10px] text-[#2818F4] font-bold block mb-1 uppercase tracking-wider">CLOUD AUTONOMOUS CLUSTERS</span>
+<h3 class="text-xl font-bold text-[#141414] mb-3">Warp Factories</h3>
+<p class="text-xs text-zinc-600 leading-relaxed mb-6">
+              The next-generation CI/CD platform built specifically for autonomous agents, automated PR reviews, and self-healing test suites.
+            </p>
+</div>
+<a class="font-mono text-xs font-bold text-[#2818F4] hover:underline flex items-center gap-1.5" href="#">
+            Deploy on cloud →
+          </a>
+</div>
+<!-- Warp Terminal -->
+<div class="border border-[#E5E5E5] bg-white p-7 rounded shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-yellow-100 text-yellow-800 flex items-center justify-center rounded font-mono font-bold mb-5">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="font-mono text-[10px] text-zinc-500 font-bold block mb-1 uppercase tracking-wider">MACOS &amp; LINUX CLIENT</span>
+<h3 class="text-xl font-bold text-[#141414] mb-3">Warp Terminal</h3>
+<p class="text-xs text-zinc-600 leading-relaxed mb-6">
+              The intelligent modern terminal loved by 800,000+ developers, with AI command lookup, block-level UX, and team workflows.
+            </p>
+</div>
+<a class="font-mono text-xs font-bold text-[#141414] hover:underline flex items-center gap-1.5" href="#">
+            Download Terminal ↓
+          </a>
+</div>
+<!-- Agent CLI -->
+<div class="border border-[#E5E5E5] bg-white p-7 rounded shadow-sm flex flex-col justify-between">
+<div>
+<div class="w-10 h-10 bg-zinc-100 text-zinc-800 flex items-center justify-center rounded font-mono font-bold mb-5">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="font-mono text-[10px] text-zinc-500 font-bold block mb-1 uppercase tracking-wider">HEADLESS CLI HARNESS</span>
+<h3 class="text-xl font-bold text-[#141414] mb-3">Agent CLI</h3>
+<p class="text-xs text-zinc-600 leading-relaxed mb-6">
+              Script and orchestrate autonomous engineering runs straight from your personal shell scripts or pre-commit hooks.
+            </p>
+</div>
+<a class="font-mono text-xs font-bold text-[#141414] hover:underline flex items-center gap-1.5" href="#">
+            Explore CLI Spec →
+          </a>
+</div>
+</div>
+</section>
+<!-- END: EcosystemProductsSection -->
+<!-- BEGIN: FAQSection -->
+<section class="max-w-[1280px] mx-auto px-6 py-20 border-b border-[#E5E5E5]" id="faq">
+<div class="max-w-3xl mb-12">
+<span class="font-mono text-[11px] font-semibold tracking-wider text-[#2818F4] block mb-2">
+          SEC_08 // COMMON INQUIRIES
+        </span>
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight text-[#141414] mb-3">
+          Technical FAQ
+        </h2>
+<p class="text-zinc-600 text-sm">
+          Everything you need to know about specs, security models, and migration paths.
+        </p>
+</div>
+<!-- FAQ Accordion List -->
+<div class="divide-y divide-[#E5E5E5] border-y border-[#E5E5E5] text-sm">
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>1. What exactly is a cloud software factory?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            A software factory is an automated, continuous compute loop where software development lifecycle tasks (such as bug fixing, migrations, lint remediations, and code reviews) are orchestrated by AI agents inside hardened sandboxes with full deterministic evals and test runners.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>2. How does Warp differ from traditional CI/CD like GitHub Actions?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            CI/CD executes static procedural tasks (build, test, deploy). Warp Factories execute dynamic cognitive loops with agent harnesses: reading code, identifying root causes, applying AST refactorings, re-testing, and opening verified pull requests when tests succeed.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>3. Can we bring our own fine-tuned models or self-hosted LLMs?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            Yes. Warp's model router supports Anthropic, OpenAI, DeepSeek, Google, or any OpenAI-compatible API endpoint including self-hosted vLLM or Ollama clusters.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>4. How does Warp ensure sandboxed security and credential safety?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            Every factory invocation runs in an isolated ephemeral Firecracker microVM with sub-second spinup. Secrets are injected at runtime through air-gapped memory, and egress internet access can be completely restricted via strict network policies.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>5. What is the $10,000 early access compute credit program?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            Teams accepted into the Private Cohort receive $10,000 in Warp Cloud compute credits to run autonomous migration factories and evaluate SWE benchmark runs against their internal repositories.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>6. Does Warp replace human software engineers?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            No. It automates repetitive, tedious engineering tasks—upgrades, minor bug triage, linter regressions, and initial test scaffold writing—freeing engineers to focus on architectural decisions and feature delivery.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>7. How do factory evals prevent hallucinations and code regressions?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            An agent cannot merge or propose code without passing the exact test suite, typechecker, and linter specified in your factory.yaml specification. If a regression occurs, the failure trace is automatically fed back to self-heal the diff.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>8. Can factories trigger from webhooks, Jira tickets, or Slack alerts?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            Yes. Warp provides webhooks and pre-built integrations with GitHub Actions, Linear, Jira, Sentry, and PagerDuty to launch factories on alerts or bug assignments.
+          </div>
+</details>
+<details class="group py-4.5">
+<summary class="flex justify-between items-center font-semibold text-[#141414] cursor-pointer list-none select-none py-1">
+<span>9. What are the system requirements for self-hosted runners?</span>
+<span class="text-zinc-400 group-open:rotate-180 transition-transform font-mono text-xs">▼</span>
+</summary>
+<div class="text-xs text-zinc-600 pt-3 leading-relaxed max-w-4xl">
+            Self-hosted runners require an x86_64 or ARM64 Linux host with KVM enabled for Firecracker microVM support, Docker or Podman for OCI containers, and minimum 4 vCPU / 16GB RAM.
+          </div>
+</details>
+</div>
+</section>
+<!-- END: FAQSection -->
+<!-- BEGIN: PreFooterCTABanner -->
+<section class="max-w-[1280px] mx-auto px-6 py-20">
+<div class="bg-[#141414] text-white p-10 md:p-14 rounded-lg border border-[#27272A] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl">
+<h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-3">
+            Build your cloud factory with Warp.
+          </h2>
+<p class="text-zinc-400 text-sm leading-relaxed">
+            Deploy your first autonomous agent pipeline in less than 5 minutes. Includes access to Warp Cloud runner compute credits.
+          </p>
+</div>
+<div class="w-full md:w-auto">
+<form class="flex flex-col sm:flex-row gap-2.5">
+<input class="bg-zinc-900 border border-zinc-700 text-white placeholder-zinc-500 font-mono text-xs px-4 py-3 rounded-none focus:outline-none focus:border-[#2818F4] w-full sm:w-72" placeholder="work_email@company.com" type="email"/>
+<button class="bg-[#FFE500] hover:bg-yellow-300 text-black font-mono text-xs font-bold px-5 py-3 whitespace-nowrap shadow-[3px_3px_0px_0px_#2818F4] transition-all" type="button">
+              JOIN EARLY ACCESS COHORT
+            </button>
+</form>
+</div>
+</div>
+</section>
+<!-- END: PreFooterCTABanner -->
+</main>
+<!-- BEGIN: MainFooter -->
+<footer class="border-t border-[#E5E5E5] bg-white font-mono text-xs text-zinc-600 py-16">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-10 pb-14 border-b border-zinc-200">
+<!-- Footer Col 1: Brand Info -->
+<div class="md:col-span-5 space-y-4">
+<div class="flex items-center space-x-2">
+<img alt="Warp Logo" class="w-6 h-6 rounded" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32' fill='none'%3E%3Crect width='32' height='32' rx='4' fill='%23141414'/%3E%3Cpath d='M7 9h4.2l3.4 10.2L17.8 9H22l-5.6 14h-3.6L7 9z' fill='%23FFFFFF'/%3E%3Crect x='23' y='19' width='3' height='4' fill='%232818F4'/%3E%3C/svg%3E"/>
+<span class="font-bold text-sm tracking-wider text-black">WARP</span>
+</div>
+<p class="text-zinc-500 text-xs leading-relaxed max-w-sm font-sans">
+            Open infrastructure for cloud software factories. Autonomous agent runners, deterministic sandboxes, and verification loops.
+          </p>
+<div class="inline-flex items-center gap-2 text-[10px] text-emerald-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            SYSTEMS OPERATIONAL // KERNEL V4.2.5
+          </div>
+</div>
+<!-- Footer Col 2: Products -->
+<div class="md:col-span-2 space-y-2.5">
+<h4 class="font-bold text-black uppercase text-[11px] mb-3">Products</h4>
+<p><a class="hover:text-black transition-colors" href="#">Warp Factories</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Warp Terminal</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Agent CLI</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Warp Drive</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Changelog</a></p>
+</div>
+<!-- Footer Col 3: Specifications -->
+<div class="md:col-span-2 space-y-2.5">
+<h4 class="font-bold text-black uppercase text-[11px] mb-3">Specification SEC_01</h4>
+<p><a class="hover:text-black transition-colors" href="#">Kernel Runtime</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Agent CLI</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Data Ingestion</a></p>
+<p><a class="hover:text-black transition-colors" href="#">SWE-Bench Harness</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Documentation</a></p>
+</div>
+<!-- Footer Col 4: Trust & Security -->
+<div class="md:col-span-3 space-y-2.5">
+<h4 class="font-bold text-black uppercase text-[11px] mb-3">SOC2 &amp; ISO AUDIT</h4>
+<p><a class="hover:text-black transition-colors" href="#">Security Whitepaper</a></p>
+<p><a class="hover:text-black transition-colors" href="#">System Telemetry</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Privacy &amp; Terms</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Responsible AI Policy</a></p>
+<p><a class="hover:text-black transition-colors" href="#">Contact Security</a></p>
+</div>
+</div>
+<!-- Bottom Footnote -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-zinc-400 gap-4">
+<div>
+          © 2025 WARP COMPUTING, INC. // OPEN INFRASTRUCTURE FOR CLOUD SOFTWARE FACTORIES. ALL SPECIFICATIONS COMPLIANT.
+        </div>
+<div class="flex space-x-6 text-zinc-600">
+<a class="hover:text-black transition-colors" href="#">GitHub</a>
+<a class="hover:text-black transition-colors" href="#">Discord</a>
+<a class="hover:text-black transition-colors" href="#">Twitter / X</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- END: MainFooter -->
+</body></html>
