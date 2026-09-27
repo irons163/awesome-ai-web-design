@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Raycast — Your shortcut to everything</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#303032",
+            "background": "#131315",
+            "on-tertiary-fixed": "#00201e",
+            "on-surface": "#e5e1e4",
+            "on-secondary-fixed": "#410006",
+            "on-primary": "#68000e",
+            "secondary-fixed-dim": "#ffb3af",
+            "outline-variant": "#5b403e",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#ffb3af",
+            "on-secondary-fixed-variant": "#832427",
+            "surface-container": "#201f21",
+            "on-error-container": "#ffdad6",
+            "on-secondary-container": "#ff9995",
+            "surface-container-low": "#1b1b1d",
+            "on-primary-container": "#5c000b",
+            "surface-container-high": "#2a2a2c",
+            "secondary-fixed": "#ffdad8",
+            "surface-bright": "#39393b",
+            "on-tertiary": "#003734",
+            "surface-tint": "#ffb3af",
+            "error": "#ffb4ab",
+            "surface-container-lowest": "#0e0e10",
+            "surface": "#131315",
+            "surface-dim": "#131315",
+            "on-background": "#e5e1e4",
+            "tertiary": "#6cd8cf",
+            "error-container": "#93000a",
+            "surface-variant": "#353437",
+            "on-tertiary-container": "#00302d",
+            "tertiary-fixed-dim": "#6cd8cf",
+            "on-primary-fixed": "#410006",
+            "inverse-surface": "#e5e1e4",
+            "inverse-primary": "#bc1027",
+            "tertiary-fixed": "#89f4ec",
+            "on-tertiary-fixed-variant": "#00504c",
+            "on-secondary": "#640c13",
+            "tertiary-container": "#29a199",
+            "primary": "#ffb3af",
+            "on-surface-variant": "#e4bdbb",
+            "secondary-container": "#832427",
+            "surface-container-highest": "#353437",
+            "primary-fixed": "#ffdad8",
+            "outline": "#ab8886",
+            "primary-container": "#ff5357",
+            "secondary": "#ffb3af",
+            "on-primary-fixed-variant": "#930019"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-primary-container selection:text-white min-h-screen relative overflow-x-hidden">
+<!-- TOP NAVIGATION CAPSULE -->
+<header class="fixed top-4 left-1/2 -translate-x-1/2 z-50 rounded-full border border-outline-variant/30 bg-surface-container-low/80 backdrop-blur-md shadow-2xl flex items-center justify-between px-4 py-2 w-full max-w-5xl mx-auto transition-all duration-150">
+<a class="font-headline font-bold text-base tracking-tight text-on-surface flex items-center gap-2 group" href="#">
+<span class="w-6 h-6 rounded-lg bg-primary-container flex items-center justify-center text-white shadow-md shadow-primary-container/30 group-hover:scale-105 transition-transform">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16">
+<path d="M4 14.5L14.5 4H20v5.5L9.5 20H4v-5.5z"></path>
+<path d="M9.5 4L4 9.5V4h5.5z" opacity="0.6"></path>
+<path d="M20 14.5L14.5 20H20v-5.5z" opacity="0.6"></path>
+</svg>
+</span>
+<span>Raycast</span>
+</a>
+<!-- Center Navigation Links -->
+<nav class="hidden md:flex items-center gap-6 font-headline text-sm font-medium tracking-tight">
+<a class="text-on-surface font-semibold hover:text-primary-fixed transition-colors duration-150" href="#">Store</a>
+<a class="text-on-surface-variant font-normal hover:text-primary-fixed transition-colors duration-150" href="#">Pro</a>
+<a class="text-on-surface-variant font-normal hover:text-primary-fixed transition-colors duration-150" href="#">AI</a>
+<a class="text-on-surface-variant font-normal hover:text-primary-fixed transition-colors duration-150" href="#">Teams</a>
+<a class="text-on-surface-variant font-normal hover:text-primary-fixed transition-colors duration-150" href="#">Enterprise</a>
+<a class="text-on-surface-variant font-normal hover:text-primary-fixed transition-colors duration-150" href="#">Pricing</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<a class="text-xs md:text-sm text-on-surface hover:text-primary-fixed font-medium px-3 py-1.5 transition-colors" href="#">Log in</a>
+<a class="inline-flex items-center gap-2 bg-on-surface text-surface-container-lowest hover:bg-white text-xs md:text-sm font-semibold px-4 py-2 rounded-full transition-all duration-150 active:scale-95 shadow-sm" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download</span>
+</a>
+</div>
+</header>
+<!-- MAIN CONTAINER -->
+<main class="pt-24 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto space-y-28 md:space-y-36">
+<!-- HERO SECTION -->
+<section class="relative w-full rounded-[32px] border border-outline-variant/30 bg-surface-container-lowest overflow-hidden h-[720px] flex items-center justify-center shadow-2xl">
+<!-- 3JS Red Atmospheric Dynamic Streaks -->
+<!-- STITCH_THREEJS_START:ANIMATION_2 class="absolute inset-0 w-full h-full bg-transparent" -->
+<div class="absolute inset-0 w-full h-full bg-transparent" style="display:block;">
+<script src="https://ajax.googleapis.com/ajax/libs/threejs/r125/three.min.js"></script>
+<div id="threejs-container-ANIMATION_2" style="width:100%;height:100%"></div>
+<script>
+(function() {
+  const container = document.getElementById('threejs-container-ANIMATION_2');
+  const devicePixelRatio = window.devicePixelRatio || 1;
+  const width = container.clientWidth || window.innerWidth;
+const height = container.clientHeight || 720;
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+camera.position.set(0, 0, 10);
+
+const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+renderer.setSize(width, height);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+container.appendChild(renderer.domElement);
+
+// Create dynamic vivid red diagonal ribbons/bands matching Raycast signature hero
+const ribbonGroup = new THREE.Group();
+scene.add(ribbonGroup);
+
+const ribbonCount = 7;
+const ribbons = [];
+
+for (let i = 0; i < ribbonCount; i++) {
+  const curvePoints = [];
+  const length = 18;
+  const segments = 60;
+  const offsetX = (i - ribbonCount / 2) * 1.8;
+  const offsetZ = (i - ribbonCount / 2) * 0.4;
+  
+  for (let j = 0; j <= segments; j++) {
+    const t = j / segments;
+    const x = -8 + t * length + offsetX * 0.5;
+    const y = -6 + t * 12 + Math.sin(t * Math.PI * 1.5 + i) * 1.2;
+    const z = offsetZ + Math.cos(t * Math.PI + i * 0.5) * 1.5;
+    curvePoints.push(new THREE.Vector3(x, y, z));
+  }
+
+  const curve = new THREE.CatmullRomCurve3(curvePoints);
+  const tubeGeo = new THREE.TubeGeometry(curve, 70, 0.28 + (i % 3) * 0.12, 16, false);
+  
+  // Custom glowing red material with gradient vibrancy
+  const mat = new THREE.MeshPhongMaterial({
+    color: i % 2 === 0 ? 0xee3b44 : 0xff2a36,
+    emissive: 0x990012,
+    specular: 0xff6666,
+    shininess: 60,
+    transparent: true,
+    opacity: 0.82 - (i * 0.06),
+    side: THREE.DoubleSide
+  });
+
+  const mesh = new THREE.Mesh(tubeGeo, mat);
+  mesh.rotation.z = -0.15;
+  mesh.rotation.y = 0.25;
+  ribbonGroup.add(mesh);
+  ribbons.push({ mesh, speed: 0.0015 + i * 0.0006, baseRotX: 0, index: i });
+}
+
+// Additional volumetric wide ribbons
+for (let k = 0; k < 3; k++) {
+  const planeGeo = new THREE.PlaneGeometry(16, 2.5, 32, 8);
+  const pos = planeGeo.attributes.position;
+  for (let v = 0; v < pos.count; v++) {
+    const vx = pos.getX(v);
+    pos.setZ(v, Math.sin(vx * 0.4 + k) * 0.8);
+  }
+  planeGeo.computeVertexNormals();
+  const planeMat = new THREE.MeshBasicMaterial({
+    color: 0xEE3B44,
+    transparent: true,
+    opacity: 0.18 + k * 0.08,
+    side: THREE.DoubleSide,
+    blending: THREE.AdditiveBlending
+  });
+  const planeMesh = new THREE.Mesh(planeGeo, planeMat);
+  planeMesh.position.set(-1 + k * 1.2, 0.5 - k * 1.2, -1 - k);
+  planeMesh.rotation.set(-0.3, 0.2, 0.65);
+  scene.add(planeMesh);
+}
+
+// Lighting
+const ambientLight = new THREE.AmbientLight(0x220508, 2.0);
+scene.add(ambientLight);
+
+const pointLight1 = new THREE.PointLight(0xff3b47, 4.5, 30);
+pointLight1.position.set(2, 2, 6);
+scene.add(pointLight1);
+
+const pointLight2 = new THREE.PointLight(0xff6b70, 2.0, 20);
+pointLight2.position.set(-4, -2, 4);
+scene.add(pointLight2);
+
+let mouseX = 0;
+let mouseY = 0;
+window.addEventListener('mousemove', (e) => {
+  mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+  mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+});
+
+function animate() {
+  requestAnimationFrame(animate);
+  const time = performance.now() * 0.001;
+  ribbons.forEach((r) => {
+    r.mesh.rotation.x = Math.sin(time * r.speed * 8 + r.index) * 0.08;
+    r.mesh.rotation.y = 0.25 + Math.cos(time * r.speed * 6 + r.index) * 0.06;
+  });
+  ribbonGroup.rotation.y += (mouseX * 0.15 - ribbonGroup.rotation.y) * 0.04;
+  ribbonGroup.rotation.x += (-mouseY * 0.15 - ribbonGroup.rotation.x) * 0.04;
+  renderer.render(scene, camera);
+}
+animate();
+
+window.addEventListener('resize', () => {
+  const newW = container.clientWidth || window.innerWidth;
+  const newH = container.clientHeight || 720;
+  camera.aspect = newW / newH;
+  camera.updateProjectionMatrix();
+  renderer.setSize(newW, newH);
+});
+
+})();
+</script>
+</div>
+<!-- STITCH_THREEJS_END:ANIMATION_2 -->
+<!-- Subtle top vignette -->
+<div class="absolute inset-0 pointer-events-none bg-gradient-to-t from-surface-container-lowest via-transparent to-surface-container-lowest/70"></div>
+<!-- Hero Centered Text -->
+<div class="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-on-surface tracking-tight leading-[1.1] drop-shadow-lg">
+          Your shortcut to everything.
+        </h1>
+<p class="font-body text-base md:text-lg text-on-surface-variant max-w-lg mt-5 leading-relaxed">
+          A collection of powerful productivity tools all within an extendable launcher. Fast, ergonomic and reliable.
+        </p>
+<!-- CTA Cluster -->
+<div class="mt-8 flex flex-col sm:flex-row items-center gap-4">
+<a class="inline-flex items-center gap-2.5 bg-on-surface text-surface-container-lowest hover:bg-white text-base font-semibold px-6 py-3.5 rounded-full transition-transform active:scale-95 shadow-xl" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download for Mac</span>
+</a>
+<span class="text-xs text-on-surface-variant font-medium px-4 py-2 rounded-full border border-outline-variant/30 bg-surface-container-low/60 backdrop-blur-sm">
+            v1.75 · macOS 12+
+          </span>
+</div>
+</div>
+</section>
+<!-- SECTION: TAKE SHORTCUTS, NOT DETOURS -->
+<section class="space-y-8">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+          Take shortcuts, not detours.
+        </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+          One interface, everything you need.
+        </p>
+</div>
+<!-- Raycast Launcher Mockup with Public Background -->
+<div class="relative w-full rounded-3xl overflow-hidden border border-outline-variant/30 shadow-2xl p-6 sm:p-12 md:p-16 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuALwWRdgxKAF0op4oOFkHByzA-DyWD0mTmT3XS1BXdo0Ds41KQkeybDFr5yzw4b4Dhznc0Qh2f7XDbW0tX7I7FRMfS02x8agBDv6XozRjqxAlEVDFYmGh21HRgB6z8JG6Latl5iN7PkAf1O9dk6naGJ6AAp6QEhHgygUcxY7ZMrR7Ym5BZV7X5AdH23_x_9AsbA8Nnz85TDprQYcEYw2fWuoa7CNTE8BMkcypAcfPIXkfV73HaUHdoR-r90oeVp8iKAPVqWOCR9Mw');">
+<div class="max-w-2xl mx-auto rounded-2xl border border-outline-variant/40 bg-surface-container-lowest/90 backdrop-blur-xl shadow-2xl overflow-hidden">
+<!-- Command Prompt Header -->
+<div class="flex items-center gap-3 px-4 py-3.5 border-b border-outline-variant/20 bg-surface-container/60">
+<span class="w-3.5 h-3.5 rounded-full bg-primary-container inline-block"></span>
+<span class="material-symbols-outlined text-outline text-lg">search</span>
+<input class="bg-transparent border-none text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none w-full text-base font-body tracking-tight cursor-default" placeholder="Search for apps and commands..." readonly="" type="text"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono font-medium bg-surface-container-high text-on-surface-variant border border-outline-variant/30">⌘K</span>
+</div>
+<!-- Command Suggestions List -->
+<div class="p-2 space-y-1 divide-y divide-outline-variant/10 text-sm">
+<!-- Row 1 Active -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-xl bg-surface-container-high/90 text-on-surface font-medium cursor-pointer">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container text-xl">add_task</span>
+<span>Create Issue in Linear</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-on-surface-variant">
+<span class="text-xs">Issue Tracker</span>
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface border border-outline-variant/30 font-mono text-[10px]">↵</kbd>
+</div>
+</div>
+<!-- Row 2 -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">dark_mode</span>
+<span>Toggle Dark Mode</span>
+</div>
+<div class="flex items-center gap-2 text-xs">
+<span>System</span>
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant/20 font-mono text-[10px]">⌘T</kbd>
+</div>
+</div>
+<!-- Row 3 -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-xl">storefront</span>
+<span>Search Raycast Store</span>
+</div>
+<div class="flex items-center gap-2 text-xs">
+<span>Store</span>
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant/20 font-mono text-[10px]">⌘S</kbd>
+</div>
+</div>
+<!-- Row 4 -->
+<div class="flex items-center justify-between px-3 py-2.5 rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/40 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-xl">timer</span>
+<span>Start Timer</span>
+</div>
+<div class="flex items-center gap-2 text-xs">
+<span>Clock</span>
+<kbd class="px-1.5 py-0.5 rounded bg-surface-container text-on-surface-variant border border-outline-variant/20 font-mono text-[10px]">↵</kbd>
+</div>
+</div>
+</div>
+<!-- Command Palette Footer Bar -->
+<div class="px-4 py-2 border-t border-outline-variant/20 bg-surface-container/40 flex items-center justify-between text-xs text-on-surface-variant">
+<span>Raycast Core</span>
+<div class="flex items-center gap-3">
+<span>Actions <kbd class="px-1 py-0.5 rounded bg-surface-container border border-outline-variant/20 text-[10px]">⌘K</kbd></span>
+<span>Open <kbd class="px-1 py-0.5 rounded bg-surface-container border border-outline-variant/20 text-[10px]">↵</kbd></span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: IT'S NOT ABOUT SAVING TIME -->
+<section class="space-y-10">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+          It’s not about saving time.
+        </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+          It’s about feeling like you’re never wasting it.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: Fast -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low/70 flex flex-col justify-between hover:border-outline-variant/40 transition-colors">
+<div>
+<span class="material-symbols-outlined text-primary-container text-3xl">bolt</span>
+<h3 class="font-headline font-semibold text-xl text-on-surface mt-4">Fast</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">
+              Instant keystroke response with zero lag. Written natively in Swift and Rust for peak responsiveness.
+            </p>
+</div>
+<span class="text-xs font-mono text-outline mt-6">0ms latency overhead</span>
+</div>
+<!-- Card 2: Ergonomic -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low/70 flex flex-col justify-between hover:border-outline-variant/40 transition-colors">
+<div>
+<span class="material-symbols-outlined text-primary text-3xl">keyboard</span>
+<h3 class="font-headline font-semibold text-xl text-on-surface mt-4">Ergonomic</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">
+              Engineered exclusively for keyboard-first flow. Never lift your hands from the keys or break momentum.
+            </p>
+</div>
+<span class="text-xs font-mono text-outline mt-6">Muscle-memory native</span>
+</div>
+<!-- Card 3: Personal -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low/70 flex flex-col justify-between hover:border-outline-variant/40 transition-colors">
+<div>
+<span class="material-symbols-outlined text-tertiary text-3xl">tune</span>
+<h3 class="font-headline font-semibold text-xl text-on-surface mt-4">Personal</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">
+              Custom hotkeys, personal aliases, and quick window snapping configurations tailored directly to you.
+            </p>
+</div>
+<span class="text-xs font-mono text-outline mt-6">Fully customizable</span>
+</div>
+<!-- Card 4: Reliable -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low/70 flex flex-col justify-between hover:border-outline-variant/40 transition-colors">
+<div>
+<span class="material-symbols-outlined text-secondary-fixed text-3xl">verified</span>
+<h3 class="font-headline font-semibold text-xl text-on-surface mt-4">Reliable</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">
+              Rock-solid stability designed to run continuously in the background of your operating system.
+            </p>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/30 text-tertiary border border-tertiary/20">
+              99.8% crash-free rate
+            </span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: THERE'S AN EXTENSION FOR THAT -->
+<section class="space-y-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+            There’s an extension for that.
+          </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+            Use your favorite tools without even opening them.
+          </p>
+</div>
+<a class="text-primary hover:text-white font-medium text-sm flex items-center gap-1 group transition-colors" href="#">
+<span>Explore 1,000+ extensions in Store</span>
+<span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Extensions Grid with Real Observed Assets -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Linear -->
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low/60 p-4 overflow-hidden group hover:border-outline-variant/50 transition-all">
+<div class="overflow-hidden rounded-xl">
+<img alt="Linear Extension" class="rounded-xl border border-outline-variant/10 w-full object-cover shadow-lg group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9GpImK23xc3POpY3IP8-g8WxVWa6lFzu9xUCP4ztzjBHUA1MwgvLuBKq1H4N3Q7AoorioRVrOkimLx9etxrlW0wS56UM6iHk3RW4v7hxpXKbyHjy-a5golYowpNmSIt6gdUAoBoD93fLvKx8S7hsoDoOHomm_a_7ScH2X1vX9r0vqSy9IfvNF8PxV0p-gidwD_LtlXvHJvtVlRYC17YTDX1KmVn1kq45JZpv7cK56CA2iVIFeE5NDZYCq0JAj477qfUvUUBFjiQ"/>
+</div>
+<div class="p-3">
+<h4 class="font-headline font-semibold text-base text-on-surface">Linear</h4>
+<p class="text-xs text-on-surface-variant mt-1">Create issues, list cycles, and update statuses instantly.</p>
+</div>
+</div>
+<!-- Spotify -->
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low/60 p-4 overflow-hidden group hover:border-outline-variant/50 transition-all">
+<div class="overflow-hidden rounded-xl">
+<img alt="Spotify Extension" class="rounded-xl border border-outline-variant/10 w-full object-cover shadow-lg group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAewrDjsgWTY2rN6tBdKszXl6gJ5UuprcoAI7ung3psWmKiaLZOz_K13uBaEedqhZXqmUT71Z76iN8Wu3HXZX05URuYoV74ghfuyFUCvAAeVVf6xcqYHBw7A3wnToU1kZExFOvgptsJVP_pdlgJJRzrIYrNly7KELWGfubaGjg2qeKcuHkB2ANX3UCAP-eT-uJ_eixkcHFKKX5Raq96i5ozEFIjADqJMxjvf7Ur4mXYBA2IvLVkmaMyqRo_8nvspQJeEdPL2aAAHA"/>
+</div>
+<div class="p-3">
+<h4 class="font-headline font-semibold text-base text-on-surface">Spotify Player</h4>
+<p class="text-xs text-on-surface-variant mt-1">Control playback, search playlists, and like songs on the fly.</p>
+</div>
+</div>
+<!-- Slack -->
+<div class="rounded-2xl border border-outline-variant/20 bg-surface-container-low/60 p-4 overflow-hidden group hover:border-outline-variant/50 transition-all">
+<div class="overflow-hidden rounded-xl">
+<img alt="Slack Extension" class="rounded-xl border border-outline-variant/10 w-full object-cover shadow-lg group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSaL4QETkYxL6BrZE4D3aVTNKxo34r3-bASxj2T6PFXiI6QLHcatRDSf5DGTjTLOewk8IzUGWT4HU-_UoSMFkrPmLgwn_EkLF4f6dvQEjWIY3Gf8HOUMYymv9TEf5iGI4TWEtr7zbkWAeGruwISiRs6m7e0XIl-TDiusV7oEIPBbxwy2pSv_4DPWiZMoMbDHTjbqHW2GM15MLeyipuqWSkrrWYn3lYf1meuJsQ-kfdt8Sjtf0IH7_vnKri37Lcqb6oQ1hIqa6AKg"/>
+</div>
+<div class="p-3">
+<h4 class="font-headline font-semibold text-base text-on-surface">Slack</h4>
+<p class="text-xs text-on-surface-variant mt-1">Send quick DMs, update your presence, and snooze notifications.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: MEET YOUR NEW VIRTUAL ASSISTANT -->
+<section class="space-y-10">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+          Meet your new virtual assistant
+        </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+          Raycast AI uses the tools you already rely on to get work done.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- AI Chat -->
+<div class="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-on-surface">AI Chat</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Contextual conversational assistance with multi-model support. Switch effortlessly between leading foundation models.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-xs text-outline font-mono">
+<span>Claude 3.5 Sonnet · GPT-4o</span>
+</div>
+</div>
+<!-- Quick AI -->
+<div class="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined">electric_bolt</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-on-surface">Quick AI</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Single keystroke query resolution anywhere in macOS. Translate, fix grammar, or summarize text without context switching.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-xs text-outline font-mono">
+<span>Trigger with Tab in root</span>
+</div>
+</div>
+<!-- AI Extensions -->
+<div class="rounded-2xl border border-outline-variant/30 bg-surface-container-low p-6 flex flex-col justify-between relative overflow-hidden">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-secondary-fixed">
+<span class="material-symbols-outlined">extension</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-on-surface">AI Extensions</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Integrated with your favorite tools and codebase. Let AI perform multi-step actions across GitHub, Notion, and your local files.
+            </p>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/20 flex items-center gap-2 text-xs text-outline font-mono">
+<span>Tool-augmented prompts</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: BUILT FOR PROFESSIONALS LIKE YOU -->
+<section class="space-y-10 py-6">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+          Built for professionals like you.
+        </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+          Used by seriously productive people.
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4 max-w-4xl mx-auto">
+<span class="px-5 py-3 rounded-full border border-outline-variant/20 bg-surface-container text-sm font-medium text-on-surface flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span> Software Engineers
+        </span>
+<span class="px-5 py-3 rounded-full border border-outline-variant/20 bg-surface-container text-sm font-medium text-on-surface flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-tertiary"></span> Founders &amp; Executives
+        </span>
+<span class="px-5 py-3 rounded-full border border-outline-variant/20 bg-surface-container text-sm font-medium text-on-surface flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-secondary-fixed"></span> Product Designers
+        </span>
+<span class="px-5 py-3 rounded-full border border-outline-variant/20 bg-surface-container text-sm font-medium text-on-surface flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-outline"></span> Product Managers
+        </span>
+<span class="px-5 py-3 rounded-full border border-outline-variant/20 bg-surface-container text-sm font-medium text-on-surface flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-primary"></span> Tech Leads
+        </span>
+</div>
+</section>
+<!-- SECTION: DON'T REPEAT YOURSELF -->
+<section class="space-y-10">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-on-surface">
+          Don't repeat yourself.
+        </h2>
+<p class="text-on-surface-variant text-lg mt-3">
+          Automate the things you do all the time.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Snippets -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low hover:border-outline-variant/40 transition-colors">
+<span class="material-symbols-outlined text-primary-container text-2xl">content_paste</span>
+<h3 class="font-headline font-semibold text-lg text-on-surface mt-3">Snippets</h3>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+            Instant dynamic expansions with clipboard triggers, dates, and variable arguments.
+          </p>
+</div>
+<!-- Quicklinks -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low hover:border-outline-variant/40 transition-colors">
+<span class="material-symbols-outlined text-tertiary text-2xl">link</span>
+<h3 class="font-headline font-semibold text-lg text-on-surface mt-3">Quicklinks</h3>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+            One keystroke to navigate any URL, terminal script, or internal deep link in your stack.
+          </p>
+</div>
+<!-- Hotkeys -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low hover:border-outline-variant/40 transition-colors">
+<span class="material-symbols-outlined text-secondary-fixed text-2xl">keyboard_command_key</span>
+<h3 class="font-headline font-semibold text-lg text-on-surface mt-3">Hotkeys</h3>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+            Global shortcuts for daily applications, specific documents, and complex action stacks.
+          </p>
+</div>
+<!-- Aliases -->
+<div class="p-6 rounded-2xl border border-outline-variant/20 bg-surface-container-low hover:border-outline-variant/40 transition-colors">
+<span class="material-symbols-outlined text-outline text-2xl">terminal</span>
+<h3 class="font-headline font-semibold text-lg text-on-surface mt-3">Aliases</h3>
+<p class="text-sm text-on-surface-variant mt-2 leading-relaxed">
+            Short customizable keywords to launch extensions and complex nested workflows directly.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION: WHAT ELSE CAN RAYCAST DO & BUILD TOOLS -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- What Else -->
+<div class="p-8 rounded-3xl border border-outline-variant/30 bg-surface-container-low/80 flex flex-col justify-between">
+<div>
+<h3 class="font-headline font-bold text-2xl text-on-surface">What else can Raycast do?</h3>
+<p class="text-on-surface-variant text-sm mt-2">Packed with built-in macOS utilities out of the box.</p>
+<div class="grid grid-cols-2 gap-3 mt-6 text-sm text-on-surface">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">crop_free</span>
+<span>Window Management</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base">history</span>
+<span>Clipboard History</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">calculate</span>
+<span>Calculator &amp; Currency</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-outline text-base">notes</span>
+<span>Floating Notes</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base">settings_power</span>
+<span>System Commands</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-base">schedule</span>
+<span>Timezone Tracker</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/20">
+<a class="text-xs text-primary font-medium hover:underline inline-flex items-center gap-1" href="#">
+            See all built-in features →
+          </a>
+</div>
+</div>
+<!-- Build the Perfect Tools -->
+<div class="p-8 rounded-3xl border border-outline-variant/30 bg-surface-container-low/80 flex flex-col justify-between">
+<div>
+<span class="px-2.5 py-1 rounded bg-secondary-container/40 text-primary-fixed text-xs font-mono">Developer API</span>
+<h3 class="font-headline font-bold text-2xl text-on-surface mt-4">Build the perfect tools.</h3>
+<p class="text-on-surface-variant text-sm mt-2 leading-relaxed">
+            Create custom extensions for yourself or publish to the Store with TypeScript and React. Native performance with standard web technologies.
+          </p>
+<div class="mt-6 p-4 rounded-xl bg-surface-container-lowest font-mono text-xs text-on-surface-variant border border-outline-variant/20 space-y-1">
+<p class="text-primary-container">npm install -g @raycast/api</p>
+<p class="text-outline">ray develop</p>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-outline-variant/20">
+<a class="text-xs text-primary font-medium hover:underline inline-flex items-center gap-1" href="#">
+            Read API documentation →
+          </a>
+</div>
+</div>
+</section>
+<!-- SECTION: CLOSING CTA -->
+<section class="rounded-3xl border border-outline-variant/30 bg-gradient-to-b from-surface-container-low to-surface-container-lowest p-12 text-center relative overflow-hidden">
+<div class="relative z-10 max-w-xl mx-auto space-y-6">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl tracking-tight text-on-surface">
+          Take the short way.
+        </h2>
+<p class="text-on-surface-variant text-base">
+          Supercharge your productivity today.
+        </p>
+<div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="inline-flex items-center gap-2.5 bg-on-surface text-surface-container-lowest hover:bg-white text-base font-semibold px-8 py-3.5 rounded-full transition-transform active:scale-95 shadow-xl" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download for Mac</span>
+</a>
+</div>
+<div class="flex items-center justify-center gap-4 text-xs text-on-surface-variant pt-2">
+<span>macOS 12+</span>
+<span>•</span>
+<a class="hover:text-on-surface underline" href="#">Windows (Waitlist)</a>
+<span>•</span>
+<a class="hover:text-on-surface underline" href="#">iOS Companion</a>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER -->
+<footer class="w-full border-t border-outline-variant/20 bg-background mt-28">
+<div class="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6 font-body text-xs text-on-surface-variant">
+<!-- Brand & Disclaimer -->
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="font-headline font-bold text-sm text-on-surface">Raycast</span>
+<span>© 2026 Raycast Technologies Inc.</span>
+<span class="text-[10px] text-outline mt-1">Dated reconstruction draft as observed on 2026-09-27. Not an official Raycast page.</span>
+</div>
+<!-- Links Cluster -->
+<div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+<a class="hover:text-on-surface transition-colors" href="#">Store</a>
+<a class="hover:text-on-surface transition-colors" href="#">Pro</a>
+<a class="hover:text-on-surface transition-colors" href="#">AI</a>
+<a class="hover:text-on-surface transition-colors" href="#">iOS</a>
+<a class="hover:text-on-surface transition-colors" href="#">Windows</a>
+<a class="hover:text-on-surface transition-colors" href="#">Teams</a>
+<a class="hover:text-on-surface transition-colors" href="#">Enterprise</a>
+<a class="hover:text-on-surface transition-colors" href="#">Blog</a>
+<a class="hover:text-on-surface transition-colors" href="#">Pricing</a>
+<a class="hover:text-on-surface transition-colors" href="#">Changelog</a>
+<a class="hover:text-on-surface transition-colors" href="#">Privacy</a>
+<a class="hover:text-on-surface transition-colors" href="#">Terms</a>
+</div>
+</div>
+</footer>
+</body></html>
