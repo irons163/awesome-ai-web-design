@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Composio — The Action Layer for AI Agents</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#0e0e0e",
+            "secondary-dim": "#9e8ffd",
+            "tertiary-fixed-dim": "#ea7fc5",
+            "primary-fixed": "#8f97ff",
+            "primary": "#a0a7ff",
+            "on-secondary-fixed": "#331d8b",
+            "on-secondary-fixed-variant": "#503fa8",
+            "on-error-container": "#ffb2b9",
+            "surface-container-low": "#131313",
+            "inverse-on-surface": "#565555",
+            "on-primary": "#0005a4",
+            "secondary-fixed-dim": "#c5bcff",
+            "on-tertiary": "#650950",
+            "secondary-container": "#46349e",
+            "surface-variant": "#262626",
+            "inverse-surface": "#fcf9f8",
+            "on-surface": "#ffffff",
+            "surface-tint": "#a0a7ff",
+            "on-tertiary-fixed": "#350028",
+            "surface-dim": "#0e0e0e",
+            "secondary": "#9e8ffd",
+            "surface-container-highest": "#262626",
+            "on-tertiary-fixed-variant": "#6b1055",
+            "primary-fixed-dim": "#7e88ff",
+            "outline": "#767575",
+            "tertiary": "#ff92d8",
+            "tertiary-fixed": "#f98cd3",
+            "surface-container-lowest": "#000000",
+            "secondary-fixed": "#d4cbff",
+            "surface-container": "#1a1919",
+            "on-surface-variant": "#adaaaa",
+            "outline-variant": "#484847",
+            "on-tertiary-container": "#550042",
+            "on-secondary": "#1e0070",
+            "on-error": "#490013",
+            "on-primary-fixed-variant": "#00049d",
+            "on-background": "#ffffff",
+            "primary-container": "#8f97ff",
+            "surface-bright": "#2c2c2c",
+            "primary-dim": "#5560ff",
+            "surface-container-high": "#201f1f",
+            "error-dim": "#d73357",
+            "on-secondary-container": "#d2caff",
+            "inverse-primary": "#3b46ed",
+            "background": "#0e0e0e",
+            "on-primary-fixed": "#000000",
+            "on-primary-container": "#000381",
+            "error": "#ff6e84",
+            "tertiary-container": "#f084cb",
+            "error-container": "#a70138",
+            "tertiary-dim": "#e47ac0"
+          },
+          borderRadius: {
+            DEFAULT: "0px",
+            sm: "2px",
+            lg: "0px",
+            xl: "0px",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["Geist", "sans-serif"],
+            display: ["Geist", "sans-serif"],
+            body: ["Geist", "sans-serif"],
+            label: ["JetBrains Mono", "monospace"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom scanline and glitch ticks */
+    .glitch-left {
+      background: repeating-linear-gradient(180deg, #0007cd 0px, #0007cd 2px, transparent 2px, transparent 6px);
+    }
+    .glitch-right {
+      background: repeating-linear-gradient(180deg, #38bdf8 0px, #38bdf8 3px, transparent 3px, transparent 8px);
+    }
+    .code-glow {
+      box-shadow: 0 0 35px -5px rgba(0, 7, 205, 0.25);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body selection:bg-[#0007cd] selection:text-white">
+<!-- 1. ANNOUNCEMENT STRIP -->
+<header class="h-9 bg-[#0007cd] text-white flex items-center justify-center font-mono text-xs tracking-wider font-semibold px-4 border-b border-blue-900/40 select-none">
+<a class="flex items-center gap-2 hover:underline" href="#chatgpt-plugins">
+<span>Composio is now live in the ChatGPT Plugins Directory. TRY IT OUT ↗</span>
+</a>
+</header>
+<!-- 2. TOP NAVIGATION (Shared Component & Exact DNA) -->
+<nav class="sticky top-0 z-50 bg-[#0f0f0f] border-b border-[#222222] transition-colors">
+<div class="w-full max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Left: Wordmark & Logo Mark -->
+<a class="flex items-center gap-3 group" href="#">
+<div class="w-7 h-7 bg-white flex items-center justify-center text-black font-bold text-base tracking-tighter">
+<span class="leading-none">C</span>
+</div>
+<span class="font-headline text-lg font-bold tracking-tight text-white group-hover:text-primary transition-colors">Composio</span>
+</a>
+<!-- Center: Navigation Links in Condensed Uppercase Monospaced/Geist -->
+<div class="hidden md:flex items-center space-x-8 font-mono text-xs tracking-wider uppercase text-on-surface-variant">
+<a class="text-white font-semibold hover:text-white transition-colors duration-150" href="#product">Product</a>
+<a class="hover:text-white transition-colors duration-150" href="#integrations">Integrations</a>
+<a class="hover:text-white transition-colors duration-150" href="#use-cases">Use Cases</a>
+<a class="hover:text-white transition-colors duration-150" href="#docs">Docs</a>
+<a class="hover:text-white transition-colors duration-150" href="#pricing">Pricing</a>
+</div>
+<!-- Right: Action Buttons -->
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 text-xs font-mono tracking-wider uppercase text-white border border-[#333333] hover:border-white transition-colors">
+          Log in
+        </button>
+<button class="px-4 py-2 text-xs font-mono font-semibold tracking-wider uppercase bg-white text-black hover:bg-neutral-200 transition-colors shadow-sm">
+          Get Started
+        </button>
+</div>
+</div>
+</nav>
+<!-- 3. BLACK HERO SECTION -->
+<section class="bg-[#0f0f0f] text-white pt-14 pb-20 relative overflow-hidden border-b border-[#222222]">
+<!-- Glitch / luminous accent bands left & right -->
+<div class="absolute left-0 top-1/4 w-1.5 h-64 glitch-left opacity-70 pointer-events-none hidden lg:block"></div>
+<div class="absolute left-6 top-1/3 w-0.5 h-32 bg-[#0007cd] opacity-50 pointer-events-none hidden lg:block"></div>
+<div class="absolute right-0 top-1/3 w-1.5 h-56 glitch-right opacity-60 pointer-events-none hidden lg:block"></div>
+<div class="absolute right-8 top-1/4 w-0.5 h-24 bg-[#38bdf8] opacity-40 pointer-events-none hidden lg:block"></div>
+<div class="w-full max-w-7xl mx-auto px-6 relative z-10 flex flex-col items-center text-center">
+<!-- WORKS WITH Badge -->
+<div class="inline-flex items-center gap-3 px-3 py-1.5 border border-[#27272a] bg-[#141416] mb-8 select-none">
+<span class="font-mono text-[11px] uppercase tracking-widest text-[#adaaaa] font-medium">WORKS WITH</span>
+<div class="h-3 w-[1px] bg-[#333333]"></div>
+<div class="flex items-center gap-3 text-xs text-neutral-300 font-mono">
+<span class="hover:text-white">OpenAI</span>
+<span class="text-neutral-600">•</span>
+<span class="hover:text-white">Anthropic</span>
+<span class="text-neutral-600">•</span>
+<span class="hover:text-white">LangChain</span>
+<span class="text-neutral-600">•</span>
+<span class="hover:text-white">Llama</span>
+<span class="text-neutral-600">•</span>
+<span class="hover:text-white">AutoGen</span>
+<span class="text-neutral-600">•</span>
+<span class="hover:text-white">CrewAI</span>
+</div>
+</div>
+<!-- Hero Headline (60-68px) -->
+<h1 class="text-4xl sm:text-5xl md:text-[66px] font-extrabold tracking-tight leading-[1.08] max-w-4xl mx-auto text-white">
+        Give your AI secure access<br class="hidden sm:inline"/>
+        to 1,500+ apps <span class="inline-block bg-[#0007cd] text-white px-3 py-0.5 mt-1 sm:mt-0 font-bold shadow-[0_0_24px_rgba(0,7,205,0.7)]">in minutes</span>
+</h1>
+<!-- Subtitle -->
+<p class="mt-7 text-base md:text-lg text-[#adaaaa] max-w-2xl font-normal leading-relaxed">
+        Connect Claude, ChatGPT, Hermes, or your own harness to almost any app. Then watch it go from chatting to doing.
+      </p>
+<!-- Dual Squared CTAs -->
+<div class="mt-8 flex flex-col sm:flex-row items-center gap-4">
+<a class="w-full sm:w-auto px-7 py-3.5 bg-white text-black font-mono text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-all text-center" href="#start">
+          Get Started For Free
+        </a>
+<a class="w-full sm:w-auto px-7 py-3.5 bg-transparent text-white border border-[#333333] hover:border-neutral-400 font-mono text-xs font-semibold tracking-widest uppercase transition-all text-center" href="#demo">
+          Get a Demo
+        </a>
+</div>
+<!-- Small subtext -->
+<span class="mt-4 font-mono text-[11px] text-[#767575] tracking-wide">
+        100,000 free actions included every month.
+      </span>
+<!-- Customer Trust Bar -->
+<div class="mt-20 w-full pt-10 border-t border-[#222222]/80">
+<p class="font-mono text-[10px] tracking-widest uppercase text-[#767575] text-center mb-6">
+          TRUSTED BY DEVELOPERS AT FORWARD-THINKING TEAMS
+        </p>
+<div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 opacity-60 grayscale hover:grayscale-0 transition-all">
+<span class="font-bold text-sm tracking-tighter text-white">GLEAN</span>
+<span class="font-bold text-sm tracking-tight text-white">ZOOM</span>
+<span class="font-bold text-sm tracking-tight text-white">AWS</span>
+<span class="font-semibold text-sm tracking-tight text-white">Google</span>
+<span class="font-extrabold text-sm tracking-tight text-white">Wix</span>
+<span class="font-mono text-xs tracking-tighter text-white">BrowserUse</span>
+<span class="font-medium text-xs tracking-widest text-white">EMERGENT</span>
+<span class="font-bold text-xs tracking-wider text-white">ISLAND</span>
+<span class="font-light text-sm tracking-widest text-white">ATHENA</span>
+<span class="font-bold text-xs tracking-normal text-white">Sarvam</span>
+<span class="font-bold text-xs tracking-tight text-white">HOSTINGER</span>
+<span class="font-semibold text-xs text-white">ASU</span>
+<span class="font-mono text-xs text-white">Pelago</span>
+<span class="font-bold text-xs text-white">ClickFunnels</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. PALE GREY "HOW IT WORKS" SECTION -->
+<section class="bg-[#f6f6f6] text-[#0f0f0f] py-24 border-b border-[#e5e7eb]" id="use-cases">
+<div class="w-full max-w-7xl mx-auto px-6">
+<!-- Micro-label & Heading -->
+<div class="text-center max-w-3xl mx-auto mb-16">
+<p class="font-mono uppercase text-xs text-[#0007cd] font-bold tracking-widest mb-3">[ 01 // HOW IT WORKS ]</p>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-black">
+          Composio turns your AI into a doer
+        </h2>
+<p class="mt-4 text-[#565555] text-base md:text-lg">
+          Composio sits between your AI and your apps, turning your requests into actions.
+        </p>
+</div>
+<!-- Centered Interactive Orchestration Diagram -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4 items-center bg-white p-6 sm:p-8 border border-[#e5e7eb] shadow-sm">
+<!-- Left: Prompt & Natural Language Request -->
+<div class="lg:col-span-4 bg-[#fcfcfc] border border-[#e5e7eb] p-5 h-full flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-[#eeeeee] mb-4">
+<span class="font-mono text-[11px] font-bold tracking-wider uppercase text-neutral-500">User Prompt / Agent</span>
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+</div>
+<div class="bg-white p-4 border border-[#e5e7eb] shadow-inner mb-4">
+<p class="font-mono text-xs text-[#0f0f0f] leading-relaxed">
+                "Book a slot with Sarah next Tuesday at 2 PM, send the calendar brief, and ping the marketing channel on Slack."
+              </p>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between text-[11px] font-mono text-neutral-500">
+<span>Model Target</span>
+<span class="text-black font-semibold">Claude 3.5 Sonnet</span>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono text-neutral-500">
+<span>Session State</span>
+<span class="text-emerald-600 font-semibold">Active #ses_9801</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-3 border-t border-[#f0f0f0] flex items-center justify-between font-mono text-[11px] text-neutral-400">
+<span>Input Schema Generated</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</div>
+</div>
+<!-- Center: Composio Orchestration Node -->
+<div class="lg:col-span-4 bg-[#0f0f0f] text-white p-5 border border-[#27272a] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-24 h-24 bg-[#0007cd]/30 blur-2xl pointer-events-none"></div>
+<div class="flex items-center justify-between pb-3 border-b border-[#222222] mb-4">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 bg-[#38bdf8]"></span>
+<span class="font-mono text-[11px] font-bold tracking-wider uppercase text-[#38bdf8]">Composio Action Engine</span>
+</div>
+<span class="font-mono text-[10px] text-neutral-400">v3.4.1</span>
+</div>
+<div class="space-y-3 font-mono text-xs">
+<div class="p-2.5 bg-[#171717] border border-[#2e2e2e]">
+<div class="text-[10px] text-[#38bdf8] uppercase tracking-wider mb-1">01 Tool Filtering</div>
+<div class="text-neutral-300">1,500+ APIs indexed → 2 tools activated</div>
+</div>
+<div class="p-2.5 bg-[#171717] border border-[#2e2e2e]">
+<div class="text-[10px] text-emerald-400 uppercase tracking-wider mb-1">02 Managed Auth &amp; Vault</div>
+<div class="text-neutral-300">Google OAuth (sarah@corp) verified ✓</div>
+</div>
+<div class="p-2.5 bg-[#171717] border border-[#2e2e2e]">
+<div class="text-[10px] text-purple-400 uppercase tracking-wider mb-1">03 Schema Normalization</div>
+<div class="text-neutral-300">Payload translated: RFC3339 timestamp</div>
+</div>
+</div>
+<div class="mt-4 pt-3 border-t border-[#222222] flex items-center justify-between font-mono text-[11px] text-[#adaaaa]">
+<span>Latency: 42ms</span>
+<span class="text-emerald-400 font-semibold">200 OK Execution</span>
+</div>
+</div>
+<!-- Right: Authenticated Tool Execution Output -->
+<div class="lg:col-span-4 bg-[#fcfcfc] border border-[#e5e7eb] p-5 h-full flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 border-b border-[#eeeeee] mb-4">
+<span class="font-mono text-[11px] font-bold tracking-wider uppercase text-neutral-500">Real Execution Output</span>
+<span class="font-mono text-[11px] text-emerald-600 font-bold">3 APIs Dispatched</span>
+</div>
+<div class="space-y-3 font-mono text-xs">
+<div class="flex items-start gap-3 p-2 bg-white border border-[#e5e7eb]">
+<span class="px-1.5 py-0.5 bg-blue-50 text-blue-700 font-bold text-[10px]">GCAL</span>
+<div>
+<p class="font-semibold text-neutral-900">Event Created: Briefing</p>
+<p class="text-[11px] text-neutral-500">Tue, 14:00 - 14:30 PST</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-2 bg-white border border-[#e5e7eb]">
+<span class="px-1.5 py-0.5 bg-emerald-50 text-emerald-700 font-bold text-[10px]">SLACK</span>
+<div>
+<p class="font-semibold text-neutral-900">Message Delivered</p>
+<p class="text-[11px] text-neutral-500">Channel: #marketing-sync</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-2 bg-white border border-[#e5e7eb]">
+<span class="px-1.5 py-0.5 bg-neutral-100 text-neutral-800 font-bold text-[10px]">NOTION</span>
+<div>
+<p class="font-semibold text-neutral-900">Sync Page Attached</p>
+<p class="text-[11px] text-neutral-500">DB: /client-briefs/2026-q3</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-3 border-t border-[#f0f0f0] flex items-center justify-between font-mono text-[11px] text-neutral-500">
+<span>Result Verification</span>
+<span class="text-neutral-900 font-bold">Complete (0 Errors)</span>
+</div>
+</div>
+</div>
+<!-- Frameworks strip -->
+<div class="mt-14 text-center">
+<p class="font-mono text-xs uppercase tracking-wider text-neutral-500 mb-6 font-medium">
+          We work with the AI tools you already use
+        </p>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            LangChain
+          </div>
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            LlamaIndex
+          </div>
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            CrewAI
+          </div>
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            AutoGen
+          </div>
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            OpenAI Assistants
+          </div>
+<div class="p-3 bg-white border border-[#e5e7eb] font-mono text-xs text-neutral-800 font-semibold text-center hover:border-black transition-colors">
+            Claude Tool Use
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. NEAR-BLACK "THE COMPOSIO ADVANTAGE" SECTION -->
+<section class="bg-[#0c0c0d] text-white py-28 border-b border-[#222222]" id="product">
+<div class="w-full max-w-7xl mx-auto px-6">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<p class="font-mono text-[#38bdf8] text-xs uppercase tracking-widest font-semibold mb-3">[ THE COMPOSIO ADVANTAGE ]</p>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+          Everything between the ask and the result, handled
+        </h2>
+<p class="mt-4 text-[#adaaaa] text-base md:text-lg">
+          Find, authenticate, and execute actions across 1,500+ apps without context degradation or schema bloat.
+        </p>
+</div>
+<!-- Tab indicators -->
+<div class="grid grid-cols-2 md:grid-cols-4 border-b border-[#27272a] mb-16 font-mono text-xs uppercase">
+<div class="p-4 border-b-2 border-[#0007cd] text-white bg-[#141416] font-semibold">
+          01 Selection
+        </div>
+<div class="p-4 border-b border-[#27272a] text-[#adaaaa] hover:text-white transition-colors">
+          02 Optimization
+        </div>
+<div class="p-4 border-b border-[#27272a] text-[#adaaaa] hover:text-white transition-colors">
+          03 Auth &amp; Identity
+        </div>
+<div class="p-4 border-b border-[#27272a] text-[#adaaaa] hover:text-white transition-colors">
+          04 Multi-step Execution
+        </div>
+</div>
+<!-- 4 Stacked Detailed Feature Rows -->
+<div class="space-y-12">
+<!-- Row 1: Context Bloat Solution -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#27272a] bg-[#121214] p-6 lg:p-8">
+<div class="lg:col-span-7 bg-[#050505] p-5 border border-[#222222] font-mono text-xs text-neutral-300">
+<div class="flex items-center justify-between text-neutral-500 pb-3 border-b border-[#1f1f1f] mb-3">
+<span>TOOL_INDEX_OPTIMIZER.PY</span>
+<span class="text-emerald-400">CONTEXT SAVINGS: 94.2%</span>
+</div>
+<pre class="overflow-x-auto text-[11px] leading-relaxed text-neutral-300"><span class="text-purple-400">from</span> composio <span class="text-purple-400">import</span> ComposioToolSet, Action
+
+toolset = ComposioToolSet()
+<span class="text-neutral-500"># Filters 1,500+ down to precise sub-action schemas dynamically</span>
+tools = toolset.get_tools(
+    actions=[Action.GITHUB_CREATE_PULL_REQUEST, Action.SLACK_SEND_MESSAGE],
+    optimize_context=<span class="text-[#38bdf8]">True</span>
+)
+<span class="text-neutral-500"># Resulting prompt tokens: 412 (down from 28,000 raw API definitions)</span></pre>
+</div>
+<div class="lg:col-span-5">
+<div class="font-mono text-xs text-[#38bdf8] font-semibold mb-2">01 // CONTEXT REDUCTION</div>
+<h3 class="text-2xl font-bold tracking-tight text-white mb-3">
+              The right actions, without the context bloat
+            </h3>
+<p class="text-sm text-[#adaaaa] leading-relaxed">
+              Dynamic tool filtering that indexes 1,500+ APIs and injects only the 3-5 necessary tool schemas into the LLM context window. Prevents model hallucinations, reduces token spend by up to 90%, and accelerates response times.
+            </p>
+</div>
+</div>
+<!-- Row 2: Self-Healing Loops -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#27272a] bg-[#121214] p-6 lg:p-8">
+<div class="lg:col-span-7 bg-[#050505] p-5 border border-[#222222] font-mono text-xs text-neutral-300">
+<div class="flex items-center justify-between text-neutral-500 pb-3 border-b border-[#1f1f1f] mb-3">
+<span>SELF_HEAL_TELEMETRY</span>
+<span class="text-amber-400">AUTO-RETRY ADAPTED</span>
+</div>
+<div class="space-y-2 text-[11px]">
+<div class="text-red-400">WARN [429] Rate limit hit on endpoint: /v2/crm/deals</div>
+<div class="text-[#38bdf8]">INFO Composio backoff scheduled (120ms jitter applied)</div>
+<div class="text-neutral-400">EXEC Schema mutated: 'deal_value' mapped to 'amount_in_cents'</div>
+<div class="text-emerald-400">SUCCESS Payload accepted by target server. Flow resumed.</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="font-mono text-xs text-[#38bdf8] font-semibold mb-2">02 // ADAPTIVE RETRIES</div>
+<h3 class="text-2xl font-bold tracking-tight text-white mb-3">
+              Works today, works better next time
+            </h3>
+<p class="text-sm text-[#adaaaa] leading-relaxed">
+              Self-healing execution loops that learn from API parameter shifts, rate limits, and schema updates automatically. When an upstream vendor alters payload requirements, Composio resolves the drift in real-time.
+            </p>
+</div>
+</div>
+<!-- Row 3: Managed Auth & Identity -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#27272a] bg-[#121214] p-6 lg:p-8">
+<div class="lg:col-span-7 bg-[#050505] p-5 border border-[#222222] font-mono text-xs text-neutral-300">
+<div class="flex items-center justify-between text-neutral-500 pb-3 border-b border-[#1f1f1f] mb-3">
+<span>MANAGED_AUTH_VAULT</span>
+<span class="text-emerald-400">ENTERPRISE ISOLATION</span>
+</div>
+<div class="grid grid-cols-2 gap-3 text-xs">
+<div class="p-3 bg-[#111113] border border-[#242426]">
+<div class="text-[#adaaaa] text-[10px]">AUTH MECHANISM</div>
+<div class="text-white font-semibold mt-1">Managed OAuth 2.0 PKCE</div>
+</div>
+<div class="p-3 bg-[#111113] border border-[#242426]">
+<div class="text-[#adaaaa] text-[10px]">ROTATION SCHEDULE</div>
+<div class="text-white font-semibold mt-1">Automatic JWT Refresh</div>
+</div>
+<div class="p-3 bg-[#111113] border border-[#242426]">
+<div class="text-[#adaaaa] text-[10px]">SECURITY ENCLAVE</div>
+<div class="text-white font-semibold mt-1">AES-256 Envelope KMS</div>
+</div>
+<div class="p-3 bg-[#111113] border border-[#242426]">
+<div class="text-[#adaaaa] text-[10px]">TENANT ISOLATION</div>
+<div class="text-white font-semibold mt-1">Zero Shared Keys</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="font-mono text-xs text-[#38bdf8] font-semibold mb-2">03 // AUTHENTICATION</div>
+<h3 class="text-2xl font-bold tracking-tight text-white mb-3">
+              One click to connect, whenever you need it
+            </h3>
+<p class="text-sm text-[#adaaaa] leading-relaxed">
+              Managed OAuth2, API key, and JWT vaults with user-level isolation and enterprise token refresh. Never write, store, or rotate authentication credentials for your agent fleets manually again.
+            </p>
+</div>
+</div>
+<!-- Row 4: Multi-Step Execution -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border border-[#27272a] bg-[#121214] p-6 lg:p-8">
+<div class="lg:col-span-7 bg-[#050505] p-5 border border-[#222222] font-mono text-xs text-neutral-300">
+<div class="flex items-center justify-between text-neutral-500 pb-3 border-b border-[#1f1f1f] mb-3">
+<span>WORKFLOW_SANDBOX</span>
+<span class="text-[#38bdf8]">SESSION: DOCKER_CONTAINER_41</span>
+</div>
+<div class="space-y-1.5 text-[11px] font-mono">
+<div class="flex items-center gap-2 text-white">
+<span class="text-neutral-500">[STEP 1]</span>
+<span>Pull repo diff from GitHub</span>
+<span class="text-emerald-400 ml-auto">SUCCESS</span>
+</div>
+<div class="flex items-center gap-2 text-white">
+<span class="text-neutral-500">[STEP 2]</span>
+<span>Run lint &amp; unit test matrix</span>
+<span class="text-emerald-400 ml-auto">PASS (14/14)</span>
+</div>
+<div class="flex items-center gap-2 text-white">
+<span class="text-neutral-500">[STEP 3]</span>
+<span>Update Linear task to IN_REVIEW</span>
+<span class="text-emerald-400 ml-auto">SYNCHRONIZED</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5">
+<div class="font-mono text-xs text-[#38bdf8] font-semibold mb-2">04 // ORCHESTRATION</div>
+<h3 class="text-2xl font-bold tracking-tight text-white mb-3">
+              A workspace for multi-step work
+            </h3>
+<p class="text-sm text-[#adaaaa] leading-relaxed">
+              State-preserving execution sandbox that chains actions across multiple applications in a single deterministic flow. Agents retain memory, credentials, and intermediate data across complex chains.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. PALE GREY "COMPOSIO FOR YOU" SECTION -->
+<section class="bg-[#f6f6f6] text-[#0f0f0f] py-24 border-b border-[#e5e7eb]">
+<div class="w-full max-w-7xl mx-auto px-6">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<p class="font-mono text-xs uppercase tracking-widest text-[#0007cd] font-semibold mb-2">[ HIGH IMPACT USE CASES ]</p>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-black">
+          Composio helps AI take action 100M+ times a week
+        </h2>
+<p class="mt-4 text-[#565555] text-base md:text-lg">
+          Transform your assistants from conversational bots into dependable enterprise workforce agents.
+        </p>
+</div>
+<!-- 6 Flat Light-Bordered Task Cards in 3x2 Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-14">
+<!-- Card 1 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">COMMUNICATION</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Email and calendar</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Draft reply to customer with Calendly link and cross-check GCal free slots."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Gmail</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Outlook</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Google Calendar</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">KNOWLEDGE BASE</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Docs and files</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Synthesize quarterly metrics PDF and sync summary table to Notion &amp; Drive."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Notion</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Google Docs</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">OneDrive</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Dropbox</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">ENGINEERING</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Development</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Create GitHub PR, tag reviewers, trigger Linear issue state change."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">GitHub</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Linear</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Jira</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">GitLab</span>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">DISTRIBUTION</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Social media</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Schedule thread on X, publish announcement to LinkedIn, ping Slack channel."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">X (Twitter)</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">LinkedIn</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Slack</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Discord</span>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">GROWTH &amp; ANALYTICS</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Ads and SEO</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Fetch weekly ad spend from Google Ads &amp; Meta, flag anomalies in Google Sheets."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Google Ads</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Meta Ads</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Search Console</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Sheets</span>
+</div>
+</div>
+<!-- Card 6 -->
+<div class="bg-white p-6 border border-[#d4d4d8] shadow-sm flex flex-col justify-between hover:border-black transition-colors">
+<div>
+<div class="font-mono text-[11px] uppercase tracking-wider text-[#0007cd] font-bold mb-2">REVENUE OPERATIONS</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Sales and CRM</h3>
+<p class="text-sm text-neutral-600 mb-6">
+              "Enrich inbound lead on HubSpot, notify account executive on Slack, log call."
+            </p>
+</div>
+<div class="pt-4 border-t border-neutral-100 flex items-center gap-2">
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Salesforce</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">HubSpot</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Close</span>
+<span class="px-2 py-1 bg-neutral-100 font-mono text-[10px] text-neutral-800 font-semibold">Pipedrive</span>
+</div>
+</div>
+</div>
+<!-- Two Squared CTAs -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto px-8 py-3.5 bg-black text-white font-mono text-xs font-bold tracking-widest uppercase hover:bg-neutral-800 transition-colors text-center" href="#signup">
+          Put Your AI To Work
+        </a>
+<a class="w-full sm:w-auto px-8 py-3.5 bg-transparent text-black border border-[#222222] font-mono text-xs font-bold tracking-widest uppercase hover:bg-neutral-100 transition-colors text-center" href="#directory">
+          Learn More
+        </a>
+</div>
+</div>
+</section>
+<!-- 7. BLACK DEVELOPER SECTION -->
+<section class="bg-[#09090b] text-white py-24 border-b border-[#222222]" id="developers">
+<div class="w-full max-w-7xl mx-auto px-6">
+<div class="max-w-3xl mb-12">
+<p class="font-mono text-xs uppercase tracking-widest text-[#38bdf8] font-semibold mb-2">[ DEVELOPER PLATFORM ]</p>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
+          Build agents on battle-tested infrastructure
+        </h2>
+</div>
+<!-- Developer Platform Code Snippet Card -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 bg-[#111113] border border-[#27272a] p-6 lg:p-8 mb-16">
+<div class="lg:col-span-8 bg-[#070708] border border-[#1f1f22] p-5 font-mono text-xs">
+<div class="flex items-center justify-between pb-3 border-b border-[#1c1c1f] text-neutral-500 mb-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-red-500/80 inline-block"></span>
+<span class="w-3 h-3 bg-yellow-500/80 inline-block"></span>
+<span class="w-3 h-3 bg-green-500/80 inline-block"></span>
+<span class="ml-2 text-white">main.py</span>
+</div>
+<span>pip install composio-core</span>
+</div>
+<pre class="overflow-x-auto text-[12px] leading-relaxed text-neutral-300"><span class="text-purple-400">from</span> openai <span class="text-purple-400">import</span> OpenAI
+<span class="text-purple-400">from</span> composio_openai <span class="text-purple-400">import</span> ComposioToolSet, Action, App
+
+client = OpenAI()
+composio_toolset = ComposioToolSet(entity_id=<span class="text-emerald-400">"dev_user_449"</span>)
+
+<span class="text-neutral-500"># Pull verified actions across connected software</span>
+tools = composio_toolset.get_tools(apps=[App.GITHUB, App.SLACK, App.NOTION])
+
+response = client.chat.completions.create(
+    model=<span class="text-emerald-400">"gpt-4o"</span>,
+    tools=tools,
+    messages=[{<span class="text-emerald-400">"role"</span>: <span class="text-emerald-400">"user"</span>, <span class="text-emerald-400">"content"</span>: <span class="text-emerald-400">"Star the composio repo and post confirmation in Slack"</span>}]
+)
+
+result = composio_toolset.handle_tool_calls(response)
+<span class="text-purple-400">print</span>(<span class="text-emerald-400">"Action Execution Complete:"</span>, result)</pre>
+</div>
+<div class="lg:col-span-4 flex flex-col justify-between">
+<div>
+<div class="font-mono text-xs uppercase tracking-wider text-neutral-400 font-semibold mb-3">Live Connected Integrations</div>
+<div class="space-y-2 font-mono text-xs">
+<div class="flex items-center justify-between p-2.5 bg-[#17171a] border border-[#26262a]">
+<span>GitHub API</span>
+<span class="text-emerald-400 font-bold">READY</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-[#17171a] border border-[#26262a]">
+<span>Slack Bot Socket</span>
+<span class="text-emerald-400 font-bold">CONNECTED</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-[#17171a] border border-[#26262a]">
+<span>Notion Database Sync</span>
+<span class="text-emerald-400 font-bold">ACTIVE</span>
+</div>
+<div class="flex items-center justify-between p-2.5 bg-[#17171a] border border-[#26262a]">
+<span>Linear Issue Tracker</span>
+<span class="text-emerald-400 font-bold">CONNECTED</span>
+</div>
+</div>
+</div>
+<div class="pt-6">
+<a class="block w-full py-3 bg-[#0007cd] text-white text-center font-mono text-xs font-bold uppercase tracking-wider hover:bg-blue-700 transition-colors" href="#docs">
+              Explore Full SDK Docs
+            </a>
+</div>
+</div>
+</div>
+<!-- Out of the Box Features -->
+<h3 class="text-2xl font-bold tracking-tight mb-8">What you get out of the box</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-[#111113] border border-[#27272a] p-6 hover:border-[#38bdf8] transition-colors">
+<div class="font-mono text-xs text-[#38bdf8] font-bold mb-2">01 // IDENTITY</div>
+<h4 class="text-lg font-bold mb-2">Managed Auth</h4>
+<p class="text-xs text-[#adaaaa] leading-relaxed">
+            OAuth 1.0/2.0, API keys, scopes, automated refresh token rotation and multi-tenant key vaulting.
+          </p>
+</div>
+<div class="bg-[#111113] border border-[#27272a] p-6 hover:border-[#38bdf8] transition-colors">
+<div class="font-mono text-xs text-[#38bdf8] font-bold mb-2">02 // REACTIVITY</div>
+<h4 class="text-lg font-bold mb-2">Triggers</h4>
+<p class="text-xs text-[#adaaaa] leading-relaxed">
+            Real-time webhooks, event listeners, and asynchronous event streams to wake agents on external events.
+          </p>
+</div>
+<div class="bg-[#111113] border border-[#27272a] p-6 hover:border-[#38bdf8] transition-colors">
+<div class="font-mono text-xs text-[#38bdf8] font-bold mb-2">03 // PERFORMANCE</div>
+<h4 class="text-lg font-bold mb-2">Context Aware Sessions</h4>
+<p class="text-xs text-[#adaaaa] leading-relaxed">
+            Token optimization, action caching, and multi-turn state preservation without LLM degradation.
+          </p>
+</div>
+<div class="bg-[#111113] border border-[#27272a] p-6 hover:border-[#38bdf8] transition-colors">
+<div class="font-mono text-xs text-[#38bdf8] font-bold mb-2">04 // COMPATIBILITY</div>
+<h4 class="text-lg font-bold mb-2">Model &amp; Framework Agnostic</h4>
+<p class="text-xs text-[#adaaaa] leading-relaxed">
+            Compatible with Claude 3.5, GPT-4o, DeepSeek, LangChain, LlamaIndex, and CrewAI without vendor lock-in.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. PALE GREY SECURITY SECTION -->
+<section class="bg-[#f6f6f6] text-[#0f0f0f] py-24 border-b border-[#e5e7eb]">
+<div class="w-full max-w-7xl mx-auto px-6">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<p class="font-mono text-xs uppercase tracking-widest text-[#0007cd] font-semibold mb-2">[ ENTERPRISE SECURITY ]</p>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-black">
+          Secure by default, at every layer
+        </h2>
+<p class="mt-4 text-[#565555] text-base md:text-lg">
+          Purpose-built for zero trust enterprise agent deployments in critical environments.
+        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Left: Technical Security Visual Graphic -->
+<div class="lg:col-span-6 bg-black text-white p-8 border border-neutral-300 relative">
+<div class="font-mono text-xs text-neutral-400 pb-3 border-b border-neutral-800 flex justify-between items-center mb-6">
+<span>ZERO_TRUST_MATRIX</span>
+<span class="text-emerald-400">ENCLAVE SECURE</span>
+</div>
+<!-- Encryption & Compliance Matrix -->
+<div class="space-y-4 font-mono">
+<div class="p-4 bg-[#141416] border border-[#27272a] flex items-center justify-between">
+<div>
+<div class="text-xs text-white font-bold">SOC 2 Type II Certified</div>
+<div class="text-[11px] text-[#adaaaa]">Annual third-party audit verification</div>
+</div>
+<span class="px-2 py-1 bg-emerald-950 text-emerald-300 text-[10px] font-bold">VALIDATED</span>
+</div>
+<div class="p-4 bg-[#141416] border border-[#27272a] flex items-center justify-between">
+<div>
+<div class="text-xs text-white font-bold">ISO 27001:2022 Compliant</div>
+<div class="text-[11px] text-[#adaaaa]">Global information security standard</div>
+</div>
+<span class="px-2 py-1 bg-emerald-950 text-emerald-300 text-[10px] font-bold">VALIDATED</span>
+</div>
+<div class="p-4 bg-[#141416] border border-[#27272a] flex items-center justify-between">
+<div>
+<div class="text-xs text-white font-bold">Data Privacy Guarantee</div>
+<div class="text-[11px] text-[#adaaaa]">Zero model training on customer payloads or logs</div>
+</div>
+<span class="px-2 py-1 bg-blue-950 text-blue-300 text-[10px] font-bold">STRICT NO-LOG</span>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+<span>Hardware Enclaves: AWS Nitro</span>
+<span class="text-white">mTLS / TLS 1.3 Strict</span>
+</div>
+</div>
+<!-- Right: Accordion Feature Rows -->
+<div class="lg:col-span-6 space-y-4">
+<div class="bg-white border border-[#d4d4d8] p-6">
+<div class="flex items-center justify-between font-mono text-xs font-bold uppercase text-[#0007cd] mb-2">
+<span>01 // ACCESS POLICIES</span>
+<span class="material-symbols-outlined text-sm">lock</span>
+</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Team controls</h3>
+<p class="text-sm text-neutral-600 leading-relaxed">
+              Granular role-based permissions, action allowlists, human-in-the-loop approvals before sensitive executions, and per-tool spending quotas for every developer team.
+            </p>
+</div>
+<div class="bg-white border border-[#d4d4d8] p-6">
+<div class="flex items-center justify-between font-mono text-xs font-bold uppercase text-[#0007cd] mb-2">
+<span>02 // CERTIFICATIONS</span>
+<span class="material-symbols-outlined text-sm">verified_user</span>
+</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">SOC2 &amp; ISO 27001:2022</h3>
+<p class="text-sm text-neutral-600 leading-relaxed">
+              Enterprise compliance, complete end-to-end data encryption in transit and at rest, zero prompt logging, and automated compliance report generation for procurement reviews.
+            </p>
+</div>
+<div class="bg-white border border-[#d4d4d8] p-6">
+<div class="flex items-center justify-between font-mono text-xs font-bold uppercase text-[#0007cd] mb-2">
+<span>03 // INFRASTRUCTURE</span>
+<span class="material-symbols-outlined text-sm">cloud</span>
+</div>
+<h3 class="text-xl font-bold text-neutral-900 mb-2">Bring your own cloud</h3>
+<p class="text-sm text-neutral-600 leading-relaxed">
+              Deploy Composio on your AWS VPC, Google Cloud, or Azure with single-tenant data isolation and complete customer-managed encryption key (CMEK) ownership.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. BLACK FAQ SECTION & FOOTER -->
+<section class="bg-[#09090b] text-white py-24 border-b border-[#222222]">
+<div class="w-full max-w-4xl mx-auto px-6">
+<div class="text-center mb-16">
+<p class="font-mono text-xs uppercase tracking-widest text-[#38bdf8] font-semibold mb-2">[ FAQ ]</p>
+<h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+          Frequently asked questions
+        </h2>
+</div>
+<!-- FAQ Accordions -->
+<div class="space-y-4 font-body">
+<details class="group bg-[#111113] border border-[#27272a] p-5 cursor-pointer">
+<summary class="flex justify-between items-center font-bold text-base md:text-lg list-none select-none">
+<span>How does Composio compare to raw LangChain tools or custom API scripts?</span>
+<span class="font-mono text-neutral-400 group-open:rotate-45 transition-transform text-xl">+</span>
+</summary>
+<div class="mt-4 text-sm text-[#adaaaa] leading-relaxed pt-3 border-t border-[#222222]">
+            Raw tools require you to manually write OAuth redirect flows, keep access tokens fresh, maintain updated JSON schemas, and feed thousands of prompt tokens per request. Composio acts as a managed runtime that handles token vaults, dynamic 90%+ schema compression, self-healing execution, and 1,500+ pre-built integrations natively.
+          </div>
+</details>
+<details class="group bg-[#111113] border border-[#27272a] p-5 cursor-pointer">
+<summary class="flex justify-between items-center font-bold text-base md:text-lg list-none select-none">
+<span>How is user authentication handled?</span>
+<span class="font-mono text-neutral-400 group-open:rotate-45 transition-transform text-xl">+</span>
+</summary>
+<div class="mt-4 text-sm text-[#adaaaa] leading-relaxed pt-3 border-t border-[#222222]">
+            Composio provides hosted user auth connect URLs and a headless API. When an end-user connects their account (e.g. GitHub or Google Drive), Composio securely handles the OAuth handshake, stores the token in dedicated KMS-encrypted envelopes, and auto-refreshes tokens without exposing keys to LLMs.
+          </div>
+</details>
+<details class="group bg-[#111113] border border-[#27272a] p-5 cursor-pointer">
+<summary class="flex justify-between items-center font-bold text-base md:text-lg list-none select-none">
+<span>What is context bloat and how does Composio solve it?</span>
+<span class="font-mono text-neutral-400 group-open:rotate-45 transition-transform text-xl">+</span>
+</summary>
+<div class="mt-4 text-sm text-[#adaaaa] leading-relaxed pt-3 border-t border-[#222222]">
+            Supplying complete OpenAPI documentation for multiple applications consumes tens of thousands of tokens before user prompts even start, triggering LLM hallucinations and high costs. Composio’s semantic indexing filters only the 3-5 necessary tools dynamically based on user intent.
+          </div>
+</details>
+<details class="group bg-[#111113] border border-[#27272a] p-5 cursor-pointer">
+<summary class="flex justify-between items-center font-bold text-base md:text-lg list-none select-none">
+<span>Is there a free tier for developers?</span>
+<span class="font-mono text-neutral-400 group-open:rotate-45 transition-transform text-xl">+</span>
+</summary>
+<div class="mt-4 text-sm text-[#adaaaa] leading-relaxed pt-3 border-t border-[#222222]">
+            Yes. Every developer gets 100,000 free action executions each month, unlimited integrations, managed auth, and access to Python and TypeScript SDKs without requiring a credit card.
+          </div>
+</details>
+</div>
+<!-- Final CTA Banner -->
+<div class="mt-24 p-8 sm:p-12 bg-[#121215] border border-[#27272a] text-center relative overflow-hidden">
+<div class="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-[#0007cd]/30 blur-3xl pointer-events-none"></div>
+<div class="relative z-10">
+<h3 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            Connect your AI to 1,500+ apps for free
+          </h3>
+<p class="mt-3 text-sm sm:text-base text-[#adaaaa] max-w-xl mx-auto">
+            Get started in under 3 minutes with our Python or TypeScript SDK. 100,000 free actions included every month.
+          </p>
+<div class="mt-8 flex justify-center">
+<a class="px-8 py-3.5 bg-white text-black font-mono text-xs font-bold tracking-widest uppercase hover:bg-neutral-200 transition-colors" href="#signup">
+              Try Composio Now
+            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SHARED FOOTER -->
+<footer class="bg-surface-container-lowest text-white border-t border-outline-variant">
+<div class="w-full max-w-7xl mx-auto px-6 py-16">
+<!-- Top Columns -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 pb-12 border-b border-[#222222]">
+<div class="col-span-2">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-6 h-6 bg-white flex items-center justify-center text-black font-bold text-sm tracking-tighter">
+              C
+            </div>
+<span class="font-headline text-base font-bold text-on-surface tracking-tight">Composio</span>
+</div>
+<p class="text-xs text-[#adaaaa] max-w-xs leading-relaxed">
+            Composio — The action layer for AI agents. Build reliable agents that execute tasks across 1,500+ applications seamlessly.
+          </p>
+</div>
+<div>
+<div class="font-mono text-xs uppercase tracking-wider text-white font-semibold mb-4">Product</div>
+<ul class="space-y-2.5 text-xs text-on-surface-variant font-body">
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#integrations">Integrations Directory</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#actions">Actions</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#triggers">Triggers</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#rag">RAG Tools</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#sdks">SDKs</a></li>
+</ul>
+</div>
+<div>
+<div class="font-mono text-xs uppercase tracking-wider text-white font-semibold mb-4">Developers</div>
+<ul class="space-y-2.5 text-xs text-on-surface-variant font-body">
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#docs">Documentation</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#quickstart">Quickstart</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#github">GitHub</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#api">API Reference</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#changelog">Changelog</a></li>
+</ul>
+</div>
+<div>
+<div class="font-mono text-xs uppercase tracking-wider text-white font-semibold mb-4">Company &amp; Legal</div>
+<ul class="space-y-2.5 text-xs text-on-surface-variant font-body">
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#security">Security &amp; Compliance</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#privacy">Privacy Policy</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#terms">Terms of Service</a></li>
+<li><a class="hover:text-on-surface transition-colors duration-150" href="#careers">Careers</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Status & Copyright -->
+<div class="pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono text-[#767575]">
+<div>
+          © 2026 Composio, Inc. All rights reserved.
+        </div>
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-neutral-300">System Status: All Systems Operational</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
