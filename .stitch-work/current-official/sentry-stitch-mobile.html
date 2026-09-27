@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Sentry — Application Monitoring Software Considered 'Not Bad'</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Font: Rubik and JetBrains Mono for telemetry code -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&amp;family=Rubik:ital,wght@0,300..900;1,300..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-container": "#4aa401",
+            "on-secondary": "#2d1d81",
+            "on-primary-fixed": "#3d0026",
+            "on-tertiary-fixed-variant": "#215100",
+            "on-tertiary-container": "#113100",
+            "on-tertiary": "#153800",
+            "primary-fixed-dim": "#ffafd3",
+            "error-container": "#93000a",
+            "surface-dim": "#170e2b",
+            "on-primary-container": "#570037",
+            "tertiary": "#7fdd45",
+            "secondary-fixed": "#e4dfff",
+            "secondary": "#c7bfff",
+            "on-surface": "#eaddff",
+            "error": "#ffb4ab",
+            "on-primary": "#620040",
+            "surface-container-low": "#1f1633",
+            "surface": "#170e2b",
+            "background": "#170e2b",
+            "tertiary-fixed-dim": "#7fdd45",
+            "primary-fixed": "#ffd8e7",
+            "outline-variant": "#58404a",
+            "on-background": "#eaddff",
+            "primary": "#ffafd3",
+            "surface-container-lowest": "#120825",
+            "inverse-primary": "#b50079",
+            "tertiary-fixed": "#9afa5f",
+            "on-secondary-fixed": "#170065",
+            "surface-tint": "#ffafd3",
+            "on-surface-variant": "#dfbeca",
+            "inverse-on-surface": "#352b4a",
+            "on-tertiary-fixed": "#092100",
+            "surface-variant": "#39304e",
+            "surface-bright": "#3e3453",
+            "surface-container-highest": "#39304e",
+            "on-secondary-fixed-variant": "#443798",
+            "on-secondary-container": "#b4abff",
+            "on-error-container": "#ffdad6",
+            "secondary-container": "#443798",
+            "outline": "#a68994",
+            "inverse-surface": "#eaddff",
+            "surface-container-high": "#2e2543",
+            "on-error": "#690005",
+            "primary-container": "#fd44b0",
+            "on-primary-fixed-variant": "#8b005b",
+            "surface-container": "#231a38",
+            "secondary-fixed-dim": "#c7bfff"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Rubik", "sans-serif"],
+            display: ["Rubik", "sans-serif"],
+            body: ["Rubik", "sans-serif"],
+            label: ["Rubik", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom cosmic speckle and starfield texture */
+    .cosmic-grain {
+      background-image: 
+        radial-gradient(circle at 18% 12%, rgba(253, 68, 176, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 82% 35%, rgba(108, 92, 231, 0.22) 0%, transparent 45%),
+        radial-gradient(circle at 50% 70%, rgba(74, 164, 1, 0.08) 0%, transparent 50%),
+        radial-gradient(1.5px 1.5px at 30px 45px, rgba(255,255,255,0.75), transparent),
+        radial-gradient(1.2px 1.2px at 120px 180px, rgba(234,221,255,0.65), transparent),
+        radial-gradient(1.8px 1.8px at 280px 110px, rgba(253,68,176,0.8), transparent),
+        radial-gradient(1px 1px at 340px 290px, rgba(127,221,69,0.7), transparent),
+        radial-gradient(1.4px 1.4px at 70px 420px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1.2px 1.2px at 210px 520px, rgba(199,191,255,0.7), transparent),
+        radial-gradient(1.5px 1.5px at 320px 680px, rgba(255,255,255,0.5), transparent);
+      background-size: 100% 100%, 100% 100%, 100% 100%, 360px 480px, 320px 420px, 390px 500px, 360px 360px, 390px 450px, 300px 300px, 390px 600px;
+    }
+    
+    .scribble-underline {
+      position: relative;
+      display: inline-block;
+    }
+    .scribble-underline::after {
+      content: "";
+      position: absolute;
+      left: -2px;
+      right: -2px;
+      bottom: -6px;
+      height: 6px;
+      background: url('data:image/svg+xml;utf8,<svg preserveAspectRatio="none" viewBox="0 0 100 12" xmlns="http://www.w3.org/2000/svg"><path d="M1 8 C 25 1, 60 14, 99 6" stroke="%23fd44b0" stroke-width="4.5" stroke-linecap="round" fill="none"/></svg>');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+    
+    /* Hide scrollbars for crisp native mobile feel */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased selection:bg-primary-container selection:text-white flex justify-center min-h-screen">
+<!-- Mobile Viewport Frame (Strict 390px width container simulation) -->
+<div class="w-full max-w-[390px] min-h-screen bg-surface-container-low cosmic-grain relative flex flex-col border-x border-outline-variant/30 shadow-2xl">
+<!-- 1. Mobile Header (Sticky Top Bar - Styled via Shared Components TopNavBar instructions) -->
+<header class="sticky top-0 left-0 w-full z-50 bg-surface-container-low/90 backdrop-blur-md border-b border-outline-variant/30">
+<div class="px-5 h-16 flex items-center justify-between">
+<!-- Authentic Sentry Logo & Brand mark -->
+<a aria-label="Sentry Home" class="flex items-center gap-2.5 group active:scale-95 transition-transform duration-100" href="#">
+<!-- Sentry Sigil: Geometric overlapping arcs -->
+<div class="relative w-8 h-8 flex items-center justify-center">
+<svg class="w-7 h-7 text-primary-container fill-current transform -rotate-12 transition-transform group-hover:rotate-0 duration-300" viewbox="0 0 72 66" xmlns="http://www.w3.org/2000/svg">
+<path d="M47.7 54.4H28.4L20.2 41.5L34.1 19.3L47.7 54.4ZM71.2 59.9L58.5 28.5L42.2 0L24.5 28.5L1.1 59.9C-0.3 61.8 -0.4 64.3 0.8 66H71.5C72.8 64.1 72.7 61.7 71.2 59.9Z" fill="#FD44B0"></path>
+<path d="M24.7 28.5L33.9 13.9L51.8 54.3H16.4L24.7 28.5Z" fill="#FFFFFF" fill-opacity="0.9"></path>
+<circle cx="34" cy="38" fill="#1F1633" r="4.5"></circle>
+</svg>
+</div>
+<span class="font-headline text-xl font-bold tracking-tight text-white uppercase">Sentry</span>
+</a>
+<!-- Mobile Header Right Actions: White Menu Square Button -->
+<div class="flex items-center gap-2">
+<button class="text-on-surface-variant hover:text-white p-2 transition-colors active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="dark_mode">dark_mode</span>
+</button>
+<button class="bg-white text-surface-container-lowest font-headline font-bold text-xs uppercase px-3 py-2 rounded-lg hover:bg-slate-100 active:scale-95 transition-all flex items-center gap-1.5 shadow-sm">
+<span>Menu</span>
+<span class="material-symbols-outlined text-sm font-bold" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN MOBILE SCROLLABLE CONTENT CANVAS -->
+<main class="flex-1 flex flex-col w-full">
+<!-- 2. Hero Section (First fold mobile viewport) -->
+<section class="pt-6 pb-10 px-5 flex flex-col items-center text-center relative overflow-hidden">
+<!-- Ambient Top Glow Orb -->
+<div class="absolute top-2 left-1/2 -translate-x-1/2 w-64 h-64 bg-primary-container/15 rounded-full blur-3xl pointer-events-none -z-10"></div>
+<div class="absolute top-24 -right-12 w-48 h-48 bg-secondary-container/30 rounded-full blur-2xl pointer-events-none -z-10"></div>
+<!-- Announcement Pill -->
+<a class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#6a5fc1]/20 border border-[#6a5fc1]/40 text-secondary hover:border-secondary transition-all text-[11px] font-medium leading-tight max-w-[340px] mb-6 shadow-sm active:scale-95" href="#mcp">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="truncate">Sentry MCP: fix production issues right from your LLM</span>
+<span class="text-primary-container font-bold text-xs">→</span>
+</a>
+<!-- Hero Headline -->
+<h1 class="font-headline font-black text-[42px] leading-[1.05] tracking-tight text-white mb-4">
+          Code <span class="text-primary-container scribble-underline">breaks,</span><br/>
+          fix it<br/>
+          faster
+        </h1>
+<!-- Subtitle -->
+<p class="text-on-surface-variant text-base leading-relaxed max-w-[320px] font-normal mb-8">
+          Application monitoring software considered "not bad" by millions of developers.
+        </p>
+<!-- Stacked Dual Mobile CTAs -->
+<div class="w-full flex flex-col gap-3 mb-10">
+<a class="w-full py-3.5 px-6 rounded-lg bg-white text-surface-container-lowest font-headline font-bold text-sm tracking-wider uppercase text-center shadow-lg hover:bg-slate-100 active:scale-[0.98] transition-all flex items-center justify-center gap-2" href="#get-started">
+<span>Get Started</span>
+<span class="material-symbols-outlined text-base font-bold" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="w-full py-3.5 px-6 rounded-lg bg-transparent border-2 border-primary-container text-primary-container font-headline font-bold text-sm tracking-wider uppercase text-center hover:bg-primary-container/10 active:scale-[0.98] transition-all" href="#get-demo">
+            Get Demo
+          </a>
+</div>
+<!-- Hero Mascot & Layered Telemetry UI Card Collage -->
+<div class="w-full relative mt-2 pb-2">
+<!-- Mascot Peeking Behind Card -->
+<div class="relative -mb-6 flex justify-end pr-6 z-10">
+<!-- Illustrated Playful Sentry Bot Character -->
+<div class="relative w-28 h-28 transform hover:scale-105 transition-transform duration-300">
+<!-- Bot Glow -->
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-xl"></div>
+<svg class="w-full h-full drop-shadow-xl" fill="none" viewbox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+<!-- Antenna Wire & Pulse -->
+<path d="M60 40 V18" stroke="#fd44b0" stroke-dasharray="2 4" stroke-linecap="round" stroke-width="3"></path>
+<circle class="animate-ping" cx="60" cy="14" fill="#46E3B7" opacity="0.7" r="6"></circle>
+<circle cx="60" cy="14" fill="#46E3B7" r="5"></circle>
+<!-- Bot Head Body -->
+<rect fill="#231a38" height="52" rx="14" stroke="#fd44b0" stroke-width="2.5" width="60" x="30" y="38"></rect>
+<!-- Eye Screen Glass -->
+<rect fill="#120825" height="24" rx="8" stroke="#6a5fc1" stroke-width="1.5" width="44" x="38" y="48"></rect>
+<!-- Neon Expressive Eyes -->
+<circle cx="49" cy="60" fill="#fd44b0" r="4.5"></circle>
+<circle cx="71" cy="60" fill="#fd44b0" r="4.5"></circle>
+<circle cx="51" cy="58" fill="#ffffff" r="1.5"></circle>
+<circle cx="73" cy="58" fill="#ffffff" r="1.5"></circle>
+<!-- Cheek Rosy Blushes -->
+<ellipse cx="43" cy="67" fill="#7fdd45" opacity="0.8" rx="3" ry="1.5"></ellipse>
+<ellipse cx="77" cy="67" fill="#7fdd45" opacity="0.8" rx="3" ry="1.5"></ellipse>
+<!-- Small Smile -->
+<path d="M54 67 Q60 72 66 67" stroke="#ffffff" stroke-linecap="round" stroke-width="2"></path>
+<!-- Bot Little Hand reaching over card -->
+<rect fill="#2e2543" height="18" rx="6" stroke="#fd44b0" stroke-width="2" width="14" x="22" y="78"></rect>
+<rect fill="#2e2543" height="18" rx="6" stroke="#fd44b0" stroke-width="2" width="14" x="84" y="78"></rect>
+</svg>
+</div>
+</div>
+<!-- Main Overlapping Telemetry Window (TypeError Sentry Issue Details) -->
+<div class="w-full bg-surface-container-high/90 backdrop-blur-md rounded-xl border border-primary-container/40 p-3.5 shadow-2xl text-left relative z-20 overflow-hidden">
+<!-- Top bar indicator with Seer AI Confidence Badge -->
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-2 mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-error-container inline-block"></span>
+<span class="font-mono text-[10px] text-error uppercase font-bold tracking-wider">UNHANDLED EXCEPTION</span>
+</div>
+<!-- Seer AI Badge -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-primary-container/20 border border-primary-container/50 text-primary font-mono text-[10px] font-bold">
+<span class="material-symbols-outlined text-[11px]" data-icon="auto_awesome">auto_awesome</span>
+                Seer AI: 98%
+              </span>
+</div>
+<!-- Exception Name & Stack Location -->
+<div class="font-mono text-xs font-bold text-white mb-1 tracking-tight break-all">
+              TypeError: Cannot read properties of undefined (reading 'pricingTier')
+            </div>
+<div class="text-[11px] font-mono text-on-surface-variant flex items-center gap-2 mb-3">
+<span class="text-secondary">app/checkout/BillingStep.tsx:142</span>
+<span class="text-outline-variant">•</span>
+<span class="text-tertiary">prod-eu-west-1</span>
+</div>
+<!-- Session Replay Scrub Bar Mini Wireframe -->
+<div class="bg-surface-container-lowest/80 rounded-lg p-2.5 border border-outline-variant/20 mb-2">
+<div class="flex items-center justify-between text-[10px] font-mono text-on-surface-variant mb-1.5">
+<div class="flex items-center gap-1 text-white">
+<span class="material-symbols-outlined text-xs text-primary-container" data-icon="videocam">videocam</span>
+<span>Session Replay #SR-601</span>
+</div>
+<span class="text-tertiary font-semibold">-00:04.2s (Rage Click)</span>
+</div>
+<!-- Scrub timeline visualization -->
+<div class="relative w-full h-4 bg-surface-variant/80 rounded flex items-center px-1 overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-3/4 bg-secondary-container/40"></div>
+<!-- Breadcrumb Markers -->
+<div class="absolute left-[20%] w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<div class="absolute left-[45%] w-1.5 h-1.5 rounded-full bg-secondary"></div>
+<div class="absolute left-[65%] w-1.5 h-1.5 rounded-full bg-tertiary"></div>
+<div class="absolute left-[78%] w-2 h-2 rounded-full bg-primary-container animate-ping"></div>
+<div class="absolute left-[78%] w-2 h-2 rounded-full bg-primary-container"></div>
+<!-- Needle indicator -->
+<div class="absolute left-[78%] top-0 bottom-0 w-[1.5px] bg-white"></div>
+</div>
+</div>
+<!-- Quick Meta Footer -->
+<div class="flex items-center justify-between text-[10px] font-mono text-on-surface-variant pt-1">
+<div class="flex items-center gap-2">
+<span>12 events</span>
+<span>•</span>
+<span>8 users impacted</span>
+</div>
+<span class="text-primary-container font-semibold">Assigned: @alex.chen</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Social Proof & Customer Logo Strip -->
+<section class="py-6 px-5 border-y border-outline-variant/20 bg-surface-container-lowest/40">
+<p class="font-headline text-[10px] tracking-widest uppercase font-bold text-on-surface-variant/80 text-center mb-4">
+          Trusted by engineering teams at
+        </p>
+<!-- Logo marquee wrap -->
+<div class="grid grid-cols-3 gap-y-4 gap-x-3 items-center justify-items-center opacity-70">
+<div class="font-headline font-bold text-sm tracking-tight text-white flex items-center gap-1">
+<span class="text-base font-black">GitHub</span>
+</div>
+<div class="font-headline font-bold text-sm tracking-tighter text-white">Disney+</div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">Linear</div>
+<div class="font-headline font-semibold text-sm tracking-tight text-white">Vercel</div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">Cloudflare</div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">Slack</div>
+<div class="font-headline font-semibold text-sm tracking-tight text-white">Cursor</div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">Anthropic</div>
+<div class="font-headline font-bold text-sm tracking-tight text-white">Supabase</div>
+</div>
+</section>
+<!-- 4. "Developer first. Always." Section -->
+<section class="py-10 px-5 flex flex-col gap-6">
+<div>
+<h2 class="font-headline font-black text-2xl tracking-tight text-white mb-2">
+            Developer first. <span class="text-primary-container">Always.</span>
+</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Built from day one to deliver code-level clarity without wading through millions of noisy unstructured log streams.
+          </p>
+</div>
+<!-- 4 Vertically stacked wide violet product illustration cards -->
+<div class="flex flex-col gap-4">
+<!-- Card 1: Monitor in five lines -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 hover:border-primary-container/40 transition-all flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-sm text-white flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="terminal">terminal</span>
+                Monitor in five lines
+              </span>
+<span class="text-[10px] font-mono text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded">Quick setup</span>
+</div>
+<p class="text-xs text-on-surface-variant">Drop in our lightweight SDK. Capture unhandled exceptions, network spans, and console breadcrumbs automatically.</p>
+<!-- Code snippet UI box -->
+<div class="bg-surface-container-lowest rounded-lg p-3 font-mono text-[11px] leading-relaxed border border-outline-variant/20 overflow-x-auto text-on-surface">
+<span class="text-primary-container">import</span> * <span class="text-primary-container">as</span> Sentry <span class="text-primary-container">from</span> <span class="text-tertiary">"@sentry/node"</span>;<br/><br/>
+              Sentry.<span class="text-secondary">init</span>({<br/>
+                dsn: <span class="text-tertiary">"https://key@o1.ingest.sentry.io/42"</span>,<br/>
+                tracesSampleRate: <span class="text-primary">1.0</span>,<br/>
+                profilesSampleRate: <span class="text-primary">1.0</span><br/>
+              });
+            </div>
+</div>
+<!-- Card 2: Automatically root-cause any issue -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 hover:border-primary-container/40 transition-all flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-sm text-white flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-base" data-icon="commit">commit</span>
+                Automatically root-cause
+              </span>
+<span class="text-[10px] font-mono text-primary bg-primary-container/20 px-2 py-0.5 rounded font-semibold">Git blame sync</span>
+</div>
+<p class="text-xs text-on-surface-variant">Sentry matches stack frames with your GitHub commits to isolate the exact PR that broke production.</p>
+<!-- Git commit blame simulation -->
+<div class="bg-surface-container-lowest rounded-lg p-3 font-mono text-xs border border-outline-variant/20 flex flex-col gap-2">
+<div class="flex items-center justify-between text-[10px] text-on-surface-variant">
+<span class="text-secondary">commit e04fb18</span>
+<span>2 hours ago</span>
+</div>
+<div class="text-white text-xs font-medium">"refactor auth token cache &amp; ttl invalidation"</div>
+<div class="flex items-center gap-2 pt-1 border-t border-outline-variant/20 text-[11px]">
+<div class="w-4 h-4 rounded-full bg-secondary-container flex items-center justify-center text-[9px] font-bold text-white">ER</div>
+<span class="text-on-surface-variant">Elena Rostova</span>
+<span class="text-error ml-auto font-mono text-[10px]">+14 -2 lines</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Babysit the bots -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 hover:border-primary-container/40 transition-all flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-sm text-white flex items-center gap-1.5">
+<span class="material-symbols-outlined text-tertiary text-base" data-icon="smart_toy">smart_toy</span>
+                Babysit the bots (LLM Telemetry)
+              </span>
+<span class="text-[10px] font-mono text-tertiary bg-tertiary-container/20 px-2 py-0.5 rounded font-semibold">GenAI Ops</span>
+</div>
+<p class="text-xs text-on-surface-variant">Inspect model latency, cost per token, hallucinated function calls, and prompt injection attempts.</p>
+<!-- LLM Trace Telemetry Box -->
+<div class="bg-surface-container-lowest rounded-lg p-2.5 font-mono text-[11px] border border-outline-variant/20 flex flex-col gap-1.5">
+<div class="flex justify-between items-center">
+<span class="text-white font-semibold">claude-3-7-sonnet</span>
+<span class="text-tertiary">1.92s response</span>
+</div>
+<div class="w-full bg-surface-variant h-1.5 rounded-full overflow-hidden flex">
+<div class="bg-secondary w-2/5 h-full"></div>
+<div class="bg-primary-container w-3/5 h-full"></div>
+</div>
+<div class="flex justify-between text-[10px] text-on-surface-variant pt-0.5">
+<span>Input: 1,420 tokens ($0.0042)</span>
+<span>Output: 312 tokens</span>
+</div>
+</div>
+</div>
+<!-- Card 4: Stay in the flow -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 hover:border-primary-container/40 transition-all flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="font-headline font-bold text-sm text-white flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-base" data-icon="bolt">bolt</span>
+                Stay in the flow
+              </span>
+<span class="text-[10px] font-mono text-secondary bg-secondary-container/30 px-2 py-0.5 rounded">Deep Integrations</span>
+</div>
+<p class="text-xs text-on-surface-variant">Direct alerts to where your team already chats, manages issues, and iterates code.</p>
+<!-- Integrated Apps Pill Grid -->
+<div class="grid grid-cols-2 gap-2 pt-1">
+<div class="bg-surface-container-lowest rounded px-2.5 py-1.5 flex items-center gap-2 border border-outline-variant/20">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="chat">chat</span>
+<span class="text-[11px] font-medium text-white">Slack Alerts</span>
+</div>
+<div class="bg-surface-container-lowest rounded px-2.5 py-1.5 flex items-center gap-2 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary-container text-sm" data-icon="check_circle">check_circle</span>
+<span class="text-[11px] font-medium text-white">Linear Sync</span>
+</div>
+<div class="bg-surface-container-lowest rounded px-2.5 py-1.5 flex items-center gap-2 border border-outline-variant/20">
+<span class="material-symbols-outlined text-tertiary text-sm" data-icon="sync">sync</span>
+<span class="text-[11px] font-medium text-white">GitHub Actions</span>
+</div>
+<div class="bg-surface-container-lowest rounded px-2.5 py-1.5 flex items-center gap-2 border border-outline-variant/20">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="hub">hub</span>
+<span class="text-[11px] font-medium text-white">Cloud MCP</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. "Everything's connected" Trace & Telemetry Section -->
+<section class="py-10 px-5 bg-surface-container-lowest/60 border-t border-outline-variant/20 flex flex-col gap-6">
+<div>
+<h2 class="font-headline font-black text-2xl tracking-tight text-white mb-2">
+            Everything's <span class="text-primary-container">connected</span>
+</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Yeah, other tools exist. But errors, logs, replays, spans, profiles, and metrics — all connected by the same trace? That’s kind of our thing.
+          </p>
+</div>
+<!-- Realistic mobile-adapted Trace Waterfall & Flamegraph UI Card -->
+<div class="bg-surface-container rounded-xl border border-outline-variant/40 p-3.5 shadow-xl relative overflow-hidden">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-2 mb-3">
+<span class="font-mono text-xs font-bold text-white flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+              GET /api/v2/checkout/complete
+            </span>
+<span class="font-mono text-xs text-error font-bold bg-error-container/20 px-1.5 py-0.5 rounded">500 Internal Error</span>
+</div>
+<!-- Trace spans waterfall -->
+<div class="flex flex-col gap-2 font-mono text-[10px]">
+<!-- Span Row 1: Root Transaction -->
+<div>
+<div class="flex justify-between text-on-surface-variant mb-0.5">
+<span class="text-white truncate max-w-[200px]">router.dispatch</span>
+<span class="text-outline">640ms</span>
+</div>
+<div class="w-full bg-surface-variant h-3 rounded relative">
+<div class="absolute left-0 top-0 bottom-0 w-full bg-secondary-container rounded"></div>
+</div>
+</div>
+<!-- Span Row 2: Sub span db query -->
+<div class="pl-2 border-l border-outline-variant/40">
+<div class="flex justify-between text-on-surface-variant mb-0.5">
+<span class="text-white truncate max-w-[190px]">SELECT * FROM users_subscriptions</span>
+<span class="text-outline">120ms</span>
+</div>
+<div class="w-full bg-surface-variant h-3 rounded relative">
+<div class="absolute left-[15%] top-0 bottom-0 w-[35%] bg-tertiary-container rounded"></div>
+</div>
+</div>
+<!-- Span Row 3: Payment gateway HTTP request with failure highlight -->
+<div class="pl-4 border-l border-outline-variant/40">
+<div class="flex justify-between text-error font-bold mb-0.5">
+<span class="truncate max-w-[180px]">POST https://api.stripe.com/charges</span>
+<span>480ms (Failed)</span>
+</div>
+<div class="w-full bg-surface-variant h-3 rounded relative">
+<div class="absolute left-[45%] top-0 bottom-0 w-[55%] bg-primary-container rounded flex items-center justify-end pr-1">
+<span class="text-[8px] text-white font-bold">CRITICAL</span>
+</div>
+</div>
+</div>
+<!-- Span Row 4: Sentry SDK Auto-Captured Replay Link -->
+<div class="pt-2 mt-1 border-t border-outline-variant/20 flex items-center justify-between text-[10px] text-secondary font-semibold">
+<span class="flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="link">link</span>
+                Linked Session Replay available
+              </span>
+<span class="text-white underline cursor-pointer">Jump to frame →</span>
+</div>
+</div>
+</div>
+<!-- 3 Feature bullet blocks with pink/lime index markers -->
+<div class="flex flex-col gap-4 mt-2">
+<div class="flex items-start gap-3">
+<span class="font-mono text-xs font-black text-primary-container bg-primary-container/10 border border-primary-container/30 px-2 py-1 rounded">01</span>
+<div>
+<h4 class="font-headline font-bold text-sm text-white mb-1">Debug 500s &amp; Replay Failures</h4>
+<p class="text-xs text-on-surface-variant">Don't guess what the user clicked before it blew up. Watch their exact reproduction video alongside DOM events.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-mono text-xs font-black text-tertiary bg-tertiary-container/10 border border-tertiary-container/30 px-2 py-1 rounded">02</span>
+<div>
+<h4 class="font-headline font-bold text-sm text-white mb-1">Distributed Bottlenecks</h4>
+<p class="text-xs text-on-surface-variant">Propagate trace headers across serverless handlers, Redis caches, GraphQL endpoints, and external payment APIs.</p>
+</div>
+</div>
+<div class="flex items-start gap-3">
+<span class="font-mono text-xs font-black text-secondary bg-secondary-container/20 border border-secondary-container/40 px-2 py-1 rounded">03</span>
+<div>
+<h4 class="font-headline font-bold text-sm text-white mb-1">Frontend Frustration</h4>
+<p class="text-xs text-on-surface-variant">Capture Core Web Vitals, cold app startups, frozen frames, and slow hydration without ballooning bundle size.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. "Debugging needs context — with or without AI" -->
+<section class="py-10 px-5 flex flex-col gap-5">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/20 border border-primary-container/40 text-primary-container font-mono text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-xs" data-icon="auto_awesome">auto_awesome</span>
+            Sentry Seer AI
+          </span>
+</div>
+<div>
+<h2 class="font-headline font-black text-2xl tracking-tight text-white mb-2 leading-tight">
+            Debugging needs context— <span class="text-primary-container">with or without AI</span>
+</h2>
+<p class="text-on-surface-variant text-sm leading-relaxed">
+            Generic LLMs hallucinate when fed raw logs. Seer uses your compiler AST, runtime telemetry, and git history to pinpoint the culprit line.
+          </p>
+</div>
+<!-- Comparative Telemetry Cards (Stacked for 390px Mobile View) -->
+<div class="flex flex-col gap-4">
+<!-- Card A: Traditional Logging -->
+<div class="bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-2.5">
+<div class="flex justify-between items-center">
+<span class="font-mono text-[11px] font-bold text-on-surface-variant tracking-wider uppercase">Traditional Log Search</span>
+<span class="text-[10px] font-mono text-error font-semibold">MTTR: ~45 mins</span>
+</div>
+<div class="bg-surface-dim p-2.5 rounded font-mono text-[10px] text-outline-variant leading-relaxed">
+              [2026-09-28T14:12:02.109Z] INFO ping ok<br/>
+              [2026-09-28T14:12:03.441Z] ERROR connection reset<br/>
+              [2026-09-28T14:12:04.002Z] WARN retry attempt 3<br/>
+<span class="text-error font-bold">... 142,890 unindexed lines omitted ...</span>
+</div>
+<p class="text-[11px] text-on-surface-variant italic">Engineers wasting hours grepping text regexes across fragmented cloud buckets.</p>
+</div>
+<!-- Card B: Sentry Seer Diagnosis -->
+<div class="bg-surface-container rounded-xl p-4 border-2 border-primary-container/50 shadow-lg relative flex flex-col gap-2.5">
+<div class="absolute -top-2.5 right-4 bg-primary-container text-surface-container-lowest font-headline font-bold text-[9px] uppercase px-2 py-0.5 rounded tracking-wider">
+              Recommended Fix
+            </div>
+<div class="flex justify-between items-center">
+<span class="font-mono text-[11px] font-bold text-primary tracking-wider uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+                Sentry Seer Diagnosis
+              </span>
+<span class="text-[10px] font-mono text-tertiary font-bold">MTTR: &lt; 2 mins</span>
+</div>
+<!-- AST Diff snippet -->
+<div class="bg-surface-container-lowest p-2.5 rounded font-mono text-[11px] leading-relaxed border border-outline-variant/30">
+<div class="text-on-surface-variant text-[10px] mb-1">Root Cause: Optional chaining missing on null subscription record</div>
+<div class="bg-error-container/20 text-error px-1.5 py-0.5 rounded mb-1">
+                - return customer.plan.pricingTier;
+              </div>
+<div class="bg-tertiary-container/20 text-tertiary px-1.5 py-0.5 rounded">
+                + return customer?.plan?.pricingTier ?? 'free';
+              </div>
+</div>
+<div class="flex items-center justify-between pt-1">
+<span class="text-[10px] font-mono text-secondary">Regression introduced in PR #912</span>
+<button class="bg-white text-surface-container-lowest font-headline font-bold text-[10px] uppercase px-2.5 py-1 rounded hover:bg-slate-100 transition-colors">
+                Draft GitHub PR
+              </button>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. "Loved by developers worldwide" (Social Proof & Testimonials) -->
+<section class="py-10 px-5 bg-surface-container-lowest/50 border-t border-outline-variant/20 flex flex-col gap-5">
+<div>
+<span class="font-headline text-[10px] tracking-widest uppercase font-bold text-primary-container mb-1 block">Real Engineering Stories</span>
+<h2 class="font-headline font-black text-2xl tracking-tight text-white">
+            Loved by developers worldwide
+          </h2>
+</div>
+<!-- 3 Mobile Testimonial Cards -->
+<div class="flex flex-col gap-3.5">
+<!-- Testimonial 1: Anthropic -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-3">
+<p class="text-xs text-on-surface leading-relaxed">
+              "Sentry allows our engineers to diagnose complex model pipeline bottlenecks and production exceptions before users notice."
+            </p>
+<div class="flex items-center gap-2.5 pt-2 border-t border-outline-variant/20">
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center font-bold text-xs text-white">ND</div>
+<div>
+<div class="font-headline font-bold text-xs text-white">Novo DasSarma</div>
+<div class="text-[10px] text-on-surface-variant font-mono">Infrastructure @ Anthropic</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 2: Disney+ -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-3">
+<p class="text-xs text-on-surface leading-relaxed">
+              "Tracing high-concurrency streaming failures across millions of concurrent sessions has made Sentry indispensable."
+            </p>
+<div class="flex items-center gap-2.5 pt-2 border-t border-outline-variant/20">
+<div class="w-8 h-8 rounded-full bg-primary-container/30 text-primary-container flex items-center justify-center font-bold text-xs">AH</div>
+<div>
+<div class="font-headline font-bold text-xs text-white">Andrew Hay</div>
+<div class="text-[10px] text-on-surface-variant font-mono">Principal Architect @ Disney+</div>
+</div>
+</div>
+</div>
+<!-- Testimonial 3: Instacart -->
+<div class="bg-surface-container rounded-xl p-4 border border-outline-variant/30 flex flex-col gap-3">
+<p class="text-xs text-on-surface leading-relaxed">
+              "The instant correlation between client errors and backend distributed traces cut our mean time to resolution by 60%."
+            </p>
+<div class="flex items-center gap-2.5 pt-2 border-t border-outline-variant/20">
+<div class="w-8 h-8 rounded-full bg-tertiary-container/30 text-tertiary flex items-center justify-center font-bold text-xs">ID</div>
+<div>
+<div class="font-headline font-bold text-xs text-white">Igor Dobrovitski</div>
+<div class="text-[10px] text-on-surface-variant font-mono">VP of Platform @ Instacart</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. "Get started in minutes" Section -->
+<section class="py-10 px-5 flex flex-col gap-5" id="get-started">
+<div>
+<h2 class="font-headline font-black text-2xl tracking-tight text-white mb-2">
+            Get started in minutes
+          </h2>
+<p class="text-on-surface-variant text-sm">
+            Run the automated CLI wizard to install dependencies and inject telemetry without manual boilerplate.
+          </p>
+</div>
+<!-- Framework Pills Horizontal Scrollable -->
+<div class="flex gap-2 overflow-x-auto pb-1 -mx-5 px-5">
+<button class="px-3 py-1.5 rounded-full bg-primary-container text-white font-mono text-xs font-semibold whitespace-nowrap shadow-sm">Next.js</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">React</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">Python</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">Node</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">Go</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">iOS</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant hover:text-white font-mono text-xs font-medium whitespace-nowrap border border-outline-variant/30">Android</button>
+</div>
+<!-- Terminal Shell Command Box with Copy Trigger -->
+<div class="bg-surface-container-lowest rounded-xl p-3 border border-outline-variant/40 flex items-center justify-between font-mono text-xs text-white">
+<div class="flex items-center gap-2 overflow-hidden truncate">
+<span class="text-tertiary select-none">$</span>
+<span class="text-primary truncate">npx @sentry/wizard@latest -i nextjs</span>
+</div>
+<button class="p-1.5 hover:text-primary-container text-on-surface-variant active:scale-95 transition-transform ml-2" title="Copy Command">
+<span class="material-symbols-outlined text-base" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</section>
+<!-- 9. Security, Enterprise & Compliance -->
+<section class="py-8 px-5 bg-surface-container-high/40 border-t border-outline-variant/20 flex flex-col gap-4 text-center">
+<h3 class="font-headline font-bold text-base text-white">
+          Built to be secure, designed to not get in your way
+        </h3>
+<!-- 4 Security badges grid -->
+<div class="grid grid-cols-2 gap-2.5 text-left">
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary text-lg" data-icon="verified_user">verified_user</span>
+<div>
+<div class="font-headline font-bold text-xs text-white">GDPR</div>
+<div class="text-[9px] text-on-surface-variant font-mono">Compliant Storage</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg" data-icon="security">security</span>
+<div>
+<div class="font-headline font-bold text-xs text-white">SOC 2 Type II</div>
+<div class="text-[9px] text-on-surface-variant font-mono">Certified Audits</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg" data-icon="policy">policy</span>
+<div>
+<div class="font-headline font-bold text-xs text-white">ISO 27001</div>
+<div class="text-[9px] text-on-surface-variant font-mono">Infosec Standard</div>
+</div>
+</div>
+<div class="bg-surface-container rounded-lg p-2.5 border border-outline-variant/30 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-lg" data-icon="health_and_safety">health_and_safety</span>
+<div>
+<div class="font-headline font-bold text-xs text-white">HIPAA Ready</div>
+<div class="text-[9px] text-on-surface-variant font-mono">BAA Enforced</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. Final Call to Action Section -->
+<section class="py-12 px-5 text-center relative overflow-hidden flex flex-col items-center">
+<!-- Deep Purple Glowing backdrop box -->
+<div class="w-full bg-gradient-to-b from-secondary-container/50 to-surface-container-high rounded-2xl p-6 border border-primary-container/30 shadow-2xl relative">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-primary-container/20 rounded-full blur-2xl pointer-events-none"></div>
+<h2 class="font-headline font-black text-4xl text-white tracking-tight mb-2">
+            Fix It.
+          </h2>
+<p class="text-xs text-on-surface-variant leading-relaxed max-w-[280px] mx-auto mb-6">
+            Join 4M+ developers resolving issues, profiling bottlenecks, and shipping code with confidence.
+          </p>
+<div class="flex flex-col gap-3">
+<a class="w-full py-3.5 px-6 rounded-lg bg-white text-surface-container-lowest font-headline font-bold text-xs uppercase tracking-wider text-center shadow-lg active:scale-95 transition-all" href="#get-started">
+              Get Started
+            </a>
+<a class="w-full py-3.5 px-6 rounded-lg bg-transparent border-2 border-primary-container text-primary-container font-headline font-bold text-xs uppercase tracking-wider text-center active:scale-95 transition-all" href="#get-demo">
+              Get Demo
+            </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Shared Components: Footer (Rendered according to JSON specs for Mobile) -->
+<footer class="w-full border-t border-outline-variant/20 bg-surface-container-lowest py-8 px-6 flex flex-col gap-6">
+<!-- Brand & Product name -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5 text-primary-container fill-current" viewbox="0 0 72 66">
+<path d="M47.7 54.4H28.4L20.2 41.5L34.1 19.3L47.7 54.4ZM71.2 59.9L58.5 28.5L42.2 0L24.5 28.5L1.1 59.9C-0.3 61.8 -0.4 64.3 0.8 66H71.5C72.8 64.1 72.7 61.7 71.2 59.9Z" fill="#FD44B0"></path>
+</svg>
+<span class="font-headline text-lg font-bold text-on-surface">Sentry</span>
+</div>
+<span class="text-[11px] font-mono text-tertiary flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-tertiary inline-block animate-pulse"></span>
+          All Systems Operational
+        </span>
+</div>
+<!-- Links Grid matching Shared Components JSON -->
+<div class="grid grid-cols-2 gap-y-2.5 gap-x-4 text-xs font-body text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#docs">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#changelog">Changelog</a>
+<a class="hover:text-primary transition-colors" href="#security">Security</a>
+<a class="hover:text-primary transition-colors" href="#privacy">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#terms">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#status">Status</a>
+<a class="hover:text-primary transition-colors" href="#architecture">System Architecture</a>
+<a class="hover:text-primary transition-colors" href="#careers">Careers</a>
+<a class="hover:text-primary transition-colors" href="#github">GitHub</a>
+</div>
+<!-- Mandatory Copyright verbatim from JSON -->
+<div class="pt-4 border-t border-outline-variant/20 text-[11px] font-body text-on-surface-variant/70 leading-relaxed">
+        © 2026 Functional Software, Inc. Sentry is a registered trademark of Functional Software, Inc.
+      </div>
+</footer>
+</div>
+</body></html>
