@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=390, initial-scale=1.0">
+  <title>Mistral AI - Frontier AI in your hands</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              black: '#101013',
+              dark: '#131316',
+              surface: '#18181c',
+              border: '#26262b',
+              borderLight: '#32323a',
+              orange: '#f05b2c',
+              amber: '#fa8029',
+              yellow: '#fab839',
+              red: '#b51d26',
+              darkRed: '#7d1217',
+              ivory: '#fafaf4',
+              muted: '#8e8e93',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #101013;
+      color: #fafaf4;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+    .pixel-grid-pattern {
+      background-size: 24px 24px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    /* Hide scrollbars for clean mobile study */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    * {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-brand-black text-brand-ivory min-h-screen selection:bg-brand-orange selection:text-white">
+
+  <!-- ========================================== -->
+  <!-- 1. TOP BAR (Height: 49px)                   -->
+  <!-- ========================================== -->
+  <header class="sticky top-0 z-50 w-full h-[49px] bg-brand-black/95 backdrop-blur border-b border-brand-border flex items-stretch">
+    <!-- Left Logo Cell (0 - 52px) -->
+    <a href="#" class="w-[52px] h-full flex items-center justify-center border-r border-brand-border hover:bg-brand-surface transition-colors" aria-label="Mistral AI Home">
+      <!-- Mistral Pixel Icon SVG (Orange pixel grid) -->
+      <svg width="22" height="18" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg" class="shape-rendering-crispEdges">
+        <rect x="0" y="0" width="1" height="9" fill="#f05b2c"/>
+        <rect x="1" y="2" width="1" height="7" fill="#f05b2c"/>
+        <rect x="2" y="3" width="1" height="6" fill="#f05b2c"/>
+        <rect x="3" y="4" width="1" height="5" fill="#fa8029"/>
+        <rect x="4" y="5" width="1" height="4" fill="#fab839"/>
+        <rect x="5" y="4" width="1" height="5" fill="#f05b2c"/>
+        <rect x="6" y="5" width="1" height="4" fill="#fab839"/>
+        <rect x="7" y="4" width="1" height="5" fill="#fa8029"/>
+        <rect x="8" y="3" width="1" height="6" fill="#f05b2c"/>
+        <rect x="9" y="2" width="1" height="7" fill="#f05b2c"/>
+        <rect x="10" y="0" width="1" height="9" fill="#f05b2c"/>
+      </svg>
+    </a>
+
+    <!-- Center 'Get in touch' Action Cell -->
+    <div class="flex-1 flex items-center justify-center px-4">
+      <a href="#contact" class="w-full text-center py-2 text-[13px] tracking-wide font-medium text-brand-ivory hover:text-brand-orange transition-colors">
+        Get in touch
+      </a>
+    </div>
+
+    <!-- Right 3x3 Dotted Menu Icon Cell (340 - 390px) -->
+    <button class="w-[50px] h-full flex items-center justify-center border-l border-brand-border hover:bg-brand-surface transition-colors" aria-label="Menu">
+      <div class="grid grid-cols-3 gap-[3px] p-1">
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+        <span class="w-[3px] h-[3px] bg-brand-ivory rounded-[0.5px]"></span>
+      </div>
+    </button>
+  </header>
+
+  <!-- ========================================== -->
+  <!-- 2. HERO SECTION (0-844px viewport study)    -->
+  <!-- ========================================== -->
+  <section class="relative px-4 pt-8 pb-4">
+    <!-- Meta prompt subtag -->
+    <div class="flex items-center gap-2 mb-4">
+      <span class="inline-block w-2 h-2 bg-brand-orange"></span>
+      <span class="font-mono text-[10px] tracking-widest uppercase text-brand-muted">FRONTIER OPEN INTELLIGENCE</span>
+    </div>
+
+    <!-- 40px Sans 2-line heading -->
+    <h1 class="text-[38px] leading-[1.08] font-medium tracking-tight text-brand-ivory mb-5">
+      Frontier AI.<br>In your hands.
+    </h1>
+
+    <!-- 20px Multi-line paragraph -->
+    <p class="text-[17px] leading-[1.4] text-neutral-300 font-normal mb-6">
+      We help organizations build tailored AI systems to solve the world’s hardest problems.
+    </p>
+
+    <!-- Release tags / telemetry bar -->
+    <div class="flex items-center justify-between py-2 border-t border-b border-brand-border text-[11px] font-mono text-brand-muted">
+      <span>CURRENT RELEASE</span>
+      <span class="text-brand-ivory font-medium">mistral-large-2411</span>
+    </div>
+
+    <!-- FEATURED NEWS ROW (y331-446) -->
+    <div class="mt-4 border border-brand-border bg-brand-dark p-3.5 hover:border-brand-borderLight transition-colors">
+      <div class="flex items-center justify-between text-[10px] font-mono tracking-wider text-brand-muted mb-1.5">
+        <span class="text-brand-orange uppercase font-semibold">Featured Dispatch</span>
+        <span>OCT 2026</span>
+      </div>
+      <a href="#" class="flex items-center justify-between group">
+        <span class="text-[13px] font-medium text-brand-ivory group-hover:text-brand-orange transition-colors pr-2 leading-snug">
+          Announcing Pixtral Large & Le Chat Enterprise updates
+        </span>
+        <svg class="w-4 h-4 text-brand-muted group-hover:text-brand-orange shrink-0 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+
+    <!-- PIXEL MOSAIC ARTWORK (y446-666 approx 220px high) -->
+    <!-- Authentic Mistral pixel-grid generative visual block with black hairline outlines -->
+    <div class="mt-4 w-full h-[180px] bg-black border border-brand-border relative overflow-hidden flex flex-col justify-between p-2">
+      <!-- Grid Background -->
+      <div class="absolute inset-0 pixel-grid-pattern opacity-60"></div>
+      
+      <!-- Mosaic Pixel Blocks -->
+      <div class="relative z-10 w-full h-full flex flex-col justify-center items-center">
+        <!-- Pixel Assembly Graphic -->
+        <svg viewBox="0 0 350 140" class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+          <!-- Pixel Rows with Hairline Outlines -->
+          <!-- Row 1 -->
+          <rect x="30" y="20" width="30" height="24" fill="#7d1217" stroke="#101013" stroke-width="1.5"/>
+          <rect x="60" y="20" width="45" height="24" fill="#b51d26" stroke="#101013" stroke-width="1.5"/>
+          <rect x="105" y="20" width="60" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="165" y="20" width="40" height="24" fill="#fab839" stroke="#101013" stroke-width="1.5"/>
+          <rect x="205" y="20" width="70" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="275" y="20" width="45" height="24" fill="#fa8029" stroke="#101013" stroke-width="1.5"/>
+
+          <!-- Row 2 -->
+          <rect x="15" y="44" width="50" height="24" fill="#fa8029" stroke="#101013" stroke-width="1.5"/>
+          <rect x="65" y="44" width="70" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="135" y="44" width="30" height="24" fill="#fab839" stroke="#101013" stroke-width="1.5"/>
+          <rect x="165" y="44" width="80" height="24" fill="#fa8029" stroke="#101013" stroke-width="1.5"/>
+          <rect x="245" y="44" width="50" height="24" fill="#b51d26" stroke="#101013" stroke-width="1.5"/>
+          <rect x="295" y="44" width="40" height="24" fill="#7d1217" stroke="#101013" stroke-width="1.5"/>
+
+          <!-- Row 3 -->
+          <rect x="35" y="68" width="65" height="24" fill="#fab839" stroke="#101013" stroke-width="1.5"/>
+          <rect x="100" y="68" width="45" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="145" y="68" width="65" height="24" fill="#b51d26" stroke="#101013" stroke-width="1.5"/>
+          <rect x="210" y="68" width="55" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="265" y="68" width="50" height="24" fill="#fa8029" stroke="#101013" stroke-width="1.5"/>
+
+          <!-- Row 4 -->
+          <rect x="50" y="92" width="55" height="24" fill="#f05b2c" stroke="#101013" stroke-width="1.5"/>
+          <rect x="105" y="92" width="70" height="24" fill="#fa8029" stroke="#101013" stroke-width="1.5"/>
+          <rect x="175" y="92" width="50" height="24" fill="#fab839" stroke="#101013" stroke-width="1.5"/>
+          <rect x="225" y="92" width="60" height="24" fill="#b51d26" stroke="#101013" stroke-width="1.5"/>
+
+          <!-- Small Accent Pixels -->
+          <rect x="20" y="100" width="8" height="8" fill="#fab839" stroke="#101013" stroke-width="1"/>
+          <rect x="315" y="32" width="8" height="8" fill="#f05b2c" stroke="#101013" stroke-width="1"/>
+          <rect x="325" y="74" width="8" height="8" fill="#fa8029" stroke="#101013" stroke-width="1"/>
+        </svg>
+      </div>
+
+      <!-- Technical Telemetry Footer inside mosaic frame -->
+      <div class="relative z-10 flex items-center justify-between text-[9px] font-mono text-brand-muted px-1">
+        <span>FIG. 01 — MULTI-MODAL LATENT WAVE</span>
+        <span class="text-brand-orange">DENSITY: 88.4%</span>
+      </div>
+    </div>
+
+    <!-- 2-COLUMN ENTERPRISE LOGO GRID (y666 - 844) -->
+    <div class="mt-4">
+      <div class="text-[10px] font-mono uppercase tracking-widest text-brand-muted mb-2 flex items-center justify-between">
+        <span>TRUSTED BY GLOBAL LEADERS</span>
+        <span class="text-[9px] text-neutral-500">10,000+ CLUSTERS</span>
+      </div>
+
+      <div class="grid grid-cols-2 border-t border-l border-brand-border">
+        <!-- Logo cell 1: BNP Paribas / HSBC -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">BNP PARIBAS</span>
+        </div>
+        <!-- Logo cell 2: TotalEnergies -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">TOTALENERGIES</span>
+        </div>
+        <!-- Logo cell 3: Orange -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">ORANGE</span>
+        </div>
+        <!-- Logo cell 4: ASML -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">ASML</span>
+        </div>
+        <!-- Logo cell 5: AXA -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">AXA</span>
+        </div>
+        <!-- Logo cell 6: CMA CGM -->
+        <div class="h-[52px] border-r border-b border-brand-border flex items-center justify-center p-3 bg-brand-dark/50">
+          <span class="font-mono text-[12px] tracking-wider font-semibold text-neutral-300">CMA CGM</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 3. CUSTOMER STORIES / HORIZONTAL SCROLL    -->
+  <!-- ========================================== -->
+  <section class="py-8 border-t border-brand-border bg-brand-black">
+    <div class="px-4 mb-4 flex items-baseline justify-between">
+      <div>
+        <span class="text-[10px] font-mono uppercase tracking-widest text-brand-orange">PROVEN VALUE</span>
+        <h2 class="text-xl font-medium tracking-tight text-brand-ivory mt-0.5">Deploying sovereignty at scale.</h2>
+      </div>
+      <a href="#" class="text-[11px] font-mono text-brand-muted hover:text-brand-ivory flex items-center gap-1">
+        All cases <span>→</span>
+      </a>
+    </div>
+
+    <!-- Horizontal scrollable case cards -->
+    <div class="flex overflow-x-auto gap-3 px-4 pb-2 snap-x snap-mandatory">
+      
+      <!-- Story Card 1 -->
+      <div class="min-w-[280px] max-w-[280px] shrink-0 border border-brand-border bg-brand-dark p-4 snap-start flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[10px] font-mono text-brand-muted mb-2">
+            <span class="text-brand-orange">FINANCIAL SERVICES</span>
+            <span>LATENCY: -64%</span>
+          </div>
+          <h3 class="text-[15px] font-medium leading-snug mb-2 text-brand-ivory">
+            Accelerating fraud detection and compliance workflows
+          </h3>
+          <p class="text-[12px] text-neutral-400 leading-relaxed mb-4">
+            Automating 8.4M cross-border transaction reviews daily with ultra-low latency self-hosted Mistral weights.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between font-mono text-[11px] text-brand-muted">
+          <span>BNP PARIBAS</span>
+          <span class="text-brand-ivory">Read case →</span>
+        </div>
+      </div>
+
+      <!-- Story Card 2 -->
+      <div class="min-w-[280px] max-w-[280px] shrink-0 border border-brand-border bg-brand-dark p-4 snap-start flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[10px] font-mono text-brand-muted mb-2">
+            <span class="text-brand-orange">GLOBAL LOGISTICS</span>
+            <span>ACCURACY: 99.2%</span>
+          </div>
+          <h3 class="text-[15px] font-medium leading-snug mb-2 text-brand-ivory">
+            Automating multi-modal maritime documentation
+          </h3>
+          <p class="text-[12px] text-neutral-400 leading-relaxed mb-4">
+            Extracting complex bill of ladings and manifests across 160 countries in 24 languages with Pixtral vision.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between font-mono text-[11px] text-brand-muted">
+          <span>CMA CGM</span>
+          <span class="text-brand-ivory">Read case →</span>
+        </div>
+      </div>
+
+      <!-- Story Card 3 -->
+      <div class="min-w-[280px] max-w-[280px] shrink-0 border border-brand-border bg-brand-dark p-4 snap-start flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between text-[10px] font-mono text-brand-muted mb-2">
+            <span class="text-brand-orange">TELECOM & VOICE</span>
+            <span>380+ DIALECTS</span>
+          </div>
+          <h3 class="text-[15px] font-medium leading-snug mb-2 text-brand-ivory">
+            Empowering 280M subscribers with localized LLMs
+          </h3>
+          <p class="text-[12px] text-neutral-400 leading-relaxed mb-4">
+            Sub-second conversational customer assistance fine-tuned on native regional French & European dialects.
+          </p>
+        </div>
+        <div class="pt-3 border-t border-brand-border/60 flex items-center justify-between font-mono text-[11px] text-brand-muted">
+          <span>ORANGE GROUP</span>
+          <span class="text-brand-ivory">Read case →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 4. PRODUCT MATRIX ("Do it all with Mistral")-->
+  <!-- ========================================== -->
+  <section class="py-10 border-t border-brand-border bg-brand-black">
+    <!-- Centered Section Heading -->
+    <div class="px-4 text-center mb-6">
+      <span class="text-[11px] font-mono uppercase tracking-widest text-brand-muted">THE MISTRAL PLATFORM</span>
+      <h2 class="text-[28px] font-medium tracking-tight text-brand-ivory mt-1">
+        Do it all with Mistral.
+      </h2>
+      <p class="text-[13px] text-neutral-400 mt-2 max-w-[320px] mx-auto">
+        A unified stack for frontier inference, specialized domain training, and enterprise agent workflows.
+      </p>
+    </div>
+
+    <!-- Tab / Category Pills Row (scrollable on mobile) -->
+    <div class="flex overflow-x-auto gap-1.5 px-4 mb-8 pb-1">
+      <span class="px-3 py-1.5 bg-brand-surface border border-brand-orange text-brand-orange text-[11px] font-mono whitespace-nowrap">Vibe</span>
+      <span class="px-3 py-1.5 bg-brand-dark border border-brand-border text-neutral-300 text-[11px] font-mono whitespace-nowrap">Studio</span>
+      <span class="px-3 py-1.5 bg-brand-dark border border-brand-border text-neutral-300 text-[11px] font-mono whitespace-nowrap">Forge</span>
+      <span class="px-3 py-1.5 bg-brand-dark border border-brand-border text-neutral-300 text-[11px] font-mono whitespace-nowrap">Applied AI</span>
+      <span class="px-3 py-1.5 bg-brand-dark border border-brand-border text-neutral-300 text-[11px] font-mono whitespace-nowrap">Frontier models</span>
+      <span class="px-3 py-1.5 bg-brand-dark border border-brand-border text-neutral-300 text-[11px] font-mono whitespace-nowrap">AI Cloud</span>
+    </div>
+
+    <!-- 6 DETAILED PRODUCT SECTIONS -->
+    <div class="divide-y divide-brand-border border-y border-brand-border">
+
+      <!-- Product 1: Autonomous work -->
+      <article class="p-5 bg-brand-black">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>MISTRAL VIBE</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">Autonomous work.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          Enterprise agent orchestration built on deterministic tool-calling, autonomous multi-step reasoning, and zero data leakage boundaries.
+        </p>
+
+        <!-- Feature bullet badges -->
+        <div class="space-y-1.5 mb-4 text-[11px] font-mono text-neutral-400">
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> Native JSON mode & function routing
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> Persistent memory state across sessions
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> Full audit trails for security operations
+          </div>
+        </div>
+
+        <!-- Terminal / Artifact Visual -->
+        <div class="bg-brand-dark border border-brand-border p-3 font-mono text-[11px] rounded-none mb-4">
+          <div class="flex items-center justify-between text-[10px] text-brand-muted border-b border-brand-border pb-2 mb-2">
+            <span>agent_workflow.ts</span>
+            <span class="text-emerald-400">● RUNNING</span>
+          </div>
+          <div class="text-neutral-400 space-y-1">
+            <div class="text-brand-muted">> Initializing Orchestrator: SovereignFinancialReview</div>
+            <div class="text-neutral-300">> Tool Dispatched: parse_sec_fillings_10k</div>
+            <div class="text-brand-orange bg-brand-orange/10 p-1.5 mt-1 border-l-2 border-brand-orange">
+              Debt ratio secured at 2.1x vs 3.5x maximum threshold.
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          Explore Mistral Vibe <span>→</span>
+        </a>
+      </article>
+
+      <!-- Product 2: Autonomous coding -->
+      <article class="p-5 bg-brand-dark/40">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>CODESTRAL ENGINE</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">Autonomous coding.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          Codestral is our dedicated 22B parameter model built specifically for code generation, multi-file refactoring, fill-in-the-middle completion, and automated test synthesis.
+        </p>
+
+        <div class="space-y-1.5 mb-4 text-[11px] font-mono text-neutral-400">
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> 80+ programming languages supported
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> 256k long-context repository indexing
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-brand-orange font-bold">+</span> Sub-50ms latency with speculative decoding
+          </div>
+        </div>
+
+        <!-- Code Visual -->
+        <div class="bg-black border border-brand-border p-3 font-mono text-[11px] rounded-none mb-4">
+          <div class="flex items-center justify-between text-[10px] text-brand-muted border-b border-brand-border pb-1.5 mb-2">
+            <span>speculative_kernel.cu</span>
+            <span class="text-neutral-500">NVCC CUDA 12.4</span>
+          </div>
+          <pre class="text-neutral-300 text-[10px] leading-tight overflow-x-auto"><span class="text-brand-orange">__global__ void</span> speculative_decode(...) {
+  <span class="text-brand-muted">// Codestral SIMD lane verification</span>
+  <span class="text-brand-orange">int</span> tid = threadIdx.x;
+  <span class="text-neutral-400">if</span> (alpha > 0.985f) atomicAdd(&accepted);
+}</pre>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          Read Codestral documentation <span>→</span>
+        </a>
+      </article>
+
+      <!-- Product 3: AI application development -->
+      <article class="p-5 bg-brand-black">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>MISTRAL STUDIO</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">AI application development.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          An all-in-one developer workspace to test prompts, run benchmark comparisons, define system constraints, and deploy managed endpoints with built-in guardrails.
+        </p>
+
+        <!-- Studio Benchmarks Visual -->
+        <div class="bg-brand-dark border border-brand-border p-3 font-mono text-[11px] mb-4">
+          <div class="flex items-center justify-between text-[10px] text-neutral-400 mb-2">
+            <span class="bg-brand-surface px-1.5 py-0.5 border border-brand-border">MISTRAL LARGE 2411</span>
+            <span class="text-brand-orange">100% JSON VALID</span>
+          </div>
+          <div class="w-full bg-brand-surface h-2 mb-2">
+            <div class="bg-brand-orange h-full w-[96%]"></div>
+          </div>
+          <div class="flex justify-between text-[10px] text-brand-muted">
+            <span>LATENCY: 142ms</span>
+            <span>TOKENS: 4,120 /s</span>
+          </div>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          Open Studio Playground <span>→</span>
+        </a>
+      </article>
+
+      <!-- Product 4: Custom model development -->
+      <article class="p-5 bg-brand-dark/40">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>MISTRAL FORGE</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">Custom model development.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          Continuous pre-training, fine-tuning, and model distillation designed for proprietary organizational data. Produce sovereign smaller models with the capability of frontier giants.
+        </p>
+
+        <!-- Loss reduction curve card -->
+        <div class="bg-brand-black border border-brand-border p-3 font-mono text-[11px] mb-4">
+          <div class="flex justify-between text-[10px] text-brand-muted mb-2">
+            <span>TRAINING JOB: forge-biotech-v4</span>
+            <span class="text-brand-amber">EPOCH 3/5</span>
+          </div>
+          <div class="text-[12px] text-brand-ivory mb-1">
+            Loss reduction: <span class="text-emerald-400 font-semibold">1.841 → 0.412 (-77.6%)</span>
+          </div>
+          <div class="text-[10px] text-brand-muted">
+            Retention rate: 97.4% on general reasoning benchmark
+          </div>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          Start fine-tuning with Forge <span>→</span>
+        </a>
+      </article>
+
+      <!-- Product 5: Infrastructure for training & inference -->
+      <article class="p-5 bg-brand-black">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>INFRASTRUCTURE</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">Training and inference.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          Bare-metal European AI computing environments powered entirely by carbon-free energy. Dedicated hardware allocation, NVLink interconnects, and unthrottled API throughput.
+        </p>
+
+        <!-- Server Grid Status -->
+        <div class="bg-brand-dark border border-brand-border p-3 font-mono text-[11px] mb-4 space-y-2">
+          <div class="flex justify-between items-center text-[10px] border-b border-brand-border/60 pb-1.5">
+            <span class="text-brand-ivory">EU-PARIS-01 (Sovereign Zone)</span>
+            <span class="text-emerald-400">100% GREEN</span>
+          </div>
+          <div class="flex justify-between items-center text-[10px] border-b border-brand-border/60 pb-1.5">
+            <span class="text-brand-ivory">EU-FRANKFURT-02</span>
+            <span class="text-emerald-400">ONLINE</span>
+          </div>
+          <div class="flex justify-between items-center text-[10px]">
+            <span class="text-brand-ivory">US-EAST-01 (Air-gapped)</span>
+            <span class="text-brand-orange">RESERVED</span>
+          </div>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          View cluster regions <span>→</span>
+        </a>
+      </article>
+
+      <!-- Product 6: Advanced R&D -->
+      <article class="p-5 bg-brand-dark/40">
+        <div class="flex items-center gap-1.5 mb-2 font-mono text-[10px] text-brand-orange">
+          <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+          <span>APPLIED AI LABS</span>
+        </div>
+        <h3 class="text-2xl font-medium text-brand-ivory tracking-tight mb-2">Advanced R&D.</h3>
+        <p class="text-[13px] text-neutral-300 leading-relaxed mb-4">
+          Direct access to Mistral’s core research scientists. We partner with national institutes, defense organizations, and critical industries to build bespoke frontier intelligence.
+        </p>
+
+        <div class="border border-brand-border bg-brand-black p-3 text-[11px] font-mono text-neutral-300 space-y-1 mb-4">
+          <div class="text-brand-orange">PHASE I: Mathematical Blueprint & Topology</div>
+          <div class="text-brand-muted">PHASE II: 100B+ Token Domain Pre-training</div>
+          <div class="text-brand-muted">PHASE III: Direct Preference Optimization (DPO)</div>
+        </div>
+
+        <a href="#" class="inline-flex items-center gap-1 text-[12px] font-mono uppercase tracking-wider text-brand-orange hover:underline font-medium">
+          Engage research team <span>→</span>
+        </a>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 5. EXPERT PARTNERSHIP & SERVICES           -->
+  <!-- ========================================== -->
+  <section class="py-8 px-4 border-t border-brand-border bg-brand-black">
+    <div class="mb-6">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-brand-orange">SERVICES & ENGAGEMENT</span>
+      <h2 class="text-2xl font-medium tracking-tight text-brand-ivory mt-1">Supported by expert partnership.</h2>
+      <p class="text-[13px] text-neutral-400 mt-1">
+        White-glove technical deployment backed directly by Mistral’s engineering leadership.
+      </p>
+    </div>
+
+    <!-- 4 Services Cards Grid (2x2 on mobile) -->
+    <div class="grid grid-cols-1 gap-3">
+      <!-- Service 1 -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <span class="text-[10px] font-mono text-brand-orange">01 //</span>
+        <h4 class="text-[15px] font-medium text-brand-ivory mt-1 mb-1.5">Frontier Engineering</h4>
+        <p class="text-[12px] text-neutral-400 leading-relaxed">
+          Architecture review, vLLM / TensorRT-LLM acceleration, and low-level GPU kernel tuning for maximum throughput.
+        </p>
+      </div>
+
+      <!-- Service 2 -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <span class="text-[10px] font-mono text-brand-orange">02 //</span>
+        <h4 class="text-[15px] font-medium text-brand-ivory mt-1 mb-1.5">Model Alignment</h4>
+        <p class="text-[12px] text-neutral-400 leading-relaxed">
+          Domain-specific safety filters, hallucination mitigation pipelines, and constitutional AI constraints for compliance.
+        </p>
+      </div>
+
+      <!-- Service 3 -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <span class="text-[10px] font-mono text-brand-orange">03 //</span>
+        <h4 class="text-[15px] font-medium text-brand-ivory mt-1 mb-1.5">Sovereign Architecture</h4>
+        <p class="text-[12px] text-neutral-400 leading-relaxed">
+          Air-gapped on-premise installation, SecNumCloud compliance, and complete cryptographic perimeter segregation.
+        </p>
+      </div>
+
+      <!-- Service 4 -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <span class="text-[10px] font-mono text-brand-orange">04 //</span>
+        <h4 class="text-[15px] font-medium text-brand-ivory mt-1 mb-1.5">Enterprise Enablement</h4>
+        <p class="text-[12px] text-neutral-400 leading-relaxed">
+          Developer bootcamps, prompt engineering certifications, and continuous production monitoring support.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 6. PRIVACY & SOVEREIGN DEPLOYMENT CHOICES  -->
+  <!-- ========================================== -->
+  <section class="py-8 px-4 border-t border-brand-border bg-brand-black">
+    <div class="mb-6">
+      <span class="text-[10px] font-mono uppercase tracking-widest text-brand-orange">DATA SOVEREIGNTY & GOVERNANCE</span>
+      <h2 class="text-2xl font-medium tracking-tight text-brand-ivory mt-1">AI deployments designed for privacy.</h2>
+      <p class="text-[13px] text-neutral-400 mt-1">
+        Never compromise your intellectual property. Choose the exact topology where your model weights and telemetry reside.
+      </p>
+    </div>
+
+    <!-- 3 Deployment Choices Stack -->
+    <div class="space-y-3">
+      <!-- Option 1: Self-Hosted -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <div class="flex items-center justify-between text-[10px] font-mono text-brand-muted mb-1">
+          <span>TIER 01</span>
+          <span class="text-brand-orange">MAX PRIVACY</span>
+        </div>
+        <h4 class="text-[16px] font-medium text-brand-ivory mb-1">Self-Hosted / On-Premise</h4>
+        <p class="text-[12px] text-neutral-400 mb-3">
+          Deploy raw weights entirely inside your physical data centers or isolated Kubernetes clusters with zero outbound telemetry.
+        </p>
+        <ul class="text-[11px] font-mono text-neutral-300 space-y-1">
+          <li>✓ Full model weights custody</li>
+          <li>✓ Air-gapped network compatibility</li>
+          <li>✓ Zero external API dependencies</li>
+        </ul>
+      </div>
+
+      <!-- Option 2: Mistral Cloud Sovereign -->
+      <div class="p-4 border-2 border-brand-orange bg-brand-dark relative">
+        <div class="flex items-center justify-between text-[10px] font-mono mb-1">
+          <span class="text-brand-orange font-bold">TIER 02 — RECOMMENDED</span>
+          <span class="bg-brand-orange text-white text-[9px] px-1.5 py-0.2">EU SOVEREIGN</span>
+        </div>
+        <h4 class="text-[16px] font-medium text-brand-ivory mb-1">Mistral Cloud Sovereign</h4>
+        <p class="text-[12px] text-neutral-400 mb-3">
+          Fully managed endpoints hosted in certified European data zones subject strictly to European legislation and GDPR.
+        </p>
+        <ul class="text-[11px] font-mono text-neutral-300 space-y-1">
+          <li>✓ French & German sovereign zones</li>
+          <li>✓ No CLOUD Act exposure</li>
+          <li>✓ Zero data retention for prompts</li>
+        </ul>
+      </div>
+
+      <!-- Option 3: Major Cloud Providers -->
+      <div class="p-4 border border-brand-border bg-brand-dark">
+        <div class="flex items-center justify-between text-[10px] font-mono text-brand-muted mb-1">
+          <span>TIER 03</span>
+          <span class="text-neutral-400">MULTI-CLOUD</span>
+        </div>
+        <h4 class="text-[16px] font-medium text-brand-ivory mb-1">Major Cloud Providers</h4>
+        <p class="text-[12px] text-neutral-400 mb-3">
+          Consume Mistral models via your existing enterprise billing agreements on AWS Bedrock, Microsoft Azure, Google Cloud, or Snowflake.
+        </p>
+        <ul class="text-[11px] font-mono text-neutral-300 space-y-1">
+          <li>✓ Integrated cloud IAM credentials</li>
+          <li>✓ Spend existing cloud commitments</li>
+          <li>✓ Turnkey serverless availability</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 7. FINAL HERO CTA                          -->
+  <!-- ========================================== -->
+  <section class="py-14 px-4 border-t border-brand-border bg-brand-black text-center relative overflow-hidden">
+    <div class="absolute inset-0 pixel-grid-pattern opacity-40"></div>
+    
+    <div class="relative z-10 max-w-[320px] mx-auto">
+      <div class="inline-flex items-center gap-2 mb-3">
+        <span class="w-1.5 h-1.5 bg-brand-orange"></span>
+        <span class="text-[10px] font-mono tracking-widest text-brand-muted uppercase">SOVEREIGN FRONTIER COGNITION</span>
+      </div>
+
+      <h2 class="text-3xl font-medium tracking-tight text-brand-ivory leading-tight mb-4">
+        OWN YOUR OWN AI FUTURE.
+      </h2>
+
+      <p class="text-[13px] text-neutral-400 leading-relaxed mb-6">
+        Deploy sovereign, efficient, and open frontier intelligence inside your perimeter. Start building in minutes.
+      </p>
+
+      <div class="flex flex-col gap-2.5">
+        <a href="#build" class="w-full py-3 bg-brand-orange hover:bg-brand-amber text-white font-medium text-[13px] transition-colors flex items-center justify-center gap-2">
+          <span>Start building</span>
+          <span>→</span>
+        </a>
+        <a href="#contact" class="w-full py-3 bg-brand-surface border border-brand-border hover:border-brand-borderLight text-brand-ivory font-medium text-[13px] transition-colors">
+          Contact sales
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- 8. COMPACTED MOBILE FOOTER                 -->
+  <!-- ========================================== -->
+  <footer class="border-t border-brand-border bg-brand-black px-4 pt-8 pb-12 font-mono text-[11px]">
+    <!-- Brand identity + System status -->
+    <div class="flex items-center justify-between pb-6 border-b border-brand-border mb-6">
+      <div class="flex items-center gap-2">
+        <!-- Mistral Pixel Icon SVG -->
+        <svg width="18" height="15" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="1" height="9" fill="#f05b2c"/>
+          <rect x="1" y="2" width="1" height="7" fill="#f05b2c"/>
+          <rect x="2" y="3" width="1" height="6" fill="#f05b2c"/>
+          <rect x="3" y="4" width="1" height="5" fill="#fa8029"/>
+          <rect x="4" y="5" width="1" height="4" fill="#fab839"/>
+          <rect x="5" y="4" width="1" height="5" fill="#f05b2c"/>
+          <rect x="6" y="5" width="1" height="4" fill="#fab839"/>
+          <rect x="7" y="4" width="1" height="5" fill="#fa8029"/>
+          <rect x="8" y="3" width="1" height="6" fill="#f05b2c"/>
+          <rect x="9" y="2" width="1" height="7" fill="#f05b2c"/>
+          <rect x="10" y="0" width="1" height="9" fill="#f05b2c"/>
+        </svg>
+        <span class="font-sans font-semibold text-[15px] tracking-tight text-brand-ivory">Mistral AI</span>
+      </div>
+      <div class="flex items-center gap-1.5 text-[10px] text-emerald-400 bg-brand-surface px-2 py-1 border border-brand-border">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>ALL SYSTEMS OPERATIONAL</span>
+      </div>
+    </div>
+
+    <!-- Multi-column links grid (2-columns on mobile) -->
+    <div class="grid grid-cols-2 gap-y-6 gap-x-4 mb-8">
+      <div>
+        <div class="text-neutral-500 uppercase tracking-wider mb-2 font-semibold text-[10px]">Products</div>
+        <ul class="space-y-1.5 text-neutral-300">
+          <li><a href="#" class="hover:text-brand-orange">Mistral Vibe</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Codestral</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Mistral Studio</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Mistral Forge</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Le Chat Enterprise</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-neutral-500 uppercase tracking-wider mb-2 font-semibold text-[10px]">Models</div>
+        <ul class="space-y-1.5 text-neutral-300">
+          <li><a href="#" class="hover:text-brand-orange">Mistral Large</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Pixtral Large</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Mistral Small</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Ministral 3B / 8B</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Mistral Embed</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-neutral-500 uppercase tracking-wider mb-2 font-semibold text-[10px]">Developers</div>
+        <ul class="space-y-1.5 text-neutral-300">
+          <li><a href="#" class="hover:text-brand-orange">Documentation</a></li>
+          <li><a href="#" class="hover:text-brand-orange">API Reference</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Python Client</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Discord Community</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Cookbooks</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="text-neutral-500 uppercase tracking-wider mb-2 font-semibold text-[10px]">Company & Legal</div>
+        <ul class="space-y-1.5 text-neutral-300">
+          <li><a href="#" class="hover:text-brand-orange">About Us</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Careers (We're hiring)</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Research Papers</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Privacy & Security</a></li>
+          <li><a href="#" class="hover:text-brand-orange">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom copyright line -->
+    <div class="pt-6 border-t border-brand-border text-neutral-500 text-[10px] flex flex-col gap-2">
+      <div>© 2026 Mistral AI. All rights reserved. Sovereign, open, and efficient AI.</div>
+      <div class="flex gap-4 text-neutral-400">
+        <a href="#" class="hover:text-brand-ivory">GitHub</a>
+        <a href="#" class="hover:text-brand-ivory">X (Twitter)</a>
+        <a href="#" class="hover:text-brand-ivory">LinkedIn</a>
+        <a href="#" class="hover:text-brand-ivory">Hugging Face</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
