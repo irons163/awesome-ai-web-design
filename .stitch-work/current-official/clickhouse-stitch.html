@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ClickHouse - The leading database for AI &amp; Real-time Analytics</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "inverse-primary": "#5f6200",
+            "tertiary": "#ffffff",
+            "surface-tint": "#c8cd4c",
+            "primary-container": "#e5ea66",
+            "background": "#131312",
+            "on-primary": "#313300",
+            "tertiary-fixed-dim": "#b0ccce",
+            "surface-variant": "#353533",
+            "surface-container-low": "#1c1c1a",
+            "on-tertiary-fixed-variant": "#314b4d",
+            "on-surface": "#e5e2e0",
+            "surface-container": "#20201e",
+            "on-secondary-container": "#bbbc82",
+            "on-tertiary-container": "#4f696b",
+            "on-primary-container": "#656900",
+            "tertiary-fixed": "#cbe8ea",
+            "on-primary-fixed": "#1c1d00",
+            "inverse-surface": "#e5e2e0",
+            "outline": "#93927d",
+            "on-secondary-fixed-variant": "#48491b",
+            "surface-container-high": "#2a2a29",
+            "on-tertiary-fixed": "#031f21",
+            "tertiary-container": "#cbe8ea",
+            "surface-bright": "#3a3938",
+            "on-background": "#e5e2e0",
+            "primary-fixed": "#e5ea66",
+            "on-secondary": "#313306",
+            "on-error-container": "#ffdad6",
+            "surface-container-highest": "#353533",
+            "secondary-fixed": "#e5e6a8",
+            "error-container": "#93000a",
+            "on-primary-fixed-variant": "#474a00",
+            "error": "#ffb4ab",
+            "secondary-fixed-dim": "#c9ca8e",
+            "on-error": "#690005",
+            "on-surface-variant": "#c9c8b1",
+            "inverse-on-surface": "#31302f",
+            "secondary": "#c9ca8e",
+            "surface-container-lowest": "#0e0e0d",
+            "surface": "#131312",
+            "surface-dim": "#131312",
+            "secondary-container": "#4a4c1d",
+            "primary": "#ffffff",
+            "primary-fixed-dim": "#c8cd4c",
+            "on-secondary-fixed": "#1c1d00",
+            "outline-variant": "#484836",
+            "on-tertiary": "#1a3436",
+            "clickhouse-yellow": "#FAFF78"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee {
+      display: flex;
+      width: 200%;
+      animation: marquee 35s linear infinite;
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+    pre, code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-clickhouse-yellow selection:text-black">
+<!-- 1. TOP ANNOUNCEMENT BANNER -->
+<aside class="bg-clickhouse-yellow text-black h-[32px] px-4 flex items-center justify-between text-xs font-semibold tracking-tight relative z-50" id="announcement-banner">
+<div class="flex-1 text-center">
+<a class="hover:underline inline-flex items-center gap-1.5 transition-all" href="#promql">
+<span>Native PromQL support is finally here!</span>
+<span class="font-bold">→</span>
+</a>
+</div>
+<button aria-label="Close Announcement" class="text-black hover:opacity-70 p-1 flex items-center justify-center transition-opacity" onclick="document.getElementById('announcement-banner').style.display='none'">
+<span class="text-sm font-bold leading-none">✕</span>
+</button>
+</aside>
+<!-- 2. STICKY TOP NAVIGATION (TopNavBar) -->
+<header class="sticky top-0 w-full z-50 bg-surface border-b border-outline-variant">
+<div class="flex justify-between items-center h-[77px] px-8 max-w-7xl mx-auto w-full">
+<!-- Brand Logo -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 group" href="#">
+<!-- ClickHouse Vertical Bars Logo Mark -->
+<div class="flex items-end gap-[3px] h-6 w-6">
+<span class="w-[3px] h-3 bg-clickhouse-yellow rounded-[1px]"></span>
+<span class="w-[3px] h-5 bg-clickhouse-yellow rounded-[1px]"></span>
+<span class="w-[3px] h-6 bg-clickhouse-yellow rounded-[1px]"></span>
+<span class="w-[3px] h-4 bg-clickhouse-yellow rounded-[1px]"></span>
+<span class="w-[3px] h-2 bg-clickhouse-yellow rounded-[1px]"></span>
+</div>
+<span class="font-headline font-bold text-xl tracking-tight text-primary">ClickHouse</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden lg:flex items-center gap-6 font-headline text-sm font-medium tracking-tight">
+<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-150" href="#product">Product</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-150" href="#solutions">Solutions</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-150" href="#docs">Docs</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-150" href="#learn">Learn</a>
+<a class="text-on-surface-variant hover:text-primary-container transition-colors duration-150" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Trailing Action Cluster -->
+<div class="flex items-center gap-4">
+<!-- Search icon -->
+<button aria-label="Search documentation and ecosystem" class="p-2 text-on-surface-variant hover:text-primary transition-colors duration-150 rounded">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</button>
+<a class="hidden sm:inline-block text-xs font-medium text-on-surface-variant hover:text-primary transition-colors" href="#console">Console</a>
+<!-- GitHub pill with star count -->
+<a class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high border border-outline-variant hover:border-outline text-xs text-on-surface font-mono transition-colors" href="https://github.com/ClickHouse/ClickHouse" rel="noreferrer" target="_blank">
+<span class="material-symbols-outlined text-clickhouse-yellow text-[16px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-semibold text-primary">50.1k</span>
+</a>
+<!-- Sign In -->
+<a class="text-sm font-medium text-on-surface-variant hover:text-primary transition-colors px-2 py-1" href="#signin">
+          Sign In
+        </a>
+<!-- Get Started (Pale lemon yellow pill) -->
+<a class="bg-clickhouse-yellow text-black font-semibold text-xs px-4 py-2 rounded hover:brightness-105 transition-all shadow-sm" href="#signup">
+          Get Started
+        </a>
+</div>
+</div>
+</header>
+<main>
+<!-- 3. TYPOGRAPHIC HERO SECTION -->
+<section class="max-w-7xl mx-auto px-8 pt-24 pb-20 text-center relative overflow-hidden">
+<!-- Two-line Centered 96px Headline -->
+<h1 class="font-headline font-bold text-5xl sm:text-7xl lg:text-[96px] leading-[1.02] tracking-[-0.035em] text-primary max-w-5xl mx-auto">
+        The leading<br/>database for AI
+      </h1>
+<!-- Centered Subheadline -->
+<p class="mt-8 text-lg sm:text-xl text-on-surface-variant max-w-2xl mx-auto font-normal leading-relaxed">
+        Powering agentic systems with millisecond queries at petabyte scale.
+      </p>
+<!-- Dual CTA Row -->
+<div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+<a class="bg-clickhouse-yellow text-black font-semibold text-sm px-6 py-3 rounded hover:brightness-105 transition-all" href="#trial">
+          Start free cloud trial
+        </a>
+<a class="bg-surface-container border border-outline-variant text-primary font-medium text-sm px-6 py-3 rounded hover:bg-surface-container-high transition-colors" href="#sales">
+          Contact sales
+        </a>
+</div>
+<!-- Lower Hero Promotional Split Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20 text-left max-w-5xl mx-auto">
+<!-- Card 1: Langfuse -->
+<a class="group p-6 rounded-lg bg-surface-container border border-outline-variant hover:border-clickhouse-yellow/40 transition-all flex flex-col justify-between" href="#langfuse">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-surface-container-high text-clickhouse-yellow border border-clickhouse-yellow/20 rounded">ANNOUNCEMENT</span>
+<span class="text-xs font-semibold text-primary">Langfuse + ClickHouse</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Langfuse is now part of ClickHouse. Discover the leading open-source platform for LLM observability, evaluations, and prompt management. Ideal for building, monitoring, and optimizing AI applications at scale.
+            </p>
+</div>
+<span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-clickhouse-yellow group-hover:translate-x-0.5 transition-transform">
+            Learn more <span>→</span>
+</span>
+</a>
+<!-- Card 2: Managed Postgres Beta -->
+<a class="group p-6 rounded-lg bg-surface-container border border-outline-variant hover:border-clickhouse-yellow/40 transition-all flex flex-col justify-between" href="#postgres">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="inline-block px-2 py-0.5 text-[10px] font-mono uppercase tracking-wider bg-surface-container-high text-clickhouse-yellow border border-clickhouse-yellow/20 rounded">PUBLIC BETA</span>
+<span class="text-xs font-semibold text-primary">ClickHouse Managed Postgres</span>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Now in Public Beta: ClickHouse Managed Postgres. Run Postgres up to 10X faster, with real-time analytics built-in directly to your transactional pipeline.
+            </p>
+</div>
+<span class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-clickhouse-yellow group-hover:translate-x-0.5 transition-transform">
+            Explore Managed Postgres <span>→</span>
+</span>
+</a>
+</div>
+</section>
+<!-- 4. CUSTOMER LOGO BAND -->
+<section class="border-y border-outline-variant bg-[#1a1a18] py-8 overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 mb-6 text-center">
+<span class="text-[11px] font-mono font-medium tracking-widest text-on-surface-variant uppercase">
+          CLICKHOUSE IS TRUSTED BY
+        </span>
+</div>
+<!-- Infinite Logo Ticker Row -->
+<div class="relative w-full overflow-hidden">
+<div class="animate-marquee flex items-center gap-16 text-on-surface-variant/70 font-semibold tracking-wide text-lg select-none">
+<span class="hover:text-primary transition-colors">Meta</span>
+<span class="hover:text-primary transition-colors">eBay</span>
+<span class="hover:text-primary transition-colors">Microsoft</span>
+<span class="hover:text-primary transition-colors">Spotify</span>
+<span class="hover:text-primary transition-colors">Lyft</span>
+<span class="hover:text-primary transition-colors">HubSpot</span>
+<span class="hover:text-primary transition-colors">Vercel</span>
+<span class="hover:text-primary transition-colors">Ramp</span>
+<span class="hover:text-primary transition-colors">Block</span>
+<span class="hover:text-primary transition-colors">Cognitiv</span>
+<span class="hover:text-primary transition-colors">Statsig</span>
+<span class="hover:text-primary transition-colors">Didi</span>
+<!-- Duplicate set for infinite wrap -->
+<span class="hover:text-primary transition-colors">Meta</span>
+<span class="hover:text-primary transition-colors">eBay</span>
+<span class="hover:text-primary transition-colors">Microsoft</span>
+<span class="hover:text-primary transition-colors">Spotify</span>
+<span class="hover:text-primary transition-colors">Lyft</span>
+<span class="hover:text-primary transition-colors">HubSpot</span>
+<span class="hover:text-primary transition-colors">Vercel</span>
+<span class="hover:text-primary transition-colors">Ramp</span>
+<span class="hover:text-primary transition-colors">Block</span>
+<span class="hover:text-primary transition-colors">Cognitiv</span>
+<span class="hover:text-primary transition-colors">Statsig</span>
+<span class="hover:text-primary transition-colors">Didi</span>
+</div>
+</div>
+</section>
+<!-- 5. USE CASES SECTION -->
+<section class="max-w-7xl mx-auto px-8 py-24">
+<div class="mb-12">
+<span class="text-xs font-mono font-semibold tracking-wider text-clickhouse-yellow uppercase">USE CASES</span>
+<h2 class="font-headline font-bold text-3xl sm:text-4xl text-primary tracking-tight mt-2">
+          Built for every modern data challenge
+        </h2>
+</div>
+<!-- 4 Equal Dark Bordered Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Tile 1 -->
+<div class="bg-[#181816] border border-[#2e2e2a] rounded-lg p-6 flex flex-col justify-between hover:border-outline transition-colors">
+<div>
+<div class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center mb-6 text-clickhouse-yellow">
+<span class="material-symbols-outlined text-[22px]">speed</span>
+</div>
+<h3 class="font-headline font-semibold text-lg text-primary mb-2">Real-time analytics</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Deliver instant insights and dashboards at scale. Analyze billions of rows in real time with millisecond results.
+            </p>
+</div>
+<a class="mt-8 text-xs font-semibold text-clickhouse-yellow inline-flex items-center gap-1 hover:underline" href="#rta">
+            Explore Real-time analytics <span>→</span>
+</a>
+</div>
+<!-- Tile 2 -->
+<div class="bg-[#181816] border border-[#2e2e2a] rounded-lg p-6 flex flex-col justify-between hover:border-outline transition-colors">
+<div>
+<div class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center mb-6 text-clickhouse-yellow">
+<span class="material-symbols-outlined text-[22px]">monitoring</span>
+</div>
+<h3 class="font-headline font-semibold text-lg text-primary mb-2">Observability</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Store and query logs, metrics and traces at scale using ClickStack, the open source observability stack powered by ClickHouse.
+            </p>
+</div>
+<a class="mt-8 text-xs font-semibold text-clickhouse-yellow inline-flex items-center gap-1 hover:underline" href="#clickstack">
+            Explore ClickStack <span>→</span>
+</a>
+</div>
+<!-- Tile 3 -->
+<div class="bg-[#181816] border border-[#2e2e2a] rounded-lg p-6 flex flex-col justify-between hover:border-outline transition-colors">
+<div>
+<div class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center mb-6 text-clickhouse-yellow">
+<span class="material-symbols-outlined text-[22px]">database</span>
+</div>
+<h3 class="font-headline font-semibold text-lg text-primary mb-2">Data warehousing</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Analyze and explore data instantly for insights and apps. Scale faster by offloading heavy workloads from legacy warehouses.
+            </p>
+</div>
+<a class="mt-8 text-xs font-semibold text-clickhouse-yellow inline-flex items-center gap-1 hover:underline" href="#warehouse">
+            Explore Data warehousing <span>→</span>
+</a>
+</div>
+<!-- Tile 4 -->
+<div class="bg-[#181816] border border-[#2e2e2a] rounded-lg p-6 flex flex-col justify-between hover:border-outline transition-colors">
+<div>
+<div class="w-10 h-10 rounded border border-outline-variant flex items-center justify-center mb-6 text-clickhouse-yellow">
+<span class="material-symbols-outlined text-[22px]">psychology</span>
+</div>
+<h3 class="font-headline font-semibold text-lg text-primary mb-2">ML &amp; GenAI</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+              Power machine learning and GenAI with blazing-fast vector search, instant aggregations, and scalable training checkpoints.
+            </p>
+</div>
+<a class="mt-8 text-xs font-semibold text-clickhouse-yellow inline-flex items-center gap-1 hover:underline" href="#vector">
+            Explore Vector &amp; AI <span>→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 6. CUSTOMER STORIES SECTION (Sticky Layout) -->
+<section class="border-t border-outline-variant py-24 bg-surface">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+<!-- Left Sticky Column (~42%) -->
+<div class="lg:col-span-5 lg:sticky lg:top-28">
+<h2 class="font-headline font-bold text-3xl sm:text-4xl text-primary tracking-tight leading-tight">
+              Build real-time data products that scale
+            </h2>
+<p class="mt-4 text-on-surface-variant text-base leading-relaxed">
+              Sony, Lyft, Cisco, GitLab and many more choose ClickHouse Cloud for its scale, efficiency, and ease of use.
+            </p>
+<div class="mt-8">
+<span class="text-xs font-mono font-semibold tracking-wider text-clickhouse-yellow uppercase block mb-3">
+                FILTER BY
+              </span>
+<!-- Interactive Chips -->
+<div class="flex flex-wrap gap-2 text-xs">
+<button class="px-3 py-1.5 rounded-full bg-surface-container-high text-clickhouse-yellow border border-clickhouse-yellow/40 font-medium">Real-time analytics</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Observability</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Business intelligence</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Media &amp; entertainment</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">ML &amp; GenAI</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Financial services</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Marketing &amp; sales</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">E-commerce &amp; retail</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Fraud &amp; cybersecurity</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant hover:border-outline transition-colors">Gaming</button>
+</div>
+</div>
+</div>
+<!-- Right Stacked Story Cards (~58%) -->
+<div class="lg:col-span-7 flex flex-col gap-8">
+<!-- Story 1: Anthropic -->
+<article class="bg-[#1c1c1a] border border-outline-variant rounded-lg p-8 relative overflow-hidden group">
+<div class="flex items-center justify-between mb-6">
+<span class="font-headline font-bold text-xl text-primary tracking-wide">ANTHROPIC</span>
+<span class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-clickhouse-yellow group-hover:scale-105 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<blockquote class="text-xl sm:text-2xl font-light text-primary tracking-tight leading-snug">
+                “ClickHouse played an instrumental role in helping us develop and ship Claude 4.”
+              </blockquote>
+<div class="mt-8 pt-6 border-t border-outline-variant flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold text-primary">Anthropic Engineering Team</p>
+<p class="text-xs text-on-surface-variant">Core AI Infrastructure</p>
+</div>
+<a class="text-xs font-semibold text-clickhouse-yellow hover:underline inline-flex items-center gap-1" href="#anthropic">
+                  Read story <span>→</span>
+</a>
+</div>
+</article>
+<!-- Story 2: Tesla -->
+<article class="bg-[#1c1c1a] border border-outline-variant rounded-lg p-8 relative overflow-hidden group">
+<div class="flex items-center justify-between mb-6">
+<span class="font-headline font-bold text-xl text-primary tracking-wide">TESLA</span>
+<span class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-clickhouse-yellow group-hover:scale-105 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<blockquote class="text-xl sm:text-2xl font-light text-primary tracking-tight leading-snug">
+                “ClickHouse checked every box. We have availability, we have speed, we have durability. We have everything we could want.”
+              </blockquote>
+<div class="mt-8 pt-6 border-t border-outline-variant flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold text-primary">Tesla Telemetry &amp; Data Platform</p>
+<p class="text-xs text-on-surface-variant">Fleet-Wide Analytics</p>
+</div>
+<a class="text-xs font-semibold text-clickhouse-yellow hover:underline inline-flex items-center gap-1" href="#tesla">
+                  Read story <span>→</span>
+</a>
+</div>
+</article>
+<!-- Story 3: Lyft -->
+<article class="bg-[#1c1c1a] border border-outline-variant rounded-lg p-8 relative overflow-hidden group">
+<div class="flex items-center justify-between mb-6">
+<span class="font-headline font-bold text-xl text-primary tracking-wide">lyft</span>
+<span class="w-10 h-10 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center text-clickhouse-yellow group-hover:scale-105 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</span>
+</div>
+<blockquote class="text-xl sm:text-2xl font-light text-primary tracking-tight leading-snug">
+                “By standardizing real-time pricing and dispatching on ClickHouse, our query latency dropped by 95% with sub-second decision pipelines.”
+              </blockquote>
+<div class="mt-8 pt-6 border-t border-outline-variant flex items-center justify-between">
+<div>
+<p class="text-sm font-semibold text-primary">Lyft Core Data Platform</p>
+<p class="text-xs text-on-surface-variant">Real-Time Marketplace Analytics</p>
+</div>
+<a class="text-xs font-semibold text-clickhouse-yellow hover:underline inline-flex items-center gap-1" href="#lyft">
+                  Read story <span>→</span>
+</a>
+</div>
+</article>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. 'WHY CLICKHOUSE?' ARCHITECTURE & MATRIX -->
+<section class="max-w-7xl mx-auto px-8 py-24 border-t border-outline-variant">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="font-headline font-bold text-3xl sm:text-4xl text-primary tracking-tight">
+          Why ClickHouse?
+        </h2>
+<p class="mt-4 text-on-surface-variant text-base sm:text-lg">
+          ClickHouse is the fastest and most resource efficient real-time data warehouse and open-source database.
+        </p>
+</div>
+<!-- 3 Large Dark Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<div class="bg-surface-container p-8 rounded-lg border border-outline-variant">
+<div class="text-clickhouse-yellow mb-4">
+<span class="material-symbols-outlined text-3xl">bolt</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-primary mb-2">Blazing fast</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+            Vectorized query execution that utilizes CPU caches and SIMD instructions, married with pure column-oriented disk compression for sub-second responses on billions of rows.
+          </p>
+</div>
+<div class="bg-surface-container p-8 rounded-lg border border-outline-variant">
+<div class="text-clickhouse-yellow mb-4">
+<span class="material-symbols-outlined text-3xl">code</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-primary mb-2">Developer friendly</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+            Standard ANSI SQL syntax enriched with built-in analytical arrays, probabilistic structures, JSON extraction, and native clients for every popular programming language.
+          </p>
+</div>
+<div class="bg-surface-container p-8 rounded-lg border border-outline-variant">
+<div class="text-clickhouse-yellow mb-4">
+<span class="material-symbols-outlined text-3xl">savings</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-primary mb-2">Cost effective</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+            Extreme data compression up to 10x reduces cloud storage and RAM bills dramatically, letting you consolidate hundreds of legacy nodes down into efficient clusters.
+          </p>
+</div>
+</div>
+<!-- 5 Smaller Pale-Yellow Tiles (#FAFF78 Cards) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+<div class="bg-clickhouse-yellow text-black p-5 rounded-lg flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight mb-1">Open Source</h4>
+<p class="text-xs text-black/80 leading-snug">Apache 2.0 licensed, independent, and transparently developed in public.</p>
+</div>
+<a class="mt-4 text-xs font-bold inline-flex items-center gap-1 hover:underline" href="#oss">More <span>→</span></a>
+</div>
+<div class="bg-clickhouse-yellow text-black p-5 rounded-lg flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight mb-1">Secure, compliant</h4>
+<p class="text-xs text-black/80 leading-snug">SOC 2 Type II, HIPAA, ISO 27001, GDPR ready with fine-grained RBAC.</p>
+</div>
+<a class="mt-4 text-xs font-bold inline-flex items-center gap-1 hover:underline" href="#compliance">More <span>→</span></a>
+</div>
+<div class="bg-clickhouse-yellow text-black p-5 rounded-lg flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight mb-1">Resource optimized</h4>
+<p class="text-xs text-black/80 leading-snug">Vectorized CPU SIMD instructions that maximize throughput per core.</p>
+</div>
+<a class="mt-4 text-xs font-bold inline-flex items-center gap-1 hover:underline" href="#simd">More <span>→</span></a>
+</div>
+<div class="bg-clickhouse-yellow text-black p-5 rounded-lg flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight mb-1">Proven at scale</h4>
+<p class="text-xs text-black/80 leading-snug">Exabytes of data queried daily across the world’s most demanding products.</p>
+</div>
+<a class="mt-4 text-xs font-bold inline-flex items-center gap-1 hover:underline" href="#scale">More <span>→</span></a>
+</div>
+<div class="bg-clickhouse-yellow text-black p-5 rounded-lg flex flex-col justify-between">
+<div>
+<h4 class="font-headline font-bold text-sm tracking-tight mb-1">100+ integrations</h4>
+<p class="text-xs text-black/80 leading-snug">Native connectors for Kafka, Airflow, dbt, Spark, Grafana, and Superset.</p>
+</div>
+<a class="mt-4 text-xs font-bold inline-flex items-center gap-1 hover:underline" href="#integrations">More <span>→</span></a>
+</div>
+</div>
+<!-- Bottom Prompt Bar -->
+<div class="mt-10 text-center">
+<a class="text-sm font-semibold text-clickhouse-yellow hover:underline inline-flex items-center gap-1.5" href="#trial">
+<span>Get started in a few minutes with a free cloud trial</span>
+<span>→</span>
+</a>
+</div>
+</section>
+<!-- 8. INTEGRATIONS ECOSYSTEM & ARCHITECTURE DIAGRAM -->
+<section class="bg-surface-container-low border-t border-outline-variant py-24">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Header -->
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="text-xs font-mono font-semibold tracking-wider text-clickhouse-yellow uppercase">ECOSYSTEM</span>
+<h2 class="font-headline font-bold text-3xl sm:text-4xl text-primary tracking-tight mt-2">
+            Seamlessly integrate with your stack
+          </h2>
+<p class="mt-3 text-on-surface-variant text-base">
+            Choose from our growing ecosystem of integrations for data ingestion, visualization, language clients, and more.
+          </p>
+</div>
+<!-- Ecosystem Network Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-5 gap-4 mb-20">
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">STREAMING</span>
+<span class="font-semibold text-primary text-sm">Apache Kafka</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">TRANSFORMATION</span>
+<span class="font-semibold text-primary text-sm">dbt</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">DASHBOARDS</span>
+<span class="font-semibold text-primary text-sm">Grafana</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">BATCH</span>
+<span class="font-semibold text-primary text-sm">Apache Spark</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">OLTP REPLICATION</span>
+<span class="font-semibold text-primary text-sm">PostgreSQL</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">OBJECT STORAGE</span>
+<span class="font-semibold text-primary text-sm">Amazon S3</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">DATA WAREHOUSE</span>
+<span class="font-semibold text-primary text-sm">Snowflake</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">LANGUAGE CLIENT</span>
+<span class="font-semibold text-primary text-sm">Python / PyClickHouse</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">LANGUAGE CLIENT</span>
+<span class="font-semibold text-primary text-sm">Go (clickhouse-go)</span>
+</div>
+<div class="bg-surface-container border border-outline-variant p-4 rounded text-center hover:border-clickhouse-yellow/50 transition-colors">
+<span class="text-xs font-mono text-clickhouse-yellow block mb-1">LANGUAGE CLIENT</span>
+<span class="font-semibold text-primary text-sm">Node.js / TypeScript</span>
+</div>
+</div>
+<!-- Architecture Breakdown: "Why is ClickHouse so fast?" -->
+<div class="bg-surface border border-outline-variant rounded-xl p-8 lg:p-12">
+<div class="max-w-2xl mb-8">
+<h3 class="font-headline font-bold text-2xl text-primary">Why is ClickHouse so fast?</h3>
+<p class="text-sm text-on-surface-variant mt-2">
+              Traditional databases scan entire records horizontally. ClickHouse reads strictly the columns your query asks for, packed in compressed continuous disk blocks.
+            </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-xs">
+<!-- Row-Oriented -->
+<div class="p-6 rounded-lg bg-surface-container border border-outline-variant">
+<div class="flex items-center justify-between mb-4">
+<span class="text-error font-bold uppercase tracking-wider">Row-oriented databases</span>
+<span class="text-on-surface-variant">e.g. Postgres, MySQL</span>
+</div>
+<p class="text-on-surface-variant mb-4 font-sans text-xs">Reads full records including unused columns, leading to massive disk I/O penalties for analytical queries.</p>
+<div class="space-y-2">
+<div class="p-2.5 rounded bg-surface-container-high border border-outline-variant flex gap-2 text-on-surface-variant">
+<span class="text-primary">Row 1:</span>
+<span class="text-error">[ID: 101]</span>
+<span class="opacity-40">[User: "Alex"]</span>
+<span class="opacity-40">[Bio: "Lorem..."]</span>
+<span class="text-primary font-bold">[Amount: 420.00]</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high border border-outline-variant flex gap-2 text-on-surface-variant">
+<span class="text-primary">Row 2:</span>
+<span class="text-error">[ID: 102]</span>
+<span class="opacity-40">[User: "Sara"]</span>
+<span class="opacity-40">[Bio: "Ipsum..."]</span>
+<span class="text-primary font-bold">[Amount: 890.50]</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high border border-outline-variant flex gap-2 text-on-surface-variant">
+<span class="text-primary">Row 3:</span>
+<span class="text-error">[ID: 103]</span>
+<span class="opacity-40">[User: "John"]</span>
+<span class="opacity-40">[Bio: "Dolor..."]</span>
+<span class="text-primary font-bold">[Amount: 112.20]</span>
+</div>
+</div>
+<div class="mt-4 text-right text-error font-sans text-xs font-semibold">
+                High I/O: Reads 100% of bytes to aggregate 1 column
+              </div>
+</div>
+<!-- Column-Oriented -->
+<div class="p-6 rounded-lg bg-surface-container border border-clickhouse-yellow/30 relative">
+<div class="flex items-center justify-between mb-4">
+<span class="text-clickhouse-yellow font-bold uppercase tracking-wider">Column-oriented databases</span>
+<span class="text-clickhouse-yellow font-semibold">ClickHouse</span>
+</div>
+<p class="text-on-surface-variant mb-4 font-sans text-xs">Reads strictly query-targeted columnar streams. Compact data enables vectorized SIMD instructions.</p>
+<div class="space-y-2">
+<div class="p-2.5 rounded bg-surface-container-high border border-clickhouse-yellow/40 flex items-center justify-between text-clickhouse-yellow">
+<span class="font-bold">Column [Amount]:</span>
+<span class="font-bold tracking-wider">[420.00, 890.50, 112.20, ... 10M rows]</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high/40 border border-outline-variant opacity-40 flex items-center justify-between text-on-surface-variant">
+<span>Column [User]:</span>
+<span>(Skipped from disk entirely)</span>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high/40 border border-outline-variant opacity-40 flex items-center justify-between text-on-surface-variant">
+<span>Column [Bio]:</span>
+<span>(Skipped from disk entirely)</span>
+</div>
+</div>
+<div class="mt-4 text-right text-clickhouse-yellow font-sans text-xs font-semibold">
+                Extreme speed: Zero unnecessary disk scan, SIMD-parallel
+              </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. SIGNATURE DEPLOYMENT SECTION (FULL-WIDTH BRIGHT YELLOW) -->
+<section class="bg-clickhouse-yellow text-black py-24 px-8 w-full">
+<div class="max-w-6xl mx-auto text-center">
+<!-- DB / Cloud Icon -->
+<div class="inline-flex items-center justify-center w-12 h-12 rounded-full border-2 border-black mb-4">
+<span class="material-symbols-outlined text-2xl text-black">cloud</span>
+</div>
+<h2 class="font-headline font-extrabold text-4xl sm:text-5xl text-black tracking-tight">
+          Deploy your way
+        </h2>
+<p class="mt-4 text-base sm:text-lg text-black/80 max-w-2xl mx-auto">
+          Unlike traditional closed-source databases, ClickHouse runs in every environment, whether it’s on your machine or in the cloud.
+        </p>
+<!-- Centered Large Dark Card: ClickHouse Cloud -->
+<div class="mt-12 bg-[#131312] text-primary p-8 sm:p-12 rounded-xl border border-black/20 text-left max-w-4xl mx-auto shadow-2xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-outline-variant pb-6 mb-6">
+<div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-clickhouse-yellow text-2xl">cloud_done</span>
+<h3 class="font-headline font-bold text-2xl text-primary">ClickHouse Cloud</h3>
+</div>
+<p class="text-sm text-on-surface-variant mt-1">Fully managed, secure serverless analytics engine across AWS, GCP, and Azure.</p>
+</div>
+<a class="bg-clickhouse-yellow text-black font-semibold text-xs px-6 py-3 rounded text-center hover:brightness-105 transition-all" href="#signup">
+              Get started
+            </a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-sm">
+<div>
+<h4 class="font-semibold text-primary mb-1">True Serverless Scaling</h4>
+<p class="text-xs text-on-surface-variant">Decoupled compute and storage with instant auto-scaling to match fluctuating traffic loads.</p>
+</div>
+<div>
+<h4 class="font-semibold text-primary mb-1">Managed Kafka Ingestion</h4>
+<p class="text-xs text-on-surface-variant">Stream data directly with zero ETL glue code and automated schema detection.</p>
+</div>
+<div>
+<h4 class="font-semibold text-primary mb-1">Enterprise SLA &amp; Support</h4>
+<p class="text-xs text-on-surface-variant">99.99% uptime guarantee with 24/7/365 direct access to ClickHouse core architects.</p>
+</div>
+</div>
+</div>
+<!-- Two Smaller Dark Cards Below -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-6 text-left">
+<!-- Card A: Open Source -->
+<div class="bg-[#131312] text-primary p-6 rounded-lg border border-black/20 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-clickhouse-yellow">storage</span>
+<h4 class="font-headline font-bold text-lg text-primary">ClickHouse</h4>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                Self-managed open-source clustered deployment. Complete control over infrastructure, custom hardware topologies, and bare-metal servers.
+              </p>
+</div>
+<div class="mt-6 flex items-center justify-between pt-4 border-t border-outline-variant">
+<span class="text-xs text-clickhouse-yellow font-mono">Apache-2.0</span>
+<a class="text-xs font-semibold text-primary hover:text-clickhouse-yellow transition-colors inline-flex items-center gap-1" href="#install-cluster">
+                Install docs <span>→</span>
+</a>
+</div>
+</div>
+<!-- Card B: ClickHouse Local -->
+<div class="bg-[#131312] text-primary p-6 rounded-lg border border-black/20 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="material-symbols-outlined text-clickhouse-yellow">terminal</span>
+<h4 class="font-headline font-bold text-lg text-primary">ClickHouse Local</h4>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+                Zero-dependency single-binary CLI tool for instantly running blazing-fast SQL queries on local CSV, Parquet, and JSON files without starting a server.
+              </p>
+</div>
+<div class="mt-6 flex items-center justify-between pt-4 border-t border-outline-variant">
+<span class="text-xs font-mono text-on-surface-variant">brew install clickhouse</span>
+<a class="text-xs font-semibold text-primary hover:text-clickhouse-yellow transition-colors inline-flex items-center gap-1" href="#install-local">
+                Download binary <span>→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. COMMUNITY METRICS & FAQS -->
+<section class="max-w-7xl mx-auto px-8 py-24">
+<!-- Community Stat Band -->
+<div class="text-center mb-16">
+<h2 class="font-headline font-bold text-2xl sm:text-3xl text-primary tracking-tight">
+          Join the 100k+ developers using ClickHouse today
+        </h2>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
+<div class="p-6 rounded bg-surface-container border border-outline-variant">
+<span class="font-headline font-extrabold text-3xl sm:text-4xl text-primary block">3.2k+</span>
+<span class="text-xs font-mono text-on-surface-variant uppercase mt-1 block">Contributors</span>
+</div>
+<div class="p-6 rounded bg-surface-container border border-outline-variant">
+<span class="font-headline font-extrabold text-3xl sm:text-4xl text-primary block">89.1k+</span>
+<span class="text-xs font-mono text-on-surface-variant uppercase mt-1 block">Pull Requests</span>
+</div>
+<div class="p-6 rounded bg-surface-container border border-outline-variant">
+<span class="font-headline font-extrabold text-3xl sm:text-4xl text-primary block">873+</span>
+<span class="text-xs font-mono text-on-surface-variant uppercase mt-1 block">Releases</span>
+</div>
+<div class="p-6 rounded bg-surface-container border border-outline-variant">
+<span class="font-headline font-extrabold text-3xl sm:text-4xl text-clickhouse-yellow block">50.1k+</span>
+<span class="text-xs font-mono text-on-surface-variant uppercase mt-1 block">GitHub Stars</span>
+</div>
+</div>
+</div>
+<!-- FAQ Section -->
+<div class="mt-20 border-t border-outline-variant pt-16">
+<div class="flex flex-col lg:flex-row gap-12">
+<div class="lg:w-1/3">
+<span class="text-xs font-mono font-semibold tracking-wider text-clickhouse-yellow uppercase">QUESTIONS</span>
+<h3 class="font-headline font-bold text-3xl text-primary mt-2">FAQs</h3>
+<p class="text-sm text-on-surface-variant mt-3 leading-relaxed">
+              Need help? Ask our community of 30,000+ engineers or our database specialists.
+            </p>
+<a class="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-clickhouse-yellow hover:underline" href="#ask">
+              Ask us anything <span>→</span>
+</a>
+</div>
+<div class="lg:w-2/3 space-y-4">
+<details class="group bg-surface-container border border-outline-variant rounded-lg p-5 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer" open="">
+<summary class="flex justify-between items-center font-medium text-primary text-base">
+<span>1. Why should I use ClickHouse vs. X database?</span>
+<span class="text-clickhouse-yellow group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<p class="mt-3 text-sm text-on-surface-variant leading-relaxed font-sans">
+                ClickHouse is specifically engineered from the ground up for analytical workloads (OLAP). While transactional databases like Postgres or MySQL prioritize concurrent row-level locks and mutations, ClickHouse compresses continuous column arrays to execute analytical aggregations (COUNT, SUM, AVG, GROUP BY) orders of magnitude faster with minimal hardware resources.
+              </p>
+</details>
+<details class="group bg-surface-container border border-outline-variant rounded-lg p-5 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-medium text-primary text-base">
+<span>2. What is an OLAP database?</span>
+<span class="text-clickhouse-yellow group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<p class="mt-3 text-sm text-on-surface-variant leading-relaxed font-sans">
+                OLAP stands for Online Analytical Processing. OLAP databases optimize for read-heavy operations scanning billions of rows across a few columns simultaneously, contrasting with OLTP (Online Transaction Processing) engines built for rapid single-row updates.
+              </p>
+</details>
+<details class="group bg-surface-container border border-outline-variant rounded-lg p-5 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-medium text-primary text-base">
+<span>3. Can ClickHouse handle large volumes of data?</span>
+<span class="text-clickhouse-yellow group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<p class="mt-3 text-sm text-on-surface-variant leading-relaxed font-sans">
+                Yes. ClickHouse powers telemetry and event systems holding hundreds of petabytes and trillions of rows across companies like Uber, Meta, and Cloudflare, handling ingestion rates exceeding millions of rows per second.
+              </p>
+</details>
+<details class="group bg-surface-container border border-outline-variant rounded-lg p-5 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-medium text-primary text-base">
+<span>4. How can I visualize data stored in ClickHouse?</span>
+<span class="text-clickhouse-yellow group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<p class="mt-3 text-sm text-on-surface-variant leading-relaxed font-sans">
+                ClickHouse connects seamlessly with all standard BI and observability platforms including Grafana, Apache Superset, Metabase, Tableau, Looker, and Power BI via official plugins and JDBC/ODBC drivers.
+              </p>
+</details>
+<details class="group bg-surface-container border border-outline-variant rounded-lg p-5 [&amp;_summary::-webkit-details-marker]:hidden cursor-pointer">
+<summary class="flex justify-between items-center font-medium text-primary text-base">
+<span>5. How much does ClickHouse cost?</span>
+<span class="text-clickhouse-yellow group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<p class="mt-3 text-sm text-on-surface-variant leading-relaxed font-sans">
+                The open-source ClickHouse server is 100% free under the Apache 2.0 license. ClickHouse Cloud offers transparent usage-based pay-as-you-go pricing based on compute and storage consumption, beginning with a $300 trial credit.
+              </p>
+</details>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. FINAL CTA BANNER -->
+<section class="max-w-7xl mx-auto px-8 mb-20">
+<div class="bg-surface-container-high border border-outline-variant rounded-xl p-10 sm:p-14 text-center relative overflow-hidden">
+<h2 class="font-headline font-bold text-3xl sm:text-4xl text-primary tracking-tight">
+          Get started with ClickHouse Cloud for free
+        </h2>
+<p class="mt-3 text-on-surface-variant text-base max-w-xl mx-auto">
+          We’ll get you started on a 30 day trial and $300 credits to spend at your own pace.
+        </p>
+<!-- CTA Action and Terminal Copy Snippet -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="bg-clickhouse-yellow text-black font-semibold text-xs px-6 py-3.5 rounded hover:brightness-105 transition-all" href="#trial">
+            Create a free account
+          </a>
+<!-- Code Snippet -->
+<div class="flex items-center gap-3 bg-surface-container-lowest border border-outline-variant px-4 py-3 rounded text-xs font-mono text-on-surface">
+<span class="text-clickhouse-yellow">$</span>
+<span>curl https://clickhouse.com/ | sh</span>
+<button class="text-on-surface-variant hover:text-primary transition-colors ml-1" onclick="navigator.clipboard.writeText('curl https://clickhouse.com/ | sh')" title="Copy to clipboard">
+<span class="material-symbols-outlined text-[16px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Components JSON Compliant) -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant">
+<div class="max-w-7xl mx-auto px-8 py-16 flex flex-col gap-12 w-full font-body text-xs text-on-surface-variant">
+<!-- Multi-Column Links -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Product</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#cloud">ClickHouse Cloud</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#local">ClickHouse Local</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#postgres">Managed Postgres</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#langfuse">Langfuse AI</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Resources</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#docs">Documentation</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#architecture">Architecture</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#blog">Engineering Blog</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#status">Cloud Status</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#integrations">Integrations</a></li>
+</ul>
+</div>
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Company</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#about">About ClickHouse</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#careers">Careers (We're Hiring)</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#newsroom">Newsroom</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#security">Security &amp; Trust</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#contact">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Community</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#github">GitHub</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#slack">Public Slack</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#events">Meetups &amp; Events</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#ch-champs">ClickHouse Champions</a></li>
+</ul>
+</div>
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Comparisons</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#vs-snowflake">vs. Snowflake</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#vs-redshift">vs. Redshift</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#vs-bigquery">vs. BigQuery</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#vs-elasticsearch">vs. Elasticsearch</a></li>
+</ul>
+</div>
+<div>
+<span class="font-headline font-bold text-primary text-sm block mb-3">Partners</span>
+<ul class="space-y-2">
+<li><a class="hover:text-primary transition-colors duration-150" href="#aws">AWS Marketplace</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#gcp">Google Cloud</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#azure">Microsoft Azure</a></li>
+<li><a class="hover:text-primary transition-colors duration-150" href="#consulting">Consulting Partners</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Row / Copyright & Direct Anchors -->
+<div class="pt-8 border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-end gap-[2px] h-4 w-4">
+<span class="w-[2px] h-2 bg-clickhouse-yellow"></span>
+<span class="w-[2px] h-3.5 bg-clickhouse-yellow"></span>
+<span class="w-[2px] h-4 bg-clickhouse-yellow"></span>
+<span class="w-[2px] h-2.5 bg-clickhouse-yellow"></span>
+<span class="w-[2px] h-1.5 bg-clickhouse-yellow"></span>
+</div>
+<span class="font-headline font-bold text-lg text-primary">ClickHouse</span>
+<span class="text-on-surface-variant ml-2">© 2025 ClickHouse, Inc. All rights reserved.</span>
+</div>
+<div class="flex flex-wrap items-center gap-6">
+<a class="hover:text-primary transition-colors duration-150" href="#docs">Documentation</a>
+<a class="hover:text-primary transition-colors duration-150" href="#architecture">Architecture</a>
+<a class="hover:text-primary transition-colors duration-150" href="#github">GitHub</a>
+<a class="hover:text-primary transition-colors duration-150" href="#cloud-status">Cloud Status</a>
+<a class="hover:text-primary transition-colors duration-150" href="#privacy">Privacy Policy</a>
+<a class="hover:text-primary transition-colors duration-150" href="#terms">Terms of Service</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
