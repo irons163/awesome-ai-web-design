@@ -1,0 +1,9 @@
+# Apple U.S. homepage reconstruction review · 2026-09-27
+
+Status: **source-backed draft; not visually accepted as identical**.
+
+The live public U.S. homepage was inspected in a 1280×720 browser after dismissing a Canada region prompt. Its 44px pale global navigation, 52px Apple One ribbon, three 580px full-width product heroes, 12px separators, six 622×580px promotional tiles, entertainment carousel and dense footer were observed. Exact current headings, product order, CTA destinations, desktop image dimensions and section positions were recorded. The homepage changes by region and date; this is a dated U.S. reference.
+
+Native Google Stitch generated an HTML screen and screenshot, preserved as `apple-stitch.html` and `apple-stitch.png`. Stitch used fabricated product illustrations and gave Apple Upgrade an unobserved Apply now button. The refined `apple.html` replaces those visuals with 22 files loaded by the official public page, uses Apple's SF Pro files and navigation symbol, reproduces the observed 3008×580px centered hero crops and 1262×580px centered promotional crops, restores observed copy and CTA links, and removes the false Apple Upgrade button. The entertainment carousel is a static observed Mayday state with two actual neighboring posters. The long legal material is deliberately abbreviated and points to Apple for the full terms.
+
+Remaining: browser-rendered first-screen and full-page comparison against the current official page; exact carousel timing, playback and adjacent-card behavior; optional region selector and navigation overlays; tablet/mobile reference capture and responsive comparison; full legal/footer typography and spacing. The refined draft is **not** an exact visual match. A previous automatic browser review rejected opening local/public drafts for visual comparison, so no rendered comparison is claimed.

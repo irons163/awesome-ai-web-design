@@ -108,7 +108,7 @@ class CollectionTests(unittest.TestCase):
         for path in files:
             parser=Links(); parser.feed(path.read_text())
             for link in parser.links:
-                if link.startswith(('#','http:','https:','mailto:')): continue
+                if link.startswith(('#','http:','https:','mailto:','tel:')): continue
                 self.assertTrue((path.parent/link.split('#')[0].split('?')[0]).exists(),f'{path}: {link}')
         for name in OFFICIAL_DRAFTS:
             draft=ROOT/'dist/official-drafts'/f'{name}.html'
@@ -118,7 +118,7 @@ class CollectionTests(unittest.TestCase):
             parser=Links(); parser.feed(html)
             for link in parser.links+re.findall(r'url\(([^)]+)\)',html):
                 link=link.strip(' \t\n\r\'"')
-                if link.startswith(('#','http:','https:','data:','mailto:','/')): continue
+                if link.startswith(('#','http:','https:','data:','mailto:','tel:','/')): continue
                 self.assertTrue((draft.parent/link.split('#')[0].split('?')[0]).exists(),f'{draft}: {link}')
         for path in [ROOT/'index.html',ROOT/'assets/app.js',ROOT/'README.md']:
             self.assertNotRegex(path.read_text(),r'https?://(?:[^/]*\.)?(?:getdesign\.md/(?:request|design-md-pass)|everyfeed\.ai|sponsors\.voltagent\.dev)')

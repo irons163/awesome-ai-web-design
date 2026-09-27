@@ -10,7 +10,7 @@ from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 
 
@@ -38,7 +38,7 @@ def stage_official_drafts():
         references.values.extend(re.findall(r'url\(([^)]+)\)', html))
         for value in references.values:
             value = value.strip(' \t\n\r\'"')
-            if value.startswith(('https:', 'http:', 'data:', 'mailto:', '#', '/')):
+            if value.startswith(('https:', 'http:', 'data:', 'mailto:', 'tel:', '#', '/')):
                 continue
             relative = Path(urlsplit(value).path)
             asset = (DRAFT_SOURCE / relative).resolve()
