@@ -1,0 +1,7 @@
+# Resend current-official draft review — 2026-09-27
+
+Status: **in visual review; not accepted as identical**. The current public homepage was inspected at 1280×720 in the in-app browser. The refined draft has not yet been rendered and compared against it at desktop or mobile sizes. Earlier browser auto-review denied opening local and public draft URLs; this work does not use another browser or command-line renderer to bypass that decision.
+
+The observed first viewport has a 58px dark header, Resend wordmark, a full-height black hero with subdued floor/light-ray backgrounds, a Domaine regular 96px two-line heading at x88/y237, exact intro copy, two actions, and a live black 3D cube at right. The generated Stitch screen retained the black visual direction but substituted a CSS cube, invented a customer strip, invented testimonials and metrics, and wrote a different code sample. The corrected draft uses public Resend fonts, logo, cube video/fallback, hero backgrounds, product assets, observed headings, customer names, and text. The untouched Stitch HTML and thumbnail screenshot remain beside it.
+
+Remaining checks: full-page desktop visual comparison; mobile/tablet visual references; section spacing and animation fidelity; functional navigation menus and language examples; official logo treatment in the customer strip. Until those pass, the public progress page labels this only as a dated reconstruction draft.

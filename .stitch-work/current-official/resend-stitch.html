@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resend — Email for developers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bg: '#000000',
+            surface: '#0a0a0a',
+            borderDark: '#1f1f1f',
+            borderSubtle: '#262626',
+            silver: '#d6d6d6',
+            silverMuted: '#8a8a8a',
+            accent: '#ffffff',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            serif: ['Newsreader', 'Domaine', 'serif'],
+            mono: ['JetBrains Mono', 'Commit Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #000000;
+      color: #ededed;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-glow {
+      background: radial-gradient(circle at 75% 35%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 70%);
+    }
+    .hero-rays {
+      background-image: 
+        radial-gradient(circle at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 60%),
+        linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 100% 80px;
+    }
+    .text-silver-gradient {
+      background: linear-gradient(180deg, #FFFFFF 20%, #888888 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-silver-muted-gradient {
+      background: linear-gradient(180deg, #EDEDED 10%, #6E6E6E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .iridescent-pill {
+      position: relative;
+      background: rgba(20, 20, 20, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 0 20px -5px rgba(255, 255, 255, 0.07);
+    }
+    .iridescent-pill::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 9999px;
+      padding: 1px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(180,200,255,0.25), rgba(255,180,220,0.2), rgba(255,255,255,0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+    .grid-lines {
+      background-size: 60px 60px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+    .code-container {
+      background: #080808;
+      border: 1px solid #1c1c1c;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+
+  <!-- Header: 58px transparent fixed/sticky nav -->
+  <header class="sticky top-0 z-50 h-[58px] bg-black/70 backdrop-blur-md border-b border-[#171717] px-6 flex items-center justify-between">
+    <div class="flex items-center gap-8">
+      <!-- Resend Logo Wordmark with Angular R Emblem -->
+      <a href="https://resend.com/" class="flex items-center gap-2.5 text-white group">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-white">
+          <path d="M4 4H14.5C17.5376 4 20 6.46243 20 9.5C20 12.5376 17.5376 15 14.5 15H9V20H4V4Z" fill="white"/>
+          <path d="M14 14.5L20 20H14.5L9.5 15H14Z" fill="white"/>
+        </svg>
+        <span class="font-semibold text-lg tracking-tight font-sans text-white">Resend</span>
+      </a>
+
+      <!-- Primary Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-[13px] text-[#999999] font-medium">
+        <a href="#features" class="hover:text-white transition-colors">Features</a>
+        <a href="#company" class="hover:text-white transition-colors">Company</a>
+        <a href="#enterprise" class="hover:text-white transition-colors">Enterprise</a>
+        <a href="#help" class="hover:text-white transition-colors">Help</a>
+        <a href="https://resend.com/docs" class="hover:text-white transition-colors">Docs</a>
+        <a href="#ai" class="flex items-center gap-1.5 hover:text-white transition-colors">
+          AI
+          <span class="text-[10px] px-1.5 py-0.2 rounded-full border border-[#2b2b2b] bg-[#121212] text-[#888]">New</span>
+        </a>
+        <a href="#pricing" class="hover:text-white transition-colors">Pricing</a>
+      </nav>
+    </div>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-4 text-[13px]">
+      <a href="https://resend.com/login" class="text-[#999999] hover:text-white transition-colors font-medium px-2 py-1">Log in</a>
+      <a href="https://resend.com/signup" class="bg-[#171717] hover:bg-[#222222] text-[#ededed] hover:text-white border border-[#2c2c2c] px-3.5 py-1.5 rounded-md font-medium tracking-tight transition-all">
+        Get started
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section (observed at 1280px width) -->
+  <section class="relative min-h-[662px] pt-12 pb-24 overflow-hidden border-b border-[#141414] hero-glow hero-rays">
+    <!-- Background overlay light accents -->
+    <div class="absolute inset-0 pointer-events-none opacity-40">
+      <div class="absolute top-1/4 right-1/4 w-[500px] h-[500px] rounded-full bg-white/5 blur-[120px]"></div>
+      <div class="absolute -top-10 left-1/3 w-[400px] h-[300px] rounded-full bg-slate-400/5 blur-[100px]"></div>
+    </div>
+
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+      <!-- Left Column (starts around x88 in canonical desktop layout) -->
+      <div class="lg:col-span-7 pt-4">
+        <!-- Iridescent Outline Pill at y174 -->
+        <a href="https://resend.com/forward" class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full iridescent-pill mb-10 text-[13px] text-[#e0e0e0] hover:text-white transition-all group">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>Join us at Resend Forward</span>
+          <svg class="w-3.5 h-3.5 text-[#888] group-hover:translate-x-0.5 group-hover:text-white transition-all" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+
+        <!-- Headline: Domaine Serif, 96px on desktop with fading silver gradient on 2nd line -->
+        <h1 class="font-serif text-[68px] sm:text-[84px] lg:text-[96px] leading-[0.96] tracking-[-0.035em] font-normal mb-8 select-none">
+          <span class="text-white block">Email for</span>
+          <span class="text-silver-gradient block">developers</span>
+        </h1>
+
+        <!-- Exact Source-Backed Paragraph -->
+        <p class="text-[18px] leading-[1.6] text-[#999999] max-w-[520px] mb-10 font-normal">
+          The best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex flex-wrap items-center gap-4 text-[14px]">
+          <a href="https://resend.com/signup" class="inline-flex items-center justify-center px-5 py-2.5 bg-[#171717] hover:bg-[#242424] text-white border border-[#303030] rounded-md font-medium tracking-tight shadow-sm transition-all">
+            Get started
+          </a>
+          <a href="https://resend.com/docs" class="inline-flex items-center justify-center px-4 py-2.5 text-[#8a8a8a] hover:text-[#ffffff] transition-colors font-medium">
+            Documentation
+            <span class="ml-1.5 opacity-60">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: The iconic 3D Black Cube -->
+      <div class="lg:col-span-5 flex items-center justify-center relative">
+        <div class="relative w-full max-w-[420px] aspect-square flex items-center justify-center">
+          <!-- Ambient lighting reflection under the cube -->
+          <div class="absolute w-72 h-72 rounded-full bg-white/[0.04] blur-3xl pointer-events-none"></div>
+
+          <!-- Public Cube Visual representation -->
+          <div class="relative z-10 w-full h-full flex items-center justify-center group">
+            <!-- Simulated isometric architectural black cube with subtle bevel reflections -->
+            <div class="relative w-72 h-72 transform rotate-[-12deg] hover:rotate-[-8deg] transition-transform duration-700">
+              <!-- Top Face -->
+              <div class="absolute inset-x-8 top-2 h-36 bg-gradient-to-br from-[#242424] via-[#151515] to-[#0c0c0c] border border-white/10 rounded-sm transform skew-x-[-30deg] scale-y-50 shadow-2xl">
+                <div class="absolute inset-0 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] bg-[size:12px_12px] opacity-40"></div>
+                <!-- Precision subtle white ray glint -->
+                <div class="absolute top-0 right-10 w-20 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent"></div>
+              </div>
+              
+              <!-- Left Face -->
+              <div class="absolute left-8 top-[74px] w-28 h-40 bg-gradient-to-b from-[#111111] via-[#090909] to-[#030303] border-l border-b border-white/5 rounded-bl-sm transform skew-y-[28deg]">
+                <div class="absolute top-0 right-0 w-[1px] h-full bg-white/10"></div>
+              </div>
+
+              <!-- Right Face -->
+              <div class="absolute right-8 top-[74px] w-36 h-40 bg-gradient-to-b from-[#1a1a1a] via-[#0d0d0d] to-[#050505] border-r border-b border-white/10 rounded-br-sm transform skew-y-[-28deg]">
+                <!-- Resend subtle R imprint on cube surface -->
+                <div class="absolute inset-0 flex items-center justify-center opacity-25">
+                  <svg width="44" height="44" viewBox="0 0 24 24" fill="none">
+                    <path d="M4 4H14.5C17.5376 4 20 6.46243 20 9.5C20 12.5376 17.5376 15 14.5 15H9V20H4V4Z" fill="white"/>
+                  </svg>
+                </div>
+              </div>
+
+              <!-- Dark floor ambient occlusion -->
+              <div class="absolute -bottom-10 left-1/2 -translate-x-1/2 w-64 h-12 bg-black/90 blur-xl -z-10"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Logo Strip -->
+  <section class="border-b border-[#141414] py-14 bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <p class="text-[14px] text-[#737373] tracking-normal font-normal">
+          Companies of all sizes trust Resend to deliver their most important emails.
+        </p>
+        <a href="#enterprise" class="text-[13px] text-[#a3a3a3] hover:text-white transition-colors inline-flex items-center gap-1 font-medium">
+          Explore Enterprise <span>→</span>
+        </a>
+      </div>
+
+      <!-- Real customer brand names (verified actual customers of Resend) -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 items-center pt-2">
+        <div class="text-[#a1a1a1] hover:text-white font-semibold text-lg tracking-tight transition-colors flex items-center gap-2">
+          <span class="text-xl">▲</span> Vercel
+        </div>
+        <div class="text-[#a1a1a1] hover:text-white font-semibold text-lg tracking-tight transition-colors flex items-center gap-2">
+          <span class="text-emerald-500 font-mono text-xl">⚡</span> Supabase
+        </div>
+        <div class="text-[#a1a1a1] hover:text-white font-bold text-lg tracking-wider transition-colors">
+          CAL.COM
+        </div>
+        <div class="text-[#a1a1a1] hover:text-white font-medium text-lg tracking-tight transition-colors flex items-center gap-1.5">
+          <span class="w-4 h-4 rounded-full border border-current inline-block"></span> raycast
+        </div>
+        <div class="text-[#a1a1a1] hover:text-white font-semibold text-lg tracking-tight transition-colors flex items-center gap-2">
+          <span>●</span> Lovable
+        </div>
+        <div class="text-[#a1a1a1] hover:text-white font-semibold text-lg tracking-tight transition-colors">
+          Mintlify
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: "Integrate this weekend" -->
+  <section class="py-24 border-b border-[#141414] relative bg-black overflow-hidden">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[680px] mb-12">
+        <div class="text-[12px] uppercase tracking-widest text-[#666666] font-mono mb-3 font-semibold">Integrations</div>
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Integrate this weekend
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          A simple, elegant interface so you can start sending emails in minutes. It fits right into your code with SDKs for your favorite programming languages.
+        </p>
+      </div>
+
+      <!-- SDK Language Tabs -->
+      <div class="flex items-center gap-1 overflow-x-auto pb-4 mb-6 border-b border-[#181818] scrollbar-none text-[13px] font-mono">
+        <button class="px-3.5 py-1.5 bg-[#141414] text-white rounded-md border border-[#2b2b2b] font-medium">Node.js</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Serverless</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Ruby</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Python</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">PHP</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">CLI</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Go</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Rust</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Java</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">Elixir</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">.NET</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">REST</button>
+        <button class="px-3 py-1.5 text-[#737373] hover:text-[#d4d4d4] transition-colors">SMTP</button>
+      </div>
+
+      <!-- Code & Wireframe Panel Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left: Code Sample Panel -->
+        <div class="lg:col-span-7 code-container rounded-lg p-6 font-mono text-[13px] leading-[1.65]">
+          <div class="flex items-center justify-between pb-4 mb-4 border-b border-[#1a1a1a]">
+            <div class="flex items-center gap-2">
+              <span class="w-3 h-3 rounded-full bg-[#262626]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#262626]"></span>
+              <span class="w-3 h-3 rounded-full bg-[#262626]"></span>
+              <span class="text-[12px] text-[#666] ml-2">app/api/send/route.ts</span>
+            </div>
+            <button class="text-[11px] text-[#737373] hover:text-white flex items-center gap-1 transition-colors">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+              Copy
+            </button>
+          </div>
+          <pre class="overflow-x-auto text-[#bfbfbf]"><code><span class="text-[#888]">import</span> { Resend } <span class="text-[#888]">from</span> <span class="text-[#a3e635]">'resend'</span>;
+
+<span class="text-[#888]">const</span> resend = <span class="text-[#888]">new</span> <span class="text-[#60a5fa]">Resend</span>(process.env.RESEND_API_KEY);
+
+<span class="text-[#888]">export async function</span> <span class="text-[#60a5fa]">POST</span>() {
+  <span class="text-[#888]">const</span> { data, error } = <span class="text-[#888]">await</span> resend.emails.<span class="text-[#60a5fa]">send</span>({
+    from: <span class="text-[#a3e635]'">'Acme &lt;onboarding@resend.dev&gt;'</span>,
+    to: [<span class="text-[#a3e635]">'delivered@resend.dev'</span>],
+    subject: <span class="text-[#a3e635]">'hello world'</span>,
+    react: <span class="text-[#60a5fa]">EmailTemplate</span>({ firstName: <span class="text-[#a3e635]">'John'</span> }),
+  });
+
+  <span class="text-[#888]">if</span> (error) {
+    <span class="text-[#888]">return</span> Response.<span class="text-[#60a5fa]">json</span>({ error }, { status: <span class="text-[#f87171]">500</span> });
+  }
+
+  <span class="text-[#888]">return</span> Response.<span class="text-[#60a5fa]">json</span>(data);
+}</code></pre>
+        </div>
+
+        <!-- Right: Dark wireframe aesthetic visualization -->
+        <div class="lg:col-span-5 h-[340px] border border-[#1b1b1b] rounded-lg bg-[#080808] p-6 relative flex flex-col justify-between overflow-hidden">
+          <div class="absolute inset-0 grid-lines opacity-40"></div>
+          <div class="relative z-10 flex items-center justify-between">
+            <span class="text-[12px] font-mono text-[#737373]">STATUS: 200 OK</span>
+            <span class="text-[11px] font-mono text-[#4ade80] px-2 py-0.5 rounded border border-[#225533] bg-[#0c1f13]">Delivered in 28ms</span>
+          </div>
+
+          <div class="relative z-10 space-y-3 font-mono text-[12px]">
+            <div class="p-3 bg-[#0d0d0d] border border-[#202020] rounded">
+              <div class="text-[#666] text-[10px] uppercase">EMAIL_ID</div>
+              <div class="text-[#e2e2e2] truncate">re_123456789_abcdef</div>
+            </div>
+            <div class="p-3 bg-[#0d0d0d] border border-[#202020] rounded">
+              <div class="text-[#666] text-[10px] uppercase">DELIVERY REGION</div>
+              <div class="text-[#e2e2e2]">iad1 (US East, N. Virginia)</div>
+            </div>
+          </div>
+
+          <div class="relative z-10 text-[11px] text-[#666] font-mono">
+            SDK verified across 12+ cloud runtimes
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: "First-class developer experience" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-16">
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          First-class developer experience
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          Built from the ground up for modern engineering workflows. Everything you need to test, monitor, and automate email delivery.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Feature 1: Test Mode -->
+        <div class="border border-[#1c1c1c] rounded-lg p-8 bg-[#080808]">
+          <div class="w-9 h-9 rounded border border-[#2b2b2b] bg-[#121212] flex items-center justify-center mb-6 text-white font-mono text-sm">
+            01
+          </div>
+          <h3 class="text-2xl font-sans font-medium text-white mb-3">Test mode</h3>
+          <p class="text-[#888888] text-[15px] leading-[1.6] mb-6">
+            Simulate events and test your application without sending real emails to users or burning sending quota.
+          </p>
+          <div class="p-4 rounded border border-[#1d1d1d] bg-[#0c0c0c] font-mono text-[12px] text-[#999]">
+            <div class="text-[#555] mb-1">// Safe testing environment</div>
+            <div>RESEND_API_KEY=<span class="text-[#a3e635]">re_test_xxxxxxxxxxxx</span></div>
+          </div>
+        </div>
+
+        <!-- Feature 2: Modular Webhooks -->
+        <div class="border border-[#1c1c1c] rounded-lg p-8 bg-[#080808]">
+          <div class="w-9 h-9 rounded border border-[#2b2b2b] bg-[#121212] flex items-center justify-center mb-6 text-white font-mono text-sm">
+            02
+          </div>
+          <h3 class="text-2xl font-sans font-medium text-white mb-3">Modular webhooks</h3>
+          <p class="text-[#888888] text-[15px] leading-[1.6] mb-6">
+            Receive real-time notifications for delivery, opens, clicks, bounces, and complaints with cryptographic signing verification.
+          </p>
+          <div class="p-4 rounded border border-[#1d1d1d] bg-[#0c0c0c] font-mono text-[12px] text-[#999] flex items-center justify-between">
+            <span class="text-[#e0e0e0]">email.delivered</span>
+            <span class="text-emerald-400">active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: "Write using a delightful editor" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-12">
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Write using a delightful editor
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          Compose broadcast and transactional emails with a clean, distraction-free markdown and rich text interface designed for speed.
+        </p>
+      </div>
+
+      <!-- Large real product representation -->
+      <div class="border border-[#202020] rounded-xl overflow-hidden bg-[#0a0a0a] shadow-2xl">
+        <div class="border-b border-[#1c1c1c] px-6 py-3.5 flex items-center justify-between bg-[#0e0e0e]">
+          <div class="flex items-center gap-3">
+            <span class="text-[13px] font-medium text-white">Product Launch Update — September 2026</span>
+            <span class="text-[11px] px-2 py-0.5 rounded border border-[#2e2e2e] bg-[#171717] text-[#999]">Draft</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-[12px] text-[#737373]">Audience: 42,850 developers</span>
+            <button class="bg-[#1f1f1f] text-white border border-[#333] px-3 py-1 rounded text-xs">Preview</button>
+          </div>
+        </div>
+        <div class="p-8 sm:p-12 max-w-[800px] mx-auto font-sans">
+          <h4 class="text-2xl font-serif text-white mb-4">Announcing modern email infrastructure</h4>
+          <p class="text-[#a3a3a3] text-[15px] leading-relaxed mb-6">
+            Today we are introducing a new way to compose, preview, and send transactional updates. You can write content using clean Markdown, embed reusable React components, and verify rendering across 40+ email clients in parallel.
+          </p>
+          <div class="p-4 rounded border border-[#222] bg-[#121212] mb-6">
+            <span class="text-xs font-mono text-[#888] block mb-1">BUTTON COMPONENT</span>
+            <span class="inline-block bg-white text-black px-4 py-2 rounded text-sm font-medium">Verify your email address</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: "Go beyond editing" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-16">
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Go beyond editing
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          Complete contact management and broadcast analytics that keep you informed without invasive tracking cookies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Contact Management -->
+        <div class="border border-[#1c1c1c] rounded-lg p-8 bg-[#080808]">
+          <h3 class="text-2xl font-sans font-medium text-white mb-3">Contact management</h3>
+          <p class="text-[#888888] text-[15px] leading-[1.6] mb-6">
+            Segment audiences, handle unsubscriptions automatically, and synchronize contacts directly via our REST API.
+          </p>
+          <div class="space-y-2 text-[13px] font-mono text-[#999]">
+            <div class="p-2.5 rounded bg-[#0d0d0d] border border-[#1a1a1a] flex justify-between">
+              <span>developers@company.com</span>
+              <span class="text-emerald-400">Subscribed</span>
+            </div>
+            <div class="p-2.5 rounded bg-[#0d0d0d] border border-[#1a1a1a] flex justify-between">
+              <span>founder@startup.io</span>
+              <span class="text-emerald-400">Subscribed</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Broadcast Analytics -->
+        <div class="border border-[#1c1c1c] rounded-lg p-8 bg-[#080808]">
+          <h3 class="text-2xl font-sans font-medium text-white mb-3">Broadcast analytics</h3>
+          <p class="text-[#888888] text-[15px] leading-[1.6] mb-6">
+            Measure delivery rates, open performance, and link clicks with clean charts and zero bloat.
+          </p>
+          <div class="grid grid-cols-3 gap-3 text-center font-mono">
+            <div class="p-3 bg-[#0d0d0d] border border-[#1a1a1a] rounded">
+              <div class="text-lg text-white font-medium">99.8%</div>
+              <div class="text-[11px] text-[#666]">Delivered</div>
+            </div>
+            <div class="p-3 bg-[#0d0d0d] border border-[#1a1a1a] rounded">
+              <div class="text-lg text-white font-medium">64.2%</div>
+              <div class="text-[11px] text-[#666]">Open rate</div>
+            </div>
+            <div class="p-3 bg-[#0d0d0d] border border-[#1a1a1a] rounded">
+              <div class="text-lg text-white font-medium">21.4%</div>
+              <div class="text-[11px] text-[#666]">Click rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: "Develop emails using React" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-5">
+        <div class="text-[12px] uppercase tracking-widest text-[#666666] font-mono mb-3 font-semibold">React Email</div>
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Develop emails using React
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6] mb-6">
+          Write emails with familiar JSX components, Tailwind styling, and TypeScript safety. No more tables inside tables or archaic inline HTML hacks.
+        </p>
+        <a href="https://react.email" class="text-[14px] text-white hover:underline inline-flex items-center gap-1 font-medium">
+          Explore React Email open source <span>→</span>
+        </a>
+      </div>
+
+      <div class="lg:col-span-7 code-container rounded-lg p-6 font-mono text-[13px] leading-[1.65]">
+        <div class="text-[11px] text-[#666] mb-3">// emails/welcome.tsx</div>
+        <pre class="overflow-x-auto text-[#bfbfbf]"><code><span class="text-[#888]">import</span> { Html, Head, Body, Container, Text, Button } <span class="text-[#888]">from</span> <span class="text-[#a3e635]'@react-email/components'</span>;
+
+<span class="text-[#888]">export const</span> <span class="text-[#60a5fa]">WelcomeEmail</span> = ({ name }) =&gt; (
+  &lt;<span class="text-[#60a5fa]">Html</span>&gt;
+    &lt;<span class="text-[#60a5fa]">Head</span> /&gt;
+    &lt;<span class="text-[#60a5fa]">Body</span> <span class="text-[#888]">className</span>=<span class="text-[#a3e635]">'bg-black font-sans text-white'</span>&gt;
+      &lt;<span class="text-[#60a5fa]">Container</span> <span class="text-[#888]">className</span>=<span class="text-[#a3e635]">'p-8 mx-auto'</span>&gt;
+        &lt;<span class="text-[#60a5fa]">Text</span> <span class="text-[#888]">className</span>=<span class="text-[#a3e635]">'text-2xl font-bold'</span>&gt;Welcome, {name}&lt;/<span class="text-[#60a5fa]">Text</span>&gt;
+        &lt;<span class="text-[#60a5fa]">Button</span> <span class="text-[#888]">href</span>=<span class="text-[#a3e635]">'https://resend.com'</span> <span class="text-[#888]">className</span>=<span class="text-[#a3e635]">'bg-white text-black px-4 py-2'</span>&gt;
+          Get Started
+        &lt;/<span class="text-[#60a5fa]">Button</span>&gt;
+      &lt;/<span class="text-[#60a5fa]">Container</span>&gt;
+    &lt;/<span class="text-[#60a5fa]">Body</span>&gt;
+  &lt;/<span class="text-[#60a5fa]">Html</span>&gt;
+);</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 6: "Reach humans, not spam folders" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-16">
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Reach humans, not spam folders
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          Modern sender reputation management, dedicated IP warming, automatic DKIM/SPF verification, and proactive blocklist tracking.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="p-8 rounded-lg border border-[#1b1b1b] bg-[#080808]">
+          <h3 class="text-xl font-medium text-white mb-2">Proactive blocklist tracking</h3>
+          <p class="text-[#888] text-[15px] leading-relaxed">
+            Continuous background scans across Spamhaus, Barracuda, and SURBL ensure your sending domains maintain pristine health scorecards before reputation is impacted.
+          </p>
+        </div>
+        <div class="p-8 rounded-lg border border-[#1b1b1b] bg-[#080808]">
+          <h3 class="text-xl font-medium text-white mb-2">Faster time to inbox</h3>
+          <p class="text-[#888] text-[15px] leading-relaxed">
+            Global edge nodes route SMTP traffic through low-latency direct pipes to major mailbox providers (Gmail, Outlook, iCloud, and Yahoo).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: "Everything in your control" -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-12">
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Everything in your control
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          Granular API tokens, multi-domain isolation, team permissions, and audit logs designed for growing engineering organizations.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-[13px]">
+        <div class="p-6 rounded border border-[#1c1c1c] bg-[#090909]">
+          <div class="text-[#ededed] font-medium mb-1">Fine-grained API keys</div>
+          <div class="text-[#666]">Restrict tokens by domain, sending quota, or read-only webhook access.</div>
+        </div>
+        <div class="p-6 rounded border border-[#1c1c1c] bg-[#090909]">
+          <div class="text-[#ededed] font-medium mb-1">Multi-domain management</div>
+          <div class="text-[#666]">Isolate transactional notification domains from marketing broadcast subdomains.</div>
+        </div>
+        <div class="p-6 rounded border border-[#1c1c1c] bg-[#090909]">
+          <div class="text-[#ededed] font-medium mb-1">Audit trail</div>
+          <div class="text-[#666]">Immutable logs tracking all domain authentications and team member actions.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 8: "Beyond expectations" (Testimonials) -->
+  <section class="py-24 border-b border-[#141414] bg-black">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12">
+      <div class="max-w-[700px] mb-16">
+        <div class="text-[12px] uppercase tracking-widest text-[#666666] font-mono mb-3 font-semibold">Testimonials</div>
+        <h2 class="text-[44px] md:text-[56px] font-sans font-medium text-white tracking-[-0.03em] leading-[1.08] mb-4">
+          Beyond expectations
+        </h2>
+        <p class="text-[17px] text-[#8e8e8e] leading-[1.6]">
+          What technical founders and engineering leaders say about migrating their email infrastructure to Resend.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="p-8 rounded-lg border border-[#1b1b1b] bg-[#080808] flex flex-col justify-between">
+          <p class="text-[15px] text-[#cccccc] leading-relaxed mb-8">
+            “Resend is the developer-first email platform we've been waiting for. Setup took 5 minutes and delivery rates have been 100% rock solid.”
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#202020] flex items-center justify-center font-bold text-xs text-white">G</div>
+            <div>
+              <div class="text-sm font-medium text-white">Guillermo Rauch</div>
+              <div class="text-xs text-[#666]">CEO, Vercel</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-lg border border-[#1b1b1b] bg-[#080808] flex flex-col justify-between">
+          <p class="text-[15px] text-[#cccccc] leading-relaxed mb-8">
+            “The developer experience of Resend is lightyears ahead of legacy providers. It feels like Stripe for email.”
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#202020] flex items-center justify-center font-bold text-xs text-white">P</div>
+            <div>
+              <div class="text-sm font-medium text-white">Peer Richelsen</div>
+              <div class="text-xs text-[#666]">Co-founder, Cal.com</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 rounded-lg border border-[#1b1b1b] bg-[#080808] flex flex-col justify-between">
+          <p class="text-[15px] text-[#cccccc] leading-relaxed mb-8">
+            “React Email combined with Resend made transactional templates fun again. No more nightmare nested HTML tables.”
+          </p>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-[#202020] flex items-center justify-center font-bold text-xs text-white">S</div>
+            <div>
+              <div class="text-sm font-medium text-white">Shu Ding</div>
+              <div class="text-xs text-[#666]">Software Engineer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA Section: Domaine heading "Email reimagined. Available today." -->
+  <section class="py-32 bg-black text-center relative overflow-hidden">
+    <div class="max-w-[1240px] mx-auto px-6 relative z-10">
+      <h2 class="font-serif text-[56px] sm:text-[76px] lg:text-[92px] leading-[1.0] tracking-[-0.035em] text-white mb-8">
+        Email reimagined.<br>
+        <span class="text-silver-muted-gradient">Available today.</span>
+      </h2>
+      <div class="flex items-center justify-center gap-4">
+        <a href="https://resend.com/signup" class="px-6 py-3 bg-[#171717] hover:bg-[#222222] text-white border border-[#303030] rounded-md font-medium text-sm transition-all">
+          Get started
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-[#141414] py-16 bg-black text-[13px] text-[#737373]">
+    <div class="max-w-[1240px] mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-3">
+        <span class="text-white font-semibold">Resend</span>
+        <span>© 2026 Resend, Inc. All rights reserved.</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://resend.com/docs" class="hover:text-white transition-colors">Documentation</a>
+        <a href="#changelog" class="hover:text-white transition-colors">Changelog</a>
+        <a href="#privacy" class="hover:text-white transition-colors">Privacy</a>
+        <a href="#terms" class="hover:text-white transition-colors">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
