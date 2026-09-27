@@ -50,7 +50,7 @@ python3 scripts/build.py
 python3 -m unittest discover -s tests -v
 ```
 
-有 Node.js 的環境也可使用 `npm run dev`、`npm run build`、`npm test`；它們呼叫相同的 Python 指令，不需 `npm install`。
+有 Node.js 的環境也可執行 `npm run build`，用不依賴 Python 的入口建立 Sites 靜態網站；`npm run build:bundle`、`npm run dev` 和 `npm test` 仍呼叫相應的 Python 指令，不需 `npm install`。
 
 - `design-md/<slug>/DESIGN.md`：完整設計分析，加上全新 AI 指令。
 - `design-md/<slug>/PROMPTS.md`：三種任務指令與迭代流程。
