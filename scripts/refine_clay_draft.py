@@ -7,6 +7,14 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / '.stitch-work' / 'current-official'
 data = json.loads((SOURCE / 'clay-browser-data.json').read_text())
+provenance = {
+    item['file']: item['source_url']
+    for item in json.loads((SOURCE / 'clay-asset-provenance.json').read_text())['assets']
+}
+
+def official_media(file):
+    """Keep the hosted package small; the hash-addressed official CDN serves imagery."""
+    return escape(provenance[file], quote=True)
 
 services = data['services'].strip().split('\n\n')
 assert len(services) == 13, len(services)
@@ -76,7 +84,7 @@ def work_card(index):
     return (
         f'<article class="work-card{" work-card-wide" if wide else ""}">'
         f'<a href="{escape(item["href"], quote=True)}" aria-label="View {escape(work_names[index])} case study">'
-        f'<img src="clay-assets/{work_images[index]}" alt="{escape(work_names[index])} project image" loading="lazy"></a>'
+        f'<img src="{official_media(work_images[index])}" alt="{escape(work_names[index])} project image" loading="lazy"></a>'
         f'<div class="work-meta"><h3>{escape(work_names[index])}</h3>'
         f'<p>{escape(desc)}</p><a href="{escape(item["href"], quote=True)}" class="case-link">View case study ↗</a></div>'
         '</article>'
@@ -96,13 +104,13 @@ logo_files = [
     'logo-western-digital.avif', 'logo-toyota.avif', 'logo-samsung.png',
 ]
 logo_html = ''.join(
-    f'<img src="clay-assets/{file}" alt="{escape(logo["name"])}" loading="lazy">'
+    f'<img src="{official_media(file)}" alt="{escape(logo["name"])}" loading="lazy">'
     for logo, file in zip(logos, logo_files[:10])
 )
 work_html = ''.join(work_card(i) for i in range(14))
 news_html = ''.join(
     f'<a class="news-item" href="{escape(data["news"][i]["href"], quote=True)}">'
-    f'<img src="clay-assets/{news_images[i]}" alt="" loading="lazy">'
+    f'<img src="{official_media(news_images[i])}" alt="" loading="lazy">'
     f'<div><span class="news-category">{news_categories[i]}</span><h3>{escape(news_titles[i])}</h3>'
     f'<small>{news_dates[i]}</small></div><span class="news-arrow" aria-hidden="true">↗</span></a>'
     for i in range(3)
@@ -203,5 +211,8 @@ for marker, content in {
 }.items():
     html = html.replace(marker, content)
 assert '@@' not in html
+for file in ('showreel-poster.avif', 'team-office.jpg', 'team-camera.png',
+             'team-san-francisco.png'):
+    html = html.replace('clay-assets/' + file, official_media(file))
 (SOURCE / 'clay.html').write_text(html + '\n')
 print(f'Wrote Clay draft: {len(work_names)} work items, {len(service_pairs)} services, {len(questions)} FAQs')
