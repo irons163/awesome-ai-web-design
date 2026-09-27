@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VoltAgent — AI Agent Engineering Platform</title>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed": "#ffffff",
+            "inverse-on-surface": "#303033",
+            "tertiary-fixed": "#5e5e5e",
+            "on-background": "#e3e2e5",
+            "surface-container-highest": "#343537",
+            "on-secondary-container": "#e2e2e2",
+            "surface-tint": "#75daa1",
+            "inverse-primary": "#006d43",
+            "primary-container": "#84e9af",
+            "error": "#ffb4ab",
+            "secondary-container": "#474747",
+            "outline-variant": "#474747",
+            "tertiary-fixed-dim": "#474747",
+            "surface-container": "#1f2022",
+            "secondary-fixed-dim": "#ababab",
+            "primary-fixed-dim": "#005231",
+            "on-primary": "#002111",
+            "on-error": "#690005",
+            "tertiary-container": "#919191",
+            "surface": "#121315",
+            "primary-fixed": "#006d43",
+            "on-tertiary-fixed": "#ffffff",
+            "tertiary": "#e2e2e2",
+            "on-primary-fixed-variant": "#92f7bc",
+            "secondary": "#c6c6c6",
+            "surface-container-high": "#292a2c",
+            "inverse-surface": "#e3e2e5",
+            "secondary-fixed": "#c6c6c6",
+            "on-secondary-fixed": "#1b1b1b",
+            "outline": "#919191",
+            "on-secondary": "#1b1b1b",
+            "background": "#121315",
+            "surface-bright": "#38393b",
+            "surface-variant": "#343537",
+            "on-surface-variant": "#c6c6c6",
+            "error-container": "#93000a",
+            "on-tertiary-container": "#000000",
+            "on-tertiary": "#1b1b1b",
+            "on-error-container": "#ffdad6",
+            "on-primary-container": "#000000",
+            "surface-dim": "#121315",
+            "surface-container-lowest": "#0d0e10",
+            "primary": "#ffffff",
+            "on-tertiary-fixed-variant": "#e2e2e2",
+            "surface-container-low": "#1b1c1e",
+            "on-surface": "#e3e2e5",
+            "on-secondary-fixed-variant": "#3b3b3b",
+            /* Direct brand anchor palette */
+            "volt-bg": "#090a0c",
+            "volt-hairline": "#25282a",
+            "volt-mint": "#55ba84",
+            "volt-mint-dark": "#0e2b1d"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Inter", "sans-serif"],
+            mono: ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+    .dotted-grid {
+      background-image: radial-gradient(#25282a 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .dense-grid {
+      background-image: radial-gradient(#1f2022 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+  </style>
+</head>
+<body class="bg-[#090a0c] text-on-surface font-body antialiased selection:bg-[#55ba84]/20 selection:text-[#55ba84]">
+<!-- 1. TOP ANNOUNCEMENT BAR (40px) -->
+<aside class="w-full h-10 bg-[#090a0c] border-b border-[#25282a] flex items-center justify-center px-4 text-xs font-medium text-on-surface-variant z-50 relative">
+<div class="flex items-center gap-2 max-w-[1280px]">
+<span class="text-[#55ba84] text-xs">⭐</span>
+<span>We're open source - a GitHub star means a lot to us.</span>
+<a class="text-[#55ba84] hover:underline flex items-center gap-0.5 ml-1 transition-colors" href="https://github.com">
+        Thank you for the support!
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</aside>
+<!-- 2. STICKY TOP NAVBAR (64px) - Shared Component JSON Execution -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/90 backdrop-blur-md dark:bg-surface/90 border-b border-outline-variant dark:border-outline-variant flat no shadows">
+<div class="max-w-[1280px] mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Brand Logo -->
+<a class="font-headline text-lg font-bold tracking-tight text-primary dark:text-primary flex items-center gap-2" href="#">
+<div class="w-7 h-7 rounded border border-[#55ba84]/40 bg-[#0e2b1d] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#55ba84] text-base" data-icon="bolt">bolt</span>
+</div>
+<span class="tracking-tight text-white font-semibold">voltagent</span>
+</a>
+<!-- Center Links -->
+<nav class="hidden md:flex items-center gap-8 font-headline text-sm font-medium tracking-tight text-on-surface dark:text-on-surface">
+<a class="text-primary dark:text-primary font-semibold border-b-2 border-primary-container pb-0.5" href="#architecture">Architecture</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary-container dark:hover:text-primary-container transition-colors duration-150" href="#core-framework">Core Framework</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary-container dark:hover:text-primary-container transition-colors duration-150" href="#voltops">VoltOps Console</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary-container dark:hover:text-primary-container transition-colors duration-150" href="#toolkit">Toolkit</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-medium hover:text-primary-container dark:hover:text-primary-container transition-colors duration-150" href="#docs">Docs</a>
+</nav>
+<!-- Right Trailing Actions -->
+<div class="flex items-center gap-3">
+<a class="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded text-xs font-mono border border-[#25282a] bg-surface-container-lowest text-on-surface-variant hover:text-white hover:border-outline transition-colors" href="https://github.com">
+<span class="material-symbols-outlined text-[15px] text-[#55ba84]" data-icon="star" data-weight="fill">star</span>
+<span class="font-semibold text-white">Star</span>
+<span class="text-[#919191] ml-0.5 border-l border-[#25282a] pl-1.5">4.2k</span>
+</a>
+<button aria-label="Terminal Console" class="w-8 h-8 rounded border border-[#25282a] flex items-center justify-center text-on-surface-variant hover:text-white hover:border-outline transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="terminal">terminal</span>
+</button>
+<a class="text-xs font-medium text-on-surface-variant hover:text-white transition-colors px-2" href="#signin">Sign In</a>
+<a class="text-xs font-medium px-3.5 py-1.5 rounded bg-primary-container text-on-primary-container font-semibold hover:bg-primary-container/90 transition-all duration-150 active:scale-[0.99] flex items-center gap-1.5" href="#deploy">
+<span>Deploy Agent</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</header>
+<!-- 3. HERO SECTION (y~200) -->
+<section class="relative pt-16 pb-24 border-b border-[#25282a] overflow-hidden">
+<div class="max-w-[1280px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Column: Copy & Command -->
+<div class="lg:col-span-6 flex flex-col items-start">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded border border-[#55ba84]/30 bg-[#0e2b1d]/40 mb-6">
+<div class="w-1.5 h-1.5 rounded-full bg-[#55ba84] animate-pulse"></div>
+<span class="text-xs font-mono text-[#55ba84] uppercase tracking-wider">The end-to-end</span>
+</div>
+<h1 class="text-white text-5xl sm:text-6xl font-extrabold tracking-tight font-headline leading-[1.08] mb-6">
+          AI Agent Engineering<br/>
+<span class="italic font-normal text-[#55ba84]">Platform</span>
+</h1>
+<p class="text-on-surface-variant text-lg font-normal leading-relaxed max-w-xl mb-8">
+          Build enterprise multi-agent systems — development, observability, and deployment in one unified TypeScript runtime.
+        </p>
+<!-- CTA Buttons -->
+<div class="flex flex-wrap items-center gap-4 w-full sm:w-auto">
+<a class="px-5 py-2.5 rounded bg-[#1f2022] hover:bg-surface-container-high border border-[#25282a] hover:border-outline text-white text-sm font-semibold transition-all" href="#get-started">
+            Get Started
+          </a>
+<div class="flex items-center gap-2 px-3.5 py-2.5 rounded border border-[#25282a] bg-surface-container-lowest font-mono text-xs text-on-surface-variant">
+<span class="text-[#55ba84]">$</span>
+<span class="text-white select-all">npm create voltagent-app@latest</span>
+<button class="text-outline hover:text-[#55ba84] ml-2 transition-colors" title="Copy command">
+<span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+<!-- Metric Badges Under Hero -->
+<div class="mt-12 pt-8 border-t border-[#25282a] w-full grid grid-cols-3 gap-6">
+<div>
+<div class="text-xl font-bold font-mono text-white">0.4ms</div>
+<div class="text-xs text-outline font-label mt-0.5">Execution overhead</div>
+</div>
+<div>
+<div class="text-xl font-bold font-mono text-white">100%</div>
+<div class="text-xs text-outline font-label mt-0.5">TypeScript strict</div>
+</div>
+<div>
+<div class="text-xl font-bold font-mono text-white">MCP-ready</div>
+<div class="text-xs text-outline font-label mt-0.5">Standard protocols</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Line-Art Architecture Diagram -->
+<div class="lg:col-span-6 w-full">
+<div class="relative rounded-lg border border-[#25282a] bg-[#0d0e10] p-6 dotted-grid overflow-hidden">
+<!-- Node Canvas Overlay Header -->
+<div class="flex items-center justify-between pb-4 border-b border-[#25282a]/60 text-xs font-mono text-outline mb-6">
+<span class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#55ba84]"></span>
+              RUNTIME PIPELINE
+            </span>
+<span class="text-[11px] text-outline-variant">LIVE TOPOLOGY</span>
+</div>
+<!-- Topology Grid -->
+<div class="relative py-4">
+<!-- Feed In Nodes -->
+<div class="grid grid-cols-4 gap-2 mb-8">
+<div class="px-2.5 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant flex items-center justify-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded bg-blue-400"></span> Airtable
+              </div>
+<div class="px-2.5 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant flex items-center justify-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded bg-slate-200"></span> GitHub
+              </div>
+<div class="px-2.5 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant flex items-center justify-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded bg-amber-400"></span> Slack
+              </div>
+<div class="px-2.5 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant flex items-center justify-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded bg-red-400"></span> Gmail
+              </div>
+</div>
+<!-- Central Hub (VoltAgent Engine) -->
+<div class="relative flex justify-center items-center my-6">
+<div class="absolute inset-x-0 h-[1px] bg-gradient-to-r from-transparent via-[#55ba84]/30 to-transparent"></div>
+<div class="relative z-10 px-6 py-4 rounded-lg border border-[#55ba84]/40 bg-[#0e2b1d] text-center shadow-lg shadow-[#55ba84]/5">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#55ba84] text-lg" data-icon="bolt">bolt</span>
+<span class="font-mono font-bold text-sm text-white">VoltAgent Engine</span>
+</div>
+<div class="text-[11px] font-mono text-[#84e9af]">Orchestrator v2.4.1 [Active]</div>
+</div>
+</div>
+<!-- Outbound Connections -->
+<div class="grid grid-cols-4 gap-2 mt-8">
+<div class="px-2 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant">
+                AI Resp.
+              </div>
+<div class="px-2 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant">
+                Automations
+              </div>
+<div class="px-2 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant">
+                API Resp.
+              </div>
+<div class="px-2 py-1.5 rounded border border-[#25282a] bg-[#121315] text-center text-xs font-mono text-on-surface-variant">
+                Webhooks
+              </div>
+</div>
+<!-- Bottom Subsystem Nodes -->
+<div class="mt-8 pt-6 border-t border-[#25282a] flex justify-between items-center px-4">
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-8 h-8 rounded-full border border-[#25282a] bg-[#1b1c1e] flex items-center justify-center text-white text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="account_tree">account_tree</span>
+</div>
+<span class="text-[10px] font-mono text-outline">Workflow</span>
+</div>
+<div class="h-[1px] w-6 bg-[#25282a]"></div>
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-8 h-8 rounded-full border border-[#25282a] bg-[#1b1c1e] flex items-center justify-center text-white text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="memory">memory</span>
+</div>
+<span class="text-[10px] font-mono text-outline">LLM</span>
+</div>
+<div class="h-[1px] w-6 bg-[#25282a]"></div>
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-8 h-8 rounded-full border border-[#55ba84]/30 bg-[#0e2b1d] flex items-center justify-center text-[#55ba84] text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="database">database</span>
+</div>
+<span class="text-[10px] font-mono text-[#55ba84]">Memory</span>
+</div>
+<div class="h-[1px] w-6 bg-[#25282a]"></div>
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-8 h-8 rounded-full border border-[#25282a] bg-[#1b1c1e] flex items-center justify-center text-white text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="search_check">search_check</span>
+</div>
+<span class="text-[10px] font-mono text-outline">RAG</span>
+</div>
+<div class="h-[1px] w-6 bg-[#25282a]"></div>
+<div class="flex flex-col items-center gap-1.5">
+<div class="w-8 h-8 rounded-full border border-[#25282a] bg-[#1b1c1e] flex items-center justify-center text-white text-xs">
+<span class="material-symbols-outlined text-sm" data-icon="build">build</span>
+</div>
+<span class="text-[10px] font-mono text-outline">Tools</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. "THE PLATFORM" PRODUCT EQUATION & MULTI-TAB ENGINE (y~798) -->
+<section class="py-24 border-b border-[#25282a]">
+<div class="max-w-[1280px] mx-auto px-6">
+<!-- Section Eyebrow & Headline -->
+<div class="mb-12">
+<span class="text-xs font-mono font-bold tracking-widest text-[#55ba84] uppercase">THE PLATFORM</span>
+<h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight font-headline mt-2">
+          Two architectures. One coherent platform.
+        </h2>
+</div>
+<!-- Two-part Product Architecture Equation Cards -->
+<div class="grid grid-cols-1 md:grid-cols-11 gap-4 items-center mb-16">
+<!-- Left: Core Framework -->
+<div class="md:col-span-5 p-6 rounded-lg border border-[#25282a] bg-[#0d0e10] hover:border-outline transition-colors">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold font-headline text-white">Core Framework</h3>
+<span class="text-xs font-mono px-2 py-0.5 rounded border border-[#55ba84]/30 bg-[#0e2b1d] text-[#55ba84]">Open Source</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 font-normal">
+            Low-overhead runtime engine written in strict TypeScript with zero unnecessary abstractions.
+          </p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Memory</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">RAG</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Guardrails</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Tools</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">MCP</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Voice</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Workflow</span>
+</div>
+</div>
+<!-- Plus Separator -->
+<div class="md:col-span-1 flex items-center justify-center">
+<div class="w-10 h-10 rounded-full border border-[#25282a] bg-[#121315] flex items-center justify-center text-on-surface-variant font-mono text-xl font-light">
+            +
+          </div>
+</div>
+<!-- Right: VoltOps Console -->
+<div class="md:col-span-5 p-6 rounded-lg border border-[#25282a] bg-[#0d0e10] hover:border-outline transition-colors">
+<div class="flex items-center justify-between mb-4">
+<h3 class="text-lg font-bold font-headline text-white">VoltOps Console</h3>
+<span class="text-xs font-mono px-2 py-0.5 rounded border border-[#25282a] bg-surface-container-high text-on-surface-variant">Cloud / Self-Hosted</span>
+</div>
+<p class="text-sm text-on-surface-variant mb-6 font-normal">
+            Real-time multi-agent execution telemetry, deterministic evaluations, and one-click cloud deploys.
+          </p>
+<div class="flex flex-wrap gap-2">
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Observability</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Automation</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Deployment</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Evals</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Guardrails</span>
+<span class="px-2.5 py-1 rounded text-xs font-mono bg-surface-container-high text-on-surface border border-[#25282a]">Prompts</span>
+</div>
+</div>
+</div>
+<!-- Wide Feature Tab Navigation Bar -->
+<div class="border-b border-[#25282a] flex items-center overflow-x-auto no-scrollbar gap-1 mb-8">
+<button class="px-4 py-3 text-xs font-mono font-semibold text-[#55ba84] border-b-2 border-[#55ba84] whitespace-nowrap">
+          Framework
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Observability
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Evals
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Triggers &amp; Actions
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          RAG
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Monitoring
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Prompts
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Guardrails
+        </button>
+<button class="px-4 py-3 text-xs font-mono text-outline hover:text-white transition-colors whitespace-nowrap">
+          Deployment
+        </button>
+</div>
+<!-- Active Tab Content Area -->
+<div class="flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<p class="text-base text-white font-medium">
+            Create production-ready AI agents in minutes with type-safe TypeScript APIs
+          </p>
+<a class="text-xs font-mono text-[#55ba84] hover:underline flex items-center gap-1" href="#docs-framework">
+            Docs <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</a>
+</div>
+<!-- Technical Side-by-Side View -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-4">
+<!-- Left: Code Editor -->
+<div class="lg:col-span-7 rounded-lg border border-[#25282a] bg-[#0d0e10] overflow-hidden flex flex-col font-mono text-xs">
+<!-- Window Tab Header -->
+<div class="h-9 px-4 bg-[#121315] border-b border-[#25282a] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="text-outline text-[11px] ml-2">agent.config.ts</span>
+</div>
+<span class="text-[#55ba84] text-[10px] uppercase font-mono">TypeScript 5.6</span>
+</div>
+<!-- Code Body -->
+<div class="p-4 leading-relaxed overflow-x-auto text-[#c6c6c6]">
+<pre><code><span class="text-[#84e9af]">import</span> { Agent, Tool, MemoryStore } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]">'@voltagent/core'</span>;
+<span class="text-[#84e9af]">import</span> { PostgresMemory } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]">'@voltagent/memory-pg'</span>;
+
+<span class="text-outline">// Initialize deterministic state memory</span>
+<span class="text-[#84e9af]">const</span> memory = <span class="text-[#84e9af]">new</span> PostgresMemory({
+  connectionString: process.env.DATABASE_URL,
+  namespace: <span class="text-[#92f7bc]'">'enterprise-ops'</span>,
+});
+
+<span class="text-outline">// Define typed autonomous agent</span>
+<span class="text-[#84e9af]">export const</span> leadAnalyst = <span class="text-[#84e9af]">new</span> Agent({
+  name: <span class="text-[#92f7bc]'">'Lead Market Analyst'</span>,
+  model: <span class="text-[#92f7bc]'">'claude-3-5-sonnet-20241022'</span>,
+  memory,
+  tools: [
+    <span class="text-[#84e9af]">new</span> Tool({
+      name: <span class="text-[#92f7bc]'">'queryVectorDb'</span>,
+      description: <span class="text-[#92f7bc]'">'Execute hybrid sparse/dense vector search'</span>,
+      parameters: z.object({ query: z.string(), topK: z.number().default(5) }),
+      handler: <span class="text-[#84e9af]">async</span> ({ query, topK }) =&gt; {
+        <span class="text-[#84e9af]">return await</span> memory.retrieveVectors(query, topK);
+      },
+    }),
+  ],
+  guardrails: { maxTokens: 4096, hallucinationCheck: <span class="text-[#84e9af]">true</span> }
+});</code></pre>
+</div>
+</div>
+<!-- Right: VoltOps Runtime Trace Preview -->
+<div class="lg:col-span-5 rounded-lg border border-[#25282a] bg-[#0d0e10] overflow-hidden flex flex-col font-mono text-xs">
+<div class="h-9 px-4 bg-[#121315] border-b border-[#25282a] flex items-center justify-between">
+<span class="text-on-surface font-semibold flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#55ba84]"></span>
+                VoltOps Runtime Trace
+              </span>
+<span class="text-[10px] text-outline">TRACE_ID: 8fa9-c291</span>
+</div>
+<div class="p-4 flex flex-col gap-3">
+<div class="p-2.5 rounded bg-[#121315] border border-[#25282a]">
+<div class="flex justify-between text-[11px] text-outline mb-1">
+<span>STEP 1: INTENT_ROUTER</span>
+<span class="text-[#55ba84]">COMPLETED (12ms)</span>
+</div>
+<div class="text-white text-xs">Target tool assigned: `queryVectorDb`</div>
+</div>
+<div class="p-2.5 rounded bg-[#121315] border border-[#25282a]">
+<div class="flex justify-between text-[11px] text-outline mb-1">
+<span>STEP 2: TOOL_EXECUTION</span>
+<span class="text-[#55ba84]">COMPLETED (43ms)</span>
+</div>
+<div class="text-white text-xs">Extracted 5 embeddings with 0.89 cosine score</div>
+</div>
+<div class="p-2.5 rounded bg-[#121315] border border-[#55ba84]/40 bg-[#0e2b1d]/20">
+<div class="flex justify-between text-[11px] text-[#55ba84] mb-1">
+<span>STEP 3: SYNTHESIS_STREAM</span>
+<span class="animate-pulse">STREAMING (89ms)</span>
+</div>
+<div class="text-white text-xs">Output tokens: 412 / 85 tok/s</div>
+</div>
+<div class="mt-2 pt-3 border-t border-[#25282a] grid grid-cols-3 gap-2 text-center">
+<div class="p-2 rounded bg-[#121315] border border-[#25282a]">
+<div class="text-[10px] text-outline">LATENCY</div>
+<div class="text-white font-bold text-xs mt-0.5">144ms</div>
+</div>
+<div class="p-2 rounded bg-[#121315] border border-[#25282a]">
+<div class="text-[10px] text-outline">COST</div>
+<div class="text-white font-bold text-xs mt-0.5">$0.0018</div>
+</div>
+<div class="p-2 rounded bg-[#121315] border border-[#25282a]">
+<div class="text-[10px] text-outline">STATUS</div>
+<div class="text-[#55ba84] font-bold text-xs mt-0.5">HEALTHY</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. LOGO MARQUEE (y~1959) -->
+<section class="py-16 border-b border-[#25282a] bg-[#090a0c]">
+<div class="max-w-[1280px] mx-auto px-6 text-center">
+<h4 class="text-xs font-mono font-medium uppercase tracking-widest text-[#919191] mb-10">
+        USED AND TESTED BY DEVELOPERS AT
+      </h4>
+<!-- Row 1 -->
+<div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-6 items-center justify-center opacity-60 mb-8">
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">SAMSUNG</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">TATA MOTORS</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">INFOSYS</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">COGNIZANT</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">WELLS FARGO</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">BAYER</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">ORACLE</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">HUAWEI</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">MICROSOFT</span>
+<span class="font-headline font-bold text-sm tracking-wider text-outline hover:text-white transition-colors">ABB</span>
+</div>
+<!-- Row 2 -->
+<div class="grid grid-cols-2 sm:grid-cols-5 lg:grid-cols-10 gap-6 items-center justify-center opacity-40">
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">AMAZON</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">STELLANTIS</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">VERIZON</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">CARREFOUR</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">GODADDY</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">BROADCOM</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">ACCENTURE</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">NISSAN</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">ADOBE</span>
+<span class="font-headline font-semibold text-sm tracking-wider text-outline hover:text-white transition-colors">FIVERR</span>
+</div>
+</div>
+</section>
+<!-- 6. COMPLETE TOOLKIT FOR ENTERPRISE LEVEL AI AGENTS (y~2431) -->
+<section class="py-24 border-b border-[#25282a]">
+<div class="max-w-[1280px] mx-auto px-6">
+<!-- Section Header -->
+<div class="mb-14">
+<span class="text-xs font-mono font-bold tracking-widest text-[#55ba84] uppercase">ENTERPRISE-LEVEL AI AGENTS</span>
+<h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight font-headline mt-2 mb-3">
+          Complete toolkit for enterprise level AI agents
+        </h2>
+<p class="text-on-surface-variant text-base font-normal max-w-2xl">
+          Design production-ready agents with unified APIs, tools, and memory.
+        </p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Side: 4 Dark Feature Cards with Subtle Borders -->
+<div class="lg:col-span-5 grid grid-cols-1 gap-4">
+<!-- Card 1 -->
+<div class="p-5 rounded-lg border border-[#55ba84]/30 bg-[#0d0e10] hover:border-[#55ba84] transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-[#55ba84]" data-icon="terminal">terminal</span>
+<h3 class="text-base font-bold text-white">Tool calling</h3>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Native schema validation via Zod, strict argument casting, and asynchronous execution with granular timeout controls.
+            </p>
+</div>
+<!-- Card 2 -->
+<div class="p-5 rounded-lg border border-[#25282a] bg-[#0d0e10] hover:border-outline transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-outline" data-icon="schema">schema</span>
+<h3 class="text-base font-bold text-white">Unified API</h3>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Switch providers between Anthropic, OpenAI, Mistral, and local Ollama runtimes without changing agent logic.
+            </p>
+</div>
+<!-- Card 3 -->
+<div class="p-5 rounded-lg border border-[#25282a] bg-[#0d0e10] hover:border-outline transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-outline" data-icon="psychology">psychology</span>
+<h3 class="text-base font-bold text-white">Dynamic Prompting</h3>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Context-aware runtime templates with automatic token budget pruning and live guardrail injections.
+            </p>
+</div>
+<!-- Card 4 -->
+<div class="p-5 rounded-lg border border-[#25282a] bg-[#0d0e10] hover:border-outline transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-outline" data-icon="storage">storage</span>
+<h3 class="text-base font-bold text-white">Persistent Memory</h3>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Session state persistence, long-term semantic recollection, and multi-tenant vector store bindings.
+            </p>
+</div>
+</div>
+<!-- Right Side: Full-Height Sleek Dark Syntax-Highlighted TypeScript Code Panel -->
+<div class="lg:col-span-7 rounded-lg border border-[#25282a] bg-[#0d0e10] overflow-hidden flex flex-col font-mono text-xs">
+<div class="h-10 px-4 bg-[#121315] border-b border-[#25282a] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#25282a]"></span>
+<span class="text-outline text-xs ml-2">production-agent.ts</span>
+</div>
+<div class="flex items-center gap-3 text-outline">
+<span>ES2024</span>
+<button class="hover:text-white"><span class="material-symbols-outlined text-sm" data-icon="content_copy">content_copy</span></button>
+</div>
+</div>
+<div class="p-6 leading-relaxed overflow-x-auto text-[#c6c6c6]">
+<pre><code><span class="text-[#84e9af]">import</span> { Agent, ToolDefinition, MemoryManager } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]'">'@voltagent/core'</span>;
+<span class="text-[#84e9af]">import</span> { RedisStore } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]'">'@voltagent/redis-store'</span>;
+<span class="text-[#84e9af]">import</span> { z } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]'">'zod'</span>;
+
+<span class="text-outline">// 1. Register production tool definitions with strict types</span>
+<span class="text-[#84e9af]">const</span> executeRefundTool: ToolDefinition = {
+  id: <span class="text-[#92f7bc]'">'execute_refund'</span>,
+  name: <span class="text-[#92f7bc]'">'Issue Stripe Refund'</span>,
+  parameters: z.object({
+    chargeId: z.string().startsWith(<span class="text-[#92f7bc]'">'ch_'</span>),
+    amountInCents: z.number().positive(),
+    reason: z.enum([<span class="text-[#92f7bc]'">'duplicate'</span>, <span class="text-[#92f7bc]'">'fraudulent'</span>, <span class="text-[#92f7bc]'">'requested_by_customer'</span>])
+  }),
+  execute: <span class="text-[#84e9af]">async</span> (args, context) =&gt; {
+    <span class="text-outline">// Enforce enterprise execution guardrails</span>
+    context.auditLogger.record({ action: <span class="text-[#92f7bc]'">'REFUND_INITIATED'</span>, args });
+    <span class="text-[#84e9af]">return await</span> stripeClient.refunds.create({
+      charge: args.chargeId,
+      amount: args.amountInCents
+    });
+  }
+};
+
+<span class="text-outline">// 2. Bootstrap autonomous customer agent</span>
+<span class="text-[#84e9af]">export const</span> customerSupportAgent = <span class="text-[#84e9af]">new</span> Agent({
+  role: <span class="text-[#92f7bc]'">'Tier 3 Support Specialist'</span>,
+  model: <span class="text-[#92f7bc]'">'gpt-4o-2024-08-06'</span>,
+  memory: <span class="text-[#84e9af]">new</span> MemoryManager({ store: <span class="text-[#84e9af]">new</span> RedisStore({ ttl: 86400 }) }),
+  tools: [executeRefundTool],
+  temperature: 0.1,
+  maxSteps: 6,
+  onStepFinish: <span class="text-[#84e9af]">async</span> (trace) =&gt; {
+    console.log(<span bg-[#090a0c]"="" border-[#25282a]="" border-b="" class="text-[#92f7bc]'`[VoltOps] Step ${trace.stepNumber} complete in ${trace.durationMs}ms`'&lt;/span&gt;); } });&lt;/code&gt;&lt;/pre&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/section&gt; &lt;!-- 7. COMMUNITY &amp; SOCIAL PROOF (y~3133) --&gt; &lt;section class=" py-24="">
+    <div class="max-w-[1280px] mx-auto px-6">
+      
+      <!-- Section Eyebrow & Headline -->
+      <div class="mb-14 text-center">
+        <span class="text-xs font-mono font-bold tracking-widest text-[#55ba84] uppercase">FAST GROWING COMMUNITY</span>
+        <h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight font-headline mt-2">
+          What are they saying?
+        </h2>
+        <p class="text-on-surface-variant text-base font-normal max-w-xl mx-auto mt-2">
+          Engineers shipping complex agent architectures without brittle scaffolding.
+        </p>
+      </div>
+
+      <!-- Testimonial Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Post 1 -->
+        <div class="p-6 rounded-lg border border-[#25282a] bg-[#0d0e10] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-[#1f2022] border border-[#25282a] flex items-center justify-center font-bold text-xs text-[#55ba84]">
+                  DK
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-white">David K.</div>
+                  <div class="text-xs font-mono text-outline">@dk_systems</div>
+                </div>
+              </div>
+              <span class="text-outline text-xs">2d ago</span>
+            </div>
+            <p class="text-xs text-on-surface leading-relaxed">
+              "Migrated our customer routing pipeline to VoltAgent in 2 days. The TypeScript typing across tool schemas saved us at least 15 edge case bugs that were leaking through Python strings."
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#25282a] flex items-center gap-2 text-xs font-mono text-[#55ba84]">
+            <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+            Verified Production User
+          </div>
+        </div>
+
+        <!-- Post 2 -->
+        <div class="p-6 rounded-lg border border-[#25282a] bg-[#0d0e10] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-[#1f2022] border border-[#25282a] flex items-center justify-center font-bold text-xs text-[#55ba84]">
+                  SL
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-white">Sarah Lin</div>
+                  <div class="text-xs font-mono text-outline">@slin_dev</div>
+                </div>
+              </div>
+              <span class="text-outline text-xs">5d ago</span>
+            </div>
+            <p class="text-xs text-on-surface leading-relaxed">
+              "The real differentiator is VoltOps tracing. Being able to inspect the exact execution graph of 4 sub-agents running concurrently with token latency breakdown is unmatched."
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#25282a] flex items-center gap-2 text-xs font-mono text-[#55ba84]">
+            <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+            Verified Production User
+          </div>
+        </div>
+
+        <!-- Post 3 -->
+        <div class="p-6 rounded-lg border border-[#25282a] bg-[#0d0e10] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-full bg-[#1f2022] border border-[#25282a] flex items-center justify-center font-bold text-xs text-[#55ba84]">
+                  MR
+                </div>
+                <div>
+                  <div class="text-sm font-semibold text-white">Marc Rossi</div>
+                  <div class="text-xs font-mono text-outline">@marcrossi_ts</div>
+                </div>
+              </div>
+              <span class="text-outline text-xs">1w ago</span>
+            </div>
+            <p class="text-xs text-on-surface leading-relaxed">
+              "Finally a platform that treats agents as structured TypeScript programs instead of prompt engineering scripts. The Supervisor Agent pattern is bulletproof in production."
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-[#25282a] flex items-center gap-2 text-xs font-mono text-[#55ba84]">
+            <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+            Verified Production User
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </span></code></pre></div></div></div></div></section>
+<!-- 8. SUPERVISOR AGENT ORCHESTRATION (y~4289) -->
+<section class="py-24 border-b border-[#25282a]">
+<div class="max-w-[1280px] mx-auto px-6">
+<!-- Section Eyebrow & Headline -->
+<div class="mb-14">
+<span class="text-xs font-mono font-bold tracking-widest text-[#55ba84] uppercase">INTELLIGENT COORDINATION</span>
+<h2 class="text-white text-3xl sm:text-4xl font-bold tracking-tight font-headline mt-2 mb-3">
+          Supervisor agent orchestration
+        </h2>
+<p class="text-on-surface-variant text-base font-normal max-w-2xl">
+          Build powerful multi-agent systems with a central Supervisor Agent that coordinates specialized agents.
+        </p>
+</div>
+<!-- Architecture Node Diagram Canvas -->
+<div class="p-8 rounded-lg border border-[#25282a] bg-[#0d0e10] dense-grid mb-12 relative overflow-hidden">
+<div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10">
+<!-- Step 1: User Prompt -->
+<div class="flex flex-col items-center">
+<div class="px-4 py-2.5 rounded border border-[#25282a] bg-[#121315] text-xs font-mono text-white flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm text-outline" data-icon="person">person</span>
+<span>User Prompt</span>
+</div>
+<span class="text-[10px] font-mono text-outline mt-1.5">Task payload</span>
+</div>
+<div class="hidden md:block h-[1px] flex-1 bg-[#25282a] mx-2 relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#55ba84]"></div>
+</div>
+<!-- Step 2: Lead Agent -->
+<div class="flex flex-col items-center">
+<div class="px-4 py-2.5 rounded border border-[#25282a] bg-[#1b1c1e] text-xs font-mono text-white flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-sm text-[#55ba84]" data-icon="tune">tune</span>
+<span>Lead Agent</span>
+</div>
+<span class="text-[10px] font-mono text-outline mt-1.5">Deconstruction</span>
+</div>
+<div class="hidden md:block h-[1px] flex-1 bg-[#25282a] mx-2 relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#55ba84]"></div>
+</div>
+<!-- Step 3: Central Mint Glowing Supervisor -->
+<div class="flex flex-col items-center">
+<div class="px-6 py-4 rounded-lg border border-[#55ba84] bg-[#0e2b1d] text-center shadow-lg shadow-[#55ba84]/10">
+<div class="flex items-center justify-center gap-2 mb-1">
+<span class="material-symbols-outlined text-[#55ba84] text-lg" data-icon="hub">hub</span>
+<span class="font-mono font-bold text-sm text-white">Supervisor Agent</span>
+</div>
+<span class="text-[10px] font-mono text-[#84e9af]">Dynamic Router &amp; Evaluator</span>
+</div>
+</div>
+<div class="hidden md:block h-[1px] flex-1 bg-[#25282a] mx-2 relative">
+<div class="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#55ba84]"></div>
+</div>
+<!-- Step 4: 3 Specialized Agents Cluster -->
+<div class="flex flex-col gap-3 w-full md:w-auto">
+<!-- Sub Agent 1 -->
+<div class="px-4 py-2 rounded border border-[#25282a] bg-[#121315] flex items-center justify-between gap-4 text-xs font-mono">
+<span class="text-white flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Research Agent
+              </span>
+<span class="px-2 py-0.5 rounded text-[10px] bg-surface-container-high text-outline">Claude 3.5 Sonnet</span>
+</div>
+<!-- Sub Agent 2 -->
+<div class="px-4 py-2 rounded border border-[#25282a] bg-[#121315] flex items-center justify-between gap-4 text-xs font-mono">
+<span class="text-white flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Code Synthesis Agent
+              </span>
+<span class="px-2 py-0.5 rounded text-[10px] bg-surface-container-high text-outline">GPT-4o</span>
+</div>
+<!-- Sub Agent 3 -->
+<div class="px-4 py-2 rounded border border-[#25282a] bg-[#121315] flex items-center justify-between gap-4 text-xs font-mono">
+<span class="text-white flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> QA &amp; Review Agent
+              </span>
+<span class="px-2 py-0.5 rounded text-[10px] bg-surface-container-high text-outline">Llama 3.3</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Code Snippet Alongside 4 Bordered Cards -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Code Panel -->
+<div class="lg:col-span-7 rounded-lg border border-[#25282a] bg-[#0d0e10] overflow-hidden flex flex-col font-mono text-xs">
+<div class="h-9 px-4 bg-[#121315] border-b border-[#25282a] flex items-center justify-between">
+<span class="text-outline text-xs">supervisor-mesh.ts</span>
+<span class="text-[#55ba84] text-[11px]">Strict Multi-Agent Routing</span>
+</div>
+<div class="p-4 leading-relaxed overflow-x-auto text-[#c6c6c6]">
+<pre><code><span class="text-[#84e9af]">import</span> { Supervisor, createSpecialist } <span class="text-[#84e9af]">from</span> <span class="text-[#92f7bc]'">'@voltagent/supervisor'</span>;
+
+<span class="text-outline">// Instantiate domain specialists</span>
+<span class="text-[#84e9af]">const</span> researchSpecialist = createSpecialist({
+  id: <span class="text-[#92f7bc]'">'research'</span>,
+  model: <span class="text-[#92f7bc]'">'claude-3-5-sonnet'</span>,
+  capabilities: [<span class="text-[#92f7bc]'">'web_search'</span>, <span class="text-[#92f7bc]'">'arxiv_lookup'</span>]
+});
+
+<span class="text-[#84e9af]">const</span> coderSpecialist = createSpecialist({
+  id: <span class="text-[#92f7bc]'">'synthesis'</span>,
+  model: <span class="text-[#92f7bc]'">'gpt-4o'</span>,
+  capabilities: [<span class="text-[#92f7bc]'">'ast_generation'</span>, <span class="text-[#92f7bc]'">'test_runner'</span>]
+});
+
+<span class="text-outline">// Mesh orchestrator with state consensus</span>
+<span class="text-[#84e9af]">export const</span> engineeringSupervisor = <span class="text-[#84e9af]">new</span> Supervisor({
+  name: <span class="text-[#92f7bc]'">'Engineering Directorate'</span>,
+  agents: [researchSpecialist, coderSpecialist],
+  routingStrategy: <span class="text-[#92f7bc]'">'dynamic_consensus'</span>,
+  sharedMemory: <span class="text-[#84e9af]">true</span>,
+  maxIterations: 10
+});</code></pre>
+</div>
+</div>
+<!-- Right 4 Explanation Cards -->
+<div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+<div class="p-4 rounded-lg border border-[#25282a] bg-[#0d0e10]">
+<h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#55ba84]"></span>
+              1. Centralized Coordination
+            </h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              A single authoritative supervisor ensures task decomposition, deduplication, and non-cyclical execution graphs.
+            </p>
+</div>
+<div class="p-4 rounded-lg border border-[#25282a] bg-[#0d0e10]">
+<h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#55ba84]"></span>
+              2. Specialized Agent Roles
+            </h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Every sub-agent is locked to specific system prompts, token budgets, and tailored toolsets to eliminate drift.
+            </p>
+</div>
+<div class="p-4 rounded-lg border border-[#25282a] bg-[#0d0e10]">
+<h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#55ba84]"></span>
+              3. Shared Memory System
+            </h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Unified vector and key-value state ensures contextual knowledge passes between agents without context-window stuffing.
+            </p>
+</div>
+<div class="p-4 rounded-lg border border-[#25282a] bg-[#0d0e10]">
+<h4 class="text-sm font-bold text-white mb-1 flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-[#55ba84]"></span>
+              4. Dynamic Agent Selection
+            </h4>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              The supervisor decides which agent to invoke next based on intermediate validation feedback loops.
+            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SEGMENT 1 CONTINUATION DELIMITER (STOP POINT at y~5200) -->
+<div class="py-12 bg-[#090a0c] border-b border-[#25282a] text-center">
+<div class="max-w-[1280px] mx-auto px-6 flex flex-col items-center">
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#25282a] bg-surface-container-lowest text-xs font-mono text-outline mb-3">
+<span class="w-2 h-2 rounded-full bg-[#55ba84]"></span>
+<span>SNAPSHOT SEGMENT 1 COMPLETE (y=0 to y=5200)</span>
+</div>
+<p class="text-xs text-outline max-w-md">
+        Covered Hero, Architecture Equation, Tab Engine, Logo Marquee, Enterprise Toolkit, Community Proof, and Supervisor Orchestration. Continuation follows in Segment 2.
+      </p>
+</div>
+</div>
+<!-- Shared Component: Footer (Guide Anchor) -->
+<footer class="full-width bottom bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant dark:border-outline-variant flat no shadows">
+<div class="max-w-[1280px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-start gap-8 font-body text-xs font-normal text-on-surface-variant dark:text-on-surface-variant leading-relaxed">
+<div>
+<div class="font-headline text-base font-bold tracking-tight text-primary dark:text-primary flex items-center gap-2 mb-2">
+<div class="w-5 h-5 rounded border border-[#55ba84]/40 bg-[#0e2b1d] flex items-center justify-center">
+<span class="material-symbols-outlined text-[#55ba84] text-xs" data-icon="bolt">bolt</span>
+</div>
+<span>voltagent</span>
+</div>
+<p class="max-w-md">
+          © 2025 VoltAgent Inc. High-throughput autonomous agent orchestration for enterprise TypeScript runtimes.
+        </p>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2">
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#documentation">Documentation</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#architecture-guide">Architecture Guide</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#typescript-sdk">TypeScript SDK</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#voltops-console">VoltOps Console</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#security">Security &amp; Compliance</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#changelog">Changelog</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#github">GitHub</a>
+<a class="hover:text-primary dark:hover:text-primary transition-colors duration-150" href="#status">Status</a>
+</div>
+</div>
+</footer>
+</body></html>
