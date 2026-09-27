@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Webflow: Create a custom website | Visual website builder</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-tertiary-fixed": "#360f00",
+            "tertiary": "#ffb598",
+            "on-tertiary-fixed-variant": "#7e2c00",
+            "surface-container-lowest": "#0e0e0e",
+            "primary-fixed": "#d9e2ff",
+            "tertiary-container": "#cb4c00",
+            "surface-container-high": "#2a2a2a",
+            "surface-container": "#201f1f",
+            "outline-variant": "#424655",
+            "primary-fixed-dim": "#b0c6ff",
+            "on-surface-variant": "#c2c6d7",
+            "on-secondary": "#102e64",
+            "surface-container-highest": "#353534",
+            "surface-bright": "#3a3939",
+            "secondary-fixed": "#d9e2ff",
+            "tertiary-fixed-dim": "#ffb598",
+            "secondary-fixed-dim": "#b0c6ff",
+            "on-tertiary": "#591d00",
+            "on-secondary-container": "#9fb7f7",
+            "secondary": "#b0c6ff",
+            "error": "#ffb4ab",
+            "surface-container-low": "#1c1b1b",
+            "on-primary-fixed-variant": "#00429c",
+            "on-background": "#e5e2e1",
+            "on-tertiary-container": "#fffdff",
+            "surface": "#131313",
+            "error-container": "#93000a",
+            "surface-tint": "#b0c6ff",
+            "surface-variant": "#353534",
+            "tertiary-fixed": "#ffdbcd",
+            "on-error": "#690005",
+            "inverse-surface": "#e5e2e1",
+            "inverse-primary": "#0058cb",
+            "surface-dim": "#131313",
+            "secondary-container": "#2e477f",
+            "on-secondary-fixed-variant": "#2b457c",
+            "on-primary-container": "#fffdff",
+            "primary": "#b0c6ff",
+            "on-surface": "#e5e2e1",
+            "on-primary": "#002d6f",
+            "on-error-container": "#ffdad6",
+            "background": "#131313",
+            "inverse-on-surface": "#313030",
+            "primary-container": "#146ef5",
+            "on-primary-fixed": "#001945",
+            "on-secondary-fixed": "#001945",
+            "outline": "#8c90a0"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .dot-grid {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased selection:bg-primary-container selection:text-white">
+<!-- 1. Top Announcement Bar (46px high, full width Webflow azure) -->
+<aside class="w-full h-[46px] bg-primary-container text-white px-4 flex items-center justify-center text-xs font-medium tracking-wide z-50 relative">
+<a class="inline-flex items-center gap-2 hover:underline transition-opacity duration-150" href="#conf-recap">
+<span>The biggest announcements from Webflow Conf ’26 — Read the recap ↗</span>
+</a>
+</aside>
+<!-- 2. Sticky Header / TopNavBar (68px high) -->
+<header class="sticky top-0 w-full z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30 shadow-sm">
+<div class="flex justify-between items-center w-full px-6 max-w-7xl mx-auto h-[68px]">
+<!-- Brand Logo -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2.5 font-headline text-lg font-bold tracking-tight text-on-surface" href="#">
+<!-- Webflow custom geometric 'W' mark -->
+<svg class="w-6 h-6 text-primary-container" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.41 6.5h3.94l-4.7 11h-3.83l2.87-6.72h-.11l-3.08 6.72H8.62L5.44 6.5h3.94l1.63 6.46h.11l1.83-6.46h3.46l-2.02 6.46h.11l2.92-6.46z"></path>
+</svg>
+<span class="tracking-tight text-white font-bold text-xl">Webflow</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-7 font-body text-sm font-medium">
+<a class="text-on-surface font-semibold hover:text-white flex items-center gap-1 transition-colors duration-150" href="#platform">
+            Platform
+            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</a>
+<a class="text-on-surface-variant hover:text-white flex items-center gap-1 transition-colors duration-150" href="#source">
+            Source
+          </a>
+<a class="text-on-surface-variant hover:text-white flex items-center gap-1 transition-colors duration-150" href="#solutions">
+            Solutions
+            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</a>
+<a class="text-on-surface-variant hover:text-white flex items-center gap-1 transition-colors duration-150" href="#resources">
+            Resources
+            <span class="material-symbols-outlined text-[16px] text-on-surface-variant">expand_more</span>
+</a>
+<a class="text-on-surface-variant hover:text-white transition-colors duration-150" href="#enterprise">
+            Enterprise
+          </a>
+<a class="text-on-surface-variant hover:text-white transition-colors duration-150" href="#pricing">
+            Pricing
+          </a>
+</nav>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-3">
+<a class="text-on-surface-variant hover:text-on-surface font-body text-sm font-medium px-3 py-2 transition-colors duration-150" href="#login">
+          Log in
+        </a>
+<a class="hidden sm:inline-flex items-center justify-center font-body text-sm font-medium px-4 py-2 rounded-lg border border-outline-variant/40 hover:bg-surface-container-high text-white transition-all duration-150" href="#sales">
+          Contact Sales
+        </a>
+<a class="inline-flex items-center justify-center bg-primary-container text-white font-body text-sm font-semibold px-4 py-2 rounded-lg hover:bg-primary-container/90 transition-all duration-150 active:scale-95 shadow-sm" href="#signup">
+          Start for free
+        </a>
+</div>
+</div>
+</header>
+<main>
+<!-- SECTION 1: HERO SECTION -->
+<section class="relative pt-20 pb-16 px-6 max-w-7xl mx-auto border-b border-outline-variant/20">
+<div class="max-w-4xl">
+<h1 class="text-5xl sm:text-6xl md:text-[76px] font-headline font-bold text-white tracking-[-0.035em] leading-[1.02]">
+          Build for what’s next
+        </h1>
+<p class="mt-6 text-xl sm:text-[22px] text-on-surface-variant font-normal leading-relaxed max-w-2xl">
+          Webflow gives every team the tools to build, manage, and grow a website that drives real revenue.
+        </p>
+<!-- CTA Buttons -->
+<div class="mt-8 flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center justify-center bg-primary-container text-white font-medium text-base px-6 py-3.5 rounded-lg hover:bg-primary-container/90 transition-all active:scale-95 shadow-md" href="#signup">
+            Get started — it's free
+          </a>
+<a class="inline-flex items-center justify-center bg-surface-container border border-outline-variant/40 text-white font-medium text-base px-6 py-3.5 rounded-lg hover:bg-surface-container-high transition-all" href="#sales">
+            Talk to Sales
+          </a>
+</div>
+</div>
+<!-- Segment Selector Banner -->
+<div class="mt-14 pt-8 border-t border-outline-variant/20 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2 text-sm text-on-surface-variant">
+<span>What</span>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/40 text-white font-medium hover:border-outline-variant transition-colors">
+<span>Marketing teams</span>
+<span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</button>
+<span>love about Webflow</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-on-surface-variant font-medium">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> 99.99% uptime SLA</span>
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span> Multi-tenant cloud CDN</span>
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> SOC2 Type II Certified</span>
+</div>
+</div>
+</section>
+<!-- SECTION 2: ASYMMETRIC HORIZONTAL PRODUCT & STORY CAROUSEL -->
+<section class="py-16 dot-grid border-b border-outline-variant/20 overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 mb-8 flex justify-between items-end">
+<div>
+<span class="text-xs font-semibold tracking-widest uppercase text-primary-container">Capabilities</span>
+<h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-1">Total creative command at enterprise scale</h2>
+</div>
+<div class="hidden sm:flex items-center gap-2">
+<button class="w-10 h-10 rounded-lg border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">west</span>
+</button>
+<button class="w-10 h-10 rounded-lg border border-outline-variant/40 flex items-center justify-center text-on-surface-variant hover:text-white hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">east</span>
+</button>
+</div>
+</div>
+<!-- Tile Strip -->
+<div class="flex gap-6 overflow-x-auto px-6 max-w-7xl mx-auto pb-4 custom-scrollbar">
+<!-- Tile 1: Visual Canvas Preview (420px wide) -->
+<div class="min-w-[380px] md:min-w-[440px] bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 flex flex-col justify-between shadow-xl">
+<div>
+<!-- Breakpoint tool simulation -->
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3 mb-4 text-xs text-on-surface-variant">
+<div class="flex items-center gap-2 bg-surface-container px-2 py-1 rounded">
+<span class="material-symbols-outlined text-xs">desktop_windows</span>
+<span class="font-mono text-[11px] text-white">1920px</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-xs hover:text-white">tablet_mac</span>
+<span class="material-symbols-outlined text-xs hover:text-white">phone_iphone</span>
+<span class="h-3 w-[1px] bg-outline-variant"></span>
+<span class="text-[11px] text-emerald-400">Published</span>
+</div>
+</div>
+<!-- Stylized Canvas mockup -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-lg p-4 space-y-3">
+<div class="flex justify-between items-center text-[10px] text-on-surface-variant font-mono">
+<span>Body &gt; Section &gt; HeroContainer</span>
+<span class="text-primary-container">Flex: Row</span>
+</div>
+<div class="h-20 bg-surface-container rounded flex items-center justify-center border border-dashed border-outline-variant/40 text-center px-4">
+<span class="text-xs text-on-surface-variant font-medium">Interactive Canvas with live semantic HTML hierarchy &amp; Flexbox/Grid visual controls</span>
+</div>
+<div class="grid grid-cols-3 gap-2 pt-2">
+<div class="h-6 bg-surface-container-high rounded text-[10px] flex items-center px-2 text-on-surface-variant">margin: auto</div>
+<div class="h-6 bg-surface-container-high rounded text-[10px] flex items-center px-2 text-on-surface-variant">gap: 24px</div>
+<div class="h-6 bg-surface-container-high rounded text-[10px] flex items-center px-2 text-on-surface-variant">z-index: 10</div>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<h3 class="text-white font-semibold text-lg">Visual Designer with zero code compromise</h3>
+<p class="text-xs text-on-surface-variant mt-1">Export pristine, production-grade clean CSS and semantic HTML5 natively.</p>
+</div>
+</div>
+<!-- Tile 2: Photographic Story Card (320px) -->
+<div class="min-w-[300px] md:min-w-[320px] relative rounded-xl overflow-hidden border border-outline-variant/30 flex flex-col justify-end p-6 bg-surface-container-low">
+<img class="absolute inset-0 w-full h-full object-cover" data-alt="A cinematic architectural portrait of a visionary creative director in a high-contrast minimalist studio setting, bathed in subtle directional light with deep graphite shadows and clean monochromatic tones reflecting executive web leadership." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvFQ1WzKRTR9MlU_0_ohzJfBa94Zm3TXXd8oy0J4qE7aDv95HT19epjSnYs99AZj2hLHAQUwNvq8LajeSqoYy2GBZek2UXfSJ4p1dOxERkmaD1pscIzawHdvYqtHMixAkT0wCNScM1mmAHO9xxoMhhzr7nKPDm78IktuX3VWdEsbKViDzixSvjwSGVQgwbIQLK3HTz77wZBPbjlxIHz-i70fw2rRRGTT7bOPPmQ3QUBbYmy3KF3_6QjbQG6Wy-oKWuPrFTlSjpFlT2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/60 to-transparent"></div>
+<div class="relative z-10">
+<span class="inline-block px-2 py-0.5 rounded text-[10px] font-semibold uppercase tracking-wider bg-white/10 text-white backdrop-blur-sm mb-2">Creative Direction</span>
+<p class="text-white font-medium text-sm leading-snug">"Webflow gave our 120-person distributed design org the velocity to deploy without engineering bottlenecks."</p>
+<span class="text-[11px] text-on-surface-variant mt-2 block">Empowering 100+ distributed team members</span>
+</div>
+</div>
+<!-- Tile 3: Stat Card (260px) -->
+<div class="min-w-[240px] md:min-w-[260px] bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 flex flex-col justify-between">
+<div class="w-8 h-8 rounded-lg bg-primary-container/10 border border-primary-container/30 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+</div>
+<div>
+<div class="text-4xl md:text-5xl font-extrabold tracking-tight text-white">$4M+</div>
+<p class="text-sm font-semibold text-on-surface mt-1">in pipeline generated in Q2</p>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">Achieved through high-velocity localized landing pages and instant iteration cycles.</p>
+</div>
+<div class="text-[11px] text-primary-container font-medium flex items-center gap-1">
+<span>Read case study</span>
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</div>
+</div>
+<!-- Tile 4: Localization Matrix (380px) -->
+<div class="min-w-[360px] md:min-w-[380px] bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Global Localization</span>
+<span class="text-[10px] px-2 py-0.5 rounded bg-primary-container/20 text-primary-container font-mono">4 Locales Live</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container border border-outline-variant/20 text-xs">
+<span class="text-white flex items-center gap-2"><span class="font-mono text-[10px] text-on-surface-variant">EN-US</span> Global Primary</span>
+<span class="text-emerald-400 font-mono text-[10px]">100% Synced</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container border border-outline-variant/20 text-xs">
+<span class="text-white flex items-center gap-2"><span class="font-mono text-[10px] text-on-surface-variant">DE-DE</span> DACH Region</span>
+<span class="text-primary-container font-mono text-[10px]">Machine Translated</span>
+</div>
+<div class="flex items-center justify-between p-2.5 rounded bg-surface-container border border-outline-variant/20 text-xs">
+<span class="text-white flex items-center gap-2"><span class="font-mono text-[10px] text-on-surface-variant">JA-JP</span> Japan Market</span>
+<span class="text-amber-400 font-mono text-[10px]">Custom Localized</span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<h3 class="text-white font-semibold text-base">Native multi-market routing</h3>
+<p class="text-xs text-on-surface-variant mt-1">Translate design, layout, content, and imagery automatically per geo.</p>
+</div>
+</div>
+<!-- Tile 5: Multi-cursor collaboration (280px) -->
+<div class="min-w-[260px] md:min-w-[280px] bg-surface-container-low border border-outline-variant/30 rounded-xl p-6 flex flex-col justify-between">
+<div>
+<span class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Live Collaboration</span>
+<div class="mt-4 relative h-32 bg-surface-container rounded-lg border border-outline-variant/20 overflow-hidden p-3">
+<!-- Cursor 1 -->
+<div class="absolute top-4 left-6 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary-container fill-1">navigation</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-primary-container text-white font-medium">Sarah K.</span>
+</div>
+<!-- Cursor 2 -->
+<div class="absolute bottom-6 right-8 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-emerald-400 fill-1">navigation</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white font-medium">Marcus L.</span>
+</div>
+<!-- AI Cursor -->
+<div class="absolute top-14 right-16 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-purple-400 fill-1">smart_toy</span>
+<span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-600 text-white font-medium">Agent: Copy</span>
+</div>
+</div>
+</div>
+<div class="mt-6">
+<h3 class="text-white font-semibold text-base">Figma-like live presence</h3>
+<p class="text-xs text-on-surface-variant mt-1">Multiplayer editing with granular permission governance for enterprise safety.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: INTRODUCING SOURCE BY WEBFLOW -->
+<section class="py-24 px-6 max-w-7xl mx-auto border-b border-outline-variant/20" id="source">
+<div class="max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-container/10 border border-primary-container/30 text-primary-container text-xs font-semibold mb-4">
+<span>Introducing Source by Webflow</span>
+<span class="material-symbols-outlined text-[14px]">arrow_outward</span>
+</div>
+<h2 class="text-3xl sm:text-5xl font-bold tracking-tight text-white leading-tight">
+          Where modern teams and agents run the web
+        </h2>
+<p class="mt-4 text-lg text-on-surface-variant leading-relaxed">
+          The new paradigm bridging visual design, developer codebases, and autonomous AI agents in one unified operating system.
+        </p>
+</div>
+<!-- High-End Source IDE Mockup -->
+<div class="mt-12 bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-2xl">
+<!-- Window Chrome Topbar -->
+<div class="h-10 bg-surface-container-low border-b border-outline-variant/30 px-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-surface-bright"></span>
+<span class="w-3 h-3 rounded-full bg-surface-bright"></span>
+<span class="w-3 h-3 rounded-full bg-surface-bright"></span>
+<span class="ml-4 font-mono text-[11px] text-on-surface-variant">source-project-noir-v2 // production</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-on-surface-variant font-mono">
+<span class="flex items-center gap-1 text-emerald-400">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span> Git: main (synced)
+            </span>
+<span class="border border-outline-variant/40 px-2 py-0.5 rounded text-[10px]">Build #4829</span>
+</div>
+</div>
+<!-- IDE 3-Pane Body -->
+<div class="grid grid-cols-12 min-h-[520px]">
+<!-- Left IDE Navigation Sidebar -->
+<div class="col-span-12 md:col-span-2 bg-surface-container-low border-r border-outline-variant/20 p-3 space-y-4">
+<div class="space-y-1">
+<div class="px-2.5 py-1.5 rounded-lg bg-surface-container-high text-white text-xs font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-primary-container">folder_open</span>
+<span>Projects</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-white text-xs font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">hub</span>
+<span>Workflows</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-white text-xs font-medium flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-purple-400">smart_toy</span>
+<span>Agents</span>
+</div>
+<span class="px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 text-[9px] font-mono">3 Active</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-white text-xs font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">perm_media</span>
+<span>Assets</span>
+</div>
+<div class="px-2.5 py-1.5 rounded-lg text-on-surface-variant hover:text-white text-xs font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">settings</span>
+<span>Settings</span>
+</div>
+</div>
+<!-- Agent Mini-Task Widget -->
+<div class="pt-4 border-t border-outline-variant/20">
+<span class="text-[10px] uppercase font-mono tracking-wider text-on-surface-variant block mb-2">Automated Tasks</span>
+<div class="p-2 rounded bg-surface-container border border-outline-variant/20 text-[11px] space-y-1.5">
+<div class="flex items-center justify-between text-white font-medium">
+<span>SEO Alt-Text Gen</span>
+<span class="text-emerald-400 text-[10px]">Done</span>
+</div>
+<div class="w-full bg-surface-container-high h-1 rounded overflow-hidden">
+<div class="bg-emerald-400 h-full w-full"></div>
+</div>
+<div class="text-[10px] text-on-surface-variant">42 assets updated</div>
+</div>
+</div>
+</div>
+<!-- Center Canvas: Editorial Site Preview -->
+<div class="col-span-12 md:col-span-7 bg-[#FAF9F5] text-[#111111] p-8 flex flex-col justify-between relative overflow-hidden">
+<div class="border-b border-black/10 pb-4 flex justify-between items-center text-xs font-mono tracking-widest uppercase">
+<span class="font-bold">NOIR ATELIER</span>
+<div class="space-x-6">
+<span class="underline">Collection</span>
+<span>Archive</span>
+<span>Journal</span>
+</div>
+<span>Cart (0)</span>
+</div>
+<div class="my-10 max-w-md">
+<span class="text-xs tracking-widest uppercase text-stone-500 font-mono">Edition 2026 // Spring Summer</span>
+<h3 class="text-4xl font-serif font-light tracking-tight mt-2 leading-none text-black">Form follows intentionality</h3>
+<p class="text-xs text-stone-600 mt-4 leading-relaxed font-sans">
+                Curated architectural silhouettes cut from recycled organic linen and structural wool. Designed between Kyoto and Copenhagen.
+              </p>
+<div class="mt-6">
+<span class="inline-block px-5 py-2.5 bg-black text-white text-xs font-mono uppercase tracking-wider">Explore The Capsule ↗</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 pt-6 border-t border-black/10">
+<div class="aspect-square bg-stone-200 rounded relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="High-fashion editorial garment detail photograph of minimalist charcoal black structured jacket on warm ivory background with exquisite natural textiles and studio lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtB2znHNxSCzN0PsO4Z3ZIF7CiUhZC89zLbY4xGME8O0Q6Ci7xxR9sh0S4G1uIk73x6cIATCGZFmoiY9S2drm-AoHAZJABq2NBtHNNItyyQf2cZ4oSOMcGbDeS7cRIdmaBvtfRdiblfJ2kCT8vtztYZAY4m3mNRpX0KQr0EhbEC8Ov8GTFcMzsWePrRmO08JTFvkNnP016gDYdYx-xvutyaxWhG76cmigeSPFXykK2FRIx9fkJjWu5eA40ziz3JjZor2m8Qfc1Q_Ou"/>
+</div>
+<div class="aspect-square bg-stone-200 rounded relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Minimalist design study of luxury accessories and textured ceramic architectural elements arranged on a clean cream surface with soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhRrM8tx7-XLem9R4LIgL4L93m77jpiRcts6wEdjmNhfWQnA39EAfxuWNHcwtXwByeAHYKB7ZnYVEl_WAXwDUqpKQ33j5Yiyc36cltIDF5MN5gF7ABAM0VuuazfVDrUE3t113w8sz7QU2rUsyBwuON2pSEGcsH2W0Y_3gKo6w5nQQPNycAxwGvZMQ0HU5ijbbOt4VhYjfnu40fMvwZT5E744g-VO5Ktpddn493aVF9UeQdIVRRYIYFb4D4DkI5qVF-R1poAVK1W0J1"/>
+</div>
+<div class="aspect-square bg-stone-200 rounded relative overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Monochromatic editorial portrait of high fashion model wearing oversized clean tailored apparel in a modern brutalist concrete atrium." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAp7SjUYTW7H1t6AlLUFm_o5uxjITHyDZbOG2krIsm9m9TtXEyUbcvxbLT2x5QxOLD2Dd4_S1c_DgZZOZyRwPFqpiW9kYFSygOWU6IOF_8WJD0d_DsWxz6xnKIBoOQvci1h1Hk-CW5pY6dNP2-19hg3NTVsf0acdvZhEYZSnYSf4KM0-be0LAJVkZ2cuEj8hIW08BrHxepaOwVxZ6BNIV-M-n98jQRKUYNDyQxazl82YyExRou0hnYqghxhb2twBkvFeFqmd3-HHCwV"/>
+</div>
+</div>
+</div>
+<!-- Right Contextual Inspector & AI Agent Panel -->
+<div class="col-span-12 md:col-span-3 bg-surface-container-low border-l border-outline-variant/20 p-4 flex flex-col justify-between">
+<div class="space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant/20 pb-3">
+<span class="text-xs font-bold text-white uppercase tracking-wider">Inspector</span>
+<span class="text-[10px] font-mono text-purple-400 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> Agent Live
+                </span>
+</div>
+<!-- Agent Status -->
+<div class="p-3 rounded-lg bg-surface-container border border-outline-variant/30 space-y-2">
+<div class="flex items-center justify-between text-xs">
+<span class="text-on-surface-variant">Active Agent</span>
+<span class="font-mono text-white text-[11px]">DesignSync-v4</span>
+</div>
+<div class="text-xs text-on-surface leading-tight">
+                  Analyzing breakpoint discrepancies for viewports under 640px.
+                </div>
+</div>
+<!-- Properties Mockup -->
+<div class="space-y-2.5">
+<span class="text-[11px] font-semibold text-on-surface-variant uppercase tracking-wider block">Styles</span>
+<div class="flex justify-between items-center text-xs py-1 border-b border-outline-variant/10">
+<span class="text-on-surface-variant">Font Family</span>
+<span class="font-mono text-white text-[11px]">Playfair / Inter</span>
+</div>
+<div class="flex justify-between items-center text-xs py-1 border-b border-outline-variant/10">
+<span class="text-on-surface-variant">Padding Bottom</span>
+<span class="font-mono text-white text-[11px]">48px</span>
+</div>
+<div class="flex justify-between items-center text-xs py-1 border-b border-outline-variant/10">
+<span class="text-on-surface-variant">Max Width</span>
+<span class="font-mono text-white text-[11px]">1280px</span>
+</div>
+</div>
+</div>
+<!-- Agent Prompt Box -->
+<div class="mt-6 pt-3 border-t border-outline-variant/20">
+<label class="text-[10px] uppercase font-mono tracking-wider text-on-surface-variant block mb-1.5">Agent Command Bar</label>
+<div class="relative">
+<input class="w-full bg-surface-container border border-outline-variant/40 rounded-lg text-xs text-white px-3 py-2 pr-8 focus:outline-none cursor-default font-mono" readonly="" type="text" value="Refine typography spacing for mobile"/>
+<span class="material-symbols-outlined text-primary-container text-sm absolute right-2.5 top-2.5">send</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4 Pillars underneath -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center text-primary-container mb-4">
+<span class="material-symbols-outlined text-base">sync_alt</span>
+</div>
+<h3 class="text-base font-bold text-white">Connect your codebase</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Seamless bi-directional git syncing with modern frontend repos. Visual design updates map cleanly to pull requests.
+          </p>
+</div>
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center text-purple-400 mb-4">
+<span class="material-symbols-outlined text-base">smart_toy</span>
+</div>
+<h3 class="text-base font-bold text-white">Build agentically</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Delegate routine updates, translations, and asset variants to vetted AI workflows while preserving creative direction.
+          </p>
+</div>
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center text-emerald-400 mb-4">
+<span class="material-symbols-outlined text-base">token</span>
+</div>
+<h3 class="text-base font-bold text-white">Unified workspaces</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Centralize design tokens, brand guidelines, and governance across all global brands, subdomains, and teams.
+          </p>
+</div>
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface-container border border-outline-variant/30 flex items-center justify-center text-amber-400 mb-4">
+<span class="material-symbols-outlined text-base">rule</span>
+</div>
+<h3 class="text-base font-bold text-white">Orchestrate agents</h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Keep human review at the center with approval gates while autonomous agents scale web production 10x faster.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION 4: CUSTOMER PROOF & MONOCHROMATIC LOGOS -->
+<section class="py-20 px-6 max-w-7xl mx-auto border-b border-outline-variant/20 text-center">
+<h2 class="text-3xl sm:text-4xl md:text-[44px] font-bold text-white tracking-tight">
+        300,000+ brands move the needle with Webflow
+      </h2>
+<p class="mt-3 text-sm text-on-surface-variant max-w-xl mx-auto">
+        From hyper-growth scaleups to Fortune 500 enterprises, modern leaders choose Webflow to deliver mission-critical web experiences.
+      </p>
+<!-- Monochromatic Logo Grid -->
+<div class="mt-12 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-8 items-center justify-items-center opacity-70">
+<span class="font-headline font-extrabold tracking-widest text-lg text-white">IDEO</span>
+<span class="font-headline font-bold text-sm tracking-tighter text-white">orangetheory</span>
+<span class="font-headline font-bold text-base tracking-tight text-white">Dropbox</span>
+<span class="font-headline font-black text-lg uppercase tracking-wider text-white">SHIFT</span>
+<span class="font-headline font-semibold text-base text-white">Lattice</span>
+<span class="font-headline font-extrabold text-base tracking-tight text-white">Discord</span>
+<span class="font-headline font-bold text-base uppercase tracking-wider text-white">Verifone</span>
+<span class="font-headline font-bold text-base text-white">zendesk</span>
+</div>
+</section>
+<!-- SECTION 5: THREE GIANT PHOTOGRAPHIC CUSTOMER-STORY CARDS -->
+<section class="py-24 px-6 max-w-7xl mx-auto border-b border-outline-variant/20">
+<div class="mb-12">
+<span class="text-xs font-semibold tracking-widest uppercase text-primary-container">Customer Impact</span>
+<h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mt-1">Real business metrics, real revenue</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1: Verifone -->
+<div class="relative rounded-2xl overflow-hidden border border-outline-variant/30 min-h-[460px] flex flex-col justify-between p-8 bg-surface-container-low group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A modern financial technology server room and global transaction terminal laboratory bathed in subtle cool blue illumination with crisp geometric lines reflecting security and massive scale." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkkutuoySs0bRaN_8iWflaaK5PFUfAvzu6wfyhp2If8lkQLYaQDoXp2LESCagNsf-lSxJ5b-LhT3YGhsNvcXRfLe5mcWqgRjHagnpzZ5D2-LDkDe3N-82-NuGdftik2wjAflnvyz6pqr9aep-vIFRhHYP1U09C9FZiGuJSbaPhiLQRjr3qRPn6l6jJ8nn6oSTz2z5J80AFS__yHqzaETN30d7QS6UOAl9-0s28CjpIfTvn2UxgEb76kkrVuqkMJosg2PNzUk7qvrr-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-surface-container-lowest/30"></div>
+<div class="relative z-10 flex justify-between items-center">
+<span class="font-headline font-extrabold tracking-wider text-sm text-white">Verifone</span>
+<span class="material-symbols-outlined text-white text-base">arrow_forward</span>
+</div>
+<div class="relative z-10 space-y-4">
+<div>
+<div class="text-5xl font-bold tracking-tight text-white">32</div>
+<p class="text-sm font-semibold text-white mt-1">global sites launched in 10 days</p>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              "Webflow enabled us to standardize our global digital presence faster than ever imagined, eliminating months of custom development queue."
+            </p>
+<div class="pt-2 text-[11px] text-white/60 font-mono">
+              — Head of Global Web Engineering
+            </div>
+</div>
+</div>
+<!-- Card 2: Lattice -->
+<div class="relative rounded-2xl overflow-hidden border border-outline-variant/30 min-h-[460px] flex flex-col justify-between p-8 bg-surface-container-low group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="An expansive modern open-plan technology enterprise office with creative people collaborating near floor-to-ceiling glass windows overlooking a sunlit metropolitan skyline." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCYuBtJ0HDJJ40mHpj-TgZ6MyAAPOszqPRhhtQ_PihBOhL-GkXogS2zZ1p2mQRFf9-toxsswpYlfuN_OX06TWn9vLVkwTxlq4Q3swyIGL7Di0gX2jgvBMMB-ZnC5mwReGuoa3v8RbxS-k1VSKKl2BQRKbeDZLxNJvMbR5fW8jAA50Q7HKfXHHiVnv352cty0q24HaUex2QAHKX7xPqluHdJYmHAag6zzEpzhyPIHcxdHC5zH-0odv0lggvXpKO02embNQr0XgqJ1xX"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-surface-container-lowest/30"></div>
+<div class="relative z-10 flex justify-between items-center">
+<span class="font-headline font-bold text-base text-white">Lattice</span>
+<span class="material-symbols-outlined text-white text-base">arrow_forward</span>
+</div>
+<div class="relative z-10 space-y-4">
+<div>
+<div class="text-5xl font-bold tracking-tight text-white">+20%</div>
+<p class="text-sm font-semibold text-white mt-1">Increase in site-wide conversion rate</p>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Migrated from a complex legacy CMS monolith to autonomous marketing agility, allowing content teams to ship A/B tests daily.
+            </p>
+<div class="pt-2 text-[11px] text-white/60 font-mono">
+              — VP of Growth Marketing
+            </div>
+</div>
+</div>
+<!-- Card 3: Orangetheory Fitness -->
+<div class="relative rounded-2xl overflow-hidden border border-outline-variant/30 min-h-[460px] flex flex-col justify-between p-8 bg-surface-container-low group">
+<img class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="Dynamic athletic training facility with state-of-the-art cardiovascular rowing equipment under dramatic high-contrast amber and charcoal indoor athletic club lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCG1VJ2GN6CNRnUafhSMYPnCSfZMhSkjLKMxk-uu5P0XAkfq5-KKoog0CAhZ-IMjn1v2W89QrSmCO-RE974c-kJI1kk_DbOHCOGUITgMOx5mIqtkgpEjjHxsCnqFchLkqjZUIJrYWwWulN3OofXma3UWaH-2hoIVsDfrhg4lO7cptjkyKu4jHs6yUR7ZxaCjegVyv0cST3_w6kh3FU3oKQbKuqKOYJQf8zfGoWq5tZio3eq0sRdEw9wUpXLNjeL8SrnZAxloolfij1"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-surface-container-lowest/80 to-surface-container-lowest/30"></div>
+<div class="relative z-10 flex justify-between items-center">
+<span class="font-headline font-bold text-sm tracking-tight text-white">orangetheory</span>
+<span class="material-symbols-outlined text-white text-base">arrow_forward</span>
+</div>
+<div class="relative z-10 space-y-4">
+<div>
+<div class="text-5xl font-bold tracking-tight text-white">$6M</div>
+<p class="text-sm font-semibold text-white mt-1">in cost savings annually</p>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+              Empowered 1,500+ local studio franchise owners with centrally managed, locally personalized dynamic landing pages.
+            </p>
+<div class="pt-2 text-[11px] text-white/60 font-mono">
+              — Senior Director of Digital Products
+            </div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 6: CONVERSION HERO BANNER -->
+<section class="py-24 px-6 max-w-7xl mx-auto border-b border-outline-variant/20 text-center">
+<div class="max-w-3xl mx-auto">
+<h2 class="text-4xl sm:text-5xl md:text-6xl font-headline font-bold text-white tracking-tight leading-tight">
+          Make creativity your competitive edge
+        </h2>
+<p class="mt-6 text-lg sm:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed">
+          Experience the web development platform designed for modern brands who refuse to settle for templates.
+        </p>
+<div class="mt-8 flex flex-wrap items-center justify-center gap-4">
+<a class="inline-flex items-center justify-center bg-primary-container text-white font-medium text-base px-8 py-3.5 rounded-lg hover:bg-primary-container/90 transition-all shadow-lg active:scale-95" href="#signup">
+            Get started for free
+          </a>
+<a class="inline-flex items-center justify-center bg-surface-container border border-outline-variant/40 text-white font-medium text-base px-8 py-3.5 rounded-lg hover:bg-surface-container-high transition-all" href="#sales">
+            Contact enterprise sales
+          </a>
+</div>
+</div>
+</section>
+<!-- SECTION 7: RECENT UPDATES (EDITORIAL 3-COLUMN) -->
+<section class="py-24 px-6 max-w-7xl mx-auto border-b border-outline-variant/20" id="resources">
+<div class="flex justify-between items-end mb-12">
+<div>
+<span class="text-xs font-semibold tracking-widest uppercase text-primary-container">News &amp; Releases</span>
+<h2 class="text-3xl font-bold tracking-tight text-white mt-1">Recent updates</h2>
+</div>
+<a class="text-xs text-primary-container font-medium hover:underline flex items-center gap-1" href="#blog">
+<span>View all stories</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Article 1 -->
+<article class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden border border-outline-variant/30 mb-4 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A grand futuristic tech conference keynote auditorium stage with bold deep-blue graphics on massive ultra-wide curved screens, dramatic ambient spotlighting, and professional speakers." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbo80D_Wy3ZaWb2R6mSC3zC3K1RlsSSkipgHf4eS0GpPovNAAQrsTD9GXvmv0Kpv0GhpHy9ZHACCbdg5cukGvVyO67AKCmeFXbm868m78bjLbG4k7nLY8p1sG8jJb5UQjOmkeilRcCOScKTRyExHy7HFNOj15CBhfuk_EpXIJaAC6GkonMjzoQPjMhBlYGOFzGB4c7FNIomRJLcFjee8Mv8DtMv93lLQHSrKRxkXeTEu56Fuam8M6fo4yveZmrqKV7E-Aaa-UmW3QS"/>
+<span class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-white border border-outline-variant/30">Webflow Conf ’26</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-on-surface-variant font-mono mb-2">
+<span class="text-primary-container font-semibold">Recap</span>
+<span>•</span>
+<span>6 min read</span>
+</div>
+<h3 class="text-lg font-bold text-white group-hover:text-primary-container transition-colors leading-snug">
+            The biggest announcements from Webflow Conf ’26
+          </h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Everything introduced today: Source, native multi-region cloud hosting, AI site assistants, and the next-generation canvas engine.
+          </p>
+</article>
+<!-- Article 2 -->
+<article class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden border border-outline-variant/30 mb-4 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Close-up crisp visual studio computer screen demonstrating intricate vector responsive layout controls, custom CSS grid alignments, and modern software design interfaces." src="https://lh3.googleusercontent.com/aida-public/AB6AXuChQT_GNBQhNGRBMgEUIyvpnH_FCCA2hcP4szGXKqx6X-mxzEAuJ7BW9M6FMKWZ9Klg2uLs-utkLWhL1NebkN2bWh2d9M2rrrlzmsjZsMtjwK6OQKG93WQcXcuwjb5NvFtF-K3NVIO498Rl0gLcaMZ-P5QEH9zIcPHgMJDGgjrNS5rZybNAXure_rc9TU1OMz3sOavvQ7EmcsuuT-w5wTuypsqz1bdxzy1JgQy0rPGKMgxlj3FbnmP5Znq_ZgjrQYYqAuaXrr6fzSPk"/>
+<span class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-white border border-outline-variant/30">Designer Update</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-on-surface-variant font-mono mb-2">
+<span class="text-emerald-400 font-semibold">Product</span>
+<span>•</span>
+<span>4 min read</span>
+</div>
+<h3 class="text-lg font-bold text-white group-hover:text-primary-container transition-colors leading-snug">
+            For the builders: canvas, CMS, and quality-of-life improvements
+          </h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            Explore 40+ designer quality-of-life refinements built to accelerate production velocity for agency and enterprise teams.
+          </p>
+</article>
+<!-- Article 3 -->
+<article class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden border border-outline-variant/30 mb-4 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Dynamic keynote presentation capture of executive leader delivering strategic vision talk on stage with vibrant azure backdrop lighting and clean minimal branding typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl7mcY9kpKnr7fXfDQpBTAHl6K4NtSTy9J0y1qqhS577Z6NjQz45bmaANU5UIa4cJy2Ud9OvpXuIflH9B1o_as5ddQS36lsVcX7QgylS6e1VEQRV_xsxzIQ_IfLz1MiFKtLbZMEL0ApRCOSACwSCOi62t2sYfFWByQI-rUJ_xhsn5LITLuw-VT0VnewAr0dFnYZ54OLQHyTGW4COb80ZKp0Qn6eG-9EB63PrO1Tn1xTgK7ocd0eFwRkzuTC2GhTTWvCvT7TG3XW32P"/>
+<span class="absolute top-3 left-3 bg-surface-container-lowest/80 backdrop-blur-md px-2.5 py-1 rounded text-[11px] font-mono text-white border border-outline-variant/30">Keynote</span>
+</div>
+<div class="flex items-center gap-2 text-[11px] text-on-surface-variant font-mono mb-2">
+<span class="text-amber-400 font-semibold">Video</span>
+<span>•</span>
+<span>42 min stream</span>
+</div>
+<h3 class="text-lg font-bold text-white group-hover:text-primary-container transition-colors leading-snug">
+            Watch a replay of the opening keynote with CEO Linda Tong
+          </h3>
+<p class="text-xs text-on-surface-variant mt-2 leading-relaxed">
+            A comprehensive look at our vision for agentic web development and the future of human-centered visual computing.
+          </p>
+</article>
+</div>
+</section>
+<!-- SECTION 8: #MADEINWEBFLOW GALLERY -->
+<section class="py-24 px-6 max-w-7xl mx-auto border-b border-outline-variant/20">
+<div class="flex flex-wrap justify-between items-end mb-10 gap-4">
+<div>
+<h2 class="text-3xl font-bold tracking-tight text-white">#MadeinWebflow</h2>
+<p class="text-xs text-on-surface-variant mt-1">Discover what the world’s best digital designers and studios are publishing.</p>
+</div>
+<a class="text-xs text-primary-container font-medium hover:underline flex items-center gap-1" href="#showcase">
+<span>Browse cloneables &amp; community sites ↗</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Site 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A striking 3D digital interactive website experience featuring iridescent spatial glass orbs and liquid metallic textures on a deep obsidian canvas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDBWundRkPd1s9-CqU6tQNRcVoCxMcgnZJZud24bwgYFYYiutTD8CPqWjNxXF4OalHALRJU1GjpyqdwQTP3iGQTslIdXV4KyANJNxwRgl8lcnVNekJy40eGs_6XbmxSGVV4N4BhSkeFsG_SCjPf4MoDIiMr-IdxpXzwzELo025IyVkbF97Q-vcoOCUkR1gv1vwjlg1dGSDIkmIn3IEmd7QBjGn5zDU3SoIMPBhM6ARpSGwN_Yz8rZH3v_ijMQI5_c3UCzqPD0Cyg5O"/>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<p class="text-xs font-semibold text-white">Orbit Dynamics</p>
+<p class="text-[11px] text-on-surface-variant">by studio_parallax</p>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-white">favorite</span>
+</div>
+</div>
+<!-- Site 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Brutalist graphic design studio portfolio website with intense stark typography, high contrast monochrome geometry, and editorial layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfKRHHmEbnyrYegOGeuJ-t4BEYgibo_bIEGUGUDGVxxNHa5wLu5Y17ZpX0wwI7Q_t-8d5hE0fl5mOKPzkBuujeNArH1LXU2qMyuxwd2XEjkJZ0inGV-c8BlhgOEp0Pibwe5Fi_JusxSC_DNyxGsnraHcjFZHT3V113ZNR6TgNuQmdxSsA9sRB521bg6jjyfYjc3gH2dJ_bWiIJ1IQ6Y0kMeszonYU11ayqiNrKO3NY4onN0ob973STANRMRfGt8qBDa2AVE4K7iZlW"/>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<p class="text-xs font-semibold text-white">KRONOS Atelier</p>
+<p class="text-[11px] text-on-surface-variant">by Elena Rostova</p>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-white">favorite</span>
+</div>
+</div>
+<!-- Site 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Sleek fintech web application interface showcasing dark-mode analytics graphs, holographic card designs, and micro-interactions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnFxCFxuR__5qk2mMgR-rqY6O5RGkBvhoj7_GOlU8NyKV5Izx2iyYZ0VTbaujRMeCK6FSrnFJZkxwIT2exll8Weok15KMlFRLduTnNF1H21tsSw0ld5xAXGpMrM84Scq0CGkPZ1wR57wyoVjEUBOYvICp3MIsEufwRDqxX4GPQ6cQcEbJHY-SAKEdZaSTkmnGpoDk6syDoKlN_rtJoauotDGXw2PH9XMYWEiowgwl7D6KCyyS1gj85QYyoZS4UDqi5bjxfrFTmgDsH"/>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<p class="text-xs font-semibold text-white">Veloce Protocol</p>
+<p class="text-[11px] text-on-surface-variant">by Apex Labs</p>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-white">favorite</span>
+</div>
+</div>
+<!-- Site 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-[4/3] rounded-xl overflow-hidden border border-outline-variant/30 bg-surface-container relative">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="Luxury fashion e-commerce lookbook layout featuring elegant serif headlines, warm earth-tone photography, and editorial product showcases." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDThcqB4K8abRt0PZ88kUXUYwdhahU1cPBxnLaSzqQIuCM5smzaITeseeEYJBA4WKuF8pGIHwnLq0yXq7DqVUiL59-GqG3gKarX3LA8NNjYRMmOEG0TfdTDKaMcXbSBHU61gCf1KcCBwJXL8FBp2B78tAIf8GKH_WAkJzu3graNboO368j6YI3Ct3LWotfeAVRLL-LpPg3pL5B166RXWqChM_0xZ9smNgUOK0LRMakK4cio4F8jemWbhCBhtfaqwNHUSu3TRBzMsWud"/>
+</div>
+<div class="mt-3 flex justify-between items-center">
+<div>
+<p class="text-xs font-semibold text-white">Aura Botanical</p>
+<p class="text-[11px] text-on-surface-variant">by Maison Forme</p>
+</div>
+<span class="material-symbols-outlined text-xs text-on-surface-variant group-hover:text-white">favorite</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- SECTION 9: DENSE 2026 ENTERPRISE FOOTER -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="w-full px-6 py-16 max-w-7xl mx-auto">
+<!-- Footer Top Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-12 border-b border-outline-variant/20 gap-6">
+<div class="flex items-center gap-3">
+<svg class="w-6 h-6 text-primary-container" fill="currentColor" viewbox="0 0 24 24">
+<path d="M17.41 6.5h3.94l-4.7 11h-3.83l2.87-6.72h-.11l-3.08 6.72H8.62L5.44 6.5h3.94l1.63 6.46h.11l1.83-6.46h3.46l-2.02 6.46h.11l2.92-6.46z"></path>
+</svg>
+<span class="font-headline text-base font-bold text-white">Webflow</span>
+<span class="text-xs text-on-surface-variant font-mono ml-4">The visual development platform</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="text-white font-medium">All systems operational</span>
+</div>
+</div>
+</div>
+<!-- 6 Dense Columns -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-8 py-12 text-xs">
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Platform</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">Designer</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">CMS</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Ecommerce</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Interactions</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Localization</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Enterprise</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Hosting</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Security</a></li>
+<li><a class="text-primary-container font-medium hover:underline" href="#">Source</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Solutions</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">Enterprise</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Freelancers</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Agencies</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Startups</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Global Brands</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Marketing Teams</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Resources</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">Webflow University</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Blog</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Ebooks</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Customer Stories</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Developers</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Apps</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Hire an Expert</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Company</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">About</a></li>
+<li>
+<a class="hover:text-white transition-colors duration-150 inline-flex items-center gap-1.5" href="#">
+<span>Careers</span>
+<span class="px-1.5 py-0.2 rounded bg-primary-container text-[10px] text-white">Hiring</span>
+</a>
+</li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Press</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Brand Assets</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Merch</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Webflow Conf</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Community</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">Forum</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Made in Webflow</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Showcase</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Events</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">User Groups</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Templates</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-semibold text-white tracking-wide uppercase text-[11px] mb-4">Get Help</h4>
+<ul class="space-y-2.5 text-on-surface-variant">
+<li><a class="hover:text-white transition-colors duration-150" href="#">Support</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">System Status</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Documentation</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Contact Support</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Wishlist</a></li>
+<li><a class="hover:text-white transition-colors duration-150" href="#">Pricing</a></li>
+</ul>
+</div>
+</div>
+<!-- Footer Bottom Legal & Selector Bar -->
+<div class="pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row items-center justify-between text-xs text-on-surface-variant gap-4">
+<div class="flex items-center gap-6">
+<span>© 2026 Webflow, Inc. All rights reserved.</span>
+<div class="flex items-center gap-4">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Preferences</a>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="flex items-center gap-1.5 text-white hover:text-primary-container transition-colors">
+<span class="material-symbols-outlined text-sm">language</span>
+<span>English (US)</span>
+<span class="material-symbols-outlined text-xs">keyboard_arrow_down</span>
+</button>
+<!-- Socials -->
+<div class="flex items-center gap-3">
+<a class="hover:text-white transition-colors" href="#"><span class="font-mono text-xs">X</span></a>
+<a class="hover:text-white transition-colors" href="#"><span class="font-mono text-xs">in</span></a>
+<a class="hover:text-white transition-colors" href="#"><span class="font-mono text-xs">yt</span></a>
+<a class="hover:text-white transition-colors" href="#"><span class="font-mono text-xs">git</span></a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
