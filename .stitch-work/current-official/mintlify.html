@@ -1,0 +1,302 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Mintlify current-official visual reconstruction draft, observed 2026-09-28.">
+<title>Mintlify — The Knowledge Platform Built for Agents · Draft</title>
+<style>@font-face{font-family:MintlifyInter;src:url('mintlify-assets/ec2ded910215d01e.ttf') format('truetype');font-weight:100 900;font-display:swap}
+@font-face{font-family:MintlifyArizona;src:url('mintlify-assets/ba2fa83e814a97a8.otf') format('opentype');font-weight:400;font-display:swap}
+@font-face{font-family:MintlifyPaper;src:url('mintlify-assets/5471c220edd6e15e.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{color-scheme:dark;--bg:#080a0a;--surface:#0d0f10;--line:#1d2020;--white:#f7f8f7;--muted:#a1a3a2;--green:#46d4a5}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--white);font:16px/1.45 MintlifyInter,Inter,Arial,sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+button,a{font:inherit}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px}
+img,svg{max-width:100%}
+.report-bar{height:40px;background:#101714;display:flex;align-items:center;justify-content:center;border-bottom:1px solid #17211d;font-size:13px;white-space:nowrap}
+.report-bar a{display:flex;align-items:center;gap:12px;color:#e4e6e4}
+.report-chip{color:#68b995;background:#153124;padding:2px 7px;font:12px MintlifyPaper,monospace}
+.report-read{color:#aeb1af}
+.top-nav{height:65px;position:sticky;top:0;z-index:50;background:#080a0af7;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav-inner{height:100%;max-width:1088px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.wordmark{display:inline-flex;width:104px;height:24px;flex:none}
+.wordmark svg{width:104px;height:24px}
+.top-nav nav{display:flex;gap:28px;align-items:center;font-size:14px;margin-left:100px}
+.top-nav nav>a,.nav-menu summary{white-space:nowrap}
+.top-nav nav>a:hover,.nav-menu summary:hover{color:var(--green)}
+.nav-menu{position:relative}
+.nav-menu summary{list-style:none;cursor:pointer}
+.nav-menu summary::-webkit-details-marker{display:none}
+.nav-menu summary:after{content:'⌄';margin-left:8px;color:#8d9390}
+.menu-panel{position:absolute;left:-20px;top:29px;min-width:190px;display:grid;gap:0;padding:8px;background:#161a18;border:1px solid #303632;border-radius:5px;box-shadow:0 16px 40px #0009}
+.menu-panel a{padding:9px 12px;font-size:13px;white-space:nowrap}
+.menu-panel a:hover{background:#242b27}
+.menu-panel a span{display:none}
+.nav-actions{display:flex;gap:6px;align-items:center;font-size:14px}
+.sign-in{border:1px solid var(--line);border-radius:4px;padding:7px 15px}
+.sign-in:hover{background:#161a18}
+.button{border-radius:4px;padding:10px 17px;min-height:39px;display:inline-flex;align-items:center;justify-content:center;gap:9px;font-size:14px;font-weight:500;white-space:nowrap}
+.button span[aria-hidden]{opacity:.6}
+.button.white{background:#f7f8f7;color:#0b0c0b;border:1px solid #f7f8f7}
+.button.white:hover{background:#e0e4e1}
+.button.ghost{background:#111513;color:#f2f3f2;border:1px solid #252d28}
+.button.ghost:hover{background:#1b221e}
+.hero{height:995px;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.hero-copy{position:relative;z-index:3;max-width:1088px;margin:auto;padding-top:80px}
+.traffic-chip{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 10px;border:1px solid #262e2a;background:#111513a8;color:#aeb2af;font:12px MintlifyPaper,monospace}
+.traffic-chip strong{color:#67d79b;font-weight:400;background:#162b1d;padding:2px 5px}
+.traffic-chip span:last-child{color:#459c72}
+.hero h1{font:400 50px/1.04 MintlifyArizona,Georgia,serif;letter-spacing:-1.1px;margin:20px 0 20px;max-width:480px}
+.hero p{color:#a5a8a6;font-size:17px;line-height:1.45;max-width:400px;margin:0 0 30px}
+.hero-actions{display:flex;gap:8px}
+.hero-actions .button{min-height:43px}
+.google-g{font:bold 20px Arial,sans-serif;background:conic-gradient(#4285f4 0 25%,#34a853 25% 50%,#fbbc05 50% 75%,#ea4335 75% 100%);background-clip:text;color:transparent}
+.filaments{pointer-events:none}
+.hero-filaments{position:absolute;inset:0;width:100%;height:100%;z-index:0;filter:drop-shadow(0 0 5px #34875a7d)}
+.docs-preview{position:absolute;left:calc(50% - 129px);top:351px;z-index:2;width:1055px;max-width:none;height:auto;display:block;filter:drop-shadow(0 16px 35px #0009)}
+.customers-logos{height:520px;position:relative;border-bottom:1px solid var(--line)}
+.logo-inner{max-width:1052px;margin:auto;display:grid;grid-template-columns:340px 1fr;min-height:380px;border-left:1px solid var(--line);border-right:1px solid var(--line)}
+.logo-intro{padding:26px 26px 20px 28px;border-right:1px solid var(--line)}
+.logo-intro h2{font-size:28px;line-height:1.2;letter-spacing:-.6px;font-weight:500;margin:0 0 24px}
+.logo-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(2,1fr)}
+.logo-cell{border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;color:#f3f4f3;font-size:14px}
+.logo-cell:nth-child(4n){border-right:0}
+.logo-cell img{width:auto;max-width:100px;max-height:26px;filter:brightness(1.2)}
+.logo-cell b{font-weight:600}
+.microsoft-mark{display:grid;grid-template-columns:repeat(2,7px);grid-template-rows:repeat(2,7px);gap:2px}
+.microsoft-mark i:nth-child(1){background:#f25022}.microsoft-mark i:nth-child(2){background:#7fba00}
+.microsoft-mark i:nth-child(3){background:#00a4ef}.microsoft-mark i:nth-child(4){background:#ffb900}
+.coinbase-word{font-weight:650;letter-spacing:-1px}.rivian-word{letter-spacing:2px}
+.stats-strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line);height:90px;overflow:hidden}
+.stats-inner{max-width:1052px;margin:auto;display:flex;align-items:center;height:100%;gap:28px}
+.stats-inner>b{white-space:nowrap;font-weight:500;border-right:1px solid #2e3330;padding-right:28px}
+.stats-values{display:flex;gap:26px;overflow:hidden;white-space:nowrap}
+.stats-values>span{display:inline-flex;gap:8px;align-items:center}
+.stats-values small{font-size:12px;color:#a0a5a1}
+.stats-values strong{font:12px MintlifyPaper,monospace;color:#7acaa2;background:#14231a;padding:4px 6px}
+.section-shell{position:relative;border-bottom:1px solid var(--line);overflow:hidden}
+.section-inner{width:min(1052px,calc(100% - 48px));margin:auto;position:relative;height:100%}
+.section-head{position:relative;display:flex;justify-content:space-between;align-items:end;gap:24px;padding-left:30px}
+.section-head:before{content:'';position:absolute;left:-16px;top:4px;width:2px;height:24px;background:#4bc890}
+.section-head h2{font-size:36px;line-height:1.12;letter-spacing:-.85px;font-weight:500;margin:0;max-width:735px}
+.section-head h2 span{color:#b8bbb9}
+.bento{height:1688px;padding-top:125px}
+.bento-head{height:120px;margin-bottom:57px}
+.bento-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.feature-card{height:410px;position:relative;overflow:hidden;background:#0d0e10;border:1px solid #242628;border-radius:11px;padding:30px}
+.feature-card h3{position:absolute;left:32px;bottom:26px;z-index:5;margin:0;font-size:16px;line-height:1.35;font-weight:500}
+.feature-wide{grid-column:span 2}
+.feature-full{grid-column:1/-1}
+.feature-card .card-filaments{position:absolute;inset:0;width:100%;height:100%;opacity:.9}
+.art-window{position:absolute;left:35%;top:40%;width:57%;height:38%;border-radius:13px;border:1px solid #282c2a;background:#0c1010;box-shadow:0 12px 25px #0007;display:flex;align-items:start;padding:15px;gap:12px}
+.art-window span{font-size:11px;color:#e6f1eb}.art-window i{height:5px;width:34px;background:#29302c;border-radius:5px;margin-top:5px}
+.update-art{position:absolute;top:27%;left:20%;right:12%;height:78px;border:1px solid #343934;border-radius:18px;background:#101513;display:flex;align-items:center;padding:15px;gap:9px}
+.update-dot{width:24px;height:24px;border-radius:50%;border:2px solid #26372d;display:block}
+.update-art i{height:6px;background:#252c28;border-radius:6px;flex:1}.update-art i:nth-of-type(3),.update-art i:nth-of-type(4){display:none}
+.access-art{position:absolute;top:26%;left:11%;width:95%;display:grid;gap:5px;transform:perspective(400px) rotateY(-4deg)}
+.access-art>div{height:58px;border:1px solid #222826;background:#111416;border-radius:8px;display:flex;align-items:center;gap:12px;padding:8px 14px;color:#a9b0ac}
+.access-art>div.active{border-color:#57a779;background:#112017;box-shadow:0 0 18px #216d4144;color:#b4edc6}
+.access-art i:first-child{width:28px;height:28px;border-radius:4px;background:#1c2421}.access-art i:nth-child(2){width:52%;height:7px;border-radius:4px;background:#202925}
+.access-art small{margin-left:auto;white-space:nowrap;font-size:11px}
+.systems-art{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:10px}
+.systems-art .filaments{position:absolute;inset:0;width:100%;height:100%}
+.systems-art span{z-index:1;width:54px;height:54px;display:grid;place-items:center;background:#111514;border:1px solid #2a2e2c;border-radius:13px;font-size:24px;box-shadow:0 15px 30px #0009}
+.systems-art span:first-of-type{color:#ca8659}.systems-art span:nth-of-type(2){color:#e5e6e5}.systems-art span:last-of-type{color:#59b694}
+.collab-art{position:absolute;top:20%;left:14%;right:0;height:220px;border:1px solid #24292b;border-radius:6px;background:#101214;padding:16px;box-shadow:0 12px 28px #0008}
+.file-tabs{display:flex;gap:10px;border-bottom:1px solid #292d2d;padding-bottom:10px;white-space:nowrap;font-size:10px;color:#b4b6b5}
+.file-tabs span:first-child{color:#9ad5af;border-bottom:2px solid #54c792}
+.file-lines{position:relative;margin-top:35px;display:grid;gap:13px}
+.file-lines i{height:7px;background:#303535;border-radius:5px;width:80%}.file-lines i:nth-child(2){width:55%;background:#305846}.file-lines i:nth-child(3){width:68%}.file-lines i:nth-child(4){width:91%}
+.file-lines em{position:absolute;top:-20px;right:10px;background:#38304c;border:1px solid #53456c;color:#d1b8e5;font:10px MintlifyPaper,monospace;padding:4px;font-style:normal}
+.file-lines em:last-child{top:75px;right:20px;background:#524225;border-color:#8b7038;color:#ffe3a0}
+.config-art{position:absolute;left:23%;top:10%;width:70%;height:74%;border:1px solid #303533;border-radius:10px;background:#101513;display:grid;grid-template-columns:25% 1fr;overflow:hidden;box-shadow:0 20px 36px #0008}
+.config-sidebar{border-right:1px solid #29312d;padding:20px;display:grid;align-content:start;gap:17px}.config-sidebar i{height:8px;background:#24362b;border-radius:5px}
+.config-screen{padding:22px;display:grid;align-content:start;gap:14px;color:#dce9df;font-size:13px}.config-screen i{height:12px;background:#26362d;border-radius:5px}.config-screen i:nth-child(3){width:70%}.config-screen i:nth-child(4){width:85%;background:#1e5638}.config-screen i:nth-child(5){width:65%}
+.feature-full .card-filaments{left:-12%;width:100%;opacity:.35}
+.enterprise{height:850px;padding-top:97px}
+.enterprise-head{height:105px;margin-bottom:55px}
+.enterprise-head h2{max-width:760px}
+.head-actions{display:flex;gap:8px;align-items:center;flex:none}
+.arrow{width:40px;height:40px;border:1px solid #303532;border-radius:4px;background:#111513;color:#cbd0cc;font-size:24px;line-height:1}
+.arrow:hover{background:#232b25}
+.story-track{display:flex;gap:16px;width:calc(100% + 80px);overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.story-track::-webkit-scrollbar,.startup-track::-webkit-scrollbar{display:none}
+.story-card{height:430px;min-width:810px;display:grid;grid-template-columns:50% 50%;border:1px solid #292c2a;border-radius:10px;overflow:hidden;scroll-snap-align:start}
+.story-card.anthropic{background:#ca6846}.story-card.coinbase{background:#0052ff}.story-card.hubspot{background:#ec5a44}.story-card.att{background:#0067a8}
+.story-copy{padding:30px;display:flex;flex-direction:column;color:white}
+.story-brand{font-size:17px;font-weight:650;letter-spacing:-.5px}.story-card h3{font-size:24px;line-height:1.15;letter-spacing:-.5px;font-weight:500;max-width:360px;margin:44px 0 auto}
+.story-metrics{display:flex;gap:28px}.story-metrics div{display:grid;align-content:start;max-width:155px}.story-metrics strong{font-size:32px;font-weight:500;line-height:1}.story-metrics small{font-size:12px;line-height:1.35;margin-top:5px}
+.story-read{font-size:13px;font-weight:500;border-top:1px solid #ffffff55;padding-top:16px;margin-top:22px}
+.story-card img{height:100%;width:100%;object-fit:cover}
+.scale{height:855px;padding-top:111px}
+.scale .section-head h2{max-width:780px}
+.scale-art{width:100%;height:410px;position:relative;overflow:hidden;margin-top:38px;opacity:.75}
+.scale-art .filaments{width:100%;height:100%}
+.scale-metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:12px}
+.scale-metrics>div{border-top:1px solid #333937;padding-top:18px;display:grid;gap:6px}
+.scale-metrics strong{font-size:36px;line-height:1;font-weight:500;letter-spacing:-1px}
+.scale-metrics span{color:#b4b9b5;font-size:15px}
+.startups{height:885px;padding-top:109px}
+.startups-head{height:110px;margin-bottom:70px}.startups-head h2{max-width:770px}
+.startup-track{display:flex;gap:16px;overflow-x:auto;scrollbar-width:none;width:calc(100% + 80px);padding-bottom:4px}
+.startup-card{width:298px;min-width:298px;height:360px;border:1px solid #292d2b;background:#101213;border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.startup-card img{width:100%;height:210px;object-fit:cover;background:#151615}
+.startup-copy{display:grid;gap:5px;padding:18px}.startup-copy b{font-size:16px}.startup-copy>span{font-size:12px;line-height:1.35;color:#bdc1bd;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.startup-copy small{font-size:11px;margin-top:5px}
+.testimonials{height:905px;padding-top:130px}
+.quote-grid{margin-top:72px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.quote-card{margin:0;min-height:205px;background:#0e1110;border:1px solid #252a27;border-radius:8px;padding:23px;display:flex;flex-direction:column;gap:20px}
+.quote-card b,.quote-card small{display:block}.quote-card b{font-size:14px;font-weight:600}.quote-card small{font-size:12px;color:#8d9690;margin-top:3px}
+.quote-card p{font-size:15px;line-height:1.5;margin:0;color:#d4d7d4}
+.updates{height:760px;padding-top:108px}
+.update-grid{margin-top:63px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.update-card{display:block;min-width:0}.update-card img{display:block;width:100%;height:225px;object-fit:cover;background:#141817;border:1px solid #252a27;border-radius:7px}
+.update-meta{display:block;color:#adb3ad;font-size:13px;margin-top:20px}.update-card h3{font-size:18px;line-height:1.3;font-weight:500;margin:9px 0 0;max-width:310px}
+.closing{height:317px;padding-top:124px}
+.closing-inner{display:flex;align-items:center;justify-content:space-between;gap:26px}
+.closing h2{font:400 36px/1.15 MintlifyArizona,Georgia,serif;letter-spacing:-.4px;margin:0}
+.closing-actions{display:flex;gap:8px}
+.footer{min-height:617px;background:#080a0a}
+.footer-inner{max-width:1052px;margin:auto;border-left:1px solid var(--line);border-right:1px solid var(--line);padding:28px 30px 24px}
+.footer-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:50px}
+.status{display:inline-flex;align-items:center;gap:7px;color:#b9c1bb;font-size:12px}.status span{width:8px;height:8px;border-radius:50%;background:#46d495}
+.footer-columns{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;min-height:390px}
+.footer-columns>div{display:flex;flex-direction:column;gap:11px;align-items:flex-start}
+.footer-columns h3{font-size:13px;color:#e5e9e5;margin:0 0 8px;font-weight:600}
+.footer-columns a{font-size:13px;color:#aeb5af}.footer-columns a:hover,.footer-bottom a:hover{color:white;text-decoration:underline}
+.footer-bottom{display:flex;justify-content:space-between;gap:20px;padding-top:22px;border-top:1px solid var(--line);font-size:12px;color:#858b87}
+.footer-bottom>div{display:flex;gap:20px}
+@media(max-width:1100px){.nav-inner{padding:0 24px}.hero-copy{padding-left:24px;padding-right:24px}.logo-inner{margin:0 24px}.stats-inner{padding:0 24px}.story-track,.startup-track{width:100%}.footer-inner{margin:0 24px}}
+@media(max-width:800px){.report-bar{font-size:11px}.report-chip{font-size:10px}.top-nav nav{display:none}.nav-inner{padding:0 20px}.hero{height:890px}.hero-copy{padding-top:70px}.hero h1{font-size:45px}.docs-preview{left:32%;top:410px;width:900px}.logo-inner{grid-template-columns:1fr;height:auto;min-height:0}.logo-intro{border-right:0;border-bottom:1px solid var(--line)}.customers-logos{height:auto;padding-bottom:80px}.logo-grid{min-height:250px}.stats-strip{margin-top:20px}.bento,.enterprise,.scale,.startups,.testimonials,.updates,.closing{height:auto;padding:110px 0}.section-head{align-items:start}.section-head h2{font-size:31px}.bento-head,.enterprise-head,.startups-head{height:auto;margin-bottom:55px}.bento-grid{grid-template-columns:repeat(2,1fr)}.feature-wide,.feature-full{grid-column:1/-1}.story-card{min-width:740px}.scale-art{height:330px}.quote-grid{grid-template-columns:repeat(2,1fr)}.footer-columns{grid-template-columns:repeat(3,1fr);row-gap:30px}.closing-inner{align-items:start;flex-direction:column}}
+@media(max-width:560px){.report-bar{padding:0 8px}.report-bar a{gap:5px;font-size:10px}.report-read{display:none}.nav-inner{padding:0 16px}.nav-actions{gap:4px}.nav-actions .button{padding:8px 10px;font-size:12px}.sign-in{padding:7px 9px;font-size:12px}.hero{height:830px}.hero-copy{padding:58px 20px 0}.hero h1{font-size:42px;line-height:1.08}.hero p{font-size:15px;max-width:320px}.desktop-only{display:none}.hero-actions{flex-wrap:wrap}.docs-preview{top:475px;left:5%;width:800px;opacity:.9}.hero-filaments{width:160%;left:-30%}.logo-inner{margin:0 14px}.logo-intro h2{font-size:25px}.logo-grid{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,92px)}.logo-cell:nth-child(2n){border-right:0}.stats-inner{gap:15px}.stats-inner>b{padding-right:12px;font-size:13px}.stats-values{gap:12px}.stats-values small{font-size:10px}.section-inner{width:calc(100% - 28px)}.section-head{padding-left:14px;flex-direction:column;gap:24px}.section-head:before{left:0}.section-head h2{font-size:27px}.section-head h2 br{display:none}.bento,.enterprise,.scale,.startups,.testimonials,.updates,.closing{padding:70px 0}.bento-grid{grid-template-columns:1fr;gap:12px}.feature-card,.feature-wide,.feature-full{grid-column:auto;height:340px}.head-actions{flex-wrap:wrap}.story-card{min-width:320px;max-width:320px;height:520px;display:flex;flex-direction:column-reverse}.story-card img{height:175px}.story-copy{padding:18px;height:345px}.story-card h3{font-size:21px;margin:18px 0 auto}.story-metrics strong{font-size:25px}.scale-art{height:230px}.scale-metrics{grid-template-columns:1fr;gap:26px}.startup-card{width:260px;min-width:260px}.quote-grid{grid-template-columns:1fr}.update-grid{grid-template-columns:1fr}.update-card img{height:190px}.closing h2{font-size:32px}.closing-actions{flex-wrap:wrap}.footer-inner{margin:0 14px;padding:26px 16px}.footer-columns{grid-template-columns:repeat(2,1fr);gap:32px 12px}.footer-bottom{flex-direction:column}}
+</style></head><body><aside class="report-bar"><a href="https://www.mintlify.com/state-of-knowledge/2026">
+      <span class="report-chip">▥&nbsp; Featured report</span><span>The 2026 State of Knowledge Report</span>
+      <span class="report-read">Read the research&nbsp; ›</span></a></aside>
+<header class="top-nav"><div class="nav-inner">
+  <a class="wordmark" href="https://www.mintlify.com/" aria-label="Mintlify official website"><svg width="104" height="24" viewBox="0 0 104 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.4725 9.60528V3.91396C18.4725 3.30323 17.977 2.81641 17.3754 2.81641H11.6867C10.7931 2.81641 9.90842 2.99342 9.08564 3.32977C8.26285 3.67497 7.51085 4.17064 6.88271 4.80793L6.83847 4.85219C6.00684 5.69305 5.41408 6.73749 5.11328 7.88815C5.65296 7.74653 6.2103 7.67572 6.76767 7.66687C8.25399 7.64916 9.71378 8.12713 10.8993 9.02111C11.9698 9.81771 12.7837 10.9153 13.2261 12.181C13.6861 13.4644 13.7392 14.8629 13.3942 16.1817C14.5354 15.8808 15.5883 15.2878 16.4288 14.4558L16.473 14.4115C17.1011 13.7831 17.6054 13.0307 17.9504 12.2075C18.2955 11.3844 18.4636 10.4993 18.4636 9.60528H18.4725Z" fill="#18E299"></path><path d="M4.9434 9.50941C4.95221 7.76347 5.64849 6.08807 6.87361 4.83594L2.14058 9.57113C2.12296 9.58876 2.10532 9.59758 2.08769 9.61522C0.933084 10.7615 0.23681 12.2959 0.122231 13.9183C0.0164654 15.435 0.413078 16.934 1.2592 18.1862C1.33991 18.3056 1.5589 18.3449 1.68229 18.2303L4.58202 15.338C5.48985 14.4298 5.7719 13.0806 5.34002 11.8726C5.06679 11.1231 4.93459 10.3207 4.9434 9.50941Z" fill="#0C8C5E"></path><path d="M16.4445 14.4121C15.5367 15.3027 14.3997 15.92 13.1658 16.1933C11.923 16.4667 10.6362 16.3873 9.43757 15.9641C9.43757 15.9641 9.42874 15.9641 9.41992 15.9641C8.21243 15.532 6.86394 15.8141 5.95612 16.7136L3.05634 19.6058C2.93295 19.7293 2.95057 19.9321 3.10041 20.0291C4.35197 20.8668 5.85035 21.2724 7.36632 21.1666C8.98806 21.052 10.5128 20.3553 11.6674 19.2002L11.7115 19.1561L16.4445 14.4209V14.4121Z" fill="#0C8C5E"></path><path d="M96.2355 23.5H92.6842L95.1868 17.8513L90.1816 6.60156H93.7568L96.6734 13.6537C96.7753 13.9002 97.1246 13.8997 97.2259 13.653L100.12 6.60156H103.719L96.2355 23.5Z" fill="#f7f8f7"></path><path d="M85.4483 18.5186V9.46164H83.041V6.60154H85.4483V5.05232C85.4483 3.63816 85.8773 2.5259 86.7353 1.71554C87.5933 0.90518 88.6818 0.5 90.0006 0.5C90.8109 0.5 91.5021 0.587392 92.0742 0.762175V3.64611C91.6928 3.5031 91.2479 3.4316 90.7394 3.4316C90.0244 3.4316 89.508 3.59049 89.1902 3.90828C88.8724 4.21018 88.7135 4.72659 88.7135 5.4575V6.60154H92.0742V9.46164H88.7135V18.5186H85.4483Z" fill="#f7f8f7"></path><path d="M80.1204 4.64714C79.5643 4.64714 79.0797 4.44852 78.6666 4.05129C78.2534 3.63816 78.0469 3.14559 78.0469 2.57357C78.0469 2.00155 78.2534 1.51692 78.6666 1.11969C79.0797 0.706563 79.5643 0.5 80.1204 0.5C80.7084 0.5 81.2009 0.706563 81.5982 1.11969C82.0113 1.51692 82.2178 2.00155 82.2178 2.57357C82.2178 3.14559 82.0113 3.63816 81.5982 4.05129C81.2009 4.44852 80.7084 4.64714 80.1204 4.64714ZM78.4997 18.5186V6.60154H81.765V18.5186H78.4997Z" fill="#f7f8f7"></path><path d="M72.8125 18.5182V0.642578H76.0778V18.5182H72.8125Z" fill="#f7f8f7"></path><path d="M69.1256 18.6621C67.7909 18.6621 66.6945 18.2966 65.8365 17.5657C64.9943 16.8189 64.5733 15.7464 64.5733 14.3481V9.46211H62.166V6.60201H64.5733V3.28906H67.8385V6.60201H71.1992V9.46211H67.8385V13.7046C67.8385 14.4355 67.9974 14.9598 68.3152 15.2776C68.633 15.5795 69.1494 15.7305 69.8644 15.7305C70.3729 15.7305 70.8178 15.659 71.1992 15.516V18.3999C70.6271 18.5747 69.9359 18.6621 69.1256 18.6621Z" fill="#f7f8f7"></path><path d="M49.9434 18.5191V6.60202H53.2086V7.47307C53.2086 7.62037 53.4091 7.6855 53.5066 7.57513C54.2346 6.75161 55.2713 6.33984 56.6169 6.33984C58.047 6.33984 59.1672 6.81653 59.9775 7.76989C60.8038 8.70737 61.2169 9.96263 61.2169 11.5357V18.5191H57.9516V12.0839C57.9516 11.21 57.7689 10.5347 57.4034 10.058C57.038 9.5654 56.5216 9.31911 55.8542 9.31911C55.0598 9.31911 54.4162 9.60512 53.9237 10.1771C53.447 10.7492 53.2086 11.5913 53.2086 12.7036V18.5191H49.9434Z" fill="#f7f8f7"></path><path d="M45.8783 4.64714C45.3221 4.64714 44.8375 4.44852 44.4244 4.05129C44.0113 3.63816 43.8047 3.14559 43.8047 2.57357C43.8047 2.00155 44.0113 1.51692 44.4244 1.11969C44.8375 0.706563 45.3221 0.5 45.8783 0.5C46.4662 0.5 46.9587 0.706563 47.356 1.11969C47.7691 1.51692 47.9757 2.00155 47.9757 2.57357C47.9757 3.14559 47.7691 3.63816 47.356 4.05129C46.9587 4.44852 46.4662 4.64714 45.8783 4.64714ZM44.2575 18.5186V6.60154H47.5228V18.5186H44.2575Z" fill="#f7f8f7"></path><path d="M38.7147 18.5191V12.1554C38.7147 10.2645 38.095 9.31911 36.8557 9.31911C36.1406 9.31911 35.5686 9.58923 35.1396 10.1295C34.7265 10.6697 34.504 11.4721 34.4722 12.5367V18.5191H31.207V12.1554C31.207 10.2645 30.5873 9.31911 29.3479 9.31911C28.617 9.31911 28.037 9.60512 27.608 10.1771C27.179 10.7492 26.9645 11.5913 26.9645 12.7036V18.5191H23.6992V6.60202H26.9645V7.48165C26.9645 7.62818 27.1615 7.69271 27.2578 7.58222C27.9791 6.75397 28.938 6.33984 30.1344 6.33984C31.7067 6.33984 32.8909 6.98895 33.687 8.28717C33.7498 8.38958 33.9044 8.38799 33.9668 8.28535C34.311 7.71964 34.7893 7.26975 35.4018 6.9357C36.1009 6.53846 36.808 6.33984 37.523 6.33984C38.9372 6.33984 40.0335 6.80858 40.8121 7.74606C41.5907 8.68353 41.98 9.97058 41.98 11.6072V18.5191H38.7147Z" fill="#f7f8f7"></path></svg></a>
+  <nav aria-label="Primary navigation"><details class="nav-menu"><summary>Products</summary><div class="menu-panel"><a class="" href="https://www.mintlify.com/docs">Documentation<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/search-index">Index<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/score">Agent score<span aria-hidden="true"> ↗</span></a></div></details><details class="nav-menu"><summary>Solutions</summary><div class="menu-panel"><a class="" href="https://www.mintlify.com/startups">Startups<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/enterprise">Enterprise<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/switch">Switch to Mintlify<span aria-hidden="true"> ↗</span></a></div></details><details class="nav-menu"><summary>Resources</summary><div class="menu-panel"><a class="" href="https://www.mintlify.com/customers">Customers<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/blog">Blog<span aria-hidden="true"> ↗</span></a><a class="" href="https://www.mintlify.com/guides/introduction">Guides<span aria-hidden="true"> ↗</span></a></div></details><a href="https://www.mintlify.com/pricing">Pricing</a></nav>
+  <div class="nav-actions"><a class="sign-in" href="https://app.mintlify.com">Sign in</a>
+    <a class="button white" href="https://www.mintlify.com/contact/sales">Contact sales</a></div>
+</div></header>
+<main>
+<section class="hero" aria-labelledby="hero-title">
+  <svg class="filaments hero-filaments" viewBox="0 0 1280 995" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-140 922 C540 847,680 419,740 344 S1130 180,1290 95" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-122 925 C545 850,688 417,748 342 S1133 187,1290 102" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-104 928 C550 853,696 415,756 340 S1136 194,1290 109" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-86 931 C555 856,704 413,764 338 S1139 201,1290 116" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-68 934 C560 859,712 411,772 336 S1142 208,1290 123" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-50 937 C565 862,720 409,780 334 S1145 215,1290 130" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-32 940 C570 865,728 407,788 332 S1148 222,1290 137" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-14 943 C575 868,736 405,796 330 S1151 229,1290 144" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M4 946 C580 871,744 403,804 328 S1154 236,1290 151" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M22 949 C585 874,752 401,812 326 S1157 243,1290 158" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M40 952 C590 877,760 399,820 324 S1160 250,1290 165" stroke="#9bcf37" stroke-opacity="0.54" stroke-width=".7"/><path d="M58 955 C595 880,768 397,828 322 S1163 257,1290 172" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M76 958 C600 883,776 395,836 320 S1166 264,1290 179" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M94 961 C605 886,784 393,844 318 S1169 271,1290 186" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M112 964 C610 889,792 391,852 316 S1172 278,1290 193" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M130 967 C615 892,800 389,860 314 S1175 285,1290 200" stroke="#9bcf37" stroke-opacity="0.64" stroke-width=".7"/><path d="M148 970 C620 895,808 387,868 312 S1178 292,1290 207" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M166 973 C625 898,816 385,876 310 S1181 299,1290 214" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M184 976 C630 901,824 383,884 308 S1184 306,1290 221" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M202 979 C635 904,832 381,892 306 S1187 313,1290 228" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M220 982 C640 907,840 379,900 304 S1190 320,1290 235" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M238 985 C645 910,848 377,908 302 S1193 327,1290 242" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M256 988 C650 913,856 375,916 300 S1196 334,1290 249" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M274 991 C655 916,864 373,924 298 S1199 341,1290 256" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M292 994 C660 919,872 371,932 296 S1202 348,1290 263" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M310 997 C665 922,880 369,940 294 S1205 355,1290 270" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M328 1000 C670 925,888 367,948 292 S1208 362,1290 277" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/></svg>
+  <div class="hero-copy"><div class="traffic-chip"><span>Agent traffic</span><strong>68.8%</strong><span aria-hidden="true">›</span></div>
+    <h1 id="hero-title">The knowledge<br>infrastructure<br>agents build on</h1>
+    <p>Self-updating documentation for startups,<br class="desktop-only"> enterprises, and agents.</p>
+    <div class="hero-actions"><a class="button white" href="https://app.mintlify.com/signup">Get started <span aria-hidden="true">›</span></a>
+      <a class="button ghost" href="https://app.mintlify.com/api/auth/google/discovery"><b class="google-g">G</b>Sign up with Google</a></div>
+  </div>
+  <img class="docs-preview" src="mintlify-assets/3ff34f45c36d44db.svg"
+    width="1080" height="656" alt="Mintlify dark documentation preview showing API Reference and the Quickstart Guide">
+</section>
+<section class="customers-logos" aria-label="Customer logos and observed agent activity">
+  <div class="logo-inner"><div class="logo-intro"><h2>Join 20,000+ of the world's most ambitious companies building for agents.</h2>
+    <a class="button white" href="https://www.mintlify.com/customers">Read customer stories <span aria-hidden="true">›</span></a></div>
+    <div class="logo-grid"><div class="logo-cell" aria-label="Microsoft"><span class="microsoft-mark"><i></i><i></i><i></i><i></i></span><b>Microsoft</b></div><div class="logo-cell" aria-label="Anthropic"><img src="mintlify-assets/71d89fce50605060.svg" alt="Anthropic"></div><div class="logo-cell" aria-label="Amazon"><img src="mintlify-assets/39dfbe732951e147.svg" alt="Amazon"></div><div class="logo-cell" aria-label="Coinbase"><b class="coinbase-word">coinbase</b></div><div class="logo-cell" aria-label="Cognition"><img src="mintlify-assets/da778c0690940ce4.svg" alt="Cognition"></div><div class="logo-cell" aria-label="Solana"><img src="mintlify-assets/c852f85ab15aab1b.svg" alt="Solana"></div><div class="logo-cell" aria-label="AT&amp;T"><img src="mintlify-assets/e35ad5544f9af52d.svg" alt="AT&amp;T"></div><div class="logo-cell" aria-label="Rivian"><b class="rivian-word">RIVIAN</b></div></div></div>
+  <div class="stats-strip"><div class="stats-inner"><b>Agents at work today</b><div class="stats-values"><span><small>Pages read</small><strong>10,759,862</strong></span><span><small>Search requests</small><strong>131,135</strong></span><span><small>API requests</small><strong>22,105</strong></span><span><small>Feedback provided</small><strong>3,105</strong></span><span><small>Content updates</small><strong>21,841</strong></span></div></div></div>
+</section>
+<section class="bento section-shell" aria-labelledby="bento-title">
+  <div class="section-inner"><div class="section-head bento-head"><h2 id="bento-title">One platform for your<br>entire knowledge stack.<br><span>Agents that keep work moving 24/7.</span></h2>
+    <a class="button white" href="https://app.mintlify.com/signup">Get started <span aria-hidden="true">›</span></a></div>
+  <div class="bento-grid">
+    <article class="feature-card feature-wide"><svg class="filaments card-filaments" viewBox="0 0 695 330" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-90 300 C264 125,431 251,740 25" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-76 302 C264 130,431 247,740 32" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-62 304 C264 135,431 243,740 39" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-48 306 C264 140,431 239,740 46" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-34 308 C264 145,431 235,740 53" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-20 310 C264 150,431 231,740 60" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-6 312 C264 155,431 227,740 67" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M8 314 C264 160,431 223,740 74" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M22 316 C264 165,431 219,740 81" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M36 318 C264 170,431 215,740 88" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M50 320 C264 175,431 211,740 95" stroke="#9bcf37" stroke-opacity="0.54" stroke-width=".7"/><path d="M64 322 C264 180,431 207,740 102" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/></svg><div class="art-window"><span>mintlify</span><i></i><i></i><i></i></div><h3>Agent-native platform</h3></article>
+    <article class="feature-card feature-narrow"><div class="update-art"><span class="update-dot"></span><i></i><i></i><i></i><i></i></div><svg class="filaments card-filaments" viewBox="0 0 340 340" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-90 310 C129 129,211 258,385 25" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-76 312 C129 134,211 254,385 32" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-62 314 C129 139,211 250,385 39" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-48 316 C129 144,211 246,385 46" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-34 318 C129 149,211 242,385 53" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-20 320 C129 154,211 238,385 60" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-6 322 C129 159,211 234,385 67" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M8 324 C129 164,211 230,385 74" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/></svg><h3>Self-updating knowledge</h3></article>
+    <article class="feature-card"><div class="access-art"><div><i></i><i></i><small>Editor</small></div><div class="active"><i></i><i></i><small>Admin</small></div><div><i></i><i></i><small>Collaborator</small></div></div><h3>Control who has access</h3></article>
+    <article class="feature-card"><div class="systems-art"><svg class="filaments card-filaments" viewBox="0 0 340 320" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-90 290 C129 122,211 243,385 25" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-76 292 C129 127,211 239,385 32" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-62 294 C129 132,211 235,385 39" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-48 296 C129 137,211 231,385 46" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-34 298 C129 142,211 227,385 53" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-20 300 C129 147,211 223,385 60" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-6 302 C129 152,211 219,385 67" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M8 304 C129 157,211 215,385 74" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M22 306 C129 162,211 211,385 81" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M36 308 C129 167,211 207,385 88" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/></svg><span>✳</span><span>▲</span><span>◎</span></div><h3>Connect with your systems</h3></article>
+    <article class="feature-card"><div class="collab-art"><div class="file-tabs"><span>▣&nbsp; Guide.md</span><span>LLMS.txt</span><span>MCP</span><span>Skill.md</span></div><div class="file-lines"><i></i><i></i><i></i><i></i><em>Agent 130</em><em>User 007</em></div></div><h3>Collaborate with your team &amp; agents</h3></article>
+    <article class="feature-card feature-full"><div class="config-art"><div class="config-sidebar"><i></i><i></i><i></i><i></i></div><div class="config-screen"><span>Configuration</span><i></i><i></i><i></i><i></i></div></div><svg class="filaments card-filaments" viewBox="0 0 1052 360" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-90 330 C400 137,652 274,1097 25" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-76 332 C400 142,652 270,1097 32" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-62 334 C400 147,652 266,1097 39" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-48 336 C400 152,652 262,1097 46" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-34 338 C400 157,652 258,1097 53" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-20 340 C400 162,652 254,1097 60" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-6 342 C400 167,652 250,1097 67" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M8 344 C400 172,652 246,1097 74" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M22 346 C400 177,652 242,1097 81" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M36 348 C400 182,652 238,1097 88" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M50 350 C400 187,652 234,1097 95" stroke="#9bcf37" stroke-opacity="0.54" stroke-width=".7"/><path d="M64 352 C400 192,652 230,1097 102" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M78 354 C400 197,652 226,1097 109" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/></svg><h3>Build on top of your existing setup</h3></article>
+  </div></div>
+</section>
+<section class="enterprise section-shell" aria-labelledby="enterprise-title"><div class="section-inner">
+      <div class="section-head enterprise-head"><h2 id="enterprise-title">Powering businesses of all sizes.<br><span>Run your business on a reliable platform that adapts to your needs.</span></h2>
+        <div class="head-actions"><button class="arrow" type="button" data-slide="previous" aria-label="Previous customer story">‹</button>
+          <button class="arrow" type="button" data-slide="next" aria-label="Next customer story">›</button>
+          <a class="button white" href="https://www.mintlify.com/enterprise">For enterprises <span aria-hidden="true">›</span></a></div></div>
+      <div class="story-track" id="story-track" tabindex="0" aria-label="Enterprise customer stories"><a class="story-card anthropic" href="https://www.mintlify.com/customers/anthropic">
+      <div class="story-copy"><span class="story-brand">Anthropic</span><h3>See how Anthropic accelerates AI adoption with Mintlify</h3>
+        <div class="story-metrics"><div><strong>2M</strong><small>Monthly active developers</small></div>
+          <div><strong>4+</strong><small>Products serviced</small></div></div>
+        <span class="story-read">Read the story <span aria-hidden="true">›</span></span></div>
+      <img src="mintlify-assets/anthropic-sf.webp" alt="Anthropic customer story photograph" loading="lazy"></a><a class="story-card coinbase" href="https://www.mintlify.com/customers/coinbase">
+      <div class="story-copy"><span class="story-brand">Coinbase</span><h3>How Coinbase became agent-ready with Mintlify</h3>
+        <div class="story-metrics"><div><strong>+50x</strong><small>Faster deployment time</small></div>
+          <div><strong>12+</strong><small>Products serviced</small></div></div>
+        <span class="story-read">Read the story <span aria-hidden="true">›</span></span></div>
+      <img src="mintlify-assets/coinbase-ipo.webp" alt="Coinbase customer story photograph" loading="lazy"></a><a class="story-card hubspot" href="https://www.mintlify.com/customers/hubspot">
+      <div class="story-copy"><span class="story-brand">HubSpot</span><h3>How HubSpot powers next-gen developer experience with Mintlify</h3>
+        <div class="story-metrics"><div><strong>3x</strong><small>Faster build times</small></div>
+          <div><strong>50%</strong><small>Reduction in engineering resources</small></div></div>
+        <span class="story-read">Read the story <span aria-hidden="true">›</span></span></div>
+      <img src="mintlify-assets/hubspot-conference.webp" alt="HubSpot customer story photograph" loading="lazy"></a><a class="story-card att" href="https://www.mintlify.com/customers/att">
+      <div class="story-copy"><span class="story-brand">AT&amp;T</span><h3>See how AT&amp;T modernized their knowledge infrastructure with Mintlify</h3>
+        <div class="story-metrics"><div><strong>50K+</strong><small>Monthly active users</small></div>
+          <div><strong>4+</strong><small>Products serviced</small></div></div>
+        <span class="story-read">Read the story <span aria-hidden="true">›</span></span></div>
+      <img src="mintlify-assets/att-photo.webp" alt="AT&amp;T customer story photograph" loading="lazy"></a></div>
+    </div></section>
+<section class="scale section-shell" aria-labelledby="scale-title"><div class="section-inner">
+      <div class="section-head"><h2 id="scale-title">Built to scale with the agent web.<br><span>Built for scale with enterprise-grade reliability and performance.</span></h2>
+        <a class="button white" href="https://www.mintlify.com/enterprise">For enterprises <span aria-hidden="true">›</span></a></div>
+      <div class="scale-art" aria-hidden="true"><svg class="filaments card-filaments" viewBox="0 0 1052 410" preserveAspectRatio="none" fill="none" aria-hidden="true"><path d="M-90 380 C400 156,652 312,1097 25" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M-76 382 C400 161,652 308,1097 32" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M-62 384 C400 166,652 304,1097 39" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M-48 386 C400 171,652 300,1097 46" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M-34 388 C400 176,652 296,1097 53" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M-20 390 C400 181,652 292,1097 60" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/><path d="M-6 392 C400 186,652 288,1097 67" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M8 394 C400 191,652 284,1097 74" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M22 396 C400 196,652 280,1097 81" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M36 398 C400 201,652 276,1097 88" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M50 400 C400 206,652 272,1097 95" stroke="#9bcf37" stroke-opacity="0.54" stroke-width=".7"/><path d="M64 402 C400 211,652 268,1097 102" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M78 404 C400 216,652 264,1097 109" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M92 406 C400 221,652 260,1097 116" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M106 408 C400 226,652 256,1097 123" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M120 410 C400 231,652 252,1097 130" stroke="#9bcf37" stroke-opacity="0.64" stroke-width=".7"/><path d="M134 412 C400 236,652 248,1097 137" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M148 414 C400 241,652 244,1097 144" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M162 416 C400 246,652 240,1097 151" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M176 418 C400 251,652 236,1097 158" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M190 420 C400 256,652 232,1097 165" stroke="#9bcf37" stroke-opacity="0.34" stroke-width=".7"/><path d="M204 422 C400 261,652 228,1097 172" stroke="#25c99a" stroke-opacity="0.44" stroke-width=".7"/><path d="M218 424 C400 266,652 224,1097 179" stroke="#25c99a" stroke-opacity="0.54" stroke-width=".7"/><path d="M232 426 C400 271,652 220,1097 186" stroke="#25c99a" stroke-opacity="0.64" stroke-width=".7"/><path d="M246 428 C400 276,652 216,1097 193" stroke="#25c99a" stroke-opacity="0.34" stroke-width=".7"/><path d="M260 430 C400 281,652 212,1097 200" stroke="#9bcf37" stroke-opacity="0.44" stroke-width=".7"/></svg></div>
+      <div class="scale-metrics"><div><strong>300M+</strong><span>visitors in the past year</span></div>
+        <div><strong>2B+</strong><span>agents in the past year</span></div>
+        <div><strong>99.99%</strong><span>uptime across all services</span></div></div>
+    </div></section>
+<section class="startups section-shell" aria-labelledby="startups-title"><div class="section-inner">
+      <div class="section-head startups-head"><h2 id="startups-title">Enabling the next generation of startups.<br>
+        <span>Powering a quarter of the last YC batch to 40% of the Forbes AI 50.</span></h2>
+        <a class="button white" href="https://www.mintlify.com/startups">For startups <span aria-hidden="true">›</span></a></div>
+      <div class="startup-track"><a class="startup-card" href="https://www.mintlify.com/customers/lovable"><img src="mintlify-assets/5d1d69bded27a71f.webp"
+         alt="Lovable customer story visual" loading="lazy"><span class="startup-copy"><b>Lovable</b>
+         <span>Lovable builds its AI-native coding platform and developer experience on top of Mintlify.</span><small>Read Lovable's story&nbsp; ›</small></span></a><a class="startup-card" href="https://www.mintlify.com/customers/kalshi"><img src="mintlify-assets/d3c5f87d90d5a90a.webp"
+         alt="Kalshi customer story visual" loading="lazy"><span class="startup-copy"><b>Kalshi</b>
+         <span>Kalshi powers its developer documentation with Mintlify.</span><small>Read Kalshi's story&nbsp; ›</small></span></a><a class="startup-card" href="https://www.mintlify.com/customers/decagon"><img src="mintlify-assets/09c00b59eb5ad1b5.webp"
+         alt="Decagon customer story visual" loading="lazy"><span class="startup-copy"><b>Decagon</b>
+         <span>Decagon ships sleek, AI-native documentation built on Mintlify.</span><small>Read Decagon's story&nbsp; ›</small></span></a><a class="startup-card" href="https://www.mintlify.com/customers/replit"><img src="mintlify-assets/e4eb840e14c0eb73.webp"
+         alt="Replit customer story visual" loading="lazy"><span class="startup-copy"><b>Replit</b>
+         <span>Learn how Replit uses Mintlify to turn documentation into a fast, collaborative, and accessible experience.</span><small>Read Replit's story&nbsp; ›</small></span></a></div>
+    </div></section>
+<section class="testimonials section-shell" aria-labelledby="testimonials-title"><div class="section-inner">
+      <div class="section-head"><h2 id="testimonials-title">Trusted by teams building for agents.</h2>
+        <a class="button white" href="https://www.mintlify.com/wall-of-love">Read more <span aria-hidden="true">›</span></a></div>
+      <div class="quote-grid"><blockquote class="quote-card"><div><b>Brian Armstrong</b><small>Co-founder &amp; CEO, Coinbase</small></div>
+        <p>Yes shout out to Mintlify, great product, worth checking out</p></blockquote><blockquote class="quote-card"><div><b>Guillermo Rauch</b><small>CEO, Vercel</small></div>
+        <p>Was wondering how docs.x.com was built because it was so fast &amp; delightful. It’s Mintlify</p></blockquote><blockquote class="quote-card"><div><b>HubSpot</b><small>Product Manager of Developer Growth</small></div>
+        <p>Delivering a best-in-class developer experience is non-negotiable for us. That’s why moving our documentation to Mintlify was the obvious choice.</p></blockquote><blockquote class="quote-card"><div><b>Abe Duran</b><small>Developer Support, Zapier</small></div>
+        <p>Honestly, we have found it very, very helpful. If I’m honest with you, it’s been one of the best decisions we have taken and we have made in a long time.</p></blockquote><blockquote class="quote-card"><div><b>Dominic Macias</b><small>Legal Counsel, Axiom</small></div>
+        <p>Since we adopted Mintlify last year at Axiom, I’ve been more and more delighted with that decision… our customers are getting real value from the AI chat responses.</p></blockquote><blockquote class="quote-card"><div><b>Daksh Gupta</b><small>CEO, Greptile</small></div>
+        <p>The idea that devs hate updating docs will be completely lost on the next gen that have always used Mintlify</p></blockquote></div>
+    </div></section>
+<section class="updates section-shell" aria-labelledby="updates-title"><div class="section-inner">
+      <div class="section-head"><h2 id="updates-title">Latest updates</h2>
+        <a class="button white" href="https://www.mintlify.com/blog">All posts <span aria-hidden="true">›</span></a></div>
+      <div class="update-grid"><a class="update-card" href="https://www.mintlify.com/blog/mintlify-index"><img src="mintlify-assets/ee53b059c899c31d.webp"
+      alt="Introducing Mintlify Index article graphic" loading="lazy"><span class="update-meta">Announcements&nbsp; · &nbsp;Aug 6, 2026</span>
+      <h3>Introducing Mintlify Index</h3></a><a class="update-card" href="https://www.mintlify.com/blog/state-of-docs-traffic"><img src="mintlify-assets/5611860d8e36d1dc.webp"
+      alt="The state of docs traffic: a 2026 midyear report article graphic" loading="lazy"><span class="update-meta">AI Trends&nbsp; · &nbsp;Jul 29, 2026</span>
+      <h3>The state of docs traffic: a 2026 midyear report</h3></a><a class="update-card" href="https://www.mintlify.com/score"><img src="mintlify-assets/d1a4ec1fcebc4175.webp"
+      alt="Can agents read your docs? article graphic" loading="lazy"><span class="update-meta">Agent Score&nbsp; · &nbsp;Apr 27, 2026</span>
+      <h3>Can agents read your docs?</h3></a></div>
+    </div></section>
+<section class="closing section-shell"><div class="section-inner closing-inner">
+      <h2>The knowledge platform built for agents</h2><div class="closing-actions">
+        <a class="button ghost" href="https://www.mintlify.com/contact/sales">Talk to sales</a>
+        <a class="button white" href="https://app.mintlify.com/signup">Get started <span aria-hidden="true">›</span></a>
+      </div></div></section>
+</main>
+<footer class="footer"><div class="footer-inner"><div class="footer-top">
+      <a href="https://www.mintlify.com/" aria-label="Mintlify official website"><svg width="104" height="24" viewBox="0 0 104 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M18.4725 9.60528V3.91396C18.4725 3.30323 17.977 2.81641 17.3754 2.81641H11.6867C10.7931 2.81641 9.90842 2.99342 9.08564 3.32977C8.26285 3.67497 7.51085 4.17064 6.88271 4.80793L6.83847 4.85219C6.00684 5.69305 5.41408 6.73749 5.11328 7.88815C5.65296 7.74653 6.2103 7.67572 6.76767 7.66687C8.25399 7.64916 9.71378 8.12713 10.8993 9.02111C11.9698 9.81771 12.7837 10.9153 13.2261 12.181C13.6861 13.4644 13.7392 14.8629 13.3942 16.1817C14.5354 15.8808 15.5883 15.2878 16.4288 14.4558L16.473 14.4115C17.1011 13.7831 17.6054 13.0307 17.9504 12.2075C18.2955 11.3844 18.4636 10.4993 18.4636 9.60528H18.4725Z" fill="#18E299"></path><path d="M4.9434 9.50941C4.95221 7.76347 5.64849 6.08807 6.87361 4.83594L2.14058 9.57113C2.12296 9.58876 2.10532 9.59758 2.08769 9.61522C0.933084 10.7615 0.23681 12.2959 0.122231 13.9183C0.0164654 15.435 0.413078 16.934 1.2592 18.1862C1.33991 18.3056 1.5589 18.3449 1.68229 18.2303L4.58202 15.338C5.48985 14.4298 5.7719 13.0806 5.34002 11.8726C5.06679 11.1231 4.93459 10.3207 4.9434 9.50941Z" fill="#0C8C5E"></path><path d="M16.4445 14.4121C15.5367 15.3027 14.3997 15.92 13.1658 16.1933C11.923 16.4667 10.6362 16.3873 9.43757 15.9641C9.43757 15.9641 9.42874 15.9641 9.41992 15.9641C8.21243 15.532 6.86394 15.8141 5.95612 16.7136L3.05634 19.6058C2.93295 19.7293 2.95057 19.9321 3.10041 20.0291C4.35197 20.8668 5.85035 21.2724 7.36632 21.1666C8.98806 21.052 10.5128 20.3553 11.6674 19.2002L11.7115 19.1561L16.4445 14.4209V14.4121Z" fill="#0C8C5E"></path><path d="M96.2355 23.5H92.6842L95.1868 17.8513L90.1816 6.60156H93.7568L96.6734 13.6537C96.7753 13.9002 97.1246 13.8997 97.2259 13.653L100.12 6.60156H103.719L96.2355 23.5Z" fill="#f7f8f7"></path><path d="M85.4483 18.5186V9.46164H83.041V6.60154H85.4483V5.05232C85.4483 3.63816 85.8773 2.5259 86.7353 1.71554C87.5933 0.90518 88.6818 0.5 90.0006 0.5C90.8109 0.5 91.5021 0.587392 92.0742 0.762175V3.64611C91.6928 3.5031 91.2479 3.4316 90.7394 3.4316C90.0244 3.4316 89.508 3.59049 89.1902 3.90828C88.8724 4.21018 88.7135 4.72659 88.7135 5.4575V6.60154H92.0742V9.46164H88.7135V18.5186H85.4483Z" fill="#f7f8f7"></path><path d="M80.1204 4.64714C79.5643 4.64714 79.0797 4.44852 78.6666 4.05129C78.2534 3.63816 78.0469 3.14559 78.0469 2.57357C78.0469 2.00155 78.2534 1.51692 78.6666 1.11969C79.0797 0.706563 79.5643 0.5 80.1204 0.5C80.7084 0.5 81.2009 0.706563 81.5982 1.11969C82.0113 1.51692 82.2178 2.00155 82.2178 2.57357C82.2178 3.14559 82.0113 3.63816 81.5982 4.05129C81.2009 4.44852 80.7084 4.64714 80.1204 4.64714ZM78.4997 18.5186V6.60154H81.765V18.5186H78.4997Z" fill="#f7f8f7"></path><path d="M72.8125 18.5182V0.642578H76.0778V18.5182H72.8125Z" fill="#f7f8f7"></path><path d="M69.1256 18.6621C67.7909 18.6621 66.6945 18.2966 65.8365 17.5657C64.9943 16.8189 64.5733 15.7464 64.5733 14.3481V9.46211H62.166V6.60201H64.5733V3.28906H67.8385V6.60201H71.1992V9.46211H67.8385V13.7046C67.8385 14.4355 67.9974 14.9598 68.3152 15.2776C68.633 15.5795 69.1494 15.7305 69.8644 15.7305C70.3729 15.7305 70.8178 15.659 71.1992 15.516V18.3999C70.6271 18.5747 69.9359 18.6621 69.1256 18.6621Z" fill="#f7f8f7"></path><path d="M49.9434 18.5191V6.60202H53.2086V7.47307C53.2086 7.62037 53.4091 7.6855 53.5066 7.57513C54.2346 6.75161 55.2713 6.33984 56.6169 6.33984C58.047 6.33984 59.1672 6.81653 59.9775 7.76989C60.8038 8.70737 61.2169 9.96263 61.2169 11.5357V18.5191H57.9516V12.0839C57.9516 11.21 57.7689 10.5347 57.4034 10.058C57.038 9.5654 56.5216 9.31911 55.8542 9.31911C55.0598 9.31911 54.4162 9.60512 53.9237 10.1771C53.447 10.7492 53.2086 11.5913 53.2086 12.7036V18.5191H49.9434Z" fill="#f7f8f7"></path><path d="M45.8783 4.64714C45.3221 4.64714 44.8375 4.44852 44.4244 4.05129C44.0113 3.63816 43.8047 3.14559 43.8047 2.57357C43.8047 2.00155 44.0113 1.51692 44.4244 1.11969C44.8375 0.706563 45.3221 0.5 45.8783 0.5C46.4662 0.5 46.9587 0.706563 47.356 1.11969C47.7691 1.51692 47.9757 2.00155 47.9757 2.57357C47.9757 3.14559 47.7691 3.63816 47.356 4.05129C46.9587 4.44852 46.4662 4.64714 45.8783 4.64714ZM44.2575 18.5186V6.60154H47.5228V18.5186H44.2575Z" fill="#f7f8f7"></path><path d="M38.7147 18.5191V12.1554C38.7147 10.2645 38.095 9.31911 36.8557 9.31911C36.1406 9.31911 35.5686 9.58923 35.1396 10.1295C34.7265 10.6697 34.504 11.4721 34.4722 12.5367V18.5191H31.207V12.1554C31.207 10.2645 30.5873 9.31911 29.3479 9.31911C28.617 9.31911 28.037 9.60512 27.608 10.1771C27.179 10.7492 26.9645 11.5913 26.9645 12.7036V18.5191H23.6992V6.60202H26.9645V7.48165C26.9645 7.62818 27.1615 7.69271 27.2578 7.58222C27.9791 6.75397 28.938 6.33984 30.1344 6.33984C31.7067 6.33984 32.8909 6.98895 33.687 8.28717C33.7498 8.38958 33.9044 8.38799 33.9668 8.28535C34.311 7.71964 34.7893 7.26975 35.4018 6.9357C36.1009 6.53846 36.808 6.33984 37.523 6.33984C38.9372 6.33984 40.0335 6.80858 40.8121 7.74606C41.5907 8.68353 41.98 9.97058 41.98 11.6072V18.5191H38.7147Z" fill="#f7f8f7"></path></svg></a>
+      <a class="status" href="https://status.mintlify.com/"><span></span>All systems normal</a>
+      </div><div class="footer-columns"><div><h3>Explore</h3><a href="https://www.mintlify.com/startups">Startups</a><a href="https://www.mintlify.com/enterprise">Enterprise</a><a href="https://www.mintlify.com/build-vs-buy">Build vs Buy</a><a href="https://www.mintlify.com/switch">Switch</a><a href="https://www.mintlify.com/oss-program">OSS program</a><a href="https://www.mintlify.com/desktop">Download</a></div><div><h3>Resources</h3><a href="https://learn.mintlify.com/">Learn</a><a href="https://www.mintlify.com/customers">Customers</a><a href="https://www.mintlify.com/blog">Blog</a><a href="https://www.mintlify.com/pricing">Pricing</a><a href="https://www.mintlify.com/guides/introduction">Guides</a><a href="https://github.com/orgs/mintlify/discussions/categories/feature-requests">Feature requests</a><a href="https://www.mintlify.com/library">Library</a><a href="https://www.mintlify.com/search-index">Index</a><a href="https://www.mintlify.com/wiki">Convert from code</a><a href="https://www.mintlify.com/score">Agent score</a></div><div><h3>Documentation</h3><a href="https://www.mintlify.com/docs">Getting started</a><a href="https://www.mintlify.com/docs/api/introduction">API reference</a><a href="https://www.mintlify.com/docs/components">Components</a><a href="https://www.mintlify.com/docs/changelog">Changelog</a></div><div><h3>Company</h3><a href="https://www.mintlify.com/careers">Careers</a><a href="https://www.mintlify.com/events">Events</a><a href="https://www.mintlify.com/wall-of-love">Wall of love</a><a href="https://www.mintlify.com/roadmap">Roadmap</a></div><div><h3>Legal</h3><a href="https://www.mintlify.com/legal/privacy">Privacy policy</a><a href="https://www.mintlify.com/security/responsible-disclosure">Responsible disclosure</a><a href="https://www.mintlify.com/legal/terms">Terms of service</a><a href="https://security.mintlify.com">Security</a><a href="https://mintlify.typeform.com/to/Bxa77EKc">DSR/DSAR</a></div></div>
+      <div class="footer-bottom"><span>© 2026 Mintlify, Inc.</span>
+        <div><a href="https://x.com/mintlify">X</a><a href="https://github.com/mintlify">GitHub</a>
+          <a href="https://discord.gg/mintlify">Discord</a></div></div>
+    </div></footer>
+<script>
+for (const button of document.querySelectorAll('[data-slide]')) {
+  button.addEventListener('click', () => document.getElementById('story-track').scrollBy({
+    left: button.dataset.slide === 'next' ? 840 : -840, behavior: 'smooth'
+  }));
+}
+</script></body></html>

@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+
+<html class="dark scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mintlify — The Knowledge Infrastructure Agents Build On</title>
+<!-- Tailwind CSS CDN with forms & typography -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<!-- Arizona Flare / Source Serif 4 exclusively for the two specified hero/CTA headings; Inter for everything else -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Source+Serif+4:opsz,wght@8..60,400&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            canvas: '#080a0a',
+            surface: '#0d1110',
+            'surface-card': '#0c100f',
+            border: '#191c1b',
+            'border-subtle': '#222625',
+            mint: '#00c98e',
+            'mint-light': '#34d399',
+            'mint-dark': '#008f65',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #080a0a;
+      color: #e5e7eb;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-heading {
+      font-family: "Source Serif 4", Georgia, serif;
+      font-size: 50px;
+      line-height: 1.14;
+      font-weight: 400;
+      letter-spacing: -0.025em;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .filament-glow {
+      filter: drop-shadow(0 0 12px rgba(0, 201, 142, 0.4));
+    }
+    /* Hide scrollbars for carousel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="w-full relative selection:bg-mint/20 selection:text-[#3ae0a3]">
+<!-- TOP BANNER (FEATURED REPORT) -->
+<aside aria-label="Announcement" class="w-full h-10 bg-[#08120d] border-b border-[#14231b] flex items-center justify-center px-4 text-xs z-50 relative">
+<a class="flex items-center gap-2 group transition-colors" href="#report">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-semibold bg-mint/15 text-mint border border-mint/20 font-mono-code">Featured report</span>
+<span class="text-zinc-300 group-hover:text-white transition-colors">The 2026 State of Knowledge Report</span>
+<span class="text-zinc-500 group-hover:text-mint flex items-center transition-colors">Read the research <span class="ml-1">→</span></span>
+</a>
+</aside>
+<!-- NAVIGATION BAR -->
+<header class="sticky top-0 z-40 w-full h-[65px] bg-[#080a0a]/90 backdrop-blur-md border-b border-[#191c1b]">
+<div class="max-w-[1280px] mx-auto h-full px-6 md:px-12 flex items-center justify-between">
+<!-- Mintlify Wordmark with iconic leaf badge -->
+<a aria-label="Mintlify Homepage" class="flex items-center gap-2 text-white group" href="#">
+<svg class="w-6 h-6 text-mint" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10A10 10 0 0 0 12 2zm1 14.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-4c0-.28.22-.5.5-.5s.5.22.5.5v4zm3-2c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-6c0-.28.22-.5.5-.5s.5.22.5.5v6zm-6 0c0 .28-.22.5-.5.5s-.5-.22-.5-.5v-2c0-.28.22-.5.5-.5s.5.22.5.5v2z"></path>
+<path d="M17.5 7.5C16.1 6.1 14.2 5.2 12 5.2c-4.4 0-8 3.6-8 8 0 1.9.7 3.7 1.8 5.1L17.5 7.5z" opacity="0.3"></path>
+</svg>
+<span class="font-semibold text-lg tracking-tight text-white flex items-center">
+          mintlify
+          <span class="ml-1 w-1.5 h-1.5 rounded-full bg-mint"></span>
+</span>
+</a>
+<!-- Center Nav Links -->
+<nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-zinc-400">
+<a class="hover:text-white transition-colors" href="#products">Products</a>
+<a class="hover:text-white transition-colors" href="#solutions">Solutions</a>
+<a class="hover:text-white transition-colors" href="#resources">Resources</a>
+<a class="hover:text-white transition-colors" href="#pricing">Pricing</a>
+</nav>
+<!-- Right CTAs -->
+<div class="flex items-center space-x-4">
+<a class="text-sm font-medium text-zinc-300 hover:text-white px-2 py-1.5 transition-colors" href="#signin">Sign in</a>
+<a class="text-sm font-medium bg-white hover:bg-zinc-200 text-black px-4 py-2 rounded-full transition-all shadow-sm flex items-center gap-1.5" href="#contact">
+<span>Contact sales</span>
+</a>
+</div>
+</div>
+</header>
+<main>
+<!-- HERO SECTION -->
+<section class="relative min-h-[860px] w-full border-b border-[#191c1b] overflow-hidden bg-[#080a0a]">
+<!-- Dense, softly luminous diagonal glowing green filaments (#00c98e / #10b981) -->
+<div class="absolute inset-0 pointer-events-none z-0">
+<svg class="w-full h-full filament-glow" fill="none" viewbox="0 0 1280 860" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="stream1" x1="10%" x2="90%" y1="100%" y2="0%">
+<stop offset="0%" stop-color="#00c98e" stop-opacity="0.05"></stop>
+<stop offset="45%" stop-color="#00c98e" stop-opacity="0.75"></stop>
+<stop offset="85%" stop-color="#34d399" stop-opacity="0.9"></stop>
+<stop offset="100%" stop-color="#a7f3d0" stop-opacity="0.4"></stop>
+</lineargradient>
+<lineargradient id="stream2" x1="20%" x2="100%" y1="95%" y2="15%">
+<stop offset="0%" stop-color="#059669" stop-opacity="0.05"></stop>
+<stop offset="50%" stop-color="#10b981" stop-opacity="0.65"></stop>
+<stop offset="100%" stop-color="#34d399" stop-opacity="0.1"></stop>
+</lineargradient>
+</defs>
+<!-- Sweeping filament paths running through background behind docs image -->
+<path d="M 280 840 C 440 680, 680 520, 1260 140" stroke="url(#stream1)" stroke-linecap="round" stroke-width="1.6"></path>
+<path d="M 330 860 C 510 690, 750 490, 1280 180" stroke="url(#stream2)" stroke-linecap="round" stroke-width="1.1"></path>
+<path d="M 390 850 C 580 670, 840 440, 1280 110" stroke="url(#stream1)" stroke-linecap="round" stroke-width="2.0"></path>
+<path d="M 440 860 C 640 660, 910 400, 1280 70" stroke="url(#stream2)" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M 520 860 C 720 630, 980 340, 1280 20" stroke="url(#stream1)" stroke-linecap="round" stroke-width="1.4"></path>
+<path d="M 220 820 C 400 670, 620 540, 1200 230" stroke="url(#stream2)" stroke-linecap="round" stroke-width="0.8"></path>
+<path d="M 600 860 C 790 610, 1040 310, 1280 0" stroke="url(#stream1)" stroke-linecap="round" stroke-width="0.9"></path>
+<!-- Subtle nodal energy points -->
+<circle cx="820" cy="450" fill="#34d399" r="2.5"></circle>
+<circle cx="980" cy="340" fill="#a7f3d0" r="3"></circle>
+<circle cx="700" cy="530" fill="#00c98e" r="2"></circle>
+</svg>
+</div>
+<div class="max-w-[1280px] mx-auto px-6 md:px-12 relative z-10 pt-16">
+<!-- Live-metric chip -->
+<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#222625] bg-[#0d1110]/80 backdrop-blur mb-6">
+<span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+<span class="text-xs font-mono-code text-zinc-400">Agent traffic</span>
+<span class="text-xs font-mono-code font-semibold text-mint">68.8%</span>
+<span class="text-[10px] text-zinc-500 border-l border-zinc-700 pl-2">live index</span>
+</div>
+<!-- 50px Arizona Flare / Source Serif 4 style, weight 400, regular NO italics, exact 3-line break -->
+<h1 class="hero-heading text-white max-w-2xl mb-5">
+          The knowledge<br/>
+          infrastructure<br/>
+          agents build on
+        </h1>
+<!-- Subheading in Inter -->
+<p class="text-zinc-400 text-lg md:text-xl font-normal max-w-xl leading-relaxed mb-8">
+          Self-updating documentation for startups, enterprises, and agents.
+        </p>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-3 mb-12">
+<a class="px-6 py-3 rounded-full bg-white hover:bg-zinc-200 text-black font-medium text-sm transition-all shadow-md flex items-center gap-2" href="#get-started">
+<span>Get started</span>
+<span>→</span>
+</a>
+<a class="px-6 py-3 rounded-full bg-[#111514] hover:bg-[#181d1c] text-zinc-200 border border-[#262b29] font-medium text-sm transition-all flex items-center gap-2.5" href="#google-auth">
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M12 5c1.6 0 3 .6 4.1 1.7l3.1-3.1C17.3 1.8 14.8 1 12 1 7.4 1 3.5 3.6 1.6 7.4l3.7 2.9C6.2 7.1 8.9 5 12 5z" fill="#EA4335"></path>
+<path d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" fill="#4285F4"></path>
+<path d="M5.3 14.7c-.2-.7-.4-1.5-.4-2.7s.1-2 .4-2.7L1.6 6.4C.6 8.3 0 10.1 0 12s.6 3.7 1.6 5.6l3.7-2.9z" fill="#FBBC05"></path>
+<path d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3.1 0-5.8-2.1-6.7-5.1L1.6 16.1C3.5 20.4 7.4 23 12 23z" fill="#34A853"></path>
+</svg>
+<span>Sign up with Google</span>
+</a>
+</div>
+<!-- Official dark documentation preview graphic (~1055x641) starting x511 y456 position -->
+<div class="relative w-full max-w-[1055px] ml-auto rounded-t-xl border-t border-l border-r border-[#222625] bg-[#0b0e0d] shadow-2xl overflow-hidden mt-6">
+<img alt="Mintlify Documentation Interface Preview" class="w-full h-auto block select-none" loading="eager" onerror="this.onerror=null; this.src='https://mintlify.com/images/docs-preview/preview-dark.svg';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAttvq7iI6LBfD9crR6DUD6CurMcVwgZDu3FlMqgAzT4e5FNAA8YuyUA9xb9djfLEVfmOTrG2L3osNAXlFEaZLmgGLMUIr44ama8_bVEhXxFuhOV2BjKQCNzAbgzOTY2CjUtzklZshuVboLU9AbdTz-5JnQEuKEmp10tcefnCJ0NFVqVJRs-QvcREsOnyfIh5K9C-yTYFLW0amS_Sk_dk91V4-I0AHgOoktxWBCn_IVM-R1GN2a8RFNNdKJ0nENn-Ovws-z44XkGJw"/>
+</div>
+</div>
+</section>
+<!-- CUSTOMER LOGOS & ONE-LINE LIVE STAT TICKER -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-14">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pb-10 border-b border-[#191c1b]">
+<!-- Left Statement in Inter -->
+<div class="lg:col-span-5 pr-4">
+<h2 class="text-xl sm:text-2xl font-semibold text-white leading-snug mb-4">
+              Join 20,000+ of the world's most ambitious companies building for agents.
+            </h2>
+<a class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white hover:bg-zinc-200 text-black text-xs font-semibold transition-all" href="#customer-stories">
+<span>Read customer stories</span>
+<span>→</span>
+</a>
+</div>
+<!-- Eight Clean Monochrome Logo Cells -->
+<div class="lg:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+<!-- 1. Microsoft -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-semibold tracking-tight text-sm font-sans flex items-center gap-1.5">
+<span class="grid grid-cols-2 gap-0.5 w-3 h-3"><span class="bg-[#f25022]"></span><span class="bg-[#7fba00]"></span><span class="bg-[#00a4ef]"></span><span class="bg-[#ffb900]"></span></span>
+                Microsoft
+              </span>
+</div>
+<!-- 2. Anthropic -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-sans font-semibold tracking-wider text-xs">ANTHROPIC</span>
+</div>
+<!-- 3. Amazon -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-bold tracking-tight text-sm font-sans">amazon</span>
+</div>
+<!-- 4. Coinbase -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-semibold tracking-tight text-xs font-sans flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#0052ff]"></span> coinbase
+              </span>
+</div>
+<!-- 5. Cognition -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-mono-code font-medium text-xs">cognition (devin)</span>
+</div>
+<!-- 6. Solana -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-bold tracking-wider text-xs uppercase bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">SOLANA</span>
+</div>
+<!-- 7. AT&T -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-bold tracking-wider text-sm font-sans">AT&amp;T</span>
+</div>
+<!-- 8. Rivian -->
+<div class="h-16 bg-[#0d100f] border border-[#1b201e] rounded flex items-center justify-center p-4 hover:border-zinc-700 transition-colors">
+<span class="text-zinc-300 font-mono-code tracking-widest text-[11px] uppercase font-medium">RIVIAN</span>
+</div>
+</div>
+</div>
+<!-- Clean Real-time Status Ticker in a narrow ONE-LINE horizontal strip -->
+<div class="pt-6">
+<div class="w-full py-2.5 px-4 rounded-lg bg-[#0c100f] border border-[#19201d] flex flex-wrap items-center justify-between gap-3 text-xs font-mono-code text-zinc-400">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+<span class="text-white font-medium">AGENTS AT WORK TODAY</span>
+<span class="text-zinc-600">•</span>
+<span class="text-zinc-400">Real-time counter stream</span>
+</div>
+<div class="flex items-center gap-2 text-zinc-400">
+<span class="text-zinc-600">•</span>
+<span>Processing active knowledge queries across <span class="text-mint font-semibold">20,000+</span> developer ecosystems</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ASYMMETRIC SIX-CARD BENTO SECTION -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-20">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<!-- Header: 36px Inter sans-serif -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-14 gap-6">
+<div class="max-w-2xl">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-1 h-3.5 bg-mint rounded-full inline-block"></span>
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider font-semibold">KNOWLEDGE INFRASTRUCTURE</span>
+</div>
+<h2 class="text-3xl md:text-[36px] font-semibold text-white tracking-tight leading-snug">
+              One platform for your entire knowledge stack. Agents that keep work moving 24/7.
+            </h2>
+</div>
+<div>
+<a class="px-5 py-2.5 bg-white hover:bg-zinc-200 text-black text-sm font-semibold rounded-full transition-colors inline-flex items-center gap-2" href="#bento-get-started">
+<span>Get started</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Bento Grid: 6 cards -->
+<div class="space-y-6">
+<!-- Row 1: Top Wide (~695x410, 8 cols) + Narrow (~339x410, 4 cols) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Card 1: Agent-native platform -->
+<div class="lg:col-span-8 rounded-xl bg-[#0c100f] border border-[#1b2220] p-7 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col justify-between min-h-[410px]">
+<!-- Interactive AST / Model Context Protocol topology diagram -->
+<div class="relative z-10 w-full bg-[#080b0a] border border-[#1a211e] rounded-lg p-5 mb-6">
+<div class="flex items-center justify-between text-xs font-mono-code text-zinc-500 border-b border-zinc-800 pb-2 mb-3">
+<span>AGENT_EXECUTION_TOPOLOGY</span>
+<span class="text-mint flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-mint"></span> ACTIVE SYNC</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+<div class="p-3 bg-[#0d1210] border border-[#1b2521] rounded">
+<span class="text-zinc-500 font-mono-code block mb-1">INPUT AGENTS</span>
+<p class="text-zinc-200 font-medium">Cursor, Devin, Claude Code, GitHub Copilot</p>
+</div>
+<div class="p-3 bg-[#0d1210] border border-[#1b2521] rounded">
+<span class="text-mint font-mono-code block mb-1">MINTLIFY CORE</span>
+<p class="text-zinc-200 font-medium">Structured AST &amp; Model Context Protocol</p>
+</div>
+<div class="p-3 bg-[#0d1210] border border-[#1b2521] rounded">
+<span class="text-zinc-500 font-mono-code block mb-1">OUTPUT KNOWLEDGE</span>
+<p class="text-zinc-200 font-medium">Verified, zero-hallucination context</p>
+</div>
+</div>
+</div>
+<!-- Title & Desc at Lower Left (Inter ~16px font-medium) -->
+<div class="relative z-10">
+<h3 class="text-base font-medium text-white mb-1.5">Agent-native platform</h3>
+<p class="text-zinc-400 text-xs leading-relaxed max-w-xl">
+                  Engineered from the ground up for LLMs and autonomous agents to crawl, parse, verify, and cite documentation without losing structure or context.
+                </p>
+</div>
+</div>
+<!-- Card 2: Self-updating knowledge -->
+<div class="lg:col-span-4 rounded-xl bg-[#0c100f] border border-[#1b2220] p-7 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col justify-between min-h-[410px]">
+<!-- Automated git commit docs sync visual -->
+<div class="relative z-10 w-full bg-[#080b0a] border border-[#1a211e] rounded-lg p-4 space-y-2.5 mb-6">
+<div class="flex items-center justify-between text-[11px] font-mono-code text-zinc-400">
+<span>github-actions / docs-sync</span>
+<span class="text-mint font-semibold">success</span>
+</div>
+<div class="text-xs text-zinc-300 font-mono-code bg-[#0e1311] p-2.5 rounded border border-[#1c2421]">
+                  git commit -m "feat(billing): add v3 endpoints"<br/>
+<span class="text-zinc-500">→ auto-updated 4 pages &amp; 12 schema refs</span>
+</div>
+<div class="h-1.5 w-full bg-[#151c19] rounded-full overflow-hidden">
+<div class="h-full bg-mint w-full"></div>
+</div>
+</div>
+<!-- Title & Desc at Lower Left (Inter ~16px font-medium) -->
+<div class="relative z-10">
+<h3 class="text-base font-medium text-white mb-1.5">Self-updating knowledge</h3>
+<p class="text-zinc-400 text-xs leading-relaxed">
+                  Never write outdated guides. Integrates with git commits, pull requests, and CI/CD pipelines to keep API docs live with zero lag.
+                </p>
+</div>
+</div>
+</div>
+<!-- Row 2: Middle Three Equal Cards (~339x410 each, 4 cols each) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 3: Control who has access -->
+<div class="rounded-xl bg-[#0c100f] border border-[#1b2220] p-7 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col justify-between min-h-[380px]">
+<div class="bg-[#080b0a] border border-[#19221e] rounded-lg p-4 mb-6">
+<div class="flex items-center justify-between text-[11px] font-mono-code text-zinc-500 mb-2">
+<span>RBAC &amp; SOC2 COMPLIANT</span>
+<span class="text-mint">ENFORCED</span>
+</div>
+<div class="space-y-2 text-xs">
+<div class="flex items-center justify-between p-2 bg-[#0f1412] rounded text-zinc-300">
+<span>Engineering team</span>
+<span class="text-[10px] text-zinc-500">Read / Write</span>
+</div>
+<div class="flex items-center justify-between p-2 bg-[#0f1412] rounded text-zinc-300">
+<span>Agent tokens (Claude/Devin)</span>
+<span class="text-[10px] text-mint">Scoped API Read</span>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-base font-medium text-white mb-1.5">Control who has access</h3>
+<p class="text-zinc-400 text-xs leading-relaxed">
+                  Enterprise SSO, role-based controls, and fine-grained agent API keys ensure confidential architecture stays internal.
+                </p>
+</div>
+</div>
+<!-- Card 4: Connect with your systems -->
+<div class="rounded-xl bg-[#0c100f] border border-[#1b2220] p-7 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col justify-between min-h-[380px]">
+<div class="bg-[#080b0a] border border-[#19221e] rounded-lg p-4 mb-6">
+<div class="text-[11px] font-mono-code text-zinc-500 mb-2.5">INTEGRATIONS ECOSYSTEM</div>
+<div class="flex flex-wrap gap-1.5 text-[11px] text-zinc-300 font-mono-code">
+<span class="px-2 py-1 bg-[#121815] border border-[#212c26] rounded">GitHub</span>
+<span class="px-2 py-1 bg-[#121815] border border-[#212c26] rounded">GitLab</span>
+<span class="px-2 py-1 bg-[#121815] border border-[#212c26] rounded">Slack</span>
+<span class="px-2 py-1 bg-[#121815] border border-[#212c26] rounded">Postman</span>
+<span class="px-2 py-1 bg-[#121815] border border-[#212c26] rounded">OpenAPI 3.1</span>
+</div>
+</div>
+<div>
+<h3 class="text-base font-medium text-white mb-1.5">Connect with your systems</h3>
+<p class="text-zinc-400 text-xs leading-relaxed">
+                  Sync native OpenAPI specifications, markdown directories, Postman collections, and Slack resolution threads seamlessly.
+                </p>
+</div>
+</div>
+<!-- Card 5: Collaborate with your team & agents -->
+<div class="rounded-xl bg-[#0c100f] border border-[#1b2220] p-7 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col justify-between min-h-[380px]">
+<div class="bg-[#080b0a] border border-[#19221e] rounded-lg p-4 mb-6">
+<div class="text-[11px] font-mono-code text-zinc-500 mb-2">THREADED AGENT REVIEW</div>
+<div class="p-2.5 bg-[#0e1412] rounded border border-[#1a2520] text-xs space-y-1">
+<div class="flex items-center gap-1.5 text-zinc-300">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="font-medium">Devin proposed doc revision</span>
+</div>
+<p class="text-[11px] text-zinc-500">"Updated signature of verifyWebhook() based on commit 9a41b."</p>
+</div>
+</div>
+<div>
+<h3 class="text-base font-medium text-white mb-1.5">Collaborate with your team &amp; agents</h3>
+<p class="text-zinc-400 text-xs leading-relaxed">
+                  Unified feedback loops where human technical writers and AI coding assistants review, approve, and deploy changes together.
+                </p>
+</div>
+</div>
+</div>
+<!-- Row 3: Bottom Full-Width Card (~1052x410) -->
+<div class="w-full rounded-xl bg-[#0c100f] border border-[#1b2220] p-8 md:p-10 relative overflow-hidden group hover:border-[#283631] transition-all flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl">
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider mb-2 block font-semibold">Extensibility Architecture</span>
+<h3 class="text-2xl font-semibold text-white mb-3">Build on top of your existing setup</h3>
+<p class="text-zinc-400 text-xs md:text-sm leading-relaxed mb-6">
+                No vendor lock-in. Keep your docs in your repositories as pure MDX, configure through clear JSON, and deploy custom interactive widgets and client components at will.
+              </p>
+<div class="flex items-center gap-3">
+<a class="px-4 py-2 bg-white hover:bg-zinc-200 text-black text-xs font-semibold rounded-full transition-colors" href="#docs-extensibility">Explore SDK &amp; APIs</a>
+<a class="px-4 py-2 bg-[#121815] text-zinc-300 hover:text-white border border-[#232e29] text-xs font-medium rounded-full transition-colors" href="#mdx-spec">MDX component gallery</a>
+</div>
+</div>
+<!-- JSON Configuration preview -->
+<div class="w-full md:w-1/2 max-w-md bg-[#080a0a] border border-[#1c2420] rounded-lg p-5 font-mono-code text-xs">
+<div class="text-zinc-500 text-[10px] mb-2 uppercase">mint.json configuration</div>
+<pre class="text-zinc-300 leading-relaxed overflow-x-auto"><code>{
+  <span class="text-mint">"name"</span>: <span class="text-amber-200">"Acme Agent Platform"</span>,
+  <span class="text-mint">"mode"</span>: <span class="text-amber-200">"agent-first"</span>,
+  <span class="text-mint">"integrations"</span>: [<span class="text-amber-200">"github"</span>, <span class="text-amber-200">"mcp"</span>, <span class="text-amber-200">"slack"</span>],
+  <span class="text-mint">"agents"</span>: {
+    <span class="text-mint">"autoCrawl"</span>: <span class="text-emerald-400">true</span>,
+    <span class="text-mint">"verifySignatures"</span>: <span class="text-emerald-400">true</span>
+  }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ENTERPRISE CUSTOMER STORY CAROUSEL -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-20 overflow-hidden">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+<div>
+<h2 class="text-3xl font-semibold text-white mb-2">Powering businesses of all sizes.</h2>
+<p class="text-zinc-400 text-sm max-w-xl">Run your business on a reliable platform that adapts to your needs.</p>
+</div>
+<div class="flex items-center gap-3">
+<button aria-label="Previous customer story" class="p-2 rounded border border-[#232d28] bg-[#0e1311] hover:bg-[#151c19] text-zinc-300 transition-colors" id="carousel-prev">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button aria-label="Next customer story" class="p-2 rounded border border-[#232d28] bg-[#0e1311] hover:bg-[#151c19] text-zinc-300 transition-colors" id="carousel-next">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<a class="px-4 py-2 bg-white hover:bg-zinc-200 text-black text-xs font-semibold rounded-full ml-2 transition-colors" href="#enterprises">For enterprises</a>
+</div>
+</div>
+<!-- Carousel Track with Anthropic Case Study -->
+<div class="relative w-full flex gap-6 overflow-x-auto no-scrollbar scroll-smooth py-2" id="story-carousel">
+<!-- Anthropic Feature Panel (Burnt-orange / warm accent) -->
+<div class="w-full lg:min-w-[840px] shrink-0 rounded-2xl bg-gradient-to-br from-[#1c140f] via-[#120f0e] to-[#0c0d0d] border border-[#3b2319] p-8 md:p-10 flex flex-col justify-between">
+<div class="flex items-center justify-between mb-8">
+<span class="text-xs font-mono-code tracking-widest text-[#d97757] font-semibold uppercase">ANTHROPIC CASE STUDY</span>
+<span class="text-xs font-mono-code text-zinc-500">FEATURED ENTERPRISE</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center mb-8">
+<div class="md:col-span-7">
+<blockquote class="text-lg md:text-xl font-normal text-zinc-100 leading-relaxed mb-6">
+                  "Mintlify enabled our engineering team to scale Claude's official documentation seamlessly as developers and autonomous agents interact with our APIs at unprecedented velocity."
+                </blockquote>
+<div class="text-xs text-zinc-400">
+<span class="font-semibold text-white block">Developer Relations &amp; Platform Infrastructure</span>
+                  Anthropic Team
+                </div>
+</div>
+<!-- Case-Study Stats -->
+<div class="md:col-span-5 grid grid-cols-1 gap-4 bg-[#0a0807]/60 p-5 rounded-xl border border-[#301c13]">
+<div>
+<div class="text-2xl md:text-3xl font-mono-code font-bold text-white">2M+</div>
+<div class="text-xs text-zinc-400 mt-0.5">monthly active developers</div>
+</div>
+<div class="border-t border-[#301c13] pt-3">
+<div class="text-2xl md:text-3xl font-mono-code font-bold text-[#d97757]">4+</div>
+<div class="text-xs text-zinc-400 mt-0.5">major products serviced simultaneously</div>
+</div>
+</div>
+</div>
+<div class="flex items-center justify-between border-t border-[#2a1b14] pt-4">
+<a class="text-xs font-semibold text-[#d97757] hover:text-[#f48a68] inline-flex items-center gap-1.5" href="#anthropic-full">
+<span>Read the Anthropic case study</span>
+<span>→</span>
+</a>
+<span class="text-[11px] font-mono-code text-zinc-500">Verified Customer Profile</span>
+</div>
+</div>
+<!-- Secondary Story Panel (Coinbase) -->
+<div class="w-full lg:min-w-[420px] shrink-0 rounded-2xl bg-[#0d1012] border border-[#1b262f] p-8 flex flex-col justify-between opacity-85 hover:opacity-100 transition-opacity">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono-code tracking-widest text-[#3b82f6] font-semibold uppercase">COINBASE DEVELOPER PLATFORM</span>
+</div>
+<blockquote class="text-base text-zinc-200 leading-relaxed mb-4">
+                "Autonomous transaction agents require precise, zero-drift onchain specifications. Mintlify provides the exact developer context required."
+              </blockquote>
+</div>
+<div class="bg-[#080b0d] p-4 rounded-lg border border-[#17222b] mt-6">
+<div class="text-xl font-mono-code font-bold text-white">100M+</div>
+<div class="text-xs text-zinc-400 mt-0.5">Onchain API calls verified daily</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- BUILT TO SCALE WITH THE AGENT WEB (Unboxed Metrics) -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-24 relative overflow-hidden">
+<!-- Background subtle line art -->
+<div class="absolute inset-0 pointer-events-none opacity-25">
+<svg class="w-full h-full filament-glow" fill="none" viewbox="0 0 1280 400">
+<path d="M 0 200 C 320 120, 640 280, 1280 80" stroke="#00c98e" stroke-width="1.2"></path>
+<path d="M 0 240 C 400 100, 800 320, 1280 140" stroke="#34d399" stroke-width="0.8"></path>
+</svg>
+</div>
+<div class="max-w-[1280px] mx-auto px-6 md:px-12 relative z-10 text-center">
+<div class="max-w-2xl mx-auto mb-16">
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider mb-2.5 inline-block font-semibold">GLOBAL HIGH-THROUGHPUT INFRASTRUCTURE</span>
+<h2 class="text-3xl md:text-4xl font-semibold text-white mb-3">
+            Built to scale with the agent web.
+          </h2>
+<p class="text-zinc-400 text-sm md:text-base">
+            Built for scale with enterprise-grade reliability and performance.
+          </p>
+</div>
+<!-- Three Unboxed Metrics placed beneath line art -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
+<div class="py-4">
+<div class="text-4xl md:text-5xl font-mono-code font-bold text-white mb-2">300M+</div>
+<div class="text-sm font-medium text-zinc-300">visitors in the past year</div>
+<p class="text-xs text-zinc-500 mt-2 max-w-xs mx-auto">Serving human developers across every major continent with sub-50ms edge caching.</p>
+</div>
+<div class="py-4">
+<div class="text-4xl md:text-5xl font-mono-code font-bold text-mint mb-2">2B+</div>
+<div class="text-sm font-medium text-zinc-200">agents in the past year</div>
+<p class="text-xs text-zinc-500 mt-2 max-w-xs mx-auto">Autonomous crawler, LLM indexing, and agent queries processed via direct MCP endpoints.</p>
+</div>
+<div class="py-4">
+<div class="text-4xl md:text-5xl font-mono-code font-bold text-white mb-2">99.99%</div>
+<div class="text-sm font-medium text-zinc-300">uptime across all services</div>
+<p class="text-xs text-zinc-500 mt-2 max-w-xs mx-auto">Multi-region active-active deployment backed by continuous automated health verification.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ENABLING THE NEXT GENERATION OF STARTUPS -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-20">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="max-w-3xl mb-12">
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider mb-2 block font-semibold">VENTURE ECOSYSTEM</span>
+<h2 class="text-3xl font-semibold text-white mb-2">
+            Enabling the next generation of startups.
+          </h2>
+<p class="text-zinc-400 text-sm">
+            Powering a quarter of the last YC batch to 40% of the Forbes AI 50.
+          </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Card 1: Lovable -->
+<div class="rounded-xl bg-gradient-to-b from-[#21111d] to-[#0c0a0c] border border-[#3b1d31] p-6 flex flex-col justify-between min-h-[300px] hover:border-[#602d51] transition-all">
+<div>
+<span class="text-xs font-mono-code text-[#f472b6] font-semibold">LOVABLE</span>
+<h3 class="text-base font-semibold text-white mt-3">Full-stack software built by natural language</h3>
+<p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                Scaled documentation alongside real-time user prompts and codebase synthesis.
+              </p>
+</div>
+<div class="pt-4 border-t border-[#311729] flex items-center justify-between text-[11px] text-zinc-500">
+<span>YC W24 / W20</span>
+<span class="text-[#f472b6]">Case story →</span>
+</div>
+</div>
+<!-- Card 2: Kalshi -->
+<div class="rounded-xl bg-gradient-to-b from-[#10221c] to-[#0a0d0c] border border-[#1b3d32] p-6 flex flex-col justify-between min-h-[300px] hover:border-[#275949] transition-all">
+<div>
+<span class="text-xs font-mono-code text-mint font-semibold">KALSHI</span>
+<h3 class="text-base font-semibold text-white mt-3">Regulated event prediction markets</h3>
+<p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                Financial-grade API docs with verified schema contracts for algorithmic trading agents.
+              </p>
+</div>
+<div class="pt-4 border-t border-[#16332a] flex items-center justify-between text-[11px] text-zinc-500">
+<span>CFTC Regulated</span>
+<span class="text-mint">Case story →</span>
+</div>
+</div>
+<!-- Card 3: Decagon -->
+<div class="rounded-xl bg-gradient-to-b from-[#191526] to-[#0b0a0e] border border-[#2d2442] p-6 flex flex-col justify-between min-h-[300px] hover:border-[#463768] transition-all">
+<div>
+<span class="text-xs font-mono-code text-[#a78bfa] font-semibold">DECAGON</span>
+<h3 class="text-base font-semibold text-white mt-3">Autonomous customer support engines</h3>
+<p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                Equipping enterprise AI support agents with instant access to dynamic product changes.
+              </p>
+</div>
+<div class="pt-4 border-t border-[#231b34] flex items-center justify-between text-[11px] text-zinc-500">
+<span>Series B</span>
+<span class="text-[#a78bfa]">Case story →</span>
+</div>
+</div>
+<!-- Card 4: Replit -->
+<div class="rounded-xl bg-gradient-to-b from-[#241710] to-[#0d0b09] border border-[#402617] p-6 flex flex-col justify-between min-h-[300px] hover:border-[#673b20] transition-all">
+<div>
+<span class="text-xs font-mono-code text-[#fb923c] font-semibold">REPLIT</span>
+<h3 class="text-base font-semibold text-white mt-3">Browser software development and hosting</h3>
+<p class="text-xs text-zinc-400 mt-2 leading-relaxed">
+                Empowering millions of cloud devs with synchronized agent extension documentation.
+              </p>
+</div>
+<div class="pt-4 border-t border-[#311d12] flex items-center justify-between text-[11px] text-zinc-500">
+<span>10M+ Users</span>
+<span class="text-[#fb923c]">Case story →</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUSTED BY TEAMS BUILDING FOR AGENTS -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-20">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="mb-12">
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider mb-2 block font-semibold">INDUSTRY ENDORSEMENTS</span>
+<h2 class="text-3xl font-semibold text-white">
+            Trusted by teams building for agents.
+          </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-6 rounded-xl bg-[#0c100f] border border-[#1a231f] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2 h-2 rounded-full bg-mint"></span>
+<span class="text-xs font-mono-code text-zinc-400">Devin by Cognition</span>
+</div>
+<p class="text-zinc-300 text-xs md:text-sm leading-relaxed mb-4">
+                "Our autonomous software engineer relies on structured technical documentation to implement full-stack features independently. Mintlify structures docs so agents retrieve answers in milliseconds."
+              </p>
+</div>
+<div class="pt-4 border-t border-[#17201c] flex items-center justify-between text-xs text-zinc-500 font-mono-code">
+<span>Verified Agent Integration</span>
+<a class="text-mint hover:underline" href="#cognition-story">View case study ↗</a>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-[#0c100f] border border-[#1a231f] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2 h-2 rounded-full bg-mint"></span>
+<span class="text-xs font-mono-code text-zinc-400">Solana Foundation</span>
+</div>
+<p class="text-zinc-300 text-xs md:text-sm leading-relaxed mb-4">
+                "High performance blockchain ecosystems evolve daily. Having docs continuously verified against protocol commits keeps our validator and developer communities unified."
+              </p>
+</div>
+<div class="pt-4 border-t border-[#17201c] flex items-center justify-between text-xs text-zinc-500 font-mono-code">
+<span>Protocol Documentation</span>
+<a class="text-mint hover:underline" href="#solana-story">View case study ↗</a>
+</div>
+</div>
+<div class="p-6 rounded-xl bg-[#0c100f] border border-[#1a231f] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2 h-2 rounded-full bg-mint"></span>
+<span class="text-xs font-mono-code text-zinc-400">Rivian Automotive</span>
+</div>
+<p class="text-zinc-300 text-xs md:text-sm leading-relaxed mb-4">
+                "Managing connected vehicle fleet APIs requires enterprise security and zero-drift documentation. Mintlify gives our internal telemetry engineers total confidence."
+              </p>
+</div>
+<div class="pt-4 border-t border-[#17201c] flex items-center justify-between text-xs text-zinc-500 font-mono-code">
+<span>Enterprise Telemetry</span>
+<a class="text-mint hover:underline" href="#rivian-story">View case study ↗</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- RESEARCH & CHANGELOG (LATEST UPDATES) -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-20">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="flex items-center justify-between mb-10">
+<div>
+<span class="text-xs font-mono-code text-mint uppercase tracking-wider mb-2 block font-semibold">RESEARCH &amp; CHANGELOG</span>
+<h2 class="text-3xl font-semibold text-white">Latest updates</h2>
+</div>
+<a class="text-xs font-semibold text-zinc-400 hover:text-white flex items-center gap-1 font-mono-code" href="#blog">
+            View all articles <span>→</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Article 1: Introducing Mintlify Index -->
+<article class="p-6 rounded-xl bg-[#0c100f] border border-[#1b2220] flex flex-col justify-between hover:border-zinc-700 transition-colors">
+<div>
+<span class="text-xs font-mono-code text-mint">Aug 6, 2026</span>
+<h3 class="text-base font-semibold text-white mt-2 mb-2 leading-snug">
+                Introducing Mintlify Index
+              </h3>
+<p class="text-xs text-zinc-400 leading-relaxed">
+                The universal semantic knowledge registry built to serve autonomous agents with structured AST extraction and sub-millisecond retrieval.
+              </p>
+</div>
+<div class="pt-4 mt-6 border-t border-[#181f1c]">
+<a class="text-xs font-semibold text-white hover:text-mint inline-flex items-center gap-1" href="#article-index">
+                Read article <span>→</span>
+</a>
+</div>
+</article>
+<!-- Article 2: The state of docs traffic: a 2026 midyear report -->
+<article class="p-6 rounded-xl bg-[#0c100f] border border-[#1b2220] flex flex-col justify-between hover:border-zinc-700 transition-colors">
+<div>
+<span class="text-xs font-mono-code text-zinc-400">Jul 29, 2026</span>
+<h3 class="text-base font-semibold text-white mt-2 mb-2 leading-snug">
+                The state of docs traffic: a 2026 midyear report
+              </h3>
+<p class="text-xs text-zinc-400 leading-relaxed">
+                Analyzing over 2 billion requests across 20,000 documentations: how coding agents surpassed human developer queries in Q2 2026.
+              </p>
+</div>
+<div class="pt-4 mt-6 border-t border-[#181f1c]">
+<a class="text-xs font-semibold text-white hover:text-mint inline-flex items-center gap-1" href="#article-traffic">
+                Read report <span>→</span>
+</a>
+</div>
+</article>
+<!-- Article 3: Can agents read your docs? -->
+<article class="p-6 rounded-xl bg-[#0c100f] border border-[#1b2220] flex flex-col justify-between hover:border-zinc-700 transition-colors">
+<div>
+<span class="text-xs font-mono-code text-zinc-400">Apr 27, 2026</span>
+<h3 class="text-base font-semibold text-white mt-2 mb-2 leading-snug">
+                Can agents read your docs?
+              </h3>
+<p class="text-xs text-zinc-400 leading-relaxed">
+                Why standard markdown parsers fail silently on complex API schemas, and how to format reference docs for autonomous tool calling.
+              </p>
+</div>
+<div class="pt-4 mt-6 border-t border-[#181f1c]">
+<a class="text-xs font-semibold text-white hover:text-mint inline-flex items-center gap-1" href="#article-agents-read">
+                Read guide <span>→</span>
+</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- FINAL CTA SECTION -->
+<!-- 50px Arizona Flare regular serif: 'The knowledge platform<br>built for agents' (NO italics) -->
+<section class="w-full border-b border-[#191c1b] bg-[#080a0a] py-28 text-center relative overflow-hidden">
+<div class="max-w-3xl mx-auto px-6 relative z-10">
+<h2 class="hero-heading text-white mb-5">
+          The knowledge platform<br/>
+          built for agents
+        </h2>
+<p class="text-zinc-400 text-base md:text-lg mb-8 max-w-xl mx-auto">
+          Start building documentation that updates itself and scales with the autonomous web.
+        </p>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="px-6 py-3 bg-white hover:bg-zinc-200 text-black font-semibold text-sm rounded-full transition-all" href="#cta-get-started">
+            Get started
+          </a>
+<a class="px-6 py-3 bg-[#111614] hover:bg-[#181f1c] text-zinc-200 border border-[#232c28] font-medium text-sm rounded-full transition-all" href="#cta-talk-sales">
+            Talk to sales
+          </a>
+</div>
+</div>
+</section>
+</main>
+<!-- DENSE DARK FOOTER -->
+<footer class="w-full bg-[#060807] text-zinc-400 text-xs py-16 border-t border-[#141817]">
+<div class="max-w-[1280px] mx-auto px-6 md:px-12">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16">
+<!-- Column 1: Explore -->
+<div>
+<h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4 font-mono-code">Explore</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="#feature-agent-sync">Agent Sync</a></li>
+<li><a class="hover:text-white transition-colors" href="#feature-indexing">Mintlify Index</a></li>
+<li><a class="hover:text-white transition-colors" href="#feature-integrations">Integrations</a></li>
+<li><a class="hover:text-white transition-colors" href="#feature-enterprise">Enterprise Cloud</a></li>
+<li><a class="hover:text-white transition-colors" href="#feature-pricing">Pricing Plans</a></li>
+</ul>
+</div>
+<!-- Column 2: Resources -->
+<div>
+<h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4 font-mono-code">Resources</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="#res-state-of-knowledge">2026 State of Knowledge</a></li>
+<li><a class="hover:text-white transition-colors" href="#res-customers">Customer Stories</a></li>
+<li><a class="hover:text-white transition-colors" href="#res-blog">Blog &amp; Research</a></li>
+<li><a class="hover:text-white transition-colors" href="#res-showcase">Showcase Gallery</a></li>
+<li><a class="hover:text-white transition-colors" href="#res-benchmarks">Agent Benchmarks</a></li>
+</ul>
+</div>
+<!-- Column 3: Documentation -->
+<div>
+<h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4 font-mono-code">Documentation</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="#doc-quickstart">Quickstart Guide</a></li>
+<li><a class="hover:text-white transition-colors" href="#doc-api-ref">API Reference</a></li>
+<li><a class="hover:text-white transition-colors" href="#doc-mcp">Model Context Protocol</a></li>
+<li><a class="hover:text-white transition-colors" href="#doc-components">Interactive MDX Components</a></li>
+<li><a class="hover:text-white transition-colors" href="#doc-cli">Mintlify CLI</a></li>
+</ul>
+</div>
+<!-- Column 4: Company -->
+<div>
+<h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4 font-mono-code">Company</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="#comp-about">About Mintlify</a></li>
+<li><a class="hover:text-white transition-colors" href="#comp-careers">Careers <span class="text-[10px] text-mint border border-mint/20 px-1 py-0.5 rounded ml-1 font-mono-code">HIRING</span></a></li>
+<li><a class="hover:text-white transition-colors" href="#comp-brand">Brand Assets</a></li>
+<li><a class="hover:text-white transition-colors" href="#comp-contact">Contact Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#comp-security">Security &amp; SOC2</a></li>
+</ul>
+</div>
+<!-- Column 5: Legal -->
+<div>
+<h4 class="text-white font-semibold text-xs tracking-wider uppercase mb-4 font-mono-code">Legal</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="#leg-terms">Terms of Service</a></li>
+<li><a class="hover:text-white transition-colors" href="#leg-privacy">Privacy Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#leg-dpa">Data Processing (DPA)</a></li>
+<li><a class="hover:text-white transition-colors" href="#leg-cookies">Cookie Settings</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom bar: System Status & Social links -->
+<div class="pt-8 border-t border-[#131716] flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-2.5 py-1 rounded bg-[#0b0e0d] border border-[#1b2320]">
+<span class="w-2 h-2 rounded-full bg-mint animate-pulse"></span>
+<span class="text-[11px] font-mono-code text-zinc-300">All systems normal</span>
+</div>
+<span class="text-zinc-600 text-xs">© 2026 Mintlify, Inc. All rights reserved.</span>
+</div>
+<div class="flex items-center space-x-6 text-zinc-500">
+<a aria-label="X / Twitter" class="hover:text-zinc-300 transition-colors" href="https://x.com/mintlify">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="GitHub" class="hover:text-zinc-300 transition-colors" href="https://github.com/mintlify">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path></svg>
+</a>
+<a aria-label="Discord" class="hover:text-zinc-300 transition-colors" href="https://discord.gg/mintlify">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</footer>
+<script>
+    const carousel = document.getElementById('story-carousel');
+    const prevBtn = document.getElementById('carousel-prev');
+    const nextBtn = document.getElementById('carousel-next');
+
+    if (carousel && prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: -450, behavior: 'smooth' });
+      });
+      nextBtn.addEventListener('click', () => {
+        carousel.scrollBy({ left: 450, behavior: 'smooth' });
+      });
+    }
+  </script>
+</body></html>
