@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Expo — Mobile AI infrastructure</title>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            expo: {
+              canvas: '#111113',
+              card: '#18191b',
+              elevated: '#222326',
+              border: '#26272b',
+              borderSubtle: '#1d1e22',
+              heading: '#ffffff',
+              body: '#a1a2a8',
+              muted: '#70727a',
+              blue: '#3b82f6',
+            }
+          },
+          borderRadius: {
+            'card': '40px',
+            'inner': '24px',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #111113;
+      color: #a1a2a8;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .hero-glow {
+      background: radial-gradient(circle at center, rgba(59, 130, 246, 0.08) 0%, rgba(17, 17, 19, 0) 70%);
+    }
+  </style>
+</head>
+<body class="bg-[#111113] text-[#a1a2a8] antialiased selection:bg-neutral-800 selection:text-white">
+<!-- ==================== HEADER (69px sticky) ==================== -->
+<header class="sticky top-0 z-50 w-full h-[69px] bg-[#111113]/90 backdrop-blur-md border-b border-[#26272b] flex items-center px-6 transition-colors">
+<div class="max-w-[1280px] w-full mx-auto flex items-center justify-between">
+<!-- Left: Logo & Nav -->
+<div class="flex items-center gap-8">
+<!-- Expo Logo -->
+<a class="flex items-center gap-2.5 text-white group" href="https://expo.dev">
+<svg class="w-6 h-6 transition-transform group-hover:scale-105" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 78L50 22L78 78L62 78L50 54L38 78H22Z" fill="white"></path>
+<path d="M50 38L61 60H39L50 38Z" fill="#111113"></path>
+</svg>
+<span class="font-bold text-[20px] tracking-tight text-white">expo</span>
+</a>
+<!-- Horizontal Nav Links -->
+<nav class="hidden md:flex items-center gap-6 text-[14px] font-medium text-[#a1a2a8]">
+<a class="hover:text-white transition-colors flex items-center gap-1" href="https://docs.expo.dev">Docs <span class="text-xs text-[#70727a]">↗</span></a>
+<a class="hover:text-white transition-colors" href="https://expo.dev">Product</a>
+<a class="hover:text-white transition-colors" href="https://expo.dev">Solutions</a>
+<a class="hover:text-white transition-colors" href="https://expo.dev">Enterprise</a>
+<a class="hover:text-white transition-colors" href="https://expo.dev/pricing">Pricing</a>
+<a class="hover:text-white transition-colors" href="https://expo.dev/blog">Blog</a>
+</nav>
+</div>
+<!-- Right: Search Bar/kbd, Github Star, Log in, Sign up -->
+<div class="flex items-center gap-3">
+<!-- Search bar trigger -->
+<div class="hidden lg:flex items-center gap-3 px-3 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs text-[#70727a] hover:border-[#383a40] cursor-pointer">
+<svg class="w-3.5 h-3.5 text-[#70727a]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="pr-2">Search...</span>
+<kbd class="px-1.5 py-0.5 text-[10px] font-mono bg-[#222326] text-[#a1a2a8] rounded border border-[#303136]">⌘K</kbd>
+</div>
+<!-- Github Star Indicator -->
+<a class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-[13px] text-white hover:border-[#383a40] transition-all" href="https://github.com/expo/expo" target="_blank">
+<svg class="w-3.5 h-3.5 fill-[#a1a2a8]" viewbox="0 0 16 16">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span class="font-mono text-xs font-semibold">50K</span>
+</a>
+<!-- Log In Pill -->
+<a class="px-4 py-1.5 rounded-full border border-[#26272b] text-[13px] font-medium text-white hover:bg-[#18191b] hover:border-[#383a40] transition-all" href="https://expo.dev/login">
+          Log in
+        </a>
+<!-- Sign Up Pill -->
+<a class="px-4 py-1.5 rounded-full bg-white text-[#111113] text-[13px] font-semibold hover:bg-neutral-200 transition-colors" href="https://expo.dev/signup">
+          Sign up
+        </a>
+</div>
+</div>
+</header>
+<!-- ==================== HERO SECTION ==================== -->
+<section class="relative w-full max-w-[1280px] mx-auto px-6 pt-[80px] pb-16 min-h-[640px] flex flex-col justify-between">
+<div class="grid grid-cols-12 gap-8 items-center">
+<!-- Left Column: Copy & Actions -->
+<div class="col-span-7 flex flex-col items-start pr-4">
+<!-- H1: 48px font-bold tracking-tight text-white -->
+<h1 class="text-[48px] leading-[1.1] font-bold tracking-tight text-white">
+          Mobile AI<br/>
+<span>infrastructure</span>
+</h1>
+<!-- Call to Actions -->
+<div class="flex items-center gap-3.5 mt-8">
+<a class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-[#111113] text-[15px] font-semibold hover:bg-neutral-200 transition-all shadow-md" href="https://expo.dev/signup">
+            Get started
+            <span class="text-sm">→</span>
+</a>
+<a class="inline-flex items-center px-6 py-3 rounded-full bg-transparent border border-[#26272b] text-white text-[15px] font-medium hover:bg-[#18191b] hover:border-[#383a40] transition-all" href="https://expo.dev/contact">
+            Talk to our team
+          </a>
+</div>
+<!-- Around y390: NEW Try Observe -> badge pill -->
+<div class="mt-12">
+<a class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#18191b] border border-[#26272b] text-[12px] text-white hover:border-[#383a40] transition-colors" href="https://expo.dev">
+<span class="font-semibold text-white px-1.5 py-0.5 rounded bg-[#222326] text-[10px] tracking-wider uppercase">New</span>
+<span>Try Observe →</span>
+</a>
+</div>
+<!-- Subcopy -->
+<p class="mt-4 text-[16px] leading-[1.6] text-[#a1a2a8] max-w-[530px]">
+          Build with our CLI and dev tools. Test on simulators made for agents. Ship with the best CI/CD for mobile and learn from every release.
+        </p>
+</div>
+<!-- Right Column: Starburst with radiating particle graphic with Expo 'A' logo badge -->
+<div class="col-span-5 flex items-center justify-center relative">
+<div class="relative w-[480px] h-[480px] flex items-center justify-center hero-glow">
+<!-- Fine Charcoal Radial Lines SVG Starburst -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none" fill="none" viewbox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.85" stroke="#26272b" stroke-width="0.8">
+<line x1="250" x2="250" y1="250" y2="10"></line>
+<line x1="250" x2="281" y1="250" y2="12"></line>
+<line x1="250" x2="312" y1="250" y2="18"></line>
+<line x1="250" x2="342" y1="250" y2="28"></line>
+<line x1="250" x2="370" y1="250" y2="42"></line>
+<line x1="250" x2="397" y1="250" y2="60"></line>
+<line x1="250" x2="420" y1="250" y2="80"></line>
+<line x1="250" x2="440" y1="250" y2="103"></line>
+<line x1="250" x2="458" y1="250" y2="130"></line>
+<line x1="250" x2="472" y1="250" y2="158"></line>
+<line x1="250" x2="482" y1="250" y2="188"></line>
+<line x1="250" x2="488" y1="250" y2="219"></line>
+<line x1="250" x2="490" y1="250" y2="250"></line>
+<line x1="250" x2="488" y1="250" y2="281"></line>
+<line x1="250" x2="482" y1="250" y2="312"></line>
+<line x1="250" x2="472" y1="250" y2="342"></line>
+<line x1="250" x2="458" y1="250" y2="370"></line>
+<line x1="250" x2="440" y1="250" y2="397"></line>
+<line x1="250" x2="420" y1="250" y2="420"></line>
+<line x1="250" x2="397" y1="250" y2="440"></line>
+<line x1="250" x2="370" y1="250" y2="458"></line>
+<line x1="250" x2="342" y1="250" y2="472"></line>
+<line x1="250" x2="312" y1="250" y2="482"></line>
+<line x1="250" x2="281" y1="250" y2="488"></line>
+<line x1="250" x2="250" y1="250" y2="490"></line>
+<line x1="250" x2="219" y1="250" y2="488"></line>
+<line x1="250" x2="188" y1="250" y2="482"></line>
+<line x1="250" x2="158" y1="250" y2="472"></line>
+<line x1="250" x2="130" y1="250" y2="458"></line>
+<line x1="250" x2="103" y1="250" y2="440"></line>
+<line x1="250" x2="80" y1="250" y2="420"></line>
+<line x1="250" x2="60" y1="250" y2="397"></line>
+<line x1="250" x2="42" y1="250" y2="370"></line>
+<line x1="250" x2="28" y1="250" y2="342"></line>
+<line x1="250" x2="18" y1="250" y2="312"></line>
+<line x1="250" x2="12" y1="250" y2="281"></line>
+<line x1="250" x2="10" y1="250" y2="250"></line>
+<line x1="250" x2="12" y1="250" y2="219"></line>
+<line x1="250" x2="18" y1="250" y2="188"></line>
+<line x1="250" x2="28" y1="250" y2="158"></line>
+<line x1="250" x2="42" y1="250" y2="130"></line>
+<line x1="250" x2="60" y1="250" y2="103"></line>
+<line x1="250" x2="80" y1="250" y2="80"></line>
+<line x1="250" x2="103" y1="250" y2="60"></line>
+<line x1="250" x2="130" y1="250" y2="42"></line>
+<line x1="250" x2="158" y1="250" y2="28"></line>
+<line x1="250" x2="188" y1="250" y2="18"></line>
+<line x1="250" x2="219" y1="250" y2="12"></line>
+</g>
+<circle cx="250" cy="250" fill="none" r="115" stroke="#1d1e22" stroke-width="0.8"></circle>
+<circle cx="250" cy="250" fill="none" r="175" stroke="#1d1e22" stroke-dasharray="3 4" stroke-width="0.8"></circle>
+<circle cx="250" cy="250" fill="none" r="235" stroke="#18191b" stroke-width="0.8"></circle>
+<circle cx="250" cy="135" fill="#ffffff" r="1.5"></circle>
+<circle cx="345" cy="175" fill="#a1a2a8" r="1.2"></circle>
+<circle cx="375" cy="265" fill="#ffffff" r="1.5"></circle>
+<circle cx="325" cy="355" fill="#a1a2a8" r="1.2"></circle>
+<circle cx="155" cy="335" fill="#ffffff" r="1.5"></circle>
+<circle cx="125" cy="215" fill="#a1a2a8" r="1.2"></circle>
+</svg>
+<!-- White rounded-square Expo 'A' logo badge in center -->
+<div class="relative z-10 w-28 h-28 rounded-2xl bg-white shadow-2xl flex items-center justify-center border border-white/20 transition-transform hover:scale-105 duration-300">
+<svg class="w-16 h-16" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 78L50 22L78 78L62 78L50 54L38 78H22Z" fill="#111113"></path>
+<path d="M50 38L61 60H39L50 38Z" fill="white"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom of Hero: Colorful 40-icon/app strip of real mobile apps made with Expo -->
+<div class="mt-14 pt-8 border-t border-[#26272b]">
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-[11px] font-medium tracking-wider text-[#70727a] uppercase">
+          TRUSTED IN PRODUCTION BY TEAMS BUILDING APPS WITH EXPO
+        </span>
+<span class="text-[11px] text-[#70727a] font-mono">10,000+ top App Store releases</span>
+</div>
+<!-- Colorful squircle app icon strip -->
+<div class="grid grid-cols-10 md:grid-cols-20 gap-2.5 overflow-hidden py-1 opacity-90 hover:opacity-100 transition-opacity">
+<div class="w-11 h-11 rounded-[12px] bg-[#0085ff] flex items-center justify-center shadow hover:scale-105 transition-transform" title="Bluesky"><svg class="w-6 h-6 fill-white" viewbox="0 0 24 24"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566 1.01 0 1.95 0 5.244c0 3.294 1.343 11.233 2.122 12.355 2.138 3.078 6.008 1.488 7.39.467 1.382 1.021 5.252 2.611 7.39-.467.779-1.122 2.122-9.061 2.122-12.355 0-3.294-2.566-4.234-5.202-2.439C16.046 4.747 13.087 8.686 12 10.8z"></path></svg></div>
+<div class="w-11 h-11 rounded-[12px] bg-[#111111] border border-[#2e2f33] flex items-center justify-center shadow text-white font-bold text-xs hover:scale-105 transition-transform" title="Puma">PUMA</div>
+<div class="w-11 h-11 rounded-[12px] bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center text-white font-black text-sm shadow hover:scale-105 transition-transform" title="Warcraft Rumble">⚔</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#0052ff] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Coinbase">C</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#5865f2] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Discord">
+<svg class="w-6 h-6 fill-white" viewbox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#f26522] flex items-center justify-center text-white font-black text-sm shadow hover:scale-105 transition-transform" title="Brex">B</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#95bf47] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Shopify">S</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#f2ebdf] flex items-center justify-center text-black font-bold text-sm shadow hover:scale-105 transition-transform" title="Clubhouse">👋</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#000000] border border-[#333] flex items-center justify-center text-white font-mono text-xs font-bold hover:scale-105 transition-transform" title="Whoop">W</div>
+<div class="w-11 h-11 rounded-[12px] bg-gradient-to-tr from-pink-500 to-rose-400 flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Cameo">★</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#ff4500] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Snoo / Reddit">R</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#00c805] flex items-center justify-center text-black font-bold text-sm shadow hover:scale-105 transition-transform" title="Robinhood">▲</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#d31018] flex items-center justify-center text-white font-black text-xs shadow hover:scale-105 transition-transform" title="Showtime">SHO</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#ff5500] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="SoundCloud">☁</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#ffc629] flex items-center justify-center text-black font-black text-sm shadow hover:scale-105 transition-transform" title="Bumble">🐝</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#03d47c] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Expensify">E</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#fc4c02] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Strava">⚡</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#ffffff] flex items-center justify-center text-black font-black text-sm shadow hover:scale-105 transition-transform" title="Notion">N</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#625df5] flex items-center justify-center text-white font-bold text-sm shadow hover:scale-105 transition-transform" title="Loom">✱</div>
+<div class="w-11 h-11 rounded-[12px] bg-[#1e1e1e] border border-[#333] flex items-center justify-center text-purple-400 font-bold text-sm shadow hover:scale-105 transition-transform" title="Figma Mirror">F</div>
+</div>
+</div>
+</section>
+<!-- ==================== BENTO ARCHITECTURE SECTION ==================== -->
+<section class="w-full max-w-[1280px] mx-auto px-6 py-12">
+<div class="mb-8">
+<h2 class="text-[32px] font-semibold tracking-tight text-white">
+        Building blocks for agentic workflows
+      </h2>
+<p class="text-[15px] text-[#a1a2a8] mt-2">
+        A single cohesive ecosystem engineered for human engineers and autonomous coding models alike.
+      </p>
+</div>
+<!-- Asymmetrical Bento Grid -->
+<div class="grid grid-cols-12 gap-6 items-stretch">
+<!-- Left Bento Card (SDK Card, col-span-5 / 504px ratio, rounded-[40px], deep charcoal #18191b border #26272b) -->
+<div class="col-span-12 lg:col-span-5 rounded-[40px] bg-[#18191b] border border-[#26272b] p-10 flex flex-col justify-between relative overflow-hidden group min-h-[620px]">
+<!-- Dimensional metallic/white Expo 'A' symbol high above content -->
+<div class="w-full flex items-center justify-center pt-8 pb-4 relative">
+<!-- Subtle back glow -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="w-44 h-44 bg-white/5 rounded-full blur-2xl"></div>
+</div>
+<!-- 3D style dimensional Expo A mark -->
+<div class="relative w-40 h-40 flex items-center justify-center transition-transform group-hover:scale-105 duration-500">
+<svg class="w-36 h-36 drop-shadow-[0_12px_24px_rgba(0,0,0,0.6)]" fill="none" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="metalA" x1="20" x2="80" y1="20" y2="80">
+<stop stop-color="#ffffff"></stop>
+<stop offset="0.5" stop-color="#e1e2e6"></stop>
+<stop offset="1" stop-color="#8a8d94"></stop>
+</lineargradient>
+</defs>
+<path d="M22 78L50 22L78 78L62 78L50 54L38 78H22Z" fill="url(#metalA)"></path>
+<path d="M50 38L61 60H39L50 38Z" fill="#18191b"></path>
+</svg>
+</div>
+</div>
+<!-- Text details -->
+<div class="mt-6">
+<span class="font-mono text-xs text-blue-400 font-semibold tracking-wider uppercase">Framework Architecture</span>
+<h3 class="text-[32px] font-bold text-white tracking-tight mt-2">The Expo SDK</h3>
+<p class="text-[15px] text-[#a1a2a8] mt-3 leading-relaxed">
+            10+ years in the making. Powering thousands of apps.
+          </p>
+</div>
+<!-- Lower section: Interactive white GitHub pill with star count -->
+<div class="mt-8 pt-6 border-t border-[#26272b] flex items-center justify-between">
+<a class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white text-[#111113] hover:bg-neutral-200 transition-colors shadow font-medium text-xs" href="https://github.com/expo/expo" target="_blank">
+<svg class="w-4 h-4 fill-[#111113]" viewbox="0 0 16 16">
+<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span class="font-mono font-semibold">expo/expo</span>
+<span class="text-[11px] bg-neutral-100 text-neutral-800 px-1.5 py-0.5 rounded font-mono">★ 50K</span>
+</a>
+<span class="font-mono text-xs text-[#70727a]">v52.0 Production Ready</span>
+</div>
+</div>
+<!-- Right Column: Top Card + Two Bottom Adjacent Cards -->
+<div class="col-span-12 lg:col-span-7 flex flex-col gap-6">
+<!-- Right Top Card: Powering AI-native app devs (rounded-[40px], blue-orange glow, floating app icons) -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-10 relative overflow-hidden flex flex-col justify-between">
+<!-- Blue-orange ambient gradient glow atmosphere -->
+<div class="absolute -right-12 -top-12 w-64 h-64 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute -left-12 -bottom-12 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top bar with floating icons -->
+<div class="flex items-center justify-between mb-4">
+<span class="font-mono text-xs text-orange-400 font-semibold tracking-wider uppercase">Agentic Context</span>
+<!-- Floating orange/dark app icons with subtle shadows -->
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-orange-600/20 border border-orange-500/40 flex items-center justify-center text-orange-400 font-bold text-xs shadow-lg transform -rotate-3">
+                CC
+              </div>
+<div class="w-9 h-9 rounded-xl bg-[#222326] border border-[#303136] flex items-center justify-center text-white font-bold text-xs shadow-lg transform rotate-6">
+                MCP
+              </div>
+</div>
+</div>
+<!-- Center Content -->
+<div>
+<h3 class="text-[26px] font-bold text-white tracking-tight">Powering AI-native app devs</h3>
+<p class="text-[15px] text-[#a1a2a8] mt-2 leading-relaxed max-w-[560px]">
+              Equip coding agents with full context of your mobile application, simulator telemetry, and project assets.
+            </p>
+</div>
+<!-- Connector Pill -->
+<div class="mt-6 pt-5 border-t border-[#26272b] flex items-center justify-between">
+<a class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#222326] border border-[#26272b] text-white hover:border-[#3b82f6] transition-colors text-xs font-medium" href="https://docs.expo.dev">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Expo Claude Code connector</span>
+<span class="font-mono text-[10px] text-[#70727a]">mcp-server-expo</span>
+</a>
+<span class="text-xs text-blue-400 font-mono">stdio &amp; SSE</span>
+</div>
+</div>
+<!-- Right Bottom Cards: Two Adjacent Cards Side-by-Side -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Left Card: 100+ production APIs one install away (with rich mobile mockup) -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-7 flex flex-col justify-between">
+<div>
+<h3 class="text-[20px] font-bold text-white tracking-tight">100+ production APIs one install away</h3>
+<p class="text-[13px] text-[#a1a2a8] mt-1.5 leading-normal">
+                Camera, SecureStore, SQLite, Notifications, Sensors, and Audio ready for production.
+              </p>
+</div>
+<!-- Mobile app grid preview -->
+<div class="mt-5 grid grid-cols-2 gap-2 bg-[#111113] p-3 rounded-2xl border border-[#26272b]">
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-1.5 text-xs text-white font-mono font-medium">
+<span class="text-blue-400">📷</span> Camera
+                </div>
+<div class="text-[10px] text-[#70727a] font-mono mt-0.5">AVFoundation</div>
+</div>
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-1.5 text-xs text-white font-mono font-medium">
+<span class="text-amber-400">🔒</span> SecureStore
+                </div>
+<div class="text-[10px] text-[#70727a] font-mono mt-0.5">KeyChain/Keystore</div>
+</div>
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-1.5 text-xs text-white font-mono font-medium">
+<span class="text-emerald-400">💾</span> SQLite
+                </div>
+<div class="text-[10px] text-[#70727a] font-mono mt-0.5">Local Storage</div>
+</div>
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-1.5 text-xs text-white font-mono font-medium">
+<span class="text-purple-400">🔔</span> Notifications
+                </div>
+<div class="text-[10px] text-[#70727a] font-mono mt-0.5">APNs &amp; FCM</div>
+</div>
+</div>
+</div>
+<!-- Right Card: All native code welcome (with overlapping colorful language tiles) -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-7 flex flex-col justify-between">
+<div>
+<h3 class="text-[20px] font-bold text-white tracking-tight">All native code welcome</h3>
+<p class="text-[13px] text-[#a1a2a8] mt-1.5 leading-normal">
+                Write custom Swift, Kotlin, or C++ native modules with zero friction using Expo Modules API.
+              </p>
+</div>
+<!-- Overlapping colorful language icon tiles -->
+<div class="mt-5 flex flex-wrap gap-2">
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span> TypeScript
+              </span>
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-orange-500"></span> Swift
+              </span>
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-purple-500"></span> Kotlin
+              </span>
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span> JavaScript
+              </span>
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-sky-400"></span> Objective-C
+              </span>
+<span class="px-2.5 py-1.5 rounded-xl bg-[#222326] border border-[#26272b] text-[12px] text-white flex items-center gap-1.5 font-medium">
+<span class="w-2 h-2 rounded-full bg-cyan-400"></span> C++ JSI
+              </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== INFRASTRUCTURE FOR YOUR APPS SECTION ==================== -->
+<section class="w-full max-w-[1280px] mx-auto px-6 pt-24 pb-16">
+<!-- Centered section header -->
+<div class="text-center max-w-[760px] mx-auto flex flex-col items-center">
+<h2 class="text-[44px] font-bold text-white tracking-tight leading-[1.1]">
+        Infrastructure for your apps
+      </h2>
+<p class="text-[17px] text-[#a1a2a8] mt-4">
+        End-to-end cloud and local mobile toolchain designed to scale from prototype to hundreds of millions of daily active users.
+      </p>
+<!-- Technology badges / marks row -->
+<div class="flex flex-wrap items-center justify-center gap-2.5 mt-8">
+<div class="px-3.5 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs font-semibold text-white">Expo</div>
+<div class="px-3.5 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs font-semibold text-white">React Native</div>
+<div class="px-3.5 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs font-semibold text-white">Swift</div>
+<div class="px-3.5 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs font-semibold text-white">Jetpack Compose</div>
+<div class="px-3.5 py-1.5 rounded-full bg-[#18191b] border border-[#26272b] text-xs font-semibold text-white">Kotlin</div>
+</div>
+<!-- Learn more white pill linking to EAS -->
+<div class="mt-6">
+<a class="px-6 py-2.5 rounded-full bg-white text-[#111113] text-[14px] font-semibold hover:bg-neutral-200 transition-colors inline-block shadow" href="https://expo.dev/eas">
+          Learn more
+        </a>
+</div>
+</div>
+<!-- Mosaic Card Grid: 40px rounded #18191b cards, generous 40px inter-card spacing -->
+<div class="mt-16 space-y-10">
+<!-- PAIR 1: Two Side-by-Side Cards (~596px each) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<!-- Card 1: Get your app on every device -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-10 flex flex-col justify-between overflow-hidden">
+<!-- Upper Half Visual Graphic: Cross-platform distribution -->
+<div class="bg-[#111113] rounded-2xl border border-[#26272b] p-5 font-mono text-xs">
+<div class="flex items-center justify-between border-b border-[#26272b] pb-2 mb-3">
+<span class="text-white font-medium">$ eas build --platform all</span>
+<span class="text-emerald-400">● 3/3 Succeeded</span>
+</div>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-2 text-white">
+<span>🍎</span> iOS Release (IPA)
+                </div>
+<span class="text-emerald-400">Completed (4m 12s)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-2 text-white">
+<span>🤖</span> Android Prod (AAB)
+                </div>
+<span class="text-emerald-400">Completed (3m 48s)</span>
+</div>
+<div class="flex items-center justify-between p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center gap-2 text-white">
+<span>🌐</span> Web Static Output
+                </div>
+<span class="text-emerald-400">Completed (42s)</span>
+</div>
+</div>
+<div class="mt-3 pt-2 border-t border-[#26272b] flex items-center justify-between text-[11px] text-[#70727a]">
+<span>Scan QR code to install</span>
+<span class="text-blue-400 font-semibold">[QR Code Ready]</span>
+</div>
+</div>
+<!-- Centered title & description below with link -->
+<div class="mt-8 text-center flex flex-col items-center">
+<span class="font-mono text-xs text-blue-400 font-semibold uppercase tracking-wider">Multiplatform Build</span>
+<h3 class="text-[26px] font-bold text-white tracking-tight mt-1.5">Get your app on every device</h3>
+<p class="text-[14px] text-[#a1a2a8] mt-2 leading-relaxed max-w-[460px]">
+              Build and host for Android, iOS, and Web simultaneously from a single shared codebase with automated signing and native distribution.
+            </p>
+<a class="mt-4 text-xs font-semibold text-white hover:text-blue-400 transition-colors flex items-center gap-1" href="https://expo.dev/eas">
+              Explore EAS Build <span>→</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Get the latest to every user, instantly -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-10 flex flex-col justify-between overflow-hidden">
+<!-- Upper Half Visual Graphic: Real OTA rollout gauge/dashboard -->
+<div class="bg-[#111113] rounded-2xl border border-[#26272b] p-5 font-mono text-xs">
+<div class="flex items-center justify-between mb-3">
+<span class="text-[#70727a]">Channel: production (v4.8.1)</span>
+<span class="text-emerald-400 font-bold">99.98% crash-free</span>
+</div>
+<div class="w-full bg-[#18191b] rounded-full h-3 overflow-hidden border border-[#26272b] mb-4">
+<div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-[94%] rounded-full"></div>
+</div>
+<div class="grid grid-cols-3 gap-3 text-center">
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="text-[10px] text-[#70727a]">Rollout</div>
+<div class="text-white font-bold text-sm mt-0.5">94% live</div>
+</div>
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="text-[10px] text-[#70727a]">Active Users</div>
+<div class="text-emerald-400 font-bold text-sm mt-0.5">2.4M</div>
+</div>
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b]">
+<div class="text-[10px] text-[#70727a]">Rollback Latency</div>
+<div class="text-white font-bold text-sm mt-0.5">&lt; 3s</div>
+</div>
+</div>
+</div>
+<!-- Centered title & description below with link -->
+<div class="mt-8 text-center flex flex-col items-center">
+<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Over-The-Air Updates</span>
+<h3 class="text-[26px] font-bold text-white tracking-tight mt-1.5">Get the latest to every user, instantly</h3>
+<p class="text-[14px] text-[#a1a2a8] mt-2 leading-relaxed max-w-[460px]">
+              Publish instant bug fixes and progressive canary deployments without waiting days for App Store review cycles.
+            </p>
+<a class="mt-4 text-xs font-semibold text-white hover:text-emerald-400 transition-colors flex items-center gap-1" href="https://expo.dev/eas">
+              Explore EAS Update <span>→</span>
+</a>
+</div>
+</div>
+</div>
+<!-- FULL-WIDTH CARD 1: A device in your agent’s hands -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-12 overflow-hidden">
+<!-- Centered Copy -->
+<div class="text-center max-w-[700px] mx-auto mb-10">
+<span class="font-mono text-xs text-purple-400 font-semibold uppercase tracking-wider">Cloud Simulators &amp; Agent Testing</span>
+<h3 class="text-[34px] font-bold text-white tracking-tight mt-2">A device in your agent’s hands</h3>
+<p class="text-[15px] text-[#a1a2a8] mt-3 leading-relaxed">
+            Cloud simulators, automated screenshots, and live system logs give autonomous AI coding models the eyes and hands to verify screen layouts and debug interactions.
+          </p>
+</div>
+<!-- Oversized three-part visual graphic: cloud phone preview + agent terminal log + telemetry inspector -->
+<div class="grid grid-cols-12 gap-6 items-stretch">
+<!-- 1. Interactive cloud phone simulator preview -->
+<div class="col-span-12 md:col-span-4 bg-[#111113] rounded-2xl border border-[#26272b] p-4 flex flex-col items-center">
+<div class="w-full flex items-center justify-between pb-3 border-b border-[#26272b] text-[11px] font-mono text-[#70727a]">
+<span>iPhone 16 Pro (Virtual)</span>
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+</div>
+<!-- Mock Phone Frame -->
+<div class="w-[200px] h-[340px] rounded-[32px] bg-[#18191b] border-2 border-[#383a40] mt-4 p-3 relative flex flex-col justify-between shadow-xl">
+<!-- Notch/island -->
+<div class="w-16 h-3 bg-black rounded-full mx-auto mb-2"></div>
+<!-- Content Screen -->
+<div class="flex-1 rounded-xl bg-[#222326] p-2 flex flex-col gap-2">
+<div class="w-full h-8 rounded bg-[#18191b] flex items-center px-2 text-[10px] text-white font-semibold">Shopping Bag (2)</div>
+<div class="w-full h-16 rounded bg-[#18191b]/80 border border-blue-500/40 p-1 flex items-center gap-2">
+<div class="w-10 h-10 rounded bg-blue-500/20 flex items-center justify-center text-xs">👟</div>
+<div class="text-[9px] text-[#a1a2a8]">Puma Nitro 3<br/><span class="text-white font-mono">$160.00</span></div>
+</div>
+<div class="mt-auto w-full py-1.5 rounded-lg bg-blue-500 text-white text-[10px] font-bold text-center border border-blue-400">
+                  Pay with Pay
+                </div>
+</div>
+<!-- Home indicator -->
+<div class="w-16 h-1 bg-[#70727a] rounded-full mx-auto mt-2"></div>
+</div>
+</div>
+<!-- 2. Real agent session terminal log -->
+<div class="col-span-12 md:col-span-5 bg-[#111113] rounded-2xl border border-[#26272b] p-5 font-mono text-xs flex flex-col justify-between">
+<div class="flex items-center justify-between border-b border-[#26272b] pb-2 text-[#70727a] text-[11px]">
+<span>Agent Session #894 — Telemetry stream</span>
+<span class="text-emerald-400">Active</span>
+</div>
+<div class="space-y-2 mt-3 text-[12px]">
+<p class="text-[#70727a]">[08:44:02] $ agent.tap(button: "Checkout")</p>
+<p class="text-blue-400">[08:44:03] ViewTransition: CartModal -&gt; PaymentSheet</p>
+<p class="text-emerald-400">[08:44:04] Screenshot captured: /tmp/eval_screen_48.png</p>
+<p class="text-white bg-[#18191b] p-2 rounded border border-[#26272b]">
+                [08:44:04] Assertion PASSED: Element "ApplePay" visible and clickable
+              </p>
+<p class="text-[#70727a]">[08:44:05] Simulated layout diff: 0 discrepancies detected</p>
+</div>
+<div class="mt-4 pt-2 border-t border-[#26272b] flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#222326] text-[10px] text-purple-300">MCP Protocol v2</span>
+<span class="px-2 py-0.5 rounded bg-[#222326] text-[10px] text-purple-300">Headless XCTest</span>
+</div>
+</div>
+<!-- 3. Live Telemetry Inspector -->
+<div class="col-span-12 md:col-span-3 bg-[#111113] rounded-2xl border border-[#26272b] p-5 flex flex-col justify-between">
+<div>
+<div class="text-[11px] font-mono text-[#70727a] uppercase mb-3">Live Agent Telemetry</div>
+<div class="space-y-3 font-mono text-xs">
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="text-[#70727a] text-[10px]">CPU Execution</div>
+<div class="text-white font-bold text-sm mt-0.5">14.2%</div>
+</div>
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="text-[#70727a] text-[10px]">Memory Footprint</div>
+<div class="text-white font-bold text-sm mt-0.5">86.4 MB</div>
+</div>
+<div class="p-2.5 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="text-[#70727a] text-[10px]">Frame Rate</div>
+<div class="text-emerald-400 font-bold text-sm mt-0.5">60 FPS</div>
+</div>
+</div>
+</div>
+<a class="text-xs text-purple-400 font-semibold hover:underline mt-4" href="https://docs.expo.dev">
+              Explore Agent Simulator Docs →
+            </a>
+</div>
+</div>
+</div>
+<!-- PAIR 2: Two Side-by-Side Cards (~596px each) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<!-- Card 3: Launch anything to the App Store -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-10 flex flex-col justify-between overflow-hidden">
+<!-- Upper Half Visual: Submission pipelines -->
+<div class="bg-[#111113] rounded-2xl border border-[#26272b] p-5 font-mono text-xs space-y-3">
+<div class="p-3 rounded-xl bg-[#18191b] border border-[#26272b] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-xs"></span>
+<div>
+<div class="text-white font-medium text-xs">App Store Connect</div>
+<div class="text-[10px] text-[#70727a]">Build #249 (TestFlight)</div>
+</div>
+</div>
+<span class="text-emerald-400 text-[11px] font-semibold">Approved</span>
+</div>
+<div class="p-3 rounded-xl bg-[#18191b] border border-[#26272b] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-6 h-6 rounded bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-xs">▶</span>
+<div>
+<div class="text-white font-medium text-xs">Google Play Console</div>
+<div class="text-[10px] text-[#70727a]">Internal Track → Production</div>
+</div>
+</div>
+<span class="text-emerald-400 text-[11px] font-semibold">Promoted</span>
+</div>
+</div>
+<!-- Centered title & description below with link -->
+<div class="mt-8 text-center flex flex-col items-center">
+<span class="font-mono text-xs text-blue-400 font-semibold uppercase tracking-wider">Release Automation</span>
+<h3 class="text-[26px] font-bold text-white tracking-tight mt-1.5">Launch anything to the App Store</h3>
+<p class="text-[14px] text-[#a1a2a8] mt-2 leading-relaxed max-w-[460px]">
+              Automate certificates, provisioning profiles, metadata updates, and release track promotions directly through simple CLI or CI workflows.
+            </p>
+<a class="mt-4 text-xs font-semibold text-white hover:text-blue-400 transition-colors flex items-center gap-1" href="https://expo.dev/eas">
+              Explore EAS Submit <span>→</span>
+</a>
+</div>
+</div>
+<!-- Card 4: Built-in monitoring and observability -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-10 flex flex-col justify-between overflow-hidden">
+<!-- Upper Half Visual: Observability dashboard -->
+<div class="bg-[#111113] rounded-2xl border border-[#26272b] p-5 font-mono text-xs">
+<div class="grid grid-cols-3 gap-2.5 mb-3">
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b] text-center">
+<div class="text-[10px] text-[#70727a]">Cold Start TTID</div>
+<div class="text-white font-bold text-sm mt-0.5">320ms</div>
+</div>
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b] text-center">
+<div class="text-[10px] text-[#70727a]">FPS Stability</div>
+<div class="text-emerald-400 font-bold text-sm mt-0.5">59.8</div>
+</div>
+<div class="p-2 rounded bg-[#18191b] border border-[#26272b] text-center">
+<div class="text-[10px] text-[#70727a]">Crash Rate</div>
+<div class="text-white font-bold text-sm mt-0.5">0.01%</div>
+</div>
+</div>
+<!-- Trace waterfall bar simulation -->
+<div class="space-y-1.5 pt-2">
+<div class="flex items-center gap-2 text-[10px]">
+<span class="w-16 text-[#70727a]">Bundle eval</span>
+<div class="h-2 rounded bg-blue-500 w-[45%]"></div>
+<span class="text-white">120ms</span>
+</div>
+<div class="flex items-center gap-2 text-[10px]">
+<span class="w-16 text-[#70727a]">Root mount</span>
+<div class="h-2 rounded bg-teal-500 w-[65%]"></div>
+<span class="text-white">180ms</span>
+</div>
+<div class="flex items-center gap-2 text-[10px]">
+<span class="w-16 text-[#70727a]">Hydration</span>
+<div class="h-2 rounded bg-emerald-500 w-[20%]"></div>
+<span class="text-white">40ms</span>
+</div>
+</div>
+</div>
+<!-- Centered title & description below with link -->
+<div class="mt-8 text-center flex flex-col items-center">
+<span class="font-mono text-xs text-amber-400 font-semibold uppercase tracking-wider">Telemetry &amp; Health</span>
+<h3 class="text-[26px] font-bold text-white tracking-tight mt-1.5">Built-in monitoring and observability</h3>
+<p class="text-[14px] text-[#a1a2a8] mt-2 leading-relaxed max-w-[460px]">
+              Track real user performance, trace slow component renders, and capture stack traces without third-party SDK binary bloat.
+            </p>
+<a class="mt-4 text-xs font-semibold text-white hover:text-amber-400 transition-colors flex items-center gap-1" href="https://expo.dev">
+              Explore Expo Observe <span>→</span>
+</a>
+</div>
+</div>
+</div>
+<!-- FULL-WIDTH CARD 2: Automate your builds, tests, and releases -->
+<div class="rounded-[40px] bg-[#18191b] border border-[#26272b] p-8 lg:p-12 overflow-hidden">
+<!-- Centered Copy -->
+<div class="text-center max-w-[700px] mx-auto mb-10">
+<span class="font-mono text-xs text-sky-400 font-semibold uppercase tracking-wider">Continuous Integration</span>
+<h3 class="text-[34px] font-bold text-white tracking-tight mt-2">Automate your builds, tests, and releases</h3>
+<p class="text-[15px] text-[#a1a2a8] mt-3 leading-relaxed">
+            Connect your Git repository and let EAS build matrices trigger on every pull request, auto-generate preview QR codes, and run regression suites.
+          </p>
+</div>
+<!-- Large EAS Build & GitHub Actions CI/CD matrix visual -->
+<div class="bg-[#111113] rounded-2xl border border-[#26272b] p-6 font-mono text-xs">
+<div class="flex items-center justify-between border-b border-[#26272b] pb-3 mb-4">
+<div class="flex items-center gap-2">
+<span class="text-emerald-400">✔</span>
+<span class="text-white font-medium">GitHub Actions: .github/workflows/mobile-ci.yml</span>
+</div>
+<span class="text-[#70727a]">Commit 8f192b · 2m 14s total</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="p-3 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center justify-between text-white font-semibold">
+<span>PR Preview Build</span>
+<span class="text-emerald-400">PASSED</span>
+</div>
+<div class="mt-2 text-[#70727a] text-[11px]">
+                PR #421: "feat: vector embeddings for offline search"
+              </div>
+<div class="mt-3 text-blue-400 text-[11px] underline cursor-pointer">
+                Scan QR code for preview build ↗
+              </div>
+</div>
+<div class="p-3 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center justify-between text-white font-semibold">
+<span>Maestro End-to-End</span>
+<span class="text-emerald-400">PASSED</span>
+</div>
+<div class="mt-2 text-[#70727a] text-[11px]">
+                32 device flows executed across iOS 18 &amp; Android 15
+              </div>
+<div class="mt-3 text-emerald-400 text-[11px]">
+                0 regressions detected
+              </div>
+</div>
+<div class="p-3 rounded-xl bg-[#18191b] border border-[#26272b]">
+<div class="flex items-center justify-between text-white font-semibold">
+<span>App Store Submission</span>
+<span class="text-emerald-400">QUEUED</span>
+</div>
+<div class="mt-2 text-[#70727a] text-[11px]">
+                Scheduled upon merge to `main` branch
+              </div>
+<div class="mt-3 text-white text-[11px]">
+                Track: Internal Testers
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== STATISTICS STRIP ==================== -->
+<section class="w-full max-w-[1280px] mx-auto px-6 py-14 border-t border-[#26272b]">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b]">
+<div class="font-mono text-[36px] font-bold text-white">7M+</div>
+<div class="text-[14px] text-[#a1a2a8] mt-1 font-medium">weekly downloads</div>
+</div>
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b]">
+<div class="font-mono text-[36px] font-bold text-white">100K+</div>
+<div class="text-[14px] text-[#a1a2a8] mt-1 font-medium">active devs</div>
+</div>
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b]">
+<div class="font-mono text-[36px] font-bold text-white">500K+</div>
+<div class="text-[14px] text-[#a1a2a8] mt-1 font-medium">projects</div>
+</div>
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b]">
+<div class="font-mono text-[36px] font-bold text-white">100K+</div>
+<div class="text-[14px] text-[#a1a2a8] mt-1 font-medium">daily builds</div>
+</div>
+</div>
+</section>
+<!-- ==================== COMMUNITY SECTION ("Expo is a community") ==================== -->
+<section class="w-full max-w-[1280px] mx-auto px-6 py-20">
+<div class="text-center max-w-[700px] mx-auto">
+<h2 class="text-[40px] font-bold text-white tracking-tight">Expo is a community</h2>
+<p class="text-[16px] text-[#a1a2a8] mt-3 leading-relaxed">
+        80% of React Native developers choose Expo. Hear what developers say about their experience.
+      </p>
+<!-- Join us on Discord pill linking to chat.expo.dev -->
+<div class="mt-6">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#18191b] border border-[#26272b] text-[14px] font-medium text-white hover:bg-[#222326] hover:border-[#383a40] transition-all" href="https://chat.expo.dev" target="_blank">
+<svg class="w-4 h-4 fill-[#5865F2]" viewbox="0 0 16 16">
+<path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.57-.406.812a12.19 12.19 0 0 0-3.658 0 8.274 8.274 0 0 0-.412-.812.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"></path>
+</svg>
+<span>Join us on Discord</span>
+</a>
+</div>
+</div>
+<!-- Responsive masonry grid of REAL developer social posts -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Post 1: Peter Piekarczyk (@peterpme) -->
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-9 h-9 rounded-full bg-blue-600 flex items-center justify-center font-bold text-white text-xs">PP</div>
+<div>
+<div class="text-[13px] font-semibold text-white">Peter Piekarczyk</div>
+<div class="text-[11px] text-[#70727a] font-mono">@peterpme</div>
+</div>
+</div>
+<p class="text-[14px] text-white leading-relaxed font-normal">
+            “Expo is amazing”
+          </p>
+</div>
+<div class="mt-6 pt-3 border-t border-[#26272b] text-[11px] text-[#70727a] font-mono">
+          via X (Twitter)
+        </div>
+</div>
+<!-- Post 2: Hugo Duarte (@hugoasduarte) -->
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b] flex flex-col justify-between lg:col-span-2">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-purple-500 to-indigo-500 flex items-center justify-center font-bold text-white text-xs">HD</div>
+<div>
+<div class="text-[13px] font-semibold text-white">Hugo Duarte</div>
+<div class="text-[11px] text-[#70727a] font-mono">@hugoasduarte</div>
+</div>
+</div>
+<p class="text-[14px] text-white leading-relaxed font-normal">
+            “I love @expo so much! Was struggling to upgrade an old React Native app to the latest version for a few days without success. Created a new expo app, copied my src folder along with some package installs and was ready in just a few minutes!”
+          </p>
+</div>
+<div class="mt-6 pt-3 border-t border-[#26272b] text-[11px] text-[#70727a] font-mono">
+          via X (Twitter)
+        </div>
+</div>
+<!-- Post 3: Josh Gonsalves (@joshgonsalves_) -->
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-3 mb-4">
+<div class="w-9 h-9 rounded-full bg-emerald-600 flex items-center justify-center font-bold text-white text-xs">JG</div>
+<div>
+<div class="text-[13px] font-semibold text-white">Josh Gonsalves</div>
+<div class="text-[11px] text-[#70727a] font-mono">@joshgonsalves_</div>
+</div>
+</div>
+<p class="text-[14px] text-white leading-relaxed font-normal">
+            “Makes sense. I do LOVE expo.”
+          </p>
+</div>
+<div class="mt-6 pt-3 border-t border-[#26272b] text-[11px] text-[#70727a] font-mono">
+          via X (Twitter)
+        </div>
+</div>
+<!-- Post 4: NicoDevs (@Nico_Devs) -->
+<div class="p-6 rounded-3xl bg-[#18191b] border border-[#26272b] flex flex-col justify-between lg:col-span-4">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-amber-600 flex items-center justify-center font-bold text-white text-xs">ND</div>
+<div>
+<div class="text-[13px] font-semibold text-white">NicoDevs</div>
+<div class="text-[11px] text-[#70727a] font-mono">@Nico_Devs</div>
+</div>
+</div>
+<div class="text-[11px] text-[#70727a] font-mono">via X (Twitter)</div>
+</div>
+<p class="text-[14px] text-white leading-relaxed font-normal mt-3">
+          “EAS build velocity and the developer experience with config plugins has made shipping to both platforms feel like a unified web deployment. Can't imagine developing mobile without it now.”
+        </p>
+</div>
+</div>
+</section>
+<!-- ==================== FINAL CTA SECTION ==================== -->
+<section class="w-full max-w-[1280px] mx-auto px-6 py-28 text-center border-t border-[#26272b]">
+<div class="max-w-[760px] mx-auto flex flex-col items-center">
+<h2 class="text-[64px] font-bold tracking-tight text-white leading-[1.05]">
+        Build beautiful<br/>
+        native apps
+      </h2>
+<p class="text-[17px] text-[#a1a2a8] mt-6 max-w-[520px]">
+        Start for free in seconds. Build with local CLI tools or leverage cloud infrastructure for autonomous agents.
+      </p>
+<div class="mt-8 flex items-center gap-4">
+<a class="px-8 py-3.5 rounded-full bg-white text-[#111113] text-[15px] font-semibold hover:bg-neutral-200 transition-colors shadow-lg" href="https://expo.dev/signup">
+          Get started
+        </a>
+<a class="px-8 py-3.5 rounded-full bg-[#18191b] border border-[#26272b] text-white text-[15px] font-medium hover:bg-[#222326] transition-colors" href="https://expo.dev/contact">
+          Contact Sales
+        </a>
+</div>
+</div>
+</section>
+<!-- ==================== FOOTER ==================== -->
+<footer class="w-full bg-[#111113] border-t border-[#26272b] pt-16 pb-12 px-6">
+<div class="max-w-[1280px] mx-auto">
+<div class="grid grid-cols-12 gap-8 pb-14 border-b border-[#26272b]">
+<!-- Newsletter column -->
+<div class="col-span-12 lg:col-span-4 pr-6">
+<div class="flex items-center gap-2 text-white">
+<svg class="w-5 h-5" fill="none" viewbox="0 0 100 100">
+<path d="M22 78L50 22L78 78L62 78L50 54L38 78H22Z" fill="white"></path>
+<path d="M50 38L61 60H39L50 38Z" fill="#111113"></path>
+</svg>
+<span class="font-bold text-lg tracking-tight text-white">expo</span>
+</div>
+<p class="text-[14px] text-[#a1a2a8] mt-3">
+            Subscribe to our newsletter for the latest release notes, SDK changelogs, and mobile AI guides.
+          </p>
+<div class="mt-4 flex items-center gap-2">
+<input class="px-3.5 py-2 rounded-lg bg-[#18191b] border border-[#26272b] text-xs text-white placeholder-[#70727a] focus:outline-none focus:border-white w-full max-w-[240px]" placeholder="you@company.com" type="email"/>
+<button class="px-4 py-2 rounded-lg bg-white text-[#111113] text-xs font-semibold hover:bg-neutral-200 transition-colors">
+              Subscribe
+            </button>
+</div>
+</div>
+<!-- Five columns: Product, Resources, Solutions, Company, Legal -->
+<div class="col-span-12 lg:col-span-8 grid grid-cols-2 md:grid-cols-5 gap-6 text-[13px]">
+<!-- Product -->
+<div>
+<div class="font-semibold text-white mb-3">Product</div>
+<ul class="space-y-2 text-[#a1a2a8]">
+<li><a class="hover:text-white transition-colors" href="https://docs.expo.dev">Expo SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/eas">EAS Build</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/eas">EAS Submit</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/eas">EAS Update</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Observe</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/pricing">Pricing</a></li>
+</ul>
+</div>
+<!-- Resources -->
+<div>
+<div class="font-semibold text-white mb-3">Resources</div>
+<ul class="space-y-2 text-[#a1a2a8]">
+<li><a class="hover:text-white transition-colors" href="https://docs.expo.dev">Documentation</a></li>
+<li><a class="hover:text-white transition-colors" href="https://docs.expo.dev">Quickstart</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/changelog">Changelog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/blog">Blog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://chat.expo.dev">Community</a></li>
+<li><a class="hover:text-white transition-colors" href="https://status.expo.dev">Status</a></li>
+</ul>
+</div>
+<!-- Solutions -->
+<div>
+<div class="font-semibold text-white mb-3">Solutions</div>
+<ul class="space-y-2 text-[#a1a2a8]">
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">AI Native</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Enterprises</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Startups</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Agencies</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Universal Web</a></li>
+</ul>
+</div>
+<!-- Company -->
+<div>
+<div class="font-semibold text-white mb-3">Company</div>
+<ul class="space-y-2 text-[#a1a2a8]">
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/about">About Us</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/careers">Careers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Press Kit</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/contact">Contact</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Partners</a></li>
+</ul>
+</div>
+<!-- Legal -->
+<div>
+<div class="font-semibold text-white mb-3">Legal</div>
+<ul class="space-y-2 text-[#a1a2a8]">
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/privacy">Privacy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/terms">Terms of Service</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev/security">Security</a></li>
+<li><a class="hover:text-white transition-colors" href="https://expo.dev">Compliance</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Bottom Bar: Status & Socials -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-[#70727a] gap-4">
+<div class="flex items-center gap-3">
+<a class="inline-flex items-center gap-1.5 text-emerald-400 hover:underline" href="https://status.expo.dev">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            All systems operational
+          </a>
+<span>•</span>
+<span>© 2026 650 Industries, Inc. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-5 text-[#a1a2a8]">
+<a class="hover:text-white transition-colors" href="https://github.com/expo/expo" target="_blank">GitHub</a>
+<a class="hover:text-white transition-colors" href="https://x.com/expo" target="_blank">X (Twitter)</a>
+<a class="hover:text-white transition-colors" href="https://chat.expo.dev" target="_blank">Discord</a>
+<a class="hover:text-white transition-colors" href="https://www.youtube.com/@expo" target="_blank">YouTube</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
