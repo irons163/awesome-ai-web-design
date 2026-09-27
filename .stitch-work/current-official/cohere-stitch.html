@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cohere - Your AI. Your rules.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cohere-forest: #152717;
+    --cohere-stone: #f0eee9;
+    --cohere-dark: #0f1110;
+  }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #111111;
+    background-color: #ffffff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  .font-cohere-heading {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.035em;
+  }
+  .font-cohere-display {
+    font-family: 'Space Grotesk', sans-serif;
+    letter-spacing: -0.045em;
+  }
+  .bg-stone-cohere {
+    background-color: #f0eee9;
+  }
+  .bg-forest-cohere {
+    background-color: #152717;
+  }
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f8f8f8;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+</style>
+</head>
+<body class="w-full min-h-screen selection:bg-[#152717] selection:text-white">
+
+  <!-- TOP BANNER (48px) -->
+  <aside id="top-announcement" class="w-full h-12 bg-black text-white text-xs md:text-sm flex items-center justify-between px-4 sm:px-8 z-50 relative">
+    <div class="flex-1 text-center truncate">
+      <span class="font-normal text-neutral-300">AI for Empowerment:</span>
+      <span class="text-white font-medium ml-1">Your freedom. Your focus.</span>
+      <span class="text-neutral-400 hidden lg:inline ml-1">See how AI gives you more time for what truly moves you.</span>
+      <a href="https://cohere.com/empowerment" class="underline underline-offset-4 font-medium text-white hover:text-neutral-300 transition-colors ml-2">Explore now</a>
+    </div>
+    <button onclick="document.getElementById('top-announcement').style.display='none'" class="text-neutral-400 hover:text-white p-1 text-lg leading-none" aria-label="Close banner">×</button>
+  </aside>
+
+  <!-- STICKY NAVBAR (60px) -->
+  <header class="sticky top-0 w-full h-[60px] bg-white/95 backdrop-blur-md border-b border-neutral-100 z-40 transition-all">
+    <div class="max-w-[1280px] h-full mx-auto px-6 sm:px-10 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center gap-8">
+        <a href="https://cohere.com/" class="flex items-center gap-2 group" aria-label="Cohere homepage">
+          <!-- Authentic Cohere wordmark with 4 colored lozenges -->
+          <svg class="h-6 w-auto" viewBox="0 0 130 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 4 iconic organic dot lozenges in Cohere identity -->
+            <g transform="translate(0, 7)">
+              <rect x="0" y="2" width="5.5" height="12" rx="2.75" fill="#395B42" transform="rotate(-15 0 2)"/>
+              <circle cx="9" cy="4.5" r="3.2" fill="#DE7C5A"/>
+              <rect x="6" y="9.5" width="5" height="6.5" rx="2.5" fill="#E8B931"/>
+              <circle cx="15" cy="11" r="3.2" fill="#5F8A74"/>
+            </g>
+            <!-- lowercase cohere text -->
+            <text x="24" y="21.5" font-family="'Space Grotesk', 'Inter', sans-serif" font-weight="700" font-size="21" letter-spacing="-0.04em" fill="#152717">cohere</text>
+          </svg>
+        </a>
+
+        <!-- Main Navigation Links -->
+        <nav class="hidden md:flex items-center gap-7 text-[14px] text-neutral-700 font-medium">
+          <div class="relative group py-4">
+            <button class="hover:text-black flex items-center gap-1">Products <svg class="w-3 h-3 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></button>
+          </div>
+          <a href="https://cohere.com/solutions" class="hover:text-black transition-colors">Solutions</a>
+          <a href="https://cohere.com/resources" class="hover:text-black transition-colors">Resources</a>
+          <a href="https://cohere.com/blog" class="hover:text-black transition-colors">Blog</a>
+          <a href="https://cohere.com/research" class="hover:text-black transition-colors">Research</a>
+          <a href="https://cohere.com/company" class="hover:text-black transition-colors">Company</a>
+        </nav>
+      </div>
+
+      <!-- Auth & Primary CTA -->
+      <div class="flex items-center gap-5">
+        <a href="https://dashboard.cohere.com/welcome/login" class="text-[14px] font-medium text-neutral-800 hover:text-black transition-colors hidden sm:inline-block">Sign in</a>
+        <a href="https://cohere.com/contact-sales" class="bg-[#111111] hover:bg-neutral-800 text-white text-[13.5px] font-medium px-5 py-2.5 rounded-full transition-all duration-150 shadow-sm hover:shadow">
+          Request a demo
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Pure White, Generous Space, 96px H1, No Hero CTA) -->
+  <section class="w-full bg-white pt-24 pb-14 px-6 sm:px-10 flex flex-col items-center text-center">
+    <div class="max-w-[1200px] mx-auto flex flex-col items-center">
+      
+      <!-- 96px CohereText Headline -->
+      <h1 class="font-cohere-display text-[54px] sm:text-[76px] lg:text-[96px] leading-[0.98] font-bold text-[#111111] tracking-[-0.045em] max-w-[1000px] mb-8">
+        Your AI.<br>Your rules.
+      </h1>
+
+      <!-- Split 2-line Subtitle -->
+      <p class="text-[17px] sm:text-[19px] leading-[1.48] text-neutral-700 max-w-[760px] font-normal tracking-[-0.01em] mb-14">
+        North by Cohere is a complete agentic enterprise AI platform<br class="hidden sm:inline"> that you control and deploy on your terms.
+      </p>
+
+      <!-- Featured Graphic (x40, width 1200): North agent product UI over soft granular gold/green sculptural texture -->
+      <div class="w-full max-w-[1200px] rounded-2xl overflow-hidden bg-[#0d110e] border border-neutral-900/60 shadow-2xl relative text-left p-6 sm:p-10 lg:p-12 min-h-[480px] lg:min-h-[560px] flex flex-col justify-between" style="background: radial-gradient(circle at 85% 20%, rgba(42, 68, 50, 0.45) 0%, rgba(13, 17, 14, 0.98) 70%), radial-gradient(circle at 15% 85%, rgba(110, 95, 45, 0.25) 0%, rgba(13, 17, 14, 1) 60%), #0c0f0d;">
+        
+        <!-- Header row of the agent canvas -->
+        <div class="flex items-center justify-between border-b border-neutral-800/80 pb-5">
+          <div class="flex items-center gap-3">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]"></span>
+            <span class="text-xs uppercase tracking-widest text-neutral-400 font-mono">NORTH AGENT WORKSPACE / v2.4</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-xs text-neutral-400 font-mono bg-white/5 border border-white/10 px-2.5 py-1 rounded">Private VPC Deployment</span>
+            <span class="text-xs text-emerald-400 font-mono bg-emerald-950/40 border border-emerald-800/40 px-2.5 py-1 rounded">Zero Data Retention</span>
+          </div>
+        </div>
+
+        <!-- Agent UI Interface Split: Prompt / Orchestration & Tool Execution -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 my-auto pt-6">
+          
+          <!-- Left side: Goal & Orchestration -->
+          <div class="lg:col-span-5 bg-black/40 backdrop-blur border border-white/10 rounded-xl p-5 flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-semibold uppercase text-neutral-400 tracking-wider">Active Task</span>
+                <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-300">Agent: Financial Analyst</span>
+              </div>
+              <p class="text-sm text-neutral-200 font-medium mb-4 leading-relaxed">
+                "Audit Q2 cross-border hedging reserves against revised Basel III reporting rules and summarize liquidity variance across all APAC subsidiaries."
+              </p>
+              
+              <div class="space-y-2.5">
+                <div class="flex items-center justify-between text-xs bg-white/5 p-2 rounded border border-white/5">
+                  <span class="text-neutral-400 flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    Internal Datastores Queried
+                  </span>
+                  <span class="text-neutral-300 font-mono text-[11px]">42 Datasets Verified</span>
+                </div>
+                <div class="flex items-center justify-between text-xs bg-white/5 p-2 rounded border border-white/5">
+                  <span class="text-neutral-400 flex items-center gap-2">
+                    <svg class="w-3.5 h-3.5 text-emerald-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                    Multilingual Rerank & Citation
+                  </span>
+                  <span class="text-neutral-300 font-mono text-[11px]">Cohere Rerank v3.5</span>
+                </div>
+                <div class="flex items-center justify-between text-xs bg-emerald-950/20 p-2 rounded border border-emerald-500/30">
+                  <span class="text-emerald-300 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Policy Compliance Guardrails
+                  </span>
+                  <span class="text-emerald-400 font-mono text-[11px]">100% Pass (Air-gapped)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-neutral-800 text-[11px] text-neutral-500 font-mono flex items-center justify-between">
+              <span>Latency: 412ms</span>
+              <span>Tokens: 14,280 in / 1,024 out</span>
+            </div>
+          </div>
+
+          <!-- Right side: Granular Agent Output & Citations -->
+          <div class="lg:col-span-7 bg-[#141815]/90 border border-neutral-700/50 rounded-xl p-5 shadow-inner flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <span class="text-xs font-mono text-neutral-400">Synthesized Executive Intelligence</span>
+                <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">Confidence: 99.4%</span>
+              </div>
+              <div class="bg-black/60 rounded-lg p-4 font-mono text-xs text-neutral-300 space-y-2 border border-white/5">
+                <p class="text-neutral-100 font-medium">✓ Key Finding: Hedging reserves exceed mandatory tier-1 capital buffer by $142.8M (3.4% margin).</p>
+                <p class="text-neutral-400 text-[11.5px] leading-relaxed">
+                  Tokyo and Singapore operational entities remain shielded against Yen volatility swings up to ±14.2%. Currency mismatch risk flagged in HK subsidiary is fully hedged through forward swap contracts maturing Oct 2026.
+                </p>
+                <!-- Citations badges -->
+                <div class="flex flex-wrap gap-2 pt-2">
+                  <span class="text-[10px] bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded flex items-center gap-1 border border-neutral-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> [Doc 102] APAC_Q2_Liquidity.pdf
+                  </span>
+                  <span class="text-[10px] bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded flex items-center gap-1 border border-neutral-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> [Doc 88] Basel_III_Compliant_Matrix.xlsx
+                  </span>
+                  <span class="text-[10px] bg-neutral-800 text-neutral-300 px-2 py-0.5 rounded flex items-center gap-1 border border-neutral-700">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> [API] Ledger_Live_Snapshot
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Soft gold/green sculptural gradient art accent -->
+            <div class="mt-4 pt-3 flex items-center justify-between text-xs text-neutral-400">
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-neutral-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                Autonomous audit trail signed with private KMS key
+              </span>
+              <span class="text-neutral-500 font-mono text-[11px]">Zero customer data shared</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footing in banner -->
+        <div class="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] text-neutral-400">
+          <span>Enterprise Multi-Cloud: AWS, Azure, OCI, GCP & On-Prem Air-Gapped</span>
+          <span class="text-neutral-300 hover:text-white transition-colors cursor-pointer">Explore North architecture →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CUSTOMER LOGOS MARQUEE (y1121, centered caption, actual customer logos) -->
+  <section class="w-full bg-white py-14 border-t border-neutral-100">
+    <div class="max-w-[1280px] mx-auto px-6 sm:px-10 text-center">
+      <p class="text-sm font-medium text-neutral-500 tracking-tight mb-8">
+        Trusted by industry leaders and developers worldwide
+      </p>
+
+      <!-- Customer logos grid / authentic SVG marks -->
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-7 opacity-80 max-w-[1100px] mx-auto">
+        
+        <!-- Oracle -->
+        <div class="h-6 flex items-center grayscale hover:grayscale-0 transition-opacity">
+          <span class="font-bold text-lg tracking-wider text-red-700 font-mono">ORACLE</span>
+        </div>
+        
+        <!-- Dell Technologies -->
+        <div class="h-6 flex items-center text-neutral-800 font-bold text-sm tracking-tight">
+          DELL <span class="font-normal text-xs ml-1 text-neutral-600">Technologies</span>
+        </div>
+
+        <!-- RBC -->
+        <div class="h-6 flex items-center text-blue-700 font-black text-lg tracking-wider">
+          RBC
+        </div>
+
+        <!-- LG CNS -->
+        <div class="h-6 flex items-center text-neutral-800 font-bold text-sm tracking-widest">
+          LG <span class="font-medium text-neutral-600 ml-1">CNS</span>
+        </div>
+
+        <!-- Fujitsu -->
+        <div class="h-6 flex items-center text-red-600 font-semibold text-base tracking-wide">
+          FUJITSU
+        </div>
+
+        <!-- Bell -->
+        <div class="h-6 flex items-center text-blue-800 font-serif font-black text-xl italic">
+          Bell
+        </div>
+
+        <!-- Asana -->
+        <div class="h-6 flex items-center text-neutral-800 font-semibold text-sm tracking-tight flex items-center gap-1.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block"></span>
+          asana
+        </div>
+
+        <!-- RWS -->
+        <div class="h-6 flex items-center text-neutral-800 font-bold text-base tracking-widest">
+          RWS
+        </div>
+
+        <!-- SAP -->
+        <div class="h-6 flex items-center text-blue-900 font-black text-lg tracking-wider">
+          SAP
+        </div>
+
+        <!-- Salesforce -->
+        <div class="h-6 flex items-center text-sky-600 font-bold text-sm tracking-tight">
+          salesforce
+        </div>
+
+        <!-- TD Bank -->
+        <div class="h-6 flex items-center text-emerald-700 font-bold text-base tracking-wider bg-emerald-50 px-2 py-0.5 rounded">
+          TD
+        </div>
+
+        <!-- Ensemble -->
+        <div class="h-6 flex items-center text-neutral-800 font-medium text-sm tracking-wide">
+          ensemble
+        </div>
+
+        <!-- Second Front -->
+        <div class="h-6 flex items-center text-neutral-800 font-bold text-xs tracking-wider">
+          2F | SECOND FRONT
+        </div>
+
+        <!-- McKinsey & Company -->
+        <div class="h-6 flex items-center text-neutral-900 font-serif font-medium text-sm">
+          McKinsey &amp; Company
+        </div>
+
+        <!-- Accenture -->
+        <div class="h-6 flex items-center text-neutral-800 font-bold text-sm tracking-tight">
+          accenture<span class="text-purple-600">&gt;</span>
+        </div>
+
+        <!-- BambooHR -->
+        <div class="h-6 flex items-center text-emerald-600 font-bold text-sm tracking-tight">
+          bamboohr<span class="text-green-500">®</span>
+        </div>
+
+        <!-- STC -->
+        <div class="h-6 flex items-center text-purple-900 font-black text-base tracking-widest">
+          stc
+        </div>
+
+        <!-- Carahsoft -->
+        <div class="h-6 flex items-center text-neutral-800 font-semibold text-xs tracking-wider">
+          carahsoft.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CAMPAIGN BANNER (y1366, 520px tall, two adjacent photographic halves) -->
+  <section class="w-full max-w-[1280px] mx-auto px-6 sm:px-10 my-8">
+    <div class="w-full min-h-[520px] rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-2 relative shadow-lg">
+      
+      <!-- Left Half: Dark-green woodland backdrop with exact copy -->
+      <div class="p-10 sm:p-14 lg:p-16 flex flex-col justify-between relative text-white" style="background: linear-gradient(135deg, #112817 0%, #1e3d25 50%, #0d1e12 100%);">
+        
+        <div>
+          <!-- white 60px "AI for Empowerment" -->
+          <h2 class="font-cohere-display text-[44px] sm:text-[56px] lg:text-[60px] leading-[1.04] font-bold text-white tracking-[-0.04em] mb-6">
+            AI for<br>Empowerment
+          </h2>
+
+          <!-- exact paragraph -->
+          <p class="text-[17px] sm:text-[18px] leading-[1.5] text-neutral-200 max-w-[460px] font-normal tracking-[-0.01em]">
+            Your freedom. Your focus. Cohere keeps it that way. Learn how AI helps you reclaim time for what truly moves you.
+          </p>
+        </div>
+
+        <!-- white pill "Explore now" -->
+        <div class="pt-8">
+          <a href="https://cohere.com/empowerment" class="inline-block bg-white hover:bg-neutral-100 text-[#111111] text-[14px] font-medium px-6 py-3 rounded-full transition-all">
+            Explore now
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Half: Person outdoors in yellow/black photographic half -->
+      <div class="relative min-h-[300px] lg:min-h-full overflow-hidden" style="background: linear-gradient(160deg, #d8a032 0%, #4a3e20 40%, #171816 100%);">
+        <!-- SVG artwork depicting the atmospheric outdoors composition -->
+        <div class="absolute inset-0 flex items-center justify-center p-8">
+          <svg class="w-full h-full object-cover" viewBox="0 0 600 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="warmSun" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.8"/>
+                <stop offset="40%" stop-color="#F59E0B" stop-opacity="0.5"/>
+                <stop offset="100%" stop-color="#1E293B" stop-opacity="0.9"/>
+              </linearGradient>
+              <radialGradient id="sunGlow" cx="60%" cy="30%" r="50%">
+                <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.7"/>
+                <stop offset="100%" stop-color="#78350F" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="600" height="520" fill="url(#warmSun)"/>
+            <circle cx="360" cy="180" r="220" fill="url(#sunGlow)"/>
+            
+            <!-- Mountainous outdoor landscape contour -->
+            <path d="M0 520L110 380L240 440L380 320L520 410L600 360V520H0Z" fill="#1C1917" fill-opacity="0.85"/>
+            <path d="M0 520L190 410L320 470L460 390L600 480V520H0Z" fill="#0C0A09"/>
+            
+            <!-- Silhouette of person outdoors in yellow coat taking in expansive landscape -->
+            <g transform="translate(340, 240)">
+              <!-- Body jacket in vibrant yellow -->
+              <path d="M40 70C30 90 20 140 20 190H70C70 140 60 90 50 70Z" fill="#EAB308"/>
+              <!-- Head / hood profile looking toward horizon -->
+              <circle cx="45" cy="45" r="16" fill="#1C1917"/>
+              <!-- Backpack / hiking strap -->
+              <path d="M28 80C28 110 35 150 40 160" stroke="#111" stroke-width="4"/>
+            </g>
+          </svg>
+        </div>
+        
+        <!-- Subtle photo caption pill -->
+        <div class="absolute bottom-6 right-6 bg-black/40 backdrop-blur-md px-3.5 py-1.5 rounded-full text-[11px] text-neutral-300 font-mono">
+          Cohere Series: Reclaiming focus
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PURPOSE-BUILT AI SOLUTIONS ZONE (Warm pale-gray #f0eee9 backdrop, y1886) -->
+  <section class="w-full bg-stone-cohere py-24 px-6 sm:px-10 transition-colors">
+    <div class="max-w-[1280px] mx-auto">
+      
+      <!-- 48px Centered Heading -->
+      <div class="text-center max-w-[800px] mx-auto mb-16">
+        <h2 class="font-cohere-heading text-[38px] sm:text-[48px] font-bold text-[#111111] tracking-[-0.035em] mb-4">
+          Purpose-built AI solutions
+        </h2>
+        <p class="text-neutral-600 text-[16px] sm:text-[17px]">
+          Enterprise infrastructure engineered for privacy, latency, and full architectural ownership.
+        </p>
+      </div>
+
+      <!-- 3 Very Large Overlapping Product Panels (each ~1200x586px with 40px margins) -->
+      <div class="space-y-10 max-w-[1200px] mx-auto">
+        
+        <!-- PANEL 1: NORTH PLATFORM (Moody dark blue/black agent image) -->
+        <article class="w-full min-h-[586px] rounded-3xl bg-[#0e131b] border border-neutral-800 p-8 sm:p-12 lg:p-14 text-white shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative overflow-hidden">
+          <div class="lg:col-span-5 flex flex-col justify-between h-full z-10">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-sky-400 font-mono font-semibold block mb-3">NORTH PLATFORM</span>
+              <h3 class="font-cohere-heading text-[36px] sm:text-[46px] font-bold leading-tight mb-5">
+                North
+              </h3>
+              <p class="text-[16px] sm:text-[17px] text-neutral-300 leading-relaxed font-normal mb-8">
+                A fully ownable agentic platform built to bring peak security, intelligence, cost efficiency, and control together.
+              </p>
+            </div>
+            <div>
+              <a href="https://cohere.com/north" class="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-sm font-medium px-6 py-3 rounded-full transition-all">
+                Explore North <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Financial Analysis Agent interface on the right -->
+          <div class="lg:col-span-7 bg-[#141b24] border border-neutral-700/60 rounded-2xl p-6 shadow-2xl z-10 font-sans">
+            <div class="flex items-center justify-between border-b border-neutral-700 pb-4 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-blue-500"></span>
+                <span class="font-mono text-xs text-neutral-300 font-medium">Financial Analysis Agent • Production</span>
+              </div>
+              <span class="text-[11px] font-mono bg-sky-950 text-sky-300 border border-sky-800 px-2 py-0.5 rounded">Multi-tool Agentic Graph</span>
+            </div>
+
+            <!-- Agent step-by-step breakdown UI -->
+            <div class="space-y-3 font-mono text-xs">
+              <div class="bg-black/40 p-3.5 rounded-lg border border-neutral-800">
+                <div class="flex items-center justify-between text-neutral-400 mb-1.5 text-[11px]">
+                  <span>Step 1: Ingestion & Vector Reranking</span>
+                  <span class="text-emerald-400">Completed (68ms)</span>
+                </div>
+                <p class="text-neutral-200 font-sans text-xs">Processed 1,480 pages of 10-K regulatory filings via Cohere Embed v3.</p>
+              </div>
+
+              <div class="bg-black/40 p-3.5 rounded-lg border border-neutral-800">
+                <div class="flex items-center justify-between text-neutral-400 mb-1.5 text-[11px]">
+                  <span>Step 2: Tool Execution (Python Sandbox)</span>
+                  <span class="text-emerald-400">Completed (142ms)</span>
+                </div>
+                <code class="text-sky-300 text-[11px] block bg-neutral-900 p-2 rounded">
+                  variance_calc(ebitda_q2, fx_hedged=True) -> +8.4% YoY Adjusted
+                </code>
+              </div>
+
+              <div class="bg-blue-950/30 p-3.5 rounded-lg border border-blue-500/40">
+                <div class="flex items-center justify-between text-blue-300 mb-1.5 text-[11px]">
+                  <span>Step 3: Synthesis & Verified Citation Output</span>
+                  <span class="text-blue-400 animate-pulse">Streaming</span>
+                </div>
+                <p class="text-neutral-100 font-sans text-xs leading-relaxed">
+                  "Operating income margin improved by 230 bps driven by supply chain rationalization, exactly matching projections cited in Section 4.2."
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 2: COHERE MODELS (Nearly black with fine white dotted lines) -->
+        <article class="w-full min-h-[586px] rounded-3xl bg-[#0c0d0c] border border-neutral-800 p-8 sm:p-12 lg:p-14 text-white shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative overflow-hidden">
+          
+          <!-- Background fine dotted grid texture -->
+          <div class="absolute inset-0 opacity-15 pointer-events-none" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+          <div class="lg:col-span-5 flex flex-col justify-between h-full z-10">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-emerald-400 font-mono font-semibold block mb-3">COHERE MODELS</span>
+              <h3 class="font-cohere-heading text-[36px] sm:text-[46px] font-bold leading-tight mb-5">
+                Our models.<br>Your business.
+              </h3>
+              <p class="text-[16px] sm:text-[17px] text-neutral-300 leading-relaxed font-normal mb-8">
+                Tools for generative AI, advanced search, and multilingual capabilities—built to keep your enterprise in full control.
+              </p>
+            </div>
+            <div>
+              <a href="https://cohere.com/models" class="inline-flex items-center gap-2 bg-white text-black hover:bg-neutral-200 text-sm font-medium px-6 py-3 rounded-full transition-all">
+                Explore models <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Model family showcase on the right -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4 z-10">
+            <div class="bg-neutral-900/90 border border-neutral-700/60 p-5 rounded-2xl backdrop-blur">
+              <span class="text-[11px] font-mono text-emerald-400 uppercase tracking-wider block mb-1">State-of-the-art LLM</span>
+              <h4 class="text-lg font-bold font-cohere-heading text-white mb-2">Command R+</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                Optimized for conversational agents, advanced tool use, and multilingual enterprise workflows.
+              </p>
+              <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-300">
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">128k Context</span>
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">10+ Languages</span>
+              </div>
+            </div>
+
+            <div class="bg-neutral-900/90 border border-neutral-700/60 p-5 rounded-2xl backdrop-blur">
+              <span class="text-[11px] font-mono text-sky-400 uppercase tracking-wider block mb-1">Semantic Search</span>
+              <h4 class="text-lg font-bold font-cohere-heading text-white mb-2">Cohere Embed v3</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                Industry benchmark embedding model leading in MTEB benchmarks for document retrieval.
+              </p>
+              <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-300">
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">Compression Aware</span>
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">Zero Hallucination</span>
+              </div>
+            </div>
+
+            <div class="bg-neutral-900/90 border border-neutral-700/60 p-5 rounded-2xl backdrop-blur">
+              <span class="text-[11px] font-mono text-amber-400 uppercase tracking-wider block mb-1">Precision Retrieval</span>
+              <h4 class="text-lg font-bold font-cohere-heading text-white mb-2">Cohere Rerank 3.5</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                Drop-in semantic reranker that boosts RAG search quality by up to 50% with one line of code.
+              </p>
+              <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-300">
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">Single API Call</span>
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">&lt;15ms Latency</span>
+              </div>
+            </div>
+
+            <div class="bg-neutral-900/90 border border-neutral-700/60 p-5 rounded-2xl backdrop-blur">
+              <span class="text-[11px] font-mono text-purple-400 uppercase tracking-wider block mb-1">Specialized</span>
+              <h4 class="text-lg font-bold font-cohere-heading text-white mb-2">Fine-tuning Suite</h4>
+              <p class="text-xs text-neutral-400 leading-relaxed mb-4">
+                Custom weights trained directly on your enterprise taxonomy without leaking proprietary IP.
+              </p>
+              <div class="flex items-center gap-2 text-[11px] font-mono text-neutral-300">
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">Private Weights</span>
+                <span class="bg-neutral-800 px-2 py-0.5 rounded">LoRA / Full Tune</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- PANEL 3: MODEL VAULT (Pale lavender/stone with real Model vaults UI) -->
+        <article class="w-full min-h-[586px] rounded-3xl bg-[#e8e4dc] border border-[#d6d0c4] p-8 sm:p-12 lg:p-14 text-neutral-900 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center relative overflow-hidden">
+          <div class="lg:col-span-5 flex flex-col justify-between h-full z-10">
+            <div>
+              <span class="text-xs uppercase tracking-widest text-neutral-600 font-mono font-semibold block mb-3">MODEL VAULT</span>
+              <h3 class="font-cohere-heading text-[36px] sm:text-[46px] font-bold leading-tight mb-5 text-[#111111]">
+                Scalable, secure AI deployment
+              </h3>
+              <p class="text-[16px] sm:text-[17px] text-neutral-700 leading-relaxed font-normal mb-8">
+                Model Vault provides fully-isolated performance inference with end-to-end encryption.
+              </p>
+            </div>
+            <div>
+              <a href="https://cohere.com/deployment" class="inline-flex items-center gap-2 bg-[#111111] hover:bg-neutral-800 text-white text-sm font-medium px-6 py-3 rounded-full transition-all">
+                Learn more <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Real Model vaults UI on the right -->
+          <div class="lg:col-span-7 bg-white rounded-2xl p-6 shadow-md border border-neutral-300 font-sans z-10">
+            <div class="flex items-center justify-between border-b border-neutral-200 pb-4 mb-5">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-neutral-900 text-white flex items-center justify-center font-bold text-xs">
+                  MV
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-neutral-900">Dedicated Production Vault #04</h4>
+                  <p class="text-[11px] text-neutral-500 font-mono">Region: eu-west-1 (Frankfurt) • KMS: Customer Managed Key</p>
+                </div>
+              </div>
+              <span class="text-xs bg-emerald-100 text-emerald-800 font-mono px-2.5 py-1 rounded-full font-medium">Healthy / 99.99% Uptime</span>
+            </div>
+
+            <!-- Vault details cards -->
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="bg-neutral-50 p-3 rounded-xl border border-neutral-200">
+                <span class="text-[11px] text-neutral-500 block">Active Instance Type</span>
+                <span class="text-sm font-bold font-mono text-neutral-800">8x H100 SXM5 Air-gapped</span>
+              </div>
+              <div class="bg-neutral-50 p-3 rounded-xl border border-neutral-200">
+                <span class="text-[11px] text-neutral-500 block">End-to-End Encryption</span>
+                <span class="text-sm font-bold font-mono text-neutral-800">TLS 1.3 / AES-256-GCM</span>
+              </div>
+            </div>
+
+            <div class="bg-neutral-900 text-white p-4 rounded-xl font-mono text-xs space-y-2">
+              <div class="flex justify-between text-neutral-400 text-[11px]">
+                <span>Inference Cluster Isolation</span>
+                <span class="text-emerald-400">Zero Public IP Surface</span>
+              </div>
+              <p class="text-neutral-300 text-[11.5px]">Direct AWS PrivateLink & Azure ExpressRoute routing established. Customer telemetry retained solely within local boundary.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- POWERING PROGRESS ACROSS INDUSTRIES (y3981, Pure White, ~709px section) -->
+  <section class="w-full bg-white py-24 px-6 sm:px-10 border-t border-neutral-100">
+    <div class="max-w-[1280px] mx-auto">
+      
+      <!-- 48px Centered Heading -->
+      <h2 class="font-cohere-heading text-[38px] sm:text-[48px] font-bold text-center text-[#111111] tracking-[-0.035em] mb-16">
+        Powering progress across industries
+      </h2>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start max-w-[1200px] mx-auto">
+        
+        <!-- Large square lavender-tinted AI/agent interface image at left -->
+        <div class="lg:col-span-6 bg-[#f3f0f7] border border-purple-100 rounded-3xl p-8 sm:p-10 min-h-[480px] flex flex-col justify-between relative overflow-hidden shadow-sm">
+          <div>
+            <div class="flex items-center justify-between mb-6">
+              <span class="text-xs font-mono font-semibold uppercase tracking-wider text-purple-900 bg-purple-200/60 px-3 py-1 rounded-full">
+                Financial Services Deployment
+              </span>
+              <span class="text-xs font-mono text-neutral-500">Live Agent Session</span>
+            </div>
+
+            <!-- Visual representation of financial analytics interface -->
+            <div class="bg-white rounded-2xl p-6 shadow-md border border-purple-100/80 mb-6">
+              <div class="flex items-center justify-between border-b border-neutral-100 pb-3 mb-3">
+                <span class="text-xs font-bold text-neutral-800">Portfolio Risk & Regulatory Engine</span>
+                <span class="text-[11px] text-emerald-600 font-medium">Secured • Audit Ready</span>
+              </div>
+              <p class="text-xs text-neutral-600 mb-3 leading-relaxed">
+                Autonomous extraction of liquidity ratios and counterparty stress tests from 280+ fund prospectuses.
+              </p>
+              <div class="space-y-1.5 font-mono text-[11px]">
+                <div class="flex justify-between bg-neutral-50 p-2 rounded">
+                  <span class="text-neutral-500">Stress Test: -300bps Shock</span>
+                  <span class="font-semibold text-neutral-800">Resilient (Cap Ratio 14.8%)</span>
+                </div>
+                <div class="flex justify-between bg-neutral-50 p-2 rounded">
+                  <span class="text-neutral-500">Document Processing Time</span>
+                  <span class="font-semibold text-neutral-800">4.2 min (vs 6 weeks manual)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-purple-950 font-medium pt-4 border-t border-purple-200/50">
+            <span>Verified deployment at top-5 global asset managers</span>
+            <span class="font-mono text-[11px]">Tier 1 Security Validated</span>
+          </div>
+        </div>
+
+        <!-- Right column open accordion/list -->
+        <div class="lg:col-span-6 flex flex-col justify-between">
+          
+          <!-- Accordion item 1: Financial services (EXPANDED) -->
+          <div class="border-b border-neutral-900 pb-8">
+            <div class="flex items-center justify-between cursor-pointer mb-4">
+              <h3 class="font-cohere-heading text-[26px] font-bold text-black">Financial services</h3>
+              <span class="text-2xl font-light text-neutral-400">−</span>
+            </div>
+            
+            <p class="text-neutral-700 text-[15px] sm:text-[16px] leading-relaxed mb-5">
+              AI solutions that drive growth, reduce risk, and enhance customer experiences with speed and precision.
+            </p>
+
+            <ul class="space-y-3 mb-6">
+              <li class="flex items-center gap-3 text-sm text-neutral-800 font-medium">
+                <span class="w-5 h-5 rounded-full bg-neutral-100 flex items-center justify-center text-xs text-black">✓</span>
+                Help investment teams move faster
+              </li>
+              <li class="flex items-center gap-3 text-sm text-neutral-800 font-medium">
+                <span class="w-5 h-5 rounded-full bg-neutral-100 flex items-center justify-center text-xs text-black">✓</span>
+                Automate routine back-office work
+              </li>
+              <li class="flex items-center gap-3 text-sm text-neutral-800 font-medium">
+                <span class="w-5 h-5 rounded-full bg-neutral-100 flex items-center justify-center text-xs text-black">✓</span>
+                Streamline customer service operations
+              </li>
+            </ul>
+
+            <a href="https://cohere.com/solutions/financial-services" class="inline-flex items-center text-sm font-semibold text-black hover:underline underline-offset-4">
+              Learn more →
+            </a>
+          </div>
+
+          <!-- Collapsed rows divided by thin black rules -->
+          <div class="border-b border-neutral-900/80 py-5 flex items-center justify-between cursor-pointer hover:text-neutral-600 transition-colors">
+            <h3 class="font-cohere-heading text-[22px] font-bold text-neutral-900">Public Sector</h3>
+            <span class="text-2xl font-light text-neutral-400">+</span>
+          </div>
+
+          <div class="border-b border-neutral-900/80 py-5 flex items-center justify-between cursor-pointer hover:text-neutral-600 transition-colors">
+            <h3 class="font-cohere-heading text-[22px] font-bold text-neutral-900">Technology</h3>
+            <span class="text-2xl font-light text-neutral-400">+</span>
+          </div>
+
+          <div class="border-b border-neutral-900/80 py-5 flex items-center justify-between cursor-pointer hover:text-neutral-600 transition-colors mb-8">
+            <h3 class="font-cohere-heading text-[22px] font-bold text-neutral-900">Energy and utilities</h3>
+            <span class="text-2xl font-light text-neutral-400">+</span>
+          </div>
+
+          <!-- Rounded outlined "See all industries" button -->
+          <div>
+            <a href="https://cohere.com/solutions" class="inline-block border border-neutral-900 hover:bg-neutral-900 hover:text-white text-black text-sm font-medium px-6 py-2.5 rounded-full transition-all">
+              See all industries
+            </a>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY LEADING TEAMS TRUST COHERE (48px heading, 3 warm-gray story cards) -->
+  <section class="w-full bg-white py-24 px-6 sm:px-10 border-t border-neutral-100">
+    <div class="max-w-[1280px] mx-auto">
+      
+      <div class="mb-14">
+        <h2 class="font-cohere-heading text-[38px] sm:text-[48px] font-bold text-[#111111] tracking-[-0.035em]">
+          Why leading teams trust Cohere
+        </h2>
+      </div>
+
+      <!-- 3 side-by-side warm-gray story cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24">
+        
+        <!-- Story Card 1: CoreWeave -->
+        <article class="bg-[#f5f4f0] rounded-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-7 border border-neutral-200/70 hover:shadow-md transition-shadow">
+          <div>
+            <!-- Real story image at top -->
+            <div class="w-full h-48 rounded-xl bg-neutral-900 mb-6 overflow-hidden relative flex items-center justify-center p-4" style="background: linear-gradient(135deg, #182230 0%, #0d1117 100%);">
+              <span class="font-mono text-xs uppercase tracking-wider text-sky-400 bg-sky-950/80 border border-sky-800/80 px-2.5 py-1 rounded">CoreWeave + North</span>
+            </div>
+            <span class="text-xs uppercase font-mono font-semibold tracking-wider text-neutral-500 block mb-2">TECHNOLOGY</span>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-[#111111] leading-snug mb-4">
+              How CoreWeave used Cohere North to transform its customer support in 90 days
+            </h3>
+          </div>
+          <div class="pt-4 border-t border-neutral-200/80">
+            <a href="https://cohere.com/customers/coreweave" class="inline-flex items-center gap-1.5 text-sm font-semibold text-black hover:underline">
+              Read more <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Story Card 2: Draftwise -->
+        <article class="bg-[#f5f4f0] rounded-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-7 border border-neutral-200/70 hover:shadow-md transition-shadow">
+          <div>
+            <!-- Real story image at top -->
+            <div class="w-full h-48 rounded-xl bg-neutral-900 mb-6 overflow-hidden relative flex items-center justify-center p-4" style="background: linear-gradient(135deg, #2b1f1d 0%, #151211 100%);">
+              <span class="font-mono text-xs uppercase tracking-wider text-amber-400 bg-amber-950/80 border border-amber-800/80 px-2.5 py-1 rounded">Draftwise + Cohere Search</span>
+            </div>
+            <span class="text-xs uppercase font-mono font-semibold tracking-wider text-neutral-500 block mb-2">TECHNOLOGY</span>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-[#111111] leading-snug mb-4">
+              Integrating Cohere into Draftwise boosted the quality of search results by 30%
+            </h3>
+          </div>
+          <div class="pt-4 border-t border-neutral-200/80">
+            <a href="https://cohere.com/customers/draftwise" class="inline-flex items-center gap-1.5 text-sm font-semibold text-black hover:underline">
+              Read more <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+        <!-- Story Card 3: Fujitsu -->
+        <article class="bg-[#f5f4f0] rounded-2xl overflow-hidden flex flex-col justify-between p-6 sm:p-7 border border-neutral-200/70 hover:shadow-md transition-shadow">
+          <div>
+            <!-- Real story image at top -->
+            <div class="w-full h-48 rounded-xl bg-neutral-900 mb-6 overflow-hidden relative flex items-center justify-center p-4" style="background: linear-gradient(135deg, #1b261e 0%, #0d1410 100%);">
+              <span class="font-mono text-xs uppercase tracking-wider text-emerald-400 bg-emerald-950/80 border border-emerald-800/80 px-2.5 py-1 rounded">Fujitsu Takane Model</span>
+            </div>
+            <span class="text-xs uppercase font-mono font-semibold tracking-wider text-neutral-500 block mb-2">TECHNOLOGY</span>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-[#111111] leading-snug mb-4">
+              Fujitsu launches Takane AI model in partnership with Cohere
+            </h3>
+          </div>
+          <div class="pt-4 border-t border-neutral-200/80">
+            <a href="https://cohere.com/customers/fujitsu" class="inline-flex items-center gap-1.5 text-sm font-semibold text-black hover:underline">
+              Read more <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- LARGE WHITE QUOTE SECTION (Jensen Huang / NVIDIA mark, 48px statement) -->
+      <div class="max-w-[1080px] mx-auto pt-8 border-t border-neutral-200">
+        <!-- Authentic NVIDIA mark -->
+        <div class="mb-8">
+          <svg class="h-7 w-auto" viewBox="0 0 120 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C16.3 22 19.95 19.28 21.32 15.42C21.46 15.02 21.1 14.65 20.68 14.73C18.28 15.2 15.82 14.48 14.1 12.76C12.38 11.04 11.66 8.58 12.13 6.18C12.21 5.76 11.84 5.4 11.44 5.54C7.58 6.91 4.86 10.56 4.86 14.86" stroke="#76B900" stroke-width="2.8" stroke-linecap="round"/>
+            <text x="28" y="19" font-family="'Space Grotesk', sans-serif" font-weight="800" font-size="16" fill="#111111" letter-spacing="0.05em">NVIDIA</text>
+          </svg>
+        </div>
+
+        <blockquote class="font-cohere-heading text-[28px] sm:text-[38px] lg:text-[44px] font-normal leading-[1.2] text-[#111111] tracking-[-0.03em] mb-8">
+          “The team at Cohere has made foundational contributions to generative AI. Their service will help enterprises around the world harness these capabilities to automate and accelerate.”
+        </blockquote>
+
+        <div>
+          <cite class="not-italic">
+            <span class="block text-base font-bold text-black">Jensen Huang</span>
+            <span class="block text-sm text-neutral-500">Founder and CEO, NVIDIA</span>
+          </cite>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE LATEST NEWS (y6403, 3-card editorial news row with real dates) -->
+  <section class="w-full bg-white py-20 px-6 sm:px-10 border-t border-neutral-100">
+    <div class="max-w-[1280px] mx-auto">
+      
+      <div class="flex flex-col sm:flex-row items-baseline justify-between mb-12">
+        <h2 class="font-cohere-heading text-[38px] sm:text-[48px] font-bold text-[#111111] tracking-[-0.035em]">
+          The latest news
+        </h2>
+        <a href="https://cohere.com/blog" class="text-sm font-semibold text-black hover:underline underline-offset-4 mt-2 sm:mt-0">
+          See more on the blog →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Card 1: Aleph Alpha / Sep 16, 2026 -->
+        <article class="flex flex-col justify-between group">
+          <a href="https://cohere.com/blog/aleph-alpha" class="block">
+            <div class="w-full h-52 rounded-2xl bg-neutral-900 mb-5 overflow-hidden relative" style="background: linear-gradient(135deg, #1b3022 0%, #0d1a12 100%);">
+              <div class="absolute inset-0 flex items-center justify-center p-6 text-center">
+                <span class="text-xs font-mono text-emerald-300 border border-emerald-600/60 bg-emerald-950/70 px-3 py-1 rounded">Transatlantic Sovereign AI Alliance</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono text-neutral-500 mb-2.5">
+              <span>Company News</span>
+              <span>•</span>
+              <span>Sovereign AI</span>
+              <span>•</span>
+              <time datetime="2026-09-16">Sep 16, 2026</time>
+            </div>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-black leading-snug group-hover:text-neutral-600 transition-colors">
+              Cohere and Aleph Alpha sign agreement to become the first transatlantic sovereign AI solution
+            </h3>
+          </a>
+        </article>
+
+        <!-- Card 2: OpenText / Sep 16, 2026 -->
+        <article class="flex flex-col justify-between group">
+          <a href="https://cohere.com/blog/opentext-partnership" class="block">
+            <div class="w-full h-52 rounded-2xl bg-neutral-900 mb-5 overflow-hidden relative" style="background: linear-gradient(135deg, #2b1738 0%, #130a1c 100%);">
+              <div class="absolute inset-0 flex items-center justify-center p-6 text-center">
+                <span class="text-xs font-mono text-purple-300 border border-purple-600/60 bg-purple-950/70 px-3 py-1 rounded">Cohere + OpenText Enterprise Agents</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono text-neutral-500 mb-2.5">
+              <span>Partner</span>
+              <span>•</span>
+              <span>Company News</span>
+              <span>•</span>
+              <time datetime="2026-09-16">Sep 16, 2026</time>
+            </div>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-black leading-snug group-hover:text-neutral-600 transition-colors">
+              Cohere and OpenText partner to bring trusted agentic AI to governments and regulated industries
+            </h3>
+          </a>
+        </article>
+
+        <!-- Card 3: Who Gets to Define the Rules / Sep 14, 2026 -->
+        <article class="flex flex-col justify-between group">
+          <a href="https://cohere.com/blog/rules-for-ai" class="block">
+            <div class="w-full h-52 rounded-2xl bg-neutral-900 mb-5 overflow-hidden relative" style="background: linear-gradient(135deg, #2a251e 0%, #15130f 100%);">
+              <div class="absolute inset-0 flex items-center justify-center p-6 text-center">
+                <span class="text-xs font-mono text-amber-200 border border-amber-600/60 bg-amber-950/70 px-3 py-1 rounded">Editorial Perspective</span>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 text-xs font-mono text-neutral-500 mb-2.5">
+              <span>Company News</span>
+              <span>•</span>
+              <time datetime="2026-09-14">Sep 14, 2026</time>
+            </div>
+            <h3 class="font-cohere-heading text-[20px] font-bold text-black leading-snug group-hover:text-neutral-600 transition-colors">
+              Who Gets to Define the Rules for AI?
+            </h3>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECURITY & DATA PROTECTION ZONE (Deep forest-green #152717, y6991) -->
+  <section class="w-full bg-forest-cohere text-white py-24 px-6 sm:px-10">
+    <div class="max-w-[1280px] mx-auto text-center">
+      
+      <!-- 48px Heading -->
+      <h2 class="font-cohere-heading text-[36px] sm:text-[48px] font-bold leading-tight max-w-[840px] mx-auto mb-6 tracking-[-0.035em]">
+        Industry-leading AI security and data protection
+      </h2>
+
+      <!-- Exact paragraph -->
+      <p class="text-[17px] sm:text-[18px] leading-relaxed text-neutral-300 max-w-[720px] mx-auto mb-8 font-normal">
+        Our platform and models meet rigorous standards across security, availability, processing integrity, confidentiality, and privacy.
+      </p>
+
+      <div class="mb-16">
+        <a href="https://cohere.com/security" class="inline-flex items-center gap-1.5 text-sm font-medium text-emerald-400 hover:text-emerald-300 underline underline-offset-4">
+          Learn more →
+        </a>
+      </div>
+
+      <!-- 5 Authentic Light Compliance Marks in a Row: SOC2, GDPR, CCPA, ISO 27001, Cyber Essentials -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 max-w-[1000px] mx-auto pt-6 border-t border-white/10">
+        
+        <!-- SOC2 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 font-mono text-xs font-bold text-emerald-300">
+            AICPA
+          </div>
+          <span class="font-bold text-sm text-white tracking-wide">SOC 2</span>
+          <span class="text-[11px] text-neutral-400 font-mono">Type II Certified</span>
+        </div>
+
+        <!-- GDPR -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 font-mono text-xs font-bold text-emerald-300">
+            EU
+          </div>
+          <span class="font-bold text-sm text-white tracking-wide">GDPR</span>
+          <span class="text-[11px] text-neutral-400 font-mono">Fully Compliant</span>
+        </div>
+
+        <!-- CCPA -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 font-mono text-xs font-bold text-emerald-300">
+            CA
+          </div>
+          <span class="font-bold text-sm text-white tracking-wide">CCPA</span>
+          <span class="text-[11px] text-neutral-400 font-mono">Privacy Standard</span>
+        </div>
+
+        <!-- ISO 27001 -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 font-mono text-xs font-bold text-emerald-300">
+            ISO
+          </div>
+          <span class="font-bold text-sm text-white tracking-wide">ISO 27001</span>
+          <span class="text-[11px] text-neutral-400 font-mono">Security Management</span>
+        </div>
+
+        <!-- Cyber Essentials -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col items-center justify-center text-center col-span-2 sm:col-span-1">
+          <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center mb-2 font-mono text-xs font-bold text-emerald-300">
+            CE
+          </div>
+          <span class="font-bold text-sm text-white tracking-wide">Cyber Essentials</span>
+          <span class="text-[11px] text-neutral-400 font-mono">Plus Verified</span>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ENDING CALLOUT (Spacious White Area, 60px "Ready to put AI to work?", Dark Pill CTA) -->
+  <section class="w-full bg-white py-28 px-6 sm:px-10 text-center border-b border-neutral-100">
+    <div class="max-w-[800px] mx-auto">
+      <h2 class="font-cohere-display text-[44px] sm:text-[60px] font-bold text-[#111111] tracking-[-0.04em] mb-8">
+        Ready to put AI to work?
+      </h2>
+      <a href="https://cohere.com/contact-sales" class="inline-block bg-[#111111] hover:bg-neutral-800 text-white text-[15px] font-medium px-8 py-3.5 rounded-full transition-all shadow hover:shadow-md">
+        Request a demo
+      </a>
+    </div>
+  </section>
+
+  <!-- DENSE FOOTER (Platforms, Models, Industries, Deployment, Resources, Connect, Company, Legal) -->
+  <footer class="w-full bg-white text-neutral-800 py-16 px-6 sm:px-10 text-xs">
+    <div class="max-w-[1280px] mx-auto">
+      
+      <!-- Multi-column link layout -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-8 mb-16">
+        
+        <!-- Platforms -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Platforms</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/north" class="hover:text-black">North</a></li>
+            <li><a href="https://cohere.com/agents" class="hover:text-black">Agentic AI</a></li>
+            <li><a href="https://cohere.com/enterprise" class="hover:text-black">Enterprise Suite</a></li>
+            <li><a href="https://dashboard.cohere.com" class="hover:text-black">Console</a></li>
+          </ul>
+        </div>
+
+        <!-- Models -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Models</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/command" class="hover:text-black">Command R+</a></li>
+            <li><a href="https://cohere.com/command" class="hover:text-black">Command R</a></li>
+            <li><a href="https://cohere.com/embed" class="hover:text-black">Embed v3</a></li>
+            <li><a href="https://cohere.com/rerank" class="hover:text-black">Rerank 3.5</a></li>
+            <li><a href="https://cohere.com/fine-tuning" class="hover:text-black">Fine-tuning</a></li>
+          </ul>
+        </div>
+
+        <!-- Industries -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Industries</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/solutions/financial-services" class="hover:text-black">Financial Services</a></li>
+            <li><a href="https://cohere.com/solutions/public-sector" class="hover:text-black">Public Sector</a></li>
+            <li><a href="https://cohere.com/solutions/technology" class="hover:text-black">Technology</a></li>
+            <li><a href="https://cohere.com/solutions/energy" class="hover:text-black">Energy & Utilities</a></li>
+            <li><a href="https://cohere.com/solutions/healthcare" class="hover:text-black">Healthcare</a></li>
+          </ul>
+        </div>
+
+        <!-- Deployment -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Deployment</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/deployment" class="hover:text-black">Model Vault</a></li>
+            <li><a href="https://cohere.com/deployment/aws" class="hover:text-black">AWS Bedrock</a></li>
+            <li><a href="https://cohere.com/deployment/azure" class="hover:text-black">Azure AI</a></li>
+            <li><a href="https://cohere.com/deployment/oci" class="hover:text-black">Oracle Cloud</a></li>
+            <li><a href="https://cohere.com/deployment/air-gapped" class="hover:text-black">VPC & On-Prem</a></li>
+          </ul>
+        </div>
+
+        <!-- Resources -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Resources</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://docs.cohere.com" class="hover:text-black">Documentation</a></li>
+            <li><a href="https://docs.cohere.com/reference/about" class="hover:text-black">API Reference</a></li>
+            <li><a href="https://cohere.com/research" class="hover:text-black">Research Papers</a></li>
+            <li><a href="https://cohere.com/blog" class="hover:text-black">Blog</a></li>
+            <li><a href="https://cohere.com/customers" class="hover:text-black">Case Studies</a></li>
+          </ul>
+        </div>
+
+        <!-- Connect -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Connect</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://discord.gg/co-here" class="hover:text-black">Community Discord</a></li>
+            <li><a href="https://twitter.com/cohere" class="hover:text-black">X / Twitter</a></li>
+            <li><a href="https://linkedin.com/company/cohere-ai" class="hover:text-black">LinkedIn</a></li>
+            <li><a href="https://github.com/cohere-ai" class="hover:text-black">GitHub</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Company</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/about" class="hover:text-black">About Us</a></li>
+            <li><a href="https://cohere.com/careers" class="hover:text-black">Careers</a></li>
+            <li><a href="https://cohere.com/newsroom" class="hover:text-black">Newsroom</a></li>
+            <li><a href="https://cohere.com/security" class="hover:text-black">Trust Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal -->
+        <div>
+          <h4 class="font-bold text-black uppercase tracking-wider mb-4 text-[11px]">Legal</h4>
+          <ul class="space-y-2.5 text-neutral-600">
+            <li><a href="https://cohere.com/terms" class="hover:text-black">Terms of Service</a></li>
+            <li><a href="https://cohere.com/privacy" class="hover:text-black">Privacy Policy</a></li>
+            <li><a href="https://cohere.com/acceptable-use" class="hover:text-black">Acceptable Use</a></li>
+            <li><a href="https://cohere.com/security" class="hover:text-black">Security Policy</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Bottom bar with wordmark & copyright -->
+      <div class="pt-8 border-t border-neutral-100 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <svg class="h-5 w-auto" viewBox="0 0 130 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g transform="translate(0, 7)">
+              <rect x="0" y="2" width="5.5" height="12" rx="2.75" fill="#395B42" transform="rotate(-15 0 2)"/>
+              <circle cx="9" cy="4.5" r="3.2" fill="#DE7C5A"/>
+              <rect x="6" y="9.5" width="5" height="6.5" rx="2.5" fill="#E8B931"/>
+              <circle cx="15" cy="11" r="3.2" fill="#5F8A74"/>
+            </g>
+            <text x="24" y="21.5" font-family="'Space Grotesk', sans-serif" font-weight="700" font-size="21" letter-spacing="-0.04em" fill="#152717">cohere</text>
+          </svg>
+          <span class="text-neutral-400 font-mono text-[11px]">© 2026 Cohere Inc. All rights reserved.</span>
+        </div>
+
+        <div class="flex items-center gap-6 text-neutral-500">
+          <a href="https://twitter.com/cohere" class="hover:text-black">Twitter</a>
+          <a href="https://linkedin.com/company/cohere-ai" class="hover:text-black">LinkedIn</a>
+          <a href="https://github.com/cohere-ai" class="hover:text-black">GitHub</a>
+          <a href="https://youtube.com/@cohere-ai" class="hover:text-black">YouTube</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
