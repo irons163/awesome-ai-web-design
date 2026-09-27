@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Ollama — Run open models. Get more usage.</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        },
+        colors: {
+          ollama: {
+            text: '#171717',
+            muted: '#737373',
+            subtle: '#a3a3a3',
+            border: '#e5e5e5',
+            bg: '#ffffff',
+            pill: '#f5f5f5',
+            dark: '#111111',
+            accent: '#2563eb'
+          }
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    color: #171717;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -0.015em;
+  }
+  .hairline {
+    border-color: #eaeaea;
+  }
+  .mono {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+  /* Marquee ticker simulation */
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-50%); }
+  }
+  .logo-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 35s linear infinite;
+  }
+  .logo-track:hover {
+    animation-play-state: paused;
+  }
+</style>
+</head>
+<body class="bg-white min-w-[1280px]">
+<!-- Top Draft Banner / Non-intrusive indicator -->
+<div class="w-full bg-[#fafafa] border-b border-[#f0f0f0] text-[11px] text-[#737373] text-center py-1.5 font-medium tracking-wide">
+    HISTORICAL ARCHIVE SNAPSHOT RECONSTRUCTION · 2026-09-27 · PUBLIC HOMEPAGE DRAFT
+  </div>
+<!-- Slim Global Header -->
+<header class="w-full border-b hairline sticky top-0 bg-white/95 backdrop-blur-sm z-50">
+<div class="max-w-[1280px] mx-auto h-[64px] px-6 flex items-center justify-between">
+<!-- Left: Logo & Nav -->
+<div class="flex items-center space-x-8">
+<a class="flex items-center gap-2.5 group" href="https://ollama.com/">
+<!-- Public Llama Icon -->
+<img alt="Ollama" class="w-8 h-8 object-contain" onerror="this.src='https://api.iconify.design/lucide:origami.svg?color=%23171717'" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</a>
+<nav class="flex items-center space-x-6 text-[15px] font-medium text-[#171717]">
+<a class="hover:text-black transition-colors" href="https://ollama.com/models">Models</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/docs">Docs</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/pricing">Pricing</a>
+</nav>
+</div>
+<!-- Center: Search Models Field -->
+<div class="relative w-[340px]">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#a3a3a3]">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<input class="w-full h-[38px] pl-10 pr-10 bg-[#f5f5f5] hover:bg-[#efefef] focus:bg-white text-[14px] text-[#171717] rounded-full border border-transparent focus:border-[#d4d4d4] focus:outline-none transition-all placeholder-[#737373]" placeholder="Search models" type="text"/>
+<div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+<kbd class="text-[11px] text-[#a3a3a3] border hairline rounded px-1.5 py-0.5 bg-white font-sans">⌘K</kbd>
+</div>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center space-x-3 text-[14px]">
+<a class="px-4 py-2 bg-[#f5f5f5] text-[#171717] font-medium rounded-full hover:bg-[#eaeaea] transition-all" href="https://ollama.com/signin">
+          Sign in
+        </a>
+<a class="px-4 py-2 bg-[#171717] text-white font-medium rounded-full hover:bg-black transition-all" href="https://ollama.com/download">
+          Download
+        </a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<main class="max-w-[1280px] mx-auto px-6 pt-[78px] pb-16">
+<div class="grid grid-cols-12 gap-6 items-start">
+<!-- Left Column: Typography & Action -->
+<div class="col-span-5 pt-[52px]">
+<h1 class="text-[56px] leading-[56px] font-[500] text-[#171717] tracking-[-0.035em] mb-7">
+          Run open models.<br/>Get more usage.
+        </h1>
+<p class="text-[18px] leading-[28px] text-[#737373] max-w-[430px] font-normal mb-8">
+          Ollama lets you use open models with your coding agents so you can spend less while keeping your data private.
+        </p>
+<div>
+<a class="inline-flex items-center justify-center px-6 py-3.5 bg-[#171717] text-white text-[15px] font-medium rounded-full hover:bg-black transition-all shadow-sm" href="https://ollama.com/download">
+            Download
+          </a>
+</div>
+</div>
+<!-- Right Column: Product Demo Poster & Video Container -->
+<div class="col-span-7 pl-4">
+<div class="relative w-full rounded-2xl overflow-hidden border border-[#e5e5e5] shadow-lg bg-[#0b1b36] aspect-[722/467]">
+<!-- Video element with hero-poster fallback -->
+<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" poster="https://ollama.com/public/hero-poster.jpg">
+<source src="https://files.ollama.com/codex-new-with-bg.mp4" type="video/mp4"/>
+<!-- Fallback image poster -->
+<img alt="Ollama desktop app showing coding agent workflow" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</video>
+<!-- Subtle window border overlay -->
+<div class="absolute inset-0 pointer-events-none rounded-2xl ring-1 ring-inset ring-black/10"></div>
+</div>
+</div>
+</div>
+<!-- Social Proof Customer Strip -->
+<section class="mt-24 pt-12 border-t hairline">
+<div class="text-center text-[15px] text-[#737373] font-medium mb-8">
+        Trusted by more than 9M developers
+      </div>
+<div class="overflow-hidden relative py-3 w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+<div class="logo-track flex items-center space-x-12 text-[#737373] font-semibold tracking-wider text-[14px]">
+<!-- Customer logos using official names and clean vector typography representations -->
+<span class="hover:text-black transition-colors px-2">Apple</span>
+<span class="hover:text-black transition-colors px-2">Nike</span>
+<span class="hover:text-black transition-colors px-2">Microsoft</span>
+<span class="hover:text-black transition-colors px-2">Meta</span>
+<span class="hover:text-black transition-colors px-2">NASA</span>
+<span class="hover:text-black transition-colors px-2">Netflix</span>
+<span class="hover:text-black transition-colors px-2">NVIDIA</span>
+<span class="hover:text-black transition-colors px-2">Adobe</span>
+<span class="hover:text-black transition-colors px-2">IBM</span>
+<span class="hover:text-black transition-colors px-2">BMW</span>
+<span class="hover:text-black transition-colors px-2">Mercedes-Benz</span>
+<span class="hover:text-black transition-colors px-2">Intel</span>
+<span class="hover:text-black transition-colors px-2">Volvo</span>
+<span class="hover:text-black transition-colors px-2">Salesforce</span>
+<span class="hover:text-black transition-colors px-2">Databricks</span>
+<span class="hover:text-black transition-colors px-2">Intuit</span>
+<span class="hover:text-black transition-colors px-2">MIT</span>
+<span class="hover:text-black transition-colors px-2">Walmart</span>
+<span class="hover:text-black transition-colors px-2">Visa</span>
+<!-- Duplicate for seamless infinite loop -->
+<span class="hover:text-black transition-colors px-2">Apple</span>
+<span class="hover:text-black transition-colors px-2">Nike</span>
+<span class="hover:text-black transition-colors px-2">Microsoft</span>
+<span class="hover:text-black transition-colors px-2">Meta</span>
+<span class="hover:text-black transition-colors px-2">NASA</span>
+<span class="hover:text-black transition-colors px-2">Netflix</span>
+<span class="hover:text-black transition-colors px-2">NVIDIA</span>
+<span class="hover:text-black transition-colors px-2">Adobe</span>
+<span class="hover:text-black transition-colors px-2">IBM</span>
+<span class="hover:text-black transition-colors px-2">BMW</span>
+<span class="hover:text-black transition-colors px-2">Mercedes-Benz</span>
+<span class="hover:text-black transition-colors px-2">Intel</span>
+<span class="hover:text-black transition-colors px-2">Volvo</span>
+<span class="hover:text-black transition-colors px-2">Salesforce</span>
+<span class="hover:text-black transition-colors px-2">Databricks</span>
+<span class="hover:text-black transition-colors px-2">Intuit</span>
+<span class="hover:text-black transition-colors px-2">MIT</span>
+<span class="hover:text-black transition-colors px-2">Walmart</span>
+<span class="hover:text-black transition-colors px-2">Visa</span>
+</div>
+</div>
+</section>
+<!-- Two-Column Editorial Rail Section -->
+<div class="mt-28 grid grid-cols-12 gap-8 relative items-start">
+<!-- Sticky Vertical Left Rail Navigation -->
+<aside class="col-span-4 sticky top-28 pt-2">
+<nav class="space-y-4 text-[15px] font-medium border-l hairline pl-5">
+<a class="block text-[#171717] font-semibold border-l-2 -ml-[21px] pl-[19px] border-black transition-colors" href="#fast">Reliably fast</a>
+<a class="block text-[#737373] hover:text-black transition-colors" href="#frontier">Frontier open models</a>
+<a class="block text-[#737373] hover:text-black transition-colors" href="#setup">Keep your setup</a>
+<a class="block text-[#737373] hover:text-black transition-colors" href="#data">Your data stays yours</a>
+<a class="block text-[#737373] hover:text-black transition-colors" href="#pricing">Predictable pricing</a>
+</nav>
+</aside>
+<!-- Content Column starting around x424 -->
+<div class="col-span-8 space-y-36 pb-20">
+<!-- Section 1: Reliably fast -->
+<section class="scroll-mt-28" id="fast">
+<h2 class="text-[30px] font-semibold text-[#171717] tracking-tight mb-4">
+            Reliably fast
+          </h2>
+<p class="text-[17px] leading-[27px] text-[#737373] max-w-[620px] mb-8">
+            The same open models, served faster. Dedicated capacity so throughput holds up when you are running several agents at once.
+          </p>
+<!-- Benchmarks Chart -->
+<div class="bg-white border hairline rounded-xl p-6 max-w-[640px] shadow-sm">
+<div class="text-[13px] font-medium text-[#737373] mb-6 flex justify-between items-center">
+<span>Throughput (tokens/sec)</span>
+<span class="text-[12px] bg-[#f5f5f5] text-[#525252] px-2 py-0.5 rounded">Higher is better</span>
+</div>
+<div class="space-y-4">
+<!-- Ollama Bar -->
+<div>
+<div class="flex justify-between text-[14px] font-medium mb-1.5">
+<span class="text-[#171717] flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#171717]"></span>
+<strong>Ollama</strong>
+</span>
+<span class="font-semibold text-[#171717] mono">195.6</span>
+</div>
+<div class="w-full bg-[#f5f5f5] h-6 rounded-md overflow-hidden p-0.5">
+<div class="bg-[#171717] h-full rounded transition-all duration-500" style="width: 100%;"></div>
+</div>
+</div>
+<!-- Provider A -->
+<div>
+<div class="flex justify-between text-[14px] text-[#737373] mb-1.5">
+<span>Provider A</span>
+<span class="mono">97.6</span>
+</div>
+<div class="w-full bg-[#f5f5f5] h-6 rounded-md overflow-hidden p-0.5">
+<div class="bg-[#a3a3a3] h-full rounded" style="width: 49.9%;"></div>
+</div>
+</div>
+<!-- Provider B -->
+<div>
+<div class="flex justify-between text-[14px] text-[#737373] mb-1.5">
+<span>Provider B</span>
+<span class="mono">63.0</span>
+</div>
+<div class="w-full bg-[#f5f5f5] h-6 rounded-md overflow-hidden p-0.5">
+<div class="bg-[#c4c4c4] h-full rounded" style="width: 32.2%;"></div>
+</div>
+</div>
+<!-- Provider C -->
+<div>
+<div class="flex justify-between text-[14px] text-[#737373] mb-1.5">
+<span>Provider C</span>
+<span class="mono">50.5</span>
+</div>
+<div class="w-full bg-[#f5f5f5] h-6 rounded-md overflow-hidden p-0.5">
+<div class="bg-[#d4d4d4] h-full rounded" style="width: 25.8%;"></div>
+</div>
+</div>
+</div>
+<!-- Source attribution -->
+<div class="mt-6 pt-4 border-t hairline text-[12px] text-[#8a8a8a]">
+              Model: DeepSeek v4 Flash. Sources: TokenDyno and provider published figures, August 2026.
+            </div>
+</div>
+</section>
+<!-- Section 2: Frontier open models -->
+<section class="scroll-mt-28" id="frontier">
+<h2 class="text-[30px] font-semibold text-[#171717] tracking-tight mb-4">
+            Frontier open models
+          </h2>
+<p class="text-[17px] leading-[27px] text-[#737373] max-w-[620px] mb-8">
+            Frontier capability with more usage. The latest open models match the best closed ones, at a fraction of the cost.
+          </p>
+<!-- Table Comparison -->
+<div class="bg-white border hairline rounded-xl overflow-hidden max-w-[640px] shadow-sm">
+<table class="w-full text-left border-collapse text-[14px]">
+<thead>
+<tr class="bg-[#fafafa] border-b hairline text-[12px] font-semibold text-[#737373] uppercase tracking-wider">
+<th class="py-3 px-5">Model</th>
+<th class="py-3 px-4">Score</th>
+<th class="py-3 px-5 text-right">Cost / M tokens</th>
+</tr>
+</thead>
+<tbody class="divide-y hairline font-normal">
+<tr class="hover:bg-[#fcfcfc]">
+<td class="py-3.5 px-5 font-medium text-[#171717] mono text-[13px]">gpt-5.6-sol <span class="text-[#737373] text-[11px] font-sans">[max]</span></td>
+<td class="py-3.5 px-4 text-[#171717]">73% <span class="text-[#737373] text-[12px]">±3%</span></td>
+<td class="py-3.5 px-5 text-right font-medium text-[#171717] mono">$6.46</td>
+</tr>
+<tr class="hover:bg-[#fcfcfc]">
+<td class="py-3.5 px-5 font-medium text-[#171717] mono text-[13px]">claude-fable-5 <span class="text-[#737373] text-[11px] font-sans">[max]</span></td>
+<td class="py-3.5 px-4 text-[#171717]">70% <span class="text-[#737373] text-[12px]">±4%</span></td>
+<td class="py-3.5 px-5 text-right font-medium text-[#171717] mono">$21.63</td>
+</tr>
+<tr class="hover:bg-[#fcfcfc]">
+<td class="py-3.5 px-5 font-medium text-[#171717] mono text-[13px]">kimi-k3 <span class="text-[#737373] text-[11px] font-sans">[max]</span></td>
+<td class="py-3.5 px-4 text-[#171717]">69% <span class="text-[#737373] text-[12px]">±5%</span></td>
+<td class="py-3.5 px-5 text-right font-medium text-[#171717] mono">$4.65</td>
+</tr>
+<tr class="bg-[#fafafa]/70 hover:bg-[#fafafa]">
+<td class="py-3.5 px-5 font-semibold text-[#171717] mono text-[13px] flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+                    deepseek-v4-pro <span class="text-[#737373] text-[11px] font-sans">[max]</span>
+</td>
+<td class="py-3.5 px-4 font-semibold text-[#171717]">63% <span class="text-[#737373] text-[12px] font-normal">±6%</span></td>
+<td class="py-3.5 px-5 text-right font-semibold text-[#171717] mono text-emerald-700">$1.67</td>
+</tr>
+</tbody>
+</table>
+<div class="px-5 py-3 border-t hairline bg-[#fafafa] text-[12px] text-[#8a8a8a]">
+              Source: DeepSWE August 2026.
+            </div>
+</div>
+</section>
+<!-- Section 3: Keep your setup -->
+<section class="scroll-mt-28" id="setup">
+<h2 class="text-[30px] font-semibold text-[#171717] tracking-tight mb-4">
+            Keep your setup
+          </h2>
+<p class="text-[17px] leading-[27px] text-[#737373] max-w-[620px] mb-8">
+            Launch Claude Code, Codex, and more with one command. Switch models without changing your workflow.
+          </p>
+<!-- Quiet Grid of Integrations -->
+<div class="grid grid-cols-4 gap-3 max-w-[640px]">
+<!-- Claude Code -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">CC</div>
+<span class="text-[13px] font-medium text-[#171717]">Claude Code</span>
+</div>
+<!-- Codex -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">CX</div>
+<span class="text-[13px] font-medium text-[#171717]">Codex</span>
+</div>
+<!-- OpenCode -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">OC</div>
+<span class="text-[13px] font-medium text-[#171717]">OpenCode</span>
+</div>
+<!-- Hermes Agent -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">HA</div>
+<span class="text-[13px] font-medium text-[#171717]">Hermes Agent</span>
+</div>
+<!-- OpenClaw -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">🦀</div>
+<span class="text-[13px] font-medium text-[#171717]">OpenClaw</span>
+</div>
+<!-- VS Code -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">VS</div>
+<span class="text-[13px] font-medium text-[#171717]">VS Code</span>
+</div>
+<!-- Pi -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">π</div>
+<span class="text-[13px] font-medium text-[#171717]">Pi</span>
+</div>
+<!-- n8n -->
+<div class="border hairline rounded-xl p-4 flex flex-col items-center justify-center text-center hover:border-[#171717] transition-all bg-white group h-28">
+<div class="w-8 h-8 rounded-lg bg-[#f5f5f5] flex items-center justify-center text-[#171717] font-bold text-xs mb-2">n8n</div>
+<span class="text-[13px] font-medium text-[#171717]">n8n</span>
+</div>
+</div>
+</section>
+<!-- Section 4: Your data stays yours -->
+<section class="scroll-mt-28" id="data">
+<h2 class="text-[30px] font-semibold text-[#171717] tracking-tight mb-4">
+            Your data stays yours
+          </h2>
+<p class="text-[17px] leading-[27px] text-[#737373] max-w-[620px] mb-8">
+            Your data is never trained on by any provider. All cloud models are hosted in the US, Europe &amp; Singapore. Get the privacy benefits of local and the power of cloud.
+          </p>
+<!-- 4 Architecture Rows: Private, Hosted, Local, Open -->
+<div class="space-y-3 max-w-[640px]">
+<div class="p-4 border hairline rounded-xl flex items-center justify-between bg-white">
+<div class="flex items-center space-x-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#171717]"></span>
+<div>
+<h4 class="text-[15px] font-semibold text-[#171717]">Private</h4>
+<p class="text-[13px] text-[#737373]">Zero training on user inputs or generated completions.</p>
+</div>
+</div>
+<span class="text-[12px] text-[#171717] font-medium bg-[#f5f5f5] px-2.5 py-1 rounded-full">Default</span>
+</div>
+<div class="p-4 border hairline rounded-xl flex items-center justify-between bg-white">
+<div class="flex items-center space-x-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#171717]"></span>
+<div>
+<h4 class="text-[15px] font-semibold text-[#171717]">Hosted</h4>
+<p class="text-[13px] text-[#737373]">Dedicated cloud instances located in US, Europe &amp; Singapore regions.</p>
+</div>
+</div>
+<span class="text-[12px] text-[#737373] mono">Multi-Region</span>
+</div>
+<div class="p-4 border hairline rounded-xl flex items-center justify-between bg-white">
+<div class="flex items-center space-x-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#171717]"></span>
+<div>
+<h4 class="text-[15px] font-semibold text-[#171717]">Local</h4>
+<p class="text-[13px] text-[#737373]">Run fully offline on Apple Silicon, Linux, or Windows GPUs.</p>
+</div>
+</div>
+<span class="text-[12px] text-[#171717] font-medium bg-[#f5f5f5] px-2.5 py-1 rounded-full">100% Offline</span>
+</div>
+<div class="p-4 border hairline rounded-xl flex items-center justify-between bg-white">
+<div class="flex items-center space-x-3.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#171717]"></span>
+<div>
+<h4 class="text-[15px] font-semibold text-[#171717]">Open</h4>
+<p class="text-[13px] text-[#737373]">Full transparency with open source weights and open architecture.</p>
+</div>
+</div>
+<span class="text-[12px] text-[#737373] mono">Open Weights</span>
+</div>
+</div>
+</section>
+<!-- Section 5: Predictable pricing -->
+<section class="scroll-mt-28" id="pricing">
+<h2 class="text-[30px] font-semibold text-[#171717] tracking-tight mb-4">
+            Predictable pricing
+          </h2>
+<p class="text-[17px] leading-[27px] text-[#737373] max-w-[620px] mb-8">
+            No hidden limits or confusing pricing. Start free and upgrade or add more usage when you need more. Local models are always free.
+          </p>
+<!-- Sample Brand Card -->
+<div class="border hairline rounded-2xl p-7 bg-[#fafafa] max-w-[520px] shadow-sm">
+<div class="flex justify-between items-baseline mb-3">
+<h3 class="text-[22px] font-bold text-[#171717]">Pro</h3>
+<div class="text-[22px] font-bold text-[#171717]">$20<span class="text-[14px] font-normal text-[#737373]">/mo</span></div>
+</div>
+<div class="text-[14px] text-[#171717] font-medium mb-5">
+              Includes $60 of usage
+            </div>
+<!-- Meter / progress bar -->
+<div class="mb-2">
+<div class="flex justify-between text-[12px] text-[#737373] mb-1.5">
+<span>$37.20 used</span>
+<span>resets on the 1st</span>
+</div>
+<div class="w-full bg-[#e5e5e5] h-2.5 rounded-full overflow-hidden">
+<div class="bg-[#171717] h-full rounded-full" style="width: 62%;"></div>
+</div>
+</div>
+<div class="mt-6 pt-5 border-t hairline space-y-2 text-[13px] text-[#737373]">
+<div class="flex justify-between">
+<span>Usage included Pro</span>
+<span class="font-medium text-[#171717]">$60</span>
+</div>
+<div class="flex justify-between">
+<span>Usage included Max</span>
+<span class="font-medium text-[#171717]">$300</span>
+</div>
+</div>
+<div class="mt-6">
+<a class="inline-flex items-center text-[14px] font-semibold text-[#171717] hover:underline gap-1" href="https://ollama.com/pricing">
+                See pricing <span aria-hidden="true">→</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+<!-- Spacious Closing CTA -->
+<section class="mt-20 py-24 text-center border-t hairline">
+<h2 class="text-[48px] font-medium text-[#171717] tracking-tight mb-8">
+        Get up and running in less than two minutes
+      </h2>
+<div>
+<a class="inline-flex items-center justify-center px-7 py-4 bg-[#171717] text-white text-[16px] font-medium rounded-full hover:bg-black transition-all shadow-sm" href="https://ollama.com/download">
+          Download
+        </a>
+</div>
+</section>
+</main>
+<!-- Compact Footer -->
+<footer class="w-full border-t hairline py-10 bg-white">
+<div class="max-w-[1280px] mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-[14px] text-[#737373] gap-4">
+<div class="flex items-center space-x-6">
+<span>© 2026 Ollama</span>
+</div>
+<div class="flex flex-wrap items-center gap-x-6 gap-y-2">
+<a class="hover:text-black transition-colors" href="https://ollama.com/download">Download</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/blog">Blog</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/docs">Docs</a>
+<a class="hover:text-black transition-colors" href="https://github.com/ollama/ollama">GitHub</a>
+<a class="hover:text-black transition-colors" href="https://discord.gg/ollama">Discord</a>
+<a class="hover:text-black transition-colors" href="https://x.com/ollama">X (Twitter)</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/support">Support</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/careers">Careers</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/privacy">Privacy</a>
+<a class="hover:text-black transition-colors" href="https://ollama.com/terms">Terms</a>
+</div>
+</div>
+</footer>
+</body>
+</html>
