@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clay — Global Branding &amp; UI/UX Design Agency</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#fe8983",
+            "secondary-fixed": "#e2e2e9",
+            "on-secondary-fixed-variant": "#5a5b61",
+            "error-dim": "#4e0309",
+            "primary-fixed-dim": "#cfd4e4",
+            "on-tertiary-container": "#4b4a65",
+            "tertiary": "#5d5c78",
+            "tertiary-container": "#d9d7f8",
+            "on-secondary": "#f8f8ff",
+            "background": "#fcf8f9",
+            "on-tertiary-fixed": "#383751",
+            "on-primary": "#f7f7ff",
+            "surface-dim": "#dbd9dd",
+            "secondary-fixed-dim": "#d3d4db",
+            "primary-container": "#dde2f2",
+            "surface": "#fcf8f9",
+            "surface-tint": "#585e6c",
+            "surface-container": "#f0edef",
+            "error": "#9f403d",
+            "tertiary-fixed": "#d9d7f8",
+            "surface-container-lowest": "#ffffff",
+            "inverse-primary": "#e8eefe",
+            "on-background": "#323235",
+            "inverse-surface": "#0e0e0f",
+            "on-primary-container": "#4c525f",
+            "on-error-container": "#752121",
+            "primary-fixed": "#dde2f2",
+            "on-error": "#fff7f6",
+            "surface-variant": "#e4e2e5",
+            "tertiary-dim": "#51506c",
+            "outline-variant": "#b3b1b4",
+            "on-secondary-container": "#505257",
+            "on-surface": "#323235",
+            "surface-bright": "#fcf8f9",
+            "on-surface-variant": "#5f5f61",
+            "secondary-dim": "#515359",
+            "outline": "#7b7a7d",
+            "inverse-on-surface": "#9e9c9d",
+            "primary": "#585e6c",
+            "surface-container-low": "#f6f3f4",
+            "on-primary-fixed": "#393f4c",
+            "secondary-container": "#e2e2e9",
+            "surface-container-highest": "#e4e2e5",
+            "on-tertiary-fixed-variant": "#54536f",
+            "on-tertiary": "#fbf7ff",
+            "on-secondary-fixed": "#3d3f45",
+            "on-primary-fixed-variant": "#565c69",
+            "secondary": "#5d5f65",
+            "primary-dim": "#4d525f",
+            "tertiary-fixed-dim": "#cbc9e9",
+            "surface-container-high": "#eae7ea"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @keyframes floatSoft {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-16px) rotate(1.5deg); }
+    }
+    .animate-float {
+      animation: floatSoft 7s ease-in-out infinite;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased selection:bg-on-surface selection:text-surface-container-lowest">
+<!-- 1. TopNavBar (Shared Component Anchor) -->
+<header class="sticky top-0 w-full z-50 border-none bg-background/90 dark:bg-inverse-surface/90 backdrop-blur-md transition-all duration-300">
+<div class="flex justify-between items-center w-full px-6 lg:px-[75px] py-6 max-w-full">
+<!-- Left: Logo -->
+<a class="font-headline font-black text-2xl lg:text-3xl tracking-tighter text-on-background dark:text-inverse-primary hover:opacity-80 transition-opacity" href="#">
+        clay
+      </a>
+<!-- Middle: Navigation Links -->
+<nav class="hidden md:flex items-center space-x-9 font-headline text-[17px] tracking-tight">
+<a class="text-on-background dark:text-inverse-primary font-bold hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#work">Work</a>
+<a class="text-secondary dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#clients">Clients</a>
+<a class="text-secondary dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#services">Services</a>
+<div class="relative group cursor-pointer flex items-center gap-1 text-secondary dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200">
+<span>Industries</span>
+<span class="material-symbols-outlined text-[18px] transition-transform duration-200 group-hover:rotate-180">keyboard_arrow_down</span>
+</div>
+<a class="text-secondary dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#about">About</a>
+<a class="text-secondary dark:text-outline-variant font-medium hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#blog">Blog</a>
+</nav>
+<!-- Right: Contact Pill CTA -->
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center justify-center bg-inverse-surface text-surface-container-lowest font-headline font-medium text-sm tracking-tight px-6 py-3 rounded-full hover:bg-on-surface transition-all duration-150 active:scale-95 shadow-sm" href="#contact">
+          Contact
+        </a>
+</div>
+</div>
+</header>
+<!-- 2. Hero Section (715px height, pale warm gray #efedf0, 3D satellite) -->
+<section class="w-full bg-[#efedf0] min-h-[715px] flex items-center px-6 lg:px-[75px] py-16 lg:py-0 overflow-hidden relative">
+<div class="w-full max-w-[1720px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Headline -->
+<div class="lg:col-span-7 flex flex-col justify-center z-10">
+<h1 class="font-headline font-black text-4xl sm:text-5xl lg:text-[64px] leading-[1.08] tracking-[-0.04em] text-on-surface max-w-[745px]">
+          Clay is a global branding<br class="hidden sm:inline"/> and UX design agency
+        </h1>
+<p class="mt-6 font-body text-secondary text-lg lg:text-xl font-normal max-w-[620px] leading-relaxed">
+          We craft world-class brand identities, digital products, and flagship web experiences for visionary tech enterprises and industry disruptors worldwide.
+        </p>
+</div>
+<!-- Right Signature 3D Graphic -->
+<div class="lg:col-span-5 flex justify-center lg:justify-end relative">
+<div class="relative w-[340px] h-[340px] sm:w-[460px] sm:h-[460px] lg:w-[540px] lg:h-[540px] flex items-center justify-center group cursor-pointer">
+<div class="absolute inset-0 bg-primary-container/20 rounded-full blur-3xl opacity-40 scale-75 group-hover:scale-90 transition-transform duration-700"></div>
+<img alt="Clay Signature 3D Satellite Graphic" class="relative z-10 w-full h-full object-contain animate-float drop-shadow-2xl transition-transform duration-500 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1VIiu1Si52w5cizSq_8DzyhxQPrCEkued_M-WDWONJzbjqZFxK3lu7Rm77fN07RbBl8ncpya7EtcgeDKisiHdDWhS8gtkErd_IwjiqIfOJtoQzkWK11nUyZLrOHz96IAe9VHBCjadZbH25khF-eGyuAsC6XbhqXLkNyqAhnM6tSYW_ecTlel_Gui3xQkJOtfE-46rS7YVR5i54Fr19lLe4pa4e0hII2-FbPXxa6CyVyoSmleD2rRld1tjQ"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. Showreel Frame Section (1130px frame) -->
+<section class="w-full px-6 lg:px-[75px] py-16 lg:py-24 bg-surface-container-lowest flex justify-center">
+<div class="w-full max-w-[1130px] relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-inverse-surface group cursor-pointer">
+<div class="aspect-video w-full relative overflow-hidden flex items-center justify-center">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 filter brightness-95" data-alt="A cinematic widescreen montage showcase of modern minimalist digital products, sleek UI design animations on glass devices, and high-tech typography reels in high key studio lighting. Crisp monochrome tones dominate with subtle violet ambient highlights, evoking world-class design mastery and cutting edge digital interface craft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYglk87GIHUZstnBmKe8oCuFTfaxvUhn60N18F66VNQInL-9Jq6t_gnLjtx22ZUSOCVt8f57P9FhrvL1wsrdPA2LIWS8qRyjTYbjyIdoaQeCQ_UFUP7IXGWfXfjI9MJePpM9cOta8vN6txxWFnvpnPiAL-1YRb-dl-_GHYhh9phrKQk_kB1vbZ_xSpSDKqgCpnJtEVlTqRy_MeIv2KRJA8SeNuoBODqYaK8V0-XR3nAb-dZ3kqdYiraolDxOCU50ffZz51ghDXz8w"/>
+<!-- Overlay Dark Gradient -->
+<div class="absolute inset-0 bg-gradient-to-t from-inverse-surface/80 via-transparent to-transparent"></div>
+<!-- Center Play Button Watermark -->
+<div class="absolute flex items-center justify-center w-20 h-20 rounded-full bg-surface-container-lowest/20 backdrop-blur-md border border-surface-container-lowest/30 text-surface-container-lowest transition-transform duration-300 group-hover:scale-110">
+<span class="material-symbols-outlined text-4xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<!-- Bottom Overlay Bar -->
+<div class="absolute bottom-6 left-6 right-6 flex items-center justify-between pointer-events-none">
+<span class="text-surface-container-lowest/90 font-headline font-medium text-sm tracking-wide uppercase px-3 py-1 bg-inverse-surface/60 rounded backdrop-blur-sm">Clay Reel 2026</span>
+<button class="pointer-events-auto inline-flex items-center gap-2 bg-surface-container-lowest text-inverse-surface px-5 py-2.5 rounded-full font-headline font-semibold text-sm hover:bg-surface-container-low transition-all duration-200 shadow-md">
+<span class="material-symbols-outlined text-lg" data-weight="fill" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+<span>Play Showreel</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Value Proposition & Services Section -->
+<section class="w-full px-6 lg:px-[75px] py-20 lg:py-28 bg-surface-container-lowest" id="services">
+<div class="max-w-[1400px] mx-auto">
+<h2 class="font-headline font-medium text-3xl sm:text-4xl lg:text-[46px] leading-[1.25] tracking-tight text-on-surface max-w-[1240px]">
+        We build transformative digital experiences for the world's leading brands by blending AI, design, and technology.
+      </h2>
+<!-- Service Categories (Editorial Line items) -->
+<div class="mt-20 border-t border-outline-variant/30">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 pt-10">
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">01</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Branding</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">Brand Strategy, Architecture, Visual Identity Systems, Guidelines</p>
+</div>
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">02</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Digital Products</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">Product Strategy, UI/UX, Design Systems, Mobile &amp; Web Apps</p>
+</div>
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">03</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Websites</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">Flagship Marketing Sites, Editorial Platforms, Interactive Experiences</p>
+</div>
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">04</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Development</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">Fullstack Engineering, WebGL, High-Performance Micro-interactions</p>
+</div>
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">05</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Content</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">3D Motion, Art Direction, Video Production, Copywriting</p>
+</div>
+<div class="space-y-2 group cursor-pointer">
+<span class="text-xs uppercase tracking-widest text-outline font-label">06</span>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Generative AI</h3>
+<p class="text-xs text-secondary leading-relaxed pt-1">Custom Model Interfaces, LLM Product UX, Adaptive Workflows</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Client Logo Wall -->
+<section class="w-full px-6 lg:px-[75px] py-16 bg-surface-container-lowest border-y border-outline-variant/20" id="clients">
+<div class="max-w-[1400px] mx-auto flex flex-col items-center">
+<!-- 2 balanced rows of logos -->
+<div class="w-full grid grid-cols-2 sm:grid-cols-5 gap-8 lg:gap-12 items-center justify-items-center opacity-70">
+<span class="font-headline font-bold text-2xl tracking-tighter text-outline hover:text-on-surface transition-colors">Meta</span>
+<span class="font-headline font-bold text-2xl tracking-tight text-outline hover:text-on-surface transition-colors">Google</span>
+<span class="font-headline font-bold text-2xl tracking-normal text-outline hover:text-on-surface transition-colors">DISCOVER</span>
+<span class="font-headline font-bold text-2xl tracking-tight text-outline hover:text-on-surface transition-colors">stripe</span>
+<span class="font-headline font-bold text-2xl italic tracking-tight text-outline hover:text-on-surface transition-colors">Coca-Cola</span>
+<span class="font-headline font-bold text-2xl tracking-normal text-outline hover:text-on-surface transition-colors">coinbase</span>
+<span class="font-headline font-bold text-2xl tracking-tight text-outline hover:text-on-surface transition-colors">Uber</span>
+<span class="font-headline font-bold text-2xl tracking-widest text-outline hover:text-on-surface transition-colors">SONY</span>
+<span class="font-headline font-bold text-2xl tracking-tight text-outline hover:text-on-surface transition-colors">slack</span>
+<span class="font-headline font-bold text-2xl tracking-tight text-outline hover:text-on-surface transition-colors">amazon</span>
+</div>
+<div class="mt-12">
+<a class="text-sm font-headline font-medium text-secondary hover:text-on-surface transition-colors flex items-center gap-1 group" href="#clients-all">
+<span>View all clients</span>
+<span class="transition-transform group-hover:translate-x-1">→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 6. Inset Fintech Feature Panel (Bg: #17191e) -->
+<section class="w-full px-6 lg:px-[75px] py-16 lg:py-24 bg-surface-container-lowest">
+<div class="max-w-[1570px] mx-auto bg-[#17191e] rounded-3xl p-8 sm:p-12 lg:p-20 overflow-hidden relative">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left content -->
+<div class="lg:col-span-7 flex flex-col justify-center z-10 space-y-8">
+<span class="text-xs font-label uppercase tracking-[0.2em] text-outline-variant font-semibold">
+            Fintech
+          </span>
+<h2 class="font-headline font-bold text-4xl sm:text-5xl lg:text-[58px] text-surface-container-lowest leading-[1.1] tracking-tight">
+            The Future of Finance is Intelligent
+          </h2>
+<p class="text-outline-variant text-base lg:text-lg max-w-[520px] font-normal leading-relaxed">
+            We partner with premier banking institutions and disruptive web3 protocols to engineer ultra-secure, hyper-intuitive financial tools.
+          </p>
+<div>
+<a class="inline-flex items-center gap-2 text-surface-container-lowest font-headline font-semibold text-lg hover:text-primary-fixed transition-colors group" href="#fintech">
+<span>Explore fintech</span>
+<span class="transition-transform group-hover:translate-x-1.5">→</span>
+</a>
+</div>
+</div>
+<!-- Right 3D Tubular Graphic -->
+<div class="lg:col-span-5 flex justify-center lg:justify-end">
+<div class="relative w-[300px] h-[300px] sm:w-[420px] sm:h-[420px] lg:w-[480px] lg:h-[480px] group">
+<div class="absolute inset-0 bg-primary/20 rounded-full blur-2xl opacity-30"></div>
+<img alt="Clay Fintech 3D Tubular Graphic" class="relative z-10 w-full h-full object-contain filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)] transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida/AEtjO1Xpm0G8Wct9pTwElFTIq8F1L31NkR6gFRfrWvGuZloj6nL1zjGqwQFTOerWdFAz7W2jRHz1Jyud2wepc1gZVTt1wmt5pJG7yHr_aviTzrYyoYb96SsnlWPQcJOdvwooFpiAtU1mu1iewOIy7lwD-yt-Ney0JRfJV6zx6mMcYWs4iqgMNsWLZvxHtFKLtjfWIXK-c3sPSd2ZvWAJh7E2j4SkbQljXAJZjOloIqXHXF9fYVEfinItlOUD834"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Work / Case Studies Section (Masonry Gallery) -->
+<section class="w-full px-6 lg:px-[75px] py-16 lg:py-24 bg-surface-container-lowest" id="work">
+<div class="max-w-[1720px] mx-auto">
+<div class="flex justify-between items-baseline mb-16">
+<h2 class="font-headline font-bold text-3xl lg:text-4xl text-on-surface tracking-tight">Selected Work</h2>
+<span class="text-sm font-label uppercase tracking-widest text-outline">2024 — 2026</span>
+</div>
+<!-- Asymmetric Editorial Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
+<!-- 1. Slack (Square Tile) -->
+<div class="md:col-span-6 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-[#eae8eb] rounded-2xl overflow-hidden relative mb-5 flex items-center justify-center p-12">
+<img class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-102" data-alt="A minimal clean product presentation mockup of Slack design system interfaces, typography scale sheets, and iconic multi-color hashtag branding elements on neutral gray surfaces. High key soft overhead studio light, modern tech corporate aesthetic, pristine clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA_e_AiT_Cy7jaZ2SFzQUARbm0WF7HEyivC4tNRDFvLGAbWmJOsW5QqXJwRCXznfnD8dR16GQVghTnuO4vNB_uNoInCKbyDDrI3t1VrrsoJFEdbY7R_XeBPJlf1VAgVpDyZmwsMPJ1SrseEnrwUxQ-OZVOuRXw_RaBOF97nkXW0WHQ-bA2SGxpOGCFlyijIsU3qR99xU7znRl6owAumuParsAfzT1zUaIj3PLOKtFDm4tXlsun61YY1coSCNwv9cOxxvBQnS-x8Aik"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Branding</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Design System</span>
+</div>
+<h3 class="font-headline font-bold text-2xl text-on-surface group-hover:text-primary transition-colors">Slack</h3>
+<p class="text-secondary text-sm mt-1">A comprehensive brand evolution and cross-platform UI ecosystem for modern workplace collaboration.</p>
+</div>
+<!-- 2. STC Bank (Portrait Tile - Deep Emerald) -->
+<div class="md:col-span-6 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-[#053024] rounded-2xl overflow-hidden relative mb-5 flex items-center justify-center p-10">
+<img class="w-full h-full object-cover rounded-xl transition-transform duration-500 group-hover:scale-102" data-alt="A smartphone finance application mockup resting on a deep emerald green marble pedestal, showcasing modern contactless digital banking cards, biometric security dashboards, and hyper-clean fintech charts. Subtle dramatic side lighting with glowing metallic accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAWkpnO3diUocwtFlhcAndRmSsXnQAyQ5T2Yv_6OlKtedrGDdCPj9YyD_zBG_DXZ8HxkiFfFqBlf9xNzrImexXD5erY0r4LsIhD3SyYW9RxLZKdW7sQoROcFf8lFcFmx-YIF43rtXpVU8Yt3U21IzswRi37qO4ZoqD-jMIOHwwBYtLnqmCvthNtNWpAuC1JjEBJ7B5MFttoftPAkPtMVlJpELDoFT7LXmxitGcFYaXhjPUJFV2-z9WSQmaICWMvWgwLvrp18Varots"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">UI/UX</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Mobile App</span>
+</div>
+<h3 class="font-headline font-bold text-2xl text-on-surface group-hover:text-primary transition-colors">STC Bank</h3>
+<p class="text-secondary text-sm mt-1">Transforming Saudi Arabia’s leading telecom into a seamless, next-generation digital banking challenger.</p>
+</div>
+<!-- 3. Sky (Panoramic Wide Tile) -->
+<div class="md:col-span-12 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[21/9] bg-surface-container-high rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="A wide panoramic television screen interface displaying an ultra-modern streaming media platform with cinematic movie posters, transparent frosted glass navigation overlays, and high resolution ambient glow. Clean editorial layout designed for premium home entertainment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtjU83R1XjKPeeegEI9I3YWmf09F8sj45tH9B04OnnXKl4FFwmilVh1a4lf-EyGo3Pcg5fgzyFfM_cdvKAAIxkoOarBZ9OgrkP6O6yMemE_CI80Rh05sIF99cA8D7KCXVLBtpqUgayhnkvBa3ZQLkBBN_9XVJFB26Yj4vrIBIBUNehEulryoY7juEpGMnvM9u4YcWKhHsYhLWCvEzpmkkzD81jM0sDBo77hGV4yO7KVO3eob8HBetSTPYuhkfOoCJCHl2LliUN47Q"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">TV OS</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Experience Design</span>
+</div>
+<h3 class="font-headline font-bold text-2xl text-on-surface group-hover:text-primary transition-colors">Sky</h3>
+<p class="text-secondary text-sm mt-1">Next-generation connected entertainment operating system for millions of living rooms across Europe.</p>
+</div>
+<!-- 4. Snapchat (4 cols) -->
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[4/5] bg-[#fff600]/10 rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Modern smartphone interface capturing augmented reality 3D camera lenses and generative AR filter controls with clean, playful social UI components in bright natural lighting. Energetic, youthful aesthetic balanced with pristine architectural typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA18zR1MDKkHHxi3FB6mh_iAijlvIQBYlnBFqs5LiP2N80nHryq-MRWJzsjA_AQ5fV8INP_dNdTM0k7-L6Q5DwNj7qHfzWU1w3ZnXQSi_oeFmoB7Eaw6T83tag29xz4-oZcnfkEIKAkgneyLBe1Z1HLvS5S7NTTNevpnxFTNfbpU7hnDcFgydqwWHbx0_Y5k3Mgyce5f2hzYe0wPDQknJNxabFLwyHmjlqWbegxLapWdYYe18sXg9FjSOOX5donsHwVQUoImnzTy7w"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">AR/VR</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Mobile</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Snapchat</h3>
+<p class="text-secondary text-sm mt-1">Flagship AR interaction design and spatial camera creator tools.</p>
+</div>
+<!-- 5. Joe & The Juice (4 cols) -->
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[4/5] bg-[#ff80a6]/10 rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Editorial lifestyle photography of chic coffee cups, juice packaging, and sleek mobile pre-order touchscreens in a sunlit Scandinavian cafe interior with soft timber and blush pink accents. Minimalist luxury fast-casual dining experience." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJDJhAxN2TrdgStiFG4BnZyda-A6l0NVLlj6IyWLpVCBYQVfHJYmzdejgfi82pD9WltEssXDGTkdR5q04Ur6Hnnz80z3tSg0ITW4526Zvy3IbcYPTkVJ6sJmu9hJti9OjBLxxzdqXjgU4AE0aEjkzIbHiU0JLuuyx5AsjCTCcJnQiiAKP-7R29SMp4Mem3sz9vqTm5J3tN4mT1E-6tZxnKFUNpgnFUTNA38xyEAMUAebAWDcVR57hNXhokzzvNou72JufBeM2ctCM"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">E-Commerce</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Branding</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Joe &amp; The Juice</h3>
+<p class="text-secondary text-sm mt-1">Global omnichannel app and bespoke store pickup experience.</p>
+</div>
+<!-- 6. Vantara (4 cols) -->
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[4/5] bg-surface-container-high rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="A lush nature conservation wildlife digital interactive map showcasing botanical reserves and exotic veterinary care facilities. Earthy green gradients, editorial serif typography, and tactile digital topography renderings in gentle morning mist." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmumlZ43Js1_pWgxZkGMqrnQvYD15Tim_tkWyRTj3ewTqq-cO4lxvXr1lnOBk1XdpLOLRDKhrjXHb2fegm76uO9BLzw-Js1EMoT0lEn7e6Hh9SmTPY4XtvYIqn2TfgAioL021SKaY49BXR5y83Azi8u45NbvJ3XlD2Sa3KHVJYEWRBxMmWKrutfuAPvxe_eT77A5eZPlNgTGSYURQPojMbMxMzzGWQP-iNxGZvSLexKwaPlrjUlr-9lwOhqy09k55qkJzZJGnF4lo"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Conservation</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Web Experience</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Vantara</h3>
+<p class="text-secondary text-sm mt-1">Immersive digital portal honoring the world's largest animal sanctuary.</p>
+</div>
+<!-- 7. Grayscale (6 cols) -->
+<div class="md:col-span-6 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[16/10] bg-inverse-surface rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Sophisticated crypto asset management web dashboard displaying real time institutional fund metrics, portfolio allocations, and dark mode candlestick analytics in crisp high-contrast monochrome with subtle cyan data callouts. Elegant financial typography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuARivxowDMc7owxPw3ulfSOT1VeaidxQ3E5l-d1cZwwvmOyjcGQCQ60b3BRdt0B1gfc2XbxbOJxod3_Zgf8kB3H48AL1t7hV2W18yN4qe2ikpCB36xb4GcXA7L75FUBGYPOlDicw1Xs3_TKOdObSXZ4Ik1bLs1REREpmL6CdC731SpHIbBMr1WS9QsVBcIYlHmhgcW02DmeqAChqCrb1kj2wfzjkB5Dhjswcfnvp6U-krxWL7b82Z62870oChWuy3UpYpCGdc9IQM4"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Fintech</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Web Platform</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Grayscale</h3>
+<p class="text-secondary text-sm mt-1">Digital wealth platform for the world’s pioneer in digital currency investing.</p>
+</div>
+<!-- 8. Discover (6 cols) -->
+<div class="md:col-span-6 flex flex-col group cursor-pointer">
+<div class="w-full aspect-[16/10] bg-[#f97316]/10 rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="A modern consumer banking web application showcasing cashback card rewards, credit health monitors, and intelligent spending analytics on a warm pale surface. High key studio lighting emphasizing clarity, accessibility, and high usability." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_sFLbIW4NTgv9hApv1dLhhOkPu3B9a4Zo5rM04FpsTYvKPTI9JL19wMAYuvRTl1JJqS-L_1mBpIg_jk14GLh36dO_qoVy2KjOxFnlIosyZ6BPpbGaWoU0EwR61VNqOP-VNKzxWSnVV2Ra0qtjf-kvCc1PilPfYLqpiLgmgVWW2q8OxkufZTLCxaPEo68gx3Qn8EU1A5Sukhj3L3JOh8rN3jsSLWnppFYrgWEMa1k0xFk3kH2lkxWT2YfhePgmbUNIIIuAhhu8toU"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Banking</span>
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Design System</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Discover</h3>
+<p class="text-secondary text-sm mt-1">Unified design language redesign serving over 50 million cardholders.</p>
+</div>
+<!-- 9. Marqeta, 10. Yahoo! Games, 11. Serena & Lily (3 cols each) -->
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-surface-container-high rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Fintech developer API documentation interface featuring dark mode syntax code snippets, payment card configuration widgets, and sharp geometric vector graphics. Clean structural layout in neutral gray tones with luminous mint highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCskszaAj7ZsrJAKwofyB1R0dO9fRBXcW1x9AsleZF4gOhPmOcssADtTLYEKUTILbg9ByDSOWJdmVM_6d8GUfEWL2liudXdL3gBtYolvnXUOEzyBsHdRlKGfmLUBg7jPuJDirp5gOz5fLvO3zOL__41SNhtoVX58WMHvIf5xLFF8jPbmwigjaGEYApTDwoYjg4KnN7oZJETTMml63OJC_hEtF4wjoe4miCFBcqKvCu5M5szCthlS4UnNZHRoliyY76KIh2QMssX_6Q"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Developer Tools</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Marqeta</h3>
+<p class="text-secondary text-sm mt-1">Modern card issuing API developer platform and brand refresh.</p>
+</div>
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-[#7c3aed]/10 rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="A dynamic casual gaming web portal UI featuring vibrant multiplayer game tiles, virtual leaderboards, and energetic retro-modern avatars on a clean lilac background. Balanced retro gaming nostalgia with pristine contemporary web layout." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB66uduaBZaWSM89GMD4JUnRJ5fh2ChEMN2sGGe0nid7Vu2pERfbbOW1wO43lx_Q6bflIuN6uPzSoOk0R_ohSDATQHK4mrZW9AaZ6J6vLmsCE7lR3HnEmUY3SbNhMkMhf-J1N2p58cRlTk7Dkf4rAA_8Z7MANX605Q4oDBsQ1v4lduZtQ6MtUWOBEHO6SYo8pf9I_-rTtOt5jTNtyhn5R3gBPJjXII-62b2Yo-W7sW4z8du2eB3hnBBo_hjOCvQVFTYjbJ54h_Cv5o"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Gaming</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Yahoo! Games</h3>
+<p class="text-secondary text-sm mt-1">Reimagining an iconic gaming brand for the browser-based social era.</p>
+</div>
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-surface-container-low rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="High-end coastal interior design e-commerce catalog featuring handmade rattan armchairs, coastal linen textiles, and tranquil sun-drenched architectural rooms. Editorial luxury retail aesthetic with sophisticated serif accents and warm neutral palettes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCI8YQ4w28GX_p5c2_xGiEAyCt6-kuFw2RpwZZGRHqABgMr6ZpAgn7SWxZYA3x3tNWDc0V51jutXbc0L6sUS2bw-lDyTZJktP261RZpvsf6pGGHv-P3ORf07p0vvPe7663jNWPRLBg4-i6otQ9LdbSlPDUVrW2D3Qqmd6fPv8GRAGTUMNG0Qp5dS7ubVn_CDi7nu7rrFGgedCzHTvY8qUJ5g1BEnEftzamM7kAE1RKMO8N6tW7WxIuB7czVW9LlL1Xr4KMMbJJt-Ag"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Luxury Retail</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Serena &amp; Lily</h3>
+<p class="text-secondary text-sm mt-1">Digital flagship and home decorating consultation digital experience.</p>
+</div>
+<!-- 12. Tipalti, 13. Wealth, 14. Art Bridges (3 cols each) -->
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-surface-container-high rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Enterprise accounts payable automation software UI featuring invoice reconciliation dashboards, global payout progress bars, and clean data grids in sleek corporate slate and deep navy tones. Masterclass in complex B2B information density." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhK0Vr9bSHZFcGg-03yFfCpCfxZN2EbMrmXqYStHyxuymM5OTvjvY3GJQhT77CHf40tZcbFpmwSav7VsMWnuF-Jq5u0hfDlUBxul274wrcihCwqURmCdfmUhmnBjzxnNRrMIwyJTCcmS69DSo9iNOxBGDMsOuRXM4PInqCBaqhJl7HPvM9WVA7k0-9hAHNoHRd9MFrIn0GZlYSMIZ6kBDMQIGwz2ZbaTCezgKLgfSMsNslSi91tukihS7v_H0Sq6eDTWBnEcDczRk"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Enterprise B2B</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Tipalti</h3>
+<p class="text-secondary text-sm mt-1">End-to-end automated payables platform UI and design system.</p>
+</div>
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-secondary-fixed/30 rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Personalized family office estate planning mobile app interface showing generational asset distribution charts and legal trust vault documents. Warm understated luxury aesthetic with serene typography and soothing cream and charcoal tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXjv5p4eoEorscQVEVb7yh8UhbsQP14roPRXK9y968Z0422tTG8KD1OwTnVm7CKK5f18E3p4GVHJ77q9KBGpp8Hx5lEdjUtaD2jolX2HQay6OjUG9fB9oWBLGNSO9We2c7kYKzkT0VnwVnPdrhUN0Zgo1ZfJFC-FU4Wl47ypyhihhh6jyvKi0oVc35k-SD6Az16HOtsADLkGbBgkni8G5-FYwi1Y3vHXtOXVycMw6EPvSC_xj2CoYVx_PfbQwOL6R8HA-3oSCXcjk"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Fintech</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Wealth</h3>
+<p class="text-secondary text-sm mt-1">Holistic estate planning and modern wealth legacy preservation.</p>
+</div>
+<div class="md:col-span-4 flex flex-col group cursor-pointer">
+<div class="w-full aspect-square bg-surface-container rounded-2xl overflow-hidden relative mb-5">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-102" data-alt="Modern museum fine art curation platform showcasing contemporary paintings, exhibition schedules, and interactive virtual museum tours. Elegant white gallery walls, high contrast typography, and museum grade lighting aesthetics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDne0lvDggKofVfKtrWhQUtdr6G6oZ0g_Kz7R8UOxUoxJsYis2c17LqcnW7YKy_kLptXzKV69OhXmY5hJZWUO0e1Xxlrfqm2TtMQF4w7K2WbMBSa9Gi7tlI5KaboHqRyFkYDItAOFiMf0uZwpDinJs008EsNg6qzIF9LwukmaNxeEjfljjxCtF6MXRR1a_xlkjNi8NqaVqMUhftvOe-zhCseBUUGojmFpZojAz60zGP9Xqa3tsuejMBB_YnKTCUQyL-pwFwxmpYEJw"/>
+</div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-xs font-label uppercase px-2 py-0.5 rounded bg-surface-container text-on-surface-variant font-medium">Culture &amp; Arts</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Art Bridges</h3>
+<p class="text-secondary text-sm mt-1">Expanding access to American art across communities through digital archives.</p>
+</div>
+</div>
+<!-- End Link -->
+<div class="mt-20 text-center">
+<a class="inline-flex items-center gap-2 text-xl font-headline font-bold text-on-surface hover:text-primary transition-colors group" href="#all-work">
+<span>Explore all work</span>
+<span class="transition-transform group-hover:translate-x-2">→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 8. About & Team Section -->
+<section class="w-full px-6 lg:px-[75px] py-20 lg:py-28 bg-surface-container-lowest border-t border-outline-variant/20" id="about">
+<div class="max-w-[1570px] mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-baseline">
+<div class="lg:col-span-6">
+<h2 class="font-headline font-bold text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-[1.15] text-on-surface">
+            We transform companies through design innovation
+          </h2>
+</div>
+<div class="lg:col-span-6 space-y-6">
+<p class="font-body text-secondary text-lg lg:text-xl font-normal leading-relaxed">
+            A full-service creative agency designing and building inventive digital experiences across all platforms and brand touchpoints.
+          </p>
+<div>
+<a class="inline-flex items-center gap-2 font-headline font-semibold text-base text-on-surface hover:text-primary transition-colors group" href="#services">
+<span>View our services</span>
+<span class="transition-transform group-hover:translate-x-1.5">→</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Staggered horizontal photo gallery representing Clay team culture -->
+<div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="space-y-4">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="An expansive architectural design studio interior in San Francisco with high exposed concrete ceilings, minimalist oak workbenches, dual 5K monitors, and natural daylight flooding through factory windows. Creatives collaborating around physical moodboards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCSZD8yD36eg7JyB3WfpCEUABuA7Q1uACdqs42uPEe9PVCuIpjlBv1YOGdipD_Au5ljEickZJY6n8KJ9zkM6irgSfkDVrHz3zDZKH6Ohkr7_ddpl1mBnfGdk4iKlMbnPktwm6PEguJpMgmglOpO4EIfDgXiEZxEtbT0eRLSyGjjHxP8qOC_WFFPojyq3r3Hpz1bnHncIffXIMkfpzY5ho79-mz_j2o-S0JVfnZ0MLq1e4g-mK3C2TybAcqTTIew0pfDyhaUh6HAD6Q"/>
+</div>
+<span class="text-xs font-label text-outline uppercase tracking-wider block">Clay HQ — San Francisco</span>
+</div>
+<div class="space-y-4 md:mt-12">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Two focused digital product designers reviewing high fidelity mobile wireframes and color palette tokens on a tablet in an airy, sunlit Lisbon creative studio. Clean minimalist office with lush indoor plants and architectural books." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDIgg4gdmtzgSSW8JyS0LfwziqsFrTZmJCleAcoJxx80rwuWqgNkTK8RpmI9cBmTdcxt-F-kLzixHNGvJsyigKn-tAmc0XKJLAXdqHUenT7rvag1zIZ2oZrlh698Jy4CBmvuNkNlT9fESt37zdjNLerMgc7RJolpVvD2G2Ofr-PVHGfZsEnLsA_h9TK3ivxvRlaWa5y6XZAX3iHLICK327nEYh8lr1gv-5FJGRQu8_-53wu89fwwnHzQdzDAC2fW-16181LnyMV89g"/>
+</div>
+<span class="text-xs font-label text-outline uppercase tracking-wider block">Design Reviews — Lisbon</span>
+</div>
+<div class="space-y-4 md:-mt-6">
+<div class="aspect-[4/5] rounded-2xl overflow-hidden bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="Close up of a senior UX strategist sketching wireflows with black marker on translucent paper next to ceramic espresso cups and metal drafting tools. High key bright studio lighting creating an intimate atmosphere of precise artisanal design craft." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpTFpZyGc2DSccILz1gBajrE3TWZN_ka9Ho0NJpZFbyhasCyrHAGLJPclWheUGr_OOqSOIP7lYxMu4dsvXvgfUaytGOBAquxlZjZVXL4SSPGTE4D2qEleePK0k2I5b_d1k1n0MZ69QRVH_QWdgxJXYwZacOQsjnLZzT9fCRhw3-oew4tS1PaGFOJR0uoL_RbV6nU27j1vJxJ37MrrN5sbYST0HB23s0KqnAXM-wq9Ka4MMNqFCFPrUzxqS5ofsIjsIwRyyGk_g1ZA"/>
+</div>
+<span class="text-xs font-label text-outline uppercase tracking-wider block">Product Strategy &amp; Craft</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. Featured News & Blog (Black Section: #06070a) -->
+<section class="w-full px-6 lg:px-[75px] py-24 bg-[#06070a] text-surface-container-lowest" id="blog">
+<div class="max-w-[1570px] mx-auto">
+<div class="flex justify-between items-baseline pb-12 border-b border-surface-container-highest/10">
+<h2 class="font-headline font-bold text-3xl lg:text-4xl tracking-tight text-surface-container-lowest">Featured News</h2>
+<a class="text-sm font-headline font-medium text-outline-variant hover:text-surface-container-lowest transition-colors flex items-center gap-1 group" href="#blog-all">
+<span>Visit blog</span>
+<span class="transition-transform group-hover:translate-x-1">→</span>
+</a>
+</div>
+<!-- 3 Real Articles -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-10 mt-12">
+<!-- Article 1 -->
+<article class="flex flex-col space-y-4 group cursor-pointer">
+<div class="aspect-[16/10] bg-inverse-surface rounded-xl overflow-hidden border border-surface-container-highest/10 mb-2">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A clean editorial photo of a design trophy award in sleek matte black aluminum resting on a pedestal in an art gallery, illuminated with a single directional spotlight in a deep moody black background. Modern corporate accolade celebration." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFkdOHke53DW0AKlfBAp0Ca9l3adUId02G62z7u5_u-wOzp4oX0t9cZxFomH9Nn6XLXU7ECpsEYYLUj7P05TMACjcW77D4S-5JX-RPqnaIzRbSTZ5insLAry-tLxvE0Wvg5A5LZ4PO5zEd2h7Vqfj2ub_ZvzE53qkvS3RvX-QYEeT8IxXA3vqo6vgII31gdVyv3-ntiCzGWqzRbrgFrMEHARRwHDDPkAE0_-v1W1XhlaGpDUOQGLc7ZZZGuO8Pi4Epwe1YAUBETwk"/>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-outline">
+<span class="text-inverse-primary uppercase tracking-wider font-semibold">News</span>
+<span>•</span>
+<time datetime="2026-09-03">Sep 3, 2026</time>
+</div>
+<h3 class="font-headline font-bold text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors leading-snug">
+            Tipalti Redesign Wins Design Awards and Features
+          </h3>
+<p class="text-outline-variant text-sm line-clamp-2">
+            Recognizing our enterprise financial automation overhaul at global design competitions this autumn.
+          </p>
+</article>
+<!-- Article 2 -->
+<article class="flex flex-col space-y-4 group cursor-pointer">
+<div class="aspect-[16/10] bg-inverse-surface rounded-xl overflow-hidden border border-surface-container-highest/10 mb-2">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high contrast macro composition of interactive button state variables, micro-interaction hover curves, and rounded corner radius scales arranged on a dark design interface grid. Clean typographical and UI micro-system analysis." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRR4cdSXnQAnwwdE-cXj4Igx_iEVA_dorHm7rcwmaZ6VKoKCmmbBYcYw9pTCiMft8JiQ5s0WqWO6oZcpLJf7DUIVtvDWLi-ku2hGHJOaiFvvg7Z-b9957RrENfMKpERhov2elvnLq9tsYt3mm_efMq_60tlPd0jpyQb-Cp0F7gOf-Y0R-jqK9TCsdTCDbeLZk1ZdKFLI-hWNV1uaVDYCU3_TekCKvhYaYSe6G9guuLHgmxN1IiPfo21Pk2QHyqJLimAC1R-rYVJiA"/>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-outline">
+<span class="text-inverse-primary uppercase tracking-wider font-semibold">Web Design</span>
+<span>•</span>
+<time datetime="2026-04-21">Apr 21, 2026</time>
+</div>
+<h3 class="font-headline font-bold text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors leading-snug">
+            Complete Guide to Buttons in Web Design for 2026
+          </h3>
+<p class="text-outline-variant text-sm line-clamp-2">
+            A comprehensive masterclass on tactile affordance, accessible contrast states, and generative interaction styling.
+          </p>
+</article>
+<!-- Article 3 -->
+<article class="flex flex-col space-y-4 group cursor-pointer">
+<div class="aspect-[16/10] bg-inverse-surface rounded-xl overflow-hidden border border-surface-container-highest/10 mb-2">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="The Webby Awards signature coiled spring metallic trophy gleaming against a dark studio backdrop with moody violet and gold refractions. High end celebration of digital craftsmanship and web excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzK7jh7xm6b8W6jWFhtwsZiU0UEXebLcKDAWNZyQK22XvTbCN1Fxt0uztR3ojiZXdXH-1Qywh2G2g3cV4wcQqaUUkK7miu-X0DMvJpGWnS6Xpw4rzZThcd4WvJlPhCbt9c16Noj1QHrcsuwwd2Q9Wcaj5AkvJOzfidpYrMhCP8BzOcFhUXR61N4ukpJvFjCjLpzJPYV5vc666ctz5isaJ58s2fabMKjpfup-qQvZt4b1D24I4nIHVaKg_6G9leIfkXw3ZZ-MpPI7s"/>
+</div>
+<div class="flex items-center gap-3 text-xs font-label text-outline">
+<span class="text-inverse-primary uppercase tracking-wider font-semibold">Awards</span>
+<span>•</span>
+<time datetime="2026-05-06">May 6, 2026</time>
+</div>
+<h3 class="font-headline font-bold text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors leading-snug">
+            Clay Global Shows Up Strong at The Webby Awards 2026
+          </h3>
+<p class="text-outline-variant text-sm line-clamp-2">
+            Taking home multiple honours across Best Visual Design, Best Mobile UI, and Financial Services categories.
+          </p>
+</article>
+</div>
+</div>
+</section>
+<!-- 10. FAQ Section (Black background: #06070a) -->
+<section class="w-full px-6 lg:px-[75px] py-20 lg:py-28 bg-[#06070a] text-surface-container-lowest border-t border-surface-container-highest/10">
+<div class="max-w-[1200px] mx-auto">
+<div class="mb-14">
+<span class="text-xs font-label uppercase tracking-widest text-outline font-semibold">Inquiries</span>
+<h2 class="font-headline font-bold text-3xl lg:text-4xl text-surface-container-lowest mt-2">Frequently Asked Questions</h2>
+</div>
+<!-- Accordion with 6 core questions -->
+<div class="divide-y divide-surface-container-highest/15">
+<!-- Q1 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>What core services does Clay provide?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            Clay is a full-service digital agency. Our core offerings encompass Brand Identity &amp; Strategy, Product Design (UI/UX), Flagship Websites &amp; E-Commerce, Fullstack Engineering, Content &amp; 3D Motion, and cutting-edge Generative AI workflows for consumer and enterprise brands.
+          </div>
+</details>
+<!-- Q2 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>How is Clay different from other design agencies?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            Unlike traditional consulting firms or siloed creative shops, we fuse Silicon Valley product strategy with European high-fashion art direction. We operate in senior, cross-functional pods where designers write code and strategists prototype live interactions.
+          </div>
+</details>
+<!-- Q3 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>How do you handle clients across different time zones?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            With studios positioned across San Francisco, New York, Austin, Denver, Lisbon, and Belgrade, we run synchronized 24-hour sprints with guaranteed working overlap for any client in North America, Europe, or Asia.
+          </div>
+</details>
+<!-- Q4 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>How much does a typical project cost?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            Engagements are customized depending on complexity, timeline, and scope. Typical brand transformations and flagship product buildouts start from mid five-figure sprints up to comprehensive multi-phase enterprise partnerships. Reach out to our team for a tailored proposal.
+          </div>
+</details>
+<!-- Q5 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>Do you work with early-stage startups?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            Yes. We routinely partner with high-conviction founders backed by top-tier venture firms (such as Sequoia, Andreessen Horowitz, and Founders Fund) to design stealth MVPs, seed-stage brand launches, and category-defining product stories.
+          </div>
+</details>
+<!-- Q6 -->
+<details class="group py-6 cursor-pointer">
+<summary class="flex justify-between items-center list-none font-headline font-semibold text-lg lg:text-xl text-surface-container-lowest group-hover:text-primary-fixed transition-colors">
+<span>What is your experience in complex B2B software and enterprise platforms?</span>
+<span class="material-symbols-outlined text-outline group-open:rotate-180 transition-transform duration-200">expand_more</span>
+</summary>
+<div class="mt-4 text-outline-variant font-body text-base leading-relaxed pr-12">
+            Over half our portfolio consists of complex enterprise systems—including fintech rails, API developer dashboards, cloud observability software, and AI tooling. We excel at untangling massive data architectures into consumer-grade, joyful software.
+          </div>
+</details>
+</div>
+</div>
+</section>
+<!-- 11. Large Contact & Footer Section (Shared Component Anchor) -->
+<footer class="w-full bg-inverse-surface dark:bg-inverse-surface text-surface-container-lowest dark:text-surface-container-lowest px-6 lg:px-[75px] pt-24 pb-12 flex flex-col justify-between border-none" id="contact">
+<div class="max-w-[1720px] mx-auto w-full">
+<!-- Oversized Call to Action -->
+<div class="border-b border-surface-container-highest/15 pb-20">
+<span class="text-xs font-label uppercase tracking-widest text-outline font-semibold">New Projects</span>
+<h2 class="font-headline font-black text-6xl sm:text-7xl lg:text-[120px] tracking-tighter text-surface-container-lowest mt-4 hover:opacity-90 transition-opacity">
+          Let's Talk
+        </h2>
+<div class="mt-12 flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+<a class="font-headline text-2xl lg:text-3xl font-light text-surface-container-lowest hover:text-primary-fixed transition-colors" href="mailto:hey@clay.global">
+            hey@clay.global
+          </a>
+<a class="font-headline text-2xl lg:text-3xl font-light text-outline-variant hover:text-surface-container-lowest transition-colors" href="tel:+14157966262">
+            +1 415 796 6262
+          </a>
+</div>
+</div>
+<!-- Studio Locations -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 py-16 border-b border-surface-container-highest/15">
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">San Francisco</h4>
+<p class="text-xs text-outline mt-1 font-label">Main HQ</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">New York</h4>
+<p class="text-xs text-outline mt-1 font-label">East Coast</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">Austin</h4>
+<p class="text-xs text-outline mt-1 font-label">Design Lab</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">Denver</h4>
+<p class="text-xs text-outline mt-1 font-label">Engineering Hub</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">Lisbon</h4>
+<p class="text-xs text-outline mt-1 font-label">European Studio</p>
+</div>
+<div>
+<h4 class="font-headline font-bold text-sm text-surface-container-lowest">Belgrade</h4>
+<p class="text-xs text-outline mt-1 font-label">Motion &amp; 3D Lab</p>
+</div>
+</div>
+<!-- Footer Bottom Links & Socials -->
+<div class="pt-12 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+<!-- Links -->
+<div class="flex flex-wrap gap-x-8 gap-y-3 font-headline text-on-primary-fixed-variant dark:text-outline-variant text-sm">
+<a class="text-surface-container-lowest font-medium hover:text-surface-container-lowest transition-colors" href="#work">Work</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#services">Services</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#about">About</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#blog">Insights</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#careers">Careers</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#privacy">Privacy Policy</a>
+<a class="text-outline dark:text-outline font-normal hover:text-surface-container-lowest transition-colors" href="#terms">Terms of Service</a>
+</div>
+<!-- Social Media -->
+<div class="flex items-center gap-6 text-sm text-outline-variant">
+<a class="hover:text-surface-container-lowest transition-colors" href="https://twitter.com" rel="noopener noreferrer" target="_blank">Twitter/X</a>
+<a class="hover:text-surface-container-lowest transition-colors" href="https://linkedin.com" rel="noopener noreferrer" target="_blank">LinkedIn</a>
+<a class="hover:text-surface-container-lowest transition-colors" href="https://instagram.com" rel="noopener noreferrer" target="_blank">Instagram</a>
+<a class="hover:text-surface-container-lowest transition-colors" href="https://dribbble.com" rel="noopener noreferrer" target="_blank">Dribbble</a>
+</div>
+</div>
+<!-- Copyright & Brand Stamp -->
+<div class="mt-12 flex flex-col sm:flex-row justify-between items-start sm:items-center text-xs text-outline font-label pt-6">
+<p>© 2016–2026 Clay Global, LLC. All rights reserved. San Francisco — Worldwide.</p>
+<p class="mt-2 sm:mt-0">Design &amp; Technology Agency</p>
+</div>
+</div>
+</footer>
+</body></html>
