@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1280">
+  <title>Together AI — The AI Native Cloud</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              orange: '#f25d36',
+              navy: '#050517',
+              darkcard: '#0a0a24',
+              ice: '#f5f8fc',
+              border: '#e6ebf2',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      width: 1280px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      color: #0d0d12;
+      font-family: 'Geist', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .hero-gradient {
+      background: radial-gradient(75% 65% at 65% 35%, #ebf3fd 0%, #f4f8fe 45%, #ffffff 85%);
+    }
+    .grid-lines {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(210, 222, 238, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(210, 222, 238, 0.25) 1px, transparent 1px);
+    }
+    .subtle-shadow {
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    }
+    .pill-blur {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .code-preview-bg {
+      background: #090a16;
+    }
+  </style>
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+
+  <!-- TOP PROMOTIONAL TICKER (y0 - y40) -->
+  <aside class="w-full h-10 bg-black text-white flex items-center justify-between px-8 text-xs font-mono tracking-tight z-50 border-b border-neutral-900">
+    <div class="flex items-center space-x-3">
+      <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span class="text-neutral-400">ANNOUNCEMENT:</span>
+      <span class="text-neutral-100 font-medium">ThunderKittens v3.2 & NVIDIA Vera Rubin NVL72 integration live</span>
+    </div>
+    <div class="flex items-center space-x-6 text-neutral-300 text-xs">
+      <a href="#research" class="hover:text-white transition-colors flex items-center gap-1">
+        <span>Read benchmark results</span>
+        <svg class="w-3.5 h-3.5 text-neutral-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      <span class="text-neutral-600">|</span>
+      <span class="text-neutral-400 font-sans">Together Platform Status: <span class="text-emerald-400 font-mono">100.0% Operational</span></span>
+    </div>
+  </aside>
+
+  <!-- FLOATING NAVIGATION STRIP (y~52) -->
+  <header class="sticky top-3 z-40 px-6 mt-3">
+    <nav class="max-w-[1232px] mx-auto h-[54px] bg-white/95 pill-blur rounded-xl border border-neutral-200/90 subtle-shadow px-5 flex items-center justify-between">
+      <!-- Left: Logo & Wordmark -->
+      <div class="flex items-center space-x-3">
+        <div class="relative w-7 h-7 flex items-center justify-center">
+          <!-- Together AI cluster glyph icon -->
+          <svg viewBox="0 0 32 32" class="w-7 h-7" fill="none">
+            <rect x="3" y="3" width="11" height="11" rx="3" fill="#0D0E15"/>
+            <rect x="18" y="3" width="11" height="11" rx="3" fill="#3B82F6"/>
+            <rect x="3" y="18" width="11" height="11" rx="3" fill="#F25D36"/>
+            <rect x="18" y="18" width="11" height="11" rx="3" fill="#A855F7"/>
+          </svg>
+        </div>
+        <span class="font-bold text-lg tracking-tight text-neutral-900 font-sans">together<span class="text-neutral-500 font-normal">.ai</span></span>
+      </div>
+
+      <!-- Center: Navigation Links -->
+      <div class="flex items-center space-x-7 text-[13px] font-medium text-neutral-700">
+        <a href="#platform" class="hover:text-black transition-colors">Inference</a>
+        <a href="#platform" class="hover:text-black transition-colors">Compute</a>
+        <a href="#platform" class="hover:text-black transition-colors">Model Shaping</a>
+        <a href="#research" class="hover:text-black transition-colors">Research</a>
+        <a href="#developers" class="hover:text-black transition-colors">Developers</a>
+        <a href="#company" class="hover:text-black transition-colors">Company</a>
+        <a href="#pricing" class="hover:text-black transition-colors">Pricing</a>
+      </div>
+
+      <!-- Right: Action Buttons -->
+      <div class="flex items-center space-x-3 text-xs">
+        <button class="px-4 py-2 font-mono uppercase tracking-wider text-neutral-800 hover:text-black hover:bg-neutral-100 rounded-lg transition-colors font-medium">
+          Contact sales
+        </button>
+        <button class="px-4 py-2 bg-black text-white font-mono uppercase tracking-wider rounded-lg font-medium hover:bg-neutral-800 transition-colors shadow-sm">
+          Sign in
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION (1280x720 Viewport Focus) -->
+  <section class="relative min-h-[660px] hero-gradient grid-lines border-b border-brand-border overflow-hidden pt-12 pb-16">
+    <div class="max-w-[1200px] mx-auto px-6 grid grid-cols-12 gap-8 items-center min-h-[520px]">
+      
+      <!-- Left Column: Title & CTAs -->
+      <div class="col-span-6 pr-4 z-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 bg-white/90 border border-blue-100 rounded-md text-[11px] font-mono uppercase tracking-widest text-neutral-700 mb-6 shadow-sm">
+          <span class="w-1.5 h-1.5 rounded-full bg-blue-600"></span>
+          RESEARCH-OPTIMIZED STACK 2026
+        </div>
+
+        <h1 class="text-[58px] leading-[1.06] font-bold tracking-tight text-black mb-6">
+          Build what's next<br/>
+          <span class="text-neutral-400 font-normal">on the AI Native Cloud</span>
+        </h1>
+
+        <p class="text-[17px] leading-relaxed text-neutral-600 font-normal mb-8 max-w-[460px]">
+          Full-stack AI platform, powered by cutting-edge research. Deploy open and custom models at sub-millisecond latencies on premier silicon.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="flex items-center space-x-4 mb-10">
+          <a href="#build" class="inline-flex items-center justify-center px-6 py-3.5 bg-black text-white font-mono text-[12px] uppercase tracking-wider font-semibold rounded hover:bg-neutral-800 transition-all shadow-md">
+            Start building
+          </a>
+          <a href="#sales" class="inline-flex items-center justify-center px-6 py-3.5 bg-[#f0f3f8] text-neutral-800 border border-neutral-300/80 font-mono text-[12px] uppercase tracking-wider font-semibold rounded hover:bg-white hover:border-neutral-400 transition-all">
+            Contact sales
+          </a>
+        </div>
+
+        <!-- Metric highlights -->
+        <div class="flex items-center space-x-6 pt-3 border-t border-neutral-200/70 text-xs text-neutral-500 font-mono">
+          <div><strong class="text-neutral-900 font-sans text-sm">500k+</strong> Developers</div>
+          <span class="text-neutral-300">•</span>
+          <div><strong class="text-neutral-900 font-sans text-sm">200+</strong> Open Models</div>
+          <span class="text-neutral-300">•</span>
+          <div><strong class="text-neutral-900 font-sans text-sm">0.8ms</strong> Token TTFT</div>
+        </div>
+      </div>
+
+      <!-- Right Column: Official 3D Diagram (Pale-blue disc, violet rings, blue oval blade, slanted orange hexagonal plate) -->
+      <div class="col-span-6 relative flex items-center justify-center h-[520px]">
+        <div class="relative w-[500px] h-[480px]">
+
+          <!-- Outer Atmospheric Glow -->
+          <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-200/40 via-purple-100/30 to-orange-100/30 filter blur-3xl opacity-70"></div>
+
+          <!-- SVG 3D Isometric Construct -->
+          <svg viewBox="0 0 520 500" class="w-full h-full relative z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="discGrad" x1="120" y1="180" x2="380" y2="400" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#93c5fd" stop-opacity="0.5"/>
+                <stop offset="60%" stop-color="#bfdbfe" stop-opacity="0.25"/>
+                <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.05"/>
+              </linearGradient>
+              <linearGradient id="ringViolet" x1="100" y1="100" x2="400" y2="350" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#a855f7" stop-opacity="0.9"/>
+                <stop offset="50%" stop-color="#c084fc" stop-opacity="0.4"/>
+                <stop offset="100%" stop-color="#7c3aed" stop-opacity="0.1"/>
+              </linearGradient>
+              <linearGradient id="orangeHex" x1="280" y1="160" x2="420" y2="300" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#f25d36" stop-opacity="0.95"/>
+                <stop offset="100%" stop-color="#ea580c" stop-opacity="0.8"/>
+              </linearGradient>
+              <linearGradient id="blueBlade" x1="140" y1="120" x2="260" y2="340" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="#2563eb" stop-opacity="0.85"/>
+                <stop offset="100%" stop-color="#38bdf8" stop-opacity="0.4"/>
+              </linearGradient>
+            </defs>
+
+            <!-- Hairline Coordinate Grid & Radii -->
+            <ellipse cx="260" cy="270" rx="210" ry="105" stroke="#cbd5e1" stroke-width="0.8" stroke-dasharray="4 4" fill="none" opacity="0.6"/>
+            <ellipse cx="260" cy="270" rx="160" ry="80" stroke="#94a3b8" stroke-width="0.6" stroke-dasharray="2 2" fill="none" opacity="0.4"/>
+
+            <!-- Translucent pale-blue circular disc (isometric tilt) -->
+            <ellipse cx="260" cy="280" rx="175" ry="88" fill="url(#discGrad)" stroke="#60a5fa" stroke-width="1.2" stroke-opacity="0.5"/>
+
+            <!-- Orbit 1: Intersecting Violet/Purple Orbital Ring 1 -->
+            <ellipse cx="255" cy="250" rx="195" ry="92" stroke="url(#ringViolet)" stroke-width="2.2" transform="rotate(-28 255 250)" fill="none"/>
+            <circle cx="110" cy="180" r="4.5" fill="#a855f7" filter="drop-shadow(0 0 6px #c084fc)"/>
+            
+            <!-- Orbit 2: Complementary Orbital Ring -->
+            <ellipse cx="265" cy="245" rx="170" ry="78" stroke="#818cf8" stroke-width="1.4" stroke-opacity="0.75" transform="rotate(38 265 245)" fill="none"/>
+
+            <!-- Blue Oval Blade (Vertical angled cutting slab) -->
+            <path d="M210 110 C270 90, 290 190, 260 320 C230 400, 180 340, 190 220 Z" fill="url(#blueBlade)" stroke="#1d4ed8" stroke-width="1.5" opacity="0.85" filter="drop-shadow(0 15px 25px rgba(37,99,235,0.25))"/>
+
+            <!-- Slanted Orange Hexagonal Plate (Highlight geometric focal point) -->
+            <polygon points="340,195 405,170 435,215 395,280 330,305 300,260" fill="url(#orangeHex)" stroke="#ffffff" stroke-width="1.8" filter="drop-shadow(0 12px 24px rgba(242,93,54,0.35))"/>
+            <!-- Orange Hex interior line work -->
+            <line x1="340" y1="195" x2="395" y2="280" stroke="#fed7aa" stroke-width="1" opacity="0.6"/>
+            <line x1="405" y1="170" x2="330" y2="305" stroke="#fed7aa" stroke-width="1" opacity="0.6"/>
+
+            <!-- Central Data Anchor Core -->
+            <circle cx="260" cy="265" r="16" fill="#050517" stroke="#3b82f6" stroke-width="2.5"/>
+            <circle cx="260" cy="265" r="6" fill="#f25d36"/>
+
+            <!-- Hairline Annotation Lines & Badges -->
+            <!-- 1. OPTIMIZED TRAINING -->
+            <line x1="390" y1="180" x2="455" y2="135" stroke="#475569" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <circle cx="390" cy="180" r="2.5" fill="#f25d36"/>
+            <rect x="390" y="105" width="130" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.06))"/>
+            <text x="400" y="121" font-family="'Geist Mono', monospace" font-size="9" font-weight="600" fill="#0f172a" letter-spacing="0.08em">OPTIMIZED TRAINING</text>
+
+            <!-- 2. PRODUCTION INFERENCE -->
+            <line x1="165" y1="230" x2="90" y2="175" stroke="#475569" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <circle cx="165" cy="230" r="2.5" fill="#3b82f6"/>
+            <rect x="15" y="150" width="145" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.06))"/>
+            <text x="25" y="166" font-family="'Geist Mono', monospace" font-size="9" font-weight="600" fill="#0f172a" letter-spacing="0.08em">PRODUCTION INFERENCE</text>
+
+            <!-- 3. CUTTING-EDGE RESEARCH -->
+            <line x1="280" y1="365" x2="350" y2="425" stroke="#475569" stroke-width="0.8" stroke-dasharray="2 2"/>
+            <circle cx="280" cy="365" r="2.5" fill="#a855f7"/>
+            <rect x="290" y="420" width="150" height="24" rx="4" fill="#ffffff" stroke="#cbd5e1" stroke-width="0.8" filter="drop-shadow(0 2px 6px rgba(0,0,0,0.06))"/>
+            <text x="300" y="436" font-family="'Geist Mono', monospace" font-size="9" font-weight="600" fill="#0f172a" letter-spacing="0.08em">CUTTING-EDGE RESEARCH</text>
+          </svg>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- TRUSTED-BY BRAND LOGO ROW (Across y620) -->
+    <div class="max-w-[1200px] mx-auto px-6 mt-6 border-t border-neutral-200/60 pt-7">
+      <p class="text-[11px] font-mono uppercase tracking-widest text-neutral-400 text-center mb-6">
+        TRUSTED BY INDUSTRY LEADERS AND FAST-GROWING AI UNICORNS
+      </p>
+      <div class="flex items-center justify-between opacity-75 grayscale hover:grayscale-0 transition-all duration-300 px-6">
+        <!-- Cursor -->
+        <div class="flex items-center space-x-2 font-mono font-semibold text-neutral-800 text-sm">
+          <div class="w-4 h-4 bg-black rounded-sm flex items-center justify-center text-[10px] text-white">_></div>
+          <span class="tracking-tight text-base font-sans">Cursor</span>
+        </div>
+        <!-- DuckDuckGo -->
+        <div class="flex items-center space-x-1.5 font-bold text-neutral-800 text-sm">
+          <span class="w-3.5 h-3.5 bg-orange-500 rounded-full inline-block"></span>
+          <span class="font-sans">DuckDuckGo</span>
+        </div>
+        <!-- Decagon -->
+        <div class="font-mono text-neutral-900 font-bold tracking-tight text-base">
+          DECAGON
+        </div>
+        <!-- The Washington Post -->
+        <div class="font-serif italic font-semibold text-neutral-800 text-sm tracking-tight">
+          The Washington Post
+        </div>
+        <!-- Salesforce -->
+        <div class="font-sans font-bold text-sky-700 text-base">
+          salesforce
+        </div>
+        <!-- Zoom -->
+        <div class="font-sans font-extrabold text-blue-600 text-lg tracking-tight">
+          zoom
+        </div>
+        <!-- Zillow -->
+        <div class="font-sans font-bold text-blue-800 text-base tracking-tight">
+          zillow
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: THE TOGETHER AI PLATFORM & PASTEL PANELS -->
+  <section id="platform" class="py-24 max-w-[1200px] mx-auto px-6">
+    <div class="text-center max-w-[760px] mx-auto mb-16">
+      <span class="text-xs font-mono uppercase tracking-widest text-neutral-400 block mb-3">AI ARCHITECTURE</span>
+      <h2 class="text-4xl font-bold tracking-tight text-neutral-950 mb-4">The Together AI Platform</h2>
+      <p class="text-lg text-neutral-600 leading-relaxed">
+        Accelerate inference, model shaping and pre-training on a research-optimized platform.
+      </p>
+    </div>
+
+    <!-- 3 Equal Pastel Panels -->
+    <div class="grid grid-cols-3 gap-6 mb-16">
+      <!-- Panel 1: Pale Blue -->
+      <div class="bg-[#f2f7fd] border border-[#d6e5f8] rounded-xl p-8 flex flex-col justify-between hover:border-blue-300 transition-colors subtle-shadow">
+        <div>
+          <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-blue-800 bg-blue-100/70 px-2.5 py-1 rounded mb-6 font-semibold">
+            INFERENCE LATENCY
+          </span>
+          <div class="text-3xl font-bold text-neutral-900 tracking-tight mb-2">
+            FASTER INFERENCE 2x
+          </div>
+          <p class="text-neutral-600 text-sm leading-relaxed mt-4">
+            Custom GPU flash attention kernels and speculative decoding engines achieve ultra-low time-to-first-token across Llama, DeepSeek, and Qwen architectures.
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-blue-200/60 flex items-center justify-between text-xs font-mono text-blue-900">
+          <span>Benchmarked vs Standard vLLM</span>
+          <span class="font-bold">0.8ms TTFT</span>
+        </div>
+      </div>
+
+      <!-- Panel 2: Pale Pink -->
+      <div class="bg-[#fdf3f5] border border-[#fae0e5] rounded-xl p-8 flex flex-col justify-between hover:border-pink-300 transition-colors subtle-shadow">
+        <div>
+          <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-pink-800 bg-pink-100/70 px-2.5 py-1 rounded mb-6 font-semibold">
+            UNIT ECONOMICS
+          </span>
+          <div class="text-3xl font-bold text-neutral-900 tracking-tight mb-2">
+            LOWER COST 60%
+          </div>
+          <p class="text-neutral-600 text-sm leading-relaxed mt-4">
+            Hardware-aware resource multiplexing and optimized memory layout slash operational expenditure compared to hyperscaler cloud AI instances.
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-pink-200/60 flex items-center justify-between text-xs font-mono text-pink-900">
+          <span>Enterprise Token Blended Avg</span>
+          <span class="font-bold">-62.4% TCO</span>
+        </div>
+      </div>
+
+      <!-- Panel 3: Pale Peach -->
+      <div class="bg-[#fef6ed] border border-[#fce3cc] rounded-xl p-8 flex flex-col justify-between hover:border-orange-300 transition-colors subtle-shadow">
+        <div>
+          <span class="inline-block text-[11px] font-mono uppercase tracking-wider text-orange-800 bg-orange-100/70 px-2.5 py-1 rounded mb-6 font-semibold">
+            CLUSTER EFFICIENCY
+          </span>
+          <div class="text-3xl font-bold text-neutral-900 tracking-tight mb-2">
+            FASTER PRE-TRAINING 90%
+          </div>
+          <p class="text-neutral-600 text-sm leading-relaxed mt-4">
+            Slingshot interconnect networks and ThunderKittens parallel collective primitives drive near-linear scaling up to 32,768 connected GPUs.
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-orange-200/60 flex items-center justify-between text-xs font-mono text-orange-900">
+          <span>MFU on Vera Rubin NVL72</span>
+          <span class="font-bold">78.5% MFU</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THIN SEPARATOR -->
+  <div class="max-w-[1200px] mx-auto px-6"><hr class="border-t border-neutral-200"/></div>
+
+  <!-- SECTION 3: FULL-STACK CLOUD & PRODUCT SHOWCASE -->
+  <section class="py-24 max-w-[1200px] mx-auto px-6">
+    <div class="text-center max-w-[800px] mx-auto mb-12">
+      <span class="text-xs font-mono uppercase tracking-widest text-neutral-400 block mb-3">INFRASTRUCTURE TIERS</span>
+      <h2 class="text-4xl font-bold tracking-tight text-neutral-950 mb-4">Full-stack cloud</h2>
+      <p class="text-lg text-neutral-600">
+        Powering every step of the AI development journey—from experimentation to massive scale.
+      </p>
+    </div>
+
+    <!-- Wide 3-Tab Strip -->
+    <div class="flex justify-center mb-12">
+      <div class="inline-flex p-1.5 bg-neutral-100/90 rounded-xl border border-neutral-200">
+        <button class="px-8 py-2.5 rounded-lg text-sm font-semibold font-sans bg-[#d8f0f9] text-sky-950 border border-sky-300/80 shadow-sm transition-all">
+          Inference
+        </button>
+        <button class="px-8 py-2.5 rounded-lg text-sm font-medium font-sans text-neutral-600 hover:text-black transition-all">
+          Compute
+        </button>
+        <button class="px-8 py-2.5 rounded-lg text-sm font-medium font-sans text-neutral-600 hover:text-black transition-all">
+          Model shaping
+        </button>
+      </div>
+    </div>
+
+    <!-- Product Showcase White Box -->
+    <div class="bg-white border border-neutral-200 rounded-2xl p-8 grid grid-cols-12 gap-8 subtle-shadow">
+      
+      <!-- Left: Vertical Option List -->
+      <div class="col-span-5 space-y-3 pr-4">
+        <!-- Active Item: Serverless Inference -->
+        <div class="p-4 rounded-xl bg-neutral-50 border border-neutral-300/80 cursor-pointer">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-bold text-neutral-900">Serverless Inference</span>
+            <span class="text-[10px] font-mono bg-blue-100 text-blue-700 px-2 py-0.5 rounded font-semibold">POPULAR</span>
+          </div>
+          <p class="text-xs text-neutral-600 mt-2 leading-relaxed">
+            Query leading open source models via OpenAI-compatible endpoints with zero infrastructure overhead. Auto-scales instantly.
+          </p>
+        </div>
+
+        <!-- Inactive Item: Batch Inference -->
+        <div class="p-4 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-200 cursor-pointer transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-neutral-800">Batch Inference</span>
+            <span class="text-[10px] font-mono text-neutral-400">50% DISCOUNT</span>
+          </div>
+          <p class="text-xs text-neutral-500 mt-1">High-throughput asynchronous workloads with guaranteed completion windows.</p>
+        </div>
+
+        <!-- Inactive Item: Provisioned Throughput -->
+        <div class="p-4 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-200 cursor-pointer transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-neutral-800">Provisioned Throughput</span>
+            <span class="text-[10px] font-mono text-neutral-400">SLAs</span>
+          </div>
+          <p class="text-xs text-neutral-500 mt-1">Reserved token allocation with strictly bounded latency guarantees.</p>
+        </div>
+
+        <!-- Inactive Item: Dedicated Model Inference -->
+        <div class="p-4 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-200 cursor-pointer transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-neutral-800">Dedicated Model Inference</span>
+          </div>
+          <p class="text-xs text-neutral-500 mt-1">Private model weight serving isolated completely to your enterprise tenancy.</p>
+        </div>
+
+        <!-- Inactive Item: Dedicated Container Inference -->
+        <div class="p-4 rounded-xl hover:bg-neutral-50 border border-transparent hover:border-neutral-200 cursor-pointer transition-colors">
+          <div class="flex items-center justify-between">
+            <span class="text-sm font-medium text-neutral-800">Dedicated Container Inference</span>
+          </div>
+          <p class="text-xs text-neutral-500 mt-1">Deploy arbitrary custom PyTorch and CUDA runtime containers with direct host mounts.</p>
+        </div>
+      </div>
+
+      <!-- Right: Together AI Interface / API Screenshot Style Illustration -->
+      <div class="col-span-7 code-preview-bg rounded-xl border border-neutral-800 p-5 flex flex-col justify-between text-neutral-300 font-mono text-xs shadow-2xl">
+        <!-- Window Chrome -->
+        <div class="flex items-center justify-between border-b border-neutral-800/80 pb-3 mb-4">
+          <div class="flex items-center space-x-2">
+            <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+            <span class="w-3 h-3 rounded-full bg-emerald-500/80 inline-block"></span>
+            <span class="text-neutral-500 text-[11px] ml-2 font-mono">api.together.xyz/v1/chat/completions</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <span class="text-[11px] text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded">HTTP 200 OK</span>
+            <span class="text-[11px] text-neutral-400">14.2ms</span>
+          </div>
+        </div>
+
+        <!-- Code Block -->
+        <pre class="text-[12px] leading-relaxed text-neutral-300 overflow-x-auto"><span class="text-purple-400">import</span> { Together } <span class="text-purple-400">from</span> <span class="text-emerald-300">'together-ai'</span>;
+
+<span class="text-neutral-500">// Initialize client with low-latency endpoint</span>
+<span class="text-purple-400">const</span> client = <span class="text-blue-400">new</span> <span class="text-amber-300">Together</span>({ apiKey: process.env.TOGETHER_API_KEY });
+
+<span class="text-purple-400">const</span> response = <span class="text-purple-400">await</span> client.chat.completions.<span class="text-blue-300">create</span>({
+  model: <span class="text-emerald-300">'togethercomputer/Llama-3.3-70B-Instruct-Turbo'</span>,
+  messages: [{ role: <span class="text-emerald-300">'user'</span>, content: <span class="text-emerald-300">'Synthesize multi-modal kernel spec'</span> }],
+  stream: <span class="text-orange-400">true</span>,
+  max_tokens: <span class="text-orange-400">1024</span>,
+});
+
+<span class="text-purple-400">for await</span> (<span class="text-purple-400">const</span> chunk <span class="text-purple-400">of</span> response) {
+  process.stdout.<span class="text-blue-300">write</span>(chunk.choices[<span class="text-orange-400">0</span>]?.delta?.content || <span class="text-emerald-300">''</span>);
+}</pre>
+
+        <!-- Response Metrics HUD Bar -->
+        <div class="mt-6 pt-4 border-t border-neutral-800 grid grid-cols-3 gap-4 text-center bg-neutral-900/60 p-3 rounded-lg border border-neutral-800">
+          <div>
+            <div class="text-[10px] text-neutral-400 uppercase">Tokens Per Second</div>
+            <div class="text-base font-bold text-white mt-0.5">248.6 <span class="text-xs text-emerald-400 font-normal">t/s</span></div>
+          </div>
+          <div>
+            <div class="text-[10px] text-neutral-400 uppercase">Time to First Token</div>
+            <div class="text-base font-bold text-white mt-0.5">0.82 <span class="text-xs text-blue-400 font-normal">ms</span></div>
+          </div>
+          <div>
+            <div class="text-[10px] text-neutral-400 uppercase">Input Token Cost</div>
+            <div class="text-base font-bold text-white mt-0.5">$0.18 <span class="text-xs text-neutral-400 font-normal">/ 1M</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 4: GROUNDED IN CUTTING-EDGE RESEARCH (Deep Midnight Navy #050517) -->
+  <section id="research" class="bg-[#050517] text-white py-24 border-y border-neutral-900">
+    <div class="max-w-[1200px] mx-auto px-6">
+      
+      <div class="flex items-end justify-between mb-16">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-orange-400 block mb-3">TOGETHER RESEARCH LAB</span>
+          <h2 class="text-4xl font-bold tracking-tight text-white mb-3">Grounded in cutting-edge research</h2>
+          <p class="text-neutral-400 max-w-[620px] text-base">
+            Frontier systems research published at top ML conferences directly powers every optimization on the Together AI cloud platform.
+          </p>
+        </div>
+        <a href="#papers" class="inline-flex items-center gap-2 text-xs font-mono text-neutral-300 hover:text-white border border-neutral-700 px-4 py-2 rounded-lg bg-neutral-900/80">
+          <span>View all publications</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </a>
+      </div>
+
+      <!-- 4 Actual Research Cards -->
+      <div class="grid grid-cols-2 gap-6">
+        
+        <!-- Card 1 -->
+        <article class="bg-[#0a0a24] border border-neutral-800 rounded-xl p-7 hover:border-neutral-700 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-mono text-orange-400 bg-orange-950/40 border border-orange-900/60 px-2.5 py-0.5 rounded font-medium">SYSTEMS & KERNELS</span>
+              <span class="text-xs font-mono text-neutral-400">Sep 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors tracking-tight leading-snug mb-3">
+              To Infinity and Beyond: ThunderKittens Now on NVIDIA Vera Rubin NVL72!
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+              Porting our bare-metal tile programming model to next-generation GPU hardware, exploiting custom tensor memory accelerators for unprecedented GEMM throughput.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+            <span>By Together AI Kernel Team & Stanford DAWN</span>
+            <span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Read paper →</span>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="bg-[#0a0a24] border border-neutral-800 rounded-xl p-7 hover:border-neutral-700 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-mono text-sky-400 bg-sky-950/40 border border-sky-900/60 px-2.5 py-0.5 rounded font-medium">AGENTIC INFERENCE</span>
+              <span class="text-xs font-mono text-neutral-400">Aug 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors tracking-tight leading-snug mb-3">
+              ThunderAgent: 2x Faster Agentic Inference for Synthetic Data Generation at Scale
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+              Pipelined speculative decoding coupled with multi-branch tree verification yields massive throughput gains for recursive reasoning loops.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+            <span>By Research Team & MIT CSAIL</span>
+            <span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Read paper →</span>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="bg-[#0a0a24] border border-neutral-800 rounded-xl p-7 hover:border-neutral-700 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-mono text-purple-400 bg-purple-950/40 border border-purple-900/60 px-2.5 py-0.5 rounded font-medium">CONFERENCE HIGHLIGHT</span>
+              <span class="text-xs font-mono text-neutral-400">ICML 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors tracking-tight leading-snug mb-3">
+              Together AI at ICML 2026: frontier research across the full stack
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+              9 accepted papers across memory optimization, non-causal speculative decoding, distributed fault-tolerance, and open weights evaluation safety.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+            <span>Published at Vienna, Austria</span>
+            <span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Read paper →</span>
+          </div>
+        </article>
+
+        <!-- Card 4 -->
+        <article class="bg-[#0a0a24] border border-neutral-800 rounded-xl p-7 hover:border-neutral-700 transition-all flex flex-col justify-between group">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-[11px] font-mono text-emerald-400 bg-emerald-950/40 border border-emerald-900/60 px-2.5 py-0.5 rounded font-medium">BENCHMARK LAB</span>
+              <span class="text-xs font-mono text-neutral-400">Jul 2026</span>
+            </div>
+            <h3 class="text-xl font-bold text-white group-hover:text-blue-300 transition-colors tracking-tight leading-snug mb-3">
+              ParallelKernelBench: Frontier LLMs can't write fast multi-GPU kernels (yet)
+            </h3>
+            <p class="text-neutral-400 text-sm leading-relaxed mb-6">
+              Comprehensive evaluation of 14 leading models attempting CUDA, Triton, and ThunderKittens collective kernels under strict hardware verification.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-neutral-800 flex items-center justify-between text-xs text-neutral-400 font-mono">
+            <span>By Together AI Systems & Benchmarks</span>
+            <span class="text-white group-hover:translate-x-1 transition-transform inline-flex items-center gap-1">Read paper →</span>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: AI NATIVES BUILD ON TOGETHER AI (Case Studies) -->
+  <section class="py-24 max-w-[1200px] mx-auto px-6">
+    <div class="text-center max-w-[700px] mx-auto mb-16">
+      <span class="text-xs font-mono uppercase tracking-widest text-neutral-400 block mb-3">CUSTOMER CASE STUDIES</span>
+      <h2 class="text-4xl font-bold tracking-tight text-neutral-950 mb-3">AI natives build on Together AI</h2>
+      <p class="text-neutral-600 text-base">
+        From lightning-fast autocomplete to enterprise support agents, the world's most demanding AI software companies run on our cloud.
+      </p>
+    </div>
+
+    <!-- 3 Mostly-Black Case-Study Cards -->
+    <div class="grid grid-cols-3 gap-6">
+      
+      <!-- Card 1: Cursor -->
+      <div class="bg-[#0b0c10] text-white rounded-xl p-8 border border-neutral-800 flex flex-col justify-between hover:border-neutral-700 transition-all">
+        <div>
+          <div class="flex items-center space-x-2 font-mono font-semibold text-white text-base mb-8">
+            <span class="w-5 h-5 bg-white text-black rounded flex items-center justify-center text-xs font-bold font-mono">_></span>
+            <span class="font-sans text-lg">Cursor</span>
+          </div>
+          <div class="text-4xl font-extrabold text-white tracking-tight mb-2">12ms</div>
+          <div class="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">Median Speculative Latency</div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            "Together AI's custom speculative engine powers Cursor's instant tab autocompletion across millions of developers every single day."
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-neutral-800 text-xs font-mono text-neutral-400 flex items-center justify-between">
+          <span>Aman Sanger, Co-founder</span>
+          <span class="text-sky-400">Read story →</span>
+        </div>
+      </div>
+
+      <!-- Card 2: Decagon -->
+      <div class="bg-[#0b0c10] text-white rounded-xl p-8 border border-neutral-800 flex flex-col justify-between hover:border-neutral-700 transition-all">
+        <div>
+          <div class="font-mono text-white font-bold tracking-tight text-lg mb-8">
+            DECAGON
+          </div>
+          <div class="text-4xl font-extrabold text-white tracking-tight mb-2">99.99%</div>
+          <div class="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">Production Inference Uptime</div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            "Deploying dedicated fine-tuned models on Together AI allowed us to scale autonomous customer service for Fortune 500 enterprises."
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-neutral-800 text-xs font-mono text-neutral-400 flex items-center justify-between">
+          <span>Jesse Zhang, CEO</span>
+          <span class="text-sky-400">Read story →</span>
+        </div>
+      </div>
+
+      <!-- Card 3: Vercept -->
+      <div class="bg-[#0b0c10] text-white rounded-xl p-8 border border-neutral-800 flex flex-col justify-between hover:border-neutral-700 transition-all">
+        <div>
+          <div class="font-mono text-white font-bold tracking-tight text-lg mb-8 flex items-center gap-2">
+            <span class="w-3.5 h-3.5 bg-orange-500 rounded-sm"></span>
+            <span>VERCEPT</span>
+          </div>
+          <div class="text-4xl font-extrabold text-white tracking-tight mb-2">3.4x</div>
+          <div class="text-xs font-mono text-neutral-400 uppercase tracking-wider mb-6">Throughput per Dollar</div>
+          <p class="text-neutral-300 text-sm leading-relaxed">
+            "Switching from legacy hyperscaler endpoints to Together Dedicated GPU instances immediately reduced our monthly token burn."
+          </p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-neutral-800 text-xs font-mono text-neutral-400 flex items-center justify-between">
+          <span>Elena Rostova, CTO</span>
+          <span class="text-sky-400">Read story →</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 6: WHAT'S NEW AT TOGETHER AI (Asymmetric Article Grid) -->
+  <section class="py-20 bg-neutral-50/80 border-t border-neutral-200">
+    <div class="max-w-[1200px] mx-auto px-6">
+      
+      <div class="flex items-end justify-between mb-12">
+        <div>
+          <span class="text-xs font-mono uppercase tracking-widest text-neutral-500 block mb-2">ECOSYSTEM & UPDATES</span>
+          <h2 class="text-3xl font-bold tracking-tight text-neutral-950">What's new at Together AI</h2>
+        </div>
+        <a href="#blog" class="text-xs font-mono font-medium text-neutral-700 hover:text-black flex items-center gap-1">
+          Explore all blog posts →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-12 gap-6">
+        
+        <!-- Large Featured Article (Span 7) -->
+        <article class="col-span-7 bg-white rounded-xl border border-neutral-200 p-8 flex flex-col justify-between subtle-shadow">
+          <div>
+            <div class="flex items-center space-x-3 text-xs font-mono text-neutral-400 mb-4">
+              <span class="bg-neutral-100 text-neutral-700 px-2 py-0.5 rounded font-semibold">INFRASTRUCTURE ESSAY</span>
+              <span>•</span>
+              <span>September 24, 2026</span>
+            </div>
+            <h3 class="text-2xl font-bold text-neutral-900 tracking-tight leading-snug mb-3">
+              The Open Source AI Stack: Architecting Independent Frontier Intelligence
+            </h3>
+            <p class="text-neutral-600 text-sm leading-relaxed mb-6">
+              Why leading technology institutions are decoupling from proprietary closed-box APIs in favor of customizable weights, self-hosted checkpoints, and reproducible evaluation harnesses.
+            </p>
+          </div>
+          <div class="flex items-center justify-between pt-4 border-t border-neutral-100 text-xs font-mono text-neutral-500">
+            <span>By Vipul Ved Prakash & Together Architecture</span>
+            <span class="text-blue-600 font-medium">Read article →</span>
+          </div>
+        </article>
+
+        <!-- Right Column (Span 5): 3 Stacked Articles -->
+        <div class="col-span-5 space-y-4">
+          
+          <article class="bg-white rounded-xl border border-neutral-200 p-5 subtle-shadow hover:border-neutral-300 transition-colors">
+            <span class="text-[10px] font-mono text-neutral-400 uppercase">MIGRATION GUIDE</span>
+            <h4 class="text-base font-bold text-neutral-900 mt-1 mb-1 leading-snug">
+              Migrating from closed to open source models in production
+            </h4>
+            <p class="text-xs text-neutral-500 line-clamp-2">Practical token mapping, structured output parsing, and fine-tuning pathways.</p>
+          </article>
+
+          <article class="bg-white rounded-xl border border-neutral-200 p-5 subtle-shadow hover:border-neutral-300 transition-colors">
+            <span class="text-[10px] font-mono text-orange-600 font-medium uppercase">PARTNERSHIP</span>
+            <h4 class="text-base font-bold text-neutral-900 mt-1 mb-1 leading-snug">
+              Together AI and Y Combinator announce dedicated frontier GPU cluster
+            </h4>
+            <p class="text-xs text-neutral-500 line-clamp-2">Granting early-stage batch founders priority H200 and Vera Rubin compute credits.</p>
+          </article>
+
+          <article class="bg-white rounded-xl border border-neutral-200 p-5 subtle-shadow hover:border-neutral-300 transition-colors">
+            <span class="text-[10px] font-mono text-blue-600 font-medium uppercase">BENCHMARK STUDY</span>
+            <h4 class="text-base font-bold text-neutral-900 mt-1 mb-1 leading-snug">
+              GLM-5.3 vs Claude Fable 5: Reasoning, Tool Use & Token Efficiency
+            </h4>
+            <p class="text-xs text-neutral-500 line-clamp-2">Direct head-to-head empirical comparison across complex software engineering evals.</p>
+          </article>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SECTION 7: FINAL CALL TO ACTION -->
+  <section id="build" class="py-24 bg-white text-center border-t border-neutral-200 relative overflow-hidden">
+    <div class="max-w-[760px] mx-auto px-6 relative z-10">
+      <div class="inline-flex items-center gap-2 px-3 py-1 bg-neutral-100 rounded-md text-[11px] font-mono uppercase tracking-widest text-neutral-600 mb-6">
+        INSTANT API ACCESS • $5 FREE COMPUTE CREDIT
+      </div>
+      <h2 class="text-5xl font-bold tracking-tight text-neutral-950 mb-6">
+        Start building on Together AI
+      </h2>
+      <p class="text-lg text-neutral-600 mb-10 leading-relaxed">
+        Join over 500,000 engineers and researchers deploying generative AI with unprecedented speed, reliability, and cost-efficiency.
+      </p>
+
+      <div class="flex items-center justify-center space-x-4">
+        <button class="px-8 py-4 bg-black text-white font-mono text-xs uppercase tracking-wider font-semibold rounded hover:bg-neutral-800 transition-all shadow-lg">
+          Start building free
+        </button>
+        <button class="px-8 py-4 bg-[#f0f3f8] text-neutral-800 border border-neutral-300 font-mono text-xs uppercase tracking-wider font-semibold rounded hover:bg-white transition-all">
+          Schedule architecture review
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- DENSE WHITE FOOTER WITH HUGE PALE WORDMARK -->
+  <footer class="bg-white border-t border-neutral-200 pt-20 pb-16">
+    <div class="max-w-[1200px] mx-auto px-6">
+      
+      <!-- Columns Grid -->
+      <div class="grid grid-cols-5 gap-8 mb-16 text-sm">
+        
+        <!-- Column 1: Brand & Status -->
+        <div class="col-span-1 pr-4">
+          <div class="flex items-center space-x-2 mb-4">
+            <svg viewBox="0 0 32 32" class="w-6 h-6" fill="none">
+              <rect x="3" y="3" width="11" height="11" rx="3" fill="#0D0E15"/>
+              <rect x="18" y="3" width="11" height="11" rx="3" fill="#3B82F6"/>
+              <rect x="3" y="18" width="11" height="11" rx="3" fill="#F25D36"/>
+              <rect x="18" y="18" width="11" height="11" rx="3" fill="#A855F7"/>
+            </svg>
+            <span class="font-bold text-neutral-900 tracking-tight">together.ai</span>
+          </div>
+          <p class="text-xs text-neutral-500 leading-relaxed mb-4">
+            The AI Native Cloud. Optimized infrastructure for training and serving the world's leading open models.
+          </p>
+          <div class="flex items-center space-x-2 text-xs font-mono text-neutral-500">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>All systems operational</span>
+          </div>
+        </div>
+
+        <!-- Column 2: Products -->
+        <div>
+          <h5 class="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-4 font-semibold">Products</h5>
+          <ul class="space-y-2.5 text-neutral-600 text-xs">
+            <li><a href="#" class="hover:text-black transition-colors">Serverless Inference</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Dedicated Endpoints</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Batch API</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">GPU Clusters</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Fine-tuning Platform</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">ThunderKittens Kernels</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 3: Models & Silicon -->
+        <div>
+          <h5 class="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-4 font-semibold">Models & Hardware</h5>
+          <ul class="space-y-2.5 text-neutral-600 text-xs">
+            <li><a href="#" class="hover:text-black transition-colors">Llama 3.3 Suite</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">DeepSeek V3 & R1</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Qwen 2.5 72B</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Flux.1 Schnell & Dev</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">NVIDIA Vera Rubin NVL72</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">NVIDIA H200 SXM</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Developers & Research -->
+        <div>
+          <h5 class="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-4 font-semibold">Developers & Lab</h5>
+          <ul class="space-y-2.5 text-neutral-600 text-xs">
+            <li><a href="#" class="hover:text-black transition-colors">Documentation</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Python SDK</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">TypeScript SDK</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Research Papers</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Community Discord</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Status Dashboard</a></li>
+          </ul>
+        </div>
+
+        <!-- Column 5: Company -->
+        <div>
+          <h5 class="text-xs font-mono uppercase tracking-wider text-neutral-400 mb-4 font-semibold">Company</h5>
+          <ul class="space-y-2.5 text-neutral-600 text-xs">
+            <li><a href="#" class="hover:text-black transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Careers <span class="text-[10px] font-mono text-emerald-600 font-bold ml-1">WE'RE HIRING</span></a></li>
+            <li><a href="#" class="hover:text-black transition-colors">News & Press</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Security & Trust</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-black transition-colors">Terms of Service</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- HUGE PALE WORDMARK -->
+      <div class="pt-10 pb-8 border-t border-neutral-100 flex justify-center items-center overflow-hidden">
+        <span class="text-[112px] font-black tracking-tighter text-neutral-100/80 select-none uppercase pointer-events-none font-sans">
+          TOGETHER.AI
+        </span>
+      </div>
+
+      <!-- Copyright & Bottom Line -->
+      <div class="flex items-center justify-between text-xs font-mono text-neutral-400 border-t border-neutral-100 pt-6">
+        <div>© 2026 Together Computer, Inc. All rights reserved.</div>
+        <div class="flex space-x-6">
+          <a href="#" class="hover:text-neutral-700">X (Twitter)</a>
+          <a href="#" class="hover:text-neutral-700">GitHub</a>
+          <a href="#" class="hover:text-neutral-700">LinkedIn</a>
+          <a href="#" class="hover:text-neutral-700">Discord</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
