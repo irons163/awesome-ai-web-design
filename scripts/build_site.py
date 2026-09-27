@@ -50,12 +50,21 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
-        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity'):
+        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai'):
             # Runtime tabs select additional official media that do not appear
             # in static src attributes; keep those assets with each draft.
             asset_dir = f'{name}-assets'
             shutil.copytree(DRAFT_SOURCE / asset_dir,
                             destination / asset_dir, dirs_exist_ok=True)
+        if name == 'sanity':
+            # Large public imagery and video remain on Sanity's own CDN.
+            for asset in (DRAFT_SOURCE / 'sanity-assets').rglob('*'):
+                if asset.is_file() and asset.suffix in {
+                    '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp'
+                }:
+                    target = destination / asset.relative_to(DRAFT_SOURCE)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(asset, target)
         record = progress['linear.app' if name == 'linear' else name]
         observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
         note = record.get('review_note')

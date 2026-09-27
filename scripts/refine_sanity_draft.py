@@ -18,6 +18,7 @@ SOURCE = ROOT / 'sanity-source-current.html'
 DESTINATION = ROOT / 'sanity.html'
 ASSETS = ROOT / 'sanity-assets'
 BASE = 'https://www.sanity.io/'
+HOSTED_SUFFIXES = {'.css', '.woff', '.woff2', '.ttf', '.svg', '.webp'}
 
 
 def sha256(path: Path) -> str:
@@ -39,7 +40,8 @@ def main() -> None:
         def rewrite_css_url(match: re.Match[str]) -> str:
             value = unescape(match.group(1).strip().strip('"\''))
             resolved = public_asset(value, url)
-            if not resolved or resolved not in assets:
+            if (not resolved or resolved not in assets or
+                    Path(assets[resolved]['path']).suffix not in HOSTED_SUFFIXES):
                 return match.group(0)
             relative = os.path.relpath(ASSETS / assets[resolved]['path'],
                                        local.parent)
@@ -64,6 +66,8 @@ def main() -> None:
     html = re.sub(r'<link\b[^>]*\brel="preconnect"[^>]*>', '', html,
                   flags=re.I)
     for url, item in sorted(assets.items(), key=lambda pair: -len(pair[0])):
+        if Path(item['path']).suffix not in HOSTED_SUFFIXES:
+            continue
         local = css_replacements.get(url, 'sanity-assets/' + item['path'])
         html = html.replace(url, local).replace(url.replace('&', '&amp;'), local)
         if url.startswith(BASE):

@@ -17,7 +17,10 @@ const OFFICIAL_DRAFTS = [
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
-  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity',
+  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai',
+]);
+const SANITY_HOSTED_SUFFIXES = new Set([
+  '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp',
 ]);
 
 const read = p => fs.readFileSync(p, 'utf8');
@@ -77,6 +80,23 @@ function stageOfficialDrafts(progress) {
     if (COPY_ALL_ASSETS.has(name)) {
       fs.cpSync(path.join(DRAFT_SOURCE, name + '-assets'),
         path.join(destination, name + '-assets'), { recursive: true, force: true });
+    }
+    if (name === 'sanity') {
+      const sourceRoot = path.join(DRAFT_SOURCE, 'sanity-assets');
+      const copyFiltered = directory => {
+        for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+          const source = path.join(directory, entry.name);
+          if (entry.isDirectory()) {
+            copyFiltered(source);
+          } else if (entry.isFile() && SANITY_HOSTED_SUFFIXES.has(path.extname(entry.name))) {
+            const target = path.join(destination,
+              path.relative(DRAFT_SOURCE, source));
+            fs.mkdirSync(path.dirname(target), { recursive: true });
+            fs.copyFileSync(source, target);
+          }
+        }
+      };
+      copyFiltered(sourceRoot);
     }
     const record = progress[name === 'linear' ? 'linear.app' : name];
     const observed = escapeHtml((record.observed_at || record.reference_observed_at || '').slice(0, 10) || '日期未記錄');
