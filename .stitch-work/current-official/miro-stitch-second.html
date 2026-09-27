@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Miro — The Visual Workspace for Innovation</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary": "#ffffff",
+            "surface-tint": "#374be0",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed-variant": "#783200",
+            "on-error-container": "#93000a",
+            "secondary-fixed-dim": "#bcc2ff",
+            "on-secondary": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#964100",
+            "on-secondary-fixed": "#0a1352",
+            "tertiary-container": "#bd5300",
+            "surface-variant": "#e2e2e2",
+            "primary-fixed": "#dfe0ff",
+            "inverse-surface": "#1c1c1e",
+            "surface-container": "#eeeeee",
+            "on-primary-container": "#fcf8ff",
+            "surface-container-highest": "#e2e2e2",
+            "surface": "#f9f9f9",
+            "on-primary-fixed": "#000b63",
+            "surface-container-low": "#f3f3f3",
+            "error-container": "#ffdad6",
+            "surface-dim": "#dadada",
+            "on-secondary-fixed-variant": "#3a417f",
+            "on-error": "#ffffff",
+            "tertiary-fixed-dim": "#ffb690",
+            "tertiary-fixed": "#ffdbca",
+            "primary-container": "#4f62f6",
+            "inverse-on-surface": "#f1f1f1",
+            "secondary": "#515998",
+            "outline": "#757687",
+            "secondary-container": "#b2b9ff",
+            "on-tertiary-container": "#fff8f6",
+            "outline-variant": "#c5c5d8",
+            "inverse-primary": "#bcc2ff",
+            "on-background": "#1a1c1c",
+            "primary": "#3246dc",
+            "on-primary-fixed-variant": "#152dc9",
+            "on-surface": "#1a1c1c",
+            "on-tertiary": "#ffffff",
+            "surface-container-high": "#e8e8e8",
+            "background": "#f9f9f9",
+            "on-surface-variant": "#454655",
+            "surface-bright": "#f9f9f9",
+            "on-secondary-container": "#404886",
+            "on-tertiary-fixed": "#331100",
+            "secondary-fixed": "#dfe0ff",
+            "primary-fixed-dim": "#bcc2ff",
+            "miro-yellow": "#FFD02F",
+            "miro-dark": "#1C1C1E"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            "headline": ["Geist", "sans-serif"],
+            "display": ["Geist", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TopNavBar (Shared Component Anchor) -->
+<header class="fixed top-0 left-0 w-full h-[72px] z-50 bg-surface-container-lowest dark:bg-inverse-surface border-b border-surface-variant dark:border-outline-variant">
+<div class="max-w-7xl mx-auto px-6 h-full flex items-center justify-between">
+<div class="flex items-center space-x-8">
+<!-- Logo -->
+<a class="flex items-center space-x-2.5" href="#">
+<div class="w-8 h-8 rounded-lg bg-[#FFD02F] flex items-center justify-center font-headline font-black text-black text-xl shadow-xs">
+            ///
+          </div>
+<span class="font-headline text-2xl font-bold tracking-tight text-on-surface dark:text-inverse-on-surface">Miro</span>
+</a>
+<!-- Desktop Navigation Links -->
+<nav class="hidden md:flex items-center space-x-6 font-headline text-base font-medium">
+<a class="text-on-surface dark:text-inverse-on-surface font-semibold hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">Product</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">Solutions</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">Resources</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">Enterprise</a>
+<a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-inverse-primary transition-colors duration-150" href="#">Pricing</a>
+</nav>
+</div>
+<!-- Actions -->
+<div class="flex items-center space-x-4">
+<button aria-label="Language selector" class="text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors p-1 flex items-center">
+<span class="material-symbols-outlined text-[20px]" data-icon="language">language</span>
+</button>
+<a class="hidden sm:inline-block font-headline text-sm font-medium text-on-surface hover:text-primary transition-colors" href="#">
+          Contact Sales
+        </a>
+<a class="inline-flex items-center justify-center px-4 py-2 rounded-full font-headline text-sm font-semibold bg-primary-container text-on-primary hover:opacity-90 transition-opacity" href="#">
+          Sign up free
+        </a>
+</div>
+</div>
+</header>
+<main class="pt-[72px]">
+<!-- SECTION 1: Experience the Innovation Workspace -->
+<section class="py-20 md:py-24 bg-surface-container-lowest overflow-hidden">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-3xl mx-auto text-center mb-14">
+<span class="inline-block text-xs font-semibold uppercase tracking-wider text-secondary mb-3">
+            Platform Capabilities
+          </span>
+<h2 class="font-headline text-3xl md:text-5xl font-bold tracking-tight text-on-surface mb-4">
+            Experience the Innovation Workspace
+          </h2>
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed">
+            Everything your team needs to go from idea to outcome, all in one place.
+          </p>
+</div>
+<!-- Carousel Container with Navigation Arrows -->
+<div class="relative">
+<!-- Horizontal Scroll Track -->
+<div class="flex gap-6 overflow-x-auto hide-scrollbar scroll-smooth pb-4 pt-1 snap-x snap-mandatory" id="workspaceCarousel">
+<!-- Card 1: AI -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-4 mb-6 relative overflow-hidden flex flex-col justify-between">
+<!-- UI Mock: AI Prompt Bar & Stickies -->
+<div class="flex items-center space-x-2 bg-surface-container-low px-3 py-1.5 rounded-lg border border-surface-variant text-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span>Synthesizing sprint feedback...</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-3">
+<div class="bg-[#FFF4B8] p-2.5 rounded shadow-xs text-[11px] font-medium text-black">
+                      Automate release summaries
+                    </div>
+<div class="bg-[#D5F5E3] p-2.5 rounded shadow-xs text-[11px] font-medium text-black">
+                      Cluster user insights
+                    </div>
+</div>
+<!-- Cursors -->
+<div class="absolute bottom-3 right-4 flex items-center space-x-1 bg-primary text-on-primary text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[12px]" data-icon="navigation">navigation</span>
+<span>AI Assistant</span>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">01 / Intelligence</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">AI Workflows</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Accelerate your team with collaborative AI workflows, auto-generated sticky clusters, and instant synthesis.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 2: Intelligent Canvas -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-4 mb-6 relative overflow-hidden flex flex-col justify-center items-center">
+<!-- Minimap & Live Multiplayer Cursors -->
+<div class="absolute top-2 right-2 w-16 h-12 bg-surface-container-high rounded border border-outline-variant/30 flex items-center justify-center">
+<div class="w-6 h-4 bg-primary/20 border border-primary rounded-xs"></div>
+</div>
+<div class="relative w-full max-w-[200px] h-20 border border-dashed border-outline-variant rounded-lg p-2 flex items-center justify-center">
+<span class="text-xs text-on-surface-variant font-medium">Infinite Multiplayer Frame</span>
+</div>
+<div class="absolute bottom-4 left-6 flex items-center space-x-1 bg-[#2ECC71] text-black text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[10px]" data-icon="navigation">navigation</span>
+<span>Alex S.</span>
+</div>
+<div class="absolute top-8 left-12 flex items-center space-x-1 bg-[#E74C3C] text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-xs">
+<span class="material-symbols-outlined text-[10px]" data-icon="navigation">navigation</span>
+<span>Sarah M.</span>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">02 / Canvas</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">Intelligent Canvas</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Empower teamwork on one, infinite, multiplayer canvas with nested frames, minimaps, and spatial clarity.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 3: Formats -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-3 mb-6 relative overflow-hidden flex flex-col gap-2">
+<div class="bg-surface-container-low rounded p-2 flex items-center space-x-2 border border-surface-variant">
+<span class="material-symbols-outlined text-sm text-primary" data-icon="table_chart">table_chart</span>
+<span class="text-[11px] font-medium text-on-surface">Q3 Product Backlog &amp; Milestones</span>
+</div>
+<div class="bg-surface-container-low rounded p-2 flex items-center space-x-2 border border-surface-variant">
+<span class="material-symbols-outlined text-sm text-[#E67E22]" data-icon="description">description</span>
+<span class="text-[11px] font-medium text-on-surface">PRD: Multi-agent canvas spec</span>
+</div>
+<div class="bg-surface-container-low rounded p-2 flex items-center space-x-2 border border-surface-variant">
+<span class="material-symbols-outlined text-sm text-[#9B59B6]" data-icon="slideshow">slideshow</span>
+<span class="text-[11px] font-medium text-on-surface">Executive Pitch Deck — 12 Slides</span>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">03 / Modalities</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">Docs, Tables &amp; Slides</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Move quickly from ideas to structured plans and work natively with Docs, Tables, Slides, Diagrams, and more.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 4: Blueprints -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-4 mb-6 relative overflow-hidden flex items-center justify-around">
+<div class="p-2.5 rounded bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-lg text-primary block mx-auto" data-icon="touch_app">touch_app</span>
+<span class="text-[10px] font-semibold text-on-surface mt-1 block">Trigger</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="trending_flat">trending_flat</span>
+<div class="p-2.5 rounded bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-lg text-[#2ECC71] block mx-auto" data-icon="sync_alt">sync_alt</span>
+<span class="text-[10px] font-semibold text-on-surface mt-1 block">Branch</span>
+</div>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="trending_flat">trending_flat</span>
+<div class="p-2.5 rounded bg-surface-container-low border border-surface-variant text-center">
+<span class="material-symbols-outlined text-lg text-[#E67E22] block mx-auto" data-icon="task_alt">task_alt</span>
+<span class="text-[10px] font-semibold text-on-surface mt-1 block">Action</span>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">04 / Automation</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">Workflow Blueprints</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Automate key processes and ensure your workflows are scalable, repeatable, and synchronized with core tools.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 5: Enterprise Security -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-4 mb-6 relative overflow-hidden flex flex-col justify-between">
+<div class="flex items-center justify-between pb-2 border-b border-surface-variant">
+<div class="flex items-center space-x-1.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified_user">verified_user</span>
+<span class="text-xs font-bold text-on-surface">Miro Guard &amp; SSO</span>
+</div>
+<span class="text-[10px] font-semibold px-2 py-0.5 rounded bg-surface-container text-on-surface">SOC2 Type II</span>
+</div>
+<div class="space-y-1.5 text-[11px] text-on-surface-variant">
+<div class="flex items-center justify-between">
+<span>SCIM Provisioning</span>
+<span class="text-[#2ECC71] font-semibold">Active</span>
+</div>
+<div class="flex items-center justify-between">
+<span>Data Residency (EU/US)</span>
+<span class="text-on-surface font-semibold">Isolated</span>
+</div>
+<div class="flex items-center justify-between">
+<span>SLA Uptime</span>
+<span class="text-on-surface font-semibold">99.99%</span>
+</div>
+</div>
+<div class="h-1.5 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full w-full"></div>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">05 / Governance</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">Enterprise Security</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Enterprise-grade governance, data residency, admin audit logs, and 99.99% uptime for global organizations.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Card 6: Integrations -->
+<div class="snap-start shrink-0 w-[340px] md:w-[380px] bg-surface-container-low rounded-2xl border border-surface-variant p-6 flex flex-col justify-between hover:border-outline-variant transition-colors">
+<div>
+<div class="h-48 rounded-xl bg-surface-container-lowest border border-surface-variant p-4 mb-6 relative overflow-hidden flex items-center justify-center">
+<div class="grid grid-cols-3 gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-xs shadow-xs text-on-surface">Jira</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-xs shadow-xs text-on-surface">Slack</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-xs shadow-xs text-on-surface">Figma</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-xs shadow-xs text-on-surface">Google</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center font-bold text-xs shadow-xs text-on-surface">Teams</div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-high flex items-center justify-center font-bold text-xs text-primary shadow-xs">+245</div>
+</div>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider text-primary">06 / Ecosystem</span>
+<h3 class="font-headline text-xl font-bold text-on-surface mt-1 mb-2">250+ Integrations</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                  Connect seamlessly with Jira, Slack, Figma, Google Workspace, Microsoft Teams, and enterprise tools.
+                </p>
+</div>
+<div class="mt-6 pt-4 border-t border-surface-variant flex items-center justify-between">
+<button class="inline-flex items-center space-x-1.5 bg-inverse-surface text-inverse-on-surface px-4 py-2 rounded-full text-xs font-semibold hover:bg-black transition-colors">
+<span>Learn more</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Carousel Controls -->
+<div class="flex items-center justify-between mt-6">
+<div class="flex space-x-2">
+<span class="w-8 h-1.5 rounded-full bg-primary inline-block"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-variant inline-block"></span>
+<span class="w-2 h-1.5 rounded-full bg-surface-variant inline-block"></span>
+</div>
+<div class="flex space-x-2">
+<button aria-label="Previous card" class="w-9 h-9 rounded-full border border-surface-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('workspaceCarousel').scrollBy({left: -380, behavior: 'smooth'})">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
+</button>
+<button aria-label="Next card" class="w-9 h-9 rounded-full border border-surface-variant flex items-center justify-center text-on-surface hover:bg-surface-container transition-colors" onclick="document.getElementById('workspaceCarousel').scrollBy({left: 380, behavior: 'smooth'})">
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: The AI platform for teamwork -->
+<section class="py-24 bg-[#F5F5F7]">
+<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-3xl mb-12">
+<h2 class="font-headline text-3xl md:text-5xl font-bold tracking-tight text-on-surface mb-4">
+            The AI platform for teamwork
+          </h2>
+<p class="text-base md:text-lg text-on-surface-variant leading-relaxed mb-6">
+            Move beyond individual AI productivity to team and cross-team collaboration with AI that understands your artifacts, roadmaps, and workflows.
+          </p>
+<div class="flex flex-wrap items-center gap-4">
+<a class="inline-flex items-center justify-center px-6 py-3 rounded-full font-headline text-sm font-semibold bg-inverse-surface text-inverse-on-surface hover:bg-black transition-colors" href="#">
+              Explore the solution
+            </a>
+<a class="inline-flex items-center space-x-2 px-4 py-3 rounded-full font-headline text-sm font-medium text-on-surface hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="play_circle">play_circle</span>
+<span>Watch demo (2 min)</span>
+</a>
+</div>
+</div>
+<!-- 16:9 Interactive Video/Product Showcase Container -->
+<div class="relative w-full aspect-video rounded-3xl border border-[#E6E6E9] bg-surface-container-lowest overflow-hidden shadow-xl flex items-center justify-center group cursor-pointer">
+<!-- Canvas Dot Pattern Background -->
+<div class="absolute inset-0 opacity-40 bg-[radial-gradient(#C5C5D8_1px,transparent_1px)] [background-size:20px_20px]"></div>
+<!-- Rich Miro AI Canvas Interface Mockup -->
+<div class="relative w-full h-full p-8 md:p-14 flex flex-col justify-between select-none">
+<!-- Canvas Header Bar -->
+<div class="flex items-center justify-between">
+<div class="flex items-center space-x-3 bg-surface-container-lowest/90 backdrop-blur-md px-4 py-2 rounded-xl border border-surface-variant shadow-xs">
+<span class="material-symbols-outlined text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-xs md:text-sm font-semibold text-on-surface">Miro Assist: Product Strategy Synthesis</span>
+</div>
+<div class="flex items-center space-x-2">
+<div class="w-8 h-8 rounded-full bg-[#3498DB] text-white flex items-center justify-center text-xs font-bold ring-2 ring-white">DK</div>
+<div class="w-8 h-8 rounded-full bg-[#E67E22] text-white flex items-center justify-center text-xs font-bold ring-2 ring-white">JL</div>
+<div class="w-8 h-8 rounded-full bg-[#2ECC71] text-white flex items-center justify-center text-xs font-bold ring-2 ring-white">AR</div>
+</div>
+</div>
+<!-- Canvas Central Cluster of Smart Stickies & Synthesis -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto w-full my-auto">
+<!-- Sticky Group 1 -->
+<div class="bg-[#FFF8D6] p-5 rounded-xl shadow-sm border border-[#F3E7A3] transform -rotate-1 transition-transform group-hover:rotate-0">
+<div class="text-[11px] font-bold uppercase tracking-wider text-[#8A7100] mb-2">Customer Pain Point</div>
+<p class="text-xs md:text-sm font-medium text-black">
+                  "Context switching between PRD docs and Jira sprint planning causes communication gaps."
+                </p>
+<div class="mt-4 flex items-center space-x-1.5 text-[10px] text-[#8A7100]">
+<span class="material-symbols-outlined text-xs" data-icon="sentiment_satisfied">sentiment_satisfied</span>
+<span>14 user interviews tagged</span>
+</div>
+</div>
+<!-- AI Synthesis Output Card -->
+<div class="bg-surface-container-lowest p-5 rounded-xl shadow-md border-2 border-primary/40 transform scale-105 transition-transform group-hover:scale-105">
+<div class="flex items-center space-x-1.5 text-primary text-xs font-bold mb-2">
+<span class="material-symbols-outlined text-sm" data-icon="magic_button">magic_button</span>
+<span>AI Generated Recommendation</span>
+</div>
+<p class="text-xs md:text-sm font-semibold text-on-surface">
+                  Consolidate roadmap epics directly into synchronous multiplayer visual milestones with automated Jira synchronization.
+                </p>
+<div class="mt-3 inline-block px-2.5 py-1 bg-primary/10 text-primary text-[10px] font-bold rounded-full">
+                  Impact: High • Confidence: 92%
+                </div>
+</div>
+<!-- Sticky Group 2 -->
+<div class="bg-[#EBF7EE] p-5 rounded-xl shadow-sm border border-[#C5E8CE] transform rotate-1 transition-transform group-hover:rotate-0">
+<div class="text-[11px] font-bold uppercase tracking-wider text-[#1B6F35] mb-2">Engineering Roadmap</div>
+<p class="text-xs md:text-sm font-medium text-black">
+                  Build bidirectional API connectors for seamless two-way state sync across core workspace cards.
+                </p>
+<div class="mt-4 flex items-center space-x-1.5 text-[10px] text-[#1B6F35]">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+<span>Target: Q4 Milestone</span>
+</div>
+</div>
+</div>
+<!-- Floating Simulated Multiplayer Live Cursors -->
+<div class="absolute bottom-16 left-24 flex items-center space-x-1.5 bg-[#4F62F6] text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-xs" data-icon="navigation">navigation</span>
+<span>David (Product Lead)</span>
+</div>
+<div class="absolute top-20 right-32 flex items-center space-x-1.5 bg-[#964100] text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-xs" data-icon="navigation">navigation</span>
+<span>Elena (Architect)</span>
+</div>
+<!-- Glassmorphism Central Play Overlay -->
+<div class="absolute inset-0 flex items-center justify-center bg-black/5 backdrop-blur-[1px] group-hover:bg-black/10 transition-colors">
+<div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/95 shadow-2xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-200">
+<span class="material-symbols-outlined text-4xl md:text-5xl text-inverse-surface ml-1" data-icon="play_arrow" data-weight="fill">play_arrow</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Need help getting started? -->
+<section class="py-24 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto px-6">
+<div class="max-w-3xl mb-16">
+<h2 class="font-headline text-3xl md:text-5xl font-bold tracking-tight text-on-surface mb-3">
+            Need help getting started?
+          </h2>
+<p class="text-base md:text-lg text-on-surface-variant">
+            Find the right resources, templates, and community to accelerate your workflow.
+          </p>
+</div>
+<!-- 6 Resource Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Pricing -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="payments">payments</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Pricing</h3>
+<p class="text-sm font-semibold text-primary mb-2">Select a plan</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Find the right plan for your team, from free forever to robust enterprise security.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>View pricing</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2: Templates -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="dashboard_customize">dashboard_customize</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Templates</h3>
+<p class="text-sm font-semibold text-primary mb-2">Get started fast</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Choose from over 2,500 pre-built templates created by Miro and industry experts.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>Browse templates</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3: Solution Partners -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="handshake">handshake</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Solution Partners</h3>
+<p class="text-sm font-semibold text-primary mb-2">Explore the network</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Connect with certified partners to build custom integrations, training, and scale.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>Find a partner</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 4: Community -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="groups">groups</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Community</h3>
+<p class="text-sm font-semibold text-primary mb-2">Connect with Miro users</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Join discussions, share boards, and learn from over 100M+ innovators worldwide.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>Join community</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 5: Blog -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="article">article</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Blog</h3>
+<p class="text-sm font-semibold text-primary mb-2">Dive in to ways of working</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Read the latest guides, thought leadership, customer stories, and product releases.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>Read stories</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 6: Academy -->
+<div class="p-8 rounded-2xl bg-surface-container-low border border-surface-variant hover:border-outline transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="w-12 h-12 rounded-xl bg-surface-container-lowest border border-surface-variant flex items-center justify-center mb-6 text-on-surface group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl" data-icon="school">school</span>
+</div>
+<h3 class="font-headline text-xl font-bold text-on-surface mb-1">Academy</h3>
+<p class="text-sm font-semibold text-primary mb-2">Get started with Miro</p>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                Free on-demand courses, certifications, badges, and live interactive training sessions.
+              </p>
+</div>
+<div class="mt-8 pt-4 border-t border-surface-variant">
+<a class="inline-flex items-center space-x-1.5 text-sm font-semibold text-on-surface group-hover:text-primary transition-colors" href="#">
+<span>Start learning</span>
+<span class="material-symbols-outlined text-base transition-transform group-hover:translate-x-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Anchor & Full-Width 6-Column Layout) -->
+<footer class="w-full py-16 bg-inverse-surface dark:bg-surface-container-lowest border-t border-outline-variant dark:border-surface-variant text-inverse-on-surface dark:text-on-surface">
+<div class="max-w-7xl mx-auto px-6">
+<!-- Top Row: Logo, Region & Socials -->
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-12 mb-12 border-b border-[#2F3131]">
+<div class="flex items-center space-x-3 mb-6 md:mb-0">
+<div class="w-7 h-7 rounded bg-[#FFD02F] flex items-center justify-center font-headline font-black text-black text-lg">
+            ///
+          </div>
+<span class="font-headline text-xl font-bold text-inverse-on-surface dark:text-on-surface">Miro</span>
+</div>
+<div class="flex items-center space-x-6 text-[#9E9E9E]">
+<button class="flex items-center space-x-2 text-sm hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg" data-icon="language">language</span>
+<span>English (US)</span>
+<span class="material-symbols-outlined text-sm" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+</button>
+<div class="flex items-center space-x-4">
+<a aria-label="X / Twitter" class="hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="share">share</span>
+</a>
+<a aria-label="LinkedIn" class="hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="hub">hub</span>
+</a>
+<a aria-label="YouTube" class="hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="smart_display">smart_display</span>
+</a>
+</div>
+</div>
+</div>
+<!-- 6 Links Columns -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 pb-16">
+<!-- Col 1: Product -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Product</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">Product Overview</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Miro Assist (AI)</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Intelligent Canvas</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Developer Platform</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Visual Collaboration</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Enterprise Security</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Changelog</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Releases</a></li>
+</ul>
+</div>
+<!-- Col 2: Solutions -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Solutions</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">Product Management</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Engineering &amp; Architecture</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Agile Coaching</a></li>
+<li><a class="hover:text-white transition-colors" href="#">UX &amp; Product Design</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Marketing &amp; Brand</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Sales &amp; Consulting</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Operations</a></li>
+</ul>
+</div>
+<!-- Col 3: Tools -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Tools</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">Mind Map Maker</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Flowchart Maker</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Concept Map</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Wireframing</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Online Sticky Notes</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Kanban Board</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Retrospective</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Strategic Planning</a></li>
+</ul>
+</div>
+<!-- Col 4: Resources -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Resources</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">Templates</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Miro Academy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Community</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Events &amp; Webinars</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Solution Partners</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Miroverse</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Status</a></li>
+</ul>
+</div>
+<!-- Col 5: Company -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Company</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Press &amp; News</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Sustainability</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Security &amp; Trust</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Legal &amp; Privacy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Investor Relations</a></li>
+</ul>
+</div>
+<!-- Col 6: Plans & Pricing -->
+<div>
+<h4 class="font-headline text-sm font-semibold text-white mb-4">Plans &amp; Pricing</h4>
+<ul class="space-y-3 font-body text-sm font-normal text-[#9E9E9E]">
+<li><a class="hover:text-white transition-colors" href="#">Free</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Starter</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Business</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Enterprise</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Education</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Nonprofits</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Enterprise Contact</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Compare Plans</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal Row -->
+<div class="pt-8 border-t border-[#2F3131] flex flex-col md:flex-row items-center justify-between text-xs text-[#9E9E9E] space-y-4 md:space-y-0">
+<div>
+<span>© 2026 Miro. All rights reserved.</span>
+<span class="ml-2 text-[#757687]">Dated reconstruction draft for design reference.</span>
+</div>
+<div class="flex flex-wrap gap-x-6 gap-y-2">
+<a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Cookie Preferences</a>
+<a class="hover:text-white transition-colors" href="#">Manage Consent</a>
+<a class="hover:text-white transition-colors" href="#">Do Not Sell My Personal Info</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
