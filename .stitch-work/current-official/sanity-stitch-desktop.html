@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sanity — The Content Operations Platform</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#131313",
+            "surface-dim": "#131313",
+            "surface-container-high": "#2a2a2a",
+            "outline": "#ac897e",
+            "on-primary": "#5c1900",
+            "primary-container": "#ff5708",
+            "on-tertiary": "#00325a",
+            "on-primary-container": "#511500",
+            "secondary": "#c6c6c7",
+            "on-secondary-fixed-variant": "#454747",
+            "primary": "#ffb59c",
+            "secondary-fixed": "#e2e2e2",
+            "tertiary-container": "#0494fc",
+            "on-surface-variant": "#e5beb2",
+            "secondary-fixed-dim": "#c6c6c7",
+            "primary-fixed": "#ffdbcf",
+            "on-tertiary-fixed-variant": "#004880",
+            "on-primary-fixed-variant": "#822700",
+            "on-error": "#690005",
+            "primary-fixed-dim": "#ffb59c",
+            "on-secondary-fixed": "#1a1c1c",
+            "inverse-on-surface": "#313030",
+            "on-surface": "#e5e2e1",
+            "inverse-surface": "#e5e2e1",
+            "secondary-container": "#454747",
+            "surface-container": "#201f1f",
+            "on-secondary": "#2f3131",
+            "surface-bright": "#3a3939",
+            "outline-variant": "#5c4037",
+            "error-container": "#93000a",
+            "background": "#131313",
+            "inverse-primary": "#aa3600",
+            "on-error-container": "#ffdad6",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container-low": "#1c1b1b",
+            "tertiary-fixed-dim": "#a1c9ff",
+            "tertiary": "#a1c9ff",
+            "on-primary-fixed": "#390c00",
+            "tertiary-fixed": "#d2e4ff",
+            "surface-container-highest": "#353534",
+            "on-secondary-container": "#b4b5b5",
+            "surface-variant": "#353534",
+            "on-tertiary-fixed": "#001c37",
+            "on-background": "#e5e2e1",
+            "on-tertiary-container": "#002b4f",
+            "error": "#ffb4ab",
+            "surface-tint": "#ffb59c"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            label: ["IBM Plex Sans", "sans-serif"],
+            mono: ["IBM Plex Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    /* Mimic Waldenburg tight display tracking */
+    .tracking-waldenburg {
+      letter-spacing: -0.045em;
+    }
+    .tracking-ultratight {
+      letter-spacing: -0.06em;
+    }
+    .syntax-kw { color: #ff5708; }
+    .syntax-fn { color: #a1c9ff; }
+    .syntax-str { color: #a3e635; }
+    .syntax-prop { color: #e5e2e1; }
+    .syntax-comment { color: #737373; font-style: italic; }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface font-body antialiased selection:bg-primary-container selection:text-black min-w-[1280px]">
+<!-- 1. TOP ANNOUNCEMENT STRIP (Exactly 36px height, pure white) -->
+<aside class="w-full h-[36px] bg-white text-black flex items-center justify-center px-4 z-50 relative border-b border-black/10 select-none">
+<a class="font-mono text-xs font-semibold tracking-tight text-neutral-900 hover:text-black flex items-center gap-1.5 transition-colors" href="#">
+<span>Everything *[NYC] 2026: see what we announced.</span>
+<span class="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+</a>
+</aside>
+<!-- 2. FIXED / OVERLAY TOP NAV (Matching Shared Components JSON & Dated Reference) -->
+<header class="w-full sticky top-0 z-50 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+<div class="max-w-7xl mx-auto h-16 px-8 flex items-center justify-between">
+<!-- Left: Authentic bold Sanity wordmark -->
+<div class="flex items-center gap-10">
+<a class="font-display font-black text-2xl tracking-tighter text-on-surface flex items-center gap-2 group" href="#">
+<span class="w-4 h-4 bg-primary-container rounded-xs inline-block transform rotate-12 group-hover:rotate-45 transition-transform duration-300"></span>
+<span>Sanity</span>
+</a>
+<!-- Center-Left: Upper Navigation Items -->
+<nav class="hidden md:flex items-center gap-7">
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#products">Products</a>
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#solutions">Solutions</a>
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#resources">Resources</a>
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#docs">Docs</a>
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#enterprise">Enterprise</a>
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right: Action Suite -->
+<div class="flex items-center gap-4">
+<a class="font-label text-xs uppercase tracking-wider text-secondary hover:text-on-surface transition-colors duration-150 px-2 py-1" href="#login">
+          Login
+        </a>
+<a class="font-label text-xs uppercase tracking-wider text-on-surface border border-white/20 hover:border-white px-4 py-2 rounded-full transition-all duration-150 active:scale-95" href="#contact">
+          Contact Sales
+        </a>
+<a class="font-label text-xs font-semibold text-black bg-primary-container hover:bg-[#ff6a1a] px-4 py-2 rounded-full transition-all duration-150 active:scale-95 shadow-sm" href="#start">
+          Get Started
+        </a>
+</div>
+</div>
+</header>
+<!-- 3. HERO VIEWPORT (Edge-to-edge dark immersive background) -->
+<section class="relative overflow-hidden bg-surface-container-lowest border-b border-white/10 pt-20 pb-24">
+<!-- Dark layered media & schema editorial collage backdrop -->
+<div class="absolute inset-0 pointer-events-none opacity-20">
+<div class="absolute -top-24 left-1/4 w-[600px] h-[600px] bg-primary-container/10 rounded-full blur-3xl"></div>
+<div class="absolute top-1/2 -right-20 w-[500px] h-[500px] bg-tertiary-container/10 rounded-full blur-3xl"></div>
+<!-- Subtle visual grid schema cards in background -->
+<div class="grid grid-cols-4 gap-6 p-8 h-full transform -skew-y-3 scale-105 opacity-30 select-none">
+<div class="border border-white/10 bg-surface-container-low p-6 rounded-lg space-y-3">
+<div class="h-3 w-20 bg-primary-container/40 rounded"></div>
+<div class="h-32 bg-white/5 rounded border border-white/5"></div>
+<div class="h-2 w-3/4 bg-white/20 rounded"></div>
+<div class="h-2 w-1/2 bg-white/10 rounded"></div>
+</div>
+<div class="border border-white/10 bg-surface-container-low p-6 rounded-lg space-y-3">
+<div class="h-3 w-16 bg-white/20 rounded"></div>
+<div class="h-24 bg-white/5 rounded border border-white/5"></div>
+<div class="h-2 w-full bg-white/15 rounded"></div>
+<div class="h-2 w-2/3 bg-white/10 rounded"></div>
+</div>
+<div class="border border-white/10 bg-surface-container-low p-6 rounded-lg space-y-3">
+<div class="h-3 w-24 bg-tertiary-container/40 rounded"></div>
+<div class="h-36 bg-white/5 rounded border border-white/5"></div>
+<div class="h-2 w-4/5 bg-white/15 rounded"></div>
+</div>
+<div class="border border-white/10 bg-surface-container-low p-6 rounded-lg space-y-3">
+<div class="h-3 w-12 bg-white/30 rounded"></div>
+<div class="h-28 bg-white/5 rounded border border-white/5"></div>
+<div class="h-2 w-1/2 bg-white/20 rounded"></div>
+</div>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-surface-container-lowest/80 via-surface-container-lowest/95 to-surface-container-lowest"></div>
+</div>
+<!-- Hero Content -->
+<div class="relative z-10 max-w-7xl mx-auto px-8">
+<!-- Waldenburg H1 Title (112px at desktop, line-height 0.9, tight tracking) -->
+<h1 class="text-[112px] leading-[0.9] font-black tracking-waldenburg text-white uppercase select-none">
+        The Content<br/>
+        Operations Platform
+      </h1>
+<!-- Subheading (~32px) -->
+<p class="mt-8 text-[32px] leading-tight tracking-tight text-white/90 font-medium max-w-3xl">
+        Power content applications and AI workflows at scale. Every application, one platform.
+      </p>
+<!-- Three Pill CTAs -->
+<div class="mt-12 flex flex-wrap items-center gap-4">
+<!-- Pill 1: Vivid Orange Start Building -->
+<a class="bg-primary-container hover:bg-[#ff6a1a] text-black font-headline font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-150 active:scale-95 shadow-md flex items-center gap-2" href="#start">
+<span>Start building</span>
+<span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+</a>
+<!-- Pill 2: Crisp White Watch Demo -->
+<a class="bg-white hover:bg-neutral-100 text-black font-headline font-semibold text-sm px-7 py-3.5 rounded-full transition-all duration-150 active:scale-95 shadow-md flex items-center gap-2" href="#demo">
+<span class="material-symbols-outlined text-base">play_arrow</span>
+<span>Watch demo</span>
+</a>
+<!-- Pill 3: Terminal Command Pill -->
+<div class="flex items-center gap-3 bg-black/80 border border-white/20 hover:border-white/40 px-5 py-3 rounded-full text-xs font-mono text-neutral-300 transition-colors group cursor-pointer" onclick="navigator.clipboard.writeText('npm create sanity@latest'); alert('Copied to clipboard: npm create sanity@latest')">
+<span class="text-primary-container font-semibold">$</span>
+<span class="text-white selection:bg-transparent">npm create sanity@latest</span>
+<span class="material-symbols-outlined text-sm text-neutral-400 group-hover:text-white transition-colors" data-icon="content_copy">content_copy</span>
+<span class="text-[10px] font-label uppercase tracking-widest text-neutral-400 border-l border-white/20 pl-2 group-hover:text-primary-container">COPY</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. SOLID VIVID ORANGE CUSTOMER LOGO RAIL -->
+<section class="w-full bg-[#FF5500] py-6 px-8 select-none overflow-hidden">
+<div class="max-w-7xl mx-auto flex items-center justify-between gap-8 flex-wrap">
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">FIGMA</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">REDIS</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">REPLIT</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">ANTHROPIC</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">SPOTIFY</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">LINEAR</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">SKIMS</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">ARC'TERYX</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">COMPLEX</div>
+<div class="font-display font-black text-2xl tracking-tighter text-black uppercase">BREX</div>
+</div>
+</section>
+<!-- 5. CUSTOMER OUTCOME METRICS ROW -->
+<section class="bg-[#0B0B0B] border-b border-white/10 py-16 px-8">
+<div class="max-w-7xl mx-auto grid grid-cols-4 gap-8 divide-x divide-white/10">
+<!-- Col 1: Braze -->
+<div class="pr-6">
+<span class="font-mono text-xs uppercase tracking-widest text-neutral-400">BRAZE</span>
+<div class="mt-3 text-6xl font-black font-display tracking-tight text-white">-98%</div>
+<p class="mt-2 text-sm text-neutral-300 font-label uppercase tracking-wider font-semibold">Translation turnaround with AI agents</p>
+<p class="mt-2 text-xs text-neutral-400">Automated localized content workflows directly inside Sanity Studio across 28 geos.</p>
+</div>
+<!-- Col 2: Puma -->
+<div class="px-6">
+<span class="font-mono text-xs uppercase tracking-widest text-neutral-400">PUMA</span>
+<div class="mt-3 text-6xl font-black font-display tracking-tight text-white">50k</div>
+<p class="mt-2 text-sm text-neutral-300 font-label uppercase tracking-wider font-semibold">Reusable structured content pieces</p>
+<p class="mt-2 text-xs text-neutral-400">Unified global brand assets, product metadata, and high-frequency campaign drops.</p>
+</div>
+<!-- Col 3: Complex -->
+<div class="px-6">
+<span class="font-mono text-xs uppercase tracking-widest text-neutral-400">COMPLEX</span>
+<div class="mt-3 text-6xl font-black font-display tracking-tight text-white">80h</div>
+<p class="mt-2 text-sm text-neutral-300 font-label uppercase tracking-wider font-semibold">Editorial time saved per month</p>
+<p class="mt-2 text-xs text-neutral-400">Real-time collaborative previews eliminating staging bottlenecks across newsrooms.</p>
+</div>
+<!-- Col 4: Action / Demo CTA -->
+<div class="pl-6 flex flex-col justify-center items-start">
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">PROVEN ARCHITECTURE</span>
+<h4 class="mt-2 text-lg font-bold text-white tracking-tight">Scale your content without breaking your stack.</h4>
+<a class="mt-6 inline-flex items-center gap-2 border border-white/30 hover:border-white px-5 py-2.5 rounded-full text-xs font-mono uppercase tracking-wider text-white transition-all duration-150 hover:bg-white/5" href="#demo-booking">
+<span>Book a demo</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 6. MIRROR HOW YOUR CONTENT OPERATIONS TEAM WORKS (Sanity Studio 3-Pane Showcase) -->
+<section class="py-24 px-8 border-b border-white/10 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="mb-12">
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">STUDIO WORKSPACE</span>
+<h2 class="mt-2 text-5xl font-black font-display tracking-waldenburg text-white">
+          Mirror how your content operations team works
+        </h2>
+<p class="mt-4 text-xl text-neutral-400 max-w-3xl">
+          Customizable schemas, real-time collaboration, visual editing, and instant content releases.
+        </p>
+</div>
+<!-- Chrome Mockup Window -->
+<div class="w-full bg-[#0a0a0a] border border-white/15 rounded-lg overflow-hidden shadow-2xl">
+<!-- Window Bar -->
+<div class="h-10 bg-surface-container-low border-b border-white/10 flex items-center justify-between px-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-red-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
+<div class="w-3 h-3 rounded-full bg-green-500/80"></div>
+<span class="ml-4 font-mono text-xs text-neutral-400">sanity.studio/desk/article;featured-drop-2026</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-950 text-emerald-300 border border-emerald-800">
+              ● LIVE SYNC
+            </span>
+<span class="font-mono text-xs text-neutral-400">v3.58.0</span>
+</div>
+</div>
+<!-- 3-Pane IDE & Studio Interface Mockup -->
+<div class="grid grid-cols-12 min-h-[520px] font-mono text-xs">
+<!-- Left Pane: TypeScript Schema Editor (3 cols) -->
+<div class="col-span-3 bg-[#0d0d0d] border-r border-white/10 p-4 overflow-x-auto text-[11px] leading-relaxed">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-white/10">
+<span class="font-semibold text-neutral-300 flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-primary-container">code</span>
+                heroSchema.ts
+              </span>
+<span class="text-[10px] text-neutral-500">TypeScript</span>
+</div>
+<div class="space-y-1">
+<div><span class="syntax-kw">import</span> { defineType, defineField } <span class="syntax-kw">from</span> <span class="syntax-str">'sanity'</span></div>
+<div class="mt-2"><span class="syntax-kw">export default</span> defineType({</div>
+<div class="pl-3"><span class="syntax-prop">name:</span> <span class="syntax-str">'article'</span>,</div>
+<div class="pl-3"><span class="syntax-prop">title:</span> <span class="syntax-str">'Article'</span>,</div>
+<div class="pl-3"><span class="syntax-prop">type:</span> <span class="syntax-str">'document'</span>,</div>
+<div class="pl-3"><span class="syntax-prop">fields:</span> [</div>
+<div class="pl-6">defineField({</div>
+<div class="pl-9"><span class="syntax-prop">name:</span> <span class="syntax-str">'headline'</span>,</div>
+<div class="pl-9"><span class="syntax-prop">type:</span> <span class="syntax-str">'string'</span>,</div>
+<div class="pl-9"><span class="syntax-prop">validation:</span> Rule =&gt; Rule.required()</div>
+<div class="pl-6">}),</div>
+<div class="pl-6">defineField({</div>
+<div class="pl-9"><span class="syntax-prop">name:</span> <span class="syntax-str">'coverImage'</span>,</div>
+<div class="pl-9"><span class="syntax-prop">type:</span> <span class="syntax-str">'image'</span>,</div>
+<div class="pl-9"><span class="syntax-prop">options:</span> { <span class="syntax-prop">hotspot:</span> <span class="syntax-kw">true</span> }</div>
+<div class="pl-6">}),</div>
+<div class="pl-6">defineField({</div>
+<div class="pl-9"><span class="syntax-prop">name:</span> <span class="syntax-str">'body'</span>,</div>
+<div class="pl-9"><span class="syntax-prop">type:</span> <span class="syntax-str">'portableText'</span></div>
+<div class="pl-6">})</div>
+<div class="pl-3">]</div>
+<div>})</div>
+</div>
+<div class="mt-6 pt-3 border-t border-white/10 text-neutral-500 text-[10px]">
+              Schema compiled in 8ms with strict Zod types.
+            </div>
+</div>
+<!-- Center Pane: Live Studio Workspace (6 cols) -->
+<div class="col-span-6 bg-[#111111] p-6 border-r border-white/10 font-body">
+<div class="flex items-center justify-between pb-4 border-b border-white/10">
+<div class="flex items-center gap-2">
+<span class="inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-primary-container text-black font-bold">DRAFT</span>
+<span class="text-xs text-neutral-400 font-mono">/posts/orchestrating-omnichannel-scale</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-neutral-700 flex items-center justify-center text-[10px] font-bold text-white border border-white/20">AK</div>
+<div class="w-6 h-6 rounded-full bg-primary-container flex items-center justify-center text-[10px] font-bold text-black border border-white/20">EM</div>
+<span class="text-[10px] text-neutral-400 font-mono">+2 editing</span>
+</div>
+</div>
+<!-- Form Content -->
+<div class="mt-6 space-y-5">
+<div>
+<label class="block font-label text-xs uppercase tracking-wider text-neutral-400 mb-1.5">Headline *</label>
+<div class="bg-black/40 border border-white/20 p-3 rounded text-sm text-white font-medium">
+                  The Content Engine Behind Real-Time Global Drops
+                </div>
+</div>
+<!-- Hotspot Visual Image Crop Simulation -->
+<div>
+<div class="flex items-center justify-between mb-1.5">
+<label class="font-label text-xs uppercase tracking-wider text-neutral-400">Visual Asset &amp; Hotspot</label>
+<span class="font-mono text-[10px] text-primary-container">CROP: (x:0.42, y:0.65)</span>
+</div>
+<div class="relative w-full h-44 bg-surface-container-low rounded border border-white/15 overflow-hidden flex items-center justify-center">
+<!-- Editorial visual asset image placeholder -->
+<img class="w-full h-full object-cover" data-alt="A dark high-contrast editorial fashion campaign portrait photographed in high-key moody studio lighting with deep charcoal backgrounds, sharp directional shadows, and vivid electric orange color accents highlighting structural garments and technical fabric textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqJ0lczlfa85ucD5P9JU-BFwGHrEFZNek0_aCKjGjQYC1XttoiGsJXus9Iv6LNemTVCbruZwVnAmiLmyuk5YTM5D8iUXp9lNUR24KBgGK964h7HPluowmBDwUbHHlI2HXTlb_MdIF6t8krd-q7ikB1MrKC6QE6yiu35c5G5wkkuvrwMdEe1L_khlN6AwKNFWivy8btW7266i171PaGJe2TJ8tSAVhfvMr3vz15fu756goVqUvytYA2o5MciiICNOZ6UK1xW5y8WkQ"/>
+<!-- Hotspot target crosshair -->
+<div class="absolute top-[35%] left-[45%] w-8 h-8 rounded-full border-2 border-primary-container bg-primary-container/20 flex items-center justify-center pointer-events-none">
+<div class="w-1.5 h-1.5 bg-primary-container rounded-full"></div>
+</div>
+<div class="absolute bottom-2 right-2 bg-black/80 px-2 py-1 rounded text-[10px] font-mono text-neutral-300">
+                    Aspect: 16:9 • WEBP 4K
+                  </div>
+</div>
+</div>
+<!-- Portable Text Block -->
+<div>
+<label class="block font-label text-xs uppercase tracking-wider text-neutral-400 mb-1.5">Portable Text Body</label>
+<div class="bg-black/40 border border-white/20 p-3 rounded text-xs text-neutral-300 space-y-2">
+<div class="flex items-center gap-2 border-b border-white/10 pb-2 mb-2 text-neutral-400 font-mono text-[10px]">
+<span class="hover:text-white cursor-pointer font-bold">B</span>
+<span class="hover:text-white cursor-pointer italic">I</span>
+<span class="hover:text-white cursor-pointer underline">U</span>
+<span class="hover:text-white cursor-pointer">H2</span>
+<span class="hover:text-white cursor-pointer">QUOTE</span>
+<span class="hover:text-white cursor-pointer text-primary-container">+ AGENT ENRICH</span>
+</div>
+<p class="leading-relaxed">
+                    By decentralizing structured content through real-time document listeners, editorial teams push synchronized releases simultaneously across iOS, React Web, and localized kiosks without cache divergence.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Pane: History, Diff & Release (3 cols) -->
+<div class="col-span-3 bg-[#0d0d0d] p-4 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between pb-3 mb-4 border-b border-white/10">
+<span class="font-semibold text-neutral-300">Document History</span>
+<span class="material-symbols-outlined text-sm text-neutral-400">history</span>
+</div>
+<div class="space-y-3 font-mono text-[11px]">
+<div class="p-2.5 rounded bg-white/5 border border-white/10">
+<div class="flex items-center justify-between text-neutral-400">
+<span class="text-white font-semibold">Current (Draft)</span>
+<span class="text-[10px] text-primary-container">Just now</span>
+</div>
+<p class="mt-1 text-neutral-300 text-[10px]">Added AI localized summaries</p>
+</div>
+<div class="p-2.5 rounded hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+<div class="flex items-center justify-between text-neutral-400">
+<span>Revision #142</span>
+<span class="text-[10px]">12m ago</span>
+</div>
+<p class="mt-1 text-neutral-400 text-[10px]">Hero hotspot repositioned</p>
+</div>
+<div class="p-2.5 rounded hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
+<div class="flex items-center justify-between text-neutral-400">
+<span>Published v2.0</span>
+<span class="text-[10px]">2h ago</span>
+</div>
+<p class="mt-1 text-neutral-400 text-[10px]">By Elena Morales</p>
+</div>
+</div>
+</div>
+<!-- Schedule & Release Bar -->
+<div class="pt-4 border-t border-white/10 space-y-2">
+<div class="flex items-center justify-between text-[11px] text-neutral-400 font-mono">
+<span>Release:</span>
+<span class="text-white font-bold">Fall Campaign '26</span>
+</div>
+<button class="w-full bg-primary-container hover:bg-[#ff6a1a] text-black font-headline font-bold text-xs py-2.5 rounded transition-all">
+                Publish Document
+              </button>
+<button class="w-full bg-white/5 hover:bg-white/10 text-white font-mono text-[11px] py-2 rounded border border-white/10 transition-all">
+                Schedule for 09:00 UTC
+              </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. CONTENT OPERATIONS WITHOUT THE BUSYWORK (AI & Workflow Automation Layer) -->
+<section class="py-24 px-8 border-b border-white/10 bg-[#0B0B0B]">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">AUTOMATION ENGINE</span>
+<h2 class="mt-2 text-5xl font-black font-display tracking-waldenburg text-white">
+            Content operations without the busywork
+          </h2>
+<p class="mt-4 text-xl text-neutral-400 max-w-2xl">
+            Agent actions, functions, and content agents automate manual work before and after hitting publish.
+          </p>
+</div>
+<!-- Horizontal Tab Switcher -->
+<div class="flex items-center p-1 bg-surface-container-high rounded-full border border-white/10 self-start md:self-auto font-mono text-xs">
+<button class="px-5 py-2 rounded-full bg-primary-container text-black font-semibold shadow">
+            UPDATE REFERENCES
+          </button>
+<button class="px-5 py-2 rounded-full text-neutral-300 hover:text-white transition-colors">
+            TRANSLATE WITH AI
+          </button>
+<button class="px-5 py-2 rounded-full text-neutral-300 hover:text-white transition-colors">
+            DELEGATE FROM ELSEWHERE
+          </button>
+</div>
+</div>
+<!-- Agent Terminal Pipeline Visual -->
+<div class="bg-black border border-white/15 rounded-lg p-6 font-mono text-xs space-y-4 shadow-xl">
+<div class="flex items-center justify-between border-b border-white/10 pb-3 text-neutral-400">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-white font-bold">Sanity Content Agent Pipeline: Auto-Enrichment &amp; Localization</span>
+</div>
+<span class="text-[11px]">Execution latency: 420ms</span>
+</div>
+<!-- 5-Step Pipeline Flow -->
+<div class="grid grid-cols-5 gap-3 pt-2">
+<!-- Step 1 -->
+<div class="bg-[#141414] border border-white/10 p-4 rounded space-y-2">
+<div class="text-[10px] text-primary-container font-bold uppercase tracking-wider">01 // TRIGGER</div>
+<div class="text-white font-semibold">Incoming Webhook</div>
+<p class="text-[11px] text-neutral-400">Document event <code class="text-primary-container">create</code> fired from product PIM inventory drop.</p>
+</div>
+<!-- Step 2 -->
+<div class="bg-[#141414] border border-white/10 p-4 rounded space-y-2">
+<div class="text-[10px] text-primary-container font-bold uppercase tracking-wider">02 // AGENT PARSE</div>
+<div class="text-white font-semibold">Context Analysis</div>
+<p class="text-[11px] text-neutral-400">Sanity Agent tokenizes raw copy, assigns categories, generates SEO metadata.</p>
+</div>
+<!-- Step 3 -->
+<div class="bg-[#141414] border border-white/10 p-4 rounded space-y-2">
+<div class="text-[10px] text-primary-container font-bold uppercase tracking-wider">03 // AUTO-ENRICH</div>
+<div class="text-white font-semibold">Schema Infill</div>
+<p class="text-[11px] text-neutral-400">Matches internal taxonomy relations and injects semantic vector embedding.</p>
+</div>
+<!-- Step 4 -->
+<div class="bg-[#141414] border border-white/10 p-4 rounded space-y-2">
+<div class="text-[10px] text-primary-container font-bold uppercase tracking-wider">04 // LOCALIZATION</div>
+<div class="text-white font-semibold">14 Geos Synthesized</div>
+<p class="text-[11px] text-neutral-400">Translates brand voice into DE, FR, JP, ES preserving layout constraints.</p>
+</div>
+<!-- Step 5 -->
+<div class="bg-[#141414] border border-emerald-500/40 p-4 rounded space-y-2">
+<div class="text-[10px] text-emerald-400 font-bold uppercase tracking-wider">05 // VALIDATION</div>
+<div class="text-white font-semibold">Staging Passed</div>
+<p class="text-[11px] text-neutral-400">Strict schema checks verified. Awaiting editorial sign-off.</p>
+</div>
+</div>
+<div class="p-3 bg-white/5 rounded border border-white/5 text-[11px] text-neutral-400 flex items-center justify-between">
+<span>&gt; agent.execute(workflow: "content-operations-v4", localeCount: 14, autoRefUpdate: true)</span>
+<span class="text-emerald-400 font-semibold">SUCCESS [200 OK]</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. POWER ANYTHING. ONE API, EVERY PLATFORM (Knowledge Layer & GROQ / GraphQL Console) -->
+<section class="py-24 px-8 border-b border-white/10 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto grid grid-cols-12 gap-12 items-center">
+<!-- Text Description -->
+<div class="col-span-5">
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">KNOWLEDGE LAYER</span>
+<h2 class="mt-2 text-5xl font-black font-display tracking-waldenburg text-white">
+          Power anything. One API, every platform
+        </h2>
+<p class="mt-5 text-lg text-neutral-300 leading-relaxed">
+          Turn your content into a governed knowledge layer that powers applications and AI agents.
+        </p>
+<ul class="mt-8 space-y-4 font-mono text-xs text-neutral-300">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-base">check_circle</span>
+<span><strong>GROQ &amp; GraphQL:</strong> Query exactly the fields your clients require without over-fetching or custom BFF servers.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-base">check_circle</span>
+<span><strong>Live Mutation Bus:</strong> Real-time streaming listeners over HTTPS server-sent events for instant UI reactivity.</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container text-base">check_circle</span>
+<span><strong>Global Edge CDN:</strong> Sub-20ms cached query responses replicated in 350+ edge points of presence.</span>
+</li>
+</ul>
+</div>
+<!-- Live GROQ Console Visual Showcase -->
+<div class="col-span-7 bg-black border border-white/20 rounded-lg overflow-hidden shadow-2xl font-mono text-xs">
+<div class="bg-surface-container-high px-4 py-3 border-b border-white/10 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-primary-container font-bold">GROQ Live Query</span>
+<span class="text-neutral-500">•</span>
+<span class="text-neutral-400">dataset: production</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[11px] text-neutral-400">Edge Cache: <span class="text-emerald-400">HIT (14ms)</span></span>
+<button class="bg-white text-black font-bold px-3 py-1 rounded text-[10px] hover:bg-neutral-200">RUN</button>
+</div>
+</div>
+<div class="grid grid-cols-2 divide-x divide-white/10 p-4 min-h-[300px]">
+<!-- GROQ Query -->
+<div class="pr-4 space-y-1 text-[11px] leading-relaxed">
+<span class="syntax-comment">// Extract live campaign entities</span><br/>
+<span class="syntax-kw">*</span>[_type == <span class="syntax-str">"article"</span> &amp;&amp; status == <span class="syntax-str">"published"</span>] {<br/>
+              _id,<br/>
+              title,<br/>
+              <span class="syntax-str">"slug"</span>: slug.current,<br/>
+              <span class="syntax-str">"author"</span>: author-&gt;{ name, avatar },<br/>
+              <span class="syntax-str">"vectorScore"</span>: vectorMatch(<span class="syntax-str">"q4 retail strategy"</span>),<br/>
+              <span class="syntax-str">"coverUrl"</span>: coverImage.asset-&gt;url<br/>
+            }[0..2]
+          </div>
+<!-- JSON Response -->
+<div class="pl-4 text-[11px] text-neutral-300 overflow-x-auto space-y-1">
+<span class="syntax-comment">// Output Payload (JSON)</span><br/>
+            [<br/>
+              {<br/>
+                <span class="syntax-prop">"_id":</span> <span class="syntax-str">"art-98214"</span>,<br/>
+                <span class="syntax-prop">"title":</span> <span class="syntax-str">"The Content Engine"</span>,<br/>
+                <span class="syntax-prop">"slug":</span> <span class="syntax-str">"content-engine"</span>,<br/>
+                <span class="syntax-prop">"vectorScore":</span> <span class="syntax-fn">0.984</span>,<br/>
+                <span class="syntax-prop">"author":</span> {<br/>
+                  <span class="syntax-prop">"name":</span> <span class="syntax-str">"Elena Morales"</span><br/>
+                }<br/>
+              }<br/>
+            ]
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. EVERYTHING YOUR TEAM NEEDS IN ONE PLACE (5-Chapter Matrix) -->
+<section class="py-24 px-8 border-b border-white/10 bg-[#0B0B0B]">
+<div class="max-w-7xl mx-auto">
+<div class="mb-12">
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">PLATFORM MATRIX</span>
+<h2 class="mt-2 text-5xl font-black font-display tracking-waldenburg text-white">
+          Everything your team needs in one place
+        </h2>
+</div>
+<!-- Horizontal Chapter Index -->
+<div class="grid grid-cols-5 border-b border-white/20 pb-4 font-mono text-xs tracking-wider">
+<div class="text-white font-bold border-b-2 border-primary-container pb-4 -mb-[18px]">
+          01 CONTENT-AS-DATA
+        </div>
+<div class="text-neutral-400 hover:text-white transition-colors pb-4">
+          02 EDITORIAL FREEDOM
+        </div>
+<div class="text-neutral-400 hover:text-white transition-colors pb-4">
+          03 CONTENT AGENT
+        </div>
+<div class="text-neutral-400 hover:text-white transition-colors pb-4">
+          04 AUTOMATION AT SCALE
+        </div>
+<div class="text-neutral-400 hover:text-white transition-colors pb-4">
+          05 POWER ANY APPLICATION
+        </div>
+</div>
+<!-- Spotlight Card for Chapter 01 -->
+<div class="mt-12 bg-surface-container-low border border-white/10 rounded-xl p-8 grid grid-cols-12 gap-8 items-center">
+<div class="col-span-6 space-y-4">
+<span class="inline-block px-3 py-1 bg-primary-container/20 text-primary-container border border-primary-container/30 text-xs font-mono font-semibold rounded">
+            CORE FOUNDATION
+          </span>
+<h3 class="text-3xl font-black font-display text-white">
+            The database optimized for content operations
+          </h3>
+<p class="text-neutral-300 leading-relaxed text-sm">
+            Traditional CMSs treat content as rigid HTML blobs or static markdown files. Sanity structures your content as graph-relational JSON documents in our distributed Content Lake, enabling effortless reuse across infinite frontends and AI agents.
+          </p>
+<div class="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 font-mono text-xs text-neutral-400">
+<div>
+<span class="text-white font-bold block mb-1">Content Lake</span>
+              Global document storage with zero schematic locks.
+            </div>
+<div>
+<span class="text-white font-bold block mb-1">Asset Pipelines</span>
+              Automatic on-the-fly image transformations &amp; WebP caching.
+            </div>
+</div>
+</div>
+<div class="col-span-6 bg-black border border-white/15 rounded-lg p-6 font-mono text-xs space-y-3">
+<div class="flex items-center justify-between text-neutral-400 border-b border-white/10 pb-2">
+<span>contentLake.architecture</span>
+<span class="text-emerald-400">99.999% SLA</span>
+</div>
+<div class="space-y-2 text-neutral-300">
+<div class="p-2 rounded bg-white/5 flex items-center justify-between">
+<span>● Transactions: Multi-document ACID mutations</span>
+<span class="text-white font-bold">ACTIVE</span>
+</div>
+<div class="p-2 rounded bg-white/5 flex items-center justify-between">
+<span>● Content Version History</span>
+<span class="text-white font-bold">INFINITE</span>
+</div>
+<div class="p-2 rounded bg-white/5 flex items-center justify-between">
+<span>● Live Query Push Listener</span>
+<span class="text-white font-bold">&lt; 15ms</span>
+</div>
+<div class="p-2 rounded bg-white/5 flex items-center justify-between">
+<span>● Enterprise RBAC &amp; SSO</span>
+<span class="text-white font-bold">ENFORCED</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. LOVED BY 1M+ USERS AND 6K+ TEAMS (Editorial Quotation & Attribution) -->
+<section class="py-24 px-8 border-b border-white/10 bg-surface-container-lowest">
+<div class="max-w-7xl mx-auto">
+<div class="flex items-center justify-between mb-16">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">TESTIMONIALS</span>
+<h2 class="mt-2 text-5xl font-black font-display tracking-waldenburg text-white">
+            Loved by 1M+ users and 6k+ teams
+          </h2>
+</div>
+<!-- Numeric Switcher Pills (01 / 02 / 03) -->
+<div class="flex items-center gap-2 font-mono text-xs">
+<button class="w-10 h-10 rounded-full bg-primary-container text-black font-bold flex items-center justify-center">01</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-high text-neutral-300 hover:text-white flex items-center justify-center border border-white/10">02</button>
+<button class="w-10 h-10 rounded-full bg-surface-container-high text-neutral-300 hover:text-white flex items-center justify-center border border-white/10">03</button>
+</div>
+</div>
+<!-- Massive Editorial Quote Block -->
+<div class="relative bg-surface-container-low border border-white/10 rounded-2xl p-12 overflow-hidden">
+<span class="absolute -top-10 -left-4 font-serif text-[180px] text-white/5 select-none leading-none">“</span>
+<div class="relative z-10 max-w-4xl">
+<blockquote class="text-3xl font-medium text-white leading-snug tracking-tight">
+            “Sanity completely redefined how our global engineers and editorial leaders operate together. Content is no longer an afterthought tucked inside a database—it's an active, programmable API fueling everything from our mobile applications to our latest autonomous LLM agents.”
+          </blockquote>
+<div class="mt-10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-neutral-700 overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="A polished black and white corporate executive headshot portrait of a senior engineering technology leader dressed in modern minimalist attire with clean architectural studio lighting and high-contrast background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgg9EPSw6P1Ln2xz5HwVycIxvQjVzHJspZ4hSPk8LS-2f74HgEgs00IUvifcsA_lLKBKBI6_79mvwk4GXZ5cyOa4JsxTlWOhu588fXdnBYioQN-6G83rFSnQyIGndR1RBqil922PDtQG7Hl5c7WxWv4iQQrqymgHx8xS66gcEVL4uWECl4F8TaXpciHBdaF3HWBjeilNJw0YmJJtyTu809t38-dGrpV-GkoaoDzZ4beu_uQ8B9NT49uXKxXaib9h2PgNf7ba6OmoA"/>
+</div>
+<div>
+<div class="font-headline font-bold text-white text-base">Marcus Vance</div>
+<div class="font-mono text-xs text-neutral-400">VP of Engineering, Global Digital Operations</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. ENTERPRISE-GRADE EVERYTHING & LESS TALK, MORE CODE -->
+<section class="py-24 px-8 border-b border-white/10 bg-[#0B0B0B]">
+<div class="max-w-7xl mx-auto space-y-20">
+<!-- Part A: Enterprise Trust Badges -->
+<div>
+<div class="text-center max-w-2xl mx-auto mb-12">
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">MISSION CRITICAL</span>
+<h3 class="mt-2 text-3xl font-black font-display text-white">Enterprise-grade everything</h3>
+<p class="mt-2 text-neutral-400 text-sm">Security, uptime, and compliance guarantees tailored for Fortune 500 organizations.</p>
+</div>
+<div class="grid grid-cols-5 gap-4">
+<div class="bg-surface-container-low border border-white/10 p-5 rounded-lg text-center space-y-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">verified_user</span>
+<div class="font-mono text-xs text-white font-bold">SOC2 TYPE II</div>
+<p class="text-[11px] text-neutral-400">Independently audited yearly compliance.</p>
+</div>
+<div class="bg-surface-container-low border border-white/10 p-5 rounded-lg text-center space-y-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">speed</span>
+<div class="font-mono text-xs text-white font-bold">99.99% UPTIME SLA</div>
+<p class="text-[11px] text-neutral-400">Contractual high-availability guarantees.</p>
+</div>
+<div class="bg-surface-container-low border border-white/10 p-5 rounded-lg text-center space-y-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">key</span>
+<div class="font-mono text-xs text-white font-bold">SSO &amp; SAML 2.0</div>
+<p class="text-[11px] text-neutral-400">Okta, Azure AD, Google Workspace integration.</p>
+</div>
+<div class="bg-surface-container-low border border-white/10 p-5 rounded-lg text-center space-y-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">admin_panel_settings</span>
+<div class="font-mono text-xs text-white font-bold">GRANULAR RBAC</div>
+<p class="text-[11px] text-neutral-400">Field-level permissions and custom roles.</p>
+</div>
+<div class="bg-surface-container-low border border-white/10 p-5 rounded-lg text-center space-y-2">
+<span class="material-symbols-outlined text-primary-container text-2xl">receipt_long</span>
+<div class="font-mono text-xs text-white font-bold">AUDIT LOGS</div>
+<p class="text-[11px] text-neutral-400">Complete audit trail for all content modifications.</p>
+</div>
+</div>
+</div>
+<!-- Part B: Less Talk, More Code Developer Terminal Strip -->
+<div class="pt-12 border-t border-white/10">
+<div class="flex items-center justify-between mb-8">
+<div>
+<span class="font-mono text-xs uppercase tracking-widest text-primary-container font-semibold">DEVELOPER WORKFLOW</span>
+<h3 class="mt-1 text-2xl font-black font-display text-white">Less talk, more code</h3>
+</div>
+<a class="text-xs font-mono text-primary-container hover:underline" href="#docs">Read the developer documentation →</a>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<!-- Col 1: CLI Install -->
+<div class="bg-black border border-white/20 p-5 rounded-lg font-mono text-xs space-y-3">
+<div class="flex items-center justify-between text-neutral-400">
+<span class="text-white font-bold">1. Quickstart CLI</span>
+<span class="material-symbols-outlined text-sm">terminal</span>
+</div>
+<p class="text-neutral-400 text-[11px]">Bootstraps Next.js, Remix, or SvelteKit with Sanity Studio embedded.</p>
+<div class="bg-surface-container-lowest p-3 rounded border border-white/10 text-primary-container flex items-center justify-between">
+<span>npm create sanity@latest</span>
+<span class="material-symbols-outlined text-xs text-neutral-400 cursor-pointer hover:text-white" data-icon="content_copy">content_copy</span>
+</div>
+</div>
+<!-- Col 2: MCP Server -->
+<div class="bg-black border border-white/20 p-5 rounded-lg font-mono text-xs space-y-3">
+<div class="flex items-center justify-between text-neutral-400">
+<span class="text-white font-bold">2. Model Context Protocol</span>
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+</div>
+<p class="text-neutral-400 text-[11px]">Connect Claude Desktop and Cursor directly to your Sanity schema.</p>
+<div class="bg-surface-container-lowest p-3 rounded border border-white/10 text-primary-container flex items-center justify-between">
+<span>npx @sanity/mcp-server setup</span>
+<span class="material-symbols-outlined text-xs text-neutral-400 cursor-pointer hover:text-white" data-icon="content_copy">content_copy</span>
+</div>
+</div>
+<!-- Col 3: Agent Toolkit -->
+<div class="bg-black border border-white/20 p-5 rounded-lg font-mono text-xs space-y-3">
+<div class="flex items-center justify-between text-neutral-400">
+<span class="text-white font-bold">3. Agent Toolkit</span>
+<span class="material-symbols-outlined text-sm">hub</span>
+</div>
+<p class="text-neutral-400 text-[11px]">Build autonomous multi-agent content pipelines using official SDKs.</p>
+<div class="bg-surface-container-lowest p-3 rounded border border-white/10 text-primary-container flex items-center justify-between">
+<span>npm i @sanity/agent-toolkit</span>
+<span class="material-symbols-outlined text-xs text-neutral-400 cursor-pointer hover:text-white" data-icon="content_copy">content_copy</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 12. OFFICIAL DENSE FOOTER (Matching Shared Components JSON & Specifications) -->
+<footer class="w-full bg-[#050505] border-t border-outline-variant/20 pt-16 pb-12 px-8">
+<div class="max-w-7xl mx-auto flex flex-col gap-12">
+<!-- Top Row: Brand & Columns -->
+<div class="grid grid-cols-12 gap-8">
+<!-- Brand Info -->
+<div class="col-span-3 space-y-4">
+<a class="font-display font-black text-2xl text-on-surface tracking-tighter flex items-center gap-2" href="#">
+<span class="w-3.5 h-3.5 bg-primary-container rounded-xs inline-block transform rotate-12"></span>
+<span>Sanity</span>
+</a>
+<p class="text-xs text-neutral-400 font-label leading-relaxed">
+            The Content Operations Platform for high-scale digital brands and intelligent AI agents.
+          </p>
+<div class="pt-2">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono bg-neutral-900 border border-white/10 text-neutral-300">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              All systems operational
+            </span>
+</div>
+</div>
+<!-- Link Columns (5 columns) -->
+<div class="col-span-9 grid grid-cols-5 gap-6 text-xs">
+<!-- Col 1: Product -->
+<div class="space-y-3 font-label">
+<span class="font-display font-bold text-on-surface uppercase tracking-wider text-[11px]">Product</span>
+<ul class="space-y-2 text-secondary font-body">
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Sanity Studio</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Content Lake</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">AI Content Agent</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">GROQ Query API</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Visual Editing</a></li>
+</ul>
+</div>
+<!-- Col 2: Solutions -->
+<div class="space-y-3 font-label">
+<span class="font-display font-bold text-on-surface uppercase tracking-wider text-[11px]">Solutions</span>
+<ul class="space-y-2 text-secondary font-body">
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Enterprise</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Omnichannel</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Commerce &amp; PIM</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Editorial Publishing</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Generative Workflows</a></li>
+</ul>
+</div>
+<!-- Col 3: Developers -->
+<div class="space-y-3 font-label">
+<span class="font-display font-bold text-on-surface uppercase tracking-wider text-[11px]">Developers</span>
+<ul class="space-y-2 text-secondary font-body">
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Documentation</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">CLI Reference</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">MCP Server</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">GitHub Community</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Templates</a></li>
+</ul>
+</div>
+<!-- Col 4: Resources -->
+<div class="space-y-3 font-label">
+<span class="font-display font-bold text-on-surface uppercase tracking-wider text-[11px]">Resources</span>
+<ul class="space-y-2 text-secondary font-body">
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Customer Stories</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Blog</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Events &amp; NYC 2026</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">System Architecture</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Guides</a></li>
+</ul>
+</div>
+<!-- Col 5: Company -->
+<div class="space-y-3 font-label">
+<span class="font-display font-bold text-on-surface uppercase tracking-wider text-[11px]">Company</span>
+<ul class="space-y-2 text-secondary font-body">
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">About Us</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Careers</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Security</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Status</a></li>
+<li><a class="hover:text-primary-container transition-colors duration-150" href="#">Contact</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Bottom Bar with exact shared components text -->
+<div class="pt-8 border-t border-white/10 flex items-center justify-between text-xs text-secondary-fixed-dim font-label">
+<div>
+<span>© 2026 Sanity, Inc. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-on-surface transition-colors" href="#">Security</a>
+<a class="hover:text-on-surface transition-colors" href="#">Status</a>
+<a class="hover:text-on-surface transition-colors" href="#">System Architecture</a>
+<a class="hover:text-on-surface transition-colors" href="#">Contact</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

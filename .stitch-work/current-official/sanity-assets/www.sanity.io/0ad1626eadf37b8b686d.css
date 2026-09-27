@@ -1,0 +1,427 @@
+/* stylelint-disable */
+
+.osano-cm-window {
+  --sanity-osano-font-sans: var(--font-sans), sans-serif;
+  --sanity-osano-font-mono: var(--font-mono), monospace;
+  --sanity-osano-bg: light-dark(#fff, #0b0b0b);
+  --sanity-osano-fg: light-dark(#0b0b0b, #fff);
+
+  -webkit-font-smoothing: antialiased;
+}
+
+.osano-cm-widget {
+  display: none;
+}
+
+.osano-cm-dialog {
+  background-color: var(--sanity-osano-bg);
+  border: 1px solid var(--sanity-osano-fg);
+  color: var(--sanity-osano-fg);
+  display: block !important;
+  overflow: visible;
+  padding: 1.5rem;
+  transition: none;
+  width: 100%;
+
+  @media (min-width: 480px) {
+    margin: 1.5rem;
+    max-width: 26rem;
+  }
+  @media (min-width: 1000px) {
+    margin: 1.5rem;
+    max-width: 600px;
+    min-with: 600px;
+  }
+}
+
+.osano-cm-message {
+  padding: 0 !important;
+}
+
+.osano-cm-storage-policy {
+  display: block;
+  color: var(--sanity-osano-fg);
+  font-family: var(--sanity-osano-font-sans);
+  font-size: 13px;
+  line-height: 1.5;
+  margin-top: 1rem;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.osano-cm-buttons {
+  display: flex !important;
+  flex-wrap: wrap;
+  /* flex-direction: column; */
+  justify-content: flex-start !important;
+  margin-top: 1.5rem !important;
+  margin-inline: 0 !important;
+  gap: 8px;
+  width: 100% !important;
+  max-width: 100% !important;
+
+  & > * {
+    flex-shrink: 0;
+  }
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+  }
+}
+
+.osano-cm-info {
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--sanity-osano-bg);
+  box-shadow: none;
+  color: var(--sanity-osano-fg);
+  display: block !important;
+  padding: 0 1.5rem;
+  transition: none;
+  width: 100%;
+}
+
+.osano-cm-view {
+  padding: 0 !important;
+}
+
+/* .osano-cm-info-dialog-header {
+  background: var(--sanity-osano-bg) !important;
+  height: auto !important;
+  min-height: unset !important;
+  padding-block: 1rem 0 !important;
+  margin-bottom: 1rem;
+} */
+
+.osano-cm-header {
+  background: none;
+  padding: 0;
+}
+
+.osano-cm-description {
+  padding: 0 !important;
+}
+
+.osano-cm-link {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-sans);
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  padding: 0 !important;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+  text-decoration: underline;
+}
+
+.osano-cm-powered-by {
+  margin-block: 2rem !important;
+}
+
+.osano-cm-view__list {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2rem !important;
+  margin-block: 2rem !important;
+}
+
+.osano-cm-disclosure {
+  padding: 0 !important;
+  margin: 1.5rem 0 0 !important;
+  border: 0 !important;
+}
+
+/* .osano-cm-disclosure__toggle {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-mono);
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  padding: 0 !important;
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+} */
+
+.osano-cm-label {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-sans);
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  padding: 0 !important;
+  /* background: var(--sanity-osano-bg) !important; */
+  text-box-edge: cap alphabetic;
+  text-box-trim: trim-both;
+}
+
+.osano-cm-opt-out-honored-wrapper--position_right,
+.osano-cm-opt-out-honored-wrapper--position_left {
+  background: var(--sanity-osano-bg) !important;
+  border-color: var(--sanity-osano-fg) !important;
+}
+
+.osano-cm-view__button {
+  margin-top: 2rem !important;
+}
+
+.osano-cm-dialog__close {
+  margin: 6px;
+  stroke: var(--sanity-osano-fg) !important;
+
+  &:focus {
+    background: none !important;
+    border: none !important;
+  }
+
+  &:focus-visible {
+    outline: 1px solid var(--sanity-osano-fg) !important;
+  }
+
+  .osano-cm-dialog:has(.osano-cm-accept-all):has(.osano-cm-button--type_denyAll)
+    & {
+    display: none !important;
+  }
+}
+
+.osano-cm-dialog__buttons .osano-cm-button {
+  flex-grow: 1 !important;
+}
+
+.osano-cm-info-dialog-header__close {
+  top: 0;
+  right: -1.5rem;
+  position: absolute;
+  margin: 0;
+  border-radius: 0 !important;
+  transform: none !important;
+  font-family: var(--sanity-osano-font-mono);
+  color: var(--sanity-osano-fg);
+  border: 0 !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  width: 35px;
+
+  svg {
+    display: none;
+  }
+
+  &::before {
+    content: "×";
+    font-size: 20px;
+  }
+
+  &:focus {
+    background: var(--sanity-osano-bg);
+    color: var(--sanity-osano-fg);
+  }
+
+  &:focus-visible {
+    background: var(--sanity-osano-bg);
+    color: var(--sanity-osano-fg);
+    outline: 1px solid var(--sanity-osano-fg);
+    outline-offset: 2px;
+  }
+
+  &:hover,
+  &:active {
+    background-color: var(--sanity-osano-fg);
+    color: var(--sanity-osano-bg);
+  }
+}
+
+.osano-cm-info__info-dialog-header {
+  background: var(--sanity-osano-bg) !important;
+  height: fit-content !important;
+  font-size: 0;
+  min-height: 0 !important;
+  padding-block: 1.5rem !important;
+}
+
+.osano-cm-list-item__disclosure {
+  margin-block: 1rem 0 !important;
+}
+
+.osano-cm-drawer-toggle {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
+.osano-cm-switch {
+  cursor: pointer !important;
+  border: 0 !important;
+  display: flex !important;
+  position: relative !important;
+  height: 25px;
+  width: 50px !important;
+  background: none !important;
+  padding: 2px;
+
+  &::before {
+    inset: 0;
+    background: var(--sanity-osano-bg) !important;
+    border: 1px solid var(--sanity-osano-fg) !important;
+    height: 25px !important;
+  }
+
+  &::after {
+    background: var(--sanity-osano-fg) !important;
+    height: 23px !important;
+    width: 23px !important;
+    border-radius: 9999px !important;
+    border: 2px solid var(--sanity-osano-bg) !important;
+    box-sizing: border-box;
+    inset: 1px 0 0 1px !important;
+  }
+
+  .osano-cm-toggle--checked &::before {
+    background: var(--sanity-osano-fg) !important;
+  }
+
+  .osano-cm-toggle--checked &::after {
+    transform: translateX(calc(150% - 6px)) !important;
+  }
+}
+
+/************************************
+  Typography
+*************************************/
+
+/* component-heading-sm */
+.osano-cm-info-dialog-header__header {
+  font-family: var(--sanity-osano-font-sans) !important;
+  font-size: 20px !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  line-height: 110% !important;
+  letter-spacing: -0.2px !important;
+  text-box-edge: cap alphabetic !important;
+  text-box-trim: trim-both !important;
+}
+
+/* detail-md */
+.osano-cm-message,
+.osano-cm-storage-policy,
+.osano-cm-toggle__label {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-sans) !important;
+  font-size: 13px !important;
+  line-height: 1.5 !important;
+  text-box-edge: cap alphabetic !important;
+  text-box-trim: trim-both !important;
+}
+
+/* label-md */
+.osano-cm-button,
+.osano-cm-toggle__label {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-mono) !important;
+  font-size: 13px !important;
+  font-weight: 400;
+  line-height: 1.5 !important;
+  text-box-edge: cap alphabetic !important;
+  text-box-trim: trim-both !important;
+  text-transform: uppercase;
+}
+
+/* detail-sm */
+.osano-cm-description,
+.osano-cm-disclosure__toggle {
+  color: var(--sanity-osano-fg) !important;
+  font-family: var(--sanity-osano-font-sans) !important;
+  font-size: 12px !important;
+  line-height: 1.2 !important;
+  text-box-edge: cap alphabetic !important;
+  text-box-trim: trim-both !important;
+}
+
+.osano-cm-link,
+.osano-cm-disclosure__toggle {
+  width: fit-content !important;
+  text-decoration: underline !important;
+
+  &:focus {
+    font-weight: 400;
+  }
+}
+
+/* button-secondary */
+.osano-cm-button {
+  background: var(--sanity-osano-bg) !important;
+  border: 1px solid var(--sanity-osano-fg) !important;
+  width: fit-content !important;
+  color: var(--sanity-osano-fg) !important;
+  display: block !important;
+  margin: 0 !important;
+  border-radius: 9999px !important;
+  transition: none !important;
+  padding: 8px !important;
+  flex: unset !important;
+  text-transform: uppercase !important;
+
+  &:focus {
+    background: var(--sanity-osano-bg) !important;
+    color: var(--sanity-osano-fg) !important;
+  }
+
+  &:focus-visible {
+    background: var(--sanity-osano-bg) !important;
+    color: var(--sanity-osano-fg) !important;
+    outline: 1px solid var(--sanity-osano-fg) !important;
+    outline-offset: 2px !important;
+  }
+
+  &:hover,
+  &:active {
+    background: var(--sanity-osano-fg) !important;
+    color: var(--sanity-osano-bg) !important;
+  }
+}
+
+/* button-primary */
+.osano-cm-save,
+.osano-cm-accept-all {
+  background: var(--sanity-osano-fg) !important;
+  color: var(--sanity-osano-bg) !important;
+
+  &:focus {
+    background: var(--sanity-osano-fg) !important;
+    color: var(--sanity-osano-bg) !important;
+  }
+
+  &:focus-visible {
+    background: var(--sanity-osano-fg) !important;
+    color: var(--sanity-osano-bg) !important;
+    outline: 1px solid var(--sanity-osano-fg) !important;
+    outline-offset: 2px !important;
+  }
+
+  &:hover,
+  &:active {
+    background: var(--sanity-osano-bg) !important;
+    color: var(--sanity-osano-fg) !important;
+  }
+}
+
+.osano-cm-save {
+  font-size: 15px !important;
+  padding: 0.75rem !important;
+  width: 100% !important;
+}
+
+/*
+  It is necessary for the Opt-out Honored badge
+  to be presented so the user can see their choice
+  is being respected. So instead of hiding the badge
+  immediately, we fade it away after 5 seconds so that
+  it no longer blocks UI elements behind it
+*/
+.osano-cm-window__opt-out-honored-wrapper {
+  transition-behavior: allow-discrete;
+  animation: osano-opt-out-honored-exit 300ms 5000ms forwards ease-out;
+}
+
+@keyframes osano-opt-out-honored-exit {
+  to {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+  }
+}

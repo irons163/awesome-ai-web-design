@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Sanity — The Content Operations Platform</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#3a3939",
+            "on-secondary-container": "#b4b5b5",
+            "tertiary-fixed-dim": "#a1c9ff",
+            "surface-tint": "#ffb59c",
+            "on-primary-fixed": "#390c00",
+            "on-primary-container": "#511500",
+            "secondary-fixed": "#e2e2e2",
+            "error": "#ffb4ab",
+            "inverse-on-surface": "#313030",
+            "primary-fixed": "#ffdbcf",
+            "primary-container": "#ff5708",
+            "primary": "#ffb59c",
+            "on-secondary": "#2f3131",
+            "on-primary-fixed-variant": "#822700",
+            "surface": "#131313",
+            "secondary-fixed-dim": "#c6c6c7",
+            "on-surface": "#e5e2e1",
+            "on-secondary-fixed": "#1a1c1c",
+            "on-background": "#e5e2e1",
+            "tertiary-fixed": "#d2e4ff",
+            "surface-container-high": "#2a2a2a",
+            "on-tertiary-container": "#002b4f",
+            "secondary": "#c6c6c7",
+            "outline": "#ac897e",
+            "on-secondary-fixed-variant": "#454747",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container": "#201f1f",
+            "on-error-container": "#ffdad6",
+            "background": "#131313",
+            "secondary-container": "#454747",
+            "on-error": "#690005",
+            "surface-dim": "#131313",
+            "surface-variant": "#353534",
+            "on-primary": "#5c1900",
+            "surface-container-highest": "#353534",
+            "on-tertiary-fixed": "#001c37",
+            "on-surface-variant": "#e5beb2",
+            "surface-container-low": "#1c1b1b",
+            "tertiary-container": "#0494fc",
+            "error-container": "#93000a",
+            "outline-variant": "#5c4037",
+            "tertiary": "#a1c9ff",
+            "inverse-surface": "#e5e2e1",
+            "inverse-primary": "#aa3600",
+            "primary-fixed-dim": "#ffb59c",
+            "on-tertiary-fixed-variant": "#004880",
+            "on-tertiary": "#00325a"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {},
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["IBM Plex Sans", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #0b0b0b;
+      color: #e5e2e1;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Infinite marquee animation */
+    @keyframes marquee {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+    .animate-marquee-infinite {
+      display: flex;
+      width: 200%;
+      animation: marquee 16s linear infinite;
+    }
+    /* Custom scrollbar hiding */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-surface antialiased flex justify-center w-full min-h-screen selection:bg-primary-container selection:text-black">
+<!-- Mobile Simulator Frame (390px fixed canvas width) -->
+<main class="w-full max-w-[390px] min-h-screen bg-surface-container-lowest flex flex-col relative shadow-2xl border-x border-surface-container-high/40">
+<!-- 1. Top Announcement Banner (~40px) -->
+<header class="w-full h-10 bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center px-3 border-b border-surface-container-highest select-none">
+<a class="text-[12px] font-mono tracking-tight font-medium hover:underline flex items-center gap-1.5 truncate" href="#nyc-announcements">
+<span>Everything *[NYC] 2026: see what we announced.</span>
+<span class="font-bold text-sm">→</span>
+</a>
+</header>
+<!-- 2. Sticky Mobile Navigation Header -->
+<div class="sticky top-0 z-50 w-full bg-surface-container-lowest/95 backdrop-blur-md px-4 h-16 flex items-center justify-between border-b border-surface-container-high/40">
+<!-- Sanity Logo (Exact Casing) -->
+<a class="font-display font-black text-2xl tracking-tighter text-on-surface flex items-center gap-1 hover:opacity-90 transition-opacity" href="#">
+<span class="inline-block w-2.5 h-2.5 bg-primary-container mr-0.5 rounded-full"></span>
+        Sanity
+      </a>
+<!-- Right Action Cluster -->
+<div class="flex items-center gap-2">
+<a class="px-3.5 py-1.5 rounded-full bg-primary-container text-black font-label text-xs font-bold tracking-tight shadow-sm hover:brightness-110 active:scale-95 transition-all" href="#get-started">
+          Get Started
+        </a>
+<!-- Circular Hamburger Menu Button -->
+<button aria-label="Toggle navigation menu" class="w-9 h-9 rounded-full border border-surface-container-highest flex items-center justify-center text-on-surface hover:bg-surface-container transition-all active:scale-90" id="mobile-menu-trigger">
+<span class="material-symbols-outlined text-[20px]" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+<!-- Mobile Drawer Structure (Interactive) -->
+<nav class="hidden flex-col bg-surface-container-low border-b border-surface-container-high px-5 py-6 space-y-4" id="mobile-drawer">
+<div class="flex flex-col space-y-3 font-label text-sm tracking-tight text-secondary">
+<a class="text-on-surface font-medium hover:text-primary-container transition-colors py-1" href="#">Products</a>
+<a class="text-secondary hover:text-on-surface transition-colors py-1" href="#">Solutions</a>
+<a class="text-secondary hover:text-on-surface transition-colors py-1" href="#">Resources</a>
+<a class="text-secondary hover:text-on-surface transition-colors py-1" href="#">Docs</a>
+<a class="text-secondary hover:text-on-surface transition-colors py-1" href="#">Enterprise</a>
+<a class="text-secondary hover:text-on-surface transition-colors py-1" href="#">Pricing</a>
+</div>
+<div class="pt-4 border-t border-surface-container-high flex flex-col gap-2.5">
+<a class="w-full text-center py-2.5 rounded-full border border-surface-container-highest text-xs font-mono font-medium text-on-surface hover:bg-surface-container" href="#contact">
+          Contact Sales
+        </a>
+</div>
+</nav>
+<!-- 3. Hero Viewport (Framed for 390px portrait) -->
+<section class="relative px-5 pt-10 pb-12 flex flex-col justify-start overflow-hidden">
+<!-- Background Ambient Glow & Subtle Editorial Collage Motif -->
+<div class="absolute -top-16 left-1/2 -translate-x-1/2 w-80 h-80 bg-primary-container/10 rounded-full blur-[90px] pointer-events-none"></div>
+<div class="absolute inset-0 opacity-[0.04] pointer-events-none bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<!-- Studio Tag / Micro Breadcrumb -->
+<div class="inline-flex items-center gap-2 self-start px-2.5 py-1 rounded-full bg-surface-container border border-surface-container-high mb-6">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="text-[11px] font-mono text-secondary-fixed-dim uppercase tracking-wider">Sanity 2026.4 Released</span>
+</div>
+<!-- Massive 54-58px Tight Headline across three lines -->
+<h1 class="font-display font-extrabold text-[54px] leading-[0.92] tracking-tighter text-on-surface mb-6 uppercase">
+<span>THE CONTENT</span><br/>
+<span>OPERATIONS</span><br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-on-surface via-on-surface to-secondary-fixed-dim">PLATFORM</span>
+</h1>
+<!-- Subhead ~18-20px -->
+<p class="text-[19px] leading-snug text-secondary font-body font-normal tracking-tight mb-8">
+        Power content applications and AI workflows at scale. Every application, one platform.
+      </p>
+<!-- Two stacked full-width pill buttons with 8px gap -->
+<div class="flex flex-col gap-2 w-full mb-10 z-10">
+<a class="w-full py-4 rounded-full bg-primary-container text-black font-label text-base font-bold text-center flex items-center justify-center gap-1.5 shadow-lg shadow-primary-container/20 active:scale-[0.98] transition-transform" href="#start-building">
+<span>Start building</span>
+<span class="font-bold text-lg leading-none">→</span>
+</a>
+<a class="w-full py-3.5 rounded-full bg-on-surface text-surface-container-lowest font-label text-base font-semibold text-center flex items-center justify-center gap-2 active:scale-[0.98] transition-transform hover:bg-white" href="#watch-demo">
+<span class="material-symbols-outlined text-[18px]" data-icon="play_arrow">play_arrow</span>
+<span>Watch demo</span>
+</a>
+</div>
+<!-- Subdued Editorial Collage / Studio Teaser UI Preview -->
+<div class="relative w-full rounded-2xl bg-surface-container border border-surface-container-high overflow-hidden shadow-2xl">
+<div class="px-3.5 py-2.5 bg-surface-container-high/60 border-b border-surface-container-high flex items-center justify-between text-xs text-secondary font-mono">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+<span class="ml-2 text-[11px] text-secondary/70">studio.production.sanity.io</span>
+</div>
+<span class="text-[10px] text-primary-container font-semibold">LIVE DRAFT</span>
+</div>
+<!-- Collage Snapshot Graphic -->
+<div class="p-3.5 bg-surface-container-lowest/80 flex flex-col gap-3">
+<div class="flex items-center justify-between border-b border-surface-container-high/50 pb-2">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-[10px] font-mono text-secondary">Document</span>
+<span class="text-xs font-semibold text-on-surface">homepageCampaign.json</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-[10px] bg-primary-container/20 text-primary-container px-2 py-0.5 rounded-full font-mono">Syncing 3 edges</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-2 py-1">
+<div class="h-16 rounded-lg bg-surface-container p-2 flex flex-col justify-between border border-surface-container-high">
+<span class="text-[9px] font-mono text-secondary">AGENT 01</span>
+<span class="text-[11px] font-bold text-on-surface truncate">Auto-Enrich</span>
+</div>
+<div class="h-16 rounded-lg bg-surface-container p-2 flex flex-col justify-between border border-surface-container-high">
+<span class="text-[9px] font-mono text-secondary">SCHEMA</span>
+<span class="text-[11px] font-bold text-on-surface truncate">Type-Safe</span>
+</div>
+<div class="h-16 rounded-lg bg-surface-container p-2 flex flex-col justify-between border border-primary-container/40">
+<span class="text-[9px] font-mono text-primary-container">REALTIME</span>
+<span class="text-[11px] font-bold text-on-surface truncate">3 Mut/s</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Bold Vivid Orange Horizontal Logo Marquee (#ff5500 background) -->
+<section class="w-full bg-primary-container py-3.5 overflow-hidden select-none border-y border-black">
+<div class="animate-marquee-infinite items-center gap-8 whitespace-nowrap text-black font-display font-black text-lg tracking-tighter">
+<span>FIGMA</span>
+<span class="text-xs font-mono">•</span>
+<span>REDIS</span>
+<span class="text-xs font-mono">•</span>
+<span>REPLIT</span>
+<span class="text-xs font-mono">•</span>
+<span>ANTHROPIC</span>
+<span class="text-xs font-mono">•</span>
+<span>SPOTIFY</span>
+<span class="text-xs font-mono">•</span>
+<span>LINEAR</span>
+<span class="text-xs font-mono">•</span>
+<span>SKIMS</span>
+<span class="text-xs font-mono">•</span>
+<span>ARC'TERYX</span>
+<span class="text-xs font-mono">•</span>
+<span>COMPLEX</span>
+<span class="text-xs font-mono">•</span>
+<span>BREX</span>
+<span class="text-xs font-mono">•</span>
+<!-- Duplicate set for seamless continuous scroll loop -->
+<span>FIGMA</span>
+<span class="text-xs font-mono">•</span>
+<span>REDIS</span>
+<span class="text-xs font-mono">•</span>
+<span>REPLIT</span>
+<span class="text-xs font-mono">•</span>
+<span>ANTHROPIC</span>
+<span class="text-xs font-mono">•</span>
+<span>SPOTIFY</span>
+<span class="text-xs font-mono">•</span>
+<span>LINEAR</span>
+<span class="text-xs font-mono">•</span>
+<span>SKIMS</span>
+<span class="text-xs font-mono">•</span>
+<span>ARC'TERYX</span>
+<span class="text-xs font-mono">•</span>
+<span>COMPLEX</span>
+<span class="text-xs font-mono">•</span>
+<span>BREX</span>
+</div>
+</section>
+<!-- 5. Customer Metrics / Proven Architecture -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-mono uppercase tracking-wider text-secondary-fixed-dim">PROVEN AT HYPERSCALE</span>
+<span class="text-[10px] font-mono text-primary-container">PROD VERIFIED</span>
+</div>
+<!-- Metric Bento Cards -->
+<div class="flex flex-col gap-3">
+<!-- Braze -->
+<div class="p-4 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-secondary uppercase font-semibold">BRAZE</span>
+<span class="text-xs font-mono text-primary-container font-bold">-98% TIME</span>
+</div>
+<p class="text-2xl font-display font-extrabold text-on-surface tracking-tight">-98% turnaround</p>
+<p class="text-xs text-secondary font-body">Global content translation and delivery with autonomous AI agents.</p>
+</div>
+<!-- PUMA -->
+<div class="p-4 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-secondary uppercase font-semibold">PUMA</span>
+<span class="text-xs font-mono text-primary-container font-bold">50K ASSETS</span>
+</div>
+<p class="text-2xl font-display font-extrabold text-on-surface tracking-tight">50,000+ pieces</p>
+<p class="text-xs text-secondary font-body">Reusable structured content items powering unified global omnichannel commerce.</p>
+</div>
+<!-- Complex -->
+<div class="p-4 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="text-xs font-mono text-secondary uppercase font-semibold">COMPLEX</span>
+<span class="text-xs font-mono text-primary-container font-bold">80H / MO</span>
+</div>
+<p class="text-2xl font-display font-extrabold text-on-surface tracking-tight">80 hours saved</p>
+<p class="text-xs text-secondary font-body">Monthly editorial overhead eliminated via automated portable text pipelines.</p>
+</div>
+</div>
+<a class="inline-flex items-center gap-1.5 text-xs font-mono text-primary-container hover:underline mt-1" href="#case-studies">
+<span>Scale your content without breaking your stack</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</section>
+<!-- 6. Studio Workspace Section -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">01 // STUDIO WORKSPACE</span>
+<h2 class="text-3xl font-display font-black tracking-tight text-on-surface leading-tight">
+        Mirror how your content operations team works
+      </h2>
+<p class="text-sm text-secondary font-body leading-relaxed mb-3">
+        Customizable schemas, real-time collaboration, visual editing, and instant content releases.
+      </p>
+<!-- Code & Studio Inspector Card -->
+<div class="w-full rounded-2xl bg-surface-container border border-surface-container-high overflow-hidden flex flex-col">
+<!-- Tab selector -->
+<div class="flex border-b border-surface-container-high bg-surface-container-low font-mono text-[11px]">
+<button class="px-3.5 py-2.5 border-r border-surface-container-high text-on-surface font-semibold bg-surface-container">heroSchema.ts</button>
+<button class="px-3.5 py-2.5 text-secondary hover:text-on-surface">Preview.tsx</button>
+<span class="ml-auto px-3 py-2 text-[10px] text-secondary self-center">TS 5.4</span>
+</div>
+<!-- Code Block -->
+<div class="p-4 bg-surface-container-lowest font-mono text-[11px] leading-relaxed overflow-x-auto text-secondary-fixed">
+<span class="text-secondary/50">// Define content model once</span><br/>
+<span class="text-primary-container">export default</span> defineType({<br/>
+            name: <span class="text-tertiary">'heroCampaign'</span>,<br/>
+            type: <span class="text-tertiary">'document'</span>,<br/>
+            fields: [<br/>
+              defineField({<br/>
+                name: <span class="text-tertiary">'headline'</span>,<br/>
+                type: <span class="text-tertiary">'string'</span>,<br/>
+                validation: Rule =&gt; Rule.required()<br/>
+              }),<br/>
+              defineField({<br/>
+                name: <span class="text-tertiary">'aiEnrichedTags'</span>,<br/>
+                type: <span class="text-tertiary">'array'</span>,<br/>
+                of: [{type: <span class="text-tertiary">'string'</span>}]<br/>
+              })<br/>
+            ]<br/>
+          })
+        </div>
+<!-- Studio Preview Inspector footer -->
+<div class="p-3 bg-surface-container border-t border-surface-container-high flex items-center justify-between text-[11px]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-secondary font-mono">Live visual inspector ready</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-high font-mono text-[10px] text-on-surface">v3.58</span>
+</div>
+</div>
+</section>
+<!-- 7. Automation Engine Section -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">02 // AUTOMATION ENGINE</span>
+<h2 class="text-3xl font-display font-black tracking-tight text-on-surface leading-tight">
+        Content operations without the busywork
+      </h2>
+<p class="text-sm text-secondary font-body leading-relaxed mb-2">
+        Agent actions, functions, and content agents automate manual work before and after hitting publish.
+      </p>
+<!-- Horizontal Pills Scroll -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+<button class="px-3 py-1.5 rounded-full bg-primary-container text-black font-mono text-[11px] font-bold whitespace-nowrap">
+          UPDATE REFERENCES
+        </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container border border-surface-container-high text-secondary hover:text-on-surface font-mono text-[11px] whitespace-nowrap">
+          TRANSLATE WITH AI
+        </button>
+<button class="px-3 py-1.5 rounded-full bg-surface-container border border-surface-container-high text-secondary hover:text-on-surface font-mono text-[11px] whitespace-nowrap">
+          DELEGATE FROM ELSEWHERE
+        </button>
+</div>
+<!-- Automation Pipeline Flow Terminal -->
+<div class="rounded-2xl bg-surface-container-lowest border border-surface-container-high p-4 flex flex-col gap-3 font-mono text-xs">
+<div class="flex items-center justify-between border-b border-surface-container-high pb-2">
+<span class="text-primary-container font-bold">PIPELINE: agent-workflow-eu-01</span>
+<span class="text-[10px] text-secondary">ACTIVE</span>
+</div>
+<div class="space-y-2.5">
+<div class="flex items-start gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-[10px] text-secondary">01</span>
+<div>
+<p class="text-on-surface font-medium">Trigger: Document Published</p>
+<p class="text-[10px] text-secondary">Payload ID: doc_9824_retail</p>
+</div>
+</div>
+<div class="w-px h-3 bg-surface-container-high ml-3"></div>
+<div class="flex items-start gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-[10px] text-secondary">02</span>
+<div>
+<p class="text-on-surface font-medium">Agent Parse: Schema Validation</p>
+<p class="text-[10px] text-secondary">Verified portable text &amp; asset links</p>
+</div>
+</div>
+<div class="w-px h-3 bg-surface-container-high ml-3"></div>
+<div class="flex items-start gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-primary-container/20 text-[10px] text-primary-container font-bold">03</span>
+<div>
+<p class="text-primary-container font-medium">Auto-Enrichment via Model API</p>
+<p class="text-[10px] text-secondary">Synthesized SEO slugs &amp; alt tags in 240ms</p>
+</div>
+</div>
+<div class="w-px h-3 bg-surface-container-high ml-3"></div>
+<div class="flex items-start gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-[10px] text-secondary">04</span>
+<div>
+<p class="text-on-surface font-medium">Localization: 14 Edge Locales</p>
+<p class="text-[10px] text-secondary">DE, FR, JP, ES, PT-BR mutated in parallel</p>
+</div>
+</div>
+<div class="w-px h-3 bg-surface-container-high ml-3"></div>
+<div class="flex items-start gap-2.5">
+<span class="px-1.5 py-0.5 rounded bg-surface-container-high text-[10px] text-secondary">05</span>
+<div>
+<p class="text-on-surface font-medium">Validation: Webhook Broadcast</p>
+<p class="text-[10px] text-green-400">200 OK — Next.js &amp; Remix ISG Revalidated</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. Knowledge Layer / API Section -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">03 // KNOWLEDGE LAYER</span>
+<h2 class="text-3xl font-display font-black tracking-tight text-on-surface leading-tight">
+        Power anything. One API, every platform
+      </h2>
+<p class="text-sm text-secondary font-body leading-relaxed">
+        Turn your content into a governed knowledge layer that powers applications and AI agents.
+      </p>
+<ul class="space-y-2 text-xs font-mono text-secondary my-1">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-container" data-icon="check_circle">check_circle</span>
+<span>GROQ &amp; GraphQL query protocols</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-container" data-icon="check_circle">check_circle</span>
+<span>Live Mutation Bus with microsecond latency</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-container" data-icon="check_circle">check_circle</span>
+<span>Global Edge CDN across 300+ PoPs worldwide</span>
+</li>
+</ul>
+<!-- Code Preview: GROQ & Output -->
+<div class="rounded-2xl bg-surface-container-lowest border border-surface-container-high overflow-hidden font-mono text-[11px]">
+<div class="px-3.5 py-2 bg-surface-container border-b border-surface-container-high text-secondary flex justify-between">
+<span>QUERY (GROQ)</span>
+<span class="text-primary-container">RUN ↗</span>
+</div>
+<div class="p-3.5 text-secondary-fixed">
+          *[_type == <span class="text-tertiary">"article"</span> &amp;&amp; featured == <span class="text-primary-container">true</span>] {<br/>
+            title,<br/>
+            <span class="text-tertiary">"coverUrl"</span>: mainImage.asset-&gt;url,<br/>
+            summary,<br/>
+            <span class="text-tertiary">"embeddings"</span>: vector.values<br/>
+          }[0...5]
+        </div>
+<div class="px-3.5 py-2 bg-surface-container-high/40 border-t border-surface-container-high text-[10px] text-secondary flex items-center justify-between">
+<span>RESULT: 2.1kb JSON</span>
+<span class="text-green-400 font-bold">14ms EDGE CACHE</span>
+</div>
+</div>
+</section>
+<!-- 9. Platform Matrix Section -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">04 // PLATFORM MATRIX</span>
+<h2 class="text-3xl font-display font-black tracking-tight text-on-surface leading-tight">
+        Everything your team needs in one place
+      </h2>
+<!-- Horizontal Tab Bar -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar py-1">
+<span class="px-3 py-1.5 rounded-full bg-on-surface text-surface-container-lowest font-mono text-[10px] font-bold whitespace-nowrap">01 CONTENT-AS-DATA</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-secondary font-mono text-[10px] whitespace-nowrap">02 EDITORIAL FREEDOM</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-secondary font-mono text-[10px] whitespace-nowrap">03 CONTENT AGENT</span>
+<span class="px-3 py-1.5 rounded-full bg-surface-container text-secondary font-mono text-[10px] whitespace-nowrap">04 AUTOMATION</span>
+</div>
+<!-- Feature Card -->
+<div class="p-5 rounded-2xl bg-surface-container border border-surface-container-high flex flex-col gap-4">
+<div>
+<span class="text-[10px] font-mono text-primary-container uppercase">FOUNDATION</span>
+<h3 class="text-xl font-display font-bold text-on-surface mt-1">The database optimized for content operations</h3>
+<p class="text-xs text-secondary mt-1.5 font-body">Complete revision history, document-level locking, and zero-schema migrations.</p>
+</div>
+<div class="grid grid-cols-2 gap-2.5 pt-2 border-t border-surface-container-high">
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-container-high/50">
+<span class="text-[10px] font-mono text-secondary">RELIABILITY</span>
+<p class="text-lg font-mono font-bold text-on-surface">99.999%</p>
+<span class="text-[9px] text-secondary">Historical SLA</span>
+</div>
+<div class="p-2.5 rounded-lg bg-surface-container-low border border-surface-container-high/50">
+<span class="text-[10px] font-mono text-secondary">CONCURRENCY</span>
+<p class="text-lg font-mono font-bold text-on-surface">Infinite</p>
+<span class="text-[9px] text-secondary">Realtime listeners</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. Testimonials Section -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">TESTIMONIALS</span>
+<div class="flex gap-1">
+<span class="w-6 h-6 rounded-full bg-primary-container text-black font-mono text-[10px] font-bold flex items-center justify-center">01</span>
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary font-mono text-[10px] flex items-center justify-center">02</span>
+<span class="w-6 h-6 rounded-full bg-surface-container text-secondary font-mono text-[10px] flex items-center justify-center">03</span>
+</div>
+</div>
+<h2 class="text-2xl font-display font-extrabold text-on-surface tracking-tight">
+        Loved by 1M+ users and 6k+ teams
+      </h2>
+<!-- Quote Card -->
+<div class="p-5 rounded-2xl bg-surface-container border border-surface-container-high flex flex-col justify-between gap-4">
+<p class="text-sm font-body italic text-secondary-fixed leading-relaxed">
+          "Sanity's programmable Content Lake changed our whole digital architecture. Editorial velocity tripled, and engineering has zero content ticket backlog."
+        </p>
+<div class="flex items-center gap-3 pt-3 border-t border-surface-container-high">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border border-surface-container-high flex items-center justify-center font-display font-bold text-sm text-on-surface">
+            MV
+          </div>
+<div class="flex flex-col">
+<span class="text-xs font-bold text-on-surface">Marcus Vance</span>
+<span class="text-[10px] font-mono text-secondary">VP Engineering, Global Operations</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. Enterprise & Security Grid -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-secondary-fixed-dim">COMPLIANCE &amp; GOVERNANCE</span>
+<h2 class="text-2xl font-display font-black tracking-tight text-on-surface">
+        Enterprise-grade everything
+      </h2>
+<div class="grid grid-cols-2 gap-2.5 pt-2">
+<div class="p-3.5 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1">
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="verified_user">verified_user</span>
+<span class="font-mono text-xs font-bold text-on-surface">SOC2 Type II</span>
+<span class="text-[10px] text-secondary">Audited annually</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1">
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="lock">lock</span>
+<span class="font-mono text-xs font-bold text-on-surface">SSO / SAML 2.0</span>
+<span class="text-[10px] text-secondary">Okta, Azure, Google</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1">
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="admin_panel_settings">admin_panel_settings</span>
+<span class="font-mono text-xs font-bold text-on-surface">Granular RBAC</span>
+<span class="text-[10px] text-secondary">Custom field permissions</span>
+</div>
+<div class="p-3.5 rounded-xl bg-surface-container border border-surface-container-high flex flex-col gap-1">
+<span class="material-symbols-outlined text-primary-container text-[20px]" data-icon="history">history</span>
+<span class="font-mono text-xs font-bold text-on-surface">Audit Logs</span>
+<span class="text-[10px] text-secondary">Real-time export API</span>
+</div>
+</div>
+</section>
+<!-- 12. Developer Workflow -->
+<section class="px-5 py-12 border-b border-surface-container-high/40 flex flex-col gap-4">
+<span class="text-[11px] font-mono uppercase tracking-wider text-primary-container font-semibold">GET STARTED IN SECONDS</span>
+<h2 class="text-3xl font-display font-black tracking-tight text-on-surface">
+        Less talk, more code
+      </h2>
+<p class="text-xs text-secondary font-body">Spin up a content lake or connect AI agents locally with standard tooling.</p>
+<div class="space-y-2.5">
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container-high flex items-center justify-between font-mono text-[11px]">
+<span class="text-secondary truncate">npm create sanity@latest</span>
+<button class="text-primary-container hover:text-white transition-colors ml-2" onclick="navigator.clipboard.writeText('npm create sanity@latest')" title="Copy Command">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container-high flex items-center justify-between font-mono text-[11px]">
+<span class="text-secondary truncate">npm @sanity/mcp-server setup</span>
+<button class="text-primary-container hover:text-white transition-colors ml-2" onclick="navigator.clipboard.writeText('npm @sanity/mcp-server setup')" title="Copy Command">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-lowest border border-surface-container-high flex items-center justify-between font-mono text-[11px]">
+<span class="text-secondary truncate">npm i @sanity/agent-toolkit</span>
+<button class="text-primary-container hover:text-white transition-colors ml-2" onclick="navigator.clipboard.writeText('npm i @sanity/agent-toolkit')" title="Copy Command">
+<span class="material-symbols-outlined text-[16px]" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 13. Dense Mobile Footer (From Shared Components & Layout) -->
+<footer class="w-full bg-surface-container-lowest py-12 px-5 flex flex-col gap-8">
+<div class="flex flex-col gap-3">
+<!-- Sanity Brand Logo -->
+<a class="font-display font-black text-2xl text-on-surface tracking-tighter flex items-center gap-1" href="#">
+<span class="inline-block w-2.5 h-2.5 bg-primary-container mr-0.5 rounded-full"></span>
+          Sanity
+        </a>
+<p class="text-xs text-secondary font-body">The Content Operations Platform for developers and creative teams.</p>
+<!-- Status indicator -->
+<div class="inline-flex items-center gap-2 mt-1">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-[11px] font-mono text-secondary">All systems operational</span>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 gap-6 text-xs font-body">
+<div class="flex flex-col gap-2.5">
+<span class="font-display font-bold text-on-surface text-[13px]">Product</span>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Studio</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Content Lake</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">AI Agents</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Visual Editing</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Pricing</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<span class="font-display font-bold text-on-surface text-[13px]">Resources</span>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Documentation</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Guides</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Changelog</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Community</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Templates</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<span class="font-display font-bold text-on-surface text-[13px]">Solutions</span>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Enterprise</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Global Commerce</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Publishing</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Marketing Sites</a>
+</div>
+<div class="flex flex-col gap-2.5">
+<span class="font-display font-bold text-on-surface text-[13px]">Company</span>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">About Us</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Careers</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Security</a>
+<a class="text-secondary hover:text-primary-container transition-colors" href="#">Contact</a>
+</div>
+</div>
+<!-- Legal & Copyright -->
+<div class="pt-6 border-t border-surface-container-high/40 flex flex-col gap-3 font-label text-xs text-secondary-fixed-dim">
+<div class="flex flex-wrap gap-x-4 gap-y-1">
+<a class="hover:text-primary-container transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary-container transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary-container transition-colors" href="#">System Architecture</a>
+</div>
+<p class="font-mono text-[11px] text-secondary/60">
+          © 2026 Sanity, Inc. All rights reserved.
+        </p>
+</div>
+</footer>
+</main>
+<!-- Interactive script for mobile drawer toggling -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuTrigger = document.getElementById('mobile-menu-trigger');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+
+      if (menuTrigger && mobileDrawer) {
+        menuTrigger.addEventListener('click', () => {
+          mobileDrawer.classList.toggle('hidden');
+          mobileDrawer.classList.toggle('flex');
+        });
+      }
+    });
+  </script>
+</body></html>
