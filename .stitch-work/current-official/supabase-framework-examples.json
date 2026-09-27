@@ -1,0 +1,32 @@
+[
+  {
+    "name": "React",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/reactjs",
+    "code": "import { createClient } from '@supabase/supabase-js'\n\nconst supabase = createClient(\n  process.env.SUPABASE_URL,\n  process.env.SUPABASE_ANON_KEY\n)\n\nexport default function App() {\n  const [todos, setTodos] = useState([])\n\n  useEffect(() => {\n    supabase.from('todos').select('*')\n      .then(({ data }) => setTodos(data))\n  }, [])\n\n  return <TodoList items={todos} />\n}"
+  },
+  {
+    "name": "Next.js",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/nextjs",
+    "code": "import { createClient } from '@supabase/supabase-js'\n\nconst supabase = createClient(\n  process.env.NEXT_PUBLIC_SUPABASE_URL,\n  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY\n)\n\nexport default async function Page() {\n  const { data: todos } = await supabase\n    .from('todos')\n    .select('*')\n\n  return <TodoList items={todos} />\n}"
+  },
+  {
+    "name": "Flutter",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/flutter",
+    "code": "import 'package:supabase_flutter/supabase_flutter.dart';\n\nFuture<void> main() async {\n  await Supabase.initialize(\n    url: 'YOUR_SUPABASE_URL',\n    anonKey: 'YOUR_SUPABASE_ANON_KEY',\n  );\n  runApp(MyApp());\n}\n\nfinal supabase = Supabase.instance.client;\n\nfinal data = await supabase\n    .from('todos')\n    .select('*');"
+  },
+  {
+    "name": "Svelte",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/sveltekit",
+    "code": "<script>\n  import { createClient } from '@supabase/supabase-js'\n\n  const supabase = createClient(\n    PUBLIC_SUPABASE_URL,\n    PUBLIC_SUPABASE_ANON_KEY\n  )\n\n  let todos = []\n\n  async function loadTodos() {\n    const { data } = await supabase\n      .from('todos').select('*')\n    todos = data\n  }\n</script>"
+  },
+  {
+    "name": "Vue",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/vuejs",
+    "code": "<script setup>\nimport { createClient } from '@supabase/supabase-js'\nimport { ref, onMounted } from 'vue'\n\nconst supabase = createClient(\n  import.meta.env.VITE_SUPABASE_URL,\n  import.meta.env.VITE_SUPABASE_ANON_KEY\n)\n\nconst todos = ref([])\n\nonMounted(async () => {\n  const { data } = await supabase\n    .from('todos').select('*')\n  todos.value = data\n})\n</script>"
+  },
+  {
+    "name": "Nuxt",
+    "docs": "https://supabase.com/docs/guides/getting-started/quickstarts/nuxtjs",
+    "code": "<script setup>\nconst supabase = useSupabaseClient()\n\nconst { data: todos } = await useAsyncData(\n  'todos',\n  async () => {\n    const { data } = await supabase\n      .from('todos')\n      .select('*')\n    return data\n  }\n)\n</script>\n\n<template>\n  <TodoList :items=\"todos\" />\n</template>"
+  }
+]

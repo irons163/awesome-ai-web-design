@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Supabase - Build in a weekend, scale to millions</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            supabase: {
+              bg: '#121412',
+              card: '#171917',
+              'card-border': '#272a27',
+              'border-subtle': '#1f221f',
+              green: '#3ECF8E',
+              'green-hover': '#34b27b',
+              muted: '#8b949e',
+              offwhite: '#EDEDED'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Manrope', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #121412;
+      color: #EDEDED;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .announcement-pattern {
+      background-image: radial-gradient(rgba(62, 207, 142, 0.12) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+    .card-border {
+      border: 1px solid #272a27;
+    }
+    .code-glow {
+      box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.05);
+    }
+  </style>
+</head>
+<body class="bg-[#121412] text-[#EDEDED] min-w-[1280px]">
+<!-- 55px Announcement Band -->
+<div class="h-[55px] w-full border-b border-[#222622] bg-[#141714] announcement-pattern flex items-center justify-center text-sm px-4">
+<a class="group flex items-center space-x-2 text-[#d1d5db] hover:text-white transition" href="#">
+<span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-[#3ECF8E] animate-pulse"></span>
+<span class="font-medium tracking-tight">Supabase Select 2026 is coming October 2 · Apply to attend</span>
+<span class="text-[#3ECF8E] font-medium group-hover:translate-x-0.5 transition-transform duration-150">→</span>
+</a>
+</div>
+<!-- 64px Dark Header -->
+<header class="h-[64px] w-full border-b border-[#1f221f] bg-[#121412]/95 sticky top-0 z-50 backdrop-blur-md">
+<div class="max-w-[1280px] mx-auto h-full px-12 flex items-center justify-between">
+<!-- Logo & Primary Nav -->
+<div class="flex items-center space-x-8">
+<!-- Supabase Official Logo -->
+<a class="flex items-center space-x-3 group" href="#">
+<svg class="w-6 h-6 text-[#3ECF8E]" fill="none" viewbox="0 0 24 24">
+<path d="M13.35 2.14a1 1 0 0 0-1.7 0l-7.5 12.8a1 1 0 0 0 .86 1.5h7.3l-1.36 5.42a1 1 0 0 0 1.7.01l7.5-12.8a1 1 0 0 0-.86-1.5h-7.3l1.36-5.43z" fill="url(#supabase-grad)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="supabase-grad" x1="4.15" x2="19.85" y1="2" y2="22">
+<stop stop-color="#3ECF8E"></stop>
+<stop offset="1" stop-color="#249361"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="font-bold text-lg tracking-tight text-white font-display">supabase</span>
+</a>
+<!-- Links -->
+<nav class="flex items-center space-x-6 text-[14px] text-[#9ca3af]">
+<a class="hover:text-white transition" href="#">Product</a>
+<a class="hover:text-white transition" href="#">Developers</a>
+<a class="hover:text-white transition" href="#">Solutions</a>
+<a class="hover:text-white transition" href="#">Pricing</a>
+<a class="hover:text-white transition" href="#">Docs</a>
+<a class="hover:text-white transition" href="#">Blog</a>
+</nav>
+</div>
+<!-- Right Header Items -->
+<div class="flex items-center space-x-4 text-[14px]">
+<!-- GitHub Star Badge -->
+<a class="flex items-center space-x-2 px-3 py-1.5 rounded-md border border-[#272a27] bg-[#171917] hover:border-[#3a3f3a] text-[#d1d5db] transition" href="https://github.com/supabase/supabase" target="_blank">
+<svg class="w-4 h-4 fill-current text-white" viewbox="0 0 16 16">
+<path d="M8 0C3.58 0 0 3.58 0 8a8 8 0 005.47 7.59c.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+</svg>
+<span class="text-xs font-medium text-white">110.7K</span>
+</a>
+<a class="text-[#9ca3af] hover:text-white px-3 py-1.5 transition" href="#">Sign in</a>
+<a class="px-3.5 py-1.5 rounded-md bg-[#3ECF8E] hover:bg-[#34b27b] text-[#121412] font-semibold text-xs transition duration-150 flex items-center space-x-1" href="#">
+<span>Start your project</span>
+</a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<main class="max-w-[1280px] mx-auto px-12 pt-[140px] pb-16">
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Left Heading & CTA Column (x96 y281) -->
+<div class="col-span-6 pr-4">
+<h1 class="font-display text-[46px] leading-[46px] font-normal tracking-tight mb-8">
+<span class="text-[#EDEDED] block">Build in a weekend</span>
+<span class="text-[#3ECF8E] block">Scale to millions</span>
+</h1>
+<div class="flex items-center space-x-4 pt-4">
+<a class="px-5 py-2.5 rounded-md bg-[#3ECF8E] hover:bg-[#34b27b] text-[#121412] font-semibold text-sm transition" href="#">
+            Start your project
+          </a>
+<a class="px-5 py-2.5 rounded-md border border-[#272a27] bg-[#171917] hover:bg-[#202420] hover:border-[#383d38] text-white text-sm font-medium transition" href="#">
+            Request a demo
+          </a>
+</div>
+</div>
+<!-- Right Intro Column (x648 y305) -->
+<div class="col-span-6 pt-3 pl-4">
+<p class="text-[#9ca3af] text-[18px] leading-[28px] font-normal">
+          Start your project with a Postgres database. Add Authentication, Data APIs, Edge Functions, Realtime Data, Storage, and Vector embeddings.
+        </p>
+</div>
+</div>
+<!-- 1088px Product Grid (x96 y507) -->
+<div class="mt-[110px] w-full">
+<!-- Row 1: Postgres (double width), Authentication, Edge Functions -->
+<div class="grid grid-cols-4 gap-3">
+<!-- Postgres Database Card (Col span 2) -->
+<div class="col-span-2 rounded-[12px] bg-[#171917] card-border p-6 flex flex-col justify-between relative overflow-hidden group min-h-[300px]">
+<!-- Background elephant drawing watermark -->
+<div class="absolute -right-4 -bottom-6 opacity-10 pointer-events-none group-hover:opacity-15 transition-opacity">
+<svg class="w-64 h-64 text-white fill-current" viewbox="0 0 24 24">
+<path d="M19.5 7.5c-1.3-.8-2.8-1.2-4.5-1.2h-.5c-.2-.6-.6-1.1-1.1-1.5-1.1-.9-2.7-1.3-4.4-1.3-3.2 0-5.8 1.8-6.5 4.5H2v2h.3c.1.9.4 1.8.8 2.6L2 14.5l1.4 1.4 1.2-1.2c1.2 1.4 2.8 2.3 4.6 2.6v2.2c0 .8.7 1.5 1.5 1.5h1c.8 0 1.5-.7 1.5-1.5v-2.1c1.5-.2 2.9-.8 4-1.8.9.9 2.1 1.4 3.4 1.4 2.5 0 4.4-1.8 4.4-4.2V9.8c0-1-.3-1.8-.9-2.3zM10 5.5c1.2 0 2.2.3 2.9.8.4.3.7.8.8 1.2H7.8C8.3 6.3 9.1 5.5 10 5.5zm4 10.5c-1.1.9-2.5 1.4-4 1.5v-1.6l-1.5-.2c-1.4-.2-2.7-.9-3.6-2l-.5-.6.5-.6c.7-.8 1.1-1.8 1.1-2.9 0-.4-.1-.8-.2-1.2h7.8c.2.6.5 1.2 1 1.6.4.4 1 .6 1.6.6.6 0 1.2-.2 1.6-.6.5-.5.8-1.2.8-2h1.5c.3.3.4.7.4 1.2v3c0 1.4-1 2.4-2.5 2.4-.9 0-1.7-.4-2.3-1l-.6-.6-.6.6z"></path>
+</svg>
+</div>
+<div class="relative z-10">
+<div class="flex items-center space-x-2 mb-3">
+<img alt="Database" class="w-6 h-6 object-contain" onerror="this.src='https://assets.supabase.com/brand-assets/supabase-logo-icon.png'" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Postgres Database</span>
+</div>
+<h3 class="text-lg font-semibold text-white mb-2">Every project is a full Postgres database</h3>
+<p class="text-sm text-[#9ca3af] max-w-[420px] leading-relaxed">
+              Every project is a full Postgres database, the world's most trusted relational database.
+            </p>
+</div>
+<div class="relative z-10 pt-8 flex items-center space-x-6 text-xs text-[#d1d5db]">
+<div class="flex items-center space-x-1.5">
+<svg class="w-4 h-4 text-[#3ECF8E]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>100% portable</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<svg class="w-4 h-4 text-[#3ECF8E]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Built-in Auth with RLS</span>
+</div>
+<div class="flex items-center space-x-1.5">
+<svg class="w-4 h-4 text-[#3ECF8E]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Easy to extend</span>
+</div>
+</div>
+</div>
+<!-- Authentication Card -->
+<div class="col-span-1 rounded-[12px] bg-[#171917] card-border p-6 flex flex-col justify-between group min-h-[300px]">
+<div>
+<div class="flex items-center space-x-2 mb-3">
+<img alt="Auth" class="w-6 h-6 object-contain" onerror="this.onerror=null; this.innerHTML=''" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Authentication</span>
+</div>
+<h3 class="text-base font-semibold text-white mb-2">User Management &amp; Security</h3>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Add user sign ups and logins, securing your data with Row Level Security.
+            </p>
+</div>
+<div class="pt-6">
+<div class="w-full h-24 rounded border border-[#272a27] bg-[#121412] p-2.5 flex flex-col justify-center space-y-1.5 font-mono text-[10px] text-[#8b949e]">
+<div class="text-[#3ECF8E]">supabase.auth.signUp({</div>
+<div class="pl-3 text-[#d1d5db]">email: 'user@example.com',</div>
+<div class="pl-3 text-[#d1d5db]">password: '••••••••'</div>
+<div class="text-[#3ECF8E]">})</div>
+</div>
+</div>
+</div>
+<!-- Edge Functions Card -->
+<div class="col-span-1 rounded-[12px] bg-[#171917] card-border p-6 flex flex-col justify-between group min-h-[300px]">
+<div>
+<div class="flex items-center space-x-2 mb-3">
+<img alt="Edge Functions" class="w-6 h-6 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Edge Functions</span>
+</div>
+<h3 class="text-base font-semibold text-white mb-2">Serverless Compute</h3>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Easily write custom code without deploying or scaling servers.
+            </p>
+</div>
+<div class="pt-6">
+<div class="w-full h-24 rounded border border-[#272a27] bg-[#121412] p-2.5 flex flex-col justify-center font-mono text-[10px] text-[#8b949e]">
+<div class="text-[#9ca3af]">// Deno runtime at edge</div>
+<div class="text-[#3ECF8E]">Deno.serve(async (req) =&gt; {</div>
+<div class="pl-2 text-[#d1d5db]">return new Response("OK")</div>
+<div class="text-[#3ECF8E]">})</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Row 2: Storage, Realtime, Vector, Data APIs (4 equal cards) -->
+<div class="grid grid-cols-4 gap-3 mt-3">
+<!-- Storage Card -->
+<div class="rounded-[12px] bg-[#171917] card-border p-5 flex flex-col justify-between min-h-[220px]">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Storage</span>
+</div>
+<h4 class="text-sm font-semibold text-white mb-1.5">File &amp; Media Assets</h4>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Store, organize, and serve large files, from videos to images.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[11px] text-[#6b7280] font-mono border-t border-[#222522]">
+<span>S3 compatible API</span>
+<span class="text-[#3ECF8E]">CDN cached</span>
+</div>
+</div>
+<!-- Realtime Card -->
+<div class="rounded-[12px] bg-[#171917] card-border p-5 flex flex-col justify-between min-h-[220px]">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<img alt="Realtime" class="w-5 h-5 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Realtime</span>
+</div>
+<h4 class="text-sm font-semibold text-white mb-1.5">Multiplayer State</h4>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Build multiplayer experiences with real-time data synchronization.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[11px] text-[#6b7280] font-mono border-t border-[#222522]">
+<span>WebSockets</span>
+<span class="text-[#3ECF8E]">Broadcast &amp; Presence</span>
+</div>
+</div>
+<!-- Vector Card -->
+<div class="rounded-[12px] bg-[#171917] card-border p-5 flex flex-col justify-between min-h-[220px]">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<img alt="Vector" class="w-5 h-5 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Vector</span>
+</div>
+<h4 class="text-sm font-semibold text-white mb-1.5">AI &amp; Embeddings</h4>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Integrate your favorite ML-models to store, index and search vector embeddings.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[11px] text-[#6b7280] font-mono border-t border-[#222522]">
+<span>pgvector extension</span>
+<span class="text-[#3ECF8E]">Cosine / HNSW</span>
+</div>
+</div>
+<!-- Data APIs Card -->
+<div class="rounded-[12px] bg-[#171917] card-border p-5 flex flex-col justify-between min-h-[220px]">
+<div>
+<div class="flex items-center space-x-2 mb-2">
+<img alt="Data APIs" class="w-5 h-5 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-xs uppercase tracking-wider text-[#3ECF8E] font-semibold">Data APIs</span>
+</div>
+<h4 class="text-sm font-semibold text-white mb-1.5">Auto-generated APIs</h4>
+<p class="text-xs text-[#9ca3af] leading-relaxed">
+              Instant ready-to-use REST APIs.
+            </p>
+</div>
+<div class="pt-4 flex items-center justify-between text-[11px] text-[#6b7280] font-mono border-t border-[#222522]">
+<span>PostgREST</span>
+<span class="text-[#3ECF8E]">OpenAPI Spec</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Platform Sub-banner -->
+<div class="mt-14 text-center">
+<p class="text-sm font-medium tracking-wide text-[#9ca3af]">
+        Use one or all. <span class="text-white font-semibold">Best of breed products.</span> Integrated as a platform.
+      </p>
+</div>
+<!-- Social Proof / Logos -->
+<div class="mt-20 pt-10 border-t border-[#1f221f]">
+<div class="text-center mb-8">
+<p class="text-xs uppercase tracking-widest text-[#6b7280] font-semibold">
+          Trusted by fast-growing companies worldwide
+        </p>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-x-12 gap-y-6 text-[#9ca3af] font-medium text-sm">
+<span class="hover:text-white transition">Lovable</span>
+<span class="hover:text-white transition">Mozilla</span>
+<span class="hover:text-white transition">PwC</span>
+<span class="hover:text-white transition">Figma</span>
+<span class="hover:text-white transition">v0</span>
+<span class="hover:text-white transition">Bolt</span>
+<span class="hover:text-white transition">GitHub</span>
+<span class="hover:text-white transition">BetaShares</span>
+<span class="hover:text-white transition">Mobbin</span>
+<span class="hover:text-white transition">Resend</span>
+<span class="hover:text-white transition">LangChain</span>
+<span class="hover:text-white transition">1Password</span>
+</div>
+</div>
+<!-- Dashboard Product Showcase (Draft study layout) -->
+<div class="mt-28">
+<div class="text-center max-w-2xl mx-auto mb-10">
+<h2 class="text-2xl font-bold font-display text-white mb-3">
+          Stay productive and manage your app without leaving the dashboard
+        </h2>
+<p class="text-sm text-[#9ca3af]">
+          Complete Postgres management inside a slick visual interface.
+        </p>
+</div>
+<!-- Dashboard Mock Window -->
+<div class="rounded-xl border border-[#272a27] bg-[#151715] overflow-hidden shadow-2xl">
+<!-- Window Bar & Tabs -->
+<div class="border-b border-[#272a27] bg-[#111311] px-4 py-2.5 flex items-center justify-between">
+<div class="flex items-center space-x-2">
+<span class="w-3 h-3 rounded-full bg-[#343834] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#343834] inline-block"></span>
+<span class="w-3 h-3 rounded-full bg-[#343834] inline-block"></span>
+<span class="ml-4 text-xs font-mono text-[#8b949e]">project-id.supabase.co</span>
+</div>
+<!-- Tab selectors -->
+<div class="flex space-x-1 bg-[#1a1d1a] p-1 rounded-md text-xs font-medium">
+<button class="px-3 py-1 rounded bg-[#242824] text-white shadow">Table Editor</button>
+<button class="px-3 py-1 rounded text-[#9ca3af] hover:text-white">SQL Editor</button>
+<button class="px-3 py-1 rounded text-[#9ca3af] hover:text-white">RLS Policies</button>
+</div>
+</div>
+<!-- Table UI Content Representation -->
+<div class="p-6">
+<div class="border border-[#272a27] rounded-lg overflow-hidden bg-[#121412]">
+<table class="w-full text-left text-xs text-[#d1d5db]">
+<thead class="bg-[#171917] border-b border-[#272a27] text-[#9ca3af] font-mono">
+<tr>
+<th class="p-3">id (uuid)</th>
+<th class="p-3">created_at (timestamptz)</th>
+<th class="p-3">full_name (text)</th>
+<th class="p-3">email (text)</th>
+<th class="p-3">plan (varchar)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#1e211e] font-mono text-[11px]">
+<tr>
+<td class="p-3 text-[#3ECF8E]">9b1deb4d-3b7d...</td>
+<td class="p-3 text-[#9ca3af]">2026-09-27 10:14:02</td>
+<td class="p-3 text-white">Alex Rivera</td>
+<td class="p-3 text-[#9ca3af]">alex@company.com</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-[#1e3427] text-[#3ECF8E]">enterprise</span></td>
+</tr>
+<tr>
+<td class="p-3 text-[#3ECF8E]">c2a5ef12-98aa...</td>
+<td class="p-3 text-[#9ca3af]">2026-09-27 11:22:45</td>
+<td class="p-3 text-white">Elena Rostova</td>
+<td class="p-3 text-[#9ca3af]">elena@studio.design</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-[#262c26] text-[#9ca3af]">pro</span></td>
+</tr>
+<tr>
+<td class="p-3 text-[#3ECF8E]">f440a1b9-4411...</td>
+<td class="p-3 text-[#9ca3af]">2026-09-27 12:05:19</td>
+<td class="p-3 text-white">Marcus Vance</td>
+<td class="p-3 text-[#9ca3af]">marcus@venture.io</td>
+<td class="p-3"><span class="px-2 py-0.5 rounded bg-[#262c26] text-[#9ca3af]">team</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<!-- Framework Tabs & Code Example Section -->
+<div class="mt-28 grid grid-cols-12 gap-8 items-center">
+<div class="col-span-5">
+<h2 class="text-2xl font-bold font-display text-white mb-3">
+          Use Supabase with React
+        </h2>
+<p class="text-sm text-[#9ca3af] leading-relaxed mb-6">
+          Connect your frontend to Supabase in less than five minutes with official client libraries across modern web frameworks.
+        </p>
+<!-- Framework List Tabs -->
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1.5 rounded-md bg-[#242824] border border-[#3ECF8E] text-white font-medium text-xs">React</span>
+<span class="px-3 py-1.5 rounded-md bg-[#171917] border border-[#272a27] text-[#9ca3af] text-xs">Next.js</span>
+<span class="px-3 py-1.5 rounded-md bg-[#171917] border border-[#272a27] text-[#9ca3af] text-xs">Flutter</span>
+<span class="px-3 py-1.5 rounded-md bg-[#171917] border border-[#272a27] text-[#9ca3af] text-xs">Svelte</span>
+<span class="px-3 py-1.5 rounded-md bg-[#171917] border border-[#272a27] text-[#9ca3af] text-xs">Vue</span>
+<span class="px-3 py-1.5 rounded-md bg-[#171917] border border-[#272a27] text-[#9ca3af] text-xs">Nuxt</span>
+</div>
+</div>
+<div class="col-span-7">
+<div class="rounded-xl border border-[#272a27] bg-[#151715] p-5 font-mono text-xs leading-relaxed overflow-x-auto code-glow">
+<div class="text-[#6b7280] mb-2">// 1. Initialize client</div>
+<div><span class="text-[#ff7b72]">import</span> { createClient } <span class="text-[#ff7b72]">from</span> <span class="text-[#a5d6ff]'">'@supabase/supabase-js'</span></div>
+<div class="mb-4"><span class="text-[#ff7b72]">const</span> supabase = <span class="text-[#d2a8ff]">createClient</span>(SUPABASE_URL, SUPABASE_ANON_KEY)</div>
+<div class="text-[#6b7280] mb-2">// 2. Query Postgres database with RLS</div>
+<div><span class="text-[#ff7b72]">const</span> { data, error } = <span class="text-[#ff7b72]">await</span> supabase</div>
+<div class="pl-4">.<span class="text-[#d2a8ff]">from</span>(<span class="text-[#a5d6ff]'countries'&lt;/span&gt;)&lt;/div&gt; &lt;div class=" pl-4"="">.<span class="text-[#d2a8ff]">select</span>(<span class="text-[#a5d6ff]'id, name, capital'&lt;/span&gt;)&lt;/div&gt; &lt;div class=" pl-4"="">.<span class="text-[#d2a8ff]">eq</span>(<span class="text-[#a5d6ff]'active'&lt;/span&gt;, &lt;span class=" text-[#79c0ff]"="">true</span>)</span></span></div>
+</div>
+</div>
+</div>
+<!-- Kickstart / Community & Open Source Grid (Draft elements study) -->
+<div class="mt-28 grid grid-cols-3 gap-6">
+<div class="rounded-xl border border-[#272a27] bg-[#171917] p-6">
+<h3 class="text-base font-semibold text-white mb-2">Production ready templates</h3>
+<p class="text-xs text-[#9ca3af] leading-relaxed mb-4">
+          Kickstart your next project with production ready templates curated by the community.
+        </p>
+<a class="text-xs font-semibold text-[#3ECF8E] hover:underline flex items-center space-x-1" href="#">
+<span>Explore templates</span>
+<span>→</span>
+</a>
+</div>
+<div class="rounded-xl border border-[#272a27] bg-[#171917] p-6">
+<h3 class="text-base font-semibold text-white mb-2">How industry leaders build</h3>
+<p class="text-xs text-[#9ca3af] leading-relaxed mb-4">
+          Case studies and architectural breakdowns from engineering teams scaling on Supabase.
+        </p>
+<a class="text-xs font-semibold text-[#3ECF8E] hover:underline flex items-center space-x-1" href="#">
+<span>Read customer stories</span>
+<span>→</span>
+</a>
+</div>
+<div class="rounded-xl border border-[#272a27] bg-[#171917] p-6">
+<h3 class="text-base font-semibold text-white mb-2">Open source from day one</h3>
+<p class="text-xs text-[#9ca3af] leading-relaxed mb-4">
+          No vendor lock-in. Self-host with Docker or rely on the Supabase managed cloud platform.
+        </p>
+<a class="text-xs font-semibold text-[#3ECF8E] hover:underline flex items-center space-x-1" href="#">
+<span>Join the community</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Closing Call to Action -->
+<div class="mt-32 pt-16 border-t border-[#1f221f] text-center pb-20">
+<h2 class="text-3xl font-bold font-display text-white mb-2">
+        Build in a weekend, scale to millions
+      </h2>
+<p class="text-sm text-[#9ca3af] mb-8">
+        Start building immediately without entering credit card information.
+      </p>
+<div class="flex items-center justify-center space-x-4">
+<a class="px-6 py-2.5 rounded-md bg-[#3ECF8E] hover:bg-[#34b27b] text-[#121412] font-semibold text-sm transition" href="#">
+          Start your project
+        </a>
+<a class="px-6 py-2.5 rounded-md border border-[#272a27] bg-[#171917] hover:bg-[#202420] text-white text-sm font-medium transition" href="#">
+          Request a demo
+        </a>
+</div>
+</div>
+</main>
+<!-- Multi-column Official Footer -->
+<footer class="border-t border-[#1f221f] bg-[#0e100e] text-[#9ca3af] py-16 text-xs">
+<div class="max-w-[1280px] mx-auto px-12 grid grid-cols-5 gap-8">
+<div>
+<div class="flex items-center space-x-2 text-white mb-4">
+<svg class="w-5 h-5 text-[#3ECF8E]" fill="none" viewbox="0 0 24 24">
+<path d="M13.35 2.14a1 1 0 0 0-1.7 0l-7.5 12.8a1 1 0 0 0 .86 1.5h7.3l-1.36 5.42a1 1 0 0 0 1.7.01l7.5-12.8a1 1 0 0 0-.86-1.5h-7.3l1.36-5.43z" fill="#3ECF8E"></path>
+</svg>
+<span class="font-bold text-sm text-white font-display">supabase</span>
+</div>
+<p class="text-[#6b7280] leading-relaxed">
+          The open source Firebase alternative. Build production-grade backends with Postgres.
+        </p>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-3">Product</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Database</a></li>
+<li><a class="hover:text-white transition" href="#">Auth</a></li>
+<li><a class="hover:text-white transition" href="#">Storage</a></li>
+<li><a class="hover:text-white transition" href="#">Edge Functions</a></li>
+<li><a class="hover:text-white transition" href="#">Realtime</a></li>
+<li><a class="hover:text-white transition" href="#">Vector</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-3">Developers</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Documentation</a></li>
+<li><a class="hover:text-white transition" href="#">Changelog</a></li>
+<li><a class="hover:text-white transition" href="#">Guides</a></li>
+<li><a class="hover:text-white transition" href="#">Status</a></li>
+<li><a class="hover:text-white transition" href="#">Open Source</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-3">Company</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Blog</a></li>
+<li><a class="hover:text-white transition" href="#">Customer Stories</a></li>
+<li><a class="hover:text-white transition" href="#">Careers</a></li>
+<li><a class="hover:text-white transition" href="#">Brand Assets</a></li>
+<li><a class="hover:text-white transition" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-white font-semibold mb-3">Community</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">GitHub</a></li>
+<li><a class="hover:text-white transition" href="#">Twitter / X</a></li>
+<li><a class="hover:text-white transition" href="#">Discord</a></li>
+<li><a class="hover:text-white transition" href="#">YouTube</a></li>
+</ul>
+</div>
+</div>
+</footer>
+</body>
+</html>
