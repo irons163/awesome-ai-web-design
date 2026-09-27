@@ -3,7 +3,7 @@ const $ = selector => document.querySelector(selector);
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
-const OFFICIAL_DRAFTS = {'spotify':'spotify','linear.app':'linear','claude':'claude','notion':'notion','figma':'figma','framer':'framer','vercel':'vercel','airbnb':'airbnb','airtable':'airtable','stripe':'stripe','starbucks':'starbucks','shopify':'shopify','slack':'slack','supabase':'supabase','resend':'resend','ollama':'ollama','raycast':'raycast','cal':'cal'};
+const OFFICIAL_DRAFTS = {'spotify':'spotify','linear.app':'linear','claude':'claude','notion':'notion','figma':'figma','framer':'framer','vercel':'vercel','airbnb':'airbnb','airtable':'airtable','stripe':'stripe','starbucks':'starbucks','shopify':'shopify','slack':'slack','supabase':'supabase','resend':'resend','ollama':'ollama','raycast':'raycast','cal':'cal','cursor':'cursor'};
 let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'image';
 let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
