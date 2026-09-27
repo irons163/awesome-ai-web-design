@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PostHog - Your product's context layer</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ph-orange: #e9a345;
+    --ph-purple: #b634da;
+    --ph-blue: #4d7fee;
+    --ph-ink: #15171d;
+    --ph-bg-window: rgba(246, 244, 238, 0.94);
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ph-ink);
+    user-select: none;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Moss-green illustrated landscape background */
+  .os-desktop-bg {
+    background: radial-gradient(circle at 50% 15%, #587c4a 0%, #3d5e33 45%, #284422 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .os-desktop-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+      radial-gradient(rgba(0, 0, 0, 0.12) 1.5px, transparent 1.5px);
+    background-size: 24px 24px;
+    background-position: 0 0, 12px 12px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  /* Decorative organic hedge / foliage elements on edges */
+  .hedge-foliage-left {
+    position: absolute;
+    left: -50px;
+    bottom: -40px;
+    width: 220px;
+    height: 380px;
+    background: radial-gradient(circle at 30% 30%, #4f7340 0%, #2f4b26 80%);
+    border-radius: 60% 40% 70% 30% / 50% 60% 40% 50%;
+    opacity: 0.75;
+    filter: blur(1px);
+    pointer-events: none;
+  }
+  .hedge-foliage-right {
+    position: absolute;
+    right: -40px;
+    top: 60px;
+    width: 200px;
+    height: 320px;
+    background: radial-gradient(circle at 60% 40%, #5a824b 0%, #325027 80%);
+    border-radius: 40% 60% 30% 70% / 60% 40% 60% 40%;
+    opacity: 0.65;
+    filter: blur(1px);
+    pointer-events: none;
+  }
+
+  /* Desktop shortcuts */
+  .desktop-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    width: 76px;
+    padding: 6px 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    text-align: center;
+  }
+  .desktop-shortcut:hover {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(4px);
+    transform: translateY(-1px);
+  }
+  .desktop-shortcut span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f7faf4;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.75), 0 0 2px rgba(0, 0, 0, 0.9);
+    line-height: 1.15;
+    word-break: break-word;
+  }
+
+  /* Scrollable OS Main Window */
+  .window-card {
+    background: var(--ph-bg-window);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 
+      0 25px 60px -12px rgba(0, 16, 5, 0.45),
+      0 0 0 1px rgba(21, 23, 29, 0.08),
+      0 8px 24px -4px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+  }
+
+  /* Custom inner scrollbar */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(220, 218, 210, 0.4);
+    border-radius: 0 18px 18px 0;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(140, 137, 126, 0.5);
+    border-radius: 999px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 97, 88, 0.8);
+  }
+
+  /* Pill button styling */
+  .btn-orange {
+    background-color: #e9a345;
+    color: #15171d;
+    font-weight: 700;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 0 #bc7a23;
+  }
+  .btn-orange:hover {
+    background-color: #f0ae52;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #bc7a23;
+  }
+  .btn-orange:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #bc7a23;
+  }
+
+  .btn-white {
+    background-color: #ffffff;
+    color: #15171d;
+    border: 1px solid #dcdad2;
+    font-weight: 600;
+    transition: all 0.15s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  }
+  .btn-white:hover {
+    background-color: #faf9f6;
+    border-color: #c7c4b8;
+  }
+
+  /* Badges & tags */
+  .badge-purple {
+    background-color: #f6e6fb;
+    color: #8c1eb0;
+    border: 1px solid #ecc6f5;
+  }
+  .badge-blue {
+    background-color: #eaf1ff;
+    color: #2b59c4;
+    border: 1px solid #cbdcff;
+  }
+</style>
+</head>
+<body class="w-[1280px] h-[720px] os-desktop-bg relative overflow-hidden text-[#15171d] antialiased select-none">
+
+  <!-- Foliage background illustrations -->
+  <div class="hedge-foliage-left"></div>
+  <div class="hedge-foliage-right"></div>
+  <svg class="absolute bottom-2 left-6 opacity-35 pointer-events-none" width="80" height="70" viewBox="0 0 100 90" fill="none">
+    <path d="M10,80 Q20,30 30,80 Q45,20 55,80 Q70,35 85,80" stroke="#7aa568" stroke-width="6" stroke-linecap="round"/>
+  </svg>
+  <svg class="absolute top-16 right-10 opacity-30 pointer-events-none" width="90" height="70" viewBox="0 0 100 90" fill="none">
+    <path d="M15,10 Q40,60 60,15 Q80,70 95,20" stroke="#8cb878" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+
+  <!-- ============================================================ -->
+  <!-- 1. OS TASKBAR (x=8–1272, y=8–49, h=41px)                     -->
+  <!-- ============================================================ -->
+  <header class="absolute top-2 left-2 right-2 h-[41px] bg-[#fbf9f4]/90 backdrop-blur-md border border-white/80 rounded-xl shadow-sm z-50 flex items-center justify-between px-3.5">
+    <!-- Left: Brand Logo & Main Nav -->
+    <div class="flex items-center gap-5">
+      <a href="#home" class="flex items-center gap-2 cursor-pointer group" title="PostHog">
+        <!-- PostHog Hedgehog Logo -->
+        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" class="transition-transform group-hover:scale-105">
+          <rect width="32" height="32" rx="7" fill="#15171d"/>
+          <!-- Hedgehog spines & snout vector -->
+          <path d="M6 19C6 14 10 10 16 10C22 10 26 14 26 19C26 21 24 23 21 23H11C8 23 6 21 6 19Z" fill="#E9A345"/>
+          <circle cx="12" cy="16" r="1.5" fill="#15171d"/>
+          <circle cx="20" cy="16" r="1.5" fill="#15171d"/>
+          <path d="M14 19H18" stroke="#15171d" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M10 10L8 7M14 9L14 6M18 9L18 6M22 10L24 7" stroke="#E9A345" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="font-extrabold text-[15px] tracking-tight text-[#15171d]">PostHog</span>
+      </a>
+
+      <!-- Menu links -->
+      <nav class="flex items-center gap-4 text-[13px] font-semibold text-[#292c34]">
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors flex items-center gap-1">
+          Products
+          <svg width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Pricing</button>
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Docs</button>
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Community</button>
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Company</button>
+        <button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors text-gray-500">More</button>
+      </nav>
+    </div>
+
+    <!-- Right: Utility icons & CTA -->
+    <div class="flex items-center gap-3">
+      <!-- Search icon button -->
+      <button class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-black/5 text-[#3e424d] transition" title="Search (⌘K)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      </button>
+
+      <!-- Theme / Display mode icon -->
+      <button class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-black/5 text-[#3e424d] transition" title="Display preferences">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      </button>
+
+      <!-- Status dot icon -->
+      <button class="flex items-center gap-1.5 px-2 py-1 rounded-lg hover:bg-black/5 text-xs font-semibold text-emerald-700" title="All Systems Operational">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span class="text-[11px] font-mono">100%</span>
+      </button>
+
+      <!-- Sign In link -->
+      <a href="#login" class="text-[13px] font-semibold text-[#15171d] hover:underline px-1.5">Log in</a>
+
+      <!-- Primary Orange CTA -->
+      <a href="#signup" class="btn-orange px-3.5 py-1.5 rounded-lg text-xs tracking-tight flex items-center gap-1.5">
+        <span>Get started – free</span>
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ============================================================ -->
+  <!-- 2. DESKTOP SHORTCUTS - LEFT COLUMN                           -->
+  <!-- ============================================================ -->
+  <div class="absolute left-3 top-[66px] bottom-4 w-[116px] flex flex-col justify-start items-center gap-3 z-30 pointer-events-auto">
+    <!-- Home -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#eef5eb]/90 border border-white/70 shadow flex items-center justify-center text-[#23421d]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <span>Home</span>
+    </div>
+
+    <!-- Self-driving product -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#faefe0]/90 border border-white/70 shadow flex items-center justify-center text-[#b86918]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><path d="M12 3v6M12 15v6M3 12h6M15 12h6"/></svg>
+      </div>
+      <span>Self-driving product</span>
+    </div>
+
+    <!-- Context warehouse -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#e6f0fa]/90 border border-white/70 shadow flex items-center justify-center text-[#215494]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+      </div>
+      <span>Context warehouse</span>
+    </div>
+
+    <!-- Pricing -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#fdf5df]/90 border border-white/70 shadow flex items-center justify-center text-[#8e690f]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M15 9.5c-.7-.8-1.7-1.5-3-1.5-2 0-3 1.2-3 2.5 0 2.5 6 1.8 6 4.5 0 1.5-1.2 2.5-3 2.5-1.5 0-2.6-.7-3.3-1.7"/></svg>
+      </div>
+      <span>Pricing</span>
+    </div>
+
+    <!-- Docs -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#fbf9f4]/90 border border-white/70 shadow flex items-center justify-center text-[#353842]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      </div>
+      <span>Docs</span>
+    </div>
+
+    <!-- Demo -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#fae8fb]/90 border border-white/70 shadow flex items-center justify-center text-[#8d1fa8]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+      </div>
+      <span>Demo</span>
+    </div>
+
+    <!-- Talk to a human -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#eaf6ef]/90 border border-white/70 shadow flex items-center justify-center text-[#1c683b]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </div>
+      <span>Talk to human</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 3. DESKTOP SHORTCUTS - RIGHT COLUMN                          -->
+  <!-- ============================================================ -->
+  <div class="absolute right-3 top-[66px] bottom-4 w-[116px] flex flex-col justify-start items-center gap-3.5 z-30 pointer-events-auto">
+    <!-- About us -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#f5effa]/90 border border-white/70 shadow flex items-center justify-center text-[#692d91]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      </div>
+      <span>About us</span>
+    </div>
+
+    <!-- Changelog -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#fef7e7]/90 border border-white/70 shadow flex items-center justify-center text-[#aa6b08]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      </div>
+      <span>Changelog</span>
+    </div>
+
+    <!-- Company handbook -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#ebf3fc]/90 border border-white/70 shadow flex items-center justify-center text-[#1d5aa1]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <span>Handbook</span>
+    </div>
+
+    <!-- Store (Merch) -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#fbedee]/90 border border-white/70 shadow flex items-center justify-center text-[#a8253b]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </div>
+      <span>Store</span>
+    </div>
+
+    <!-- Careers -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#edf7ee]/90 border border-white/70 shadow flex items-center justify-center text-[#217537]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <span>Careers</span>
+    </div>
+
+    <!-- Trash -->
+    <div class="desktop-shortcut">
+      <div class="w-10 h-10 rounded-xl bg-[#f2f2f3]/90 border border-white/70 shadow flex items-center justify-center text-[#555a66]">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+      </div>
+      <span>Trash</span>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- 4. OVERSIZED FROSTED APP WINDOW                              -->
+  <!-- x≈134–1146 (width=1012px), top≈66, bottom≈696 (h=630px)      -->
+  <!-- Content scrolls internally within this frame                 -->
+  <!-- ============================================================ -->
+  <main class="absolute left-[134px] right-[134px] top-[66px] bottom-[24px] window-card flex flex-col overflow-hidden z-40">
+    
+    <!-- Window Titlebar / Chrome (fixed inside window) -->
+    <div class="h-9 px-4 bg-[#f2efe7]/80 border-b border-[#ded9cb] flex items-center justify-between shrink-0 select-none">
+      <div class="flex items-center gap-2">
+        <div class="w-3 h-3 rounded-full bg-[#15171d]/20 flex items-center justify-center">
+          <div class="w-1.5 h-1.5 rounded-full bg-[#15171d]/60"></div>
+        </div>
+        <span class="text-xs font-semibold text-[#5a5f6e]">posthog.com – Product OS</span>
+      </div>
+      <!-- Window Controls (Minimize, Maximize, Close) -->
+      <div class="flex items-center gap-2">
+        <button class="w-3.5 h-3.5 rounded-full bg-[#dfd9c8] hover:bg-[#c9c1ad] border border-black/10 flex items-center justify-center transition" title="Minimize">
+          <span class="w-2 h-0.5 bg-black/50"></span>
+        </button>
+        <button class="w-3.5 h-3.5 rounded-full bg-[#dfd9c8] hover:bg-[#c9c1ad] border border-black/10 flex items-center justify-center transition" title="Maximize">
+          <div class="w-1.5 h-1.5 border border-black/50"></div>
+        </button>
+        <button class="w-3.5 h-3.5 rounded-full bg-[#e8a3a3] hover:bg-[#d97c7c] border border-black/10 flex items-center justify-center transition" title="Close">
+          <span class="text-[9px] leading-none text-black/60 font-bold">×</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Scrollable Window Viewport (~4,757px internal height) -->
+    <div class="flex-1 overflow-y-auto overflow-x-hidden custom-scrollbar bg-[#f6f4ee] text-[#15171d] scroll-smooth">
+      
+      <!-- ======================================================= -->
+      <!-- SECTION 1: HERO & PRODUCT DEMO (y ≈ 0 to 1132)          -->
+      <!-- ======================================================= -->
+      <section class="px-12 pt-10 pb-16 max-w-[940px] mx-auto">
+        <!-- PostHog Top Inline Logo Mark -->
+        <div class="mb-6 flex items-center gap-2">
+          <div class="px-2.5 py-1 rounded bg-[#ece7da] border border-[#d6cfbe] inline-flex items-center gap-2 text-xs font-bold text-[#15171d]">
+            <span class="w-2 h-2 rounded-full bg-[#e9a345]"></span>
+            PostHog 3.0: The Agent-Ready Data Platform
+          </div>
+        </div>
+
+        <!-- Two Column Hero Content -->
+        <div class="grid grid-cols-12 gap-8 items-start mb-12">
+          <!-- Left Column (x≈214–620 equivalent inside window) -->
+          <div class="col-span-7 pr-2">
+            <h1 class="text-[40px] leading-[1.12] font-extrabold text-[#15171d] tracking-tight mb-5">
+              Your product’s <span class="text-[#4d7fee] underline decoration-[#4d7fee]/30 underline-offset-4">context layer</span>
+            </h1>
+            <p class="text-base text-[#4a4e5a] leading-relaxed mb-6 font-medium">
+              PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query and act on it.
+            </p>
+            <div class="flex items-center gap-3 text-xs font-semibold text-[#5a5f6e]">
+              <div class="flex -space-x-1.5 overflow-hidden">
+                <div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f6f4ee] bg-[#e9a345] text-[10px] font-bold text-white flex items-center justify-center">PH</div>
+                <div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f6f4ee] bg-[#b634da] text-[10px] font-bold text-white flex items-center justify-center">AI</div>
+                <div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f6f4ee] bg-[#4d7fee] text-[10px] font-bold text-white flex items-center justify-center">SQL</div>
+              </div>
+              <span>Join <strong class="text-[#15171d]">500,000+ teams</strong> already shipping with PostHog.</span>
+            </div>
+          </div>
+
+          <!-- Right Column (x≈656–1065 equivalent) - Setup Card -->
+          <div class="col-span-5">
+            <div class="bg-white rounded-2xl p-6 border border-[#e1dccf] shadow-md relative overflow-hidden">
+              <div class="absolute -top-10 -right-10 w-28 h-28 bg-[#fdf5e8] rounded-full blur-xl pointer-events-none"></div>
+              <h2 class="text-lg font-bold text-[#15171d] mb-4">Set up PostHog for free</h2>
+              
+              <ul class="space-y-2.5 mb-6 text-xs font-medium text-[#404450]">
+                <li class="flex items-center gap-2">
+                  <div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+                  <span><strong>97% of users</strong> pay us $0</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+                  <span>No credit card required</span>
+                </li>
+                <li class="flex items-center gap-2">
+                  <div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+                  <span>Setup wizard installs PostHog for you</span>
+                </li>
+              </ul>
+
+              <div class="space-y-2.5">
+                <a href="#signup" class="btn-orange w-full py-2.5 rounded-xl text-center block text-sm font-bold shadow-sm">
+                  Get started – free
+                </a>
+                <button class="btn-white w-full py-2.5 rounded-xl text-center flex items-center justify-center gap-2 text-xs font-bold">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+                  <span>Install with AI</span>
+                </button>
+              </div>
+              <p class="text-[11px] text-center text-gray-400 mt-3 font-medium">Takes ~4 minutes • Self-hostable via Docker</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3-Tab Product Demo Mockup -->
+        <div class="bg-white rounded-2xl border border-[#ded9cd] shadow-md overflow-hidden mb-8">
+          <!-- Tab Navigation Bar -->
+          <div class="flex items-center border-b border-[#e5e0d4] bg-[#fbf9f4] px-4 pt-2 gap-2 text-xs font-bold">
+            <button class="px-4 py-2.5 rounded-t-lg bg-white border-t-2 border-[#b634da] text-[#15171d] shadow-sm flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-[#b634da]"></span>
+              Ask PostHog anything
+            </button>
+            <button class="px-4 py-2.5 rounded-t-lg text-gray-500 hover:text-gray-900 transition flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              Give agents product context
+            </button>
+            <button class="px-4 py-2.5 rounded-t-lg text-gray-500 hover:text-gray-900 transition flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              Ship with PostHog
+            </button>
+          </div>
+
+          <!-- Product UI Mockup Screen -->
+          <div class="p-6 bg-[#faf9f6]">
+            <!-- Query Bar Prompt -->
+            <div class="flex items-center gap-3 bg-white p-3 rounded-xl border border-[#e1ded5] shadow-inner mb-5">
+              <span class="text-[#b634da] font-mono text-sm font-bold">AI ✨</span>
+              <input type="text" readonly value="Which signup cohort had the highest drop-off after viewing the billing table last week?" class="w-full text-xs font-mono text-[#15171d] bg-transparent outline-none cursor-default font-medium">
+              <span class="text-[10px] font-mono bg-gray-100 text-gray-600 px-2 py-0.5 rounded border">SQL Generated</span>
+            </div>
+
+            <!-- Dashboard Charts / Insights Mockup -->
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <div class="bg-white p-4 rounded-xl border border-[#e5e1d7] shadow-sm">
+                <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <span>Weekly Retention Drop</span>
+                  <span class="text-rose-600 font-bold">-18.4%</span>
+                </div>
+                <div class="h-16 flex items-end gap-1.5 pt-2">
+                  <div class="flex-1 bg-[#4d7fee]/20 rounded-t h-[40%]"></div>
+                  <div class="flex-1 bg-[#4d7fee]/30 rounded-t h-[65%]"></div>
+                  <div class="flex-1 bg-[#4d7fee]/40 rounded-t h-[85%]"></div>
+                  <div class="flex-1 bg-[#4d7fee]/60 rounded-t h-[50%]"></div>
+                  <div class="flex-1 bg-[#b634da] rounded-t h-[95%]"></div>
+                </div>
+                <div class="text-[11px] text-gray-400 mt-2 font-mono">Cohort: 2026-W38 • N=14,208</div>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-[#e5e1d7] shadow-sm">
+                <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <span>Session Replay Trigger</span>
+                  <span class="text-emerald-600 font-bold">142 clips</span>
+                </div>
+                <div class="bg-[#15171d] text-white rounded-lg p-2.5 font-mono text-[10px] h-16 flex flex-col justify-center">
+                  <div class="text-amber-400">> error: 402 Payment Required</div>
+                  <div class="text-gray-400">URL: /app/checkout?plan=scale</div>
+                </div>
+                <div class="text-[11px] text-purple-600 mt-2 font-bold cursor-pointer hover:underline">Watch 3-minute highlight tape →</div>
+              </div>
+
+              <div class="bg-white p-4 rounded-xl border border-[#e5e1d7] shadow-sm">
+                <div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+                  <span>Agent Context Feed</span>
+                  <span class="badge-purple text-[10px] px-1.5 py-0.5 rounded font-bold">Live API</span>
+                </div>
+                <div class="text-[11px] text-gray-600 leading-snug space-y-1 font-mono">
+                  <p class="truncate"><span class="text-[#4d7fee] font-bold">SELECT</span> user_id, intent</p>
+                  <p class="truncate"><span class="text-[#b634da] font-bold">EMBEDDING</span> match 0.94</p>
+                  <p class="text-emerald-700 font-bold">✓ Synced to Cursor & Claude</p>
+                </div>
+                <div class="text-[11px] text-gray-400 mt-2 font-mono">Latency: 18ms (cached)</div>
+              </div>
+            </div>
+
+            <!-- Bottom technical summary snippet -->
+            <div class="bg-[#eef3f8] border border-[#d6e2f0] rounded-xl p-3 flex items-center justify-between text-xs">
+              <div class="flex items-center gap-2 text-[#244574] font-medium">
+                <span class="font-bold">Automated Root Cause:</span>
+                <span>Pricing modal v2 caused mobile Safari SVG layout freeze on iOS 18.</span>
+              </div>
+              <button class="text-[11px] font-bold text-[#4d7fee] hover:underline">Deploy Feature Flag Fix</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Horizontal Strip of PostHog Product Icons -->
+        <div class="flex items-center justify-between py-3 px-6 bg-[#eeebe2] rounded-xl border border-[#ded8c8] text-xs font-bold text-[#3d414d]">
+          <span class="flex items-center gap-1.5"><span class="text-base">📊</span> Product Analytics</span>
+          <span class="text-gray-300">•</span>
+          <span class="flex items-center gap-1.5"><span class="text-base">📹</span> Session Replay</span>
+          <span class="text-gray-300">•</span>
+          <span class="flex items-center gap-1.5"><span class="text-base">🚩</span> Feature Flags</span>
+          <span class="text-gray-300">•</span>
+          <span class="flex items-center gap-1.5"><span class="text-base">🧪</span> A/B Testing</span>
+          <span class="text-gray-300">•</span>
+          <span class="flex items-center gap-1.5"><span class="text-base">⚡</span> Error Tracking</span>
+          <span class="text-gray-300">•</span>
+          <span class="flex items-center gap-1.5"><span class="text-base">📦</span> Data Warehouse</span>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 2: SOCIAL PROOF (y ≈ 1132)                      -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-16 bg-[#fbf9f4] border-t border-[#ded8c8]">
+        <div class="max-w-[940px] mx-auto">
+          <div class="text-center max-w-2xl mx-auto mb-10">
+            <h2 class="text-2xl font-extrabold text-[#15171d] tracking-tight mb-2">
+              Trusted by 500,000+ teams shipping modern software
+            </h2>
+            <p class="text-xs font-medium text-[#5a5f6e] italic">
+              “Yes they actually use us, no it’s not just some random engineer who tried us out 2+ years ago.”
+            </p>
+          </div>
+
+          <!-- Giant Two-Column White Logo Panel -->
+          <div class="bg-white rounded-2xl border border-[#ded9cb] p-8 shadow-sm">
+            <div class="grid grid-cols-2 gap-8 divide-x divide-[#ece7da]">
+              
+              <!-- Column 1: Colorful Logos -->
+              <div class="pr-6">
+                <div class="flex items-center justify-between mb-6 pb-2 border-b border-[#f0ece1]">
+                  <span class="text-xs font-bold tracking-wider uppercase text-[#b634da]">Colorful Logos</span>
+                  <span class="text-[11px] font-mono text-gray-400">High-growth startups</span>
+                </div>
+                <div class="grid grid-cols-3 gap-6 items-center">
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-[#e9a345]">Y Combinator</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">S20 Batch</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-[#4d7fee]">Airbyte</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Data movement</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-[#b634da]">Vercel</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Frontend cloud</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-rose-500">ElevenLabs</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Voice AI</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-emerald-600">Supabase</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Backend DB</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-lg font-black text-indigo-600">Resend</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Email for devs</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Column 2: Sleek Logos -->
+              <div class="pl-6">
+                <div class="flex items-center justify-between mb-6 pb-2 border-b border-[#f0ece1]">
+                  <span class="text-xs font-bold tracking-wider uppercase text-[#15171d]">Sleek Logos</span>
+                  <span class="text-[11px] font-mono text-gray-400">Scale & enterprise</span>
+                </div>
+                <div class="grid grid-cols-3 gap-6 items-center">
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold tracking-widest text-[#15171d]">AIRBUS</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Aerospace</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold tracking-wider text-[#15171d]">hasura</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">GraphQL engine</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold text-[#15171d]">dbt Labs</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Analytics code</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold tracking-tight text-[#15171d]">Phantom</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Web3 wallet</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold tracking-wider text-[#15171d]">Penta</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Fintech</span>
+                  </div>
+                  <div class="p-3 rounded-xl bg-[#faf9f5] border border-[#eee9dc] flex flex-col items-center justify-center text-center">
+                    <span class="text-base font-extrabold tracking-tight text-[#15171d]">AssemblyAI</span>
+                    <span class="text-[10px] text-gray-500 font-mono mt-0.5">Speech AI</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-[#f0ece1] flex items-center justify-between text-xs text-gray-500">
+              <span>Read 40+ verified case studies with uncensored customer architecture diagrams</span>
+              <a href="#customers" class="font-bold text-[#15171d] hover:underline flex items-center gap-1">
+                Explore customer stories →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 3: ALL YOUR DATA, WORKING TOGETHER (y ≈ 1777)   -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-16 bg-[#f6f4ee] border-t border-[#ded8c8]">
+        <div class="max-w-[940px] mx-auto">
+          <div class="grid grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Explanatory Text & List -->
+            <div class="col-span-6">
+              <span class="badge-blue text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-3 inline-block">Built-in Context Warehouse</span>
+              <h2 class="text-3xl font-extrabold text-[#15171d] tracking-tight mb-4">
+                All your data, working together
+              </h2>
+              <p class="text-sm text-[#4a4e5a] leading-relaxed mb-6 font-medium">
+                Traditional stacks make you buy separate tools for analytics, session replays, feature flags, and experiments, then pay another $100k/year to pipe them into snowflake. PostHog unifies the warehouse and application layer.
+              </p>
+
+              <div class="space-y-3.5 mb-6 text-xs text-[#2b2e38]">
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-md bg-[#eef5eb] border border-[#c4dcbe] text-[#245b1d] font-bold flex items-center justify-center shrink-0">1</div>
+                  <div>
+                    <h4 class="font-bold text-[#15171d]">ClickHouse powered speed</h4>
+                    <p class="text-gray-500 text-[11px]">Sub-second aggregation across billions of events without indexing gymnastics.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-md bg-[#faefe0] border border-[#e4ccaa] text-[#935211] font-bold flex items-center justify-center shrink-0">2</div>
+                  <div>
+                    <h4 class="font-bold text-[#15171d]">Direct SQL & HogQL querying</h4>
+                    <p class="text-gray-500 text-[11px]">Write ANSI SQL directly on top of event streams, sessions, and external Stripe tables.</p>
+                  </div>
+                </div>
+                <div class="flex items-start gap-3">
+                  <div class="w-5 h-5 rounded-md bg-[#f6e6fb] border border-[#e0bceb] text-[#731991] font-bold flex items-center justify-center shrink-0">3</div>
+                  <div>
+                    <h4 class="font-bold text-[#15171d]">Agent-ready MCP and vector embeddings</h4>
+                    <p class="text-gray-500 text-[11px]">Give Claude, Codex, or Cursor complete user context without manual data exports.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <a href="#warehouse" class="btn-orange px-4 py-2 rounded-xl text-xs font-bold">Explore Data Warehouse</a>
+                <a href="#benchmarks" class="text-xs font-semibold text-[#15171d] hover:underline">See query speed benchmarks →</a>
+              </div>
+            </div>
+
+            <!-- Right Compact Warehouse Card & Hedgehog Artwork -->
+            <div class="col-span-6">
+              <div class="bg-white rounded-2xl border border-[#ded9cb] p-6 shadow-md relative">
+                <!-- Decorative Hedgehog Artwork Badge -->
+                <div class="absolute -top-5 -right-4 bg-[#fbf5e7] border-2 border-[#e9a345] rounded-2xl p-2.5 shadow-sm flex items-center gap-2">
+                  <!-- Illustrated Hedgehog Icon -->
+                  <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                    <rect width="32" height="32" rx="8" fill="#15171d"/>
+                    <circle cx="16" cy="18" r="9" fill="#E9A345"/>
+                    <path d="M10 11L7 8M14 9L14 5M18 9L18 5M22 11L25 8" stroke="#E9A345" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="13" cy="17" r="1.5" fill="#15171d"/>
+                    <circle cx="19" cy="17" r="1.5" fill="#15171d"/>
+                    <path d="M15 21Q16 22 17 21" stroke="#15171d" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                  <span class="text-[11px] font-mono font-bold text-[#15171d]">Max the Hedgehog<br><span class="text-gray-400 font-normal">Data architect</span></span>
+                </div>
+
+                <div class="text-xs font-mono font-bold text-gray-400 mb-3 flex items-center justify-between">
+                  <span>POSTHOG CONTEXT RUNTIME</span>
+                  <span class="text-emerald-600 font-bold">● Active 28 sources</span>
+                </div>
+
+                <!-- Live Query Pipeline Mockup -->
+                <div class="space-y-2.5 font-mono text-[11px]">
+                  <div class="p-2.5 rounded-lg bg-[#faf9f5] border border-[#e8e4d8] flex items-center justify-between">
+                    <span class="text-gray-700">events: pageviews + custom</span>
+                    <span class="font-bold text-[#4d7fee]">42.8M rows / sec</span>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-[#faf9f5] border border-[#e8e4d8] flex items-center justify-between">
+                    <span class="text-gray-700">source: Stripe webhook charges</span>
+                    <span class="font-bold text-[#e9a345]">$1.4M synced</span>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-[#faf9f5] border border-[#e8e4d8] flex items-center justify-between">
+                    <span class="text-gray-700">source: Zendesk + GitHub issues</span>
+                    <span class="font-bold text-[#b634da]">Zero-lag joins</span>
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-[#faf9f5] border border-[#e8e4d8] flex items-center justify-between">
+                    <span class="text-gray-700">destination: Cursor IDE context</span>
+                    <span class="font-bold text-emerald-600">Active pipe</span>
+                  </div>
+                </div>
+
+                <!-- Code Terminal Snippet -->
+                <div class="mt-4 p-3 rounded-xl bg-[#15171d] text-gray-200 font-mono text-[10px] leading-relaxed">
+                  <span class="text-gray-500">-- HogQL cross-domain correlation</span><br>
+                  <span class="text-purple-400">SELECT</span> person.properties.email, count()<br>
+                  <span class="text-purple-400">FROM</span> events e <span class="text-purple-400">JOIN</span> stripe_charges s <span class="text-purple-400">ON</span> e.distinct_id = s.customer<br>
+                  <span class="text-purple-400">WHERE</span> event = <span class="text-amber-300">'rageclick'</span> <span class="text-purple-400">GROUP BY</span> 1;
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 4: USAGE-BASED PRICING (y ≈ 2369)               -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-16 bg-[#fbf9f4] border-t border-[#ded8c8]">
+        <div class="max-w-[940px] mx-auto">
+          <!-- Heading & Hedgehog Money Illustration -->
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#ded8c8]">
+            <div>
+              <span class="badge-purple text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Predictable Billing</span>
+              <h2 class="text-3xl font-extrabold text-[#15171d] tracking-tight">
+                Usage-based pricing without surprises
+              </h2>
+              <p class="text-xs text-gray-500 mt-1 font-medium">Generous free allowances every single month on every product. Forever.</p>
+            </div>
+
+            <!-- Hedgehog with Bag of Money vector illustration -->
+            <div class="flex items-center gap-3 bg-white px-4 py-2 rounded-2xl border border-[#ded9cb] shadow-sm">
+              <svg width="40" height="40" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="22" fill="#FDF5E6"/>
+                <path d="M12 28C12 20 18 15 26 15C34 15 38 20 38 28C38 31 35 34 31 34H19C15 34 12 31 12 28Z" fill="#E9A345"/>
+                <circle cx="20" cy="24" r="2" fill="#15171d"/>
+                <circle cx="30" cy="24" r="2" fill="#15171d"/>
+                <circle cx="34" cy="18" r="7" fill="#4D7FEE"/>
+                <text x="34" y="22" font-size="10" font-weight="bold" fill="white" text-anchor="middle">$</text>
+              </svg>
+              <div class="text-left">
+                <div class="text-xs font-bold text-[#15171d]">Zero minimum spend</div>
+                <div class="text-[10px] text-gray-400 font-mono">Set strict budget caps anytime</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Four-Row Product / Free-tier / Rate Table -->
+          <div class="bg-white rounded-2xl border border-[#ded9cb] shadow-sm overflow-hidden mb-6">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="bg-[#f5f2e9] text-[#15171d] font-bold border-b border-[#e2dccf]">
+                  <th class="py-3 px-5">Product</th>
+                  <th class="py-3 px-5">Free Tier (Monthly)</th>
+                  <th class="py-3 px-5">Paid Rate (After free tier)</th>
+                  <th class="py-3 px-5 text-right">Included Features</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-[#ece7da] font-medium text-[#2f323c]">
+                <!-- Row 1: Product Analytics -->
+                <tr class="hover:bg-[#faf9f5]">
+                  <td class="py-4 px-5 font-bold flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-[#eef5eb] text-emerald-700 flex items-center justify-center text-xs">📊</span>
+                    <span>Product Analytics</span>
+                  </td>
+                  <td class="py-4 px-5">
+                    <span class="font-bold text-[#15171d]">1,000,000 events</span>
+                    <div class="text-[10px] text-gray-400">every single month</div>
+                  </td>
+                  <td class="py-4 px-5 font-mono text-xs">
+                    From $0.00030 / event
+                    <div class="text-[10px] text-gray-400 font-sans">Volume discounts up to 90%</div>
+                  </td>
+                  <td class="py-4 px-5 text-right text-gray-600 text-[11px]">
+                    Funnels, Retention, Trends, Paths, SQL
+                  </td>
+                </tr>
+
+                <!-- Row 2: Session Replay -->
+                <tr class="hover:bg-[#faf9f5]">
+                  <td class="py-4 px-5 font-bold flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-[#faefe0] text-amber-700 flex items-center justify-center text-xs">📹</span>
+                    <span>Session Replay</span>
+                  </td>
+                  <td class="py-4 px-5">
+                    <span class="font-bold text-[#15171d]">5,000 recordings</span>
+                    <div class="text-[10px] text-gray-400">full DOM & network capture</div>
+                  </td>
+                  <td class="py-4 px-5 font-mono text-xs">
+                    From $0.040 / recording
+                    <div class="text-[10px] text-gray-400 font-sans">Sampling & duration controls</div>
+                  </td>
+                  <td class="py-4 px-5 text-right text-gray-600 text-[11px]">
+                    Console logs, Network inspector, Mobile iOS/Android
+                  </td>
+                </tr>
+
+                <!-- Row 3: Feature Flags & Experiments -->
+                <tr class="hover:bg-[#faf9f5]">
+                  <td class="py-4 px-5 font-bold flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-[#f6e6fb] text-purple-700 flex items-center justify-center text-xs">🚩</span>
+                    <span>Feature Flags & A/B</span>
+                  </td>
+                  <td class="py-4 px-5">
+                    <span class="font-bold text-[#15171d]">1,000,000 requests</span>
+                    <div class="text-[10px] text-gray-400">multivariate & payloads</div>
+                  </td>
+                  <td class="py-4 px-5 font-mono text-xs">
+                    From $0.00010 / evaluation
+                    <div class="text-[10px] text-gray-400 font-sans">Local evaluation available</div>
+                  </td>
+                  <td class="py-4 px-5 text-right text-gray-600 text-[11px]">
+                    Bayesian significance, Rollouts, Overrides
+                  </td>
+                </tr>
+
+                <!-- Row 4: Error Tracking -->
+                <tr class="hover:bg-[#faf9f5]">
+                  <td class="py-4 px-5 font-bold flex items-center gap-2">
+                    <span class="w-6 h-6 rounded-lg bg-[#ebf3fc] text-blue-700 flex items-center justify-center text-xs">⚡</span>
+                    <span>Error Tracking</span>
+                  </td>
+                  <td class="py-4 px-5">
+                    <span class="font-bold text-[#15171d]">100,000 exceptions</span>
+                    <div class="text-[10px] text-gray-400">stacktraces + source maps</div>
+                  </td>
+                  <td class="py-4 px-5 font-mono text-xs">
+                    From $0.00035 / error
+                    <div class="text-[10px] text-gray-400 font-sans">Fingerprinting included</div>
+                  </td>
+                  <td class="py-4 px-5 text-right text-gray-600 text-[11px]">
+                    Replay linked directly to root error line
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="flex items-center justify-between text-xs text-gray-500 px-2">
+            <span>Need enterprise SAML SSO, dedicated support Slack channels, or HIPAA BAA?</span>
+            <a href="#calculator" class="text-xs font-bold text-[#15171d] hover:underline">Interactive Pricing Calculator →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 5: WHY POSTHOG? (y ≈ 3098)                      -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-16 bg-[#f6f4ee] border-t border-[#ded8c8]">
+        <div class="max-w-[940px] mx-auto">
+          <div class="grid grid-cols-12 gap-8 items-center">
+            
+            <!-- Left: Transparency, Shipping, Technical Support Bullets -->
+            <div class="col-span-7">
+              <span class="badge-purple text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">The Anti-Enterprise Enterprise</span>
+              <h2 class="text-3xl font-extrabold text-[#15171d] tracking-tight mb-4">
+                Why PostHog?
+              </h2>
+              <p class="text-sm text-[#4a4e5a] leading-relaxed mb-6 font-medium">
+                We believe software teams deserve open-source roots, radical public transparency, and direct access to the engineers actually writing the code.
+              </p>
+
+              <div class="space-y-4 text-xs">
+                <div class="p-3.5 rounded-xl bg-white border border-[#ded9cb] shadow-sm">
+                  <h4 class="font-bold text-[#15171d] flex items-center gap-2 mb-1">
+                    <span class="text-amber-600 font-mono text-sm">01.</span>
+                    Radical Transparency
+                  </h4>
+                  <p class="text-gray-600 leading-normal">
+                    Our entire company handbook, salary formulas, product roadmaps, and board meeting notes are published live on the web for anyone to read.
+                  </p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-white border border-[#ded9cb] shadow-sm">
+                  <h4 class="font-bold text-[#15171d] flex items-center gap-2 mb-1">
+                    <span class="text-purple-600 font-mono text-sm">02.</span>
+                    Relentless Shipping Velocity
+                  </h4>
+                  <p class="text-gray-600 leading-normal">
+                    Small autonomous product teams push code multiple times every day. No 6-month enterprise committee meetings or vaporware slide decks.
+                  </p>
+                </div>
+
+                <div class="p-3.5 rounded-xl bg-white border border-[#ded9cb] shadow-sm">
+                  <h4 class="font-bold text-[#15171d] flex items-center gap-2 mb-1">
+                    <span class="text-blue-600 font-mono text-sm">03.</span>
+                    Support by Real Engineers
+                  </h4>
+                  <p class="text-gray-600 leading-normal">
+                    When you ask a technical question in our community or tickets, you talk straight to the full-time engineers maintaining that exact subsystem.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Hedgehog Whiteboard Image Mockup -->
+            <div class="col-span-5">
+              <div class="bg-white rounded-2xl border border-[#ded9cb] p-6 shadow-md text-center relative overflow-hidden">
+                <!-- Whiteboard Frame -->
+                <div class="bg-[#faf9f6] rounded-xl border-2 border-dashed border-[#d2ccc0] p-5 relative">
+                  <div class="text-[10px] font-mono uppercase tracking-widest text-gray-400 mb-2">Max's Architecture Whiteboard</div>
+                  
+                  <!-- Whiteboard Diagram Drawing -->
+                  <svg width="220" height="150" viewBox="0 0 220 150" fill="none" class="mx-auto my-2">
+                    <!-- Hedgehog drawing with marker -->
+                    <circle cx="110" cy="80" r="45" fill="#fdf5e6" stroke="#e9a345" stroke-width="2"/>
+                    <path d="M75 60L90 40M110 50L110 30M130 50L150 40" stroke="#e9a345" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="95" cy="75" r="3.5" fill="#15171d"/>
+                    <circle cx="125" cy="75" r="3.5" fill="#15171d"/>
+                    <path d="M102 92Q110 98 118 92" stroke="#15171d" stroke-width="2" stroke-linecap="round"/>
+                    <!-- Marker pen in hand -->
+                    <rect x="145" y="85" width="22" height="6" rx="2" fill="#4d7fee" transform="rotate(-30 145 85)"/>
+                    <text x="110" y="140" font-size="9" font-family="monospace" fill="#555" text-anchor="middle">"Build what users actually love"</text>
+                  </svg>
+
+                  <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 text-[10px] font-mono text-amber-900 mt-2">
+                    Commit #8942b0: Open-source, self-hostable core forever.
+                  </div>
+                </div>
+
+                <div class="mt-4 flex items-center justify-center gap-2">
+                  <span class="text-xs font-bold text-[#15171d]">18,000+ GitHub Stars</span>
+                  <span class="text-gray-300">•</span>
+                  <a href="https://github.com/PostHog/posthog" class="text-xs font-bold text-[#4d7fee] hover:underline">View repo on GitHub →</a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 6: BEDTIME READING (y ≈ 3504)                   -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-16 bg-[#fbf9f4] border-t border-[#ded8c8]">
+        <div class="max-w-[940px] mx-auto">
+          <div class="flex items-center justify-between mb-8 pb-4 border-b border-[#ded8c8]">
+            <div>
+              <span class="badge-blue text-[11px] font-bold px-2 py-0.5 rounded uppercase tracking-wider mb-2 inline-block">Engineering Culture</span>
+              <h2 class="text-3xl font-extrabold text-[#15171d] tracking-tight">
+                Bedtime reading
+              </h2>
+              <p class="text-xs text-gray-500 mt-1 font-medium">Unvarnished essays on building startups, ClickHouse internals, and surviving product launches.</p>
+            </div>
+
+            <!-- Hedgehog Reading in Bed Artwork -->
+            <div class="bg-white px-4 py-2 rounded-2xl border border-[#ded9cb] shadow-sm flex items-center gap-3">
+              <svg width="44" height="40" viewBox="0 0 44 40" fill="none">
+                <!-- Bed blanket -->
+                <rect x="4" y="20" width="36" height="16" rx="4" fill="#E8EFF8"/>
+                <path d="M4 22C4 22 12 18 22 18C32 18 40 22 40 22V32C40 34 38 36 36 36H8C6 36 4 34 4 32V22Z" fill="#4D7FEE"/>
+                <!-- Hedgehog pillow & head reading -->
+                <circle cx="16" cy="14" r="8" fill="#E9A345"/>
+                <circle cx="14" cy="13" r="1.5" fill="#15171d"/>
+                <!-- Open book -->
+                <path d="M22 14L28 10L34 14V22L28 18L22 22V14Z" fill="#FAF9F5" stroke="#15171d" stroke-width="1.2"/>
+              </svg>
+              <div class="text-left">
+                <div class="text-xs font-bold text-[#15171d]">The PostHog Newsletter</div>
+                <div class="text-[10px] text-gray-400 font-mono">110k+ weekly readers</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Linked Resources 3-Card Grid -->
+          <div class="grid grid-cols-3 gap-5">
+            <a href="#article1" class="bg-white rounded-2xl p-5 border border-[#ded9cb] shadow-sm hover:border-[#15171d] hover:shadow-md transition group block">
+              <div class="text-[10px] font-mono font-bold text-[#b634da] uppercase mb-2">Startup Engineering</div>
+              <h3 class="text-sm font-extrabold text-[#15171d] group-hover:text-[#4d7fee] transition mb-2">
+                Why we pay all engineers identical salaries across tier-1 cities
+              </h3>
+              <p class="text-xs text-gray-500 leading-normal mb-4 font-medium">
+                How transparent salary bands destroyed endless compensation negotiations and helped us hire top 1% talent.
+              </p>
+              <div class="text-[11px] font-bold text-[#15171d] flex items-center gap-1 group-hover:underline">
+                Read guide (7 min) →
+              </div>
+            </a>
+
+            <a href="#article2" class="bg-white rounded-2xl p-5 border border-[#ded9cb] shadow-sm hover:border-[#15171d] hover:shadow-md transition group block">
+              <div class="text-[10px] font-mono font-bold text-[#e9a345] uppercase mb-2">Deep Tech</div>
+              <h3 class="text-sm font-extrabold text-[#15171d] group-hover:text-[#4d7fee] transition mb-2">
+                How ClickHouse handles 100 billion rows without setting on fire
+              </h3>
+              <p class="text-xs text-gray-500 leading-normal mb-4 font-medium">
+                The technical deep-dive into partitioning strategies, dictionary encoding, and vectorized SIMD execution.
+              </p>
+              <div class="text-[11px] font-bold text-[#15171d] flex items-center gap-1 group-hover:underline">
+                Read architecture (12 min) →
+              </div>
+            </a>
+
+            <a href="#article3" class="bg-white rounded-2xl p-5 border border-[#ded9cb] shadow-sm hover:border-[#15171d] hover:shadow-md transition group block">
+              <div class="text-[10px] font-mono font-bold text-[#4d7fee] uppercase mb-2">Product OS</div>
+              <h3 class="text-sm font-extrabold text-[#15171d] group-hover:text-[#4d7fee] transition mb-2">
+                Stop building features your customers will never discover
+              </h3>
+              <p class="text-xs text-gray-500 leading-normal mb-4 font-medium">
+                A framework for coupling feature flags, heatmaps, and funnel dropoffs into a single development feedback loop.
+              </p>
+              <div class="text-[11px] font-bold text-[#15171d] flex items-center gap-1 group-hover:underline">
+                Read playbook (5 min) →
+              </div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================= -->
+      <!-- SECTION 7: SHAMELESS CTA (y ≈ 3941 to ~4757)            -->
+      <!-- ======================================================= -->
+      <section class="px-12 py-20 bg-[#efece1] border-t border-[#ded8c8] text-center relative overflow-hidden">
+        <!-- Retro decorative background accent -->
+        <div class="max-w-[760px] mx-auto relative z-10">
+          
+          <!-- Retro PostHog Web Software Box & CD Artwork Mockup -->
+          <div class="flex items-center justify-center gap-6 mb-8">
+            <!-- 90s Big Box Software Package 3D Perspective -->
+            <div class="w-36 h-48 bg-gradient-to-br from-[#15171d] via-[#242833] to-[#15171d] rounded-xl border-2 border-[#e9a345] shadow-2xl p-3 flex flex-col justify-between text-left text-white transform -rotate-3 hover:rotate-0 transition duration-300">
+              <div class="flex justify-between items-start">
+                <span class="text-[9px] font-mono uppercase tracking-widest text-[#e9a345]">v2026.9</span>
+                <span class="text-[8px] bg-red-600 px-1 py-0.5 rounded font-bold uppercase">WIN/MAC</span>
+              </div>
+              <div class="text-center my-auto">
+                <div class="w-12 h-12 mx-auto rounded-full bg-[#e9a345] flex items-center justify-center text-xl font-black text-[#15171d] shadow-lg mb-2">
+                  🦔
+                </div>
+                <div class="font-extrabold text-sm tracking-tight text-white">PostHog</div>
+                <div class="text-[8px] text-gray-300 font-mono">Product Operating System</div>
+              </div>
+              <div class="text-[8px] text-gray-400 font-mono border-t border-gray-700 pt-1">
+                Unlimited Replays Inside
+              </div>
+            </div>
+
+            <!-- Shiny Optical Compact Disc Artwork -->
+            <div class="w-36 h-36 rounded-full bg-gradient-to-tr from-amber-200 via-purple-300 to-sky-300 border-4 border-white shadow-xl flex items-center justify-center relative transform rotate-12 hover:rotate-45 transition duration-500">
+              <div class="w-12 h-12 rounded-full bg-white/90 border border-gray-300 flex items-center justify-center shadow-inner">
+                <div class="w-4 h-4 rounded-full bg-[#15171d]"></div>
+              </div>
+              <span class="absolute bottom-4 text-[8px] font-mono font-bold text-gray-700 tracking-wider">CD-ROM 700MB</span>
+            </div>
+          </div>
+
+          <!-- Humorous Copy & Shameless CTA Heading -->
+          <h2 class="text-3xl font-black text-[#15171d] tracking-tight mb-3">
+            Shameless CTA to get you shipping faster
+          </h2>
+          <p class="text-sm text-[#4a4e5a] max-w-lg mx-auto mb-6 font-medium">
+            You just scrolled past 4,000 pixels of genuine product philosophy, technical architecture, and hedgehogs. You might as well make a free account now.
+          </p>
+
+          <!-- Cloud Choice: US / EU Radio Selectors -->
+          <div class="inline-flex items-center p-1 bg-white rounded-xl border border-[#ded9cb] shadow-sm mb-6 text-xs font-semibold">
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#15171d] text-white cursor-pointer shadow-sm">
+              <input type="radio" name="cloud-choice" checked class="hidden">
+              <span>🇺🇸 US Cloud</span>
+              <span class="text-[10px] text-gray-400">(Virginia)</span>
+            </label>
+            <label class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-gray-600 hover:text-black cursor-pointer">
+              <input type="radio" name="cloud-choice" class="hidden">
+              <span>🇪🇺 EU Cloud</span>
+              <span class="text-[10px] text-gray-400">(Frankfurt / GDPR)</span>
+            </label>
+          </div>
+
+          <!-- Orange Get Started Button -->
+          <div class="flex items-center justify-center gap-4 mb-6">
+            <a href="#signup-final" class="btn-orange px-8 py-3 rounded-xl text-sm font-extrabold tracking-tight shadow-md flex items-center gap-2">
+              <span>Get started with PostHog – free</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <button class="btn-white px-5 py-3 rounded-xl text-xs font-bold flex items-center gap-2">
+              <span>Talk to sales</span>
+            </button>
+          </div>
+
+          <div class="text-xs text-gray-500 font-medium">
+            No credit card required • 5-minute setup • Unlimited team members
+          </div>
+        </div>
+
+        <!-- Window Footer / Copyright notice at end of ~4,757px scroll height -->
+        <footer class="mt-16 pt-8 border-t border-[#ded8c8] text-xs text-gray-500 max-w-[940px] mx-auto flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="font-bold text-[#15171d]">PostHog, Inc.</span>
+            <span>© 2026 • Made with 🦔 across 14 countries</span>
+          </div>
+          <div class="flex items-center gap-4">
+            <a href="#terms" class="hover:underline">Terms</a>
+            <a href="#privacy" class="hover:underline">Privacy</a>
+            <a href="#security" class="hover:underline">Security</a>
+            <a href="#status" class="hover:underline">System Status</a>
+          </div>
+        </footer>
+      </section>
+
+    </div>
+  </main>
+
+</body>
+</html>

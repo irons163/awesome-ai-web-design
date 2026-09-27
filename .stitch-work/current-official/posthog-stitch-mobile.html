@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PostHog - Mobile OS</title>
+<!-- Tailwind CSS v3 with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            hogMoss: '#224220',
+            hogMossDark: '#1b3619',
+            hogOrange: '#e9a345',
+            hogOrangeHover: '#d89335',
+            hogCream: '#fdfaf3',
+            hogCreamLight: '#fffdf9',
+            hogBorder: '#e5e1d8',
+            hogDark: '#191919',
+            hogMuted: '#57534e'
+          },
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace']
+          },
+          boxShadow: {
+            'retro': '0 4px 0 0 rgba(0,0,0,0.15)',
+            'retro-sm': '0 2px 0 0 rgba(0,0,0,0.12)',
+            'os-window': '0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0,0,0,0.2)'
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-layout">
+    /* Subtle dot grid pattern on desktop wallpaper */
+    .bg-desktop-pattern {
+      background-color: #224220;
+      background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+      background-size: 18px 18px;
+    }
+    
+    /* Custom scrollbar for mobile internal feel */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #d6d3c9;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="bg-desktop-pattern min-h-screen text-hogDark antialiased flex flex-col items-center p-2 font-sans selection:bg-amber-200">
+<!-- BEGIN: FloatingTaskbar -->
+<header class="fixed top-2 left-2 right-2 max-w-[374px] mx-auto h-11 bg-white/95 backdrop-blur-md border border-black/10 rounded-xl shadow-md z-50 flex items-center justify-between px-3" data-purpose="mobile-top-taskbar">
+<!-- Brand Logo and Dropdown -->
+<div class="flex items-center space-x-1.5">
+<div class="w-6 h-6 flex items-center justify-center bg-[#f7eedc] rounded-md border border-amber-300 shadow-xs text-sm">
+        🦔
+      </div>
+<span class="font-black text-sm tracking-tight text-[#1c1c1c]">PostHog</span>
+<svg class="w-3.5 h-3.5 text-neutral-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</div>
+<!-- Status & Right Actions -->
+<div class="flex items-center space-x-2">
+<!-- Light/Dark Indicator -->
+<button class="w-6 h-6 flex items-center justify-center text-neutral-600 hover:text-black hover:bg-neutral-100 rounded-full transition-colors text-xs" title="Theme">
+        ☀️
+      </button>
+<!-- System Health Indicator -->
+<div class="flex items-center space-x-1 px-1.5 py-0.5 rounded-full bg-emerald-50 border border-emerald-200 text-[10px] font-semibold text-emerald-700">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>100%</span>
+</div>
+<!-- Quick CTA Button -->
+<a class="bg-hogOrange hover:bg-hogOrangeHover text-hogDark font-bold text-xs px-2.5 py-1 rounded-md shadow-retro-sm transition-all active:translate-y-0.5" href="#setup">
+        Get started
+      </a>
+</div>
+</header>
+<!-- END: FloatingTaskbar -->
+<!-- BEGIN: ProductOSWindow -->
+<main class="w-full max-w-[374px] mt-14 mb-4 bg-hogCream border border-black/20 rounded-2xl shadow-os-window overflow-hidden flex flex-col" data-purpose="product-os-window-shell">
+<!-- BEGIN: WindowTitleBar -->
+<div class="bg-[#eee9db] border-b border-black/10 px-3 py-2 flex items-center justify-between sticky top-0 z-40 select-none">
+<!-- Window Controls -->
+<div class="flex items-center space-x-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56] border border-[#e0443e] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e] border border-[#dea123] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27c93f] border border-[#1aab29] inline-block"></span>
+</div>
+<!-- OS Window Title -->
+<div class="flex items-center space-x-1.5 text-[11px] font-mono font-medium text-neutral-600 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-400"></span>
+<span>posthog.com — Product OS</span>
+</div>
+<!-- Window Meta / Actions -->
+<div class="flex items-center space-x-1 text-neutral-400 text-xs">
+<span class="font-mono text-[10px]">v3.0</span>
+</div>
+</div>
+<!-- END: WindowTitleBar -->
+<!-- BEGIN: HeroSection -->
+<section class="p-4 pt-6 flex flex-col items-center text-center" data-purpose="hero-section">
+<!-- Version Pill Tag -->
+<div class="inline-flex items-center gap-1.5 bg-[#f5eccb] border border-amber-400/60 rounded-full px-3 py-1 mb-4 text-[11px] font-medium text-amber-950 shadow-xs">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span>PostHog 3.0: The Agent-Ready Data Platform</span>
+</div>
+<!-- Main Headline with Blue Highlight on context layer -->
+<h1 class="text-3xl font-extrabold tracking-tight text-neutral-900 leading-[1.18] mb-3">
+        Your product's <br/>
+<span class="bg-blue-100 text-blue-600 px-2.5 py-0.5 rounded-md inline-block mt-0.5 border border-blue-200">context layer</span>
+</h1>
+<!-- Subtitle Description -->
+<p class="text-xs text-hogMuted leading-relaxed max-w-[310px] mb-4">
+        PostHog ingests and stores your analytics, errors, replays, and business data so you and your agents can query and act on it.
+      </p>
+<!-- Proof Avatars Badge -->
+<div class="inline-flex items-center gap-2 bg-white/80 border border-neutral-200/90 rounded-full px-3 py-1.5 shadow-2xs mb-6">
+<div class="flex -space-x-1.5 items-center">
+<span class="w-5 h-5 rounded-full bg-amber-400 text-[9px] font-bold flex items-center justify-center text-black border border-white">PH</span>
+<span class="w-5 h-5 rounded-full bg-purple-500 text-[9px] font-bold flex items-center justify-center text-white border border-white">AI</span>
+<span class="w-5 h-5 rounded-full bg-blue-600 text-[9px] font-bold flex items-center justify-center text-white border border-white">SQL</span>
+</div>
+<span class="text-[11px] font-medium text-neutral-700">Join <strong class="text-black font-semibold">500,000+ teams</strong> shipping with PostHog</span>
+</div>
+<!-- Free Setup Box Card -->
+<div class="w-full bg-white rounded-xl border border-black/10 shadow-sm p-4 text-left" data-purpose="setup-card" id="setup">
+<h2 class="text-base font-bold text-neutral-900 mb-2.5 flex items-center justify-between">
+<span>Set up PostHog for free</span>
+<span class="text-xs font-normal text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">0 friction</span>
+</h2>
+<!-- Checkmarks list -->
+<ul class="space-y-1.5 text-xs text-neutral-700 mb-4">
+<li class="flex items-center gap-2">
+<span class="text-emerald-600 font-bold text-sm">✓</span>
+<span><strong class="font-semibold text-neutral-900">97% of users</strong> pay us $0</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="text-emerald-600 font-bold text-sm">✓</span>
+<span>No credit card required</span>
+</li>
+<li class="flex items-center gap-2">
+<span class="text-emerald-600 font-bold text-sm">✓</span>
+<span>Setup wizard installs PostHog for you</span>
+</li>
+</ul>
+<!-- Primary Call to Action -->
+<button class="w-full bg-hogOrange hover:bg-hogOrangeHover text-neutral-950 font-bold py-2.5 px-4 rounded-lg shadow-retro-sm transition-transform active:translate-y-0.5 flex items-center justify-center gap-1.5 text-sm mb-2">
+<span>Get started – free</span>
+<span class="text-base">→</span>
+</button>
+<!-- Secondary AI Action -->
+<button class="w-full bg-[#faf9f5] hover:bg-[#f2efe4] text-neutral-800 font-semibold py-2 px-4 rounded-lg border border-neutral-300 text-xs flex items-center justify-center gap-1.5 transition-colors">
+<span>✨</span>
+<span>Install with AI</span>
+</button>
+<!-- Guarantee Meta Footer -->
+<div class="text-center mt-3 text-[10px] text-neutral-500 font-mono">
+          Takes ~4 minutes • Self-hostable via Docker
+        </div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: InteractiveQueryDemo -->
+<section class="p-3 mx-2 my-2 bg-white rounded-xl border border-black/10 shadow-xs" data-purpose="tabbed-product-demo">
+<!-- Tabs Bar -->
+<div class="flex items-center space-x-1 border-b border-neutral-200 pb-2 overflow-x-auto text-[11px] font-medium">
+<button class="px-2.5 py-1 rounded-md bg-purple-50 text-purple-700 border border-purple-200 font-semibold flex items-center gap-1 shrink-0">
+<span class="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+<span>Ask PostHog</span>
+</button>
+<button class="px-2 py-1 rounded-md text-neutral-500 hover:text-black shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
+<span>Agent Context</span>
+</button>
+<button class="px-2 py-1 rounded-md text-neutral-500 hover:text-black shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-neutral-300"></span>
+<span>Ship Features</span>
+</button>
+</div>
+<!-- Demo Query Box -->
+<div class="mt-3 bg-neutral-50 rounded-lg p-2.5 border border-neutral-200">
+<div class="flex items-start gap-2 mb-2">
+<div class="w-6 h-6 rounded bg-purple-600 text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+            AI
+          </div>
+<div class="text-xs text-neutral-800 font-mono leading-tight">
+            Which signup cohort had the highest drop-off after viewing the billing table last week?
+          </div>
+</div>
+<div class="flex justify-end">
+<span class="bg-white border border-neutral-300 px-2 py-0.5 rounded text-[10px] font-mono text-neutral-600 shadow-2xs">
+            SQL Generated ⚡ 24ms
+          </span>
+</div>
+<!-- Simulated Response Metric Box -->
+<div class="mt-2.5 p-2 bg-white rounded border border-neutral-200 font-mono text-[10px] space-y-1">
+<div class="flex justify-between text-neutral-500">
+<span>Cohort #4 (Self-Serve Dev)</span>
+<span class="text-red-600 font-semibold">-42.8% drop</span>
+</div>
+<div class="w-full bg-neutral-100 rounded-full h-1.5 overflow-hidden">
+<div class="bg-red-500 h-1.5 rounded-full w-[42%]"></div>
+</div>
+<div class="text-[9px] text-neutral-500 pt-1">
+            Replays found: <strong>1,420 sessions</strong> with rageclicks on <code>#enterprise-tier-cta</code>
+</div>
+</div>
+</div>
+</section>
+<!-- END: InteractiveQueryDemo -->
+<!-- BEGIN: SocialProofSection -->
+<section class="px-4 py-6 border-t border-black/5 bg-[#fbf8ef]" data-purpose="customer-social-proof">
+<div class="text-center mb-4">
+<h3 class="text-sm font-bold uppercase tracking-wider text-neutral-500">Trusted By Builders</h3>
+<p class="text-xs font-semibold text-neutral-800 mt-1">Loved by 500,000+ teams from startups to hypergrowth</p>
+</div>
+<!-- Logo grid -->
+<div class="grid grid-cols-3 gap-2 text-center text-xs font-bold text-neutral-600 font-mono mb-4">
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">Y Combinator</div>
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">Airbus</div>
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">Hasura</div>
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">Phantom</div>
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">AssemblyAI</div>
+<div class="p-2 bg-white rounded border border-neutral-200 shadow-2xs">Contra</div>
+</div>
+<!-- Customer Quote Card -->
+<div class="bg-white p-3 rounded-xl border border-neutral-200 text-left shadow-2xs">
+<p class="text-xs italic text-neutral-700 mb-2">
+          "PostHog replaced 5 different analytics and observability tabs we had open. The session replay combined with LLM tracking is unbeatable."
+        </p>
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded-full bg-amber-500 flex items-center justify-center font-bold text-[10px] text-black">
+            C
+          </div>
+<div class="text-[11px] leading-tight">
+<p class="font-bold text-neutral-900">VP Engineering</p>
+<p class="text-neutral-500 text-[10px]">Series B AI Infrastructure</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: SocialProofSection -->
+<!-- BEGIN: PlatformFeaturesSection -->
+<section class="p-4 border-t border-black/5" data-purpose="core-product-features">
+<div class="mb-4">
+<span class="text-[10px] font-mono font-bold tracking-widest text-amber-700 uppercase bg-amber-100 px-2 py-0.5 rounded">All-In-One Toolkit</span>
+<h3 class="text-lg font-bold text-neutral-900 mt-1.5 leading-snug">All your data, working together</h3>
+<p class="text-xs text-neutral-600 mt-1">One SDK to install. Zero data silos. Stop stitch-welding disparate SaaS vendors.</p>
+</div>
+<!-- Feature Item 1: Analytics -->
+<div class="space-y-3">
+<div class="p-3 bg-white rounded-xl border border-neutral-200 shadow-2xs">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="text-base">📈</span>
+<h4 class="text-xs font-bold text-neutral-900">Product &amp; Web Analytics</h4>
+</div>
+<span class="text-[10px] font-mono text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Realtime</span>
+</div>
+<p class="text-[11px] text-neutral-600 mb-2">Funnels, retention graphs, user paths, and custom SQL trends without leaving your IDE.</p>
+<div class="bg-neutral-50 p-2 rounded border border-neutral-200 font-mono text-[9px] text-neutral-700">
+            &gt; posthog.capture('user_signed_up', { tier: 'growth' })
+          </div>
+</div>
+<!-- Feature Item 2: Session Replay -->
+<div class="p-3 bg-white rounded-xl border border-neutral-200 shadow-2xs">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="text-base">🎥</span>
+<h4 class="text-xs font-bold text-neutral-900">Session Replay + Errors</h4>
+</div>
+<span class="text-[10px] font-mono text-amber-800 bg-amber-50 px-1.5 py-0.5 rounded">5,000 free/mo</span>
+</div>
+<p class="text-[11px] text-neutral-600">Watch user frustrations, console errors, and network timings in video-quality replays.</p>
+</div>
+<!-- Feature Item 3: Feature Flags & Experiments -->
+<div class="p-3 bg-white rounded-xl border border-neutral-200 shadow-2xs">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="text-base">🎛️</span>
+<h4 class="text-xs font-bold text-neutral-900">Feature Flags &amp; A/B Testing</h4>
+</div>
+<span class="text-[10px] font-mono text-blue-700 bg-blue-50 px-1.5 py-0.5 rounded">1M calls free</span>
+</div>
+<p class="text-[11px] text-neutral-600">Roll out gradually, test conversion hypotheses, and kill bugs remotely with zero redeploys.</p>
+</div>
+<!-- Feature Item 4: AI & LLM Observability -->
+<div class="p-3 bg-white rounded-xl border border-neutral-200 shadow-2xs">
+<div class="flex items-center justify-between mb-1.5">
+<div class="flex items-center space-x-2">
+<span class="text-base">🤖</span>
+<h4 class="text-xs font-bold text-neutral-900">LLM Observability</h4>
+</div>
+<span class="text-[10px] font-mono text-purple-700 bg-purple-50 px-1.5 py-0.5 rounded">PostHog 3.0</span>
+</div>
+<p class="text-[11px] text-neutral-600">Trace agent actions, token expenses, latency, and ground-truth user outcomes side-by-side.</p>
+</div>
+</div>
+</section>
+<!-- END: PlatformFeaturesSection -->
+<!-- BEGIN: PricingSection -->
+<section class="p-4 bg-[#fbf8ef] border-t border-black/5" data-purpose="pricing-transparency">
+<div class="text-center mb-4">
+<h3 class="text-base font-bold text-neutral-900">Generous free tiers.<br/>Predictable pricing.</h3>
+<p class="text-xs text-neutral-600 mt-1">Start free, scale smoothly, pay only for what you consume above thresholds.</p>
+</div>
+<!-- Pricing Tier Cards -->
+<div class="bg-white rounded-xl border border-neutral-200 p-3.5 shadow-2xs space-y-3">
+<div class="flex items-baseline justify-between border-b border-neutral-100 pb-2">
+<div>
+<div class="font-bold text-sm text-neutral-900">Free Forever Tier</div>
+<div class="text-[11px] text-neutral-500">Every single project starts here</div>
+</div>
+<div class="text-right">
+<span class="text-xl font-extrabold text-neutral-900">$0</span>
+<span class="text-[10px] text-neutral-500 font-mono">/month</span>
+</div>
+</div>
+<!-- Generous Free Allowances -->
+<div class="space-y-1.5 text-xs text-neutral-700">
+<div class="flex items-center justify-between">
+<span>• Event Analytics:</span>
+<span class="font-mono font-bold text-neutral-900">1,000,000 / mo</span>
+</div>
+<div class="flex items-center justify-between">
+<span>• Session Replays:</span>
+<span class="font-mono font-bold text-neutral-900">5,000 / mo</span>
+</div>
+<div class="flex items-center justify-between">
+<span>• Feature Flags:</span>
+<span class="font-mono font-bold text-neutral-900">1,000,000 requests</span>
+</div>
+<div class="flex items-center justify-between">
+<span>• Team Members:</span>
+<span class="font-mono font-bold text-emerald-600">Unlimited</span>
+</div>
+</div>
+<a class="block w-full text-center bg-hogOrange hover:bg-hogOrangeHover font-bold text-neutral-900 py-2 rounded-lg text-xs shadow-retro-sm" href="#setup">
+          Claim Free Tier
+        </a>
+</div>
+</section>
+<!-- END: PricingSection -->
+<!-- BEGIN: EngineeringPillarsSection -->
+<section class="p-4 border-t border-black/5 bg-white" data-purpose="why-engineers-choose-posthog">
+<h3 class="text-base font-bold text-neutral-900 mb-3">Why engineers choose PostHog</h3>
+<div class="grid grid-cols-2 gap-2 text-left">
+<div class="p-2.5 rounded-lg bg-neutral-50 border border-neutral-200">
+<div class="text-sm mb-1">🛠️</div>
+<div class="font-bold text-xs text-neutral-900">Built for Devs</div>
+<p class="text-[10px] text-neutral-600 mt-0.5">Written in Python, TypeScript &amp; ClickHouse. APIs for everything.</p>
+</div>
+<div class="p-2.5 rounded-lg bg-neutral-50 border border-neutral-200">
+<div class="text-sm mb-1">📖</div>
+<div class="font-bold text-xs text-neutral-900">Open Source Core</div>
+<p class="text-[10px] text-neutral-600 mt-0.5">Transparent roadmap, GitHub public issues, inspect code anytime.</p>
+</div>
+<div class="p-2.5 rounded-lg bg-neutral-50 border border-neutral-200">
+<div class="text-sm mb-1">🇪🇺</div>
+<div class="font-bold text-xs text-neutral-900">EU Data Residency</div>
+<p class="text-[10px] text-neutral-600 mt-0.5">Host in Frankfurt or US East. GDPR &amp; HIPAA compliant.</p>
+</div>
+<div class="p-2.5 rounded-lg bg-neutral-50 border border-neutral-200">
+<div class="text-sm mb-1">⚡</div>
+<div class="font-bold text-xs text-neutral-900">Fast SQL Queries</div>
+<p class="text-[10px] text-neutral-600 mt-0.5">Powered by ClickHouse for sub-second analytical aggregations.</p>
+</div>
+</div>
+</section>
+<!-- END: EngineeringPillarsSection -->
+<!-- BEGIN: BedtimeReadingSection -->
+<section class="p-4 border-t border-black/5 bg-[#fcfaf5]" data-purpose="editorial-reading-corner">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-bold uppercase tracking-wider text-neutral-500">Bedtime Reading</h3>
+<span class="text-[10px] font-mono text-amber-800">PostHog Blog &amp; Handbook</span>
+</div>
+<!-- Article list -->
+<div class="space-y-2">
+<a class="block p-2.5 bg-white rounded-lg border border-neutral-200 hover:border-neutral-400 transition-colors" href="#">
+<div class="flex items-center justify-between text-[10px] text-neutral-400 font-mono mb-1">
+<span>Engineering Culture</span>
+<span>4 min read</span>
+</div>
+<div class="text-xs font-bold text-neutral-900">Why we don't have traditional sales reps</div>
+</a>
+<a class="block p-2.5 bg-white rounded-lg border border-neutral-200 hover:border-neutral-400 transition-colors" href="#">
+<div class="flex items-center justify-between text-[10px] text-neutral-400 font-mono mb-1">
+<span>Product Strategy</span>
+<span>6 min read</span>
+</div>
+<div class="text-xs font-bold text-neutral-900">Product engineer vs. software engineer: What's the difference?</div>
+</a>
+</div>
+</section>
+<!-- END: BedtimeReadingSection -->
+<!-- BEGIN: RetroBoxedSoftwareCTA -->
+<section class="p-4 border-t border-black/10 bg-[#f7eedc] text-center" data-purpose="final-retro-cta">
+<!-- Retro Software Box Concept -->
+<div class="inline-block p-2 bg-white rounded-xl border border-amber-300 shadow-sm mb-3">
+<span class="text-3xl">🦔💾</span>
+</div>
+<h3 class="text-lg font-black text-neutral-950">Ship products people want</h3>
+<p class="text-xs text-neutral-700 max-w-[280px] mx-auto mt-1 mb-3">
+        Get your product's context layer configured in 4 minutes flat.
+      </p>
+<!-- Cloud region pills -->
+<div class="flex items-center justify-center space-x-2 mb-3">
+<span class="px-2 py-0.5 rounded-full bg-white border border-neutral-300 text-[10px] font-mono text-neutral-700">🇺🇸 US Cloud</span>
+<span class="px-2 py-0.5 rounded-full bg-white border border-neutral-300 text-[10px] font-mono text-neutral-700">🇪🇺 EU Cloud</span>
+</div>
+<!-- Pricing Strike -->
+<div class="text-xs text-neutral-500 font-mono mb-2">
+        Regular Price: <span class="line-through text-red-500">$99</span> <strong class="text-neutral-950 font-bold text-sm bg-amber-200 px-1 rounded ml-1">FREE</strong>
+</div>
+<!-- Final Action Button -->
+<button class="w-full bg-hogOrange hover:bg-hogOrangeHover text-neutral-950 font-black py-3 px-4 rounded-xl shadow-retro transition-transform active:translate-y-0.5 text-sm mb-2">
+        Get started – free →
+      </button>
+<!-- Secondary Links -->
+<div class="flex justify-center space-x-3 text-[11px] font-semibold text-neutral-600">
+<a class="hover:underline" href="#">Talk to a human</a>
+<span>•</span>
+<a class="hover:underline" href="#">Explore docs</a>
+<span>•</span>
+<a class="hover:underline" href="#">Handbook</a>
+</div>
+</section>
+<!-- END: RetroBoxedSoftwareCTA -->
+<!-- BEGIN: WindowFooter -->
+<footer class="bg-[#eee9db] border-t border-black/10 px-3 py-2 text-center text-[10px] text-neutral-500 font-mono">
+      © 2026 PostHog, Inc. • Open-source Product OS
+    </footer>
+<!-- END: WindowFooter -->
+</main>
+<!-- END: ProductOSWindow -->
+</body></html>

@@ -3,14 +3,14 @@
 import json
 import re
 import shutil
-from html import escape
+from html import escape, unescape
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 
 
@@ -37,7 +37,7 @@ def stage_official_drafts():
         references.feed(html)
         references.values.extend(re.findall(r'url\(([^)]+)\)', html))
         for value in references.values:
-            value = value.strip(' \t\n\r\'"')
+            value = unescape(value).strip(' \t\n\r\'"')
             if value.startswith(('https:', 'http:', 'data:', 'mailto:', 'tel:', '#', '/')):
                 continue
             relative = Path(urlsplit(value).path)
@@ -48,7 +48,7 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
-        if name in ('slack', 'supabase', 'voltagent'):
+        if name in ('slack', 'supabase', 'voltagent', 'posthog'):
             # Runtime tabs select additional official media that do not appear
             # in static src attributes; keep those assets with each draft.
             asset_dir = f'{name}-assets'
