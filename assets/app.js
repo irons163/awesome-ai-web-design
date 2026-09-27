@@ -3,7 +3,7 @@ const $ = selector => document.querySelector(selector);
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
-const OFFICIAL_DRAFTS = {'spotify':'spotify','linear.app':'linear','claude':'claude','notion':'notion','figma':'figma','framer':'framer','vercel':'vercel','airbnb':'airbnb','airtable':'airtable','stripe':'stripe','starbucks':'starbucks','shopify':'shopify','slack':'slack','supabase':'supabase','resend':'resend','ollama':'ollama','raycast':'raycast','cal':'cal','cursor':'cursor','apple':'apple','clay':'clay','clickhouse':'clickhouse','cohere':'cohere','composio':'composio'};
+let OFFICIAL_DRAFTS = {};
 let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'image';
 let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
@@ -128,16 +128,19 @@ function openDesign(item) {
   $('#download-design').download = `${item.slug}-DESIGN.md`;
   $('#download-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
   $('#download-prompts').download = `${item.slug}-PROMPTS.md`;
-  const draft = OFFICIAL_DRAFTS[item.slug];
-  $('#official-draft-note').hidden = !draft;
-  if (draft) $('#official-draft-link').href = `official-drafts/${draft}.html`;
-  else $('#official-draft-link').removeAttribute('href');
+  showOfficialDraft(item);
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
   setTab('preview'); setPreview('image');
   if (!$('#design-dialog').open) $('#design-dialog').showModal();
   $('#design-dialog').scrollTop = 0;
   $('#close-dialog').focus();
   document.title = `${item.name} — Awesome AI Web Design`;
+}
+function showOfficialDraft(item) {
+  const draft = OFFICIAL_DRAFTS[item.slug];
+  $('#official-draft-note').hidden = !draft;
+  if (draft) $('#official-draft-link').href = `official-drafts/${draft}.html`;
+  else $('#official-draft-link').removeAttribute('href');
 }
 function dismiss() {
   documentRequest++;
@@ -180,6 +183,37 @@ async function loadCatalog() {
     $('#result-count').textContent = '載入失敗'; $('#load-error').hidden = false; $('#empty').hidden = true;
   }
 }
+async function loadOfficialDrafts() {
+  const grid = $('.official-draft-grid');
+  const count = $('.official-drafts-count');
+  try {
+    const response = await fetch('official-progress.html');
+    if (!response.ok) throw new Error('Progress unavailable');
+    const page = new DOMParser().parseFromString(await response.text(), 'text/html');
+    const drafts = [...page.querySelectorAll('tbody tr')].flatMap(row => {
+      if (!row.querySelector('td.draft')) return [];
+      const link = row.querySelector('th a');
+      const match = /^official-drafts\/([a-z0-9.-]+)\.html$/.exec(link?.getAttribute('href') || '');
+      if (!match) return [];
+      return [{
+        slug: match[1] === 'linear' ? 'linear.app' : match[1],
+        file: match[1],
+        name: link.textContent.replace(/\s*↗\s*$/, '').trim(),
+        date: row.querySelector('td:last-child')?.textContent.trim() || '日期未記錄',
+      }];
+    });
+    if (!drafts.length) throw new Error('No draft records');
+    OFFICIAL_DRAFTS = Object.fromEntries(drafts.map(item => [item.slug, item.file]));
+    count.textContent = `${drafts.length} 份草稿 · 0 份完成視覺驗收`;
+    grid.innerHTML = drafts.map(item =>
+      `<a href="official-drafts/${escapeHTML(item.file)}.html">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} 草稿 · 待驗收 ↗</span></a>`
+    ).join('');
+    if (currentDesign) showOfficialDraft(currentDesign);
+  } catch {
+    count.textContent = '草稿清單暫時無法載入';
+    grid.innerHTML = '<a href="official-progress.html">查看完整進度 ↗</a>';
+  }
+}
 $('#search').addEventListener('input', render);
 $('#mode').addEventListener('change', render);
 $('#clear-filters').addEventListener('click', resetFilters);
@@ -218,3 +252,4 @@ window.addEventListener('storage', event => {
 });
 document.addEventListener('keydown', event => { if (event.key === '/' && !event.metaKey && !event.ctrlKey && !$('#design-dialog').open && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) { event.preventDefault(); $('#search').focus(); } });
 loadCatalog();
+loadOfficialDrafts();
