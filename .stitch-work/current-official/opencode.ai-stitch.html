@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OpenCode — The open source AI coding agent</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-low": "#1c1b1b",
+            "secondary-container": "#464747",
+            "secondary-fixed": "#e3e2e2",
+            "on-primary": "#303030",
+            "tertiary-container": "#e4e2e1",
+            "tertiary": "#ffffff",
+            "tertiary-fixed": "#e4e2e1",
+            "primary": "#ffffff",
+            "on-tertiary-fixed": "#1b1c1c",
+            "error-container": "#93000a",
+            "on-primary-container": "#646464",
+            "surface": "#131313",
+            "on-tertiary": "#303030",
+            "inverse-primary": "#5e5e5e",
+            "primary-fixed-dim": "#c7c6c5",
+            "on-primary-fixed-variant": "#464746",
+            "surface-container-high": "#2a2a2a",
+            "secondary": "#c7c6c6",
+            "on-primary-fixed": "#1b1c1b",
+            "on-background": "#e5e2e1",
+            "on-secondary-container": "#b5b5b5",
+            "on-tertiary-container": "#656464",
+            "surface-tint": "#c7c6c5",
+            "primary-fixed": "#e4e2e1",
+            "surface-variant": "#353534",
+            "inverse-surface": "#e5e2e1",
+            "surface-dim": "#131313",
+            "on-secondary-fixed-variant": "#464747",
+            "surface-container-lowest": "#0e0e0e",
+            "surface-container-highest": "#353534",
+            "on-tertiary-fixed-variant": "#474747",
+            "inverse-on-surface": "#313030",
+            "surface-container": "#201f1f",
+            "surface-bright": "#3a3939",
+            "background": "#131313",
+            "on-error": "#690005",
+            "on-secondary-fixed": "#1a1c1c",
+            "outline-variant": "#444847",
+            "tertiary-fixed-dim": "#c8c6c6",
+            "primary-container": "#e4e2e1",
+            "on-surface-variant": "#c4c7c6",
+            "on-surface": "#e5e2e1",
+            "outline": "#8e9190",
+            "secondary-fixed-dim": "#c7c6c6",
+            "error": "#ffb4ab",
+            "on-error-container": "#ffdad6",
+            "on-secondary": "#2f3131"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "gutter": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin": "1rem",
+            "margin-desktop": "2rem",
+            "space-sm": "0.5rem",
+            "gutter-desktop": "1.5rem",
+            "space-2xl": "4rem"
+          },
+          "fontFamily": {
+            "display-hero-mobile": ["Space Mono"],
+            "body-lg": ["JetBrains Mono"],
+            "headline-md": ["Space Mono"],
+            "body-sm": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Space Mono"],
+            "label-caps": ["Space Mono"],
+            "label-code": ["JetBrains Mono"],
+            "headline-lg": ["Space Mono"],
+            "display-hero": ["Space Mono"],
+            "body-md": ["JetBrains Mono"],
+            "headline-sm": ["Space Mono"]
+          },
+          "fontSize": {
+            "display-hero-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "letterSpacing": "0.01em", "fontWeight": "400" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+            "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "700" }],
+            "label-code": ["13px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "display-hero": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "letterSpacing": "0em", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 18px;
+      line-height: 1;
+      display: inline-block;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+      -webkit-font-smoothing: antialiased;
+    }
+    @keyframes cursor-blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .terminal-cursor {
+      animation: cursor-blink 1.05s infinite;
+    }
+  </style>
+</head>
+<body class="bg-[#111111] text-on-background selection:bg-primary selection:text-surface min-h-screen antialiased">
+<!-- Centered 1080px Master Grid Container with 1px Hairline #303030 Borders -->
+<div class="max-w-[1080px] mx-auto border-x border-on-primary min-h-screen bg-surface flex flex-col relative">
+<!-- 1. TOP NAVIGATION -->
+<header class="w-full border-b border-on-primary bg-surface max-w-[1080px] mx-auto px-4 lg:px-6 flex items-center justify-between h-20 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<a class="font-headline-sm text-headline-sm tracking-tight text-primary font-bold flex items-center gap-2" href="#">
+<span class="inline-block w-2.5 h-4 bg-primary"></span>
+<span>opencode</span>
+</a>
+<nav class="hidden md:flex items-center gap-6">
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#github">GitHub</a>
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#docs">Docs</a>
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#data">Data</a>
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#zen">Zen</a>
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#go">Go</a>
+<a class="font-label-code text-label-code text-secondary hover:text-primary transition-colors" href="#enterprise">Enterprise</a>
+</nav>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-[#f5f3f2] text-[#111111] font-label-code text-label-code font-bold px-4 py-2 rounded-[2px] hover:bg-transparent hover:text-primary hover:outline hover:outline-1 hover:outline-on-primary transition-all duration-150">
+          Download
+        </button>
+</div>
+</header>
+<!-- MAIN CONTENT CANVAS -->
+<main class="flex-1 flex flex-col">
+<!-- 2. HERO & INSTALL SELECTOR -->
+<section class="p-6 md:p-12 border-b border-on-primary flex flex-col items-center text-center">
+<div class="inline-flex items-center gap-2 border border-on-primary px-2.5 py-1 mb-6 rounded-[2px] bg-surface-container-lowest">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping"></span>
+<span class="font-label-caps text-label-caps text-secondary">v2.4 RUNTIME READY</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary max-w-3xl">
+          The open source AI coding agent
+        </h1>
+<p class="font-body-md text-body-md text-[#989898] max-w-2xl mt-4 mb-8">
+          Free models included or connect any model from any provider, including Claude, GPT, Gemini and more.
+        </p>
+<!-- Install Command Selector Container (~918px max width) -->
+<div class="w-full max-w-[918px] border border-on-primary bg-surface-container-lowest rounded-[2px] text-left">
+<!-- Tabs Row -->
+<div class="flex border-b border-on-primary overflow-x-auto text-nowrap">
+<button class="px-5 py-2.5 font-label-code text-label-code text-primary bg-surface-container border-b-2 border-primary font-bold">curl</button>
+<button class="px-5 py-2.5 font-label-code text-label-code text-[#989898] hover:text-primary hover:bg-surface-container-low transition-colors">npm</button>
+<button class="px-5 py-2.5 font-label-code text-label-code text-[#989898] hover:text-primary hover:bg-surface-container-low transition-colors">bun</button>
+<button class="px-5 py-2.5 font-label-code text-label-code text-[#989898] hover:text-primary hover:bg-surface-container-low transition-colors">brew</button>
+<button class="px-5 py-2.5 font-label-code text-label-code text-[#989898] hover:text-primary hover:bg-surface-container-low transition-colors">paru</button>
+<button class="px-5 py-2.5 font-label-code text-label-code text-[#989898] hover:text-primary hover:bg-surface-container-low transition-colors">yay</button>
+</div>
+<!-- Code Command Row -->
+<div class="p-4 md:px-6 md:py-5 flex items-center justify-between gap-4 font-body-md text-body-md">
+<div class="flex items-center gap-3 overflow-x-auto font-label-code text-label-code">
+<span class="text-[#989898] select-none">$</span>
+<span class="text-primary font-medium tracking-tight">curl -fsSL https://opencode.ai/v2/install | bash</span>
+</div>
+<button class="text-[#989898] hover:text-primary flex-shrink-0 p-1.5 border border-on-primary hover:border-primary rounded-[2px] transition-colors" onclick="navigator.clipboard.writeText('curl -fsSL https://opencode.ai/v2/install | bash')" title="Copy to clipboard">
+<span class="material-symbols-outlined" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+</div>
+</section>
+<!-- 3. PRODUCT DEMONSTRATION AREA -->
+<section class="border-b border-on-primary bg-surface-container-lowest p-4 md:p-8">
+<div class="border border-on-primary rounded-[2px] bg-[#111111] overflow-hidden">
+<!-- Terminal Title Bar -->
+<div class="h-9 bg-[#161616] border-b border-on-primary px-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#303030]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#303030]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#303030]"></span>
+<span class="ml-2 font-label-caps text-label-caps text-[#989898]">opencode ~/src/core</span>
+</div>
+<div class="font-label-caps text-label-caps text-[#989898] flex items-center gap-3">
+<span>bash - 80x24</span>
+<span>[x] [-] [+]</span>
+</div>
+</div>
+<!-- Terminal Content Area -->
+<div class="p-5 md:p-6 font-label-code text-label-code space-y-3 leading-relaxed">
+<div class="text-[#989898]">
+              opencode@2026:~$ <span class="text-primary font-bold">opencode "Refactor auth middleware to support ephemeral ed25519 tokens &amp; run integration test suite"</span>
+</div>
+<div class="text-secondary font-medium">
+              [agent:session:0x4d9a] Initialized context with repository graph (48 modules indexed)
+            </div>
+<!-- File Inspection Panel -->
+<div class="border-l-2 border-on-primary pl-4 py-1 space-y-1 text-[#989898]">
+<div>→ Inspecting: <span class="text-primary">src/middleware/auth.rs</span></div>
+<div>→ Analyzing imports: <span class="text-secondary">ring::signature::Ed25519KeyPair, jsonwebtoken</span></div>
+<div>→ Running LSP diagnostics... <span class="text-emerald-400">clean (0 errors, 0 warnings)</span></div>
+</div>
+<!-- Diff Output Display -->
+<div class="border border-on-primary bg-[#161616] p-3 text-body-sm font-body-sm rounded-[2px]">
+<div class="text-[#989898] pb-1 border-b border-on-primary mb-2 flex justify-between">
+<span>DIFF // src/middleware/auth.rs</span>
+<span class="text-emerald-400">+18 -4 lines</span>
+</div>
+<div class="text-[#989898]">@@ -42,6 +42,18 @@ pub async fn verify_token(req: HttpRequest) -&gt; Result&lt;Claims, AuthError&gt; {</div>
+<div class="text-red-400">-    let decoded = rsa_verify(&amp;token, &amp;PUBLIC_KEY)?;</div>
+<div class="text-emerald-400">+    let claims = match parse_header(&amp;token) {</div>
+<div class="text-emerald-400">+        Algorithm::Ed25519 =&gt; ed25519_verify_ephemeral(&amp;token, &amp;EPHEMERAL_POOL).await?,</div>
+<div class="text-emerald-400">+        Algorithm::RS256   =&gt; rsa_verify(&amp;token, &amp;PUBLIC_KEY)?,</div>
+<div class="text-emerald-400">+    };</div>
+<div class="text-emerald-400">+    req.extensions_mut().insert(claims.clone());</div>
+</div>
+<!-- Test Execution -->
+<div class="space-y-1 pt-1">
+<div class="text-[#989898]">$ cargo test --test auth_integration -- --nocapture</div>
+<div class="text-primary">running 4 tests</div>
+<div class="text-emerald-400">test tests::test_ed25519_ephemeral_token_valid ... ok</div>
+<div class="text-emerald-400">test tests::test_expired_ephemeral_token_rejected ... ok</div>
+<div class="text-emerald-400">test tests::test_cross_tenant_impersonation ... ok</div>
+<div class="text-emerald-400">test tests::test_legacy_rsa_backward_compat ... ok</div>
+<div class="text-secondary font-bold pt-1">test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out</div>
+</div>
+<div class="flex items-center gap-2 pt-2 text-[#989898]">
+<span>opencode@2026:~$</span>
+<span class="inline-block w-2.5 h-4 bg-primary terminal-cursor"></span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. "WHAT IS OPENCODE?" SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">What is OpenCode?</h2>
+<p class="font-body-md text-body-md text-[#989898] mb-8 max-w-2xl">
+          OpenCode is an open source agent that helps you write code in your terminal, IDE, or desktop.
+        </p>
+<!-- Seven compact one-line feature rows -->
+<div class="border border-on-primary divide-y divide-on-primary bg-surface-container-lowest rounded-[2px] mb-8 font-label-code text-label-code">
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">LSP enabled</span>
+<span class="text-[#989898]">— Automatically loads the right LSPs for the LLM</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">Multi-session</span>
+<span class="text-[#989898]">— Start multiple agents in parallel on the same project</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">Share links</span>
+<span class="text-[#989898]">— Share a link to any session for reference or to debug</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">GitHub Copilot</span>
+<span class="text-[#989898]">— Log in with GitHub to use your Copilot account</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">ChatGPT Plus/Pro</span>
+<span class="text-[#989898]">— Log in with OpenAI to use your ChatGPT Plus or Pro account</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">Any model</span>
+<span class="text-[#989898]">— 75+ LLM providers through Models.dev, including local models</span>
+</div>
+<div class="p-3.5 flex items-start sm:items-center gap-3">
+<span class="text-[#989898] font-bold select-none">[*]</span>
+<span class="text-primary font-bold">Any editor</span>
+<span class="text-[#989898]">— Available as a terminal interface, desktop app, and IDE extension</span>
+</div>
+</div>
+<button class="bg-[#f5f3f2] text-[#111111] font-label-code text-label-code font-bold px-4 py-2.5 rounded-[2px] hover:bg-transparent hover:text-primary hover:outline hover:outline-1 hover:outline-on-primary transition-all">
+          Read docs →
+        </button>
+</section>
+<!-- 5. STATS & DATA VISUALIZATIONS SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-2">The open source AI coding agent</h3>
+<p class="font-body-md text-body-md text-[#989898] max-w-3xl mb-10 leading-relaxed">
+          With over 208,000 GitHub stars, 950 contributors, and over 13,000 commits, OpenCode is used and trusted by over 16M developers every month.
+        </p>
+<!-- 3-Column Fine-Line Technical Graphics -->
+<div class="grid grid-cols-1 md:grid-cols-3 border border-on-primary divide-y md:divide-y-0 md:divide-x divide-on-primary bg-surface-container-lowest">
+<!-- Fig 1: Cumulative Growth Curve -->
+<div class="p-5 flex flex-col justify-between">
+<div class="h-44 w-full flex flex-col justify-end relative border-b border-on-primary pb-2">
+<svg class="w-full h-32 overflow-visible stroke-primary fill-none stroke-[1.25]" viewbox="0 0 200 100">
+<!-- Grid Lines -->
+<line stroke="#303030" stroke-dasharray="2,2" x1="0" x2="200" y1="20" y2="20"></line>
+<line stroke="#303030" stroke-dasharray="2,2" x1="0" x2="200" y1="50" y2="50"></line>
+<line stroke="#303030" stroke-dasharray="2,2" x1="0" x2="200" y1="80" y2="80"></line>
+<!-- Growth Curve -->
+<path d="M 0 95 Q 60 90, 110 55 T 200 8"></path>
+<circle class="fill-primary" cx="200" cy="8" r="3"></circle>
+</svg>
+<div class="flex justify-between font-label-caps text-label-caps text-[#989898] mt-2">
+<span>2024</span>
+<span>2025</span>
+<span>2026</span>
+</div>
+</div>
+<div class="font-label-caps text-label-caps text-primary mt-4">
+              Fig 1. 208K GitHub Stars
+            </div>
+</div>
+<!-- Fig 2: Network node/commit density diagram -->
+<div class="p-5 flex flex-col justify-between">
+<div class="h-44 w-full flex items-center justify-center relative border-b border-on-primary pb-2">
+<svg class="w-full h-32 stroke-primary fill-none stroke-[1]" viewbox="0 0 160 120">
+<line stroke="#303030" x1="80" x2="30" y1="60" y2="30"></line>
+<line stroke="#303030" x1="80" x2="130" y1="60" y2="30"></line>
+<line stroke="#303030" x1="80" x2="40" y1="60" y2="90"></line>
+<line stroke="#303030" x1="80" x2="120" y1="60" y2="90"></line>
+<line stroke="#303030" stroke-dasharray="2,2" x1="30" x2="130" y1="30" y2="30"></line>
+<circle class="fill-primary" cx="80" cy="60" r="5"></circle>
+<circle class="fill-surface stroke-primary" cx="30" cy="30" r="3"></circle>
+<circle class="fill-surface stroke-primary" cx="130" cy="30" r="3"></circle>
+<circle class="fill-surface stroke-primary" cx="40" cy="90" r="2.5"></circle>
+<circle class="fill-surface stroke-primary" cx="120" cy="90" r="2.5"></circle>
+<circle class="fill-primary" cx="80" cy="20" r="2"></circle>
+<circle class="fill-primary" cx="80" cy="100" r="2"></circle>
+</svg>
+</div>
+<div class="font-label-caps text-label-caps text-primary mt-4">
+              Fig 2. 950 Contributors
+            </div>
+</div>
+<!-- Fig 3: Activity Bar Histogram -->
+<div class="p-5 flex flex-col justify-between">
+<div class="h-44 w-full flex items-end justify-between gap-1 border-b border-on-primary pb-2 px-1">
+<div class="w-full bg-[#303030] h-[20%]"></div>
+<div class="w-full bg-[#303030] h-[35%]"></div>
+<div class="w-full bg-[#303030] h-[30%]"></div>
+<div class="w-full bg-[#303030] h-[55%]"></div>
+<div class="w-full bg-[#303030] h-[65%]"></div>
+<div class="w-full bg-primary h-[85%]"></div>
+<div class="w-full bg-primary h-[95%]"></div>
+<div class="w-full bg-primary h-[100%]"></div>
+</div>
+<div class="font-label-caps text-label-caps text-primary mt-4">
+              Fig 3. 16M Monthly Devs
+            </div>
+</div>
+</div>
+</section>
+<!-- 6. PRIVACY SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary bg-surface">
+<h2 class="font-headline-md text-headline-md text-primary mb-3">Built for privacy first</h2>
+<p class="font-body-md text-body-md text-[#989898] max-w-2xl leading-relaxed">
+          OpenCode does not store any of your code or context data, so that it can operate in privacy sensitive environments. 
+          <a class="text-primary underline hover:text-secondary ml-1" href="#privacy">Learn more about privacy.</a>
+</p>
+</section>
+<!-- 7. FAQ ACCORDION SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary">
+<h2 class="font-headline-md text-headline-md text-primary mb-6">Frequently Asked Questions</h2>
+<div class="border border-on-primary divide-y divide-on-primary bg-surface-container-lowest rounded-[2px]">
+<!-- FAQ Item 1 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>1. What is OpenCode?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              OpenCode is an open source AI coding agent designed to run autonomously in developer environments, terminal sessions, and desktop editors.
+            </p>
+</details>
+<!-- FAQ Item 2 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>2. How do I use OpenCode?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              Install the CLI via curl or package managers, navigate to your project directory, and run the `opencode` command followed by natural language instructions.
+            </p>
+</details>
+<!-- FAQ Item 3 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>3. Do I need extra AI subscriptions to use OpenCode?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              No. OpenCode includes access to free validated models out of the box with zero setup.
+            </p>
+</details>
+<!-- FAQ Item 4 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>4. Can I use my existing AI subscriptions with OpenCode?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              Yes. You can seamlessly authenticate with your GitHub Copilot, OpenAI ChatGPT Plus/Pro, Anthropic, or Gemini credentials.
+            </p>
+</details>
+<!-- FAQ Item 5 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>5. Can I only use OpenCode in the terminal?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              No. OpenCode is built as a versatile core agent accessible via standard CLI, standalone desktop app, and IDE extensions.
+            </p>
+</details>
+<!-- FAQ Item 6 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>6. How much does OpenCode cost?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              The core platform is completely free and licensed under open source terms.
+            </p>
+</details>
+<!-- FAQ Item 7 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>7. What about data and privacy?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              OpenCode executes locally or direct-to-API with zero telemetry on source files and strict non-retention policies.
+            </p>
+</details>
+<!-- FAQ Item 8 -->
+<details class="group p-4 cursor-pointer">
+<summary class="flex justify-between items-center font-label-code text-label-code text-primary list-none">
+<span>8. Is OpenCode open source?</span>
+<span class="text-[#989898] group-open:rotate-45 transition-transform font-bold">+</span>
+</summary>
+<p class="mt-3 font-body-sm text-body-sm text-[#989898] leading-relaxed">
+              Yes, 100% of the agent engine, runtime, and harness architecture is publicly inspectable and governed on GitHub.
+            </p>
+</details>
+</div>
+</section>
+<!-- 8. ZEN MODELS SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary" id="zen">
+<h2 class="font-headline-md text-headline-md text-primary mb-3">
+          Access reliable optimized models for coding agents
+        </h2>
+<p class="font-body-md text-body-md text-[#989898] max-w-3xl mb-8 leading-relaxed">
+          Zen gives you access to a handpicked set of AI models that OpenCode has tested and benchmarked specifically for coding agents. No need to worry about inconsistent performance and quality across providers, use validated models that work.
+        </p>
+<!-- Monochrome row of model marks -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mb-8">
+<div class="border border-on-primary bg-surface-container-lowest p-3 text-center rounded-[2px]">
+<span class="font-label-code text-label-code text-primary font-bold">Zen-DeepSeek</span>
+</div>
+<div class="border border-on-primary bg-surface-container-lowest p-3 text-center rounded-[2px]">
+<span class="font-label-code text-label-code text-primary font-bold">Zen-Claude</span>
+</div>
+<div class="border border-on-primary bg-surface-container-lowest p-3 text-center rounded-[2px]">
+<span class="font-label-code text-label-code text-primary font-bold">Zen-Qwen</span>
+</div>
+<div class="border border-on-primary bg-surface-container-lowest p-3 text-center rounded-[2px]">
+<span class="font-label-code text-label-code text-primary font-bold">Zen-Llama</span>
+</div>
+<div class="border border-on-primary bg-surface-container-lowest p-3 text-center rounded-[2px] col-span-2 sm:col-span-1">
+<span class="font-label-code text-label-code text-primary font-bold">Zen-GPT</span>
+</div>
+</div>
+<button class="bg-[#111111] border border-on-primary text-[#f5f3f2] font-label-code text-label-code font-bold px-4 py-2.5 rounded-[2px] hover:border-primary transition-colors">
+          Learn about Zen →
+        </button>
+</section>
+<!-- 9. NEWSLETTER / WAITLIST SECTION -->
+<section class="p-6 md:p-12 border-b border-on-primary bg-surface-container-lowest">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-1">
+          Be the first to know when we release new products
+        </h3>
+<p class="font-body-md text-body-md text-[#989898] mb-6">
+          Join the waitlist for early access
+        </p>
+<form class="flex flex-col sm:flex-row gap-3 max-w-xl" onsubmit="event.preventDefault();">
+<input class="flex-1 bg-[#111111] border border-on-primary focus:border-primary text-primary font-label-code text-label-code px-4 py-2.5 rounded-[2px] outline-none transition-colors" placeholder="developer@domain.com" required="" type="email"/>
+<button class="bg-[#f5f3f2] text-[#111111] font-label-code text-label-code font-bold px-6 py-2.5 rounded-[2px] hover:bg-transparent hover:text-primary hover:outline hover:outline-1 hover:outline-on-primary transition-all flex-shrink-0" type="submit">
+            Subscribe
+          </button>
+</form>
+</section>
+</main>
+<!-- 10. FOOTER -->
+<footer class="w-full border-t border-on-primary bg-surface max-w-[1080px] mx-auto">
+<!-- Five equal dark footer cells with hairline rules -->
+<div class="grid grid-cols-2 md:grid-cols-5 divide-y md:divide-y-0 md:divide-x divide-on-primary border-b border-on-primary">
+<a class="p-4 flex items-center justify-between font-label-code text-label-code text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#github">
+<span>GitHub</span>
+<span class="text-[#989898] text-body-sm">[208K]</span>
+</a>
+<a class="p-4 flex items-center justify-between font-label-code text-label-code text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#docs">
+<span>Docs</span>
+</a>
+<a class="p-4 flex items-center justify-between font-label-code text-label-code text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#changelog">
+<span>Changelog</span>
+</a>
+<a class="p-4 flex items-center justify-between font-label-code text-label-code text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#discord">
+<span>Discord</span>
+</a>
+<a class="p-4 flex items-center justify-between font-label-code text-label-code text-secondary hover:text-primary hover:bg-surface-container-low transition-colors col-span-2 md:col-span-1" href="#x">
+<span>X</span>
+</a>
+</div>
+<!-- Centered bottom row -->
+<div class="p-6 text-center">
+<p class="font-label-caps text-label-caps text-[#989898] tracking-wider">
+          ©2026 Anomaly · Brand · Privacy · Terms · English
+        </p>
+</div>
+</footer>
+</div>
+</body></html>
