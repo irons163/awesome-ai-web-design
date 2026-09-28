@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceX - Desktop Homepage Study</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      letter-spacing: -0.01em;
+    }
+    .font-din {
+      font-family: 'Barlow Condensed', 'DIN Alternate', 'D-DIN', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .spacex-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 140px;
+      padding: 13px 32px;
+      border: 2px solid #ffffff;
+      background: transparent;
+      color: #ffffff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    .spacex-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #ffffff;
+      transform: translateY(100%);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
+    }
+    .spacex-btn:hover::before {
+      transform: translateY(0);
+    }
+    .spacex-btn span {
+      position: relative;
+      z-index: 2;
+      transition: color 0.2s ease;
+    }
+    .spacex-btn:hover span {
+      color: #000000;
+    }
+    .nav-link {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #ffffff;
+      position: relative;
+      transition: color 0.2s ease;
+      white-space: nowrap;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 1px;
+      background-color: #ffffff;
+      transition: width 0.2s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .section-band {
+      position: relative;
+      width: 100%;
+      height: 941px;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .band-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.2) 70%, rgba(0,0,0,0.65) 100%);
+    }
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.2) 65%, rgba(0,0,0,0.7) 100%);
+    }
+  </style>
+</head>
+<body class="bg-black text-white selection:bg-white selection:text-black">
+
+  <!-- Fixed Transparent Top Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-10 py-7 transition-all duration-300">
+    <div class="flex items-center space-x-10">
+      <!-- SpaceX Wordmark -->
+      <a href="#" class="inline-block text-white" aria-label="SpaceX Home">
+        <svg class="h-5 w-auto fill-current" viewBox="0 0 1200 150" xmlns="http://www.w3.org/2000/svg">
+          <path d="M78.6 62.4c-18.7-2.8-31.5-7.4-31.5-16.1 0-8.2 10.3-13.8 28.5-13.8 17.5 0 33.7 5.1 47.9 14.8l17.4-23.8C120.9 9.3 98.7 3.5 75.6 3.5 30.6 3.5 0 25.4 0 54.4c0 30.6 28.2 40.5 59.7 44.8 20.3 2.8 33.7 7.7 33.7 17.4 0 9.8-12.8 15.3-31.5 15.3-21.5 0-41.2-7.2-56.8-19.4L7.7 136.8c18.7 14.1 43.7 20.9 70.4 20.9 47.7 0 79.9-21.7 79.9-52.6 0-33.1-30.8-39.9-79.4-42.7zm175.7-56h-44.5v147.2h44.5V99.5h33.4c38.7 0 66.8-21.7 66.8-46.8 0-25.2-28.1-46.3-66.8-46.3h-33.4zm0 65.2V32.9h30.2c18.5 0 30.7 7.7 30.7 19.4 0 11.8-12.2 19.3-30.7 19.3h-30.2zm233.9-65.2l-58.4 147.2h45.2l12-32.9h66.3l12 32.9h45.2L550.8 6.4h-62.6zm6.4 87.2l24.9-68.5 24.9 68.5h-49.8zm272.9-65c-20 0-38.2 6.7-52.1 18.2L503.7 6.4h-42.2l89.7 101.4c-22.3 8.7-36.9 23.8-36.9 41.7 0 26.6 31.7 47.7 78.4 47.7 23.3 0 44.8-5.4 61.2-15.6l-18.7-22.8c-12.8 7.4-27.1 11.3-42.5 11.3-22.8 0-38.4-9.7-38.4-21.2 0-9.7 11.8-17.9 31.5-20.7l46.1-6.7c33.8-4.9 51-20.7 51-41.4 0-27.2-31.2-46.9-77-46.9zm1.3 54.3c-20.5 3.1-29.4 8.7-29.4 16.9 0 7.2 7.9 12.8 23.1 12.8 11.3 0 22.8-3.1 32.8-8.2l-26.5-21.5zm195.9-76.5h-101v147.2h101v-27.2h-56.5V93.8h48.9V67.6h-48.9V33.6h56.5V6.4zm105.7 0h-48.4l60.2 75.3-66.8 71.9h50.7l42.2-47.4 42.2 47.4h50.7l-66.8-71.9 60.2-75.3h-48.4l-38.1 48.7-37.9-48.7z"/>
+        </svg>
+      </a>
+
+      <!-- Primary Upper Case Nav Links -->
+      <nav class="hidden xl:flex items-center space-x-7">
+        <a href="#vehicles" class="nav-link">Vehicles</a>
+        <a href="#human-spaceflight" class="nav-link">Human Spaceflight</a>
+        <a href="#starlink" class="nav-link">Starlink</a>
+        <a href="#starshield" class="nav-link">Starshield</a>
+        <a href="#spacexai" class="nav-link">SpaceXAI</a>
+        <a href="#terafab" class="nav-link">Terafab</a>
+        <a href="#company" class="nav-link">Company</a>
+        <a href="#shop" class="nav-link">Shop</a>
+      </nav>
+    </div>
+
+    <!-- Right Controls: Upcoming Launches Outlined Dropdown -->
+    <div class="flex items-center space-x-6">
+      <button class="flex items-center space-x-2 px-4 py-2 border border-white/80 hover:border-white bg-black/40 hover:bg-white hover:text-black transition-all text-xs font-din font-bold tracking-widest uppercase">
+        <span>Upcoming Launches</span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <!-- Mobile / Secondary Hamburger Icon -->
+      <button class="xl:hidden text-white hover:opacity-80 transition-opacity">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- BAND 1: Launchpad Wet-Dress Video Still (Hero: 1280x720 / 100vh viewport) -->
+  <section class="relative w-full h-screen min-h-[720px] flex items-end pb-20 px-12 lg:px-20 bg-black overflow-hidden" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAflGQeb8oyOchvxCxU_XE_vqXxJjBSqY61KOveEP1g7ytyH_3QmGk17Dk-KTPw8A7ioxvzrlyOhk526RQH6J-nBkEm7LU6kLqLdWVYfvZ6rRDknI9GpcVwL90sZAavoZVZMwSKt7-EB-FkAalXGJwXWu9swYS18AhMmmK3AShaLyNehQMBWJ1pmjJYP7jaVLI8BT0PiGK14o3mnVgv45gk5xst_6rdEJMxBnyCHw6JXVHvl4_oqCBGcfILXXB0xWNhPbJ44WD-WcY6'); background-size: cover; background-position: center bottom;">
+    <div class="hero-gradient"></div>
+
+    <div class="relative z-10 max-w-3xl text-left">
+      <!-- T-minus Timer -->
+      <div class="flex items-center space-x-2 text-xs md:text-sm font-din font-medium tracking-[0.2em] text-white/80 mb-3">
+        <span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+        <span>T - 00:18:42</span>
+        <span class="text-white/40">|</span>
+        <span class="text-white/70">STARBASE, TEXAS</span>
+      </div>
+
+      <!-- Two-line Headline -->
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-din font-bold leading-[0.95] tracking-tight mb-7 text-white">
+        STARSHIP<br>FLIGHT 14
+      </h1>
+
+      <!-- CTA -->
+      <div>
+        <a href="#watch" class="spacex-btn">
+          <span>WATCH</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll Indicator Arrow -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 opacity-70 animate-bounce">
+      <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="square" stroke-linejoin="miter" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- BAND 2: MAKING LIFE MULTIPLANETARY (Mars Motion - Left Alignment) -->
+  <section class="section-band flex items-center px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCVQqle9yat2klY7yvmyP0m1J2m8Ak-Gshw9Kxiw2OTSNl12aETHLvFkmT3pRXjhCxjj-6mJeIMDaBmHvTXMQdYAnaloF4RHFzaaWPewFF69VNi8gHwRfMGilsfAtQLx4cLWqZdvePYAI3EVRYgdsMMfDXl42G5n0ZF_rwXoHK7XdDnbMy2luVCsIx0figOWDiYxybVytFX4H4wqRDK7jdDGAbWYW9zyMuEDiTqt9Hz2DiryYphFe3guFEuCYK61pq_q6Ujc8a9afjr');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left py-12">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">MISSION ARCHITECTURE</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        MAKING LIFE<br>MULTIPLANETARY
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        SpaceX is developing fully reusable transportation systems capable of carrying crew and cargo to Earth orbit, the Moon, Mars, and beyond to ensure the long-term survival of human consciousness.
+      </p>
+      <div>
+        <a href="#explore" class="spacex-btn">
+          <span>EXPLORE</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND 3: REVOLUTIONIZING SPACE TECHNOLOGY (Starship Orbital - Right Alignment) -->
+  <section class="section-band flex items-center justify-end px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9C64be4T0zUToVfiJJWzDhloBrVBasdMTOO6A_3hiYHTZO_J80k1kfAbQSl4mT9B-_ELuc4OqY18nR-15PuZRYUtWxIRrmFXKlkja3PXVjiiA3fw9Aft2cMo2qzgmNqPUo6SbFmYjjEphPhqj0b_4_hmX6bMFR5SCWDRaLbdSORaniZIxmdg7pvs4iLIiKZ2LFITXszIEG5B41Vfjw_uQVzLPKeEr0VJUMdKGZXbmergTSoTo7J8wPOsfzBerI_aMbn54jr2oRolR');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left md:text-right py-12 flex flex-col md:items-end">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">FULL REUSABILITY</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        REVOLUTIONIZING<br>SPACE TECHNOLOGY
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        Starship is designed to rapidly transport satellite constellations and deep-space payloads with radical cost reductions through rapid multi-flight refurbishment and stainless steel aerodynamic heat shielding.
+      </p>
+      <div>
+        <a href="#learn-more" class="spacex-btn">
+          <span>LEARN MORE</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND 4: WORLD'S LEADING LAUNCH SERVICE PROVIDER (Falcon Heavy Landing - Left Alignment) -->
+  <section class="section-band flex items-center px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB9HxslYOYB0ukt5EXd61dsOTb-SdSM32B1KOhXnk3Ccn1sy2sSWYCk91uVQb6pJtgHtECZCqSYDvpUJHrNQ5GgKigMoQI16-llrz-q2mtLFD1p3CaJDNc4T-eXTr_jLceOevm_FHaW3OnFXUjIbwwP6OOaXBIeMTCzkrfad1tVTN7sFGqWy_Xbd8r11pYZuCJESKxptjkpf7nD0CLEXXaSe0tBfEA8_PGvITSXaXo04CEY0naZthVo-NQDFSWx3HCZISHSnZdlEyCu');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left py-12">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">PROVEN RELIABILITY</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        WORLD'S LEADING<br>LAUNCH SERVICE PROVIDER
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        Falcon 9 and Falcon Heavy continue to achieve record-breaking operational cadences with precision autonomous drone ship recoveries and dual booster returns to launch site pads.
+      </p>
+      <div>
+        <a href="#reserve" class="spacex-btn">
+          <span>RESERVE YOUR RIDE</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND 5: ADVANCING HUMAN SPACEFLIGHT (Dragon Orbital Crew - Right Alignment) -->
+  <section class="section-band flex items-center justify-end px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA-264h9sEqG_cD7Kv_7V7sLPczZgbA7VIKKIIEmXDuE-t8jqymQgusanJG86uLGz6WM0dG2-0Nx0j4TJpZ91fsn_rvLlBHalBe2bMb7HZd4Zh6uH6vs1l3TTkG_u4qRg62OUjkHwEN4p2prZRnSjHT3JtxUUlvT--EkduRfgCBeHcpJXGhXOzM4qmoTOHL_de8jhvVBN0xpT2rE6-IKwgLh_W0CFPQ4DMC5rkPhOxdiJqivyqZbT2MlReNFifc43V_MIYbjF-n1xaF');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left md:text-right py-12 flex flex-col md:items-end">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">COMMERCIAL CREW</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        ADVANCING HUMAN<br>SPACEFLIGHT
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        Dragon is the first commercial spacecraft to reliably ferry astronauts to and from the International Space Station, while opening civilian orbital journeys, high-altitude research missions, and spacewalks.
+      </p>
+      <div>
+        <a href="#join-mission" class="spacex-btn">
+          <span>JOIN A MISSION</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND 6: DELIVERING HIGH-SPEED INTERNET FROM SPACE (Starlink Constellation - Left Alignment) -->
+  <section class="section-band flex items-center px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCwMwkH32AHe4l362bhbqX4Lyum4qZkI8JqHTl_q4voxDFXEbe0qWia65PzFmOZgNZgKXe3Ma-KoVZ1DLu3kpAzzVsQeb0SH6pvA8tI7-V5pmkvmtFkt3iMfdWOfHVwlhZdryb1dvoJn7vt3pOMFuDY72mtxb2b9coFbBqVbgEZUGiiW7Nx_OCY-u0oLfNBd-TdkufepLpmG4Ftunyt5Pb_Mdk1iHczDdlbsvhL_qRJHKkquhsguHpwIykfdw0_DWA-4Ahjo8_WlSfU');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left py-12">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">GLOBAL CONNECTIVITY</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        DELIVERING HIGH-SPEED<br>INTERNET FROM SPACE
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        Engineered by SpaceX, Starlink delivers broadband internet capable of streaming, online gaming, video calls and enterprise connectivity to the world's most rural and remote locations across all seven continents.
+      </p>
+      <div>
+        <a href="#order" class="spacex-btn">
+          <span>ORDER NOW</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND 7: DEVELOPING ORBITAL AI COMPUTE (Satellite-in-Orbit - Right Alignment) -->
+  <section class="section-band flex items-center justify-end px-12 lg:px-24" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuABZ8ox1WJbTJ9K5IRNt4-CQfojbcol6VpbDlSM4n6G2AUDHqoPI7JC8nWo2icsRXIz7_27sFtFDAYI8cnjAhq21v6o_90DWKpV9tovLCZjUI9m7-gV3iRDqR31QXexNxx8regGF1dzbYM-ZVG1AaBuu7bztdBMAx6VmAoa52SswMC4f5q5CGb4xGhH-qbiH5uYnb6sjlVfhS4mq9UxYQkBt-Fx9V4zDpPg23OAKF7knD2vQTs7WQlYh0I1CF-aGfWPXW90-Z3VFpnt');">
+    <div class="band-overlay"></div>
+    <div class="relative z-10 max-w-xl text-left md:text-right py-12 flex flex-col md:items-end">
+      <span class="text-xs font-din tracking-[0.25em] text-white/60 mb-3 block">NEXT-GEN PAYLOADS</span>
+      <h2 class="text-4xl sm:text-5xl lg:text-6xl font-din font-bold leading-[1.0] tracking-tight mb-5 text-white">
+        DEVELOPING ORBITAL<br>AI COMPUTE
+      </h2>
+      <p class="text-sm md:text-base text-white/80 font-normal leading-relaxed mb-8 max-w-lg">
+        Deploying high-throughput space-based tensor processors interconnected via multi-gigabit inter-satellite optical laser links for direct in-orbit sensor analytics, autonomous navigation, and planetary observation.
+      </p>
+      <div>
+        <a href="#starmind" class="spacex-btn">
+          <span>STARMIND</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom Compact Black Footer -->
+  <footer class="bg-black py-8 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between text-xs font-din text-white/50 tracking-wider space-y-4 md:space-y-0">
+      <!-- Legal & Main Links -->
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <span class="text-white/30 uppercase">SPACEX © 2026</span>
+        <a href="#careers" class="hover:text-white transition-colors">CAREERS</a>
+        <a href="#updates" class="hover:text-white transition-colors">UPDATES</a>
+        <a href="#privacy" class="hover:text-white transition-colors">PRIVACY POLICY</a>
+        <a href="#suppliers" class="hover:text-white transition-colors">SUPPLIERS</a>
+        <a href="#investors" class="hover:text-white transition-colors">INVESTORS</a>
+      </div>
+
+      <!-- X Social Link -->
+      <div class="flex items-center space-x-6">
+        <a href="https://x.com/spacex" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center space-x-1.5" aria-label="SpaceX on X">
+          <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          <span class="tracking-widest">X</span>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

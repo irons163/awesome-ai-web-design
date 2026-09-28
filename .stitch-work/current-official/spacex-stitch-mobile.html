@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>SpaceX - Mobile</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            spaceblack: '#000000',
+          },
+          letterSpacing: {
+            spacex: '0.15em',
+          }
+        }
+      }
+    };
+  </script>
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="custom-typography">
+    /* SpaceX geometric headline styling */
+    .spacex-headline {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+    .spacex-eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+    }
+  </style>
+<style data-purpose="ui-interactions">
+    /* Subtle touch active state for buttons */
+    .spacex-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease, color 0.2s ease;
+      touch-action: manipulation;
+    }
+    .spacex-btn:active {
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    /* Subtle scroll vignette header transition */
+    .header-scrolled {
+      background-color: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  </style>
+<!-- END: Custom Styles -->
+</head>
+<body class="bg-black text-white antialiased selection:bg-white selection:text-black min-w-[320px] max-w-[430px] mx-auto overflow-x-hidden relative">
+<!-- BEGIN: MainHeader -->
+<header class="fixed top-0 left-0 right-0 max-w-[430px] mx-auto z-50 h-16 flex items-center justify-between px-6 transition-all duration-300" id="site-header">
+<!-- SpaceX Vector Logo -->
+<a aria-label="SpaceX Logo" class="relative z-50 flex items-center" href="#">
+<svg aria-hidden="true" class="w-36 h-auto text-white fill-current" viewbox="0 0 500 62">
+<path d="M492.3 0c-7.8 0-14.7 3.3-19.4 8.7L254.6 257.4l-44.1-49.8 178.6-200C384.3 2.8 377.3 0 369.4 0c-4.9 0-9.6 1.3-13.7 3.6L169.8 211.5l-33.4-37.7c3.9-3.2 6.4-8 6.4-13.4 0-9.7-7.8-17.5-17.5-17.5H2.3L0 167.1h125.3c1.8 0 3.3 1.5 3.3 3.3 0 .9-.4 1.7-1 2.3L95.2 208l-59 66.8h112.5l56.5-63.9 44.5 50.3-157.9 178c4.8 4.9 11.6 7.9 19.1 7.9 5.3 0 10.3-1.6 14.5-4.4l191.1-215.3 35.6 40.2c-4.3 3.2-7 8.3-7 14.1 0 9.7 7.8 17.5 17.5 17.5H500l-2.3-24.2H370.8c-1.8 0-3.3-1.5-3.3-3.3 0-.9.4-1.7 1-2.3l34-38.4 67.9-76.7H353.6l-57.9 65.5-43.4-49.1L471.2 5.5C477 1.9 484.4 0 492.3 0z"></path>
+</svg>
+</a>
+<!-- Hamburger Menu Toggle Button -->
+<button aria-controls="mobile-nav" aria-expanded="false" aria-label="Open Navigation Menu" class="relative z-50 p-2 -mr-2 text-white focus:outline-none" id="menu-btn" type="button">
+<div class="w-6 h-4 flex flex-col justify-between items-end">
+<span class="w-6 h-[2px] bg-white transition-all duration-300"></span>
+<span class="w-4 h-[2px] bg-white transition-all duration-300"></span>
+<span class="w-6 h-[2px] bg-white transition-all duration-300"></span>
+</div>
+</button>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MobileNavOverlay -->
+<nav aria-hidden="true" class="fixed inset-0 z-50 bg-black translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between p-8 overflow-y-auto max-w-[430px] mx-auto pointer-events-none" id="mobile-nav">
+<!-- Top Nav Action Bar -->
+<div class="flex items-center justify-between pb-6 border-b border-zinc-800">
+<span class="text-xs uppercase font-mono tracking-widest text-zinc-400">Navigation</span>
+<button aria-label="Close Navigation Menu" class="text-white p-2 -mr-2 focus:outline-none" id="close-menu-btn" type="button">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Mobile Nav Links -->
+<div class="py-6 flex flex-col space-y-5 text-left">
+<!-- Vehicles with nested items -->
+<div class="border-b border-zinc-900 pb-4">
+<div class="text-xl font-bold tracking-wider uppercase text-white mb-2">Vehicles</div>
+<div class="pl-3 flex flex-col space-y-2 border-l border-zinc-800">
+<a class="menu-link text-sm tracking-wider uppercase text-zinc-400 hover:text-white transition" href="#section-1">Starship</a>
+<a class="menu-link text-sm tracking-wider uppercase text-zinc-400 hover:text-white transition" href="#section-4">Falcon 9</a>
+<a class="menu-link text-sm tracking-wider uppercase text-zinc-400 hover:text-white transition" href="#section-4">Falcon Heavy</a>
+<a class="menu-link text-sm tracking-wider uppercase text-zinc-400 hover:text-white transition" href="#section-5">Dragon</a>
+</div>
+</div>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-5">Human Spaceflight</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-6">Starlink</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-7">Starshield</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-7">SpaceX AI</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-2">Terafab</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="#section-3">Company</a>
+<a class="menu-link text-lg font-bold tracking-wider uppercase text-zinc-200 hover:text-white transition" href="https://shop.spacex.com">Shop</a>
+<!-- Outlined Upcoming Launches Pill Button -->
+<div class="pt-4">
+<a class="menu-link block text-center border border-zinc-500 hover:border-white px-5 py-3 text-xs uppercase tracking-widest font-semibold text-white transition" href="#section-1">
+          Upcoming Launches
+        </a>
+</div>
+</div>
+<!-- Drawer Footer Info -->
+<div class="pt-4 border-t border-zinc-900 text-center">
+<p class="text-[10px] uppercase font-mono tracking-widest text-zinc-500">Space Exploration Technologies Corp.</p>
+</div>
+</nav>
+<!-- END: MobileNavOverlay -->
+<!-- BEGIN: MainContent -->
+<main class="w-full">
+<!-- Section 1: Hero - Starship Flight 14 -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-1">
+<!-- Background Image -->
+<img alt="Starship Flight 14 at Starbase Texas pad" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WT3gdXZZA_wspOyd4eNnz_YZIH2F4iQVEqWjWZ-ZIWKMQ7iaxBa-BcF6GvxO9N28Fn-Rtf6-Yo99sGkEsMO7iA0lWcFQrBLZ5_oGzg5-BwqstHoxlrBDqHBNz-oaFdHHwiyIPqCifMLejLstqResP4uErLFW4oeAc-79dxS3mHZGKOyprr98nvq_VvC1C-BnscMtGF7feas5AjyDODfrpyRJtGvAA8uZ-nvofarOzGOI6-qhjCddoa-CA7"/>
+<!-- Radial & Gradient Dark Overlay for legibility -->
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10 pointer-events-none"></div>
+<!-- Content Container -->
+<div class="relative z-20 w-full max-w-[340px] mb-8">
+<!-- Live status pill / eyebrow -->
+<div class="flex items-center space-x-2 text-[11px] font-mono tracking-widest uppercase text-white/90 mb-3">
+<span class="inline-block w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
+<span>T - 00:19:42 | STARBASE, TEXAS</span>
+</div>
+<!-- Section Title -->
+<h1 class="spacex-headline text-4xl sm:text-5xl font-black text-white leading-none uppercase tracking-tight mb-5">
+          Starship<br/>Flight 14
+        </h1>
+<!-- Call to Action -->
+<a class="spacex-btn border border-white text-white uppercase text-xs tracking-widest px-8 py-3.5 font-semibold" href="#section-1">
+          Watch
+        </a>
+</div>
+<!-- Scroll Indicator Arrow Down -->
+<div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex justify-center text-white/70 animate-bounce pointer-events-none">
+<svg class="w-6 h-6 stroke-current" fill="none" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+</section>
+<!-- Section 2: Making Life Multiplanetary -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-2">
+<img alt="Surface of Mars canyon landscape" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1VXiJ4hUxFGmB-98_ypUCcKFXmRc_XGPg5hlJh0NBWvXadGyrrn7JzuEkDB4CuFxcU3tfwRiFlYUgZ9malJZHWgKAXrNQdnvc7eiSmAF1yEoFHLfcopQhiFp24WQ_HD0oAMTjuNce9uoNEja0r5HLH1t4NoymbQgZ6oVEJnoEpHu7-LKSXNkyESBkinl2Qbv2R80OaaS9cs1tv8k3pCYBxfZ-rAFHWgvE8Fa7w-SnDXprRUXLP_5MdJs4oq"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Mission Architecture</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          Making Life<br/>Multiplanetary
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          SpaceX is developing fully reusable transportation systems capable of carrying crew and cargo to Earth orbit, the Moon, Mars, and beyond to ensure the long-term survival of human consciousness.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-2">
+          Explore
+        </a>
+</div>
+</section>
+<!-- Section 3: Revolutionizing Space Technology -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-3">
+<img alt="Starship glowing re-entry in orbit" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UzGkY2rnFYia5lVIGYIkcwQhsFsL1XNjBPT9n_tNR4Fbc3BuD-F6A5lPTE1Lwl7kRQM1XfEFfUYzI8H5chnlPWADQmN0kDCLdCnhUuk9ZLMGRYks8ptchxSW_fdM8g2-e77Tm70y9dkW9XUPs18uB1T4NLRTcnw0MxOZsgVFKetweWXQlivJo_NGS9txSHIX_T5ZBzmePk3583_zylngdiPfwlLf05oyymVs1ejG4_w0tWAbQQwOcPjdOz"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Full Reusability</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          Revolutionizing<br/>Space Technology
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          Starship is designed to rapidly transport satellite constellations and deep-space payloads with radical cost reductions through rapid multi-engine re-ignition and stainless steel aerodynamic heat shielding.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-3">
+          Learn More
+        </a>
+</div>
+</section>
+<!-- Section 4: World's Leading Launch Service Provider -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-4">
+<img alt="Twin Falcon booster touchdown on landing pads" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1UURFFl_vVscO9EtKStiNSezebeZTG1cB87vERRSdgt_wuDFm4UsygQOnhm5B_PzSe6R1JCtFXxja2YfhPsJ3ZZR83P83TpREB402QzzqrvHM2ihX0qn5ZiKPpsQ1-XqaU16Yvy7GaeX7fV9K9CVZGGuNfVXhamI8-l9lAewWwAgxaDJHS1JjoAQgBuMA01GoR_XpBV_Dk3qbK86MRBn711aAxOpsuAYNNRVxBaNRH8WmzIUxLEttpvniA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Proven Reliability</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          World's Leading<br/>Launch Service Provider
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          Falcon 9 and Falcon Heavy continue to achieve record-breaking operational cadences with precision autonomous drone ship recoveries and dual booster returns to launch site pads.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-4">
+          Reserve Your Ride
+        </a>
+</div>
+</section>
+<!-- Section 5: Advancing Human Spaceflight -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-5">
+<img alt="Astronaut in ISS looking out cupola at Dragon" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1V2sRd93nuCJVCdydu_AagtA5uoOkLlkXk3DFB_29rXhwSGFk-Mwxyd-obiWK91uYhRkAkOV5DJgMTFIkKedlXeKpDztx1IPxmNc1xnrc1AreJl_9plPBKSCbpwnpKSJH-VPsDmSGMTm4eyI-g_gEkBrRbOZUsmlvsZUPwfUlKoHGa9ugI8I-6FPPoonbHoJnok4CvzzCctCDt-0GfmFrNQi21dUkBnLmXBfmhqg1458Jw0Oat3rjMwvpZ6"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Commercial Crew</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          Advancing Human<br/>Spaceflight
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          Dragon is the first commercial spacecraft to reliably ferry astronauts to and from the International Space Station, while opening civilian orbital journeys, high-altitude research missions, and spacewalks.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-5">
+          Join A Mission
+        </a>
+</div>
+</section>
+<!-- Section 6: Delivering High-Speed Internet from Space -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-6">
+<img alt="Starlink satellites deployment stack in orbit" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WeAfFdmglYUVWD0QqnlBz5kRGEzuCiwUHKhlU6b102h5KQZcUhkVl0egFM_gS8Ec4e_0vj-59E-hzGQCMUoaPRHwkjMWwd-Z_hdFvTmV-6mD92wHwF7ZSHL_uhqIcCUnKhwqTA58r1GP6OeJUdYG8njBn0ehzGUktE_0MFF8wi77WX6-dv_4NhvAjDcmBGJLJkonoB1iR39hy1CGqC8jjGwJEQ_yuKVIx2Kt_jZGuBY_R8G6oyYoEVx-kD"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Global Connectivity</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          Delivering High-Speed<br/>Internet From Space
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          Engineered by SpaceX, Starlink delivers broadband internet capable of streaming, online gaming, video calls and enterprise connectivity to the world's most rural and remote locations across all seven continents.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-6">
+          Order Now
+        </a>
+</div>
+</section>
+<!-- Section 7: Developing Orbital AI Compute -->
+<section class="relative w-full h-[100vh] min-h-[844px] flex flex-col justify-end px-6 pb-16 snap-start overflow-hidden" id="section-7">
+<img alt="Orbital AI compute satellite with laser terminal" class="absolute inset-0 w-full h-full object-cover object-center z-0" src="https://lh3.googleusercontent.com/aida/AEtjO1Wru2N5rBTaqbLdQNmqkvkthbhYWNcgKIlhYqMEc1FPejzquL74_fa11fiKk2tpwGA6ZTSABdgVGMemFsPDbO8H4P-XI2yEXMH18OJxA3CFyb1g7JkrWZnRFHAsu1hLWq9NTwms6pI9f8ccEmyNfe7cUOfBWqpLWVgskz8EJCKo2hXBOWds1meeaQE5N0CUem5PC2fiIOOdzEE2PPrag_p6uSo0Kxei9h-A0n6ucT-TfOljMG_oHJix3sxU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-transparent z-10 pointer-events-none"></div>
+<div class="relative z-20 w-full max-w-[340px]">
+<p class="spacex-eyebrow text-[11px] font-medium tracking-widest text-zinc-400 mb-2">Next-Gen Payloads</p>
+<h2 class="spacex-headline text-3xl font-extrabold text-white leading-tight uppercase tracking-tight mb-3">
+          Developing Orbital<br/>AI Compute
+        </h2>
+<p class="text-xs leading-relaxed text-zinc-300 max-w-[320px] mb-6">
+          Deploying high-throughput space-based tensor processors interconnected via multi-gigabit inter-satellite optical laser links for direct in-orbit sensor analytics, autonomous navigation, and planetary observation.
+        </p>
+<a class="spacex-btn border border-white text-white px-8 py-3 uppercase text-xs tracking-widest font-semibold" href="#section-7">
+          Starlink
+        </a>
+</div>
+</section>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: MobileFooter -->
+<footer class="w-full bg-black py-10 px-6 border-t border-zinc-900 text-center relative z-20">
+<div class="flex flex-wrap justify-center items-center gap-x-4 gap-y-3 text-[10px] tracking-wider text-zinc-500 uppercase font-medium">
+<span class="text-zinc-400">SpaceX © 2026</span>
+<a class="hover:text-white transition" href="#">Careers</a>
+<a class="hover:text-white transition" href="#">Updates</a>
+<a class="hover:text-white transition" href="#">Privacy Policy</a>
+<a class="hover:text-white transition" href="#">Suppliers</a>
+<a class="hover:text-white transition" href="#">Investors</a>
+<span aria-label="SpaceX Brand Icon" class="inline-flex items-center text-zinc-600 hover:text-white cursor-pointer transition">
+<svg class="w-2.5 h-2.5 fill-current" viewbox="0 0 24 24">
+<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+</svg>
+</span>
+</div>
+</footer>
+<!-- END: MobileFooter -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="mobile-menu-drawer">
+    // Interactive drawer controller for hamburger menu
+    const menuBtn = document.getElementById('menu-btn');
+    const closeMenuBtn = document.getElementById('close-menu-btn');
+    const mobileNav = document.getElementById('mobile-nav');
+    const navLinks = document.querySelectorAll('.menu-link');
+
+    function openMenu() {
+      mobileNav.classList.remove('translate-x-full', 'pointer-events-none');
+      mobileNav.classList.add('translate-x-0', 'pointer-events-auto');
+      mobileNav.setAttribute('aria-hidden', 'false');
+      menuBtn.setAttribute('aria-expanded', 'true');
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeMenu() {
+      mobileNav.classList.remove('translate-x-0', 'pointer-events-auto');
+      mobileNav.classList.add('translate-x-full', 'pointer-events-none');
+      mobileNav.setAttribute('aria-hidden', 'true');
+      menuBtn.setAttribute('aria-expanded', 'false');
+      document.body.classList.remove('overflow-hidden');
+    }
+
+    menuBtn.addEventListener('click', openMenu);
+    closeMenuBtn.addEventListener('click', closeMenu);
+
+    // Auto-close on tapping any inner anchor link
+    navLinks.forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  </script>
+<script data-purpose="header-scroll-observer">
+    // Add subtle background blur when scrolled past top threshold
+    const siteHeader = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        siteHeader.classList.add('header-scrolled');
+      } else {
+        siteHeader.classList.remove('header-scrolled');
+      }
+    }, { passive: true });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>
