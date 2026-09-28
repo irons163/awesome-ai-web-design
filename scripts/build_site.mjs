@@ -79,7 +79,11 @@ function stageOfficialDrafts(progress) {
     for (const value of references(html)) copyReferencedAsset(name, value);
     if (COPY_ALL_ASSETS.has(name)) {
       fs.cpSync(path.join(DRAFT_SOURCE, name + '-assets'),
-        path.join(destination, name + '-assets'), { recursive: true, force: true });
+        path.join(destination, name + '-assets'), {
+          recursive: true, force: true,
+          filter: source => name !== 'tesla' ||
+            !['Homepage-FSD-Card-Desktop.mp4', 'Homepage-FSD-Card-Mobile.mp4'].includes(path.basename(source)),
+        });
     }
     if (name === 'sanity') {
       const sourceRoot = path.join(DRAFT_SOURCE, 'sanity-assets');

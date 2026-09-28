@@ -54,8 +54,12 @@ def stage_official_drafts():
             # Runtime tabs select additional official media that do not appear
             # in static src attributes; keep those assets with each draft.
             asset_dir = f'{name}-assets'
+            ignore = (shutil.ignore_patterns('Homepage-FSD-Card-Desktop.mp4',
+                                             'Homepage-FSD-Card-Mobile.mp4')
+                      if name == 'tesla' else None)
             shutil.copytree(DRAFT_SOURCE / asset_dir,
-                            destination / asset_dir, dirs_exist_ok=True)
+                            destination / asset_dir, dirs_exist_ok=True,
+                            ignore=ignore)
         if name == 'sanity':
             # Large public imagery and video remain on Sanity's own CDN.
             for asset in (DRAFT_SOURCE / 'sanity-assets').rglob('*'):
