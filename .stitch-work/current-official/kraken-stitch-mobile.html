@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Kraken Canada | Own the power of your money</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: IBM Plex Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            krakenPurple: '#582cd1',
+            krakenPurpleDark: '#431fb5',
+            krakenPurpleLight: '#7132f5',
+            krakenBg: '#f6f5f9',
+            cardDark1: '#150f2e',
+            cardDark2: '#0d0e12',
+            cardDark3: '#16181f',
+            cardDark4: '#220b16',
+            cardDark5: '#0f141c',
+            cardDark6: '#131722',
+          },
+          fontFamily: {
+            sans: ['"IBM Plex Sans"', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'Roboto', 'sans-serif'],
+          }
+        }
+      }
+    };
+  </script>
+<style data-purpose="base-layout">
+    body {
+      background-color: #f6f5f9;
+      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    /* Hide scrollbars for crisp native mobile feel */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style data-purpose="candlestick-chart">
+    .candle-bar {
+      width: 6px;
+      border-radius: 1px;
+      position: relative;
+    }
+    .candle-bar::before {
+      content: '';
+      position: absolute;
+      width: 1.5px;
+      background: currentColor;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  </style>
+</head>
+<body class="text-gray-900 bg-[#f6f5f9] flex flex-col items-center min-h-screen">
+<!-- BEGIN: MobileContainer -->
+<!-- 390px mobile target container with responsive viewport adaptability -->
+<div class="w-full max-w-[390px] min-h-screen bg-[#f6f5f9] flex flex-col relative shadow-2xl overflow-x-hidden">
+<!-- BEGIN: MainHeader -->
+<header class="sticky top-0 h-16 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 flex items-center justify-between z-50">
+<!-- Kraken Wordmark -->
+<a aria-label="Kraken Home" class="flex items-center gap-1.5 focus:outline-none" href="#">
+<span class="text-2xl font-black tracking-tight text-[#582cd1] lowercase select-none">kraken</span>
+</a>
+<!-- Right Header Actions -->
+<div class="flex items-center gap-2.5">
+<!-- Search Button -->
+<button aria-label="Search markets" class="w-9 h-9 rounded-full flex items-center justify-center text-gray-700 hover:bg-gray-100 transition-colors" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 21l-4.35-4.35M16.65 10.65a6 6 0 11-12 0 6 6 0 0112 0z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Sign Up CTA -->
+<a class="px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#582cd1] text-white hover:bg-opacity-90 active:scale-95 transition-all shadow-sm" href="#signup">
+          Sign Up
+        </a>
+<!-- Hamburger Menu Toggle Button -->
+<button aria-label="Open Navigation Menu" class="w-9 h-9 flex flex-col justify-center items-center gap-1 text-gray-800 rounded-lg hover:bg-gray-100 transition-colors" id="menu-toggle-btn" type="button">
+<span class="w-5 h-0.5 bg-gray-800 rounded-full transition-transform" id="bar1"></span>
+<span class="w-5 h-0.5 bg-gray-800 rounded-full transition-opacity" id="bar2"></span>
+<span class="w-5 h-0.5 bg-gray-800 rounded-full transition-transform" id="bar3"></span>
+</button>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MobileNavDrawer -->
+<nav class="hidden fixed inset-x-0 top-16 bg-white/98 backdrop-blur-xl border-b border-gray-200 z-40 max-w-[390px] mx-auto shadow-xl transition-all duration-300 px-5 py-6" id="mobile-menu-drawer">
+<div class="flex flex-col space-y-4">
+<!-- Region and Currency Indicator -->
+<div class="flex items-center justify-between pb-3 border-b border-gray-100 text-xs font-medium text-gray-600">
+<div class="flex items-center gap-1.5">
+<span class="text-base">🇨🇦</span>
+<span>EN / CAD</span>
+</div>
+<span class="text-[10px] bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full font-semibold">Canada</span>
+</div>
+<!-- Navigation Links -->
+<div class="flex flex-col space-y-3 pt-1">
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>Individuals</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>Businesses</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>VIP</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>Affiliates</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>Markets</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+<a class="flex items-center justify-between py-1.5 text-base font-medium text-gray-800 hover:text-purple-600" href="#">
+<span>About</span>
+<svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<div class="pt-4 border-t border-gray-100 flex gap-3">
+<a class="flex-1 text-center py-2.5 rounded-xl border border-gray-300 font-semibold text-sm text-gray-700 hover:bg-gray-50" href="#">Log In</a>
+<a class="flex-1 text-center py-2.5 rounded-xl bg-[#582cd1] font-semibold text-sm text-white shadow-md" href="#">Sign Up</a>
+</div>
+</div>
+</nav>
+<!-- END: MobileNavDrawer -->
+<!-- BEGIN: HeroSection -->
+<main class="flex-1">
+<section class="pt-6 pb-8 px-4 flex flex-col items-center text-center" data-purpose="hero-section">
+<!-- Regulatory Oversight Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-gray-200/75 border border-gray-300/50 text-[10.5px] font-medium text-gray-700 shadow-xs mb-3">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Serving Canadian Clients Under Registered Oversight • Updated Sept 2026</span>
+</div>
+<!-- Headline -->
+<h1 class="text-[31px] font-extrabold tracking-tight text-gray-950 leading-[1.12] mt-2 px-1">
+          Own the power of your money
+        </h1>
+<!-- Subtitle -->
+<p class="text-[15px] font-normal text-gray-600 mt-3 px-2 leading-relaxed">
+          Crypto, stocks, futures, and more — trusted by millions worldwide
+        </p>
+<!-- Email Sign-up Form -->
+<form class="w-full mt-6 flex flex-col gap-2.5" id="signup" onsubmit="event.preventDefault()">
+<div class="relative w-full">
+<input class="w-full bg-[#eeedf2] rounded-xl px-4 py-3.5 text-sm text-gray-900 placeholder-gray-500 border border-transparent focus:border-[#582cd1] focus:bg-white focus:outline-none transition-all" placeholder="Enter your email" required="" type="email"/>
+</div>
+<button class="w-full py-3.5 bg-[#582cd1] hover:bg-[#431fb5] active:scale-[0.99] text-white font-semibold rounded-xl text-sm shadow-md transition-all" type="submit">
+            Try Kraken
+          </button>
+</form>
+<!-- Social Sign-Up Section -->
+<div class="flex items-center justify-center gap-3 mt-4">
+<span class="text-xs text-gray-500 font-medium">or sign up with</span>
+<!-- Apple Sign-in Button -->
+<button aria-label="Sign up with Apple" class="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 transition-colors" type="button">
+<svg class="w-4 h-4 fill-current text-gray-900" viewbox="0 0 170 170">
+<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.66-7.85-11.91-14.42-6.19-9.59-10.92-20.2-14.19-31.84-3.27-11.64-4.9-22.61-4.9-32.91 0-14.48 3.73-26.4 11.19-35.76 7.46-9.36 16.74-14.15 27.84-14.37 4.12 0 8.86 1.08 14.21 3.23 5.35 2.15 8.94 3.33 10.77 3.54 2.18-.32 6.03-1.6 11.55-3.87 5.52-2.26 10.05-3.23 13.59-2.91 12.63.75 22.38 5.48 29.25 14.19-11.06 6.77-16.48 16.12-16.27 28.05.21 9.46 3.82 17.38 10.84 23.77 7.02 6.39 15.35 10.05 24.99 11-2.04 6.13-4.46 12.82-7.27 20.08zM119.22 31.42c0-7.31 2.65-14.13 7.95-20.46 5.3-6.33 11.83-10.42 19.59-12.27.32 1.4.48 2.69.48 3.87 0 7.2-2.8 14.07-8.4 20.61-5.6 6.54-12.18 10.47-19.74 11.79-.11-1.18-.18-2.36-.18-3.54z"></path>
+</svg>
+</button>
+<!-- Google Sign-in Button -->
+<button aria-label="Sign up with Google" class="w-8 h-8 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center hover:bg-gray-50 transition-colors" type="button">
+<svg class="w-3.5 h-3.5" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3h3.86c2.26-2.09 3.58-5.17 3.68-9.1z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.86-3c-1.08.72-2.45 1.16-4.07 1.16-3.13 0-5.78-2.11-6.73-4.96H1.29v3.09C3.26 21.3 7.37 24 12 24z" fill="#34A853"></path>
+<path d="M5.27 14.29c-.25-.72-.38-1.49-.38-2.29s.14-1.57.38-2.29V6.62H1.29C.47 8.24 0 10.06 0 12s.47 3.76 1.29 5.38l3.98-3.09z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.37 0 3.26 2.7 1.29 6.62l3.98 3.09c.95-2.85 3.6-4.96 6.73-4.96z" fill="#EA4335"></path>
+</svg>
+</button>
+</div>
+<!-- Trust Stats 2+1 Layout -->
+<div class="w-full grid grid-cols-2 gap-3 mt-8 pt-6 border-t border-gray-200/80">
+<div class="bg-white/80 backdrop-blur rounded-xl p-3 border border-gray-100 flex flex-col items-center">
+<span class="text-xl font-bold text-gray-900 tracking-tight">Since 2011</span>
+<span class="text-[11px] text-gray-500 mt-0.5">Over a decade of crypto leadership</span>
+</div>
+<div class="bg-white/80 backdrop-blur rounded-xl p-3 border border-gray-100 flex flex-col items-center">
+<span class="text-xl font-bold text-gray-900 tracking-tight">$2T+</span>
+<span class="text-[11px] text-gray-500 mt-0.5">In quarterly trading volume</span>
+</div>
+<div class="col-span-2 bg-white/80 backdrop-blur rounded-xl py-3 px-4 border border-gray-100 flex flex-col items-center">
+<span class="text-2xl font-serif font-black tracking-tight text-gray-900 italic">Forbes</span>
+<span class="text-[11px] text-gray-500 mt-0.5">Ranked #1 Global Crypto App</span>
+</div>
+</div>
+</section>
+<!-- END: HeroSection -->
+<!-- BEGIN: ProductCards -->
+<section class="px-3 pb-8 flex flex-col gap-4.5" data-purpose="product-suites">
+<!-- CARD 1: KRAKEN PRO -->
+<article class="bg-[#120b29] rounded-2xl p-5 text-white border border-purple-900/40 shadow-sm relative overflow-hidden" data-purpose="kraken-pro-card">
+<!-- Background Glow Effect -->
+<div class="absolute -right-16 -top-16 w-44 h-44 bg-purple-700/20 rounded-full blur-3xl pointer-events-none"></div>
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-purple-500/20 text-[#a379ff] text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            KRAKEN PRO
+          </div>
+<h2 class="text-2xl font-bold tracking-tight text-white leading-tight">
+            The command center for active traders
+          </h2>
+<p class="text-xs text-purple-200/80 mt-2.5 leading-relaxed">
+            Institutional-grade performance built for precision execution. Deep spot &amp; derivatives liquidity, maker fees starting as low as 0.00%, sub-millisecond execution, and fully configurable trading workspaces.
+          </p>
+<div class="mt-4">
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#582cd1] hover:bg-[#4a23b3] text-white text-xs font-semibold shadow transition-colors" href="#">
+<span>Sign up now</span>
+<span>→</span>
+</a>
+</div>
+<!-- Kraken Pro UI Terminal Mockup -->
+<div class="mt-5 bg-[#0b0718] rounded-xl p-3 border border-purple-950 text-[11px] font-mono select-none">
+<!-- Header of simulated UI -->
+<div class="flex items-center justify-between border-b border-purple-900/40 pb-2 mb-2">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="font-bold text-gray-200">BTC/CAD</span>
+<span class="text-emerald-400 font-semibold">$89,420.50</span>
+</div>
+<span class="text-emerald-400 text-[10px] bg-emerald-500/10 px-1.5 py-0.5 rounded">+2.41%</span>
+</div>
+<!-- Candlestick Visualizer -->
+<div class="h-28 w-full flex items-end justify-between px-1 py-1 gap-1.5 bg-[#080512] rounded-lg border border-purple-900/20">
+<!-- Bar 1 (Green) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-3 bg-emerald-500/60 mb-[-2px]"></div>
+<div class="w-full bg-emerald-500 rounded-xs h-10"></div>
+<div class="w-1 h-2 bg-emerald-500/60 mt-[-2px]"></div>
+</div>
+<!-- Bar 2 (Red) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-4 bg-rose-500/60 mb-[-2px]"></div>
+<div class="w-full bg-rose-500 rounded-xs h-14"></div>
+<div class="w-1 h-3 bg-rose-500/60 mt-[-2px]"></div>
+</div>
+<!-- Bar 3 (Green) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-2 bg-emerald-500/60 mb-[-2px]"></div>
+<div class="w-full bg-emerald-500 rounded-xs h-18"></div>
+<div class="w-1 h-4 bg-emerald-500/60 mt-[-2px]"></div>
+</div>
+<!-- Bar 4 (Green) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-3 bg-emerald-500/60 mb-[-2px]"></div>
+<div class="w-full bg-emerald-500 rounded-xs h-24"></div>
+<div class="w-1 h-2 bg-emerald-500/60 mt-[-2px]"></div>
+</div>
+<!-- Bar 5 (Red) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-5 bg-rose-500/60 mb-[-2px]"></div>
+<div class="w-full bg-rose-500 rounded-xs h-16"></div>
+<div class="w-1 h-3 bg-rose-500/60 mt-[-2px]"></div>
+</div>
+<!-- Bar 6 (Green Peak) -->
+<div class="flex-1 flex flex-col items-center justify-end h-full">
+<div class="w-1 h-2 bg-emerald-400 mb-[-2px]"></div>
+<div class="w-full bg-emerald-400 rounded-xs h-26 shadow-[0_0_8px_rgba(52,211,153,0.3)]"></div>
+<div class="w-1 h-2 bg-emerald-400 mt-[-2px]"></div>
+</div>
+</div>
+<!-- Mini Order Depth Bar -->
+<div class="mt-2.5 flex items-center justify-between text-[10px] text-gray-400">
+<span>EMA(20) • VWAP</span>
+<span class="text-purple-300">24h Vol: $1.2B CAD</span>
+</div>
+</div>
+</article>
+<!-- CARD 2: KRAKEN APP -->
+<article class="bg-[#0d0e12] rounded-2xl p-5 text-white border border-gray-800 shadow-sm" data-purpose="kraken-app-card">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-gray-800 text-gray-300 text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            KRAKEN APP
+          </div>
+<h2 class="text-2xl font-bold tracking-tight text-white leading-tight">
+            Crypto and stocks made easy
+          </h2>
+<p class="text-xs text-gray-400 mt-2.5 leading-relaxed">
+            Buy, sell, and build wealth with an ultra-intuitive mobile app. Enjoy instant Canadian Interac e-Transfer deposits with zero Kraken funding fees, set recurring auto-investments, and monitor equities side-by-side with digital tokens.
+          </p>
+<div class="mt-4">
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-white hover:bg-gray-100 text-gray-900 text-xs font-semibold shadow transition-colors" href="#">
+<span>Get started</span>
+<span>↗</span>
+</a>
+</div>
+<!-- Mobile App Screen Mockup -->
+<div class="mt-5 bg-[#171922] rounded-2xl p-4 border border-gray-800 flex flex-col items-center shadow-inner">
+<span class="text-[10px] text-gray-400 uppercase tracking-widest font-medium">Portfolio Balance (CAD)</span>
+<span class="text-2xl font-extrabold text-white mt-1">$42,850.25</span>
+<div class="flex items-center gap-1 text-emerald-400 text-[11px] font-semibold mt-0.5">
+<span>↗</span>
+<span>+$1,420.10 (+3.42%) Today</span>
+</div>
+<!-- Action Buttons Pill -->
+<div class="w-full grid grid-cols-3 gap-2 mt-4">
+<button class="py-2 bg-purple-600/30 text-purple-300 rounded-lg text-xs font-semibold text-center border border-purple-500/30">
+                + Buy
+              </button>
+<button class="py-2 bg-gray-800/80 text-gray-300 rounded-lg text-xs font-semibold text-center border border-gray-700/60">
+                Convert
+              </button>
+<button class="py-2 bg-gray-800/80 text-gray-300 rounded-lg text-xs font-semibold text-center border border-gray-700/60">
+                Deposit
+              </button>
+</div>
+<!-- Micro Asset Row -->
+<div class="w-full mt-3.5 space-y-2 pt-2 border-t border-gray-800">
+<div class="flex items-center justify-between text-xs py-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-[10px]">₿</div>
+<div>
+<div class="font-medium text-gray-200">Bitcoin</div>
+<div class="text-[10px] text-gray-500">0.354 BTC</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-medium text-gray-200">$31,654.85</div>
+<div class="text-[10px] text-emerald-400">+2.41%</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-xs py-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-[10px]">Ξ</div>
+<div>
+<div class="font-medium text-gray-200">Ethereum</div>
+<div class="text-[10px] text-gray-500">2.15 ETH</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-medium text-gray-200">$7,826.21</div>
+<div class="text-[10px] text-emerald-400">+1.85%</div>
+</div>
+</div>
+</div>
+</div>
+</article>
+<!-- CARD 3: KRAKEN WALLET -->
+<article class="bg-[#16181f] rounded-2xl p-5 text-white border border-gray-800 shadow-sm" data-purpose="kraken-wallet-card">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-slate-800 text-cyan-300 text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            KRAKEN WALLET
+          </div>
+<h2 class="text-2xl font-bold tracking-tight text-white leading-tight">
+            Secure your crypto with self custody
+          </h2>
+<p class="text-xs text-gray-400 mt-2.5 leading-relaxed">
+            The gateway to Web3 and decentralized finance. Open-source, audited by top security specialists, supporting multiple chains, NFT galleries, biometric sign-in, and zero tracking of IP addresses.
+          </p>
+<div class="mt-4">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors" href="#">
+<span>Explore Wallet</span>
+<span>→</span>
+</a>
+</div>
+<!-- Web3 Security Dashboard Mockup -->
+<div class="mt-5 bg-[#0e1017] rounded-xl p-3.5 border border-gray-800">
+<div class="flex items-center justify-between text-xs mb-3 pb-2 border-b border-gray-800">
+<div class="flex items-center gap-1.5 text-gray-300 font-mono text-[11px]">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>mainnet-vault.eth</span>
+</div>
+<span class="text-[10px] bg-cyan-950/60 text-cyan-400 border border-cyan-800/50 px-2 py-0.5 rounded">100% Open Source</span>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center">
+<div class="bg-[#171a24] p-2 rounded-lg border border-gray-800">
+<span class="text-[10px] text-gray-400 block">Chains</span>
+<span class="text-xs font-bold text-gray-200">8 Supported</span>
+</div>
+<div class="bg-[#171a24] p-2 rounded-lg border border-gray-800">
+<span class="text-[10px] text-gray-400 block">Audits</span>
+<span class="text-xs font-bold text-gray-200">Trail of Bits</span>
+</div>
+<div class="bg-[#171a24] p-2 rounded-lg border border-gray-800">
+<span class="text-[10px] text-gray-400 block">Privacy</span>
+<span class="text-xs font-bold text-gray-200">No IP Profiling</span>
+</div>
+</div>
+<div class="mt-3 flex items-center justify-between text-[10px] text-gray-400 pt-2 border-t border-gray-800/60">
+<span class="flex items-center gap-1">
+<svg class="w-3 h-3 text-emerald-400" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" fill-rule="evenodd"></path></svg>
+                Hardware Key &amp; Seed Encrypted locally
+              </span>
+<span class="text-emerald-400 font-medium">Protected</span>
+</div>
+</div>
+</article>
+<!-- CARD 4: KRAK CARD -->
+<article class="bg-[#200812] rounded-2xl p-5 text-white border border-rose-950 shadow-sm" data-purpose="krak-card">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-rose-900/40 text-rose-300 text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            KRAK CARD
+          </div>
+<h2 class="text-2xl font-bold tracking-tight text-white leading-tight">
+            The global money app
+          </h2>
+<p class="text-xs text-rose-200/80 mt-2.5 leading-relaxed">
+            Spend crypto and stablecoins directly worldwide without high currency conversion markups. Real-time balance settlement, instant push alerts, virtual cards on Apple Pay and Google Wallet.
+          </p>
+<div class="mt-4">
+<a class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-rose-700 hover:bg-rose-800 text-white text-xs font-semibold shadow transition-colors" href="#">
+<span>Join the waitlist</span>
+<span>✉</span>
+</a>
+</div>
+<!-- Debit Card Visual Mockup -->
+<div class="mt-5 w-full aspect-[1.586] rounded-2xl p-4 bg-gradient-to-tr from-[#1b0610] via-[#2f0d1d] to-[#45102a] border border-rose-800/40 flex flex-col justify-between shadow-2xl relative overflow-hidden">
+<div class="flex items-center justify-between">
+<span class="font-extrabold text-sm tracking-widest lowercase text-rose-100">kraken</span>
+<!-- Contactless Symbol -->
+<svg class="w-5 h-5 text-rose-300/80" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M8.5 14.5A2.5 2.5 0 0011 12a2.5 2.5 0 00-2.5-2.5M5.5 17.5A6.5 6.5 0 0012 11a6.5 6.5 0 00-6.5-6.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<!-- Card Chip & Masked Digits -->
+<div class="my-auto pt-2">
+<div class="w-8 h-6 rounded bg-amber-400/80 border border-amber-300/60 mb-2"></div>
+<div class="font-mono text-sm tracking-wider text-rose-100/90 font-medium">
+                •••• •••• •••• 2026
+              </div>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<span class="text-[8px] uppercase tracking-wider text-rose-400 block">Cardholder</span>
+<span class="text-xs font-semibold text-rose-100 tracking-wider">MORGAN VANCE</span>
+</div>
+<span class="text-base font-black italic tracking-tighter text-white">VISA</span>
+</div>
+</div>
+</article>
+<!-- CARD 5: DEVELOPER CLI -->
+<article class="bg-[#0f141c] rounded-2xl p-5 text-white border border-gray-800 shadow-sm" data-purpose="developer-cli-card">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-blue-900/30 text-blue-400 text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            DEVELOPER FIRST
+          </div>
+<h2 class="text-xl font-bold tracking-tight text-white leading-tight">
+            Kraken CLI &amp; Low-Latency APIs
+          </h2>
+<p class="text-xs text-gray-400 mt-2 leading-relaxed">
+            Build quantitative strategies with REST &amp; WebSocket streams. Low latency order placement, robust order book feeds, and sandboxed test environments.
+          </p>
+<!-- Simulated Terminal Code Snippet -->
+<div class="mt-4 bg-[#07090e] rounded-xl p-3 border border-gray-800 font-mono text-[11px] text-gray-300">
+<div class="text-gray-500">// Query real-time CAD market depth via CLI</div>
+<div class="mt-1 text-purple-400">$ kraken market depth --pair=XBT/CAD --limit=5</div>
+<div class="mt-1 text-emerald-400">√ Connected to wss://ws.kraken.com (latency 1.4ms)</div>
+<div class="mt-1 text-gray-400">BID: $89,420.50 | ASK: $89,425.00 | SPREAD: 0.005%</div>
+</div>
+<div class="mt-3.5">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-400 hover:text-blue-300" href="#">
+<span>Read API documentation</span>
+<span>&lt;/&gt;</span>
+</a>
+</div>
+</article>
+<!-- CARD 6: CAPITAL EFFICIENCY / LEVERAGE -->
+<article class="bg-[#131722] rounded-2xl p-5 text-white border border-gray-800 shadow-sm" data-purpose="margin-leverage-card">
+<div class="inline-block px-2.5 py-0.5 rounded-full bg-indigo-900/40 text-indigo-300 text-[10px] font-bold tracking-wider uppercase mb-2.5">
+            CAPITAL EFFICIENCY
+          </div>
+<h2 class="text-xl font-bold tracking-tight text-white leading-tight">
+            Up to 20x margin capability
+          </h2>
+<p class="text-xs text-gray-400 mt-2 leading-relaxed">
+            Amplify trading positions across major crypto collateral. Multi-currency settlement, cross-margining, real-time liquidation warnings, and advanced stops.
+          </p>
+<!-- Metrics Container -->
+<div class="mt-4 bg-[#0a0d14] rounded-xl p-3 border border-gray-800 grid grid-cols-2 gap-3 text-left">
+<div>
+<span class="text-[10px] text-gray-500 uppercase tracking-wider block">Max Leverage</span>
+<span class="text-base font-bold text-white">20x</span>
+</div>
+<div>
+<span class="text-[10px] text-gray-500 uppercase tracking-wider block">Collateral Assets</span>
+<span class="text-base font-bold text-white">15+ Pairs</span>
+</div>
+<div class="col-span-2 pt-2 border-t border-gray-800/80 flex items-center justify-between">
+<span class="text-[10px] text-gray-400">Dynamic Interest Rates:</span>
+<span class="text-[11px] font-mono text-emerald-400 font-semibold">0.01% / 4 hours</span>
+</div>
+</div>
+<div class="mt-3.5">
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-400 hover:text-indigo-300" href="#">
+<span>Learn margin requirements</span>
+<span>↗</span>
+</a>
+</div>
+</article>
+</section>
+<!-- END: ProductCards -->
+<!-- BEGIN: ExploreEveryMarket -->
+<section class="mx-3 mb-6 bg-white rounded-2xl p-4 border border-gray-200/90 shadow-sm" data-purpose="market-explorer">
+<div class="mb-3">
+<h3 class="text-xl font-extrabold text-gray-950 tracking-tight">Explore every market</h3>
+<p class="text-[11px] text-gray-500 mt-0.5">Dated historical market pricing shown in Canadian Dollars (CAD) as of 2026-09-28.</p>
+</div>
+<!-- Segmented Tab Controls -->
+<div class="flex items-center justify-end mb-4">
+<div class="inline-flex p-1 bg-gray-100 rounded-xl text-xs font-medium text-gray-600">
+<button class="px-2.5 py-1 rounded-lg bg-white text-[#582cd1] font-semibold shadow-xs">Crypto</button>
+<button class="px-2 py-1 rounded-lg hover:text-gray-900 transition-colors">Spot-Margin</button>
+<button class="px-2 py-1 rounded-lg hover:text-gray-900 transition-colors">Futures</button>
+</div>
+</div>
+<!-- Coins List (6 requested assets) -->
+<div class="divide-y divide-gray-100">
+<!-- 1. Bitcoin -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">₿</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Bitcoin</div>
+<div class="text-[10px] text-gray-400 font-medium">BTC</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$89,420.50 CAD</div>
+<div class="text-[10px] font-semibold text-emerald-600">+2.41%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+<!-- 2. Ethereum -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-indigo-500 text-white flex items-center justify-center font-bold text-xs shadow-xs">Ξ</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Ethereum</div>
+<div class="text-[10px] text-gray-400 font-medium">ETH</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$3,640.10 CAD</div>
+<div class="text-[10px] font-semibold text-emerald-600">+1.85%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+<!-- 3. Solana -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-600 to-teal-400 text-white flex items-center justify-center font-bold text-xs shadow-xs">◎</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Solana</div>
+<div class="text-[10px] text-gray-400 font-medium">SOL</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$198.40 CAD</div>
+<div class="text-[10px] font-semibold text-emerald-600">+5.12%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+<!-- 4. Ripple -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs shadow-xs">✕</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Ripple</div>
+<div class="text-[10px] text-gray-400 font-medium">XRP</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$0.82 CAD</div>
+<div class="text-[10px] font-semibold text-rose-500">-0.64%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+<!-- 5. Dogecoin -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-amber-400 text-white flex items-center justify-center font-bold text-xs shadow-xs">Ð</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Dogecoin</div>
+<div class="text-[10px] text-gray-400 font-medium">DOGE</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$0.21 CAD</div>
+<div class="text-[10px] font-semibold text-emerald-600">+3.10%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+<!-- 6. Cardano -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">₳</div>
+<div>
+<div class="text-xs font-bold text-gray-900">Cardano</div>
+<div class="text-[10px] text-gray-400 font-medium">ADA</div>
+</div>
+</div>
+<div class="text-right">
+<div class="text-xs font-bold text-gray-900">$0.58 CAD</div>
+<div class="text-[10px] font-semibold text-emerald-600">+0.95%</div>
+</div>
+<a class="ml-2 px-3 py-1 text-xs font-semibold rounded-full bg-purple-50 text-[#582cd1] hover:bg-purple-100 transition-colors" href="#">
+              Trade
+            </a>
+</div>
+</div>
+<div class="mt-4 pt-3 text-center border-t border-gray-100">
+<a class="inline-flex items-center gap-1 text-xs font-bold text-[#582cd1] hover:underline" href="#">
+<span>View all 200+ markets</span>
+<span>→</span>
+</a>
+</div>
+</section>
+<!-- END: ExploreEveryMarket -->
+<!-- BEGIN: BottomCTA -->
+<section class="mx-3 mb-6 bg-[#582cd1] rounded-2xl p-6 text-white text-center shadow-lg" data-purpose="bottom-cta-banner">
+<h3 class="text-2xl font-black tracking-tight leading-tight">
+          Make your first move
+        </h3>
+<p class="text-xs text-purple-100 mt-2 px-2 leading-relaxed">
+          Join millions of traders worldwide. Fund with Interac e-Transfer in Canadian Dollars or crypto within minutes.
+        </p>
+<div class="mt-5 flex flex-col gap-2.5 w-full">
+<a class="w-full py-3 bg-white text-gray-950 hover:bg-gray-100 font-bold rounded-xl text-xs shadow-sm transition-all text-center" href="#signup">
+            Create account
+          </a>
+<a class="w-full py-3 bg-purple-700/50 border border-purple-400/40 text-white hover:bg-purple-700/70 font-semibold rounded-xl text-xs transition-all text-center" href="#">
+            Explore products
+          </a>
+</div>
+</section>
+<!-- END: BottomCTA -->
+<!-- BEGIN: LegalRegulatoryArchivalNotice -->
+<section class="mx-3 mb-6 bg-[#ebe9f0] border border-gray-300/80 rounded-xl p-3.5 text-[10px] text-gray-600 leading-normal" data-purpose="regulatory-disclaimer">
+<div class="flex items-start gap-2">
+<!-- Info icon -->
+<svg class="w-3.5 h-3.5 text-purple-700 shrink-0 mt-0.5" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" fill-rule="evenodd"></path>
+</svg>
+<div class="space-y-1.5">
+<div class="font-bold text-gray-800 uppercase tracking-wider text-[9px]">Canadian Regulatory Compliance &amp; Dated Historical Archival Notice</div>
+<p>
+<strong>Dated Historical Archive:</strong> This page is an unofficial dated recreation referencing the public kraken.com Canadian layout on <strong>2026-09-28</strong>. All asset pricing (e.g. BTC, ETH, SOL in CAD) represents an illustrative historical snapshot and must never be interpreted as real-time market data, financial advice, or an offering of securities.
+            </p>
+<p>
+<strong>Payward Canada Inc.:</strong> Registered as a Money Services Business (MSB) with the Financial Transactions and Reports Analysis Centre of Canada (FINTRAC) under registration number M20489912. Crypto assets are not covered by the Canadian Deposit Insurance Corporation (CDIC) or the Canadian Investor Protection Fund (CIPF). Trading in crypto assets carries a high level of risk and may not be suitable for all investors.
+            </p>
+</div>
+</div>
+</section>
+<!-- END: LegalRegulatoryArchivalNotice -->
+</main>
+<!-- BEGIN: MobileFooter -->
+<footer class="bg-[#f0eff5] border-t border-gray-200/90 pt-8 pb-10 px-5 text-gray-700" data-purpose="page-footer">
+<!-- Kraken Footer Wordmark & Mission -->
+<div>
+<span class="text-2xl font-black tracking-tight text-[#582cd1] lowercase select-none">kraken</span>
+<p class="text-xs text-gray-500 mt-2 leading-relaxed">
+          Leading the financial revolution since 2011. Providing secure, transparent, and regulated asset exchange infrastructure for clients across Canada and globally.
+        </p>
+</div>
+<!-- Navigation Columns (Mobile 2x2 Grid) -->
+<div class="grid grid-cols-2 gap-6 mt-6 pt-5 border-t border-gray-200/70 text-xs">
+<div>
+<h4 class="font-bold text-gray-900 mb-2.5">Products</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-purple-600 transition-colors" href="#">Exchange</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Kraken Pro</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Kraken Wallet</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Institutional</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">OTC Trading</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-2.5">Learn</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-purple-600 transition-colors" href="#">Crypto Guides</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">What is Bitcoin?</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Security Standards</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Proof of Reserves</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Canadian Tax Guide</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-2.5">Support</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-purple-600 transition-colors" href="#">24/7 Help Center</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">System Status</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Contact Us</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Bug Bounty</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Interac e-Transfer Help</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-gray-900 mb-2.5">Company</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-purple-600 transition-colors" href="#">About Payward</a></li>
+<li>
+<a class="inline-flex items-center gap-1.5 hover:text-purple-600 transition-colors" href="#">
+<span>Careers</span>
+<span class="text-[9px] bg-purple-100 text-purple-700 px-1 py-0.2 rounded font-bold uppercase">Hiring</span>
+</a>
+</li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Press Room</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Affiliates</a></li>
+<li><a class="hover:text-purple-600 transition-colors" href="#">Kraken Ventures</a></li>
+</ul>
+</div>
+</div>
+<!-- Legal & Disclaimers Footer Links -->
+<div class="mt-8 pt-5 border-t border-gray-200/80 text-[10px] text-gray-500 space-y-3">
+<p>© 2011 - 2025 Payward Canada Inc. NMLS ID 1843738. Regulated by FINTRAC.</p>
+<div class="flex flex-wrap gap-x-3 gap-y-1.5 text-gray-500 font-medium">
+<a class="hover:underline" href="#">Privacy Notice</a>
+<span>•</span>
+<a class="hover:underline" href="#">Terms of Service</a>
+<span>•</span>
+<a class="hover:underline" href="#">Security</a>
+<span>•</span>
+<a class="hover:underline" href="#">Disclosures</a>
+<span>•</span>
+<a class="hover:underline" href="#">Canadian Regulatory Info</a>
+<span>•</span>
+<a class="hover:underline" href="#">Crypto Asset Risk Statement</a>
+<span>•</span>
+<a class="hover:underline" href="#">Cookie Settings</a>
+</div>
+</div>
+</footer>
+<!-- END: MobileFooter -->
+</div>
+<!-- END: MobileContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="mobile-navigation-toggle">
+    // Toggle Mobile Navigation Drawer
+    const toggleBtn = document.getElementById('menu-toggle-btn');
+    const drawer = document.getElementById('mobile-menu-drawer');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+
+    let isOpen = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      if (isOpen) {
+        drawer.classList.remove('hidden');
+        bar1.classList.add('rotate-45', 'translate-y-1.5');
+        bar2.classList.add('opacity-0');
+        bar3.classList.add('-rotate-45', '-translate-y-1.5');
+      } else {
+        drawer.classList.add('hidden');
+        bar1.classList.remove('rotate-45', 'translate-y-1.5');
+        bar2.classList.remove('opacity-0');
+        bar3.classList.remove('-rotate-45', '-translate-y-1.5');
+      }
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>
