@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Intercom: A Complete System for Human and AI Customer Service</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Serif Display Typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary-fixed": "#e5e2e1",
+            "primary": "#000000",
+            "on-secondary-fixed-variant": "#484646",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#1d1b1a",
+            "outline": "#747878",
+            "inverse-primary": "#c8c6c5",
+            "tertiary-fixed": "#e6e1df",
+            "on-tertiary": "#ffffff",
+            "on-primary-container": "#858383",
+            "inverse-on-surface": "#f0f1f1",
+            "on-secondary-container": "#656464",
+            "secondary-fixed": "#e5e2e1",
+            "surface": "#f9f9f9",
+            "tertiary-fixed-dim": "#cac6c3",
+            "primary-fixed-dim": "#c8c6c5",
+            "inverse-surface": "#2f3131",
+            "on-surface": "#1a1c1c",
+            "on-primary": "#ffffff",
+            "background": "#f9f9f9",
+            "on-background": "#1a1c1c",
+            "error": "#ba1a1a",
+            "on-secondary-fixed": "#1c1b1b",
+            "surface-variant": "#e2e2e2",
+            "surface-container-low": "#f3f3f4",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#dadada",
+            "outline-variant": "#c4c7c7",
+            "on-primary-fixed": "#1c1b1b",
+            "on-tertiary-fixed-variant": "#484645",
+            "surface-container-highest": "#e2e2e2",
+            "surface-tint": "#5f5e5e",
+            "secondary-fixed-dim": "#c9c6c5",
+            "surface-container-high": "#e8e8e8",
+            "surface-container": "#eeeeee",
+            "surface-bright": "#f9f9f9",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#444748",
+            "tertiary-container": "#1d1b1a",
+            "secondary": "#5f5e5e",
+            "on-error-container": "#93000a",
+            "primary-container": "#1c1b1b",
+            "on-tertiary-container": "#868381",
+            "tertiary": "#000000",
+            "on-primary-fixed-variant": "#474646",
+            "on-error": "#ffffff",
+            "secondary-container": "#e5e2e1"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "serif": ["Newsreader", "Georgia", "serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    body {
+      -webkit-tap-highlight-color: transparent;
+      text-rendering: optimizeLegibility;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="w-full max-w-full bg-surface-container-lowest text-on-surface font-body antialiased selection:bg-surface-variant">
+<!-- 34px Announcement Bar -->
+<aside class="w-full h-[34px] bg-primary text-on-primary px-4 flex items-center justify-between text-[12px] font-medium tracking-tight z-50" id="announcement-banner">
+<div class="flex items-center gap-1.5 truncate">
+<span class="truncate">Join us at Pioneer, Oct 7.</span>
+<a class="underline underline-offset-2 hover:opacity-80 transition-opacity font-semibold" href="#register">Register</a>
+</div>
+<button aria-label="Dismiss banner" class="p-1 hover:opacity-75 transition-opacity text-on-primary flex items-center justify-center" onclick="document.getElementById('announcement-banner').style.display='none'">
+<span class="material-symbols-outlined text-[16px]">close</span>
+</button>
+</aside>
+<!-- Sticky Mobile Header -->
+<header class="sticky top-0 z-40 w-full h-[64px] bg-surface-container-lowest/95 backdrop-blur-md px-4 flex items-center justify-between border-b border-outline-variant/30">
+<div class="flex items-center gap-2.5">
+<!-- Authentic Intercom Minimal Brandmark -->
+<a aria-label="Intercom Home" class="flex items-center gap-1.5 focus:outline-none" href="#">
+<svg class="w-7 h-7 text-primary fill-current" viewbox="0 0 28 28">
+<path d="M5.5 8C5.5 6.62 6.62 5.5 8 5.5H20C21.38 5.5 22.5 6.62 22.5 8V18C22.5 19.38 21.38 20.5 20 20.5H16.5L13.8 23.2C13.4 23.6 12.8 23.4 12.8 22.9V20.5H8C6.62 20.5 5.5 19.38 5.5 18V8Z" fill="currentColor"></path>
+<circle cx="9.5" cy="13" fill="#FFFFFF" r="1.5"></circle>
+<circle cx="14" cy="13" fill="#FFFFFF" r="1.5"></circle>
+<circle cx="18.5" cy="13" fill="#FFFFFF" r="1.5"></circle>
+</svg>
+<span class="font-headline font-bold text-lg tracking-tight text-primary">Intercom</span>
+</a>
+<a class="text-[11px] font-medium tracking-tight px-2 py-0.5 border border-outline-variant/60 rounded-full text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#fin">
+<span>Fin AI</span>
+<span class="material-symbols-outlined text-[12px]">arrow_forward</span>
+</a>
+</div>
+<div class="flex items-center gap-2">
+<a class="bg-primary text-on-primary text-[12px] font-semibold px-3 py-2 rounded-lg hover:opacity-90 transition-opacity" href="#trial">
+        Start free trial
+      </a>
+<button aria-label="Toggle navigation drawer" class="p-1.5 text-on-surface rounded hover:bg-surface-container-low transition-colors" id="menu-btn" onclick="toggleMenu()">
+<span class="material-symbols-outlined text-[24px]" id="menu-icon">menu</span>
+</button>
+</div>
+</header>
+<!-- Mobile Navigation Drawer -->
+<nav class="hidden fixed inset-x-0 top-[98px] bottom-0 bg-surface-container-lowest z-30 p-6 flex-col justify-between overflow-y-auto border-t border-outline-variant/30" id="mobile-menu">
+<div class="flex flex-col gap-5 pt-2">
+<div class="space-y-4">
+<a class="text-xl font-headline font-semibold text-primary block" href="#product" onclick="toggleMenu()">Product</a>
+<a class="text-xl font-headline font-semibold text-primary block" href="#customers" onclick="toggleMenu()">Customers</a>
+<a class="text-xl font-headline font-semibold text-primary block" href="#resources" onclick="toggleMenu()">Resources</a>
+<a class="text-xl font-headline font-semibold text-primary block" href="#pricing" onclick="toggleMenu()">Pricing</a>
+</div>
+<div class="h-px w-full bg-outline-variant/40 my-3"></div>
+<div class="flex flex-col gap-3.5 text-sm font-medium text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#login" onclick="toggleMenu()">Log in</a>
+<a class="hover:text-primary transition-colors" href="#sales" onclick="toggleMenu()">Contact sales</a>
+<a class="hover:text-primary transition-colors" href="#demo" onclick="toggleMenu()">View demo</a>
+</div>
+</div>
+<div class="pt-8 pb-4 flex flex-col gap-3">
+<a class="w-full py-3.5 bg-primary text-on-primary text-center font-semibold text-sm rounded-lg" href="#trial" onclick="toggleMenu()">
+        Start free trial
+      </a>
+<p class="text-center text-xs text-on-surface-variant">Instant setup. No credit card required.</p>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="pt-8 pb-12 px-5 text-center flex flex-col items-center">
+<!-- G2 Review Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/40 text-[11px] font-medium text-on-surface mb-6">
+<span>Over 2,000 five-star reviews on</span>
+<span class="font-bold text-primary">G2</span>
+<div class="flex text-[#ff7900] text-[12px] leading-none">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<!-- 3-Line Hero Headline -->
+<h1 class="font-headline tracking-tight text-[38px] leading-[1.08] font-extrabold max-w-sm mb-5">
+<span class="text-[#9ca3af] block">A complete system for</span>
+<span class="text-primary block font-black">human and AI</span>
+<span class="text-[#9ca3af] block">customer service</span>
+</h1>
+<!-- Editorial Serif Paragraph -->
+<p class="font-serif italic text-[17px] leading-relaxed text-on-surface-variant max-w-xs mb-8">
+        Intercom is the only helpdesk with a natively integrated AI Agent, Fin, meaning every customer conversation improves the next one, enabling perfect experiences that were never possible before.
+      </p>
+<!-- Email Capture Form -->
+<div class="w-full max-w-sm flex flex-col gap-2.5 mb-2" id="trial">
+<div class="relative">
+<input class="w-full px-4 py-3.5 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary transition-all" placeholder="Enter your work email..." type="email"/>
+</div>
+<button class="w-full py-3.5 bg-primary text-on-primary font-semibold text-sm rounded-lg hover:opacity-90 active:scale-[0.99] transition-all">
+          Start free trial
+        </button>
+</div>
+<p class="text-[12px] text-on-surface-variant mb-10">14 day free trial. No credit card required.</p>
+<!-- Editorial 3-Tile Collage -->
+<div class="w-full max-w-sm grid grid-cols-3 gap-2.5">
+<div class="aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/50 relative bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A vivid, sharp high-fashion macro photograph focusing tightly on a single human eye with delicate iris details. Natural soft daylight illuminates the subtle skin texture and neutral tones, capturing an atmosphere of human observation and emotional presence in a minimalist studio environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4U_RkwtDxYYXcnc8c15f0wWfYGl1aRcXXwWxJEEp8cMjpVlejFic6IsEJ8z3grRqCZ7W2mK4BuxMNMEb_WhC5i3bcyVqRNZXaYj4rE97MOsJmqeyXcH5EOAFbXxhHzHd543useplFk9vLMmpOiHoErpmQHENAsFbO6TcpMh_OdfUJynQa_Ve-mTvD9-XxRjY2Dvr_XzzJeJ98bu7Kjd7_zr7m4cqyUeoLk-s2t-onXa4ZnHx4T-bPKzmbh2mz5T2KPbx90iIfRqc"/>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/50 relative bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An expansive, high-contrast monochrome landscape featuring a flock of migratory birds soaring effortlessly across an overcast, atmospheric sky. The composition emphasizes calm precision, geometric freedom, and wide open horizon with subtle gradient transitions of white, slate gray, and pitch black." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAa9TlLshNytW_I18yamKtVnEgLbGA25WRHzTihmfdnUurWMPr8UIhjOoM9W_E2resqNWQPeCreYL--Vq0Gh3AEjFxOqTqlN69XrNEIRBppKGqBtUdS1BQEUy4jikSNwBcSG58RGwSYzuqRQVIbM7StrOeDZ0CfQ85g4zkNaZdWKqDbp-72oY-ft7jlEJO4SMV9osfYv1fSNFrZfF42o7abdfVhV8c94QdhbwObaIC9KsUsZ3Ss8zZinU5_zzeFR77e3koB866eOPo"/>
+</div>
+<div class="aspect-[3/4] rounded-xl overflow-hidden border border-outline-variant/50 relative bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="An artistic high-contrast architectural portrait showing a striking human silhouette casting a sharp geometric shadow across a bright brutalist concrete gallery wall. Crisp daylight creates high key contrast between clean white walls and deep black human contours, evoking modern design rigor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB82Kc4JjDfuuOSNPreao-7xTHvNieg80uHrYFQv1QCGrRSkPlSw7oiLPEtBYdYIDF3UuHCZwuXe5ZF8Nze-pfPiNv5tVYlzDadlwlGyWX7CA8cNrNMSy1YT6QzZwdK2G6HVJ6Qrw9wW53hhDnadctifVlgwgRw3fgPglIUcelkcRpPhJHeQtsQwLK1_bjMW7RHo2-27Qc6T-G4OLIGJEJfyX5z8TjkWQttLzU1RZ87nvp9lgX8ZHsEonIecYPmwREw5avzgJQwKWw"/>
+</div>
+</div>
+</section>
+<!-- Section 2: Two products, one seamless experience -->
+<section class="py-12 px-5 bg-surface-container-low border-y border-outline-variant/30" id="product">
+<div class="text-center max-w-sm mx-auto mb-6">
+<span class="inline-block px-2.5 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant text-[11px] font-semibold tracking-wider mb-2">THE PLATFORM</span>
+<h2 class="text-2xl font-headline font-bold text-primary tracking-tight">Two products, one seamless experience</h2>
+</div>
+<!-- Segmented Pill Switcher -->
+<div class="max-w-xs mx-auto flex p-1 bg-surface-container-highest rounded-full mb-6">
+<button class="flex-1 py-1.5 text-xs font-semibold rounded-full bg-surface-container-lowest text-primary shadow-sm transition-all" id="tab-helpdesk" onclick="switchProductTab('helpdesk')">
+          Intercom Helpdesk
+        </button>
+<button class="flex-1 py-1.5 text-xs font-medium rounded-full text-on-surface-variant hover:text-primary transition-all" id="tab-fin" onclick="switchProductTab('fin')">
+          Fin AI Agent
+        </button>
+</div>
+<!-- Realistic Intercom Workspace Simulation Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/60 shadow-sm overflow-hidden max-w-sm mx-auto">
+<!-- Inbox Workspace Header -->
+<div class="px-3.5 py-2.5 border-b border-outline-variant/30 flex items-center justify-between bg-surface">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#10b981]"></span>
+<span class="text-xs font-semibold text-primary">Inbox #4029</span>
+<span class="text-[10px] text-on-surface-variant px-1.5 py-0.5 rounded bg-surface-container border border-outline-variant/40">Enterprise</span>
+</div>
+<span class="text-[11px] text-on-surface-variant font-mono">14m SLA</span>
+</div>
+<!-- Live Chat Thread -->
+<div class="p-3.5 flex flex-col gap-3">
+<!-- Customer Message -->
+<div class="flex gap-2.5 items-start">
+<div class="w-6 h-6 rounded-full bg-surface-container-high flex items-center justify-center text-[10px] font-bold text-on-surface flex-shrink-0">
+              SL
+            </div>
+<div class="flex-1">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="text-xs font-semibold text-primary">Sarah Lin</span>
+<span class="text-[10px] text-on-surface-variant">CloudScale VP</span>
+</div>
+<p class="text-xs text-on-surface bg-surface-container-low p-2.5 rounded-lg rounded-tl-none border border-outline-variant/30">
+                Can you help configure SAML 2.0 with Okta? We need ACS URL attributes verified for 4,000 seats.
+              </p>
+</div>
+</div>
+<!-- Fin AI Grounded Agent Resolution Snippet -->
+<div class="ml-4 pl-3 border-l-2 border-primary flex flex-col gap-2 py-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[15px] text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span class="text-[11px] font-bold text-primary">Fin AI Agent</span>
+<span class="text-[9px] bg-primary text-on-primary px-1.5 py-0.2 rounded font-mono">100% Grounded</span>
+</div>
+<span class="text-[10px] text-on-surface-variant">Latency 410ms</span>
+</div>
+<p class="text-xs text-on-surface bg-surface p-2.5 rounded-lg border border-outline-variant/40">
+              Here is your Okta SAML 2.0 SSO setup link. Enter your Intercom Workspace ID and verify the ACS URL: <code class="text-[11px] bg-surface-container-high px-1 py-0.5 rounded">https://auth.intercom.com/sso/saml2</code>.
+            </p>
+<div class="flex items-center gap-1.5 text-[10px] text-on-surface-variant">
+<span class="material-symbols-outlined text-[12px]">verified</span>
+<span>Source: Enterprise IAM Architecture v1.2</span>
+</div>
+</div>
+<!-- Human Copilot Suggestion Prompt -->
+<div class="bg-surface-container-high/60 rounded-lg p-2.5 border border-dashed border-outline-variant/60 flex items-center justify-between">
+<div class="flex items-center gap-2 truncate">
+<span class="material-symbols-outlined text-[16px] text-primary">auto_fix_high</span>
+<span class="text-[11px] font-medium text-on-surface truncate">Copilot: Draft resolution confirmation</span>
+</div>
+<button class="text-[10px] font-semibold bg-surface-container-lowest px-2 py-1 rounded border border-outline-variant hover:bg-surface text-primary">
+              Insert
+            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Trusted Brands Logo Wall -->
+<section class="py-10 px-5 border-b border-outline-variant/30 text-center" id="customers">
+<p class="text-[11px] font-bold tracking-widest text-on-surface-variant mb-6 uppercase">Trusted by 30,000+ leading brands</p>
+<div class="grid grid-cols-2 gap-y-6 gap-x-4 max-w-xs mx-auto items-center justify-items-center opacity-85">
+<span class="font-headline font-bold text-base tracking-tighter text-primary">Anthropic</span>
+<span class="font-headline font-semibold text-base tracking-tight text-primary">ATLASSIAN</span>
+<span class="font-headline font-bold text-base tracking-normal text-primary">amazon</span>
+<span class="font-headline font-semibold text-base tracking-tight text-primary">Notion</span>
+<span class="font-headline font-medium text-base tracking-wide text-primary">frame.io</span>
+<span class="font-headline font-bold text-base tracking-tight text-primary">lightspeed</span>
+<span class="font-headline font-semibold text-base tracking-tight text-primary col-span-2">New Relic.</span>
+</div>
+</section>
+<!-- Section 4: Helpdesk Capabilities -->
+<section class="py-14 px-5">
+<div class="max-w-sm mx-auto mb-8">
+<span class="text-[11px] font-bold tracking-widest text-primary uppercase block mb-1">Help Desk</span>
+<h2 class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-2.5">Intercom is a fully-featured AI-powered helpdesk</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Engineered from the ground up for modern teams to collaborate effortlessly, orchestrate proactive resolutions, and give human reps superhuman speed.</p>
+</div>
+<div class="max-w-sm mx-auto flex flex-col gap-4">
+<!-- Card 1 -->
+<div class="p-5 rounded-xl border border-outline-variant/60 bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center mb-3 text-primary">
+<span class="material-symbols-outlined text-[20px]">inbox</span>
+</div>
+<h3 class="text-base font-headline font-bold text-primary mb-1.5">Maximize productivity with an AI-enhanced inbox</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Instant AI conversation summaries, live tone rewrites, language translations across 45+ languages, and automated triaging.</p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#inbox">
+<span>Explore inbox features</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2 -->
+<div class="p-5 rounded-xl border border-outline-variant/60 bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center mb-3 text-primary">
+<span class="material-symbols-outlined text-[20px]">confirmation_number</span>
+</div>
+<h3 class="text-base font-headline font-bold text-primary mb-1.5">Ticketing, built for collaboration</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Cross-functional ticketing living right next to customer live chats, bi-directional Jira and finance sync, and automated SLA rules.</p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#ticketing">
+<span>Explore Ticketing</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3 -->
+<div class="p-5 rounded-xl border border-outline-variant/60 bg-surface-container-lowest">
+<div class="w-8 h-8 rounded-lg bg-surface-container-high flex items-center justify-center mb-3 text-primary">
+<span class="material-symbols-outlined text-[20px]">campaign</span>
+</div>
+<h3 class="text-base font-headline font-bold text-primary mb-1.5">Support for customers, before they need it</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed mb-4">Proactive outbound banners, contextual in-app guidance, scheduled announcements, and status alerts before issues compound.</p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#proactive">
+<span>Explore Proactive Support</span>
+<span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Section 5: Fin AI Agent -->
+<section class="py-14 px-5 bg-surface-container-low border-y border-outline-variant/30" id="fin">
+<div class="max-w-sm mx-auto mb-8">
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary text-on-primary text-[11px] font-semibold tracking-wider mb-2">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<span>FIN AI AGENT</span>
+</span>
+<h2 class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-2.5">Fin is the highest-performing AI agent</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">Zero hallucination architecture, instant onboarding from your existing docs, and autonomous resolutions across all channels.</p>
+</div>
+<!-- Metrics Cards -->
+<div class="max-w-sm mx-auto grid grid-cols-1 gap-3.5 mb-6">
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/60">
+<div class="text-3xl font-headline font-extrabold text-primary tracking-tight mb-1">76%</div>
+<div class="text-xs font-bold text-primary mb-1">Average Resolution Rate</div>
+<p class="text-[11px] text-on-surface-variant leading-snug">Resolves technical, billing, and order inquiries end-to-end without touching a human rep.</p>
+</div>
+<div class="grid grid-cols-2 gap-3.5">
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/60">
+<div class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-1">12,000+</div>
+<div class="text-[11px] font-semibold text-on-surface-variant">Organizations powered by Fin</div>
+</div>
+<div class="p-4 bg-surface-container-lowest rounded-xl border border-outline-variant/60">
+<div class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-1">&lt; 1 min</div>
+<div class="text-[11px] font-semibold text-on-surface-variant">First-response &amp; resolution</div>
+</div>
+</div>
+</div>
+<!-- Fin Live Execution Simulation -->
+<div class="max-w-sm mx-auto p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/60 mb-8 font-mono text-[11px]">
+<div class="flex items-center justify-between pb-2 mb-2 border-b border-outline-variant/30 text-on-surface-variant">
+<span class="font-sans font-bold text-xs text-primary flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+            Fin AI Resolution Engine
+          </span>
+<span>480ms</span>
+</div>
+<div class="space-y-1.5 text-on-surface-variant">
+<p><span class="text-primary font-bold">1. Query:</span> "SAML 2.0 Okta ACS URL setup"</p>
+<p><span class="text-primary font-bold">2. Retrieval:</span> 3 knowledge articles ingested</p>
+<p><span class="text-primary font-bold">3. Grounding check:</span> <span class="text-[#10b981] font-bold">99.4% verified</span></p>
+<p><span class="text-primary font-bold">4. Action:</span> Response generated with verified citations</p>
+</div>
+</div>
+<!-- Value Props -->
+<div class="max-w-sm mx-auto space-y-3">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">check_circle</span>
+<div>
+<h4 class="text-xs font-bold text-primary">Instant setup with your existing content</h4>
+<p class="text-[11px] text-on-surface-variant">Point Fin at Zendesk, Notion, PDFs, or URL endpoints in seconds.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">verified_user</span>
+<div>
+<h4 class="text-xs font-bold text-primary">Grounded truth without hallucinations</h4>
+<p class="text-[11px] text-on-surface-variant">Strict boundary guardrails safeguard enterprise security and compliance.</p>
+</div>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-primary mt-0.5">hub</span>
+<div>
+<h4 class="text-xs font-bold text-primary">Omnichannel across web, mobile, WhatsApp, and email</h4>
+<p class="text-[11px] text-on-surface-variant">Uniform quality of resolution wherever your users initiate contact.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Flywheel & Proof -->
+<section class="py-14 px-5">
+<div class="max-w-sm mx-auto mb-8">
+<h2 class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-2.5">Together, they deliver better support experiences</h2>
+<p class="text-sm text-on-surface-variant leading-relaxed">A continuous flywheel where automated AI and human empathy compound to make your entire support operation smarter every single day.</p>
+</div>
+<!-- 3-Step Vertical Flow -->
+<div class="max-w-sm mx-auto relative pl-6 border-l border-outline-variant/60 space-y-7 mb-12">
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-surface-container-lowest"></div>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant uppercase">Phase 01</span>
+<h3 class="text-sm font-headline font-bold text-primary mt-0.5">Fin handles routine inquiries</h3>
+<p class="text-xs text-on-surface-variant mt-1">76% autonomous answers solved instantaneously without queue wait times.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-surface-container-lowest"></div>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant uppercase">Phase 02</span>
+<h3 class="text-sm font-headline font-bold text-primary mt-0.5">Seamless human handoff</h3>
+<p class="text-xs text-on-surface-variant mt-1">When nuance is required, Fin passes a structured recap so users never repeat details.</p>
+</div>
+<div class="relative">
+<div class="absolute -left-[31px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-surface-container-lowest"></div>
+<span class="text-[10px] font-mono font-bold text-on-surface-variant uppercase">Phase 03</span>
+<h3 class="text-sm font-headline font-bold text-primary mt-0.5">Continuous flywheel learning</h3>
+<p class="text-xs text-on-surface-variant mt-1">Human rep solutions are automatically converted into new approved knowledge articles for Fin.</p>
+</div>
+</div>
+<!-- Testimonials / Quote Cards -->
+<div class="max-w-sm mx-auto space-y-4">
+<div class="p-4 rounded-xl bg-surface border border-outline-variant/50">
+<p class="font-serif italic text-xs leading-relaxed text-on-surface mb-3">
+            "Fin resolved over 70% of inbound user questions with exceptional accuracy. Our human reps now focus almost exclusively on high-impact customer relationships."
+          </p>
+<div class="flex items-center justify-between text-[11px]">
+<span class="font-bold text-primary">Anthropic</span>
+<span class="text-on-surface-variant">Head of CX Operations</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface border border-outline-variant/50">
+<p class="font-serif italic text-xs leading-relaxed text-on-surface mb-3">
+            "The unified helpdesk gave our team hours back every week while CSAT jumped to 98%. The interplay between Fin and our human staff is seamless."
+          </p>
+<div class="flex items-center justify-between text-[11px]">
+<span class="font-bold text-primary">Klean</span>
+<span class="text-on-surface-variant">VP Customer Experience</span>
+</div>
+</div>
+<div class="p-4 rounded-xl bg-surface border border-outline-variant/50">
+<p class="font-serif italic text-xs leading-relaxed text-on-surface mb-3">
+            "Scaling our customer base 4x without scaling support headcount would have been literally impossible without Intercom and Fin."
+          </p>
+<div class="flex items-center justify-between text-[11px]">
+<span class="font-bold text-primary">Neo Financial</span>
+<span class="text-on-surface-variant">Director of Member Support</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Integrations -->
+<section class="py-12 px-5 bg-surface-container-low border-y border-outline-variant/30">
+<div class="max-w-sm mx-auto text-center mb-6">
+<h2 class="text-xl font-headline font-bold text-primary tracking-tight mb-1">Works with the tools you already use</h2>
+<p class="text-xs text-on-surface-variant">Connect Intercom with your entire stack in minutes.</p>
+</div>
+<div class="max-w-xs mx-auto grid grid-cols-2 gap-2 text-center text-xs font-medium text-on-surface">
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">cloud</span> Salesforce
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">task_alt</span> Jira
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">support_agent</span> Zendesk
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">forum</span> Slack
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">hub</span> HubSpot
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">terminal</span> GitHub
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">credit_card</span> Stripe
+        </div>
+<div class="p-2.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 flex items-center justify-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">shopping_bag</span> Shopify
+        </div>
+</div>
+</section>
+<!-- Section 8: Transparent Pricing -->
+<section class="py-14 px-5" id="pricing">
+<div class="max-w-sm mx-auto mb-8 text-center">
+<h2 class="text-2xl font-headline font-extrabold text-primary tracking-tight mb-1.5">Transparent pricing</h2>
+<p class="text-sm text-on-surface-variant">Start free, scale as your business grows.</p>
+</div>
+<div class="max-w-sm mx-auto space-y-4">
+<!-- Tier 1 -->
+<div class="p-5 rounded-xl border border-outline-variant/70 bg-surface-container-lowest flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-base font-headline font-bold text-primary">Intercom Helpdesk</h3>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">For Human Agents</span>
+</div>
+<div class="flex items-baseline gap-1 mb-3">
+<span class="text-3xl font-extrabold text-primary tracking-tight">$29</span>
+<span class="text-xs text-on-surface-variant">/ seat / month billed annually</span>
+</div>
+<ul class="text-xs text-on-surface-variant space-y-2 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> Shared multi-channel inbox
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> Integrated AI Copilot for reps
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> SLA management &amp; routing
+              </li>
+</ul>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary text-xs font-semibold rounded-lg hover:opacity-90">
+            Start 14-day free trial
+          </button>
+</div>
+<!-- Tier 2 -->
+<div class="p-5 rounded-xl border-2 border-primary bg-surface-container-lowest flex flex-col justify-between relative shadow-sm">
+<div class="absolute -top-3 right-4 bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 rounded">
+            MOST POPULAR
+          </div>
+<div>
+<div class="flex items-center justify-between mb-2">
+<h3 class="text-base font-headline font-bold text-primary">Fin AI Agent</h3>
+<span class="text-[10px] uppercase font-bold text-on-surface-variant bg-surface-container px-2 py-0.5 rounded">Autonomous AI</span>
+</div>
+<div class="flex items-baseline gap-1 mb-3">
+<span class="text-3xl font-extrabold text-primary tracking-tight">$0.99</span>
+<span class="text-xs text-on-surface-variant">/ per successful resolution</span>
+</div>
+<ul class="text-xs text-on-surface-variant space-y-2 mb-6">
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> Zero cost on unassisted handoffs
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> Native omnichannel resolution
+              </li>
+<li class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary">check</span> 45+ languages out of the box
+              </li>
+</ul>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary text-xs font-semibold rounded-lg hover:opacity-90">
+            Try Fin on your content
+          </button>
+</div>
+</div>
+<div class="mt-5 text-center">
+<a class="text-xs font-semibold text-primary underline underline-offset-4" href="#savings">
+          Calculate your expected monthly savings with Fin →
+        </a>
+</div>
+</section>
+<!-- Section 9: Final Call to Action -->
+<section class="py-16 px-5 bg-primary text-on-primary text-center">
+<div class="max-w-sm mx-auto flex flex-col items-center">
+<h2 class="text-3xl font-headline font-extrabold tracking-tight mb-3">Deliver perfect customer experiences</h2>
+<p class="text-xs text-on-primary/80 leading-relaxed mb-6 max-w-xs">Join the next generation of customer service. Start your 14-day free trial today.</p>
+<div class="w-full flex flex-col gap-2.5 mb-3">
+<button class="w-full py-3.5 bg-surface-container-lowest text-primary font-semibold text-sm rounded-lg hover:bg-surface-bright transition-all">
+            Start free trial
+          </button>
+<button class="w-full py-3.5 bg-transparent border border-on-primary/30 text-on-primary font-semibold text-sm rounded-lg hover:bg-on-primary/10 transition-all">
+            Book a demo
+          </button>
+</div>
+<p class="text-[11px] text-on-primary/60">Instant setup. No credit card required.</p>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-lowest px-5 pt-12 pb-16 border-t border-outline-variant/30 text-on-surface-variant">
+<div class="max-w-sm mx-auto flex flex-col gap-8">
+<!-- Status & Logo -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<svg class="w-6 h-6 text-primary fill-current" viewbox="0 0 28 28">
+<path d="M5.5 8C5.5 6.62 6.62 5.5 8 5.5H20C21.38 5.5 22.5 6.62 22.5 8V18C22.5 19.38 21.38 20.5 20 20.5H16.5L13.8 23.2C13.4 23.6 12.8 23.4 12.8 22.9V20.5H8C6.62 20.5 5.5 19.38 5.5 18V8Z" fill="currentColor"></path>
+<circle cx="9.5" cy="13" fill="#FFFFFF" r="1.5"></circle>
+<circle cx="14" cy="13" fill="#FFFFFF" r="1.5"></circle>
+<circle cx="18.5" cy="13" fill="#FFFFFF" r="1.5"></circle>
+</svg>
+<span class="font-headline font-bold text-base text-primary">Intercom</span>
+</div>
+<div class="flex items-center gap-1.5 text-[11px] font-medium text-on-surface">
+<span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+<span>All systems operational</span>
+</div>
+</div>
+<!-- Links Accordion -->
+<div class="grid grid-cols-2 gap-y-3 gap-x-6 text-xs">
+<a class="hover:text-primary transition-colors" href="#helpdesk">Helpdesk</a>
+<a class="hover:text-primary transition-colors" href="#fin">Fin AI Agent</a>
+<a class="hover:text-primary transition-colors" href="#features">AI Features</a>
+<a class="hover:text-primary transition-colors" href="#proactive">Proactive Support</a>
+<a class="hover:text-primary transition-colors" href="#omnichannel">Omnichannel</a>
+<a class="hover:text-primary transition-colors" href="#integrations">Integrations</a>
+<a class="hover:text-primary transition-colors" href="#pricing">Pricing</a>
+<a class="hover:text-primary transition-colors" href="#customers">Customers</a>
+<a class="hover:text-primary transition-colors" href="#blog">Blog</a>
+<a class="hover:text-primary transition-colors" href="#podcast">Podcast</a>
+<a class="hover:text-primary transition-colors" href="#security">Security</a>
+<a class="hover:text-primary transition-colors" href="#privacy">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#terms">Terms of Service</a>
+</div>
+<div class="pt-4 border-t border-outline-variant/30 flex flex-col gap-1.5 text-[11px] text-on-surface-variant">
+<p>© 2026 Intercom Inc. All rights reserved.</p>
+<p class="text-[10px] text-outline">Note: This is an independent visual study.</p>
+</div>
+</div>
+</footer>
+<script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const icon = document.getElementById('menu-icon');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+        icon.textContent = 'close';
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        icon.textContent = 'menu';
+        document.body.style.overflow = '';
+      }
+    }
+
+    function switchProductTab(type) {
+      const tabHelpdesk = document.getElementById('tab-helpdesk');
+      const tabFin = document.getElementById('tab-fin');
+      if (type === 'helpdesk') {
+        tabHelpdesk.className = "flex-1 py-1.5 text-xs font-semibold rounded-full bg-surface-container-lowest text-primary shadow-sm transition-all";
+        tabFin.className = "flex-1 py-1.5 text-xs font-medium rounded-full text-on-surface-variant hover:text-primary transition-all";
+      } else {
+        tabFin.className = "flex-1 py-1.5 text-xs font-semibold rounded-full bg-surface-container-lowest text-primary shadow-sm transition-all";
+        tabHelpdesk.className = "flex-1 py-1.5 text-xs font-medium rounded-full text-on-surface-variant hover:text-primary transition-all";
+      }
+    }
+  </script>
+</body></html>
