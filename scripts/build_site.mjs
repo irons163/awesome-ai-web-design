@@ -13,11 +13,11 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
-  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike',
+  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax',
 ]);
 const SANITY_HOSTED_SUFFIXES = new Set([
   '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp',

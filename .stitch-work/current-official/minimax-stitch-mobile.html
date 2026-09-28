@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MiniMax - Intelligence with Everyone</title>
+<!-- Google Fonts: Outfit, Libre Caslon Text, DM Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&amp;family=Outfit:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary-container": "#6f5fea",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#d3e4ff",
+            "on-secondary-container": "#fffbff",
+            "tertiary-container": "#3296f6",
+            "stage-vivid-purple": "#8E44AD",
+            "on-tertiary-fixed": "#001c38",
+            "primary-fixed": "#ffdad3",
+            "on-secondary-fixed-variant": "#4029ba",
+            "on-primary-container": "#5b0c00",
+            "on-secondary-fixed": "#160066",
+            "surface-tint": "#b52706",
+            "secondary-fixed-dim": "#c6bfff",
+            "surface-bright": "#fcf8fb",
+            "outline": "#8f7069",
+            "text-on-dark": "#FFFFFF",
+            "surface-variant": "#e5e1e4",
+            "secondary-fixed": "#e4dfff",
+            "surface-container": "#f0edf0",
+            "stage-sky-blue": "#0984E3",
+            "surface-container-low": "#f6f3f5",
+            "stage-violet": "#6C5CE7",
+            "tertiary-fixed-dim": "#a2c9ff",
+            "gradient-coral-start": "#FF5C39",
+            "on-error-container": "#93000a",
+            "on-primary-fixed": "#3d0600",
+            "text-secondary-dark": "#55555C",
+            "text-primary-dark": "#111113",
+            "on-primary-fixed-variant": "#8c1800",
+            "on-tertiary-fixed-variant": "#004881",
+            "on-tertiary-container": "#002d54",
+            "surface-warm-tint": "#FAF8F6",
+            "secondary": "#5644d0",
+            "on-background": "#1b1b1d",
+            "on-secondary": "#ffffff",
+            "text-on-dark-muted": "rgba(255, 255, 255, 0.72)",
+            "footer-black": "#0B0B0C",
+            "tertiary": "#0060a9",
+            "surface-pure-white": "#FFFFFF",
+            "primary-container": "#ff5c39",
+            "inverse-primary": "#ffb4a4",
+            "on-primary": "#ffffff",
+            "on-error": "#ffffff",
+            "outline-variant": "#e3beb6",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#e5e1e4",
+            "on-surface-variant": "#5b403b",
+            "gradient-peach-end": "#FFA07A",
+            "inverse-on-surface": "#f3f0f2",
+            "on-surface": "#1b1b1d",
+            "surface": "#fcf8fb",
+            "primary": "#b52706",
+            "background": "#fcf8fb",
+            "primary-fixed-dim": "#ffb4a4",
+            "inverse-surface": "#303032",
+            "error": "#ba1a1a",
+            "card-stroke": "rgba(0, 0, 0, 0.06)",
+            "surface-dim": "#dcd9dc",
+            "text-tertiary-dark": "#8E8E93",
+            "surface-container-high": "#eae7ea",
+            "on-tertiary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "24px",
+            "margin": "16px",
+            "gutter": "12px",
+            "space-xs": "4px",
+            "space-2xl": "48px",
+            "space-xl": "32px",
+            "space-sm": "8px",
+            "space-md": "16px",
+            "space-3xl": "64px"
+          },
+          "fontFamily": {
+            "headline-serif": ["Libre Caslon Text"],
+            "body-md": ["DM Sans"],
+            "display-hero": ["Outfit"],
+            "label-button": ["Outfit"],
+            "headline-serif-mobile": ["Libre Caslon Text"],
+            "label-caps": ["Outfit"],
+            "body-sm": ["DM Sans"],
+            "headline-lg": ["Outfit"],
+            "body-lg": ["DM Sans"],
+            "nav-link": ["Outfit"],
+            "display-hero-mobile": ["Outfit"],
+            "headline-md": ["Outfit"]
+          },
+          "fontSize": {
+            "headline-serif": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "22px", "letterSpacing": "0", "fontWeight": "400" }],
+            "display-hero": ["44px", { "lineHeight": "48px", "letterSpacing": "-0.03em", "fontWeight": "700" }],
+            "label-button": ["15px", { "lineHeight": "20px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-serif-mobile": ["22px", { "lineHeight": "28px", "letterSpacing": "0", "fontWeight": "400" }],
+            "label-caps": ["11px", { "lineHeight": "14px", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "18px", "letterSpacing": "0", "fontWeight": "400" }],
+            "headline-lg": ["28px", { "lineHeight": "34px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["17px", { "lineHeight": "26px", "letterSpacing": "-0.01em", "fontWeight": "400" }],
+            "nav-link": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "display-hero-mobile": ["36px", { "lineHeight": "40px", "letterSpacing": "-0.025em", "fontWeight": "700" }],
+            "headline-md": ["22px", { "lineHeight": "28px", "letterSpacing": "-0.015em", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-text-primary-dark font-body-md antialiased selection:bg-primary-container selection:text-text-on-dark min-h-screen flex justify-center">
+<!-- Mobile Viewport Shell (Strictly 390px Baseline Container) -->
+<div class="relative w-full max-w-[390px] bg-surface-pure-white min-h-screen shadow-2xl flex flex-col overflow-x-hidden">
+<!-- 1. Top Navigation Bar (Shared Component: TopAppBar Execution) -->
+<header class="fixed top-0 left-0 right-0 max-w-[390px] mx-auto z-50 h-[56px] bg-surface-pure-white/85 dark:bg-inverse-surface/85 backdrop-blur-md px-margin flex items-center justify-between border-b border-card-stroke shadow-sm transition-all duration-300">
+<div class="flex items-center gap-space-sm">
+<!-- Pink/Coral glowing MiniMax circular logo -->
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-gradient-coral-start to-gradient-peach-end flex items-center justify-center shadow-sm">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-pure-white"></div>
+</div>
+<span class="font-display-hero-mobile text-display-hero-mobile font-bold text-text-primary-dark tracking-tight leading-none text-[20px]">MiniMax</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<a class="text-label-button font-label-button text-text-primary-dark px-space-sm py-1 hover:opacity-80 active:scale-[0.96] transition-transform" href="#login">Login</a>
+<button aria-label="Open menu" class="p-1 rounded-full text-text-primary-dark active:scale-[0.96] transition-transform flex items-center justify-center" id="navToggleBtn">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</header>
+<!-- Navigation Drawer (Shared Component: Fullscreen Accordion Modal Overlay) -->
+<div class="fixed inset-0 z-50 bg-surface-pure-white flex flex-col justify-between w-full h-full px-space-lg py-space-xl overflow-y-auto hidden" id="mobileDrawer">
+<div class="flex flex-col w-full">
+<!-- Drawer Header -->
+<div class="flex items-center justify-between pb-space-lg border-b border-surface-container">
+<div class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-gradient-coral-start to-gradient-peach-end flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-pure-white"></div>
+</div>
+<span class="font-display-hero-mobile text-display-hero-mobile font-bold text-text-primary-dark tracking-tight text-[22px]">MiniMax</span>
+</div>
+<button aria-label="Close menu" class="p-2 text-text-primary-dark active:opacity-75" id="navCloseBtn">
+<span class="material-symbols-outlined text-[26px]">close</span>
+</button>
+</div>
+<!-- Links Stack (7 items as prescribed) -->
+<nav class="flex flex-col divide-y divide-surface-container mt-space-md">
+<a class="text-primary border-l-2 border-primary-container pl-space-sm font-semibold text-nav-link font-nav-link py-space-md active:opacity-75" href="#models">Models</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#product">Product</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#api">API</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#token-plan">Token Plan</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#research">Research</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#company">Company</a>
+<a class="text-text-primary-dark font-nav-link text-nav-link py-space-md hover:text-primary active:opacity-75" href="#login">Login</a>
+</nav>
+</div>
+<!-- Drawer Bottom CTA -->
+<div class="pt-space-xl flex flex-col gap-space-sm">
+<a class="w-full h-12 rounded-full bg-text-primary-dark text-text-on-dark font-label-button text-label-button flex items-center justify-center shadow-lg active:scale-[0.98] transition-transform" href="#try">
+          Try in MiniMax Code
+        </a>
+<p class="text-body-sm font-body-sm text-text-secondary-dark text-center mt-space-xs">2026-09-28 Platform Preview</p>
+</div>
+</div>
+<!-- 2. Hero Section (MiniMax M3, ~742px height, radiant coral to peach gradient) -->
+<section class="relative w-full h-[742px] pt-[68px] pb-space-lg px-margin flex flex-col justify-between overflow-hidden bg-gradient-to-b from-[#FF5C39] via-[#FF7452] to-[#FFA07A] text-text-on-dark shadow-sm">
+<!-- Top Title Stack & Badge -->
+<div class="flex flex-col items-center text-center mt-space-xs">
+<div class="inline-flex items-center px-3 py-1 rounded-full bg-surface-pure-white/20 backdrop-blur-md border border-surface-pure-white/30 text-text-on-dark font-label-caps text-label-caps mb-space-sm">
+          FLAGSHIP FOUNDATION ARCHITECTURE
+        </div>
+<h1 class="font-display-hero-mobile text-display-hero-mobile text-text-on-dark tracking-tight drop-shadow-sm">
+          MiniMax M3
+        </h1>
+</div>
+<!-- 3 Full-Width Rounded Feature Cards (~95px each) -->
+<div class="flex flex-col gap-space-sm my-auto">
+<!-- Card 1 -->
+<div class="w-full h-[94px] bg-surface-pure-white rounded-[20px] p-space-md flex items-center gap-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke active:scale-[0.99] transition-transform">
+<div class="w-11 h-11 rounded-xl bg-surface-warm-tint flex items-center justify-center text-gradient-coral-start flex-shrink-0 border border-surface-container">
+<span class="material-symbols-outlined text-[24px]">terminal</span>
+</div>
+<div class="flex flex-col justify-center min-w-0">
+<h3 class="font-headline-md text-headline-md text-text-primary-dark truncate text-[17px] leading-[22px]">Frontier Coding / Agentic</h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark leading-tight mt-0.5 line-clamp-2">Production-grade engineering, beyond code generation</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-full h-[94px] bg-surface-pure-white rounded-[20px] p-space-md flex items-center gap-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke active:scale-[0.99] transition-transform">
+<div class="w-11 h-11 rounded-xl bg-surface-warm-tint flex items-center justify-center text-gradient-coral-start flex-shrink-0 border border-surface-container">
+<span class="material-symbols-outlined text-[24px]">grain</span>
+</div>
+<div class="flex flex-col justify-center min-w-0">
+<h3 class="font-headline-md text-headline-md text-text-primary-dark truncate text-[17px] leading-[22px]">MSA · 1M Context</h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark leading-tight mt-0.5 line-clamp-2">Novel sparse attention that truly scales context</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-full h-[94px] bg-surface-pure-white rounded-[20px] p-space-md flex items-center gap-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke active:scale-[0.99] transition-transform">
+<div class="w-11 h-11 rounded-xl bg-surface-warm-tint flex items-center justify-center text-gradient-coral-start flex-shrink-0 border border-surface-container">
+<span class="material-symbols-outlined text-[24px]">auto_awesome_motion</span>
+</div>
+<div class="flex flex-col justify-center min-w-0">
+<h3 class="font-headline-md text-headline-md text-text-primary-dark truncate text-[17px] leading-[22px]">Multimodal</h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark leading-tight mt-0.5 line-clamp-2">Step 0 joint training · interleaved</p>
+</div>
+</div>
+</div>
+<!-- Italic Serif Display Quote -->
+<div class="text-center px-space-xs mb-space-sm">
+<p class="font-headline-serif-mobile text-headline-serif-mobile italic text-text-on-dark text-[15px] leading-[20px] opacity-95">
+          “A frontier coding &amp; agentic model built on a novel attention architecture (MSA) with 1M context”
+        </p>
+</div>
+<!-- CTAs & Actions Stack -->
+<div class="flex flex-col gap-space-xs">
+<a class="w-full h-[46px] rounded-full border-[1.5px] border-surface-pure-white/70 bg-transparent text-text-on-dark font-label-button text-label-button flex items-center justify-center hover:bg-surface-pure-white/10 active:scale-[0.97] transition-all" href="#api">
+          API &amp; Token Plan
+        </a>
+<div class="grid grid-cols-2 gap-space-xs">
+<a class="h-[44px] rounded-full bg-surface-pure-white text-text-primary-dark font-label-button text-label-button flex items-center justify-center shadow-md active:scale-[0.97] transition-transform" href="#try-code">
+            Try in MiniMax Code
+          </a>
+<a class="h-[44px] rounded-full bg-surface-pure-white/20 backdrop-blur-sm border border-surface-pure-white/40 text-text-on-dark font-label-button text-label-button flex items-center justify-center active:scale-[0.97] transition-transform" href="#learn-more">
+            Learn More
+          </a>
+</div>
+</div>
+<!-- Bottom Carousel Segment Indicator (M3 active) -->
+<div class="flex items-center justify-between pt-space-md border-t border-surface-pure-white/20 px-space-xs text-[11px] font-label-caps tracking-widest text-text-on-dark">
+<div class="flex flex-col items-center gap-1 cursor-pointer">
+<span class="font-bold opacity-100">M3</span>
+<div class="w-12 h-1 bg-surface-pure-white rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer opacity-70">
+<span>H3</span>
+<div class="w-8 h-1 bg-surface-pure-white/40 rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer opacity-70">
+<span>CODE</span>
+<div class="w-8 h-1 bg-surface-pure-white/40 rounded-full"></div>
+</div>
+<div class="flex flex-col items-center gap-1 cursor-pointer opacity-70">
+<span>DESIGN</span>
+<div class="w-8 h-1 bg-surface-pure-white/40 rounded-full"></div>
+</div>
+</div>
+</section>
+<!-- 3. Flagship Models Section -->
+<section class="w-full bg-surface-warm-tint py-space-2xl px-margin flex flex-col gap-space-lg border-b border-surface-container" id="models">
+<!-- Section Heading -->
+<div class="flex flex-col gap-1">
+<div class="inline-flex items-center gap-1 text-primary-container font-label-caps text-label-caps">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+          FOUNDATION ENGINES
+        </div>
+<h2 class="font-headline-lg text-headline-lg text-text-primary-dark">Flagship Models</h2>
+<p class="font-headline-serif-mobile text-headline-serif-mobile italic text-text-secondary-dark text-[15px] leading-[22px]">
+          MiniMax’s latest featured models — Language / Video / Speech &amp; Music
+        </p>
+</div>
+<!-- Tall MiniMax M3 Flagship Feature Card -->
+<div class="w-full bg-surface-pure-white rounded-[20px] p-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke flex flex-col gap-space-md">
+<!-- Badge row -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-xs">
+<span class="px-2.5 py-0.5 rounded-full bg-primary-fixed text-on-primary-container font-label-caps text-label-caps">
+              Coral Series
+            </span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container text-text-secondary-dark font-label-caps text-label-caps">
+              LLM / Code Agent
+            </span>
+</div>
+<span class="material-symbols-outlined text-gradient-coral-start text-[20px]">verified</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-headline-lg text-text-primary-dark">MiniMax M3</h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark mt-space-xs leading-[20px]">
+            Our leading frontier coding and reasoning engine. Engineered with native sparse attention architecture allowing complete repository context analysis up to 1,000,000 tokens with near-instant retrieval fidelity.
+          </p>
+</div>
+<!-- Stat Metrics Row -->
+<div class="grid grid-cols-3 gap-2 py-space-xs border-y border-surface-container text-center">
+<div class="flex flex-col">
+<span class="font-display-hero text-headline-md text-text-primary-dark text-[18px]">1M</span>
+<span class="font-label-caps text-label-caps text-text-tertiary-dark text-[10px]">Context Window</span>
+</div>
+<div class="flex flex-col border-x border-surface-container px-1">
+<span class="font-display-hero text-headline-md text-gradient-coral-start text-[18px]">89.4%</span>
+<span class="font-label-caps text-label-caps text-text-tertiary-dark text-[10px]">SWE-bench Verified</span>
+</div>
+<div class="flex flex-col">
+<span class="font-display-hero text-headline-md text-text-primary-dark text-[18px]">Native</span>
+<span class="font-label-caps text-label-caps text-text-tertiary-dark text-[10px]">Sparse Attention</span>
+</div>
+</div>
+<!-- Interactive Preview Widget -->
+<div class="w-full bg-[#111113] rounded-xl p-space-sm text-surface-pure-white font-mono text-[12px] flex flex-col gap-2 shadow-inner border border-surface-container/20">
+<div class="flex items-center justify-between text-[11px] text-text-on-dark-muted">
+<span class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-[#00E676] animate-pulse"></span>
+              SPARSE ATTENTION ACTIVE
+            </span>
+<span class="text-tertiary-fixed-dim">msa_kernel_v3</span>
+</div>
+<!-- Synthetic Attention Heatmap Strip -->
+<div class="w-full h-8 rounded bg-[#1B1B1E] flex items-center px-2 gap-1 overflow-hidden">
+<div class="h-4 flex-1 bg-gradient-to-r from-gradient-coral-start/40 via-stage-violet/50 to-gradient-coral-start rounded-sm flex items-center justify-center text-[10px] text-text-on-dark font-mono">
+              [ 1,000,000 Context Tokens Analyzed ]
+            </div>
+</div>
+<div class="flex justify-between items-center text-[11px] text-text-on-dark-muted pt-1 border-t border-surface-container/10">
+<span>Latency: <strong class="text-surface-pure-white font-semibold">28ms/token</strong></span>
+<span class="text-gradient-peach-end">Fidelity: 99.8%</span>
+</div>
+</div>
+<!-- Action CTAs -->
+<div class="flex flex-col gap-space-xs mt-space-xs">
+<a class="w-full h-[46px] rounded-full bg-text-primary-dark text-text-on-dark font-label-button text-label-button flex items-center justify-center gap-1 active:scale-[0.98] transition-transform" href="#m3-specs">
+<span>View M3 Specs</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+<a class="w-full h-[44px] rounded-full border border-card-stroke bg-surface-container-low text-text-primary-dark font-label-button text-label-button flex items-center justify-center active:scale-[0.98] transition-transform" href="#playground">
+            Open Playground
+          </a>
+</div>
+</div>
+<!-- Secondary Stacked Models -->
+<div class="flex flex-col gap-gutter">
+<!-- Card: MiniMax H3 -->
+<div class="w-full bg-surface-pure-white rounded-[20px] p-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed-variant font-label-caps text-label-caps">
+              Violet Series · Video Generation
+            </span>
+<span class="material-symbols-outlined text-stage-violet text-[20px]">movie</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-text-primary-dark">MiniMax H3</h4>
+<p class="font-body-sm text-body-sm text-text-secondary-dark mt-1">
+              Cinematic Spatio-Temporal Diffusion (4K resolution · 60fps physics simulation).
+            </p>
+</div>
+<div class="pt-space-xs flex justify-between items-center border-t border-surface-container">
+<span class="font-label-caps text-label-caps text-stage-violet font-semibold">PHYSICS GROUNDED</span>
+<a class="font-label-button text-label-button text-text-primary-dark flex items-center gap-1 hover:text-stage-violet active:scale-95 transition-all" href="#explore-h3">
+              Explore Model <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card: MiniMax Speech 2.8 -->
+<div class="w-full bg-surface-pure-white rounded-[20px] p-space-md shadow-[0_12px_32px_rgba(17,17,19,0.08)] border border-card-stroke flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed-variant font-label-caps text-label-caps">
+              Audio &amp; Speech · Ultra-Low Latency
+            </span>
+<span class="material-symbols-outlined text-stage-sky-blue text-[20px]">graphic_eq</span>
+</div>
+<div>
+<h4 class="font-headline-md text-headline-md text-text-primary-dark">MiniMax Speech 2.8</h4>
+<p class="font-body-sm text-body-sm text-text-secondary-dark mt-1">
+              40+ Languages &amp; Instant Cloning (&lt;120ms Streaming Latency).
+            </p>
+</div>
+<!-- Waveform graphic visualization -->
+<div class="h-6 w-full flex items-center gap-1 px-1 bg-surface-warm-tint rounded-lg">
+<div class="w-1 h-2 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-4 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-3 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-5 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-2 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-6 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-3 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-5 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-4 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-2 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-4 bg-stage-sky-blue rounded-full"></div>
+<div class="w-1 h-3 bg-stage-sky-blue rounded-full"></div>
+</div>
+<div class="pt-space-xs flex justify-between items-center border-t border-surface-container">
+<span class="font-label-caps text-label-caps text-tertiary font-semibold">ZERO-SHOT VOICE</span>
+<a class="font-label-button text-label-button text-text-primary-dark flex items-center gap-1 hover:text-tertiary active:scale-95 transition-all" href="#listen-speech">
+              Listen Samples <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Latest Research Section (White Substrate) -->
+<section class="w-full bg-surface-pure-white py-space-2xl px-margin flex flex-col gap-space-lg" id="research">
+<div class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-primary uppercase">Lab Publications</span>
+<h2 class="font-headline-lg text-headline-lg text-text-primary-dark">Latest Research</h2>
+<p class="font-body-sm text-body-sm text-text-secondary-dark">
+          Pioneering foundational breakthroughs in sparse architectures, physical video grounding, and audio synthesis.
+        </p>
+</div>
+<!-- 4 Article Cards Stack -->
+<div class="flex flex-col divide-y divide-surface-container border-y border-surface-container">
+<!-- Paper 1 -->
+<article class="py-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm text-text-tertiary-dark">
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary-fixed/60 px-2 py-0.5 rounded-full">Audio Architecture</span>
+<time class="text-[12px]" datetime="2026-08-14">August 14, 2026</time>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary-dark text-[17px] leading-[22px]">
+            Music 3.0: High-fidelity audio synthesis &amp; multi-track generation.
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark line-clamp-2">
+            Audio Foundation Team — Exploring hierarchical latent diffusion for complex harmonic polyphony and zero-shot voice alignment.
+          </p>
+<a class="inline-flex items-center gap-1 text-primary font-label-button text-label-button text-[14px] pt-1" href="#paper-music">
+            Read Paper <span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</article>
+<!-- Paper 2 -->
+<article class="py-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm text-text-tertiary-dark">
+<span class="font-label-caps text-label-caps text-stage-violet bg-secondary-fixed/60 px-2 py-0.5 rounded-full">Video Diffusion</span>
+<time class="text-[12px]" datetime="2026-07-28">July 28, 2026</time>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary-dark text-[17px] leading-[22px]">
+            MiniMax H3: Scalable visual dynamics and temporal consistency in video diffusion.
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark line-clamp-2">
+            Vision &amp; Dynamics Lab — Introducing recurrent spatio-temporal transformers to maintain physical Newtonian integrity over prolonged sequences.
+          </p>
+<a class="inline-flex items-center gap-1 text-primary font-label-button text-label-button text-[14px] pt-1" href="#paper-h3">
+            Read Paper <span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</article>
+<!-- Paper 3 -->
+<article class="py-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm text-text-tertiary-dark">
+<span class="font-label-caps text-label-caps text-stage-vivid-purple bg-surface-container px-2 py-0.5 rounded-full">Automated Reasoning</span>
+<time class="text-[12px]" datetime="2026-06-19">June 19, 2026</time>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary-dark text-[17px] leading-[22px]">
+            MaxProof: Automated formal verification and mathematical reasoning at scale.
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark line-clamp-2">
+            Reasoning &amp; Alignment — Self-correcting neural tree searches verifying Lean 4 theorems with verifiable zero hallucination.
+          </p>
+<a class="inline-flex items-center gap-1 text-primary font-label-button text-label-button text-[14px] pt-1" href="#paper-maxproof">
+            Read Paper <span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</article>
+<!-- Paper 4 -->
+<article class="py-space-md flex flex-col gap-space-xs">
+<div class="flex items-center justify-between text-body-sm text-text-tertiary-dark">
+<span class="font-label-caps text-label-caps text-gradient-coral-start bg-primary-fixed/60 px-2 py-0.5 rounded-full">Sparse Attention</span>
+<time class="text-[12px]" datetime="2026-05-30">May 30, 2026</time>
+</div>
+<h3 class="font-headline-md text-headline-md text-text-primary-dark text-[17px] leading-[22px]">
+            MiniMax M3: Multi-modal sparse attention architecture for 1M context code generation.
+          </h3>
+<p class="font-body-sm text-body-sm text-text-secondary-dark line-clamp-2">
+            Core Architecture Group — Mathematical proof and systems engineering metrics underlying MSA scaling bounds on extreme context limits.
+          </p>
+<a class="inline-flex items-center gap-1 text-primary font-label-button text-label-button text-[14px] pt-1" href="#paper-m3">
+            Read Paper <span class="material-symbols-outlined text-[16px]">north_east</span>
+</a>
+</article>
+</div>
+<!-- Action Button -->
+<a class="w-full h-12 rounded-full border border-card-stroke bg-surface-pure-white text-text-primary-dark font-label-button text-label-button flex items-center justify-center gap-1 shadow-sm active:scale-[0.98] transition-transform" href="#all-papers">
+        View All Research Papers <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</section>
+<!-- 5. About Section -->
+<section class="w-full bg-surface-warm-tint py-space-2xl px-margin flex flex-col gap-space-lg border-t border-card-stroke" id="company">
+<!-- Brand & Mission Header -->
+<div class="flex flex-col gap-space-xs">
+<div class="inline-flex self-start px-2.5 py-0.5 rounded-full bg-surface-pure-white border border-card-stroke text-text-secondary-dark font-label-caps text-label-caps">
+          About Us
+        </div>
+<h2 class="font-display-hero-mobile text-display-hero-mobile font-bold text-text-primary-dark">MiniMax</h2>
+<p class="font-headline-serif-mobile text-headline-serif-mobile italic text-text-secondary-dark">
+          A World-Leading General AI Technology Company
+        </p>
+</div>
+<!-- Body Paragraphs -->
+<div class="flex flex-col gap-space-md text-body-md font-body-md text-text-secondary-dark leading-relaxed">
+<p>
+          Founded with the conviction to create <strong class="text-text-primary-dark font-semibold">Intelligence with Everyone</strong>, MiniMax is committed to pioneering foundational Artificial General Intelligence that seamlessly empowers developers, creatives, and enterprises worldwide.
+        </p>
+<p>
+          Through breakthroughs in algorithmic efficiency, sparse attention structures, and scalable distributed training infrastructures, we engineer end-to-end multimodal systems that democratize state-of-the-art cognitive compute.
+        </p>
+</div>
+<!-- 2x2 Key Statistics Grid -->
+<div class="grid grid-cols-2 gap-gutter mt-space-xs">
+<div class="bg-surface-pure-white p-space-md rounded-[16px] border border-card-stroke shadow-sm flex flex-col">
+<span class="font-display-hero text-headline-lg font-bold text-text-primary-dark">230+</span>
+<span class="font-body-sm text-body-sm text-text-secondary-dark mt-1">Countries &amp; Regions</span>
+</div>
+<div class="bg-surface-pure-white p-space-md rounded-[16px] border border-card-stroke shadow-sm flex flex-col">
+<span class="font-display-hero text-headline-lg font-bold text-gradient-coral-start">300M+</span>
+<span class="font-body-sm text-body-sm text-text-secondary-dark mt-1">Global Users</span>
+</div>
+<div class="bg-surface-pure-white p-space-md rounded-[16px] border border-card-stroke shadow-sm flex flex-col">
+<span class="font-display-hero text-headline-lg font-bold text-text-primary-dark">2M+</span>
+<span class="font-body-sm text-body-sm text-text-secondary-dark mt-1">Developers &amp; Enterprises</span>
+</div>
+<div class="bg-surface-pure-white p-space-md rounded-[16px] border border-card-stroke shadow-sm flex flex-col">
+<span class="font-display-hero text-headline-lg font-bold text-stage-violet">100+</span>
+<span class="font-body-sm text-body-sm text-text-secondary-dark mt-1">Research Patents &amp; Publications</span>
+</div>
+</div>
+</section>
+<!-- 6. Footer (Shared Component: Footer Execution) -->
+<footer class="w-full bg-footer-black text-text-on-dark px-margin py-space-2xl flex flex-col gap-space-md text-left">
+<!-- Brand Lockup -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-6 h-6 rounded-full bg-gradient-to-tr from-gradient-coral-start to-gradient-peach-end flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-surface-pure-white"></div>
+</div>
+<span class="font-display-hero-mobile text-display-hero-mobile font-bold text-text-on-dark tracking-tight text-[22px]">MiniMax</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-on-dark-muted">Intelligence with Everyone.</p>
+</div>
+<!-- Navigation Clusters -->
+<div class="grid grid-cols-2 gap-space-lg py-space-md border-y border-inverse-surface mt-space-sm">
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-caps text-label-caps text-text-tertiary-dark uppercase">Products</span>
+<a class="text-text-on-dark font-medium text-body-sm hover:text-text-on-dark transition-colors" href="#models">Models</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#api">API Platform</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#token-plan">Token Plan</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#code">MiniMax Code</a>
+</div>
+<div class="flex flex-col gap-space-sm">
+<span class="font-label-caps text-label-caps text-text-tertiary-dark uppercase">Ecosystem</span>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#research">Research</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#company">Company</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#careers">Careers</a>
+<a class="text-text-on-dark-muted font-body-sm hover:text-text-on-dark transition-colors" href="#press">Press &amp; Media</a>
+</div>
+</div>
+<!-- Legal Links & Copyright -->
+<div class="flex flex-wrap gap-x-space-md gap-y-space-xs text-body-sm text-text-on-dark-muted pt-space-xs">
+<a class="hover:text-text-on-dark transition-colors" href="#terms">Terms of Service</a>
+<a class="hover:text-text-on-dark transition-colors" href="#privacy">Privacy Policy</a>
+<a class="hover:text-text-on-dark transition-colors" href="#status">Status</a>
+<a class="hover:text-text-on-dark transition-colors" href="#contact">Contact Us</a>
+</div>
+<div class="pt-space-xs">
+<p class="font-body-sm text-body-sm text-text-tertiary-dark">
+          © 2026 MiniMax Inc. All rights reserved.
+        </p>
+</div>
+</footer>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+    const navToggleBtn = document.getElementById('navToggleBtn');
+    const navCloseBtn = document.getElementById('navCloseBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    function toggleMenu(show) {
+      if (show) {
+        mobileDrawer.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        mobileDrawer.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    if (navToggleBtn && navCloseBtn && mobileDrawer) {
+      navToggleBtn.addEventListener('click', () => toggleMenu(true));
+      navCloseBtn.addEventListener('click', () => toggleMenu(false));
+      
+      // Auto-close when clicking links inside drawer
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => toggleMenu(false));
+      });
+    }
+  </script>
+</body></html>
