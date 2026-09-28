@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Superhuman — The Productive Suite</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            plum: {
+              950: '#140E1B',
+              900: '#1F142B',
+              850: '#2A1B3D',
+              800: '#382252',
+            },
+            sand: {
+              50: '#FAF9F6',
+              100: '#F6F5F1',
+              200: '#EFECE6',
+              300: '#E2DED4',
+            },
+            lilac: {
+              100: '#F3EEFB',
+              200: '#E6DCF8',
+              300: '#CBB7EE',
+              400: '#B093E4',
+              DEFAULT: '#9B72CF',
+            },
+            accent: {
+              purple: '#5D2E8C',
+              dark: '#120D18'
+            }
+          },
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', '"SF Pro Text"', 'system-ui', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Page Layout Styles -->
+<style data-purpose="page-layout">
+    body {
+      background-color: #F6F5F1;
+      color: #120D18;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .mobile-screen {
+      width: 100%;
+      max-width: 390px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      background-color: #F6F5F1;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.08);
+      overflow-x: hidden;
+    }
+  </style>
+<!-- Custom Hero Atmosphere Styles -->
+<style data-purpose="sky-gradients">
+    .hero-sky-bg {
+      background: radial-gradient(130% 90% at 50% 15%, #92B5DF 0%, #B7C7E8 35%, #D4CEE7 65%, #EAD4E4 100%);
+      position: relative;
+    }
+    .cloud-softness {
+      background: radial-gradient(circle at 50% 60%, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%);
+    }
+    .frosted-glass {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .frosted-plum {
+      background: rgba(31, 20, 43, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+  </style>
+<!-- Drawer Menu Navigation Animation -->
+<style data-purpose="drawer-animation">
+    #mobileDrawer {
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    #drawerBackdrop {
+      transition: opacity 0.3s ease;
+    }
+    .drawer-open #mobileDrawer {
+      transform: translateX(0);
+    }
+    .drawer-closed #mobileDrawer {
+      transform: translateX(-100%);
+    }
+    .drawer-open #drawerBackdrop {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .drawer-closed #drawerBackdrop {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-stone-200">
+<div class="mobile-screen min-h-screen">
+<!-- BEGIN: AnnouncementTopBanner -->
+<!-- Top Dark Plum Pill Banner as seen on superhuman.com -->
+<aside class="w-full bg-[#1A1124] text-white px-3 pt-3 pb-2.5" data-purpose="announcement-bar">
+<div class="w-full max-w-[358px] mx-auto bg-[#291B3A] border border-[#3E2C55] rounded-full py-1.5 px-3 flex items-center justify-between shadow-sm">
+<div class="flex items-center space-x-2 truncate">
+<span class="inline-block w-2 h-2 rounded-full bg-lilac-300 animate-pulse"></span>
+<span class="text-[12px] font-medium tracking-tight text-lilac-100 truncate">Looking for Superhuman Mail?</span>
+</div>
+<a class="text-[11px] font-semibold tracking-wide bg-white/10 hover:bg-white/20 active:bg-white/30 text-white px-2.5 py-1 rounded-full whitespace-nowrap flex items-center transition" href="#mail-panel">
+        Learn more <span class="ml-1 text-[10px]">→</span>
+</a>
+</div>
+</aside>
+<!-- END: AnnouncementTopBanner -->
+<!-- BEGIN: MobileHeader -->
+<!-- Mobile Navigation Header with Geometric Superhuman Logo and Drawer Toggle -->
+<header class="relative z-30 px-5 pt-4 pb-3 flex items-center justify-between hero-sky-bg text-white" data-purpose="mobile-header">
+<!-- Brand Logo Mark and Wordmark -->
+<a aria-label="Superhuman Home" class="flex items-center space-x-2 text-white group" href="#">
+<!-- Superhuman Iconic S Wingmark -->
+<svg class="w-6 h-6 fill-current text-white" fill="none" viewbox="0 0 32 32">
+<path d="M7 6L25 14L18 17L7 6Z" fill="currentColor" fill-opacity="0.95"></path>
+<path d="M25 26L7 18L14 15L25 26Z" fill="currentColor"></path>
+</svg>
+<span class="font-bold tracking-[0.16em] text-[13px] uppercase text-white/95">SUPERHUMAN</span>
+</a>
+<!-- Hamburger Menu Button -->
+<button aria-label="Open menu" class="w-10 h-10 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 active:bg-white/30 text-white backdrop-blur-sm transition border border-white/15" id="openDrawerBtn" type="button">
+<svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2.2" viewbox="0 0 24 24">
+<line x1="4" x2="20" y1="7" y2="7"></line>
+<line x1="4" x2="20" y1="12" y2="12"></line>
+<line x1="4" x2="20" y1="17" y2="17"></line>
+</svg>
+</button>
+</header>
+<!-- END: MobileHeader -->
+<!-- BEGIN: SkyHeroSection -->
+<!-- Sky hero section with powder-blue gradient, thoughtful portrait, and floating glass pills -->
+<section class="hero-sky-bg pt-6 px-5 pb-0 text-center relative overflow-hidden flex flex-col items-center" data-purpose="hero-section">
+<!-- Hero Headline -->
+<h1 class="text-white text-[32px] leading-[1.12] font-semibold tracking-[-0.03em] max-w-[340px] mb-3">
+      Superpowers,<br/>everywhere you work
+    </h1>
+<!-- Hero Subheading -->
+<p class="text-white/90 text-[16px] leading-[1.38] font-normal max-w-[310px] mb-6">
+      Mail, Docs, and AI that works in every app and tab.
+    </p>
+<!-- Hero Call to Action Buttons -->
+<div class="flex items-center justify-center space-x-2.5 mb-7 w-full max-w-[320px]">
+<a class="flex-1 bg-[#120D18] hover:bg-[#1E1627] text-white text-[15px] font-medium py-3.5 px-6 rounded-full shadow-lg shadow-black/15 text-center transition" href="#suite-section">
+        Get Superhuman
+      </a>
+<button aria-label="Explore features" class="w-[50px] h-[50px] rounded-full bg-[#D7BEFF] text-[#1A1124] flex items-center justify-center hover:bg-[#E2D0FF] active:scale-95 shadow-md transition">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24">
+<path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Editorial Image with Floating AI Glass Badges -->
+<div class="relative w-full max-w-[360px] mx-auto mt-2 flex flex-col items-center justify-end">
+<!-- Top Left Floating Badge -->
+<div class="absolute -top-1 left-2 z-20 frosted-glass rounded-2xl py-2 px-3 shadow-xl border border-white/60 text-left flex items-center space-x-2.5 max-w-[200px] animate-pulse">
+<div class="w-6 h-6 rounded-full bg-[#6E3FF3] text-white flex items-center justify-center text-[11px] font-bold">✨</div>
+<div class="leading-tight">
+<div class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Superhuman Go</div>
+<div class="text-[12px] font-medium text-gray-900 truncate">Draft reply in Slack</div>
+</div>
+</div>
+<!-- Bottom Right Floating Glass Badge -->
+<div class="absolute bottom-16 right-1 z-20 frosted-glass rounded-2xl py-2 px-3 shadow-xl border border-white/60 text-left flex items-center space-x-2">
+<div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div>
+<span class="text-[12px] font-semibold text-gray-800">Inbox Zero achieved</span>
+</div>
+<!-- Cutout Portrait Image of thoughtful user looking up -->
+<div class="relative w-full h-[360px] overflow-hidden flex items-end justify-center">
+<img alt="Person looking thoughtfully upward towards digital productivity superpowers" class="w-auto h-[380px] max-w-none object-contain object-bottom pointer-events-none drop-shadow-md" loading="eager" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARFEZpozwZtRDcLLzct71_vTyj_crfOgi9C1Iq_0aGLMPW64a5Rq1IIfrqrfU-bLEGbNFnlQTDAnflVbFNRXQbYPdsqPaKZqcHJioN9J-8HRexJ_quHDcRnFKqziZd0fUbJU2ZCHWs8-MKLRhLhQehn6v4aLBte5TUVlNocf4uXaBs1-xWIRrqgNumhZ6vhM30taXDtmVyjtapVlsz_FiR-qUUr0aG9Mc8TBjX4Uy8ricA83NvaIuOIBNU4-dQ9lsgQ3FvNxQRgA"/>
+</div>
+<!-- Cloud gradient seam blending hero into off-white trust proofing -->
+<div class="absolute -bottom-1 left-0 right-0 h-16 bg-gradient-to-t from-[#F6F5F1] via-[#F6F5F1]/80 to-transparent pointer-events-none"></div>
+</div>
+</section>
+<!-- END: SkyHeroSection -->
+<!-- BEGIN: TrustProofSection -->
+<!-- Monochromatic Trust Logos on Warm Sand Canvas -->
+<section class="bg-[#F6F5F1] pt-6 pb-12 px-6 text-center border-b border-sand-200/60" data-purpose="trust-proof">
+<p class="text-[11px] uppercase tracking-[0.14em] font-semibold text-[#6E6877] mb-7">
+      Trusted by the most innovative companies in the world
+    </p>
+<!-- 2-Row Grid of Minimalist Monochromatic Logos -->
+<div class="grid grid-cols-3 gap-y-6 gap-x-4 items-center justify-items-center opacity-85">
+<!-- OpenAI Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-semibold text-[15px] tracking-tight text-gray-800 flex items-center gap-1.5">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.5045 4.5045 0 0 1-4.4945 4.4947z"></path></svg>
+          OpenAI
+        </span>
+</div>
+<!-- Figma Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-bold text-[16px] tracking-tight text-gray-800 flex items-center gap-1">
+<span class="text-sm font-black">❖</span> Figma
+        </span>
+</div>
+<!-- HubSpot Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-bold text-[15px] tracking-tight text-gray-800">HubSpot</span>
+</div>
+<!-- DoorDash Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-bold text-[14px] tracking-tight text-gray-800 flex items-center gap-1">
+<span class="text-xs">●~</span> DOORDASH
+        </span>
+</div>
+<!-- Expensify Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-semibold text-[15px] italic tracking-tight text-gray-800">Expensify</span>
+</div>
+<!-- GEICO Logo -->
+<div class="flex items-center justify-center h-8">
+<span class="font-black text-[15px] tracking-wider text-gray-800">GEICO</span>
+</div>
+</div>
+</section>
+<!-- END: TrustProofSection -->
+<!-- BEGIN: SuiteIntroSection -->
+<!-- Suite Overview and 4 Selector Navigation Badges -->
+<section class="bg-[#F6F5F1] pt-12 pb-6 px-5" data-purpose="suite-overview" id="suite-section">
+<div class="flex flex-col items-start mb-6">
+<h2 class="text-[30px] font-semibold tracking-[-0.02em] text-[#120D18] mb-3">
+        Your Superhuman suite
+      </h2>
+<p class="text-[15px] text-[#554E5F] leading-snug mb-4">
+        Unified intelligent tools crafted to save 4+ hours every week across your digital workday.
+      </p>
+<!-- Outlined Lavender Pill CTA -->
+<a class="inline-flex items-center text-[13px] font-semibold text-[#3C225C] border border-[#B093E4] bg-[#F1EAFC] px-4 py-2 rounded-full transition active:bg-[#E4D6F8]" href="#mail-panel">
+        Get the suite <span class="ml-1.5">→</span>
+</a>
+</div>
+<!-- Stacked 4 Interactive Feature Selector Cards -->
+<div class="space-y-3 pt-2">
+<!-- Selector 1: Mail -->
+<a class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-[#E3DECE] shadow-sm hover:border-purple-300 transition" href="#mail-panel">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-[#EDE4FF] text-[#572CB7] flex items-center justify-center font-bold text-lg">
+            ✉️
+          </div>
+<div>
+<h3 class="text-[15px] font-semibold text-gray-900">Mail</h3>
+<p class="text-[12px] text-gray-500">Core inbox at lightning speed</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-full">Explore</span>
+</a>
+<!-- Selector 2: Grammarly AI Writing Partner -->
+<a class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-[#E3DECE] shadow-sm hover:border-purple-300 transition" href="#grammarly-panel">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-[#E8F8F2] text-[#128359] flex items-center justify-center font-bold text-lg">
+            ✍️
+          </div>
+<div>
+<h3 class="text-[15px] font-semibold text-gray-900">Grammarly</h3>
+<p class="text-[12px] text-gray-500">AI writing partner anywhere</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-full">Explore</span>
+</a>
+<!-- Selector 3: Docs Canvas -->
+<a class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-[#E3DECE] shadow-sm hover:border-purple-300 transition" href="#docs-panel">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-[#FFF0E8] text-[#E05315] flex items-center justify-center font-bold text-lg">
+            📄
+          </div>
+<div>
+<h3 class="text-[15px] font-semibold text-gray-900">Docs</h3>
+<p class="text-[12px] text-gray-500">Connected Coda collaborative canvas</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-orange-700 bg-orange-50 px-2.5 py-1 rounded-full">Explore</span>
+</a>
+<!-- Selector 4: Superhuman Go -->
+<a class="flex items-center justify-between p-3.5 rounded-2xl bg-white border border-[#E3DECE] shadow-sm hover:border-purple-300 transition" href="#go-panel">
+<div class="flex items-center space-x-3">
+<div class="w-10 h-10 rounded-xl bg-[#EBF2FF] text-[#2968E8] flex items-center justify-center font-bold text-lg">
+            ⚡
+          </div>
+<div>
+<h3 class="text-[15px] font-semibold text-gray-900">Go</h3>
+<p class="text-[12px] text-gray-500">Universal ambient browser assistant</p>
+</div>
+</div>
+<span class="text-xs font-semibold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-full">Explore</span>
+</a>
+</div>
+</section>
+<!-- END: SuiteIntroSection -->
+<!-- BEGIN: ProductPanelsSection -->
+<!-- 4 Deep Authentic Product Narrative Panels with High Fidelity Static Assets -->
+<section class="bg-[#F6F5F1] px-5 py-4 space-y-12" data-purpose="product-deep-dives">
+<!-- PANEL 1: Superhuman Mail -->
+<article class="pt-6" data-purpose="mail-feature-panel" id="mail-panel">
+<span class="inline-block text-[11px] uppercase tracking-[0.16em] font-bold text-purple-800 bg-purple-100/70 px-2.5 py-1 rounded mb-3">
+        Superhuman Mail
+      </span>
+<h3 class="text-[28px] font-bold tracking-tight text-[#140E1B] leading-tight mb-3">
+        The most productive email app ever made
+      </h3>
+<p class="text-[15px] text-[#4F4756] leading-relaxed mb-5">
+        Experience blazing fast speeds under 50ms, triage unread threads with Split Inbox, and fly through correspondence with built-in instant AI auto-drafting.
+      </p>
+<!-- Key Bullet Points with Checkmarks -->
+<ul class="space-y-2.5 mb-6 text-[14px] text-[#271E30]">
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Split Inbox automatically organizes VIPs &amp; team alerts</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Instant keyboard shortcuts on mobile gestures and Cmd+K</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>AI Summarize, Auto-Draft, and Write with your exact voice</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Read statuses with contextual reminders and snooze</span>
+</li>
+</ul>
+<!-- Action Link -->
+<a class="inline-flex items-center text-[14px] font-semibold text-[#5A2C99] mb-5" href="#">
+        Learn more about Mail <span class="ml-1 text-sm">→</span>
+</a>
+<!-- Authentic Product Screenshot Asset -->
+<div class="rounded-2xl overflow-hidden shadow-lg border border-[#DDD7C8] bg-white">
+<img alt="Superhuman Mail interface with split inbox and AI summary" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIQTRFAq-XwF4wxwINCOq_JmVYrmeHEe2-a0ZmQh1hsYAt71_O8vg1t1_OSbKPBmGRm92MDCM5ozpa4mV7-1FdMK7_638TSDGuCTKiwLiwQCnTpESrXqB_F2QdrgKNeJysJjitc7SAPBeG5k2MxcNpGSMsK02IQDl59eMEbU_WXyoF6TomMgYOrqjxnlRCFo5-EXvAK9zEiUThVVGi9s9APCrpJcVw_26GaY_DY559sp3SZGOZkcsTV3Bo_NVBawOVot5LcBMwLA"/>
+</div>
+</article>
+<!-- PANEL 2: Grammarly Integration -->
+<article class="pt-6 border-t border-[#E5E0D2]" data-purpose="grammarly-feature-panel" id="grammarly-panel">
+<span class="inline-block text-[11px] uppercase tracking-[0.16em] font-bold text-emerald-800 bg-emerald-100/70 px-2.5 py-1 rounded mb-3">
+        Superhuman + Grammarly
+      </span>
+<h3 class="text-[28px] font-bold tracking-tight text-[#140E1B] leading-tight mb-3">
+        Everyone’s favorite AI writing partner
+      </h3>
+<p class="text-[15px] text-[#4F4756] leading-relaxed mb-5">
+        Bring enterprise-level writing intelligence to every communication. Ensure pitch-perfect clarity, empathy, and tone without leaving your workflow.
+      </p>
+<!-- Key Bullet Points with Checkmarks -->
+<ul class="space-y-2.5 mb-6 text-[14px] text-[#271E30]">
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Real-time tone detectors ensure diplomatic stakeholder comms</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>One-tap rewrites for executive brevity and clear impact</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Custom company voice guidelines enforced automatically</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Zero latency inline grammar corrections</span>
+</li>
+</ul>
+<!-- Action Link -->
+<a class="inline-flex items-center text-[14px] font-semibold text-emerald-700 mb-5" href="#">
+        Learn more about Grammarly <span class="ml-1 text-sm">→</span>
+</a>
+<!-- Authentic Product Screenshot Asset -->
+<div class="rounded-2xl overflow-hidden shadow-lg border border-[#DDD7C8] bg-white">
+<img alt="Grammarly AI writing interface inside Superhuman" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGLntUgq2_Fmu2vTIfvScyxICSO0CSPT4jhhCgpMP-jXPRZaqBmmf__F_jO9NI40UfYE8JDJ2Jk5IetBGFYj35GRDVdPbW8FDzA-_ZuEywAgWq7eeN9WmUmP25afJm3VM5nn_lzuUaMPtW9i3uCy89iqyAMzgQoSbFy40RlItuw6A5oYCKfRJCY16amvyXmy56Mu-HhbA6slF6Y6WGAyIkbMrGhmxdl0Z_A0Vnf8RwKJo3WhScAojgt6oAHxmVlanQfaQo1-I-sA"/>
+</div>
+</article>
+<!-- PANEL 3: Docs Canvas (Coda) -->
+<article class="pt-6 border-t border-[#E5E0D2]" data-purpose="docs-feature-panel" id="docs-panel">
+<span class="inline-block text-[11px] uppercase tracking-[0.16em] font-bold text-orange-800 bg-orange-100/70 px-2.5 py-1 rounded mb-3">
+        Superhuman Docs
+      </span>
+<h3 class="text-[28px] font-bold tracking-tight text-[#140E1B] leading-tight mb-3">
+        The best place for teams and AI to work together
+      </h3>
+<p class="text-[15px] text-[#4F4756] leading-relaxed mb-5">
+        Transform static text into dynamic collaborative hubs. Integrated with Coda canvas architecture to build custom trackers, notes, and automations.
+      </p>
+<!-- Key Bullet Points with Checkmarks -->
+<ul class="space-y-2.5 mb-6 text-[14px] text-[#271E30]">
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Live interactive tables, kanban views, and team roadmaps</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Embed emails directly into active project canvases</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>AI summaries that refresh automatically when rows change</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Real-time multiplayer cursor collaboration</span>
+</li>
+</ul>
+<!-- Action Link -->
+<a class="inline-flex items-center text-[14px] font-semibold text-orange-700 mb-5" href="#">
+        Learn more about Docs <span class="ml-1 text-sm">→</span>
+</a>
+<!-- Authentic Product Screenshot Asset -->
+<div class="rounded-2xl overflow-hidden shadow-lg border border-[#DDD7C8] bg-white">
+<img alt="Coda dynamic documentation canvas integrated in Superhuman" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA-UbGlz3KZSJ8t9lIwzwJUF3GZ8r2pxYLuRt4Q6jfRcrWsGNs-lSClMgGRJLS4vorqEw9x4brZRgbrGc43Y3VJO_6yLeD7hp7DLQGFR955vLzIjo3J12ozinB4P_7I0-wSdt5s75KSLUKKFPXopghYfucHUKhxV-jqfc00-Z2BDBmG2NAmiOKK1DESTGq_ZRGpnxc0xFTGMoii6WUAMe26fPEPo0R4x54EUsolC4zw7-LA49gCcjuUSLWIJtchRZwXXH2EYDdfZA"/>
+</div>
+</article>
+<!-- PANEL 4: Superhuman Go Everywhere -->
+<article class="pt-6 border-t border-[#E5E0D2]" data-purpose="go-feature-panel" id="go-panel">
+<span class="inline-block text-[11px] uppercase tracking-[0.16em] font-bold text-blue-800 bg-blue-100/70 px-2.5 py-1 rounded mb-3">
+        Superhuman Go
+      </span>
+<h3 class="text-[28px] font-bold tracking-tight text-[#140E1B] leading-tight mb-3">
+        AI that actually works in every app you use
+      </h3>
+<p class="text-[15px] text-[#4F4756] leading-relaxed mb-5">
+        Your ambient copilot. Summon Superhuman Go across Slack, LinkedIn, Notion, Salesforce, or any web browser tab with one instant command.
+      </p>
+<!-- Key Bullet Points with Checkmarks -->
+<ul class="space-y-2.5 mb-6 text-[14px] text-[#271E30]">
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Available on macOS, Windows, Chrome, and iOS everywhere</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Understands context from what is currently on your display</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Instant prompt shortcuts for research, summaries, and edits</span>
+</li>
+<li class="flex items-start">
+<svg class="w-4 h-4 text-emerald-600 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span>Enterprise grade privacy guarantee: data never trains public LLMs</span>
+</li>
+</ul>
+<!-- Action Link -->
+<a class="inline-flex items-center text-[14px] font-semibold text-blue-700 mb-5" href="#">
+        Learn more about Go <span class="ml-1 text-sm">→</span>
+</a>
+<!-- Authentic Product Screenshot Asset -->
+<div class="rounded-2xl overflow-hidden shadow-lg border border-[#DDD7C8] bg-white">
+<img alt="Superhuman Go ambient AI floating assistant screenshot" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCznx8e4IqKm6mNcHZ-AcMOVcXMWFuAQPEdmhW40lB7yf2f_aOdeQN-2cYqpcW2mOXdy5wULgZoXbo7ghYt98XuOn_ZqcJQyuXWFgKul7fYIbnFCmbpcPir_ZOMosoKZJwewnhuxy3XFNcaQCEQ_RbtINM8rut5tDem9yJurQMxPQbbmlJNobOKjYDUcBOC0LDQLaFoNpUO94GZSJ5KWBEEQmc4uYrfyP33jGvI5wry3ctyCknhMcOCinvjLGFeUqQsCpwTq9x4kA"/>
+</div>
+</article>
+</section>
+<!-- END: ProductPanelsSection -->
+<!-- BEGIN: ManifestoSection -->
+<!-- Dark Plum Editorial Manifesto Section with Authentic Founder/Leader Portrait -->
+<section class="bg-[#181023] text-white px-6 pt-14 pb-12 mt-6" data-purpose="manifesto-section">
+<div class="max-w-[340px] mx-auto">
+<!-- Lilac Category Pill -->
+<span class="inline-block text-[11px] uppercase tracking-[0.2em] font-bold text-[#CEB5F2] mb-3">
+        Our Manifesto
+      </span>
+<!-- Headline -->
+<h2 class="text-[34px] font-semibold tracking-[-0.03em] leading-[1.12] text-white mb-5">
+        Becoming Superhuman.
+      </h2>
+<!-- Manifesto Editorial Story Body -->
+<div class="space-y-4 text-[15px] leading-relaxed text-[#D2C8DF]">
+<p>
+          We believe that technology should feel like an extension of your mind — not an obstacle course of notifications, tab-overload, and cognitive strain.
+        </p>
+<p>
+          Speed isn’t just a metric; it is respect for human time. By combining lightning software craftsmanship with generative intelligence, we unlock human flow state.
+        </p>
+</div>
+<!-- Action Link Button -->
+<div class="mt-6 mb-8">
+<a class="inline-flex items-center text-[14px] font-medium text-white border-b border-lilac-300 pb-0.5 hover:text-lilac-200" href="#">
+          Read the full story <span class="ml-1.5">→</span>
+</a>
+</div>
+<!-- Editorial Portrait Image -->
+<div class="rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+<img alt="Superhuman executive editorial manifesto photograph" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-1284QGpAQytcDuVG8b46kwTVWP3dhjLlCoBQQBaCXyY_F4wCqtVMs1TyQFdTfg7y7WWHBaGHoSX2ElCEZfjWbUeH87JtFwgzFq414TXR1Sk_NerKvUK1JpstjvSFr1F0YQI5TIX1c7rxy_073iMy2kG0PFUUYzf51irGyVipBbLC54q9GER7FRlf2f-X2cVUb2E-F43qbMILTgUp09xcNCgRYi7g3HIsPwok0QxuaZe7Qlb9rLNrif0N4pvYldRLYn8XuhUMfQ"/>
+</div>
+</div>
+</section>
+<!-- END: ManifestoSection -->
+<!-- BEGIN: FinalCTASection -->
+<!-- Final Conversion Section with Tonal Flower and Dual Mobile Buttons -->
+<section class="bg-[#F6F5F1] py-16 px-6 text-center flex flex-col items-center" data-purpose="final-call-to-action">
+<!-- Authentic Superhuman Tonal Flower Symbol -->
+<div class="w-24 h-24 mb-6 relative flex items-center justify-center">
+<img alt="Superhuman tonal flower emblem" class="w-20 h-20 object-contain" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD52UwGfxzoR1-IQgkfFuJVzRs-aPR-C0hQSw13knrUCGPMV2__vk7Hhl2_UCPlgazMntnUZkO0p6AYOupb7J4TKBmrQkhdYMryc54g42AlNHrtceQAMwG3nmyZJ1vIOAB0JK4kCwWUHl6JfHft78jym0FYrZv5EzDjKXk3t-1fVY1f8LWd_cvDku7DT9hZpEJ60-czR2aKq5e3Tt0OcopYw53gFRvDV3PPUKgUSfAHv1qmJXMW4UtBjCok67cpCUzNHGuwk2hW3g"/>
+</div>
+<!-- H2 Conversion Headline -->
+<h2 class="text-[34px] font-semibold tracking-tight text-[#140E1B] leading-[1.15] mb-4">
+      AI that works<br/>everywhere you work.
+    </h2>
+<p class="text-[15px] text-[#554E5F] max-w-[290px] mb-8 leading-normal">
+      Join 100,000+ ambitious individuals saving 4 hours every single week.
+    </p>
+<!-- Dual Stacked CTA Buttons -->
+<div class="w-full max-w-[320px] space-y-3">
+<a class="block w-full py-4 px-6 bg-[#181023] hover:bg-[#28183D] active:scale-[0.98] text-white font-medium text-[15px] rounded-full shadow-lg transition" href="#">
+        Get Superhuman
+      </a>
+<a class="block w-full py-3.5 px-6 border border-[#2B1B3C]/20 text-[#181023] font-medium text-[15px] rounded-full hover:bg-black/5 active:bg-black/10 transition" href="#">
+        Talk to sales
+      </a>
+</div>
+</section>
+<!-- END: FinalCTASection -->
+<!-- BEGIN: MobileFooter -->
+<!-- Authentic Deep Plum Stacked Footer -->
+<footer class="bg-[#120B1A] text-[#9A8DAE] pt-12 pb-14 px-6 border-t border-[#251833]" data-purpose="site-footer">
+<div class="max-w-[340px] mx-auto">
+<!-- Footer Logo Header -->
+<div class="flex items-center space-x-2 text-white mb-8">
+<svg class="w-6 h-6 fill-current text-white" fill="none" viewbox="0 0 32 32">
+<path d="M7 6L25 14L18 17L7 6Z" fill="currentColor" fill-opacity="0.95"></path>
+<path d="M25 26L7 18L14 15L25 26Z" fill="currentColor"></path>
+</svg>
+<span class="font-bold tracking-[0.18em] text-[13px] uppercase">SUPERHUMAN</span>
+</div>
+<!-- 2-Column Responsive Footer Links Grid -->
+<div class="grid grid-cols-2 gap-y-8 gap-x-6 text-[13px] mb-10">
+<!-- Col 1: Products -->
+<div class="space-y-3">
+<h4 class="text-white font-semibold text-[13px] tracking-wide uppercase">Products</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#mail-panel">Superhuman Mail</a></li>
+<li><a class="hover:text-white transition" href="#go-panel">Superhuman Go</a></li>
+<li><a class="hover:text-white transition" href="#docs-panel">Docs &amp; Coda</a></li>
+<li><a class="hover:text-white transition" href="#grammarly-panel">Grammarly AI</a></li>
+<li><a class="hover:text-white transition" href="#">Enterprise Security</a></li>
+<li><a class="hover:text-white transition" href="#">Pricing</a></li>
+</ul>
+</div>
+<!-- Col 2: Company & Connect -->
+<div class="space-y-3">
+<h4 class="text-white font-semibold text-[13px] tracking-wide uppercase">Company</h4>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Manifesto</a></li>
+<li><a class="hover:text-white transition" href="#">Careers (Hiring!)</a></li>
+<li><a class="hover:text-white transition" href="#">Customer Love</a></li>
+<li><a class="hover:text-white transition" href="#">Blog</a></li>
+<li><a class="hover:text-white transition" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal Copyright -->
+<div class="pt-6 border-t border-[#231535] text-[11px] text-[#716484] flex flex-col space-y-2">
+<p>© 2026 Superhuman Labs, Inc. All rights reserved.</p>
+<p>Built for professionals who value focus, craftsmanship, and speed.</p>
+</div>
+</div>
+</footer>
+<!-- END: MobileFooter -->
+<!-- BEGIN: InteractiveMobileDrawer -->
+<!-- Authentic Sliding Mobile Drawer Overlay (353px width, triggered by hamburger) -->
+<div class="fixed inset-0 z-50 pointer-events-none drawer-closed" id="drawerContainer">
+<!-- Dimmed Backdrop -->
+<div class="absolute inset-0 bg-black/50 backdrop-blur-xs" id="drawerBackdrop"></div>
+<!-- Sliding Panel (Width: 353px) -->
+<nav aria-label="Mobile Navigation" class="absolute top-0 bottom-0 left-0 w-[353px] max-w-[90vw] bg-[#F6F5F1] shadow-2xl flex flex-col justify-between overflow-y-auto pointer-events-auto" id="mobileDrawer">
+<!-- Drawer Top Bar -->
+<div class="p-5 border-b border-sand-200 flex items-center justify-between">
+<div class="flex items-center space-x-2 text-[#120D18]">
+<svg class="w-6 h-6 fill-current text-[#120D18]" fill="none" viewbox="0 0 32 32">
+<path d="M7 6L25 14L18 17L7 6Z" fill="currentColor"></path>
+<path d="M25 26L7 18L14 15L25 26Z" fill="currentColor" fill-opacity="0.8"></path>
+</svg>
+<span class="font-bold tracking-[0.16em] text-[13px] uppercase">SUPERHUMAN</span>
+</div>
+<button aria-label="Close navigation menu" class="w-9 h-9 rounded-full bg-sand-200/80 hover:bg-sand-300 flex items-center justify-center text-gray-800 transition" id="closeDrawerBtn" type="button">
+<svg class="w-5 h-5 stroke-current" fill="none" stroke-width="2.2" viewbox="0 0 24 24">
+<line x1="6" x2="18" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="18" y2="6"></line>
+</svg>
+</button>
+</div>
+<!-- Navigation Links List & Products Accordion -->
+<div class="px-5 py-4 space-y-1 divide-y divide-sand-200 text-[#191122]">
+<!-- Accordion Item: Products -->
+<div class="pt-2 pb-2">
+<button class="w-full flex items-center justify-between text-left py-2 text-[17px] font-semibold focus:outline-none" id="productsAccordionBtn" type="button">
+<span>Products</span>
+<svg class="w-4 h-4 text-gray-500 transform transition-transform duration-200" fill="none" id="accordionIcon" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="6 9 12 15 18 9"></polyline>
+</svg>
+</button>
+<!-- Accordion Submenu Items -->
+<div class="hidden pl-2 pt-2 pb-1 space-y-2.5 text-[14px] text-gray-700" id="productsSubmenu">
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#go-panel">
+<span class="text-sm">⚡</span>
+<span>Superhuman Go</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#">
+<span class="text-sm">🤖</span>
+<span>Agents &amp; Workflows</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#mail-panel">
+<span class="text-sm">✉️</span>
+<span>Superhuman Mail</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#">
+<span class="text-sm">📅</span>
+<span>Superhuman Calendar</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#docs-panel">
+<span class="text-sm">📄</span>
+<span>Docs &amp; Canvas</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#">
+<span class="text-sm">🗄️</span>
+<span>Databases</span>
+</a>
+<a class="drawer-nav-link flex items-center space-x-2 py-1 hover:text-purple-700" href="#">
+<span class="text-sm">🛍️</span>
+<span>Superhuman Store</span>
+</a>
+</div>
+</div>
+<!-- Primary Top-Level Drawer Links -->
+<div class="py-2.5 space-y-2">
+<a class="drawer-nav-link block py-2 text-[17px] font-semibold hover:text-purple-700" href="#">Solutions</a>
+<a class="drawer-nav-link block py-2 text-[17px] font-semibold hover:text-purple-700" href="#">AI</a>
+<a class="drawer-nav-link block py-2 text-[17px] font-semibold hover:text-purple-700" href="#">Resources</a>
+<a class="drawer-nav-link block py-2 text-[17px] font-semibold hover:text-purple-700" href="#">Pricing</a>
+<a class="drawer-nav-link block py-2 text-[17px] font-semibold hover:text-purple-700" href="#">Love</a>
+</div>
+</div>
+<!-- Drawer Bottom Action Buttons -->
+<div class="p-5 border-t border-sand-200 bg-[#EFECE6]/40 space-y-2.5">
+<a class="block w-full text-center py-3 rounded-xl bg-[#140E1B] text-white font-medium text-[14px] shadow-sm" href="#">
+          Contact sales
+        </a>
+<a class="block w-full text-center py-2.5 rounded-xl border border-sand-300 text-gray-800 font-medium text-[14px] bg-white" href="#">
+          Sign in
+        </a>
+</div>
+</nav>
+</div>
+<!-- END: InteractiveMobileDrawer -->
+</div>
+<!-- BEGIN: DrawerScript -->
+<!-- Drawer open, close, and accordion toggle logic -->
+<script data-purpose="drawer-interactivity">
+  const drawerContainer = document.getElementById('drawerContainer');
+  const openDrawerBtn = document.getElementById('openDrawerBtn');
+  const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+  const drawerBackdrop = document.getElementById('drawerBackdrop');
+  const productsBtn = document.getElementById('productsAccordionBtn');
+  const productsSubmenu = document.getElementById('productsSubmenu');
+  const accordionIcon = document.getElementById('accordionIcon');
+  const drawerNavLinks = document.querySelectorAll('.drawer-nav-link');
+
+  function openDrawer() {
+    drawerContainer.classList.remove('drawer-closed');
+    drawerContainer.classList.add('drawer-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeDrawer() {
+    drawerContainer.classList.remove('drawer-open');
+    drawerContainer.classList.add('drawer-closed');
+    document.body.style.overflow = '';
+  }
+
+  openDrawerBtn.addEventListener('click', openDrawer);
+  closeDrawerBtn.addEventListener('click', closeDrawer);
+  drawerBackdrop.addEventListener('click', closeDrawer);
+
+  // Close drawer when any internal navigation link is clicked
+  drawerNavLinks.forEach(link => {
+    link.addEventListener('click', closeDrawer);
+  });
+
+  // Accordion Expand/Collapse
+  productsBtn.addEventListener('click', () => {
+    const isHidden = productsSubmenu.classList.contains('hidden');
+    if (isHidden) {
+      productsSubmenu.classList.remove('hidden');
+      accordionIcon.classList.add('rotate-180');
+    } else {
+      productsSubmenu.classList.add('hidden');
+      accordionIcon.classList.remove('rotate-180');
+    }
+  });
+</script>
+<!-- END: DrawerScript -->
+</body></html>

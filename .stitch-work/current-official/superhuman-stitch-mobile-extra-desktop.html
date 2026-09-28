@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Superhuman 2026 Mobile Homepage</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+            display: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            superplum: '#1A0B2E',
+            superbg: '#F6F5F1',
+            supercard: '#FFFFFF',
+            accentlilac: '#C3B8FF',
+            superviolet: '#201138',
+            superdarkcta: '#120724',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #F6F5F1;
+      color: #120724;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+    .sky-gradient {
+      background: linear-gradient(180deg, #8EA3D4 0%, #A4B5DF 35%, #C2CDED 70%, #E2DCF3 100%);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 16px 36px -8px rgba(32, 17, 56, 0.12), 0 4px 12px rgba(32, 17, 56, 0.05);
+    }
+    .drawer-open {
+      transform: translateX(0) !important;
+    }
+    .backdrop-active {
+      opacity: 1 !important;
+      pointer-events: auto !important;
+    }
+  </style>
+</head>
+<body class="bg-superbg text-[#120724] relative selection:bg-accentlilac selection:text-superdarkcta">
+<!-- Mobile Drawer Backdrop -->
+<div class="fixed inset-0 bg-[#0c0418]/60 z-50 opacity-0 pointer-events-none transition-opacity duration-300 backdrop-blur-sm" id="drawer-backdrop" onclick="toggleDrawer(false)"></div>
+<!-- Mobile Slide-over Drawer (353px wide) -->
+<div class="fixed top-0 right-0 h-full w-[353px] max-w-[92vw] bg-white z-50 transform translate-x-full transition-transform duration-300 ease-out shadow-2xl flex flex-col justify-between overflow-y-auto" id="mobile-drawer">
+<div class="p-6">
+<div class="flex items-center justify-between pb-6 border-b border-gray-100">
+<!-- Black Superhuman logo -->
+<div class="flex items-center gap-2">
+<svg class="w-6 h-6 text-black" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2L2 12l10 10 10-10L12 2zm0 4.24l5.76 5.76L12 17.76 6.24 12 12 6.24z"></path>
+</svg>
+<span class="font-bold tracking-[0.22em] text-xs text-black">SUPERHUMAN</span>
+</div>
+<!-- Close Button -->
+<button aria-label="Close menu" class="p-2 rounded-full hover:bg-gray-100 text-gray-700 transition" onclick="toggleDrawer(false)">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</div>
+<!-- Navigation Links -->
+<nav class="py-4 space-y-1">
+<!-- Products Accordion -->
+<div>
+<button class="w-full py-3.5 flex items-center justify-between text-[17px] font-medium text-gray-900 border-b border-gray-100" onclick="toggleProductsMenu()">
+<span>Products</span>
+<svg class="w-4 h-4 text-gray-400 transition-transform duration-200" fill="none" id="products-chevron" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<div class="hidden pl-3 py-2 space-y-2 border-b border-gray-100 bg-[#FBFBFA] rounded-xl my-1" id="products-sublist">
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Superhuman Go</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Agents</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Mail</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Calendar</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Docs</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Databases</a>
+<a class="block py-1.5 text-[15px] font-medium text-gray-800 hover:text-purple-600" href="#">Superhuman Store</a>
+</div>
+</div>
+<a class="block py-3.5 text-[17px] font-medium text-gray-900 border-b border-gray-100" href="#">Solutions</a>
+<a class="block py-3.5 text-[17px] font-medium text-gray-900 border-b border-gray-100" href="#">AI</a>
+<a class="block py-3.5 text-[17px] font-medium text-gray-900 border-b border-gray-100" href="#">Resources</a>
+<a class="block py-3.5 text-[17px] font-medium text-gray-900 border-b border-gray-100" href="#">Pricing</a>
+<a class="block py-3.5 text-[17px] font-medium text-gray-900 border-b border-gray-100" href="#">Love</a>
+</nav>
+</div>
+<!-- Drawer Footer Actions -->
+<div class="p-6 border-t border-gray-100 space-y-3 bg-[#FBFBFA]">
+<a class="block w-full py-3 text-center text-sm font-semibold text-gray-800 border border-gray-200 rounded-full hover:bg-white transition" href="#">Contact sales</a>
+<a class="block w-full py-3 text-center text-sm font-semibold text-white bg-superdarkcta rounded-full hover:bg-black transition" href="#">Sign in</a>
+</div>
+</div>
+<!-- MAIN WRAPPER: Mobile 390px Viewport Centered / Full Mobile Canvas -->
+<main class="w-full max-w-[440px] mx-auto min-h-screen bg-superbg relative overflow-hidden">
+<!-- ==================== HERO SECTION (390x844 Base Frame) ==================== -->
+<section class="relative w-full sky-gradient pt-2 pb-12 overflow-hidden min-h-[780px] flex flex-col items-center">
+<!-- Background Video Overlay if available, with ambient cloud glow -->
+<div class="absolute inset-0 pointer-events-none opacity-40 mix-blend-overlay">
+<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="">
+<source src="https://superhumanstatic.com/super-funnel/main/public/videos/v1/shared/hero-background.mp4" type="video/mp4"/>
+</video>
+</div>
+<!-- Atmospheric cloud gradients -->
+<div class="absolute top-1/4 -left-20 w-80 h-80 bg-white/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/3 -right-20 w-80 h-80 bg-[#C3B8FF]/30 rounded-full blur-3xl pointer-events-none"></div>
+<!-- Top Announcement Banner: Dark Plum (x16 y8 width 358 height ~61) -->
+<div class="relative z-20 w-[358px] mx-auto mt-2 mb-6 px-4 py-3 bg-[#1A0B2E]/95 rounded-[18px] border border-white/10 flex items-center justify-between text-white shadow-xl backdrop-blur-md">
+<div class="flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-accentlilac animate-pulse"></span>
+<span class="text-[13px] font-normal tracking-tight text-white/90">Looking for Superhuman Mail?</span>
+</div>
+<a class="flex items-center gap-1.5 px-3 py-1 rounded-full border border-white/25 text-[11px] font-medium tracking-tight text-white hover:bg-white/10 transition" href="#">
+<span>Learn more</span>
+<span class="text-xs">→</span>
+</a>
+</div>
+<!-- Mobile Header / Top Nav Bar (y~90) -->
+<header class="relative z-20 w-[358px] mx-auto flex items-center justify-between mb-8">
+<!-- Superhuman Logo & Wordmark (left) -->
+<a class="flex items-center gap-2.5 group" href="#">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2L2 12l10 10 10-10L12 2zm0 4.24l5.76 5.76L12 17.76 6.24 12 12 6.24z"></path>
+</svg>
+<span class="font-bold tracking-[0.24em] text-[13px] text-white">SUPERHUMAN</span>
+</a>
+<!-- Mobile Hamburger Button (right) -->
+<button aria-label="Open mobile menu" class="p-2 text-white hover:text-white/80 focus:outline-none" onclick="toggleDrawer(true)">
+<svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</header>
+<!-- Centered H1 (y~153) -->
+<div class="relative z-20 px-6 text-center mt-2">
+<h1 class="text-white text-[32px] leading-[1.12] font-normal tracking-[-0.03em]">
+          Superpowers,<br/>
+          everywhere you work
+        </h1>
+<!-- Centered Subheading (y~230) -->
+<p class="text-white/90 text-[16px] leading-[1.38] font-normal mt-3.5 tracking-[-0.01em]">
+          Mail, Docs, and AI that<br/>
+          works in every app and tab
+        </p>
+<!-- CTA Button (y~288): Near-black/lavender with separate luminous lilac arrow block -->
+<div class="mt-6 flex items-center justify-center">
+<a class="inline-flex items-center pl-6 pr-1.5 py-1.5 bg-superdarkcta hover:bg-black text-white rounded-full shadow-2xl transition duration-200 group border border-white/10" href="#">
+<span class="text-[15px] font-medium tracking-tight pr-3">Get Superhuman</span>
+<span class="w-9 h-9 rounded-full bg-accentlilac flex items-center justify-center text-superdarkcta group-hover:scale-105 transition-transform duration-200">
+<svg class="w-4 h-4 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</span>
+</a>
+</div>
+</div>
+<!-- Hero Person Editorial Photo & Translucent Floating Panels (y~380 to y~700) -->
+<div class="relative z-10 w-full mt-6 px-4 flex flex-col items-center">
+<!-- Floating contextual panel: Left AI snippet -->
+<div class="glass-card absolute -left-1 top-8 z-20 p-3 rounded-2xl w-[190px] shadow-xl text-left border border-white/60 transform -rotate-1">
+<div class="flex items-center justify-between pb-1.5 border-b border-gray-100">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+<span class="text-[10px] font-semibold text-gray-800">Superhuman AI</span>
+</div>
+<span class="text-[9px] bg-purple-100 text-purple-800 font-medium px-1.5 py-0.5 rounded-full">Auto-draft</span>
+</div>
+<p class="text-[11px] text-gray-700 mt-1.5 leading-snug line-clamp-2">“3 action items extracted from Q3 roadmap doc.”</p>
+<div class="mt-2 flex items-center justify-between text-[9px] text-gray-500">
+<span class="font-mono bg-gray-100 px-1 py-0.5 rounded text-[8px]">⌘K</span>
+<span class="text-purple-600 font-semibold">Ready to send</span>
+</div>
+</div>
+<!-- Floating contextual panel: Right Mini Doc Sync -->
+<div class="glass-card absolute -right-1 top-28 z-20 p-3 rounded-2xl w-[180px] shadow-xl text-left border border-white/60 transform rotate-1">
+<div class="flex items-center gap-1.5 pb-1">
+<svg class="w-3.5 h-3.5 text-blue-500" fill="currentColor" viewbox="0 0 20 20">
+<path d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path>
+</svg>
+<span class="text-[11px] font-semibold text-gray-800 truncate">Sprint 2026.doc</span>
+</div>
+<p class="text-[10px] text-gray-600 leading-tight mt-1">Universal AI active across all Chrome tabs</p>
+<div class="mt-2 flex items-center gap-1 text-[9px] text-emerald-600 font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span>Instant context sync</span>
+</div>
+</div>
+<!-- Editorial Person Rising Image (Genuine Asset) -->
+<div class="relative w-[340px] h-[370px] flex items-end justify-center pt-4">
+<img alt="Person thinking in creative focus" class="w-[310px] h-auto object-contain drop-shadow-2xl relative z-10" loading="eager" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Bottom subtle fade to page background -->
+<div class="absolute bottom-0 inset-x-0 h-16 bg-gradient-to-t from-superbg via-superbg/50 to-transparent z-15"></div>
+</div>
+</div>
+</section>
+<!-- ==================== TRUST LOGOS SECTION (y~760 - 950) ==================== -->
+<section class="w-full px-6 py-10 bg-superbg text-center">
+<p class="text-[11px] font-semibold tracking-[0.16em] uppercase text-gray-500 mb-6">
+        Trusted by the most innovative companies in the world
+      </p>
+<div class="grid grid-cols-3 gap-y-6 gap-x-4 items-center justify-items-center opacity-85">
+<!-- OpenAI -->
+<div class="flex items-center gap-1.5 text-gray-800 font-semibold text-sm">
+<svg class="w-4 h-4 text-gray-900" fill="currentColor" viewbox="0 0 24 24">
+<path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1683a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4947z"></path>
+</svg>
+<span class="tracking-tight text-xs">OpenAI</span>
+</div>
+<!-- Figma -->
+<div class="flex items-center gap-1.5 text-gray-800 font-semibold text-sm">
+<svg class="w-4 h-4 text-gray-900" fill="currentColor" viewbox="0 0 24 24">
+<path d="M8 24c2.208 0 4-1.792 4-4v-4H8c-2.208 0-4 1.792-4 4s1.792 4 4 4zM4 12c0-2.208 1.792-4 4-4h4v8H8c-2.208 0-4-1.792-4-4zm0-8c0-2.208 1.792-4 4-4h4v8H8C5.792 8 4 6.208 4 4zm8 0h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4V4zm0 8h4c2.208 0 4 1.792 4 4s-1.792 4-4 4h-4v-8z"></path>
+</svg>
+<span class="tracking-tight text-xs">Figma</span>
+</div>
+<!-- HubSpot -->
+<div class="text-gray-800 font-semibold text-xs tracking-tight">HubSpot</div>
+<!-- DoorDash -->
+<div class="text-gray-800 font-bold text-xs tracking-wider">DOORDASH</div>
+<!-- Expensify -->
+<div class="text-gray-800 font-semibold italic text-xs tracking-tight">Expensify</div>
+<!-- GEICO -->
+<div class="text-gray-800 font-bold text-xs tracking-widest">GEICO</div>
+</div>
+</section>
+<!-- ==================== SUITE INTRO & STACKED PRODUCT SELECTORS (y~1026) ==================== -->
+<section class="w-full px-5 py-8 bg-superbg">
+<div class="text-center mb-6">
+<h2 class="text-[32px] font-normal tracking-[-0.03em] text-[#120724]">
+          Your Superhuman suite
+        </h2>
+<div class="mt-3">
+<a class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-purple-300 text-purple-900 text-xs font-semibold hover:bg-purple-50 transition" href="#">
+<span>Get the suite</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- 4 Stacked Product Selector Cards (Mail, Grammarly, Docs, Go) -->
+<div class="space-y-3 w-[350px] mx-auto">
+<!-- Card 1: Mail -->
+<div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-xl bg-purple-100 flex items-center justify-center text-purple-700 flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-semibold text-gray-900">Mail</h3>
+<span class="text-[10px] bg-purple-50 text-purple-700 font-medium px-2 py-0.5 rounded-full">Core</span>
+</div>
+<p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Lightning-fast inbox with 4 hours saved per week.</p>
+</div>
+</div>
+<!-- Card 2: Grammarly -->
+<div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-700 flex-shrink-0 font-bold text-sm">
+            G
+          </div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-semibold text-gray-900">Grammarly</h3>
+<span class="text-[10px] bg-emerald-50 text-emerald-700 font-medium px-2 py-0.5 rounded-full">Writing</span>
+</div>
+<p class="text-xs text-gray-500 mt-0.5 leading-relaxed">AI writing partner everywhere you communicate.</p>
+</div>
+</div>
+<!-- Card 3: Docs -->
+<div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-xl bg-blue-100 flex items-center justify-center text-blue-700 flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-semibold text-gray-900">Docs</h3>
+<span class="text-[10px] bg-blue-50 text-blue-700 font-medium px-2 py-0.5 rounded-full">Coda</span>
+</div>
+<p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Modern collaboration canvas for teams and AI.</p>
+</div>
+</div>
+<!-- Card 4: Go -->
+<div class="p-4 bg-white rounded-2xl border border-gray-100 shadow-sm flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-xl bg-amber-100 flex items-center justify-center text-amber-700 flex-shrink-0">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-semibold text-gray-900">Go</h3>
+<span class="text-[10px] bg-amber-50 text-amber-700 font-medium px-2 py-0.5 rounded-full">Anywhere</span>
+</div>
+<p class="text-xs text-gray-500 mt-0.5 leading-relaxed">Everywhere-assistant in every Chrome tab and app.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 4 AUTHENTIC LONG PRODUCT PANELS ==================== -->
+<!-- PANEL 1: SUPERHUMAN MAIL (y~1264 to y~2330) -->
+<section class="w-full px-5 py-12 border-t border-gray-200/60 bg-superbg">
+<div class="w-[350px] mx-auto">
+<span class="text-[11px] font-semibold tracking-wider uppercase text-purple-700 bg-purple-100/70 px-2.5 py-1 rounded-full">
+          Superhuman Mail
+        </span>
+<h2 class="text-[30px] font-normal leading-[1.15] tracking-[-0.03em] text-[#120724] mt-3">
+          The most productive email app ever made
+        </h2>
+<p class="text-[15px] text-gray-600 mt-3 leading-relaxed">
+          Fly through your inbox twice as fast as before, never drop the ball again, and save 4 hours every single week.
+        </p>
+<!-- Feature Bullets -->
+<div class="mt-5 space-y-3">
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-purple-600/10 text-purple-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Split Inbox to organize VIPs, team threads, and notifications instantly</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-purple-600/10 text-purple-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">AI email draft generation tuned to your exact voice and cadence</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-purple-600/10 text-purple-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Sub-100ms keyboard shortcuts for every action with zero lag</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-purple-600/10 text-purple-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Automatic follow-up reminders and scheduled sends</p>
+</div>
+</div>
+<div class="mt-5">
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-purple-900 hover:text-purple-700" href="#">
+<span>Learn more about Mail</span>
+<span>→</span>
+</a>
+</div>
+<!-- Real Product Image (324px filled width) -->
+<div class="mt-7 w-[324px] mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-white">
+<img alt="Superhuman Mail real interface" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- PANEL 2: GRAMMARLY (y~2333 to y~3330) -->
+<section class="w-full px-5 py-12 border-t border-gray-200/60 bg-superbg">
+<div class="w-[350px] mx-auto">
+<span class="text-[11px] font-semibold tracking-wider uppercase text-emerald-800 bg-emerald-100/70 px-2.5 py-1 rounded-full">
+          Superhuman + Grammarly
+        </span>
+<h2 class="text-[30px] font-normal leading-[1.15] tracking-[-0.03em] text-[#120724] mt-3">
+          Everyone’s favorite AI writing partner
+        </h2>
+<p class="text-[15px] text-gray-600 mt-3 leading-relaxed">
+          Bring trusted, intelligent assistance into every sentence. Real-time tone adjustment, concise phrasing, and contextual corrections across every window.
+        </p>
+<!-- Feature Bullets -->
+<div class="mt-5 space-y-3">
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-emerald-600/10 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Real-time tone calibration for executives, clients, and cross-functional teams</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-emerald-600/10 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Zero-friction inline rephrase recommendations without leaving flow</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-emerald-600/10 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Enterprise-grade security and strict data privacy compliance</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-emerald-600/10 text-emerald-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Vocabulary enhancements that elevate team communications</p>
+</div>
+</div>
+<div class="mt-5">
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-emerald-800 hover:text-emerald-950" href="#">
+<span>Learn more about Grammarly</span>
+<span>→</span>
+</a>
+</div>
+<!-- Real Product Image (324px filled width) -->
+<div class="mt-7 w-[324px] mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-white">
+<img alt="Grammarly writing partner real interface" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- PANEL 3: DOCS (CODA) (y~3337 to y~4430) -->
+<section class="w-full px-5 py-12 border-t border-gray-200/60 bg-superbg">
+<div class="w-[350px] mx-auto">
+<span class="text-[11px] font-semibold tracking-wider uppercase text-blue-800 bg-blue-100/70 px-2.5 py-1 rounded-full">
+          Superhuman Docs (Coda)
+        </span>
+<h2 class="text-[30px] font-normal leading-[1.15] tracking-[-0.03em] text-[#120724] mt-3">
+          The best place for teams and AI to work together
+        </h2>
+<p class="text-[15px] text-gray-600 mt-3 leading-relaxed">
+          Turn collaborative documents into interactive, automated systems with built-in AI copilots that synthesize team knowledge.
+        </p>
+<!-- Feature Bullets -->
+<div class="mt-5 space-y-3">
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-blue-600/10 text-blue-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Live collaborative tables, interactive cards, and connected roadmaps</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-blue-600/10 text-blue-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Automated summaries that synthesize conversations into structured tasks</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-blue-600/10 text-blue-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Bi-directional sync with Superhuman Mail for seamless handoffs</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-blue-600/10 text-blue-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Custom formulas and widgets built in natural language</p>
+</div>
+</div>
+<div class="mt-5">
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-800 hover:text-blue-950" href="#">
+<span>Learn more about Docs</span>
+<span>→</span>
+</a>
+</div>
+<!-- Real Product Image (324px filled width) -->
+<div class="mt-7 w-[324px] mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-white">
+<img alt="Superhuman Docs real interface" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- PANEL 4: SUPERHUMAN GO (y~4434 to y~5590) -->
+<section class="w-full px-5 py-12 border-t border-gray-200/60 bg-superbg">
+<div class="w-[350px] mx-auto">
+<span class="text-[11px] font-semibold tracking-wider uppercase text-amber-800 bg-amber-100/70 px-2.5 py-1 rounded-full">
+          Superhuman Go
+        </span>
+<h2 class="text-[30px] font-normal leading-[1.15] tracking-[-0.03em] text-[#120724] mt-3">
+          AI that actually works in every app you use
+        </h2>
+<p class="text-[15px] text-gray-600 mt-3 leading-relaxed">
+          No more copy-pasting between browser tabs. Superhuman Go reads your context, understands the document or thread you are viewing, and drafts answers right where you are.
+        </p>
+<!-- Feature Bullets -->
+<div class="mt-5 space-y-3">
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-amber-600/10 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Instant sidebar presence inside LinkedIn, Salesforce, Notion, and Google Docs</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-amber-600/10 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Cross-app semantic memory that connects what you read with what you write</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-amber-600/10 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Universal keyboard trigger ready on command everywhere you work</p>
+</div>
+<div class="flex items-start gap-2.5">
+<div class="w-4 h-4 rounded-full bg-amber-600/10 text-amber-700 flex items-center justify-center flex-shrink-0 mt-0.5">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+</div>
+<p class="text-[13px] text-gray-700">Custom agent automations across multiple browser windows</p>
+</div>
+</div>
+<div class="mt-5">
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-amber-800 hover:text-amber-950" href="#">
+<span>Learn more about Go</span>
+<span>→</span>
+</a>
+</div>
+<!-- Real Product Image (324px filled width) -->
+<div class="mt-7 w-[324px] mx-auto rounded-2xl overflow-hidden shadow-xl border border-gray-200 bg-white">
+<img alt="Superhuman Go real interface" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- ==================== MANIFESTO SECTION: "BECOMING SUPERHUMAN" (y~5594) ==================== -->
+<section class="w-full px-6 py-16 bg-superplum text-white relative overflow-hidden">
+<!-- Ambient purple halo glow -->
+<div class="absolute -top-24 -right-24 w-80 h-80 bg-[#593799]/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 w-[342px] mx-auto">
+<span class="text-[11px] font-semibold tracking-[0.2em] uppercase text-accentlilac">
+          Our Manifesto
+        </span>
+<h2 class="text-[34px] font-normal tracking-[-0.03em] leading-[1.12] text-white mt-3">
+          Becoming<br/>Superhuman.
+        </h2>
+<p class="text-[15px] text-white/80 leading-relaxed mt-4 font-normal">
+          We believe technology should feel like an extension of your own mind. Not endless tabs, notification overload, and fragmented workflows, but effortless speed, profound focus, and genuine delight.
+        </p>
+<p class="text-[14px] text-white/70 leading-relaxed mt-3">
+          From the pioneers of the fastest email experience on earth comes a unified suite built for people who refuse to compromise on quality and speed.
+        </p>
+<div class="mt-6">
+<a class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-superdarkcta font-semibold text-xs hover:bg-gray-100 transition shadow-lg" href="#">
+<span>Read the story</span>
+<span>→</span>
+</a>
+</div>
+<!-- Authentic Manifesto Editorial Asset -->
+<div class="mt-8 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+<img alt="Becoming Superhuman portrait" class="w-full h-auto object-cover" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- ==================== FINAL CTA SECTION WITH TONAL FLOWER (y~6324) ==================== -->
+<section class="w-full px-6 py-16 bg-superbg text-center relative">
+<div class="w-[342px] mx-auto flex flex-col items-center">
+<!-- Authentic Tonal Flower Asset -->
+<div class="w-20 h-20 mb-5 relative">
+<img alt="Superhuman tonal flower emblem" class="w-full h-full object-contain filter drop-shadow-md" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h2 class="text-[34px] font-normal leading-[1.14] tracking-[-0.03em] text-[#120724]">
+          AI that works<br/>everywhere you work
+        </h2>
+<p class="text-[15px] text-gray-600 mt-3 max-w-[300px] leading-relaxed">
+          Experience the speed, precision, and intelligence of the all-new Superhuman suite.
+        </p>
+<!-- Dual CTA Buttons -->
+<div class="mt-6 flex flex-col w-full max-w-[280px] gap-2.5">
+<a class="w-full py-3.5 px-6 rounded-full bg-superdarkcta hover:bg-black text-white font-semibold text-sm transition shadow-lg text-center" href="#">
+            Get Superhuman
+          </a>
+<a class="w-full py-3 px-6 rounded-full border border-gray-300 text-gray-800 font-semibold text-sm hover:bg-white transition text-center" href="#">
+            Talk to sales
+          </a>
+</div>
+</div>
+</section>
+<!-- ==================== MOBILE FOOTER (y~6700) ==================== -->
+<footer class="w-full px-6 pt-12 pb-16 bg-superplum text-white/90 border-t border-white/10">
+<div class="w-[342px] mx-auto">
+<!-- Logo & Mission Summary -->
+<div class="pb-8 border-b border-white/10">
+<div class="flex items-center gap-2">
+<svg class="w-6 h-6 text-white" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2L2 12l10 10 10-10L12 2zm0 4.24l5.76 5.76L12 17.76 6.24 12 12 6.24z"></path>
+</svg>
+<span class="font-bold tracking-[0.24em] text-xs text-white">SUPERHUMAN</span>
+</div>
+<p class="text-xs text-white/60 mt-3 leading-relaxed">
+            The ultimate productivity suite. Mail, Docs, and universal AI built to give you hours back every week.
+          </p>
+</div>
+<!-- Stacked Footer Columns -->
+<div class="py-8 grid grid-cols-2 gap-y-8 gap-x-6 text-xs border-b border-white/10">
+<div>
+<h4 class="font-bold uppercase tracking-wider text-[11px] text-white/40 mb-3">Products</h4>
+<ul class="space-y-2.5 text-white/80">
+<li><a class="hover:text-white transition" href="#">Superhuman Mail</a></li>
+<li><a class="hover:text-white transition" href="#">Grammarly</a></li>
+<li><a class="hover:text-white transition" href="#">Superhuman Docs</a></li>
+<li><a class="hover:text-white transition" href="#">Superhuman Go</a></li>
+<li><a class="hover:text-white transition" href="#">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold uppercase tracking-wider text-[11px] text-white/40 mb-3">Company</h4>
+<ul class="space-y-2.5 text-white/80">
+<li><a class="hover:text-white transition" href="#">About Us</a></li>
+<li><a class="hover:text-white transition" href="#">Manifesto</a></li>
+<li><a class="hover:text-white transition" href="#">Careers</a></li>
+<li><a class="hover:text-white transition" href="#">Press &amp; Media</a></li>
+<li><a class="hover:text-white transition" href="#">Customer Stories</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold uppercase tracking-wider text-[11px] text-white/40 mb-3">Legal</h4>
+<ul class="space-y-2.5 text-white/80">
+<li><a class="hover:text-white transition" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition" href="#">Terms of Service</a></li>
+<li><a class="hover:text-white transition" href="#">Security &amp; Trust</a></li>
+<li><a class="hover:text-white transition" href="#">Compliance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold uppercase tracking-wider text-[11px] text-white/40 mb-3">Connect</h4>
+<ul class="space-y-2.5 text-white/80">
+<li><a class="hover:text-white transition" href="#">Twitter / X</a></li>
+<li><a class="hover:text-white transition" href="#">LinkedIn</a></li>
+<li><a class="hover:text-white transition" href="#">YouTube</a></li>
+<li><a class="hover:text-white transition" href="#">Contact Sales</a></li>
+<li><a class="hover:text-white transition" href="#">Status</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-6 flex flex-col items-center justify-between text-[11px] text-white/40 gap-2 text-center">
+<p>© 2026 Superhuman. All rights reserved.</p>
+<p class="text-[10px] text-white/30">Independent visual study of the 2026 Superhuman suite platform.</p>
+</div>
+</div>
+</footer>
+</main>
+<script>
+    function toggleDrawer(open) {
+      const drawer = document.getElementById('mobile-drawer');
+      const backdrop = document.getElementById('drawer-backdrop');
+      if (open) {
+        drawer.classList.add('drawer-open');
+        backdrop.classList.add('backdrop-active');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.remove('drawer-open');
+        backdrop.classList.remove('backdrop-active');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function toggleProductsMenu() {
+      const sublist = document.getElementById('products-sublist');
+      const chevron = document.getElementById('products-chevron');
+      if (sublist.classList.contains('hidden')) {
+        sublist.classList.remove('hidden');
+        chevron.classList.add('rotate-180');
+      } else {
+        sublist.classList.add('hidden');
+        chevron.classList.remove('rotate-180');
+      }
+    }
+  </script>
+</body>
+</html>
