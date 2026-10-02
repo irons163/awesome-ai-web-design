@@ -22,7 +22,10 @@ ALLOWED_HOSTS = {
 def main() -> None:
     if sys.stdin.isatty():
         attributes = termios.tcgetattr(sys.stdin.fileno())
-        attributes[3] &= ~termios.ECHO
+        # Export URLs can exceed a terminal's canonical input buffer.
+        attributes[3] &= ~(termios.ECHO | termios.ICANON)
+        attributes[6][termios.VMIN] = 1
+        attributes[6][termios.VTIME] = 0
         termios.tcsetattr(sys.stdin.fileno(), termios.TCSANOW, attributes)
     if len(sys.argv) > 1:
         manifest = json.loads(Path(sys.argv[1]).read_text())

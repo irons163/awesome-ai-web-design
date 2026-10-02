@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SpaceXAI — Frontier AI Models</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Space+Grotesk:wght@400;450;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#cbc5c0",
+            "on-secondary-fixed-variant": "#46464e",
+            "inverse-surface": "#2f3132",
+            "inverse-on-surface": "#f0f1f2",
+            "on-secondary-fixed": "#1a1b22",
+            "on-primary": "#ffffff",
+            "terminal-text": "#A1A1AA",
+            "secondary-container": "#e3e1ec",
+            "on-error-container": "#93000a",
+            "secondary": "#5d5e66",
+            "primary-fixed": "#e5e1e4",
+            "surface-container-high": "#e8e8e9",
+            "surface-container": "#eeeeef",
+            "on-tertiary-fixed-variant": "#4a4642",
+            "on-secondary": "#ffffff",
+            "outline": "#77767b",
+            "tertiary-fixed": "#e8e1dc",
+            "on-background": "#1a1c1d",
+            "surface-pale": "#FAFAFA",
+            "on-error": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-tertiary-fixed": "#1e1b18",
+            "error": "#ba1a1a",
+            "terminal-bg": "#09090B",
+            "tertiary": "#000000",
+            "inverse-primary": "#c8c6c8",
+            "surface-variant": "#e2e2e3",
+            "surface-dim": "#dadadb",
+            "surface-container-low": "#f3f3f4",
+            "outline-variant": "#c8c5ca",
+            "primary-container": "#1b1b1d",
+            "error-container": "#ffdad6",
+            "background": "#f9f9fa",
+            "on-tertiary": "#ffffff",
+            "on-primary-fixed": "#1b1b1d",
+            "secondary-fixed-dim": "#c6c5cf",
+            "on-surface": "#1a1c1d",
+            "secondary-fixed": "#e3e1ec",
+            "on-surface-variant": "#47464a",
+            "on-primary-fixed-variant": "#474649",
+            "border-subtle": "#E4E4E7",
+            "primary-fixed-dim": "#c8c6c8",
+            "surface-tint": "#5f5e60",
+            "primary": "#000000",
+            "tertiary-container": "#1e1b18",
+            "surface-container-highest": "#e2e2e3",
+            "surface": "#f9f9fa",
+            "surface-bright": "#f9f9fa",
+            "canvas": "#FFFFFF",
+            "on-tertiary-container": "#88837e",
+            "on-secondary-container": "#63646c",
+            "on-primary-container": "#858386"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "24px",
+            "gutter": "24px",
+            "space-md": "16px",
+            "space-xs": "4px",
+            "space-xl": "48px",
+            "space-sm": "8px",
+            "margin": "24px"
+          },
+          "fontFamily": {
+            "body-lg": ["Space Grotesk"],
+            "body-md": ["Space Grotesk"],
+            "headline-lg-mobile": ["Space Grotesk"],
+            "headline-md": ["Space Grotesk"],
+            "label-pill": ["Space Grotesk"],
+            "headline-lg": ["Space Grotesk"],
+            "headline-sm": ["Space Grotesk"],
+            "code-mono": ["JetBrains Mono"],
+            "body-sm": ["Space Grotesk"]
+          },
+          "fontSize": {
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg-mobile": ["36px", { "lineHeight": "39.6px", "letterSpacing": "-0.01em", "fontWeight": "450" }],
+            "headline-md": ["40px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "450" }],
+            "label-pill": ["13px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-lg": ["60px", { "lineHeight": "60px", "letterSpacing": "-0.01em", "fontWeight": "450" }],
+            "headline-sm": ["24px", { "lineHeight": "30px", "letterSpacing": "-0.01em", "fontWeight": "450" }],
+            "code-mono": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #ffffff;
+      color: #1a1c1d;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    .custom-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scroll {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-canvas text-on-surface antialiased flex justify-center w-full min-h-screen">
+<!-- Mobile Container: 390px Canvas Frame -->
+<div class="w-full max-w-[390px] min-h-screen bg-canvas flex flex-col relative pb-12 shadow-sm border-x border-border-subtle/50">
+<!-- Top Fixed Web Header (Shared Component Anchors) -->
+<header class="fixed top-0 left-0 w-full z-50 bg-canvas/95 backdrop-blur-md">
+<div class="max-w-[390px] mx-auto h-16 px-4 flex justify-between items-center">
+<!-- Brand Logo / Wordmark -->
+<a class="flex items-center gap-1.5 focus:outline-none" href="#">
+<div class="w-7 h-7 bg-primary text-on-primary rounded-md flex items-center justify-center font-headline-sm font-bold text-base tracking-tighter">
+            ✕
+          </div>
+<span class="font-headline-sm text-headline-sm tracking-tight text-on-surface font-bold">SpaceXAI</span>
+</a>
+<!-- Right 52px Hamburger Circular Control -->
+<button aria-label="Open Navigation Menu" class="w-[52px] h-[52px] rounded-full bg-surface-container-low hover:bg-surface-container flex flex-col items-center justify-center gap-1 transition-colors duration-150">
+<span class="w-5 h-[1.75px] bg-primary rounded-full"></span>
+<span class="w-5 h-[1.75px] bg-primary rounded-full"></span>
+</button>
+</div>
+</header>
+<!-- Spacer for fixed navbar -->
+<div class="h-20 w-full"></div>
+<!-- Hero Section -->
+<section class="px-4 pt-4 pb-8 flex flex-col items-center text-center">
+<!-- Announcement Pill -->
+<a class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-border-subtle bg-canvas shadow-sm text-label-pill font-label-pill text-on-surface mb-6 hover:border-secondary transition-colors duration-150" href="#grok">
+<span class="w-2 h-2 rounded-full bg-primary inline-block"></span>
+<span>Meet Grok 4.7 · Our new model</span>
+<span class="text-secondary">→</span>
+</a>
+<!-- Hero Title (36px, 450 weight, strictly 3 lines on mobile) -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface tracking-tight mb-4">
+        Frontier AI models<br/>
+        for everything you<br/>
+        build.
+      </h1>
+<!-- Supporting Copy -->
+<p class="font-body-sm text-body-sm text-secondary mb-7 leading-relaxed max-w-[310px]">
+        Reasoning, code, voice, images, and video.<br/>
+        Trained on the world's largest supercluster.
+      </p>
+<!-- Action Buttons -->
+<div class="flex items-center gap-3 w-full justify-center">
+<a class="flex-1 max-w-[155px] text-center bg-primary text-on-primary font-body-sm text-body-sm font-medium py-2.5 px-4 rounded-full shadow-sm hover:opacity-90 transition-opacity" href="#api">
+          Get API Access
+        </a>
+<a class="flex-1 max-w-[165px] text-center bg-canvas border border-border-subtle text-on-surface font-body-sm text-body-sm font-medium py-2.5 px-4 rounded-full hover:bg-surface-pale transition-colors" href="#docs">
+          View Documentation
+        </a>
+</div>
+</section>
+<!-- Five Product Demo Cards Bento Stack -->
+<section class="px-4 space-y-3 pb-12">
+<!-- Card 1: CHAT -->
+<div class="h-[235px] rounded-2xl border border-border-subtle bg-background p-4 flex flex-col justify-between overflow-hidden relative">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-code-mono text-[11px] font-semibold tracking-wider text-primary">CHAT</span>
+</div>
+<span class="font-code-mono text-[11px] text-secondary">grok-4.7-reasoning</span>
+</div>
+<p class="font-body-sm text-[12px] text-secondary leading-snug">
+            Authentic multi-step reasoning dialogue with Grok 4.7
+          </p>
+</div>
+<div class="space-y-2 font-code-mono text-[11px]">
+<!-- User Prompt -->
+<div class="bg-canvas border border-border-subtle p-2 rounded-xl text-on-surface-variant line-clamp-2">
+<span class="text-primary font-semibold">User:</span> Compare distributed transformer latency across NVLink (900 GB/s) shows 4.2x lower time-to-first-token under high KV-cache stress.
+          </div>
+<!-- Grok Reasoning Response -->
+<div class="bg-canvas border border-border-subtle p-2 rounded-xl relative">
+<div class="flex items-center gap-1.5 mb-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[10px] font-medium text-emerald-600 tracking-wide uppercase">Thought for 1.8s</span>
+</div>
+<p class="text-on-surface text-[11px] leading-tight line-clamp-2">
+              Partitioning attention heads across 8x H100 channels mitigates cross-node barrier synchronization stalls by 76.4%...
+            </p>
+</div>
+</div>
+</div>
+<!-- Card 2: BUILD -->
+<div class="h-[235px] rounded-2xl border border-border-subtle bg-background p-4 flex flex-col justify-between overflow-hidden">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="terminal">terminal</span>
+<span class="font-code-mono text-[11px] font-semibold tracking-wider text-primary">BUILD</span>
+</div>
+<span class="font-code-mono text-[11px] text-secondary">auth_migrate.ts</span>
+</div>
+<p class="font-body-sm text-[12px] text-secondary leading-snug">
+            Autonomous code refactoring &amp; compiler verification
+          </p>
+</div>
+<div class="bg-terminal-bg rounded-xl p-3 font-code-mono text-[11px] text-terminal-text overflow-hidden leading-relaxed shadow-inner">
+<div class="text-neutral-500">// Autonomous session token migration</div>
+<div><span class="text-blue-400">export async function</span> <span class="text-yellow-300">migrateKeys</span>(req: <span class="text-cyan-300">NextRequest</span>) {</div>
+<div class="pl-2">const session = <span class="text-blue-400">await</span> grok.auth.<span class="text-yellow-300">verify</span>(req);</div>
+<div class="pl-2">if (!session.valid) <span class="text-blue-400">return</span> Response.<span class="text-yellow-300">json</span>({ err: 401 });</div>
+<div class="pl-2"><span class="text-blue-400">return</span> session.<span class="text-yellow-300">upgradeToColossus</span>({ v: <span class="text-emerald-400">"4.7"</span> });</div>
+<div>}</div>
+</div>
+</div>
+<!-- Card 3: BOT -->
+<div class="h-[235px] rounded-2xl border border-border-subtle bg-background p-4 flex flex-col justify-between overflow-hidden">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="smart_toy">smart_toy</span>
+<span class="font-code-mono text-[11px] font-semibold tracking-wider text-primary">BOT</span>
+</div>
+<div class="flex items-center gap-1 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[10px] font-code-mono font-medium">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              Active Agent
+            </div>
+</div>
+<p class="font-body-sm text-[12px] text-secondary leading-snug">
+            Iconic Grok Bot background automation &amp; orchestration
+          </p>
+</div>
+<div class="bg-canvas border border-border-subtle p-3 rounded-xl space-y-2.5 font-code-mono text-[11px]">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[14px] text-primary" data-icon="radar">radar</span>
+</div>
+<span class="font-medium text-on-surface">42 Supercluster Diagnostics</span>
+</div>
+<span class="text-emerald-600 text-[10px] font-medium">99.98% Confidence</span>
+</div>
+<div class="h-[1px] bg-border-subtle w-full"></div>
+<div class="flex justify-between items-center text-[10px] text-secondary">
+<span>Status: Node 14,812 recalibrated</span>
+<span class="text-primary font-medium">Next run: in 14s</span>
+</div>
+</div>
+</div>
+<!-- Card 4: IMAGINE -->
+<div class="h-[235px] rounded-2xl border border-border-subtle bg-background p-4 flex flex-col justify-between overflow-hidden">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="auto_awesome">auto_awesome</span>
+<span class="font-code-mono text-[11px] font-semibold tracking-wider text-primary">IMAGINE</span>
+</div>
+<span class="font-code-mono text-[10px] tracking-wider text-secondary uppercase bg-surface-container px-2 py-0.5 rounded-md">AURORA V2</span>
+</div>
+<p class="font-body-sm text-[12px] text-secondary leading-snug">
+            Ultra-high fidelity generative visual synthesis &amp; vector field control
+          </p>
+</div>
+<div class="bg-terminal-bg rounded-xl p-3 font-code-mono text-[11px] text-canvas space-y-2">
+<div class="text-neutral-400 text-[10px] truncate">
+<span class="text-neutral-500 font-semibold">Prompt:</span> "starship aerodynamic re-entry plasma telemetry, photorealistic, 8k"
+          </div>
+<div class="flex items-center justify-between text-[10px] text-terminal-text border-t border-primary-container pt-2">
+<span>Diffusion steps: 35</span>
+<span>Latent: 1024x1024</span>
+<span>Guidance: 7.2</span>
+</div>
+<div class="flex items-center justify-between text-[10px] text-emerald-400 pt-0.5">
+<span>Render speed: 1.4s</span>
+<span class="text-neutral-400">grok-vision-imagine</span>
+</div>
+</div>
+</div>
+<!-- Card 5: VOICE -->
+<div class="h-[235px] rounded-2xl border border-border-subtle bg-background p-4 flex flex-col justify-between overflow-hidden">
+<div>
+<div class="flex items-center justify-between mb-2">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="graphic_eq">graphic_eq</span>
+<span class="font-code-mono text-[11px] font-semibold tracking-wider text-primary">VOICE</span>
+</div>
+<span class="font-code-mono text-[10px] tracking-wider text-cyan-700 bg-cyan-50 px-2 py-0.5 rounded-md uppercase font-medium">STREAMING</span>
+</div>
+<p class="font-body-sm text-[12px] text-secondary leading-snug">
+            Zero-lag bidirectional conversational audio engine
+          </p>
+</div>
+<div class="bg-canvas border border-border-subtle p-3 rounded-xl font-code-mono text-[11px] space-y-2.5">
+<!-- Audio visualizer bars -->
+<div class="flex items-center justify-center gap-1.5 h-7 py-1">
+<span class="w-1 bg-primary rounded-full h-3 animate-pulse"></span>
+<span class="w-1 bg-primary rounded-full h-5"></span>
+<span class="w-1 bg-primary rounded-full h-6 animate-pulse"></span>
+<span class="w-1 bg-primary rounded-full h-4"></span>
+<span class="w-1 bg-primary rounded-full h-7 animate-pulse"></span>
+<span class="w-1 bg-primary rounded-full h-3"></span>
+<span class="w-1 bg-primary rounded-full h-5"></span>
+<span class="w-1 bg-primary rounded-full h-2"></span>
+</div>
+<div class="flex justify-between items-center text-[10px] text-secondary border-t border-border-subtle pt-2">
+<span>Latency: 124ms</span>
+<span>48kHz PCM · Full Duplex</span>
+</div>
+<div class="text-[10px] text-on-surface truncate">
+            Real-time voice turn-taking · grok-voice-transcribe-2.0
+          </div>
+</div>
+</div>
+</section>
+<!-- For Developers Section -->
+<section class="px-4 py-8 bg-surface-pale border-t border-border-subtle">
+<div class="mb-4">
+<span class="font-code-mono text-[11px] tracking-widest text-secondary uppercase font-semibold">FOR DEVELOPERS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1 tracking-tight font-medium">
+          One API. Every modality.
+        </h2>
+<p class="font-body-sm text-body-sm text-secondary mt-2 leading-relaxed">
+          Integrate Grok 4.7 natively into any production stack with a single unified SDK. Native support for parallel function calling, structured JSON output, and multi-modal streaming.
+        </p>
+</div>
+<!-- Developer Code Terminal -->
+<div class="bg-terminal-bg rounded-2xl overflow-hidden border border-primary-container shadow-sm mt-5">
+<!-- Terminal Header with Tabs & Copy -->
+<div class="flex items-center justify-between px-3 py-2 border-b border-primary-container bg-[#121214]">
+<div class="flex items-center gap-2 overflow-x-auto custom-scroll font-code-mono text-[12px]">
+<button class="text-canvas border-b border-canvas pb-0.5 font-medium">Python</button>
+<button class="text-terminal-text hover:text-canvas transition-colors">Node.js</button>
+<button class="text-terminal-text hover:text-canvas transition-colors">cURL</button>
+<button class="text-terminal-text hover:text-canvas transition-colors">Go</button>
+</div>
+<button class="text-terminal-text hover:text-canvas text-[11px] font-code-mono flex items-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-[13px]" data-icon="content_copy">content_copy</span>
+<span>Copy</span>
+</button>
+</div>
+<!-- Terminal Code Body -->
+<div class="p-3.5 font-code-mono text-code-mono text-terminal-text leading-relaxed overflow-x-auto custom-scroll">
+<div><span class="text-blue-400">from</span> xai <span class="text-blue-400">import</span> Client</div>
+<div class="mt-1">client = <span class="text-yellow-300">Client</span>(api_key=<span class="text-emerald-400">"xai-colossus-live-token"</span>)</div>
+<div class="mt-2">response = client.chat.completions.<span class="text-yellow-300">create</span>(</div>
+<div class="pl-3">model=<span class="text-emerald-400">"grok-4.7"</span>,</div>
+<div class="pl-3">messages=[{<span class="text-cyan-300">"role"</span>: <span class="text-emerald-400">"user"</span>, <span class="text-cyan-300">"content"</span>: <span class="text-emerald-400">"Analyze system latency and optimize throughput across Colossus."</span>}],</div>
+<div class="pl-3">temperature=<span class="text-purple-400">0.2</span></div>
+<div>)</div>
+<div class="mt-2"><span class="text-yellow-300">print</span>(response.choices[<span class="text-purple-400">0</span>].message.content)</div>
+</div>
+</div>
+</section>
+<!-- Engineered for Scale (By the numbers) -->
+<section class="px-4 py-10 border-t border-border-subtle">
+<div class="mb-6">
+<span class="font-code-mono text-[11px] tracking-widest text-secondary uppercase font-semibold">ENGINEERED FOR SCALE</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface mt-1 tracking-tight font-medium">
+          Built on the Colossus Supercluster
+        </h2>
+</div>
+<!-- 2-column Grid of Numbers -->
+<div class="grid grid-cols-2 gap-3">
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">1M+</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">API calls per day</div>
+</div>
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">&lt;200ms</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">Median latency</div>
+</div>
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">5+</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">Model families</div>
+</div>
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">300M+</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">Queries processed daily</div>
+</div>
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">150K</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">GPUs in Colossus</div>
+</div>
+<div class="p-4 rounded-xl bg-background border border-border-subtle">
+<div class="font-headline-sm text-[26px] font-bold text-on-surface tracking-tight">90</div>
+<div class="font-body-sm text-[12px] text-secondary mt-1">Days to build Colossus</div>
+</div>
+</div>
+</section>
+<!-- Latest News Section -->
+<section class="px-4 py-10 bg-surface-pale border-t border-border-subtle">
+<div class="flex items-center justify-between mb-4">
+<div>
+<span class="font-code-mono text-[11px] tracking-widest text-secondary uppercase font-semibold">UPDATES &amp; ANNOUNCEMENTS</span>
+<h2 class="font-headline-sm text-headline-sm text-on-surface tracking-tight font-medium">Latest News</h2>
+</div>
+<a class="font-body-sm text-[13px] text-primary hover:underline font-medium" href="#news">View all posts →</a>
+</div>
+<!-- Stacked News Items -->
+<div class="space-y-3 mt-4">
+<!-- News Card 1 -->
+<a class="block p-4 rounded-2xl bg-canvas border border-border-subtle hover:border-secondary transition-colors" href="#article-1">
+<div class="w-full h-24 rounded-lg bg-surface-container flex items-center justify-center mb-3 text-secondary overflow-hidden">
+<span class="font-code-mono text-xs uppercase tracking-wider text-outline font-medium">Architecture / Colossus</span>
+</div>
+<div class="font-code-mono text-[11px] text-secondary mb-1">Sep 21, 2026</div>
+<h3 class="font-headline-sm text-base text-on-surface font-semibold mb-2 leading-snug">Introducing Grok 4.7</h3>
+<span class="font-body-sm text-[12px] font-medium text-primary inline-flex items-center gap-0.5">Read article ↗</span>
+</a>
+<!-- News Card 2 -->
+<a class="block p-4 rounded-2xl bg-canvas border border-border-subtle hover:border-secondary transition-colors" href="#article-2">
+<div class="w-full h-24 rounded-lg bg-surface-container flex items-center justify-center mb-3 text-secondary overflow-hidden">
+<span class="font-code-mono text-xs uppercase tracking-wider text-outline font-medium">Autonomous Systems</span>
+</div>
+<div class="font-code-mono text-[11px] text-secondary mb-1">Sep 28, 2026</div>
+<h3 class="font-headline-sm text-base text-on-surface font-semibold mb-2 leading-snug">Team Bots: shared AI teammates that learn as they work</h3>
+<span class="font-body-sm text-[12px] font-medium text-primary inline-flex items-center gap-0.5">Read article ↗</span>
+</a>
+<!-- News Card 3 -->
+<a class="block p-4 rounded-2xl bg-canvas border border-border-subtle hover:border-secondary transition-colors" href="#article-3">
+<div class="w-full h-24 rounded-lg bg-surface-container flex items-center justify-center mb-3 text-secondary overflow-hidden">
+<span class="font-code-mono text-xs uppercase tracking-wider text-outline font-medium">Case Study / Scale</span>
+</div>
+<div class="font-code-mono text-[11px] text-secondary mb-1">Sep 22, 2026</div>
+<h3 class="font-headline-sm text-base text-on-surface font-semibold mb-2 leading-snug">How SpaceXAI is using Grok Bot to scale customer support</h3>
+<span class="font-body-sm text-[12px] font-medium text-primary inline-flex items-center gap-0.5">Read article ↗</span>
+</a>
+<!-- News Card 4 -->
+<a class="block p-4 rounded-2xl bg-canvas border border-border-subtle hover:border-secondary transition-colors" href="#article-4">
+<div class="w-full h-24 rounded-lg bg-surface-container flex items-center justify-center mb-3 text-secondary overflow-hidden">
+<span class="font-code-mono text-xs uppercase tracking-wider text-outline font-medium">Audio Intelligence</span>
+</div>
+<div class="font-code-mono text-[11px] text-secondary mb-1">Sep 18, 2026</div>
+<h3 class="font-headline-sm text-base text-on-surface font-semibold mb-2 leading-snug">Introducing Grok Voice Transcribe 2.0</h3>
+<span class="font-body-sm text-[12px] font-medium text-primary inline-flex items-center gap-0.5">Read article ↗</span>
+</a>
+</div>
+</section>
+<!-- Choose How To Get Started -->
+<section class="px-4 py-10 border-t border-border-subtle">
+<div class="text-center mb-6">
+<h2 class="font-headline-sm text-[26px] text-on-surface tracking-tight font-medium">Choose how to get started</h2>
+</div>
+<div class="space-y-3">
+<!-- Card 1 -->
+<div class="border border-border-subtle rounded-2xl p-5 bg-canvas flex flex-col justify-between shadow-xs">
+<div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">Build on your own</h3>
+<p class="font-body-sm text-[13px] text-secondary leading-relaxed mb-5">
+              Start prototyping immediately with our API keys, instant credit, and interactive sandbox. Full access to Grok 4.7 reasoning and multimodal endpoints.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-primary text-on-primary text-center font-body-sm text-body-sm font-medium rounded-full shadow-sm hover:opacity-90 transition-opacity" href="#signup">
+            Start building
+          </a>
+</div>
+<!-- Card 2 -->
+<div class="border border-border-subtle rounded-2xl p-5 bg-canvas flex flex-col justify-between shadow-xs">
+<div>
+<h3 class="font-headline-sm text-lg font-semibold text-on-surface mb-2">Get extra support</h3>
+<p class="font-body-sm text-[13px] text-secondary leading-relaxed mb-5">
+              Dedicated engineering assistance, enterprise SLA, custom fine-tuning, and on-premise compute cluster allocation on the Colossus network.
+            </p>
+</div>
+<a class="w-full py-2.5 px-4 bg-canvas border border-border-subtle text-on-surface text-center font-body-sm text-body-sm font-medium rounded-full hover:bg-surface-pale transition-colors" href="#sales">
+            Contact sales
+          </a>
+</div>
+</div>
+</section>
+<!-- Footer Component (Shared Anchor Sitemaps) -->
+<footer class="w-full relative border-t border-border-subtle bg-surface-pale px-5 pt-10 pb-12">
+<!-- 2-column Compact Link Directory -->
+<div class="grid grid-cols-2 gap-y-7 gap-x-4 mb-10 text-body-sm font-body-sm">
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Products</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Overview</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Grok 4.7</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Grok Vision</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Grok Voice</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Download</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">macOS App</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">iOS Mobile</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Android</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Solutions</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Enterprise</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Startups</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Research Labs</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Grok Bot</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Overview</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Agent Studio</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Automations</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Developers</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Documentation</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">API Reference</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Playground</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Status</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Enterprise</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Compute Engine</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Custom Clusters</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Security</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Company</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">News</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-code-mono text-[11px] font-semibold text-on-surface uppercase tracking-wider mb-2.5">Trust &amp; Social</h4>
+<ul class="space-y-1.5 text-secondary text-[13px]">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">X / Twitter</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">GitHub</a></li>
+</ul>
+</div>
+</div>
+<!-- Legal / Brand Stamp -->
+<div class="pt-6 border-t border-border-subtle flex flex-col items-start gap-2">
+<div class="flex items-center gap-1.5">
+<div class="w-5 h-5 bg-primary text-on-primary rounded flex items-center justify-center font-bold text-xs">✕</div>
+<span class="font-headline-sm font-bold text-sm tracking-tight text-on-surface">SpaceXAI</span>
+</div>
+<p class="font-code-mono text-[11px] text-secondary">
+          © 2026 SpaceXAI LLC. All rights reserved.
+        </p>
+</div>
+</footer>
+</div>
+</body></html>

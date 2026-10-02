@@ -71,7 +71,7 @@ for name in FONTS:
     page = page.replace('</head>', preload + '</head>', 1)
 
 page = page.replace('/_build/assets/opencode-min-CiEsORKQ.mp4',
-                    'opencode.ai-assets/opencode-min-CiEsORKQ.mp4')
+                    'https://opencode.ai/_build/assets/opencode-min-CiEsORKQ.mp4')
 page = page.replace('/_build/assets/opencode-poster-CbUiDHgA.png',
                     'opencode.ai-assets/opencode-poster-CbUiDHgA.png')
 for variant in ('light', 'dark'):

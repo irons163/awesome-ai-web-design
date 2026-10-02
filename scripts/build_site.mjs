@@ -13,7 +13,7 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',

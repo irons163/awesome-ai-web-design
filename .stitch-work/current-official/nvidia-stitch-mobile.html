@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>NVIDIA USA | AI, Accelerated Computing &amp; Autonomous Systems</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter & Space Grotesk Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "border-gray": "#333333",
+            "on-tertiary-container": "#710069",
+            "on-error-container": "#ffdad6",
+            "surface-container-high": "#282a2b",
+            "surface": "#121414",
+            "on-background": "#e2e2e2",
+            "secondary-fixed-dim": "#c6c6c6",
+            "on-secondary-fixed-variant": "#474747",
+            "nvidia-green": "#76b900",
+            "surface-container-lowest": "#0c0f0f",
+            "on-tertiary-fixed": "#390035",
+            "on-secondary-container": "#b5b5b5",
+            "on-primary": "#203700",
+            "tertiary-fixed": "#ffd7f2",
+            "pure-white": "#ffffff",
+            "outline": "#8c947d",
+            "inverse-on-surface": "#2f3131",
+            "on-secondary-fixed": "#1b1b1b",
+            "tertiary-fixed-dim": "#ffacec",
+            "surface-container-low": "#1a1c1c",
+            "on-primary-fixed": "#102000",
+            "on-surface": "#e2e2e2",
+            "error-container": "#93000a",
+            "primary-fixed": "#aff74e",
+            "primary": "#94da32",
+            "primary-fixed-dim": "#94da32",
+            "on-tertiary-fixed-variant": "#83007a",
+            "primary-container": "#76b900",
+            "surface-tint": "#94da32",
+            "on-error": "#690005",
+            "secondary": "#c6c6c6",
+            "tertiary": "#ffacec",
+            "on-surface-variant": "#c1cab1",
+            "surface-variant": "#333535",
+            "surface-container": "#1e2020",
+            "surface-bright": "#37393a",
+            "on-secondary": "#303030",
+            "surface-black": "#111111",
+            "on-primary-container": "#284400",
+            "outline-variant": "#424936",
+            "pure-black": "#000000",
+            "error": "#ffb4ab",
+            "surface-container-highest": "#333535",
+            "secondary-container": "#474747",
+            "inverse-primary": "#416900",
+            "neutral-gray": "#737373",
+            "background": "#121414",
+            "on-primary-fixed-variant": "#304f00",
+            "surface-dim": "#121414",
+            "inverse-surface": "#e2e2e2",
+            "secondary-fixed": "#e2e2e2",
+            "tertiary-container": "#fd71e8",
+            "on-tertiary": "#5d0056"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "24px",
+            "space-sm": "8px",
+            "space-md": "16px",
+            "space-xs": "4px",
+            "space-xl": "48px",
+            "margin": "32px",
+            "gutter": "24px"
+          },
+          "fontFamily": {
+            "label-sm": ["Inter", "sans-serif"],
+            "label-md": ["Inter", "sans-serif"],
+            "headline-xl": ["Space Grotesk", "sans-serif"],
+            "headline-sm": ["Space Grotesk", "sans-serif"],
+            "headline-lg": ["Space Grotesk", "sans-serif"],
+            "body-lg": ["Inter", "sans-serif"],
+            "headline-md": ["Space Grotesk", "sans-serif"],
+            "body-sm": ["Inter", "sans-serif"],
+            "body-md": ["Inter", "sans-serif"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "18px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+            "headline-xl": ["45px", { "lineHeight": "52px", "fontWeight": "700" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg": ["36px", { "lineHeight": "45px", "fontWeight": "700" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-md": ["28px", { "lineHeight": "35px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    /* Custom Hide Scrollbar for snappy horizontal touch decks */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-pure-black text-on-background antialiased selection:bg-nvidia-green selection:text-pure-black min-h-screen w-full flex flex-col items-center">
+<!-- 390px Canvas Wrapper -->
+<div class="w-full max-w-[390px] relative bg-pure-black min-h-screen flex flex-col overflow-x-hidden shadow-2xl">
+<!-- 1. DOCKED FIXED PURE WHITE TOP NAVBAR (45px) -->
+<header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-[15px] max-w-[390px] mx-auto h-[45px] bg-pure-white text-pure-black border-b border-[#e5e7eb]">
+<!-- Left side: Hamburger menu + Search -->
+<div class="flex items-center space-x-3">
+<button aria-label="Open Navigation Menu" class="flex items-center text-pure-black hover:text-nvidia-green transition-colors">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<button aria-label="Search NVIDIA" class="flex items-center text-pure-black hover:text-nvidia-green transition-colors">
+<span class="material-symbols-outlined text-[22px]">search</span>
+</button>
+</div>
+<!-- Center: NVIDIA Logo Wordmark & Brand Badge -->
+<div class="flex items-center justify-center">
+<a class="flex items-center space-x-1.5 focus:outline-none" href="#">
+<svg class="h-[18px] w-auto fill-nvidia-green" fill="none" viewbox="0 0 119 82" xmlns="http://www.w3.org/2000/svg">
+<path d="M47.884 1.13c-25.794 0-46.754 20.916-46.754 46.643 0 25.728 20.96 46.644 46.754 46.644 14.887 0 28.163-6.942 36.702-17.75l-13.722-11.854c-5.836 6.84-14.398 11.238-22.98 11.238-17.202 0-31.144-13.908-31.144-31.066 0-17.158 13.942-31.066 31.144-31.066 11.536 0 21.624 6.326 27.054 15.688l14.288-10.742C79.805 9.066 64.912 1.13 47.884 1.13z"></path>
+</svg>
+<span class="text-headline-sm font-headline-sm font-bold tracking-tighter text-pure-black">NVIDIA</span>
+</a>
+</div>
+<!-- Right side: US Country Selector + Account Icon -->
+<div class="flex items-center space-x-3">
+<button aria-label="Select Region" class="flex items-center space-x-1 text-pure-black hover:text-nvidia-green transition-colors">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span class="text-label-sm font-label-sm font-bold tracking-tight">US</span>
+</button>
+<button aria-label="Sign In to NVIDIA Account" class="flex items-center text-pure-black hover:text-nvidia-green transition-colors">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+</button>
+</div>
+</header>
+<!-- CONTENT CANVAS (pt-[45px] offset for fixed navbar) -->
+<main class="w-full flex-grow pt-[45px]">
+<!-- HERO SECTION: 550px black container, 15px margins -->
+<section class="w-full bg-pure-black h-[550px] relative flex flex-col justify-between pt-6 pb-4 px-[15px] border-b border-border-gray overflow-hidden">
+<!-- Top Frame: Kicker, Title, Body, Action CTA -->
+<div class="z-10 flex flex-col">
+<span class="text-[20px] leading-[24px] font-headline-sm font-bold tracking-wide text-nvidia-green uppercase mb-2">
+            Data Center
+          </span>
+<h1 class="text-headline-md font-headline-md font-bold text-pure-white tracking-tight mb-3">
+            Productive, Durable, Fungible, NVIDIA Infrastructure Maximizes ROI
+          </h1>
+<p class="text-body-sm font-body-sm text-secondary leading-relaxed mb-4">
+            AI infrastructure that generates the strongest returns is built to earn more, last longer, and serve more kinds of work.
+          </p>
+<div>
+<a class="inline-block bg-nvidia-green text-pure-black px-6 py-2.5 font-label-md font-bold tracking-wider uppercase transition-transform active:scale-95 text-center" href="#learn-more">
+              LEARN MORE
+            </a>
+</div>
+</div>
+<!-- Official Hardware Hero Graphics Frame -->
+<div class="w-full relative h-[185px] mt-2 flex items-center justify-center">
+<div class="absolute inset-0 bg-gradient-to-t from-pure-black via-transparent to-transparent z-10"></div>
+<img class="w-full h-full object-cover object-center" data-alt="Photorealistic studio rendering of high-performance NVIDIA accelerated enterprise computing modules and data center blade architecture set against a deep obsidian black background. The industrial design features precision-machined heatsinks, fiber interconnects, and an ambient emerald green glow reflecting across brushed metallic chassis edges in a clean, modern tech enterprise aesthetic." onerror="this.src='placeholder'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1eRaSb3MsTEX3-CfrJW3t_Rvyu66ojFu3PTvRXTYsYpL7eVksWNbHwbsKr2vZS_HVu_lMc5DngiK3LE9etSfhedgKzDT0BsJ7ooy61WzHXNNygKRIebIJVXLNFiIXEs664czGexb07F7k2fMmhcvPB7w5ctHVO8-FJLXf_tDasZ6-ctsnuhwuSuDyoI4i2DxV2-AVA0Jl-s3weIYc4pTs8y4-WmlMkdprNFBuHGfEHoS7FvsMHIp4qr2X-vHzapXaa0r1wTVZD30"/>
+</div>
+<!-- Hero Bottom: 6 Carousel Slides Indicator Segments -->
+<div aria-label="Hero Carousel Navigation" class="w-full flex items-center gap-1.5 pt-2 z-10">
+<!-- Slide 1 Active -->
+<button aria-label="Slide 1: Data Center (Active)" class="h-1 flex-1 bg-nvidia-green rounded-none"></button>
+<!-- Slide 2 Inactive -->
+<button aria-label="Slide 2: GTC Washington D.C." class="h-1 flex-1 bg-secondary-container hover:bg-neutral-gray transition-colors"></button>
+<!-- Slide 3 Inactive -->
+<button aria-label="Slide 3: Vera Rubin / CoreWeave" class="h-1 flex-1 bg-secondary-container hover:bg-neutral-gray transition-colors"></button>
+<!-- Slide 4 Inactive -->
+<button aria-label="Slide 4: GTC Berlin Keynote" class="h-1 flex-1 bg-secondary-container hover:bg-neutral-gray transition-colors"></button>
+<!-- Slide 5 Inactive -->
+<button aria-label="Slide 5: Open Agent Safety" class="h-1 flex-1 bg-secondary-container hover:bg-neutral-gray transition-colors"></button>
+<!-- Slide 6 Inactive -->
+<button aria-label="Slide 6: Pinterest" class="h-1 flex-1 bg-secondary-container hover:bg-neutral-gray transition-colors"></button>
+</div>
+</section>
+<!-- GTC REGISTRATION STRIP: White Banner Strip directly below hero -->
+<section class="w-full bg-pure-white text-pure-black py-6 px-[15px] border-b border-[#e5e7eb] flex flex-col space-y-3">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center bg-pure-black text-pure-white text-label-sm font-label-sm font-bold tracking-wider px-2.5 py-1">
+            REGISTRATION OPEN
+          </span>
+<span class="text-label-sm font-label-sm text-neutral-gray font-semibold">
+            Nov. 30–Dec. 3, 2026
+          </span>
+</div>
+<h2 class="text-headline-sm font-headline-sm font-bold text-pure-black tracking-tight leading-snug">
+          GTC Washington, D.C. Registration Is Now Open
+        </h2>
+<p class="text-body-sm font-body-sm text-on-secondary leading-normal">
+          Join leaders, researchers, and developers advancing AI and sovereign compute.
+        </p>
+<div class="pt-1">
+<a class="inline-block bg-nvidia-green text-pure-black px-5 py-2.5 font-label-sm font-bold uppercase tracking-wider text-center active:scale-95 transition-transform w-full" href="#gtc-registration">
+            GET YOUR PASS NOW
+          </a>
+</div>
+</section>
+<!-- 8 INDUSTRY STORY-CAROUSEL SECTIONS (Stacked vertically) -->
+<div class="w-full flex flex-col divide-y divide-border-gray">
+<!-- 1. ARTIFICIAL INTELLIGENCE -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Artificial Intelligence
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">Enterprise AI</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">NIM Microservices</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">NeMo Framework</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Dynamic high-contrast visual analytics dashboard representing social recommendation neural engines against an ultra-dark background with vibrant emerald green network nodes and high-density algorithmic streams, symbolizing Pinterest visual understanding powered by NVIDIA architectures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIxe0CJIchYZsTdnc0LD62WjCrYOy8SuH2zZJkhVnZBP4tiofp6pM0jzwYtjBezUOXjoBVoM2vgsBaYlEQQCg2DhFc9devyp2B45Gn92PSoHrTdDTUr2HJylvKOjjfYvA8Wibj-Ko0UVJISRJTdnpQYwZE5Ujr53jdT08tU3QdkFohj8ppIwJ_jH8B0RW3Si8iDB-m_lctY-lDV4Hk1Ek75W6Fu2lyRGP0HhXkqJxAcoUHt6XC3HkakhZICYFhSLLCHcET3vdsTb8"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Featured Story</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Helping Pinterest Understand Your Vibe With NVIDIA</h4>
+<p class="text-body-sm font-body-sm text-secondary">Accelerated multimodal search and discovery algorithms elevate visual recommendation systems across 500 million active users.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Read Story <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Broadcast studio environment illuminated by low ambient high-contrast lighting featuring hyper-realistic digital avatars generated in real-time, rendered across multi-panel production displays with NVIDIA green edge highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjp6U_GLXJ1xI1P-Rg5dOPj2PAGv-qj7bhEk5nltlw0H8Q14PrzxdY-5j2n7ySef-m6Wd0brBwfbm8tV_cLZSSaE3HUfWD3fF--sJroChQPG_fo-nunMpJkYK1voDT3tXvJq-6bs6uIZD-91bl1EgaaFv1-7O9Wzi_n7kb5CVVuKlgbh9vI_4zDGyOQW0BmjiTNN7HgZp_bhlfg_vy7BvbvDQ7FvKjno8Cw_Q6F32oLU_M0B4CAhE_YuGIETKGk3z_6YD2jHBfjaQ"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Industry News</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">NVIDIA AI for Media Brings Real-Time Intelligence to Broadcast</h4>
+<p class="text-body-sm font-body-sm text-secondary">Broadcasters deploy generative avatar pipelines and live translation microservices directly onto standard SDI transmission hardware.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Learn More <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Abstract enterprise container architecture diagram showcasing microservices nodes interconnected through razor-sharp lines and glowing green data paths on a pure black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFLw5ZwFFbpofuPv8FW3LaeUfiqEuKeBuQJMcBYsznL32B3BpWh_pVnNtLgojfsLTrvVjFJngtfWCp1hIl4FLJ1lA37ImhfIuqXHSRcHACxL30egj4O5-996zh_XJZe3LFeZ1TCVknBfS6cKFXujt1uEEuQ3yeNxZNIm1dq3Nm0o6iSMEyCLUtbID9s5EKkzz0anu-xdljv3PGaK14k1TstWHRhs5McSHzPhfDQvUxelctwws9NOlJ_VY666IO4CkQos_Sdgazb7o"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Enterprise Deployment</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">NVIDIA NIM Optimizes Multi-Model Production Workflows</h4>
+<p class="text-body-sm font-body-sm text-secondary">Pre-built containers standardize secure, high-throughput LLM reasoning across heterogeneous hybrid cloud infrastructures.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore NIM <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. DESIGN AND SIMULATION -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Design and Simulation
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">Omniverse</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">RTX Workstations</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Precision industrial factory digital twin modeled inside NVIDIA Omniverse with laser-accurate robotic assembly arms, wireframe overlays, and volumetric lighting casting subtle green accents onto factory floors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAw89_lTqQgiAVIeN8kzIdtD13quyx9k4yvnzaYRwr2Xrao96Z3Ed7ZEbNdz5aREYkH66UCPrqkuDmLkIAmwpzVXdm7Te18ByydkLNzP3P0ly8MMqumBekVstJmJX7pkXAO7J_gLAWUR3tDPuF-9G9ZAz2kJF3bBCroEkznSMXgdrZd2wAyFHSDgQbSjzZSBBI7YtHPYbmp0HhS_gHTWxeDAJznt2pJjH8QU66hgWUUO1m0GqOptwIQiaKFzGaUUd0_GKw2E9b_IwM"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Featured</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Omniverse Expands Industrial Digital Twins With OpenUSD</h4>
+<p class="text-body-sm font-body-sm text-secondary">Unify fragmented engineering schemas into physically accurate, real-time shared virtual environments across global design teams.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Solution <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="High-resolution aerodynamic computational fluid dynamics simulation visualizing supersonic shockwaves and heat signatures over an aircraft frame against a minimalist dark field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyH3uxkTRkYJ99QkqTUNwlGBLZxJzqlXbmnTfKM6o_DeWa6gMzbjqusgOarQvbLXbWPD4ytRnLialAa0DDMKDyr9ju1rORy2fJ5XaOmayI_UJoeAZcUA0RahPs4odSKHC_pyUbyuCAfYvEIQCtJlAFkaTcRZ9FjWnO3jKdU_0ObPNqCaBhVaqi2vcT558GC5hjjL-TpzOqWuW9YxQaBw2467fenH_8sd-3QSZXTmdfGS3uNvyuWZ9SvPcfh6525xs7DdeHIbj8ppU"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Ecosystem</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Ansys &amp; Siemens Integration Accelerates CAE</h4>
+<p class="text-body-sm font-body-sm text-secondary">GPU-native solvers cut structural and fluid simulation times from days to hours with deterministic mathematical precision.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Discover Integration <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Sleek, high-performance desktop workstation tower with transparent side panel showing quad-GPU architecture bathed in high-contrast emerald illumination on a carbon desk." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfyxmMXzt4mtLeC0qYQpMdEOT8kNVBQLLqvOJE80s-vyxKPQl5HK2PUb3Y7Qo7AXxzx0_zTNk53EkupsSU5Pd5ChnqkxfxTFYbwwQWoSGxk-afJxVN2Mvr8Bg-yCHJcxjzmDfGLJXS5WDT--7WaPTOF6A0QrOhYl-13bXRQaqXY6VJjKEZuJPWG9rU2FJ_G3B1n0Y1PfbHya502e_G7Jx19lt00OIAud2bkYmk2gyhZTY5EkrO0fQ6NvAE5unELaYxMKNoPzJRoXY"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Hardware</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Generative Physical AI on RTX Workstations</h4>
+<p class="text-body-sm font-body-sm text-secondary">Desktop supercomputing powers local training of custom visual synthesis models with up to 192GB unified GPU memory.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore RTX <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. HIGH-PERFORMANCE COMPUTING -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> High-Performance Computing
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">CUDA-X</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Quantum Simulation</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Futuristic quantum computing lattice simulation featuring crystal lattice entanglement visualization with high-tech monochrome surfaces and intense neon green focal rays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDOFDiphUkVx-Nhim8GQEF4HJGwqA5M8W9LJRPj2ophvzR5aoF1EP4LSDoAyRttDh45mDCW8Vb4cpMMPQcmSzE18wvbMqq1INsrGfM4_vS89VKcjtaPDITD1FugKDJOBwHhRj-EdXEo0IPzbZmTzJNccUKr5NKPpQ5HAzx8aGQ401PiMreZGA1vPBVD8K82MeGAeqPy6ZyEt9lL_MV7qKoFV39eDO1U7J4fHYB11zr-CsLpOHgwNop5qo2LCvm9YOvZCtLZ6dZEpq0"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Breakthrough</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Accelerating Scientific Discovery with Accelerated Quantum &amp; HPC</h4>
+<p class="text-body-sm font-body-sm text-secondary">Hybrid quantum-classical supercomputing frameworks provide breakthrough scaling for molecular simulation and cryptanalysis.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Read Overview <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Atmospheric weather model showing high-resolution storm tracking radar mapped over a 3D digital globe with kilometer-scale grid lines in stark green and white contrast." src="https://lh3.googleusercontent.com/aida-public/AB6AXuATkCf6vDZ6uWyvoxAbxj3VM4hprbD6l5OHlRabJMk2ZevOd9OfyHO3ZZwYjbxClJTfFG8G27zBaN2b73nAghNCj29JjUGGU4OT8IjsoLboFNZHv2QqJvaEvNKxtEUdYTIFUv7ETZqDjAhzDa6F6w3tTlrIIZ9wLy2ZVqaMsp4N2k47khco2IqEiF-McbZyF15qIDbf6F3pzrKQyQS9--0En310e2Tn3gQ8NAtG4CX4843C-VQP0Vo0MgUkvujI1YKHLN1KqUikZXQ"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Climate AI</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Kilometer-Scale Global Weather Forecasting</h4>
+<p class="text-body-sm font-body-sm text-secondary">CorrDiff AI models resolve extreme micro-climate anomalies up to 1000x faster than traditional numerical weather predictors.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Earth-2 <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Complex 3D molecular protein folding rendering depicting de novo drug targets with precise atomic bonds highlighted in brilliant green against deep black negative space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyV_BOVtyk38no3xSgRz_CLJQOBI335s2xmnn-hdymOXW4_RUbn-z4woMIhzwUYgTFDRZ1BS8klA_CqtPCrVnXUkn9aWZUXoINAJ-xhAPPAvKj0ERPRP8GVVTygajfVi4-aS7xcYKkWM-dfYMNx6nZjhfgMssLXr1cMKJuK_EvJ6qxN7BG4_nQOdVIT-Ya4TWEeBWJVQfi746x0F8RTQ_oZdEB4Zm-LMJEbkDvENlniu3Q1qT6PMF3RDZEMx-qkv9U2Yiqxf5AUTk"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Biopharma</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Generative Biology and Drug Discovery</h4>
+<p class="text-body-sm font-body-sm text-secondary">BioNeMo accelerates candidate screening and de novo macromolecule synthesis for clinical therapeutics development.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Discover BioNeMo <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. GAMING AND CREATING -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Gaming and Creating
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">GeForce GPUs</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Studio Drivers</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Next-generation GeForce RTX graphics card showcasing angular dual-axial flow fans, die-cast aluminum frame, and subtle glowing green geometric branding in a studio macro shot." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfw6ybhU8QUpebhSnO-8oMjULaLvz_G0FToXV6Us-Oh-8TO5qTkkWDkQiR4EnB6lx-D2Xef4rcIvHzMetwNMjxQqT7Ij4MMd0CxMztMkHjtfFhll-zg9nws9v1Dz8KqBTGeIJvasHkZrC7Y3SIIVzbSNhAsI8V3Dx8zBHN-38yjuKS1miVNHyjVX4928Hp1YTjJO2ICtV-NGbLZgN9qzt8Kocukvbu01L6kGXvLAHF-Gs3fVyrPS8yEIxEOgA1o6MM6av8ws7uLo0"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Flagship Hardware</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">GeForce RTX 50 Series: Game-Changing Performance and DLSS</h4>
+<p class="text-body-sm font-body-sm text-secondary">Neural rendering algorithms deliver maximum fidelity and fluid frame generation for demanding 4K AAA titles.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore 50 Series <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Full path tracing game environment depicting a mythical warrior standing in a dimly lit temple with ultra-realistic bounce light reflections and caustic water physics." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBizPwN4Cgr5JY_oELtP6y20N2J3hSDdS0X_VOFc-YuFY1XyRatMmfwgy35f3D8Esgy2dRGNJyIo04kaOfpCv_hZBHMsi8Ax6MEQn36JM3hmz8FzGjlSRts2yA_gN2Gn65VY0QvQFd7kI8tah_5CFbOvs8s770Dvvh0iydREFXpWgLC5OfJ3rZhBBA1gzNCl7sDB3xjeEaSdgA34kbvyWlZMTnb9F6FvsONOgklu26-rUoKbUWmZgK1IK8GnAtx25gyaE6CsYkJ9aU"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Full Path Tracing</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Black Myth Innovations and Neural Rendering</h4>
+<p class="text-body-sm font-body-sm text-secondary">Next-generation global illumination models render bounce lighting in real time with hardware-accelerated BVH traversal.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Tech Demo <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="High-speed cloud gaming streaming across multiple modern ultra-thin glass mobile and tablet devices with NVIDIA green wireless controller resting beside them." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvqwdytFWfqc9qRoVjVem_6CUDWXpTq0UUH8GRpj-yK5MsHT0Khyi4gBWokIkQysYVvTpOG19-d0vXVJux9hV7sMGoUzg78UFkN9QHqYLwWS2C-IOOytz45KLSmvOnyJK2gexvXT7K5VFz1oaSv1Z9RQTasTGgMBJGPXPvou4fV_lzYHNz51-AE8lym5J3wxjpnkauVsI3LAABKTjwQfFSzHvQ2nsNOirCb7JCFakB_HoHj0erQ0_p0RxwqZneqwkZB5gfYawmzms"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Cloud Gaming</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">GeForce NOW: RTX 4080 Class Performance</h4>
+<p class="text-body-sm font-body-sm text-secondary">Stream high-fidelity titles instantly to virtually any device at up to 240 FPS with reflex low-latency synchronization.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Play Now <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. AUTOMOTIVE -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Automotive
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">DRIVE Platform</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Simulation</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Futuristic autonomous electric concept car driving on an empty highway at dusk with lidar sensor point clouds projected in bright neon green rays." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDxnK4j-hjITRhbA4cohvKeoIgxrMPYnhYbessQVWlX2volZ7SO9vuvAdsUfuEzgFzowLmWd2yL_w9tPxETlCCgPZQTFNUVeyhQtWvcn9COT0l6ulNOw3qgTECw68eSFLEcf_pX29bXrViQKoron7bkac1ht1HhDA7lErhxtj3QX7je0gNaOSuRmE47xHFfVievMR5byBh6ib_3_uYRvqcC7R6ht68Ipl4M8ErQKaUzjbvsaaJqHQCAHfeJWk57rWiiiuGnpSFi7ZM"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Central Compute</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">NVIDIA DRIVE Thor Powers Next-Gen Autonomous Fleets</h4>
+<p class="text-body-sm font-body-sm text-secondary">Delivering 2,000 teraflops of FP4 compute to unite automated driving, digital cockpits, and active functional safety.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore Thor <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Minimalist luxury digital dashboard inside a smart electric vehicle with seamless panoramic OLED displays presenting AI voice assistant contextual prompts." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwUSV7jindsZjvhTZsrXXtIkl7AHQM6BSyrcUI9mh0CoZ-ztlzisiFlwMsVVaxOoq2BNGHSyil3MM6f8wxSpEYOiX4i9JxHMHpXUgTOrGo51m2n9VKawwjmWQl4t1fMDOgonUFBW5ybpqKmA-kjAtxJ_UtUkYUBkoc4Oe7cBow2CH6fUJfm_I7qu521nVpZFk9iwwhw-UhiN4scIMLhMEjMLL0G5X27iqPfEicronR-INXreHi1ltbtXkRLFpQRH-KLIFtjs75Gsk"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Smart Cabin</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">In-Cabin Generative AI and Voice Synthesis</h4>
+<p class="text-body-sm font-body-sm text-secondary">Context-aware conversational agents anticipate passenger needs and customize route dynamics seamlessly.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Solutions <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Photorealistic synthetic simulation environment of urban road traffic testing autonomous emergency braking scenarios with digital HUD telemetry in NVIDIA green." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZNDtgJRDxCQYUGFJkHBy13SG2SN1S69-jOM6HjlbjE4ZdNhaiIpJlUXwMBWLHV-JO9VF6OJ7MrTv8-EiFSeZkVpeGNnP1EXDXtRDQGAnEJYhrbq6rCBm8ZR3bfx_2l2P32ARo-5GEO4YzOYSx5t8zkJr3en3V04lTAoVLF5Fdv5sKWlpYsNae04C2vGTm3POLWwG4I4dB5Yg6CaL3rQuvIBpGCm5leB65oZmho195Xcrvx35W_8F0GQ_YHMB8rojUszEavzANOaM"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Validation</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">DRIVE Sim: End-to-End Safety Architectures</h4>
+<p class="text-body-sm font-body-sm text-secondary">Inject rare edge cases and sensor degradation scenarios in physically accurate virtual environments before public road trials.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore DRIVE Sim <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. ROBOTICS AND EDGE AI -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Robotics and Edge AI
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">Isaac Sim</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Jetson Orin</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Advanced bipedal humanoid robot standing in a research lab, composed of matte black carbon composite plates with illuminated green joints and optical head sensors." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUfyo84G_FxENvxXOqcCRpGQ2KG-liPG7rgn-tceMcDuqLfY7-fSlB_2ah3drZL1wdhs2vScHQa7HsiJf-ZRKAJKQRt4sKsICsX22qtYPTQg0u-MjNv8mdVNNAcKB8fuUqjrLqXKvZ2eFxUQAUzOxNxs6DnN3aZHuGY0UUhRNTMXtTtqEHdfX_6Z1QxPLXW1SP1n8tDCWvncF_KVzYIf6ZL00OUEzxGVcpFnkmiQhaWcB87pGHTerevS-SbPkBHkVa2-oCby2YkD0"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Physical AI</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Project GROOT: Humanoid Robot Foundation Models</h4>
+<p class="text-body-sm font-body-sm text-secondary">General-purpose multimodal AI enables bipedal embodiments to imitate human movements and reason through physical task constraints.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Learn More <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Compact NVIDIA Jetson system-on-module edge computer showing detailed gold-plated connectors and heat dissipation fins sitting on an industrial testing bench." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC1eCTstm39Kdx4jmJ0l13YOpwuIRd7jys3U_z3GuabHXirr2Kw1u8PMwUeTufQolnC5W-6HxVwZ6lccBtz5QOJ9gqhnzqCu-qa0Itk9626cHVaEfZ2BZPcSsExZuQE88znk4Z3dte8kmPONcB9pVBlwAIs7WvBbaaLNMN746m65_JReZW2r0QGM1PvcSQcmB-4m_dP9XQdO8FMc62ssOIy4X8e3W3LYLUNrGqpW4rkrYXKdI8tvn5A4FKv8KvfEzb65IhGlkHNPHY"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Embedded Silicon</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Jetson Thor for Complex Physical AI</h4>
+<p class="text-body-sm font-body-sm text-secondary">Next-generation edge computer architected specifically for generative vision-language-action foundation models.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Jetson Family <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Automated mobile robots navigating warehouse aisles with precise laser navigation paths highlighted on the concrete floor in high-contrast green tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxqXHqOZD5HRjhtO_wmiEDiPnIp3GII-xDc7rjhbB7NPOAV7qK_z5e4rwpJzTta2KPiDZPp7rjZqeYViDdhhTPg0F6sHLw3usUu4opzU9o65pm4Dl0y2Dq7tiNku_2dRM_3PxHtGlV3ctVtp-H4dfrLqjJi5TZGdbEuw1_fN0IIh_kTYZ1_YfzoUYETakus1ajm-2GieQ_vE4jnKFKfVIh-H1H8rVb7E08jpjpXrs1bpIgUCbzj3ZLE1ZaU96h4_c3GuEk3FYTOc8"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Industrial Logistics</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Isaac Robotics Platform &amp; Autonomous Mobile Fleets</h4>
+<p class="text-body-sm font-body-sm text-secondary">Perception libraries and fleet coordination orchestrators drive zero-collision operational efficiency in automated fulfillment centers.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Explore Isaac Sim <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. DATA CENTER AND CLOUD COMPUTING -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> Data Center and Cloud Computing
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">DGX Cloud</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">NVLink Switch</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Dense server racks inside a hyperscale enterprise data center with glowing green indicator lights and fiber optic cables vanishing into dark perspective." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAyOzKEhSfo3d7zAYo9amknnyMLCvEI0u46LRXgV8hwjAVDrT7SvemUtcVhVNfSoBSIALSxgIO49889wJtm13tFb1XM8FpbbeYp5gvePg0WJS5XTtsg0lQM_s7enHckFugtpTQwRovdbZ0ppH4RLQkeBxRlh7j-tx6bZbAFMgLnAL8JmxemQPu-AAo39MeJUgnxKPK1sCxyZowu06MxeWKMqqxjlOcr5y86PP-iKIxk8EQsHgs7tsf3G7nUf5G8N-h1vwM2W4CPayw"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Infrastructure</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Blackwell Ultra and Spectrum-X: Sovereign AI Backbone</h4>
+<p class="text-body-sm font-body-sm text-secondary">Massive scale Ethernet fabrics eliminate packet dropping and enable predictable latency across tens of thousands of GPUs.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Architecture <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Liquid cooling manifold system on an AI supercomputer blade with translucent fluoropolymer tubes carrying glowing coolant under high pressure." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMll6244acKq7AutBgPXdP5BBUuTGN_YNYk_pL_YvfLLG5J6x3DAlgS0JLZHj3zYS9VIFZt4eTv0ormjMOzdUOjztXa0I4anJe48RLPjwrrb8_SGrD9UOIOsXRoN6AU_nQr4hfPzFgk1Q1c2JYPcAn4fo5EKc-wRr60xYOhBgeDmGdDOal9DNzC00E-K1Ih7DJCLTJ02yjp9AQtwzKZWM96aVetmmIcFKDJlYY05BK33hGF_-wMKPXcx3ynGFwNMPjFxqqjbME7Po"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Efficiency</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Liquid-Cooled Supercomputing Infrastructure</h4>
+<p class="text-body-sm font-body-sm text-secondary">Direct-to-chip closed cooling loops cut data center facility power usage effectiveness (PUE) down to unprecedented 1.1 levels.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Read Whitepaper <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Architectural visualization of multi-tenant cloud computing clusters connecting global research institutes through low-latency fabric networks on a black background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAB8RIqujHXfZwEUQAqivePcnq5qYmiSMloIbg-UvLjFU-uVnAYi10oaArhy7OgXPfSUvw_wAZHr3_JKPeP_sQsQu2bbcmVln_2ZXqhgrMEttzNw0gS0n0l7JLpcSUx-6n4LF0wi5cL0RnsTVIOEp3CPFrK_ALJ0bT9Csere76O9_UxgTmoSCWlv8pNY9AQv11lobpcFip2mP60_Ae6yUllbNrpBkN0sIYRcNLpY5cTBT9iKIXgMIAI-lNCq1hODC_x1KZ9mYq9a8"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">SaaS Fabric</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">NVIDIA DGX Cloud Dedicated Clusters</h4>
+<p class="text-body-sm font-body-sm text-secondary">Instant access to co-located AI supercomputing infrastructure integrated directly into major leading cloud providers.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Request Access <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. ABOUT NVIDIA -->
+<section class="py-7 px-[15px] flex flex-col">
+<div class="flex items-baseline justify-between mb-2">
+<h3 class="text-headline-sm font-headline-sm font-bold text-pure-white flex items-center">
+<span class="text-nvidia-green mr-2 text-[24px] font-bold">+</span> About NVIDIA
+            </h3>
+</div>
+<!-- Quick links -->
+<div class="flex flex-wrap gap-x-3 gap-y-1 mb-4 text-label-sm font-label-sm text-neutral-gray">
+<a class="hover:text-nvidia-green transition-colors" href="#">Company Overview</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Careers</a>
+<span>•</span>
+<a class="hover:text-nvidia-green transition-colors" href="#">Newsroom</a>
+</div>
+<!-- Scrollable Story Cards -->
+<div class="flex overflow-x-auto gap-4 snap-x snap-mandatory no-scrollbar pb-2">
+<!-- Card 1 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="NVIDIA corporate headquarters building in Santa Clara showing triangular glass architecture at twilight with pristine reflections and green exterior lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCDSUFKesArT7ADqQWEfyMi0Qr-tR79DsjR1r9tHO1MMtOd10Ucs03pLiIegyo746PsSwxD_yBMYgF7O7ngFF4RNqBg3PPTTWFCEGRQpOmh9nILja7DE--mko4y03pr95KWHyTp1viEq5KQQ4I8DqC1rRvAJnDmasZgdiEuLNUcRk-XodrKDZYE2u5lFJYRoSzXnd5xXdeJpnio7ojlumpYL7ZjOQ3CDGaduP9Q0i1Ra5zkC5yuQUxIQhqbntjSrsS5ywWDzyKX3U"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Corporate Mission</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Pioneering Accelerated Computing to Solve Toughest Challenges</h4>
+<p class="text-body-sm font-body-sm text-secondary">Founded in 1993, NVIDIA transformed computer graphics and catalyzed the modern global artificial intelligence revolution.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Our Story <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Wind turbines and solar arrays adjacent to an ultra-modern carbon-neutral computing center under a crisp evening sky with subtle green energy lines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKUeufMZix_DyPHvaOyZ9CYV6dOKKbMXHa1jTjQcyRbq9iiKuwIhNFTc5TjvQZh8b1unJ0dLqax0Jn3r-hcN9EtdQLl84Z9ie1ycB4XVHBrlohjuK_1PNnJuXXJ0LBDFlNskczRUaUd7QuAiwccP0KOtrnuCMn4of7y31zxVfsbDMyKKT4PrM8DeB-5fdJApgoFsVEziudOx7dOashqJdg1AEmYS1foyVU0PrDfviZ0WaloIMnEX0JJfe0rgXmrXwf8YbBi_O8gKs"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Responsibility</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Corporate Sustainability &amp; Global Environmental Impact</h4>
+<p class="text-body-sm font-body-sm text-secondary">Committed to powering 100% renewable electricity across global direct operations and accelerating energy-efficient compute silicon.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  View Report <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[260px] max-w-[260px] snap-start bg-surface-black border border-border-gray flex flex-col justify-between">
+<div>
+<img class="w-full h-36 object-cover border-b border-border-gray" data-alt="Stock market digital graph representation intersecting with artificial intelligence neural weights against a pure black background with precise green data points." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4pSYTsk3O7jf6Wk1sTR18S90dM4GSGvfodBtvft4-Z3BY1t1bNLaH-BwEz5L_HRrmSlUe2oN_U5r5oZa8iqup56abdyDOueQflXcsc1SujKW0DiD1XDgEtH451S-M0UTs2u8Q0oosnAt-I_6f89tpIIxxGb0Yme-m2-7y9HtEKkHMR9zduNUF19Q0BUefGrR4pW_P9DyGJkCUpZxVVy0u232SAIjm_pBvnEfR1EwEEvGWQn23O_CxmYqzq8URUwlipaGq1e0eFG8"/>
+<div class="p-4">
+<span class="text-label-sm font-label-sm text-nvidia-green uppercase tracking-wider font-bold">Governance</span>
+<h4 class="text-body-md font-headline-sm font-bold text-pure-white mt-1 mb-2 leading-snug">Investor Relations, Leadership &amp; Ethical AI</h4>
+<p class="text-body-sm font-body-sm text-secondary">Building open, secure, and responsible artificial intelligence technologies that preserve transparency and digital provenance.</p>
+</div>
+</div>
+<div class="p-4 pt-0">
+<a class="text-label-sm font-label-sm text-nvidia-green font-bold inline-flex items-center hover:underline" href="#">
+                  Investor Hub <span class="material-symbols-outlined text-[16px] ml-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- STACKED DARK FOOTER (#121414 / #0c0f0f) -->
+<footer class="w-full bg-surface-dim border-t border-border-gray text-on-background flex flex-col">
+<!-- Dark Information Columns Accordion -->
+<div class="px-[15px] py-8 flex flex-col space-y-6">
+<!-- Accordion Item 1 -->
+<details class="group border-b border-border-gray pb-4" open="">
+<summary class="flex justify-between items-center cursor-pointer list-none text-body-md font-headline-sm font-bold text-pure-white">
+<span>Company Information</span>
+<span class="material-symbols-outlined transform transition-transform group-open:rotate-180 text-nvidia-green">expand_more</span>
+</summary>
+<div class="mt-3 flex flex-col space-y-2 text-body-sm font-body-sm text-secondary">
+<a class="hover:text-nvidia-green transition-colors" href="#">About NVIDIA</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Investor Relations</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Research</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Sustainability &amp; CSR</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Careers</a>
+</div>
+</details>
+<!-- Accordion Item 2 -->
+<details class="group border-b border-border-gray pb-4">
+<summary class="flex justify-between items-center cursor-pointer list-none text-body-md font-headline-sm font-bold text-pure-white">
+<span>News and Events</span>
+<span class="material-symbols-outlined transform transition-transform group-open:rotate-180 text-nvidia-green">expand_more</span>
+</summary>
+<div class="mt-3 flex flex-col space-y-2 text-body-sm font-body-sm text-secondary">
+<a class="hover:text-nvidia-green transition-colors" href="#">Newsroom</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">NVIDIA Blog</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">GTC Conferences</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Webinars &amp; Tech Talks</a>
+</div>
+</details>
+<!-- Accordion Item 3 -->
+<details class="group border-b border-border-gray pb-4">
+<summary class="flex justify-between items-center cursor-pointer list-none text-body-md font-headline-sm font-bold text-pure-white">
+<span>Popular Links</span>
+<span class="material-symbols-outlined transform transition-transform group-open:rotate-180 text-nvidia-green">expand_more</span>
+</summary>
+<div class="mt-3 flex flex-col space-y-2 text-body-sm font-body-sm text-secondary">
+<a class="hover:text-nvidia-green transition-colors" href="#">GeForce Graphics Cards</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">CUDA Zone</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">NVIDIA Omniverse</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">NVIDIA DGX Cloud</a>
+<a class="hover:text-nvidia-green transition-colors" href="#">Drivers &amp; Downloads</a>
+</div>
+</details>
+<!-- Newsletter Subscription & Socials: Stay Informed -->
+<div class="flex flex-col space-y-3 pt-2">
+<span class="text-body-md font-headline-sm font-bold text-pure-white">Stay Informed</span>
+<p class="text-body-sm font-body-sm text-secondary">Sign up for notifications on AI breakthroughs, events, and technologies.</p>
+<form class="flex flex-col space-y-2 mt-1" onsubmit="event.preventDefault();">
+<input class="w-full bg-surface-container border border-border-gray px-3 py-2 text-body-sm text-pure-white placeholder-neutral-gray focus:outline-none focus:border-nvidia-green rounded-none" placeholder="Enter your email" required="" type="email"/>
+<button class="bg-nvidia-green text-pure-black font-label-md font-bold py-2.5 px-4 uppercase tracking-wider text-center active:scale-95 transition-transform" type="submit">
+              Subscribe
+            </button>
+</form>
+<!-- Social Icons Cluster -->
+<div class="flex items-center space-x-4 pt-3 text-secondary">
+<a aria-label="X Twitter" class="hover:text-nvidia-green transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="hover:text-nvidia-green transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<a aria-label="YouTube" class="hover:text-nvidia-green transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<a aria-label="GitHub" class="hover:text-nvidia-green transition-colors" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+<!-- LEGAL FOOTER: PURE WHITE BACKGROUND (#FFFFFF) WITH DARK TEXT -->
+<div class="w-full bg-pure-white text-pure-black border-t border-[#e5e7eb] px-[15px] py-6 flex flex-col space-y-4">
+<!-- Copyright Text strictly matching Shared Component -->
+<div class="text-label-sm font-label-sm text-[#474747]">
+          Copyright © 2026 NVIDIA Corporation
+        </div>
+<!-- Links matching Shared Component JSON specification -->
+<nav aria-label="Footer Legal Links" class="flex flex-wrap gap-x-4 gap-y-2 text-label-sm font-label-sm text-[#474747]">
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Manage My Privacy</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Legal</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Accessibility</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Corporate Information</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Product Security</a>
+<a class="hover:text-nvidia-green hover:underline transition-colors" href="#">Contact</a>
+</nav>
+</div>
+</footer>
+</div>
+</body></html>
