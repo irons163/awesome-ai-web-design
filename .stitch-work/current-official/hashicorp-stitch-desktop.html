@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HashiCorp: Do cloud right. Multi-Cloud Infrastructure &amp; Security Automation</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- IBM Plex Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#000000",
+            "inverse-on-surface": "#f0f1f3",
+            "surface-container": "#edeef0",
+            "on-primary": "#ffffff",
+            "border-gray": "#E2E8F0",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#000000",
+            "secondary-fixed": "#e9ddff",
+            "inverse-primary": "#c9c4d2",
+            "secondary": "#6936da",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-tertiary-container": "#8e8271",
+            "on-secondary-container": "#fffbff",
+            "tertiary-fixed": "#efe1cc",
+            "cloud-accent": "#5A20CB",
+            "surface-container-low": "#f3f4f6",
+            "secondary-fixed-dim": "#cfbdff",
+            "primary-fixed-dim": "#c9c4d2",
+            "on-secondary-fixed-variant": "#5311c4",
+            "surface-container-high": "#e7e8ea",
+            "tertiary-fixed-dim": "#d2c5b1",
+            "surface-container-highest": "#e1e2e4",
+            "tertiary-container": "#211b0e",
+            "surface-tint": "#5f5d68",
+            "on-secondary": "#ffffff",
+            "on-primary-container": "#85828e",
+            "surface-bright": "#f8f9fb",
+            "on-primary-fixed": "#1c1a24",
+            "primary-container": "#1c1a24",
+            "on-background": "#191c1e",
+            "on-error": "#ffffff",
+            "background": "#f8f9fb",
+            "surface-white": "#FFFFFF",
+            "dark-navy-purple": "#0F0E17",
+            "on-tertiary-fixed-variant": "#4f4637",
+            "on-secondary-fixed": "#22005d",
+            "surface-dim": "#d9dadc",
+            "secondary-container": "#8254f4",
+            "error": "#ba1a1a",
+            "on-surface": "#191c1e",
+            "on-primary-fixed-variant": "#474550",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed": "#211b0e",
+            "surface-light-gray": "#F4F5F7",
+            "on-surface-variant": "#48464b",
+            "primary-fixed": "#e5e0ee",
+            "outline": "#78767c",
+            "surface-variant": "#e1e2e4",
+            "outline-variant": "#c9c5cc",
+            "surface": "#f8f9fb",
+            "inverse-surface": "#2e3132"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-2xl": "96px",
+            "gutter-desktop": "32px",
+            "space-sm": "8px",
+            "space-xs": "4px",
+            "margin": "24px",
+            "margin-desktop": "64px",
+            "space-lg": "24px",
+            "space-xl": "48px",
+            "gutter": "24px",
+            "space-md": "16px"
+          },
+          "fontFamily": {
+            "label-md": ["IBM Plex Sans", "sans-serif"],
+            "headline-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-hero-mobile": ["IBM Plex Sans", "sans-serif"],
+            "body-sm": ["IBM Plex Sans", "sans-serif"],
+            "body-lg": ["IBM Plex Sans", "sans-serif"],
+            "label-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-hero": ["IBM Plex Sans", "sans-serif"],
+            "headline-lg": ["IBM Plex Sans", "sans-serif"],
+            "headline-md": ["IBM Plex Sans", "sans-serif"],
+            "headline-lg-mobile": ["IBM Plex Sans", "sans-serif"],
+            "body-md": ["IBM Plex Sans", "sans-serif"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "500" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "headline-hero-mobile": ["42px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-hero": ["82px", { "lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      vertical-align: middle;
+    }
+    .code-font {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-surface-white text-on-surface antialiased font-body-md text-body-md overflow-x-hidden selection:bg-secondary selection:text-on-secondary">
+<!-- 1. TOP NAVIGATION -->
+<header class="bg-surface-white border-b border-border-gray sticky top-0 z-50 h-16 w-full">
+<div class="max-w-7xl mx-auto px-6 md:px-8 flex justify-between items-center h-full">
+<!-- Logo + Brand Endorsement -->
+<div class="flex items-center gap-3">
+<a class="flex items-center gap-2 group" href="#">
+<!-- Authentic HashiCorp Polygon Mark -->
+<div class="w-7 h-7 flex items-center justify-center bg-primary rounded-lg text-on-primary">
+<svg class="w-4 h-4 text-on-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M13.5 2.5L20 6.25v7.5l-6.5 3.75V2.5zM10.5 21.5L4 17.75v-7.5l6.5-3.75v15z" opacity="0.9"></path>
+<path d="M10.5 2.5L4 6.25v15l6.5-3.75V2.5zM13.5 21.5L20 17.75v-15l-6.5 3.75v15z" opacity="0.6"></path>
+</svg>
+</div>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-primary">HashiCorp</span>
+</a>
+<span class="text-outline-variant font-light text-body-sm">|</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant tracking-normal">An IBM Company</span>
+</div>
+<!-- Navigation Links -->
+<nav class="hidden lg:flex items-center gap-7">
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#products">Products</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#solutions">Solutions</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#quickstart">Resources</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#pricing">Pricing</a>
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#enterprise">Enterprise</a>
+</nav>
+<!-- Action Buttons -->
+<div class="flex items-center gap-4">
+<a class="text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150" href="#signin">Sign In</a>
+<a class="hidden sm:inline-block text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors duration-150 px-3 py-1.5" href="#contact">Contact Sales</a>
+<a class="bg-primary hover:bg-on-background text-on-primary text-label-md font-label-md px-4 py-2 rounded-lg transition duration-150 ease-in-out font-medium shadow-sm" href="#get-started">Get Started</a>
+</div>
+</div>
+</header>
+<!-- 2. HERO SECTION -->
+<section class="relative bg-dark-navy-purple text-on-primary overflow-hidden border-b border-outline-variant/20">
+<!-- Faceted background image asset -->
+<div class="absolute inset-0 z-0">
+<img alt="HashiCorp faceted geometric cloud mesh" class="w-full h-full object-cover object-center opacity-80 mix-blend-screen" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7oVlrhj771be1fBuMO85NCnoxt4RgYiAZk-tVLzIQ6UxsrizcPSnZDoQZrr03eeRwZY28t5I1SeCSSjDgROukecwpYx_zhGyml89RlsDJ8Q9UDU554TCdeXa-u31h4K3Btf_3GgD22EO7YehM9gqzy-3-5PbVUqK4HFXnbaSiWmAb5bpzgRM13zXd8XW20NScRnWk9WUHcH3zArP4e3YmohzgB1hROCLr06k7pgyfz57YkClr7m9UgJ7F4w7o0Xi8K3VXe2bDU70"/>
+<div class="absolute inset-0 bg-gradient-to-b from-dark-navy-purple/60 via-dark-navy-purple/40 to-dark-navy-purple pointer-events-none"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-6 md:px-8 pt-20 pb-28 flex flex-col items-center text-center">
+<!-- y162 pill badge -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-secondary/40 bg-secondary/10 backdrop-blur-md mb-8 hover:border-secondary transition-colors duration-200">
+<span class="text-secondary-fixed text-label-sm font-label-sm">✦</span>
+<span class="text-inverse-on-surface text-label-sm font-label-sm tracking-wide">Runtime Security &amp; Compliance — State of Cloud Strategy 2026</span>
+<span class="material-symbols-outlined text-secondary-fixed" style="font-size: 16px;">arrow_forward</span>
+</div>
+<!-- y220 massive headline -->
+<h1 class="text-headline-hero-mobile md:text-headline-hero font-headline-hero text-on-primary tracking-tight max-w-5xl">
+        Do cloud right.
+      </h1>
+<!-- Supporting sentence -->
+<p class="mt-6 max-w-2xl text-inverse-primary text-body-lg font-body-lg leading-relaxed font-normal">
+        Automate multi-cloud infrastructure and security with code and workflows built for enterprise resilience.
+      </p>
+<!-- y410 CTA buttons -->
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
+<a class="w-full sm:w-auto px-8 py-3.5 bg-surface-white text-primary text-label-md font-label-md font-semibold rounded-lg hover:bg-surface-container-low transition duration-150 shadow-md inline-flex items-center justify-center gap-2" href="#cloud-platform">
+          Meet The Infrastructure Cloud
+        </a>
+<a class="w-full sm:w-auto px-6 py-3.5 text-inverse-on-surface hover:text-on-primary text-label-md font-label-md inline-flex items-center justify-center gap-2 border border-outline-variant/30 rounded-lg hover:border-outline-variant transition duration-150" href="#products">
+<span>Explore products</span>
+<span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</a>
+</div>
+<!-- Customer logos strip -->
+<div class="mt-20 pt-10 border-t border-outline-variant/15 w-full max-w-5xl">
+<p class="text-label-sm font-label-sm text-outline-variant uppercase tracking-wider mb-6">Trusted by critical engineering teams worldwide</p>
+<div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 grayscale hover:grayscale-0 transition duration-300">
+<span class="text-body-lg font-bold tracking-tight text-inverse-on-surface">BARCLAYS</span>
+<span class="text-body-lg font-semibold tracking-tight text-inverse-on-surface">Booking.com</span>
+<span class="text-body-lg font-light tracking-wide text-inverse-on-surface">Mercedes-Benz</span>
+<span class="text-body-lg font-semibold tracking-tight text-inverse-on-surface">DATADOG</span>
+<span class="text-body-lg font-bold tracking-widest text-inverse-on-surface">CISCO</span>
+<span class="text-body-lg font-bold tracking-tight text-inverse-on-surface">stripe</span>
+<span class="text-body-lg font-semibold tracking-tight text-inverse-on-surface">COMCAST</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. CYBER RISK 2026 CALLOUT -->
+<section class="bg-surface-light-gray py-10 border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="bg-surface-white border border-border-gray rounded-xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-error-container text-error flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined" style="font-size: 22px;">shield</span>
+</div>
+<div>
+<div class="flex items-center gap-2 mb-1">
+<span class="text-label-sm font-label-sm text-error font-semibold uppercase tracking-wider">Cyber Risk Report 2026</span>
+<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Global Security Survey</span>
+</div>
+<p class="text-headline-sm font-headline-sm text-on-surface font-medium leading-snug">
+              89% of multi-cloud breaches stem from identity sprawl and manual misconfigurations.
+            </p>
+</div>
+</div>
+<a class="shrink-0 text-label-md font-label-md text-secondary hover:text-cloud-accent font-semibold inline-flex items-center gap-1 group" href="#report">
+<span>Read findings &amp; recommendations</span>
+<span class="material-symbols-outlined transition-transform duration-150 group-hover:translate-x-1" style="font-size: 18px;">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- 4. A SMARTER APPROACH TO INFRASTRUCTURE OPERATIONS -->
+<section class="py-20 bg-surface-white border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="max-w-3xl mb-16">
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">INFRASTRUCTURE LIFECYCLE MANAGEMENT</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+          A smarter approach to infrastructure operations
+        </h2>
+<p class="mt-4 text-on-surface-variant text-body-lg font-body-lg">
+          Shift from fragmented tooling to a unified platform across build, deploy, secure, and run.
+        </p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+<!-- Feature Card 1 -->
+<div class="md:col-span-7 bg-surface-light-gray border border-border-gray rounded-xl p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2.5 py-1 bg-surface-container rounded text-label-sm font-label-sm text-primary font-mono">01 // CODE &amp; STATE</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Continuous delivery</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-primary mb-3">Deterministic orchestration at scale</h3>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">
+              Replace fragile manual consoles with declarative Infrastructure as Code. Verify plan execution runs in isolated runners with automated policy guardrails.
+            </p>
+</div>
+<!-- Syntax Highlighted Code Box -->
+<div class="bg-primary rounded-lg p-4 code-font text-label-sm text-on-primary overflow-x-auto shadow-inner">
+<div class="flex items-center justify-between pb-3 mb-3 border-b border-on-primary-fixed-variant text-outline-variant text-[12px]">
+<span>main.tf</span>
+<span class="text-secondary-fixed">HCL 2.0</span>
+</div>
+<p><span class="text-secondary-fixed">resource</span> <span class="text-tertiary-fixed">"aws_eks_cluster"</span> <span class="text-inverse-primary">"prod"</span> {</p>
+<p class="pl-4">name     = <span class="text-surface-bright">"prod-core-vpc"</span></p>
+<p class="pl-4">role_arn = <span class="text-secondary-fixed">aws_iam_role.cluster.arn</span></p>
+<p class="pl-4">vpc_config {</p>
+<p class="pl-8 text-outline-variant">// Automated zero-trust isolation</p>
+<p class="pl-8">endpoint_private_access = <span class="text-secondary-fixed">true</span></p>
+<p class="pl-4">}</p>
+<p>}</p>
+</div>
+</div>
+<!-- Feature Card 2 -->
+<div class="md:col-span-5 bg-surface-light-gray border border-border-gray rounded-xl p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="px-2.5 py-1 bg-surface-container rounded text-label-sm font-label-sm text-secondary font-mono">02 // IDENTITY</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Zero static secrets</span>
+</div>
+<h3 class="text-headline-md font-headline-md text-primary mb-3">Dynamic runtime credentials</h3>
+<p class="text-on-surface-variant text-body-md font-body-md mb-6">
+              Grant short-lived, identity-driven access for applications, workloads, and engineers without storing persistent credentials in code.
+            </p>
+</div>
+<div class="bg-surface-white border border-border-gray rounded-lg p-5">
+<div class="flex items-center justify-between mb-3">
+<span class="text-label-sm font-label-sm text-on-surface-variant">Token TTL: 15m remaining</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-medium bg-surface-container text-primary">Ephemeral</span>
+</div>
+<div class="w-full bg-surface-container h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 72%;"></div>
+</div>
+<div class="mt-4 flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-on-surface-variant font-mono">auth/jwt/login</span>
+<span class="text-primary font-medium">Revoked automatically</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. GET STARTED IN MINUTES -->
+<section class="py-20 bg-surface-light-gray border-b border-border-gray" id="quickstart">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">DEVELOPER EXPERIENCE</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+            Get started in minutes
+          </h2>
+</div>
+<p class="text-on-surface-variant text-body-md font-body-md max-w-md mt-2 md:mt-0">
+          Command-line primitives loved by engineers, unified in cloud control planes for management and compliance.
+        </p>
+</div>
+<!-- Quickstart workflow console -->
+<div class="bg-surface-white border border-border-gray rounded-xl overflow-hidden shadow-sm">
+<!-- Tab selector -->
+<div class="flex border-b border-border-gray bg-surface-container-low px-4 pt-3 overflow-x-auto">
+<button class="px-5 py-3 text-label-md font-label-md font-semibold text-secondary border-b-2 border-secondary bg-surface-white rounded-t-lg flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+            1. Provision with Terraform
+          </button>
+<button class="px-5 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+            2. Secure secrets with Vault
+          </button>
+<button class="px-5 py-3 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2">
+            3. Connect services with Consul
+          </button>
+</div>
+<div class="p-6 md:p-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-5">
+<h4 class="text-headline-sm font-headline-sm text-primary mb-3">Automate cloud state in three commands</h4>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+              Write standard declarative HCL, validate consistency across your team with speculative plans, and apply configuration changes securely without risk of manual drifts.
+            </p>
+<ul class="space-y-3 mb-6">
+<li class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">check_circle</span>
+                Cloud-agnostic provider ecosystem
+              </li>
+<li class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">check_circle</span>
+                State locking and versioned rollbacks
+              </li>
+<li class="flex items-center gap-2 text-label-md font-label-md text-on-surface">
+<span class="material-symbols-outlined text-secondary" style="font-size: 18px;">check_circle</span>
+                Built-in cost estimation and Sentinel policy checks
+              </li>
+</ul>
+<a class="text-label-md font-label-md text-secondary font-semibold hover:text-cloud-accent inline-flex items-center gap-1" href="#quickstart-docs">
+              Read Terraform tutorial series →
+            </a>
+</div>
+<div class="lg:col-span-7 bg-primary rounded-xl p-5 code-font text-on-primary shadow-lg border border-primary-container">
+<div class="flex items-center justify-between pb-3 mb-4 border-b border-on-primary-fixed-variant">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-error"></span>
+<span class="w-3 h-3 rounded-full bg-amber-400"></span>
+<span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+<span class="text-label-sm text-outline-variant ml-2">bash — hcp-workspace</span>
+</div>
+<span class="text-label-sm text-emerald-400 flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span> status: ready
+              </span>
+</div>
+<div class="space-y-2 text-body-sm leading-relaxed">
+<p><span class="text-outline-variant">$</span> <span class="text-surface-bright font-semibold">terraform init</span></p>
+<p class="text-outline-variant">Initializing provider plugins... AWS v5.42.0 verified and installed.</p>
+<p class="pt-2"><span class="text-outline-variant">$</span> <span class="text-surface-bright font-semibold">terraform apply -auto-approve</span></p>
+<p class="text-secondary-fixed">Plan: 4 to add, 0 to change, 0 to destroy.</p>
+<p class="text-inverse-primary pl-2">aws_vpc.main: Creating... [id=vpc-091a4b]</p>
+<p class="text-inverse-primary pl-2">aws_subnet.primary: Creating... [id=subnet-01bf8]</p>
+<p class="text-emerald-400 font-semibold pt-1">Apply complete! Resources: 4 added, 0 changed, 0 destroyed.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. HCP TERRAFORM POWERED BY INFRAGRAPH -->
+<section class="py-20 bg-surface-white border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="bg-gradient-to-br from-dark-navy-purple to-primary text-on-primary rounded-2xl p-8 md:p-14 overflow-hidden relative border border-border-gray">
+<!-- Glow effect -->
+<div class="absolute -right-20 -bottom-20 w-96 h-96 bg-secondary/30 rounded-full blur-3xl pointer-events-none"></div>
+<div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<div class="lg:col-span-7">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container/40 border border-secondary text-secondary-fixed text-label-sm font-label-sm mb-6">
+<span>✦</span> Limited Availability
+            </div>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-on-primary tracking-tight mb-4">
+              HCP Terraform powered by Infragraph
+            </h2>
+<p class="text-inverse-primary text-body-lg font-body-lg mb-8 leading-relaxed">
+              Real-time deep relational mapping across multi-cloud topologies. Query every deployed resource, uncover shadow infrastructure, and quantify blast radius in milliseconds.
+            </p>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2 border-t border-outline-variant/20">
+<div>
+<p class="text-headline-sm font-headline-sm font-semibold text-secondary-fixed">Automated topology</p>
+<p class="text-label-sm font-label-sm text-outline-variant mt-1">Multi-cloud graph discovery across AWS, Azure, GCP.</p>
+</div>
+<div>
+<p class="text-headline-sm font-headline-sm font-semibold text-secondary-fixed">Continuous drift</p>
+<p class="text-label-sm font-label-sm text-outline-variant mt-1">Instant detection and automated guardrail remedies.</p>
+</div>
+<div>
+<p class="text-headline-sm font-headline-sm font-semibold text-secondary-fixed">Self-service catalog</p>
+<p class="text-label-sm font-label-sm text-outline-variant mt-1">Curated infrastructure modules for product teams.</p>
+</div>
+</div>
+</div>
+<!-- Graphic representation of Infragraph -->
+<div class="lg:col-span-5 flex justify-center">
+<div class="w-full max-w-md bg-dark-navy-purple/90 border border-secondary/40 rounded-xl p-6 shadow-2xl backdrop-blur-md">
+<div class="flex items-center justify-between pb-3 mb-4 border-b border-outline-variant/20 text-label-sm text-outline-variant">
+<span>Infragraph Live Mesh</span>
+<span class="text-secondary-fixed">1,482 Active Nodes</span>
+</div>
+<div class="relative h-56 flex items-center justify-center">
+<!-- Visual Graph Nodes Mockup -->
+<div class="absolute w-20 h-20 rounded-full border-2 border-dashed border-secondary/60 flex items-center justify-center">
+<div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center text-on-secondary font-bold text-xs">VPC</div>
+</div>
+<div class="absolute top-4 left-8 px-3 py-1.5 bg-primary-container rounded border border-outline-variant/30 text-xs text-secondary-fixed font-mono">
+                  aws_iam_role
+                </div>
+<div class="absolute bottom-4 left-6 px-3 py-1.5 bg-primary-container rounded border border-outline-variant/30 text-xs text-secondary-fixed font-mono">
+                  k8s_node_pool
+                </div>
+<div class="absolute top-6 right-8 px-3 py-1.5 bg-primary-container rounded border border-outline-variant/30 text-xs text-secondary-fixed font-mono">
+                  vault_engine
+                </div>
+<div class="absolute bottom-6 right-6 px-3 py-1.5 bg-primary-container rounded border border-outline-variant/30 text-xs text-secondary-fixed font-mono">
+                  rds_cluster
+                </div>
+</div>
+<div class="p-3 bg-primary-container rounded text-center text-label-sm font-label-sm text-secondary-fixed">
+                Graph analysis: 0 unmanaged dependencies detected
+              </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. SOLUTIONS TABS (Accelerate, Optimize, Strengthen) -->
+<section class="py-20 bg-surface-light-gray border-b border-border-gray" id="solutions">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="text-center max-w-3xl mx-auto mb-14">
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">ENTERPRISE PILLARS</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+          Solve the multi-cloud operational matrix
+        </h2>
+</div>
+<!-- Tab Buttons -->
+<div class="flex justify-center mb-10">
+<div class="inline-flex p-1 bg-surface-container rounded-lg border border-border-gray">
+<button class="px-6 py-2.5 text-label-md font-label-md font-semibold rounded-lg bg-surface-white text-secondary shadow-sm">
+            Accelerate
+          </button>
+<button class="px-6 py-2.5 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">
+            Optimize
+          </button>
+<button class="px-6 py-2.5 text-label-md font-label-md text-on-surface-variant hover:text-primary transition-colors">
+            Strengthen
+          </button>
+</div>
+</div>
+<!-- 3 Pillar Detailed Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Accelerate -->
+<div class="bg-surface-white border border-border-gray rounded-xl p-8 hover:border-secondary transition duration-150 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-light-gray text-secondary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-size: 28px;">speed</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-3">Accelerate Delivery</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+              Speed up cloud delivery pipelines and eliminate provisioning bottlenecks. Enable self-service infrastructure portals for feature developers without sacrificing architectural standards.
+            </p>
+</div>
+<div class="pt-6 border-t border-border-gray">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">Key metric:</span>
+<p class="text-body-sm font-body-sm text-on-surface mt-1">94% reduction in lead time to production infrastructure.</p>
+</div>
+</div>
+<!-- Optimize -->
+<div class="bg-surface-white border border-border-gray rounded-xl p-8 hover:border-secondary transition duration-150 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-light-gray text-secondary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-size: 28px;">query_stats</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-3">Optimize Infrastructure</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+              Gain complete cloud visibility, rightsize idle compute instances, and control multi-cloud spend proactively before resources are even provisioned.
+            </p>
+</div>
+<div class="pt-6 border-t border-border-gray">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">Key metric:</span>
+<p class="text-body-sm font-body-sm text-on-surface mt-1">Average 38% reduction in unmanaged cloud waste.</p>
+</div>
+</div>
+<!-- Strengthen -->
+<div class="bg-surface-white border border-border-gray rounded-xl p-8 hover:border-secondary transition duration-150 flex flex-col justify-between">
+<div>
+<div class="w-12 h-12 rounded-lg bg-surface-light-gray text-secondary flex items-center justify-center mb-6">
+<span class="material-symbols-outlined" style="font-size: 28px;">lock_clock</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-3">Strengthen Security</h3>
+<p class="text-body-md font-body-md text-on-surface-variant mb-6">
+              Zero Trust identity-based security, dynamic machine credentials, unified key management, and least-privilege remote perimeter boundaries.
+            </p>
+</div>
+<div class="pt-6 border-t border-border-gray">
+<span class="text-label-sm font-label-sm font-semibold text-secondary">Key metric:</span>
+<p class="text-body-sm font-body-sm text-on-surface mt-1">Zero long-lived credentials stored in source repositories.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. INTEGRATED LIFECYCLE MANAGEMENT PRODUCT COLUMNS -->
+<section class="py-20 bg-surface-white border-b border-border-gray" id="products">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="max-w-3xl mb-14">
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">CORE PRODUCTS</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+          The HashiCorp Enterprise Suite
+        </h2>
+<p class="mt-4 text-on-surface-variant text-body-lg font-body-lg">
+          A composable system of open and managed software for every phase of modern infrastructure.
+        </p>
+</div>
+<!-- 4-Column Structured Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Terraform -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-secondary text-on-secondary flex items-center justify-center mb-4 font-bold text-label-md">
+              TF
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Terraform</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Infrastructure as Code</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Provision and manage any cloud, infrastructure, or service with universal code workflows.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">HCP or Self-managed</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Vault -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-primary text-on-primary flex items-center justify-center mb-4 font-bold text-label-md">
+              V
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Vault</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Secrets &amp; Encryption</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Secure, store, and tightly control access to tokens, passwords, certificates, and encryption keys.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">Identity-based Security</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Consul -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-error text-on-error flex items-center justify-center mb-4 font-bold text-label-md">
+              C
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Consul</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Service Networking</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Discover and securely connect applications across any runtime environment and cloud provider.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">Zero Trust Mesh</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Nomad -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-emerald-600 text-on-primary flex items-center justify-center mb-4 font-bold text-label-md">
+              N
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Nomad</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Workload Orchestration</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Simple and flexible scheduler to deploy and manage containers and non-containerized legacy apps.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">Edge &amp; Multi-region</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Packer -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-sky-600 text-on-primary flex items-center justify-center mb-4 font-bold text-label-md">
+              P
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Packer</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Golden Image Pipelines</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Build identical, compliant machine images for multiple platforms from a single source configuration.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">HCP Packer Registry</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Boundary -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-amber-600 text-on-primary flex items-center justify-center mb-4 font-bold text-label-md">
+              B
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Boundary</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Secure Remote Access</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Enable credential-less access to private endpoints, hosts, and databases based on user identity.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">Privileged Access</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- Waypoint -->
+<div class="border border-border-gray rounded-xl p-6 hover:shadow-md transition duration-150 flex flex-col justify-between bg-surface-white group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-teal-600 text-on-primary flex items-center justify-center mb-4 font-bold text-label-md">
+              W
+            </div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1 group-hover:text-secondary transition-colors">Waypoint</h3>
+<p class="text-label-sm font-label-sm text-on-surface-variant font-medium mb-3">Application Delivery</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+              Internal developer platform (IDP) templates to build, deploy, and release to Kubernetes and cloud targets.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-gray flex items-center justify-between text-label-sm font-label-sm">
+<span class="text-secondary font-medium">Golden Workflows</span>
+<span class="material-symbols-outlined text-outline" style="font-size: 16px;">arrow_forward</span>
+</div>
+</div>
+<!-- All Products Card -->
+<div class="border border-dashed border-border-gray rounded-xl p-6 flex flex-col justify-center items-center text-center bg-surface-light-gray">
+<span class="material-symbols-outlined text-secondary mb-2" style="font-size: 32px;">hub</span>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-1">HashiCorp Cloud Platform</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-4">
+            Unified SaaS suite with managed high availability and SLA.
+          </p>
+<a class="text-label-md font-label-md text-secondary font-semibold hover:underline" href="#hcp">
+            Explore HCP overview →
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. ECOSYSTEM & BENCHMARK METRICS -->
+<section class="py-20 bg-surface-light-gray border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">GLOBAL SCALE</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+          Powering the world's modern infrastructure
+        </h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="p-6 bg-surface-white rounded-xl border border-border-gray shadow-sm">
+<p class="text-headline-hero-mobile md:text-5xl font-bold text-primary tracking-tight font-headline-sm">500M+</p>
+<p class="mt-3 text-body-sm font-body-sm text-on-surface-variant">Open source and binary downloads each year</p>
+</div>
+<div class="p-6 bg-surface-white rounded-xl border border-border-gray shadow-sm">
+<p class="text-headline-hero-mobile md:text-5xl font-bold text-primary tracking-tight font-headline-sm">4,500+</p>
+<p class="mt-3 text-body-sm font-body-sm text-on-surface-variant">Community and verified Terraform registry providers</p>
+</div>
+<div class="p-6 bg-surface-white rounded-xl border border-border-gray shadow-sm">
+<p class="text-headline-hero-mobile md:text-5xl font-bold text-primary tracking-tight font-headline-sm">85%</p>
+<p class="mt-3 text-body-sm font-body-sm text-on-surface-variant">Of Fortune 500 enterprises rely on HashiCorp suite</p>
+</div>
+<div class="p-6 bg-surface-white rounded-xl border border-border-gray shadow-sm">
+<p class="text-headline-hero-mobile md:text-5xl font-bold text-primary tracking-tight font-headline-sm">100K+</p>
+<p class="mt-3 text-body-sm font-body-sm text-on-surface-variant">Certified practitioners in production engineering</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. HASHICORP CERTIFICATION & LEARNING -->
+<section class="py-20 bg-surface-white border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">VALIDATED EXPERTISE</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+            HashiCorp Certifications
+          </h2>
+</div>
+<a class="text-label-md font-label-md text-secondary font-semibold hover:text-cloud-accent inline-flex items-center gap-1 mt-3 md:mt-0" href="#learn">
+<span>Start learning on HashiCorp Developer</span>
+<span class="material-symbols-outlined" style="font-size: 18px;">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Credential 1 -->
+<div class="border border-border-gray rounded-xl p-6 bg-surface-light-gray flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 bg-surface-container rounded text-label-sm font-label-sm font-mono text-primary">Exam 003</span>
+<span class="material-symbols-outlined text-secondary" style="font-size: 24px;">verified</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">Terraform Associate</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">
+              Validates fundamental infrastructure automation concepts, module authorship, state file management, and Cloud execution runs.
+            </p>
+</div>
+<a class="text-label-md font-label-md text-primary font-semibold hover:underline" href="#cert-tf">View exam objectives →</a>
+</div>
+<!-- Credential 2 -->
+<div class="border border-border-gray rounded-xl p-6 bg-surface-light-gray flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 bg-surface-container rounded text-label-sm font-label-sm font-mono text-primary">Exam 002</span>
+<span class="material-symbols-outlined text-secondary" style="font-size: 24px;">verified</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">Vault Associate</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">
+              Demonstrates proficiency in secrets engines, dynamic credentials, lease revocation, transit encryption, and authentication methods.
+            </p>
+</div>
+<a class="text-label-md font-label-md text-primary font-semibold hover:underline" href="#cert-vault">View exam objectives →</a>
+</div>
+<!-- Credential 3 -->
+<div class="border border-border-gray rounded-xl p-6 bg-surface-light-gray flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="px-2.5 py-1 bg-surface-container rounded text-label-sm font-label-sm font-mono text-primary">Exam 003</span>
+<span class="material-symbols-outlined text-secondary" style="font-size: 24px;">verified</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">Consul Associate</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">
+              Certifies knowledge of service discovery, multi-datacenter federation, mesh intentions, and proactive traffic failover.
+            </p>
+</div>
+<a class="text-label-md font-label-md text-primary font-semibold hover:underline" href="#cert-consul">View exam objectives →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. RESOURCES & INSIGHTS TABS -->
+<section class="py-20 bg-surface-light-gray border-b border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10">
+<div>
+<p class="text-label-sm font-label-sm text-secondary font-semibold uppercase tracking-wider mb-2">LIBRARY &amp; RESEARCH</p>
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg text-primary tracking-tight">
+            Resources &amp; Insights
+          </h2>
+</div>
+<!-- Resource Tabs -->
+<div class="flex gap-2 mt-4 md:mt-0 overflow-x-auto pb-2 md:pb-0">
+<button class="px-4 py-2 bg-surface-white text-secondary font-semibold text-label-sm font-label-sm rounded-lg border border-border-gray shadow-sm">All Resources</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary text-label-sm font-label-sm rounded-lg">Webinars</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary text-label-sm font-label-sm rounded-lg">Whitepapers</button>
+<button class="px-4 py-2 text-on-surface-variant hover:text-primary text-label-sm font-label-sm rounded-lg">Architecture Guides</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Resource 1 -->
+<div class="bg-surface-white border border-border-gray rounded-xl overflow-hidden hover:shadow-md transition duration-150 flex flex-col">
+<div class="h-44 bg-surface-container flex items-center justify-center p-6 border-b border-border-gray">
+<span class="material-symbols-outlined text-secondary" style="font-size: 48px;">developer_board</span>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-label-sm font-label-sm text-secondary font-semibold">Whitepaper</span>
+<span class="text-outline-variant">•</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">14 min read</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">The Multi-Cloud Operating Model 2026</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                Standardizing architecture across AWS, Azure, and Google Cloud with centralized policy guardrails.
+              </p>
+</div>
+<a class="mt-6 text-label-sm font-label-sm font-semibold text-secondary hover:underline inline-flex items-center gap-1" href="#resource-1">
+              Read whitepaper →
+            </a>
+</div>
+</div>
+<!-- Resource 2 -->
+<div class="bg-surface-white border border-border-gray rounded-xl overflow-hidden hover:shadow-md transition duration-150 flex flex-col">
+<div class="h-44 bg-surface-container flex items-center justify-center p-6 border-b border-border-gray">
+<span class="material-symbols-outlined text-secondary" style="font-size: 48px;">ondemand_video</span>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-label-sm font-label-sm text-secondary font-semibold">On-Demand Webinar</span>
+<span class="text-outline-variant">•</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">42 min</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">Zero Trust Architecture with Vault &amp; Boundary</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                Live walkthrough of eliminating VPN concentrators in favor of identity-aware remote session proxies.
+              </p>
+</div>
+<a class="mt-6 text-label-sm font-label-sm font-semibold text-secondary hover:underline inline-flex items-center gap-1" href="#resource-2">
+              Watch recording →
+            </a>
+</div>
+</div>
+<!-- Resource 3 -->
+<div class="bg-surface-white border border-border-gray rounded-xl overflow-hidden hover:shadow-md transition duration-150 flex flex-col">
+<div class="h-44 bg-surface-container flex items-center justify-center p-6 border-b border-border-gray">
+<span class="material-symbols-outlined text-secondary" style="font-size: 48px;">domain</span>
+</div>
+<div class="p-6 flex-1 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-2">
+<span class="text-label-sm font-label-sm text-secondary font-semibold">Case Study</span>
+<span class="text-outline-variant">•</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">8 min read</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-primary mb-2">How Booking.com Scales Thousands of Deploys</h3>
+<p class="text-body-sm font-body-sm text-on-surface-variant">
+                How one of the world's largest travel marketplaces automated global compute delivery across heterogeneous infrastructure.
+              </p>
+</div>
+<a class="mt-6 text-label-sm font-label-sm font-semibold text-secondary hover:underline inline-flex items-center gap-1" href="#resource-3">
+              Read customer story →
+            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 12. CONCLUDING CTA SECTION -->
+<section class="py-24 bg-dark-navy-purple text-on-primary relative overflow-hidden">
+<div class="max-w-7xl mx-auto px-6 md:px-8 text-center relative z-10">
+<h2 class="text-headline-hero-mobile md:text-headline-lg font-headline-lg text-on-primary tracking-tight max-w-3xl mx-auto">
+        Ready to do cloud right?
+      </h2>
+<p class="mt-6 text-inverse-primary text-body-lg font-body-lg max-w-xl mx-auto">
+        Join hundreds of thousands of engineering organizations automating multi-cloud infrastructure and identity-driven security today.
+      </p>
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto px-8 py-3.5 bg-surface-white text-primary text-label-md font-label-md font-semibold rounded-lg hover:bg-surface-container-low transition duration-150 shadow-md" href="#hcp-trial">
+          Start Free Trial on HCP
+        </a>
+<a class="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-outline-variant text-on-primary text-label-md font-label-md font-semibold rounded-lg hover:bg-surface-white/10 transition duration-150" href="#contact-sales">
+          Contact Enterprise Team
+        </a>
+</div>
+<p class="mt-14 text-label-sm font-label-sm text-outline-variant">
+        This page is an unofficial design study of the live HashiCorp homepage.
+      </p>
+</div>
+</section>
+<!-- 13. COMPREHENSIVE FOOTER -->
+<footer class="bg-surface-white text-primary border-t border-border-gray">
+<div class="max-w-7xl mx-auto px-6 md:px-8 py-16 flex flex-col md:flex-row justify-between gap-8">
+<!-- Brand & Copyright Column -->
+<div class="max-w-xs">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-6 h-6 flex items-center justify-center bg-primary rounded text-on-primary">
+<svg class="w-3.5 h-3.5 text-on-primary" fill="currentColor" viewbox="0 0 24 24">
+<path d="M13.5 2.5L20 6.25v7.5l-6.5 3.75V2.5zM10.5 21.5L4 17.75v-7.5l6.5-3.75v15z"></path>
+</svg>
+</div>
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-primary">HashiCorp</span>
+</div>
+<p class="text-body-sm font-body-sm text-on-surface-variant mb-6">
+          © 2025 HashiCorp, an IBM Company. All rights reserved.
+        </p>
+<div class="flex items-center gap-4 text-on-surface-variant">
+<a class="hover:text-primary transition-colors" href="#github"><span class="material-symbols-outlined" style="font-size: 20px;">terminal</span></a>
+<a class="hover:text-primary transition-colors" href="#community"><span class="material-symbols-outlined" style="font-size: 20px;">forum</span></a>
+<a class="hover:text-primary transition-colors" href="#status"><span class="material-symbols-outlined" style="font-size: 20px;">network_check</span></a>
+</div>
+</div>
+<!-- Links Columns -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-8 flex-1 max-w-3xl">
+<!-- Products -->
+<div>
+<h4 class="text-label-sm font-label-sm font-semibold text-primary uppercase tracking-wider mb-4">Products</h4>
+<ul class="space-y-2.5">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#terraform">Terraform</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#vault">Vault</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#consul">Consul</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#nomad">Nomad</a></li>
+</ul>
+</div>
+<!-- Documentation & Learning -->
+<div>
+<h4 class="text-label-sm font-label-sm font-semibold text-primary uppercase tracking-wider mb-4">Developer</h4>
+<ul class="space-y-2.5">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#docs">Documentation</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#certification">Certification</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#registry">Registry</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#tutorials">Tutorials</a></li>
+</ul>
+</div>
+<!-- Company & Legal -->
+<div>
+<h4 class="text-label-sm font-label-sm font-semibold text-primary uppercase tracking-wider mb-4">Company</h4>
+<ul class="space-y-2.5">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#about">About Us</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#security">Security</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#careers">Careers</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#contact">Contact</a></li>
+</ul>
+</div>
+<!-- Compliance & Policies -->
+<div>
+<h4 class="text-label-sm font-label-sm font-semibold text-primary uppercase tracking-wider mb-4">Legal</h4>
+<ul class="space-y-2.5">
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#privacy">Privacy Policy</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#terms">Terms of Service</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#cookie">Cookie Preferences</a></li>
+<li><a class="text-body-sm font-body-sm text-on-surface-variant hover:text-primary transition-colors" href="#trust">Trust Center</a></li>
+</ul>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

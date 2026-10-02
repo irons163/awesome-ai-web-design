@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Lovable — Build something Lovable</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "error-container": "#ffdad6",
+            "background": "#f7f9fb",
+            "secondary-fixed-dim": "#ffb0cd",
+            "on-primary-fixed": "#131b2e",
+            "on-error": "#ffffff",
+            "on-secondary-fixed-variant": "#8c0053",
+            "on-secondary-fixed": "#3e0022",
+            "border-subtle": "#E2E8F0",
+            "surface-tint": "#565e74",
+            "primary-fixed": "#dae2fd",
+            "on-tertiary-fixed": "#271901",
+            "tertiary-fixed-dim": "#dec29a",
+            "pulse-pink": "#F472B6",
+            "on-secondary-container": "#600037",
+            "secondary-container": "#fd56a7",
+            "surface-container-low": "#f2f4f6",
+            "on-primary": "#ffffff",
+            "outline-variant": "#c6c6cd",
+            "inverse-surface": "#2d3133",
+            "surface-container-high": "#e6e8ea",
+            "secondary": "#b4136d",
+            "on-surface": "#191c1e",
+            "surface-container": "#eceef0",
+            "outline": "#76777d",
+            "surface": "#f7f9fb",
+            "on-surface-variant": "#45464d",
+            "tertiary-container": "#271901",
+            "primary": "#000000",
+            "on-tertiary-fixed-variant": "#574425",
+            "inverse-on-surface": "#eff1f3",
+            "hero-cream": "#FAF8F5",
+            "deep-blue": "#0A0F1D",
+            "tertiary": "#000000",
+            "surface-bright": "#f7f9fb",
+            "secondary-fixed": "#ffd9e4",
+            "on-tertiary-container": "#98805d",
+            "on-secondary": "#ffffff",
+            "primary-fixed-dim": "#bec6e0",
+            "pulse-red": "#EF4444",
+            "inverse-primary": "#bec6e0",
+            "tertiary-fixed": "#fcdeb5",
+            "on-primary-fixed-variant": "#3f465c",
+            "primary-container": "#131b2e",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#e0e3e5",
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-background": "#191c1e",
+            "on-primary-container": "#7c839b",
+            "surface-variant": "#e0e3e5",
+            "surface-dim": "#d8dadc",
+            "surface-container-lowest": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "4px",
+            "margin": "32px",
+            "gutter": "24px",
+            "space-md": "16px",
+            "space-lg": "24px",
+            "space-xl": "48px",
+            "space-2xl": "96px",
+            "space-sm": "8px"
+          },
+          "fontFamily": {
+            "headline-xl": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "body-md": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "headline-md": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "body-sm": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "body-lg": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "label-sm": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "headline-xl-mobile": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "headline-lg": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            "label-md": ["Camera Plain Variable", "system-ui", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"]
+          },
+          "fontSize": {
+            "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-size: 20px;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      vertical-align: middle;
+    }
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .blinking-cursor {
+      animation: cursor-blink 1s infinite;
+    }
+  </style>
+</head>
+<body class="bg-hero-cream text-on-surface antialiased font-body-md selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- ==================== 1. TOP NAVIGATION ==================== -->
+<header class="docked full-width top-0 sticky z-50 bg-hero-cream/80 dark:bg-deep-blue/80 backdrop-blur-md border-b border-border-subtle dark:border-outline-variant/20 transition-all duration-200">
+<div class="flex justify-between items-center max-w-[1120px] mx-auto px-gutter h-16 w-full">
+<!-- Brand Logo -->
+<a class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface dark:text-inverse-on-surface flex items-center gap-space-xs transition duration-200 active:scale-95 group" href="#">
+<!-- Lovable Heart SVG -->
+<svg class="w-6 h-6 transition-transform group-hover:scale-105" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#lovable-heart-gradient)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lovable-heart-gradient" x1="2" x2="22" y1="3" y2="21.35">
+<stop stop-color="#FF385C"></stop>
+<stop offset="0.4" stop-color="#FD56A7"></stop>
+<stop offset="0.8" stop-color="#F59E0B"></stop>
+<stop offset="1" stop-color="#EF4444"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="tracking-tight font-semibold">Lovable</span>
+</a>
+<!-- Center Desktop Nav Links -->
+<nav class="hidden md:flex items-center gap-6">
+<!-- Solutions Dropdown -->
+<button class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150">
+<span>Solutions</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<!-- Resources Dropdown -->
+<button class="flex items-center gap-1 font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150">
+<span>Resources</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</button>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150" href="#enterprise">Enterprise</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150" href="#pricing">Pricing</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150" href="#security">Security</a>
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-normal hover:text-primary dark:hover:text-on-primary transition-colors duration-150" href="#community">Community</a>
+</nav>
+<!-- Right Action CTAs -->
+<div class="flex items-center gap-4">
+<a class="font-label-md text-label-md text-on-surface-variant dark:text-outline-variant font-medium hover:text-primary dark:hover:text-on-primary transition-colors duration-150" href="#login">
+          Log in
+        </a>
+<a class="bg-primary hover:bg-neutral-800 text-on-primary font-label-md text-label-md font-medium px-4 py-2 rounded-full transition duration-200 active:scale-95 shadow-sm" href="#get-started">
+          Get started
+        </a>
+</div>
+</div>
+</header>
+<!-- ==================== 2. HERO SECTION ==================== -->
+<section class="relative pt-16 pb-28 overflow-hidden bg-hero-cream">
+<!-- Pulse Artwork Ambient Background Layer -->
+<div class="absolute inset-0 pointer-events-none flex flex-col justify-end">
+<div class="w-full h-[650px] opacity-90 transform translate-y-12 bg-no-repeat bg-bottom bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAXq-z7zD50zLnlZJSwT5zkdt5xTpZ_YQsUPRkoE_j5B4RMq5ZOWm6cBLC6R8wpDGjOnuvIRwn63qhAa1xIYbZJ3GF3gOdKm049MjZxwhn5y4OgS-cwo5P3yCf5KxqkMB7kyXEi6GRv8yZCOHJSMzvbDrG3Nh3L3Ftg3kVBQuD1qq8o0qJM2MPKmJKdnY4mm8LmMeLh3pYiuKM9FOOQ-JVxE0g0cmKQlZ4gENnDgyy_SDkbtWHzfc_vUMSw_Z8-la6HDM98L5VH0TN-');"></div>
+</div>
+<div class="relative z-10 max-w-[1120px] mx-auto px-gutter flex flex-col items-center text-center">
+<!-- Headline & Subheadline -->
+<h1 class="font-headline-xl text-headline-xl text-slate-900 max-w-3xl mb-3 tracking-tight">
+        Build something Lovable
+      </h1>
+<p class="font-body-lg text-body-lg text-slate-600 max-w-xl mb-10">
+        Bring a new product, internal tool, or entire company to life.
+      </p>
+<!-- 608px Hero Interactive Prompt Box -->
+<div class="w-full max-w-[608px] bg-white rounded-2xl shadow-[0px_16px_40px_-10px_rgba(15,23,42,0.1)] border border-slate-200/90 p-4 text-left transition-all duration-200 focus-within:ring-2 focus-within:ring-slate-900/10 focus-within:shadow-[0px_20px_48px_-8px_rgba(15,23,42,0.14)]">
+<!-- Input Area with blinking cursor mockup -->
+<div class="min-h-[78px] flex items-start gap-1 py-1">
+<span class="font-body-md text-body-md text-slate-400 select-none">Ask Lovable to create a web app that</span>
+<span class="inline-block w-[2px] h-5 bg-pulse-red blinking-cursor ml-0.5 mt-0.5"></span>
+</div>
+<!-- Utility Bar -->
+<div class="flex items-center justify-between pt-2 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<!-- Add / Attach Button -->
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors" title="Attach file or context">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<!-- Build Selector Dropdown -->
+<button class="flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-slate-700 bg-slate-100 hover:bg-slate-200 text-label-sm font-label-sm transition-colors">
+<span class="w-2 h-2 rounded-full bg-pulse-red"></span>
+<span>Build</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<!-- Microphone -->
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors" title="Dictate prompt">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</button>
+<!-- Submit Button -->
+<button class="w-8 h-8 rounded-full bg-slate-900 hover:bg-black text-white flex items-center justify-center transition duration-150 active:scale-95" title="Generate application">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Quick Suggested Starters -->
+<div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-label-sm font-label-sm text-slate-500">
+<span>Try starting with:</span>
+<button class="bg-white/80 hover:bg-white border border-slate-200/80 px-2.5 py-1 rounded-full text-slate-700 transition">SaaS Analytics Dashboard</button>
+<button class="bg-white/80 hover:bg-white border border-slate-200/80 px-2.5 py-1 rounded-full text-slate-700 transition">Multi-tenant CRM with Supabase</button>
+<button class="bg-white/80 hover:bg-white border border-slate-200/80 px-2.5 py-1 rounded-full text-slate-700 transition">E-commerce storefront</button>
+</div>
+</div>
+</section>
+<!-- ==================== 3. PRODUCTION CAPABILITY TRIAD ==================== -->
+<section class="py-space-xl bg-white border-y border-border-subtle">
+<div class="max-w-[1120px] mx-auto px-gutter">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Production Ready</span>
+<h2 class="font-headline-lg text-headline-lg text-slate-900 mt-2 tracking-tight">Ideas to full-stack software in seconds</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3">From intuitive visual prompt iteration to production deployment with synchronized Git commits.</p>
+</div>
+<!-- Capability Cards Bento Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Tile 1: Real-time Previews -->
+<div class="bg-surface rounded-xl p-6 border border-border-subtle flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mb-4">
+<span class="material-symbols-outlined text-[20px]">preview</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Live instant preview</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Experience zero-latency hot-reloading as you talk with Lovable. View states update instantaneously in full high-fidelity rendering.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-md font-label-md font-medium text-slate-900 group cursor-pointer">
+<span>Explore live execution</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Tile 2: Collaborative Code Editing -->
+<div class="bg-surface rounded-xl p-6 border border-border-subtle flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="w-10 h-10 rounded-lg bg-surface-container-high flex items-center justify-center text-slate-800 mb-4">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Dual-mode code edit</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Seamlessly toggle between conversational design and pristine TypeScript + Tailwind code. You maintain complete architectural ownership.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-md font-label-md font-medium text-slate-900 group cursor-pointer">
+<span>View code architecture</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Tile 3: GitHub Sync & Version History -->
+<div class="bg-surface rounded-xl p-6 border border-border-subtle flex flex-col justify-between hover:shadow-md transition-shadow">
+<div>
+<div class="w-10 h-10 rounded-lg bg-hero-cream border border-border-subtle flex items-center justify-center text-slate-900 mb-4">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Native GitHub sync</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Every iteration can commit straight to your Git branches. Instant pull requests, non-destructive rollbacks, and team CI/CD pipelines.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-md font-label-md font-medium text-slate-900 group cursor-pointer">
+<span>Learn GitHub hooks</span>
+<span class="material-symbols-outlined text-[16px] ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Integrated App Dashboard Visual Mock -->
+<div class="mt-12 bg-white rounded-2xl border border-border-subtle shadow-xl overflow-hidden">
+<!-- Top window header bar -->
+<div class="bg-slate-50 border-b border-border-subtle px-4 py-3 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-slate-300"></span>
+<span class="w-3 h-3 rounded-full bg-slate-300"></span>
+<span class="w-3 h-3 rounded-full bg-slate-300"></span>
+<span class="ml-4 font-mono text-[12px] text-slate-500 bg-white px-3 py-1 rounded border border-slate-200">https://workspace-alpha.lovable.app</span>
+</div>
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-slate-600">
+<span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Live Node</span>
+<span class="mx-2 text-slate-300">|</span>
+<button class="text-slate-800 hover:text-black font-medium">Export Code</button>
+</div>
+</div>
+<!-- Split View Mockup -->
+<div class="grid grid-cols-1 lg:grid-cols-12 min-h-[380px]">
+<!-- Left side: Live generated UI dashboard -->
+<div class="lg:col-span-7 p-6 bg-slate-50/50 flex flex-col justify-between border-b lg:border-b-0 lg:border-r border-border-subtle">
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<div>
+<h4 class="font-headline-md text-[18px] text-slate-900 font-semibold">Revenue Operations Console</h4>
+<p class="font-body-sm text-body-sm text-slate-500">Generated from prompt: "Create Stripe billing overview with real-time KPI cards"</p>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed text-[11px] font-semibold px-2 py-0.5 rounded">Active Sync</span>
+</div>
+<div class="grid grid-cols-3 gap-3">
+<div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+<span class="text-[12px] text-slate-500 block">MRR</span>
+<span class="font-headline-md text-headline-md text-slate-900">$48,250</span>
+<span class="text-[11px] text-emerald-600 font-medium">↑ +14.2%</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+<span class="text-[12px] text-slate-500 block">Active Seats</span>
+<span class="font-headline-md text-headline-md text-slate-900">1,842</span>
+<span class="text-[11px] text-emerald-600 font-medium">↑ +8.1%</span>
+</div>
+<div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm">
+<span class="text-[12px] text-slate-500 block">Churn Rate</span>
+<span class="font-headline-md text-headline-md text-slate-900">0.82%</span>
+<span class="text-[11px] text-slate-400 font-medium">Stable</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-lg border border-slate-200 h-32 flex items-center justify-center">
+<div class="w-full flex items-end gap-2 h-20 px-4">
+<div class="w-1/6 bg-slate-200 rounded-t h-[40%]"></div>
+<div class="w-1/6 bg-slate-200 rounded-t h-[65%]"></div>
+<div class="w-1/6 bg-slate-200 rounded-t h-[50%]"></div>
+<div class="w-1/6 bg-slate-200 rounded-t h-[80%]"></div>
+<div class="w-1/6 bg-slate-200 rounded-t h-[70%]"></div>
+<div class="w-1/6 bg-secondary-container rounded-t h-[95%]"></div>
+</div>
+</div>
+</div>
+<div class="text-[12px] text-slate-400 mt-4 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Production build passed in 4.2s
+            </div>
+</div>
+<!-- Right side: Clean Code Inspector -->
+<div class="lg:col-span-5 p-5 bg-[#0f172a] text-slate-300 font-mono text-[12px] leading-relaxed overflow-x-auto flex flex-col justify-between">
+<div>
+<div class="text-slate-500 pb-2 mb-2 border-b border-slate-800 flex items-center justify-between">
+<span>src/components/BillingDashboard.tsx</span>
+<span class="text-pulse-pink">TypeScript</span>
+</div>
+<pre class="text-slate-300"><code><span class="text-pulse-pink">import</span> { useBillingMetrics } <span class="text-pulse-pink">from</span> <span class="text-amber-200">'@supabase/client'</span>;
+<span class="text-pulse-pink">import</span> { Card, StatBadge } <span class="text-pulse-pink">from</span> <span class="text-amber-200">'@/components/ui'</span>;
+
+<span class="text-pulse-pink">export const</span> <span class="text-blue-300">BillingDashboard</span> = () =&gt; {
+  <span class="text-pulse-pink">const</span> { data, status } = <span class="text-blue-300">useBillingMetrics</span>();
+
+  <span class="text-pulse-pink">return</span> (
+    &lt;<span class="text-pink-400">section</span> <span class="text-slate-400">className</span>=<span class="text-amber-200">"grid grid-cols-3 gap-4"</span>&gt;
+      &lt;<span class="text-pink-400">Card</span> <span class="text-slate-400">title</span>=<span class="text-amber-200">"MRR"</span> <span class="text-slate-400">value</span>={data.mrr}&gt;
+        &lt;<span class="text-pink-400">StatBadge</span> <span class="text-slate-400">delta</span>=<span class="text-amber-200">"+14.2%"</span> /&gt;
+      &lt;/<span class="text-pink-400">Card</span>&gt;
+    &lt;/<span class="text-pink-400">section</span>&gt;
+  );
+};</code></pre>
+</div>
+<div class="pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+<span>Branch: <span class="text-slate-200 font-semibold">main</span> (synced)</span>
+<span class="text-emerald-400">Zero merge conflicts</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 4. PLATFORM ARCHITECTURE ==================== -->
+<section class="py-space-2xl bg-hero-cream" id="solutions">
+<div class="max-w-[1120px] mx-auto px-gutter">
+<div class="max-w-2xl mb-16">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Platform Architecture</span>
+<h2 class="font-headline-xl text-headline-xl text-slate-900 mt-2 tracking-tight">For building and beyond</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-3">
+          Lovable is not just a prototyper. It is a modern full-stack execution engine with cloud infrastructure built in.
+        </p>
+</div>
+<!-- The 5 Official Platform Vector Illustrations & Features Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- 1. Hosting & Deployment -->
+<div class="bg-white rounded-xl p-6 border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<div class="h-44 flex items-center justify-center mb-6 overflow-hidden rounded-lg bg-surface">
+<img alt="Hosting &amp; Deployment" class="max-h-full object-contain p-4" data-alt="Official Lovable platform architectural illustration displaying high speed global hosting, CDN distribution servers, custom domains, and SSL certificate pipelines." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABgjtfIt_e2djHqVexuai_Q-XSV-mpbpn_bnz9VxJCuJOLPLS3kn9IbqUfKY2Wo4VCrnT0PC9WTRLtO0oTSY-XPflclJFjEeESCy5EN33Ju1kALPoW9boUSlvGdbHVqsc_8onGgaxcTkVpYK_tYDol4ltylcaGTDcE94YaBMQREUmnfGskDCpvrkrF36g_kHTsRzQySASLiaGk-TEdDGqqtXV_dc_01r8GfZk385VC1RryJBvnzDFRfLdtorbQaEaimC3O3iRwU-iP"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Hosting &amp; Deployment</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Global low-latency CDN, instant customized domains, automatic HTTPS/SSL provisioning, and zero-downtime serverless container execution.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-sm font-label-sm text-slate-600">
+<span class="material-symbols-outlined text-[16px] text-emerald-600 mr-1.5">check_circle</span> Edge-deployed automatically
+          </div>
+</div>
+<!-- 2. Connections & Integrations -->
+<div class="bg-white rounded-xl p-6 border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<div class="h-44 flex items-center justify-center mb-6 overflow-hidden rounded-lg bg-surface">
+<img alt="Connections &amp; Integrations" class="max-h-full object-contain p-4" data-alt="Official vector graphic showing backend stack integrations, database connectors, Supabase schemas, RESTful APIs, and user authentication nodes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQr58OFyD_KTfl_r3-hewY2g4jTkY5eEfRdhBq46We22e1maec16WKIBmao-fIxxLcUnHkdb9u0oiW0lFmzjLYHj70DG2V4t1gLgoxq5PeV_oQP5wYk73aQv3Z_8b4so4WjjvSrUA65TS-STXVVCKEEHoDzpxnqiszMl4vuYgeMT-l8R9fjqnqEae990mbUECZ7M_6w-x_m2G0bXrmFwO3KtgyaUzdXH0od_xnJZ9X1sUUnK-uDsUZhZ12X8XPj-lA-fwQH3W5XrcH"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Connections &amp; Integrations</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              One-click Supabase database hooks, user identity authentication, custom third-party REST APIs, webhooks, and scalable cloud storage.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-sm font-label-sm text-slate-600">
+<span class="material-symbols-outlined text-[16px] text-emerald-600 mr-1.5">check_circle</span> Built-in Supabase integration
+          </div>
+</div>
+<!-- 3. Payments & Commerce -->
+<div class="bg-white rounded-xl p-6 border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<div class="h-44 flex items-center justify-center mb-6 overflow-hidden rounded-lg bg-surface">
+<img alt="Payments &amp; Commerce" class="max-h-full object-contain p-4" data-alt="Official vector illustration representing Stripe payments integration, checkout flows, recurring billing cycles, and secure transactions." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAexHifo3bqFLZjbjsa7I2KsVlvdJEaBJPq5owkEdSxiSrzMx0oE-0YlqGh7wp1eNhZHasS2he6vTq65Qb03BbZi8M6SWcxLqTvIZ39NJW_ffBHgyVpfD3XkLWxEwXqC3F70bJAXvp_UU3uld2rUeR3c-FiLkZ0BTjEkmc3CMkDo4pUAIpTHwe-jn1TO4hpdwQ_O9HHTGcRASrv_15_vUzGzC60kTjXFdFnaoRnb4bVhbbNfc_vodNuRCaU01DnlaghZ2bOsZ4HgQeO"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Payments &amp; Commerce</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              Stripe checkout flows, subscription tiers, customer billing portals, and transaction handling ready to monetize on day one.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-sm font-label-sm text-slate-600">
+<span class="material-symbols-outlined text-[16px] text-emerald-600 mr-1.5">check_circle</span> Production checkout in 2 clicks
+          </div>
+</div>
+<!-- 4. Enterprise Security & Privacy -->
+<div class="bg-white rounded-xl p-6 border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<div class="h-44 flex items-center justify-center mb-6 overflow-hidden rounded-lg bg-surface">
+<img alt="Enterprise Security &amp; Privacy" class="max-h-full object-contain p-4" data-alt="Vector art illustrating enterprise security protocols, cryptographic shield symbols, SOC 2 compliance verification, and isolated execution sandboxes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUKx4cSo8h3lcUkiB5DlF5bVYb0AmEqNe_qwQzwu_cTAcpkyhRv-uGj16-KF8c2esWniwGbwJijY5Wnn9P9_7QNmHGTovORjD4Jfpad9xH1QCX95ETktOwjJHpitgIuv0p7srqUEdsVtINRlslIaxLeIzl94l1gjE0ODidSlvgkxdCv8BGKU3EvzBZcqv_DJG2Hia1rWLXdTTj4t1-izQ2kEZZP53IRBThFGO9d99jQOVdd76p_x2NSMTjTubFAyBUuUMXon0wop3a"/>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Enterprise Security &amp; Privacy</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+              SOC 2 Type II compliance, robust client-side sandboxing, data encryption in transit and at rest, and zero retention on model training.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-sm font-label-sm text-slate-600">
+<span class="material-symbols-outlined text-[16px] text-emerald-600 mr-1.5">check_circle</span> SOC 2 Type II certified
+          </div>
+</div>
+<!-- 5. Cross-Device Responsiveness (Spans 2 columns on lg for aesthetic balance) -->
+<div class="bg-white rounded-xl p-6 border border-border-subtle shadow-sm flex flex-col justify-between lg:col-span-2">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface tracking-tight mb-2">Cross-Device Responsiveness</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed mb-4">
+                Mobile, tablet, and widescreen desktop breakpoints generated automatically. Test live touch interactions on simulated devices directly from your canvas.
+              </p>
+<div class="flex items-center gap-3 text-label-sm font-label-sm text-slate-700">
+<span class="px-2.5 py-1 bg-surface-container rounded border border-border-subtle">Mobile 390px</span>
+<span class="px-2.5 py-1 bg-surface-container rounded border border-border-subtle">Tablet 768px</span>
+<span class="px-2.5 py-1 bg-surface-container rounded border border-border-subtle">Desktop 1280px</span>
+</div>
+</div>
+<div class="h-44 flex items-center justify-center overflow-hidden rounded-lg bg-surface">
+<img alt="Cross-Device Responsiveness" class="max-h-full object-contain p-4" data-alt="Official graphic highlighting cross-platform responsive design across desktop monitors, tablets, and smartphones with fluid CSS flexbox structures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAYEWQKfRlUItMUGl-pP-fewHO0VqB-8AD5THSVmLBPQyIFE10mCD1WJVd3ejt_MhOMGfdjzHDVDaYTEAVPGP5wp0F1zhoGyLDTPTwa0TKoBJELbiALUFK-_4y_kMCwroTM97_SpNNsyemzt0hCczpx7VbW9HHwZN7QHr591ne6ZjkU9rpT1FBcIAS-MjR8mLRVMVUHHYDRlKI8s4I_AMOBE5JKH1XihpwEbVhmILoHNJWjT98fW93yHCFH2G_CL5eg3CwDLiWZba9b"/>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center text-label-sm font-label-sm text-slate-600">
+<span class="material-symbols-outlined text-[16px] text-emerald-600 mr-1.5">check_circle</span> Tailwind responsive utilities verified
+          </div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 5. TRUSTED BRANDS & COMMUNITY ==================== -->
+<section class="py-14 bg-white border-b border-border-subtle">
+<div class="max-w-[1120px] mx-auto px-gutter text-center">
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-slate-400 font-semibold mb-8">
+        Built by creators and engineering teams worldwide
+      </p>
+<!-- Monochrome Brands Row -->
+<div class="flex flex-wrap items-center justify-center gap-10 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="font-headline-md text-slate-800 font-semibold tracking-tighter text-[20px]">NEXTGEN</span>
+<span class="font-headline-md text-slate-800 font-bold tracking-tight text-[18px]">VOYAGER.AI</span>
+<span class="font-headline-md text-slate-800 font-semibold tracking-widest text-[16px]">KINETIC</span>
+<span class="font-headline-md text-slate-800 font-extrabold tracking-normal text-[19px]">SCALEWORKS</span>
+<span class="font-headline-md text-slate-800 font-medium tracking-tight text-[20px]">HYPERION</span>
+<span class="font-headline-md text-slate-800 font-bold tracking-tighter text-[19px]">PULSE LABS</span>
+</div>
+</div>
+</section>
+<!-- ==================== 6. CUSTOMER STORIES / CAROUSEL ==================== -->
+<section class="py-space-2xl bg-surface">
+<div class="max-w-[1120px] mx-auto px-gutter">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-secondary font-semibold">Customer Stories</span>
+<h2 class="font-headline-xl text-headline-xl text-slate-900 mt-2 tracking-tight">Launched on Lovable</h2>
+</div>
+<div class="mt-4 md:mt-0 flex gap-2">
+<button aria-label="Previous story" class="w-10 h-10 rounded-full border border-border-subtle bg-white flex items-center justify-center hover:bg-slate-50 transition active:scale-95">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+</button>
+<button aria-label="Next story" class="w-10 h-10 rounded-full border border-border-subtle bg-white flex items-center justify-center hover:bg-slate-50 transition active:scale-95">
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- 4 Verified Customer Story Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Story 1 -->
+<div class="bg-white p-6 rounded-xl border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<span class="inline-block bg-pink-50 text-secondary font-label-sm text-label-sm font-semibold px-2.5 py-1 rounded-full mb-4">
+              10x faster shipping
+            </span>
+<p class="font-body-sm text-body-sm text-slate-700 italic mb-6">
+              "We took our new internal risk auditor from an executive brief to full internal deployment in 48 hours. Lovable changed how our team ships software."
+            </p>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center font-bold text-slate-600 text-xs">
+              EL
+            </div>
+<div>
+<h5 class="font-label-md text-label-md font-semibold text-slate-900">Elena Lindqvist</h5>
+<p class="text-[12px] text-slate-500">VP of Product, FinScale</p>
+</div>
+</div>
+</div>
+<!-- Story 2 -->
+<div class="bg-white p-6 rounded-xl border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<span class="inline-block bg-amber-50 text-amber-800 font-label-sm text-label-sm font-semibold px-2.5 py-1 rounded-full mb-4">
+              Zero-to-acquisition
+            </span>
+<p class="font-body-sm text-body-sm text-slate-700 italic mb-6">
+              "I built the entire initial prototype on Lovable, synced to GitHub, connected Stripe, and scaled to $30K MRR before being acquired in four months."
+            </p>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center font-bold text-slate-600 text-xs">
+              MK
+            </div>
+<div>
+<h5 class="font-label-md text-label-md font-semibold text-slate-900">Marcus Kramer</h5>
+<p class="text-[12px] text-slate-500">Solo Founder, TaskForge</p>
+</div>
+</div>
+</div>
+<!-- Story 3 -->
+<div class="bg-white p-6 rounded-xl border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<span class="inline-block bg-blue-50 text-blue-800 font-label-sm text-label-sm font-semibold px-2.5 py-1 rounded-full mb-4">
+              $1.2M seed round
+            </span>
+<p class="font-body-sm text-body-sm text-slate-700 italic mb-6">
+              "Instead of static Figma decks, we showed our angel investors a fully reactive database-connected web application built live on Lovable."
+            </p>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center font-bold text-slate-600 text-xs">
+              SC
+            </div>
+<div>
+<h5 class="font-label-md text-label-md font-semibold text-slate-900">Sarah Chen</h5>
+<p class="text-[12px] text-slate-500">Co-founder, Omniflow</p>
+</div>
+</div>
+</div>
+<!-- Story 4 -->
+<div class="bg-white p-6 rounded-xl border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<span class="inline-block bg-emerald-50 text-emerald-800 font-label-sm text-label-sm font-semibold px-2.5 py-1 rounded-full mb-4">
+              Agency efficiency +400%
+            </span>
+<p class="font-body-sm text-body-sm text-slate-700 italic mb-6">
+              "Our design agency now delivers production web apps alongside design systems. Our turnaround time dropped from months to days."
+            </p>
+</div>
+<div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-slate-200 overflow-hidden flex items-center justify-center font-bold text-slate-600 text-xs">
+              JT
+            </div>
+<div>
+<h5 class="font-label-md text-label-md font-semibold text-slate-900">Julian Thorne</h5>
+<p class="text-[12px] text-slate-500">Creative Director, Base9</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 7. PROVEN SCALE & IMPACT METRICS ==================== -->
+<section class="py-space-xl bg-white border-b border-border-subtle">
+<div class="max-w-[1120px] mx-auto px-gutter">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-border-subtle">
+<div class="pt-6 md:pt-0">
+<div class="font-headline-xl text-[54px] font-bold text-slate-900 tracking-tight">1.2M+</div>
+<div class="font-body-md text-body-md text-slate-500 mt-1">Builders and creators worldwide</div>
+</div>
+<div class="pt-6 md:pt-0">
+<div class="font-headline-xl text-[54px] font-bold text-slate-900 tracking-tight">60M+</div>
+<div class="font-body-md text-body-md text-slate-500 mt-1">Lines of production code shipped</div>
+</div>
+<div class="pt-6 md:pt-0">
+<div class="font-headline-xl text-[54px] font-bold text-slate-900 tracking-tight">900M+</div>
+<div class="font-body-md text-body-md text-slate-500 mt-1">API requests served reliably</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== 8. CLOSING PROMPT PANEL ==================== -->
+<section class="py-24 bg-deep-blue text-white relative overflow-hidden">
+<!-- Pulse ambient glow in dark theme -->
+<div class="absolute inset-0 pointer-events-none opacity-40 bg-center bg-cover" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA69Qy7RTjQfU_W7t8Qb9qvcNxwBWBrTNq109uKuJPY1MfAo9EJcLIvDbH2Vq7B0jI6_9SUAdBYOv6vV6NdRuamPswC8NHlq6Q289X-fkgHmhn4JXH0RKXkKH0kwWHl0W5yrDxhlvg-9J3drYuVOqXHSgf_dIiwKuWd-dWePL3QinEHj-mqk_NawioF_y-zhMkmCTgkhP5VfUYoqR0Doo28Nzx16TXlP92yHVl7RH23j8tMx8JTs4IJKBDUZ-7JjabD6XuQSgt8RjFj');"></div>
+<div class="absolute inset-0 bg-radial-gradient from-transparent to-deep-blue pointer-events-none"></div>
+<div class="relative z-10 max-w-[1120px] mx-auto px-gutter flex flex-col items-center text-center">
+<h2 class="font-headline-xl text-headline-xl text-white tracking-tight mb-4">
+        Start building with Lovable today
+      </h2>
+<p class="font-body-lg text-body-lg text-slate-300 max-w-lg mb-10">
+        Turn your thoughts into functional software without engineering bottlenecks.
+      </p>
+<!-- Closing Prompt Box (White contrast card) -->
+<div class="w-full max-w-[608px] bg-white rounded-2xl shadow-2xl p-4 text-left border border-white/20">
+<div class="min-h-[64px] flex items-center text-slate-400 font-body-md text-body-md">
+<span>What do you want to build next?</span>
+</div>
+<div class="flex items-center justify-between pt-3 border-t border-slate-100">
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 rounded-lg flex items-center justify-center text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</button>
+<span class="text-label-sm font-label-sm text-slate-500">Web App</span>
+</div>
+<a class="bg-slate-900 hover:bg-black text-white font-label-md text-label-md font-medium px-5 py-2 rounded-full transition duration-150 active:scale-95 flex items-center gap-1.5" href="#get-started">
+<span>Launch prompt</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+<div class="mt-6 flex items-center gap-4 text-label-sm font-label-sm text-slate-400">
+<span>✓ No credit card required</span>
+<span>✓ Full export ownership</span>
+<span>✓ Instant live URL</span>
+</div>
+</div>
+</section>
+<!-- ==================== 9. COMPREHENSIVE 5-COLUMN FOOTER ==================== -->
+<footer class="bg-deep-blue text-on-primary border-t border-border-subtle/10 font-body-sm text-body-sm">
+<div class="max-w-[1120px] mx-auto px-gutter py-space-xl">
+<!-- Top Columns Layout -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-8 pb-14 border-b border-white/10">
+<!-- Brand identity block -->
+<div class="col-span-2">
+<div class="flex items-center gap-space-xs mb-4">
+<svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#lovable-footer-heart)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lovable-footer-heart" x1="2" x2="22" y1="3" y2="21.35">
+<stop stop-color="#FF385C"></stop>
+<stop offset="0.5" stop-color="#FD56A7"></stop>
+<stop offset="1" stop-color="#EF4444"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="font-headline-md text-headline-md font-semibold text-on-primary">Lovable</span>
+</div>
+<p class="text-on-surface-variant/80 dark:text-outline-variant font-normal max-w-sm mb-6 leading-relaxed">
+            The effortless software manifestation engine. From concept to production-grade applications in seconds.
+          </p>
+<div class="flex items-center gap-2 text-label-sm font-label-sm text-emerald-400 bg-white/5 w-fit px-3 py-1.5 rounded-full border border-white/10">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>All systems operational</span>
+</div>
+</div>
+<!-- Col 1: Product -->
+<div>
+<h5 class="font-label-md text-label-md font-medium text-white mb-4">Product</h5>
+<ul class="space-y-2.5">
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Builder</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Preview</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">GitHub Sync</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Templates</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Changelog</a></li>
+</ul>
+</div>
+<!-- Col 2: Solutions -->
+<div>
+<h5 class="font-label-md text-label-md font-medium text-white mb-4">Solutions</h5>
+<ul class="space-y-2.5">
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Startups</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Enterprise</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Agencies</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Product Teams</a></li>
+</ul>
+</div>
+<!-- Col 3: Resources -->
+<div>
+<h5 class="font-label-md text-label-md font-medium text-white mb-4">Resources</h5>
+<ul class="space-y-2.5">
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Documentation</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Guides</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Community</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Showcase</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Blog</a></li>
+</ul>
+</div>
+<!-- Col 4: Legal & Security -->
+<div>
+<h5 class="font-label-md text-label-md font-medium text-white mb-4">Security</h5>
+<ul class="space-y-2.5">
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Privacy</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Terms</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">Security</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">SOC 2</a></li>
+<li><a class="text-on-surface-variant/80 dark:text-outline-variant hover:text-pulse-pink transition-colors duration-150" href="#">DPA</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="pt-8 flex flex-col md:flex-row items-center justify-between text-on-surface-variant/80 dark:text-outline-variant font-label-sm text-label-sm gap-4">
+<div>
+          © 2025 Lovable Technologies AB. All rights reserved.
+        </div>
+<div class="flex items-center gap-6">
+<a class="hover:text-white transition" href="#">Status</a>
+<a class="hover:text-white transition" href="#">Careers</a>
+<a class="hover:text-white transition" href="#">Twitter / X</a>
+<a class="hover:text-white transition" href="#">Discord</a>
+<a class="hover:text-white transition" href="#">GitHub</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

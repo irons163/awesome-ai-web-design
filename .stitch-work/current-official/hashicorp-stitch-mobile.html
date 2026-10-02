@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>HashiCorp: Infrastructure &amp; Security Lifecycle Management</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed": "#efe1cc",
+            "secondary-fixed-dim": "#cfbdff",
+            "tertiary": "#000000",
+            "surface-white": "#FFFFFF",
+            "surface-bright": "#f8f9fb",
+            "primary-container": "#1c1a24",
+            "surface-container": "#edeef0",
+            "surface": "#f8f9fb",
+            "surface-variant": "#e1e2e4",
+            "on-primary": "#ffffff",
+            "on-surface": "#191c1e",
+            "on-primary-fixed": "#1c1a24",
+            "on-tertiary-container": "#8e8271",
+            "primary": "#000000",
+            "on-secondary-container": "#fffbff",
+            "on-secondary": "#ffffff",
+            "surface-dim": "#d9dadc",
+            "surface-container-low": "#f3f4f6",
+            "on-secondary-fixed": "#22005d",
+            "secondary-container": "#8254f4",
+            "inverse-primary": "#c9c4d2",
+            "surface-light-gray": "#F4F5F7",
+            "on-primary-container": "#85828e",
+            "on-tertiary": "#ffffff",
+            "primary-fixed-dim": "#c9c4d2",
+            "background": "#f8f9fb",
+            "secondary-fixed": "#e9ddff",
+            "inverse-on-surface": "#f0f1f3",
+            "primary-fixed": "#e5e0ee",
+            "tertiary-fixed-dim": "#d2c5b1",
+            "surface-container-highest": "#e1e2e4",
+            "on-background": "#191c1e",
+            "outline": "#78767c",
+            "on-primary-fixed-variant": "#474550",
+            "on-tertiary-fixed-variant": "#4f4637",
+            "on-error": "#ffffff",
+            "tertiary-container": "#211b0e",
+            "border-gray": "#E2E8F0",
+            "surface-tint": "#5f5d68",
+            "error": "#ba1a1a",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#6936da",
+            "on-tertiary-fixed": "#211b0e",
+            "outline-variant": "#c9c5cc",
+            "on-secondary-fixed-variant": "#5311c4",
+            "inverse-surface": "#2e3132",
+            "on-surface-variant": "#48464b",
+            "error-container": "#ffdad6",
+            "dark-navy-purple": "#0F0E17",
+            "cloud-accent": "#5A20CB",
+            "surface-container-high": "#e7e8ea",
+            "on-error-container": "#93000a",
+            "charcoal-body": "#0d0e12"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-2xl": "96px",
+            "margin": "24px",
+            "gutter": "24px",
+            "space-lg": "24px",
+            "margin-desktop": "64px",
+            "space-md": "16px",
+            "space-sm": "8px",
+            "gutter-desktop": "32px",
+            "space-xs": "4px",
+            "space-xl": "48px"
+          },
+          "fontFamily": {
+            "headline-hero": ["IBM Plex Sans", "sans-serif"],
+            "label-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-hero-mobile": ["IBM Plex Sans", "sans-serif"],
+            "headline-lg-mobile": ["IBM Plex Sans", "sans-serif"],
+            "body-md": ["IBM Plex Sans", "sans-serif"],
+            "body-lg": ["IBM Plex Sans", "sans-serif"],
+            "label-md": ["IBM Plex Sans", "sans-serif"],
+            "headline-lg": ["IBM Plex Sans", "sans-serif"],
+            "body-sm": ["IBM Plex Sans", "sans-serif"],
+            "headline-md": ["IBM Plex Sans", "sans-serif"],
+            "headline-sm": ["IBM Plex Sans", "sans-serif"],
+            "mono": ["IBM Plex Mono", "monospace"]
+          },
+          "fontSize": {
+            "headline-hero": ["82px", { "lineHeight": "90px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "headline-hero-mobile": ["42px", { "lineHeight": "48px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "32px", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "headline-sm": ["18px", { "lineHeight": "24px", "fontWeight": "500" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      letter-spacing: normal;
+      text-transform: none;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+      -webkit-font-feature-settings: 'liga';
+      -webkit-font-smoothing: antialiased;
+    }
+  </style>
+</head>
+<body class="bg-surface-white text-on-surface antialiased font-body-sm flex justify-center min-h-screen">
+<!-- Mobile Viewport Container (390px layout) -->
+<div class="w-full max-w-[390px] min-h-screen flex flex-col bg-[#0d0e12] overflow-x-hidden relative shadow-2xl">
+<!-- Top Navigation Header (Crisp White 64px) -->
+<header class="sticky top-0 z-50 w-full h-16 bg-surface-white border-b border-border-gray flex items-center justify-between px-6">
+<div class="flex items-center gap-2">
+<a class="flex items-baseline gap-1.5 focus:outline-none" href="#">
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-primary">HashiCorp</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant font-normal tracking-normal border-l border-border-gray pl-1.5">An IBM Company</span>
+</a>
+</div>
+<div class="flex items-center gap-2">
+<a class="text-label-sm font-label-sm text-primary hover:text-secondary px-2 py-1" href="#signin">Sign In</a>
+<button aria-label="Open Navigation Menu" class="p-2 text-primary hover:bg-surface-container rounded transition-colors focus:outline-none flex items-center justify-center" id="menu-toggle-btn">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+</div>
+</header>
+<!-- Full-screen Expandable Mobile Nav Drawer -->
+<div class="hidden fixed inset-0 z-50 bg-surface-white flex-col transition-all duration-200" id="mobile-menu">
+<div class="h-16 px-6 border-b border-border-gray flex items-center justify-between">
+<div class="flex items-baseline gap-1.5">
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-primary">HashiCorp</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant pl-1.5 border-l border-border-gray">An IBM Company</span>
+</div>
+<button aria-label="Close Menu" class="p-2 text-primary hover:bg-surface-container rounded focus:outline-none" id="menu-close-btn">
+<span class="material-symbols-outlined text-[24px]">close</span>
+</button>
+</div>
+<nav class="flex-1 overflow-y-auto px-6 py-6 flex flex-col justify-between">
+<div class="space-y-4">
+<a class="flex items-center justify-between text-body-lg font-body-lg text-primary py-2 border-b border-border-gray/50" href="#products">
+<span>Products</span>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between text-body-lg font-body-lg text-primary py-2 border-b border-border-gray/50" href="#solutions">
+<span>Solutions</span>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between text-body-lg font-body-lg text-primary py-2 border-b border-border-gray/50" href="#resources">
+<span>Resources</span>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between text-body-lg font-body-lg text-primary py-2 border-b border-border-gray/50" href="#pricing">
+<span>Pricing</span>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+</a>
+<a class="flex items-center justify-between text-body-lg font-body-lg text-primary py-2 border-b border-border-gray/50" href="#enterprise">
+<span>Enterprise</span>
+<span class="material-symbols-outlined text-outline">arrow_forward</span>
+</a>
+</div>
+<div class="pt-6 space-y-3 pb-8">
+<a class="block w-full text-center py-3 px-4 rounded border border-border-gray text-label-md font-label-md text-primary font-semibold hover:bg-surface-container-low transition" href="#contact">
+            Contact Sales
+          </a>
+<a class="block w-full text-center py-3 px-4 rounded bg-primary text-on-primary text-label-md font-label-md font-semibold hover:bg-neutral-800 transition" href="#getstarted">
+            Get Started
+          </a>
+</div>
+</nav>
+</div>
+<!-- HERO SECTION (Purple Faceted Topology) -->
+<section class="relative bg-dark-navy-purple text-on-primary px-6 pt-7 pb-12 overflow-hidden border-b border-white/10">
+<!-- Background Image using the official Faceted Cloud Topology -->
+<div class="absolute inset-0 z-0 opacity-40 mix-blend-screen pointer-events-none">
+<img alt="HashiCorp faceted cloud topology" class="w-full h-full object-cover object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1XbRWrM3qoWC68CTrP2EVHwOKn3G8MXiw-Vy7GICw14XzhIEISA0wNivDb90KELXRLGwsWNZqfG9QWdWaIw05xaZ6enElOfAuXQ3wO3ieHG6CXIwDdbzZIvemqfy0euwsbBqv0OCwmqDVCDYhwOZ29gtD8wP6p_BIxbhTfTg-HT4O7pyvbroRV8nxzkZXT6FB7jqSDXBH8eKqvbdo27KGUWd1_caGTClFqRhSyttOB5zN6Ki7v0JkjYmrM"/>
+</div>
+<div class="absolute inset-0 bg-gradient-to-b from-dark-navy-purple/40 via-dark-navy-purple/85 to-[#0d0e12] z-0"></div>
+<div class="relative z-10 flex flex-col space-y-6">
+<!-- Top Announcement Pill -->
+<a class="group inline-flex flex-col bg-white/5 hover:bg-white/10 border border-white/15 rounded-lg p-3.5 transition backdrop-blur-sm" href="#agentic-security">
+<div class="flex items-center justify-between mb-1">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-cloud-accent/40 text-[11px] font-mono text-secondary-fixed border border-secondary-container/50">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed animate-pulse"></span>
+              NEW BRIEF
+            </span>
+<span class="text-label-sm font-label-sm text-secondary-fixed group-hover:translate-x-0.5 transition-transform flex items-center gap-0.5">
+              Learn more →
+            </span>
+</div>
+<span class="text-label-md font-label-md font-semibold text-white">Agentic runtime security, explained</span>
+<p class="text-body-sm font-body-sm text-outline-variant text-[13px] leading-snug mt-1">
+            Learn how to secure autonomous AI agents at scale with continuous identity and runtime control.
+          </p>
+</a>
+<!-- Headline & Subtitle -->
+<div class="space-y-3 pt-2">
+<h1 class="text-headline-hero-mobile font-headline-hero-mobile text-white tracking-tight leading-none">
+            Do cloud right.
+          </h1>
+<p class="text-body-md font-body-md text-surface-variant font-normal leading-relaxed">
+            Take a unified approach to hybrid cloud with Infrastructure and Security Lifecycle Management.
+          </p>
+</div>
+<!-- Hero CTAs -->
+<div class="flex flex-col gap-3 pt-2">
+<a class="w-full py-3.5 px-5 bg-surface-white text-primary text-center font-label-md text-label-md font-semibold rounded hover:bg-surface-bright transition shadow-sm" href="#infrastructure-cloud">
+            Meet The Infrastructure Cloud
+          </a>
+<a class="w-full py-3 px-5 border border-white/20 text-white text-center font-label-md text-label-md font-medium rounded hover:bg-white/5 transition flex items-center justify-center gap-1" href="#products">
+<span>Explore products</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Customer Trust Section -->
+<section class="bg-[#0d0e12] py-8 px-6 border-b border-[#22242c]">
+<p class="text-[11px] font-mono tracking-wider uppercase text-outline-variant/80 text-center mb-5 font-medium">
+        TRUSTED BY CRITICAL ENGINEERING TEAMS WORLDWIDE
+      </p>
+<!-- Authentic Client Logos Grid -->
+<div class="grid grid-cols-3 gap-y-4 gap-x-2 items-center justify-items-center opacity-75">
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Walgreens</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">SeatGeek</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Lufthansa</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Indeed</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">GSK</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Deutsche Bank</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Airbnb</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">ADT</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Wayfair</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Samsung</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">Autodesk</div>
+<div class="text-white/80 font-mono text-[13px] tracking-tight py-1 font-semibold">BNP Paribas</div>
+</div>
+<div class="flex justify-center mt-3 opacity-75">
+<span class="text-white/80 font-mono text-[13px] tracking-tight font-semibold">AstraZeneca</span>
+</div>
+</section>
+<!-- Cyber Risk Report 2026 Callout -->
+<section class="bg-[#0d0e12] px-6 pt-6 pb-2">
+<div class="bg-gradient-to-r from-primary-container to-[#17142b] border border-cloud-accent/40 rounded-lg p-4 relative overflow-hidden">
+<div class="flex items-start gap-3">
+<div class="p-2 bg-cloud-accent/30 rounded text-secondary-fixed shrink-0">
+<span class="material-symbols-outlined">shield</span>
+</div>
+<div>
+<div class="inline-block px-1.5 py-0.5 rounded bg-white/10 text-secondary-fixed text-[10px] font-mono uppercase tracking-wider mb-1">
+              Report Analysis
+            </div>
+<h3 class="text-label-md font-label-md font-semibold text-white">Cyber Risk Report 2026</h3>
+<p class="text-body-sm font-body-sm text-outline-variant text-[13px] mt-1 leading-snug">
+              91% of enterprise breaches in hybrid clouds originate from privilege misconfigurations. Learn modern mitigation models.
+            </p>
+<a class="inline-flex items-center gap-1 text-[13px] text-secondary-fixed font-semibold mt-2.5 hover:underline" href="#read-report">
+              Download the findings
+              <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: A Smarter Approach -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="space-y-2 mb-6">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Platform Foundation</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white leading-tight">
+          A smarter approach to infrastructure operations
+        </h2>
+<p class="text-body-sm font-body-sm text-outline-variant leading-relaxed">
+          Shift from fragmented tooling to a unified platform across build, deploy, secure, and run.
+        </p>
+</div>
+<div class="space-y-4">
+<!-- Feature 1 -->
+<div class="p-4 rounded-lg bg-[#14161f] border border-white/10">
+<div class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-secondary-fixed mb-3">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-white mb-1.5 font-medium">Deterministic orchestration at scale</h3>
+<p class="text-body-sm font-body-sm text-outline-variant leading-relaxed text-[13px]">
+            Define any infrastructure as declarative code. Standardize provisioning workflows across multi-cloud, sovereign clouds, and private data centers with strict drift detection.
+          </p>
+</div>
+<!-- Feature 2 -->
+<div class="p-4 rounded-lg bg-[#14161f] border border-white/10">
+<div class="w-8 h-8 rounded bg-white/5 border border-white/10 flex items-center justify-center text-secondary-fixed mb-3">
+<span class="material-symbols-outlined text-[20px]">key</span>
+</div>
+<h3 class="text-headline-sm font-headline-sm text-white mb-1.5 font-medium">Dynamic runtime credentials</h3>
+<p class="text-body-sm font-body-sm text-outline-variant leading-relaxed text-[13px]">
+            Replace static API keys and hardcoded passwords with short-lived, just-in-time dynamic tokens tied directly to cryptographic workload identity.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION: Get Started in Minutes (Tabs) -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="space-y-1 mb-5">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Workflow Automation</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white">Get started in minutes</h2>
+</div>
+<!-- Tab Buttons -->
+<div class="flex border-b border-[#22242c] mb-4 gap-2 overflow-x-auto no-scrollbar">
+<button class="tab-button text-label-sm font-label-sm pb-2.5 px-1 border-b-2 border-secondary text-white whitespace-nowrap" id="tab-btn-1" onclick="switchTab(1)">
+          Provision
+        </button>
+<button class="tab-button text-label-sm font-label-sm pb-2.5 px-1 border-b-2 border-transparent text-outline-variant hover:text-white whitespace-nowrap" id="tab-btn-2" onclick="switchTab(2)">
+          Secure secrets
+        </button>
+<button class="tab-button text-label-sm font-label-sm pb-2.5 px-1 border-b-2 border-transparent text-outline-variant hover:text-white whitespace-nowrap" id="tab-btn-3" onclick="switchTab(3)">
+          Connect services
+        </button>
+</div>
+<!-- Tab Content 1: Terraform -->
+<div class="tab-pane bg-[#14161f] border border-white/10 rounded-lg p-4 font-mono text-[12px]" id="tab-content-1">
+<div class="flex items-center justify-between text-outline-variant border-b border-white/10 pb-2 mb-3">
+<span class="text-[11px] text-secondary-fixed">main.tf — Terraform</span>
+<span class="text-[10px] text-white/50">HCL</span>
+</div>
+<pre class="text-white/90 overflow-x-auto leading-relaxed"><code><span class="text-[#cfbdff]">resource</span> <span class="text-emerald-400">"aws_instance"</span> <span class="text-amber-300">"web"</span> {
+  <span class="text-outline-variant">ami</span>           = <span class="text-secondary-fixed">"ami-0c55b159cbfafe1f0"</span>
+  <span class="text-outline-variant">instance_type</span> = <span class="text-secondary-fixed">"t3.micro"</span>
+  <span class="text-outline-variant">tags</span> = {
+    <span class="text-outline-variant">ManagedBy</span>   = <span class="text-secondary-fixed">"HCP-Terraform"</span>
+  }
+}</code></pre>
+<div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+<span class="text-[11px] text-outline-variant">Declarative multi-cloud provisioning</span>
+<a class="text-[11px] text-secondary-fixed underline" href="#quickstart">Docs →</a>
+</div>
+</div>
+<!-- Tab Content 2: Vault -->
+<div class="tab-pane hidden bg-[#14161f] border border-white/10 rounded-lg p-4 font-mono text-[12px]" id="tab-content-2">
+<div class="flex items-center justify-between text-outline-variant border-b border-white/10 pb-2 mb-3">
+<span class="text-[11px] text-secondary-fixed">vault-agent.hcl — Vault</span>
+<span class="text-[10px] text-white/50">CLI</span>
+</div>
+<pre class="text-white/90 overflow-x-auto leading-relaxed"><code><span class="text-outline-variant">$</span> vault kv get -mount=secret database/creds
+<span class="text-emerald-400">====== Data ======</span>
+<span class="text-outline-variant">key</span>        value
+<span class="text-outline-variant">password</span>   v_tok_99182x73b
+<span class="text-outline-variant">ttl</span>        3600s (Auto-rotate)</code></pre>
+<div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+<span class="text-[11px] text-outline-variant">Zero static credentials</span>
+<a class="text-[11px] text-secondary-fixed underline" href="#vault-quickstart">Docs →</a>
+</div>
+</div>
+<!-- Tab Content 3: Consul -->
+<div class="tab-pane hidden bg-[#14161f] border border-white/10 rounded-lg p-4 font-mono text-[12px]" id="tab-content-3">
+<div class="flex items-center justify-between text-outline-variant border-b border-white/10 pb-2 mb-3">
+<span class="text-[11px] text-secondary-fixed">consul-service.hcl — Consul</span>
+<span class="text-[10px] text-white/50">Service Mesh</span>
+</div>
+<pre class="text-white/90 overflow-x-auto leading-relaxed"><code><span class="text-[#cfbdff]">service</span> {
+  <span class="text-outline-variant">name</span> = <span class="text-secondary-fixed">"orders-api"</span>
+  <span class="text-outline-variant">port</span> = <span class="text-amber-300">8080</span>
+  <span class="text-outline-variant">connect</span> {
+    <span class="text-outline-variant">sidecar_service</span> {}
+  }
+}</code></pre>
+<div class="mt-4 pt-3 border-t border-white/10 flex items-center justify-between">
+<span class="text-[11px] text-outline-variant">Automatic mTLS encryption</span>
+<a class="text-[11px] text-secondary-fixed underline" href="#consul-quickstart">Docs →</a>
+</div>
+</div>
+</section>
+<!-- SECTION: HCP Terraform Powered by Infragraph -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="flex items-center gap-2 mb-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-mono uppercase bg-cloud-accent/50 text-secondary-fixed border border-secondary-container/40">
+          Limited Availability
+        </span>
+</div>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white leading-tight mb-2">
+        HCP Terraform powered by Infragraph
+      </h2>
+<p class="text-body-sm font-body-sm text-outline-variant leading-relaxed mb-5 text-[13px]">
+        Context-aware deep relational intelligence that exposes real-time dependencies and risk before any code merges.
+      </p>
+<!-- Key Capabilities List -->
+<div class="grid grid-cols-1 gap-2.5">
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px] shrink-0 mt-0.5">schema</span>
+<div>
+<div class="text-label-sm font-label-sm text-white font-medium">Real-time deep-relational mapping</div>
+<div class="text-[12px] text-outline-variant">Synthesizes infrastructure graphs across clouds into unified telemetry.</div>
+</div>
+</div>
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px] shrink-0 mt-0.5">emergency</span>
+<div>
+<div class="text-label-sm font-label-sm text-white font-medium">Blast radius quantification</div>
+<div class="text-[12px] text-outline-variant">Calculates collateral impact scoring before running terraform apply.</div>
+</div>
+</div>
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px] shrink-0 mt-0.5">hub</span>
+<div>
+<div class="text-label-sm font-label-sm text-white font-medium">Automated topology &amp; drift</div>
+<div class="text-[12px] text-outline-variant">Identifies out-of-band edits instantly and schedules remediation workflows.</div>
+</div>
+</div>
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex items-start gap-2.5">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px] shrink-0 mt-0.5">storefront</span>
+<div>
+<div class="text-label-sm font-label-sm text-white font-medium">Self-service catalog</div>
+<div class="text-[12px] text-outline-variant">Vetted templates curated by platform teams for developer autonomy.</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: Solve the Multi-Cloud Operational Matrix -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="space-y-1 mb-5">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Strategy Pillars</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white leading-tight">
+          Solve the multi-cloud operational matrix
+        </h2>
+</div>
+<div class="space-y-4">
+<!-- Accelerate -->
+<div class="p-4 bg-[#14161f] rounded-lg border-l-2 border-l-secondary border-t border-r border-b border-white/10">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">speed</span>
+<h3 class="text-headline-sm font-headline-sm text-white">Accelerate</h3>
+</div>
+<p class="text-body-sm font-body-sm text-outline-variant text-[13px] leading-relaxed">
+            Eliminate platform bottlenecks. Provide continuous delivery pipelines and self-service templates without sacrificing governance.
+          </p>
+</div>
+<!-- Optimize -->
+<div class="p-4 bg-[#14161f] rounded-lg border-l-2 border-l-secondary border-t border-r border-b border-white/10">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">tune</span>
+<h3 class="text-headline-sm font-headline-sm text-white">Optimize</h3>
+</div>
+<p class="text-body-sm font-body-sm text-outline-variant text-[13px] leading-relaxed">
+            Eliminate cloud waste and idle capacity. Unify fleet management to minimize sprawl and lower cost of computing footprint.
+          </p>
+</div>
+<!-- Strengthen -->
+<div class="p-4 bg-[#14161f] rounded-lg border-l-2 border-l-secondary border-t border-r border-b border-white/10">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary-fixed text-[18px]">security</span>
+<h3 class="text-headline-sm font-headline-sm text-white">Strengthen</h3>
+</div>
+<p class="text-body-sm font-body-sm text-outline-variant text-[13px] leading-relaxed">
+            Zero trust architecture as default. Identity-driven authorization, mutual TLS, and cryptographic boundary defense everywhere.
+          </p>
+</div>
+</div>
+</section>
+<!-- SECTION: The HashiCorp Enterprise Suite -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]" id="products">
+<div class="space-y-1 mb-5">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Integrated Lifecycle</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white">
+          The HashiCorp Enterprise Suite
+        </h2>
+</div>
+<!-- Products Grid -->
+<div class="grid grid-cols-2 gap-3">
+<!-- Terraform -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Terraform</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">cloud</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Infrastructure as code</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Vault -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Vault</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">lock</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Identity-based secrets</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Consul -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Consul</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">device_hub</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Service networking &amp; mesh</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Nomad -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Nomad</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">apps</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Flexible workload scheduler</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Packer -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Packer</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">inventory_2</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Automated golden images</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Boundary -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Boundary</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">vpn_lock</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Privileged access manager</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- Waypoint -->
+<div class="p-3 bg-[#14161f] border border-white/10 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">Waypoint</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">navigation</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Internal developer platform</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+<!-- HCP Cloud -->
+<div class="p-3 bg-[#14161f] border border-cloud-accent/50 rounded flex flex-col justify-between h-28">
+<div>
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md font-semibold text-white">HCP Platform</span>
+<span class="material-symbols-outlined text-secondary-fixed text-[16px]">cloud_queue</span>
+</div>
+<p class="text-[11px] text-outline-variant mt-1 leading-snug">Fully managed cloud SaaS</p>
+</div>
+<span class="text-[11px] text-secondary-fixed underline">Explore →</span>
+</div>
+</div>
+</section>
+<!-- SECTION: Ecosystem Numbers -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="p-5 rounded-lg bg-gradient-to-b from-[#14161f] to-[#0d0e12] border border-white/10">
+<h3 class="text-headline-sm font-headline-sm text-white mb-4 text-center">Global Ecosystem Scale</h3>
+<div class="grid grid-cols-1 divide-y divide-white/10 text-center">
+<div class="py-3">
+<div class="text-headline-lg font-headline-lg text-white font-bold tracking-tight">930+</div>
+<div class="text-[12px] font-mono text-outline-variant uppercase">Partners</div>
+</div>
+<div class="py-3">
+<div class="text-headline-lg font-headline-lg text-white font-bold tracking-tight">4,000+</div>
+<div class="text-[12px] font-mono text-outline-variant uppercase">Integrations</div>
+</div>
+<div class="py-3">
+<div class="text-headline-lg font-headline-lg text-white font-bold tracking-tight">500+</div>
+<div class="text-[12px] font-mono text-outline-variant uppercase">Systems Integrators</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: HashiCorp Certifications -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]">
+<div class="space-y-1 mb-4">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Engineering Credentials</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white">HashiCorp Certifications</h2>
+</div>
+<div class="space-y-2.5">
+<div class="p-3.5 bg-[#14161f] border border-white/10 rounded flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">verified</span>
+<div>
+<div class="text-label-md font-label-md text-white">Terraform Associate</div>
+<div class="text-[11px] font-mono text-outline-variant">Exam Code: 003</div>
+</div>
+</div>
+<a class="text-secondary-fixed text-[13px] font-medium" href="#cert-terraform">Verify →</a>
+</div>
+<div class="p-3.5 bg-[#14161f] border border-white/10 rounded flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">verified</span>
+<div>
+<div class="text-label-md font-label-md text-white">Vault Associate</div>
+<div class="text-[11px] font-mono text-outline-variant">Exam Code: 002</div>
+</div>
+</div>
+<a class="text-secondary-fixed text-[13px] font-medium" href="#cert-vault">Verify →</a>
+</div>
+<div class="p-3.5 bg-[#14161f] border border-white/10 rounded flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary-fixed">verified</span>
+<div>
+<div class="text-label-md font-label-md text-white">Consul Associate</div>
+<div class="text-[11px] font-mono text-outline-variant">Exam Code: 003</div>
+</div>
+</div>
+<a class="text-secondary-fixed text-[13px] font-medium" href="#cert-consul">Verify →</a>
+</div>
+</div>
+</section>
+<!-- SECTION: Resources & Insights -->
+<section class="bg-[#0d0e12] px-6 py-8 border-b border-[#22242c]" id="resources">
+<div class="space-y-1 mb-4">
+<span class="text-[11px] font-mono tracking-wider uppercase text-secondary-fixed">Knowledge Base</span>
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white">Resources &amp; Insights</h2>
+</div>
+<div class="space-y-3">
+<!-- Whitepapers -->
+<a class="block p-3.5 bg-[#14161f] border border-white/10 rounded hover:border-white/20 transition" href="#whitepaper">
+<div class="text-[10px] font-mono uppercase text-secondary-fixed mb-1">Whitepaper</div>
+<div class="text-label-md font-label-md font-medium text-white mb-1">The State of Cloud Strategy 2025</div>
+<div class="text-[12px] text-outline-variant">A survey of 1,000+ technology executives on multi-cloud ROI and governance.</div>
+</a>
+<!-- Webinars -->
+<a class="block p-3.5 bg-[#14161f] border border-white/10 rounded hover:border-white/20 transition" href="#webinar">
+<div class="text-[10px] font-mono uppercase text-secondary-fixed mb-1">On-Demand Webinar</div>
+<div class="text-label-md font-label-md font-medium text-white mb-1">Automating Ephemeral Access with HCP Boundary</div>
+<div class="text-[12px] text-outline-variant">How platform teams secure private endpoints across AWS and Azure without VPNs.</div>
+</a>
+<!-- Case Studies -->
+<a class="block p-3.5 bg-[#14161f] border border-white/10 rounded hover:border-white/20 transition" href="#casestudy">
+<div class="text-[10px] font-mono uppercase text-secondary-fixed mb-1">Customer Case Study</div>
+<div class="text-label-md font-label-md font-medium text-white mb-1">Global Fintech Replaces 10k Static Keys in 60 Days</div>
+<div class="text-[12px] text-outline-variant">Achieving strict zero-trust audit compliance with dynamic Vault leasing.</div>
+</a>
+</div>
+</section>
+<!-- SECTION: Closing Call to Action -->
+<section class="bg-[#0d0e12] px-6 py-10 border-b border-[#22242c]">
+<div class="text-center space-y-4">
+<h2 class="text-headline-lg-mobile font-headline-lg-mobile text-white">
+          Ready to do cloud right?
+        </h2>
+<p class="text-body-sm font-body-sm text-outline-variant leading-relaxed">
+          Join hundreds of thousands of engineering organizations automating multi-cloud infrastructure and identity-driven security today.
+        </p>
+<div class="flex flex-col gap-3 pt-3">
+<a class="w-full py-3.5 px-4 bg-surface-white text-primary text-center font-label-md text-label-md font-semibold rounded hover:bg-surface-bright transition" href="#trial">
+            Start Free Trial on HCP
+          </a>
+<a class="w-full py-3.5 px-4 border border-white/20 text-white text-center font-label-md text-label-md font-medium rounded hover:bg-white/5 transition" href="#contact-sales">
+            Contact Enterprise Team
+          </a>
+</div>
+</div>
+</section>
+<!-- Comprehensive Dark Mobile Footer -->
+<footer class="bg-[#0d0e12] px-6 pt-10 pb-12 text-on-surface-variant">
+<!-- Brand & Copyright Anchor -->
+<div class="mb-8">
+<div class="flex items-baseline gap-1.5 mb-2">
+<span class="text-headline-sm font-headline-sm font-semibold tracking-tight text-white">HashiCorp</span>
+<span class="text-[11px] font-mono text-outline-variant pl-1.5 border-l border-white/20">An IBM Company</span>
+</div>
+<p class="text-body-sm font-body-sm text-outline text-[13px] leading-relaxed">
+          © 2025 HashiCorp, an IBM Company. All rights reserved.
+        </p>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 gap-6 pb-8 border-b border-[#22242c]">
+<div>
+<div class="text-[11px] font-mono uppercase tracking-wider text-white font-medium mb-3">Products</div>
+<ul class="space-y-2 text-[13px]">
+<li><a class="text-on-surface-variant hover:text-white transition" href="#terraform">Terraform</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#vault">Vault</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#consul">Consul</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#nomad">Nomad</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#hcp">HCP Cloud</a></li>
+</ul>
+</div>
+<div>
+<div class="text-[11px] font-mono uppercase tracking-wider text-white font-medium mb-3">Developer</div>
+<ul class="space-y-2 text-[13px]">
+<li><a class="text-on-surface-variant hover:text-white transition" href="#docs">Documentation</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#certs">Certification</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#tutorials">Tutorials</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#registry">Registry</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#community">Community</a></li>
+</ul>
+</div>
+<div>
+<div class="text-[11px] font-mono uppercase tracking-wider text-white font-medium mb-3">Company</div>
+<ul class="space-y-2 text-[13px]">
+<li><a class="text-on-surface-variant hover:text-white transition" href="#about">About Us</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#leadership">Leadership</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#careers">Careers</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#press">Press</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#contact">Contact</a></li>
+</ul>
+</div>
+<div>
+<div class="text-[11px] font-mono uppercase tracking-wider text-white font-medium mb-3">Legal &amp; Trust</div>
+<ul class="space-y-2 text-[13px]">
+<li><a class="text-on-surface-variant hover:text-white transition" href="#security">Security</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#privacy">Privacy Policy</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#terms">Terms of Service</a></li>
+<li><a class="text-on-surface-variant hover:text-white transition" href="#compliance">Compliance</a></li>
+</ul>
+</div>
+</div>
+<!-- Social & Bottom Metadata -->
+<div class="pt-6 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<a aria-label="GitHub" class="text-outline-variant hover:text-white" href="#github">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+</a>
+<a aria-label="Discussions" class="text-outline-variant hover:text-white" href="#forum">
+<span class="material-symbols-outlined text-[18px]">forum</span>
+</a>
+<a aria-label="Feeds" class="text-outline-variant hover:text-white" href="#rss">
+<span class="material-symbols-outlined text-[18px]">rss_feed</span>
+</a>
+</div>
+<span class="text-[11px] font-mono text-outline">v2025.1.0</span>
+</div>
+</footer>
+</div>
+<!-- Interactive JavaScript for Mobile Menu & Tabs -->
+<script>
+    // Navigation Drawer Logic
+    const menuToggleBtn = document.getElementById('menu-toggle-btn');
+    const menuCloseBtn = document.getElementById('menu-close-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuToggleBtn && mobileMenu) {
+      menuToggleBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex');
+        document.body.style.overflow = 'hidden';
+      });
+    }
+
+    if (menuCloseBtn && mobileMenu) {
+      menuCloseBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex');
+        document.body.style.overflow = 'auto';
+      });
+    }
+
+    // Tabs Switcher Logic
+    function switchTab(index) {
+      // Hide all panes
+      const panes = document.querySelectorAll('.tab-pane');
+      panes.forEach(pane => pane.classList.add('hidden'));
+
+      // Remove active classes on buttons
+      const buttons = document.querySelectorAll('.tab-button');
+      buttons.forEach(btn => {
+        btn.classList.remove('border-secondary', 'text-white');
+        btn.classList.add('border-transparent', 'text-outline-variant');
+      });
+
+      // Show selected pane
+      const targetPane = document.getElementById('tab-content-' + index);
+      if (targetPane) {
+        targetPane.classList.remove('hidden');
+      }
+
+      // Highlight selected button
+      const targetBtn = document.getElementById('tab-btn-' + index);
+      if (targetBtn) {
+        targetBtn.classList.remove('border-transparent', 'text-outline-variant');
+        targetBtn.classList.add('border-secondary', 'text-white');
+      }
+    }
+  </script>
+</body></html>
