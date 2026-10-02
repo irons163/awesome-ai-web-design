@@ -13,9 +13,11 @@ ROOT = Path(__file__).resolve().parents[1] / '.stitch-work/current-official'
 
 
 def image(brand, name, alt='', cls=''):
-    # Keep the original bytes and hashes in source, and stream four large
+    # Keep the original bytes and hashes in source, and stream six large
     # public illustrations to keep the existing Site within its archive limit.
     remote_hashicorp = {
+        '12b7eaa49e08bb7b.svg': 'https://www.datocms-assets.com/2885/1777481477-hashi_hp_1.svg',
+        'b774795f57e97d68.svg': 'https://www.datocms-assets.com/2885/1777481422-hashi_hp_2.svg',
         'infragraph.svg': 'https://www.datocms-assets.com/2885/1777397254-infragraph_hp.svg',
         'accelerate.webp': 'https://www.datocms-assets.com/2885/1772215414-accelerate-small-1.webp',
         'certification.svg': 'https://www.datocms-assets.com/2885/1758555867-homepage-in-content-02.svg',
