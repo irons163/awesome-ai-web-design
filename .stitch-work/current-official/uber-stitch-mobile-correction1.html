@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Uber Homepage (Mobile 390px)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'UberMove';
+      src: url('https://tb-static.uber.com/prod/fonts/UberMove-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'UberMove';
+      src: url('https://tb-static.uber.com/prod/fonts/UberMove-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'UberMoveText';
+      src: url('https://tb-static.uber.com/prod/fonts/UberMoveText-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'UberMoveText';
+      src: url('https://tb-static.uber.com/prod/fonts/UberMoveText-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: 'UberMoveText', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 390px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    h1, h2, h3, .font-heading {
+      font-family: 'UberMove', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    .bg-surface-gray {
+      background-color: #f3f3f3;
+    }
+    .bg-surface-subtle {
+      background-color: #f6f6f6;
+    }
+    .text-subtle {
+      color: #545454;
+    }
+  </style>
+</head>
+<body class="bg-white text-black min-h-screen">
+<!-- Mobile Top Navigation Header (64px high) -->
+<header class="h-[64px] bg-black text-white px-6 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center">
+<a class="text-[24px] font-heading font-bold tracking-tight text-white hover:opacity-90" href="https://www.uber.com">Uber</a>
+</div>
+<div class="flex items-center gap-3">
+<a class="text-[14px] font-medium text-white px-3 py-1.5 hover:bg-neutral-800 rounded-full transition-colors" href="https://m.uber.com/looking">Log in</a>
+<a class="text-[14px] font-medium text-black bg-white px-3.5 py-1.5 rounded-full hover:bg-neutral-200 transition-colors" href="https://auth.uber.com/v2/signup">Sign up</a>
+<button aria-label="Menu" class="p-1.5 text-white hover:bg-neutral-800 rounded-full transition-colors ml-1">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg>
+</button>
+</div>
+</header>
+<!-- Main Content Container (342px content width, 24px side padding) -->
+<main class="px-6 pt-6 pb-12 w-full">
+<!-- Location variant tag -->
+<div class="flex items-center gap-1.5 text-xs text-neutral-600 mb-4">
+<svg class="w-3.5 h-3.5 text-black shrink-0" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+</svg>
+<span class="font-medium text-black">Taipei, CA</span>
+<span class="text-[11px] text-neutral-500 bg-neutral-100 px-1.5 py-0.5 rounded">Observed location variant</span>
+</div>
+<!-- Mobile Headline (36px/44px, exactly 'Go anywhere with Uber') -->
+<h1 class="text-[36px] leading-[44px] font-bold tracking-tight text-black mb-6">
+      Go anywhere with Uber
+    </h1>
+<!-- Booking Inputs (two 56px fields) -->
+<div class="relative flex flex-col gap-2 mb-4">
+<!-- Route line indicator -->
+<div class="absolute left-6 top-[28px] bottom-[28px] w-0.5 bg-neutral-300 z-10 pointer-events-none"></div>
+<!-- Pickup Field -->
+<div class="relative bg-surface-gray rounded-lg h-[56px] flex items-center px-4">
+<div class="w-2.5 h-2.5 rounded-full bg-black shrink-0 mr-3.5 z-20"></div>
+<input aria-label="Pickup location" class="bg-transparent w-full text-[15px] font-medium text-black focus:outline-none cursor-default" readonly="" type="text" value="Taipei, CA"/>
+<button class="text-neutral-500 hover:text-black p-1">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Dropoff Field -->
+<div class="relative bg-surface-gray rounded-lg h-[56px] flex items-center px-4">
+<div class="w-2.5 h-2.5 bg-black shrink-0 mr-3.5 z-20"></div>
+<input aria-label="Dropoff destination" class="bg-transparent w-full text-[15px] font-normal text-neutral-600 placeholder-neutral-500 focus:outline-none cursor-default" placeholder="Enter destination" readonly="" type="text"/>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex items-center gap-4 mb-10">
+<a class="inline-flex items-center justify-center bg-black text-white text-[15px] font-medium h-12 px-6 rounded-lg hover:bg-neutral-800 transition-colors" href="https://m.uber.com/looking">
+        See prices
+      </a>
+<a class="text-[13px] text-neutral-600 hover:text-black underline underline-offset-2" href="https://m.uber.com/looking">
+        Log in to see your recent activity
+      </a>
+</div>
+<!-- Explore what you can do (starts y560 on mobile) -->
+<section class="mb-10">
+<h2 class="text-[28px] leading-[36px] font-bold text-black mb-4">
+        Explore what you can do
+      </h2>
+<!-- 2 larger Ride / Reserve tiles -->
+<div class="grid grid-cols-2 gap-3 mb-3">
+<!-- Ride -->
+<a class="bg-surface-gray rounded-xl p-4 flex flex-col justify-between h-[120px] hover:bg-neutral-200 transition-colors relative" href="https://m.uber.com/looking">
+<div class="flex justify-between items-start">
+<span class="text-[16px] font-bold text-black">Ride</span>
+<svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-[12px] text-neutral-500">Go anywhere</span>
+<svg class="w-7 h-7 text-black" fill="currentColor" viewbox="0 0 24 24">
+<path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"></path>
+<circle cx="7.5" cy="14.5" r="1.5"></circle>
+<circle cx="16.5" cy="14.5" r="1.5"></circle>
+</svg>
+</div>
+</a>
+<!-- Reserve -->
+<a class="bg-surface-gray rounded-xl p-4 flex flex-col justify-between h-[120px] hover:bg-neutral-200 transition-colors relative" href="https://m.uber.com/reserve">
+<div class="flex justify-between items-start">
+<span class="text-[16px] font-bold text-black">Reserve</span>
+<svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-[12px] text-neutral-500">Schedule rides</span>
+<svg class="w-6 h-6 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</a>
+</div>
+<!-- 3 smaller Courier / Food / Grocery tiles -->
+<div class="grid grid-cols-3 gap-2.5">
+<!-- Courier -->
+<a class="bg-surface-gray rounded-xl p-3 flex flex-col justify-between h-[105px] hover:bg-neutral-200 transition-colors" href="https://www.uber.com/connect">
+<div class="flex justify-between items-start">
+<span class="text-[13px] font-bold text-black">Courier</span>
+<svg class="w-3.5 h-3.5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-[10px] text-neutral-500 leading-tight">Send packs</span>
+<svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</a>
+<!-- Food -->
+<a class="bg-surface-gray rounded-xl p-3 flex flex-col justify-between h-[105px] hover:bg-neutral-200 transition-colors" href="https://www.ubereats.com">
+<div class="flex justify-between items-start">
+<span class="text-[13px] font-bold text-black">Food</span>
+<svg class="w-3.5 h-3.5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-[10px] text-neutral-500 leading-tight">Favorites</span>
+<svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</a>
+<!-- Grocery -->
+<a class="bg-surface-gray rounded-xl p-3 flex flex-col justify-between h-[105px] hover:bg-neutral-200 transition-colors" href="https://www.ubereats.com/category/grocery">
+<div class="flex justify-between items-start">
+<span class="text-[13px] font-bold text-black">Grocery</span>
+<svg class="w-3.5 h-3.5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M7 17L17 7M17 7H7M17 7V17" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-[10px] text-neutral-500 leading-tight">Doorstep</span>
+<svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</a>
+</div>
+</section>
+<!-- Source Section Order: 1. Account, 2. Plan for later (Reserve), 3. City Hub, 4. Drive, 5. Business, 6. App download -->
+<!-- 1. Account Section -->
+<section class="mb-10 bg-neutral-50 rounded-2xl p-6 border border-neutral-100 flex flex-col items-center text-center">
+<div class="w-24 h-24 mb-4 flex items-center justify-center">
+<img alt="Uber account illustrations" class="max-w-full max-h-full object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1">Account</span>
+<h2 class="text-[24px] leading-[30px] font-bold text-black mb-2">
+        Log in to see your account
+      </h2>
+<p class="text-[14px] leading-[20px] text-neutral-600 mb-5">
+        View past trips, tailored suggestions, and manage your account details securely.
+      </p>
+<a class="bg-black text-white text-[14px] font-medium py-3 px-6 rounded-lg w-full text-center hover:bg-neutral-800 transition-colors" href="https://m.uber.com/looking">
+        Log in to your account
+      </a>
+</section>
+<!-- 2. Plan for later (Reserve Background Banner) -->
+<section class="mb-10 rounded-2xl overflow-hidden relative shadow-sm">
+<div class="relative h-[220px] w-full bg-neutral-900">
+<img alt="Ride with Uber Reserve" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5 text-white">
+<span class="text-[11px] uppercase tracking-wider font-semibold text-neutral-300">Planning a trip?</span>
+<h3 class="text-[20px] font-bold leading-tight">Ready to travel</h3>
+</div>
+</div>
+<div class="p-5 bg-white border border-t-0 border-neutral-100 rounded-b-2xl">
+<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1 block">Plan for later</span>
+<h2 class="text-[24px] leading-[30px] font-bold text-black mb-2">
+          Ride with Uber Reserve
+        </h2>
+<p class="text-[14px] leading-[20px] text-neutral-600 mb-4">
+          Choose your exact pickup time up to 90 days in advance. Extra wait time included with every ride.
+        </p>
+<a class="bg-black text-white text-[14px] font-medium py-3 px-6 rounded-lg inline-block hover:bg-neutral-800 transition-colors" href="https://m.uber.com/reserve">
+          Reserve a ride
+        </a>
+</div>
+</section>
+<!-- 3. City Hub -->
+<section class="mb-10 p-6 bg-surface-gray rounded-2xl">
+<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1 block">City hub</span>
+<h2 class="text-[24px] leading-[30px] font-bold text-black mb-2">
+        Explore Taipei, CA
+      </h2>
+<p class="text-[14px] leading-[20px] text-neutral-600 mb-5">
+        Discover popular pickup spots, airports, and local transport connections in your destination city.
+      </p>
+<a class="bg-black text-white text-[14px] font-medium py-3 px-6 rounded-lg inline-block hover:bg-neutral-800 transition-colors" href="https://www.uber.com/cities">
+        View city guide
+      </a>
+</section>
+<!-- 4. Drive when you want, make what you need -->
+<section class="mb-10">
+<div class="w-full h-[180px] bg-neutral-100 rounded-2xl overflow-hidden mb-5 flex items-center justify-center">
+<!-- Official steering wheel icon / illustration graphic -->
+<svg class="w-20 h-20 text-neutral-400" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="9"></circle>
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M12 3v6m0 6v6M3 12h6m6 0h6"></path>
+</svg>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1 block">Earn with Uber</span>
+<h2 class="text-[24px] leading-[30px] font-bold text-black mb-2">
+        Drive when you want, make what you need
+      </h2>
+<p class="text-[14px] leading-[20px] text-neutral-600 mb-4">
+        Make money on your schedule with deliveries or rides—or both. You can use your own car or choose a rental through Uber.
+      </p>
+<div class="flex flex-col gap-3">
+<a class="bg-black text-white text-[14px] font-medium py-3 px-6 rounded-lg text-center hover:bg-neutral-800 transition-colors" href="https://www.uber.com/drive">
+          Get started
+        </a>
+<a class="text-[13px] text-neutral-600 hover:text-black underline underline-offset-2 text-center" href="https://auth.uber.com/v2/login">
+          Already have an account? Sign in
+        </a>
+</div>
+</section>
+<!-- 5. Business Section -->
+<section class="mb-10">
+<div class="w-full h-[180px] bg-neutral-100 rounded-2xl overflow-hidden mb-5 flex items-center justify-center">
+<!-- Briefcase graphic -->
+<svg class="w-20 h-20 text-neutral-400" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24">
+<rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
+<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+</svg>
+</div>
+<span class="text-[11px] font-bold uppercase tracking-wider text-neutral-500 mb-1 block">Uber for Business</span>
+<h2 class="text-[24px] leading-[30px] font-bold text-black mb-2">
+        The best of Uber for your team
+      </h2>
+<p class="text-[14px] leading-[20px] text-neutral-600 mb-4">
+        Transform the way your company moves and feeds its people. A seamless platform for business rides, meals, and local delivery.
+      </p>
+<div class="flex items-center gap-3">
+<a class="bg-black text-white text-[14px] font-medium py-3 px-5 rounded-lg hover:bg-neutral-800 transition-colors" href="https://www.uber.com/business">
+          Explore solutions
+        </a>
+<a class="text-[14px] text-neutral-700 font-medium py-3 px-4 hover:text-black" href="https://www.uber.com/business/contact-us">
+          Contact sales
+        </a>
+</div>
+</section>
+<!-- 6. App download Section -->
+<section class="mb-6 p-6 bg-surface-gray rounded-2xl text-center flex flex-col items-center">
+<h2 class="text-[20px] leading-[26px] font-bold text-black mb-2">
+        There's more to love in the apps
+      </h2>
+<p class="text-[13px] leading-[18px] text-neutral-600 mb-5">
+        Scan the QR code or visit your app store to download the Uber and Uber Eats apps. Manage your rides, order food, and schedule in seconds.
+      </p>
+<!-- App QR box -->
+<div class="bg-white p-3 rounded-xl shadow-sm border border-neutral-200 mb-4 flex flex-col items-center">
+<svg class="w-24 h-24 text-black" fill="currentColor" viewbox="0 0 24 24">
+<path d="M2 2h8v8H2V2zm2 2v4h4V4H4zm10-2h8v8h-8V2zm2 2v4h4V4h-4zM2 14h8v8H2v-8zm2 2v4h4v-4H4zm14-2h4v4h-4v-4zm-4 4h4v4h-4v-4zm4 4h4v4h-4v-4zm-4-8h4v4h-4v-4z"></path>
+</svg>
+<span class="text-[10px] text-neutral-500 font-medium mt-1">Scan to download</span>
+</div>
+<!-- App store badges -->
+<div class="flex flex-col gap-2 w-full max-w-[200px]">
+<a class="bg-black text-white px-3.5 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors" href="https://apps.apple.com/app/uber/id368677368">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.47c.6-0.73 1.01-1.75.9-2.77-.87.04-1.92.58-2.54 1.31-.55.64-.99 1.68-.86 2.68 1 .08 1.95-.49 2.5-1.22z"></path>
+</svg>
+<div class="text-left">
+<div class="text-[8px] uppercase tracking-wider leading-none text-neutral-400">Download on</div>
+<div class="text-[12px] font-semibold leading-tight">App Store</div>
+</div>
+</a>
+<a class="bg-black text-white px-3.5 py-2 rounded-lg flex items-center justify-center gap-2 hover:bg-neutral-800 transition-colors" href="https://play.google.com/store/apps/details?id=com.ubercab">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24">
+<path d="M3.609 1.814L13.792 12 3.61 22.186c-.36-.217-.61-.607-.61-1.066V2.88c0-.459.25-.849.609-1.066zM15.207 13.414l2.502 2.502-11.44 6.605 8.938-9.107zm0-2.828L6.269 1.479l11.44 6.605-2.502 2.502zm1.414 1.414l3.753 2.167c.677.391.677 1.027 0 1.418l-3.753 2.167-2.122-2.122 2.122-2.122z"></path>
+</svg>
+<div class="text-left">
+<div class="text-[8px] uppercase tracking-wider leading-none text-neutral-400">Get it on</div>
+<div class="text-[12px] font-semibold leading-tight">Google Play</div>
+</div>
+</a>
+</div>
+</section>
+</main>
+<!-- Complete Mobile Black Footer -->
+<footer class="bg-black text-white px-6 pt-10 pb-12 w-full">
+<div class="mb-8">
+<a class="text-[20px] font-heading font-bold text-white block mb-3" href="https://www.uber.com">Uber</a>
+<a class="text-[13px] text-neutral-300 hover:text-white underline underline-offset-2" href="https://help.uber.com">Visit Help Center</a>
+</div>
+<!-- Footer link columns stacked for mobile -->
+<div class="space-y-6 mb-10 text-[13px]">
+<div>
+<h4 class="font-bold text-[14px] text-white mb-2">Company</h4>
+<ul class="space-y-2 text-neutral-400">
+<li><a class="hover:text-white" href="https://www.uber.com/about">About us</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/newsroom">Our offerings</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/newsroom">Newsroom</a></li>
+<li><a class="hover:text-white" href="https://investor.uber.com">Investors</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/blog">Blog</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/careers">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-[14px] text-white mb-2">Products</h4>
+<ul class="space-y-2 text-neutral-400">
+<li><a class="hover:text-white" href="https://www.uber.com/ride">Ride</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/drive">Drive</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/deliver">Deliver</a></li>
+<li><a class="hover:text-white" href="https://www.ubereats.com">Eat</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/business">Uber for Business</a></li>
+<li><a class="hover:text-white" href="https://www.uberfreight.com">Uber Freight</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-[14px] text-white mb-2">Global citizenship</h4>
+<ul class="space-y-2 text-neutral-400">
+<li><a class="hover:text-white" href="https://www.uber.com/safety">Safety</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/diversity">Diversity and Inclusion</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/sustainability">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-[14px] text-white mb-2">Travel</h4>
+<ul class="space-y-2 text-neutral-400">
+<li><a class="hover:text-white" href="https://www.uber.com/reserve">Reserve</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/airports">Airports</a></li>
+<li><a class="hover:text-white" href="https://www.uber.com/cities">Cities</a></li>
+</ul>
+</div>
+</div>
+<!-- Locality and language controls -->
+<div class="flex items-center gap-4 text-[13px] text-neutral-300 py-4 border-t border-neutral-800 mb-6">
+<div class="flex items-center gap-1.5">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="10" stroke-width="2"></circle>
+<path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="2"></path>
+</svg>
+<span>English</span>
+</div>
+<div class="flex items-center gap-1.5">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24">
+<path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"></path>
+</svg>
+<span>Taipei, CA</span>
+</div>
+</div>
+<!-- Legal disclaimer and copyright notice -->
+<div class="text-[11px] text-neutral-500 space-y-2 border-t border-neutral-800 pt-4">
+<p>© 2026 Uber Technologies Inc. Unofficial visual study reconstruction.</p>
+<div class="flex flex-wrap gap-x-4 gap-y-1">
+<a class="hover:text-neutral-400" href="https://www.uber.com/legal/privacy">Privacy</a>
+<a class="hover:text-neutral-400" href="https://www.uber.com/legal/accessibility">Accessibility</a>
+<a class="hover:text-neutral-400" href="https://www.uber.com/legal/terms">Terms</a>
+</div>
+</div>
+</footer>
+</body>
+</html>

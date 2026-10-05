@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Runway — Building Real-World Intelligence (Mobile)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'ABC Normal';
+      src: url('https://d3phaj0sisr2ct.cloudfront.net/site/fonts/ABCNormal-Book.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ABC Normal';
+      src: url('https://d3phaj0sisr2ct.cloudfront.net/site/fonts/ABCNormal-Regular.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'ABC Normal';
+      src: url('https://d3phaj0sisr2ct.cloudfront.net/site/fonts/ABCNormal-Medium.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: 'ABC Normal', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #ffffff;
+      color: #0d0d0d;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .hero-heading {
+      font-size: 28px;
+      line-height: 32.2px;
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    .three-platform-heading {
+      font-size: 36px;
+      line-height: 39.6px;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#0d0d0d] antialiased w-[390px] mx-auto min-h-screen relative selection:bg-black selection:text-white">
+<!-- Top App Promo Banner -->
+<header class="w-full bg-[#f6f6f6] border-b border-[#ececec] text-[11px] text-[#444] px-4 py-2 flex items-center justify-between font-normal tracking-tight">
+<div class="flex items-center gap-1.5 truncate">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] inline-block shrink-0"></span>
+<span class="truncate">Runway app for iPhone &amp; Android</span>
+</div>
+<div class="flex items-center gap-2 shrink-0 text-black font-medium">
+<a class="hover:underline flex items-center gap-0.5" href="https://apps.apple.com/app/runway-ai-video-photo-maker/id1665024375" rel="noreferrer" target="_blank">
+        iOS ↗
+      </a>
+<span class="text-[#ccc]">|</span>
+<a class="hover:underline flex items-center gap-0.5" href="https://play.google.com/store/apps/details?id=com.runwayml.prod" rel="noreferrer" target="_blank">
+        Android ↗
+      </a>
+</div>
+</header>
+<!-- Sticky Mobile Navigation Header -->
+<nav class="w-full h-[58px] px-4 bg-white/95 backdrop-blur-md sticky top-0 z-50 flex items-center justify-between border-b border-black/[0.04]">
+<!-- Runway Monogram / Wordmark Logo -->
+<a class="flex items-center gap-2 text-black hover:opacity-80 transition-opacity" href="https://runway.com">
+<svg class="h-6 w-auto" fill="currentColor" viewbox="0 0 106 24">
+<path d="M12.98 0C8.36 0 4.6 3.76 4.6 8.38c0 2.21.87 4.22 2.3 5.72L0 20.98l4.46 2.58 6.9-6.9a8.31 8.31 0 0 0 1.62.16c4.62 0 8.38-3.76 8.38-8.38C21.36 3.76 17.6 0 12.98 0zm0 11.83c-1.9 0-3.45-1.55-3.45-3.45s1.55-3.45 3.45-3.45 3.45 1.55 3.45 3.45-1.55 3.45-3.45 3.45zM30.6 5.86h3.63v12.28H30.6V5.86zm1.8-5.86c1.23 0 2.2.98 2.2 2.2 0 1.23-.97 2.2-2.2 2.2-1.22 0-2.2-.97-2.2-2.2 0-1.22.98-2.2 2.2-2.2zM45.54 18.14V5.86h3.63v2.02c.98-1.5 2.54-2.27 4.34-2.27 3.5 0 5.48 2.24 5.48 6.33v6.2h-3.63v-5.78c0-2.52-1.12-3.8-3.14-3.8-2.02 0-3.05 1.29-3.05 3.8v5.78h-3.63zM67.8 5.86h3.63v2.02c.98-1.5 2.55-2.27 4.34-2.27 3.5 0 5.49 2.24 5.49 6.33v6.2h-3.63v-5.78c0-2.52-1.12-3.8-3.14-3.8-2.02 0-3.05 1.29-3.05 3.8v5.78H67.8V5.86zM97.16 5.86l-4.14 12.28h-3.75L85.12 5.86h3.84l2.43 7.84 2.4-7.84h3.37zm2.4 12.28l4.28-12.28h3.75l-6.16 15.65c-.87 2.21-2.27 3.14-4.59 3.14-.62 0-1.26-.06-1.76-.17v-2.83c.36.06.78.11 1.2.11 1.29 0 2.05-.56 2.52-2.02l.76-1.6z"></path>
+</svg>
+</a>
+<!-- Action links -->
+<div class="flex items-center gap-2.5">
+<a class="text-[13px] font-medium text-black px-2 py-1.5 hover:opacity-70 transition-opacity" href="https://app.runwayml.com/login">
+        Login
+      </a>
+<a class="text-[12px] font-medium bg-black text-white px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors shadow-sm" href="https://app.runwayml.com">
+        Try Runway
+      </a>
+<!-- Hamburger Menu Button -->
+<button aria-label="Open Navigation Menu" class="w-8 h-8 flex flex-col justify-center items-center gap-1 text-black p-1 focus:outline-none">
+<span class="w-4 h-[1.5px] bg-black"></span>
+<span class="w-4 h-[1.5px] bg-black"></span>
+</button>
+</div>
+</nav>
+<!-- Mobile Hero Card Section (Measured at x20/y64, 350px width, 596px height) -->
+<section class="px-5 pt-3 pb-8">
+<div class="relative w-[350px] h-[596px] mx-auto rounded-[24px] overflow-hidden bg-black shadow-lg">
+<!-- Mux Robot Cooking Official Video Thumbnail -->
+<img alt="Runway Real-World Intelligence Robot Simulation" class="absolute inset-0 w-full h-full object-cover object-center pointer-events-none opacity-90" loading="eager" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Gradient scrim to ensure high text contrast -->
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/30"></div>
+<!-- Top Overlay Badges inside Hero -->
+<div class="absolute top-5 left-5 right-5 flex items-center justify-between text-white/80 text-[10px] font-mono tracking-wider uppercase">
+<div class="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10">
+<span class="w-1.5 h-1.5 rounded-full bg-[#10b981] animate-pulse"></span>
+<span>Runway Real-World Intelligence</span>
+</div>
+<div class="text-[9px] text-white/60 tracking-wider">
+          GWM-1 ACTIVE
+        </div>
+</div>
+<!-- Hero Copy at documented mobile geometry: heading starts around y219, line box 288px -->
+<div class="absolute bottom-6 left-5 right-5 text-white flex flex-col justify-end">
+<h1 class="hero-heading font-medium tracking-tight text-white mb-3 max-w-[288px]">
+          Building Real-World Intelligence
+        </h1>
+<p class="text-[13.5px] leading-[19px] text-[#ddd] mb-6 font-normal">
+          Runway is building foundational Real-World Intelligence that can understand, simulate and act in the world. We offer products and services built on-top of this intelligence to empower individuals and organizations to do more in the world.
+        </p>
+<div>
+<a class="inline-flex items-center gap-2 bg-white text-black text-[13px] font-medium px-4 py-2.5 rounded-full hover:bg-neutral-100 transition-colors shadow-md" href="https://app.runwayml.com">
+<span>Try Runway for free</span>
+<span class="text-sm font-normal">→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Partner Logos Banner -->
+<section class="px-5 py-6 border-b border-black/[0.06]">
+<p class="text-[10.5px] tracking-wide text-[#777] uppercase text-center mb-5 font-medium leading-tight">
+      We partner with the world's leading organizations to advance their industries
+    </p>
+<!-- Logos stacked in clean 2-column or wrapping flex row -->
+<div class="grid grid-cols-2 gap-y-4 gap-x-6 items-center justify-items-center opacity-70">
+<span class="font-bold tracking-widest text-[13px] text-neutral-800 uppercase">Lionsgate</span>
+<span class="font-bold tracking-tight text-[12px] text-neutral-800 uppercase text-center">Warner Bros. Discovery</span>
+<span class="font-serif tracking-wider text-[14px] text-neutral-800">Pentagram</span>
+<span class="font-bold tracking-wider text-[13px] text-neutral-800 uppercase">Canal+</span>
+</div>
+<div class="mt-4 flex justify-center opacity-70">
+<span class="font-semibold tracking-widest text-[12px] text-neutral-800 uppercase">Publicis Groupe</span>
+</div>
+</section>
+<!-- Three Platforms Section Heading -->
+<section class="px-5 pt-12 pb-6">
+<h2 class="three-platform-heading text-black tracking-tight mb-2">
+      Three platforms built on-top of the same Real-World Intelligence models
+    </h2>
+</section>
+<!-- Platform 1: Runway Creative (Documented Mobile Stack) -->
+<section class="px-5 py-4">
+<div class="border border-black/[0.08] rounded-[20px] p-6 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-black/[0.16] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[11px] font-mono tracking-wider uppercase text-[#777]">Suite</span>
+<span class="w-2 h-2 rounded-full bg-[#2563eb]"></span>
+</div>
+<h3 class="text-[22px] font-medium text-black tracking-tight mb-2">Runway Creative</h3>
+<p class="text-[14px] font-medium text-[#111] mb-2">
+        Your complete Creative Suite with everything you need, to make anything you want.
+      </p>
+<p class="text-[13px] text-[#555] leading-relaxed mb-6 font-normal">
+        An all-in-one cloud-based creative platform that offers endless ways to generate and edit video, images and audio in one workspace. Built for individuals and teams of all sizes.
+      </p>
+<div class="flex flex-wrap items-center gap-2 mb-6">
+<a class="text-[12.5px] font-medium bg-black text-white px-4 py-2 rounded-full hover:bg-neutral-800 transition-colors" href="https://app.runwayml.com">
+          Try now
+        </a>
+<a class="text-[12.5px] font-medium border border-black/[0.15] text-black px-3.5 py-2 rounded-full hover:bg-black/[0.03] transition-colors" href="https://runway.com/product">
+          Learn more
+        </a>
+<a class="text-[12.5px] text-[#666] px-2 py-2 hover:text-black transition-colors" href="https://runway.com/enterprise">
+          For Enterprise
+        </a>
+</div>
+<div class="pt-4 border-t border-black/[0.06] text-[11.5px] text-[#888]">
+        Used by 60m+ creatives around the world. Try free, cancel anytime.
+      </div>
+</div>
+</section>
+<!-- Platform 2: Runway Dev -->
+<section class="px-5 py-4">
+<div class="border border-black/[0.08] rounded-[20px] p-6 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-black/[0.16] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[11px] font-mono tracking-wider uppercase text-[#777]">API &amp; Tools</span>
+<span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+</div>
+<h3 class="text-[22px] font-medium text-black tracking-tight mb-2">Runway Dev</h3>
+<p class="text-[14px] font-medium text-[#111] mb-2">
+        The AI media platform for developers to build with the best models from Runway and other labs.
+      </p>
+<p class="text-[13px] text-[#555] leading-relaxed mb-6 font-normal">
+        The API platform with Runway's expertise built in. Access the best models and the creative tooling to easily get production-ready output from them, at scale.
+      </p>
+<div class="flex flex-wrap items-center gap-2 mb-6">
+<a class="text-[12.5px] font-medium bg-black text-white px-4 py-2 rounded-full hover:bg-neutral-800 transition-colors" href="https://dev.runwayml.com/">
+          Get API Key
+        </a>
+<a class="text-[12.5px] font-medium border border-black/[0.15] text-black px-3.5 py-2 rounded-full hover:bg-black/[0.03] transition-colors" href="https://docs.dev.runwayml.com/">
+          View docs
+        </a>
+<a class="text-[12.5px] text-[#666] px-2 py-2 hover:text-black transition-colors" href="https://runway.com/enterprise">
+          For Enterprise
+        </a>
+</div>
+<div class="pt-4 border-t border-black/[0.06] text-[11.5px] text-[#888]">
+        High-throughput, enterprise SLA, direct inference access.
+      </div>
+</div>
+</section>
+<!-- Platform 3: Runway Robotics -->
+<section class="px-5 py-4">
+<div class="border border-black/[0.08] rounded-[20px] p-6 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.03)] hover:border-black/[0.16] transition-all">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[11px] font-mono tracking-wider uppercase text-[#777]">Simulation</span>
+<span class="w-2 h-2 rounded-full bg-[#9333ea]"></span>
+</div>
+<h3 class="text-[22px] font-medium text-black tracking-tight mb-2">Runway Robotics</h3>
+<p class="text-[14px] font-medium text-[#111] mb-2">
+        A complete toolkit to run policy inference through photorealistic simulation.
+      </p>
+<p class="text-[13px] text-[#555] leading-relaxed mb-6 font-normal">
+        From policy inference and evaluation to synthetic data generation, every component is powered by GWM-1, our state-of-the-art General World Model. Pick the surface you need — we'll work with you to fit it to your hardware.
+      </p>
+<div class="flex flex-wrap items-center gap-2 mb-6">
+<a class="text-[12.5px] font-medium bg-black text-white px-4 py-2 rounded-full hover:bg-neutral-800 transition-colors" href="https://runway.com/product/robotics">
+          Learn more
+        </a>
+<a class="text-[12.5px] font-medium border border-black/[0.15] text-black px-3.5 py-2 rounded-full hover:bg-black/[0.03] transition-colors" href="https://runway.com/product/robotics/contact">
+          Contact Sales
+        </a>
+</div>
+<div class="pt-4 border-t border-black/[0.06] text-[11.5px] text-[#888]">
+        Custom physical embodiments &amp; simulated sensory input.
+      </div>
+</div>
+</section>
+<!-- How Runway is Used Feature Card (Dark Mode Contrast Module) -->
+<section class="px-5 py-8">
+<div class="bg-[#0f0f10] text-white rounded-[24px] p-6 shadow-xl overflow-hidden relative">
+<span class="text-[10px] font-mono uppercase tracking-wider text-neutral-400 block mb-1">Capabilities</span>
+<h3 class="text-[24px] font-medium tracking-tight mb-4">How Runway is Used</h3>
+<!-- Horizontal scrolling pills for mobile -->
+<div class="flex gap-2 overflow-x-auto hide-scrollbar pb-3 mb-6 -mx-2 px-2 text-[12px]">
+<button class="bg-white text-black px-3.5 py-1.5 rounded-full font-medium shrink-0">Create with Agent</button>
+<button class="bg-white/10 text-white/80 hover:bg-white/20 px-3.5 py-1.5 rounded-full shrink-0">Workflows</button>
+<button class="bg-white/10 text-white/80 hover:bg-white/20 px-3.5 py-1.5 rounded-full shrink-0">Enterprise-grade</button>
+<button class="bg-white/10 text-white/80 hover:bg-white/20 px-3.5 py-1.5 rounded-full shrink-0">Best Models</button>
+</div>
+<!-- Feature Interactive Card Preview with Official Image Asset -->
+<div class="rounded-xl overflow-hidden mb-5 border border-white/10 bg-neutral-900">
+<img alt="Runway Agent for creative teams" class="w-full h-auto object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1W4biQaqShkdzb_8vPo_ARFgmLAjF3ADLEbq0T1I-swiGCKoR-pjYFAlf30V6fV2IARKwq5wJmQQBTin1tygTCxsdAwKY_P6HV2pGQYXbmWotaozqxF40H-jJblqd1SDLwA4WQWx_CEDvK6_u-plX7YI6ODoyvFOYtn6IlsTZMMXQFAXZ0hPdjfz9QeyLipVkzohlWO_n6uuN1qVTUWqeqi7g7S9FQcrC--NhuMxhRlcnLBFldR2z322A"/>
+</div>
+<div class="space-y-2">
+<span class="inline-block text-[11px] font-mono text-white/60 bg-white/10 px-2 py-0.5 rounded">Runway Agent 2.0</span>
+<h4 class="text-[18px] font-medium tracking-tight text-white">
+          Direct multi-modal creative generation with autonomous flow
+        </h4>
+<p class="text-[13px] text-neutral-400 leading-relaxed font-normal">
+          Directly orchestrate multi-shot film sequences, consistent character generation, and audio composition from natural language. Built for creative speed and frictionless iteration.
+        </p>
+<div class="pt-2">
+<a class="inline-flex items-center gap-1.5 text-[13px] text-white font-medium hover:underline" href="https://runway.com/product/agent">
+<span>Explore Agent capabilities</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Runway Research Section -->
+<section class="px-5 py-8 border-t border-black/[0.06]">
+<span class="text-[10px] font-mono uppercase tracking-wider text-[#777] block mb-1">Frontier Systems</span>
+<h2 class="text-[26px] font-medium text-black tracking-tight mb-2">Runway Research</h2>
+<p class="text-[13.5px] text-[#555] leading-relaxed mb-4">
+      We are building foundational General World Models that will be capable of simulating all possible worlds and experiences. The next frontier of intelligence will come from models that can understand, perceive, generate and act in the world.
+    </p>
+<a class="inline-flex items-center gap-1 text-[13px] font-medium text-black hover:underline mb-6" href="https://runway.com/news/research">
+<span>Learn more about Research</span>
+<span>↗</span>
+</a>
+<!-- Research Cards Stack for Mobile -->
+<div class="space-y-3">
+<!-- GWM-1 -->
+<a class="block p-4 rounded-xl border border-black/[0.08] hover:border-black/[0.2] transition-colors bg-white" href="https://runway.com/research/introducing-runway-gwm-1">
+<div class="flex items-center justify-between text-[11px] font-mono text-[#666] mb-1">
+<span>MODEL #01</span>
+<span>↗</span>
+</div>
+<h3 class="text-[16px] font-medium text-black mb-1">GWM-1</h3>
+<p class="text-[12.5px] text-[#666] leading-snug">
+          A state-of-the-art General World Model built to interact with the real world. And a major step towards universal simulation.
+        </p>
+</a>
+<!-- Gen-4.5 -->
+<a class="block p-4 rounded-xl border border-black/[0.08] hover:border-black/[0.2] transition-colors bg-white" href="https://runway.com/research/introducing-runway-gen-4.5">
+<div class="flex items-center justify-between text-[11px] font-mono text-[#666] mb-1">
+<span>VIDEO SOTA</span>
+<span>↗</span>
+</div>
+<h3 class="text-[16px] font-medium text-black mb-1">Gen-4.5</h3>
+<p class="text-[12.5px] text-[#666] leading-snug">
+          The world's best video model, featuring state-of-the-art motion quality, prompt adherence and visual fidelity.
+        </p>
+</a>
+<!-- General World Models -->
+<a class="block p-4 rounded-xl border border-black/[0.08] hover:border-black/[0.2] transition-colors bg-white" href="https://runway.com/research/introducing-general-world-models">
+<div class="flex items-center justify-between text-[11px] font-mono text-[#666] mb-1">
+<span>FOUNDATION</span>
+<span>↗</span>
+</div>
+<h3 class="text-[16px] font-medium text-black mb-1">General World Models</h3>
+<p class="text-[12.5px] text-[#666] leading-snug">
+          Our long-term research effort to build AI systems that understand the visual world and its dynamics.
+        </p>
+</a>
+</div>
+</section>
+<!-- See the latest from Runway (News Cards) -->
+<section class="px-5 py-8 border-t border-black/[0.06]">
+<div class="flex items-center justify-between mb-5">
+<h2 class="text-[20px] font-medium text-black tracking-tight">See the latest</h2>
+<a class="text-[12px] font-medium text-[#666] hover:text-black flex items-center gap-1" href="https://runway.com/news">
+<span>View all news</span>
+<span>→</span>
+</a>
+</div>
+<!-- 4 Official News Cards Stack -->
+<div class="space-y-6">
+<!-- Card 1: Team Plan -->
+<article class="group">
+<a class="block" href="https://runway.com/news/company-news/introducing-team-plan">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-neutral-100 mb-2.5 border border-black/[0.05]">
+<img alt="Introducing Team Plan" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1W4biQaqShkdzb_8vPo_ARFgmLAjF3ADLEbq0T1I-swiGCKoR-pjYFAlf30V6fV2IARKwq5wJmQQBTin1tygTCxsdAwKY_P6HV2pGQYXbmWotaozqxF40H-jJblqd1SDLwA4WQWx_CEDvK6_u-plX7YI6ODoyvFOYtn6IlsTZMMXQFAXZ0hPdjfz9QeyLipVkzohlWO_n6uuN1qVTUWqeqi7g7S9FQcrC--NhuMxhRlcnLBFldR2z322A"/>
+</div>
+<span class="text-[10px] font-mono tracking-wider uppercase text-[#777] block mb-1">Company · News</span>
+<h3 class="text-[15px] font-medium text-black mb-1 group-hover:underline">Introducing Team Plan</h3>
+<p class="text-[12.5px] text-[#666] leading-normal mb-2">
+            Runway's collaboration plan for creative teams, with shared projects, pooled credits and Brand Kits for 2 to 9 seats.
+          </p>
+<span class="text-[12px] font-medium text-black inline-flex items-center gap-1">Learn more →</span>
+</a>
+</article>
+<!-- Card 2: Solaris -->
+<article class="group">
+<a class="block" href="https://runway.com/news/research/introducing-solaris">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-neutral-100 mb-2.5 border border-black/[0.05]">
+<img alt="Introducing Solaris" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1VdwA74yZs5qV-SmfudN2NvNnenJJE3pqBwtSSqSB1_DKP0tQXH-JblyCdYCb_r5s6uf0WJKcwg0V2IeRp4uGco_jB7ryDkeOWz4fw8Sjg9o5gZiyoMzKu-Km5EDf-5-8DlaYGFlcGI7QMwryF9-qf8zSnxADQkc-ck7XPVXRGu-wHnE6bXjlQMp_vhRSny0s_PZNszPO_KMIujzQoZBm7XAJLkKowhh4YbN838mDP7ZVoRM0Ox5vYBWg"/>
+</div>
+<span class="text-[10px] font-mono tracking-wider uppercase text-[#777] block mb-1">Research</span>
+<h3 class="text-[15px] font-medium text-black mb-1 group-hover:underline">Introducing Solaris</h3>
+<p class="text-[12.5px] text-[#666] leading-normal mb-2">
+            Our first Interface World Model: real-time AI that generates interactive interfaces frame by frame, with no code.
+          </p>
+<span class="text-[12px] font-medium text-black inline-flex items-center gap-1">Learn more →</span>
+</a>
+</article>
+<!-- Card 3: Enterprise Video Generation -->
+<article class="group">
+<a class="block" href="https://runway.com/news/company-news/the-next-phase-of-enterprise-video-generation">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-neutral-100 mb-2.5 border border-black/[0.05]">
+<img alt="Enterprise Video Generation" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1UlotDXOSe1MEZBaEmX26JhdIMhtZtTwWCmTNoPiXAVddkllFszbNrNf3epGEY4EPLRpCM_BaVNzmlr_S4APi0tcczrrw7mPeAoTDqc9CLIctjaS8Pz3YLkGJmluFHiqQ-nWLq1aoSBC8eSLrj8CQO-Eto3AA85jei0CclrOI8F3tUlgPt_73wLy4PSHXRgn9g9aiGdRO39qjoGW4lFIbglNk-PL1cg9nsd7JTan_E0LtgmoPociCynUQ"/>
+</div>
+<span class="text-[10px] font-mono tracking-wider uppercase text-[#777] block mb-1">Company · News</span>
+<h3 class="text-[15px] font-medium text-black mb-1 group-hover:underline">The Next Phase of Enterprise Video Generation</h3>
+<p class="text-[12.5px] text-[#666] leading-normal mb-2">
+            Five themes from hundreds of enterprise conversations, from data sovereignty and cost economics to autonomous execution.
+          </p>
+<span class="text-[12px] font-medium text-black inline-flex items-center gap-1">Learn more →</span>
+</a>
+</article>
+<!-- Card 4: GWM Worlds 2 -->
+<article class="group">
+<a class="block" href="https://runway.com/research/introducing-gwm-worlds-2">
+<div class="aspect-[16/9] rounded-xl overflow-hidden bg-neutral-100 mb-2.5 border border-black/[0.05]">
+<img alt="Introducing GWM Worlds 2" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1X86GhNJzfWDx404ZVWrZpjm_F0JHzuj_5Ndw0fyjf_DKIkMe9FPu2EC-T7A5C82_RJHWPWyYL_jUeKwumMCVBDRoSgezbBnI1JmntNuz4jNIdhqcxeZSOk9vwT7B3Ju7BKIcJFnleOcMCfPLSVVhHk8SSO_xco3iZvIIFEiMGhb06Bhthh6eBS7xpDVZqp26VGxQf1uXv5FYGdsvJKrR8l9_WuiuwcDq_8haAa442h9kIenzc52PqxMQ"/>
+</div>
+<span class="text-[10px] font-mono tracking-wider uppercase text-[#777] block mb-1">Research</span>
+<h3 class="text-[15px] font-medium text-black mb-1 group-hover:underline">Introducing GWM Worlds 2</h3>
+<p class="text-[12.5px] text-[#666] leading-normal mb-2">
+            GWM Worlds 2 generates interactive worlds in real time: continuous 720p video at 24 fps and audio at 48,000 Hz, responding to inputs.
+          </p>
+<span class="text-[12px] font-medium text-black inline-flex items-center gap-1">Learn more →</span>
+</a>
+</article>
+</div>
+</section>
+<!-- Complete Mobile Footer (Accordion / 2-column breakdown based on official copy) -->
+<footer class="bg-[#fafafa] border-t border-black/[0.08] px-5 pt-8 pb-12 text-[12px]">
+<div class="grid grid-cols-2 gap-y-8 gap-x-4 mb-10">
+<!-- Col 1: Creative -->
+<div>
+<h4 class="font-medium text-black mb-2 text-[13px]">Creative</h4>
+<ul class="space-y-1.5 text-[#555]">
+<li><a class="hover:text-black" href="https://runway.com/product">Overview</a></li>
+<li><a class="hover:text-black" href="https://runway.com/product/agent">Agent</a></li>
+<li><a class="hover:text-black" href="https://play.google.com/store/apps/details?id=com.runwayml.prod">Android app ↗</a></li>
+<li><a class="hover:text-black" href="https://apps.apple.com/us/app/runwayml/id1665024375">iOS app ↗</a></li>
+<li><a class="hover:text-black" href="https://runway.com/mcp/chatgpt">ChatGPT Plugin</a></li>
+<li><a class="hover:text-black" href="https://runway.com/pricing">Pricing</a></li>
+<li><a class="hover:text-black" href="https://runway.com/team-plan">Team Plan</a></li>
+</ul>
+</div>
+<!-- Col 2: Dev -->
+<div>
+<h4 class="font-medium text-black mb-2 text-[13px]">Dev</h4>
+<ul class="space-y-1.5 text-[#555]">
+<li><a class="hover:text-black" href="https://dev.runwayml.com/">Platform ↗</a></li>
+<li><a class="hover:text-black" href="https://dev.runwayml.com/models">Models ↗</a></li>
+<li><a class="hover:text-black" href="https://docs.dev.runwayml.com/model-routers/">Model Router ↗</a></li>
+<li><a class="hover:text-black" href="https://runway.com/workflows">Workflows</a></li>
+<li><a class="hover:text-black" href="https://dev.runwayml.com/recipes/product_ad">Recipes ↗</a></li>
+<li><a class="hover:text-black" href="https://docs.dev.runwayml.com/">Documentation ↗</a></li>
+<li><a class="hover:text-black" href="https://runway.com/pricing?tab=dev">Pricing</a></li>
+</ul>
+</div>
+<!-- Col 3: Robotics & Enterprise -->
+<div>
+<h4 class="font-medium text-black mb-2 text-[13px]">Robotics</h4>
+<ul class="space-y-1.5 text-[#555] mb-5">
+<li><a class="hover:text-black" href="https://runway.com/product/robotics">Overview</a></li>
+<li><a class="hover:text-black" href="https://runway.com/product/robotics/policy-model">Policy Model</a></li>
+<li><a class="hover:text-black" href="https://runway.com/product/robotics/policy-evaluation">Offline Policy Eval</a></li>
+<li><a class="hover:text-black" href="https://runway.com/product/robotics/contact">Get Access</a></li>
+</ul>
+<h4 class="font-medium text-black mb-2 text-[13px]">Enterprise</h4>
+<ul class="space-y-1.5 text-[#555]">
+<li><a class="hover:text-black" href="https://runway.com/enterprise">Overview</a></li>
+<li><a class="hover:text-black" href="https://runway.com/data-security">Data Security</a></li>
+<li><a class="hover:text-black" href="https://runway.com/news/customers">Customer Stories</a></li>
+<li><a class="hover:text-black" href="https://runway.com/enterprise-contact">Contact Sales</a></li>
+</ul>
+</div>
+<!-- Col 4: Research & Resources -->
+<div>
+<h4 class="font-medium text-black mb-2 text-[13px]">Research</h4>
+<ul class="space-y-1.5 text-[#555] mb-5">
+<li><a class="hover:text-black" href="https://runway.com/research">Research Hub</a></li>
+<li><a class="hover:text-black" href="https://runway.com/news/research">Research News</a></li>
+<li><a class="hover:text-black" href="https://runway.com/research/introducing-runway-gen-4.5">Gen-4.5</a></li>
+<li><a class="hover:text-black" href="https://runway.com/news/research/introducing-solaris">Solaris</a></li>
+<li><a class="hover:text-black" href="https://runway.com/research/introducing-gwm-worlds-2">World Simulation</a></li>
+</ul>
+<h4 class="font-medium text-black mb-2 text-[13px]">Company</h4>
+<ul class="space-y-1.5 text-[#555]">
+<li><a class="hover:text-black" href="https://runway.com/about">About Us</a></li>
+<li><a class="hover:text-black" href="https://runway.com/careers">Careers</a></li>
+<li><a class="hover:text-black" href="https://runway.com/safety">Safety</a></li>
+<li><a class="hover:text-black" href="https://runway.com/brand-guidelines">Brand Guidelines</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal & Social Strip -->
+<div class="pt-6 border-t border-black/[0.08] text-[11px] text-[#777] leading-relaxed">
+<div class="mb-3">
+        © 2026 Runway AI, Inc. · <a class="hover:underline" href="https://runway.com/terms-of-use">Terms of Use</a> · <a class="hover:underline" href="https://runway.com/privacy-policy">Privacy Policy</a> · <a class="hover:underline" href="https://runway.com/coc">Code of Conduct</a>
+</div>
+<div class="flex items-center justify-between text-[#555]">
+<div class="flex items-center gap-3">
+<a class="hover:text-black font-medium" href="https://twitter.com/runwayml" rel="noreferrer" target="_blank">𝕏</a>
+<a class="hover:text-black font-medium" href="https://instagram.com/runwayapp" rel="noreferrer" target="_blank">Instagram</a>
+<a class="hover:text-black font-medium" href="https://youtube.com/runwayml" rel="noreferrer" target="_blank">YouTube</a>
+<a class="hover:text-black font-medium" href="http://discord.gg/invite/runwayml" rel="noreferrer" target="_blank">Discord</a>
+</div>
+<span class="text-[#888]">English</span>
+</div>
+</div>
+</footer>
+</body>
+</html>
