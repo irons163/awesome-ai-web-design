@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Stage only public website files for static hosting, after build.py."""
 import json
+import hashlib
 import re
 import shutil
 from html import escape, unescape
@@ -10,8 +11,23 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
+REMOTE_ASSETS = json.loads((ROOT / 'data/official-remote-assets.json').read_text())['assets']
+REMOTE_PATHS = {asset['path'] for asset in REMOTE_ASSETS}
+
+
+def retain_original_media(html):
+    for asset in REMOTE_ASSETS:
+        if asset['path'] not in html:
+            continue
+        original = (DRAFT_SOURCE / asset['path']).read_bytes()
+        if (len(original) != asset['bytes'] or
+                hashlib.sha256(original).hexdigest() != asset['sha256'] or
+                urlsplit(asset['source_url']).scheme != 'https'):
+            raise ValueError('Original media provenance differs: ' + asset['path'])
+        html = html.replace(asset['path'], asset['source_url'])
+    return html
 
 
 class AssetReferences(HTMLParser):
@@ -32,7 +48,7 @@ def stage_official_drafts():
     progress = json.loads((DRAFT_SOURCE / 'progress.json').read_text())
     for name in OFFICIAL_DRAFTS:
         source = DRAFT_SOURCE / f'{name}.html'
-        html = source.read_text()
+        html = retain_original_media(source.read_text())
         references = AssetReferences()
         references.feed(html)
         references.values.extend(re.findall(r'url\(([^)]+)\)', html))
@@ -50,13 +66,16 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
-        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex'):
+        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m'):
             # Runtime tabs select additional official media that do not appear
             # in static src attributes; keep those assets with each draft.
             asset_dir = f'{name}-assets'
-            ignore = (shutil.ignore_patterns('Homepage-FSD-Card-Desktop.mp4',
-                                             'Homepage-FSD-Card-Mobile.mp4')
-                      if name == 'tesla' else None)
+            def ignore(directory, names):
+                return [entry for entry in names
+                        if str((Path(directory) / entry).relative_to(DRAFT_SOURCE)) in REMOTE_PATHS
+                        or (name in ('bmw', 'bmw-m') and entry.startswith('source-'))
+                        or (name == 'tesla' and entry in ('Homepage-FSD-Card-Desktop.mp4',
+                                                         'Homepage-FSD-Card-Mobile.mp4'))]
             shutil.copytree(DRAFT_SOURCE / asset_dir,
                             destination / asset_dir, dirs_exist_ok=True,
                             ignore=ignore)

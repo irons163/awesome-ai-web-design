@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Build the same static Site as build_site.py where Python is unavailable.
 import fs from 'node:fs';
+import { createHash } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -13,11 +14,11 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
-  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex',
+  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m',
 ]);
 const SANITY_HOSTED_SUFFIXES = new Set([
   '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp',
@@ -26,6 +27,22 @@ const SANITY_HOSTED_SUFFIXES = new Set([
 const read = p => fs.readFileSync(p, 'utf8');
 const write = (p, content) => fs.writeFileSync(p, content);
 const json = p => JSON.parse(read(p));
+const REMOTE_ASSETS = json(path.join(ROOT, 'data', 'official-remote-assets.json')).assets;
+const REMOTE_PATHS = new Set(REMOTE_ASSETS.map(asset => asset.path));
+
+function retainOriginalMedia(html) {
+  for (const asset of REMOTE_ASSETS) {
+    if (!html.includes(asset.path)) continue;
+    const original = fs.readFileSync(path.join(DRAFT_SOURCE, asset.path));
+    if (original.length !== asset.bytes ||
+        createHash('sha256').update(original).digest('hex') !== asset.sha256 ||
+        new URL(asset.source_url).protocol !== 'https:') {
+      throw new Error('Original media provenance differs: ' + asset.path);
+    }
+    html = html.replaceAll(asset.path, asset.source_url);
+  }
+  return html;
+}
 const escapeHtml = text => String(text).replace(/&/g, '&amp;')
   .replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#x27;');
@@ -75,14 +92,16 @@ function stageOfficialDrafts(progress) {
 .official-draft-badge strong{font-size:13px}.official-draft-badge span{color:#555}.official-draft-badge a{color:#a53d22;text-decoration:underline}
 </style>`;
   for (const name of OFFICIAL_DRAFTS) {
-    let html = read(path.join(DRAFT_SOURCE, name + '.html'));
+    let html = retainOriginalMedia(read(path.join(DRAFT_SOURCE, name + '.html')));
     for (const value of references(html)) copyReferencedAsset(name, value);
     if (COPY_ALL_ASSETS.has(name)) {
       fs.cpSync(path.join(DRAFT_SOURCE, name + '-assets'),
         path.join(destination, name + '-assets'), {
           recursive: true, force: true,
-          filter: source => name !== 'tesla' ||
-            !['Homepage-FSD-Card-Desktop.mp4', 'Homepage-FSD-Card-Mobile.mp4'].includes(path.basename(source)),
+          filter: source => !REMOTE_PATHS.has(path.relative(DRAFT_SOURCE, source)) &&
+            (!['bmw', 'bmw-m'].includes(name) || !path.basename(source).startsWith('source-')) &&
+            (name !== 'tesla' ||
+            !['Homepage-FSD-Card-Desktop.mp4', 'Homepage-FSD-Card-Mobile.mp4'].includes(path.basename(source))),
         });
     }
     if (name === 'sanity') {

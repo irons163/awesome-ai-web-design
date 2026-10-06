@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BMW M — The Ultimate Driving Machine</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&amp;family=Playfair+Display:ital@0;1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @font-face {
+      font-family: 'BMWTypeNextLatin';
+      src: url('https://www.bmw-m.com/etc.clientlibs/bmwcom/clientlibs/clientlib-site/resources/fonts/BMWTypeNextLatin.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BMWTypeNextLatin';
+      src: url('https://www.bmw-m.com/etc.clientlibs/bmwcom/clientlibs/clientlib-site/resources/fonts/BMWTypeNextLatin-Light.woff2') format('woff2');
+      font-weight: 300;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg-charcoal: #262626;
+      --bg-surface: #1e1e1e;
+      --bg-navbar: rgba(38, 38, 38, 0.94);
+      --text-white: #ffffff;
+      --text-muted: #8c8c8c;
+      --text-dim: #b2b2b2;
+      --m-blue: #3466cc;
+      --m-blue-hover: #2952a6;
+      --m-tricolor-light-blue: #0099ff;
+      --m-tricolor-dark-blue: #002b7f;
+      --m-tricolor-red: #e30613;
+      --border-subtle: #383838;
+      --font-bmw: 'BMWTypeNextLatin', 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--bg-charcoal);
+      color: var(--text-white);
+      font-family: var(--font-bmw);
+      font-weight: 300;
+      line-height: 1.5;
+      overflow-x: hidden;
+      width: 100%;
+    }
+
+    /* Top Tricolor Accent Ribbon (9px) */
+    .m-ribbon {
+      width: 100%;
+      height: 9px;
+      display: flex;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .m-ribbon-stripe {
+      height: 100%;
+    }
+    .m-ribbon-stripe.c1 { width: 33.333%; background-color: var(--m-tricolor-light-blue); }
+    .m-ribbon-stripe.c2 { width: 33.333%; background-color: var(--m-tricolor-dark-blue); }
+    .m-ribbon-stripe.c3 { width: 33.334%; background-color: var(--m-tricolor-red); }
+
+    /* Layout Wrapper */
+    .page-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      position: relative;
+      background-color: var(--bg-charcoal);
+    }
+
+    /* Shadowed Charcoal Navbar */
+    /* Spec: x24 y24 w1232 h82, combined BMW M logo at 94, 41, 132x48 */
+    .site-nav-wrapper {
+      position: sticky;
+      top: 9px;
+      z-index: 900;
+      padding: 15px 24px;
+      background: linear-gradient(180deg, rgba(38,38,38,0.98) 0%, rgba(38,38,38,0.85) 100%);
+      backdrop-filter: blur(12px);
+    }
+
+    .site-navbar {
+      height: 82px;
+      background-color: var(--bg-charcoal);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+    }
+
+    .nav-brand-group {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .bmw-m-logo {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      text-decoration: none;
+    }
+
+    .brand-slogan {
+      border-left: 1px solid rgba(255, 255, 255, 0.2);
+      padding-left: 20px;
+      font-size: 11px;
+      line-height: 1.35;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 300;
+      color: #dfdfdf;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      transition: color 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #dfdfdf;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .search-btn, .menu-toggle-btn {
+      background: none;
+      border: none;
+      color: var(--text-white);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+      font-size: 13.5px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+    }
+
+    /* Hero Section */
+    /* Hero x100 y168: left caption BMW M350 xDrive and BMW i3 M60 xDrive. */
+    /* H1 at 100,208 width436 height156, 40px/52px light with 3 lines THE BMW 3 SERIES / PERFORMANCE / MODELS. */
+    /* CTA Experience now x100 y404 180x50 */
+    /* Main red car photo x572 y168 708x398.25; overlapping vertical video/poster x424 y390 204x272. */
+    .hero-section {
+      position: relative;
+      margin: 36px 0 90px 0;
+      padding: 0 100px;
+      min-height: 520px;
+    }
+
+    .hero-content {
+      position: relative;
+      width: 100%;
+      height: 480px;
+    }
+
+    .hero-copy {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 436px;
+      z-index: 5;
+    }
+
+    .hero-caption {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+      margin-bottom: 24px;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: 40px;
+      line-height: 52px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: var(--text-white);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      height: 156px;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 180px;
+      height: 50px;
+      background-color: var(--m-blue);
+      color: var(--text-white);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease;
+      text-transform: uppercase;
+      border-radius: 0;
+    }
+
+    .btn-cta:hover {
+      background-color: var(--m-blue-hover);
+    }
+
+    .hero-main-photo-wrap {
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 608px;
+      height: 398.25px;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      background-color: #1a1a1a;
+    }
+
+    .hero-main-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-main-photo-wrap:hover img {
+      transform: scale(1.02);
+    }
+
+    .hero-portrait-poster-wrap {
+      position: absolute;
+      left: 324px;
+      top: 222px;
+      width: 204px;
+      height: 272px;
+      z-index: 10;
+      overflow: hidden;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: #111;
+    }
+
+    .hero-portrait-poster-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-badge-tag {
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(4px);
+      padding: 4px 8px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    /* Section Shared Styling */
+    .section-container {
+      padding: 0 100px;
+      margin-bottom: 96px;
+    }
+
+    .section-eyebrow {
+      font-size: 13px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 400;
+    }
+
+    .section-title {
+      font-size: 32px;
+      line-height: 42px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-white);
+      margin-bottom: 32px;
+    }
+
+    /* Teaser Double Banner Pair */
+    /* Photos top837.85 height302.625, headings at1196.07 */
+    .teasers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .teaser-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      group: cursor;
+    }
+
+    .teaser-image-wrap {
+      height: 302.6px;
+      overflow: hidden;
+      margin-bottom: 24px;
+      position: relative;
+      background-color: #181818;
+    }
+
+    .teaser-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .teaser-card:hover .teaser-image-wrap img {
+      transform: scale(1.03);
+    }
+
+    .teaser-caption {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .teaser-heading {
+      font-size: 22px;
+      line-height: 30px;
+      font-weight: 300;
+      color: var(--text-white);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      transition: color 0.2s ease;
+    }
+
+    .teaser-card:hover .teaser-heading {
+      color: #dfdfdf;
+    }
+
+    /* Horizontal Carousels */
+    .carousel-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 28px;
+    }
+
+    .carousel-controls {
+      display: flex;
+      gap: 12px;
+    }
+
+    .carousel-nav-btn {
+      width: 44px;
+      height: 44px;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .carousel-nav-btn:hover {
+      background-color: var(--text-white);
+      color: var(--bg-charcoal);
+    }
+
+    .carousel-track-container {
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding-bottom: 12px;
+    }
+
+    .carousel-track-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 24px;
+      width: max-content;
+    }
+
+    /* Magazine Cards (w436 gap24) */
+    .mag-card {
+      width: 436px;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .mag-card-media {
+      width: 100%;
+      height: 245px;
+      position: relative;
+      overflow: hidden;
+      background-color: #1a1a1a;
+      margin-bottom: 20px;
+    }
+
+    .mag-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .mag-card:hover .mag-card-media img {
+      transform: scale(1.03);
+    }
+
+    .mag-tag {
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .mag-title {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 10px;
+    }
+
+    .mag-desc {
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--text-dim);
+      font-weight: 300;
+    }
+
+    /* Asymmetric Models Carousel */
+    .model-card {
+      width: 320px;
+      flex-shrink: 0;
+      text-decoration: none;
+      color: inherit;
+      background-color: #1f1f1f;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .model-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      transform: translateY(-4px);
+    }
+
+    .model-card-media {
+      width: 100%;
+      height: 426px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .model-card-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .model-card-info {
+      padding: 24px;
+    }
+
+    .model-category {
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .model-name {
+      font-size: 20px;
+      font-weight: 400;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .model-specs {
+      font-size: 12px;
+      color: #9e9e9e;
+      line-height: 1.6;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 12px;
+    }
+
+    /* Lifestyle Split Banner */
+    .lifestyle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      background-color: #1c1c1c;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+    }
+
+    .lifestyle-image {
+      height: 440px;
+      position: relative;
+    }
+
+    .lifestyle-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .lifestyle-content {
+      padding: 60px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* Chatbot Centered Callout */
+    .chatbot-callout {
+      text-align: center;
+      padding: 64px 32px;
+      background: radial-gradient(circle at 50% 30%, rgba(52, 102, 204, 0.15) 0%, rgba(38, 38, 38, 0) 70%), #1a1a1a;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      position: relative;
+    }
+
+    .chatbot-icon-ring {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: rgba(52, 102, 204, 0.18);
+      border: 1px solid rgba(52, 102, 204, 0.4);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    /* Vertical 8 Cards Grid (More BMW M) */
+    .more-m-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+
+    .more-card {
+      background-color: #1e1e1e;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s ease;
+    }
+
+    .more-card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .more-card-img {
+      height: 170px;
+      overflow: hidden;
+    }
+
+    .more-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .more-card-body {
+      padding: 20px;
+    }
+
+    .more-card-title {
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .more-card-caption {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Newsletter Callout */
+    .newsletter-banner {
+      background: linear-gradient(90deg, #1b1b1b 0%, #20242e 100%);
+      border: 1px solid rgba(52, 102, 204, 0.3);
+      padding: 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* 4-Column Dark Footer */
+    .site-footer {
+      background-color: #191919;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 64px 100px 48px;
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1.5fr;
+      gap: 48px;
+      margin-bottom: 56px;
+    }
+
+    .footer-col-title {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    .footer-list {
+      list-style: none;
+    }
+
+    .footer-list li {
+      margin-bottom: 12px;
+    }
+
+    .footer-list a {
+      color: #9e9e9e;
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .footer-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-bottom-bar {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #7a7a7a;
+    }
+
+    .lang-switcher a {
+      color: #7a7a7a;
+      text-decoration: none;
+      margin-left: 16px;
+      font-size: 12px;
+    }
+    .lang-switcher a.active {
+      color: #ffffff;
+      font-weight: 500;
+    }
+
+    /* Mobile Overlay Menu */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(18, 18, 18, 0.98);
+      backdrop-filter: blur(16px);
+      z-index: 2000;
+      display: none;
+      flex-direction: column;
+      padding: 32px;
+    }
+
+    .mobile-menu-overlay.active {
+      display: flex;
+    }
+
+    .close-overlay-btn {
+      align-self: flex-end;
+      background: none;
+      border: none;
+      color: #ffffff;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      margin-top: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .mobile-nav-list a {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 24px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* SVG Icons Utility */
+    .icon {
+      display: inline-block;
+      stroke-width: 0;
+      stroke: currentColor;
+      fill: currentColor;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+<!-- 9px Authentic M Tricolor Ribbon -->
+<div aria-hidden="true" class="m-ribbon">
+<div class="m-ribbon-stripe c1"></div>
+<div class="m-ribbon-stripe c2"></div>
+<div class="m-ribbon-stripe c3"></div>
+</div>
+<div class="page-container">
+<!-- Top Navigation Bar (Observed 1232x82 @ x24 y24) -->
+<header class="site-nav-wrapper">
+<nav aria-label="Main Navigation" class="site-navbar">
+<div class="nav-brand-group">
+<!-- Official BMW M Combined Emblem -->
+<a aria-label="BMW M Homepage" class="bmw-m-logo" href="#">
+<svg fill="none" height="42" viewbox="0 0 132 42" width="132" xmlns="http://www.w3.org/2000/svg">
+<!-- BMW Roundel -->
+<circle cx="21" cy="21" fill="#000000" r="20" stroke="#FFFFFF" stroke-width="1.5"></circle>
+<circle cx="21" cy="21" fill="#000000" r="14.5" stroke="#FFFFFF" stroke-width="1"></circle>
+<path d="M21 6.5A14.5 14.5 0 0 1 35.5 21H21V6.5Z" fill="#0066B1"></path>
+<path d="M6.5 21A14.5 14.5 0 0 1 21 6.5V21H6.5Z" fill="#FFFFFF"></path>
+<path d="M21 35.5A14.5 14.5 0 0 1 6.5 21H21V35.5Z" fill="#0066B1"></path>
+<path d="M35.5 21A14.5 14.5 0 0 1 21 35.5V21H35.5Z" fill="#FFFFFF"></path>
+<text fill="#FFFFFF" font-family="Montserrat, sans-serif" font-size="3" font-weight="700" text-anchor="middle" x="21" y="5">BMW</text>
+<!-- M Badge Monogram -->
+<g transform="translate(56, 11)">
+<!-- Light Blue stripe (skewed) -->
+<polygon fill="#0099FF" points="0,22 6,22 13,0 7,0"></polygon>
+<!-- Dark Blue stripe -->
+<polygon fill="#002B7F" points="7.5,22 13.5,22 20.5,0 14.5,0"></polygon>
+<!-- Red stripe -->
+<polygon fill="#E30613" points="15,22 21,22 28,0 22,0"></polygon>
+<!-- Chrome / White M -->
+<path d="M26.5 22H33L37 10.5L41 22H47.5L53.5 0H47L43.8 12.8L39.8 0H34.2L30.2 12.8L27 0H20.5L26.5 22Z" fill="#FFFFFF"></path>
+</g>
+</svg>
+</a>
+<!-- Slogan: The Ultimate Driving Machine -->
+<div class="brand-slogan">
+            The Ultimate<br/>Driving Machine
+          </div>
+</div>
+<!-- Navigation Links -->
+<ul class="nav-links">
+<li><a class="active" href="#home">Home</a></li>
+<li><a href="#magazine">Magazine</a></li>
+<li><a href="#models">Models</a></li>
+<li><a href="#motorsport">M Motorsport</a></li>
+<li><a href="#aream">AREA M</a></li>
+<li><a href="#heritage">Heritage</a></li>
+<li><a href="#more">More <svg fill="currentColor" height="6" viewbox="0 0 8 6" width="8"><path d="M0 0.5L4 4.5L8 0.5H0Z"></path></svg></a></li>
+</ul>
+<!-- Action Items -->
+<div class="nav-actions">
+<button aria-label="Search" class="search-btn" id="searchBtn">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18">
+<circle cx="11" cy="11" r="7"></circle>
+<line x1="16.5" x2="22" y1="16.5" y2="22"></line>
+</svg>
+<span>Search</span>
+</button>
+<button aria-label="Open Menu" class="menu-toggle-btn" id="mobileMenuBtn">
+<svg fill="currentColor" height="16" viewbox="0 0 22 16" width="22">
+<rect height="2" width="22"></rect>
+<rect height="2" width="22" y="7"></rect>
+<rect height="2" width="22" y="14"></rect>
+</svg>
+</button>
+</div>
+</nav>
+</header>
+<!-- Asymmetric Hero Section (Measured Desktop: x100 y168) -->
+<main>
+<section class="hero-section" id="home">
+<div class="hero-content">
+<!-- Left Textual Column -->
+<div class="hero-copy">
+<p class="hero-caption">BMW M350 xDrive and BMW i3 M60 xDrive.</p>
+<h1 class="hero-title">
+              THE BMW 3 SERIES<br/>
+              PERFORMANCE<br/>
+              MODELS.
+            </h1>
+<a class="btn-cta" href="#models">Experience now</a>
+</div>
+<!-- Main Authentic Car Photo (Red M350 xDrive 708x398.25) -->
+<div class="hero-main-photo-wrap">
+<img alt="BMW M350 xDrive Performance Sedan in vivid red finish with M aerodynamic styling" loading="eager" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Overlapping Vertical Video/Poster (Observed x424 y390 204x272) -->
+<div class="hero-portrait-poster-wrap">
+<img alt="BMW 3 Series Performance cockpit cockpit and carbon detail" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-badge-tag">M Performance</div>
+</div>
+</div>
+</section>
+<!-- Paired Photo Teasers -->
+<!-- Spec: Six Models, Exclusive Features, Unique Details. / THE 100 JAHRE NÜRBURGRING EDITION. and AREA M. / YOUR ULTIMATE BMW M EXPERIENCE. -->
+<section class="section-container">
+<div class="teasers-grid">
+<!-- Teaser 1 -->
+<a class="teaser-card" href="#nurburgring-edition">
+<div class="teaser-image-wrap">
+<img alt="BMW M Nürburgring Special Edition on track" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">Six Models, Exclusive Features, Unique Details.</div>
+<h2 class="teaser-heading">THE 100 JAHRE NÜRBURGRING EDITION.</h2>
+</a>
+<!-- Teaser 2 -->
+<a class="teaser-card" href="#aream-experience">
+<div class="teaser-image-wrap">
+<img alt="AREA M Track day experience and dynamic driving" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">AREA M.</div>
+<h2 class="teaser-heading">YOUR ULTIMATE BMW M EXPERIENCE.</h2>
+</a>
+</div>
+</section>
+<!-- Magazine Section: Horizontal Carousel with ALL Seven Articles -->
+<section class="section-container" id="magazine">
+<div class="carousel-header-row">
+<div>
+<div class="section-eyebrow">BMW M Magazine</div>
+<h2 class="section-title">Latest Articles</h2>
+</div>
+<div class="carousel-controls">
+<button aria-label="Previous articles" class="carousel-nav-btn" onclick="scrollCarousel('magTrack', -460)">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M15 18l-6-6 6-6"></path></svg>
+</button>
+<button aria-label="Next articles" class="carousel-nav-btn" onclick="scrollCarousel('magTrack', 460)">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+</div>
+<div class="carousel-track-container" id="magTrack">
+<div class="carousel-track">
+<!-- Article 1 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="Sharper look, more power BMW M" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Innovation &amp; Design</div>
+<h3 class="mag-title">SHARPER LOOK, MORE POWER.</h3>
+<p class="mag-desc">A deep dive into the revised aerodynamic package and refined high-revving power unit.</p>
+</article>
+<!-- Article 2 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="BMW Bodywork with character" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Engineering</div>
+<h3 class="mag-title">BODYWORK WITH CHARACTER.</h3>
+<p class="mag-desc">Sculpted surfaces, CFRP components, and the relentless pursuit of targeted downforce.</p>
+</article>
+<!-- Article 3 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="Nürburgring Hero M car" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Motorsport Heritage</div>
+<h3 class="mag-title">FROM APRIL FOOL’S JOKE TO NÜRBURGRING HERO.</h3>
+<p class="mag-desc">How an unscripted secret development project forged an enduring Nordschleife legend.</p>
+</article>
+<!-- Article 4 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="On track for a record lap" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Track Performance</div>
+<h3 class="mag-title">ON TRACK FOR A RECORD LAP.</h3>
+<p class="mag-desc">Telemetry analysis, chassis dynamics, and precision tire compound calibration.</p>
+</article>
+<!-- Article 5 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="A champion in miniature" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Craftsmanship</div>
+<h3 class="mag-title">A CHAMPION IN MINIATURE.</h3>
+<p class="mag-desc">High-precision 1:18 collector models developed in exact accordance with CAD homologation.</p>
+</article>
+<!-- Article 6 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="Big in Japan BMW M Culture" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Global Culture</div>
+<h3 class="mag-title">BIG IN JAPAN.</h3>
+<p class="mag-desc">The passionate Japanese BMW M community celebrates at Fuji Speedway and Daikoku.</p>
+</article>
+<!-- Article 7 -->
+<article class="mag-card">
+<div class="mag-card-media">
+<img alt="Lower consumption, full performance" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="mag-tag">Electrified M</div>
+<h3 class="mag-title">LOWER CONSUMPTION, FULL PERFORMANCE.</h3>
+<p class="mag-desc">Next-generation M Hybrid powertrains deliver instant electric torque and supreme efficiency.</p>
+</article>
+</div>
+</div>
+</section>
+<!-- MORE NEW M MODELS (Asymmetric Portrait Carousel) -->
+<!-- Models: X5 M60e / M2 / M760e and i7 M70 / XM Label / M2 CS -->
+<section class="section-container" id="models">
+<div class="carousel-header-row">
+<div>
+<div class="section-eyebrow">Vehicle Showcase</div>
+<h2 class="section-title">MORE NEW M MODELS.</h2>
+</div>
+<div class="carousel-controls">
+<button aria-label="Previous model" class="carousel-nav-btn" onclick="scrollCarousel('modelTrack', -344)">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M15 18l-6-6 6-6"></path></svg>
+</button>
+<button aria-label="Next model" class="carousel-nav-btn" onclick="scrollCarousel('modelTrack', 344)">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+</div>
+<div class="carousel-track-container" id="modelTrack">
+<div class="carousel-track">
+<!-- Model 1: X5 M60e -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW X5 M60e" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">M Performance Plug-in Hybrid</div>
+<h3 class="model-name">BMW X5 M60e</h3>
+<div class="model-specs">
+                  490 hp • 700 Nm • 0-100 km/h in 4.8s<br/>
+                  Fuel cons: 1.2-1.0 l/100 km combined
+                </div>
+</div>
+</div>
+<!-- Model 2: M2 Coupe -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW M2 Coupe" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">High-Performance Coupé</div>
+<h3 class="model-name">BMW M2</h3>
+<div class="model-specs">
+                  480 hp • 600 Nm • Manual / 8-speed M Steptronic<br/>
+                  Pure rear-wheel drive agility
+                </div>
+</div>
+</div>
+<!-- Model 3: M760e -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW M760e xDrive" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">M Performance Sedan</div>
+<h3 class="model-name">BMW M760e xDrive</h3>
+<div class="model-specs">
+                  571 hp • 800 Nm • Executive Lounge<br/>
+                  Electric range up to 84 km (WLTP)
+                </div>
+</div>
+</div>
+<!-- Model 4: i7 M70 -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW i7 M70 xDrive" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">All-Electric M High Performance</div>
+<h3 class="model-name">BMW i7 M70 xDrive</h3>
+<div class="model-specs">
+                  660 hp • 1,100 Nm • 0-100 km/h in 3.7s<br/>
+                  100% Electric Luxury M Flagship
+                </div>
+</div>
+</div>
+<!-- Model 5: XM Label -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW XM Label" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">M Hybrid SAV</div>
+<h3 class="model-name">BMW XM Label</h3>
+<div class="model-specs">
+                  748 hp • 1,000 Nm • Most powerful BMW M ever<br/>
+                  M xDrive with 4WD Sport mode
+                </div>
+</div>
+</div>
+<!-- Model 6: M2 CS -->
+<div class="model-card">
+<div class="model-card-media">
+<img alt="BMW M2 CS" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="model-card-info">
+<div class="model-category">Track-Focused Special Edition</div>
+<h3 class="model-name">BMW M2 CS</h3>
+<div class="model-specs">
+                  510 hp • Lightweight carbon roof &amp; bonnet<br/>
+                  Cup tires and optimized Nürburgring setup
+                </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Paired Street League Skateboarding and Natural Fibre Composites Article Cards -->
+<section class="section-container">
+<div class="teasers-grid">
+<div class="teaser-card">
+<div class="teaser-image-wrap">
+<img alt="Street League Skateboarding BMW M partnership" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">Partnership &amp; Urban Performance</div>
+<h3 class="teaser-heading">STREET LEAGUE SKATEBOARDING AND BMW M.</h3>
+</div>
+<div class="teaser-card">
+<div class="teaser-image-wrap">
+<img alt="Sustainable natural fibre composites in BMW M race cars" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">Sustainable Motorsport Engineering</div>
+<h3 class="teaser-heading">NATURAL FIBRE COMPOSITES IN M MOTORSPORT.</h3>
+</div>
+</div>
+</section>
+<!-- BMW M LIFESTYLE Split Image Panel -->
+<section class="section-container" id="lifestyle">
+<div class="lifestyle-grid">
+<div class="lifestyle-image">
+<img alt="BMW M Lifestyle Collection Apparel and Accessories" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="lifestyle-content">
+<div class="section-eyebrow">Collection &amp; Accessories</div>
+<h2 class="section-title">BMW M LIFESTYLE.</h2>
+<p style="color: #b5b5b5; margin-bottom: 32px; font-size: 15px; line-height: 1.6;">
+              Engineered aesthetics meeting high-performance attitude. Discover apparel, chronographs, 
+              and accessories crafted with authentic carbon elements and distinctive M tricolor detailing.
+            </p>
+<div>
+<a class="btn-cta" href="#shop" style="width: 200px;">Explore Collection</a>
+</div>
+</div>
+</div>
+</section>
+<!-- BMW M CHATBOT Centered Callout -->
+<section class="section-container">
+<div class="chatbot-callout">
+<div class="chatbot-icon-ring">
+<svg fill="none" height="28" stroke="#3466cc" stroke-width="2" viewbox="0 0 24 24" width="28">
+<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+</svg>
+</div>
+<div class="section-eyebrow" style="color: #3466cc;">AI Assistant</div>
+<h2 class="section-title" style="margin-bottom: 16px;">BMW M CHATBOT</h2>
+<p style="color: #a8a8a8; max-width: 580px; margin: 0 auto 32px; font-size: 15px;">
+            Have technical questions about M TwinPower Turbo engines, suspension setups, or vehicle availability?
+            Our conversational specialist is ready with answers.
+          </p>
+<button class="btn-cta" onclick="alert('BMW M Conversational Advisor is currently in active study mode.')">
+            Launch Chatbot
+          </button>
+</div>
+</section>
+<!-- More BMW M: Vertical Card Carousel with all Eight Original Entries -->
+<section class="section-container" id="more">
+<div class="section-eyebrow">Discover the Realm</div>
+<h2 class="section-title">More BMW M.</h2>
+<div class="more-m-grid">
+<!-- 1 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="M Driving Experience" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">M Driving Experience</div>
+<div class="more-card-caption">Training on certified circuits worldwide</div>
+</div>
+</a>
+<!-- 2 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="M Performance Parts" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">M Performance Parts</div>
+<div class="more-card-caption">Motorsport aerodynamics &amp; exhausts</div>
+</div>
+</a>
+<!-- 3 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="BMW M Individual" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">BMW M Individual</div>
+<div class="more-card-caption">Bespoke paint finishes and hides</div>
+</div>
+</a>
+<!-- 4 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="BMW M Motorsport" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">BMW M Motorsport</div>
+<div class="more-card-caption">FIA WEC, IMSA and GT3 racing</div>
+</div>
+</a>
+<!-- 5 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="Classic M Heritage" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">Classic M Heritage</div>
+<div class="more-card-caption">50+ years of homologation icons</div>
+</div>
+</a>
+<!-- 6 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="M Track Days" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">M Track Days</div>
+<div class="more-card-caption">Exclusive high-speed customer events</div>
+</div>
+</a>
+<!-- 7 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="M Drivers Community" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">M Community</div>
+<div class="more-card-caption">Connect with verified owners globally</div>
+</div>
+</a>
+<!-- 8 -->
+<a class="more-card" href="#">
+<div class="more-card-img">
+<img alt="Sim Racing &amp; Esports" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="more-card-body">
+<div class="more-card-title">BMW Esports</div>
+<div class="more-card-caption">Virtual endurance and championship cups</div>
+</div>
+</a>
+</div>
+</section>
+<!-- Paired Cards: THE ULTIMATE TOURING. and ENTRY FOR EXPERTS. -->
+<section class="section-container">
+<div class="teasers-grid">
+<div class="teaser-card">
+<div class="teaser-image-wrap">
+<img alt="BMW M3 Touring in Frozen Dark Grey" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">Everyday Versatility &amp; Track Precision</div>
+<h3 class="teaser-heading">THE ULTIMATE TOURING.</h3>
+</div>
+<div class="teaser-card">
+<div class="teaser-image-wrap">
+<img alt="BMW M Performance Academy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="teaser-caption">Professional Track Training</div>
+<h3 class="teaser-heading">ENTRY FOR EXPERTS.</h3>
+</div>
+</div>
+</section>
+<!-- BMW M NEWSLETTER Callout -->
+<section class="section-container">
+<div class="newsletter-banner">
+<div>
+<div class="section-eyebrow" style="color: #648ee8;">Stay Ahead</div>
+<h2 class="section-title" style="margin-bottom: 8px;">BMW M NEWSLETTER</h2>
+<p style="color: #cccccc; font-size: 14px; max-width: 520px;">
+              Receive confidential unveilings, telemetry breakdowns, and event invitations directly to your inbox.
+            </p>
+</div>
+<form onsubmit="event.preventDefault(); alert('Subscribed to BMW M Newsletter.');" style="display: flex; gap: 12px;">
+<input placeholder="Your email address" required="" style="background: #111; border: 1px solid #444; color: #fff; padding: 14px 20px; width: 280px; font-family: inherit; font-size: 14px; outline: none;" type="email"/>
+<button class="btn-cta" style="width: 140px;" type="submit">Subscribe</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Four-Column Dark Footer with Deutsch and English language choices -->
+<footer class="site-footer">
+<div class="footer-columns">
+<!-- Col 1: Brand & Disclaimer -->
+<div>
+<div class="footer-col-title">BMW M GMBH</div>
+<p style="font-size: 13px; color: #8e8e8e; line-height: 1.6; margin-bottom: 16px;">
+            BMW M GmbH is a subsidiary of BMW AG specializing in high-performance modifications, 
+            motorsport racing homologation, and bespoke vehicle customization.
+          </p>
+<div style="font-size: 12px; color: #666;">
+            Visual Study Dated 2026-10-06. Candidate reproduction based on observed production source.
+          </div>
+</div>
+<!-- Col 2: Quick Links -->
+<div>
+<div class="footer-col-title">Quick Links</div>
+<ul class="footer-list">
+<li><a href="#models">All M Models</a></li>
+<li><a href="#magazine">M Magazine</a></li>
+<li><a href="#motorsport">M Motorsport</a></li>
+<li><a href="#aream">AREA M Experience</a></li>
+<li><a href="#heritage">Heritage &amp; History</a></li>
+</ul>
+</div>
+<!-- Col 3: Legal -->
+<div>
+<div class="footer-col-title">Legal &amp; Privacy</div>
+<ul class="footer-list">
+<li><a href="#">Legal Notice</a></li>
+<li><a href="#">Privacy Policy</a></li>
+<li><a href="#">Cookie Settings</a></li>
+<li><a href="#">WLTP Information</a></li>
+<li><a href="#">Contact BMW M</a></li>
+</ul>
+</div>
+<!-- Col 4: Official Socials -->
+<div>
+<div class="footer-col-title">Follow BMW M</div>
+<ul class="footer-list">
+<li><a href="#">Instagram @BMWM</a></li>
+<li><a href="#">YouTube /BMWM</a></li>
+<li><a href="#">TikTok @BMW_M</a></li>
+<li><a href="#">Facebook /BMWM</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar with Language Switcher -->
+<div class="footer-bottom-bar">
+<div>
+          © BMW M GmbH, Munich, Germany. All rights reserved.
+        </div>
+<div class="lang-switcher">
+<span style="color: #666;">Language:</span>
+<a class="active" href="#">English</a>
+<a href="#">Deutsch</a>
+</div>
+</div>
+</footer>
+</div>
+<!-- Mobile Fullscreen Navigation Overlay (Toggled with Escape key handler) -->
+<div aria-label="Navigation Menu" aria-modal="true" class="mobile-menu-overlay" id="mobileMenuOverlay" role="dialog">
+<button aria-label="Close menu" class="close-overlay-btn" id="closeOverlayBtn">×</button>
+<ul class="mobile-nav-list">
+<li><a href="#home" onclick="toggleMenu()">Home</a></li>
+<li><a href="#magazine" onclick="toggleMenu()">Magazine</a></li>
+<li><a href="#models" onclick="toggleMenu()">Models</a></li>
+<li><a href="#motorsport" onclick="toggleMenu()">M Motorsport</a></li>
+<li><a href="#aream" onclick="toggleMenu()">AREA M</a></li>
+<li><a href="#heritage" onclick="toggleMenu()">Heritage</a></li>
+<li><a href="#lifestyle" onclick="toggleMenu()">BMW M Lifestyle</a></li>
+<li><a href="#more" onclick="toggleMenu()">More BMW M</a></li>
+</ul>
+<div style="margin-top: auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 24px; color: #888; font-size: 13px;">
+      Press <kbd style="background: #333; padding: 2px 6px; border-radius: 3px; color: #fff;">ESC</kbd> to return
+    </div>
+</div>
+<script>
+    // Horizontal carousel scroll handler
+    function scrollCarousel(id, delta) {
+      const container = document.getElementById(id);
+      if (container) {
+        container.scrollBy({ left: delta, behavior: 'smooth' });
+      }
+    }
+
+    // Expandable Mobile Overlay Menu & Escape Key Listener
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const openBtn = document.getElementById('mobileMenuBtn');
+    const closeBtn = document.getElementById('closeOverlayBtn');
+
+    function toggleMenu() {
+      const isActive = overlay.classList.toggle('active');
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    }
+
+    if (openBtn) openBtn.addEventListener('click', toggleMenu);
+    if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+
+    // Escape key closes mobile menu
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('active')) {
+        toggleMenu();
+      }
+    });
+  </script>
+</body>
+</html>
