@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Ferrari Official Mobile Homepage</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Hanken+Grotesk:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#131313",
+            "surface-dim": "#131313",
+            "surface-container-low": "#1b1b1b",
+            "surface-container": "#1f1f1f",
+            "surface-container-high": "#2a2a2a",
+            "surface-container-highest": "#353535",
+            "primary-container": "#e8000d",
+            "on-surface": "#e2e2e2"
+          },
+          fontFamily: {
+            sans: ['Space Grotesk', 'sans-serif'],
+            body: ['Hanken Grotesk', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+<style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed 40px Header Bar */
+    .header-bar {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 390px;
+      height: 40px;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      padding: 4px 0;
+    }
+
+    /* Hero Section (390 x 844) */
+    .hero-container {
+      position: relative;
+      width: 390px;
+      height: 844px;
+      overflow: hidden;
+      background-color: #09090b;
+    }
+
+    .hero-placeholder-icon {
+      position: absolute;
+      top: 36%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      color: #4338ca;
+      opacity: 0.85;
+    }
+
+    .hero-scrim {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, 
+        rgba(0,0,0,0.45) 0%, 
+        rgba(0,0,0,0.1) 40%, 
+        rgba(0,0,0,0.65) 75%, 
+        rgba(0,0,0,0.96) 100%);
+    }
+
+    .hero-content {
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 96px;
+      z-index: 20;
+    }
+
+    .hero-category {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .circle-arrow-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(4px);
+      transition: all 0.2s ease;
+    }
+
+    .hero-cta:hover .circle-arrow-btn {
+      border-color: #ffffff;
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(2px);
+    }
+
+    /* Hero bottom controls */
+    .hero-controls {
+      position: absolute;
+      bottom: 34px;
+      left: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 25;
+    }
+
+    .hero-pagination {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-dash {
+      width: 24px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+      transition: all 0.3s ease;
+    }
+
+    .hero-dash.active {
+      background: #ffffff;
+      width: 34px;
+    }
+
+    .hero-pause-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(0, 0, 0, 0.4);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* NEWS SECTION: White Container Card */
+    .news-section {
+      width: 390px;
+      background-color: #ffffff;
+      color: #111111;
+      padding: 24px 20px;
+      box-sizing: border-box;
+    }
+
+    .news-card-media {
+      width: 350px;
+      height: 228px;
+      background-color: #dbe4f0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .news-placeholder-icon {
+      width: 44px;
+      height: 44px;
+      color: #6366f1;
+    }
+
+    .news-content {
+      margin-top: 20px;
+    }
+
+    .news-category {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #666666;
+      margin-bottom: 6px;
+    }
+
+    .news-title {
+      font-size: 20px;
+      line-height: 26px;
+      font-weight: 700;
+      color: #111111;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .news-desc {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 13px;
+      line-height: 19px;
+      color: #4b5563;
+      margin-bottom: 18px;
+    }
+
+    .news-read-more {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #111111;
+      text-decoration: none;
+    }
+
+    .news-footer-nav {
+      margin-top: 28px;
+      padding-top: 16px;
+      border-top: 1px solid #eaeaea;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .news-counter {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: #666666;
+      letter-spacing: 0.08em;
+    }
+
+    .news-arrows {
+      display: flex;
+      gap: 6px;
+    }
+
+    .news-arrow-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid #dcdcdc;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #222222;
+      transition: background 0.2s;
+    }
+
+    .view-all-news-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #111111;
+      text-decoration: none;
+    }
+
+    /* EDITORIAL ROWS (300px dark cards) */
+    .photo-rows-container {
+      width: 390px;
+      background-color: #000000;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .photo-card-row {
+      position: relative;
+      width: 390px;
+      height: 300px;
+      background: #0d0f1a;
+      overflow: hidden;
+      display: block;
+      text-decoration: none;
+      color: #ffffff;
+      border-top: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .photo-card-inner-icon {
+      position: absolute;
+      top: 42%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      color: #3b82f6;
+      opacity: 0.65;
+      z-index: 1;
+    }
+
+    .photo-card-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, 
+        rgba(0,0,0,0.1) 0%, 
+        rgba(0,0,0,0.4) 45%, 
+        rgba(0,0,0,0.85) 85%,
+        rgba(0,0,0,0.96) 100%);
+      z-index: 2;
+    }
+
+    .photo-card-text {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 24px;
+      z-index: 10;
+    }
+
+    .photo-card-cat {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.65);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .photo-card-title {
+      font-size: 20px;
+      line-height: 26px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .photo-card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .photo-circle-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.4);
+      transition: all 0.2s ease;
+    }
+
+    .photo-card-row:hover .photo-circle-btn {
+      border-color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    /* NEWSLETTER SECTION */
+    .newsletter-band {
+      width: 390px;
+      background-color: #0b0b0b;
+      padding: 50px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      box-sizing: border-box;
+    }
+
+    .newsletter-title {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .newsletter-desc {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 13px;
+      line-height: 19px;
+      color: #999999;
+      margin-bottom: 24px;
+      max-width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .newsletter-btn {
+      display: block;
+      width: 100%;
+      height: 44px;
+      line-height: 44px;
+      background-color: #e8000d;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      text-align: center;
+      border-radius: 2px;
+      transition: background-color 0.2s ease;
+    }
+
+    .newsletter-btn:hover {
+      background-color: #c7000b;
+    }
+
+    /* MOBILE ACCORDION FOOTER */
+    .mobile-footer {
+      width: 390px;
+      background-color: #000000;
+      padding: 16px 20px 40px 20px;
+      box-sizing: border-box;
+    }
+
+    .footer-accordion {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .footer-acc-header {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+    }
+
+    .acc-icon {
+      font-size: 16px;
+      font-weight: 300;
+      color: #888888;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .footer-accordion.open .acc-icon {
+      transform: rotate(45deg);
+      color: #ffffff;
+    }
+
+    .footer-acc-body {
+      display: none;
+      padding-bottom: 16px;
+    }
+
+    .footer-accordion.open .footer-acc-body {
+      display: block;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-links-list a {
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 13px;
+      color: #888888;
+      text-decoration: none;
+    }
+
+    .footer-links-list a:hover {
+      color: #ffffff;
+    }
+
+    /* FOLLOW US LIST */
+    .social-section {
+      margin-top: 36px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 20px;
+    }
+
+    .social-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #777777;
+      margin-bottom: 14px;
+    }
+
+    .social-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .social-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #cfcfcf;
+      text-decoration: none;
+      font-size: 13px;
+      font-family: 'Hanken Grotesk', sans-serif;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .social-item svg {
+      opacity: 0.55;
+    }
+
+    /* LEGAL & SHELL */
+    .footer-legal {
+      margin-top: 36px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 22px;
+      font-family: 'Hanken Grotesk', sans-serif;
+      font-size: 11px;
+      line-height: 17px;
+      color: #666666;
+    }
+
+    .shell-partner {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: #999999;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .shell-badge {
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd700 0%, #e8000d 80%);
+      display: inline-block;
+    }
+
+    .legal-meta-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+      margin-top: 16px;
+      padding-bottom: 20px;
+    }
+
+    .legal-meta-links a {
+      color: #777777;
+      text-decoration: none;
+      font-size: 11px;
+    }
+
+    .legal-meta-links a:hover {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-black text-white antialiased">
+<!-- 40px FIXED HEADER BAR -->
+<header class="header-bar" role="banner">
+<!-- Left: Menu with 3-bar hamburger -->
+<button aria-label="Open Navigation Menu" class="header-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="1.8" viewbox="0 0 18 12" width="18">
+<line x2="18" y1="1" y2="1"></line>
+<line x2="18" y1="6" y2="6"></line>
+<line x2="18" y1="11" y2="11"></line>
+</svg>
+<span>MENU</span>
+</button>
+<!-- Center: Audio Crest Icon -->
+<a aria-label="Ferrari Official Home" class="flex items-center text-white" href="https://www.ferrari.com/en-US">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<path d="M9 18V5l12-2v13"></path>
+<circle cx="6" cy="18" r="3"></circle>
+<circle cx="18" cy="16" r="3"></circle>
+</svg>
+</a>
+<!-- Right: Search with magnifying glass -->
+<button aria-label="Open Search" class="header-btn">
+<span>SEARCH</span>
+<svg fill="none" height="15" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="15">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</button>
+</header>
+<!-- HERO SECTION: Scuderia Ferrari HP (390 x 844) -->
+<section aria-label="Scuderia Ferrari HP Racing Hero" class="hero-container">
+<!-- Blue/Violet Racing Visual Placeholder -->
+<svg class="hero-placeholder-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="hero-scrim"></div>
+<div class="hero-content">
+<span class="hero-category">RACING</span>
+<h1 class="hero-title">SCUDERIA FERRARI HP</h1>
+<a class="hero-cta" href="https://www.ferrari.com/en-US/racing">
+<span>EXPLORE FORMULA 1</span>
+<div aria-hidden="true" class="circle-arrow-btn">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</a>
+</div>
+<!-- Pagination dashes and pause button -->
+<div class="hero-controls">
+<div class="hero-pagination" role="tablist">
+<button aria-label="Slide 1" class="hero-dash" role="tab"></button>
+<button aria-label="Slide 2" class="hero-dash active" role="tab"></button>
+<button aria-label="Slide 3" class="hero-dash" role="tab"></button>
+</div>
+<button aria-label="Pause Slideshow" class="hero-pause-btn">
+<svg fill="currentColor" height="10" viewbox="0 0 24 24" width="10">
+<rect height="16" width="4" x="6" y="4"></rect>
+<rect height="16" width="4" x="14" y="4"></rect>
+</svg>
+</button>
+</div>
+</section>
+<!-- SOURCE 4-NEWS CAROUSEL CARD (White/Light Container) -->
+<section aria-label="Ferrari News" class="news-section">
+<div class="news-card-media">
+<svg class="news-placeholder-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+</div>
+<div class="news-content">
+<div class="news-category">SCUDERIA FERRARI HP</div>
+<h2 class="news-title">BACK ON THE PODIUM</h2>
+<p class="news-desc">A hard-fought podium in the latest Grand Prix marks a resolute performance by the team as the championship battle intensifies across every sector.</p>
+<a class="news-read-more" href="https://www.ferrari.com/en-US/news">
+<span>READ STORY</span>
+<span aria-hidden="true">&gt;</span>
+</a>
+</div>
+<div class="news-footer-nav">
+<span class="news-counter">01 / 04</span>
+<div class="news-arrows">
+<button aria-label="Previous News item" class="news-arrow-btn">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13">
+<polyline points="15 18 9 12 15 6"></polyline>
+</svg>
+</button>
+<button aria-label="Next News item" class="news-arrow-btn">
+<svg fill="none" height="13" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="13">
+<polyline points="9 18 15 12 9 6"></polyline>
+</svg>
+</button>
+</div>
+<a class="view-all-news-link" href="https://www.ferrari.com/en-US/news">VIEW ALL NEWS</a>
+</div>
+</section>
+<!-- SIX MOBILE-SPECIFIC EDITORIAL ROWS (Dark themed 300px cards) -->
+<section aria-label="Editorial Highlights" class="photo-rows-container">
+<!-- Row 1: COLLECTIONS - FERRARI HYPERSAIL REPLICA COLLECTION -->
+<a class="photo-card-row" href="https://store.ferrari.com/en-us">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">COLLECTIONS</span>
+<h3 class="photo-card-title">FERRARI HYPERSAIL REPLICA COLLECTION</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+<!-- Row 2: FERRARI MUSEUMS - GREATEST HITS -->
+<a class="photo-card-row" href="https://www.ferrari.com/en-US/museums">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">FERRARI MUSEUMS</span>
+<h3 class="photo-card-title">GREATEST HITS</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+<!-- Row 3: MAGAZINE - A NATURAL BEAUTY -->
+<a class="photo-card-row" href="https://www.ferrari.com/en-US/magazine">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">MAGAZINE</span>
+<h3 class="photo-card-title">A NATURAL BEAUTY</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+<!-- Row 4: MAGAZINE - SKETCH BODY -->
+<a class="photo-card-row" href="https://www.ferrari.com/en-US/magazine">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">MAGAZINE</span>
+<h3 class="photo-card-title">SKETCH BODY</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+<!-- Row 5: MAGAZINE - A 50-YEAR LOVE AFFAIR -->
+<a class="photo-card-row" href="https://www.ferrari.com/en-US/magazine">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">MAGAZINE</span>
+<h3 class="photo-card-title">A 50-YEAR LOVE AFFAIR</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+<!-- Row 6: SPORTS CARS - PAST MODELS -->
+<a class="photo-card-row" href="https://www.ferrari.com/en-US/auto/past-models">
+<svg class="photo-card-inner-icon" fill="currentColor" viewbox="0 0 24 24">
+<path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"></path>
+</svg>
+<div class="photo-card-gradient"></div>
+<div class="photo-card-text">
+<span class="photo-card-cat">SPORTS CARS</span>
+<h3 class="photo-card-title">PAST MODELS</h3>
+<div class="photo-card-cta">
+<span>DISCOVER</span>
+<div aria-hidden="true" class="photo-circle-btn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12">
+<line x1="5" x2="19" y1="12" y2="12"></line>
+<polyline points="12 5 19 12 12 19"></polyline>
+</svg>
+</div>
+</div>
+</div>
+</a>
+</section>
+<!-- NEWSLETTER CALLOUT -->
+<section aria-label="Newsletter Subscription" class="newsletter-band">
+<h2 class="newsletter-title">NEWSLETTER</h2>
+<p class="newsletter-desc">Stay up to date with the latest news from the world of Ferrari.</p>
+<a class="newsletter-btn" href="https://www.ferrari.com/en-US/newsletter">SUBSCRIBE</a>
+</section>
+<!-- MOBILE FOOTER: Charcoal Accordion + Follow Us + Shell & Legal -->
+<footer class="mobile-footer" role="contentinfo">
+<!-- Exactly 5 Accordion Rows -->
+<div class="footer-accordion">
+<button aria-expanded="false" class="footer-acc-header">
+<span>RACING</span>
+<span class="acc-icon">+</span>
+</button>
+<div class="footer-acc-body">
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/racing">Scuderia Ferrari HP</a></li>
+<li><a href="https://www.ferrari.com/en-US/racing/formula-1">SF-26</a></li>
+<li><a href="https://www.ferrari.com/en-US/racing/drivers/charles-leclerc">Charles Leclerc</a></li>
+<li><a href="https://www.ferrari.com/en-US/racing/drivers/lewis-hamilton">Lewis Hamilton</a></li>
+<li><a href="https://www.ferrari.com/en-US/racing/wec">Hypercar</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-accordion">
+<button aria-expanded="false" class="footer-acc-header">
+<span>SPORTS CARS</span>
+<span class="acc-icon">+</span>
+</button>
+<div class="footer-acc-body">
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/auto">Range</a></li>
+<li><a href="https://www.ferrari.com/en-US/auto/past-models">Past Models</a></li>
+<li><a href="https://preowned.ferrari.com/en-US">Ferrari Approved</a></li>
+<li><a href="https://dealers.ferrari.com/en-US">Dealers</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-accordion">
+<button aria-expanded="false" class="footer-acc-header">
+<span>COLLECTIONS</span>
+<span class="acc-icon">+</span>
+</button>
+<div class="footer-acc-body">
+<ul class="footer-links-list">
+<li><a href="https://store.ferrari.com/en-us/women">Women's Collection</a></li>
+<li><a href="https://store.ferrari.com/en-us/men">Men's Collection</a></li>
+<li><a href="https://store.ferrari.com/en-us/accessories">Accessories</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-accordion">
+<button aria-expanded="false" class="footer-acc-header">
+<span>EXPERIENCES</span>
+<span class="acc-icon">+</span>
+</button>
+<div class="footer-acc-body">
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/museums">Ferrari Museums</a></li>
+<li><a href="https://www.ferrari.com/en-US/corse-clienti">Corse Clienti</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-accordion">
+<button aria-expanded="false" class="footer-acc-header">
+<span>ABOUT US</span>
+<span class="acc-icon">+</span>
+</button>
+<div class="footer-acc-body">
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/corporate">Corporate</a></li>
+<li><a href="https://www.ferrari.com/en-US/history">History</a></li>
+<li><a href="https://www.ferrari.com/en-US/sustainability">Sustainability</a></li>
+</ul>
+</div>
+</div>
+<!-- FOLLOW US LIST -->
+<div class="social-section">
+<div class="social-label">FOLLOW US</div>
+<div class="social-list">
+<a class="social-item" href="https://facebook.com/ferrari" rel="noopener" target="_blank">
+<span>Facebook</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+<a class="social-item" href="https://instagram.com/ferrari" rel="noopener" target="_blank">
+<span>Instagram</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+<a class="social-item" href="https://linkedin.com/company/ferrari" rel="noopener" target="_blank">
+<span>LinkedIn</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+<a class="social-item" href="https://x.com/ferrari" rel="noopener" target="_blank">
+<span>X (Twitter)</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+<a class="social-item" href="https://youtube.com/ferrari" rel="noopener" target="_blank">
+<span>YouTube</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+<a class="social-item" href="https://spotify.com" rel="noopener" target="_blank">
+<span>Spotify</span>
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</div>
+<!-- LEGAL & SHELL PARTNER -->
+<div class="footer-legal">
+<div class="shell-partner">
+<span aria-hidden="true" class="shell-badge"></span>
+<span>INNOVATION PARTNER SHELL</span>
+</div>
+<p>Ferrari N.V. - Holding company - A company under Dutch law, having its official seat in Amsterdam, the Netherlands.</p>
+<p class="mt-1">© 2026 Ferrari S.p.A. All rights reserved.</p>
+<div class="legal-meta-links">
+<a href="https://www.ferrari.com/en-US/privacy">Privacy Policy</a>
+<a href="https://www.ferrari.com/en-US/cookie">Cookie Policy</a>
+<a href="https://www.ferrari.com/en-US/legal">Legal</a>
+<a class="text-white" href="https://www.ferrari.com/en-US/choose-country">United States (EN) ▾</a>
+</div>
+</div>
+</footer>
+<script>
+    // Accordion toggle behavior
+    document.querySelectorAll('.footer-accordion').forEach(acc => {
+      const header = acc.querySelector('.footer-acc-header');
+      header.addEventListener('click', () => {
+        const isOpen = acc.classList.contains('open');
+        acc.classList.toggle('open', !isOpen);
+        header.setAttribute('aria-expanded', !isOpen);
+      });
+    });
+  </script>
+</body></html>

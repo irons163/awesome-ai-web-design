@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+
+<html lang="en-US">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Ferrari Official Website - Desktop Study</title>
+<style>
+    @font-face {
+      font-family: 'FerrariSans';
+      src: url('https://www.ferrari.com/etc.clientlibs/ferrari-fcom/clientlibs/clientlib-site/resources/fonts/Ferrari-SansRegular.woff2?v=1') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'FerrariSans';
+      src: url('https://www.ferrari.com/etc.clientlibs/ferrari-fcom/clientlibs/clientlib-site/resources/fonts/Ferrari-SansMedium.woff2?v=1') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --color-black: #000000;
+      --color-white: #ffffff;
+      --color-red: #d40000;
+      --color-dark-gray: #111111;
+      --color-border: #2b2b2b;
+      --font-ferrari: 'FerrariSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: var(--font-ferrari);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 1280px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      background: none;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid #fff;
+      outline-offset: 2px;
+    }
+
+    /* Header: 40px fixed black bar */
+    header.f-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 40px;
+      background-color: var(--color-black);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px 0 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .prancing-horse-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+    }
+
+    .prancing-horse-svg {
+      width: 17px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .header-nav a, .header-nav button {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #ffffff;
+      transition: opacity 0.2s;
+    }
+
+    .header-nav a:hover, .header-nav button:hover {
+      opacity: 0.7;
+    }
+
+    .search-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    /* Modal search/menu preview */
+    .menu-modal {
+      display: none;
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      background: #0d0d0d;
+      border-bottom: 1px solid #333;
+      padding: 32px 48px;
+      z-index: 999;
+    }
+    .menu-modal.active {
+      display: block;
+    }
+    .menu-modal-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .search-input-box {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #666;
+      color: #fff;
+      font-size: 20px;
+      font-family: var(--font-ferrari);
+      padding: 12px 0;
+      outline: none;
+    }
+
+    /* Hero Section: 720px full viewport slide */
+    .hero-container {
+      position: relative;
+      width: 1280px;
+      height: 720px;
+      margin-top: 40px;
+      overflow: hidden;
+      background: #000;
+    }
+
+    .hero-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.8s;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .hero-slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.7) 100%);
+    }
+
+    /* Hero Content centered layout */
+    .hero-content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding-bottom: 110px;
+      text-align: center;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .hero-category {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: rgba(255, 255, 255, 0.85);
+      pointer-events: auto;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 500;
+      letter-spacing: 0.195px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 18px;
+      color: #ffffff;
+      pointer-events: auto;
+      max-width: 600px;
+    }
+
+    .hero-cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #ffffff;
+      text-transform: uppercase;
+      pointer-events: auto;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 3px;
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta-link:hover {
+      opacity: 0.8;
+    }
+
+    .hero-controls {
+      position: absolute;
+      bottom: 24px;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 20;
+    }
+
+    .pagination-dots {
+      display: flex;
+      gap: 12px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .dot.active {
+      background: #ffffff;
+      transform: scale(1.4);
+    }
+
+    .playback-control {
+      position: absolute;
+      right: 32px;
+      bottom: 20px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      background: rgba(0, 0, 0, 0.3);
+      color: #fff;
+      z-index: 20;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .playback-control:hover {
+      border-color: #fff;
+      background: rgba(0, 0, 0, 0.6);
+    }
+
+    /* News Carousel Section (White background) */
+    .news-section {
+      background-color: var(--color-white);
+      color: var(--color-black);
+      padding: 72px 0 80px 0;
+      width: 1280px;
+      position: relative;
+    }
+
+    .news-wrapper {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      position: relative;
+      min-height: 440px;
+    }
+
+    .news-left-col {
+      width: 380px;
+      padding-right: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .news-meta-top {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666666;
+      margin-bottom: 24px;
+    }
+
+    .news-active-title {
+      font-size: 28px;
+      font-weight: 500;
+      letter-spacing: 0.195px;
+      line-height: 1.25;
+      text-transform: uppercase;
+      color: #000000;
+      margin-bottom: 20px;
+    }
+
+    .news-active-summary {
+      font-size: 15px;
+      line-height: 1.5;
+      color: #444444;
+      margin-bottom: 32px;
+    }
+
+    .news-action-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #000000;
+      border-bottom: 1px solid #000;
+      padding-bottom: 3px;
+      width: fit-content;
+    }
+
+    .news-bottom-nav {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #e0e0e0;
+      padding-top: 24px;
+    }
+
+    .news-counter {
+      font-size: 12px;
+      letter-spacing: 1px;
+      font-weight: 500;
+      color: #888;
+    }
+
+    .news-arrows {
+      display: flex;
+      gap: 12px;
+    }
+
+    .news-arrow-btn {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #000;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .news-arrow-btn:hover {
+      border-color: #000;
+      background: #f7f7f7;
+    }
+
+    .view-all-news {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #000;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+    }
+
+    .news-right-col {
+      flex: 1;
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+      background: #efefef;
+    }
+
+    .news-image-slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .news-image-slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Editorial Grid: 2 columns x 3 rows = 6 tiles, 460px high each, zero gaps */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 640px);
+      grid-auto-rows: 460px;
+      width: 1280px;
+      background-color: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+    .grid-tile {
+      position: relative;
+      overflow: hidden;
+      height: 460px;
+      width: 640px;
+      cursor: pointer;
+    }
+
+    .grid-tile img.bg-art {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.2, 0, 0.1, 1);
+    }
+
+    .grid-tile:hover img.bg-art {
+      transform: scale(1.03);
+    }
+
+    .tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.55) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      text-align: center;
+      padding-bottom: 56px;
+      padding-left: 32px;
+      padding-right: 32px;
+    }
+
+    .tile-category {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.85);
+      margin-bottom: 12px;
+    }
+
+    .tile-title {
+      font-size: 36px;
+      font-weight: 500;
+      letter-spacing: 0.195px;
+      line-height: 1.15;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .tile-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #ffffff;
+      border-bottom: 1px solid #fff;
+      padding-bottom: 2px;
+    }
+
+    /* Newsletter section */
+    .newsletter-band {
+      background-color: #0b0b0b;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+      padding: 68px 32px;
+      text-align: center;
+      width: 1280px;
+    }
+
+    .newsletter-label {
+      font-size: 18px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .newsletter-body {
+      font-size: 15px;
+      color: #a0a0a0;
+      margin-bottom: 28px;
+    }
+
+    .newsletter-subscribe-btn {
+      background-color: var(--color-red);
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      padding: 13px 34px;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background-color 0.2s;
+    }
+
+    .newsletter-subscribe-btn:hover {
+      background-color: #b50000;
+    }
+
+    .newsletter-preview-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.75);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .newsletter-preview-overlay.active {
+      display: flex;
+    }
+
+    .newsletter-modal-card {
+      background: #151515;
+      border: 1px solid #333;
+      padding: 36px;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 14px;
+      right: 18px;
+      color: #aaa;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    /* Footer: 5 columns + social bar + legal/copyright */
+    footer.f-footer {
+      background-color: #000000;
+      color: #ffffff;
+      padding: 72px 64px 48px 64px;
+      width: 1280px;
+      font-size: 13px;
+    }
+
+    .footer-columns {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 40px;
+      padding-bottom: 56px;
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    .footer-col-title {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      color: #ffffff;
+    }
+
+    .footer-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .footer-links-list a {
+      font-size: 12px;
+      color: #8c8c8c;
+      transition: color 0.2s;
+    }
+
+    .footer-links-list a:hover {
+      color: #ffffff;
+    }
+
+    .footer-social-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 32px 0;
+      border-bottom: 1px solid #1c1c1c;
+    }
+
+    .social-title {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .social-icons-group {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .social-icon-link {
+      color: #888;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .social-icon-link:hover {
+      color: #fff;
+    }
+
+    .footer-bottom-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 36px;
+      font-size: 11px;
+      color: #666666;
+    }
+
+    .footer-legal-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-legal-links a:hover {
+      color: #aaa;
+    }
+
+    .partner-shell-mark {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .shell-logo-svg {
+      width: 20px;
+      height: 20px;
+      fill: #ffcc00;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- FIXED BLACK TOP HEADER 40px -->
+<header class="f-header" role="banner">
+<div class="header-left">
+<a aria-label="Ferrari Home" class="prancing-horse-btn" href="https://www.ferrari.com/en-US">
+<!-- Authentic Ferrari Cavallino Rampante Silhouette -->
+<svg class="prancing-horse-svg" viewbox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+<path d="M57.5,1.2 C54.2,2.8 52.8,5.1 52.5,9.2 C52.2,13.1 50.8,15.6 47.3,18.4 C44.2,20.8 42.1,23.8 41.2,27.2 C40.3,30.6 38.2,33.5 35.1,35.4 C32.4,37.1 27.9,37.3 25.1,35.8 C22.9,34.6 22.3,34.8 21.6,37.1 C21.1,38.9 21.6,40.4 23.4,41.9 C25.3,43.5 25.8,44.7 25.2,46.2 C24.5,47.8 23.1,48.2 20.8,47.6 C18.1,46.9 16.9,47.5 16.4,49.8 C15.9,52.2 16.9,53.8 19.8,55.1 C23.2,56.6 23.8,58.4 22.5,61.4 C21.4,63.9 20.3,64.8 18.2,64.8 C15.9,64.8 15.2,65.7 15.7,68 C16.2,70.3 17.6,71.5 21.1,72.5 C24.8,73.5 25.9,74.9 25.7,78.2 C25.5,81.4 26.6,83.1 30.6,85.7 C35.4,88.8 37.1,91.8 37.1,97 C37.1,102.5 35.8,105.8 32.1,109.8 C28.9,113.3 28.5,115.3 30.5,117.3 C32.5,119.3 35.2,118.8 38.6,115.7 C42.8,111.9 44.9,107.5 45.4,101.4 C45.9,94.9 48.2,90.4 53.6,85.2 C57.8,81.1 59.8,77.9 60.8,73.6 C61.8,69.5 63.8,67.1 68.2,64.7 C72.8,62.2 75.3,59.2 76.5,54.8 C77.5,51.1 79.4,48.8 83.1,46.8 C87.3,44.6 88.6,42.5 88.1,38.6 C87.6,35.1 85.8,33.2 81.3,31.7 C77.4,30.4 75.6,28.6 74.2,24.8 C72.8,20.8 70.1,17.9 64.9,15 C60.2,12.4 58.6,9.8 58.8,5.1 C59,2 58.4,1.4 57.5,1.2 Z"></path>
+</svg>
+</a>
+</div>
+<nav aria-label="Main Navigation" class="header-nav">
+<a href="https://www.ferrari.com/en-US/racing" rel="noopener" target="_blank">RACING</a>
+<a href="https://www.ferrari.com/en-US/auto" rel="noopener" target="_blank">SPORTS CARS</a>
+<a href="https://store.ferrari.com/en-us" rel="noopener" target="_blank">COLLECTIONS</a>
+<a href="https://www.ferrari.com/en-US/museums" rel="noopener" target="_blank">EXPERIENCES</a>
+<a href="https://www.ferrari.com/en-US/corporate" rel="noopener" target="_blank">ABOUT US</a>
+<button aria-expanded="false" aria-label="Toggle Search" class="search-btn" id="searchToggle">
+<span>SEARCH</span>
+<svg fill="none" height="11" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="11">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</button>
+</nav>
+</header>
+<!-- SEARCH ACCORDION MODAL -->
+<div aria-hidden="true" aria-modal="true" class="menu-modal" id="searchModal" role="dialog">
+<div class="menu-modal-inner">
+<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+<span style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #888;">Search the World of Ferrari</span>
+<button id="closeSearch" style="color: #aaa; font-size: 14px; text-transform: uppercase;">[ESC] CLOSE</button>
+</div>
+<input aria-label="Search query" class="search-input-box" placeholder="Explore sports cars, racing, collections..." type="text"/>
+</div>
+</div>
+<main>
+<!-- FULL-WIDTH CINEMATIC HERO (720px) -->
+<section aria-label="Featured Ferrari Stories" class="hero-container">
+<!-- Slide 1: Scuderia Ferrari HP -->
+<div class="hero-slide active" data-index="0" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-category">Racing</div>
+<h1 class="hero-title">SCUDERIA FERRARI HP</h1>
+<a class="hero-cta-link" href="https://www.ferrari.com/en-US/formula1" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</div>
+<!-- Slide 2: Sports Cars -->
+<div class="hero-slide" data-index="1" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-category">Sports Cars</div>
+<h2 class="hero-title">START YOUR ENGINE</h2>
+<a class="hero-cta-link" href="https://www.ferrari.com/en-US/auto" rel="noopener" target="_blank">
+            Discover the Ferrari Line Up
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</div>
+<!-- Slide 3: Collections -->
+<div class="hero-slide" data-index="2" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');">
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<div class="hero-category">Collections</div>
+<h2 class="hero-title">FW 26 RUNWAY COLLECTION</h2>
+<a class="hero-cta-link" href="https://store.ferrari.com/en-us" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</div>
+<!-- Pagination & Playback controls -->
+<div class="hero-controls">
+<div class="pagination-dots" role="tablist">
+<button aria-label="Slide 1" class="dot active" data-slide="0" role="tab"></button>
+<button aria-label="Slide 2" class="dot" data-slide="1" role="tab"></button>
+<button aria-label="Slide 3" class="dot" data-slide="2" role="tab"></button>
+</div>
+</div>
+<button aria-label="Pause slide transitions" class="playback-control" id="heroPlayPauseBtn">
+<svg fill="currentColor" height="12" id="pauseIcon" viewbox="0 0 24 24" width="12">
+<rect height="16" width="4" x="6" y="4"></rect>
+<rect height="16" width="4" x="14" y="4"></rect>
+</svg>
+<svg fill="currentColor" height="12" id="playIcon" style="display:none;" viewbox="0 0 24 24" width="12">
+<polygon points="5 3 19 12 5 21 5 3"></polygon>
+</svg>
+</button>
+</section>
+<!-- NEWS CAROUSEL SECTION (White background) -->
+<section aria-label="Ferrari Latest News" class="news-section">
+<div class="news-wrapper">
+<!-- Left text column (320px at x222 equivalent layout) -->
+<div class="news-left-col">
+<div>
+<div class="news-meta-top" id="newsCategoryLabel">Scuderia Ferrari HP</div>
+<h2 class="news-active-title" id="newsTitleLabel">BACK ON THE PODIUM</h2>
+<p class="news-active-summary" id="newsSummaryLabel">
+              A hard-fought podium in the latest Grand Prix marks a resolute performance by the team as the championship battle intensifies across every sector.
+            </p>
+<a class="news-action-link" href="https://www.ferrari.com/en-US/formula1" id="newsLinkAction" rel="noopener" target="_blank">
+              Read story
+              <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+<div class="news-bottom-nav">
+<span class="news-counter" id="newsCounter">01 / 04</span>
+<div class="news-arrows">
+<button aria-label="Previous story" class="news-arrow-btn" id="newsPrevBtn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12"><polyline points="15 18 9 12 15 6"></polyline></svg>
+</button>
+<button aria-label="Next story" class="news-arrow-btn" id="newsNextBtn">
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="12"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</button>
+</div>
+<a class="view-all-news" href="https://www.ferrari.com/en-US/magazine" rel="noopener" target="_blank">View all news</a>
+</div>
+</div>
+<!-- Right image column -->
+<div class="news-right-col" id="newsImageContainer">
+<div class="news-image-slide active" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');"></div>
+<div class="news-image-slide" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');"></div>
+<div class="news-image-slide" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');"></div>
+<div class="news-image-slide" style="background-image: url('https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg');"></div>
+</div>
+</div>
+</section>
+<!-- EXACT TWO-COLUMN EDITORIAL GRID: 3 ROWS x 460px -->
+<section aria-label="Editorial Highlights" class="editorial-grid">
+<!-- ROW 1, COL 1: Collections / FERRARI HYPERSAIL REPLICA COLLECTION -->
+<article class="grid-tile">
+<img alt="Ferrari Hypersail Collection artwork" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Collections</span>
+<h3 class="tile-title">FERRARI HYPERSAIL REPLICA COLLECTION</h3>
+<a class="tile-cta" href="https://store.ferrari.com/en-us" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+<!-- ROW 1, COL 2: Ferrari Museums / GREATEST HITS -->
+<article class="grid-tile">
+<img alt="Ferrari Museums Greatest Hits exhibition" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Ferrari Museums</span>
+<h3 class="tile-title">GREATEST HITS</h3>
+<a class="tile-cta" href="https://www.ferrari.com/en-US/museums" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+<!-- ROW 2, COL 1: Magazine / A NATURAL BEAUTY -->
+<article class="grid-tile">
+<img alt="A Natural Beauty story cover" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Magazine</span>
+<h3 class="tile-title">A NATURAL BEAUTY</h3>
+<a class="tile-cta" href="https://www.ferrari.com/en-US/magazine" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+<!-- ROW 2, COL 2: Magazine / SKETCH BODY -->
+<article class="grid-tile">
+<img alt="Ferrari Centro Stile Sketch Book" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Magazine</span>
+<h3 class="tile-title">SKETCH BODY</h3>
+<a class="tile-cta" href="https://www.ferrari.com/en-US/magazine" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+<!-- ROW 3, COL 1: Magazine / A 50-YEAR LOVE AFFAIR -->
+<article class="grid-tile">
+<img alt="A 50-Year Love Affair vintage Ferrari 166 MM" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Magazine</span>
+<h3 class="tile-title">A 50-YEAR LOVE AFFAIR</h3>
+<a class="tile-cta" href="https://www.ferrari.com/en-US/magazine" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+<!-- ROW 3, COL 2: Sports Cars / PAST MODELS -->
+<article class="grid-tile">
+<img alt="Ferrari 125 S historic past models" class="bg-art" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="tile-overlay">
+<span class="tile-category">Sports Cars</span>
+<h3 class="tile-title">PAST MODELS</h3>
+<a class="tile-cta" href="https://www.ferrari.com/en-US/auto/past-models" rel="noopener" target="_blank">
+            Discover
+            <svg fill="none" height="10" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="10"><polyline points="9 18 15 12 9 6"></polyline></svg>
+</a>
+</div>
+</article>
+</section>
+<!-- NEWSLETTER DARK BAND -->
+<section aria-label="Newsletter Subscription" class="newsletter-band">
+<div class="newsletter-label">Newsletter</div>
+<p class="newsletter-body">Stay up to date with the latest news from the world of Ferrari.</p>
+<button class="newsletter-subscribe-btn" id="openNewsletterBtn">SUBSCRIBE</button>
+</section>
+</main>
+<!-- NEWSLETTER ACCESSIBLE PREVIEW MODAL (No personal submission) -->
+<div aria-hidden="true" aria-modal="true" class="newsletter-preview-overlay" id="newsletterModal" role="dialog">
+<div class="newsletter-modal-card">
+<button aria-label="Close modal" class="modal-close-btn" id="closeNewsletterModal">×</button>
+<h3 style="font-size: 18px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px; color: #fff;">Ferrari Newsletter</h3>
+<p style="font-size: 13px; color: #aaa; line-height: 1.5; margin-bottom: 24px;">
+        Preview of the official Ferrari newsletter subscription portal for United States residents. No personal data will be collected or transmitted in this design study.
+      </p>
+<button class="newsletter-subscribe-btn" id="dismissNewsletterNotice">CLOSE PREVIEW</button>
+</div>
+</div>
+<!-- LARGE DARK FOOTER: 5 COLUMNS + LEGAL -->
+<footer class="f-footer" role="contentinfo">
+<div class="footer-columns">
+<!-- Col 1: Racing -->
+<div>
+<div class="footer-col-title">Racing</div>
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/formula1" rel="noopener" target="_blank">Scuderia Ferrari HP</a></li>
+<li><a href="https://www.ferrari.com/en-US/formula1/sf-26" rel="noopener" target="_blank">SF-26</a></li>
+<li><a href="https://www.ferrari.com/en-US/formula1/charles-leclerc" rel="noopener" target="_blank">Charles Leclerc</a></li>
+<li><a href="https://www.ferrari.com/en-US/formula1/lewis-hamilton" rel="noopener" target="_blank">Lewis Hamilton</a></li>
+<li><a href="https://www.ferrari.com/en-US/hypercar" rel="noopener" target="_blank">Hypercar</a></li>
+<li><a href="https://www.ferrari.com/en-US/hypersail" rel="noopener" target="_blank">Hypersail</a></li>
+</ul>
+</div>
+<!-- Col 2: Sports Cars -->
+<div>
+<div class="footer-col-title">Sports Cars</div>
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/auto" rel="noopener" target="_blank">Range</a></li>
+<li><a href="https://www.ferrari.com/en-US/auto/past-models" rel="noopener" target="_blank">Past Models</a></li>
+<li><a href="https://preowned.ferrari.com" rel="noopener" target="_blank">Ferrari Approved</a></li>
+<li><a href="https://www.ferrari.com/en-US/auto/financial-services" rel="noopener" target="_blank">Financial Services</a></li>
+<li><a href="https://www.ferrari.com/en-US/auto/dealers" rel="noopener" target="_blank">Dealers</a></li>
+</ul>
+</div>
+<!-- Col 3: Collections -->
+<div>
+<div class="footer-col-title">Collections</div>
+<ul class="footer-links-list">
+<li><a href="https://store.ferrari.com/en-us/women" rel="noopener" target="_blank">Women's Collection</a></li>
+<li><a href="https://store.ferrari.com/en-us/men" rel="noopener" target="_blank">Men's Collection</a></li>
+<li><a href="https://store.ferrari.com/en-us/kids" rel="noopener" target="_blank">Kids' Collection</a></li>
+<li><a href="https://store.ferrari.com/en-us/accessories" rel="noopener" target="_blank">Accessories</a></li>
+<li><a href="https://store.ferrari.com/en-us/memorabilia" rel="noopener" target="_blank">Memorabilia</a></li>
+</ul>
+</div>
+<!-- Col 4: Experiences -->
+<div>
+<div class="footer-col-title">Experiences</div>
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/museums" rel="noopener" target="_blank">Ferrari Museums</a></li>
+<li><a href="https://www.ferrari.com/en-US/museums/maranello" rel="noopener" target="_blank">Museo Ferrari Maranello</a></li>
+<li><a href="https://www.ferrari.com/en-US/museums/modena" rel="noopener" target="_blank">Museo Enzo Ferrari Modena</a></li>
+<li><a href="https://www.ferrari.com/en-US/corse-clienti" rel="noopener" target="_blank">Corse Clienti</a></li>
+<li><a href="https://www.ferrari.com/en-US/auto/esperienze-ferrari" rel="noopener" target="_blank">Esperienze Ferrari</a></li>
+</ul>
+</div>
+<!-- Col 5: About Us -->
+<div>
+<div class="footer-col-title">About us</div>
+<ul class="footer-links-list">
+<li><a href="https://www.ferrari.com/en-US/corporate" rel="noopener" target="_blank">Corporate</a></li>
+<li><a href="https://www.ferrari.com/en-US/corporate/history" rel="noopener" target="_blank">History</a></li>
+<li><a href="https://www.ferrari.com/en-US/magazine" rel="noopener" target="_blank">Magazine</a></li>
+<li><a href="https://www.ferrari.com/en-US/corporate/sustainability" rel="noopener" target="_blank">Sustainability</a></li>
+<li><a href="https://www.ferrari.com/en-US/corporate/media" rel="noopener" target="_blank">Media Center</a></li>
+<li><a href="https://www.ferrari.com/en-US/corporate/investors" rel="noopener" target="_blank">Investors</a></li>
+</ul>
+</div>
+</div>
+<!-- Social Channel Row -->
+<div class="footer-social-row">
+<span class="social-title">Follow Us</span>
+<div class="social-icons-group">
+<a aria-label="Ferrari on Facebook" class="social-icon-link" href="https://www.facebook.com/Ferrari" rel="noopener" target="_blank">Facebook</a>
+<a aria-label="Ferrari on Instagram" class="social-icon-link" href="https://www.instagram.com/ferrari" rel="noopener" target="_blank">Instagram</a>
+<a aria-label="Ferrari on LinkedIn" class="social-icon-link" href="https://www.linkedin.com/company/ferrari" rel="noopener" target="_blank">LinkedIn</a>
+<a aria-label="Ferrari on X" class="social-icon-link" href="https://twitter.com/ferrari" rel="noopener" target="_blank">X</a>
+<a aria-label="Ferrari on YouTube" class="social-icon-link" href="https://www.youtube.com/Ferrari" rel="noopener" target="_blank">YouTube</a>
+</div>
+</div>
+<!-- Copyright & Legal -->
+<div class="footer-bottom-bar">
+<div>
+        Ferrari N.V. - Holding company - A company under Dutch law, having its official seat in Amsterdam, the Netherlands.
+        <br/>
+        © 2026 Ferrari S.p.A. All rights reserved.
+      </div>
+<div class="partner-shell-mark" title="Innovation Partner Shell">
+<svg class="shell-logo-svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<path d="M50 15 C30 15 15 35 20 65 L30 85 L70 85 L80 65 C85 35 70 15 50 15 Z" fill="#dd1d21"></path>
+<path d="M50 25 C35 25 25 40 28 65 L36 80 L64 80 L72 65 C75 40 65 25 50 25 Z" fill="#fdb913"></path>
+</svg>
+<span style="letter-spacing: 1px; text-transform: uppercase; font-size: 10px;">Innovation Partner Shell</span>
+</div>
+<div class="footer-legal-links">
+<a href="https://www.ferrari.com/en-US/corporate/privacy" rel="noopener" target="_blank">Privacy Policy</a>
+<a href="https://www.ferrari.com/en-US/corporate/cookie-policy" rel="noopener" target="_blank">Cookie Policy</a>
+<a href="https://www.ferrari.com/en-US/corporate/legal" rel="noopener" target="_blank">Legal</a>
+<a href="https://www.ferrari.com/en-US" rel="noopener" target="_blank">United States (EN)</a>
+</div>
+</div>
+</footer>
+<script>
+    // Hero Slideshow Controller
+    const heroSlides = document.querySelectorAll('.hero-slide');
+    const heroDots = document.querySelectorAll('.dot');
+    const playPauseBtn = document.getElementById('heroPlayPauseBtn');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const playIcon = document.getElementById('playIcon');
+    let currentHeroSlide = 0;
+    let isPlaying = true;
+    let heroTimer = null;
+
+    function showHeroSlide(index) {
+      heroSlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+      heroDots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+      currentHeroSlide = index;
+    }
+
+    function nextHeroSlide() {
+      const next = (currentHeroSlide + 1) % heroSlides.length;
+      showHeroSlide(next);
+    }
+
+    function startHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = setInterval(nextHeroSlide, 5500);
+    }
+
+    function stopHeroTimer() {
+      if (heroTimer) clearInterval(heroTimer);
+      heroTimer = null;
+    }
+
+    startHeroTimer();
+
+    heroDots.forEach(dot => {
+      dot.addEventListener('click', (e) => {
+        const slideIdx = parseInt(e.target.dataset.slide, 10);
+        showHeroSlide(slideIdx);
+        if (isPlaying) startHeroTimer();
+      });
+    });
+
+    playPauseBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        pauseIcon.style.display = 'block';
+        playIcon.style.display = 'none';
+        startHeroTimer();
+      } else {
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+        stopHeroTimer();
+      }
+    });
+
+    // News Carousel Controller (4 genuine items)
+    const newsData = [
+      {
+        category: "Scuderia Ferrari HP",
+        title: "BACK ON THE PODIUM",
+        summary: "A hard-fought podium in the latest Grand Prix marks a resolute performance by the team as the championship battle intensifies across every sector.",
+        link: "https://www.ferrari.com/en-US/formula1",
+        actionText: "Read story"
+      },
+      {
+        category: "Scuderia Ferrari Driver Academy",
+        title: "FERRARI OPENS ITS GATES TO THE NEXT GENERATION",
+        summary: "Maranello welcomes the emerging motorsport talents of tomorrow, providing technical immersion and racing telemetry inside the historic factory.",
+        link: "https://www.ferrari.com/en-US/fda",
+        actionText: "Read story"
+      },
+      {
+        category: "WEC & GT Racing",
+        title: "FERRARI TENTH AT FUJI",
+        summary: "Endurance motorsport report from Fuji Speedway detailing tyre strategy, track conditions, and points scored by the Ferrari 499P hypercar crew.",
+        link: "https://www.ferrari.com/en-US/hypercar",
+        actionText: "Read story"
+      },
+      {
+        category: "Ferrari Tailor Made",
+        title: "THE MAKING OF THE FERRARI LUCE TAILOR MADE — CHASSIS 0",
+        summary: "An exclusive glimpse into the bespoke artisan atelier where pure Italian tailoring meets cutting-edge aerodynamic surfaces on an unprecedented commission.",
+        link: "https://www.ferrari.com/en-US/auto/tailor-made",
+        actionText: "Read story"
+      }
+    ];
+
+    let currentNewsIndex = 0;
+    const newsCategoryEl = document.getElementById('newsCategoryLabel');
+    const newsTitleEl = document.getElementById('newsTitleLabel');
+    const newsSummaryEl = document.getElementById('newsSummaryLabel');
+    const newsLinkEl = document.getElementById('newsLinkAction');
+    const newsCounterEl = document.getElementById('newsCounter');
+    const newsSlideImages = document.querySelectorAll('.news-image-slide');
+
+    function updateNews(index) {
+      currentNewsIndex = index;
+      const item = newsData[index];
+      newsCategoryEl.textContent = item.category;
+      newsTitleEl.textContent = item.title;
+      newsSummaryEl.textContent = item.summary;
+      newsLinkEl.href = item.link;
+      newsCounterEl.textContent = `0${index + 1} / 0${newsData.length}`;
+
+      newsSlideImages.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+      });
+    }
+
+    document.getElementById('newsPrevBtn').addEventListener('click', () => {
+      const prev = (currentNewsIndex - 1 + newsData.length) % newsData.length;
+      updateNews(prev);
+    });
+
+    document.getElementById('newsNextBtn').addEventListener('click', () => {
+      const next = (currentNewsIndex + 1) % newsData.length;
+      updateNews(next);
+    });
+
+    // Search Modal toggles
+    const searchToggle = document.getElementById('searchToggle');
+    const searchModal = document.getElementById('searchModal');
+    const closeSearch = document.getElementById('closeSearch');
+
+    function openSearch() {
+      searchModal.classList.add('active');
+      searchToggle.setAttribute('aria-expanded', 'true');
+      searchModal.setAttribute('aria-hidden', 'false');
+      searchModal.querySelector('input').focus();
+    }
+
+    function closeSearchModal() {
+      searchModal.classList.remove('active');
+      searchToggle.setAttribute('aria-expanded', 'false');
+      searchModal.setAttribute('aria-hidden', 'true');
+    }
+
+    searchToggle.addEventListener('click', () => {
+      if (searchModal.classList.contains('active')) {
+        closeSearchModal();
+      } else {
+        openSearch();
+      }
+    });
+
+    closeSearch.addEventListener('click', closeSearchModal);
+
+    // Newsletter preview modal
+    const openNewsletterBtn = document.getElementById('openNewsletterBtn');
+    const newsletterModal = document.getElementById('newsletterModal');
+    const closeNewsletterModal = document.getElementById('closeNewsletterModal');
+    const dismissNewsletterNotice = document.getElementById('dismissNewsletterNotice');
+
+    function openNewsletter() {
+      newsletterModal.classList.add('active');
+      newsletterModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeNewsletter() {
+      newsletterModal.classList.remove('active');
+      newsletterModal.setAttribute('aria-hidden', 'true');
+    }
+
+    openNewsletterBtn.addEventListener('click', openNewsletter);
+    closeNewsletterModal.addEventListener('click', closeNewsletter);
+    dismissNewsletterNotice.addEventListener('click', closeNewsletter);
+
+    // Escape key listener for open modals
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSearchModal();
+        closeNewsletter();
+      }
+    });
+  </script>
+</body>
+</html>

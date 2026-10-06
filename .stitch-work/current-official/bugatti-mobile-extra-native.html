@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>BUGATTI Mobile Homepage</title>
+<style>
+    @font-face {
+      font-family: 'BUGATTI Display';
+      src: url('https://www.bugatti.com/fonts/BUGATTIDisplay-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BUGATTI Text';
+      src: url('https://www.bugatti.com/fonts/BUGATTIText-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BUGATTI Monospace';
+      src: url('https://www.bugatti.com/fonts/BUGATTIMonospace-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #0b0b0b;
+      color: #ffffff;
+      font-family: 'BUGATTI Text', -apple-system, BlinkMacSystemFont, sans-serif;
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Fixed Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      max-width: 390px;
+      margin: 0 auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 100;
+      background: linear-gradient(180deg, rgba(11,11,11,0.85) 0%, rgba(11,11,11,0) 100%);
+      backdrop-filter: blur(4px);
+    }
+
+    .header-btn {
+      background: none;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    .burger-icon {
+      width: 18px;
+      height: 12px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .burger-icon span {
+      display: block;
+      height: 1.5px;
+      width: 100%;
+      background: #ffffff;
+    }
+
+    .brand-logo-center {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo-center svg {
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    /* Hero Section (390 x 844 viewport target) */
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 844px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 24px 44px;
+      background: #111111;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.85;
+      z-index: 1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(11,11,11,0.2) 0%, rgba(11,11,11,0.4) 50%, rgba(11,11,11,0.95) 100%);
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-tag {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-family: 'BUGATTI Display', serif;
+      font-size: 32px;
+      line-height: 1.15;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      padding-bottom: 4px;
+      margin-top: 8px;
+    }
+
+    /* Notification Pill */
+    .recruitment-banner {
+      margin: 16px 20px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 2px;
+    }
+
+    .recruitment-banner p {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .recruitment-banner a {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: #ffffff;
+      text-decoration: underline;
+      white-space: nowrap;
+      margin-left: 8px;
+    }
+
+    /* Sections General */
+    .section-wrap {
+      padding: 48px 20px 24px;
+    }
+
+    .section-headline {
+      font-family: 'BUGATTI Display', serif;
+      font-size: 28px;
+      line-height: 1.2;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+    }
+
+    .card-stream {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .story-card {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .story-media {
+      width: 100%;
+      height: 220px;
+      background: #171717;
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .story-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .story-title {
+      font-family: 'BUGATTI Display', serif;
+      font-size: 20px;
+      text-transform: uppercase;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .story-link {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    /* Full-bleed Editorial Spotlight */
+    .editorial-feature {
+      position: relative;
+      margin: 40px 0;
+      height: 480px;
+      background: #151515;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 32px 20px;
+      overflow: hidden;
+    }
+
+    .editorial-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.75;
+    }
+
+    .editorial-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 20%, rgba(11,11,11,0.92) 100%);
+      z-index: 1;
+    }
+
+    .editorial-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .editorial-quote {
+      font-family: 'BUGATTI Display', serif;
+      font-size: 20px;
+      line-height: 1.3;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .btn-pill-outline {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 10px 18px;
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+
+    /* Sports Cars Grid / List */
+    .car-card {
+      background: #111111;
+      border: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .car-media {
+      width: 100%;
+      height: 210px;
+      position: relative;
+      background: #161616;
+    }
+
+    .car-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .car-details {
+      padding: 20px;
+    }
+
+    .car-name {
+      font-family: 'BUGATTI Display', serif;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .car-sub {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 16px;
+    }
+
+    /* Social Feed / Live */
+    .live-card {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 28px 20px;
+      text-align: center;
+      background: rgba(255,255,255,0.02);
+      margin: 20px 0;
+    }
+
+    .live-title {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+    }
+
+    .live-desc {
+      font-family: 'BUGATTI Text', sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 20px;
+    }
+
+    /* Footer */
+    footer {
+      background: #070707;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 48px 20px 36px;
+      margin-top: 40px;
+    }
+
+    .footer-logo {
+      margin-bottom: 32px;
+    }
+    .footer-logo svg {
+      height: 24px;
+      fill: #ffffff;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px 16px;
+      margin-bottom: 40px;
+    }
+
+    .footer-col h4 {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-family: 'BUGATTI Text', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 18px;
+    }
+
+    .footer-socials a {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .footer-legal {
+      font-family: 'BUGATTI Monospace', monospace;
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.35);
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+<!-- Header -->
+<header>
+<button aria-label="Open Menu" class="header-btn">
+<div class="burger-icon">
+<span></span>
+<span></span>
+</div>
+<span>Menu</span>
+</button>
+<div class="brand-logo-center">
+<!-- BUGATTI EB Mark SVG -->
+<svg viewbox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+<path d="M28 8h16c8 0 14 5 14 12 0 4-2 7-5 9 5 2 8 6 8 11 0 7-7 12-16 12H28V8zm12 17c4 0 7-2 7-6s-3-6-7-6h-4v12h4zm2 19c5 0 8-2 8-7s-3-7-8-7h-6v14h6z"></path>
+<path d="M72 8H56c-8 0-14 5-14 12 0 4 2 7 5 9-5 2-8 6-8 11 0 7 7 12 16 12h16V8zm-12 17c-4 0-7-2-7-6s3-6 7-6h4v12h-4zm-2 19c-5 0-8-2-8-7s3-7 8-7h6v14h-6z" opacity="0.95"></path>
+</svg>
+</div>
+<button aria-label="Account" class="header-btn">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24" width="18">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</button>
+</header>
+<!-- Hero Section: Portrait Mobile 390x844 with Destrier Film / Pure Beauty -->
+<section class="hero-section">
+<img alt="BUGATTI Chateau Saint-Jean and Hyper Sports Cars" class="hero-bg" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-overlay"></div>
+<div class="hero-content">
+<p class="hero-tag">Destrier Film — Molsheim</p>
+<h1 class="hero-title">A Story of Proportion and Craftsmanship.</h1>
+<a class="hero-cta" href="#discover">Discover Pure Beauty →</a>
+</div>
+</section>
+<!-- Recruitment Notification -->
+<aside class="recruitment-banner">
+<p>Are you ready for a new adventure? We are hiring.</p>
+<a href="#careers">Explore Opportunities</a>
+</aside>
+<!-- La Maison BUGATTI -->
+<section class="section-wrap" id="discover">
+<h2 class="section-headline">La Maison BUGATTI</h2>
+<div class="card-stream">
+<article class="story-card">
+<div class="story-media">
+<img alt="Discover BUGATTI" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="story-title">Discover BUGATTI</h3>
+<a class="story-link" href="#">Learn More →</a>
+</article>
+<article class="story-card">
+<div class="story-media">
+<img alt="Our History" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="story-title">Our History</h3>
+<a class="story-link" href="#">Learn More →</a>
+</article>
+<article class="story-card">
+<div class="story-media">
+<img alt="Careers at BUGATTI" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="story-title">Careers at BUGATTI</h3>
+<a class="story-link" href="#">Learn More →</a>
+</article>
+</div>
+</section>
+<!-- Programme Solitaire / Editorial -->
+<section class="editorial-feature">
+<img alt="Programme Solitaire" class="editorial-bg" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="editorial-overlay"></div>
+<div class="editorial-inner">
+<p class="editorial-quote">Rooted in tradition. Built to leave a legacy.</p>
+<a class="btn-pill-outline" href="#">Discover the Programme Solitaire</a>
+</div>
+</section>
+<!-- BUGATTI Sur Mesure -->
+<section class="section-wrap" style="text-align: center; padding-top: 20px;">
+<h2 class="section-headline" style="letter-spacing: 0.05em;">BUGATTI Sur Mesure</h2>
+<p style="font-family: 'BUGATTI Monospace', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.6); max-width: 290px; margin: 0 auto 20px; line-height: 1.6;">
+      The pinnacle of customization. Unlimited creativity, infinite possibilities.
+    </p>
+<a class="btn-pill-outline" href="#">Discover BUGATTI Sur Mesure</a>
+</section>
+<!-- Embrace the BUGATTI Lifestyle -->
+<section class="section-wrap">
+<h2 class="section-headline">Embrace the BUGATTI Lifestyle</h2>
+<div class="card-stream">
+<article class="story-card">
+<div class="story-media">
+<img alt="HONMA x BUGATTI" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="story-title">HONMA × BUGATTI</h3>
+<p style="font-family: 'BUGATTI Monospace', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">Sporting Luxury, Redefined</p>
+<a class="story-link" href="#">Learn More →</a>
+</article>
+<article class="story-card">
+<div class="story-media">
+<img alt="C SEED x BUGATTI" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="story-title">C SEED × BUGATTI</h3>
+<p style="font-family: 'BUGATTI Monospace', monospace; font-size: 10px; color: rgba(255,255,255,0.5); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 6px;">Collaboration Inspired by Tourbillon</p>
+<a class="story-link" href="#">Learn More →</a>
+</article>
+</div>
+</section>
+<!-- Our Hyper Sports Cars -->
+<section class="section-wrap">
+<h2 class="section-headline">Our Hyper Sports Cars</h2>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI Tourbillon" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">Tourbillon</h3>
+<p class="car-sub">Pour L'Éternité • V16 Hybrid</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI W16 Mistral" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">W16 Mistral</h3>
+<p class="car-sub">The Ultimate Roadster</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI Bolide" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">Bolide</h3>
+<p class="car-sub">What If... • Track Only</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI Chiron" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">Chiron</h3>
+<p class="car-sub">Facets of Performance</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI Divo" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">Divo</h3>
+<p class="car-sub">Modern Coachbuilding</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+<div class="car-card">
+<div class="car-media">
+<img alt="BUGATTI Centodieci" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="car-details">
+<h3 class="car-name">Centodieci</h3>
+<p class="car-sub">Hommage to an Icon</p>
+<a class="story-link" href="#">Explore Model →</a>
+</div>
+</div>
+</section>
+<!-- BUGATTI Live -->
+<section class="section-wrap" style="padding-top: 10px;">
+<h2 class="section-headline">BUGATTI Live</h2>
+<div class="live-card">
+<p class="live-title">Social Media Feed Content</p>
+<p class="live-desc">External social network content from Instagram, YouTube, and LinkedIn is restricted in accordance with your cookie privacy preferences.</p>
+<a class="btn-pill-outline" href="#">Accept Third-Party Media Cookies</a>
+</div>
+</section>
+<!-- Footer -->
+<footer>
+<div class="footer-logo">
+<svg viewbox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+<path d="M28 8h16c8 0 14 5 14 12 0 4-2 7-5 9 5 2 8 6 8 11 0 7-7 12-16 12H28V8zm12 17c4 0 7-2 7-6s-3-6-7-6h-4v12h4zm2 19c5 0 8-2 8-7s-3-7-8-7h-6v14h6z"></path>
+<path d="M72 8H56c-8 0-14 5-14 12 0 4 2 7 5 9-5 2-8 6-8 11 0 7 7 12 16 12h16V8zm-12 17c-4 0-7-2-7-6s3-6 7-6h4v12h-4zm-2 19c-5 0-8-2-8-7s3-7 8-7h6v14h-6z" opacity="0.95"></path>
+</svg>
+</div>
+<div class="footer-grid">
+<div class="footer-col">
+<h4>Hyper Sports Cars</h4>
+<ul>
+<li><a href="#">Tourbillon</a></li>
+<li><a href="#">W16 Mistral</a></li>
+<li><a href="#">Bolide</a></li>
+<li><a href="#">Chiron</a></li>
+<li><a href="#">Divo</a></li>
+<li><a href="#">Centodieci</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>La Maison</h4>
+<ul>
+<li><a href="#">The Brand</a></li>
+<li><a href="#">History</a></li>
+<li><a href="#">Molsheim Atelier</a></li>
+<li><a href="#">Careers</a></li>
+<li><a href="#">Newsroom</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Lifestyle</h4>
+<ul>
+<li><a href="#">Brand Partnerships</a></li>
+<li><a href="#">BUGATTI Boutique</a></li>
+<li><a href="#">HONMA Golf</a></li>
+<li><a href="#">C SEED Television</a></li>
+<li><a href="#">Programme Solitaire</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h4>Customer Service</h4>
+<ul>
+<li><a href="#">Find a Dealer</a></li>
+<li><a href="#">Contact Us</a></li>
+<li><a href="#">Ownership &amp; Service</a></li>
+<li><a href="#">Sur Mesure Concierge</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<div class="footer-socials">
+<a href="#">Instagram</a>
+<a href="#">YouTube</a>
+<a href="#">LinkedIn</a>
+<a href="#">Facebook</a>
+</div>
+<p class="footer-legal">
+        © 2025 BUGATTI Automobiles S.A.S. • Unofficial Design Study.<br/>
+<span style="text-decoration: underline;">Privacy Policy</span> • <span style="text-decoration: underline;">Legal Notice</span> • <span style="text-decoration: underline;">Cookie Settings</span>
+</p>
+</div>
+</footer>
+</body>
+</html>

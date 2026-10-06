@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>BUGATTI Mobile Homepage Design Study</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&amp;family=Space+Mono:ital,wght@0,400;0,700;1,400&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --font-display: 'Bodoni Moda', serif;
+      --font-mono: 'Space Mono', monospace;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: var(--font-sans);
+      width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-bugatti-display {
+      font-family: var(--font-display);
+    }
+    .font-bugatti-mono {
+      font-family: var(--font-mono);
+      letter-spacing: 0.12em;
+    }
+    .font-bugatti-text {
+      font-family: var(--font-sans);
+    }
+    .underlined-link {
+      display: inline-block;
+      position: relative;
+      padding-bottom: 3px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      transition: all 0.2s ease;
+    }
+    .underlined-link:hover {
+      border-bottom-color: #FFFFFF;
+      color: #FFFFFF;
+    }
+    /* Hide scrollbars */
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+</head>
+<body class="relative bg-black text-white selection:bg-white selection:text-black">
+<!-- ==================== STICKY / FIXED NAVIGATION HEADER ==================== -->
+<header class="fixed top-0 left-0 right-0 z-40 w-[390px] mx-auto h-[60px] px-3 flex items-center justify-between bg-gradient-to-b from-black/80 via-black/40 to-transparent backdrop-blur-[2px]">
+<!-- MENU button with two horizontal lines -->
+<button aria-label="Open Navigation Menu" class="flex items-center gap-2.5 text-white focus:outline-none group py-2" onclick="openMenu()">
+<div class="flex flex-col justify-center gap-1.5 w-6">
+<span class="block w-5 h-[1.5px] bg-white transition-transform"></span>
+<span class="block w-3.5 h-[1.5px] bg-white transition-transform"></span>
+</div>
+<span class="font-bugatti-mono text-[11px] font-bold tracking-[0.2em] text-white">MENU</span>
+</button>
+<!-- Centered EB Monogram (40x40 at x=175) -->
+<a aria-label="Bugatti Home" class="absolute left-1/2 -translate-x-1/2 top-[10px] w-10 h-10 flex items-center justify-center" href="https://www.bugatti.com">
+<svg class="w-10 h-10 text-white fill-current" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<!-- Iconic EB Monogram vector -->
+<path d="M48.5 22h-18v56h18c15.5 0 24.5-9.5 24.5-20.5 0-7.8-5-14.2-12.8-17 6.2-2.5 10.2-8.2 10.2-15 0-10.2-8.5-17.5-21.9-17.5zm-11 7h10.5c8.2 0 14.5 4.5 14.5 11.2 0 7-6.2 11.5-14.5 11.5H37.5V29zm0 29.5h11.2c9.5 0 16.5 4.8 16.5 13.5 0 8.5-7 13.8-16.5 13.8H37.5V58.5z"></path>
+<path d="M22 29h6v49h-6zM77 29h6v49h-6z" opacity="0.1"></path>
+</svg>
+</a>
+<!-- STORE / Bag Icon Right -->
+<a aria-label="Bugatti Store" class="flex items-center gap-2 text-white/90 hover:text-white" href="https://store.bugatti.com" rel="noopener noreferrer" target="_blank">
+<span class="font-bugatti-mono text-[10px] tracking-[0.2em] uppercase hidden">STORE</span>
+<svg class="w-5 h-5 stroke-current fill-none stroke-[1.5]" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</a>
+</header>
+<!-- ==================== FULL-HEIGHT OVERLAY MENU (390x820) ==================== -->
+<div class="fixed inset-0 z-50 w-[390px] h-[820px] mx-auto bg-white text-black hidden rounded-b-2xl overflow-hidden shadow-2xl transition-all duration-300" id="bugattiMenuModal">
+<!-- Close header -->
+<div class="flex items-center justify-between px-4 pt-4 pb-2 border-b border-black/10">
+<div class="flex items-center gap-2">
+<svg class="w-6 h-6 text-black fill-current" viewbox="0 0 100 100">
+<path d="M48.5 22h-18v56h18c15.5 0 24.5-9.5 24.5-20.5 0-7.8-5-14.2-12.8-17 6.2-2.5 10.2-8.2 10.2-15 0-10.2-8.5-17.5-21.9-17.5zm-11 7h10.5c8.2 0 14.5 4.5 14.5 11.2 0 7-6.2 11.5-14.5 11.5H37.5V29zm0 29.5h11.2c9.5 0 16.5 4.8 16.5 13.5 0 8.5-7 13.8-16.5 13.8H37.5V58.5z"></path>
+</svg>
+<span class="font-bugatti-mono text-[11px] tracking-[0.25em] font-semibold text-black uppercase">BUGATTI</span>
+</div>
+<button aria-label="Close menu" class="p-2 text-black hover:opacity-70 focus:outline-none" onclick="closeMenu()">
+<svg class="w-6 h-6 stroke-current stroke-[1.75]" fill="none" viewbox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</div>
+<!-- 2 Column Body: Left Navigation (~183px) & Right Portrait Models (183px at x=195) -->
+<div class="grid grid-cols-2 h-[calc(820px-60px)] divide-x divide-black/10">
+<!-- Left Column: Navigation Categories -->
+<div class="p-3.5 overflow-y-auto space-y-4">
+<!-- Group 1: Hyper Sports Cars -->
+<div>
+<span class="block font-bugatti-mono text-[10px] uppercase font-bold text-black/50 tracking-[0.16em] mb-1.5">HYPER SPORTS CARS</span>
+<ul class="space-y-1 font-bugatti-text text-[13px] font-medium text-black">
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/the-hyper-sports-cars/">Current Models</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/the-hyper-sports-cars/">Contemporary Models</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/the-hyper-sports-cars/">Classic Icons</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/sur-mesure/">Individualization</a></li>
+</ul>
+</div>
+<!-- Group 2: La Marque -->
+<div>
+<span class="block font-bugatti-mono text-[10px] uppercase font-bold text-black/50 tracking-[0.16em] mb-1.5">LA MARQUE</span>
+<ul class="space-y-1 font-bugatti-text text-[13px] font-medium text-black">
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/brand/">Company</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/brand/careers/">Careers</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://newsroom.bugatti.com/">Newsroom</a></li>
+</ul>
+</div>
+<!-- Group 3: Ownership -->
+<div>
+<span class="block font-bugatti-mono text-[10px] uppercase font-bold text-black/50 tracking-[0.16em] mb-1.5">OWNERSHIP</span>
+<ul class="space-y-1 font-bugatti-text text-[13px] font-medium text-black">
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/ownership/dealer-search/">Dealer Finder</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/ownership/customer-service/">Customer Service</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/ownership/la-maison-pur-sang/">La Maison Pur Sang</a></li>
+</ul>
+</div>
+<!-- Group 4: Lifestyle -->
+<div>
+<span class="block font-bugatti-mono text-[10px] uppercase font-bold text-black/50 tracking-[0.16em] mb-1.5">LIFESTYLE</span>
+<ul class="space-y-1 font-bugatti-text text-[13px] font-medium text-black">
+<li><a class="hover:text-black/60 block py-0.5" href="https://www.bugatti.com/lifestyle/brand-partnerships/">Collections</a></li>
+<li><a class="hover:text-black/60 block py-0.5" href="https://store.bugatti.com">BUGATTI Store</a></li>
+</ul>
+</div>
+</div>
+<!-- Right Column: 3 Stacked Portrait Current Models Photos -->
+<div class="p-2.5 overflow-y-auto space-y-3 bg-[#F8F8F8]">
+<span class="block font-bugatti-mono text-[9px] uppercase font-bold text-black/40 tracking-[0.15em] mb-1">FEATURED MODELS</span>
+<!-- Card 1: Tourbillon -->
+<a class="block group" href="https://www.bugatti.com/tourbillon/">
+<div class="relative w-full aspect-[4/5] bg-black overflow-hidden rounded">
+<img alt="BUGATTI Tourbillon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<span class="block font-bugatti-mono text-[10px] tracking-[0.18em] font-bold">TOURBILLON</span>
+<span class="block text-[8px] font-bugatti-mono text-white/70">POUR L’ÉTERNITÉ</span>
+</div>
+</div>
+</a>
+<!-- Card 2: W16 Mistral -->
+<a class="block group" href="https://www.bugatti.com/w16-mistral/">
+<div class="relative w-full aspect-[4/5] bg-black overflow-hidden rounded">
+<img alt="BUGATTI W16 Mistral" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<span class="block font-bugatti-mono text-[10px] tracking-[0.18em] font-bold">W16 MISTRAL</span>
+<span class="block text-[8px] font-bugatti-mono text-white/70">THE ULTIMATE ROADSTER</span>
+</div>
+</div>
+</a>
+<!-- Card 3: Bolide -->
+<a class="block group" href="https://www.bugatti.com/bolide/">
+<div class="relative w-full aspect-[4/5] bg-black overflow-hidden rounded">
+<img alt="BUGATTI Bolide" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+<div class="absolute bottom-2 left-2 text-white">
+<span class="block font-bugatti-mono text-[10px] tracking-[0.18em] font-bold">BOLIDE</span>
+<span class="block text-[8px] font-bugatti-mono text-white/70">WHAT IF...?</span>
+</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+<!-- ==================== HERO SECTION (Exact 844px height) ==================== -->
+<section class="relative w-[390px] h-[844px] overflow-hidden bg-black flex flex-col justify-between">
+<!-- Authentic portrait muted autoplay loop video 9:16 destrier-web-edit -->
+<div class="absolute inset-0 w-full h-full overflow-hidden">
+<video autoplay="" class="w-full h-full object-cover object-center scale-[1.01]" loop="" muted="" playsinline="" poster="https://bugatti.imgix.net/6a69ff82795c83144775d413/destrier-b-1.svg?auto=format,compress&amp;cs=srgb&amp;w=600">
+<source src="https://bugatti.imgix.net/6a759bdc795c83144777e20/destrier-web-edit-00-9-16.mp4?fm=mp4&amp;w=1200&amp;video-codec=av1&amp;video-bitrate=2m" type="video/mp4"/>
+</video>
+<!-- 20% black overlay + black bottom gradient -->
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30"></div>
+</div>
+<!-- Centered Hero Branding & Content -->
+<div class="relative z-10 w-full px-[24px] pt-[260px] flex flex-col items-center text-center">
+<!-- Centered inverted white Destrier original SVG (width 75% of 342px content = ~256px) -->
+<div class="w-[256px] flex justify-center mb-6">
+<img alt="Destrier Bugatti" class="w-full h-auto brightness-0 invert opacity-95" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Mono 14 uppercase two-line subtitle with 24px gaps -->
+<p class="font-bugatti-mono text-[13px] leading-[22px] tracking-[0.16em] uppercase text-white/95 max-w-[320px] mb-6">
+        A STORY OF PROPORTION<br/>AND CRAFTSMANSHIP.
+      </p>
+<!-- Underlined 12px link: NOT a pill button -->
+<div>
+<a class="underlined-link text-[12px] text-white tracking-[0.16em]" href="https://www.bugatti.com/destrier/">
+          DISCOVER PURE BEAUTY
+        </a>
+</div>
+</div>
+<!-- Careers Toast: bottom 12px, left 12px, right 12px -->
+<div class="relative z-20 mx-3 mb-3 p-3 bg-black/85 backdrop-blur-md border border-white/20 rounded shadow-xl flex items-center gap-3" id="careersToast">
+<img alt="Bugatti Careers" class="w-14 h-14 object-cover rounded flex-shrink-0" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="flex-1 min-w-0 pr-1">
+<p class="text-[12px] leading-snug font-bugatti-text font-medium text-white/90">
+          Are you ready for a new adventure? We are hiring.
+        </p>
+<a class="inline-block mt-1 font-bugatti-mono text-[10px] tracking-[0.14em] uppercase text-white border border-white/40 px-2 py-1 hover:bg-white hover:text-black transition-colors" href="https://www.bugatti.com/brand/careers/">
+          EXPLORE OUR OPPORTUNITIES
+        </a>
+</div>
+<button aria-label="Close notification" class="text-white/60 hover:text-white p-1" onclick="document.getElementById('careersToast').style.display='none'">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</div>
+</section>
+<!-- ==================== LA MAISON BUGATTI (y=905, x=12, w=366) ==================== -->
+<section class="w-[390px] px-3 pt-14 pb-12 bg-black">
+<!-- Section Heading: 36px/40 -->
+<h2 class="font-bugatti-display text-[36px] leading-[40px] font-normal tracking-tight text-white mb-8">
+      La Maison BUGATTI
+    </h2>
+<!-- One column 3 original photos with 24px/32 titles and underlined LEARN MORE -->
+<div class="space-y-12">
+<!-- Card 1: Discover BUGATTI -->
+<article class="group">
+<div class="w-full aspect-[16/10] bg-[#111] overflow-hidden mb-4">
+<img alt="Discover BUGATTI" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-bugatti-display text-[24px] leading-[32px] font-normal text-white mb-2">
+          Discover BUGATTI
+        </h3>
+<a class="underlined-link text-[12px] text-white/90" href="https://www.bugatti.com/brand/">
+          LEARN MORE
+        </a>
+</article>
+<!-- Card 2: Our History -->
+<article class="group">
+<div class="w-full aspect-[16/10] bg-[#111] overflow-hidden mb-4">
+<img alt="Our History" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-bugatti-display text-[24px] leading-[32px] font-normal text-white mb-2">
+          Our History
+        </h3>
+<a class="underlined-link text-[12px] text-white/90" href="https://www.bugatti.com/brand/history/">
+          LEARN MORE
+        </a>
+</article>
+<!-- Card 3: Careers at BUGATTI -->
+<article class="group">
+<div class="w-full aspect-[16/10] bg-[#111] overflow-hidden mb-4">
+<img alt="Careers at BUGATTI" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-bugatti-display text-[24px] leading-[32px] font-normal text-white mb-2">
+          Careers at BUGATTI
+        </h3>
+<a class="underlined-link text-[12px] text-white/90" href="https://www.bugatti.com/brand/careers/">
+          LEARN MORE
+        </a>
+</article>
+</div>
+</section>
+<!-- ==================== TWO STACKED PROMO VIDEOS (min-height 70svh ~590.8px) ==================== -->
+<!-- Promo 1: Solitaire card -->
+<section class="relative w-[390px] min-h-[591px] overflow-hidden bg-black flex flex-col justify-end p-6 border-t border-b border-white/10">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover" loop="" muted="" playsinline="">
+<source src="https://bugatti.imgix.net/689485a29fe9b36d36421ccf/250807-solitaire-brouillard-video-menu.mp4?fm=mp4&amp;w=1920&amp;video-codec=av1&amp;video-bitrate=2m" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<!-- Solitaire original wordmark inverted white -->
+<div class="w-[200px] mb-4">
+<img alt="Solitaire Programme" class="w-full h-auto brightness-0 invert opacity-95" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<p class="font-bugatti-mono text-[12px] leading-relaxed uppercase tracking-[0.16em] text-white/90 max-w-[300px] mb-5">
+        ROOTED IN TRADITION. BUILT TO LEAVE A LEGACY.
+      </p>
+<a class="underlined-link text-[12px] text-white" href="https://www.bugatti.com/solitaire/">
+        DISCOVER THE PROGRAMME SOLITAIRE
+      </a>
+</div>
+</section>
+<!-- Promo 2: BUGATTI Sur Mesure card -->
+<section class="relative w-[390px] min-h-[591px] overflow-hidden bg-black flex flex-col justify-end p-6 border-b border-white/10">
+<video autoplay="" class="absolute inset-0 w-full h-full object-cover" loop="" muted="" playsinline="">
+<source src="https://bugatti.imgix.net/6a6b511d795c8314478ccbed/mistral-sur-mesure-caroline-moodcut.mp4?fm=mp4&amp;w=1920&amp;video-codec=av1&amp;video-bitrate=2m" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
+<div class="relative z-10 flex flex-col items-center text-center">
+<h3 class="font-bugatti-display text-[32px] leading-[38px] font-normal text-white mb-3">
+        BUGATTI Sur Mesure
+      </h3>
+<p class="font-bugatti-mono text-[11px] leading-relaxed uppercase tracking-[0.16em] text-white/90 max-w-[320px] mb-5">
+        THE PINNACLE OF CUSTOMIZATION. UNLIMITED CREATIVITY. INFINITE POSSIBILITIES.
+      </p>
+<a class="underlined-link text-[12px] text-white" href="https://www.bugatti.com/sur-mesure/">
+        DISCOVER BUGATTI SUR MESURE
+      </a>
+</div>
+</section>
+<!-- ==================== EMBRACE THE BUGATTI LIFESTYLE (y=3310, 36px/40) ==================== -->
+<section class="w-[390px] px-3 pt-14 pb-12 bg-black">
+<h2 class="font-bugatti-display text-[36px] leading-[40px] font-normal tracking-tight text-white mb-8">
+      Embrace the BUGATTI lifestyle
+    </h2>
+<!-- One column HONMA & C SEED cards -->
+<div class="space-y-12">
+<!-- Card 1: HONMA x BUGATTI -->
+<article class="group">
+<div class="w-full aspect-[16/10] bg-[#111] overflow-hidden mb-4">
+<img alt="HONMA x BUGATTI" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-bugatti-display text-[24px] leading-[32px] font-normal text-white mb-1.5">
+          HONMA × BUGATTI
+        </h3>
+<p class="font-bugatti-mono text-[12px] uppercase tracking-[0.12em] text-white/60 mb-3">
+          SPORTING LUXURY, REDEFINED
+        </p>
+<a class="underlined-link text-[12px] text-white/90" href="https://www.bugatti.com/lifestyle/honma/">
+          LEARN MORE
+        </a>
+</article>
+<!-- Card 2: C SEED x BUGATTI -->
+<article class="group">
+<div class="w-full aspect-[16/10] bg-[#111] overflow-hidden mb-4">
+<img alt="C SEED x BUGATTI" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="font-bugatti-display text-[24px] leading-[32px] font-normal text-white mb-1.5">
+          C SEED × BUGATTI
+        </h3>
+<p class="font-bugatti-mono text-[12px] uppercase tracking-[0.12em] text-white/60 mb-3">
+          COLLABORATION INSPIRED BY THE BUGATTI TOURBILLON
+        </p>
+<a class="underlined-link text-[12px] text-white/90" href="https://www.bugatti.com/lifestyle/c-seed/">
+          LEARN MORE
+        </a>
+</article>
+</div>
+</section>
+<!-- ==================== OUR HYPER SPORTS CARS (y=4221, 36px/40) ==================== -->
+<section class="w-[390px] px-3 pt-14 pb-14 bg-black">
+<h2 class="font-bugatti-display text-[36px] leading-[40px] font-normal tracking-tight text-white mb-8">
+      Our Hyper Sports Cars
+    </h2>
+<!-- 6 original 4:5 photographic model cards in one column -->
+<div class="space-y-10">
+<!-- 1: Tourbillon -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI Tourbillon" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<!-- White Model Mark / Name overlay band + tagline + link -->
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            TOURBILLON
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            POUR L'ÉTERNITÉ
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/tourbillon/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+<!-- 2: W16 Mistral -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI W16 Mistral" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            W16 MISTRAL
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            THE ULTIMATE ROADSTER
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/w16-mistral/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+<!-- 3: Bolide -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI Bolide" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            BOLIDE
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            WHAT IF...?
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/bolide/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+<!-- 4: Chiron -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI Chiron" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            CHIRON
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            FACETS OF PERFORMANCE
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/chiron/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+<!-- 5: Divo -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI Divo" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            DIVO
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            MODERN COACHBUILDING AT ITS BEST
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/divo/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+<!-- 6: Centodieci -->
+<article class="relative w-full aspect-[4/5] bg-[#0c0c0c] overflow-hidden rounded group">
+<img alt="BUGATTI Centodieci" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-700" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+<div class="absolute bottom-0 inset-x-0 p-5 flex flex-col items-start">
+<h3 class="font-bugatti-mono text-[20px] font-bold tracking-[0.2em] text-white mb-1 uppercase">
+            CENTODIECI
+          </h3>
+<p class="font-bugatti-mono text-[11px] uppercase tracking-[0.14em] text-white/70 mb-3">
+            HOMMAGE TO AN ICON
+          </p>
+<a class="underlined-link text-[11px] text-white" href="https://www.bugatti.com/centodieci/">
+            LEARN MORE
+          </a>
+</div>
+</article>
+</div>
+</section>
+<!-- ==================== BUGATTI LIVE (y=7141, 36px) ==================== -->
+<section class="w-[390px] px-3 pt-12 pb-14 bg-black border-t border-white/10">
+<h2 class="font-bugatti-display text-[36px] leading-[40px] font-normal tracking-tight text-white mb-8">
+      BUGATTI Live
+    </h2>
+<!-- Authentic consent-inhibited empty feed (no fake instagram tiles) -->
+<div class="w-full py-16 px-4 border border-white/10 bg-[#080808] flex flex-col items-center justify-center text-center">
+<span class="font-bugatti-mono text-[10px] tracking-[0.2em] uppercase font-bold text-white/50 mb-3">
+        SOCIAL MEDIA FEED CONTENT
+      </span>
+<p class="font-bugatti-text text-[13px] leading-relaxed text-white/70 max-w-[280px] mb-6">
+        External social network content from Instagram, YouTube, and LinkedIn is currently restricted in accordance with your cookie privacy preferences.
+      </p>
+<button class="font-bugatti-mono text-[11px] tracking-[0.15em] uppercase text-white border border-white/40 px-5 py-2.5 hover:bg-white hover:text-black transition-colors">
+        ACCEPT THIRD-PARTY MEDIA COOKIES
+      </button>
+</div>
+</section>
+<!-- ==================== SIGNATURE & TWO-COLUMN FOOTER ==================== -->
+<footer class="w-[390px] px-4 pt-12 pb-16 bg-[#050505] border-t border-white/10">
+<!-- Centered EB Signature Monogram SVG -->
+<div class="flex justify-center mb-10">
+<svg class="w-12 h-12 text-white/80 fill-current" viewbox="0 0 100 100">
+<path d="M48.5 22h-18v56h18c15.5 0 24.5-9.5 24.5-20.5 0-7.8-5-14.2-12.8-17 6.2-2.5 10.2-8.2 10.2-15 0-10.2-8.5-17.5-21.9-17.5zm-11 7h10.5c8.2 0 14.5 4.5 14.5 11.2 0 7-6.2 11.5-14.5 11.5H37.5V29zm0 29.5h11.2c9.5 0 16.5 4.8 16.5 13.5 0 8.5-7 13.8-16.5 13.8H37.5V58.5z"></path>
+</svg>
+</div>
+<!-- Two-column navigation groups: Hyper Sports Cars, La Marque, Lifestyle, Customer Service -->
+<div class="grid grid-cols-2 gap-8 mb-12">
+<!-- Col 1 -->
+<div class="space-y-8">
+<div>
+<span class="block font-bugatti-mono text-[11px] uppercase tracking-[0.18em] font-bold text-white mb-3">HYPER SPORTS CARS</span>
+<ul class="space-y-2 font-bugatti-text text-[13px] text-white/60">
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/tourbillon/">Tourbillon</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/w16-mistral/">W16 Mistral</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/bolide/">Bolide</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/chiron/">Chiron</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/divo/">Divo</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/centodieci/">Centodieci</a></li>
+</ul>
+</div>
+<div>
+<span class="block font-bugatti-mono text-[11px] uppercase tracking-[0.18em] font-bold text-white mb-3">LA MARQUE</span>
+<ul class="space-y-2 font-bugatti-text text-[13px] text-white/60">
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/brand/">The Brand</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/brand/history/">History</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/brand/molsheim-experience/">Molsheim Atelier</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/brand/careers/">Careers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://newsroom.bugatti.com/">Newsroom</a></li>
+</ul>
+</div>
+</div>
+<!-- Col 2 -->
+<div class="space-y-8">
+<div>
+<span class="block font-bugatti-mono text-[11px] uppercase tracking-[0.18em] font-bold text-white mb-3">LIFESTYLE</span>
+<ul class="space-y-2 font-bugatti-text text-[13px] text-white/60">
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/lifestyle/brand-partnerships/">Brand Partnerships</a></li>
+<li><a class="hover:text-white transition-colors" href="https://store.bugatti.com">BUGATTI Boutique</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/lifestyle/honma/">HONMA Golf</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/lifestyle/c-seed/">C SEED Television</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/solitaire/">Programme Solitaire</a></li>
+</ul>
+</div>
+<div>
+<span class="block font-bugatti-mono text-[11px] uppercase tracking-[0.18em] font-bold text-white mb-3">CUSTOMER SERVICE</span>
+<ul class="space-y-2 font-bugatti-text text-[13px] text-white/60">
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/ownership/dealer-search/">Find a Dealer</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/ownership/customer-service/">Contact Us</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/ownership/la-maison-pur-sang/">Ownership &amp; Service</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.bugatti.com/sur-mesure/">Sur Mesure Concierge</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Social channels, languages, copyright 2026 -->
+<div class="pt-8 border-t border-white/10 flex flex-col gap-5 text-center">
+<div class="flex items-center justify-center gap-6 font-bugatti-mono text-[11px] uppercase tracking-[0.16em] text-white/70">
+<a class="hover:text-white" href="https://www.instagram.com/bugatti">INSTAGRAM</a>
+<a class="hover:text-white" href="https://www.youtube.com/user/bugatti-official">YOUTUBE</a>
+<a class="hover:text-white" href="https://www.linkedin.com/company/bugatti-automobiles-s-a-s">LINKEDIN</a>
+<a class="hover:text-white" href="https://www.facebook.com/bugatti">FACEBOOK</a>
+</div>
+<div class="flex items-center justify-between text-[11px] font-bugatti-mono text-white/50 pt-2">
+<span>© 2026 BUGATTI Automobiles S.A.S.</span>
+<div class="flex gap-3">
+<span class="text-white font-bold">EN</span>
+<span>/</span>
+<span class="hover:text-white cursor-pointer">FR</span>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px] font-bugatti-text text-white/40">
+<a class="hover:underline" href="https://www.bugatti.com/privacy-policy/">Privacy Policy</a>
+<a class="hover:underline" href="https://www.bugatti.com/legal-notice/">Legal Notice</a>
+<a class="hover:underline" href="https://www.bugatti.com/cookie-settings/">Cookie Settings</a>
+</div>
+</div>
+</footer>
+<!-- Interactivity Script for Modal and Escape key -->
+<script>
+    function openMenu() {
+      const modal = document.getElementById('bugattiMenuModal');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+      const modal = document.getElementById('bugattiMenuModal');
+      modal.classList.add('hidden');
+      document.body.style.overflow = 'auto';
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

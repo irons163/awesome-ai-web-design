@@ -14,11 +14,11 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
-  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m',
+  'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m', 'bugatti', 'ferrari',
 ]);
 const SANITY_HOSTED_SUFFIXES = new Set([
   '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp',
@@ -99,7 +99,7 @@ function stageOfficialDrafts(progress) {
         path.join(destination, name + '-assets'), {
           recursive: true, force: true,
           filter: source => !REMOTE_PATHS.has(path.relative(DRAFT_SOURCE, source)) &&
-            (!['bmw', 'bmw-m'].includes(name) || !path.basename(source).startsWith('source-')) &&
+            (!['bmw', 'bmw-m', 'bugatti', 'ferrari'].includes(name) || !path.basename(source).startsWith('source-')) &&
             (name !== 'tesla' ||
             !['Homepage-FSD-Card-Desktop.mp4', 'Homepage-FSD-Card-Mobile.mp4'].includes(path.basename(source))),
         });
