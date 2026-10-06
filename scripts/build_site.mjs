@@ -14,7 +14,7 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
@@ -59,6 +59,9 @@ function decodeEntities(value) {
 }
 
 function references(html) {
+  // Retain script src attributes, but exclude JavaScript strings containing
+  // runtime-generated markup. The Python HTML parser also ignores this text.
+  html = html.replace(/(<script\b[^>]*>)[\s\S]*?<\/script\s*>/gi, '$1</script>');
   const values = [];
   for (const match of html.matchAll(/(?:^|\s)(?:src|href|poster)\s*=\s*(?:"([^"]*)"|'([^']*)')/gim)) {
     values.push(match[1] ?? match[2]);
@@ -120,6 +123,17 @@ function stageOfficialDrafts(progress) {
         }
       };
       copyFiltered(sourceRoot);
+    }
+    if (name === 'lamborghini') {
+      const sourceRoot = path.join(DRAFT_SOURCE, 'lamborghini-assets');
+      for (const entry of fs.readdirSync(sourceRoot, { withFileTypes: true })) {
+        if (!entry.isFile() || !(entry.name === 'display.css' ||
+            ['.woff', '.woff2', '.ttf', '.svg'].includes(path.extname(entry.name)))) continue;
+        const source = path.join(sourceRoot, entry.name);
+        const target = path.join(destination, path.relative(DRAFT_SOURCE, source));
+        fs.mkdirSync(path.dirname(target), { recursive: true });
+        fs.copyFileSync(source, target);
+      }
     }
     const record = progress[name === 'linear' ? 'linear.app' : name];
     const observed = escapeHtml((record.observed_at || record.reference_observed_at || '').slice(0, 10) || '日期未記錄');

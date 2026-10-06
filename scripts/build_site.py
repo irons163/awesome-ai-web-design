@@ -11,7 +11,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 REMOTE_ASSETS = json.loads((ROOT / 'data/official-remote-assets.json').read_text())['assets']
 REMOTE_PATHS = {asset['path'] for asset in REMOTE_ASSETS}
@@ -79,6 +79,15 @@ def stage_official_drafts():
             shutil.copytree(DRAFT_SOURCE / asset_dir,
                             destination / asset_dir, dirs_exist_ok=True,
                             ignore=ignore)
+        if name == 'lamborghini':
+            # Package the original font and vectors; full-resolution raster
+            # evidence and video manifests remain in source, with media on its CDN.
+            for asset in (DRAFT_SOURCE / 'lamborghini-assets').rglob('*'):
+                if asset.is_file() and (asset.suffix in {'.woff', '.woff2', '.ttf', '.svg'}
+                                        or asset.name == 'display.css'):
+                    target = destination / asset.relative_to(DRAFT_SOURCE)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(asset, target)
         if name == 'sanity':
             # Large public imagery and video remain on Sanity's own CDN.
             for asset in (DRAFT_SOURCE / 'sanity-assets').rglob('*'):
