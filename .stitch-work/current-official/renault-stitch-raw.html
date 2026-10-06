@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280" name="viewport"/>
+<title>Renault Group — Site officiel</title>
+<style>
+    @font-face {
+      font-family: 'RenaultGroup';
+      src: url('https://www.renaultgroup.com/fonts/RenaultGroup/RenaultGroup-Variable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    @font-face {
+      font-family: 'RenaultGroupAH';
+      src: url('https://www.renaultgroup.com/fonts/RenaultGroupAH/RenaultGroupAH-Variable.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #0b0b0c;
+      color: #ffffff;
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      width: 1280px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* TYPOGRAPHY UTILITIES */
+    .font-heading {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700;
+    }
+
+    .font-editorial {
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* TOP HEADER STRIP (39px) */
+    .top-strip {
+      height: 39px;
+      background-color: #212124;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      font-size: 13px;
+      color: #d1d1d4;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 101;
+    }
+
+    .top-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .stock-ticker {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stock-tag {
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .stock-price {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .stock-up {
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 12px;
+    }
+
+    .top-strip-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .lang-switcher, .accessibility-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      color: #e4e4e7;
+      transition: color 0.2s;
+    }
+    .lang-switcher:hover, .accessibility-btn:hover {
+      color: #ffffff;
+    }
+
+    /* MAIN NAV BAR (80px) */
+    .main-nav {
+      height: 80px;
+      background: rgba(11, 11, 12, 0.94);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      position: sticky;
+      top: 39px;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .brand-logo svg {
+      display: block;
+      height: 44px;
+      width: auto;
+    }
+
+    .primary-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .primary-menu a {
+      font-size: 15px;
+      font-weight: 600;
+      color: #efefef;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .primary-menu a:hover {
+      color: #ffffff;
+    }
+
+    .primary-menu a.event-badge {
+      background: #e11d48;
+      color: #ffffff;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .secondary-menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .secondary-menu a {
+      font-size: 14px;
+      color: #a1a1aa;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .secondary-menu a:hover {
+      color: #fff;
+    }
+
+    .search-btn {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+
+    /* HERO CAROUSEL SECTION (844px high) */
+    .hero-section {
+      height: 844px;
+      position: relative;
+      background: #0b0b0c;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .carousel-track-wrapper {
+      position: relative;
+      width: 100%;
+      height: 617px;
+      display: flex;
+      align-items: center;
+    }
+
+    .carousel-track {
+      display: flex;
+      gap: 40px;
+      position: absolute;
+      left: 132px;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .hero-card {
+      position: relative;
+      width: 1016px;
+      height: 617px;
+      border-radius: 24px;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+      background: #18181b;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.3) 40%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0.95) 100%);
+    }
+
+    .hero-card-content {
+      position: absolute;
+      left: 56px;
+      bottom: 56px;
+      right: 120px;
+      z-index: 2;
+    }
+
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .hero-category {
+      background: rgba(255,255,255,0.18);
+      backdrop-filter: blur(8px);
+      padding: 4px 14px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .hero-date {
+      font-size: 14px;
+      color: #d1d1d6;
+    }
+
+    .hero-title {
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 30px;
+      line-height: 42px;
+      font-weight: 700;
+      color: #ffffff;
+      max-width: 780px;
+    }
+
+    .hero-card-arrow {
+      position: absolute;
+      right: 48px;
+      bottom: 48px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+      z-index: 3;
+    }
+    .hero-card:hover .hero-card-arrow {
+      background: #ffffff;
+      color: #0b0b0c;
+      border-color: #ffffff;
+    }
+
+    /* Carousel Nav Overlapping Card Edges */
+    .carousel-nav-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0b0b0c;
+      cursor: pointer;
+      z-index: 10;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: background 0.2s, transform 0.2s;
+    }
+    .carousel-nav-btn:hover {
+      background: #ffffff;
+      transform: translateY(-50%) scale(1.06);
+    }
+    .carousel-prev {
+      left: 110px;
+    }
+    .carousel-next {
+      right: 110px;
+    }
+
+    /* Indicators */
+    .carousel-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .indicator-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .indicator-dot.active {
+      width: 32px;
+      border-radius: 6px;
+      background: #ffffff;
+    }
+
+    /* FOUR TEXT NEWS COLUMNS (356px) */
+    .text-news-section {
+      min-height: 356px;
+      background: #0b0b0c;
+      padding: 40px 40px 60px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .text-news-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+    }
+
+    .text-news-col {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      border-left: 1px solid rgba(255,255,255,0.15);
+      padding-left: 24px;
+      padding-top: 4px;
+      position: relative;
+    }
+
+    .text-news-category {
+      font-size: 13px;
+      font-weight: 600;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 14px;
+    }
+
+    .text-news-title {
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 26px;
+      color: #ffffff;
+      margin-bottom: 24px;
+      transition: color 0.2s;
+    }
+    .text-news-col:hover .text-news-title {
+      color: #e4e4e7;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .text-news-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 16px;
+    }
+
+    .text-news-date {
+      font-size: 13px;
+      color: #71717a;
+    }
+
+    .text-news-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: all 0.2s;
+    }
+    .text-news-col:hover .text-news-arrow {
+      background: #fff;
+      color: #0b0b0c;
+      border-color: #fff;
+    }
+
+    /* TOPICS SECTION (1454px) */
+    .topics-section {
+      background: #0b0b0c;
+      padding: 100px 40px;
+      position: relative;
+    }
+
+    .topics-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .topics-header h2 {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 40px;
+      line-height: 38px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .topics-row-1 {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .topics-tile-3 {
+      width: 373px;
+      height: 540px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background: #18181b;
+      cursor: pointer;
+    }
+
+    .topics-row-2 {
+      display: flex;
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .topics-tile-2 {
+      width: 580px;
+      height: 540px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background: #18181b;
+      cursor: pointer;
+    }
+
+    .topics-tile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .topics-tile-3:hover .topics-tile-img,
+    .topics-tile-2:hover .topics-tile-img {
+      transform: scale(1.04);
+    }
+
+    .topics-tile-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.9) 100%);
+    }
+
+    .new-badge {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: #dc2626;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      z-index: 2;
+    }
+
+    .tile-content {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 32px;
+      z-index: 2;
+    }
+
+    .tile-title {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 26px;
+      line-height: 32px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .tile-count {
+      font-size: 14px;
+      color: #a1a1aa;
+    }
+
+    .topics-cta-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .pill-button-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #ffffff;
+      color: #0b0b0c;
+      padding: 16px 36px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pill-button-white:hover {
+      background: #e4e4e7;
+      transform: scale(1.02);
+    }
+
+    /* SUSTAINABILITY SECTION (White rounded 757px, overlaps by 24px) */
+    .sustainability-section {
+      min-height: 757px;
+      background: #ffffff;
+      color: #0b0b0c;
+      border-radius: 40px;
+      margin-top: -24px;
+      position: relative;
+      z-index: 10;
+      padding: 96px 80px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .sustainability-header {
+      margin-bottom: 72px;
+    }
+
+    .sustainability-heading {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 40px;
+      line-height: 38px;
+      font-weight: 700;
+      color: #0b0b0c;
+      letter-spacing: -0.01em;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 56px;
+    }
+
+    .pillar-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-icon-box {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pillar-icon-box svg {
+      width: 56px;
+      height: 56px;
+      stroke: #0b0b0c;
+    }
+
+    .pillar-title {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 30px;
+      margin-bottom: 16px;
+      color: #0b0b0c;
+    }
+
+    .pillar-text {
+      font-size: 15px;
+      line-height: 24px;
+      color: #3f3f46;
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* DECOUVREZ LE GROUPE SECTION (304px, black, overlaps by 24px) */
+    .discover-section {
+      min-height: 304px;
+      background: #0b0b0c;
+      color: #ffffff;
+      border-radius: 40px;
+      margin-top: -24px;
+      position: relative;
+      z-index: 12;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 40px;
+      text-align: center;
+    }
+
+    .discover-heading {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 40px;
+      line-height: 38px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .discover-subtitle {
+      max-width: 680px;
+      color: #a1a1aa;
+      font-size: 16px;
+      line-height: 26px;
+      margin-bottom: 32px;
+    }
+
+    /* CARRIÈRES SECTION (y3595) */
+    .careers-section {
+      background: #0b0b0c;
+      padding: 80px 40px 100px 40px;
+    }
+
+    .section-title-wrap {
+      margin-bottom: 48px;
+    }
+
+    .section-title {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 40px;
+      line-height: 38px;
+      font-weight: 700;
+    }
+
+    .careers-grid {
+      display: flex;
+      gap: 40px;
+    }
+
+    .career-card {
+      width: 580px;
+      height: 598px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background: #18181b;
+      box-shadow: 0 16px 36px rgba(0,0,0,0.5);
+    }
+
+    .career-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .career-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.2) 30%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0.95) 100%);
+    }
+
+    .career-card-content {
+      position: absolute;
+      left: 48px;
+      right: 48px;
+      bottom: 48px;
+      z-index: 2;
+    }
+
+    .career-card-title {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 38px;
+      margin-bottom: 24px;
+      color: #ffffff;
+    }
+
+    .btn-rounded-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #ffffff;
+      color: #0b0b0c;
+      padding: 12px 28px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-rounded-white:hover {
+      background: #e4e4e7;
+      transform: scale(1.02);
+    }
+
+    /* BRANDS SECTION (y4375) */
+    .brands-section {
+      background: #0b0b0c;
+      padding: 60px 40px 100px 40px;
+    }
+
+    .brands-grid {
+      display: flex;
+      gap: 40px;
+    }
+
+    .brand-card {
+      width: 373px;
+      height: 466px;
+      border-radius: 24px;
+      position: relative;
+      overflow: hidden;
+      background: #18181b;
+      cursor: pointer;
+    }
+
+    .brand-card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .brand-card:hover .brand-card-img {
+      transform: scale(1.05);
+    }
+
+    .brand-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.85) 90%, rgba(0,0,0,0.95) 100%);
+    }
+
+    .brand-card-content {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 32px;
+      z-index: 2;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .brand-badge {
+      font-size: 13px;
+      font-weight: 700;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+
+    .brand-model-name {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .brand-arrow {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* FOOTER (Complete corporate footer ~y6099) */
+    .corporate-footer {
+      background: #121214;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 80px 40px 40px 40px;
+      color: #a1a1aa;
+      font-size: 14px;
+    }
+
+    .footer-top-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      padding-bottom: 60px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-col-title {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .events-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .event-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .event-info h4 {
+      color: #ffffff;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .event-info p {
+      font-size: 13px;
+      color: #71717a;
+    }
+
+    .publications-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .publication-card {
+      background: #1c1c1f;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex;
+      flex-direction: column;
+      aspect-ratio: 1 / 1;
+      padding: 20px;
+      justify-content: space-between;
+    }
+
+    .pub-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pub-title {
+      font-family: 'RenaultGroupAH', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .pub-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: #d4d4d8;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* FOOTER NAV GROUPS (4 columns) */
+    .footer-nav-groups {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-group h5 {
+      font-family: 'RenaultGroup', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+
+    .footer-group ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-group a {
+      color: #a1a1aa;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-group a:hover {
+      color: #ffffff;
+    }
+
+    /* FOOTER BOTTOM BAR */
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 40px;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-social-wrap {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      transition: background 0.2s;
+    }
+    .social-btn:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    .legal-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 12px;
+      color: #71717a;
+    }
+
+    .legal-links a:hover {
+      color: #a1a1aa;
+    }
+  </style>
+</head>
+<body>
+<!-- 1. TOP GREIGE STOCK / ACCESSIBILITY / LANGUAGE STRIP (39px) -->
+<header>
+<div class="top-strip">
+<div class="top-strip-left">
+<div class="stock-ticker">
+<span class="stock-tag">RNO (Euronext Paris)</span>
+<span class="stock-price">41,28 €</span>
+<span class="stock-up">
+<svg fill="none" height="10" stroke="currentColor" stroke-width="3" viewbox="0 0 24 24" width="10">
+<path d="M18 15l-6-6-6 6"></path>
+</svg>
+            +1,42%
+          </span>
+<span style="font-size: 11px; color: #71717a; margin-left: 6px;">(Observation 06.10.2026)</span>
+</div>
+</div>
+<div class="top-strip-right">
+<div class="accessibility-btn" title="Options d'accessibilité">
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="16">
+<circle cx="12" cy="4" r="2"></circle>
+<path d="M18 9h-7l-2 13"></path>
+<path d="M12 9v4"></path>
+<path d="M6 12l5-3"></path>
+</svg>
+<span>Accessibilité</span>
+</div>
+<div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
+<div class="lang-switcher">
+<span style="font-weight: 700; color: #fff;">FR</span>
+<span style="color: #71717a;">/</span>
+<span style="color: #a1a1aa;">EN</span>
+</div>
+</div>
+</div>
+<!-- 2. MAIN NAVIGATION BAR (80px) -->
+<nav class="main-nav">
+<div class="nav-left">
+<!-- Official Renault Group Diamond & Wordmark Logo (x39, y56, 100x44) -->
+<a aria-label="Renault Group Accueil" class="brand-logo" href="https://www.renaultgroup.com/fr/">
+<svg fill="none" height="44" viewbox="0 0 160 70" width="100" xmlns="http://www.w3.org/2000/svg">
+<!-- Modern Renault Losange (nested geometric parallel lines) -->
+<path d="M40 4L70 42L40 66L10 42L40 4Z" fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="6"></path>
+<path d="M40 18L56 42L40 54L24 42L40 18Z" fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="5"></path>
+<!-- Renault Group Typography -->
+<text fill="#FFFFFF" font-family="'RenaultGroup', sans-serif" font-size="20" font-weight="800" letter-spacing="1.5" x="82" y="34">RENAULT</text>
+<text fill="#A1A1AA" font-family="'RenaultGroup', sans-serif" font-size="13" font-weight="600" letter-spacing="3.5" x="82" y="54">GROUP</text>
+</svg>
+</a>
+<!-- Primary Navigation Links -->
+<ul class="primary-menu">
+<li><a href="https://www.renaultgroup.com/groupe/">Groupe</a></li>
+<li><a href="https://www.renaultgroup.com/marques/">Marques</a></li>
+<li><a href="https://www.renaultgroup.com/developpement-durable/">Responsabilité</a></li>
+<li><a href="https://www.renaultgroup.com/magazine/">Magazine</a></li>
+<li><a class="event-badge" href="#mondial-2026">Évènement J-5</a></li>
+</ul>
+</div>
+<div class="nav-right">
+<!-- Secondary Navigation Links -->
+<ul class="secondary-menu">
+<li><a href="https://www.renaultgroup.com/talents/">Carrières</a></li>
+<li><a href="https://www.renaultgroup.com/finance/">Investisseurs</a></li>
+<li><a href="https://media.renaultgroup.com/">Presse</a></li>
+</ul>
+<button aria-label="Rechercher" class="search-btn">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="20">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</button>
+</div>
+</nav>
+</header>
+<!-- 3. HERO NEWS CAROUSEL SECTION (844px high) -->
+<section class="hero-section">
+<div class="carousel-track-wrapper">
+<!-- Prev / Next Overlapping Controls -->
+<button aria-label="Article précédent" class="carousel-nav-btn carousel-prev" id="heroPrevBtn">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="20">
+<path d="M15 18l-6-6 6-6"></path>
+</svg>
+</button>
+<button aria-label="Article suivant" class="carousel-nav-btn carousel-next" id="heroNextBtn">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="20">
+<path d="M9 18l6-6-6-6"></path>
+</svg>
+</button>
+<div class="carousel-track" id="heroTrack">
+<!-- Card 1: Woman in factory with yellow vehicle -->
+<article class="hero-card">
+<img alt="Femme travaillant sur la ligne d'assemblage automobile devant un véhicule jaune" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-card-gradient"></div>
+<div class="hero-card-content">
+<div class="hero-meta">
+<span class="hero-category">Actualités du Groupe</span>
+<span class="hero-date">05.10.2026</span>
+</div>
+<h1 class="hero-title">L’automobile, moteur de l’économie européenne</h1>
+</div>
+<a aria-label="Lire l'article" class="hero-card-arrow" href="#">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="22">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</article>
+<!-- Card 2: Innovation -->
+<article class="hero-card">
+<img alt="Technologies et laboratoires de recherche Renault Group" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-card-gradient"></div>
+<div class="hero-card-content">
+<div class="hero-meta">
+<span class="hero-category">Technologies</span>
+<span class="hero-date">01.10.2026</span>
+</div>
+<h2 class="hero-title">L’automobile, championne de l’innovation</h2>
+</div>
+<a aria-label="Lire l'article" class="hero-card-arrow" href="#">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="22">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</article>
+<!-- Card 3: Recycling -->
+<article class="hero-card">
+<img alt="Économie circulaire et recyclage chez Renault The Future Is NEUTRAL" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-card-gradient"></div>
+<div class="hero-card-content">
+<div class="hero-meta">
+<span class="hero-category">Développement durable</span>
+<span class="hero-date">28.09.2026</span>
+</div>
+<h2 class="hero-title">La voiture, cet objet du quotidien qui se recycle mieux qu’un smartphone</h2>
+</div>
+<a aria-label="Lire l'article" class="hero-card-arrow" href="#">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="22">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</article>
+<!-- Card 4: Mondial de Paris #2 -->
+<article class="hero-card">
+<img alt="Stand et modèles Renault Group au Mondial de l'Auto" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-card-gradient"></div>
+<div class="hero-card-content">
+<div class="hero-meta">
+<span class="hero-category">Actualités du Groupe</span>
+<span class="hero-date">25.09.2026</span>
+</div>
+<h2 class="hero-title">Renault Group et le Mondial de l’Auto de Paris : deux histoires qui n’en font qu’une (#2)</h2>
+</div>
+<a aria-label="Lire l'article" class="hero-card-arrow" href="#">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="22">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</article>
+</div>
+</div>
+<!-- Carousel Pagination Dots -->
+<div class="carousel-indicators">
+<div class="indicator-dot active" data-index="0"></div>
+<div class="indicator-dot" data-index="1"></div>
+<div class="indicator-dot" data-index="2"></div>
+<div class="indicator-dot" data-index="3"></div>
+</div>
+</section>
+<!-- 4. FOUR TEXT NEWS COLUMNS (y820, 356px) -->
+<section class="text-news-section">
+<div class="text-news-grid">
+<!-- Col 1 -->
+<a class="text-news-col" href="#">
+<div>
+<div class="text-news-category">Mondial de l'Auto</div>
+<h3 class="text-news-title">Renault Group et le Mondial de l’Auto de Paris : deux histoires qui n’en font qu’une (#1)</h3>
+</div>
+<div class="text-news-bottom">
+<span class="text-news-date">24.09.2026</span>
+<div class="text-news-arrow">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Col 2 -->
+<a class="text-news-col" href="#">
+<div>
+<div class="text-news-category">Partenariats &amp; Industrie</div>
+<h3 class="text-news-title">Renault et Geely posent la première pierre du pôle de Curitiba au Brésil</h3>
+</div>
+<div class="text-news-bottom">
+<span class="text-news-date">22.09.2026</span>
+<div class="text-news-arrow">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Col 3 -->
+<a class="text-news-col" href="#">
+<div>
+<div class="text-news-category">Engagement &amp; Société</div>
+<h3 class="text-news-title">25 ans de mécénat : la Fondation Renault Group renforce son action pour l’inclusion</h3>
+</div>
+<div class="text-news-bottom">
+<span class="text-news-date">18.09.2026</span>
+<div class="text-news-arrow">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</a>
+<!-- Col 4 -->
+<a class="text-news-col" href="#">
+<div>
+<div class="text-news-category">Patrimoine &amp; Histoire</div>
+<h3 class="text-news-title">70 ans de la Renault Dauphine : l’icône populaire qui a conquis le monde</h3>
+</div>
+<div class="text-news-bottom">
+<span class="text-news-date">17.09.2026</span>
+<div class="text-news-arrow">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</a>
+</div>
+</section>
+<!-- 5. TOPICS SECTION (y1152, 1454px) -->
+<section class="topics-section">
+<div class="topics-header">
+<h2>Toutes nos actualités par thématiques</h2>
+</div>
+<!-- First row: 3 tiles (373x540 each) -->
+<div class="topics-row-1">
+<!-- Tile 1: Actualités du Groupe (303 articles) -->
+<div class="topics-tile-3">
+<span class="new-badge">Nouvel article</span>
+<img alt="Actualités du Groupe" class="topics-tile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="topics-tile-overlay"></div>
+<div class="tile-content">
+<h3 class="tile-title">Actualités du Groupe</h3>
+<p class="tile-count">303 articles</p>
+</div>
+</div>
+<!-- Tile 2: Énergies et motorisations (231 articles) -->
+<div class="topics-tile-3">
+<span class="new-badge">Nouvel article</span>
+<img alt="Énergies et motorisations" class="topics-tile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="topics-tile-overlay"></div>
+<div class="tile-content">
+<h3 class="tile-title">Énergies et motorisations</h3>
+<p class="tile-count">231 articles</p>
+</div>
+</div>
+<!-- Tile 3: Développement durable (75 articles) -->
+<div class="topics-tile-3">
+<img alt="Développement durable" class="topics-tile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="topics-tile-overlay"></div>
+<div class="tile-content">
+<h3 class="tile-title">Développement durable</h3>
+<p class="tile-count">75 articles</p>
+</div>
+</div>
+</div>
+<!-- Second row: 2 tiles (580x540 each) -->
+<div class="topics-row-2">
+<!-- Tile 4: Technologies (98 articles) -->
+<div class="topics-tile-2">
+<span class="new-badge">Nouvel article</span>
+<img alt="Technologies" class="topics-tile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="topics-tile-overlay"></div>
+<div class="tile-content">
+<h3 class="tile-title">Technologies</h3>
+<p class="tile-count">98 articles</p>
+</div>
+</div>
+<!-- Tile 5: Nouveaux usages et services (12 articles) -->
+<div class="topics-tile-2">
+<img alt="Nouveaux usages et services" class="topics-tile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="topics-tile-overlay"></div>
+<div class="tile-content">
+<h3 class="tile-title">Nouveaux usages et services</h3>
+<p class="tile-count">12 articles</p>
+</div>
+</div>
+</div>
+<!-- Center White Pill CTA -->
+<div class="topics-cta-wrap">
+<a class="pill-button-white" href="https://www.renaultgroup.com/magazine/">
+<span>Découvrez notre magazine</span>
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</svg>
+</a>
+</div>
+</section>
+<!-- 6. SUSTAINABILITY SECTION (White rounded 757px, overlaps by 24px) -->
+<section class="sustainability-section">
+<div class="sustainability-header">
+<h2 class="sustainability-heading">
+        Les 3 piliers<br/>
+        de notre stratégie<br/>
+        de développement durable
+      </h2>
+</div>
+<div class="pillars-grid">
+<!-- Pillar 1: Environnement -->
+<div class="pillar-card">
+<div class="pillar-icon-box">
+<!-- Official Environment line icon -->
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 64 64">
+<path d="M32 58V32"></path>
+<path d="M32 32C32 20 42 12 54 12C54 26 44 36 32 36C20 36 10 26 10 12C22 12 32 20 32 32Z"></path>
+<path d="M22 46C26 44 29 40 32 34"></path>
+</svg>
+</div>
+<h3 class="pillar-title">Environnement</h3>
+<p class="pillar-text">
+          Protéger la biodiversité, faire plus avec moins et s’engager activement dans la décarbonation de nos activités
+        </p>
+</div>
+<!-- Pillar 2: Sécurité -->
+<div class="pillar-card">
+<div class="pillar-icon-box">
+<!-- Official Safety line icon -->
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 64 64">
+<path d="M32 6L14 14V30C14 44 22 52 32 58C42 52 50 44 50 30V14L32 6Z"></path>
+<path d="M26 32L30 36L38 26"></path>
+</svg>
+</div>
+<h3 class="pillar-title">Sécurité</h3>
+<p class="pillar-text">
+          Innover pour assurer une sécurité optimale pour les usagers de nos véhicules mais aussi pour nos collaborateurs.
+        </p>
+</div>
+<!-- Pillar 3: Diversité et inclusion -->
+<div class="pillar-card">
+<div class="pillar-icon-box">
+<!-- Official Inclusion line icon -->
+<svg fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 64 64">
+<circle cx="32" cy="22" r="10"></circle>
+<path d="M16 54C16 44 23 38 32 38C41 38 48 44 48 54"></path>
+<circle cx="50" cy="26" r="6"></circle>
+<path d="M50 48C52 46 54 42 54 38"></path>
+<circle cx="14" cy="26" r="6"></circle>
+<path d="M14 48C12 46 10 42 10 38"></path>
+</svg>
+</div>
+<h3 class="pillar-title">Diversité et inclusion</h3>
+<p class="pillar-text">
+          Garantir le bien-être au travail et s’engager pour l’insertion sociale grâce à la mobilité.
+        </p>
+</div>
+</div>
+</section>
+<!-- 7. DÉCOUVREZ LE GROUPE (304px, black, overlaps by 24px) -->
+<section class="discover-section">
+<h2 class="discover-heading">Découvrez le Groupe</h2>
+<p class="discover-subtitle">
+      Pionnier des mobilités durables et connectées, Renault Group réunit 4 marques complémentaires et plus de 105 000 collaborateurs engagés à réinventer l’industrie automobile mondiale.
+    </p>
+<a class="pill-button-white" href="https://www.renaultgroup.com/groupe/">
+<span>En savoir plus sur notre histoire et nos engagements</span>
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<path d="M5 12h14M12 5l7 7-7 7"></path>
+</svg>
+</a>
+</section>
+<!-- 8. CARRIÈRES (y3595) -->
+<section class="careers-section">
+<div class="section-title-wrap">
+<h2 class="section-title">Carrières</h2>
+</div>
+<div class="careers-grid">
+<!-- Offres d'emploi (580x598) -->
+<div class="career-card">
+<img alt="Équipe Renault Group travaillant en atelier d'ingénierie" class="career-card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="career-card-overlay"></div>
+<div class="career-card-content">
+<h3 class="career-card-title">Offres d’emploi</h3>
+<a class="btn-rounded-white" href="https://www.renaultgroup.com/talents/rejoignez-nous/">
+<span>Découvrir nos opportunités</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</div>
+</div>
+<!-- ReKnow University (580x598) -->
+<div class="career-card">
+<img alt="Formation et reconversion professionnelle ReKnow University" class="career-card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&amp;fit=crop&amp;w=1200&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="career-card-overlay"></div>
+<div class="career-card-content">
+<h3 class="career-card-title">ReKnow University</h3>
+<a class="btn-rounded-white" href="https://www.renaultgroup.com/talents/reknow-university/">
+<span>Explorer le campus des compétences</span>
+<svg fill="none" height="16" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="16">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. NOS MARQUES (y4375) -->
+<section class="brands-section">
+<div class="section-title-wrap">
+<h2 class="section-title">Nos marques</h2>
+</div>
+<div class="brands-grid">
+<!-- Renault Twingo (373x466) -->
+<div class="brand-card">
+<img alt="Nouvelle Renault Twingo Prototype électrique" class="brand-card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="brand-card-overlay"></div>
+<div class="brand-card-content">
+<div>
+<div class="brand-badge">Renault</div>
+<div class="brand-model-name">Twingo E-Tech</div>
+</div>
+<div class="brand-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Dacia Bigster (373x466) -->
+<div class="brand-card">
+<img alt="Nouveau Dacia Bigster SUV familial" class="brand-card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="brand-card-overlay"></div>
+<div class="brand-card-content">
+<div>
+<div class="brand-badge">Dacia</div>
+<div class="brand-model-name">Nouveau Bigster</div>
+</div>
+<div class="brand-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Alpine A390 (373x466) -->
+<div class="brand-card">
+<img alt="Alpine A390_β sport fastback 100% électrique" class="brand-card-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&amp;fit=crop&amp;w=800&amp;q=80';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="brand-card-overlay"></div>
+<div class="brand-card-content">
+<div>
+<div class="brand-badge">Alpine</div>
+<div class="brand-model-name">A390_β</div>
+</div>
+<div class="brand-arrow">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="18">
+<path d="M7 17L17 7M17 7H7M17 7V17"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. COMPLETE CORPORATE FOOTER (~y6099) -->
+<footer class="corporate-footer">
+<div class="footer-top-row">
+<!-- Events / Agenda Column -->
+<div>
+<h3 class="footer-col-title">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22">
+<rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect>
+<line x1="16" x2="16" y1="2" y2="6"></line>
+<line x1="8" x2="8" y1="2" y2="6"></line>
+<line x1="3" x2="21" y1="10" y2="10"></line>
+</svg>
+          Agenda &amp; Évènements
+        </h3>
+<div class="events-list">
+<div class="event-item">
+<div class="event-info">
+<h4>Mondial de l’Automobile de Paris 2026</h4>
+<p>Paris Expo Porte de Versailles — 14 au 20 octobre 2026</p>
+</div>
+<span style="font-weight: 700; color: #e11d48; font-size: 13px;">J-5</span>
+</div>
+<div class="event-item">
+<div class="event-info">
+<h4>Résultats Commerciaux &amp; Financiers T3 2026</h4>
+<p>Conférence analystes &amp; retransmission web — 24 octobre 2026</p>
+</div>
+<span style="color: #a1a1aa; font-size: 13px;">À venir</span>
+</div>
+</div>
+</div>
+<!-- Square Publications Column -->
+<div>
+<h3 class="footer-col-title">
+<svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22">
+<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+<path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+</svg>
+          Dernières publications
+        </h3>
+<div class="publications-grid">
+<!-- Publication 1 -->
+<div class="publication-card">
+<span class="pub-tag">Rapport Annuel</span>
+<div class="pub-title">Document d'Enregistrement Universel 2025</div>
+<a class="pub-link" href="#">
+<span>Télécharger PDF</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+</a>
+</div>
+<!-- Publication 2 -->
+<div class="publication-card">
+<span class="pub-tag">ESG / RSE</span>
+<div class="pub-title">Rapport de Développement Durable &amp; Climat</div>
+<a class="pub-link" href="#">
+<span>Consulter</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+</a>
+</div>
+<!-- Publication 3 -->
+<div class="publication-card">
+<span class="pub-tag">Renaulution</span>
+<div class="pub-title">Plan Stratégique &amp; Perspectives 2026-2030</div>
+<a class="pub-link" href="#">
+<span>Lire la synthèse</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="12"><path d="M7 17L17 7M17 7H7M17 7V17"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+<!-- 4 Navigation Groups -->
+<div class="footer-nav-groups">
+<div class="footer-group">
+<h5>Investisseurs</h5>
+<ul>
+<li><a href="https://www.renaultgroup.com/finance/">Actionnaires individuels</a></li>
+<li><a href="#">Résultats financiers</a></li>
+<li><a href="#">Cours de l'action RNO</a></li>
+<li><a href="#">Gouvernance &amp; Assemblée Générale</a></li>
+<li><a href="#">Calendrier financier</a></li>
+</ul>
+</div>
+<div class="footer-group">
+<h5>Magazine</h5>
+<ul>
+<li><a href="https://www.renaultgroup.com/magazine/">Actualités du Groupe</a></li>
+<li><a href="#">Énergies &amp; Motorisations</a></li>
+<li><a href="#">Développement durable &amp; Neutralité</a></li>
+<li><a href="#">Technologies &amp; Software République</a></li>
+<li><a href="#">Podcasts &amp; Vidéos</a></li>
+</ul>
+</div>
+<div class="footer-group">
+<h5>Groupe</h5>
+<ul>
+<li><a href="https://www.renaultgroup.com/groupe/">Notre histoire &amp; Patrimoine</a></li>
+<li><a href="#">L'équipe dirigeante</a></li>
+<li><a href="#">Implantations dans le monde</a></li>
+<li><a href="#">Nos marques : Renault, Dacia, Alpine, Mobilize</a></li>
+<li><a href="#">Fondation d'entreprise</a></li>
+</ul>
+</div>
+<div class="footer-group">
+<h5>Carrières</h5>
+<ul>
+<li><a href="https://www.renaultgroup.com/talents/">Rejoignez Renault Group</a></li>
+<li><a href="#">Nos métiers d'avenir</a></li>
+<li><a href="#">Étudiants &amp; Jeunes diplômés</a></li>
+<li><a href="#">ReKnow University</a></li>
+<li><a href="#">Diversité, équité et inclusion</a></li>
+</ul>
+</div>
+</div>
+<!-- Footer Bottom: Logo, Socials, Legal, Accessibility -->
+<div class="footer-bottom">
+<div style="display: flex; align-items: center; gap: 32px;">
+<!-- Renault Group Footer Logo -->
+<a aria-label="Renault Group Accueil" href="https://www.renaultgroup.com/fr/">
+<svg fill="none" height="42" viewbox="0 0 160 70" width="110">
+<path d="M40 4L70 42L40 66L10 42L40 4Z" fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="6"></path>
+<path d="M40 18L56 42L40 54L24 42L40 18Z" fill="none" stroke="#FFFFFF" stroke-linejoin="round" stroke-width="5"></path>
+<text fill="#FFFFFF" font-family="'RenaultGroup', sans-serif" font-size="20" font-weight="800" letter-spacing="1.5" x="82" y="34">RENAULT</text>
+<text fill="#71717A" font-family="'RenaultGroup', sans-serif" font-size="13" font-weight="600" letter-spacing="3.5" x="82" y="54">GROUP</text>
+</svg>
+</a>
+<!-- Social Icons -->
+<div class="footer-social-wrap">
+<a aria-label="LinkedIn" class="social-btn" href="https://www.linkedin.com/company/renault-group">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+<a aria-label="X (Twitter)" class="social-btn" href="https://twitter.com/renaultgroup">
+<svg fill="currentColor" height="16" viewbox="0 0 24 24" width="16"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="YouTube" class="social-btn" href="https://www.youtube.com/renaultgroup">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<a aria-label="Instagram" class="social-btn" href="https://www.instagram.com/renaultgroup/">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Legal Links & Copyright -->
+<div class="legal-links">
+<span>© Renault Group 2026 — Tous droits réservés</span>
+<a href="#">Mentions légales</a>
+<a href="#">Données personnelles</a>
+<a href="#">Gestion des cookies</a>
+<a href="#">Plan du site</a>
+<a href="#">Crédits</a>
+</div>
+</div>
+</footer>
+<!-- Interactive JavaScript for Carousel Navigation -->
+<script>
+    (function() {
+      const track = document.getElementById('heroTrack');
+      const dots = document.querySelectorAll('.indicator-dot');
+      const prevBtn = document.getElementById('heroPrevBtn');
+      const nextBtn = document.getElementById('heroNextBtn');
+      
+      let currentIndex = 0;
+      const cardWidth = 1016;
+      const gap = 40;
+      const totalCards = 4;
+
+      function updateCarousel(index) {
+        currentIndex = (index + totalCards) % totalCards;
+        const offset = -currentIndex * (cardWidth + gap);
+        track.style.transform = `translateX(${offset}px)`;
+        
+        dots.forEach((dot, idx) => {
+          if (idx === currentIndex) {
+            dot.classList.add('active');
+          } else {
+            dot.classList.remove('active');
+          }
+        });
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => updateCarousel(currentIndex - 1));
+      }
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => updateCarousel(currentIndex + 1));
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          const idx = parseInt(dot.getAttribute('data-index'), 10);
+          updateCarousel(idx);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
