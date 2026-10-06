@@ -31,7 +31,9 @@ def import_browser_manifest(manifest):
         original = Path(asset['path'])
         data = original.read_bytes()
         suffix = '.webp' if data[:4] == b'RIFF' and data[8:12] == b'WEBP' else original.suffix
-        name = 'browser-' + asset['id'] + '-' + Path(asset['name']).stem + suffix
+        # A browser encodes a Unicode URL itself. Literal percent escapes in a
+        # filesystem basename would otherwise be decoded into a missing file.
+        name = 'browser-' + asset['id'] + '-' + Path(unquote(asset['name'])).stem + suffix
         target = ROOT / 'renault-assets' / name
         shutil.copyfile(original, target)
         previous = records.get(asset['url'])
