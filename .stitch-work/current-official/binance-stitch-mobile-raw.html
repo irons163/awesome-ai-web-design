@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Binance Mobile Homepage Interface Study (7 Oct 2026)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'BinanceNova';
+      src: url('https://bin.bnbstatic.com/static/fonts/bn/v2/BinanceNova-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BinanceNova';
+      src: url('https://bin.bnbstatic.com/static/fonts/bn/v2/BinanceNova-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'BinanceNova';
+      src: url('https://bin.bnbstatic.com/static/fonts/bn/v2/BinanceNova-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    body {
+      font-family: 'BinanceNova', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: #181A20;
+      color: #EAECEF;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Custom Color Utilities */
+    .bg-main { background-color: #181A20; }
+    .bg-surface-1 { background-color: #202630; }
+    .bg-surface-2 { background-color: #29313D; }
+    .bg-card { background-color: #252C37; }
+    .text-pale { color: #EAECEF; }
+    .text-muted-custom { color: #929AA5; }
+    .border-input-custom { border-color: #434C5A; }
+    .bg-btn-yellow { background-color: #FCD535; }
+    .bg-btn-yellow:hover { background-color: #F0B90B; }
+    .text-brand-gold { color: #F0B90B; }
+    .text-loss-red { color: #F6465D; }
+    .text-gain-green { color: #2EBD85; }
+
+    /* Hide scrollbar for tabs */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-main text-pale text-[14px] leading-tight selection:bg-[#FCD535] selection:text-black">
+<!-- ==================== HEADER (64px) ==================== -->
+<header class="sticky top-0 z-40 bg-[#181A20] h-[64px] border-b border-[#29313D] flex items-center justify-between px-4">
+<!-- Brand Logo -->
+<a aria-label="Binance Home" class="flex items-center gap-2" href="https://www.binance.com/en">
+<svg class="w-[120px] h-[24px] text-[#F0B90B] fill-current" fill="none" viewbox="0 0 120 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M16.32 12l2.84 2.84-5.68 5.68-2.84-2.84 5.68-5.68zm-5.68-5.68L13.48 3.48l2.84 2.84-2.84 2.84-2.84-2.84zm0 11.36l2.84 2.84-2.84 2.84-2.84-2.84 2.84-2.84zM5 12l2.84-2.84 5.68 5.68-2.84 2.84L5 12zm5.64-5.68l2.84-2.84 2.84 2.84-2.84 2.84-2.84-2.84zm0 11.36l2.84-2.84 2.84 2.84-2.84 2.84-2.84-2.84zM10.64 12l2.84-2.84 2.84 2.84-2.84 2.84-2.84-2.84z"></path>
+<!-- Wordmark Text representation in clean geometric curves -->
+<path d="M28.4 7.6h3.6c2.4 0 3.8 1.2 3.8 2.8 0 1.2-.8 2.1-1.9 2.5 1.5.4 2.4 1.4 2.4 2.8 0 1.9-1.5 3.1-4.2 3.1h-3.7V7.6zm2.3 4h1.4c1 0 1.6-.5 1.6-1.3 0-.8-.6-1.3-1.6-1.3h-1.4v2.6zm0 4.8h1.6c1.1 0 1.8-.6 1.8-1.5 0-.9-.7-1.5-1.8-1.5h-1.6v3zm9.2-8.8h2.3v11.2h-2.3V7.6zm0-3.4h2.3v2.2h-2.3V4.2zm6.2 3.4h2.2v1.7h.1c.6-1.2 1.9-1.9 3.3-1.9 2.5 0 3.9 1.6 3.9 4.3v7.1h-2.3v-6.7c0-1.6-.8-2.5-2.2-2.5-1.3 0-2.3.9-2.6 2.3v6.9h-2.4V7.6zm13.1 6.8c0-2.9 2.1-4.7 4.9-4.7 1.2 0 2.2.4 2.8 1v-3.1h2.3v11.2h-2.2v-1.3h-.1c-.6.9-1.6 1.5-2.9 1.5-2.7 0-4.8-1.9-4.8-4.6zm7.7-.6v-1.1c-.5-.7-1.3-1.1-2.4-1.1-1.6 0-2.8 1.2-2.8 2.9 0 1.7 1.2 2.9 2.8 2.9 1.1 0 1.9-.4 2.4-1.1v-2.5zm6.5-6.2h2.2v1.7h.1c.6-1.2 1.9-1.9 3.3-1.9 2.5 0 3.9 1.6 3.9 4.3v7.1h-2.3v-6.7c0-1.6-.8-2.5-2.2-2.5-1.3 0-2.3.9-2.6 2.3v6.9h-2.4V7.6zm12.9 5.8c0-3.3 2.5-5.8 5.8-5.8 2.4 0 4.2 1.3 5 3.3l-2.1.9c-.5-1.2-1.5-1.9-2.9-1.9-2 0-3.4 1.5-3.4 3.5 0 2 1.4 3.5 3.4 3.5 1.4 0 2.4-.7 2.9-1.9l2.1.9c-.8 2-2.6 3.3-5 3.3-3.3 0-5.8-2.4-5.8-5.7zm15.4 0c0-3.3 2.5-5.8 5.7-5.8 3.3 0 5.6 2.4 5.6 5.8v.5h-9c.2 1.8 1.5 2.8 3.3 2.8 1.3 0 2.3-.5 2.8-1.5l2 .9c-.9 1.7-2.6 2.8-4.8 2.8-3.3 0-5.6-2.4-5.6-5.5zm9-1.1c-.1-1.6-1.3-2.6-3.2-2.6-1.7 0-3 1-3.2 2.6h6.4z"></path>
+</svg>
+</a>
+<!-- Right Controls: Search, Log In, and Mobile Drawer Hamburger Toggle -->
+<div class="flex items-center gap-3"><button aria-label="Open Navigation Menu" class="p-2 text-[#929AA5] hover:text-[#EAECEF] focus:outline-none" id="menu-btn" onclick="toggleMenu()"><svg class="w-6 h-6 fill-current" viewbox="0 0 24 24"><path d="M3 6h18v2H3V6zm0 5h18v2H3v-2zm0 5h18v2H3v-2z"></path></svg></button></div>
+</header>
+<!-- Mobile Drawer Menu (Hidden by default, reveals 9 navigation categories) -->
+<div class="fixed inset-0 z-50 bg-[#181A20] bg-opacity-95 backdrop-blur-md hidden flex-col p-6 overflow-y-auto" id="mobile-drawer">
+<div class="flex justify-between items-center pb-6 border-b border-[#29313D]">
+<span class="text-lg font-semibold text-[#F0B90B]">Menu</span>
+<button aria-label="Close menu" class="text-[#929AA5] hover:text-[#EAECEF] p-2" onclick="toggleMenu()">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24">
+<path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
+</svg>
+</button>
+</div>
+<nav class="flex flex-col py-4 space-y-4 text-base font-medium">
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/crypto/buy">Buy Crypto</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/markets">Markets</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/trade">Trade</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/futures">Futures</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/earn">Earn</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/square">Square</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/institutional">Institutional</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/feed">AI</a>
+<a class="text-[#EAECEF] hover:text-[#F0B90B] py-2 border-b border-[#202630]" href="https://www.binance.com/en/more">More</a>
+</nav>
+<div class="mt-auto pt-6 flex flex-col gap-3">
+<a class="w-full text-center bg-btn-yellow text-black font-semibold py-3 rounded-[6px]" href="https://accounts.binance.com/en/register">Sign Up</a>
+<a class="w-full text-center bg-[#29313D] text-[#EAECEF] font-medium py-3 rounded-[6px]" href="https://accounts.binance.com/en/login">Log In</a>
+</div>
+</div>
+<main class="w-full max-w-[390px] mx-auto overflow-hidden">
+<!-- ==================== HERO SECTION (y: 64 to 1223) ==================== -->
+<section class="px-4 pt-8 pb-10">
+<!-- Captured Mobile Headline Area (x:16, y:96, width:358, height:102 approx) -->
+<div class="mb-6">
+<div class="text-[36px] leading-[42px] font-bold text-[#FCD535] tracking-tight">
+          332,870,856
+        </div>
+<div class="text-[28px] leading-[34px] font-bold text-[#EAECEF] tracking-wide mt-1">
+          USERS TRUST US
+        </div>
+<p class="text-[14px] leading-[20px] text-muted-custom mt-2">
+          The World’s Leading Cryptocurrency Exchange
+        </p>
+</div>
+<!-- No.1 Distinctions with Laurel Artwork -->
+<div class="grid grid-cols-2 gap-3 mb-6">
+<!-- Distinction 1 -->
+<div class="bg-card p-3 rounded-[8px] border border-[#29313D] flex items-start gap-2.5">
+<img alt="No.1" class="w-7 h-7 flex-shrink-0" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23F0B90B\'&gt;&lt;path d=\'M12 2l2.4 5.3 5.6.8-4.1 4 1 5.9L12 15l-4.9 3 1-5.9-4.1-4 5.6-.8z\'/&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVro77UedDGm0Jrahe-uTvfakVmPCYq3XvZ69Cl8D70GwxfXURiXsB2Aw-HMNUM9_G3LJOnzdkBc1MM-ClJ_2PqVkz4_9KqYLNbOy2H3NiBO0xNuby582jMsZByHnVvO2ZKlG3tc-Yx3jJRyKh9R9VCFEYEwy2cKKa-LlYA3JTTBpS9Uf2LCLUkESJ1lR4DxhXN6krzXz7n2smWbp3PSkxfH3gzDl9r_KrFmb3mHCuVSNRhDn42w3o_Zm_EBuw3cWvUkAmoR1LYBxo"/>
+<div>
+<div class="text-[12px] font-semibold text-[#EAECEF] leading-tight">No.1 Customer Assets</div>
+<div class="text-[11px] text-muted-custom mt-0.5">$172.4B+ verified reserves</div>
+</div>
+</div>
+<!-- Distinction 2 -->
+<div class="bg-card p-3 rounded-[8px] border border-[#29313D] flex items-start gap-2.5">
+<img alt="No.1" class="w-7 h-7 flex-shrink-0" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'%23F0B90B\'&gt;&lt;path d=\'M12 2l2.4 5.3 5.6.8-4.1 4 1 5.9L12 15l-4.9 3 1-5.9-4.1-4 5.6-.8z\'/&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMjuku0yp-arT9KqxcBnT8EU2gySt3imoEtvsSB2TIpzpstLRE8g8IyVoSkoTh4rmf7sW_PINwX4Ib-V0ki_heS2Itq5ERPzN1hHuN7eS3-rFclDjLGCqNX-HGxlZXrQK9c3DcOhXCNNSlLNBliFw0qYs4jG25_GZCex4Vce8Y7KMK0JX1n-7kywfmHt86vVgrstIKmnKnGSdPB71d2sMbMtDT3wqSccrRMzN1b0FkPZtUOXBI0LPMIzuSSAzOciUXZrScaPBd3Mp8"/>
+<div>
+<div class="text-[12px] font-semibold text-[#EAECEF] leading-tight">No.1 Trading Volume</div>
+<div class="text-[11px] text-muted-custom mt-0.5">$65.8B 24h Spot volume</div>
+</div>
+</div>
+</div>
+<!-- Industry-Leading Security Badge -->
+<div class="flex items-center gap-2 mb-6 px-1">
+<svg class="w-4 h-4 text-[#2EBD85] flex-shrink-0 fill-current" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zm3.707 6.764a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-[12px] text-muted-custom font-medium">Industry-Leading Security with ISO/IEC 27001 &amp; SOC 2 Certification</span>
+</div>
+<!-- Registration / Social Entry Controls -->
+<div class="space-y-3 mb-6">
+<!-- Email/Phone Input & Primary Sign Up Button -->
+<div class="flex flex-col gap-2">
+<input class="w-full bg-[#181A20] border border-input-custom rounded-[6px] px-3.5 py-3 text-[14px] text-[#EAECEF] placeholder-[#929AA5] focus:outline-none focus:border-[#FCD535]" placeholder="Email / Phone number" readonly="" type="text"/>
+<a class="w-full text-center bg-btn-yellow text-black font-semibold text-[15px] py-3 rounded-[6px] shadow-sm hover:bg-[#F0B90B] transition-colors" href="https://accounts.binance.com/en/register">
+            Sign Up
+          </a>
+</div>
+<div class="flex items-center my-3">
+<div class="flex-grow border-t border-[#29313D]"></div>
+<span class="px-3 text-[12px] text-muted-custom uppercase">or</span>
+<div class="flex-grow border-t border-[#29313D]"></div>
+</div>
+<!-- Social Entry: Google & Apple -->
+<div class="grid grid-cols-2 gap-3">
+<a class="flex items-center justify-center gap-2 bg-surface-1 border border-[#29313D] hover:bg-surface-2 rounded-[6px] py-2.5 px-3 transition-colors" href="https://accounts.binance.com/en/login?loginType=google">
+<!-- Google SVG -->
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M12 5c1.6 0 3 .6 4.1 1.6l3.1-3.1C17.3 1.8 14.8 1 12 1 7.5 1 3.7 3.6 1.9 7.3l3.7 2.9C6.5 7.4 9 5 12 5z" fill="#EA4335"></path>
+<path d="M23.5 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.5c-.3 1.5-1.1 2.8-2.4 3.7l3.7 2.9c2.2-2 3.7-5 3.7-8.8z" fill="#4285F4"></path>
+<path d="M5.6 14.8c-.2-.7-.4-1.4-.4-2.8s.2-2.1.4-2.8L1.9 6.3C.7 8.7 0 10.3 0 12s.7 3.3 1.9 5.7l3.7-2.9z" fill="#FBBC05"></path>
+<path d="M12 23c3.2 0 6-1.1 8-3l-3.7-2.9c-1.1.7-2.5 1.2-4.3 1.2-3 0-5.5-2.4-6.4-5.2L1.9 16C3.7 19.7 7.5 23 12 23z" fill="#34A853"></path>
+</svg>
+<span class="text-[13px] text-[#EAECEF] font-medium">Google</span>
+</a>
+<a class="flex items-center justify-center gap-2 bg-surface-1 border border-[#29313D] hover:bg-surface-2 rounded-[6px] py-2.5 px-3 transition-colors" href="https://accounts.binance.com/en/login?loginType=apple">
+<!-- Apple SVG -->
+<svg class="w-4 h-4 fill-current text-white" viewbox="0 0 170 170">
+<path d="M150.37 130.25c-2.45 5.66-5.35 10.87-8.71 15.66-4.58 6.53-8.33 11.05-11.22 13.56-4.48 4.12-9.28 6.23-14.42 6.35-3.69 0-8.14-1.05-13.32-3.18-5.19-2.12-9.97-3.17-14.34-3.17-4.58 0-9.49 1.05-14.75 3.17-5.26 2.13-9.5 3.24-12.74 3.35-4.35.13-9.16-1.9-14.42-6.08-3.69-3.04-7.67-7.85-11.96-14.41-6.19-9.5-11.05-20.73-14.59-33.7-3.54-12.97-5.31-24.89-5.31-35.76 0-16.14 4.31-29.47 12.94-40 8.63-10.53 19.46-15.86 32.51-16 4.79.13 10.15 1.34 16.08 3.65 5.93 2.3 9.77 3.51 11.53 3.65 2.54-.36 6.64-1.74 12.31-4.14 5.67-2.4 10.74-3.52 15.22-3.37 13.59.73 24.37 5.75 32.33 15.07-11.83 7.15-17.65 17-17.47 29.56.24 10.05 4.12 18.5 11.64 25.34 7.52 6.84 16.63 10.81 27.34 11.92-2.3 6.9-4.96 13.6-7.98 20.1zM119.22 31.43c0-7.39 2.66-14.37 7.98-20.94 5.32-6.57 11.94-10.3 19.86-11.2.24 1.21.36 2.3.36 3.27 0 7.39-2.78 14.5-8.34 21.34-5.56 6.84-12.18 10.59-19.86 11.26v-3.73z"></path>
+</svg>
+<span class="text-[13px] text-[#EAECEF] font-medium">Apple</span>
+</a>
+</div>
+</div>
+<!-- ==================== MARKET TABS & FIVE ROWS ==================== -->
+<div class="mt-8 bg-surface-1 rounded-[12px] p-4 border border-[#29313D]">
+<!-- 4 Tabs: Popular (active), New Listing, Stocks, tCommodities -->
+<div class="flex items-center space-x-5 border-b border-[#29313D] pb-2 text-[14px] font-medium overflow-x-auto no-scrollbar">
+<button class="text-[#F0B90B] pb-2 border-b-2 border-[#F0B90B] font-semibold whitespace-nowrap">
+            Popular
+          </button>
+<button class="text-muted-custom hover:text-[#EAECEF] pb-2 whitespace-nowrap">
+            New Listing
+          </button>
+<button class="text-muted-custom hover:text-[#EAECEF] pb-2 whitespace-nowrap">
+            Stocks
+          </button>
+<button class="text-muted-custom hover:text-[#EAECEF] pb-2 whitespace-nowrap">
+            tCommodities
+          </button>
+</div>
+<!-- 5 Mobile Market Rows: BTC, ETH, BNB, SPCXB, NVDAB -->
+<div class="divide-y divide-[#29313D]/60 mt-2">
+<!-- Row 1: BTC -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#F7931A] flex items-center justify-center font-bold text-white text-xs">
+                ₿
+              </div>
+<div>
+<div class="font-semibold text-[14px] text-[#EAECEF]">BTC</div>
+<div class="text-[12px] text-muted-custom">Bitcoin</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-semibold text-[14px] text-[#EAECEF]">$62,419.80</div>
+<div class="text-[12px] font-medium text-loss-red">-1.24%</div>
+</div>
+</div>
+<!-- Row 2: ETH -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#627EEA] flex items-center justify-center font-bold text-white text-xs">
+                Ξ
+              </div>
+<div>
+<div class="font-semibold text-[14px] text-[#EAECEF]">ETH</div>
+<div class="text-[12px] text-muted-custom">Ethereum</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-semibold text-[14px] text-[#EAECEF]">$2,448.15</div>
+<div class="text-[12px] font-medium text-loss-red">-0.82%</div>
+</div>
+</div>
+<!-- Row 3: BNB (Present on mobile snapshot) -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#F0B90B] flex items-center justify-center font-bold text-black text-xs">
+                B
+              </div>
+<div>
+<div class="font-semibold text-[14px] text-[#EAECEF]">BNB</div>
+<div class="text-[12px] text-muted-custom">BNB</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-semibold text-[14px] text-[#EAECEF]">$578.40</div>
+<div class="text-[12px] font-medium text-gain-green">+0.95%</div>
+</div>
+</div>
+<!-- Row 4: SPCXB -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#1e293b] border border-[#334155] flex items-center justify-center font-bold text-sky-400 text-xs">
+                🚀
+              </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-[14px] text-[#EAECEF]">SPCXB</span>
+<span class="text-[10px] bg-[#29313D] text-muted-custom px-1.5 py-0.2 rounded">bStocks</span>
+</div>
+<div class="text-[12px] text-muted-custom">SpaceX Pre-IPO</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-semibold text-[14px] text-[#EAECEF]">$184.50</div>
+<div class="text-[12px] font-medium text-loss-red">-2.11%</div>
+</div>
+</div>
+<!-- Row 5: NVDAB -->
+<div class="py-3 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-[#76B900] flex items-center justify-center font-bold text-white text-xs">
+                N
+              </div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-semibold text-[14px] text-[#EAECEF]">NVDAB</span>
+<span class="text-[10px] bg-[#29313D] text-muted-custom px-1.5 py-0.2 rounded">bStocks</span>
+</div>
+<div class="text-[12px] text-muted-custom">NVIDIA</div>
+</div>
+</div>
+<div class="text-right">
+<div class="font-semibold text-[14px] text-[#EAECEF]">$128.24</div>
+<div class="text-[12px] font-medium text-loss-red">-1.45%</div>
+</div>
+</div>
+</div>
+<a class="block text-center text-[13px] text-[#F0B90B] font-medium pt-3 hover:underline" href="https://www.binance.com/en/markets">
+          View All 350+ Coins &gt;
+        </a>
+</div>
+<!-- Compact Recognition Strip (Forbes & Fortune) -->
+<div class="mt-4 grid grid-cols-1 gap-2">
+<div class="bg-card px-3 py-2.5 rounded-[6px] border border-[#29313D] flex items-center gap-2">
+<span class="text-[#F0B90B] font-bold text-xs tracking-wider uppercase">Forbes</span>
+<span class="text-[11px] text-muted-custom">Recognized as Forbes' Most Trusted Crypto Exchanges 2025</span>
+</div>
+<div class="bg-card px-3 py-2.5 rounded-[6px] border border-[#29313D] flex items-center gap-2">
+<span class="text-[#F0B90B] font-bold text-xs tracking-wider uppercase">Fortune</span>
+<span class="text-[11px] text-muted-custom">Named a CeFi Leader in Fortune Crypto 100</span>
+</div>
+</div>
+<!-- Current News Links Strip -->
+<div class="mt-4 bg-surface-1 p-3 rounded-[8px] border border-[#29313D]">
+<div class="flex justify-between items-center mb-2">
+<span class="text-[12px] font-semibold text-[#EAECEF] flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-[#F0B90B]"></span> News
+          </span>
+<a class="text-[11px] text-[#F0B90B]" href="https://www.binance.com/en/news">View All &gt;</a>
+</div>
+<ul class="text-[12px] text-muted-custom space-y-1.5">
+<li class="truncate hover:text-[#EAECEF]">
+            • <a href="https://www.binance.com/en/support/announcement">Binance Completes Integration of Lightning Network Layer-2 Upgrade</a>
+</li>
+<li class="truncate hover:text-[#EAECEF]">
+            • <a href="https://www.binance.com/en/research">Binance Research: Q3 2026 Comprehensive Market Industry Overview</a>
+</li>
+<li class="truncate hover:text-[#EAECEF]">
+            • <a href="https://www.binance.com/en/support/announcement">Notice on Launch of New AI-Driven Risk Analysis Portfolio Features</a>
+</li>
+</ul>
+</div>
+</section>
+<!-- ==================== CAMPAIGN BANNER SECTION (y: 1223, h: 210.2) ==================== -->
+<section class="w-full bg-[#181A20] border-y border-[#29313D] py-3 px-4">
+<div class="w-full h-[186px] rounded-[10px] overflow-hidden relative border border-[#29313D] bg-surface-1 shadow-inner">
+<!-- Public campaign artwork container -->
+<img alt="Binance Campaign Banner" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://bin.bnbstatic.com/image/admin_mgs_image_upload/20261006/8931a5ad-a0fe-48b3-8f4d-bbd94128cf0e.png';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTulwn0jnlH8ZZ-C85LQvl315MqmksvtSbuCKImYVAt44AoLXu7qRqIYKH8zkMS11JCHn9oS3IE7ZOwOCVNlJOiO_xXeZqW-HWAioKsim-wiZdPWzDg8cPji3FCaWP7UzJmtMcMBy-RTBkUZQPSo48OEB2E1h1tAYrq3jkksbhfvxm-C2Q0dtqDRj8q9519wOkl-m5ixRFzIUc8iheeITgfWGipb-uNTuLKIZYz5iMZLgVOQtH4R5xY2jCMSgOHsOTHKGJJ1rHMVSd"/>
+<!-- Carousel Dots Indicator -->
+<div class="absolute bottom-2.5 left-0 right-0 flex justify-center space-x-1.5">
+<span class="w-4 h-1.5 bg-[#FCD535] rounded-full"></span>
+<span class="w-1.5 h-1.5 bg-[#929AA5]/50 rounded-full"></span>
+<span class="w-1.5 h-1.5 bg-[#929AA5]/50 rounded-full"></span>
+</div>
+</div>
+</section>
+<!-- ==================== SAFU REGION (y: 1433 to 2589) ==================== -->
+<section class="px-4 py-12 bg-main border-b border-[#29313D]">
+<div class="mb-4">
+<h2 class="text-[32px] leading-[38px] font-bold tracking-tight">
+          FUNDS ARE <span class="text-brand-gold">SAFU</span>
+</h2>
+<p class="text-[14px] leading-[22px] text-muted-custom mt-3">
+          The Security of User Assets Fund (SAFU) was established in 2018 to protect your funds in rare emergencies. Your security is our priority.
+        </p>
+</div>
+<!-- Reserve Metric Card -->
+<div class="bg-card border border-[#29313D] rounded-[10px] p-5 mb-5">
+<div class="text-[12px] text-muted-custom">As of February 2026 Reserve Balance</div>
+<div class="text-[28px] font-bold text-[#EAECEF] mt-1">15,000 BTC</div>
+<div class="mt-3 pt-3 border-t border-[#29313D]/80 flex flex-col gap-1">
+<span class="text-[11px] text-muted-custom">SAFU Wallet Address:</span>
+<a class="text-[11px] text-[#F0B90B] font-mono break-all hover:underline flex items-center gap-1" href="https://blockstream.info/address/1BAuq7Vho2CEkVkUxbfU26LhwQjbCmWQkD" rel="noopener noreferrer" target="_blank">
+<span>1BAuq7Vho2CEkVkUxbfU26LhwQjbCmWQkD</span>
+<svg class="w-3 h-3 flex-shrink-0 fill-current" viewbox="0 0 20 20">
+<path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path>
+<path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path>
+</svg>
+</a>
+</div>
+</div>
+<!-- Statistics: Users Helped & Funds Recovered -->
+<div class="grid grid-cols-2 gap-3 mb-6">
+<div class="bg-surface-1 border border-[#29313D] p-4 rounded-[8px]">
+<div class="text-[20px] font-bold text-[#EAECEF]">7,488,223</div>
+<div class="text-[12px] text-muted-custom mt-1">Users helped</div>
+</div>
+<div class="bg-surface-1 border border-[#29313D] p-4 rounded-[8px]">
+<div class="text-[20px] font-bold text-[#EAECEF]">$229,433,449</div>
+<div class="text-[12px] text-muted-custom mt-1">Funds recovered</div>
+</div>
+</div>
+<!-- Dedicated Customer Protection & Incident Recovery Teams (Portraits) -->
+<div class="bg-surface-1 border border-[#29313D] rounded-[10px] p-4">
+<div class="text-[13px] font-semibold text-[#EAECEF] mb-3">
+          Dedicated Customer Protection &amp; Incident Recovery Teams
+        </div>
+<div class="grid grid-cols-3 gap-2 text-center">
+<!-- Person 1: Luis E. -->
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-[#252C37] border border-[#434C5A] mb-1.5">
+<img alt="Luis E." class="w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\' fill=\'%23929AA5\'&gt;&lt;circle cx=\'20\' cy=\'15\' r=\'8\'/&gt;&lt;path d=\'M6 36c0-7 6-11 14-11s14 4 14 11H6z\'/&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnLn2CA62dxoNscZ_1HIADj5SNxPvcj4i1V1acZuNF6_jHLlaGAFcNixAq3rTG237Y07uxj3prCQmFQKlw7MoOPYUcnSRhe0fDZ6Iq4NNIRjNtIplu2Dect3bLp3PzeCukZV8fbJsqB1TJVLPeiTtM5prHKDzS-WcqxWfuxou7JPZzLf5iQEtBC2no5OvNzpaxaFcHljyp6-K7ERJFVpxd29gAfzaVlQ8ioLPIHa7plKQ0pEyD4YoZEp9t_f1Ts6llZjrm71oZPo0T"/>
+</div>
+<span class="text-[12px] font-medium text-[#EAECEF]">Luis E.</span>
+</div>
+<!-- Person 2: Mohit K. -->
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-[#252C37] border border-[#434C5A] mb-1.5">
+<img alt="Mohit K." class="w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\' fill=\'%23929AA5\'&gt;&lt;circle cx=\'20\' cy=\'15\' r=\'8\'/&gt;&lt;path d=\'M6 36c0-7 6-11 14-11s14 4 14 11H6z\'/&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMYZe6GLtmVLwrNVab1yuavvuXHVWr-pnW43JZ-YvtK7JTuwsRrkxfMclqRQay20wGimxKyGSW_CtADpQ025AUcvLmLaygmdn8ZCdBGbuc1rD_4soPVbGDFQAOh-ZgppK1wYuJpVFQ_SAKURWC_WqYJQ-vEFeeM60n-8ELX2-_noi2uOVeVUat0CRFYoW87r7vqsly4qewkLbcgRDjKP2qIteARklabNuV-hmFgUoKuact3WEDx8jb2j3UavOAACgd9-AY2Ie9qBuq"/>
+</div>
+<span class="text-[12px] font-medium text-[#EAECEF]">Mohit K.</span>
+</div>
+<!-- Person 3: Dennis L. -->
+<div class="flex flex-col items-center">
+<div class="w-16 h-16 rounded-full overflow-hidden bg-[#252C37] border border-[#434C5A] mb-1.5">
+<img alt="Dennis L." class="w-full h-full object-cover" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 40 40\' fill=\'%23929AA5\'&gt;&lt;circle cx=\'20\' cy=\'15\' r=\'8\'/&gt;&lt;path d=\'M6 36c0-7 6-11 14-11s14 4 14 11H6z\'/&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCt77KKD8rFGJ0HE2r3dYjb_u3ICv2rVJjFbCxPaOV9TTPATkwXuKMZs31zPcTavX6nkmu4XG57LRCBFVjMW3w5XnK6zPFmgkAmUAON3vAk4XkV6Pxz6NPS4A0B-ovlOL2PutkJ918gpDI--jd5dQpKlHhDJ2E5CsKE2QbcqgcVgLiET4poa46ZLXFBZ87XQSg3Yj3bGPzC27Dx9a0rIIgup5Gm5hNtAjTOiGqNpoNStAgse3Z1PWcyiaPffaYdwNbv8EleReL-PXEt"/>
+</div>
+<span class="text-[12px] font-medium text-[#EAECEF]">Dennis L.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== APP DOWNLOAD REGION (y: 2589 to 3285) ==================== -->
+<section class="px-4 py-12 bg-[#181A20] text-center border-b border-[#29313D]">
+<h2 class="text-[24px] leading-[32px] font-semibold text-[#EAECEF] max-w-[320px] mx-auto">
+        Trade on the go.<br/>Anywhere, anytime.
+      </h2>
+<p class="text-[13px] text-muted-custom mt-2">
+        Stay connected to the crypto markets 24/7 with the Binance app.
+      </p>
+<!-- Original Phone Image -->
+<div class="my-6 flex justify-center">
+<img alt="Binance Mobile App" class="w-[240px] h-auto object-contain drop-shadow-2xl" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' width=\'240\' height=\'320\' viewBox=\'0 0 240 320\' fill=\'%23202630\'&gt;&lt;rect width=\'240\' height=\'320\' rx=\'20\'/&gt;&lt;text x=\'50%25\' y=\'50%25\' fill=\'%23F0B90B\' font-family=\'sans-serif\' font-size=\'14\' text-anchor=\'middle\'&gt;Binance Mobile App&lt;/text&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYhJWErExSTIDDujRQdac1Z5XcyJKLbjHFmtEe_409SD5wTevswDq8bTeN-eF9cUqap5ZsaT0UMvPtGGxead0AaomTkYYBAIiCgrnpoz-D5rAbpwLDHeMsx9jIaQg991FVdMwRDBLPBXMyqmFup3jzywwtshGPw8EgeWZr-xkVukFbrkW29PmEgLPzbpHc8q87-vmhsSUtbiYQ9tBAkvq-BeYh-WRmGEHS2Hd56HNLDsP8E9L1jTxKfzqwhYVNcUHGtL30GESVOvls"/>
+</div>
+<!-- Mobile Store Badges: Apple App Store & Google Play -->
+<div class="flex items-center justify-center gap-3">
+<a class="hover:opacity-90 transition-opacity" href="https://app.appsflyer.com/id1436799971?pid=Binance_web&amp;c=download" rel="noopener noreferrer" target="_blank">
+<img alt="Download on App Store" class="h-[40px] w-auto" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'40\' viewBox=\'0 0 120 40\' fill=\'%23000\'&gt;&lt;rect width=\'120\' height=\'40\' rx=\'6\'/&gt;&lt;text x=\'50%25\' y=\'55%25\' fill=\'%23fff\' font-size=\'10\' text-anchor=\'middle\'&gt;App Store&lt;/text&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBGfvWybsnva94-RPwPUIY6_kapPEla3ZLFdNzztRuvz0MfK1UF8xBsvmKK-gLnR06E5HBBv7D8dP7rxF5TZOEJFKrrxo90nC9HLeLuI6plTzkisvZnqkbWo8bManFxmaa4t_i8melIrlS9zR02n-swELFYR--yar_WljDbLnA8ciaIxZvvBtAo0yZRPqp2N3K2unxmbqBIF_rOOiqLMq1aZrTp_ZkZfpHxLhEOwZtCJ5oKiLDyCbFvmAnUXaF8vxlfjubEcEhV_E3t"/>
+</a>
+<a class="hover:opacity-90 transition-opacity" href="https://app.appsflyer.com/com.binance.dev?pid=Binance_web&amp;c=download" rel="noopener noreferrer" target="_blank">
+<img alt="Get it on Google Play" class="h-[40px] w-auto" onerror="this.onerror=null; this.src='data:image/svg+xml;utf8,&lt;svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'40\' viewBox=\'0 0 120 40\' fill=\'%23000\'&gt;&lt;rect width=\'120\' height=\'40\' rx=\'6\'/&gt;&lt;text x=\'50%25\' y=\'55%25\' fill=\'%23fff\' font-size=\'10\' text-anchor=\'middle\'&gt;Google Play&lt;/text&gt;&lt;/svg&gt;'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCB3f1GY-zehJzOZ9nCI17GAKmKuAmRnTMFsyfa4ynswSL8qTt5ETxIstTwSUSMohRpYaiePZ28xE_sGW3dfbpVIyMobj5wAiyDhKNKx_Px_xHKL6x2hmXHfp6Vb0YR5pqIl6LamRP1z7pPNEdFfREdnS7pA6YCCAJohRdwr082LNdN87-5GDI8q6x6kIi0zdkG_jD6ta-ZSrxDbsRvn77CDN0WMuid3JclxD4l5rsmrT1a-rqZBKQOCD1Mbyobo631MtPe0SLgTTUZ"/>
+</a>
+</div>
+<a class="inline-block text-[13px] text-[#F0B90B] mt-4 hover:underline" href="https://www.binance.com/en/download">
+        More Download Options &gt;
+      </a>
+</section>
+<!-- ==================== FAQ REGION (y: 3285 to 4213) ==================== -->
+<section class="px-4 py-12 bg-main border-b border-[#29313D]">
+<!-- Centered FAQ Heading (x:42.6, y:3309.3, w:304.8, h:32 approx) -->
+<h2 class="text-[24px] leading-[32px] font-semibold text-[#EAECEF] text-center mb-8">
+        Frequently Asked Questions
+      </h2>
+<!-- 10 Disclosure Rows -->
+<div class="space-y-3">
+<!-- Q01 (3 lines tall as observed) -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden" open="">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">01</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                What makes Binance one of the world's leading cryptocurrency exchanges?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Binance is the world's largest cryptocurrency exchange by trading volume, trusted by over 330 million users globally. We offer industry-leading liquidity, top-tier security standards, proof of reserves, and 24/7 dedicated customer assistance.
+          </div>
+</details>
+<!-- Q02 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">02</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                Where can I buy cryptocurrency?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            You can purchase cryptocurrencies directly on Binance via credit/debit card, bank transfer, peer-to-peer (P2P) trading, or instant crypto deposits. Visit our <a class="text-[#F0B90B] underline" href="https://www.binance.com/en/crypto/buy">Buy Crypto</a> page to get started.
+          </div>
+</details>
+<!-- Q03 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">03</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                How can I start cryptocurrency trading on Binance?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            To start trading: 1. Register a Binance account. 2. Complete identity verification. 3. Deposit funds or crypto. 4. Navigate to Spot or Futures trading interface to execute trades.
+          </div>
+</details>
+<!-- Q04 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">04</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                Can I buy and trade cryptocurrency on the Binance app?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Yes, the Binance mobile app supports full account management, instant purchases, spot and futures trading, staking, Binance Earn, and Web3 Wallet integration on both iOS and Android devices.
+          </div>
+</details>
+<!-- Q05 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">05</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                How can I buy Bitcoin, Ethereum, XRP and other cryptocurrencies on Binance?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Search for your preferred asset (such as BTC, ETH, XRP) in the Markets tab, select your preferred fiat currency or stablecoin pairing, enter the order amount, and confirm the transaction.
+          </div>
+</details>
+<!-- Q06 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">06</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                What crypto products and services does Binance offer?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Binance provides spot trading, margin, futures, options, Binance Earn, Launchpool, Binance Pay, NFT and Web3 marketplaces, institutional custody, and decentralized liquidity services.
+          </div>
+</details>
+<!-- Q07 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">07</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                How can I earn passive income from crypto?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Explore <a class="text-[#F0B90B] underline" href="https://www.binance.com/en/earn">Binance Earn</a> to discover Simple Earn (flexible and locked terms), ETH Staking, Dual Investment, and automated yield accumulation products.
+          </div>
+</details>
+<!-- Q08 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">08</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                How can I track cryptocurrency prices?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Visit the <a class="text-[#F0B90B] underline" href="https://www.binance.com/en/markets">Markets</a> section for real-time order books, 24-hour price charts, top gainers/losers, heatmaps, and customizable watchlists.
+          </div>
+</details>
+<!-- Q09 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">09</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                Can I trade U.S. stocks and ETFs on Binance?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Binance offers tokenized stock representations (bStocks) where eligible jurisdictions allow accredited digital asset trading of leading equities and indices around the clock.
+          </div>
+</details>
+<!-- Q10 -->
+<details class="group bg-surface-1 rounded-[8px] border border-[#29313D] overflow-hidden">
+<summary class="flex items-start justify-between p-4 cursor-pointer list-none select-none">
+<div class="flex items-start gap-3">
+<span class="text-[11px] font-mono text-[#F0B90B] bg-[#29313D] px-1.5 py-0.5 rounded mt-0.5">10</span>
+<span class="text-[15px] leading-[22px] font-medium text-[#EAECEF] w-[260px]">
+                How can I find new crypto coins early on Binance?
+              </span>
+</div>
+<span class="text-muted-custom group-open:rotate-45 transition-transform duration-200 mt-1 font-bold text-lg leading-none">+</span>
+</summary>
+<div class="px-4 pb-4 pt-1 text-[13px] leading-[20px] text-muted-custom border-t border-[#29313D]/60 pl-11">
+            Check the Launchpool and Launchpad platforms, monitor the New Listing announcement feed, and participate in Binance Square community disclosures to discover promising early projects.
+          </div>
+</details>
+</div>
+</section>
+<!-- ==================== FINAL CTA (136px high at y:4213) ==================== -->
+<section class="h-[136px] bg-[#181A20] flex flex-col items-center justify-center px-4 border-b border-[#29313D]">
+<div class="text-[16px] leading-[24px] font-medium text-[#EAECEF] text-center mb-3">
+        Secure, Low-Fee Trading on Binance
+      </div>
+<a class="bg-btn-yellow text-black font-semibold text-[14px] px-8 py-2.5 rounded-[4px] shadow hover:bg-[#F0B90B] transition-colors" href="https://accounts.binance.com/en/register">
+        Sign Up Now
+      </a>
+</section>
+<!-- ==================== RESPONSIVE FOOTER ==================== -->
+<footer class="bg-main px-4 pt-8 pb-32 text-[12px] text-muted-custom space-y-6">
+<!-- Community / Social Icons -->
+<div>
+<div class="text-[13px] font-semibold text-[#EAECEF] mb-3">Community</div>
+<div class="flex items-center space-x-3 text-muted-custom">
+<!-- Telegram -->
+<a class="w-8 h-8 rounded-full bg-surface-1 border border-[#29313D] flex items-center justify-center hover:text-white" href="https://t.me/binanceexchange">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.37.74-.56 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .34z"></path></svg>
+</a>
+<!-- X / Twitter -->
+<a class="w-8 h-8 rounded-full bg-surface-1 border border-[#29313D] flex items-center justify-center hover:text-white" href="https://twitter.com/binance">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- Facebook -->
+<a class="w-8 h-8 rounded-full bg-surface-1 border border-[#29313D] flex items-center justify-center hover:text-white" href="https://facebook.com/binance">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"></path></svg>
+</a>
+<!-- Instagram -->
+<a class="w-8 h-8 rounded-full bg-surface-1 border border-[#29313D] flex items-center justify-center hover:text-white" href="https://instagram.com/binance">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<!-- Discord -->
+<a class="w-8 h-8 rounded-full bg-surface-1 border border-[#29313D] flex items-center justify-center hover:text-white" href="https://discord.gg/binance">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.894.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Region, Currency & Dark Theme Controls -->
+<div class="grid grid-cols-3 gap-2 py-2">
+<button class="bg-surface-1 border border-[#29313D] rounded-[6px] py-2 px-2 text-[12px] text-[#EAECEF] flex items-center justify-between">
+<span>🌐 English</span>
+<span>▼</span>
+</button>
+<button class="bg-surface-1 border border-[#29313D] rounded-[6px] py-2 px-2 text-[12px] text-[#EAECEF] flex items-center justify-between">
+<span>USD ($)</span>
+<span>▼</span>
+</button>
+<button class="bg-surface-1 border border-[#29313D] rounded-[6px] py-2 px-2 text-[12px] text-[#EAECEF] flex items-center justify-center gap-1">
+<span>🌙 Dark Theme</span>
+</button>
+</div>
+<!-- 6 Mobile Collapsible Groups -->
+<div class="border-t border-[#29313D] pt-4 space-y-3">
+<!-- About Us -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>About Us</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://www.binance.com/en/about">About</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/careers">Careers</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/support/announcement">Announcements</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/news">News</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/press">Press</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/legal">Legal</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/terms">Terms</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/privacy">Privacy</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/building-trust">Building Trust</a></div>
+</div>
+</details>
+<!-- Products (includes Card in observed current state) -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>Products</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://www.binance.com/en/exchange">Exchange</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/crypto/buy">Buy Crypto</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/pay">Pay</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/cards">Card</a></div>
+<div><a class="hover:text-white" href="https://academy.binance.com/en">Academy</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/live">Live</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/tax">Tax</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/nft">NFT</a></div>
+<div><a class="hover:text-white" href="https://www.binance.charity">Charity</a></div>
+<div><a class="hover:text-white" href="https://launchpad.binance.com/en">Launchpool</a></div>
+</div>
+</details>
+<!-- Business -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>Business</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://c2c.binance.com/en">P2P Merchant</a></div>
+<div><a class="hover:text-white" href="https://p2p.binance.com/en">P2P Pro</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/listing">Listing Application</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/institutional">Institutional Services</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/vip-portal">VIP Portal</a></div>
+<div><a class="hover:text-white" href="https://labs.binance.com">Binance Labs</a></div>
+</div>
+</details>
+<!-- Learn -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>Learn</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://academy.binance.com/en/learn-and-earn">Learn &amp; Earn</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/price">Browse Crypto Prices</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/price/bitcoin">Bitcoin Price</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/price/ethereum">Ethereum Price</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/price/prediction">Price Predictions</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/how-to-buy/bitcoin">Buy Bitcoin</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/how-to-buy/ethereum">Buy Ethereum</a></div>
+</div>
+</details>
+<!-- Service -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>Service</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://www.binance.com/en/affiliate">Affiliate</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/activity/referral">Referral</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/otc">OTC Trading</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/landing/data">Historical Data</a></div>
+<div><a class="hover:text-white" href="https://binance-docs.github.io/apidocs/">Trading APIs</a></div>
+</div>
+</details>
+<!-- Support -->
+<details class="group border-b border-[#29313D]/60 pb-2">
+<summary class="flex justify-between items-center cursor-pointer list-none font-semibold text-[#EAECEF] text-[13px]">
+<span>Support</span>
+<span class="group-open:rotate-180 transition-transform">▼</span>
+</summary>
+<div class="pt-2 pl-2 space-y-1.5 text-muted-custom">
+<div><a class="hover:text-white" href="https://www.binance.com/en/chat">24/7 Chat Support</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/support">Help Center</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/fee/schedule">Trading Fees</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/support/faq">Rulebook</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/official-verification">Binance Verify</a></div>
+<div><a class="hover:text-white" href="https://www.binance.com/en/law-enforcement">Law Enforcement</a></div>
+</div>
+</details>
+</div>
+<!-- Legal Disclosure & ADGM Notice -->
+<div class="text-[11px] leading-[16px] text-muted-custom space-y-3 pt-4 border-t border-[#29313D]">
+<p>
+<strong class="text-[#EAECEF]">Entity &amp; Regulatory Disclosure (ADGM):</strong> Binance (ADGM) Limited is licensed by the Financial Services Regulatory Authority (FSRA) of Abu Dhabi Global Market (ADGM) to carry out the regulated activity of providing custody in relation to virtual assets. Regulated entities operate under applicable jurisdictions; products and services may not be available in all territories.
+        </p>
+<p>
+<strong class="text-[#EAECEF]">Risk Warning:</strong> Digital asset prices are subject to high market risk and price volatility. The value of your investment may go down or up, and you may not get back the amount invested. You are solely responsible for your investment decisions and Binance is not liable for any losses you may incur. Past performance is not a reliable predictor of future performance. You should only invest in products you are familiar with and understand the risks.
+        </p>
+<div class="flex justify-between items-center pt-2">
+<span>Binance © 2026. All rights reserved. (Archived Interface Study October 7, 2026)</span>
+<button class="text-[#F0B90B] underline" onclick="toggleCookieBanner(true)">Cookie Preferences</button>
+</div>
+</div>
+</footer>
+</main>
+<!-- ==================== REAL COOKIE PREFERENCES PANEL ==================== -->
+<div class="fixed bottom-0 left-0 right-0 z-50 bg-[#202630] border-t border-[#434C5A] p-4 shadow-2xl max-w-[390px] mx-auto hidden" id="cookie-panel">
+<div class="text-[14px] font-semibold text-[#EAECEF] mb-1.5">
+      Cookie Preferences
+    </div>
+<p class="text-[11px] leading-[16px] text-muted-custom mb-3">
+      We use cookies to improve your site experience, analyze traffic, and enhance security. Optional analytics and personalization cookies require your consent. You may accept all or reject non-essential cookies.
+    </p>
+<div class="flex flex-col gap-2">
+<button class="w-full bg-btn-yellow text-black text-[12px] font-semibold py-2.5 rounded-[4px] hover:bg-[#F0B90B] transition-colors" onclick="toggleCookieBanner(false)">
+        Accept Cookies &amp; Continue
+      </button>
+<div class="grid grid-cols-2 gap-2">
+<button class="bg-[#29313D] border border-[#434C5A] text-[#EAECEF] text-[12px] font-medium py-2 rounded-[4px] hover:bg-[#353f4e]" onclick="toggleCookieBanner(false)">
+          Reject Additional Cookies
+        </button>
+<button class="bg-transparent border border-[#434C5A] text-muted-custom text-[12px] font-medium py-2 rounded-[4px] hover:text-[#EAECEF]" onclick="alert('Manage Cookies: Analytics: OFF, Personalization: OFF, Strictly Necessary: ON')">
+          Manage Cookies
+        </button>
+</div>
+</div>
+</div>
+<script>
+    function toggleMenu() {
+      const drawer = document.getElementById('mobile-drawer');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        drawer.classList.add('flex');
+      } else {
+        drawer.classList.add('hidden');
+        drawer.classList.remove('flex');
+      }
+    }
+
+    function toggleCookieBanner(show) {
+      const panel = document.getElementById('cookie-panel');
+      if (show) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    }
+  </script>
+</body>
+</html>
