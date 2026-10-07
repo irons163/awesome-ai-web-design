@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Revolut — One app, all things money</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'Aeonik Pro';
+      font-style: normal;
+      font-weight: 400;
+      src: url('https://assets.revolut.com/assets/fonts/AeonikPro-Regular.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Aeonik Pro';
+      font-style: normal;
+      font-weight: 500;
+      src: url('https://assets.revolut.com/assets/fonts/AeonikPro-Medium.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Inter';
+      font-style: normal;
+      font-weight: 400;
+      src: url('https://assets.revolut.com/assets/fonts/Inter-Regular.woff2') format('woff2');
+    }
+
+    body {
+      font-family: 'Aeonik Pro', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #191c1f;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1, h2, h3, h4, .font-heading {
+      font-family: 'Aeonik Pro', sans-serif;
+      font-weight: 500;
+      letter-spacing: -0.03em;
+    }
+
+    .container-custom {
+      max-width: 1000px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    /* Fixed Header Styling */
+    .header-nav-link {
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      transition: opacity 0.15s ease;
+      opacity: 0.9;
+    }
+    .header-nav-link:hover {
+      opacity: 1;
+    }
+
+    /* Hero section exact heights */
+    .hero-viewport {
+      height: 720px;
+      position: relative;
+      overflow: hidden;
+      background: #739ecb;
+    }
+
+    /* Scroll tab pill styling */
+    .tab-pill {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      transition: all 0.2s ease;
+    }
+    .tab-pill.active {
+      background: #ffffff;
+      color: #191c1f;
+      border-color: #ffffff;
+    }
+
+    .tab-pill-dark {
+      background: #f4f5f6;
+      color: #191c1f;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    .tab-pill-dark.active {
+      background: #191c1f;
+      color: #ffffff;
+    }
+
+    /* Custom smooth transition classes */
+    .fade-scene {
+      transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#191c1f]">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 right-0 z-50 h-[72px] flex items-center transition-colors duration-300 px-8" id="main-header" style="background: rgba(0, 0, 0, 0.15); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);">
+<div class="max-w-[1200px] w-full mx-auto flex items-center justify-between">
+<!-- Left: Logo & Main Nav -->
+<div class="flex items-center gap-9">
+<a aria-label="Revolut Homepage" class="flex items-center" href="https://www.revolut.com/">
+<!-- White Revolut Wordmark SVG -->
+<svg fill="none" height="23" viewbox="0 0 108 23" width="108" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12.9231 6.55734C11.9567 5.48316 10.395 4.88762 8.7042 4.88762H4.66174V13.8824H8.62534C10.334 13.8824 11.9167 13.2676 12.8943 12.1645C13.8845 11.0475 14.3986 9.53922 14.3986 7.89325C14.3986 6.27622 13.8893 4.79633 12.9231 6.55734ZM8.81643 0C11.9567 0 14.8562 1.13941 16.9015 3.19799C18.9189 5.22851 20 8.01633 20 11.0286C20 14.0722 18.8953 16.8967 16.8123 18.9329C14.7735 20.9272 11.854 22.0371 8.72314 22.0371H0V0H8.81643ZM28.5137 17.1492V22.0371H23.852V0H28.5137V17.1492ZM47.886 16.2917C46.1264 19.9868 42.4836 22.4285 38.2919 22.4285C32.7486 22.4285 28.2919 17.9254 28.2919 12.3275C28.2919 6.7296 32.7486 2.22656 38.2919 2.22656C42.4836 2.22656 46.1264 4.66827 47.886 8.36336L43.8209 10.3155C42.8252 8.09632 40.7107 6.6433 38.2919 6.6433C35.1852 6.6433 32.9535 9.18376 32.9535 12.3275C32.9535 15.4713 35.1852 18.0118 38.2919 18.0118C40.7107 18.0118 42.8252 16.5588 43.8209 14.3396L47.886 16.2917ZM61.9839 22.0371L55.3377 6.84074V22.0371H50.676V0H55.3377L62.0837 15.347V0H66.7454V22.0371H61.9839ZM78.0772 0H82.7389V14.1537C82.7389 18.9667 86.4172 22.0371 91.1787 22.0371C95.9402 22.0371 99.6185 18.9667 99.6185 14.1537V0H104.28V14.1537C104.28 21.4398 98.7188 26.4539 91.1787 26.4539C83.6386 26.4539 78.0772 21.4398 78.0772 14.1537V0ZM107.561 0H112.223V17.1492H123.632V22.0371H107.561V0Z" fill="#FFFFFF" fill-rule="evenodd"></path>
+</svg>
+</a>
+<nav class="hidden md:flex items-center gap-7">
+<a class="header-nav-link font-medium text-[15px]" href="#">Personal</a>
+<a class="header-nav-link font-medium text-[15px] opacity-80 hover:opacity-100" href="#">Business</a>
+<a class="header-nav-link font-medium text-[15px] opacity-80 hover:opacity-100" href="#">Kids &amp; Teens</a>
+<a class="header-nav-link font-medium text-[15px] opacity-80 hover:opacity-100" href="#">Company</a>
+</nav>
+</div>
+<!-- Right: Actions -->
+<div class="flex items-center gap-4">
+<a class="hidden sm:inline-block text-white text-[15px] font-medium px-4 py-2 hover:opacity-85 transition" href="#">Log in</a>
+<a class="bg-white text-[#191c1f] text-[15px] font-medium px-5 py-2.5 rounded-full hover:bg-neutral-100 transition shadow-sm" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Sign up</a>
+<button aria-label="Open mobile menu" class="md:hidden text-white p-2">
+<svg fill="none" height="24" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="24">
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<line x1="3" x2="21" y1="12" y2="12"></line>
+<line x1="3" x2="21" y1="18" y2="18"></line>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- Hero Section (Desktop exact canvas specs: 1280px wide base, 720px viewport, layered composite) -->
+<section class="hero-viewport w-full" id="hero-section">
+<!-- Sky Background Image -->
+<div class="absolute inset-0 w-full h-full pointer-events-none">
+<img alt="Blue Sky" class="w-full h-full object-cover object-center transform scale-105" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Woman Image (layered behind phone overlay) -->
+<div class="absolute pointer-events-none" style="left: -153.8px; top: -162px; width: 1587.6px; height: 882px; z-index: 10;">
+<img alt="Revolut Customer" class="w-full h-full object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Phone Overlay (transparent account mockup with Personal / £6,012 / Accounts / FSCS marks) -->
+<div class="absolute pointer-events-none" style="left: 461.42px; top: 216px; width: 357.16px; height: 504px; z-index: 20;">
+<img alt="Revolut App Account Screen" class="w-full h-full object-contain drop-shadow-2xl" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Foreground Content: Top-left text and CTA overlay -->
+<div class="relative z-30 max-w-[1000px] mx-auto h-full px-5 flex flex-col justify-start pt-[120px]">
+<!-- Slide 1: Banking & Beyond (Default Hero) -->
+<div class="fade-scene max-w-[480px]" id="hero-slide-1">
+<h1 class="text-white text-[72px] lg:text-[84.65px] font-medium leading-[1.0] tracking-[-0.035em] mb-6">
+          Banking &amp;<br/>Beyond
+        </h1>
+<p class="text-white text-[18px] md:text-[20px] font-normal leading-[1.35] tracking-[-0.01em] opacity-95 mb-8 max-w-[420px]">
+          This is your bank, redefined. Get powerful daily banking and global freedom. Sign up for free in a tap.
+        </p>
+<div class="flex items-center gap-4">
+<a class="bg-[#191c1f] text-white hover:bg-black transition-all px-8 py-3.5 rounded-full text-[16px] font-medium inline-flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">
+            Download the app
+          </a>
+</div>
+</div>
+<!-- Slide 2: Your salary, reimagined (Second state accessible via toggle) -->
+<div class="fade-scene max-w-[480px] hidden opacity-0" id="hero-slide-2">
+<h1 class="text-white text-[64px] lg:text-[76px] font-medium leading-[1.05] tracking-[-0.035em] mb-6">
+          Your salary, reimagined
+        </h1>
+<p class="text-white text-[18px] md:text-[20px] font-normal leading-[1.35] tracking-[-0.01em] opacity-95 mb-8 max-w-[440px]">
+          Spend smartly, send quickly, sort your salary automatically, and watch your savings grow — all with a Revolut bank account.
+        </p>
+<div class="flex items-center gap-4">
+<a class="bg-[#191c1f] text-white hover:bg-black transition-all px-8 py-3.5 rounded-full text-[16px] font-medium inline-flex items-center justify-center shadow-lg hover:shadow-xl transform hover:-translate-y-0.5" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">
+            Move your salary
+          </a>
+</div>
+</div>
+<!-- Hero Scene Switcher Controls -->
+<div class="absolute bottom-8 left-5 z-40 flex items-center gap-2">
+<button class="tab-pill active px-4 py-1.5 rounded-full text-[13px] font-medium" id="toggle-scene-1" onclick="switchHeroScene(1)">Banking &amp; Beyond</button>
+<button class="tab-pill px-4 py-1.5 rounded-full text-[13px] font-medium" id="toggle-scene-2" onclick="switchHeroScene(2)">Your salary, reimagined</button>
+</div>
+</div>
+</section>
+<!-- Awards Section: "Join 80+ million customers worldwide and 13 million in the UK" -->
+<section class="py-24 bg-white border-b border-gray-100" id="awards-section">
+<div class="container-custom text-center">
+<h2 class="text-[34px] md:text-[42px] font-medium text-[#191c1f] tracking-[-0.025em] mb-12 max-w-[700px] mx-auto leading-tight">
+        Join 80+ million customers worldwide and 13 million in the UK
+      </h2>
+<!-- First row: 4 awards -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center mb-10 max-w-[880px] mx-auto">
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Second row: 3 awards -->
+<div class="grid grid-cols-3 gap-8 md:gap-14 items-center justify-items-center max-w-[620px] mx-auto">
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="h-16 flex items-center justify-center transition-transform hover:scale-105">
+<img alt="Revolut Award Badge" class="max-h-14 w-auto object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Savings Section: "Life, meets savings" (720px tall section) -->
+<section class="min-h-[720px] py-16 bg-[#fafafa] flex flex-col justify-center relative overflow-hidden" id="savings-section">
+<div class="container-custom">
+<div class="text-center max-w-[760px] mx-auto mb-10">
+<h2 class="text-[40px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] text-[#191c1f] mb-4">
+          Life, meets savings
+        </h2>
+<p class="text-[18px] md:text-[20px] text-[#55595d] font-normal leading-relaxed mb-6">
+          Grow your money with up to 4% AER (variable) interest on Instant Access Savings, paid every day.¹
+        </p>
+<div class="flex items-center justify-center gap-4 mb-4">
+<a class="bg-[#191c1f] text-white hover:bg-black transition px-7 py-3 rounded-full text-[15px] font-medium inline-block shadow-sm" href="https://www.revolut.com/savings/" rel="noopener" target="_blank">
+            Explore Savings
+          </a>
+</div>
+<!-- Legal note -->
+<p class="text-[12px] text-[#878c93] leading-relaxed max-w-[620px] mx-auto">
+          Ultra plan rate shown. Annual subscription fee applies. Instant Access Savings are provided by Revolut Bank UAB. T&amp;Cs apply.
+        </p>
+</div>
+<!-- Interactive Savings Visual with Tabs (Adventure / Wedding / Moving) -->
+<div class="max-w-[880px] mx-auto bg-white rounded-3xl p-6 md:p-8 shadow-sm border border-neutral-100">
+<!-- Tabs -->
+<div class="flex items-center justify-center gap-3 mb-6">
+<button class="tab-pill-dark active px-5 py-2 rounded-full text-[14px] font-medium" id="savings-tab-adventure" onclick="setSavingsTab('adventure')">Adventure</button>
+<button class="tab-pill-dark px-5 py-2 rounded-full text-[14px] font-medium" id="savings-tab-wedding" onclick="setSavingsTab('wedding')">Wedding</button>
+<button class="tab-pill-dark px-5 py-2 rounded-full text-[14px] font-medium" id="savings-tab-moving" onclick="setSavingsTab('moving')">Moving</button>
+</div>
+<!-- Savings Card Visual Content -->
+<div class="relative h-[340px] md:h-[380px] rounded-2xl overflow-hidden flex items-end p-8 text-white" id="savings-card-bg" style="background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&amp;fit=crop&amp;w=1400&amp;q=80') center/cover no-repeat;">
+<div class="relative z-10 w-full flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<span class="inline-block bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider mb-2" id="savings-goal-tag">Vault: Adventure</span>
+<h3 class="text-3xl md:text-4xl font-medium tracking-tight" id="savings-goal-amount">£4,850.20</h3>
+<p class="text-white/80 text-sm mt-1" id="savings-goal-desc">Target: £6,000 • Interest paid daily at 4.00% AER</p>
+</div>
+<div class="bg-white/15 backdrop-blur-md border border-white/25 px-5 py-3 rounded-2xl">
+<span class="block text-xs uppercase tracking-wider text-white/70">Estimated Daily Payout</span>
+<span class="text-lg font-medium">+£0.53 / day</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Cards Section: "Elevate your spend" (720px tall) -->
+<section class="min-h-[720px] py-16 bg-[#111315] text-white flex flex-col justify-center relative overflow-hidden" id="cards-section">
+<div class="container-custom">
+<div class="text-center max-w-[760px] mx-auto mb-10">
+<h2 class="text-[40px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] mb-4">
+          Elevate your spend
+        </h2>
+<p class="text-[18px] md:text-[20px] text-white/70 font-normal leading-relaxed mb-6">
+          Turn your everyday payments into unforgettable experiences. Earn RevPoints on card purchases, book trips, and upgrade your lifestyle.
+        </p>
+<div class="flex items-center justify-center gap-4 mb-4">
+<a class="bg-white text-[#191c1f] hover:bg-neutral-100 transition px-7 py-3 rounded-full text-[15px] font-medium inline-block shadow-sm" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">
+            Start earning
+          </a>
+</div>
+<!-- Legal text -->
+<p class="text-[12px] text-white/40 leading-relaxed max-w-[560px] mx-auto">
+          RevPoints T&amp;Cs apply. Earn rate varies by plan. Paid plan fees apply.
+        </p>
+</div>
+<!-- Tabs: Physical cards / Virtual cards -->
+<div class="max-w-[900px] mx-auto">
+<div class="flex items-center justify-center gap-3 mb-8">
+<button class="tab-pill active px-6 py-2 rounded-full text-[14px] font-medium" id="card-tab-physical" onclick="setCardTab('physical')">Physical cards</button>
+<button class="tab-pill px-6 py-2 rounded-full text-[14px] font-medium" id="card-tab-virtual" onclick="setCardTab('virtual')">Virtual cards</button>
+</div>
+<!-- Card display showcase container -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center bg-white/5 border border-white/10 rounded-3xl p-8 backdrop-blur-sm">
+<div class="order-2 md:order-1">
+<h3 class="text-2xl md:text-3xl font-medium mb-3" id="card-heading">Precision crafted in metal</h3>
+<p class="text-white/70 text-base leading-relaxed mb-6" id="card-desc">
+              Carry prestige with customized 18g reinforced stainless steel cards in Black, Gold, Rose, and Space Grey. Engineered to stand out every time you tap.
+            </p>
+<div class="flex items-center gap-4 text-sm text-white/60">
+<span class="flex items-center gap-1.5">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                Built-in fraud detection
+              </span>
+<span class="flex items-center gap-1.5">
+<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                Instant card freeze
+              </span>
+</div>
+</div>
+<div class="order-1 md:order-2 flex justify-center py-4">
+<div class="w-[280px] h-[176px] md:w-[320px] md:h-[200px] rounded-2xl p-6 flex flex-col justify-between shadow-2xl transition-all duration-300 transform hover:scale-105" id="card-graphic-wrap" style="background: linear-gradient(135deg, #2b2e33 0%, #151719 100%); border: 1px solid rgba(255,255,255,0.18);">
+<div class="flex justify-between items-start">
+<span class="text-white/80 font-medium tracking-wider text-sm">REVOLUT</span>
+<span class="text-white/50 text-xs font-mono">ULTRA</span>
+</div>
+<div>
+<div class="w-10 h-8 rounded bg-gradient-to-tr from-amber-300 to-yellow-600 mb-2 opacity-80"></div>
+<div class="flex justify-between items-end">
+<span class="font-mono text-sm tracking-widest text-white/70">•••• 8820</span>
+<span class="text-xs text-white/50">DEBIT</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AIR Section: "Ask, and AIR makes it happen" (720px tall) -->
+<section class="min-h-[720px] py-16 bg-[#000000] text-white flex flex-col justify-center relative overflow-hidden" id="air-section">
+<!-- Atmospheric subtle ambient glow -->
+<div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-b from-indigo-900/30 via-purple-900/10 to-transparent blur-3xl pointer-events-none"></div>
+<div class="container-custom relative z-10">
+<div class="text-center max-w-[760px] mx-auto mb-12">
+<span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-white/80 text-xs font-medium uppercase tracking-widest mb-4">
+<span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Revolut Intelligence
+        </span>
+<h2 class="text-[40px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] mb-4">
+          Ask, and AIR makes it happen
+        </h2>
+<p class="text-[18px] md:text-[20px] text-white/70 font-normal leading-relaxed mb-6">
+          AI by Revolut, AIR, is your 24/7 personal assistant. Just open your app, swipe, and ask away.
+        </p>
+<div>
+<a class="bg-white text-black hover:bg-neutral-100 transition px-7 py-3 rounded-full text-[15px] font-medium inline-block shadow-sm" href="https://www.revolut.com/air-ai-by-revolut/" rel="noopener" target="_blank">
+            Learn more
+          </a>
+</div>
+</div>
+<!-- Interactive AIR App Mockup Visual -->
+<div class="max-w-[680px] mx-auto bg-[#16181b] border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl">
+<div class="flex items-center justify-between border-b border-white/10 pb-4 mb-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-gradient-to-tr from-cyan-400 to-indigo-500 flex items-center justify-center font-bold text-xs text-black">
+              AIR
+            </div>
+<div>
+<div class="text-sm font-medium text-white">AIR Assistant</div>
+<div class="text-xs text-white/50">Always active • 24/7</div>
+</div>
+</div>
+<span class="text-xs text-white/40 font-mono">v2.4</span>
+</div>
+<div class="space-y-4 text-sm">
+<div class="bg-white/5 border border-white/5 rounded-2xl p-4 max-w-[85%]">
+<p class="text-white/90">"How much did I spend on dining out in London last weekend?"</p>
+</div>
+<div class="bg-white/10 border border-white/10 rounded-2xl p-4 max-w-[90%] ml-auto">
+<p class="text-white/95 leading-relaxed">
+              You spent <strong class="text-white">£142.80</strong> across 3 restaurants. That's 18% lower than your previous weekend average! Want me to set a £150 weekend dining budget?
+            </p>
+<div class="mt-3 flex gap-2">
+<button class="bg-white/20 hover:bg-white/30 text-white text-xs px-3 py-1.5 rounded-full transition">Yes, set budget</button>
+<button class="bg-transparent hover:bg-white/10 text-white/70 text-xs px-3 py-1.5 rounded-full transition">View breakdown</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Section: "Your money’s safe space" (White bg, black text left, vertical phone visual right) -->
+<section class="py-24 bg-white border-t border-b border-neutral-100" id="security-section">
+<div class="container-custom">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+<!-- Left: Copy & Details -->
+<div class="md:col-span-7">
+<span class="text-sm font-medium text-[#73787e] uppercase tracking-wider mb-3 block">Revolut Secure</span>
+<h2 class="text-[38px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] text-[#191c1f] mb-6">
+            Your money’s safe space
+          </h2>
+<p class="text-[18px] md:text-[20px] text-[#55595d] font-normal leading-relaxed mb-8">
+            With Revolut Secure, you’re entering the new era of money security — where your bank account has 24/7 protection through proactive, purpose-built defences and a team of specialists.
+          </p>
+<div class="space-y-4 mb-8">
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 mt-0.5">
+<svg fill="none" height="18" stroke="#191c1f" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+</div>
+<div>
+<h4 class="text-base font-medium text-[#191c1f]">Biometric &amp; Location-based Protection</h4>
+<p class="text-sm text-[#73787e]">Continuous behavioural analysis flags suspicious payments before they leave your account.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="w-8 h-8 rounded-full bg-neutral-100 flex items-center justify-center shrink-0 mt-0.5">
+<svg fill="none" height="18" stroke="#191c1f" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+</div>
+<div>
+<h4 class="text-base font-medium text-[#191c1f]">24/7 Dedicated Fraud Specialists</h4>
+<p class="text-sm text-[#73787e]">A dedicated global team constantly guarding your transactions against evolving scams.</p>
+</div>
+</div>
+</div>
+<a class="bg-[#191c1f] text-white hover:bg-black transition px-7 py-3 rounded-full text-[15px] font-medium inline-block shadow-sm" href="https://www.revolut.com/how-we-keep-your-money-safe/" rel="noopener" target="_blank">
+            Discover Revolut Secure
+          </a>
+</div>
+<!-- Right: Vertical phone visual (390x520 aspect ratio) -->
+<div class="md:col-span-5 flex justify-center">
+<div class="w-[320px] md:w-[360px] h-[500px] bg-neutral-900 rounded-[44px] p-4 shadow-2xl border-4 border-neutral-800 relative overflow-hidden flex flex-col justify-between text-white">
+<!-- Simulated notch & status -->
+<div class="flex justify-between items-center px-4 pt-2">
+<span class="text-xs font-medium">9:41</span>
+<div class="w-20 h-4 bg-black rounded-full"></div>
+<span class="text-xs">5G</span>
+</div>
+<!-- Phone UI Content: Shield & Security Status -->
+<div class="px-4 py-8 text-center my-auto">
+<div class="w-20 h-20 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center mb-6">
+<svg fill="none" height="36" stroke="#10b981" stroke-width="2" viewbox="0 0 24 24" width="36"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="M9 12l2 2 4-4"></path></svg>
+</div>
+<h3 class="text-xl font-medium mb-1">Revolut Secure Active</h3>
+<p class="text-xs text-white/60 mb-6">All systems operational &amp; protected</p>
+<div class="bg-white/10 rounded-2xl p-4 text-left space-y-3">
+<div class="flex justify-between items-center text-xs">
+<span>Card frozen if phone away</span>
+<span class="text-emerald-400 font-medium">ON</span>
+</div>
+<div class="flex justify-between items-center text-xs border-t border-white/10 pt-2">
+<span>Disposable virtual card</span>
+<span class="text-emerald-400 font-medium">READY</span>
+</div>
+</div>
+</div>
+<!-- Bottom bar -->
+<div class="w-32 h-1 bg-white/40 rounded-full mx-auto mb-2"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Stocks Section: "Explore 5,000+ stocks and ETFs" -->
+<section class="py-24 bg-[#fafafa] border-b border-neutral-100" id="stocks-section">
+<div class="container-custom">
+<div class="text-center max-w-[760px] mx-auto mb-12">
+<h2 class="text-[40px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] text-[#191c1f] mb-4">
+          Explore 5,000+ stocks and ETFs
+        </h2>
+<p class="text-[18px] md:text-[20px] text-[#55595d] font-normal leading-relaxed mb-6">
+          From Apple to Zoom, invest in some of the biggest and most influential companies in the world, commission-free within your monthly allowance.²
+        </p>
+<div class="flex items-center justify-center gap-4 mb-4">
+<a class="bg-[#191c1f] text-white hover:bg-black transition px-7 py-3 rounded-full text-[15px] font-medium inline-block shadow-sm" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">
+            Try it out
+          </a>
+</div>
+<p class="text-[13px] font-medium text-[#73787e]">
+          Other fees may apply. Capital at risk.
+        </p>
+</div>
+<!-- Stocks ticker showcase pills -->
+<div class="flex flex-wrap justify-center gap-3 max-w-[780px] mx-auto mb-8">
+<div class="bg-white border border-neutral-200 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xs">
+<span class="w-7 h-7 rounded-full bg-neutral-900 text-white flex items-center justify-center text-xs font-bold">AAPL</span>
+<div>
+<div class="text-xs font-medium text-neutral-900">Apple Inc.</div>
+<div class="text-xs text-emerald-600 font-medium">+1.42%</div>
+</div>
+</div>
+<div class="bg-white border border-neutral-200 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xs">
+<span class="w-7 h-7 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">MSFT</span>
+<div>
+<div class="text-xs font-medium text-neutral-900">Microsoft Corp.</div>
+<div class="text-xs text-emerald-600 font-medium">+0.88%</div>
+</div>
+</div>
+<div class="bg-white border border-neutral-200 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xs">
+<span class="w-7 h-7 rounded-full bg-red-600 text-white flex items-center justify-center text-xs font-bold">TSLA</span>
+<div>
+<div class="text-xs font-medium text-neutral-900">Tesla Inc.</div>
+<div class="text-xs text-emerald-600 font-medium">+2.15%</div>
+</div>
+</div>
+<div class="bg-white border border-neutral-200 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xs">
+<span class="w-7 h-7 rounded-full bg-yellow-500 text-white flex items-center justify-center text-xs font-bold">AMZN</span>
+<div>
+<div class="text-xs font-medium text-neutral-900">Amazon.com</div>
+<div class="text-xs text-emerald-600 font-medium">+1.10%</div>
+</div>
+</div>
+<div class="bg-white border border-neutral-200 px-5 py-3 rounded-2xl flex items-center gap-3 shadow-xs">
+<span class="w-7 h-7 rounded-full bg-emerald-600 text-white flex items-center justify-center text-xs font-bold">NVDA</span>
+<div>
+<div class="text-xs font-medium text-neutral-900">NVIDIA Corp.</div>
+<div class="text-xs text-emerald-600 font-medium">+3.40%</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Plans Section: "Choose your plan" (Row 1: Standard, Plus, Premium / Row 2: Metal, Ultra) -->
+<section class="py-24 bg-white" id="plans-section">
+<div class="container-custom">
+<div class="text-center max-w-[700px] mx-auto mb-14">
+<h2 class="text-[38px] md:text-[50.3px] font-medium leading-[1.05] tracking-[-0.03em] text-[#191c1f] mb-4">
+          Choose your plan
+        </h2>
+<p class="text-[17px] md:text-[19px] text-[#55595d]">
+          From everyday essential accounts to the ultimate lifestyle upgrade, there’s a Revolut plan for you.
+        </p>
+</div>
+<!-- First Row: Standard / Plus / Premium (3 cards) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+<!-- Standard -->
+<div class="bg-[#f7f8f9] rounded-3xl p-7 border border-neutral-200/80 flex flex-col justify-between hover:border-neutral-300 transition shadow-xs">
+<div>
+<h3 class="text-2xl font-medium text-[#191c1f] mb-1">Standard</h3>
+<p class="text-sm text-[#73787e] mb-5">Free everyday banking</p>
+<div class="mb-6">
+<span class="text-3xl font-medium text-[#191c1f]">Free</span>
+</div>
+<ul class="space-y-3 text-sm text-[#55595d]">
+<li class="flex items-center gap-2">✓ Free UK bank account</li>
+<li class="flex items-center gap-2">✓ Spend abroad in 150+ currencies</li>
+<li class="flex items-center gap-2">✓ Fee-free ATM withdrawals to £200/mo</li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="block w-full text-center bg-white border border-neutral-300 text-[#191c1f] py-2.5 rounded-full text-sm font-medium hover:bg-neutral-50 transition" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Get Standard</a>
+</div>
+</div>
+<!-- Plus -->
+<div class="bg-[#f7f8f9] rounded-3xl p-7 border border-neutral-200/80 flex flex-col justify-between hover:border-neutral-300 transition shadow-xs">
+<div>
+<h3 class="text-2xl font-medium text-[#191c1f] mb-1">Plus</h3>
+<p class="text-sm text-[#73787e] mb-5">Everyday protection &amp; support</p>
+<div class="mb-6">
+<span class="text-3xl font-medium text-[#191c1f]">£3.99</span>
+<span class="text-xs text-[#73787e]">/ month</span>
+</div>
+<ul class="space-y-3 text-sm text-[#55595d]">
+<li class="flex items-center gap-2">✓ Personalised card options</li>
+<li class="flex items-center gap-2">✓ 24/7 priority in-app support</li>
+<li class="flex items-center gap-2">✓ Purchase &amp; ticket protection</li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="block w-full text-center bg-white border border-neutral-300 text-[#191c1f] py-2.5 rounded-full text-sm font-medium hover:bg-neutral-50 transition" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Get Plus</a>
+</div>
+</div>
+<!-- Premium -->
+<div class="bg-[#f7f8f9] rounded-3xl p-7 border border-neutral-200/80 flex flex-col justify-between hover:border-neutral-300 transition shadow-xs">
+<div>
+<h3 class="text-2xl font-medium text-[#191c1f] mb-1">Premium</h3>
+<p class="text-sm text-[#73787e] mb-5">Global lifestyle &amp; savings</p>
+<div class="mb-6">
+<span class="text-3xl font-medium text-[#191c1f]">£7.99</span>
+<span class="text-xs text-[#73787e]">/ month</span>
+</div>
+<ul class="space-y-3 text-sm text-[#55595d]">
+<li class="flex items-center gap-2">✓ Higher interest on savings</li>
+<li class="flex items-center gap-2">✓ Unlimited fee-free FX exchange</li>
+<li class="flex items-center gap-2">✓ Worldwide medical insurance</li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="block w-full text-center bg-white border border-neutral-300 text-[#191c1f] py-2.5 rounded-full text-sm font-medium hover:bg-neutral-50 transition" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Get Premium</a>
+</div>
+</div>
+</div>
+<!-- Second Row: Metal & Ultra (2 wider cards) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Metal -->
+<div class="bg-[#f7f8f9] rounded-3xl p-8 border border-neutral-200/80 flex flex-col justify-between hover:border-neutral-300 transition shadow-xs">
+<div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-medium text-[#191c1f] mb-1">Metal</h3>
+<p class="text-sm text-[#73787e] mb-4">The ultimate power card</p>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider bg-neutral-200 text-neutral-800 px-3 py-1 rounded-full">Solid Metal</span>
+</div>
+<div class="mb-6">
+<span class="text-3xl font-medium text-[#191c1f]">£14.99</span>
+<span class="text-xs text-[#73787e]">/ month</span>
+</div>
+<ul class="space-y-3 text-sm text-[#55595d]">
+<li class="flex items-center gap-2">✓ 18g reinforced solid steel card</li>
+<li class="flex items-center gap-2">✓ Up to 40% discount on international transfers</li>
+<li class="flex items-center gap-2">✓ Comprehensive travel &amp; purchase cover</li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="block w-full text-center bg-[#191c1f] text-white py-3 rounded-full text-sm font-medium hover:bg-black transition" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Get Metal</a>
+</div>
+</div>
+<!-- Ultra -->
+<div class="bg-[#111315] text-white rounded-3xl p-8 border border-neutral-800 flex flex-col justify-between hover:border-neutral-700 transition shadow-lg">
+<div>
+<div class="flex justify-between items-start">
+<div>
+<h3 class="text-2xl font-medium text-white mb-1">Ultra</h3>
+<p class="text-sm text-neutral-400 mb-4">Exceptional everyday luxury</p>
+</div>
+<span class="text-xs font-semibold uppercase tracking-wider bg-white/20 text-white px-3 py-1 rounded-full">Platinum Plated</span>
+</div>
+<div class="mb-6">
+<span class="text-3xl font-medium text-white">£55</span>
+<span class="text-xs text-neutral-400">/ month</span>
+</div>
+<ul class="space-y-3 text-sm text-neutral-300">
+<li class="flex items-center gap-2">✓ Top interest rates on Instant Access Savings</li>
+<li class="flex items-center gap-2">✓ Unlimited lounge access at 1,400+ airports</li>
+<li class="flex items-center gap-2">✓ Premium partner subscriptions included (FT, NordVPN, WeWork)</li>
+</ul>
+</div>
+<div class="mt-8">
+<a class="block w-full text-center bg-white text-black py-3 rounded-full text-sm font-medium hover:bg-neutral-200 transition" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">Get Ultra</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Close Banner Section: "Join the 80+ million using Revolut" -->
+<section class="py-24 bg-[#191c1f] text-white text-center relative overflow-hidden" id="close-section">
+<div class="container-custom relative z-10">
+<h2 class="text-[40px] md:text-[54px] font-medium tracking-[-0.035em] mb-6 max-w-[800px] mx-auto leading-tight">
+        Join the 80+ million using Revolut
+      </h2>
+<p class="text-[18px] md:text-[20px] text-white/70 max-w-[500px] mx-auto mb-8 font-normal">
+        Experience modern banking with zero borders. Download the app today.
+      </p>
+<div class="flex justify-center">
+<a class="bg-white text-black hover:bg-neutral-100 transition px-8 py-3.5 rounded-full text-[16px] font-medium inline-block shadow-lg" href="https://get.revolut.com/E528/" rel="noopener" target="_blank">
+          Download the app
+        </a>
+</div>
+</div>
+</section>
+<!-- Official Comprehensive Dense Footer -->
+<footer class="bg-[#f7f8f9] text-[#55595d] pt-16 pb-12 border-t border-neutral-200 text-sm">
+<div class="container-custom">
+<!-- 4 Columns of real site destination links -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+<div>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mb-4">Global Finances</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">Accounts &amp; Cards</a></li>
+<li><a class="hover:text-black" href="#">Multi-currency Exchange</a></li>
+<li><a class="hover:text-black" href="#">International Money Transfers</a></li>
+<li><a class="hover:text-black" href="#">Smart Spending &amp; Analytics</a></li>
+<li><a class="hover:text-black" href="#">Joint Accounts</a></li>
+</ul>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mt-8 mb-4">Investments</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">Stocks &amp; Shares</a></li>
+<li><a class="hover:text-black" href="#">ETFs</a></li>
+<li><a class="hover:text-black" href="#">Commodities</a></li>
+<li><a class="hover:text-black" href="#">Crypto</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mb-4">Security &amp; Protection</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="https://www.revolut.com/how-we-keep-your-money-safe/">How we protect you</a></li>
+<li><a class="hover:text-black" href="#">Revolut Secure</a></li>
+<li><a class="hover:text-black" href="#">FSCS Protection info</a></li>
+<li><a class="hover:text-black" href="#">Fraud Prevention Guide</a></li>
+<li><a class="hover:text-black" href="#">Insurance Details</a></li>
+</ul>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mt-8 mb-4">Plans</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">Standard</a></li>
+<li><a class="hover:text-black" href="#">Plus</a></li>
+<li><a class="hover:text-black" href="#">Premium</a></li>
+<li><a class="hover:text-black" href="#">Metal</a></li>
+<li><a class="hover:text-black" href="#">Ultra</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mb-4">Revolut AI &amp; Tech</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="https://www.revolut.com/air-ai-by-revolut/">AIR Assistant</a></li>
+<li><a class="hover:text-black" href="#">Mobile eSIM &amp; Connectivity</a></li>
+<li><a class="hover:text-black" href="#">RevPoints Loyalty</a></li>
+<li><a class="hover:text-black" href="#">Stays &amp; Travel Booking</a></li>
+<li><a class="hover:text-black" href="#">Open Banking</a></li>
+</ul>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mt-8 mb-4">Help &amp; Support</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">Help Centre</a></li>
+<li><a class="hover:text-black" href="#">Community Forum</a></li>
+<li><a class="hover:text-black" href="#">System Status</a></li>
+<li><a class="hover:text-black" href="#">Contact Us</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mb-4">Company</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">About Revolut</a></li>
+<li><a class="hover:text-black" href="#">Careers &amp; Culture</a></li>
+<li><a class="hover:text-black" href="#">Newsroom</a></li>
+<li><a class="hover:text-black" href="#">Sustainability &amp; ESG</a></li>
+<li><a class="hover:text-black" href="#">Leadership &amp; Board</a></li>
+</ul>
+<h4 class="text-xs font-semibold uppercase tracking-wider text-[#191c1f] mt-8 mb-4">Kids &amp; Teens</h4>
+<ul class="space-y-2.5 text-xs text-[#6e7379]">
+<li><a class="hover:text-black" href="#">Revolut &lt;18</a></li>
+<li><a class="hover:text-black" href="#">Parental Controls</a></li>
+</ul>
+</div>
+</div>
+<!-- Real Financial Disclaimers & Footnotes -->
+<div class="border-t border-neutral-200/80 pt-8 text-[11px] leading-relaxed text-[#878c93] space-y-3">
+<p>
+          ¹ <strong>Instant Access Savings:</strong> Up to 4.00% AER (variable) interest applies to the Ultra plan. Annual subscription fees apply to paid plans. Interest is paid daily. Instant Access Savings accounts are provided by Revolut Bank UAB. Funds held in Instant Access Savings are protected by the Deposit and Investment Insurance (Lithuania).
+        </p>
+<p>
+          ² <strong>Stock Trading:</strong> Services are provided by Revolut Securities Europe UAB, authorized and regulated by the Bank of Lithuania. Capital at risk. The value of investments can go down as well as up and you may receive back less than your original investment. Commission-free trading applies within your plan allowance; other regulatory and currency fees may apply. Past performance is not an indicator of future results.
+        </p>
+<p>
+          Revolut Ltd is a registered company in England and Wales (No. 08804411). Revolut Ltd is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (Firm Reference 900562). Registered address: 7 Westferry Circus, Canary Wharf, London, England, E14 4HD.
+        </p>
+<p>
+<em>Visual study note: This is an unofficial, historical recreation observed 2026-10-06 in a design collection. All trademarks belong to Revolut Ltd.</em>
+</p>
+</div>
+<!-- Bottom Row: Country & Copyright -->
+<div class="border-t border-neutral-200/80 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#878c93]">
+<div class="flex items-center gap-2">
+<span>🇬🇧 United Kingdom (English)</span>
+</div>
+<div>
+<span>© 2026 Revolut Ltd. All rights reserved.</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- Interactive Scripts for Hero Scene Switching and Tabs -->
+<script>
+    // Hero Scene Toggle logic
+    function switchHeroScene(sceneIndex) {
+      const slide1 = document.getElementById('hero-slide-1');
+      const slide2 = document.getElementById('hero-slide-2');
+      const btn1 = document.getElementById('toggle-scene-1');
+      const btn2 = document.getElementById('toggle-scene-2');
+
+      if (sceneIndex === 1) {
+        slide2.classList.add('opacity-0');
+        setTimeout(() => {
+          slide2.classList.add('hidden');
+          slide1.classList.remove('hidden');
+          setTimeout(() => slide1.classList.remove('opacity-0'), 20);
+        }, 200);
+        btn1.classList.add('active');
+        btn2.classList.remove('active');
+      } else {
+        slide1.classList.add('opacity-0');
+        setTimeout(() => {
+          slide1.classList.add('hidden');
+          slide2.classList.remove('hidden');
+          setTimeout(() => slide2.classList.remove('opacity-0'), 20);
+        }, 200);
+        btn2.classList.add('active');
+        btn1.classList.remove('active');
+      }
+    }
+
+    // Savings Tab logic
+    const savingsData = {
+      adventure: {
+        tag: 'Vault: Adventure',
+        amount: '£4,850.20',
+        desc: 'Target: £6,000 • Interest paid daily at 4.00% AER',
+        bg: "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat"
+      },
+      wedding: {
+        tag: 'Vault: Wedding',
+        amount: '£12,340.00',
+        desc: 'Target: £15,000 • Interest paid daily at 4.00% AER',
+        bg: "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat"
+      },
+      moving: {
+        tag: 'Vault: New Home',
+        amount: '£8,910.50',
+        desc: 'Target: £10,000 • Interest paid daily at 4.00% AER',
+        bg: "linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.7) 100%), url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat"
+      }
+    };
+
+    function setSavingsTab(tab) {
+      document.querySelectorAll('#savings-section .tab-pill-dark').forEach(b => b.classList.remove('active'));
+      const activeBtn = document.getElementById(`savings-tab-${tab}`);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const data = savingsData[tab];
+      if (data) {
+        document.getElementById('savings-goal-tag').textContent = data.tag;
+        document.getElementById('savings-goal-amount').textContent = data.amount;
+        document.getElementById('savings-goal-desc').textContent = data.desc;
+        document.getElementById('savings-card-bg').style.background = data.bg;
+      }
+    }
+
+    // Cards Tab logic
+    function setCardTab(tab) {
+      const btnPhys = document.getElementById('card-tab-physical');
+      const btnVirt = document.getElementById('card-tab-virtual');
+      const heading = document.getElementById('card-heading');
+      const desc = document.getElementById('card-desc');
+      const graphic = document.getElementById('card-graphic-wrap');
+
+      if (tab === 'physical') {
+        btnPhys.classList.add('active');
+        btnVirt.classList.remove('active');
+        heading.textContent = 'Precision crafted in metal';
+        desc.textContent = 'Carry prestige with customized 18g reinforced stainless steel cards in Black, Gold, Rose, and Space Grey. Engineered to stand out every time you tap.';
+        graphic.style.background = 'linear-gradient(135deg, #2b2e33 0%, #151719 100%)';
+        graphic.innerHTML = `
+          <div class="flex justify-between items-start">
+            <span class="text-white/80 font-medium tracking-wider text-sm">REVOLUT</span>
+            <span class="text-white/50 text-xs font-mono">ULTRA</span>
+          </div>
+          <div>
+            <div class="w-10 h-8 rounded bg-gradient-to-tr from-amber-300 to-yellow-600 mb-2 opacity-80"></div>
+            <div class="flex justify-between items-end">
+              <span class="font-mono text-sm tracking-widest text-white/70">•••• 8820</span>
+              <span class="text-xs text-white/50">DEBIT</span>
+            </div>
+          </div>
+        `;
+      } else {
+        btnVirt.classList.add('active');
+        btnPhys.classList.remove('active');
+        heading.textContent = 'Go virtual';
+        desc.textContent = 'Create disposable virtual cards for ultra-safe online shopping. Card details regenerate automatically after each transaction, keeping your real details completely invisible.';
+        graphic.style.background = 'linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)';
+        graphic.innerHTML = `
+          <div class="flex justify-between items-start">
+            <span class="text-white/80 font-medium tracking-wider text-sm">REVOLUT</span>
+            <span class="text-white/70 text-xs font-mono">DISPOSABLE</span>
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5 text-xs text-white/80 mb-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+              Single-use active
+            </div>
+            <div class="flex justify-between items-end">
+              <span class="font-mono text-sm tracking-widest text-white/90">•••• 4192</span>
+              <span class="text-xs text-white/70">AUTO-REFRESH</span>
+            </div>
+          </div>
+        `;
+      }
+    }
+  </script>
+</body>
+</html>

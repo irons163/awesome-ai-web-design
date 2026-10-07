@@ -1,0 +1,24 @@
+(()=>{
+  const header=document.querySelector('header'), mobile=matchMedia('(max-width:767px)');
+  const menu=document.querySelector('.menu-button'), menuPanel=document.querySelector('#mobile-navigation');
+  const closeMenu=()=>{header.classList.remove('menu-open');menu.setAttribute('aria-expanded','false');menu.setAttribute('aria-label','Open menu');menuPanel.hidden=true;};
+  menu.addEventListener('click',()=>{const open=menuPanel.hidden;menuPanel.hidden=!open;header.classList.toggle('menu-open',open);menu.setAttribute('aria-expanded',String(open));menu.setAttribute('aria-label',open?'Close menu':'Open menu');});
+  for(const button of document.querySelectorAll('[data-kids]'))button.addEventListener('click',()=>{const panel=document.querySelector('.kids-links');panel.hidden=!panel.hidden;for(const b of document.querySelectorAll('[data-kids]'))b.setAttribute('aria-expanded',String(!panel.hidden));});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeMenu();document.querySelector('.kids-links').hidden=true;}});
+  for(const button of document.querySelectorAll('.footer-toggle'))button.addEventListener('click',()=>{if(!mobile.matches)return;const open=button.getAttribute('aria-expanded')!=='true';button.setAttribute('aria-expanded',String(open));button.closest('.footer-group').classList.toggle('expanded',open);});
+  const videos=[...document.querySelectorAll('video')];
+  const media=()=>{for(const v of videos){const src=mobile.matches?v.dataset.mobile:v.dataset.desktop;if(v.getAttribute('src')!==src){v.src=src;v.load();v.play().catch(()=>{});}}};
+  const hero=document.querySelector('.hero');
+  const updateHeader=()=>{header.classList.toggle('scrolled',scrollY>(mobile.matches?873:648));hero.classList.toggle('salary-active',!mobile.matches&&scrollY>=50);};
+  addEventListener('scroll',updateHeader,{passive:true});mobile.addEventListener('change',()=>{media();closeMenu();updateHeader();});media();updateHeader();
+  const savingsButtons=[...document.querySelectorAll('[data-savings]')];
+  const savings=index=>{for(const b of savingsButtons)b.setAttribute('aria-selected',String(Number(b.dataset.savings)===index));for(const f of document.querySelectorAll('[data-savings-frame]'))f.hidden=Number(f.dataset.savingsFrame)!==index;};
+  for(const b of savingsButtons)b.addEventListener('click',()=>savings(Number(b.dataset.savings)));
+  const keyboardTabs=(buttons)=>{for(const b of buttons)b.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();const i=buttons.indexOf(b),next=buttons[(i+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.click();next.focus();});};
+  keyboardTabs(savingsButtons);
+  const cardButtons=[...document.querySelectorAll('[data-card]')],cards=document.querySelector('.cards');
+  for(const b of cardButtons)b.addEventListener('click',()=>{const virtual=b.dataset.card==='virtual';cards.classList.toggle('virtual',virtual);for(const t of cardButtons)t.setAttribute('aria-selected',String(t===b));cards.querySelector('h2').textContent=virtual?'Go virtual':'Elevate your spend';cards.querySelector('.desc').textContent=virtual?'Create and add virtual cards to your Apple Wallet or Google Wallet to start paying right away.':'Earn points on your purchases with one of our debit cards. Then redeem them for Airline Miles and other rewards. RevPoints T&Cs apply.';cards.querySelector('.fine').hidden=virtual;});
+  keyboardTabs(cardButtons);
+  const dots=[...document.querySelectorAll('.salary-pagination button')],carousel=document.querySelector('.salary-carousel');
+  for(const [i,d] of dots.entries())d.addEventListener('click',()=>{for(const b of dots)b.setAttribute('aria-pressed',String(b===d));for(const c of carousel.children){const relative=(Number(c.dataset.index)-i+dots.length)%dots.length;c.dataset.position=['center','right','left'][relative];}});
+})();

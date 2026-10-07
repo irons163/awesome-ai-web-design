@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Revolut UK — One app, all things money</title>
+<style>
+  @font-face {
+    font-family: 'Aeonik Pro';
+    src: url('https://assets.revolut.com/assets/fonts/AeonikPro-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Aeonik Pro';
+    src: url('https://assets.revolut.com/assets/fonts/AeonikPro-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    src: url('https://assets.revolut.com/assets/fonts/Inter-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    width: 390px;
+    max-width: 390px;
+    margin: 0 auto;
+    background-color: #000000;
+    color: #191c1f;
+    font-family: 'Aeonik Pro', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* Header */
+  .rev-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 56px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .rev-logo svg {
+    height: 20px;
+    fill: #ffffff;
+    display: block;
+  }
+
+  .menu-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+  }
+
+  .menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 2px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    position: relative;
+    width: 390px;
+    min-height: 929px;
+    background-color: #1952e1;
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  .hero-sky-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 390px;
+    height: 580px;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 32px 20px 0 20px;
+  }
+
+  .hero-title {
+    font-family: 'Aeonik Pro', sans-serif;
+    font-size: 48px;
+    line-height: 48px;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    margin-bottom: 20px;
+    width: 350px;
+  }
+
+  .hero-body {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 400;
+    color: #ffffff;
+    opacity: 0.95;
+    margin-bottom: 24px;
+    max-width: 340px;
+  }
+
+  .btn-download {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 24px;
+    background-color: #191c1f;
+    color: #ffffff;
+    border-radius: 9999px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+  .btn-download:active {
+    transform: scale(0.97);
+    background-color: #000000;
+  }
+
+  .hero-woman-wrap {
+    position: absolute;
+    top: 360px;
+    left: 0;
+    width: 390px;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  .hero-woman-img {
+    width: 390px;
+    height: auto;
+    display: block;
+  }
+
+  .hero-phone-wrap {
+    position: absolute;
+    top: 410px;
+    left: 20px;
+    width: 350px;
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hero-phone-img {
+    width: 350px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.25));
+  }
+
+  /* Section 2: Salary reimagined */
+  .salary-section {
+    position: relative;
+    background: #000000;
+    color: #ffffff;
+    padding: 64px 20px 60px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .section-h2 {
+    font-size: 36px;
+    line-height: 38px;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+    margin-bottom: 16px;
+  }
+
+  .section-p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #a0a6b2;
+    margin-bottom: 24px;
+  }
+
+  .btn-white-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px;
+    padding: 0 24px;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  /* Awards Section */
+  .awards-section {
+    background-color: #ffffff;
+    color: #191c1f;
+    padding: 56px 20px 48px 20px;
+  }
+
+  .awards-h2 {
+    font-size: 32px;
+    line-height: 36px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin-bottom: 36px;
+  }
+
+  .awards-grid-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .award-badge-card {
+    background: #f7f9fa;
+    border-radius: 16px;
+    padding: 16px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 84px;
+    border: 1px solid #edf0f2;
+  }
+
+  .award-badge-card img {
+    max-width: 120px;
+    max-height: 52px;
+    object-fit: contain;
+  }
+
+  .awards-stack-3 {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .award-badge-row {
+    background: #f7f9fa;
+    border-radius: 16px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 72px;
+    border: 1px solid #edf0f2;
+  }
+
+  .award-badge-row img {
+    max-width: 160px;
+    max-height: 46px;
+    object-fit: contain;
+  }
+
+  /* Savings Section */
+  .savings-section {
+    background-color: #f7f9fb;
+    color: #191c1f;
+    padding: 56px 20px 60px 20px;
+  }
+
+  .savings-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    margin-top: 24px;
+  }
+
+  .pill-tab {
+    padding: 8px 16px;
+    border-radius: 9999px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: #e9ecef;
+    color: #191c1f;
+    border: none;
+  }
+  .pill-tab.active {
+    background: #191c1f;
+    color: #ffffff;
+  }
+
+  .savings-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    height: 380px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 30%, rgba(0,0,0,0.85) 100%),
+      url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+    color: #ffffff;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+  }
+
+  .vault-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.8;
+    margin-bottom: 4px;
+  }
+
+  .vault-amount {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 1;
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+
+  .vault-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+
+  .vault-payout {
+    color: #34c759;
+    font-weight: 600;
+  }
+
+  .legal-note {
+    font-size: 12px;
+    line-height: 16px;
+    color: #79808a;
+    margin-top: 16px;
+  }
+
+  /* Cards Section (Dark) */
+  .cards-section {
+    background-color: #0b0c0e;
+    color: #ffffff;
+    padding: 60px 20px 60px 20px;
+  }
+
+  .video-container {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin: 24px 0 20px 0;
+    background: #15181c;
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .video-container video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* AIR AI Section */
+  .air-section {
+    background: linear-gradient(180deg, #0b0c0e 0%, #11141b 100%);
+    color: #ffffff;
+    padding: 60px 20px 60px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .tag-capsule {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    font-weight: 500;
+    color: #92b4ff;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  /* Security Section */
+  .security-section {
+    background-color: #ffffff;
+    color: #191c1f;
+    padding: 60px 20px 60px 20px;
+  }
+
+  .security-feature-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .sec-icon {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .phone-video-wrap {
+    width: 334.5px;
+    margin: 28px auto 0 auto;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+    border: 8px solid #191c1f;
+  }
+
+  .phone-video-wrap video {
+    width: 100%;
+    height: 446px;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Stocks & ETFs */
+  .stocks-section {
+    background-color: #f7f9fa;
+    color: #191c1f;
+    padding: 60px 20px 60px 20px;
+  }
+
+  .ticker-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 20px 0;
+  }
+
+  .ticker-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #ffffff;
+    border-radius: 9999px;
+    font-size: 13px;
+    font-weight: 500;
+    border: 1px solid #e5e8eb;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+  }
+
+  .ticker-pill .pct-green {
+    color: #0b9e43;
+    font-weight: 600;
+  }
+
+  /* Plans Section */
+  .plans-section {
+    background-color: #f0f2f5;
+    padding: 60px 20px;
+    color: #191c1f;
+  }
+
+  .plans-h2 {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+
+  .plans-sub {
+    font-size: 15px;
+    line-height: 20px;
+    color: #636b78;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+
+  .plan-card {
+    background: #ffffff;
+    border-radius: 24px;
+    padding: 24px;
+    width: 350px;
+    margin: 0 auto 16px auto;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+  }
+
+  .plan-card.plan-dark {
+    background: #111315;
+    color: #ffffff;
+  }
+
+  .plan-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+
+  .plan-name {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .plan-badge {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: #eef1f4;
+    color: #4b525d;
+  }
+
+  .plan-dark .plan-badge {
+    background: #2b2e35;
+    color: #d1d5db;
+  }
+
+  .plan-price {
+    font-size: 28px;
+    font-weight: 600;
+    margin: 12px 0 16px 0;
+  }
+
+  .plan-price span {
+    font-size: 14px;
+    font-weight: 400;
+    color: #6f7682;
+  }
+  .plan-dark .plan-price span {
+    color: #9ba1ad;
+  }
+
+  .plan-features {
+    list-style: none;
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .plan-features li {
+    font-size: 14px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .plan-features li::before {
+    content: "✓";
+    font-size: 13px;
+    font-weight: 700;
+    color: #1952e1;
+  }
+  .plan-dark .plan-features li::before {
+    color: #ffffff;
+  }
+
+  .plan-btn {
+    width: 100%;
+    height: 44px;
+    border-radius: 9999px;
+    font-size: 15px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+  }
+
+  .plan-btn-light {
+    background: #f0f2f5;
+    color: #191c1f;
+  }
+
+  .plan-btn-dark {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* Close CTA */
+  .close-section {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 64px 20px;
+    text-align: center;
+  }
+
+  .close-h2 {
+    font-size: 34px;
+    line-height: 38px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+
+  .close-p {
+    font-size: 16px;
+    color: #9ba1ad;
+    margin-bottom: 28px;
+  }
+
+  /* Accordion Footer */
+  .footer-section {
+    background-color: #08090a;
+    color: #8a919e;
+    padding: 40px 20px 60px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .accordion-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .accordion-trigger {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    color: #d1d5db;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .accordion-trigger .plus {
+    font-size: 18px;
+    color: #6b7280;
+    transition: transform 0.2s ease;
+  }
+
+  .accordion-content {
+    display: none;
+    padding: 0 0 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 14px;
+    color: #9ca3af;
+  }
+
+  .legal-fineprint {
+    margin-top: 36px;
+    font-size: 11px;
+    line-height: 16px;
+    color: #555d69;
+  }
+
+  .legal-fineprint p {
+    margin-bottom: 12px;
+  }
+
+  .country-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 0;
+    margin-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    font-size: 13px;
+    color: #9ca3af;
+  }
+
+  .copy-tag {
+    font-size: 11px;
+    color: #4b525d;
+    margin-top: 8px;
+  }
+</style>
+</head>
+<body>
+<!-- Sticky Header -->
+<header class="rev-header">
+<a aria-label="Revolut Homepage" class="rev-logo" href="https://www.revolut.com/">
+<!-- Official Revolut Wordmark SVG -->
+<svg fill="none" viewbox="0 0 102 22" xmlns="http://www.w3.org/2000/svg">
+<path d="M12.984 0C9.176 0 6.64 2.115 5.568 4.672L0 4.672L0 8.878L5.056 8.878C5.024 9.174 5.008 9.477 5.008 9.789C5.008 13.91 7.616 16.924 11.592 17.436L6.592 22L12.336 22L16.896 17.696C17.456 17.664 18.016 17.6 18.576 17.472C20.304 17.072 21.728 16.096 22.688 14.656C23.648 13.2 24.16 11.392 24.16 9.328C24.16 3.84 19.344 0 12.984 0ZM12.984 13.568C10.032 13.568 8.912 11.856 8.912 9.328C8.912 6.8 10.032 5.088 12.984 5.088C15.936 5.088 17.056 6.8 17.056 9.328C17.056 11.856 15.936 13.568 12.984 13.568Z" fill="white"></path>
+<path d="M35.696 11.552C35.696 6.72 32.496 4.672 27.968 4.672C23.44 4.672 20.24 7.6 20.24 13.44C20.24 19.28 23.44 22.208 27.968 22.208C32.496 22.208 35.696 19.392 35.696 13.568L35.696 11.552ZM27.968 18.256C25.472 18.256 24.288 16.32 24.288 13.44C24.288 10.56 25.472 8.624 27.968 8.624C30.464 8.624 31.648 10.56 31.648 13.44C31.648 16.32 30.464 18.256 27.968 18.256Z" fill="white"></path>
+<path d="M42.272 0.448L38.224 0.448L44.112 22L48.16 22L54.048 0.448L50 0.448L46.136 15.584L42.272 0.448Z" fill="white"></path>
+<path d="M65.744 11.552C65.744 6.72 62.544 4.672 58.016 4.672C53.488 4.672 50.288 7.6 50.288 13.44C50.288 19.28 53.488 22.208 58.016 22.208C62.544 22.208 65.744 19.392 65.744 13.568L65.744 11.552ZM58.016 18.256C55.52 18.256 54.336 16.32 54.336 13.44C54.336 10.56 55.52 8.624 58.016 8.624C60.512 8.624 61.696 10.56 61.696 13.44C61.696 16.32 60.512 18.256 58.016 18.256Z" fill="white"></path>
+<path d="M68.64 0.448L68.64 22L72.688 22L72.688 0.448L68.64 0.448Z" fill="white"></path>
+<path d="M83.824 5.088L83.824 13.792C83.824 16.64 85.008 18.176 87.216 18.176C89.424 18.176 90.608 16.64 90.608 13.792L90.608 5.088L94.656 5.088L94.656 13.472C94.656 18.912 91.824 22.208 87.216 22.208C82.608 22.208 79.776 18.912 79.776 13.472L79.776 5.088L83.824 5.088Z" fill="white"></path>
+<path d="M102 5.088L99.04 5.088L99.04 0.448L95.04 0.448L95.04 5.088L92.08 5.088L92.08 9.04L95.04 9.04L95.04 17.584C95.04 20.736 96.96 22 100.16 22L102 22L102 18.048L100.512 18.048C99.536 18.048 99.04 17.568 99.04 16.624L99.04 9.04L102 9.04L102 5.088Z" fill="white"></path>
+</svg>
+</a>
+<button aria-label="Toggle Navigation Menu" class="menu-btn">
+<span></span>
+<span></span>
+<span></span>
+</button>
+</header>
+<!-- Initial Hero (Banking & Beyond) -->
+<section class="hero-section">
+<!-- Mobile Sky Background -->
+<img alt="Revolut sky gradient" class="hero-sky-bg" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="hero-content">
+<h1 class="hero-title">Banking &amp;<br/>Beyond</h1>
+<p class="hero-body">This is your bank, redefined. Get powerful daily banking and global freedom. Sign up for free in a tap.</p>
+<a class="btn-download" href="https://get.revolut.com/E528/">Download the app</a>
+</div>
+<!-- Official Mobile Woman Portrait -->
+<div class="hero-woman-wrap">
+<img alt="Woman using Revolut" class="hero-woman-img" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Official Transparent Phone/Account Overlay with FSCS Marks -->
+<div class="hero-phone-wrap">
+<img alt="Revolut account balance display" class="hero-phone-img" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</section>
+<!-- Sequential Hero Scene: Your salary, reimagined -->
+<section class="salary-section">
+<h2 class="section-h2">Your salary,<br/>reimagined</h2>
+<p class="section-p">Spend smartly, send quickly, sort your salary automatically, and watch your savings grow — all with a Revolut bank account.</p>
+<a class="btn-white-pill" href="https://get.revolut.com/E528/">Move your salary</a>
+</section>
+<!-- Awards Section -->
+<section class="awards-section">
+<h2 class="awards-h2">Join 80+ million customers worldwide and 13 million in the UK</h2>
+<!-- First 4 in 2-column grid -->
+<div class="awards-grid-4">
+<div class="award-badge-card">
+<img alt="Award 1" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="award-badge-card">
+<img alt="Award 2" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="award-badge-card">
+<img alt="Award 3" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="award-badge-card">
+<img alt="Award 4" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Next 3 stacked within 350px -->
+<div class="awards-stack-3">
+<div class="award-badge-row">
+<img alt="Award 5" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="award-badge-row">
+<img alt="Award 6" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="award-badge-row">
+<img alt="Award 7" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- Savings Section -->
+<section class="savings-section">
+<h2 class="section-h2" style="color: #191c1f;">Life, meets<br/>savings</h2>
+<p class="section-p" style="color: #4b525d;">Grow your money with up to 4% AER (variable) interest on Instant Access Savings, paid every day.¹</p>
+<a class="btn-download" href="https://www.revolut.com/savings/" style="background:#191c1f; color:#fff;">Explore Savings</a>
+<div class="savings-tabs">
+<button class="pill-tab active">Adventure</button>
+<button class="pill-tab">Wedding</button>
+<button class="pill-tab">Moving</button>
+</div>
+<div class="savings-card">
+<div class="vault-label">Vault • Adventure</div>
+<div class="vault-amount">£4,850.20</div>
+<div class="vault-meta">
+<span>Target: £6,000 • Interest paid daily at 4.00% AER</span>
+<span class="vault-payout">+£0.53 / day</span>
+</div>
+</div>
+<p class="legal-note">Ultra plan rate shown. Annual subscription fee applies. Instant Access Savings are provided by Revolut Bank UAB. T&amp;Cs apply.</p>
+</section>
+<!-- Cards Section (Dark) -->
+<section class="cards-section">
+<h2 class="section-h2">Elevate your spend</h2>
+<p class="section-p">Turn your everyday payments into unforgettable experiences. Earn RevPoints on card purchases, book trips, and upgrade your lifestyle.</p>
+<a class="btn-white-pill" href="https://get.revolut.com/E528/">Start earning</a>
+<div class="savings-tabs" style="margin-top:28px;">
+<button class="pill-tab active" style="background:#ffffff; color:#000;">Physical cards</button>
+<button class="pill-tab" style="background:#20242a; color:#fff;">Virtual cards</button>
+</div>
+<div class="video-container">
+<video autoplay="" loop="" muted="" playsinline="" preload="auto">
+<source src="https://assets.revolut.com/published-assets-v3/a3f03841-ddde-4f99-bf75-c2cacf2558b4/eb48080b-a584-4744-9c09-15943a9c0781.mp4" type="video/mp4"/>
+</video>
+</div>
+<p class="legal-note" style="color:#79808a;">RevPoints T&amp;Cs apply. Earn rate varies by plan. Paid plan fees apply.</p>
+</section>
+<!-- AIR (AI by Revolut) -->
+<section class="air-section">
+<span class="tag-capsule">Revolut Intelligence</span>
+<h2 class="section-h2">Ask, and AIR makes it happen</h2>
+<p class="section-p">AI by Revolut, AIR, is your 24/7 personal assistant. Just open your app, swipe, and ask away.</p>
+<a class="btn-white-pill" href="https://www.revolut.com/air-ai-by-revolut/" style="margin-bottom:28px;">Learn more</a>
+<div class="video-container" style="border-color: rgba(255,255,255,0.12);">
+<video autoplay="" loop="" muted="" playsinline="" preload="auto">
+<source src="https://assets.revolut.com/published-assets-v3/4954fed1-0d3f-4a3c-ab32-4ddb30e34976/13038c65-2a71-424a-93cd-544b2c6152d4.mp4" type="video/mp4"/>
+</video>
+</div>
+</section>
+<!-- Security Section -->
+<section class="security-section">
+<span class="tag-capsule" style="background:#eef2f6; color:#1952e1;">Revolut Secure</span>
+<h2 class="section-h2" style="color:#191c1f;">Your money’s safe space</h2>
+<p class="section-p" style="color:#4b525d;">With Revolut Secure, you’re entering the new era of money security — where your bank account has 24/7 protection through proactive, purpose-built defences and a team of specialists.</p>
+<div style="margin: 24px 0;">
+<div class="security-feature-item">
+<svg class="sec-icon" fill="none" stroke="#1952e1" stroke-width="2" viewbox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+<div>
+<div style="font-weight:600; font-size:15px; margin-bottom:2px;">Biometric &amp; Location-based Protection</div>
+<div style="font-size:13px; color:#636b78; line-height:18px;">Continuous behavioural analysis flags suspicious payments before they leave your account.</div>
+</div>
+</div>
+<div class="security-feature-item">
+<svg class="sec-icon" fill="none" stroke="#1952e1" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+<div>
+<div style="font-weight:600; font-size:15px; margin-bottom:2px;">24/7 Dedicated Fraud Specialists</div>
+<div style="font-size:13px; color:#636b78; line-height:18px;">A dedicated global team constantly guarding your transactions against evolving scams.</div>
+</div>
+</div>
+</div>
+<a class="btn-download" href="https://www.revolut.com/how-we-keep-your-money-safe/" style="background:#191c1f; color:#fff;">Discover Revolut Secure</a>
+<!-- Security Vertical Phone Video -->
+<div class="phone-video-wrap">
+<video autoplay="" loop="" muted="" playsinline="" preload="auto">
+<source src="https://assets.revolut.com/published-assets-v3/a3f03841-ddde-4f99-bf75-c2cacf2558b4/eb48080b-a584-4744-9c09-15943a9c0781.mp4" type="video/mp4"/>
+</video>
+</div>
+</section>
+<!-- Stocks & ETFs -->
+<section class="stocks-section">
+<h2 class="section-h2" style="color:#191c1f;">Explore 5,000+ stocks and ETFs</h2>
+<p class="section-p" style="color:#4b525d;">From Apple to Zoom, invest in some of the biggest and most influential companies in the world, commission-free within your monthly allowance.²</p>
+<div class="ticker-wrap">
+<div class="ticker-pill"><span>AAPL Apple Inc.</span><span class="pct-green">+1.42%</span></div>
+<div class="ticker-pill"><span>MSFT Microsoft Corp.</span><span class="pct-green">+0.88%</span></div>
+<div class="ticker-pill"><span>TSLA Tesla Inc.</span><span class="pct-green">+2.15%</span></div>
+<div class="ticker-pill"><span>AMZN Amazon.com</span><span class="pct-green">+1.16%</span></div>
+<div class="ticker-pill"><span>NVDA NVIDIA Corp.</span><span class="pct-green">+3.42%</span></div>
+</div>
+<a class="btn-download" href="https://get.revolut.com/E528/" style="background:#191c1f; color:#fff; margin-top:8px;">Try it out</a>
+<p class="legal-note">Other fees may apply. Capital at risk.</p>
+</section>
+<!-- Plans Section -->
+<section class="plans-section">
+<h2 class="plans-h2">Choose your plan</h2>
+<p class="plans-sub">From everyday essential accounts to the ultimate lifestyle upgrade, there's a Revolut plan for you.</p>
+<!-- Standard -->
+<div class="plan-card">
+<div class="plan-header">
+<span class="plan-name">Standard</span>
+</div>
+<div style="font-size:13px; color:#636b78;">Free everyday banking</div>
+<div class="plan-price">Free</div>
+<ul class="plan-features">
+<li>Free UK bank account</li>
+<li>Spend abroad in 150+ currencies</li>
+<li>Fee-free ATM withdrawals to £200/mo</li>
+</ul>
+<button class="plan-btn plan-btn-light">Get Standard</button>
+</div>
+<!-- Plus -->
+<div class="plan-card">
+<div class="plan-header">
+<span class="plan-name">Plus</span>
+</div>
+<div style="font-size:13px; color:#636b78;">Everyday protection &amp; support</div>
+<div class="plan-price">£3.99 <span>/ month</span></div>
+<ul class="plan-features">
+<li>Personalised card options</li>
+<li>24/7 priority in-app support</li>
+<li>Purchase &amp; ticket protection</li>
+</ul>
+<button class="plan-btn plan-btn-light">Get Plus</button>
+</div>
+<!-- Premium -->
+<div class="plan-card">
+<div class="plan-header">
+<span class="plan-name">Premium</span>
+</div>
+<div style="font-size:13px; color:#636b78;">Global lifestyle &amp; savings</div>
+<div class="plan-price">£7.99 <span>/ month</span></div>
+<ul class="plan-features">
+<li>Higher interest on savings</li>
+<li>Unlimited fee-free FX exchange</li>
+<li>Worldwide medical insurance</li>
+</ul>
+<button class="plan-btn plan-btn-light">Get Premium</button>
+</div>
+<!-- Metal -->
+<div class="plan-card plan-dark">
+<div class="plan-header">
+<span class="plan-name">Metal</span>
+<span class="plan-badge">Solid Metal</span>
+</div>
+<div style="font-size:13px; color:#9ba1ad;">The ultimate power card</div>
+<div class="plan-price">£14.99 <span>/ month</span></div>
+<ul class="plan-features">
+<li>18g reinforced solid steel card</li>
+<li>Up to 40% discount on international transfers</li>
+<li>Comprehensive travel &amp; purchase cover</li>
+</ul>
+<button class="plan-btn plan-btn-dark">Get Metal</button>
+</div>
+<!-- Ultra -->
+<div class="plan-card plan-dark" style="background:#000000; border:1px solid rgba(255,255,255,0.15);">
+<div class="plan-header">
+<span class="plan-name">Ultra</span>
+<span class="plan-badge" style="background:#374151; color:#f3f4f6;">Platinum-Plated</span>
+</div>
+<div style="font-size:13px; color:#9ba1ad;">Exceptional everyday luxury</div>
+<div class="plan-price">£55 <span>/ month</span></div>
+<ul class="plan-features">
+<li>Top interest rates on Instant Access Savings</li>
+<li>Unlimited lounge access at 1,400+ airports</li>
+<li>Premium partner subscriptions included (FT, NordVPN, WeWork)</li>
+</ul>
+<button class="plan-btn plan-btn-dark">Get Ultra</button>
+</div>
+</section>
+<!-- Close CTA -->
+<section class="close-section">
+<h2 class="close-h2">Join the 80+ million using Revolut</h2>
+<p class="close-p">Experience modern banking with zero borders.<br/>Download the app today.</p>
+<a class="btn-white-pill" href="https://get.revolut.com/E528/">Download the app</a>
+</section>
+<!-- 11 Collapsed Accordions Footer -->
+<footer class="footer-section">
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Security &amp; Protection</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="https://www.revolut.com/how-we-keep-your-money-safe/">How we protect you</a>
+<a href="#">Revolut Secure</a>
+<a href="#">FSCS Protection Info</a>
+<a href="#">Fraud Prevention Guide</a>
+<a href="#">Insurance Details</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Help</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Help Centre</a>
+<a href="#">Community Forum</a>
+<a href="#">System Status</a>
+<a href="#">Contact Us</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Plans</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Standard</a>
+<a href="#">Plus</a>
+<a href="#">Premium</a>
+<a href="#">Metal</a>
+<a href="#">Ultra</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Investments</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Stocks &amp; Shares</a>
+<a href="#">ETFs</a>
+<a href="#">Commodities</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Company</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">About Revolut</a>
+<a href="#">Careers &amp; Culture</a>
+<a href="#">Newsroom</a>
+<a href="#">Sustainability &amp; ESG</a>
+<a href="#">Leadership &amp; Board</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Accounts</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Personal Accounts</a>
+<a href="#">Joint Accounts</a>
+<a href="#">Revolut &lt;18</a>
+<a href="#">Business Accounts</a>
+<a href="#">Pro Freelancer Accounts</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Global Finances</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Multi-currency Exchange</a>
+<a href="#">International Money Transfers</a>
+<a href="#">Travel &amp; Spending Abroad</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Revolut AI</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="https://www.revolut.com/air-ai-by-revolut/">AIR Assistant</a>
+<a href="#">AI Financial Planning</a>
+<a href="#">Smart Insights</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Smart Spending</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">RevPoints Loyalty</a>
+<a href="#">Shops &amp; Travel Booking</a>
+<a href="#">Subscriptions Management</a>
+<a href="#">Budgeting Tools</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Crypto</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">Buy &amp; Sell Crypto</a>
+<a href="#">Crypto Learn &amp; Earn</a>
+<a href="#">Crypto Risk Warning</a>
+</div>
+</div>
+<div class="accordion-item">
+<button class="accordion-trigger" onclick="toggleAcc(this)">
+<span>Mobile &amp; Connectivity</span>
+<span class="plus">+</span>
+</button>
+<div class="accordion-content">
+<a href="#">eSIM Global Data</a>
+<a href="#">Worldwide Roaming</a>
+</div>
+</div>
+<!-- Country & Language -->
+<div class="country-selector">
+<span>🇬🇧 United Kingdom (English)</span>
+</div>
+<!-- Legal Disclaimers -->
+<div class="legal-fineprint">
+<p>¹<strong>Instant Access Savings:</strong> Up to 4.00% AER (variable) interest applies to the Ultra plan. Annual subscription fees apply to paid plans. Interest is paid daily. Instant Access Savings accounts are provided by Revolut Bank UAB. Funds held in Instant Access Savings are protected by the Deposit and Investment Insurance (Lithuania).</p>
+<p>²<strong>Stock Trading:</strong> Services are provided by Revolut Securities Europe UAB, authorized and regulated by the Bank of Lithuania. Capital at risk. The value of investments can go down as well as up and you may receive back less than your original investment. Commission-free trading applies within your plan allowance; other regulatory and currency fees may apply. Past performance is not an indicator of future results.</p>
+<p>Revolut Ltd is a registered company in England and Wales (No. 08804411). Revolut Ltd is authorised by the Financial Conduct Authority under the Electronic Money Regulations 2011 (Firm Reference 900562). Registered address: 7 Westferry Circus, Canary Wharf, London, England, E14 4HD.</p>
+<p class="copy-tag">Visual study note: This is an unofficial, historical recreation observed 2026-10-06 in a design collection. All trademarks belong to Revolut Ltd.</p>
+<p class="copy-tag">© 2026 Revolut Ltd. All rights reserved.</p>
+</div>
+</footer>
+<script>
+    function toggleAcc(btn) {
+      const content = btn.nextElementSibling;
+      const plus = btn.querySelector('.plus');
+      const isVisible = content.style.display === 'flex';
+      content.style.display = isVisible ? 'none' : 'flex';
+      plus.textContent = isVisible ? '+' : '−';
+    }
+  </script>
+</body>
+</html>
