@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+
+<html lang="en-CA">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Meta Store Canada | Shop AI Glasses, Quest &amp; More</title>
+<style>
+    @font-face {
+      font-family: 'Optimistic VF';
+      src: url('https://static.xx.fbcdn.net/rsrc.php/yQ/r/-pkMfchyeAZ.woff2') format('woff2-variations');
+      font-weight: 200 800;
+      font-display: swap;
+    }
+
+    :root {
+      --font-family: 'Optimistic VF', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      --color-ink: #0a1317;
+      --color-bg: #ffffff;
+      --color-blue-cta: #0457cb;
+      --color-blue-cta-hover: #03449e;
+      --color-secondary-cta: rgba(241, 244, 247, 0.70);
+      --color-secondary-cta-hover: rgba(241, 244, 247, 0.90);
+      --color-surface-subtle: #f5f6f7;
+      --color-border: #e4e6eb;
+      --radius-pill: 100px;
+      --radius-card: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background-color: var(--color-bg);
+      color: var(--color-ink);
+      font-family: var(--font-family);
+      font-size: 16px;
+      line-height: 1.4;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    /* Region Selector Notification Bar */
+    #region-notice {
+      background-color: #f1f4f7;
+      color: var(--color-ink);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 14px;
+      padding: 0 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      z-index: 100;
+      transition: height 0.25s ease, opacity 0.25s ease;
+    }
+
+    #region-notice.dismissed {
+      display: none;
+    }
+
+    #region-notice strong {
+      font-weight: 600;
+      margin-left: 4px;
+    }
+
+    #region-notice .dismiss-btn {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: #65676b;
+      transition: background 0.15s;
+    }
+
+    #region-notice .dismiss-btn:hover {
+      background-color: rgba(0,0,0,0.05);
+      color: #050505;
+    }
+
+    /* Sticky Navigation Header */
+    header.meta-header {
+      position: sticky;
+      top: 0;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      z-index: 90;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .meta-logo-link {
+      display: flex;
+      align-items: center;
+      margin-right: 32px;
+    }
+
+    .nav-center {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-grow: 1;
+    }
+
+    .nav-item {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--color-ink);
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: color 0.15s, background-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .nav-item:hover {
+      background-color: rgba(0, 0, 0, 0.04);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-icon-btn {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--color-ink);
+      transition: background-color 0.15s;
+    }
+
+    .nav-icon-btn:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    .region-indicator {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 10px;
+      border-radius: 16px;
+    }
+    .region-indicator:hover {
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    /* Hero Section */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      max-width: 1280px;
+      height: 626.4px;
+      margin: 0 auto;
+      overflow: hidden;
+      background-color: #000;
+    }
+
+    .hero-video-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-video-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.4) 100%);
+    }
+
+    /* Big Overlay Headlines (as prescribed in the reference coordinates) */
+    .hero-headline-1 {
+      position: absolute;
+      left: 32px;
+      top: 148px;
+      color: #ffffff;
+      font-size: 113.24px;
+      line-height: 113.24px;
+      font-weight: 700;
+      letter-spacing: -5.662px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      user-select: none;
+      pointer-events: none;
+      animation: heroFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .hero-headline-2 {
+      position: absolute;
+      left: 683.92px;
+      top: 441.16px;
+      color: #ffffff;
+      font-size: 113.24px;
+      line-height: 113.24px;
+      font-weight: 700;
+      letter-spacing: -5.662px;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.3);
+      user-select: none;
+      pointer-events: none;
+      animation: heroFadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes heroFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-copy-group {
+      position: absolute;
+      left: 32px;
+      top: 408.4px;
+      width: 440px;
+      z-index: 10;
+    }
+
+    .hero-subhead {
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 400;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+    }
+
+    .hero-cta-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      height: 52px;
+    }
+
+    /* Standard Button Styles */
+    .cta-pill-blue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-blue-cta);
+      color: #ffffff !important;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: var(--radius-pill);
+      padding: 0 24px;
+      height: 44px;
+      transition: background-color 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+
+    .cta-pill-blue:hover {
+      background-color: var(--color-blue-cta-hover);
+    }
+
+    .hero-cta-row .cta-pill-blue {
+      height: 48px;
+      padding: 0 28px;
+    }
+
+    .cta-pill-light {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-secondary-cta);
+      color: var(--color-ink) !important;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: var(--radius-pill);
+      padding: 0 24px;
+      height: 44px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background-color 0.2s;
+      white-space: nowrap;
+    }
+
+    .cta-pill-light:hover {
+      background-color: var(--color-secondary-cta-hover);
+    }
+
+    .hero-cta-row .cta-pill-light {
+      height: 48px;
+      padding: 0 28px;
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+
+    .hero-cta-row .cta-pill-light:hover {
+      background-color: #ffffff;
+    }
+
+    .video-control-btn {
+      position: absolute;
+      right: 32px;
+      bottom: 32px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, transform 0.15s;
+      z-index: 10;
+    }
+
+    .video-control-btn:hover {
+      background: rgba(0, 0, 0, 0.7);
+      transform: scale(1.05);
+    }
+
+    /* Category Navigation Strip */
+    .category-section {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 64px 32px 48px;
+      text-align: center;
+    }
+
+    .category-heading {
+      font-size: 36px;
+      line-height: 46px;
+      font-weight: 500;
+      letter-spacing: -0.5px;
+      color: var(--color-ink);
+      margin-bottom: 40px;
+    }
+
+    .category-cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .category-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 24px;
+      border-radius: 16px;
+      transition: transform 0.2s;
+    }
+
+    .category-item:hover {
+      transform: translateY(-4px);
+    }
+
+    .category-item img {
+      height: 54px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .category-label {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--color-ink);
+    }
+
+    /* Product Panels Grid */
+    .product-grid-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .product-panel {
+      position: relative;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      background-color: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      text-align: center;
+    }
+
+    .product-panel.full-width {
+      grid-column: 1 / -1;
+      height: 532px;
+    }
+
+    .product-panel.half-width {
+      height: 592px;
+    }
+
+    .panel-media-wrapper {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .panel-bg-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .product-panel:hover .panel-bg-img {
+      transform: scale(1.02);
+    }
+
+    .panel-gradient-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.55) 80%, rgba(0,0,0,0.85) 100%);
+      pointer-events: none;
+    }
+
+    .panel-content {
+      position: relative;
+      z-index: 5;
+      padding: 0 32px 48px;
+      width: 100%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .panel-subtitle {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 16px;
+      font-weight: 500;
+      letter-spacing: 0.2px;
+      margin-bottom: 6px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+    }
+
+    .panel-title {
+      color: #ffffff;
+      font-size: 40px;
+      line-height: 48px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.7);
+    }
+
+    .product-panel.full-width .panel-title {
+      font-size: 48px;
+      line-height: 56px;
+    }
+
+    .panel-cta-group {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Benefits Section "Why buy from Meta" */
+    .benefits-section {
+      max-width: 1280px;
+      margin: 80px auto 40px;
+      padding: 0 32px;
+    }
+
+    .section-title {
+      font-size: 44px;
+      line-height: 52px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 36px;
+      letter-spacing: -0.5px;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .benefit-card {
+      background-color: var(--color-surface-subtle);
+      border-radius: var(--radius-card);
+      padding: 40px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .benefit-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    }
+
+    .benefit-icon {
+      width: 36px;
+      height: 36px;
+      color: var(--color-ink);
+    }
+
+    .benefit-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-ink);
+    }
+
+    .benefit-desc {
+      font-size: 15px;
+      line-height: 22px;
+      color: #4b5563;
+    }
+
+    /* Latest from Meta (Blog Articles) */
+    .articles-section {
+      max-width: 1280px;
+      margin: 64px auto 96px;
+      padding: 0 32px;
+    }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .article-card {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .article-media {
+      width: 100%;
+      height: 333px;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      margin-bottom: 20px;
+      background-color: #f0f2f5;
+    }
+
+    .article-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .article-card:hover .article-img {
+      transform: scale(1.03);
+    }
+
+    .article-title {
+      font-size: 24px;
+      line-height: 32px;
+      font-weight: 600;
+      color: var(--color-ink);
+      transition: color 0.15s;
+    }
+
+    .article-card:hover .article-title {
+      color: var(--color-blue-cta);
+    }
+
+    /* Footer */
+    footer.meta-footer {
+      background-color: #ffffff;
+      border-top: 1px solid var(--color-border);
+      padding: 64px 32px 32px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--color-border);
+      gap: 40px;
+    }
+
+    .newsletter-block {
+      max-width: 480px;
+    }
+
+    .newsletter-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--color-ink);
+      margin-bottom: 16px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 12px;
+    }
+
+    .newsletter-input {
+      flex: 1;
+      height: 48px;
+      padding: 0 16px;
+      border: 1px solid #ccd0d5;
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--color-ink);
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    .newsletter-input:focus {
+      border-color: var(--color-blue-cta);
+    }
+
+    .newsletter-btn {
+      height: 48px;
+      padding: 0 24px;
+      background-color: #e4e6eb;
+      color: #8a8d91;
+      font-weight: 600;
+      font-size: 14px;
+      border-radius: 8px;
+      cursor: not-allowed;
+    }
+
+    .footer-links-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 20px;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .footer-col-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--color-ink);
+      margin-bottom: 16px;
+    }
+
+    .footer-link-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-link-list a {
+      font-size: 13px;
+      color: #65676b;
+      transition: color 0.15s;
+    }
+
+    .footer-link-list a:hover {
+      color: var(--color-ink);
+      text-decoration: underline;
+    }
+
+    /* Legal Disclaimers */
+    .footer-legal-notes {
+      padding: 32px 0;
+      font-size: 11px;
+      line-height: 18px;
+      color: #8a8d91;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 32px;
+      font-size: 12px;
+      color: #65676b;
+    }
+
+    .footer-bottom-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .region-choice {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .region-choice:hover {
+      text-decoration: underline;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .social-icon {
+      color: #65676b;
+      transition: color 0.15s;
+      display: flex;
+    }
+
+    .social-icon:hover {
+      color: var(--color-ink);
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 1024px) {
+      .footer-links-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-headline-1, .hero-headline-2 {
+        font-size: 56px;
+        line-height: 60px;
+        letter-spacing: -2px;
+      }
+      .hero-headline-2 {
+        left: 32px;
+        top: 220px;
+      }
+      .product-grid-container {
+        grid-template-columns: 1fr;
+      }
+      .product-panel.half-width {
+        height: 500px;
+      }
+      .footer-links-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+<!-- Region Notice Bar -->
+<div id="region-notice">
+<span>Did we select the right country/region?<strong>Canada</strong></span>
+<button aria-label="Dismiss country selection notice" class="dismiss-btn" id="dismiss-region">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18">
+<line x1="18" x2="6" y1="6" y2="18"></line>
+<line x1="6" x2="18" y1="6" y2="18"></line>
+</svg>
+</button>
+</div>
+<!-- Header -->
+<header class="meta-header">
+<div style="display: flex; align-items: center;">
+<a aria-label="Meta homepage" class="meta-logo-link" href="https://www.meta.com/ca/">
+<!-- Official Meta Wordmark SVG -->
+<svg fill="#0a1317" height="20" viewbox="0 0 110 22">
+<path d="M16.6 3.6c-2.4 0-4.6 1.1-6.1 2.9C9 4.7 6.8 3.6 4.4 3.6 1.9 3.6 0 5.6 0 8.1v9.3h2.6V8.1c0-1.1.9-2 2-2s2 .9 2 2v9.3h2.6V8.1c0-1.1.9-2 2-2s2 .9 2 2v9.3h2.6V8.1c0-2.5-1.9-4.5-4.2-4.5zM30.6 11.2c0-3.6-2.5-6.6-6.1-6.6s-6.1 3-6.1 6.6c0 3.7 2.6 6.6 6.1 6.6 2.3 0 4.1-1.2 5.1-2.9l-2.1-1.2c-.6 1-1.7 1.6-3 1.6-1.9 0-3.3-1.4-3.5-3.3h9.5c.1-.3.1-.6.1-.8zm-9.6-1c.2-1.7 1.6-3 3.5-3 1.8 0 3.2 1.3 3.4 3h-6.9zM38.8 6.3h-3.4V3.8h-2.6v2.5h-2.2v2.4h2.2v5.4c0 2.2 1.2 3.6 3.5 3.6h2.5v-2.4h-1.8c-.9 0-1.6-.5-1.6-1.5V8.7h3.4V6.3zM50.4 6.1h-2.6v1.9c-.9-1.4-2.5-2.2-4.3-2.2-3.4 0-5.9 2.7-5.9 6.2s2.5 6.2 5.9 6.2c1.8 0 3.4-.8 4.3-2.2v2h2.6V6.1zm-6.2 9.6c-2.1 0-3.7-1.6-3.7-3.7s1.6-3.7 3.7-3.7 3.7 1.6 3.7 3.7-1.6 3.7-3.7 3.7z" fill="currentColor"></path>
+<!-- Meta Infinity Symbol -->
+<path d="M78.6 3.6c-3.1 0-5.8 1.6-7.5 4-1.7-2.4-4.4-4-7.5-4-4.8 0-8.6 3.8-8.6 8.5 0 4.7 3.8 8.5 8.6 8.5 3.1 0 5.8-1.6 7.5-4 1.7 2.4 4.4 4 7.5 4 4.8 0 8.6-3.8 8.6-8.5 0-4.7-3.8-8.5-8.6-8.5zm-15 14.4c-3.3 0-6-2.6-6-5.9 0-3.3 2.7-5.9 6-5.9 2.5 0 4.7 1.5 5.6 3.8-.4.7-1 1.4-1.6 2.1-1.1 1.4-2.5 3-4 5.9zm15 0c-1.5-2.9-2.9-4.5-4-5.9-.6-.7-1.2-1.4-1.6-2.1.9-2.3 3.1-3.8 5.6-3.8 3.3 0 6 2.6 6 5.9 0 3.3-2.7 5.9-6 5.9z" fill="currentColor" opacity="0"></path>
+<path d="M79.2 4.1C76 4.1 73.1 5.9 71.5 8.5 69.9 5.9 67 4.1 63.8 4.1 58.7 4.1 54.7 8.3 54.7 13.5s4 9.4 9.1 9.4c3.2 0 6.1-1.8 7.7-4.4 1.6 2.6 4.5 4.4 7.7 4.4 5.1 0 9.1-4.2 9.1-9.4s-4-9.4-9.1-9.4zm-15.4 15.6c-3.4 0-6.2-2.8-6.2-6.2s2.8-6.2 6.2-6.2c2.5 0 4.7 1.5 5.6 3.7-1.2 1.6-2.8 3.6-4.6 6.8-.3.6-.7 1.3-1 1.9zm15.4 0c-.3-.6-.7-1.3-1-1.9-1.8-3.2-3.4-5.2-4.6-6.8.9-2.2 3.1-3.7 5.6-3.7 3.4 0 6.2 2.8 6.2 6.2s-2.8 6.2-6.2 6.2z"></path>
+</svg>
+</a>
+<nav aria-label="Main Navigation" class="nav-center">
+<a class="nav-item" href="https://www.meta.com/ca/ai-glasses/">AI glasses</a>
+<a class="nav-item" href="https://www.meta.com/ca/quest/">Meta Quest</a>
+<a class="nav-item" href="https://www.meta.com/ca/vr-glasses/">Meta VR Glasses</a>
+<a class="nav-item" href="https://www.meta.com/ca/explore/">Explore Meta</a>
+<a class="nav-item" href="https://www.meta.com/ca/help/">Support</a>
+</nav>
+</div>
+<div class="nav-actions">
+<!-- Search Icon -->
+<button aria-label="Search" class="nav-icon-btn">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<circle cx="11" cy="11" r="8"></circle>
+<line x1="21" x2="16.65" y1="21" y2="16.65"></line>
+</svg>
+</button>
+<!-- Region Globe Indicator -->
+<button aria-label="Select Region: Canada" class="region-indicator">
+<svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" viewbox="0 0 24 24" width="18">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg>
+<span>CA</span>
+</button>
+<!-- Shopping Bag Icon -->
+<a aria-label="Shopping Cart" class="nav-icon-btn" href="https://www.meta.com/ca/cart/">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+<line x1="3" x2="21" y1="6" y2="6"></line>
+<path d="M16 10a4 4 0 0 1-8 0"></path>
+</svg>
+</a>
+<!-- Account Icon -->
+<a aria-label="User Account" class="nav-icon-btn" href="https://auth.meta.com/">
+<svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20">
+<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+<circle cx="12" cy="7" r="4"></circle>
+</svg>
+</a>
+</div>
+</header>
+<!-- Hero Section -->
+<main>
+<section aria-label="Hero Showcase" class="hero-container">
+<div class="hero-video-wrapper">
+<video autoplay="" class="hero-video" id="hero-video" loop="" muted="" playsinline="" poster="https://lookaside.fbsbx.com/elementpath/media/?media_id=28586977950985699&amp;version=1791312022&amp;transcode_extension=webp">
+<source src="https://lookaside.fbsbx.com/elementpath/media/?media_id=2468795110296160&amp;version=2468794996962838&amp;vq=HD" type="video/mp4"/>
+</video>
+<div class="hero-video-overlay"></div>
+</div>
+<!-- Exact DOM Overlay Animated Typography -->
+<div class="hero-headline-1">Meet the all-new</div>
+<div class="hero-headline-2">Meta Glasses</div>
+<!-- Hero Subhead and CTAs -->
+<div class="hero-copy-group">
+<p class="hero-subhead">More shapes. More statements. More Meta Glasses.</p>
+<div class="hero-cta-row">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/shop-all/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/meta-glasses/">Learn more</a>
+</div>
+</div>
+<!-- Hero Video Pause/Play Control -->
+<button aria-label="Pause video" class="video-control-btn" id="video-toggle-btn">
+<svg fill="currentColor" height="20" id="pause-icon" viewbox="0 0 24 24" width="20">
+<rect height="16" width="4" x="6" y="4"></rect>
+<rect height="16" width="4" x="14" y="4"></rect>
+</svg>
+<svg fill="currentColor" height="20" id="play-icon" style="display: none;" viewbox="0 0 24 24" width="20">
+<polygon points="5 3 19 12 5 21 5 3"></polygon>
+</svg>
+</button>
+</section>
+<!-- Categories Strip -->
+<section class="category-section">
+<h2 class="category-heading">Shop devices, accessories and more from the Meta Store</h2>
+<div class="category-cards">
+<a class="category-item" href="https://www.meta.com/ca/ai-glasses/">
+<img alt="AI glasses lineup" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="category-label">AI glasses</span>
+</a>
+<a class="category-item" href="https://www.meta.com/ca/vr-glasses/">
+<img alt="Meta VR Glasses lineup" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="category-label">Meta VR Glasses</span>
+</a>
+<a class="category-item" href="https://www.meta.com/ca/quest/">
+<img alt="Meta Quest headset lineup" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="category-label">Meta Quest</span>
+</a>
+</div>
+</section>
+<!-- Eight Photographic Product Panels in Precise Sequence -->
+<section aria-label="Featured Products" class="product-grid-container">
+<!-- 1. Full width: LISA edition -->
+<article class="product-panel full-width">
+<div class="panel-media-wrapper">
+<img alt="Meta Glasses by LISA" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">One star. Two styles.</span>
+<h3 class="panel-title">Meta Glasses by LISA</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/meta-glasses/lisa-edition/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/meta-glasses/lisa/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 2. Half width: Ray-Ban Meta -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Ray-Ban Meta glasses" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Iconic style meets Meta AI</span>
+<h3 class="panel-title">Ray-Ban Meta</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/shop-all/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/ray-ban-meta/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 3. Half width: Ray-Ban Meta Audio -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Ray-Ban Meta Audio" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Audio AI glasses</span>
+<h3 class="panel-title">Ray-Ban Meta Audio</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/shop-all/">Pre-order</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/ray-ban-meta-audio/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 4. Half width: Meta VR Glasses -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Meta VR Glasses lightweight frame" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">The weight is over</span>
+<h3 class="panel-title">Meta VR Glasses</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-light" href="https://www.meta.com/ca/vr-glasses/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 5. Half width: Muse Charm -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Muse Charm wearable AI" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Made for your personal AI agent</span>
+<h3 class="panel-title">Muse Charm</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-light" href="https://www.meta.com/ca/muse-charm/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 6. Half width: Oakley Meta -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Oakley Meta athletic eyewear" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Athletic Intelligence is here</span>
+<h3 class="panel-title">Oakley Meta</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/shop-all/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/oakley-meta/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 7. Half width: Meta Ray-Ban Display -->
+<article class="product-panel half-width">
+<div class="panel-media-wrapper">
+<img alt="Meta Ray-Ban Display with Neural Band" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Look forward</span>
+<h3 class="panel-title">Meta Ray-Ban Display</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/ai-glasses/meta-ray-ban-display-glasses-and-neural-band/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/ai-glasses/meta-ray-ban-display/">Learn more</a>
+</div>
+</div>
+</article>
+<!-- 8. Full width: Meta Quest 3S -->
+<article class="product-panel full-width">
+<div class="panel-media-wrapper">
+<img alt="Meta Quest 3S headset" class="panel-bg-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="panel-gradient-overlay"></div>
+</div>
+<div class="panel-content">
+<span class="panel-subtitle">Expand your world</span>
+<h3 class="panel-title">Meta Quest 3S</h3>
+<div class="panel-cta-group">
+<a class="cta-pill-blue" href="https://www.meta.com/ca/quest/quest-3s/">Shop</a>
+<a class="cta-pill-light" href="https://www.meta.com/ca/quest/">Learn more</a>
+</div>
+</div>
+</article>
+</section>
+<!-- Why Buy from Meta -->
+<section class="benefits-section">
+<h2 class="section-title">Why buy from Meta</h2>
+<div class="benefits-grid">
+<!-- 1. Delivery -->
+<div class="benefit-card">
+<div class="benefit-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<rect height="13" width="15" x="1" y="3"></rect>
+<polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+<circle cx="5.5" cy="18.5" r="2.5"></circle>
+<circle cx="18.5" cy="18.5" r="2.5"></circle>
+</svg>
+</div>
+<h3 class="benefit-title">Free 2-day delivery</h3>
+<p class="benefit-desc">Get free 2-day shipping on Meta Glasses, Meta Quest, Ray-Ban Meta and Oakley Meta.</p>
+</div>
+<!-- 2. Returns -->
+<div class="benefit-card">
+<div class="benefit-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<polyline points="1 4 1 10 7 10"></polyline>
+<path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+</svg>
+</div>
+<h3 class="benefit-title">Free 30-day returns</h3>
+<p class="benefit-desc">Change your mind? Return your product within 30 days with no shipping fees attached.</p>
+</div>
+<!-- 3. Warranty -->
+<div class="benefit-card">
+<div class="benefit-icon">
+<svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24">
+<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+</svg>
+</div>
+<h3 class="benefit-title">Worry-free warranty</h3>
+<p class="benefit-desc">Products that come with peace of mind. One-year warranty included.</p>
+</div>
+</div>
+</section>
+<!-- The Latest from Meta -->
+<section class="articles-section">
+<h2 class="section-title">The latest from Meta</h2>
+<div class="articles-grid">
+<a class="article-card" href="https://www.meta.com/blog/meta-connect-2026-everything-we-announced/">
+<div class="article-media">
+<img alt="Hardware lineup announced at Meta Connect 2026" class="article-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="article-title">Everything We Announced at Meta Connect 2026</h3>
+</a>
+<a class="article-card" href="https://about.fb.com/news/2026/07/metas-ai-glasses-your-questions-answered/">
+<div class="article-media">
+<img alt="Three people wearing stylish Meta AI Glasses" class="article-img" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="article-title">Meta’s AI Glasses: Your Questions Answered</h3>
+</a>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="meta-footer">
+<div class="footer-top">
+<div class="newsletter-block">
+<h3 class="newsletter-title">Get news and updates from Meta</h3>
+<form class="newsletter-form" onsubmit="event.preventDefault();">
+<input aria-label="Email address" class="newsletter-input" disabled="" placeholder="Email address" type="email" value="fidelity-study@meta.internal"/>
+<button class="newsletter-btn" disabled="" type="submit">Sign up</button>
+</form>
+</div>
+</div>
+<!-- 7 Footer Link Columns -->
+<div class="footer-links-grid">
+<div>
+<h4 class="footer-col-title">Meta Store</h4>
+<ul class="footer-link-list">
+<li><a href="https://www.meta.com/ca/ai-glasses/">AI glasses</a></li>
+<li><a href="https://www.meta.com/ca/quest/">Meta Quest</a></li>
+<li><a href="https://www.meta.com/ca/vr-glasses/">Meta VR Glasses</a></li>
+<li><a href="https://www.meta.com/ca/muse-charm/">Muse Charm</a></li>
+<li><a href="https://www.meta.com/ca/accessories/">Accessories</a></li>
+<li><a href="https://www.meta.com/ca/refurbished/">Refurbished</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">Store support and legal</h4>
+<ul class="footer-link-list">
+<li><a href="https://www.meta.com/ca/help/orders/">Order status</a></li>
+<li><a href="https://www.meta.com/ca/help/returns/">Returns and refunds</a></li>
+<li><a href="https://www.meta.com/ca/help/warranty/">Warranty information</a></li>
+<li><a href="https://www.meta.com/ca/legal/store-terms/">Store terms of sale</a></li>
+<li><a href="https://www.meta.com/ca/help/safety/">Product safety</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">Community</h4>
+<ul class="footer-link-list">
+<li><a href="https://communityforums.atmeta.com/">Meta Community Forums</a></li>
+<li><a href="https://developers.meta.com/">Developers</a></li>
+<li><a href="https://creator.meta.com/">Creators</a></li>
+<li><a href="https://about.meta.com/community/">Meta for Work</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">Our actions</h4>
+<ul class="footer-link-list">
+<li><a href="https://about.meta.com/sustainability/">Sustainability</a></li>
+<li><a href="https://about.meta.com/responsible-innovation/">Responsible AI</a></li>
+<li><a href="https://about.meta.com/diversity/">Diversity &amp; Inclusion</a></li>
+<li><a href="https://about.meta.com/accessibility/">Accessibility</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">About us</h4>
+<ul class="footer-link-list">
+<li><a href="https://about.meta.com/">About Meta</a></li>
+<li><a href="https://about.meta.com/media-gallery/">Media gallery</a></li>
+<li><a href="https://about.meta.com/brand/">Brand resources</a></li>
+<li><a href="https://investor.atmeta.com/">Investors</a></li>
+<li><a href="https://metacareers.com/">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">Site terms and policies</h4>
+<ul class="footer-link-list">
+<li><a href="https://www.meta.com/ca/legal/privacy-policy/">Privacy policy</a></li>
+<li><a href="https://www.meta.com/ca/legal/terms/">Terms of service</a></li>
+<li><a href="https://www.meta.com/ca/legal/cookies/">Cookie policy</a></li>
+<li><a href="https://www.meta.com/ca/legal/consumer-health-data/">Consumer health privacy</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-title">App support</h4>
+<ul class="footer-link-list">
+<li><a href="https://www.meta.com/ca/help/quest/setup/">Meta Horizon mobile app</a></li>
+<li><a href="https://www.meta.com/ca/help/ray-ban-meta/setup/">Meta View app</a></li>
+<li><a href="https://www.meta.com/ca/help/vr-glasses/">Companion app setup</a></li>
+</ul>
+</div>
+</div>
+<!-- Official Legal and Licensing Disclaimers -->
+<div class="footer-legal-notes">
+<p>*Meta Quest: Parents: important guidance &amp; safety warnings for children’s use here. Accounts for 10+ on Meta Quest 2, 3 and 3S; all other Meta Quest headsets for 13+. Certain apps, games and experiences may be suitable for a more mature audience.</p>
+<p>Financing options may vary by country and are subject to credit approval and eligibility terms. Ray-Ban Meta AI features and availability subject to change; voice features available in select languages.</p>
+<p>Disney+ and NBA subscriptions sold separately. Content terms and streaming requirements apply. Muse Charm requires compatible smartphone and active Meta account.</p>
+</div>
+<!-- Footer Bottom Row -->
+<div class="footer-bottom">
+<div class="footer-bottom-left">
+<div class="region-choice">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16">
+<circle cx="12" cy="12" r="10"></circle>
+<line x1="2" x2="22" y1="12" y2="12"></line>
+<path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+</svg>
+<span>Canada (English)</span>
+</div>
+<span>© 2026 Meta</span>
+</div>
+<div class="social-links">
+<a aria-label="Facebook" class="social-icon" href="https://facebook.com/meta">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"></path></svg>
+</a>
+<a aria-label="Instagram" class="social-icon" href="https://instagram.com/meta">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<a aria-label="X" class="social-icon" href="https://x.com/meta">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="YouTube" class="social-icon" href="https://youtube.com/meta">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+</div>
+</div>
+</footer>
+<script>
+    // Region Notice dismissal
+    const dismissBtn = document.getElementById('dismiss-region');
+    const regionNotice = document.getElementById('region-notice');
+    if (dismissBtn && regionNotice) {
+      dismissBtn.addEventListener('click', () => {
+        regionNotice.classList.add('dismissed');
+      });
+    }
+
+    // Video play/pause toggle
+    const heroVideo = document.getElementById('hero-video');
+    const videoToggleBtn = document.getElementById('video-toggle-btn');
+    const pauseIcon = document.getElementById('pause-icon');
+    const playIcon = document.getElementById('play-icon');
+
+    if (videoToggleBtn && heroVideo) {
+      videoToggleBtn.addEventListener('click', () => {
+        if (heroVideo.paused) {
+          heroVideo.play();
+          pauseIcon.style.display = 'block';
+          playIcon.style.display = 'none';
+          videoToggleBtn.setAttribute('aria-label', 'Pause video');
+        } else {
+          heroVideo.pause();
+          pauseIcon.style.display = 'none';
+          playIcon.style.display = 'block';
+          videoToggleBtn.setAttribute('aria-label', 'Play video');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
