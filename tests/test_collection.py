@@ -5,6 +5,7 @@ import sys
 import unittest
 import zipfile
 from html.parser import HTMLParser
+from html import unescape
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -117,7 +118,7 @@ class CollectionTests(unittest.TestCase):
             self.assertIn('尚未視覺驗收',html)
             parser=Links(); parser.feed(html)
             for link in parser.links+re.findall(r'url\(([^)]+)\)',html):
-                link=link.strip(' \t\n\r\'"')
+                link=unescape(link).strip(' \t\n\r\'"')
                 if link.startswith(('#','http:','https:','data:','mailto:','tel:','/')): continue
                 self.assertTrue((draft.parent/link.split('#')[0].split('?')[0]).exists(),f'{draft}: {link}')
         for path in [ROOT/'index.html',ROOT/'assets/app.js',ROOT/'README.md']:

@@ -14,7 +14,7 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
@@ -93,6 +93,7 @@ function stageOfficialDrafts(progress) {
   const style = `<meta name="robots" content="noindex"><style>
 .official-draft-badge{position:fixed;right:16px;bottom:16px;z-index:2147483647;max-width:min(340px,calc(100vw - 32px));padding:12px 16px;background:#fffdf7;color:#20211f;border:1px solid #d5d3ca;border-radius:9px;box-shadow:0 8px 34px #0004;font:12px/1.5 system-ui,sans-serif;display:grid;gap:3px}
 .official-draft-badge strong{font-size:13px}.official-draft-badge span{color:#555}.official-draft-badge a{color:#a53d22;text-decoration:underline}
+.official-draft-badge:has(summary){display:block}.official-draft-badge summary{font-size:13px;font-weight:700;cursor:pointer}.official-draft-badge[open] span{display:block;margin-top:3px}
 </style>`;
   for (const name of OFFICIAL_DRAFTS) {
     let html = retainOriginalMedia(read(path.join(DRAFT_SOURCE, name + '.html')));
@@ -140,11 +141,12 @@ function stageOfficialDrafts(progress) {
     const record = progress[name === 'linear' ? 'linear.app' : name];
     const observed = escapeHtml((record.observed_at || record.reference_observed_at || '').slice(0, 10) || '日期未記錄');
     const note = record.review_note;
-    const badge = '<div class="official-draft-badge" role="note">' +
-      '<strong>官網重製草稿 · 尚未視覺驗收</strong>' +
+    const disclosure = name === 'theverge';
+    const badge = '<' + (disclosure ? 'details' : 'div') + ' class="official-draft-badge" role="note">' +
+      (disclosure ? '<summary>官網重製草稿 · 尚未視覺驗收</summary>' : '<strong>官網重製草稿 · 尚未視覺驗收</strong>') +
       `<span>參考資料：${observed}；非品牌官方網站。</span>` +
       (note ? `<span>${escapeHtml(note)}</span>` : '') +
-      '<a href="../official-progress.html">查看 74 站進度 ↗</a></div>';
+      '<a href="../official-progress.html">查看 74 站進度 ↗</a></' + (disclosure ? 'details' : 'div') + '>';
     if (!html.includes('</head>')) throw new Error('Draft has no head: ' + name);
     html = html.replace('</head>', style + '</head>');
     const body = /<body\b[^>]*>/i.exec(html);
