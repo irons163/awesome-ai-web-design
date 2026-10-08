@@ -84,14 +84,14 @@ def stage_official_drafts():
             # evidence and video manifests remain in source, with media on its CDN.
             for asset in (DRAFT_SOURCE / 'lamborghini-assets').rglob('*'):
                 if asset.is_file() and (asset.suffix in {'.woff', '.woff2', '.ttf', '.svg'}
-                                        or asset.name == 'display.css'):
+                                        or asset.name == 'display.css') and str(asset.relative_to(DRAFT_SOURCE)) not in REMOTE_PATHS:
                     target = destination / asset.relative_to(DRAFT_SOURCE)
                     target.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(asset, target)
         if name == 'sanity':
             # Large public imagery and video remain on Sanity's own CDN.
             for asset in (DRAFT_SOURCE / 'sanity-assets').rglob('*'):
-                if asset.is_file() and asset.suffix in {
+                if asset.is_file() and str(asset.relative_to(DRAFT_SOURCE)) not in REMOTE_PATHS and asset.suffix in {
                     '.css', '.woff', '.woff2', '.ttf', '.svg', '.webp'
                 }:
                     target = destination / asset.relative_to(DRAFT_SOURCE)

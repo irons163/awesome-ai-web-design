@@ -114,7 +114,8 @@ function stageOfficialDrafts(progress) {
           const source = path.join(directory, entry.name);
           if (entry.isDirectory()) {
             copyFiltered(source);
-          } else if (entry.isFile() && SANITY_HOSTED_SUFFIXES.has(path.extname(entry.name))) {
+          } else if (entry.isFile() && SANITY_HOSTED_SUFFIXES.has(path.extname(entry.name)) &&
+              !REMOTE_PATHS.has(path.relative(DRAFT_SOURCE, source))) {
             const target = path.join(destination,
               path.relative(DRAFT_SOURCE, source));
             fs.mkdirSync(path.dirname(target), { recursive: true });
@@ -130,6 +131,7 @@ function stageOfficialDrafts(progress) {
         if (!entry.isFile() || !(entry.name === 'display.css' ||
             ['.woff', '.woff2', '.ttf', '.svg'].includes(path.extname(entry.name)))) continue;
         const source = path.join(sourceRoot, entry.name);
+        if (REMOTE_PATHS.has(path.relative(DRAFT_SOURCE, source))) continue;
         const target = path.join(destination, path.relative(DRAFT_SOURCE, source));
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.copyFileSync(source, target);
