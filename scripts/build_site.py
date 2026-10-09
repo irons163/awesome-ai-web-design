@@ -11,7 +11,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge', 'wired')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 REMOTE_ASSETS = json.loads((ROOT / 'data/official-remote-assets.json').read_text())['assets']
 REMOTE_PATHS = {asset['path'] for asset in REMOTE_ASSETS}
@@ -100,7 +100,7 @@ def stage_official_drafts():
         record = progress['linear.app' if name == 'linear' else name]
         observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
         note = record.get('review_note')
-        disclosure = name == 'theverge'
+        disclosure = name in {'theverge', 'wired'}
         badge = ('<' + ('details' if disclosure else 'div') + ' class="official-draft-badge" role="note">'
                  + ('<summary>官網重製草稿 · 尚未視覺驗收</summary>' if disclosure else '<strong>官網重製草稿 · 尚未視覺驗收</strong>')
                  + f'<span>參考資料：{observed}；非品牌官方網站。</span>'

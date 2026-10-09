@@ -14,7 +14,7 @@ const OFFICIAL_DRAFTS = [
   'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple',
   'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify',
   'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp',
-  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge',
+  'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge', 'wired',
 ];
 const COPY_ALL_ASSETS = new Set([
   'slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise',
@@ -141,7 +141,7 @@ function stageOfficialDrafts(progress) {
     const record = progress[name === 'linear' ? 'linear.app' : name];
     const observed = escapeHtml((record.observed_at || record.reference_observed_at || '').slice(0, 10) || '日期未記錄');
     const note = record.review_note;
-    const disclosure = name === 'theverge';
+    const disclosure = ['theverge', 'wired'].includes(name);
     const badge = '<' + (disclosure ? 'details' : 'div') + ' class="official-draft-badge" role="note">' +
       (disclosure ? '<summary>官網重製草稿 · 尚未視覺驗收</summary>' : '<strong>官網重製草稿 · 尚未視覺驗收</strong>') +
       `<span>參考資料：${observed}；非品牌官方網站。</span>` +
