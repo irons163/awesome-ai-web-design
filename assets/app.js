@@ -4,7 +4,8 @@ const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&am
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
 let OFFICIAL_DRAFTS = {};
-let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'image';
+let officialDraftsState = 'loading', officialDraftDates = {};
+let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'official';
 let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
 try { const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); saved = new Set(Array.isArray(value) ? value.filter(x => typeof x === 'string') : []); }
@@ -28,7 +29,7 @@ function card(item) {
   const picked = saved.has(item.slug);
   const preview = item.preview;
   const art = preview.status === 'generated'
-    ? `<div class="card-art"><img src="${escapeHTML(preview.thumbnail)}" alt="${escapeHTML(item.name)} 風格的 Stitch 生成頁面" loading="lazy" decoding="async" width="${preview.width}" height="${preview.height}"><span class="stitch-badge">STITCH</span></div>`
+    ? `<div class="card-art"><img src="${escapeHTML(preview.thumbnail)}" alt="${escapeHTML(item.name)} 風格的原始 Stitch 生成頁面" loading="lazy" decoding="async" width="${preview.width}" height="${preview.height}"><span class="stitch-badge">原始 STITCH</span></div>`
     : `<div class="card-art pending-art"><span>${escapeHTML(item.name)}</span><small>Stitch 範例待生成</small></div>`;
   return `<article class="design-card"><a href="#/design/${encodeURIComponent(item.slug)}" class="card-link" aria-label="查看 ${escapeHTML(item.name)} 設計">${art}<div class="card-body"><div class="card-name-row"><h3>${escapeHTML(item.name)}</h3><span>↗</span></div><p class="card-description">${escapeHTML(item.description)}</p><div class="card-meta"><span>${escapeHTML(item.categoryLabel)}</span><span class="card-palette" aria-hidden="true">${item.colors.slice(0,4).map(color => `<i style="background:${escapeHTML(color)}"></i>`).join('')}</span></div></div></a><button class="save-button" data-save="${escapeHTML(item.slug)}" aria-label="${picked ? '取消收藏' : '收藏'} ${escapeHTML(item.name)}" aria-pressed="${picked}">${picked ? '♥' : '♡'}</button></article>`;
 }
@@ -78,12 +79,34 @@ function setPreview(view) {
   previewMode = view;
   const preview = currentDesign.preview;
   const ready = preview.status === 'generated';
-  $('#preview-pending').hidden = ready;
-  $('#preview-image').hidden = !ready || view !== 'image';
-  $('#preview-frame').hidden = !ready || view !== 'html';
-  $('#preview-actions').hidden = !ready;
-  $('#preview-controls').hidden = !ready;
-  if (ready) {
+  const official = view === 'official';
+  const draft = OFFICIAL_DRAFTS[currentDesign.slug];
+  $('#official-preview').hidden = !official;
+  $('#preview-caption').textContent = official ? '官網重製草稿 · 待驗收' : '原始 Google Stitch 生成範例';
+  $('#preview-pending').hidden = official || ready;
+  $('#preview-image').hidden = official || !ready || view !== 'image';
+  $('#preview-frame').hidden = official || !ready || view !== 'html';
+  $('#preview-actions').hidden = official || !ready;
+  document.querySelectorAll('[data-preview="image"],[data-preview="html"]').forEach(button => { button.hidden = !ready; });
+  if (official) {
+    const status = $('#official-preview-status');
+    const link = $('#official-preview-link');
+    const hasDraft = !!draft;
+    if (hasDraft) {
+      status.textContent = `參考日期：${officialDraftDates[currentDesign.slug]}。這份官網重製草稿尚未完成逐頁視覺驗收。`;
+      link.href = `official-drafts/${draft}.html`;
+      link.textContent = `開啟 ${currentDesign.name} 官網重製草稿 ↗`;
+    } else {
+      status.textContent = officialDraftsState === 'loading' ? '正在讀取官網草稿進度…' :
+        officialDraftsState === 'error' ? '官網草稿清單暫時無法載入，請查看完整進度。' : '此網站尚無可開啟的官網重製草稿。';
+      link.href = 'official-progress.html';
+      link.textContent = '查看全部 74 個網站進度 ↗';
+    }
+    $('#open-preview').href = link.href;
+    $('#open-preview').textContent = hasDraft ? '在新分頁開啟官網草稿 ↗' : '查看官網重製進度 ↗';
+    $('#preview-frame').removeAttribute('src');
+    $('#preview-image').removeAttribute('src');
+  } else if (ready) {
     $('#preview-image').src = preview.image;
     $('#preview-image').alt = `${currentDesign.name} 風格：${preview.title}，Google Stitch 原始生成截圖`;
     if (view === 'html') $('#preview-frame').src = preview.html;
@@ -93,11 +116,12 @@ function setPreview(view) {
     $('#download-html').href = preview.html;
     $('#generation-record').href = preview.provenance;
     $('#generation-prompt').href = preview.prompt;
+    $('#open-preview').textContent = '在新分頁開啟原始預覽 ↗';
   } else {
     $('#preview-frame').removeAttribute('src');
     $('#preview-image').removeAttribute('src');
   }
-  $('#open-preview').hidden = !ready;
+  $('#open-preview').hidden = !official && !ready;
   document.querySelectorAll('[data-preview]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.preview === view)));
 }
 
@@ -130,7 +154,7 @@ function openDesign(item) {
   $('#download-prompts').download = `${item.slug}-PROMPTS.md`;
   showOfficialDraft(item);
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
-  setTab('preview'); setPreview('image');
+  setTab('preview'); setPreview('official');
   if (!$('#design-dialog').open) $('#design-dialog').showModal();
   $('#design-dialog').scrollTop = 0;
   $('#close-dialog').focus();
@@ -204,14 +228,21 @@ async function loadOfficialDrafts() {
     });
     if (!drafts.length) throw new Error('No draft records');
     OFFICIAL_DRAFTS = Object.fromEntries(drafts.map(item => [item.slug, item.file]));
+    officialDraftDates = Object.fromEntries(drafts.map(item => [item.slug, item.date]));
+    officialDraftsState = 'ready';
     count.textContent = `${drafts.length} 份草稿 · 0 份完成視覺驗收`;
     grid.innerHTML = drafts.map(item =>
       `<a href="official-drafts/${escapeHTML(item.file)}.html">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} 草稿 · 待驗收 ↗</span></a>`
     ).join('');
-    if (currentDesign) showOfficialDraft(currentDesign);
+    if (currentDesign) {
+      showOfficialDraft(currentDesign);
+      if (previewMode === 'official') setPreview('official');
+    }
   } catch {
+    officialDraftsState = 'error';
     count.textContent = '草稿清單暫時無法載入';
     grid.innerHTML = '<a href="official-progress.html">查看完整進度 ↗</a>';
+    if (currentDesign && previewMode === 'official') setPreview('official');
   }
 }
 $('#search').addEventListener('input', render);

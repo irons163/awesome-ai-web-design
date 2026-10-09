@@ -42,6 +42,8 @@ python3 scripts/serve.py
 
 網站預覽由 Google Stitch MCP 依各份設計分析與專屬情境實際生成，保留原始 HTML 與截圖，不是品牌原站截圖。每份範例附有生成指令、Stitch project/screen ID 與檔案 SHA-256。HTML 是靜態介面範例，可能使用 Google Fonts、Tailwind CDN 或 Stitch 匯出的外部圖片，部分操作與資料僅供展示。直接開 `index.html` 時瀏覽器可能阻擋讀取資料；請使用上述本機伺服器。
 
+品牌詳情頁預設提供官網重製草稿入口與參考日期；沒有可用草稿時會顯示進度。原始 Stitch 截圖和 HTML 可切換查看。所有官網草稿仍待視覺驗收，預覽入口的切換不代表已與現行官網一致。
+
 ## 開發與驗證
 
 ```sh
@@ -51,6 +53,14 @@ python3 -m unittest discover -s tests -v
 ```
 
 有 Node.js 的環境也可執行 `npm run build`，用不依賴 Python 的入口建立 Sites 靜態網站；`npm run build:bundle`、`npm run dev` 和 `npm test` 仍呼叫相應的 Python 指令，不需 `npm install`。
+
+預覽入口的非同步載入、品牌連結及原始範例切換另有 DOM 測試。這套測試使用 jsdom，不是瀏覽器畫面驗收；執行前需安裝開發套件並建置網站：
+
+```bash
+pnpm install --frozen-lockfile --ignore-scripts
+pnpm run build
+pnpm run test:preview
+```
 
 - `design-md/<slug>/DESIGN.md`：完整設計分析，加上全新 AI 指令。
 - `design-md/<slug>/PROMPTS.md`：三種任務指令與迭代流程。
