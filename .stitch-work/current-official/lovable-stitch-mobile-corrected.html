@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Lovable — Build software with AI</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    @font-face {
+      font-family: 'Camera Plain Variable';
+      src: url('https://lovable.dev/assets/CameraPlainVariable-c48bd243-BhPypTEq.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    
+    body {
+      font-family: 'Camera Plain Variable', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #FAF8F5;
+      overflow-x: hidden;
+    }
+
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+
+    /* Custom Mobile Composer Box Shadow */
+    .composer-shadow {
+      box-shadow: 0px 12px 32px -8px rgba(15, 23, 42, 0.08), 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+    
+    .glow-card {
+      background: radial-gradient(circle at 50% 0%, rgba(244, 114, 182, 0.12) 0%, rgba(10, 15, 29, 0) 70%), #0A0F1D;
+    }
+  </style>
+<!-- Tailwind CSS Configuration -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-primary": "#bec6e0",
+            "inverse-surface": "#2d3133",
+            "on-tertiary-fixed-variant": "#574425",
+            "surface-variant": "#e0e3e5",
+            "surface-container-high": "#e6e8ea",
+            "on-secondary-container": "#600037",
+            "surface-dim": "#d8dadc",
+            "surface-container-low": "#f2f4f6",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#fcdeb5",
+            "on-secondary-fixed": "#3e0022",
+            "on-error": "#ffffff",
+            "surface-bright": "#f7f9fb",
+            "tertiary": "#000000",
+            "surface-container": "#eceef0",
+            "on-primary-fixed": "#131b2e",
+            "on-primary-container": "#7c839b",
+            "surface-container-lowest": "#ffffff",
+            "tertiary-container": "#271901",
+            "secondary": "#b4136d",
+            "pulse-pink": "#F472B6",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#e0e3e5",
+            "border-subtle": "#E2E8F0",
+            "inverse-on-surface": "#eff1f3",
+            "secondary-fixed": "#ffd9e4",
+            "on-primary": "#ffffff",
+            "deep-blue": "#0A0F1D",
+            "on-error-container": "#93000a",
+            "surface-tint": "#565e74",
+            "secondary-fixed-dim": "#ffb0cd",
+            "outline-variant": "#c6c6cd",
+            "on-surface": "#191c1e",
+            "hero-cream": "#FAF8F5",
+            "secondary-container": "#fd56a7",
+            "on-tertiary": "#ffffff",
+            "on-secondary-fixed-variant": "#8c0053",
+            "primary-fixed": "#dae2fd",
+            "on-tertiary-container": "#98805d",
+            "on-secondary": "#ffffff",
+            "background": "#f7f9fb",
+            "tertiary-fixed-dim": "#dec29a",
+            "primary-container": "#131b2e",
+            "on-surface-variant": "#45464d",
+            "primary-fixed-dim": "#bec6e0",
+            "pulse-red": "#EF4444",
+            "primary": "#000000",
+            "surface": "#f7f9fb",
+            "on-tertiary-fixed": "#271901",
+            "on-primary-fixed-variant": "#3f465c",
+            "outline": "#76777d",
+            "on-background": "#191c1e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "4px",
+            "space-md": "16px",
+            "space-2xl": "96px",
+            "gutter": "24px",
+            "space-xl": "48px",
+            "margin": "32px",
+            "space-sm": "8px",
+            "space-lg": "24px"
+          },
+          "fontFamily": {
+            "label-sm": ["Camera Plain Variable", "sans-serif"],
+            "body-sm": ["Camera Plain Variable", "sans-serif"],
+            "headline-md": ["Camera Plain Variable", "sans-serif"],
+            "headline-xl": ["Camera Plain Variable", "sans-serif"],
+            "body-lg": ["Camera Plain Variable", "sans-serif"],
+            "label-md": ["Camera Plain Variable", "sans-serif"],
+            "headline-xl-mobile": ["Camera Plain Variable", "sans-serif"],
+            "body-md": ["Camera Plain Variable", "sans-serif"],
+            "headline-lg": ["Camera Plain Variable", "sans-serif"]
+          },
+          "fontSize": {
+            "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }],
+            "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+            "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+            "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-lg": ["36px", { "lineHeight": "44px", "fontWeight": "600" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="w-[390px] mx-auto min-h-screen bg-hero-cream text-on-surface antialiased relative shadow-2xl selection:bg-pulse-pink selection:text-white">
+<!-- ================= TOP NAV BAR (MOBILE COMPACT) ================= -->
+<header class="sticky top-0 z-50 w-full bg-hero-cream/85 backdrop-blur-md px-4 h-16 flex items-center justify-between border-b border-border-subtle/50 transition-colors">
+<!-- Brand Mark & Wordmark -->
+<a class="flex items-center gap-2 group select-none" href="https://lovable.dev/">
+<svg class="w-6 h-6 transform group-active:scale-95 transition-transform" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#lovable_grad)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lovable_grad" x1="2" x2="22" y1="3" y2="21.35">
+<stop stop-color="#FF3366"></stop>
+<stop offset="0.55" stop-color="#F472B6"></stop>
+<stop offset="1" stop-color="#9333EA"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface">Lovable</span>
+</a>
+<!-- Action Group (Trailing Primary & Menu Drawer trigger) -->
+<div class="flex items-center gap-2">
+<a class="inline-flex items-center justify-center bg-primary text-on-primary font-label-md text-label-md px-3.5 py-1.5 rounded-lg active:scale-95 transition-transform duration-150" href="https://lovable.dev/">
+        Get started
+      </a>
+<button aria-label="Open mobile navigation" class="p-1.5 text-on-surface hover:text-primary active:bg-surface-variant rounded-lg transition-colors flex items-center justify-center" id="menu-toggle-btn">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- ================= MOBILE NAVIGATION DRAWER ================= -->
+<div class="fixed inset-0 z-50 bg-hero-cream transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-6 overflow-y-auto" id="mobile-drawer">
+<div class="flex items-center justify-between pb-6 border-b border-border-subtle">
+<div class="flex items-center gap-2">
+<svg class="w-6 h-6" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="url(#lovable_grad_drawer)"></path>
+<defs>
+<lineargradient gradientunits="userSpaceOnUse" id="lovable_grad_drawer" x1="2" x2="22" y1="3" y2="21.35">
+<stop stop-color="#FF3366"></stop>
+<stop offset="0.55" stop-color="#F472B6"></stop>
+<stop offset="1" stop-color="#9333EA"></stop>
+</lineargradient>
+</defs>
+</svg>
+<span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface">Lovable</span>
+</div>
+<button aria-label="Close navigation" class="p-2 text-on-surface hover:text-primary rounded-lg transition-colors" id="menu-close-btn">
+<span class="material-symbols-outlined" data-icon="close">close</span>
+</button>
+</div>
+<!-- Mobile Drawer Links strictly honoring Shared Components -->
+<nav class="flex flex-col gap-4 py-8">
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#solutions">Solutions</a>
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#resources">Resources</a>
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#enterprise">Enterprise</a>
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#pricing">Pricing</a>
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#security">Security</a>
+<a class="text-left font-headline-md text-headline-md font-medium text-on-surface hover:text-secondary transition-colors drawer-link" href="#community">Community</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-border-subtle flex flex-col gap-3">
+<a class="w-full text-center py-3 font-label-md text-label-md text-on-surface font-semibold bg-surface-container rounded-lg" href="https://lovable.dev/">Log in</a>
+<a class="w-full text-center py-3 font-label-md text-label-md text-on-primary font-semibold bg-primary rounded-lg active:scale-95 transition-transform" href="https://lovable.dev/">Get started</a>
+</div>
+</div>
+<!-- ================= HERO SECTION ================= -->
+<section class="relative pt-8 pb-14 px-4 overflow-hidden flex flex-col items-center text-center">
+<!-- Pulse Decorative Wave Background -->
+<div class="absolute inset-x-0 bottom-0 pointer-events-none opacity-90 select-none overflow-hidden">
+<img alt="" class="w-full min-w-[500px] -ml-16 object-cover object-top opacity-85" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgXPa5hbCxmmux81zHRFdpTsbFK3SRWjrsD2GD7cFqUKzJAVxCRAZdti4zmb_KaZXVPmDax_X5Zx02ylndz1Yr4Awg5PS5vY7QjNSxNZvWxS7BFlwuf6SyWPtSRLP6eoULak_SR0YDAHLvu0LjGg0UvEwY3HK7LgYzprfumpHU_PmYUSjlux2oy0hbWP30oqN7n_iacCzoxIh9AbEx_CqNnQfrwoeLsOcCJ9mR8_iW9ZK93JWSgty2qptrUceFBdd3KMH_dh5HKBSt"/>
+</div>
+<!-- Announcement Pill -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container border border-border-subtle/80 mb-6 shadow-sm">
+<span class="w-2 h-2 rounded-full bg-pulse-pink animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">GPT-4.5 &amp; Claude 3.7 now active</span>
+<span class="material-symbols-outlined text-[14px] text-outline" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Heading -->
+<h1 class="font-headline-xl-mobile text-headline-xl-mobile font-semibold text-on-surface tracking-tight whitespace-pre-line mb-3">
+Build something
+Lovable
+    </h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[320px] mx-auto mb-8">
+      Bring a new product, internal tool, or entire company to life.
+    </p>
+<!-- Rounded Mobile Interactive Composer Card (342px width as per tokens) -->
+<form action="https://lovable.dev/" class="w-[342px] bg-surface-container-lowest rounded-2xl p-3.5 border border-border-subtle composer-shadow text-left relative z-10" method="GET">
+<div class="flex items-center gap-2 mb-3">
+<!-- Plus Attachment Control -->
+<button aria-label="Attach context" class="w-7 h-7 rounded-full bg-surface-container hover:bg-surface-variant flex items-center justify-center text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+</button>
+<!-- Build Selector Dropdown Pill -->
+<div class="inline-flex items-center gap-1 px-2.5 py-1 bg-surface-container-low rounded-full border border-border-subtle">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-label-sm text-on-surface font-semibold">Build</span>
+<span class="material-symbols-outlined text-[14px] text-on-surface-variant" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Textarea / Input Mockup -->
+<textarea class="w-full text-on-surface placeholder:text-outline-variant font-body-sm text-body-sm bg-transparent border-0 focus:ring-0 p-0 resize-none focus:outline-none" placeholder="Ask Lovable to create a web app that..." rows="3"></textarea>
+<!-- Action Row -->
+<div class="flex items-center justify-between pt-2 border-t border-border-subtle/50 mt-1">
+<button aria-label="Use voice dictation" class="p-1.5 text-on-surface-variant hover:text-primary transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="mic">mic</span>
+</button>
+<button aria-label="Create app" class="w-8 h-8 rounded-lg bg-primary hover:bg-on-surface text-on-primary flex items-center justify-center transition-transform active:scale-95" type="submit">
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</form>
+</section>
+<!-- ================= TRUSTED BY LOGO TICKER ================= -->
+<section class="py-8 px-4 bg-hero-cream border-y border-border-subtle/40">
+<p class="font-label-sm text-label-sm text-center text-outline uppercase tracking-wider mb-5">
+      Trusted by forward-thinking teams
+    </p>
+<div class="grid grid-cols-3 gap-y-4 gap-x-3 items-center justify-items-center opacity-70">
+<span class="font-headline-md text-headline-md font-bold tracking-tighter text-on-surface">adidas</span>
+<span class="font-headline-md text-headline-md font-semibold tracking-tight text-on-surface">asana</span>
+<span class="font-headline-md text-headline-md font-medium tracking-tight text-on-surface">ElevenLabs</span>
+<span class="font-headline-md text-headline-md font-bold text-on-surface">zendesk</span>
+<span class="font-headline-md text-headline-md font-medium tracking-wide text-on-surface">workday</span>
+<span class="font-headline-md text-headline-md font-bold tracking-tight text-on-surface">NVIDIA</span>
+</div>
+</section>
+<!-- ================= CORE FEATURES (IDEAS TO FULL-STACK) ================= -->
+<section class="py-12 px-4 bg-surface-bright flex flex-col gap-6" id="solutions">
+<div class="text-left mb-2">
+<span class="font-label-sm text-label-sm font-semibold text-secondary uppercase tracking-wider">Fast creation</span>
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface tracking-tight mt-1">
+        Ideas to full-stack software in seconds
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-2">
+        You bring the vision. Lovable orchestrates the architecture, styling, and database.
+      </p>
+</div>
+<!-- Feature Card 1 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-5 shadow-sm space-y-3">
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="bolt">bolt</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Live instant preview</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        You bring the idea. Lovable brings it to life with real-time reactive sandbox rendering as fast as thought.
+      </p>
+<div class="p-3 bg-surface-container-low rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" data-icon="check_circle">check_circle</span>
+<span class="font-label-sm text-label-sm text-on-surface">Zero setup, instant Hot-Reload</span>
+</div>
+</div>
+<!-- Feature Card 2 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-5 shadow-sm space-y-3">
+<div class="w-10 h-10 rounded-xl bg-primary-fixed flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" data-icon="code">code</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Dual-mode code edit</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Refine your design and deploy. Seamlessly switch between natural prompt conversation and granular syntax code access.
+      </p>
+<div class="p-3 bg-surface-container-low rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="terminal">terminal</span>
+<span class="font-label-sm text-label-sm text-on-surface">Monaco editor with TypeScript support</span>
+</div>
+</div>
+<!-- Feature Card 3 -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-2xl p-5 shadow-sm space-y-3">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-surface">Native GitHub sync</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+        Depend on Lovable, from end to end. Every change is an authentic Git commit to your own repository branch.
+      </p>
+<div class="p-3 bg-surface-container-low rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-on-surface" data-icon="fork_right">fork_right</span>
+<span class="font-label-sm text-label-sm text-on-surface">100% code ownership, zero vendor lock-in</span>
+</div>
+</div>
+</section>
+<!-- ================= PLATFORM ARCHITECTURE (5 DARK CARDS) ================= -->
+<section class="py-14 px-4 bg-deep-blue text-on-primary space-y-8" id="enterprise">
+<div class="text-left space-y-2">
+<span class="font-label-sm text-label-sm text-pulse-pink uppercase tracking-wider font-semibold">Production Engine</span>
+<h2 class="font-headline-lg text-headline-lg font-semibold tracking-tight text-on-primary">
+        Enterprise-grade platform architecture
+      </h2>
+<p class="font-body-md text-body-md text-outline-variant">
+        Everything required to scale applications from prototype to millions of active sessions.
+      </p>
+</div>
+<div class="space-y-6">
+<!-- 1. Hosting -->
+<div class="glow-card border border-border-subtle/15 rounded-2xl p-5 overflow-hidden">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-pulse-pink font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="cloud_done">cloud_done</span> Global Edge
+        </div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-primary mb-1">Hosting &amp; Deployment</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mb-4">Hosting, handled. One-click instant worldwide edge deployments with automatic SSL certificates.</p>
+<div class="bg-black/40 rounded-xl p-3 border border-white/5 flex justify-center">
+<img alt="Lovable Edge Hosting visual representation" class="w-full h-auto max-h-44 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCuXOmtyBXoeJ2-QyeAsQf9QW-b4uBjF-yXTeniuyUVLn3rMjz5ZEhA5K6foCRIUtCPTHiLQ_ElqZXYtIMv0SCmL74U7FgQm1r-pt3AW6XTCSMvYqVMtXJRT-MERNprm0E2wH-K3vrbiHMo5zst2NnBKqAQlXDh9OIyWgBZ_mumh9PskJ5_lf_294Gs7VBpevrslC3CzrhgC__9RlPQ0HQsI6ROycWxbPSC_XEfVNAHR3nQzMgOFgrUKSUKfgWtUKcfNIzG_-KzZI-9"/>
+</div>
+</div>
+<!-- 2. Connected Stack -->
+<div class="glow-card border border-border-subtle/15 rounded-2xl p-5 overflow-hidden">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-pulse-pink font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="database">database</span> Backend &amp; APIs
+        </div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-primary mb-1">Connections &amp; Integrations</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mb-4">Your app stack, connected. Native Supabase databases, authentication tables, and Webhook dispatch.</p>
+<div class="bg-black/40 rounded-xl p-3 border border-white/5 flex justify-center">
+<img alt="Lovable connected database stack architecture" class="w-full h-auto max-h-44 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1WZ4SJJhfrPG191-AahKS-V6nZW_pSySDFHcY6rX9wyg9er2S0pnLqn7gU4jeaChnTZ909i3CnK6Baxnr8g-ys0bcAlLTWzgSJuetPjbjquk_ApYkGnjU9cADLiCz3b4ZyeNf61iUGUmlWBLyaoLyWlizHApWtL_Mknlg_0G6MAKgro0LtKuXNm73SywX6uApuUex-ngQvGhqaCHwNCap9VVKQbQ5CTtNlOQSnW3f5JT3HxIdOq3OsHSIt7HXiFmUJ9-FQziMl44"/>
+</div>
+</div>
+<!-- 3. Payments -->
+<div class="glow-card border border-border-subtle/15 rounded-2xl p-5 overflow-hidden">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-pulse-pink font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="payments">payments</span> Monetization
+        </div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-primary mb-1">Payments &amp; Commerce</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mb-4">Payments, processed. Plug-and-play Stripe billing models, subscription tiers, and customer portals.</p>
+<div class="bg-black/40 rounded-xl p-3 border border-white/5 flex justify-center">
+<img alt="Lovable Stripe payments integration" class="w-full h-auto max-h-44 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB62Nxu7iK0RY9lOmWy-Wm9WMsMoYnXTlPsEjhyCjk6XvLeMchAhrJlgMhS9MNMefxkeSRmVYyHNpGF5VEnvZyABS8SnzQCSt8lsDE5neOO2Ujtwxs_KIX0ePotgVrEkQ7_Kz_3-ILCLOGI5TgTo0luKLG4Y51JVe5hht9VRIgIBVbA_3WNyNea4OGxgHPTBq9ch_P2UXe4de3FxQYpwMYejE6o5rhkGy-0lWib1tZaI7PbYBdC80S_smwQVjZaldij8srOk48DmEj6"/>
+</div>
+</div>
+<!-- 4. Security Mobile Art -->
+<div class="glow-card border border-border-subtle/15 rounded-2xl p-5 overflow-hidden" id="security">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-pulse-pink font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="lock">lock</span> ISO &amp; SOC-2 Compliant
+        </div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-primary mb-1">Enterprise Security &amp; Privacy</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mb-4">Safe and secure, as standard. Strict RBAC controls, encrypted environments, and tenant isolation.</p>
+<div class="bg-black/40 rounded-xl p-3 border border-white/5 flex justify-center">
+<img alt="Enterprise mobile security visualization" class="w-full h-auto max-h-48 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBrGOIX6i1CWPay8AaIhwUSDTsT1yIEHk_izpzKQkzwrU5ND06j8XtMESyuNErQLo59LtN-2frhK0DX8agKaU-r-unSG-85VxQ_OKvjCuHdupzh1r-FqFwXDh6DdLZ2aH_5uGMBnCs1-YoFbMPMgpferTIcE09zfdR9o0BvVmc95jDzOu_JZYYsIhrxlU-YO8l9NrZYdNqsR65QZsLDaWfK_BxGMYCJ8ygqwpus-TVCwsUKMgsBhZoUZ7REGSrEEvSTAOzv_5KQStd"/>
+</div>
+</div>
+<!-- 5. Devices Mobile Art -->
+<div class="glow-card border border-border-subtle/15 rounded-2xl p-5 overflow-hidden">
+<div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/10 text-pulse-pink font-label-sm text-label-sm mb-3">
+<span class="material-symbols-outlined text-[14px]" data-icon="devices">devices</span> Universal Viewport
+        </div>
+<h3 class="font-headline-md text-headline-md font-semibold text-on-primary mb-1">Cross-Device Responsiveness</h3>
+<p class="font-body-sm text-body-sm text-outline-variant mb-4">Works wherever, whenever. Adaptive modern fluid layout algorithms for phone, desktop, and tablet screens.</p>
+<div class="bg-black/40 rounded-xl p-3 border border-white/5 flex justify-center">
+<img alt="Multi-device cross-platform responsiveness" class="w-full h-auto max-h-48 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcOdOt868atX73XZjU5EycAaIsnS854YFlMDNjuO5oEgHk6aV8kna4cw3uXK5k-KgBjOOzNGuz3l1E4H2lhrS0Pt76qA3fNEoP5tTNv8i6fRtOF4SqHExwapKmqtO-hc7QooP1YIT7WbKrSD8b86cKN1MupA9HzcosfwynPqZmUiI-rNtH6poRE1-Ou-ZQtjokcP_voDa4XjPweKrDtKhvghhL2N74dWgt-91QySbMwelZXffE5aD0U89OhHy_k7YGKqDrHU601EUV"/>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= HOMEPAGE USAGE METRICS ================= -->
+<section class="py-12 px-4 bg-hero-cream border-b border-border-subtle text-center">
+<div class="space-y-8">
+<div>
+<p class="font-headline-xl text-headline-xl font-bold text-on-surface tracking-tight">1.2M+</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium mt-1">New projects built every week</p>
+</div>
+<div class="w-12 h-px bg-border-subtle mx-auto"></div>
+<div>
+<p class="font-headline-xl text-headline-xl font-bold text-on-surface tracking-tight">60M+</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium mt-1">Projects built with Lovable</p>
+</div>
+<div class="w-12 h-px bg-border-subtle mx-auto"></div>
+<div>
+<p class="font-headline-xl text-headline-xl font-bold text-on-surface tracking-tight text-secondary">900M+</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-medium mt-1">Monthly visits to Lovable-built projects</p>
+</div>
+</div>
+</section>
+<!-- ================= CUSTOMER STORIES CAROUSEL ================= -->
+<section class="py-12 px-4 bg-surface-container-low" id="resources">
+<div class="text-left mb-6">
+<span class="font-label-sm text-label-sm font-semibold text-secondary uppercase tracking-wider">Case Studies</span>
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface tracking-tight mt-1">
+        Loved by builders
+      </h2>
+</div>
+<!-- Company Logos Filter Tabs -->
+<div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none" id="customer-tabs">
+<button class="customer-tab active px-3 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle shrink-0 flex items-center h-10 shadow-sm" data-target="klar">
+<img alt="Klar logo" class="h-4 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBM0xOZdwwaBwEubZQQmGtQ8c_JzpqQv9xYTwiaswkGhL8YFs5xeBwhSJqE9V6HdiGBzPC1MM9yL_QL2opmban_v2sYhdcCKhmPHFx-pVmh2O0o9PwqUUotQcJPk6e0pB5oknnC40KBCd8lZsBOmQHXFj-SzSs3drgq2ImtoAPFZx8EyW-4FTzq6YYA_nccTeJrveQZb8TnLJ0vY-vHwL55uRUgZF66UqQutmAe4RK_nzc4ZXzYDPpDsVdj8w0AJAHLcXHthCblhX96"/>
+</button>
+<button class="customer-tab px-3 py-2 rounded-xl bg-surface-container border border-transparent shrink-0 flex items-center h-10 opacity-70" data-target="exp">
+<img alt="eXp Realty logo" class="h-4 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5021WrZ88WHSe72_wQVKY4UqEdJbkIJXirMwHnEWc0hWVjhMz2J-547vCQljyMRKwFHhsaLbZYHITRKfQ7upsqgsC_2oitd48qfEauzmE0O895BH6NLNazln5f2GU6-9_-0YPIwoXwifgPBT6Drk_HNciL9ede2ffMlkESDN4qXscFa_ynHYVcPlTSpLulz3KNaDQlNd_2jyKJxLGNJa1LgpYYFSPOv86eNTS3sLtrWJecl3HfvxKhBHns8rNn4yv8tUN7o8jjhj4"/>
+</button>
+<button class="customer-tab px-3 py-2 rounded-xl bg-surface-container border border-transparent shrink-0 flex items-center h-10 opacity-70" data-target="scion">
+<img alt="Scion Group logo" class="h-4 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpGIjGHHmrOl4am3wYn7HalmfZgOPTTiTCqvdnxa2DEM5Ik32eVM1OeqwEUBlokD6UCjH7dRead9OsRbZA4Hmh13QlExbEg4C51eDFEJYatBKcL03_8Vq7Gw3xWAH3zar2md2Bh99qfLQwNfkh9rTqDEbopY-ST6-7_FFnmfTuZyxSCRN6LI3C9Y35elcWoSI5j-GuM3JCFn8C-9kI_TLV93UDTXn_wpUY0nnQ1Rxp0tGPw2iJpvrK5vC9WfTYhFP61JTN6wHAHID2"/>
+</button>
+<button class="customer-tab px-3 py-2 rounded-xl bg-surface-container border border-transparent shrink-0 flex items-center h-10 opacity-70" data-target="nursa">
+<img alt="Nursa logo" class="h-4 w-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCEsl1keZ_jcD_nIhP98egS7J877Xa-ylbuEvvQaKXPFWaqqtmYEAz2fdDdbia4ov7PrgqXO2363qSFtttdyZigJByjRfM-jYJw9ouWoz0rvzbiYRv9prFwtBUgjNpjjoiYwS_AhZUeXEfZAe5gMQ0nV8Pt4DC3QIdxTzDmSgE1I13PzR__WIhRdsG7t5G94CRLfMbG4_1yZzzQS6HE3CmWnbEeesDVHmbAv_agNI9IeN0Qv6IsTel8Yj9PpiGCUzBIArINYRk_tsTK"/>
+</button>
+</div>
+<!-- Active Story Panel (Klar) -->
+<div class="mt-4 bg-surface-container-lowest rounded-2xl p-5 border border-border-subtle shadow-sm flex flex-col justify-between">
+<div>
+<p class="font-body-md text-body-md text-on-surface italic leading-relaxed mb-6">
+          “Lovable allowed our engineering and product teams to prototype, test, and ship complex customer portals in 48 hours instead of a quarter.”
+        </p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-pulse-pink/20 flex items-center justify-center font-bold text-secondary">
+            CS
+          </div>
+<div>
+<h4 class="font-label-md text-label-md font-semibold text-on-surface">C-Level Product Leader</h4>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Klar Growth Team</p>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-border-subtle flex items-center justify-between text-secondary">
+<span class="font-label-sm text-label-sm font-semibold">Read customer story</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</section>
+<!-- ================= CLOSING CTA PROMPT CARD ================= -->
+<section class="py-14 px-4 bg-hero-cream relative overflow-hidden text-center" id="community">
+<div class="w-12 h-12 rounded-2xl bg-secondary-fixed mx-auto mb-4 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg font-semibold text-on-surface tracking-tight mb-2">
+      Start building with Lovable today
+    </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+      No complex environments to configure. Just describe your ambition.
+    </p>
+<!-- Closing prompt box -->
+<form action="https://lovable.dev/" class="w-[342px] mx-auto bg-surface-container-lowest rounded-2xl p-3 border border-border-subtle composer-shadow text-left mb-6" method="GET">
+<div class="flex items-center justify-between">
+<input class="w-full text-on-surface placeholder:text-outline-variant font-body-sm text-body-sm bg-transparent border-0 focus:ring-0 p-1" placeholder="Build an AI workflow agent..." type="text"/>
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg font-label-sm text-label-sm font-semibold active:scale-95 transition-transform shrink-0" type="submit">
+          Launch
+        </button>
+</div>
+</form>
+</section>
+<!-- ================= FOOTER (SHARED COMPONENT EXECUTION) ================= -->
+<!-- Strict adherence to Shared Components JSON: style_bg_color: bg-deep-blue text-on-primary, etc. -->
+<footer class="w-full bg-deep-blue text-on-primary border-t border-border-subtle/10 px-6 py-12" id="pricing">
+<!-- Brand row -->
+<div class="flex items-center justify-between mb-8 pb-6 border-b border-white/10">
+<div class="flex items-center gap-2">
+<svg class="w-5 h-5" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#F472B6"></path>
+</svg>
+<span class="font-headline-md text-headline-md font-semibold text-on-primary">Lovable</span>
+</div>
+<!-- Status Indicator -->
+<div class="flex items-center gap-2 px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="font-label-sm text-label-sm text-outline-variant">All Systems Normal</span>
+</div>
+</div>
+<!-- 5-Column Stacked Mobile Links preserving exact labels from JSON -->
+<div class="grid grid-cols-2 gap-y-8 gap-x-4 mb-10 text-left">
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-on-primary uppercase tracking-wider mb-3">Product</p>
+<ul class="space-y-2 font-body-sm text-body-sm text-outline-variant">
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Product</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Solutions</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Enterprise</a></li>
+</ul>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-on-primary uppercase tracking-wider mb-3">Resources</p>
+<ul class="space-y-2 font-body-sm text-body-sm text-outline-variant">
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Resources</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Community</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Blog</a></li>
+</ul>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-on-primary uppercase tracking-wider mb-3">Company</p>
+<ul class="space-y-2 font-body-sm text-body-sm text-outline-variant">
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Careers</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Pricing</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Security</a></li>
+</ul>
+</div>
+<div>
+<p class="font-label-sm text-label-sm font-semibold text-on-primary uppercase tracking-wider mb-3">Legal</p>
+<ul class="space-y-2 font-body-sm text-body-sm text-outline-variant">
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Privacy</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Terms</a></li>
+<li><a class="hover:text-pulse-pink transition-colors" href="https://lovable.dev/">Status</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright String verbatim from JSON -->
+<div class="pt-6 border-t border-white/10 text-center">
+<p class="font-label-sm text-label-sm text-outline-variant">
+        © 2025 Lovable Technologies AB. All rights reserved.
+      </p>
+</div>
+</footer>
+<!-- ================= INLINE SCRIPT FOR ACCESSIBLE INTERACTION ================= -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Mobile Drawer functionality
+      const menuToggle = document.getElementById('menu-toggle-btn');
+      const menuClose = document.getElementById('menu-close-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const drawerLinks = document.querySelectorAll('.drawer-link');
+
+      function openDrawer() {
+        mobileDrawer.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        mobileDrawer.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      }
+
+      if (menuToggle && menuClose && mobileDrawer) {
+        menuToggle.addEventListener('click', openDrawer);
+        menuClose.addEventListener('click', closeDrawer);
+        drawerLinks.forEach(link => link.addEventListener('click', closeDrawer));
+      }
+
+      // Keyboard escape listener
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileDrawer.classList.contains('translate-x-full')) {
+          closeDrawer();
+        }
+      });
+
+      // Carousel tab toggle interaction
+      const tabs = document.querySelectorAll('.customer-tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => {
+            t.classList.remove('active', 'bg-surface-container-lowest', 'border-border-subtle', 'opacity-100');
+            t.classList.add('bg-surface-container', 'border-transparent', 'opacity-70');
+          });
+          tab.classList.add('active', 'bg-surface-container-lowest', 'border-border-subtle');
+          tab.classList.remove('bg-surface-container', 'border-transparent', 'opacity-70');
+        });
+      });
+    });
+  </script>
+</body></html>
