@@ -11,7 +11,7 @@ from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
-OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge', 'wired')
+OFFICIAL_DRAFTS = ('spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel', 'airbnb', 'airtable', 'stripe', 'starbucks', 'shopify', 'slack', 'supabase', 'resend', 'ollama', 'raycast', 'cal', 'cursor', 'apple', 'clay', 'clickhouse', 'cohere', 'composio', 'expo', 'mintlify', 'elevenlabs', 'miro', 'opencode.ai', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sanity', 'sentry', 'ibm', 'mongodb', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'hashicorp', 'lovable', 'x.ai', 'nvidia', 'hp', 'playstation', 'runwayml', 'uber', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'lamborghini', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'nintendo-2001', 'theverge', 'wired', 'pinterest', 'vodafone')
 DRAFT_SOURCE = ROOT / '.stitch-work' / 'current-official'
 REMOTE_ASSETS = json.loads((ROOT / 'data/official-remote-assets.json').read_text())['assets']
 REMOTE_PATHS = {asset['path'] for asset in REMOTE_ASSETS}
@@ -54,7 +54,7 @@ def stage_official_drafts():
         references.values.extend(re.findall(r'url\(([^)]+)\)', html))
         for value in references.values:
             value = unescape(value).strip(' \t\n\r\'"')
-            if unquote(value).startswith('#'):
+            if not value or unquote(value).startswith('#'):
                 continue
             if value.startswith(('https:', 'http:', 'data:', 'mailto:', 'tel:', '#', '/')):
                 continue
@@ -66,7 +66,7 @@ def stage_official_drafts():
             target = destination / relative
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(asset, target)
-        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996'):
+        if name in ('slack', 'supabase', 'voltagent', 'posthog', 'warp', 'webflow', 'wise', 'zapier', 'tesla', 'mistral.ai', 'replicate', 'together.ai', 'sentry', 'intercom', 'superhuman', 'kraken', 'coinbase', 'nike', 'minimax', 'spacex', 'bmw', 'bmw-m', 'bugatti', 'ferrari', 'renault', 'revolut', 'meta', 'mastercard', 'binance', 'dell-1996', 'pinterest', 'vodafone'):
             # Runtime tabs select additional official media that do not appear
             # in static src attributes; keep those assets with each draft.
             asset_dir = f'{name}-assets'
@@ -100,7 +100,7 @@ def stage_official_drafts():
         record = progress['linear.app' if name == 'linear' else name]
         observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
         note = record.get('review_note')
-        disclosure = name in {'theverge', 'wired'}
+        disclosure = name in {'theverge', 'wired', 'pinterest', 'vodafone'}
         badge = ('<' + ('details' if disclosure else 'div') + ' class="official-draft-badge" role="note">'
                  + ('<summary>官網重製草稿 · 尚未視覺驗收</summary>' if disclosure else '<strong>官網重製草稿 · 尚未視覺驗收</strong>')
                  + f'<span>參考資料：{observed}；非品牌官方網站。</span>'

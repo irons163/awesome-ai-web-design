@@ -21,7 +21,7 @@ async function settleUntil(predicate) {
   assert.fail('Catalog UI did not reach the expected state');
 }
 
-async function fixture(t, slug) {
+async function fixture(t, slug, progressMarkup = progress) {
   const dom = new JSDOM(html, {
     url: `https://catalog.test/#/design/${encodeURIComponent(slug)}`,
     runScripts: 'outside-only',
@@ -48,7 +48,7 @@ async function fixture(t, slug) {
   await settleUntil(() => query('#design-dialog').open);
   return {
     window, query,
-    revealProgress: () => resolveProgress({ ok: true, text: async () => progress }),
+    revealProgress: () => resolveProgress({ ok: true, text: async () => progressMarkup }),
     failProgress: () => resolveProgress({ ok: false }),
     original: JSON.parse(catalog).designs.find(item => item.slug === slug).preview,
   };
@@ -94,7 +94,14 @@ test('late progress does not replace an explicitly selected original HTML previe
 });
 
 test('a brand without an official draft stays pending instead of showing its fictional original', async t => {
-  const ui = await fixture(t, 'pinterest');
+  const pendingPage = new JSDOM(progress);
+  const link = pendingPage.window.document.querySelector('th a[href="official-drafts/pinterest.html"]');
+  assert.ok(link, 'The actual catalog must include the new Pinterest draft');
+  link.setAttribute('href', 'index.html#/design/pinterest');
+  link.closest('tr').querySelector('td.draft').className = 'pending';
+  const pendingMarkup = pendingPage.serialize();
+  pendingPage.window.close();
+  const ui = await fixture(t, 'pinterest', pendingMarkup);
   ui.revealProgress();
   await settleUntil(() => ui.query('#official-preview-status').textContent.includes('尚無'));
   assertOfficialOnly(ui.query);
@@ -104,6 +111,17 @@ test('a brand without an official draft stays pending instead of showing its fic
   assert.equal(ui.query('#preview-image').getAttribute('src'), ui.original.image);
   assert.match(ui.query('#preview-caption').textContent, /原始/);
 });
+
+for (const slug of ['pinterest', 'vodafone']) {
+  test(`${slug} opens its new official draft from the real published progress`, async t => {
+    const ui = await fixture(t, slug);
+    ui.revealProgress();
+    await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === `official-drafts/${slug}.html`);
+    assertOfficialOnly(ui.query);
+    assert.match(ui.query('#official-preview-status').textContent, /2026-10-09.*尚未/);
+    assert.match(ui.query('.official-drafts-count').textContent, /74 份草稿/);
+  });
+}
 
 test('Linear uses the catalog slug and the actual published draft filename', async t => {
   const ui = await fixture(t, 'linear.app');
