@@ -100,7 +100,7 @@ def stage_official_drafts():
         record = progress['linear.app' if name == 'linear' else name]
         observed = escape((record.get('observed_at') or record.get('reference_observed_at') or '')[:10] or '日期未記錄')
         note = record.get('review_note')
-        disclosure = name in {'theverge', 'wired', 'pinterest', 'vodafone', 'spotify', 'linear'}
+        disclosure = name in {'theverge', 'wired', 'pinterest', 'vodafone', 'spotify', 'linear', 'claude', 'notion'}
         badge = ('<' + ('details' if disclosure else 'div') + ' class="official-draft-badge" role="note">'
                  + ('<summary>官網重製草稿 · 尚未視覺驗收</summary>' if disclosure else '<strong>官網重製草稿 · 尚未視覺驗收</strong>')
                  + f'<span>參考資料：{observed}；非品牌官方網站。</span>'
