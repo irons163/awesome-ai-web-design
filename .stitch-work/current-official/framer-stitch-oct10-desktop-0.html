@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Framer — The design agent for every step from idea to launch</title>
+<!-- Tailwind CDN & Fonts -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"GT Walsheim Medium"', '"Inter Variable"', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+            heading: ['"GT Walsheim Medium"', 'Inter', 'sans-serif'],
+            body: ['"Inter Variable"', 'Inter', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+          },
+          colors: {
+            brand: '#0B55FF',
+            framerDark: '#050505',
+            framerCard: '#0f0f11',
+            framerBorder: '#1e1e24'
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    @font-face {
+      font-family: 'GT Walsheim Medium';
+      src: local('GT Walsheim Medium'), local('GT Walsheim Medium Placeholder'), local('Inter-Medium');
+      font-weight: 500;
+      font-style: normal;
+    }
+    body {
+      background-color: #000000;
+      color: #ffffff;
+      font-family: "Inter Variable", Inter, sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-heading {
+      font-family: "GT Walsheim Medium", "GT Walsheim Medium Placeholder", sans-serif;
+      font-size: 54px;
+      line-height: 54px;
+      letter-spacing: -2.16px;
+      font-weight: 500;
+    }
+    .section-heading {
+      font-family: "GT Walsheim Medium", "GT Walsheim Medium Placeholder", sans-serif;
+      font-size: 44px;
+      line-height: 48.4px;
+      letter-spacing: -1.76px;
+      font-weight: 500;
+    }
+    .inter-subhead {
+      font-family: "Inter Variable", "Inter Variable Placeholder", sans-serif;
+      font-size: 18px;
+      line-height: 24.3px;
+      letter-spacing: -0.2px;
+      font-weight: 400;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .custom-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Precise hover and focus rings */
+    .glow-border {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(100% 100% at 50% 0%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0) 100%), #0a0a0c;
+    }
+  </style>
+</head>
+<body class="bg-black text-white selection:bg-blue-600 selection:text-white">
+<!-- ================= TOP NAVIGATION (64px, x40 padding) ================= -->
+<header class="fixed top-0 left-0 right-0 z-50 h-16 bg-black/80 backdrop-blur-md border-b border-white/[0.06] transition-all">
+<div class="max-w-[1280px] h-full mx-auto px-10 flex items-center justify-between">
+<!-- Left: Brand Logo & Links -->
+<div class="flex items-center gap-8">
+<a class="flex items-center gap-2 group text-white" href="https://www.framer.com/">
+<!-- Genuine Framer Logo Mark -->
+<svg class="transition-transform group-hover:scale-105" fill="currentColor" height="24" viewbox="0 0 24 24" width="24">
+<path d="M4 2h16v7H12l8 7H12v6L4 15V2z"></path>
+</svg>
+<span class="font-semibold text-lg tracking-tight">Framer</span>
+</a>
+<!-- Desktop Navigation Items -->
+<nav class="hidden md:flex items-center gap-6 text-[14px] text-[#999999] font-medium">
+<div class="relative group cursor-pointer hover:text-white transition-colors flex items-center gap-1">
+<span>Platform</span>
+<svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="relative group cursor-pointer hover:text-white transition-colors flex items-center gap-1">
+<span>Solutions</span>
+<svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="relative group cursor-pointer hover:text-white transition-colors flex items-center gap-1">
+<span>Resources</span>
+<svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<a class="hover:text-white transition-colors" href="https://www.framer.com/enterprise/">Enterprise</a>
+<a class="hover:text-white transition-colors" href="https://www.framer.com/pricing/">Pricing</a>
+</nav>
+</div>
+<!-- Right: Action CTA Buttons -->
+<div class="flex items-center gap-3">
+<a class="text-[14px] font-medium text-[#999999] hover:text-white px-3 py-1.5 transition-colors" href="https://framer.com/login">Log in</a>
+<a class="text-[14px] font-medium bg-white text-black hover:bg-neutral-200 px-4 py-1.5 rounded-full transition-colors font-medium" href="https://framer.com/signup">Sign up</a>
+</div>
+</div>
+</header>
+<!-- ================= HERO SECTION (x40, y164, 721x108) ================= -->
+<main class="pt-36 max-w-[1280px] mx-auto px-10">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8">
+<div class="max-w-[721px]">
+<h1 class="hero-heading text-white">
+          Framer is the design agent for every step from idea to launch
+        </h1>
+<div class="mt-8 flex flex-wrap items-center gap-4">
+<a class="bg-white hover:bg-neutral-200 text-black text-[15px] font-medium px-5 py-2.5 rounded-full transition-all shadow-sm" href="https://framer.com/signup">
+            Get started for free
+          </a>
+<a class="bg-[#161618] hover:bg-[#202024] text-white border border-white/10 text-[15px] font-medium px-5 py-2.5 rounded-full transition-all flex items-center gap-2" href="https://www.framer.com/download/">
+<span>Download app</span>
+</a>
+</div>
+</div>
+<!-- Right Link: New: Skills -->
+<div class="flex items-center gap-2 mb-2">
+<a class="group flex items-center gap-2 text-[14px] text-[#999999] hover:text-white transition-colors bg-white/[0.04] border border-white/10 px-3.5 py-1.5 rounded-full" href="#skills">
+<span class="inline-block w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
+<span class="text-white font-medium">New:</span>
+<span class="text-[#cccccc] group-hover:text-white">Skills</span>
+<svg class="w-3.5 h-3.5 ml-0.5 text-neutral-400 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+</div>
+<!-- Hero Native Video Container (1200x673.45) -->
+<div class="relative w-full rounded-2xl overflow-hidden border border-white/10 bg-[#0c0c0e] shadow-2xl group my-8">
+<video autoplay="" class="w-full h-auto aspect-[1200/673.45] object-cover block bg-transparent" loop="" muted="" playsinline="" poster="https://framerusercontent.com/images/aKUIMjNuPk8A4te7JSSJ3Jek.jpg?width=1160&amp;height=650" src="https://framerusercontent.com/assets/2zyGmnAWVTTdkv4LY1mFKgEdhg.mp4"></video>
+<!-- Native 0:36 Control Pill Badge -->
+<div class="absolute bottom-5 right-5 bg-black/70 backdrop-blur-md border border-white/10 text-white/90 text-xs px-3 py-1.5 rounded-full flex items-center gap-2 font-mono">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
+<span>0:36</span>
+</div>
+<div class="absolute bottom-5 left-5 bg-black/70 backdrop-blur-md border border-white/10 text-white/80 text-xs px-3 py-1.5 rounded-full flex items-center gap-2 font-medium">
+<span>Meet our customers</span>
+</div>
+</div>
+<!-- ================= TRUSTED BY TEAMS LOGO STRIP ================= -->
+<div class="py-14 border-b border-white/[0.06]">
+<p class="text-xs uppercase tracking-widest text-[#666666] font-semibold text-center mb-8">Trusted by teams shipping big sites</p>
+<div class="flex flex-wrap items-center justify-between gap-8 opacity-70 grayscale hover:grayscale-0 transition-all px-4">
+<!-- Miro -->
+<img alt="Miro logo" class="h-6 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Perplexity -->
+<img alt="Perplexity logo" class="h-6 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Legora -->
+<img alt="Legora logo" class="h-5 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Mixpanel -->
+<img alt="Mixpanel logo" class="h-6 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Zapier -->
+<img alt="Zapier logo" class="h-6 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Flora -->
+<img alt="Flora logo" class="h-5 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- Mutiny -->
+<img alt="Mutiny logo" class="h-6 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<!-- StackAI -->
+<img alt="StackAI logo" class="h-5 object-contain invert brightness-200" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- ================= AGENTS SECTION ================= -->
+<div class="py-24">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-4">
+<div>
+<span class="text-xs uppercase tracking-wider text-blue-400 font-semibold mb-2 block">Framer Agent Engine</span>
+<h2 class="section-heading max-w-[520px]">Agents that work alongside you, not instead of you</h2>
+</div>
+<a class="text-sm font-medium text-white hover:text-blue-400 flex items-center gap-1.5 transition-colors" href="https://framer.com/signup">
+<span>Start with agents</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<!-- Agent 1: Design with an agent -->
+<div class="glow-border rounded-3xl p-8 md:p-12 mb-12 relative overflow-hidden">
+<div class="max-w-[640px] mb-8">
+<h3 class="inter-subhead text-white font-medium mb-3">Design with an agent</h3>
+<p class="text-[#999999] text-base leading-relaxed">
+            A professional design agent, native to the canvas. It works directly on your site to generate and refine in place, with every change visible, editable, and under your control.
+          </p>
+<div class="mt-4 flex items-center gap-3">
+<span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-full border border-white/10 text-neutral-300">Exploration — Big Intro</span>
+<span class="text-xs font-mono px-3 py-1 bg-white/5 rounded-full border border-white/10 text-neutral-400">Exploration — Side Nav</span>
+</div>
+</div>
+<!-- Live Gallery Previews from Observed Images -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
+<div class="rounded-xl overflow-hidden border border-white/10 bg-neutral-900 shadow-lg">
+<img alt="Desktop website preview for the Haus design example" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-4 border-t border-white/5 bg-black/40">
+<span class="text-xs font-medium text-neutral-300">Haus Exploration · In-situ Canvas</span>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden border border-white/10 bg-neutral-900 shadow-lg">
+<img alt="Website preview in the explorations section" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-4 border-t border-white/5 bg-black/40">
+<span class="text-xs font-medium text-neutral-300">Variant A · Adaptive Spacing</span>
+</div>
+</div>
+<div class="rounded-xl overflow-hidden border border-white/10 bg-neutral-900 shadow-lg">
+<img alt="Website sidebar preview in the explorations section" class="w-full h-auto object-cover hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-4 border-t border-white/5 bg-black/40">
+<span class="text-xs font-medium text-neutral-300">Sidebar System · Dynamic Breakpoints</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent 2: Run your CMS with an agent -->
+<div class="glow-border rounded-3xl p-8 md:p-12 mb-12 relative overflow-hidden">
+<div class="max-w-[640px] mb-8">
+<h3 class="inter-subhead text-white font-medium mb-3">Run your CMS with an agent</h3>
+<p class="text-[#999999] text-base leading-relaxed">
+            Manage more. Publish faster. The CMS agent sets up, organizes, and updates your entire CMS, connecting it directly to the canvas so content and design stay in sync.
+          </p>
+</div>
+<!-- Real CMS Table UI Representation -->
+<div class="bg-[#0e0e11] border border-white/10 rounded-xl overflow-hidden">
+<div class="px-6 py-4 border-b border-white/10 flex items-center justify-between text-xs text-neutral-400">
+<div class="flex items-center gap-4">
+<span class="font-semibold text-white">Collections</span>
+<span>Fields</span>
+<span class="text-blue-400 font-medium">Articles (320)</span>
+<span>Creators (256)</span>
+<span>Categories (18)</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-1 rounded bg-blue-500/20 text-blue-300 border border-blue-500/30">Synced</span>
+<button class="bg-white/10 text-white px-3 py-1 rounded hover:bg-white/20 transition-colors">+ Add Item</button>
+</div>
+</div>
+<div class="divide-y divide-white/5 text-sm">
+<div class="px-6 py-3.5 flex items-center justify-between hover:bg-white/[0.02]">
+<div class="flex items-center gap-4">
+<img alt="CMS image example" class="w-8 h-8 rounded object-cover border border-white/10" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="font-medium text-neutral-200">Designing calmer interfaces inspired by nature</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-neutral-400">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live</span>
+<span>Inspiration</span>
+</div>
+</div>
+<div class="px-6 py-3.5 flex items-center justify-between hover:bg-white/[0.02]">
+<div class="flex items-center gap-4">
+<img alt="CMS image example" class="w-8 h-8 rounded object-cover border border-white/10" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="font-medium text-neutral-200">Organic shapes and natural motion in modern UI</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-neutral-400">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live</span>
+<span>Product</span>
+</div>
+</div>
+<div class="px-6 py-3.5 flex items-center justify-between hover:bg-white/[0.02]">
+<div class="flex items-center gap-4">
+<img alt="CMS image example" class="w-8 h-8 rounded object-cover border border-white/10" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="font-medium text-neutral-200">Earthy color palettes inspired by the natural world</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-neutral-400">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live</span>
+<span>Inspiration</span>
+</div>
+</div>
+<div class="px-6 py-3.5 flex items-center justify-between hover:bg-white/[0.02]">
+<div class="flex items-center gap-4">
+<img alt="CMS image example" class="w-8 h-8 rounded object-cover border border-white/10" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="font-medium text-neutral-200">Designing with growth: how nature shapes UX patterns</span>
+</div>
+<div class="flex items-center gap-6 text-xs text-neutral-400">
+<span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">Live</span>
+<span>Guide</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Agent 3: Code with an agent -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+<div class="glow-border rounded-3xl p-8 md:p-12 flex flex-col justify-between">
+<div>
+<h3 class="inter-subhead text-white font-medium mb-3">Code with an agent</h3>
+<p class="text-[#999999] text-base leading-relaxed mb-6">
+              Agents turn your wildest ideas into code and put them on your site. From simple custom effects to complex interactions.
+            </p>
+</div>
+<!-- Code Component showcase wheel/grid -->
+<div class="relative bg-black/50 border border-white/10 rounded-2xl p-6 font-mono text-xs text-neutral-300">
+<div class="text-neutral-500 mb-2">// Interactive Magnetic Spring component</div>
+<div class="text-blue-400">import { motion, useSpring } from 'framer-motion'</div>
+<div class="mt-2 text-neutral-300">
+              export function AgentComponent() {<br/>
+                const spring = useSpring(0, { damping: 15, stiffness: 120 });<br/>
+                return &lt;motion.div style={{ scale: spring }} /&gt;;<br/>
+              }
+            </div>
+<div class="mt-6 flex flex-wrap gap-2">
+<img alt="Code Component Image" class="w-12 h-12 rounded-lg border border-white/10 object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Code Component Image" class="w-12 h-12 rounded-lg border border-white/10 object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Code Component Image" class="w-12 h-12 rounded-lg border border-white/10 object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Code Component Image" class="w-12 h-12 rounded-lg border border-white/10 object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</div>
+<!-- Agent 4: Connect to any AI -->
+<div class="glow-border rounded-3xl p-8 md:p-12 flex flex-col justify-between">
+<div>
+<h3 class="inter-subhead text-white font-medium mb-3">Connect to any AI</h3>
+<p class="text-[#999999] text-base leading-relaxed mb-6">
+              Take action on your site from anywhere. Update copy from Slack. Trigger CMS changes from the terminal. Ship from a GitHub PR. Drive it all from your Terminal, Codex in ChatGPT, Claude Code, Cursor, or any external AI.
+            </p>
+</div>
+<!-- Terminal / Claude Code Box -->
+<div class="bg-[#0b0c0e] border border-white/10 rounded-2xl p-5 font-mono text-xs text-neutral-300 shadow-inner">
+<div class="flex items-center gap-2 pb-3 mb-3 border-b border-white/10 text-neutral-400">
+<span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
+<span class="ml-2 text-white/70">Claude Code v2.1.170 — Framer MCP</span>
+</div>
+<div class="text-neutral-400 leading-relaxed">
+<div class="text-neutral-200">Sonnet 4.6 · Claude Team · Framer</div>
+<div class="text-blue-400 mt-2">Initializing WordPress importer…</div>
+<div class="text-neutral-300">└ WP REST API detected.<br/>└ Framer CMS connected.</div>
+<div class="text-emerald-400 mt-2">Skill(check-wordpress-auth)</div>
+<div>└ Connected to Framer CMS collection.</div>
+<div class="text-neutral-400 mt-1">Bash(GET /wp-json/wp/v2/posts?per_page)</div>
+<div class="text-emerald-300">Import complete · 47 blog entries published.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= NOT JUST VIBES, A FULL PLATFORM ================= -->
+<div class="py-20 border-t border-white/[0.06]">
+<div class="text-center max-w-[680px] mx-auto mb-16">
+<span class="text-xs uppercase tracking-widest text-[#666666] font-semibold mb-2 block">Production Infrastructure</span>
+<h2 class="section-heading text-white">Not just vibes, a full platform</h2>
+</div>
+<!-- 8-Card Platform Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- 1. Performance -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Performance</h4>
+<span class="text-emerald-400 font-mono text-xs px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/20">GOOD</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-6">
+              Core Web Vitals engineered for top SEO ranking with sub-millisecond edge SSR.
+            </p>
+</div>
+<div class="grid grid-cols-3 gap-2 p-3 bg-white/[0.02] border border-white/5 rounded-xl font-mono text-center">
+<div>
+<div class="text-xs text-neutral-500">LCP</div>
+<div class="text-sm font-semibold text-emerald-400">1.1s</div>
+</div>
+<div>
+<div class="text-xs text-neutral-500">INP</div>
+<div class="text-sm font-semibold text-emerald-400">95ms</div>
+</div>
+<div>
+<div class="text-xs text-neutral-500">CLS</div>
+<div class="text-sm font-semibold text-emerald-400">0.01</div>
+</div>
+</div>
+</div>
+<!-- 2. CMS -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">CMS</h4>
+<span class="text-blue-400 font-mono text-xs px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">Sync</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Unlimited items, instantaneous multi-filter querying, visual schema relations.
+            </p>
+</div>
+<div class="text-xs font-mono text-neutral-400 p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+<div class="flex justify-between py-0.5"><span>Events</span><span class="text-white">13</span></div>
+<div class="flex justify-between py-0.5"><span>Speakers</span><span class="text-white">18</span></div>
+<div class="flex justify-between py-0.5"><span>Talks</span><span class="text-white">89</span></div>
+</div>
+</div>
+<!-- 3. SEO -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">SEO</h4>
+<span class="text-neutral-400 font-mono text-xs">Automated</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Automated sitemaps, JSON-LD structured schemas, social previews, and clean canonical redirects.
+            </p>
+</div>
+<div class="p-3 bg-white/[0.02] border border-white/5 rounded-xl text-xs font-mono text-neutral-300">
+<div class="text-neutral-400">Social Preview · 1200x630</div>
+<div class="text-blue-400 mt-1">comet.perplexity.ai/comet</div>
+</div>
+</div>
+<!-- 4. Collaboration -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Collaboration</h4>
+<div class="flex -space-x-1">
+<img alt="Framer user avatar" class="w-5 h-5 rounded-full border border-black" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Framer user avatar" class="w-5 h-5 rounded-full border border-black" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Framer user avatar" class="w-5 h-5 rounded-full border border-black" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Zero-latency multiplayer cursors, granular role permissions, and branch merging.
+            </p>
+</div>
+<div class="text-xs font-mono text-neutral-400 p-3 bg-white/[0.02] border border-white/5 rounded-xl flex justify-between">
+<span>Main branch</span>
+<span class="text-emerald-400">Synced 1m ago</span>
+</div>
+</div>
+<!-- 5. Localization -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Localization</h4>
+<span class="text-neutral-400 font-mono text-xs">60+ Locales</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Automatic AI translations, localized subpath routes, and regional content adaptation.
+            </p>
+</div>
+<div class="grid grid-cols-3 gap-2 text-center text-xs font-mono p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+<div><span class="text-neutral-400">NL</span> <span class="text-white block font-semibold">35%</span></div>
+<div><span class="text-neutral-400">IT</span> <span class="text-white block font-semibold">100%</span></div>
+<div><span class="text-neutral-400">CN</span> <span class="text-white block font-semibold">90%</span></div>
+</div>
+</div>
+<!-- 6. Hosting (99.99% uptime) -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Hosting</h4>
+<span class="text-emerald-400 font-mono text-xs">Global Edge</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-2">
+              Multi-region Global Edge network with historical uptime and zero DevOps overhead.
+            </p>
+</div>
+<div class="text-center py-2">
+<span class="text-3xl font-semibold tracking-tight text-white block">99.99%</span>
+<span class="text-xs uppercase tracking-wider text-neutral-500 font-mono">uptime</span>
+</div>
+</div>
+<!-- 7. Security -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Security</h4>
+<span class="text-blue-400 font-mono text-xs">SOC2 Type II</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Enterprise Okta / SAML SSO, automated TLS certs, and strict isolated workspaces.
+            </p>
+</div>
+<div class="text-xs font-mono text-neutral-400 p-3 bg-white/[0.02] border border-white/5 rounded-xl flex justify-between">
+<span>Enterprise SSO</span>
+<span class="text-emerald-400">Enabled</span>
+</div>
+</div>
+<!-- 8. Analytics & A/B Testing -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">Analytics</h4>
+<span class="text-neutral-400 font-mono text-xs">GDPR Compliant</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Cookieless privacy-first telemetry, live visitor maps, and zero-flicker edge A/B testing.
+            </p>
+</div>
+<div class="text-xs font-mono text-neutral-300 p-3 bg-white/[0.02] border border-white/5 rounded-xl flex justify-between">
+<div>
+<span class="text-neutral-400">Variant</span>
+<div class="text-emerald-400 font-medium">Winner (+14.1%)</div>
+</div>
+<div class="text-right">
+<span class="text-neutral-400">Visitors</span>
+<div>54,817</div>
+</div>
+</div>
+</div>
+<!-- 9. A/B Testing Card -->
+<div class="glow-border rounded-2xl p-6 relative overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<h4 class="inter-subhead text-white font-medium">A/B Testing</h4>
+<span class="text-emerald-400 font-mono text-xs">Edge Variant</span>
+</div>
+<p class="text-xs text-neutral-400 leading-relaxed mb-4">
+              Edge-computed split testing without cumulative layout shifts or client flicker delays.
+            </p>
+</div>
+<div class="text-xs font-mono text-neutral-400 p-3 bg-white/[0.02] border border-white/5 rounded-xl flex justify-between items-center">
+<span>Home Page 2026</span>
+<span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-semibold">17.1% Conv</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= SHIPPED WITH FRAMER SHOWCASE ================= -->
+<div class="py-24 border-t border-white/[0.06]">
+<div class="flex items-center justify-between mb-12">
+<h2 class="section-heading">Shipped with Framer</h2>
+<a class="text-sm font-medium text-[#999999] hover:text-white flex items-center gap-1 transition-colors" href="https://www.framer.com/gallery/">
+<span>See Framer sites</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</a>
+</div>
+<!-- Verified Responsive Showcase Grid using Real Public Images -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="rounded-2xl overflow-hidden border border-white/10 bg-[#0c0c0e] group">
+<img alt="Site image in 2026 Frontpage/Sites" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-5 flex items-center justify-between">
+<span class="text-sm font-medium text-white">Monolith Design</span>
+<span class="text-xs font-mono text-neutral-400">Live ↗</span>
+</div>
+</div>
+<div class="rounded-2xl overflow-hidden border border-white/10 bg-[#0c0c0e] group">
+<img alt="Midlife Engineering" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-5 flex items-center justify-between">
+<span class="text-sm font-medium text-white">Midlife Engineering</span>
+<span class="text-xs font-mono text-neutral-400">Live ↗</span>
+</div>
+</div>
+<div class="rounded-2xl overflow-hidden border border-white/10 bg-[#0c0c0e] group">
+<img alt="Website showcase preview made in Framer" class="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div class="p-5 flex items-center justify-between">
+<span class="text-sm font-medium text-white">Kinetic Studio</span>
+<span class="text-xs font-mono text-neutral-400">Live ↗</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= BUILT ON A COMMUNITY THAT ISN'T GOING ANYWHERE ================= -->
+<div class="py-24 border-t border-white/[0.06]">
+<div class="max-w-[600px] mb-16">
+<h2 class="section-heading mb-4">Built on a community that isn’t going anywhere</h2>
+<p class="text-base text-neutral-400">23,100 Resources &amp; creators building production templates, plugins, and custom shaders.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Community Feed Card -->
+<div class="glow-border rounded-3xl p-8">
+<div class="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+<div class="flex items-center gap-3">
+<img alt="Avatar" class="w-8 h-8 rounded-full border border-white/10" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<div>
+<div class="text-sm font-semibold text-white">Lee Black</div>
+<div class="text-xs text-neutral-500">7m ago · Liquid Glass Component</div>
+</div>
+</div>
+<span class="text-xs font-mono text-blue-400 bg-blue-500/10 px-2.5 py-1 rounded-full">Community</span>
+</div>
+<p class="text-sm text-neutral-300 leading-relaxed mb-6">
+            “The only Framer Liquid Glass component that is cross browser and mobile friendly. Turn your sound on.”
+          </p>
+<div class="rounded-xl overflow-hidden border border-white/10">
+<img alt="Community carousel image preview" class="w-full h-48 object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Templates & Marketplace Card -->
+<div class="glow-border rounded-3xl p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-sm font-semibold text-white">Trending Templates</span>
+<a class="text-xs text-blue-400 hover:underline" href="https://www.framer.com/templates/">See all</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5">
+<div>
+<div class="text-sm font-medium text-white">Billie · Portfolio</div>
+<div class="text-xs text-neutral-400">By Gustave Flowbert</div>
+</div>
+<span class="text-xs font-mono text-neutral-300 px-2 py-1 rounded bg-white/5">Free</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5">
+<div>
+<div class="text-sm font-medium text-white">Tidy Up · Agency</div>
+<div class="text-xs text-neutral-400">By Darkroom Engineering</div>
+</div>
+<span class="text-xs font-mono text-neutral-300 px-2 py-1 rounded bg-white/5">$67</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl bg-white/[0.02] border border-white/5">
+<div>
+<div class="text-sm font-medium text-white">Lou · Editorial</div>
+<div class="text-xs text-neutral-400">By Gustave Flowbert</div>
+</div>
+<span class="text-xs font-mono text-neutral-300 px-2 py-1 rounded bg-white/5">$99</span>
+</div>
+</div>
+</div>
+<div class="pt-6 border-t border-white/10 mt-6 flex items-center justify-between">
+<span class="text-xs text-neutral-400">Ready to build your next site?</span>
+<a class="text-xs font-semibold bg-white text-black px-4 py-2 rounded-full hover:bg-neutral-200 transition-colors" href="https://framer.com/signup">Start free</a>
+</div>
+</div>
+</div>
+</div>
+<!-- ================= YOUR NEXT IDEA STARTS HERE ================= -->
+<div class="py-24 text-center">
+<div class="max-w-[720px] mx-auto bg-gradient-to-b from-[#111116] to-[#08080a] border border-white/10 rounded-3xl p-10 md:p-16 shadow-2xl relative overflow-hidden">
+<h2 class="hero-heading text-white text-center mb-6">Your next idea starts here</h2>
+<p class="text-base text-neutral-400 mb-8 max-w-lg mx-auto">
+          Type what you want to create and let Framer assemble the layout, components, and responsive structure in seconds.
+        </p>
+<!-- Prompt input simulation -->
+<div class="relative max-w-lg mx-auto bg-[#16161c] border border-white/10 rounded-2xl p-2.5 flex items-center justify-between shadow-inner">
+<input class="bg-transparent border-none text-sm text-white px-3 focus:outline-none w-full placeholder:text-neutral-500" placeholder="Describe the site you want to build..." readonly="" type="text" value="Personal portfolio with 3D interactions and CMS blog"/>
+<a class="bg-white hover:bg-neutral-200 text-black text-xs font-semibold px-4 py-2.5 rounded-xl transition-colors whitespace-nowrap" href="https://framer.com/signup">Generate</a>
+</div>
+<!-- Suggestion Pills -->
+<div class="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs text-neutral-400">
+<span class="text-neutral-600">Try:</span>
+<span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full cursor-pointer hover:border-white/20">SaaS landing page</span>
+<span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full cursor-pointer hover:border-white/20">Portfolio with 3D elements</span>
+<span class="bg-white/5 border border-white/10 px-3 py-1 rounded-full cursor-pointer hover:border-white/20">Design system docs</span>
+</div>
+</div>
+</div>
+</main>
+<!-- ================= COMPREHENSIVE FOOTER ================= -->
+<footer class="border-t border-white/[0.08] bg-[#030303] text-neutral-400 text-xs py-16">
+<div class="max-w-[1280px] mx-auto px-10">
+<div class="grid grid-cols-2 md:grid-cols-6 gap-8 mb-16">
+<!-- Product -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Product</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/ai/">AI &amp; Agents</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/canvas/">Canvas Design</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/cms/">CMS &amp; Schema</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/hosting/">Site Hosting</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/seo/">SEO &amp; Vitals</a></li>
+<li><a class="hover:text-white transition-colors flex items-center gap-1.5" href="https://www.framer.com/skills/"><span>Skills</span><span class="px-1.5 py-0.2 bg-blue-500/20 text-blue-400 rounded text-[10px]">New</span></a></li>
+</ul>
+</div>
+<!-- Marketplace -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Marketplace</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/templates/">Templates</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/plugins/">Plugins</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/components/">Components</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/experts/">Hire Experts</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/gallery/">Site Gallery</a></li>
+</ul>
+</div>
+<!-- Business -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Business</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/enterprise/">Enterprise</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/agencies/">Agencies</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/startups/">Startups</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/pricing/">Pricing Plans</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/security/">Security &amp; Trust</a></li>
+</ul>
+</div>
+<!-- Resources -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Resources</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/academy/">Academy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/community/">Community</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/updates/">Changelog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/developers/">Developers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/help/">Help Center</a></li>
+</ul>
+</div>
+<!-- Solutions -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Solutions</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/landing-pages/">Landing Pages</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/portfolios/">Portfolio Maker</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/figma-to-html/">Figma to HTML</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/growth/">Growth Teams</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/compare/">Comparisons</a></li>
+</ul>
+</div>
+<!-- Company & Status -->
+<div>
+<h5 class="text-white font-semibold mb-4 text-sm">Company</h5>
+<ul class="space-y-2.5">
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/about/">About Framer</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/careers/">Careers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/brand/">Brand Assets</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.framer.com/legal/">Legal &amp; Privacy</a></li>
+<li>
+<a class="hover:text-white transition-colors flex items-center gap-1.5 text-emerald-400" href="https://status.framer.com/">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span>All systems normal</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+<!-- Bottom Legal & Copyright Bar -->
+<div class="pt-8 border-t border-white/[0.06] flex flex-col md:flex-row items-center justify-between gap-4 text-neutral-500">
+<div class="flex items-center gap-3">
+<svg class="text-white" fill="currentColor" height="18" viewbox="0 0 24 24" width="18">
+<path d="M4 2h16v7H12l8 7H12v6L4 15V2z"></path>
+</svg>
+<span>© 2026 Framer B.V. All rights reserved. Free attributed study.</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-neutral-400 transition-colors" href="https://www.framer.com/privacy/">Privacy</a>
+<a class="hover:text-neutral-400 transition-colors" href="https://www.framer.com/terms/">Terms</a>
+<a class="hover:text-neutral-400 transition-colors" href="https://www.framer.com/security/">Security</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Figma: The full-stack creative canvas</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "inverse-on-surface": "#f0f1f1",
+            "surface-container": "#eeeeee",
+            "inverse-primary": "#c6c6c6",
+            "tertiary-container": "#1b1b1b",
+            "on-tertiary-fixed": "#1b1b1b",
+            "tertiary": "#000000",
+            "on-primary-fixed": "#1b1b1b",
+            "on-primary-fixed-variant": "#474747",
+            "outline-variant": "#cfc4c5",
+            "surface-variant": "#e2e2e2",
+            "on-secondary-container": "#646464",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-container": "#848484",
+            "on-background": "#1a1c1c",
+            "on-surface-variant": "#4c4546",
+            "on-secondary-fixed-variant": "#474747",
+            "secondary": "#5e5e5e",
+            "primary-fixed-dim": "#c6c6c6",
+            "on-secondary-fixed": "#1b1b1b",
+            "on-error": "#ffffff",
+            "surface-dim": "#dadada",
+            "surface-container-high": "#e8e8e8",
+            "secondary-fixed-dim": "#c6c6c6",
+            "surface": "#f9f9f9",
+            "primary-container": "#1b1b1b",
+            "error": "#ba1a1a",
+            "on-error-container": "#93000a",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#f9f9f9",
+            "background": "#f9f9f9",
+            "error-container": "#ffdad6",
+            "surface-tint": "#5e5e5e",
+            "outline": "#7e7576",
+            "on-tertiary": "#ffffff",
+            "on-tertiary-fixed-variant": "#474747",
+            "surface-container-highest": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "secondary-fixed": "#e2e2e2",
+            "tertiary-fixed": "#e2e2e2",
+            "on-surface": "#1a1c1c",
+            "inverse-surface": "#2f3131",
+            "surface-container-low": "#f3f3f4",
+            "primary": "#000000",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "secondary-container": "#e2e2e2",
+            "on-tertiary-container": "#848484",
+            "primary-fixed": "#e2e2e2"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #ffffff;
+      color: #1a1c1c;
+    }
+    .material-symbols-outlined {
+      font-family: 'Material Symbols Outlined';
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      white-space: nowrap;
+      word-wrap: normal;
+      direction: ltr;
+    }
+    /* Hide scrollbars for crisp design presentation */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface antialiased selection:bg-black selection:text-white">
+<!-- Config India Announcement Banner -->
+<div class="w-full bg-[#1e1e1e] text-white text-xs md:text-sm py-2.5 px-4 flex items-center justify-center gap-3">
+<div class="flex items-center gap-2 font-medium">
+<span class="inline-block w-2 h-2 rounded-full bg-[#ff7262] animate-pulse"></span>
+<span>Join Config India virtually 15 October for free.</span>
+</div>
+<a class="bg-white text-black hover:bg-neutral-200 text-xs px-3 py-1 rounded-full font-semibold transition duration-150 ease-out" href="#register">
+      Register
+    </a>
+</div>
+<!-- Shared Component: TopNavBar (80px Web Header) -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest border-b border-outline-variant/30">
+<div class="flex justify-between items-center h-20 px-6 max-w-full mx-auto w-full">
+<!-- Left: Logo & Nav Links -->
+<div class="flex items-center space-x-9">
+<a aria-label="Figma Home" class="flex items-center gap-3 group" href="/">
+<!-- Figma 5-Piece Official Mark Logo -->
+<svg class="shrink-0 transition-transform duration-200 group-hover:scale-105" fill="none" height="36" viewbox="0 0 38 57" width="24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-display font-bold text-xl text-primary tracking-tight hidden sm:inline">Figma</span>
+</a>
+<!-- Top Navigation Links -->
+<nav class="hidden md:flex items-center space-x-7 font-body text-sm font-medium tracking-tight">
+<a class="text-primary font-semibold hover:text-primary transition-colors duration-150" href="#products">Products</a>
+<a class="text-on-surface hover:text-primary transition-colors duration-150" href="#solutions">Solutions</a>
+<a class="text-on-surface hover:text-primary transition-colors duration-150" href="#community">Community</a>
+<a class="text-on-surface hover:text-primary transition-colors duration-150" href="#resources">Resources</a>
+<a class="text-on-surface hover:text-primary transition-colors duration-150" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right: Action Buttons -->
+<div class="flex items-center space-x-4 text-sm font-medium">
+<a class="text-on-surface hover:text-primary transition-colors duration-150 px-2 py-1" href="#login">Log in</a>
+<a class="hidden sm:inline-flex items-center justify-center px-4 py-2 border border-black rounded-full text-black hover:bg-neutral-100 transition duration-150 ease-out" href="#contact-sales">
+          Contact sales
+        </a>
+<a class="inline-flex items-center justify-center px-4 py-2 bg-black text-white rounded-full hover:bg-neutral-800 transition duration-150 ease-out font-medium" href="#signup">
+          Get started for free
+        </a>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="w-full bg-surface-container-lowest pt-10 pb-16 md:pt-14 md:pb-24 overflow-hidden border-b border-outline-variant/30">
+<div class="max-w-[1360px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Exact Spec Headline (288px width, 224px height, 56px font, letter spacing -1.25px) -->
+<div class="lg:col-span-3 pt-4">
+<div class="w-[288px] min-h-[224px] flex flex-col justify-between">
+<h1 class="text-[56px] leading-[56px] font-normal tracking-[-1.25px] text-primary">
+            The<br/>full-stack<br/>creative<br/>canvas
+          </h1>
+</div>
+</div>
+<!-- Center: Tall Original Vimeo Player Montage -->
+<div class="lg:col-span-7 flex justify-center items-center">
+<div class="relative w-full max-w-[581px] h-[700px] rounded-2xl overflow-hidden bg-neutral-100 shadow-sm border border-outline-variant/30">
+<iframe allow="accelerometer; fullscreen; autoplay; encrypted-media; gyroscope; picture-in-picture" class="w-[581px] h-[700px] object-contain block mx-auto pointer-events-none" frameborder="0" height="100%" src="https://player.vimeo.com/video/1202887330?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="The full-stack creative canvas montage" width="100%">
+</iframe>
+</div>
+</div>
+<!-- Right Column: Dedicated black Get Started CTA -->
+<div class="lg:col-span-2 flex flex-col justify-start lg:items-end pt-4">
+<a class="inline-flex items-center justify-center px-6 py-3.5 bg-black text-white text-sm font-medium rounded-full hover:bg-neutral-800 transition duration-150 ease-out group" href="#get-started">
+<span>Get started</span>
+<span class="material-symbols-outlined ml-2 text-base transition-transform group-hover:translate-x-0.5">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Section 2: AI-Native Canvas -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1200px] mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-3xl mb-12">
+<h2 class="text-[30px] leading-[36px] font-normal tracking-[-0.66px] text-primary mb-3">
+          Move fast in the right direction on an AI-native canvas.
+        </h2>
+<p class="text-base text-secondary font-normal max-w-2xl leading-relaxed">
+          Teammates and AI agents work in the same space with shared context. Generate new ideas, refine, and align—together.
+        </p>
+</div>
+<!-- Video & Collaborator Bento Box -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Vimeo Player Iframe (795px width, 447px height) -->
+<div class="lg:col-span-8 flex justify-center">
+<div class="w-full max-w-[795px] aspect-[795/447] bg-neutral-100 rounded-xl overflow-hidden border border-outline-variant/30 shadow-sm relative">
+<iframe allow="accelerometer; fullscreen; autoplay; encrypted-media; gyroscope; picture-in-picture" class="w-full h-full object-cover pointer-events-none" frameborder="0" height="100%" src="https://player.vimeo.com/video/1202195324?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Move fast in the right direction on an AI-native canvas" width="100%">
+</iframe>
+</div>
+</div>
+<!-- Creative Collaborator Callout -->
+<div class="lg:col-span-4 p-8 bg-surface-container-low rounded-2xl border border-outline-variant/30 flex flex-col justify-between h-full min-h-[380px]">
+<div>
+<div class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-xl">auto_awesome</span>
+</div>
+<h3 class="text-xl font-medium tracking-tight text-primary mb-3">
+              Your built-in creative collaborator
+            </h3>
+<p class="text-sm text-secondary leading-relaxed mb-6">
+              Ask Figma’s agent to add motion to designs, document your design systems, implement feedback, and more.
+            </p>
+</div>
+<div>
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#ai-agent">
+<span>Explore Figma's agent</span>
+<span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Product Development Process -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1200px] mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-3xl mb-12">
+<h2 class="text-[30px] leading-[36px] font-normal tracking-[-0.66px] text-primary mb-3">
+          One workspace for your entire product development process.
+        </h2>
+<p class="text-base text-secondary font-normal leading-relaxed">
+          Made so your whole team can go from WIP to ship, together.
+        </p>
+</div>
+<!-- Large Video Player (997px width, 561px height) -->
+<div class="w-full flex justify-center mb-16">
+<div class="w-full max-w-[997px] aspect-[997/561] bg-neutral-100 rounded-2xl overflow-hidden border border-outline-variant/30 shadow-sm relative">
+<iframe allow="accelerometer; fullscreen; autoplay; encrypted-media; gyroscope; picture-in-picture" class="w-full h-full object-cover pointer-events-none" frameborder="0" height="100%" src="https://player.vimeo.com/video/1202195955?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Product development process workspace" width="100%">
+</iframe>
+</div>
+</div>
+<!-- Two Editorial Split Columns -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-4">
+<!-- Column 1 -->
+<div class="flex flex-col justify-between border-t border-outline-variant/40 pt-6">
+<div>
+<h3 class="text-xl font-medium tracking-tight text-primary mb-2">Design anything you can imagine</h3>
+<p class="text-sm text-secondary leading-relaxed mb-4">Turn your ideas into apps, websites, and products.</p>
+</div>
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#design-tools">
+<span>Explore design tools</span>
+<span class="material-symbols-outlined ml-1 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<!-- Column 2 -->
+<div class="flex flex-col justify-between border-t border-outline-variant/40 pt-6">
+<div>
+<h3 class="text-xl font-medium tracking-tight text-primary mb-2">Build with intention</h3>
+<p class="text-sm text-secondary leading-relaxed mb-4">Dev tools that take you all the way to production.</p>
+</div>
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#build-tools">
+<span>Explore build tools</span>
+<span class="material-symbols-outlined ml-1 text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Expressive & Precise Feature Bento Grid -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1280px] mx-auto px-6">
+<!-- Section Title & Right-Aligned Anchor -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-outline-variant/30">
+<div>
+<h2 class="text-[30px] leading-[36px] font-normal tracking-[-0.66px] text-primary mb-2">
+            Powerfully expressive. Incredibly precise.
+          </h2>
+<p class="text-base text-secondary font-normal">
+            Every technical tool you need to dial in the details.
+          </p>
+</div>
+<div class="mt-4 md:mt-0">
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#figma-design">
+<span>Explore Figma Design</span>
+<span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Rich Bento Grid of Media Cards & Real Captured Vimeo Players -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Accessibility Inspector Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1202189219?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Accessibility inspector in Figma">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">ACCESSIBILITY</span>
+<h4 class="text-base font-medium text-primary">Contrast &amp; Color Blindness</h4>
+<p class="text-xs text-secondary mt-1">Audit WCAG compliances dynamically in canvas previews.</p>
+</div>
+</div>
+</div>
+<!-- Card 2: Padding & Auto Layout Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1202189216?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Padding and Auto Layout">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">AUTO LAYOUT</span>
+<h4 class="text-base font-medium text-primary">Smart Fluid Padding</h4>
+<p class="text-xs text-secondary mt-1">Intuitive on-canvas spacing handles dynamic responsive growth.</p>
+</div>
+</div>
+</div>
+<!-- Card 3: Variable Type & Fonts Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1202189218?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Variable typography">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">TYPOGRAPHY</span>
+<h4 class="text-base font-medium text-primary">Variable Font Axes</h4>
+<p class="text-xs text-secondary mt-1">Fine-tune optical size, weight, and grade on fractional scales.</p>
+</div>
+</div>
+</div>
+<!-- Card 4: Motion Timeline Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1202194414?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Motion timeline features">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">INTERACTION</span>
+<h4 class="text-base font-medium text-primary">Seamless Keyframe Motion</h4>
+<p class="text-xs text-secondary mt-1">Design spring physics curves directly on component variants.</p>
+</div>
+</div>
+</div>
+<!-- Card 5: Displace & Visual Effects Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1203604825?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Displace effects in Figma">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">SHADERS &amp; FX</span>
+<h4 class="text-base font-medium text-primary">Displacement &amp; Ray Optics</h4>
+<p class="text-xs text-secondary mt-1">Real-time procedural distortion applied directly to vector layers.</p>
+</div>
+</div>
+</div>
+<!-- Card 6: Glass Depth & Material Realism Video -->
+<div class="bg-surface-container-low rounded-xl border border-outline-variant/30 overflow-hidden flex flex-col">
+<div class="w-full h-64 overflow-hidden bg-neutral-200">
+<iframe allow="autoplay; fullscreen" class="w-full h-full object-cover pointer-events-none" src="https://player.vimeo.com/video/1202189217?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Glass depth and physical rendering">
+</iframe>
+</div>
+<div class="p-5 flex-1 flex flex-col justify-between">
+<div>
+<span class="text-xs font-mono uppercase tracking-widest text-secondary block mb-1">REALISM</span>
+<h4 class="text-base font-medium text-primary">Glass Depth &amp; Diffuse Blur</h4>
+<p class="text-xs text-secondary mt-1">Photorealistic refraction without leaving the canvas viewport.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature Detail Image Showcases (Sanity Production Art) -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 mt-8">
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A minimalist UI showcase highlighting clean vector geometric structures with monochrome lines and soft grey tints in Figma's modern product canvas aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgiu6baUmzAbpP7-I4o5spHfWWL_mknM9kHdSYGw3AA4Exn0Ge380SKSmyOYb9T51agh2ibEnQhH5T2rahCWufbJyQNPXpPMCRGXUww3EJQ5byxJ1WZGwn-jFmXRBPiFjUCM5TTYJXR6N4tV-oxT8ALewAWuOxU10nyk1vr_2LcROz95f_3nHgIyVAM4DGQiNZLDnC7d2dtkHu0ChFCWRXPK0mdN_UN-HNqvpfvwzF9w6-Zgfy19lsBXXcOLhXaH-lcE_kNEMUKDv4"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">Token Variables</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A detailed design system component library displaying button states, nested tags, and segmented pickers rendered with stark black borders against a clean white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA03kuNAlGe6o2eZigxfeKGt1r8M0V012Oh4sclBO3C0ssj7yShSTPE_OgYXMrx3_RPcXPcGk5RX-XpMWB-DRmp2OxcKBqz36v3rKZbAi1EKwVt1oHoPvy-GuEol35rIzOUILCnFrHcT3MU8SkbZEsISi5xr5aLcJ7DLHuxUAHuL8pDzILlT4IeET4MOTTlMjAH3TfHU-bjs-lXpEI2pXnnpAY6y6285b0638p8xmN2ESXYSKRrlQxElEGlSBNnmXQFU-oT21lNuwhz"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">Component Sets</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A high contrast interactive state inspector showcasing variant boolean switches, dropdown toggles, and property panels in Figma Dev Mode." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHl7_2y7xf3nvMWfSTWw7-4mWYYruQrAmG7n7G99QH3gm4wN4gveCIhAZCJy5zYgKAa_03kzPUihgLb5ehOOpALfrkd7aEjDXMfDezZu7b36iR-OWhlIq8KCd9Q_HWi4uZEr-Wa-gOZqi-eSF3y5_v9drJToN8ztdVP0hz8xxFtnu4ScAynTdjShAyP7_nPBze0sUEenX8vmqVndmjSlD2b7K_u4HbDWWOLAIavjCERVI8KGlM3JM0TjcDQet8yqh_NJMmZkmGspqn"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">State Variants</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="An advanced typography styling panel with granular letter tracking, variable font weight sliders, and OpenType ligatures on high-key white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-YjghDDzIsnfV7rBnjyDa_RZ7LEbDyDElDEtajBzoIJvvlB5YaH6QfS8Aev7IGIBIxtzaPvpsF0MQ7Rr2yvCFhn2S33FAJYVSW7lLWgD8WzAZbb4Fe-_7ktDe9aIVP9EOFkDVTRr0K54plkNXSi0u1OjHXloAUTl4LlHKT6Pa4HXgAlNWoXMCgNen-HvjZiGrEQsVy8kNcR1XqTRJ2GdfNvZPjhQlEeJevBQAU8xrWaJVIEMAuOBg9n8_MnKe7OwWBchctnJi7k2N"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">Advanced Glyphs</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A modern vector pen tool manipulation demonstrating bézier handles, smooth corner radius algorithms, and pixel-precise vector nodes in sharp light mode." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBywgQk9mR9fJjn7LDqe3ZVOx4S_l4cq5_DTT-2_VSJL9BplBy2j-v0WVQPZ_rQmwWK0CWAXzxqR8Ecp2CBef7Lmk8DxDf26AcLssJNpmGHhToC8uAeC93BQXBPn2MHPXePlGQ7JuX97TOW9Gmy-KIWR0d9HMhZ6KDeqXCjN6XHv3U6x06yRplyqn9QqTZ-y--kXbdW1j3WnMtT8C1Dire203SKdFMullF80dISgXCsgi5VHtZHE4pb9a9tU6ffSf25Y-tZiITyx3LS"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">Vector Networks</div>
+</div>
+<div class="rounded-lg overflow-hidden border border-outline-variant/30 bg-surface-container-low group">
+<img class="w-full h-44 object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A generative gradient mesh and lighting reflection preview showing crisp shadows, directional highlights, and authentic rainbow hues on an interface card." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4pGG8-Tv3SD1zPh9_UBJQHT2h6_bP4EPhQGmVbcswJ8KvXp8l0pNz1_szYT_gA1xCizIcnUaDOrSyc1odnd_80qTN5yyUjOdqwTTOy-mHnFZTu3B3y5h-8SOsQ4TpJ2A7ZMB7zoxFwIzifpQcZf093CXBcqZGM8MhzjaC245ZCt7owGYxYupqHDovnZtvNrPnG2OHjSq-j-5b1QR0Uj-4ByYov8WQXbO9xoOvfDeNhjkHrs7-8zUmXnShl_n0xcBRd9ycsydlxJ5a"/>
+<div class="p-2.5 text-center text-[11px] font-mono text-secondary">Subpixel Optics</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Start with Design Context (Make Local) -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1240px] mx-auto px-6">
+<div class="max-w-3xl mb-10">
+<h2 class="text-[30px] leading-[36px] font-normal tracking-[-0.66px] text-primary mb-3">
+          Start with design context. Build with consistency.
+        </h2>
+<p class="text-base text-secondary font-normal leading-relaxed">
+          Your context, codebase, and agents stay connected so what you design is what gets shipped.
+        </p>
+</div>
+<!-- Large Video Showcase (Make Local / Code Connection, 1200px width) -->
+<div class="w-full flex justify-center mb-6">
+<div class="w-full max-w-[1200px] aspect-[1200/675] bg-neutral-900 rounded-2xl overflow-hidden shadow-md border border-neutral-800">
+<iframe allow="accelerometer; fullscreen; autoplay; encrypted-media; gyroscope; picture-in-picture" class="w-full h-full object-cover pointer-events-none" frameborder="0" height="100%" src="https://player.vimeo.com/video/1204234347?controls=0&amp;loop=1&amp;muted=1&amp;playsinline=1&amp;preload=auto&amp;transparent=1&amp;autopause=0&amp;autoplay=1" title="Make Local and code connection showcase" width="100%">
+</iframe>
+</div>
+</div>
+<div class="flex justify-start">
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#figma-make">
+<span>Explore Figma Make</span>
+<span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Section 6: Customer Social Proof -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1240px] mx-auto px-6">
+<h2 class="text-[44px] leading-[48.4px] font-normal tracking-[-1px] text-primary max-w-2xl mb-16">
+        The products you love are designed in Figma
+      </h2>
+<!-- Testimonial & Metric Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch mb-20">
+<!-- Testimonial Card -->
+<div class="lg:col-span-8 p-10 bg-surface-container-low rounded-2xl border border-outline-variant/30 flex flex-col justify-between">
+<blockquote class="text-xl md:text-2xl font-normal leading-relaxed text-primary mb-8 tracking-tight">
+            “Everyone is able to influence, inspire, and give input without ever leaving the design file. That creates a really transparent, open, and honest process throughout the whole project.”
+          </blockquote>
+<div class="flex items-center space-x-4">
+<img class="w-12 h-12 rounded-full object-cover border border-outline-variant/40" data-alt="Editorial portrait headshot of Francisco Seiz with warm studio lighting against a clean neutral background, expressing confidence and clarity in high definition." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUmK-BUlhQbG4S5pka6KTFzDTywWhLjy2ElV_SgHecp4SR6YmOaaMY5LiwTOirR0IOdUxAP45YOf-eo0blGGkQ9-svAWoSjrnDhreYWjDOVwT14ZM6EPymaovKpZDru1GdWxmKu0471St7cLqtFdz1GzQds8KxkBtMzhLwP-s5wh1T-aMjcvzAumhKcqOz4-vxsDlGwWFtDb7bvwaIzQ_P2sgs_m9wuQV0udoQcfZXM9L7gGSmlJsGix2XAubPmbA1ep_HXdzb8aWl"/>
+<div>
+<div class="text-sm font-medium text-primary">Francisco Seiz</div>
+<div class="text-xs text-secondary">Senior Design Director, Code and Theory</div>
+</div>
+</div>
+</div>
+<!-- 95% Fortune 500 Stat Card -->
+<div class="lg:col-span-4 p-10 bg-black text-white rounded-2xl flex flex-col justify-between">
+<div>
+<div class="text-7xl md:text-8xl font-normal tracking-tight mb-2">95%</div>
+<div class="text-lg font-medium leading-snug">of the Fortune 500 uses Figma</div>
+</div>
+<div class="text-xs text-neutral-400 pt-8 border-t border-neutral-800">
+            Based on data from March 2025.
+          </div>
+</div>
+</div>
+<!-- Verified Customer Logo Grid -->
+<div class="pt-8">
+<p class="text-xs font-mono uppercase tracking-widest text-secondary mb-8">TRUSTED BY GLOBAL TEAMS</p>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center opacity-85">
+<!-- Airbnb -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<svg class="h-7 w-auto" fill="currentColor" viewbox="0 0 102 32">
+<path d="M12.9 19.3c-1.3 0-2.3.9-2.3 2.1 0 1.2 1 2.1 2.3 2.1s2.3-.9 2.3-2.1c0-1.2-1-2.1-2.3-2.1zm0-15.6C8.8 3.7 0 17.5 0 24.3 0 28.6 3.4 32 7.7 32c3 0 5.6-1.7 6.9-4.2 1.3 2.5 3.9 4.2 6.9 4.2 4.3 0 7.7-3.4 7.7-7.7 0-6.8-8.8-20.6-12.9-20.6h-3.4zm0 19c-2.4 0-4.4-1.8-4.4-4.2s2-4.2 4.4-4.2 4.4 1.8 4.4 4.2-2 4.2-4.4 4.2z"></path>
+<text font-family="Inter" font-size="20" font-weight="700" x="36" y="24">airbnb</text>
+</svg>
+</div>
+<!-- Atlassian -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-bold text-lg tracking-tight font-display">ATLASSIAN</span>
+</div>
+<!-- Dropbox -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-2xl">deployed_code</span>
+<span class="font-bold text-base tracking-tight">Dropbox</span>
+</div>
+</div>
+<!-- Duolingo -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-extrabold text-xl tracking-tight lowercase">duolingo</span>
+</div>
+<!-- GitHub -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-bold text-lg tracking-tight">GitHub</span>
+</div>
+<!-- Mercado Libre -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-semibold text-sm tracking-tight">mercado libre</span>
+</div>
+<!-- Microsoft -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-medium text-lg tracking-tight">Microsoft</span>
+</div>
+<!-- Netflix -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-black text-xl tracking-wider text-black">NETFLIX</span>
+</div>
+<!-- Pentagram -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-serif italic font-bold text-lg">Pentagram</span>
+</div>
+<!-- Slack -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-bold text-lg tracking-tight">slack</span>
+</div>
+<!-- Stripe -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-bold text-xl tracking-tight">stripe</span>
+</div>
+<!-- Zoom -->
+<div class="flex items-center justify-center p-4 h-14 grayscale hover:grayscale-0 transition duration-150">
+<span class="font-bold text-xl tracking-wide lowercase">zoom</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Ideas CTA & Community Templates -->
+<section class="w-full bg-surface-container-lowest py-20 md:py-28 border-b border-outline-variant/30">
+<div class="max-w-[1240px] mx-auto px-6">
+<!-- Big Ideas Callout Banner -->
+<div class="p-12 md:p-16 rounded-3xl bg-[#f0f4f8] border border-outline-variant/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 mb-24">
+<div>
+<h2 class="text-3xl md:text-5xl font-normal tracking-tight text-primary max-w-xl">
+            Ideas no longer have to wait their turn
+          </h2>
+</div>
+<a class="px-8 py-4 bg-black text-white font-medium text-base rounded-full hover:bg-neutral-800 transition duration-150 ease-out shrink-0" href="#get-started">
+          Get started
+        </a>
+</div>
+<!-- Templates Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-outline-variant/30">
+<div>
+<h2 class="text-[44px] leading-[48.4px] font-normal tracking-[-1px] text-primary mb-2">
+            Explore what you can do in Figma.
+          </h2>
+<p class="text-base text-secondary font-normal">
+            Browse resources made by the community.
+          </p>
+</div>
+<div class="mt-4 md:mt-0">
+<a class="inline-flex items-center text-sm font-semibold text-primary hover:underline group" href="#templates">
+<span>Browse all templates</span>
+<span class="material-symbols-outlined ml-1 text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Template Cards Carousel/Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+<!-- UI Kits -->
+<a class="group block rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low transition duration-200 hover:-translate-y-1" href="#templates/ui-kits">
+<div class="h-64 overflow-hidden bg-neutral-200">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A clean light-mode UI kit showcase featuring modular wireframe cards, button variants, and navigation bars designed with precision 1px borders in Figma." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANcNj5hPm9QI5z0HMqWPQCAbQEGnilIuNe8A9eY0MVUuj3Y0TkYbWMfkCLv3phN1szgDPU5vO40cS8lsCNyytd1VhQNfLQRaJysSn0YyPmNvgYh2ilI4For5WCNNvUqVnnkYSR6UepxuZx9Z04UCOgm4MAs9U2gaDUhYuQuHFlPAA0ACZrhQ5Nod74QqEEQduSvLs9gtocOepb8oekp9fcK0q_S6KBPpliZXUGrOs_7TIOPtkOP9-amA5K2GXFX9dHovA82neLLQJQ"/>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<span class="text-sm font-medium text-primary">UI kits</span>
+<span class="material-symbols-outlined text-sm text-secondary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Websites -->
+<a class="group block rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low transition duration-200 hover:-translate-y-1" href="#templates/websites">
+<div class="h-64 overflow-hidden bg-neutral-200">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A modern editorial website template showcasing bold typography, full-bleed imagery, and minimalist layout grids designed for high-end web production." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9iLOoZ0isu_S8o0WPeJzO-mOBtaTv4KS1fz6LlYZgPhG8gqzUr8irMETASuLjx1WwE9k1Mz4rYsAIHNEFD8GIJNd7GaDgYXzS_Z2TfyuDtWEahGFpE0AkdOtokEgSh-6hjpGdRnztxjFk2yLY3sn1mv83qx9F1EIj8WMdjEpbxIDlUdfUKULntWFWiaH5JjJvTE4iN78CsUG9V5o5xvuyDxRuzidHKnQSu7A8GkD8gMmto7pmdRLDdzeI0XX7eAmoJYtfJraLZqK0"/>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<span class="text-sm font-medium text-primary">Websites</span>
+<span class="material-symbols-outlined text-sm text-secondary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Social Media -->
+<a class="group block rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low transition duration-200 hover:-translate-y-1" href="#templates/social-media">
+<div class="h-64 overflow-hidden bg-neutral-200">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="An expressive social media graphics bundle featuring colorful gradient posters, typographic compositions, and creative banner frames on a crisp white canvas." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6rTpXpnEuzxwLJs1qUf5qQOpCh8oP6U9JQSfgxsXiusQ7v1W1rkYZUqZsQmqJ1DIL9ftpHFLqnsmqyFPPIjnVeconw01I-Y-F4wjuONqVItc4et-wHLtBU7TrZyf-eLnvnZM5yirtXULSkXQYn3LC8U8rL6Svs5AtUchXUjF9-q3ayFiLZoS62P2zc9br2J1wHpxyGZ5BADGRyHwSrgrFwFsorMrcioAtIpWfVX4uZDWE57pIDiT5r32h0tX5xgMI6o0x1B4JjjB1"/>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<span class="text-sm font-medium text-primary">Social media</span>
+<span class="material-symbols-outlined text-sm text-secondary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Mobile Apps -->
+<a class="group block rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low transition duration-200 hover:-translate-y-1" href="#templates/mobile-apps">
+<div class="h-64 overflow-hidden bg-neutral-200">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A clean iOS mobile application prototype mockup with rounded glass sheets, bottom sheet navigation, and structured feed components." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBI2AvJXVuokbq4lDeJ8uxz07CAqL-UpmsKAh6gm_DmhVZWu-X_QLEVjhmZ4IzqDSyHm5BSs8xP8vvf3vwEqNjFmYY4H3JFkY_36ijVGoHBY2BVZf0AL7fN1bAuHcHsKMfox-bppDfGobdkhfpl4mmrCGqEKZY99JgB8E_LfEEK44kvSs6rkRtekwyP4TNQRMuoN-VunECGtl6fcV3nzyivG90TsYHZBcEi-uUwKZ_fW5rqZ52jNd9Xrr13_onExQWaKtQz5H5pIp5W"/>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<span class="text-sm font-medium text-primary">Mobile apps</span>
+<span class="material-symbols-outlined text-sm text-secondary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</a>
+<!-- Presentations -->
+<a class="group block rounded-2xl overflow-hidden border border-outline-variant/30 bg-surface-container-low transition duration-200 hover:-translate-y-1" href="#templates/presentations">
+<div class="h-64 overflow-hidden bg-neutral-200">
+<img class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" data-alt="A pitch deck slide presentation template with stark typography, data visual cards, and structured bento layout grids in black and white." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxrFkSPjU7DtOznaEmcw-pCz995B1VrVYapgXMGhRsg4lhkUeclbT8saf9ID_IKgzkWNJI93cY03a_SLDqo40tJj1zILnr7TzXT_yv2A_JUaIGOPw69lpMf1dvhV20ZDe1Edppwe67cfB9NOftmEiw892oeiS4n1LT1sYmkwJSuZdV-iVLZNTpCHOo_d2LgG1H5SP-zPcQ-MI9og3KUfSIb5ns3amXM9hnNK4q9m18IiSggJ-VQ3qo8rl15rbbNHrdKB0hR04Qk_2b"/>
+</div>
+<div class="p-4 flex items-center justify-between bg-white">
+<span class="text-sm font-medium text-primary">Presentations</span>
+<span class="material-symbols-outlined text-sm text-secondary group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- Shared Component: Multi-Column Official Footer -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/40">
+<div class="w-full max-w-7xl mx-auto px-6 py-16">
+<!-- Top Brand Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-12 border-b border-outline-variant/30 gap-6">
+<a class="flex items-center gap-3" href="/">
+<svg fill="none" height="42" viewbox="0 0 38 57" width="28" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-display font-bold text-2xl text-primary tracking-tight">Figma</span>
+</a>
+<!-- Social Icons -->
+<div class="flex items-center space-x-6 text-primary">
+<a aria-label="X (Twitter)" class="hover:text-neutral-600 transition-colors" href="#twitter">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="YouTube" class="hover:text-neutral-600 transition-colors" href="#youtube">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<a aria-label="Instagram" class="hover:text-neutral-600 transition-colors" href="#instagram">
+<svg class="w-5 h-5" fill="currentColor" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Footer Columns -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 py-12">
+<!-- PRODUCT -->
+<div>
+<h4 class="text-xs font-mono font-bold uppercase tracking-wider text-primary mb-4">PRODUCT</h4>
+<ul class="space-y-3 font-body text-sm text-on-surface">
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#figma-design">Figma Design</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#figjam">FigJam</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#dev-mode">Dev Mode</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#figma-make">Figma Make</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#design-systems">Design Systems</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#downloads">Downloads</a></li>
+</ul>
+</div>
+<!-- PLANS -->
+<div>
+<h4 class="text-xs font-mono font-bold uppercase tracking-wider text-primary mb-4">PLANS</h4>
+<ul class="space-y-3 font-body text-sm text-on-surface">
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#pricing">Pricing</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#enterprise">Enterprise</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#organization">Organization</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#professional">Professional</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#education">Education</a></li>
+</ul>
+</div>
+<!-- USE CASES -->
+<div>
+<h4 class="text-xs font-mono font-bold uppercase tracking-wider text-primary mb-4">USE CASES</h4>
+<ul class="space-y-3 font-body text-sm text-on-surface">
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#ui-design">UI design</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#ux-design">UX design</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#prototyping">Prototyping</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#brainstorming">Brainstorming</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#wireframing">Wireframing</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#diagramming">Diagramming</a></li>
+</ul>
+</div>
+<!-- RESOURCES -->
+<div>
+<h4 class="text-xs font-mono font-bold uppercase tracking-wider text-primary mb-4">RESOURCES</h4>
+<ul class="space-y-3 font-body text-sm text-on-surface">
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#blog">Blog</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#community">Community</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#templates">Templates</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#learn">Learn design</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#help-center">Help center</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#support">Support</a></li>
+</ul>
+</div>
+<!-- COMPANY -->
+<div>
+<h4 class="text-xs font-mono font-bold uppercase tracking-wider text-primary mb-4">COMPANY</h4>
+<ul class="space-y-3 font-body text-sm text-on-surface">
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#about">About us</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#careers">Careers</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#newsroom">Newsroom</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#security">Security</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#privacy">Privacy</a></li>
+<li><a class="hover:underline hover:text-primary transition-colors duration-150" href="#contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar: Copyright and Region Switcher -->
+<div class="pt-8 border-t border-outline-variant/30 flex flex-col md:flex-row justify-between items-center text-xs text-secondary gap-4">
+<div>
+          © 2025 Figma, Inc.
+        </div>
+<div class="flex items-center space-x-6">
+<a class="hover:underline" href="#privacy">Privacy policy</a>
+<a class="hover:underline" href="#terms">Terms of service</a>
+<div class="flex items-center space-x-1 cursor-pointer hover:text-primary">
+<span class="material-symbols-outlined text-base">language</span>
+<span>English (US)</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>
