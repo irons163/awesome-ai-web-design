@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Vercel Homepage (October 10, 2026 Study) - Mobile 390×844</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', 'GeistSans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#000000',
+              canvas: '#000000',
+              border: '#1f1f1f',
+              'border-subtle': '#161616',
+              text: 'rgb(237, 237, 237)',
+              muted: '#888888',
+              dim: '#666666',
+              card: '#0a0a0a',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: rgb(237, 237, 237);
+      font-family: 'Geist', 'GeistSans', -apple-system, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .heading-hero {
+      font-size: 48px;
+      line-height: 56px;
+      font-weight: 400;
+      letter-spacing: -2.88px;
+      color: rgb(237, 237, 237);
+    }
+    .heading-section {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 450;
+      letter-spacing: -1.6px;
+      color: rgb(237, 237, 237);
+    }
+    .footer-col-header {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      color: rgb(237, 237, 237);
+    }
+    /* Mobile Menu Drawer */
+    #mobile-menu {
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    #mobile-menu.hidden-menu {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+    }
+    details > summary {
+      list-style: none;
+    }
+    details > summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-black text-[#ededed]">
+<!-- Top Announcement Bar -->
+<div class="w-full bg-black border-b border-[#181818] pt-2 pb-2 px-4 flex items-center justify-center text-[12px] text-[#a1a1a1]">
+<a class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#111] border border-[#222] text-[#d4d4d4] hover:border-[#444] transition-colors" href="https://vercel.com/ship" rel="noopener noreferrer" target="_blank">
+<span class="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+<span>Ship 26 is coming to SF</span>
+<span class="text-[#888]">·</span>
+<span class="text-[#ededed] font-medium flex items-center">Get your ticket <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
+</a>
+</div>
+<!-- Mobile Sticky Navigation at 390px -->
+<header class="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-[#181818] px-6 h-14 flex items-center justify-between">
+<!-- Vercel Original Triangle Logo -->
+<a aria-label="Vercel Home" class="flex items-center focus:outline-none" href="https://vercel.com">
+<svg fill="none" height="19" viewbox="0 0 76 65" width="22" xmlns="http://www.w3.org/2000/svg">
+<path d="M38 0L75.244 64.5H0.756012L38 0Z" fill="#EDEDED"></path>
+</svg>
+</a>
+<!-- Hamburger / Mobile Menu Button -->
+<button aria-label="Open menu" class="text-[#ededed] p-2 -mr-2 rounded-md hover:bg-[#181818] transition-colors" id="menu-toggle-btn" onclick="toggleMenu()">
+<svg class="w-5 h-5" fill="none" id="hamburger-icon" stroke="currentColor" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<svg class="w-5 h-5 hidden" fill="none" id="close-icon" stroke="currentColor" stroke-width="1.75" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+</header>
+<!-- Full-Screen Mobile Navigation Overlay (Accordions with actual links & escape support) -->
+<div class="hidden-menu fixed inset-0 top-14 z-40 bg-black/95 backdrop-blur-xl border-t border-[#181818] p-6 overflow-y-auto flex flex-col justify-between" id="mobile-menu">
+<div class="space-y-4">
+<!-- Products Accordion -->
+<details class="group border-b border-[#181818] pb-3">
+<summary class="flex justify-between items-center text-base font-medium text-[#ededed] cursor-pointer py-1">
+<span>Products</span>
+<svg class="w-4 h-4 text-[#888] transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+</summary>
+<div class="mt-3 pl-3 space-y-2 text-sm text-[#a1a1a1]">
+<div class="text-[11px] font-semibold tracking-wider text-[#666] uppercase mt-2">Agent Stack</div>
+<a class="block hover:text-white py-1" href="https://vercel.com/ai">AI SDK</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/ai-gateway">AI Gateway</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/sandbox">Sandbox</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/passport">Passport</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/connect">Connect</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/eve">eve</a>
+<div class="text-[11px] font-semibold tracking-wider text-[#666] uppercase mt-3">Core Platform</div>
+<a class="block hover:text-white py-1" href="https://vercel.com/security">Security</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/fluid-compute">Fluid Compute</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/observability">Observability</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/workflows">Workflows</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/ci-cd">CI/CD</a>
+<div class="text-[11px] font-semibold tracking-wider text-[#666] uppercase mt-3">Tools</div>
+<a class="block hover:text-white py-1" href="https://nextjs.org">Next.js</a>
+<a class="block hover:text-white py-1" href="https://v0.dev">v0 ↗</a>
+</div>
+</details>
+<!-- Resources Accordion -->
+<details class="group border-b border-[#181818] pb-3">
+<summary class="flex justify-between items-center text-base font-medium text-[#ededed] cursor-pointer py-1">
+<span>Resources</span>
+<svg class="w-4 h-4 text-[#888] transition-transform group-open:rotate-180" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M6 9l6 6 6-6"></path></svg>
+</summary>
+<div class="mt-3 pl-3 space-y-2 text-sm text-[#a1a1a1]">
+<a class="block hover:text-white py-1" href="https://vercel.com/docs">Docs</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/blog">Blog</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/changelog">Changelog</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/customers">Customers</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/templates">Templates</a>
+<a class="block hover:text-white py-1" href="https://vercel.com/partner-finder">Partner Finder</a>
+</div>
+</details>
+<a class="block text-base font-medium text-[#ededed] py-2 border-b border-[#181818]" href="https://vercel.com/enterprise">Enterprise</a>
+<a class="block text-base font-medium text-[#ededed] py-2 border-b border-[#181818]" href="https://vercel.com/pricing">Pricing</a>
+</div>
+<div class="pt-6 space-y-3">
+<a class="w-full h-11 flex items-center justify-center rounded-full border border-[#333] text-sm font-medium text-[#ededed] hover:bg-[#111] transition-colors" href="https://vercel.com/contact/sales">
+        Get a Demo
+      </a>
+<div class="grid grid-cols-2 gap-3">
+<a class="h-11 flex items-center justify-center rounded-full bg-[#181818] text-sm font-medium text-[#ededed] hover:bg-[#222] transition-colors" href="https://vercel.com/login">
+          Log In
+        </a>
+<a class="h-11 flex items-center justify-center rounded-full bg-white text-black text-sm font-medium hover:bg-[#e0e0e0] transition-colors" href="https://vercel.com/signup">
+          Sign Up
+        </a>
+</div>
+</div>
+</div>
+<main class="w-full px-6 pt-4 pb-16">
+<!-- HERO SECTION -->
+<!-- Mobile Luminous Triangle Fallback Graphic -->
+<div class="w-full relative flex items-center justify-center mt-2 mb-8">
+<div class="relative w-[342px] h-[260px] flex items-center justify-center overflow-hidden rounded-2xl">
+<img alt="Vercel Agentic Infrastructure Mobile Luminous Triangle" class="w-full h-full object-contain filter drop-shadow-[0_0_40px_rgba(255,255,255,0.18)]" loading="eager" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Centered Heading at measured specs (342px width, 48px/56px, weight 400, tracking -2.88px) -->
+<section class="w-full text-center mb-6">
+<h1 class="heading-hero mx-auto w-[342px]">
+        Agentic<br/>Infrastructure
+      </h1>
+<!-- Supporting Phrase -->
+<p class="mt-4 text-[15px] leading-[24px] text-[#a1a1a1] max-w-[342px] mx-auto">
+        For coding agents to ship apps and agents automated by agents. Deploy, coordinate, and orchestrate autonomous systems at internet scale. Built for software engineering teams.
+      </p>
+<!-- Stacked Deploy now and Talk to sales pills -->
+<div class="mt-6 flex flex-col gap-3 max-w-[342px] mx-auto">
+<a class="w-full h-11 flex items-center justify-center rounded-full bg-white text-black text-sm font-medium hover:bg-[#ececec] transition-colors" href="https://vercel.com/new">
+<svg class="w-3.5 h-3.5 mr-2" fill="none" viewbox="0 0 76 65"><path d="M38 0L75.244 64.5H0.756012L38 0Z" fill="currentColor"></path></svg>
+          Deploy now
+        </a>
+<a class="w-full h-11 flex items-center justify-center rounded-full border border-[#262626] bg-[#0a0a0a] text-sm font-medium text-[#ededed] hover:border-[#404040] transition-colors" href="https://vercel.com/contact/sales">
+          Talk to sales
+        </a>
+</div>
+<!-- Hero 3 Architecture Points on Mobile -->
+<div class="mt-8 pt-6 border-t border-[#181818] grid grid-cols-1 gap-4 text-left">
+<div class="p-4 rounded-xl bg-[#080808] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666]">Architecture</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">For coding agents</div>
+<div class="text-[12px] text-[#888] mt-1 leading-snug">Deterministic tool access, execution loops, and sandboxed compute runners with native CLI, MCP, and Skills.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#080808] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666]">Scale</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">To ship apps and agents</div>
+<div class="text-[12px] text-[#888] mt-1 leading-snug">Isolated micro-VMs per user session, zero cold starts, global replication, and auto-provisioning.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#080808] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666]">Telemetry</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Automated by agents</div>
+<div class="text-[12px] text-[#888] mt-1 leading-snug">Real-time trace debugging, self-healing runtime errors, automated PR resolution, and policy enforcement.</div>
+</div>
+</div>
+</section>
+<!-- 7 ORIGINAL CUSTOMER LOGOS -->
+<section class="py-8 border-y border-[#161616] my-8">
+<div class="text-[11px] uppercase tracking-wider text-[#555] font-mono text-center mb-5">Trusted by industry leaders</div>
+<div class="grid grid-cols-3 gap-y-4 gap-x-2 items-center justify-items-center text-[12px] font-medium text-[#888] tracking-tight">
+<span>BLACKBOX.AI</span>
+<span>CHARLES SCHWAB</span>
+<span>DOORDASH</span>
+<span>OPENAI</span>
+<span>SUPREME</span>
+<span>THE WEATHER CO.</span>
+</div>
+<div class="mt-3 text-center text-[12px] font-medium text-[#888] tracking-tight">
+<span>POLYMARKET</span>
+</div>
+</section>
+<!-- SECTION 1: Build agents on infrastructure that thinks like them -->
+<section class="pt-6 pb-12">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666] mb-2">Intelligence Layer</div>
+<h2 class="heading-section w-[342px] mb-3">
+        Build agents on infrastructure that thinks like them
+      </h2>
+<p class="text-[14px] text-[#999] mb-5 leading-relaxed">
+        “Notion powers millions of agent conversations daily on Vercel.”
+      </p>
+<!-- Notion Mobile Original Artwork -->
+<div class="w-full rounded-2xl overflow-hidden border border-[#222] bg-[#0c0c0c] mb-6 shadow-2xl">
+<img alt="Notion Mobile Orchestrator Interface" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- 4 Actual Features -->
+<div class="grid grid-cols-1 gap-3">
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">01</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Durable Orchestration</div>
+<div class="text-[12px] text-[#888] mt-1">Stateful execution surviving restarts across distributed agent sessions.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">02</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Sandboxed Environments</div>
+<div class="text-[12px] text-[#888] mt-1">Isolated micro-VMs per user session with instant code evaluation.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">03</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">AI Model Gateway</div>
+<div class="text-[12px] text-[#888] mt-1">Multi-provider unified latency fallback, caching, and token budgeting.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">04</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Fluid Compute</div>
+<div class="text-[12px] text-[#888] mt-1">Sub-millisecond elastic scale designed specifically for streaming agent steps.</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: Ship apps that scale from zero to millions instantly -->
+<section class="pt-6 pb-12 border-t border-[#161616]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666] mb-2">Global Network</div>
+<h2 class="heading-section w-[342px] mb-3">
+        Ship apps that scale from zero to millions instantly
+      </h2>
+<p class="text-[14px] text-[#999] mb-5 leading-relaxed">
+        “Zapier serves over 100 million monthly website visits on Vercel.”
+      </p>
+<!-- Zapier Mobile Original Artwork -->
+<div class="w-full rounded-2xl overflow-hidden border border-[#222] bg-[#0c0c0c] mb-6 shadow-2xl">
+<img alt="Zapier Mobile Dashboard Mesh" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- 4 Actual Features -->
+<div class="grid grid-cols-1 gap-3">
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">01</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Global Delivery</div>
+<div class="text-[12px] text-[#888] mt-1">Smart routing across 100+ edge POPs with sub-20ms edge caching.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">02</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Deployment Environments</div>
+<div class="text-[12px] text-[#888] mt-1">Instant branch URLs for every pull request with automated previews.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">03</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Serverless Functions</div>
+<div class="text-[12px] text-[#888] mt-1">Concurrency without connection limits and zero infrastructure management.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">04</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Web Application Firewall</div>
+<div class="text-[12px] text-[#888] mt-1">Deep packet inspection, automatic DDoS defense, and bot identification.</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: Host platforms that serve every customer -->
+<section class="pt-6 pb-12 border-t border-[#161616]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666] mb-2">Multi-Tenant Engine</div>
+<h2 class="heading-section w-[342px] mb-3">
+        Host platforms that serve every customer
+      </h2>
+<p class="text-[14px] text-[#999] mb-5 leading-relaxed">
+        “Mintlify powers documentation for over 20,000 companies on Vercel.”
+      </p>
+<!-- Mintlify Mobile Original Artwork -->
+<div class="w-full rounded-2xl overflow-hidden border border-[#222] bg-[#0c0c0c] mb-6 shadow-2xl">
+<img alt="Mintlify Mobile Custom Tenants Platform" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- 4 Actual Features -->
+<div class="grid grid-cols-1 gap-3">
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">01</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Tenant Isolation</div>
+<div class="text-[12px] text-[#888] mt-1">Zero cross-account data leakage across millions of custom subdomains.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">02</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Domain Management</div>
+<div class="text-[12px] text-[#888] mt-1">Automated programmatic DNS verification and propagation.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">03</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Custom SSL Certificates</div>
+<div class="text-[12px] text-[#888] mt-1">Instant TLS provisioning via API with zero configuration needed.</div>
+</div>
+<div class="p-4 rounded-xl bg-[#090909] border border-[#1a1a1a]">
+<div class="text-[11px] font-mono text-[#666]">04</div>
+<div class="text-sm font-medium text-[#ededed] mt-1">Preview URLs</div>
+<div class="text-[12px] text-[#888] mt-1">Unique review sandbox for each customer commit and documentation release.</div>
+</div>
+</div>
+</section>
+<!-- SECTION 4: Recently shipped -->
+<section class="pt-6 pb-12 border-t border-[#161616]">
+<div class="flex items-center justify-between mb-4">
+<h2 class="heading-section">
+          Recently shipped
+        </h2>
+<a class="text-xs text-[#888] hover:text-[#ededed] transition-colors flex items-center" href="https://vercel.com/changelog">
+          View Changelog <svg class="w-3 h-3 ml-0.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</a>
+</div>
+<!-- 3 Actual Cards: eve, Passport, Containers (Dockerfile) -->
+<div class="space-y-4">
+<!-- eve card -->
+<div class="p-5 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-[11px] text-[#666] font-mono">October 2026</span>
+<span class="px-2 py-0.5 text-[10px] rounded-full bg-[#181818] border border-[#2a2a2a] text-[#aaa]">GA</span>
+</div>
+<div class="w-7 h-7 mb-3 text-white">
+<svg fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"></path></svg>
+</div>
+<h3 class="text-base font-semibold text-[#ededed]">eve framework</h3>
+<p class="text-[13px] text-[#888] mt-1">eve is a framework for building durable agents with state management designed for multi-step agent actions.</p>
+</div>
+<a class="inline-flex items-center text-xs text-[#d4d4d4] font-medium mt-4 hover:underline" href="https://vercel.com/blog/eve">
+            Read announcement <span class="ml-1">→</span>
+</a>
+</div>
+<!-- Passport Card -->
+<div class="p-5 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-[11px] text-[#666] font-mono">October 2026</span>
+<span class="px-2 py-0.5 text-[10px] rounded-full bg-[#102418] border border-[#1a4a2b] text-[#4ade80]">Preview</span>
+</div>
+<div class="text-[12px] font-mono text-[#888] mb-2 tracking-wide">Passport · Pasaporte · パスポート</div>
+<h3 class="text-base font-semibold text-[#ededed]">Passport identity</h3>
+<p class="text-[13px] text-[#888] mt-1">Secure every internal agent, app, and deployment with your identity provider. Okta, Azure AD, and Google Workspace support.</p>
+</div>
+<a class="inline-flex items-center text-xs text-[#d4d4d4] font-medium mt-4 hover:underline" href="https://vercel.com/docs/security/passport">
+            Explore Passport <span class="ml-1">→</span>
+</a>
+</div>
+<!-- Containers (Dockerfile) Card -->
+<div class="p-5 rounded-2xl bg-[#0a0a0a] border border-[#1f1f1f] flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-[11px] text-[#666] font-mono">September 2026</span>
+<span class="px-2 py-0.5 text-[10px] rounded-full bg-[#181818] border border-[#2a2a2a] text-[#aaa]">GA</span>
+</div>
+<div class="rounded-lg bg-black p-3 font-mono text-[11px] text-[#a1a1a1] border border-[#1a1a1a] mb-3">
+<div class="text-[#3b82f6]">▲ vercel deploy --docker</div>
+<div class="text-[#666] mt-1">✓ Building image from Dockerfile...</div>
+<div class="text-[#4ade80]">✓ Deployed to Fluid Compute</div>
+</div>
+<h3 class="text-base font-semibold text-[#ededed]">Containers</h3>
+<p class="text-[13px] text-[#888] mt-1">Run production workloads in isolated containers on Vercel. Native Dockerfile builds with zero orchestrator overhead.</p>
+</div>
+<a class="inline-flex items-center text-xs text-[#d4d4d4] font-medium mt-4 hover:underline" href="https://vercel.com/docs/containers">
+            Learn about Containers <span class="ml-1">→</span>
+</a>
+</div>
+</div>
+</section>
+<!-- SECTION 5: Built by you, or your agents -->
+<section class="py-12 border-t border-[#161616] text-center">
+<h2 class="heading-section w-[342px] mx-auto mb-3">
+        Built by you, or your agents
+      </h2>
+<p class="text-[14px] text-[#999] max-w-[342px] mx-auto mb-6">
+        From the first prompt to global scale. Deploy high-reliability AI apps today on the standard frontend and agent cloud.
+      </p>
+<div class="flex flex-col gap-3 max-w-[342px] mx-auto">
+<a class="w-full h-11 flex items-center justify-center rounded-full bg-white text-black text-sm font-medium hover:bg-[#ececec] transition-colors" href="https://vercel.com/new">
+<svg class="w-3.5 h-3.5 mr-2" fill="none" viewbox="0 0 76 65"><path d="M38 0L75.244 64.5H0.756012L38 0Z" fill="currentColor"></path></svg>
+          Deploy now
+        </a>
+<a class="w-full h-11 flex items-center justify-center rounded-full border border-[#262626] bg-[#0a0a0a] text-sm font-medium text-[#ededed] hover:border-[#404040] transition-colors" href="https://vercel.com/agents">
+          Onboard your agent
+        </a>
+</div>
+</section>
+<!-- SECTION 6: Complete 2-Column Phone Directory Measured Grid -->
+<section class="pt-8 pb-12 border-t border-[#181818]">
+<!-- Row 1: Agent Stack (x24) & Core Platform (x207) -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Agent Stack</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://sdk.vercel.ai">AI SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/ai-gateway">AI Gateway</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/sandbox">Sandbox</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/workflows">Workflows</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/connect">Connect <span class="text-[9px] px-1 py-0.2 bg-[#222] text-[#fff] rounded">New</span></a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/passport">Passport <span class="text-[9px] px-1 py-0.2 bg-[#222] text-[#fff] rounded">New</span></a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/eve">eve <span class="text-[9px] px-1 py-0.2 bg-[#222] text-[#fff] rounded">New</span></a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">Core Platform</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/ci-cd">CI/CD</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/edge">Content Delivery</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/fluid-compute">Fluid Compute</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/observability">Observability</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">Security</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/platform-security">Platform Security</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/waf">WAF</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/bot-management">Bot Management</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/botid">BotID</a></li>
+</ul>
+</div>
+</div>
+<!-- Row 2: Security & Tools -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Security</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">Passport SSO</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">Enterprise Firewall</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">DDoS Mitigation</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">SOC2 Type II</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/security">Data Isolation</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">Tools</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/drop">Vercel Drop</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/agent">Vercel Agent</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/plugin">Vercel Plugin</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/skills">Agent Skills</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/domains">Domains</a></li>
+<li><a class="hover:text-[#ededed]" href="https://v0.dev">v0 ↗</a></li>
+</ul>
+</div>
+</div>
+<!-- Row 3: Frameworks & SDKs -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Frameworks</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/eve">eve <span class="text-[9px] px-1 py-0.2 bg-[#222] text-[#fff] rounded">New</span></a></li>
+<li><a class="hover:text-[#ededed]" href="https://nextjs.org">Next.js</a></li>
+<li><a class="hover:text-[#ededed]" href="https://nuxt.com">Nuxt</a></li>
+<li><a class="hover:text-[#ededed]" href="https://svelte.dev">SvelteKit</a></li>
+<li><a class="hover:text-[#ededed]" href="https://nitro.unjs.io">Nitro</a></li>
+<li><a class="hover:text-[#ededed]" href="https://turborepo.org">Turborepo</a></li>
+<li><a class="hover:text-[#ededed]" href="https://tanstack.com/start">TanStack Start</a></li>
+<li><a class="hover:text-[#ededed]" href="https://fastapi.tiangolo.com">FastAPI</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/frameworks">All frameworks</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">SDKs</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://sdk.vercel.ai">Vercel SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/docs/workflows">Workflow SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/docs/flags">Flags SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/docs/chat">Chat SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/docs/queues">Queues SDK</a></li>
+<li><a class="hover:text-[#ededed]" href="https://streamdown.dev">Streamdown</a></li>
+</ul>
+</div>
+</div>
+<!-- Row 4: Build & Learn -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Build</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/templates/ai">AI Apps</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/templates">Web Apps</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/templates">Marketing Sites</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/platforms">Platforms</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/commerce">Commerce</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/platform-engineers">Platform Engineers</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/design-engineers">Design Engineers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">Learn</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/docs">Docs</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/blog">Blog</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/changelog">Changelog</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/knowledge">Knowledge Base</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/academy">Academy</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/articles">Articles</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/community">Community</a></li>
+<li><a class="hover:text-[#ededed]" href="https://isagentic.dev">Is Agentic</a></li>
+</ul>
+</div>
+</div>
+<!-- Row 5: Explore & Company -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Explore</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/customers">Customers</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/marketplace">Marketplace</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/templates">Templates</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/partner-finder">Partner Finder</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/solutions/aws">Vercel + AWS</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">Company</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/about">About</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/careers">Careers</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/press">Press</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/events">Events</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/startups">Startups</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/shipped">Shipped on Vercel</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/oss">Open Source Program</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/enterprise">Enterprise</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/pricing">Pricing</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/help">Help</a></li>
+</ul>
+</div>
+</div>
+<!-- Row 6: Legal & Trust + Social -->
+<div class="grid grid-cols-2 gap-6 mb-8">
+<div>
+<h4 class="footer-col-header mb-3">Legal &amp; Trust</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal/privacy-policy">Privacy Policy</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal/terms">Terms of Service</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal/cookie-policy">Cookie Policy</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal/dpa">DPA</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal/aup">Acceptable Use Policy</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/legal">Legal (all documents)</a></li>
+<li><a class="hover:text-[#ededed]" href="https://vercel.com/trust">Trust Center</a></li>
+</ul>
+</div>
+<div>
+<h4 class="footer-col-header mb-3">Social</h4>
+<ul class="space-y-2 text-xs text-[#888]">
+<li><a class="hover:text-[#ededed]" href="https://github.com/vercel" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+<li><a class="hover:text-[#ededed]" href="https://x.com/vercel" rel="noopener noreferrer" target="_blank">X</a></li>
+<li><a class="hover:text-[#ededed]" href="https://linkedin.com/company/vercel" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+<li><a class="hover:text-[#ededed]" href="https://youtube.com/vercel" rel="noopener noreferrer" target="_blank">YouTube</a></li>
+<li><a class="hover:text-[#ededed]" href="https://instagram.com/vercel" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+</ul>
+</div>
+</div>
+<!-- Status & Theme Controls -->
+<div class="pt-6 border-t border-[#181818] space-y-4 text-xs text-[#888]">
+<div class="flex items-center justify-between">
+<a class="flex items-center gap-2 hover:text-[#ededed]" href="https://vercel-status.com">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>All systems normal.</span>
+</a>
+<button class="hover:text-[#ededed]">Cookie Preferences</button>
+</div>
+<!-- Theme Picker Bar -->
+<div class="flex items-center justify-between pt-2">
+<span class="text-[11px] text-[#666]">Select a display theme:</span>
+<div class="inline-flex rounded-full bg-[#111] p-1 border border-[#222]">
+<button class="px-2.5 py-1 text-[11px] rounded-full text-white bg-[#222]">system</button>
+<button class="px-2.5 py-1 text-[11px] rounded-full text-[#777] hover:text-[#ededed]">light</button>
+<button class="px-2.5 py-1 text-[11px] rounded-full text-[#777] hover:text-[#ededed]">dark</button>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 text-[#555] text-[11px]">
+<div class="flex items-center gap-1.5">
+<svg fill="none" height="10" viewbox="0 0 76 65" width="12"><path d="M38 0L75.244 64.5H0.756012L38 0Z" fill="currentColor"></path></svg>
+<span>© 2026 Vercel, Inc.</span>
+</div>
+<span>Free visual study (390×844)</span>
+</div>
+</div>
+</section>
+</main>
+<script>
+    function toggleMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.getElementById('hamburger-icon');
+      const close = document.getElementById('close-icon');
+      const isHidden = menu.classList.contains('hidden-menu');
+
+      if (isHidden) {
+        menu.classList.remove('hidden-menu');
+        hamburger.classList.add('hidden');
+        close.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        closeMenu();
+      }
+    }
+
+    function closeMenu() {
+      const menu = document.getElementById('mobile-menu');
+      const hamburger = document.getElementById('hamburger-icon');
+      const close = document.getElementById('close-icon');
+      menu.classList.add('hidden-menu');
+      hamburger.classList.remove('hidden');
+      close.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+
+    // Escape key closes mobile menu
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Vercel · Agentic Infrastructure</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;family=Geist+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-highest": "#353535",
+            "surface": "#131313",
+            "secondary-container": "#474747",
+            "outline": "#919191",
+            "on-secondary": "#1b1b1b",
+            "on-error-container": "#ffdad6",
+            "on-background": "#e2e2e2",
+            "tertiary-fixed-dim": "#474747",
+            "on-secondary-fixed-variant": "#3b3b3b",
+            "surface-container-high": "#2a2a2a",
+            "on-surface": "#e2e2e2",
+            "on-tertiary-fixed-variant": "#e2e2e2",
+            "on-primary-container": "#000000",
+            "surface-container-low": "#1b1b1b",
+            "secondary-fixed": "#c6c6c6",
+            "on-secondary-container": "#e2e2e2",
+            "primary": "#ffffff",
+            "on-primary-fixed": "#ffffff",
+            "secondary-fixed-dim": "#ababab",
+            "on-primary": "#1b1b1b",
+            "surface-tint": "#c6c6c6",
+            "error": "#ffb4ab",
+            "tertiary": "#e2e2e2",
+            "primary-fixed": "#5e5e5e",
+            "outline-variant": "#474747",
+            "on-tertiary-fixed": "#ffffff",
+            "on-tertiary-container": "#000000",
+            "on-tertiary": "#1b1b1b",
+            "surface-dim": "#131313",
+            "surface-container-lowest": "#0e0e0e",
+            "inverse-surface": "#e2e2e2",
+            "surface-container": "#1f1f1f",
+            "on-primary-fixed-variant": "#e2e2e2",
+            "surface-bright": "#393939",
+            "inverse-on-surface": "#303030",
+            "tertiary-fixed": "#5e5e5e",
+            "tertiary-container": "#919191",
+            "background": "#131313",
+            "primary-fixed-dim": "#474747",
+            "on-surface-variant": "#c6c6c6",
+            "inverse-primary": "#5e5e5e",
+            "on-secondary-fixed": "#1b1b1b",
+            "primary-container": "#d4d4d4",
+            "error-container": "#93000a",
+            "on-error": "#690005",
+            "surface-variant": "#353535",
+            "secondary": "#c6c6c6"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          fontFamily: {
+            headline: ["Geist", "sans-serif"],
+            display: ["Geist", "sans-serif"],
+            body: ["Geist", "sans-serif"],
+            label: ["Geist", "sans-serif"],
+            mono: ["Geist Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom subtle scrollbars and mobile reset */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    body {
+      background-color: #000000;
+      color: #EDEDED;
+      font-family: 'Geist', sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 390px;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 844px;
+      position: relative;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    /* Smooth luminous halo simulation */
+    .luminous-halo {
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.16) 0%, rgba(255, 255, 255, 0.04) 40%, rgba(0, 0, 0, 0) 70%);
+    }
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#000000] text-[#EDEDED] antialiased selection:bg-white selection:text-black">
+<!-- Top Announcement Pill Banner -->
+<div class="w-full px-3 pt-2.5 pb-1 flex justify-center bg-[#000000]">
+<a class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-[#262626] bg-[#0c0c0c] hover:border-[#383838] transition-colors duration-150" href="#">
+<span class="text-[11.5px] font-medium tracking-tight text-[#c6c6c6] whitespace-nowrap">
+        Ship 26 is coming to SF <span class="text-[#888888]">·</span> Get your ticket -&gt;
+      </span>
+</a>
+</div>
+<!-- Mobile Header (390px width docked) -->
+<header class="sticky top-0 z-40 w-full h-14 bg-[#000000]/90 backdrop-blur-md border-b border-[#1b1b1b] flex items-center justify-between px-4">
+<!-- Brand Triangle Logo -->
+<a aria-label="Vercel Home" class="flex items-center gap-2 text-primary font-bold tracking-tight text-base" href="#">
+<svg class="text-white" fill="none" height="17" viewbox="0 0 76 65" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"></path>
+</svg>
+<span class="sr-only">Vercel</span>
+</a>
+<!-- Header Actions & Hamburger Button -->
+<div class="flex items-center gap-2">
+<button aria-label="Open menu" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#EDEDED] hover:bg-[#1a1a1a] transition-colors" id="menu-toggle-btn">
+<span class="material-symbols-outlined text-[22px]">menu</span>
+</button>
+</div>
+</header>
+<!-- Interactive Mobile Navigation Drawer Modal (Hidden by Default) -->
+<div class="fixed inset-0 z-50 bg-[#000000] hidden flex-col overflow-y-auto px-5 py-4" id="mobile-nav-modal">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-4 border-b border-[#202020]">
+<div class="flex items-center gap-2">
+<svg class="text-white" fill="none" height="17" viewbox="0 0 76 65" width="20">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"></path>
+</svg>
+<span class="text-white font-semibold text-sm tracking-tight">Vercel</span>
+</div>
+<button aria-label="Close menu" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#999999] hover:text-white hover:bg-[#1a1a1a]" id="menu-close-btn">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Navigation Accordions & Links -->
+<div class="mt-4 space-y-3 font-sans">
+<!-- Products Accordion -->
+<details class="group border-b border-[#1b1b1b] pb-3">
+<summary class="flex justify-between items-center py-2 text-base font-medium text-white cursor-pointer list-none">
+<span>Products</span>
+<span class="material-symbols-outlined text-[18px] text-[#888888] transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="pt-2 pl-2 space-y-4 text-sm text-[#ababab]">
+<!-- Agent Stack Subgroup -->
+<div>
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1.5">Agent Stack</div>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">AI SDK</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">AI Gateway</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Sandbox</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Passport</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Connect</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">eve</a>
+</div>
+</div>
+<!-- Core Platform Subgroup -->
+<div>
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1.5">Core Platform</div>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Security</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Fluid Compute</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Observability</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Workflows</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">CI/CD</a>
+</div>
+</div>
+<!-- Tools Subgroup -->
+<div>
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1.5">Tools</div>
+<div class="grid grid-cols-2 gap-2 text-xs">
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">Next.js</a>
+<a class="py-1 text-[#e2e2e2] hover:text-white" href="#">v0</a>
+</div>
+</div>
+</div>
+</details>
+<!-- Resources Accordion -->
+<details class="group border-b border-[#1b1b1b] pb-3">
+<summary class="flex justify-between items-center py-2 text-base font-medium text-white cursor-pointer list-none">
+<span>Resources</span>
+<span class="material-symbols-outlined text-[18px] text-[#888888] transition-transform duration-200 group-open:rotate-180">expand_more</span>
+</summary>
+<div class="pt-2 pl-2 grid grid-cols-2 gap-2 text-xs text-[#e2e2e2]">
+<a class="py-1 hover:text-white" href="#">Docs</a>
+<a class="py-1 hover:text-white" href="#">Blog</a>
+<a class="py-1 hover:text-white" href="#">Changelog</a>
+<a class="py-1 hover:text-white" href="#">Customers</a>
+<a class="py-1 hover:text-white" href="#">Templates</a>
+<a class="py-1 hover:text-white" href="#">Partner Finder</a>
+</div>
+</details>
+<a class="block py-2 text-base font-medium text-white border-b border-[#1b1b1b]" href="#">Enterprise</a>
+<a class="block py-2 text-base font-medium text-white border-b border-[#1b1b1b]" href="#">Pricing</a>
+</div>
+<!-- Actions inside Drawer -->
+<div class="mt-8 space-y-2.5">
+<a class="w-full h-10 flex items-center justify-center rounded-lg border border-[#2b2b2b] bg-[#121212] text-sm font-medium text-white" href="#">Get a Demo</a>
+<a class="w-full h-10 flex items-center justify-center rounded-lg border border-[#2b2b2b] bg-[#121212] text-sm font-medium text-[#c6c6c6]" href="#">Log In</a>
+<a class="w-full h-10 flex items-center justify-center rounded-lg bg-white text-black text-sm font-medium hover:bg-neutral-200 transition-colors" href="#">Sign Up</a>
+</div>
+</div>
+<main class="w-full px-4 overflow-hidden">
+<!-- Hero Section -->
+<section class="pt-8 pb-12 flex flex-col items-center text-center relative">
+<!-- Luminous Halo & Central Vercel Triangle -->
+<div class="relative w-44 h-44 mb-3 flex items-center justify-center">
+<div class="absolute inset-0 luminous-halo rounded-full scale-125 blur-xl"></div>
+<div class="w-24 h-24 rounded-full border border-[#262626] bg-[#000000] flex items-center justify-center shadow-2xl relative z-10">
+<svg class="text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]" fill="none" height="37" viewbox="0 0 76 65" width="42">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"></path>
+</svg>
+</div>
+</div>
+<!-- Exact Measured Heading -->
+<h1 class="w-[342px] mx-auto text-[#EDEDED] font-normal leading-[56px] text-[48px] tracking-[-2.88px]">
+        Agentic Infrastructure
+      </h1>
+<!-- Supporting Editorial Phrase -->
+<p class="mt-4 text-[15px] leading-relaxed text-[#969696] max-w-[340px] font-normal tracking-tight">
+        For coding agents to ship apps and agents automated by agents. Deploy, coordinate, and orchestrate autonomous systems at internet scale. Built for software engineering teams.
+      </p>
+<!-- Vertically Stacked Full-Width Action Buttons -->
+<div class="w-full mt-7 flex flex-col gap-2.5">
+<a class="w-full h-11 rounded-full bg-white text-black font-medium text-sm flex items-center justify-center gap-2 hover:bg-neutral-200 active:scale-[0.99] transition-all" href="#">
+<svg fill="currentColor" height="11" viewbox="0 0 76 65" width="12">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+</svg>
+<span>Deploy now</span>
+</a>
+<a class="w-full h-11 rounded-full bg-[#111111] border border-[#262626] text-[#EDEDED] font-medium text-sm flex items-center justify-center hover:border-[#3a3a3a] active:scale-[0.99] transition-all" href="#">
+          Talk to sales
+        </a>
+</div>
+<!-- Three Mobile Architecture Cards -->
+<div class="w-full mt-7 grid grid-cols-1 gap-2 text-left">
+<div class="p-3.5 rounded-xl border border-[#1e1e1e] bg-[#0c0c0c] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+<span class="text-xs font-mono text-[#c6c6c6]">Architecture</span>
+</div>
+<span class="text-xs text-[#8e8e8e]">For coding agents</span>
+</div>
+<div class="p-3.5 rounded-xl border border-[#1e1e1e] bg-[#0c0c0c] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-[#707070]"></span>
+<span class="text-xs font-mono text-[#c6c6c6]">Scale</span>
+</div>
+<span class="text-xs text-[#8e8e8e]">To ship apps and agents</span>
+</div>
+<div class="p-3.5 rounded-xl border border-[#1e1e1e] bg-[#0c0c0c] flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-[#404040]"></span>
+<span class="text-xs font-mono text-[#c6c6c6]">Telemetry</span>
+</div>
+<span class="text-xs text-[#8e8e8e]">Automated by agents</span>
+</div>
+</div>
+</section>
+<!-- Customer Trust Bar -->
+<section class="py-8 border-y border-[#181818] -mx-4 px-4 bg-[#050505]">
+<div class="text-[11px] font-mono uppercase tracking-wider text-[#666666] text-center mb-5">
+        Trusted by industry leaders
+      </div>
+<!-- Seven Exact Brands formatted as resilient responsive flex-wrap marquee -->
+<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-3.5 text-xs font-semibold tracking-tight text-[#888888]">
+<span class="hover:text-white transition-colors">BLACKBOX.AI</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">CHARLES SCHWAB</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">DOORDASH</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">OPENAI</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">SUPREME</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">THE WEATHER CO.</span>
+<span class="text-[#333333]">/</span>
+<span class="hover:text-white transition-colors">POLYMARKET</span>
+</div>
+</section>
+<!-- Section 1: Build agents -->
+<section class="pt-12 pb-8 border-b border-[#181818]">
+<div class="text-xs font-mono text-[#888888] uppercase tracking-wider mb-2">01 · Build</div>
+<h2 class="text-[32px] leading-[40px] font-[450] tracking-[-1.6px] text-white">
+        Build agents on infrastructure that thinks like them
+      </h2>
+<p class="mt-3 text-sm text-[#9b9b9b] leading-relaxed">
+        Notion powers millions of agent conversations daily on Vercel.
+      </p>
+<!-- Mobile Terminal / App Window Preview: Notion -->
+<div class="mt-6 rounded-xl border border-[#222222] bg-[#0a0a0a] overflow-hidden shadow-lg">
+<div class="px-3.5 py-2.5 bg-[#111111] border-b border-[#202020] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#2c2c2c]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2c2c2c]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#2c2c2c]"></span>
+</div>
+<span class="text-[11px] font-mono text-[#888888]">agent_sandbox.ts · notion</span>
+<span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1e1e1e] text-[#c6c6c6]">ready</span>
+</div>
+<div class="p-3.5 font-mono text-xs text-[#c6c6c6] space-y-2 leading-relaxed bg-[#060606]">
+<div class="text-[#777777]">// Durable orchestrator loop running Notion AI</div>
+<div>
+<span class="text-[#888888]">&gt;</span> <span class="text-white font-medium">const</span> session = <span class="text-white">await</span> Sandbox.create({
+          </div>
+<div class="pl-4 text-[#a3a3a3]">runtime: <span class="text-white">'fluid-v2'</span>,</div>
+<div class="pl-4 text-[#a3a3a3]">durable: <span class="text-white">true</span>,</div>
+<div class="pl-4 text-[#a3a3a3]">model: <span class="text-white">'gateway/claude-3-7-sonnet'</span></div>
+<div>});</div>
+<div class="text-[#4ade80] text-[11px] pt-1">✔ Session initialized: id_ntn_8829a [12ms]</div>
+</div>
+</div>
+<!-- 4 Feature Items -->
+<div class="mt-6 space-y-3">
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">01 Durable Orchestration</div>
+<p class="text-xs text-[#8e8e8e]">Fault-tolerant executions preserving state across long-lived agent turns.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">02 Sandboxed Environments</div>
+<p class="text-xs text-[#8e8e8e]">Instantaneous micro-VM isolation for dynamic code evaluation and tooling.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">03 AI Model Gateway</div>
+<p class="text-xs text-[#8e8e8e]">Unified routing, fallbacks, semantic caching, and latency optimization.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">04 Fluid Compute</div>
+<p class="text-xs text-[#8e8e8e]">Dynamic memory scaling responding elasticity to complex generative tasks.</p>
+</div>
+</div>
+</section>
+<!-- Section 2: Ship apps -->
+<section class="pt-12 pb-8 border-b border-[#181818]">
+<div class="text-xs font-mono text-[#888888] uppercase tracking-wider mb-2">02 · Ship</div>
+<h2 class="text-[32px] leading-[40px] font-[450] tracking-[-1.6px] text-white">
+        Ship apps that scale from zero to millions instantly
+      </h2>
+<p class="mt-3 text-sm text-[#9b9b9b] leading-relaxed">
+        Zapier serves over 100 million monthly website visits on Vercel.
+      </p>
+<!-- Mobile Dashboard Preview: Zapier -->
+<div class="mt-6 rounded-xl border border-[#222222] bg-[#0a0a0a] p-3.5">
+<div class="flex items-center justify-between pb-3 border-b border-[#1a1a1a]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#10b981]"></span>
+<span class="text-xs font-medium text-white">Production Edge: zapier.com</span>
+</div>
+<span class="text-[11px] font-mono text-[#888888]">p99 · 14ms</span>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-3 text-xs">
+<div class="p-2.5 rounded bg-[#121212] border border-[#1f1f1f]">
+<div class="text-[10px] text-[#777777] uppercase font-mono">Requests</div>
+<div class="text-sm font-semibold text-white mt-0.5">142.8M</div>
+<div class="text-[10px] text-[#10b981]">↑ 18.4% this mo</div>
+</div>
+<div class="p-2.5 rounded bg-[#121212] border border-[#1f1f1f]">
+<div class="text-[10px] text-[#777777] uppercase font-mono">Cold Starts</div>
+<div class="text-sm font-semibold text-white mt-0.5">0.00%</div>
+<div class="text-[10px] text-[#888888]">Edge warming</div>
+</div>
+</div>
+<div class="mt-3 p-2 rounded bg-[#000000] border border-[#1b1b1b] flex items-center justify-between text-[11px] font-mono text-[#ababab]">
+<span>WAF Rules Triggered: 0</span>
+<span class="text-[#3b82f6]">DDoS Shield Active</span>
+</div>
+</div>
+<!-- 4 Feature Items -->
+<div class="mt-6 space-y-3">
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">01 Global Delivery</div>
+<p class="text-xs text-[#8e8e8e]">Static and dynamically composable assets deployed to edge regions globally.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">02 Deployment Environments</div>
+<p class="text-xs text-[#8e8e8e]">Every git push produces an ephemeral, reproducible URL for testing.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">03 Serverless Functions</div>
+<p class="text-xs text-[#8e8e8e]">Auto-scaling backend code without the complexity of cluster orchestration.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">04 Web Application Firewall</div>
+<p class="text-xs text-[#8e8e8e]">L3/L7 layer security defending continuous production workloads automatically.</p>
+</div>
+</div>
+</section>
+<!-- Section 3: Host platforms -->
+<section class="pt-12 pb-8 border-b border-[#181818]">
+<div class="text-xs font-mono text-[#888888] uppercase tracking-wider mb-2">03 · Host</div>
+<h2 class="text-[32px] leading-[40px] font-[450] tracking-[-1.6px] text-white">
+        Host platforms that serve every customer
+      </h2>
+<p class="mt-3 text-sm text-[#9b9b9b] leading-relaxed">
+        Mintlify powers documentation for over 20,000 companies on Vercel.
+      </p>
+<!-- Mobile Customer Registry Preview: Mintlify -->
+<div class="mt-6 rounded-xl border border-[#222222] bg-[#0a0a0a] p-3.5">
+<div class="text-xs font-medium text-white mb-2 flex items-center justify-between">
+<span>Tenant Registry</span>
+<span class="text-[10px] font-mono text-[#10b981] bg-[#092615] px-2 py-0.5 rounded">20,412 active</span>
+</div>
+<div class="space-y-2">
+<div class="p-2 rounded bg-[#121212] border border-[#1c1c1c] flex items-center justify-between text-xs">
+<span class="font-mono text-[#e2e2e2]">docs.stripe.com</span>
+<span class="text-[10px] text-[#888888]">SSL Active · Isolated</span>
+</div>
+<div class="p-2 rounded bg-[#121212] border border-[#1c1c1c] flex items-center justify-between text-xs">
+<span class="font-mono text-[#e2e2e2]">docs.anthropic.com</span>
+<span class="text-[10px] text-[#888888]">SSL Active · Isolated</span>
+</div>
+<div class="p-2 rounded bg-[#121212] border border-[#1c1c1c] flex items-center justify-between text-xs">
+<span class="font-mono text-[#e2e2e2]">docs.perplexity.ai</span>
+<span class="text-[10px] text-[#888888]">SSL Active · Isolated</span>
+</div>
+</div>
+</div>
+<!-- 4 Feature Items -->
+<div class="mt-6 space-y-3">
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">01 Tenant Isolation</div>
+<p class="text-xs text-[#8e8e8e]">Strict multi-tenant security boundaries isolating customer data and compute.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">02 Domain Management</div>
+<p class="text-xs text-[#8e8e8e]">Programmatic domain verification and propagation across apex and subdomains.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">03 Custom SSL Certificates</div>
+<p class="text-xs text-[#8e8e8e]">Automatic TLS issuance and auto-renewal at zero operational touch.</p>
+</div>
+<div class="p-3 rounded-lg border border-[#1b1b1b] bg-[#0c0c0c]">
+<div class="text-xs font-mono text-white mb-0.5">04 Preview URLs</div>
+<p class="text-xs text-[#8e8e8e]">Granular permissioning and scoped tokens for customer content reviews.</p>
+</div>
+</div>
+</section>
+<!-- Recently Shipped Section -->
+<section class="py-12 border-b border-[#181818]">
+<div class="flex items-center justify-between mb-5">
+<h3 class="text-lg font-medium text-white tracking-tight">Recently shipped</h3>
+<a class="text-xs font-mono text-[#c6c6c6] hover:text-white flex items-center gap-1" href="#">
+          View Changelog -&gt;
+        </a>
+</div>
+<div class="space-y-3">
+<!-- Card 1: eve framework -->
+<div class="p-4 rounded-xl border border-[#202020] bg-[#0a0a0a]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-semibold text-white">eve framework</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-black font-medium">GA</span>
+</div>
+<p class="text-xs text-[#999999] leading-relaxed">
+            Durable agents framework for writing, deploying, and inspecting long-running automated workflows.
+          </p>
+</div>
+<!-- Card 2: Passport identity -->
+<div class="p-4 rounded-xl border border-[#202020] bg-[#0a0a0a]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-semibold text-white">Passport identity</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded border border-[#333333] text-[#c6c6c6]">Preview</span>
+</div>
+<p class="text-xs text-[#999999] leading-relaxed mb-2">
+            Seamless identity provider integration for cross-platform agent permissions.
+          </p>
+<div class="text-[11px] font-mono text-[#666666]">Pasaporte / パスポート verified</div>
+</div>
+<!-- Card 3: Containers -->
+<div class="p-4 rounded-xl border border-[#202020] bg-[#0a0a0a]">
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-semibold text-white">Containers</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white text-black font-medium">GA</span>
+</div>
+<p class="text-xs text-[#999999] leading-relaxed mb-2">
+            Native Dockerfile builds deployable straight from git repos with zero config.
+          </p>
+<div class="p-2 rounded bg-[#000000] border border-[#1c1c1c] text-[11px] font-mono text-[#4ade80]">
+            $ vercel deploy --docker
+          </div>
+</div>
+</div>
+</section>
+<!-- Bottom CTA -->
+<section class="py-14 text-center">
+<h2 class="text-[32px] leading-[40px] font-[450] tracking-[-1.6px] text-white">
+        Built by you, or your agents
+      </h2>
+<p class="mt-3.5 text-sm text-[#9b9b9b] leading-relaxed max-w-[320px] mx-auto">
+        From the first prompt to global scale. Deploy high-reliability AI apps today on the standard frontend and agent cloud.
+      </p>
+<!-- Stacked Buttons -->
+<div class="mt-7 flex flex-col gap-2.5">
+<a class="w-full h-11 rounded-full bg-white text-black font-medium text-sm flex items-center justify-center gap-2 hover:bg-neutral-200 transition-colors" href="#">
+<svg fill="currentColor" height="11" viewbox="0 0 76 65" width="12">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+</svg>
+          Deploy now
+        </a>
+<a class="w-full h-11 rounded-full bg-[#111111] border border-[#282828] text-white font-medium text-sm flex items-center justify-center hover:border-[#3d3d3d] transition-colors" href="#">
+          Onboard your agent
+        </a>
+</div>
+</section>
+<!-- Mobile Phone Directory (2-Column Grid as measured) -->
+<footer class="pt-10 pb-16 border-t border-[#1a1a1a] text-xs">
+<div class="grid grid-cols-2 gap-x-6 gap-y-8 text-[#999999]">
+<!-- Pair 1: Agent Stack & Core Platform -->
+<div>
+<div class="text-white font-medium text-xs mb-3">Agent Stack</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">AI SDK</a></li>
+<li><a class="hover:text-white" href="#">AI Gateway</a></li>
+<li><a class="hover:text-white" href="#">Sandbox</a></li>
+<li><a class="hover:text-white" href="#">Passport</a></li>
+<li><a class="hover:text-white" href="#">Connect</a></li>
+<li><a class="hover:text-white" href="#">eve</a></li>
+</ul>
+</div>
+<div>
+<div class="text-white font-medium text-xs mb-3">Core Platform</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Security</a></li>
+<li><a class="hover:text-white" href="#">Fluid Compute</a></li>
+<li><a class="hover:text-white" href="#">Observability</a></li>
+<li><a class="hover:text-white" href="#">Workflows</a></li>
+<li><a class="hover:text-white" href="#">CI/CD</a></li>
+</ul>
+</div>
+<!-- Pair 2: Security & Tools -->
+<div>
+<div class="text-white font-medium text-xs mb-3">Security</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Enterprise WAF</a></li>
+<li><a class="hover:text-white" href="#">DDoS Shield</a></li>
+<li><a class="hover:text-white" href="#">Bot Protection</a></li>
+<li><a class="hover:text-white" href="#">SOC 2 Type II</a></li>
+</ul>
+</div>
+<div>
+<div class="text-white font-medium text-xs mb-3">Tools</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Next.js</a></li>
+<li><a class="hover:text-white" href="#">v0</a></li>
+<li><a class="hover:text-white" href="#">Turborepo</a></li>
+<li><a class="hover:text-white" href="#">CLI</a></li>
+</ul>
+</div>
+<!-- Pair 3: Frameworks & SDKs -->
+<div>
+<div class="text-white font-medium text-xs mb-3">Frameworks &amp; SDKs</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Next.js</a></li>
+<li><a class="hover:text-white" href="#">SvelteKit</a></li>
+<li><a class="hover:text-white" href="#">Nuxt</a></li>
+<li><a class="hover:text-white" href="#">Remix</a></li>
+</ul>
+</div>
+<div>
+<div class="text-white font-medium text-xs mb-3">Build &amp; Learn</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Docs</a></li>
+<li><a class="hover:text-white" href="#">Guides</a></li>
+<li><a class="hover:text-white" href="#">Templates</a></li>
+<li><a class="hover:text-white" href="#">Integrations</a></li>
+</ul>
+</div>
+<!-- Pair 4: Explore & Company -->
+<div>
+<div class="text-white font-medium text-xs mb-3">Explore</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Customers</a></li>
+<li><a class="hover:text-white" href="#">Pricing</a></li>
+<li><a class="hover:text-white" href="#">Enterprise</a></li>
+<li><a class="hover:text-white" href="#">Blog</a></li>
+</ul>
+</div>
+<div>
+<div class="text-white font-medium text-xs mb-3">Company</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">About</a></li>
+<li><a class="hover:text-white" href="#">Careers</a></li>
+<li><a class="hover:text-white" href="#">Contact</a></li>
+<li><a class="hover:text-white" href="#">Press</a></li>
+</ul>
+</div>
+<!-- Pair 5: Legal & Trust & Social -->
+<div>
+<div class="text-white font-medium text-xs mb-3">Legal &amp; Trust</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">Privacy</a></li>
+<li><a class="hover:text-white" href="#">Legal</a></li>
+<li><a class="hover:text-white" href="#">Security</a></li>
+<li><a class="hover:text-white" href="#">Trust Center</a></li>
+</ul>
+</div>
+<div>
+<div class="text-white font-medium text-xs mb-3">Social</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white" href="#">GitHub</a></li>
+<li><a class="hover:text-white" href="#">X / Twitter</a></li>
+<li><a class="hover:text-white" href="#">YouTube</a></li>
+<li><a class="hover:text-white" href="#">LinkedIn</a></li>
+</ul>
+</div>
+</div>
+<!-- System Status Indicator & Controls -->
+<div class="mt-10 pt-6 border-t border-[#1a1a1a] flex flex-col gap-4">
+<!-- Status Indicator -->
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#10b981] animate-pulse"></span>
+<span class="text-xs text-[#c6c6c6]">All systems normal.</span>
+</div>
+<!-- Theme Selection Pills -->
+<div class="flex items-center gap-1.5 self-start p-1 rounded-full bg-[#111111] border border-[#222222]">
+<button aria-label="System theme" class="px-2.5 py-0.5 rounded-full text-[11px] text-[#888888] hover:text-white transition-colors">system</button>
+<button aria-label="Light theme" class="px-2.5 py-0.5 rounded-full text-[11px] text-[#888888] hover:text-white transition-colors">light</button>
+<button aria-label="Dark theme" class="px-2.5 py-0.5 rounded-full text-[11px] text-white bg-[#222222] font-medium">dark</button>
+</div>
+<!-- Copyright & Attributed Note -->
+<div class="text-[11px] text-[#666666] leading-relaxed pt-2">
+<div>© 2026 Vercel, Inc.</div>
+<div class="mt-0.5 text-[#555555]">Free visual study (390×844)</div>
+</div>
+</div>
+</footer>
+</main>
+<!-- Lightweight Script for Menu Modal Interactivity -->
+<script>
+    const menuBtn = document.getElementById('menu-toggle-btn');
+    const closeBtn = document.getElementById('menu-close-btn');
+    const modal = document.getElementById('mobile-nav-modal');
+
+    menuBtn.addEventListener('click', () => {
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = 'auto';
+    });
+  </script>
+</body></html>

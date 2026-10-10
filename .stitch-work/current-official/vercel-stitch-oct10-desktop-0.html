@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Vercel: Agentic Infrastructure</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;450;500;600;700&amp;family=Geist+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+            mono: ['Geist Mono', 'monospace'],
+          },
+          colors: {
+            brand: {
+              black: '#000000',
+              card: '#080808',
+              cardBorder: 'rgba(255, 255, 255, 0.08)',
+              subtle: '#888888',
+              muted: '#666666',
+              text: '#ededed',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      background-color: #000000;
+      color: #ededed;
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .hero-h1 {
+      font-size: 64px;
+      line-height: 64px;
+      font-weight: 400;
+      letter-spacing: -3.84px;
+      color: rgb(237, 237, 237);
+    }
+    .section-h2 {
+      font-size: 56px;
+      line-height: 56px;
+      font-weight: 450;
+      letter-spacing: -3.36px;
+      color: rgb(237, 237, 237);
+    }
+    .card-border {
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background: radial-gradient(120% 120% at 50% 0%, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%), #080808;
+    }
+    .nav-blur {
+      backdrop-filter: blur(12px);
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+  </style>
+</head>
+<body class="bg-black text-[#ededed] min-w-[1280px] overflow-x-hidden antialiased selection:bg-white selection:text-black">
+<!-- Desktop Navigation Bar (64px) -->
+<header class="sticky top-0 z-50 h-16 w-full border-b border-white/[0.08] nav-blur">
+<div class="max-w-[1280px] mx-auto h-full px-6 flex items-center justify-between">
+<!-- Left: Logo & Main Navigation -->
+<div class="flex items-center gap-8">
+<a aria-label="Vercel Home" class="flex items-center gap-2 group" href="https://vercel.com">
+<svg class="w-5 h-4.5 text-white fill-current transition-transform duration-200 group-hover:scale-105" fill="none" viewbox="0 0 76 65">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="currentColor"></path>
+</svg>
+<span class="text-white font-medium text-[15px] tracking-tight">Vercel</span>
+</a>
+<nav class="hidden md:flex items-center gap-6 text-[14px] text-[#8e8e8e]">
+<div class="relative group cursor-pointer py-2">
+<span class="hover:text-white transition-colors duration-150 flex items-center gap-1 font-normal">
+              Products
+              <svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+<!-- Products Dropdown Preview -->
+<div class="absolute left-0 top-full pt-3 hidden group-hover:block w-[520px] pointer-events-none group-hover:pointer-events-auto">
+<div class="bg-[#0a0a0a] border border-white/10 rounded-xl p-5 shadow-2xl backdrop-blur-xl grid grid-cols-2 gap-4">
+<div>
+<div class="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-2">Agent Stack</div>
+<ul class="space-y-1.5 text-sm">
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">AI SDK</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">AI Gateway</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">Sandbox</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">Passport</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">eve</a></li>
+</ul>
+</div>
+<div>
+<div class="text-[11px] font-semibold uppercase tracking-wider text-neutral-400 mb-2">Core Platform &amp; Tools</div>
+<ul class="space-y-1.5 text-sm">
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">Fluid Compute</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">Content Delivery</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">Next.js</a></li>
+<li><a class="text-neutral-300 hover:text-white block py-1" href="https://vercel.com">v0 ↗</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="relative group cursor-pointer py-2">
+<span class="hover:text-white transition-colors duration-150 flex items-center gap-1 font-normal">
+              Resources
+              <svg class="w-3.5 h-3.5 opacity-60 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</span>
+</div>
+<a class="hover:text-white transition-colors duration-150 font-normal" href="https://vercel.com/enterprise">Enterprise</a>
+<a class="hover:text-white transition-colors duration-150 font-normal" href="https://vercel.com/pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right: Action Buttons -->
+<div class="flex items-center gap-4 text-[14px]">
+<a class="text-[#8e8e8e] hover:text-white transition-colors duration-150 font-normal" href="https://vercel.com/contact/sales">Get a Demo</a>
+<a class="text-[#8e8e8e] hover:text-white transition-colors duration-150 font-normal" href="https://vercel.com/login">Log In</a>
+<a class="bg-white text-black hover:bg-[#ededed] px-3.5 py-1.5 rounded-full font-medium text-xs transition-colors duration-150" href="https://vercel.com/signup">Sign Up</a>
+</div>
+</div>
+</header>
+<!-- Ship 26 Announcement Banner -->
+<div class="w-full pt-8 pb-4 flex justify-center">
+<a class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] hover:border-white/20 transition-all text-xs text-[#a1a1a1] group" href="https://vercel.com/ship">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-white font-normal">Ship 26 is coming to SF</span>
+<span class="text-neutral-500">•</span>
+<span class="text-neutral-300 group-hover:text-white transition-colors">Get your ticket →</span>
+</a>
+</div>
+<!-- Hero Section -->
+<section class="max-w-[1280px] mx-auto px-6 pt-10 pb-20 relative">
+<div class="grid grid-cols-12 gap-8 items-center min-h-[460px]">
+<!-- Left Column: Heading & CTAs (measured x24/y302 width:444 height:128) -->
+<div class="col-span-5 flex flex-col justify-center pr-4">
+<h1 class="hero-h1 mb-6">
+          Agentic<br/>Infrastructure
+        </h1>
+<p class="text-[16px] leading-[24px] text-[#8e8e8e] max-w-[380px] mb-8 font-normal">
+          For coding agents to ship apps and agents automated by agents. Deploy, coordinate, and orchestrate autonomous systems at internet scale.
+        </p>
+<div class="flex items-center gap-3">
+<a class="bg-white text-black hover:bg-[#ededed] px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-150 shadow-sm flex items-center gap-2" href="https://vercel.com/new">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 76 65">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+</svg>
+            Deploy now
+          </a>
+<a class="border border-white/15 bg-white/[0.02] hover:bg-white/[0.07] hover:border-white/25 text-[#ededed] px-5 py-2.5 rounded-full font-medium text-sm transition-all duration-150" href="https://vercel.com/contact/sales">
+            Talk to sales
+          </a>
+</div>
+</div>
+<!-- Center Column: Luminous Black Vercel Triangle -->
+<div class="col-span-4 flex items-center justify-center relative">
+<div class="relative w-full max-w-[380px] aspect-square flex items-center justify-center">
+<!-- Background Glow Effect matching official fallback image -->
+<div class="absolute inset-0 bg-radial from-white/[0.12] via-transparent to-transparent rounded-full blur-3xl pointer-events-none scale-125"></div>
+<img alt="Vercel Luminous Triangle" class="w-full h-auto object-contain relative z-10 drop-shadow-[0_0_35px_rgba(255,255,255,0.18)]" loading="eager" onerror="this.onerror=null; this.src='https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+<!-- Right Column: Agent Capabilities Stack -->
+<div class="col-span-3 flex flex-col justify-center space-y-7 pl-4 border-l border-white/[0.08]">
+<div class="group cursor-pointer">
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1">Architecture</div>
+<h3 class="text-white text-[15px] font-medium tracking-tight mb-1 group-hover:text-neutral-200 transition-colors flex items-center justify-between">
+            For coding agents
+            <span class="text-neutral-500 group-hover:translate-x-0.5 transition-transform text-xs">→</span>
+</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            Deterministic tool access, execution loops, and sandboxed compute runners with native CLI, MCP, and Skills.
+          </p>
+</div>
+<div class="group cursor-pointer">
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1">Scale</div>
+<h3 class="text-white text-[15px] font-medium tracking-tight mb-1 group-hover:text-neutral-200 transition-colors flex items-center justify-between">
+            To ship apps and agents
+            <span class="text-neutral-500 group-hover:translate-x-0.5 transition-transform text-xs">→</span>
+</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            Isolated micro-VMs, sub-millisecond cold starts, global replication, and auto-provisioning.
+          </p>
+</div>
+<div class="group cursor-pointer">
+<div class="text-[11px] uppercase tracking-wider text-[#666666] font-semibold mb-1">Telemetry</div>
+<h3 class="text-white text-[15px] font-medium tracking-tight mb-1 group-hover:text-neutral-200 transition-colors flex items-center justify-between">
+            Automated by agents
+            <span class="text-neutral-500 group-hover:translate-x-0.5 transition-transform text-xs">→</span>
+</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            Real-time trace debugging, self-healing runtime errors, automated PR resolution, and policy enforcement.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- Logo Strip: Meta, BLACKBOX.AI, DoorDash, OpenAI, SpaceXAI, The Weather Company, Polymarket -->
+<section class="w-full border-y border-white/[0.08] py-8 bg-[#030303]">
+<div class="max-w-[1280px] mx-auto px-6">
+<div class="flex items-center justify-between gap-8 text-[#777777] text-xs uppercase tracking-widest font-mono">
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">META</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">BLACKBOX.AI</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">DOORDASH</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">OPENAI</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">SPACEX AI</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">THE WEATHER COMPANY</span>
+<span class="hover:text-white transition-colors duration-200 tracking-[0.2em] font-semibold">POLYMARKET</span>
+</div>
+</div>
+</section>
+<!-- Section 1: Build agents on infrastructure that thinks like them (Notion) -->
+<section class="max-w-[1280px] mx-auto px-6 py-28 border-b border-white/[0.08]">
+<div class="mb-14">
+<div class="text-[12px] font-mono uppercase tracking-widest text-[#666666] mb-3">Intelligence Layer</div>
+<h2 class="section-h2 mb-4 max-w-[800px]">
+        Build agents on infrastructure that thinks like them
+      </h2>
+<p class="text-[#888888] text-lg font-normal">
+        “Notion powers millions of agent conversations daily on Vercel.”
+      </p>
+</div>
+<!-- Product Showcase + 4 Features Grid -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Image Showcase (Notion Desktop Dark) -->
+<div class="col-span-7 rounded-xl overflow-hidden card-border group relative">
+<div class="h-10 px-4 bg-white/[0.02] border-b border-white/[0.08] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+</div>
+<span class="text-[11px] font-mono text-neutral-500">notion.so/agents/orchestrator</span>
+<div class="w-8"></div>
+</div>
+<img alt="Build agents on infrastructure that thinks like them - Notion" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- 4 Features Grid -->
+<div class="col-span-5 grid grid-cols-2 gap-4">
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">01</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Durable Orchestration</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Stateful execution surviving restarts across distributed agent sessions.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">02</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Sandboxed Environments</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Isolated micro-VMs per user session with instant code evaluation.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">03</div>
+<h4 class="text-white text-sm font-medium mb-1.5">AI Model Gateway</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Multi-provider unified latency fallback, caching, and token budgeting.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">04</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Fluid Compute</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Sub-millisecond elastic scale designed specifically for streaming agent steps.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Ship apps that scale from zero to millions instantly (Zapier) -->
+<section class="max-w-[1280px] mx-auto px-6 py-28 border-b border-white/[0.08]">
+<div class="mb-14">
+<div class="text-[12px] font-mono uppercase tracking-widest text-[#666666] mb-3">Global Network</div>
+<h2 class="section-h2 mb-4 max-w-[850px]">
+        Ship apps that scale from zero to millions instantly
+      </h2>
+<p class="text-[#888888] text-lg font-normal">
+        “Zapier serves over 100 million monthly website visits on Vercel.”
+      </p>
+</div>
+<!-- Features + Image Showcase (Zapier Desktop Dark) -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- 4 Features Grid (Left) -->
+<div class="col-span-5 grid grid-cols-2 gap-4">
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">01</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Global Delivery</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Smart routing across 100+ edge POPs with sub-20ms edge caching.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">02</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Deployment Environments</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Instant branch URLs for every pull request with automated previews.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">03</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Serverless Functions</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Concurrency without connection limits and zero infrastructure management.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">04</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Web Application Firewall</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Deep packet inspection, automatic DDoS defense, and bot identification.</p>
+</div>
+</div>
+<!-- Image Showcase (Zapier Desktop Dark) (Right) -->
+<div class="col-span-7 rounded-xl overflow-hidden card-border group relative">
+<div class="h-10 px-4 bg-white/[0.02] border-b border-white/[0.08] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+</div>
+<span class="text-[11px] font-mono text-neutral-500">zapier.com/app/dashboard/mesh</span>
+<div class="w-8"></div>
+</div>
+<img alt="Ship apps that scale from zero to millions instantly - Zapier" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</div>
+</section>
+<!-- Section 3: Host platforms that serve every customer (Mintlify) -->
+<section class="max-w-[1280px] mx-auto px-6 py-28 border-b border-white/[0.08]">
+<div class="mb-14">
+<div class="text-[12px] font-mono uppercase tracking-widest text-[#666666] mb-3">Multi-Tenant Engine</div>
+<h2 class="section-h2 mb-4 max-w-[850px]">
+        Host platforms that serve every customer
+      </h2>
+<p class="text-[#888888] text-lg font-normal">
+        “Mintlify powers documentation for over 20,000 companies on Vercel.”
+      </p>
+</div>
+<!-- Product Showcase (Mintlify Desktop Dark) + 4 Features Grid -->
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Image Showcase (Mintlify Desktop Dark) -->
+<div class="col-span-7 rounded-xl overflow-hidden card-border group relative">
+<div class="h-10 px-4 bg-white/[0.02] border-b border-white/[0.08] flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+</div>
+<span class="text-[11px] font-mono text-neutral-500">docs.mintlify.com/platform/tenants</span>
+<div class="w-8"></div>
+</div>
+<img alt="Host platforms that serve every customer - Mintlify" class="w-full h-auto object-cover block" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- 4 Features Grid -->
+<div class="col-span-5 grid grid-cols-2 gap-4">
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">01</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Tenant Isolation</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Zero cross-account data leakage across millions of custom subdomains.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">02</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Domain Management</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Automated programmatic DNS verification and propagation.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">03</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Custom SSL Certificates</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Instant TLS provisioning via API with zero configuration needed.</p>
+</div>
+<div class="p-5 rounded-xl card-border hover:border-white/20 transition-colors">
+<div class="w-7 h-7 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center mb-4 text-xs font-mono text-neutral-300">04</div>
+<h4 class="text-white text-sm font-medium mb-1.5">Preview URLs</h4>
+<p class="text-xs text-[#888888] leading-relaxed">Unique review sandbox for each customer commit and documentation release.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Recently Shipped -->
+<section class="max-w-[1280px] mx-auto px-6 py-28 border-b border-white/[0.08]">
+<div class="flex items-center justify-between mb-12">
+<h2 class="text-[32px] font-normal tracking-tight text-[#ededed]">Recently shipped</h2>
+<a class="text-xs text-[#888888] hover:text-white transition-colors flex items-center gap-1 font-mono" href="https://vercel.com/changelog">
+        View Changelog →
+      </a>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<!-- Card 1: eve -->
+<div class="card-border rounded-xl p-6 flex flex-col justify-between h-[340px] hover:border-white/20 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-[#666666]">October 2026</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white font-medium">GA</span>
+</div>
+<div class="h-10 flex items-center mb-4">
+<img alt="Eve" class="h-6 w-auto" onerror="this.onerror=null; this.src='https://assets.vercel.com/image/upload/front/favicon/vercel/60x60.png';" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<h3 class="text-white text-lg font-medium tracking-tight mb-2">eve framework</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            eve is a framework for building durable agents with state management designed for multi-step agent actions.
+          </p>
+</div>
+<div>
+<a class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors flex items-center gap-1" href="https://vercel.com/blog/eve">
+            Read announcement →
+          </a>
+</div>
+</div>
+<!-- Card 2: Passport -->
+<div class="card-border rounded-xl p-6 flex flex-col justify-between h-[340px] hover:border-white/20 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-[#666666]">October 2026</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-medium">Preview</span>
+</div>
+<div class="h-10 flex items-center mb-4 gap-2">
+<span class="text-white font-mono text-sm tracking-wider font-semibold">Passport</span>
+<span class="text-[11px] text-[#666666] font-mono">Pasaporte • Passaporto • パスポート</span>
+</div>
+<h3 class="text-white text-lg font-medium tracking-tight mb-2">Passport Identity</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            Secure every internal agent, app, and deployment with your identity provider. Okta, Azure AD, and Google Workspace support.
+          </p>
+</div>
+<div>
+<a class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors flex items-center gap-1" href="https://vercel.com/docs/security/passport">
+            Explore Passport →
+          </a>
+</div>
+</div>
+<!-- Card 3: Containers / Dockerfile -->
+<div class="card-border rounded-xl p-6 flex flex-col justify-between h-[340px] hover:border-white/20 transition-all group">
+<div>
+<div class="flex items-center justify-between mb-6">
+<span class="text-xs font-mono text-[#666666]">September 2026</span>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white font-medium">GA</span>
+</div>
+<div class="h-10 flex items-center mb-4">
+<div class="px-2.5 py-1 rounded bg-black border border-white/10 font-mono text-[11px] text-neutral-300 flex items-center gap-1.5">
+<span class="text-emerald-400">▲</span> vercel deploy --docker
+            </div>
+</div>
+<h3 class="text-white text-lg font-medium tracking-tight mb-2">Containers</h3>
+<p class="text-xs text-[#888888] leading-relaxed">
+            Run production workloads in isolated containers on Vercel. Native Dockerfile builds with zero orchestrator overhead.
+          </p>
+</div>
+<div>
+<a class="text-xs font-medium text-neutral-300 group-hover:text-white transition-colors flex items-center gap-1" href="https://vercel.com/docs/containers">
+            Learn about Containers →
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Built by you, or your agents (Bottom Hero CTA) -->
+<section class="max-w-[1280px] mx-auto px-6 py-32 text-center relative overflow-hidden">
+<div class="relative z-10 max-w-2xl mx-auto">
+<h2 class="text-[52px] leading-[56px] font-normal tracking-[-2.8px] text-white mb-6">
+        Built by you, or your agents
+      </h2>
+<p class="text-[#888888] text-[17px] leading-relaxed mb-10 max-w-lg mx-auto">
+        From the first prompt to global scale. Deploy high-reliability AI apps today on the standard frontend and agent cloud.
+      </p>
+<div class="flex items-center justify-center gap-4">
+<a class="bg-white text-black hover:bg-[#ededed] px-6 py-3 rounded-full font-medium text-sm transition-all duration-150 flex items-center gap-2 shadow-lg" href="https://vercel.com/new">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 76 65">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+</svg>
+          Deploy now
+        </a>
+<a class="border border-white/15 bg-white/[0.03] hover:bg-white/[0.08] hover:border-white/25 text-[#ededed] px-6 py-3 rounded-full font-medium text-sm transition-all duration-150 flex items-center gap-2" href="https://vercel.com/agent">
+          Onboard your agent
+        </a>
+</div>
+</div>
+</section>
+<!-- Complete Vercel Directory Footer -->
+<footer class="w-full border-t border-white/[0.08] bg-[#020202] pt-16 pb-12 text-[#888888]">
+<div class="max-w-[1280px] mx-auto px-6">
+<!-- Directory Grid: 6 Columns -->
+<div class="grid grid-cols-6 gap-8 pb-16 border-b border-white/[0.08] text-xs">
+<!-- Column 1: Agent Stack -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">Agent Stack</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">AI SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">AI Gateway</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Sandbox</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Workflows</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Connect <span class="text-[10px] bg-white/10 px-1 py-0.5 rounded text-neutral-200">New</span></a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Passport <span class="text-[10px] bg-white/10 px-1 py-0.5 rounded text-neutral-200">New</span></a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">eve <span class="text-[10px] bg-white/10 px-1 py-0.5 rounded text-neutral-200">New</span></a></li>
+</ul>
+</div>
+<!-- Column 2: Core Platform -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">Core Platform</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">CI/CD</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Content Delivery</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Fluid Compute</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Observability</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Security</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Platform Security</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">WAF</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Bot Management</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">BotID</a></li>
+</ul>
+</div>
+<!-- Column 3: Tools & Frameworks -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">Tools</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Vercel Drop</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Vercel Agent</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Vercel Plugin</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Agent Skills</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Domains</a></li>
+<li><a class="hover:text-white transition-colors" href="https://v0.dev">v0 ↗</a></li>
+</ul>
+<div class="text-white font-medium mt-6 mb-3 text-[13px]">Frameworks</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">eve <span class="text-[10px] bg-white/10 px-1 py-0.5 rounded text-neutral-200">New</span></a></li>
+<li><a class="hover:text-white transition-colors" href="https://nextjs.org">Next.js</a></li>
+<li><a class="hover:text-white transition-colors" href="https://nuxtjs.org">Nuxt</a></li>
+<li><a class="hover:text-white transition-colors" href="https://svelte.dev">SvelteKit</a></li>
+<li><a class="hover:text-white transition-colors" href="https://nitro.unjs.io">Nitro</a></li>
+<li><a class="hover:text-white transition-colors" href="https://turbo.build">Turborepo</a></li>
+<li><a class="hover:text-white transition-colors" href="https://tanstack.com/start">TanStack Start</a></li>
+<li><a class="hover:text-white transition-colors" href="https://fastapi.tiangolo.com">FastAPI</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/frameworks">All frameworks</a></li>
+</ul>
+</div>
+<!-- Column 4: SDKs & Build -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">SDKs</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Vercel SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Workflow SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Flags SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Chat SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Queues SDK</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Streamdown</a></li>
+</ul>
+<div class="text-white font-medium mt-6 mb-3 text-[13px]">Build</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">AI Apps</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Web Apps</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Marketing Sites</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Platforms</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Commerce</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Platform Engineers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com">Design Engineers</a></li>
+</ul>
+</div>
+<!-- Column 5: Learn & Explore -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">Learn</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/docs">Docs</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/blog">Blog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/changelog">Changelog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/kb">Knowledge Base</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/academy">Academy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/articles">Articles</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/community">Community</a></li>
+<li><a class="hover:text-white transition-colors" href="https://isagentic.com">Is Agentic</a></li>
+</ul>
+<div class="text-white font-medium mt-6 mb-3 text-[13px]">Explore</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/customers">Customers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/marketplace">Marketplace</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/templates">Templates</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/partners">Partner Finder</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/aws">Vercel + AWS</a></li>
+</ul>
+</div>
+<!-- Column 6: Company & Legal -->
+<div>
+<div class="text-white font-medium mb-3 text-[13px]">Company</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/about">About</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/careers">Careers</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/press">Press</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/events">Events</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/startups">Startups</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/shipped">Shipped on Vercel</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/oss">Open Source Program</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/enterprise">Enterprise</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/pricing">Pricing</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/help">Help</a></li>
+</ul>
+<div class="text-white font-medium mt-6 mb-3 text-[13px]">Legal &amp; Trust</div>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/legal/privacy-policy">Privacy Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/legal/terms">Terms of Service</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/legal/cookie-policy">Cookie Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/legal/dpa">DPA</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/legal/aup">Acceptable Use Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="https://vercel.com/trust">Trust Center</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar: Status, Theme & Social -->
+<div class="pt-8 flex items-center justify-between text-xs">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<svg class="w-4 h-3.5 text-white fill-current" viewbox="0 0 76 65">
+<path d="M37.5274 0L75.0548 65H0L37.5274 0Z"></path>
+</svg>
+<span class="text-neutral-400">© 2026 Vercel, Inc.</span>
+</div>
+<div class="flex items-center gap-2 text-neutral-400">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<a class="hover:text-white transition-colors" href="https://www.vercel-status.com">All systems normal.</a>
+</div>
+</div>
+<!-- Theme Picker & Social Links -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-neutral-500 text-[11px] font-mono">
+<span>Theme:</span>
+<button class="px-2 py-0.5 rounded bg-white/10 text-white font-sans">system</button>
+<button class="px-2 py-0.5 rounded hover:text-white transition-colors font-sans">light</button>
+<button class="px-2 py-0.5 rounded hover:text-white transition-colors font-sans">dark</button>
+</div>
+<div class="flex items-center gap-4 text-neutral-400">
+<a aria-label="GitHub" class="hover:text-white transition-colors" href="https://github.com/vercel">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+</a>
+<a aria-label="X" class="hover:text-white transition-colors" href="https://x.com/vercel">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<a aria-label="LinkedIn" class="hover:text-white transition-colors" href="https://linkedin.com/company/vercel">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

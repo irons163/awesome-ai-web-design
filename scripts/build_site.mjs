@@ -141,7 +141,7 @@ function stageOfficialDrafts(progress) {
     const record = progress[name === 'linear' ? 'linear.app' : name];
     const observed = escapeHtml((record.observed_at || record.reference_observed_at || '').slice(0, 10) || '日期未記錄');
     const note = record.review_note;
-    const disclosure = ['theverge', 'wired', 'pinterest', 'vodafone', 'spotify', 'linear', 'claude', 'notion', 'figma', 'framer'].includes(name);
+    const disclosure = ['theverge', 'wired', 'pinterest', 'vodafone', 'spotify', 'linear', 'claude', 'notion', 'figma', 'framer', 'vercel'].includes(name);
     const badge = '<' + (disclosure ? 'details' : 'div') + ' class="official-draft-badge" role="note">' +
       (disclosure ? '<summary>官網重製草稿 · 尚未視覺驗收</summary>' : '<strong>官網重製草稿 · 尚未視覺驗收</strong>') +
       `<span>參考資料：${observed}；非品牌官方網站。</span>` +
