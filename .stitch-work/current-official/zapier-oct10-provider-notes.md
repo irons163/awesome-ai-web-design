@@ -1,0 +1,7 @@
+# Genuine Google Stitch provenance and unverified provider statements
+
+Fresh DESKTOP edit, project6052931744795035931, session13232724403068796202, screen82b48a0f12844c37aee73b203e19bdee. Full raw response zapier-oct10-native-response.json and exact prompt zapier-oct10-native-prompt.txt. Raw HTML, unchanged provider thumbnail and fullPNG retained with exact URLs/bytes/hashes in zapier-oct10-native-export-hashes.json; actual full dimensions independently checked against provider metadata.
+
+Provider describes its design as a verified official release and claims authentic/precise/verified elements. Those statements are not validation. It invents Cursor/Claude3.7 lead-routing orchestration, Claude Desktop MCP terminal, Claude3.5Sonnet exception reasoning, Crunchbase84% faster incident response/12M+ enrichment metrics and an Enterprise Control Center with Zero-Storage Model Routing/EU PII Masking/Execution Budget Caps. None are accepted from the official homepage evidence. It also labels Zero AI Training Opt-Out and Observability Telemetry beyond the observed wording. Concrete source correction retains original official media and text, with no fabricated console/metrics.
+
+Provider suggestions preserved: generate matching390px responsive view; toggle Fluid Determinism states; inspect Enterprise Control Center security view. No new native MOBILE is claimed, and the invented Control Center is not used as source evidence. No purchases or paid upgrades; account billing not audited.

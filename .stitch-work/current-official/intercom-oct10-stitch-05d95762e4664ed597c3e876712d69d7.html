@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Intercom: A complete system for AI and human customer service</title>
+<!-- Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#111111",
+            "on-primary": "#ffffff",
+            "surface": "#fbfbfb",
+            "surface-dim": "#f3f3f3",
+            "outline-subtle": "#e5e7eb",
+            "muted-gray": "#737373"
+          },
+          fontFamily: {
+            headline: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+            body: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
+            serif: ["Newsreader", "Georgia", "serif"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .font-saans {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      letter-spacing: -0.04em;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body class="bg-white text-[#111111] antialiased overflow-x-hidden selection:bg-black selection:text-white">
+<!-- 1. Top Announcement Bar -->
+<div class="w-full h-[34px] px-4 flex items-center justify-between z-50 relative select-none border-b border-gray-200/50 text-[#1a1a1a] text-[13px] font-body tracking-tight" id="announcement-banner" style="background: linear-gradient(90deg, #fbe7df 0%, #fef3e2 25%, #e8f5e9 50%, #e0f2fe 75%, #fae8ff 100%);">
+<div class="hidden sm:block flex-1"></div>
+<div class="flex items-center gap-1.5 text-center mx-auto sm:mx-0">
+<span class="font-medium text-[#111111]">Introducing Fin 4. A major step toward a fully agentic customer experience.</span>
+<a class="underline underline-offset-2 font-semibold text-[#111111] hover:text-black ml-1 inline-flex items-center gap-0.5" href="https://fin.ai/fin4">Learn more <span class="text-xs">→</span></a>
+</div>
+<div class="hidden sm:flex flex-1 justify-end">
+<button aria-label="Close Announcement" class="text-gray-600 hover:text-black transition-colors px-2" onclick="document.getElementById('announcement-banner').style.display='none'">
+<span class="text-base leading-none">×</span>
+</button>
+</div>
+</div>
+<!-- 2. Navigation Bar (74px white nav header) -->
+<header class="bg-white border-b border-gray-100 sticky top-0 z-50 w-full transition-all">
+<div class="w-full h-[74px] px-6 lg:px-12 max-w-7xl mx-auto flex items-center justify-between">
+<!-- Left: Logo & Links -->
+<div class="flex items-center gap-10">
+<a class="flex items-center gap-2.5 text-black" href="#">
+<svg class="text-black" fill="none" height="26" viewbox="0 0 28 28" width="26" xmlns="http://www.w3.org/2000/svg">
+<path d="M4.66663 5.83337C4.66663 4.54471 5.71129 3.50004 6.99996 3.50004H21C22.2886 3.50004 23.3333 4.54471 23.3333 5.83337V17.5C23.3333 18.7887 22.2886 19.8334 21 19.8334H8.74996L4.66663 23.9167V5.83337Z" fill="black"></path>
+<rect fill="white" height="5.83333" rx="1.16667" width="2.33333" x="8.16663" y="8.75"></rect>
+<rect fill="white" height="7" rx="1.16667" width="2.33333" x="12.8333" y="7.58337"></rect>
+<rect fill="white" height="5.83333" rx="1.16667" width="2.33333" x="17.5" y="8.75"></rect>
+</svg>
+<span class="font-bold tracking-tight text-[21px] leading-none font-headline">Intercom</span>
+</a>
+<nav class="hidden md:flex items-center gap-7 text-[14px] font-medium text-gray-700">
+<a class="hover:text-black transition-colors flex items-center gap-0.5" href="#product">Product <span class="material-symbols-outlined text-[15px] text-gray-400">expand_more</span></a>
+<a class="hover:text-black transition-colors" href="#customers">Customers</a>
+<a class="hover:text-black transition-colors flex items-center gap-0.5" href="#resources">Resources <span class="material-symbols-outlined text-[15px] text-gray-400">expand_more</span></a>
+<a class="hover:text-black transition-colors" href="#pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center gap-3 lg:gap-4 text-[14px]">
+<a class="hidden sm:inline-block text-gray-700 hover:text-black font-medium transition-colors" href="#login">Log in</a>
+<a class="hidden lg:inline-block text-gray-700 hover:text-black font-medium transition-colors" href="#contact">Contact sales</a>
+<a class="hidden sm:inline-block px-3.5 py-2 text-xs font-medium text-gray-800 bg-gray-50 border border-gray-200 rounded-full hover:bg-gray-100 transition-colors" href="#demo">View demo</a>
+<a class="hidden xl:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 text-xs font-medium text-black hover:border-black transition-all" href="#agent">
+<span>Fin AI Agent</span>
+<span>→</span>
+</a>
+<a class="bg-black text-white text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-gray-900 transition-colors shadow-sm whitespace-nowrap" href="#trial">
+          Start free trial
+        </a>
+</div>
+</div>
+</header>
+<!-- 3. Hero Section -->
+<section class="pt-16 pb-20 md:pt-20 md:pb-24 px-6 relative max-w-7xl mx-auto overflow-hidden">
+<!-- Floating Editorial Photo 1: Left Top - Shadow of people on pavement -->
+<div class="hidden lg:block absolute left-4 xl:left-8 top-16 w-[150px] xl:w-[165px] h-[210px] xl:h-[225px] rounded-lg overflow-hidden shadow-sm pointer-events-none select-none z-10">
+<img alt="People walking shadows on pavement" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1517841905240-472988babdf9?w=300&amp;auto=format&amp;fit=crop&amp;q=80';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA8zTA6lsUhdlLKz2Pe7tTAe2OZEXrRKhjqAaEBtSng3Hy7m43y7wJJ2HfnVdtNTI0fl-bYx7fggGoaI41ffjHA0vqv_6qXew9MGLlry5BvOHYGQFWSnmsH9fgGtsEKWbiZtW0m0Fc6QabQmSK-6iouGF8jR1YXyeus0XJrAmzU0l9N7If38TEf62Ot8Wuo7Ioep3AKn-nTQALAXImBNHZXwgFFiQmsrcAFMBN3vUvxxAIcK5ib9ymXDOBcaDLJ-z588_VKVdO8r9I"/>
+</div>
+<!-- Floating Editorial Photo 2: Left Lower - Flower balloons clipped from left edge -->
+<div class="hidden lg:block absolute left-0 top-[310px] w-[100px] xl:w-[115px] h-[200px] xl:h-[215px] rounded-r-lg overflow-hidden shadow-sm pointer-events-none select-none z-10">
+<img alt="Bouquet of flower balloons" class="w-full h-full object-cover rounded-r-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1508615039623-a25605d2b022?w=300&amp;auto=format&amp;fit=crop&amp;q=80';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD70SoR5M2GWw7F-oM-8kG8YHxSTgaPnOiMiUkXuryBePvBgHqwea13PxTqrs-2mQrjuyO53JAd5irjJag_DK-1r-swlWq5gVWWuHB4Uuf7fWKRDpu2aG_ez16jmEwCnQHbhL9yHCNv6p2PWAyNSvYt0bxHpV5ZELTtIqQZjaNhFeLhHbJM2puN44Dh99OkRGTa6fFPz1PTTOJJ9fZWEwpEmVMAQ6fC5rl7SifVbSDbhozoMve_mY3gic5Z-eD6smULVmHmH-dBnbQ"/>
+</div>
+<!-- Floating Editorial Photo 3: Right Top - Birds flying in sky -->
+<div class="hidden lg:block absolute right-4 xl:right-10 top-16 w-[165px] xl:w-[180px] h-[160px] xl:h-[175px] rounded-lg overflow-hidden shadow-sm pointer-events-none select-none z-10">
+<img alt="Birds flying against sky" class="w-full h-full object-cover rounded-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518495973542-4542c06a5843?w=300&amp;auto=format&amp;fit=crop&amp;q=80';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBsJx9UEI7vhq-Oqbe-kO03WuheotYyYPn58-Jcm-P3AmXnfawHFQHi2e3U4XaCfrQdMgZFg4ZeAK3a8RuFzrrnqn4YdaoMQWh7cHUPa9LyKw3KotYLsyXtuTDVtuN-20gyfPkIOdXA4nxISfQtCbE_UrxBsGRg4ZgWzRf1xG7kisLaTkIUmTWy7pJaFpyBYSOkVvF0-upVHTHQ4TsWKa-DaKQEJcgvCqItVLApnVXSXZs4-tSgb6SZFKwU08Cc7iqfKoharXUcn6Y"/>
+</div>
+<!-- Floating Editorial Photo 4: Right Lower - Close-up eye -->
+<div class="hidden lg:block absolute right-0 xl:right-4 top-[320px] w-[110px] xl:w-[125px] h-[170px] xl:h-[185px] rounded-l-lg xl:rounded-lg overflow-hidden shadow-sm pointer-events-none select-none z-10">
+<img alt="Eye close-up portrait" class="w-full h-full object-cover rounded-l-lg xl:rounded-lg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&amp;auto=format&amp;fit=crop&amp;q=80';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqBLCowMWqZCjowA9YIxyPNOPqP9QwYB4jm09ffsUNntQYBL_fQmgicj_x5VUUKvWQdvE5XI29sEdqChOYkoMxcKVXjFouwg73cwXZDyyxxQPDjhEOt2dA6EYgA5MGtZKKp1CVqq0utZpaXkL-tRNttIW7om6d6Rm9uEIq-Gk7RTt3z4DIQqAsMoauUOpU6Fe8y6HvEvm79DT9nUljM7z81xL7qZmU4a9s2RhpY3j4jcys8jEtFjrlMNpq0XwN50u0Hogo295JcJo"/>
+</div>
+<!-- Centered Content -->
+<div class="max-w-4xl mx-auto text-center relative z-20 px-4">
+<!-- G2 Review Indicator Line -->
+<div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gray-50 border border-gray-200 text-xs text-gray-600 mb-10 shadow-2xs">
+<span>Over 2,000 five-star reviews on</span>
+<div class="flex items-center gap-1">
+<span class="w-4 h-4 bg-[#ff492c] text-white rounded font-bold text-[10px] flex items-center justify-center">G2</span>
+<div class="flex text-[#ff5a00] text-[13px]">
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[13px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<!-- Centered 3-line Headline: 80px font-weight: 400, line-height 80px -->
+<h1 class="font-saans text-4xl sm:text-6xl md:text-[80px] md:leading-[80px] font-normal tracking-tight max-w-4xl mx-auto mb-8">
+<span class="text-[#737373] block">A complete system for</span>
+<span class="text-[#111111] font-semibold block my-1">AI and human</span>
+<span class="text-[#737373] block">customer service</span>
+</h1>
+<!-- Subheading: Editorial Serif Paragraph -->
+<p class="font-serif text-lg sm:text-xl md:text-[22px] text-gray-600 max-w-2xl mx-auto leading-relaxed mb-10">
+Intercom is the only helpdesk with a natively integrated AI Agent, Fin, meaning every customer conversation improves the next one, enabling perfect experiences that were never possible before.
+</p>
+<!-- CTAs: Two Centered Buttons -->
+<div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+<a class="w-full sm:w-auto px-7 py-3.5 bg-black text-white text-sm font-semibold rounded-full hover:bg-neutral-800 transition-colors shadow-sm" href="#trial">
+Start free trial
+</a>
+<a class="w-full sm:w-auto px-7 py-3.5 bg-white text-black border border-gray-200 text-sm font-semibold rounded-full hover:bg-gray-50 transition-colors" href="#demo">
+View demo
+</a>
+</div>
+<!-- Caption Beneath -->
+<p class="text-xs text-gray-500 font-body">
+14 day free trial. No credit card required.
+</p>
+</div>
+</section>
+<!-- 4. Two Products, One Seamless Experience -->
+<section class="py-16 md:py-24 bg-[#fafafa] border-y border-gray-100" id="product">
+<div class="max-w-6xl mx-auto px-6">
+<div class="text-center mb-10">
+<h2 class="text-2xl md:text-[24px] font-headline font-bold text-[#111111] tracking-tight">
+          Two products, one seamless experience
+        </h2>
+<!-- Toggle Tabs -->
+<div class="inline-flex p-1 bg-white border border-gray-200 rounded-full mt-6 shadow-sm">
+<button class="px-5 py-2 text-xs font-semibold rounded-full bg-black text-white shadow-sm transition-all">Intercom helpdesk</button>
+<button class="px-5 py-2 text-xs font-medium rounded-full text-gray-600 hover:text-black transition-all">Fin AI Agent</button>
+</div>
+</div>
+<!-- High-Fidelity Dual Product Showcase -->
+<div class="rounded-2xl border border-gray-200 bg-white shadow-xl overflow-hidden">
+<!-- Mock Browser / App Shell Bar -->
+<div class="h-11 bg-[#f4f4f5] border-b border-gray-200 px-4 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+<span class="text-xs font-mono text-gray-400 ml-3">intercom.com/workspace/inbox</span>
+</div>
+<div class="flex items-center gap-2 text-xs text-gray-600 font-medium">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+<span>Fin Copilot Active</span>
+</div>
+</div>
+<!-- Sanity Media Frame / Live Dual Representation -->
+<div class="relative bg-[#0d0f12] overflow-hidden">
+<img alt="Intercom Helpdesk and Fin AI Agent Workspace Interface" class="w-full h-auto object-cover min-h-[360px] md:min-h-[500px]" onerror="this.onerror=null; this.src='https://lh3.googleusercontent.com/aida-public/AB6AXuDfvD3vb0BkKrsMGNNgD9uwCe59QpOVYUifVgMsQz8YvRL1dRrbrKj80JQqyjTHv4zyGjUDg5k2euntVsnBBQqtBU8OnHIMiElDhH4niXKtOWFr6PRYNcn_BJs0-G8YbsDS0yt7tloRZfE-uQrAjN2B1d7pdH4kvm3CohHKkMRIAkMlxAGokorFKED9s9vyilLhjGHhifyjzMj-HI8fgFf3esivv1_4jlJSIPfVHTBIs9ggZNxVHogmDnWkMERm84seZd4k2K7U6_o';" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAv5mD6eM8rP-QDq0lF8U4XyWDMUbkXeko7xjYv6Lt6_WIycORkTp0-HAel5DwxrxNmiWUIa47jbw4EVxNUrOO3e_-n63R5i7kWtWXn01hnoEf4KDGYtlAUinrYjBUdE8UypYkYx71mBx873Gy7b-TuOwkEGcldxAH5Q_U3KqyIjLq2gaKKpPKqx5-2CbeRcLI3W_LVWs28C1EKRR5KnSVe0-BfGykzs2OS_2_Q18k-ZHw18NithsBtsj3DT10ka0TuObqIcVipBKk"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. Logo Wall -->
+<section class="py-14 bg-white border-b border-gray-100" id="customers">
+<div class="max-w-7xl mx-auto px-6 text-center">
+<p class="text-[11px] font-bold tracking-[0.2em] text-gray-400 uppercase font-headline mb-8">
+        TRUSTED BY 30,000+ LEADING BRANDS
+      </p>
+<div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 grayscale hover:grayscale-0 transition-all duration-300">
+<!-- Anthropic -->
+<div class="font-headline font-black text-xl tracking-tighter text-black flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 bg-black rounded-sm inline-block"></span>
+<span>ANTHROPIC</span>
+</div>
+<!-- Atlassian -->
+<div class="font-headline font-bold text-lg tracking-tight text-black flex items-center gap-1">
+<span class="text-xl leading-none">▲</span> ATLASSIAN
+        </div>
+<!-- Amazon -->
+<div class="font-headline font-bold text-xl tracking-tight text-black">
+          amazon
+        </div>
+<!-- Notion -->
+<div class="font-headline font-bold text-lg tracking-tight text-black flex items-center gap-1.5">
+<span class="border border-black px-1 text-xs font-mono font-bold">N</span> Notion
+        </div>
+<!-- Frame.io -->
+<div class="font-headline font-semibold text-lg tracking-tight text-black">
+          Frame.io
+        </div>
+<!-- Lightspeed -->
+<div class="font-headline font-bold text-lg tracking-tight text-black">
+          lightspeed
+        </div>
+<!-- New Relic -->
+<div class="font-headline font-medium text-lg tracking-tight text-black">
+          New Relic.
+        </div>
+</div>
+</div>
+</section>
+<!-- 6. Intercom Helpdesk Deep Dive Section -->
+<section class="py-20 md:py-28 bg-white border-b border-gray-100" id="helpdesk">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Header -->
+<div class="max-w-3xl mb-14">
+<span class="text-xs font-bold tracking-widest uppercase text-gray-400 block mb-3 font-headline">INTERCOM HELPDESK</span>
+<h2 class="text-3xl sm:text-4xl md:text-[54px] md:leading-[58px] font-headline font-bold text-[#111111] tracking-tight mb-5">
+          Intercom is a fully-featured AI-powered helpdesk
+        </h2>
+<p class="font-serif text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+          With an omnichannel inbox, AI-powered ticketing, and Copilot working alongside your human team, you have everything you need to onboard faster, work more efficiently, and deliver better customer experiences.
+        </p>
+<div class="flex flex-wrap items-center gap-3">
+<a class="px-6 py-3 bg-black text-white text-xs font-semibold rounded-full hover:bg-neutral-800 transition-colors" href="#trial">
+            Start free trial
+          </a>
+<a class="px-6 py-3 bg-white text-black border border-gray-200 text-xs font-semibold rounded-full hover:bg-gray-50 transition-colors" href="#demo">
+            View demo
+          </a>
+</div>
+</div>
+<!-- Feature Cards (3 columns) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Feature 1 -->
+<div class="p-8 rounded-2xl border border-gray-200 bg-[#fbfbfb] flex flex-col justify-between hover:border-black transition-all group">
+<div>
+<div class="h-44 w-full rounded-xl bg-white border border-gray-200 mb-6 overflow-hidden p-3 flex flex-col justify-between shadow-xs">
+<div class="flex items-center gap-1.5 border-b border-gray-100 pb-2">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="text-[11px] font-bold text-gray-700">Copilot 2 in Inbox</span>
+</div>
+<div class="bg-gray-50 p-2.5 rounded text-[11px] text-gray-600 leading-snug">
+                Proactively drafting responses and syncing Jira tickets before you open the conversation.
+              </div>
+<div class="text-[10px] text-emerald-600 font-mono flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px]">check_circle</span> Admin completed automatically
+              </div>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#111111] mb-3">Maximize efficiency with Copilot 2 in the Inbox</h3>
+<p class="text-sm text-gray-600 leading-relaxed font-body">
+              Copilot proactively works before your team asks, connects to the tools they already use, and takes care of the admin - all without leaving the inbox.
+            </p>
+</div>
+<div class="pt-6 mt-6 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-black inline-flex items-center gap-1 hover:underline" href="#copilot">
+              Learn more <span>→</span>
+</a>
+</div>
+</div>
+<!-- Feature 2 -->
+<div class="p-8 rounded-2xl border border-gray-200 bg-[#fbfbfb] flex flex-col justify-between hover:border-black transition-all group">
+<div>
+<div class="h-44 w-full rounded-xl bg-white border border-gray-200 mb-6 overflow-hidden p-3 flex flex-col justify-between shadow-xs">
+<div class="flex items-center justify-between border-b border-gray-100 pb-2">
+<span class="text-[11px] font-bold text-gray-700">Unified Ticketing #4928</span>
+<span class="text-[10px] bg-amber-50 text-amber-700 px-1.5 py-0.5 rounded border border-amber-200 font-medium">In Progress</span>
+</div>
+<div class="space-y-1.5 text-[11px]">
+<div class="text-gray-500">Customer: Tier 1 Enterprise Issue</div>
+<div class="text-gray-800 font-medium">Internal Tracker: Linked to Engineering Bug #ENG-104</div>
+</div>
+<div class="text-[10px] text-gray-400">All teams synced in one view</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#111111] mb-3">Ticketing, built for collaboration</h3>
+<p class="text-sm text-gray-600 leading-relaxed font-body">
+              One ticketing system for customer issues, back-office collaboration, and tracker tickets that resolve widespread problems, keeping everyone aligned and customers informed.
+            </p>
+</div>
+<div class="pt-6 mt-6 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-black inline-flex items-center gap-1 hover:underline" href="#ticketing">
+              Learn more <span>→</span>
+</a>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="p-8 rounded-2xl border border-gray-200 bg-[#fbfbfb] flex flex-col justify-between hover:border-black transition-all group">
+<div>
+<div class="h-44 w-full rounded-xl bg-white border border-gray-200 mb-6 overflow-hidden p-3 flex flex-col justify-between shadow-xs">
+<div class="flex items-center gap-1.5 border-b border-gray-100 pb-2">
+<span class="material-symbols-outlined text-[14px] text-blue-600">notifications_active</span>
+<span class="text-[11px] font-bold text-gray-700">Proactive Notification</span>
+</div>
+<div class="bg-blue-50/60 border border-blue-100 p-2.5 rounded text-[11px] text-blue-900 leading-snug">
+                "Scheduled database migration in your region tonight at 2 AM UTC."
+              </div>
+<div class="text-[10px] text-gray-500">Deflected 430 prospective tickets</div>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#111111] mb-3">Support for customers, before they need it</h3>
+<p class="text-sm text-gray-600 leading-relaxed font-body">
+              Onboard, educate, and notify your customers with in-context, automated messages that cut support volume and keep customers happy.
+            </p>
+</div>
+<div class="pt-6 mt-6 border-t border-gray-200/60">
+<a class="text-xs font-semibold text-black inline-flex items-center gap-1 hover:underline" href="#proactive">
+              Learn more <span>→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. Fin AI Agent Section -->
+<section class="py-20 md:py-28 bg-[#fafafa] border-b border-gray-100" id="fin-ai">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<!-- Header -->
+<div class="max-w-3xl mb-14">
+<span class="text-xs font-bold tracking-widest uppercase text-gray-400 block mb-3 font-headline">FIN AI AGENT</span>
+<h2 class="text-3xl sm:text-4xl md:text-[54px] md:leading-[58px] font-headline font-bold text-[#111111] tracking-tight mb-5">
+          Fin is the highest-performing AI agent
+        </h2>
+<p class="font-serif text-lg md:text-xl text-gray-600 leading-relaxed mb-8">
+          Fin has industry leading resolution rates, averaging 76% across 12,000+ customers, with many seeing over 85%. It’s trusted by many of the most forward-thinking businesses in the world, including Anthropic, Clay, Lightspeed, Rocket Money, Gamma, and many more.
+        </p>
+<div class="flex flex-wrap items-center gap-3">
+<a class="px-6 py-3 bg-black text-white text-xs font-semibold rounded-full hover:bg-neutral-800 transition-colors" href="#trial">
+            Start free trial
+          </a>
+<a class="px-6 py-3 bg-white text-black border border-gray-200 text-xs font-semibold rounded-full hover:bg-gray-50 transition-colors" href="#demo">
+            View demo
+          </a>
+</div>
+</div>
+<!-- Fin 4 Video / Major Callout Card -->
+<div class="bg-black text-white rounded-3xl p-8 md:p-12 mb-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl">
+<div class="inline-block px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-gray-300 uppercase tracking-wider mb-4">
+            Next Generation
+          </div>
+<h3 class="text-2xl md:text-3xl font-headline font-bold text-white mb-2">Introducing Fin 4</h3>
+<p class="text-gray-300 text-sm md:text-base leading-relaxed mb-6 font-serif">
+            A major step towards a fully agentic customer experience.
+          </p>
+<a class="inline-flex items-center gap-1.5 text-xs font-semibold text-white bg-white/20 hover:bg-white/30 px-5 py-2.5 rounded-full transition-colors" href="https://fin.ai/fin4">
+            Learn more <span>→</span>
+</a>
+</div>
+<div class="w-full md:w-80 h-44 rounded-2xl bg-neutral-900 border border-white/10 flex items-center justify-center relative overflow-hidden group cursor-pointer">
+<div class="w-14 h-14 rounded-full bg-white text-black flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[28px] ml-0.5">play_arrow</span>
+</div>
+<span class="absolute bottom-3 text-[11px] text-gray-400 font-mono">Watch announcement</span>
+</div>
+</div>
+<!-- Key Differentiators / Capability Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-8 rounded-2xl bg-white border border-gray-200 shadow-xs">
+<div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-black mb-6">
+<span class="material-symbols-outlined text-[22px]">model_training</span>
+</div>
+<h4 class="text-lg font-headline font-bold text-black mb-2">Train and test Fin to handle complex queries</h4>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            Upload policies, integrate internal documentation, and run synthetic conversation tests before deploying changes live.
+          </p>
+</div>
+<div class="p-8 rounded-2xl bg-white border border-gray-200 shadow-xs">
+<div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-black mb-6">
+<span class="material-symbols-outlined text-[22px]">share</span>
+</div>
+<h4 class="text-lg font-headline font-bold text-black mb-2">Deploy across every channel</h4>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            Seamlessly activate Fin across Web Messenger, WhatsApp, Email, and mobile SDKs without duplicate configuration.
+          </p>
+</div>
+<div class="p-8 rounded-2xl bg-white border border-gray-200 shadow-xs">
+<div class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-black mb-6">
+<span class="material-symbols-outlined text-[22px]">insights</span>
+</div>
+<h4 class="text-lg font-headline font-bold text-black mb-2">Analyze performance with AI-powered insights</h4>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            Automatically discover gaps in your knowledge base and view topic clusters where Fin delivers optimal ROI.
+          </p>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. Together, They Deliver Better Support Experiences -->
+<section class="py-20 md:py-28 bg-white border-b border-gray-100">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="max-w-3xl mx-auto text-center mb-16">
+<h2 class="text-3xl sm:text-4xl md:text-[54px] md:leading-[58px] font-headline font-bold text-[#111111] tracking-tight mb-4">
+          Together, they deliver better support experiences
+        </h2>
+<p class="font-serif text-lg md:text-xl text-gray-600 leading-relaxed">
+          When AI and human agents operate on a unified system, every resolution informs the next, unlocking compounding efficiency and superhuman support velocity.
+        </p>
+</div>
+<!-- 3 Feature Highlights -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+<div class="p-8 rounded-2xl bg-[#fbfbfb] border border-gray-200">
+<div class="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center text-xs font-bold font-mono mb-6">01</div>
+<h3 class="text-xl font-headline font-bold text-black mb-2">Work together, seamlessly</h3>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            Fin triages, summarizes, and hands off with flawless context, allowing human teammates to step in right where Fin left off.
+          </p>
+</div>
+<div class="p-8 rounded-2xl bg-[#fbfbfb] border border-gray-200">
+<div class="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center text-xs font-bold font-mono mb-6">02</div>
+<h3 class="text-xl font-headline font-bold text-black mb-2">Self-improving system</h3>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            Every human agent answer automatically flags opportunities to update Fin's knowledge, ensuring the AI never fails the same query twice.
+          </p>
+</div>
+<div class="p-8 rounded-2xl bg-[#fbfbfb] border border-gray-200">
+<div class="w-9 h-9 rounded-lg bg-black text-white flex items-center justify-center text-xs font-bold font-mono mb-6">03</div>
+<h3 class="text-xl font-headline font-bold text-black mb-2">Centralized Knowledge Hub</h3>
+<p class="text-xs text-gray-600 leading-relaxed font-body">
+            A single source of truth powers both your autonomous agent and human Copilot drafts, guaranteeing consistent answers across channels.
+          </p>
+</div>
+</div>
+<!-- Customer Testimonials -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Anthropic -->
+<div class="p-8 rounded-2xl bg-white border border-gray-200 flex flex-col justify-between shadow-xs">
+<p class="font-serif text-base text-gray-800 leading-relaxed mb-8 italic">
+            "Fin has fundamentally transformed how we approach customer support at Anthropic. It resolved high volume immediately without sacrificing accuracy."
+          </p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-900 text-white font-bold text-xs flex items-center justify-center">IL</div>
+<div>
+<h5 class="text-xs font-bold text-black font-headline">Isabel Larrow</h5>
+<span class="text-[11px] text-gray-500 font-body">Head of AI Support at Anthropic</span>
+</div>
+</div>
+</div>
+<!-- Glean -->
+<div class="p-8 rounded-2xl bg-white border border-gray-200 flex flex-col justify-between shadow-xs">
+<p class="font-serif text-base text-gray-800 leading-relaxed mb-8 italic">
+            "The synergy between Fin and the human helpdesk allows our engineers and reps to focus purely on high-touch enterprise strategic accounts."
+          </p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-900 text-white font-bold text-xs flex items-center justify-center">KC</div>
+<div>
+<h5 class="text-xs font-bold text-black font-headline">Kat Crichton</h5>
+<span class="text-[11px] text-gray-500 font-body">Manager of Technical Support at Glean</span>
+</div>
+</div>
+</div>
+<!-- Neo Financial -->
+<div class="p-8 rounded-2xl bg-white border border-gray-200 flex flex-col justify-between shadow-xs">
+<p class="font-serif text-base text-gray-800 leading-relaxed mb-8 italic">
+            "With Fin operating natively inside our Intercom helpdesk, we scaled our member base 4x without having to increase our team size proportionally."
+          </p>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-neutral-900 text-white font-bold text-xs flex items-center justify-center">ED</div>
+<div>
+<h5 class="text-xs font-bold text-black font-headline">Eunice Dunmade</h5>
+<span class="text-[11px] text-gray-500 font-body">Product Lead at Neo Financial</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. Integrations Section -->
+<section class="py-20 md:py-28 bg-[#fafafa] border-b border-gray-100">
+<div class="max-w-7xl mx-auto px-6 lg:px-12">
+<div class="max-w-2xl mx-auto text-center mb-14">
+<h2 class="text-3xl sm:text-4xl md:text-[54px] md:leading-[58px] font-headline font-bold text-[#111111] tracking-tight mb-4">
+          Works with the tools you already use
+        </h2>
+<p class="font-body text-sm sm:text-base text-gray-600 leading-relaxed">
+          Connect Intercom and Fin to the tools you already use, like Slack, Shopify, and Github...
+        </p>
+</div>
+<!-- Integration Badges Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 max-w-4xl mx-auto">
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-blue-50 text-blue-600 flex items-center justify-center font-bold text-xs">SF</div>
+<div>
+<h4 class="text-xs font-bold text-black">Salesforce</h4>
+<span class="text-[10px] text-gray-400">Two-way sync</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-blue-600 text-white flex items-center justify-center font-bold text-xs">JR</div>
+<div>
+<h4 class="text-xs font-bold text-black">Jira</h4>
+<span class="text-[10px] text-gray-400">Issue tracking</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-purple-600 text-white flex items-center justify-center font-bold text-xs">SL</div>
+<div>
+<h4 class="text-xs font-bold text-black">Slack</h4>
+<span class="text-[10px] text-gray-400">Team chat</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-emerald-600 text-white flex items-center justify-center font-bold text-xs">SH</div>
+<div>
+<h4 class="text-xs font-bold text-black">Shopify</h4>
+<span class="text-[10px] text-gray-400">Order context</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-black text-white flex items-center justify-center font-bold text-xs">GH</div>
+<div>
+<h4 class="text-xs font-bold text-black">GitHub</h4>
+<span class="text-[10px] text-gray-400">Code repositories</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-orange-600 text-white flex items-center justify-center font-bold text-xs">HS</div>
+<div>
+<h4 class="text-xs font-bold text-black">HubSpot</h4>
+<span class="text-[10px] text-gray-400">Marketing data</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-[#635bff] text-white flex items-center justify-center font-bold text-xs">ST</div>
+<div>
+<h4 class="text-xs font-bold text-black">Stripe</h4>
+<span class="text-[10px] text-gray-400">Billing details</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-emerald-700 text-white flex items-center justify-center font-bold text-xs">ZD</div>
+<div>
+<h4 class="text-xs font-bold text-black">Zendesk</h4>
+<span class="text-[10px] text-gray-400">Sync &amp; migrate</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-sky-400 text-white flex items-center justify-center font-bold text-xs">SF</div>
+<div>
+<h4 class="text-xs font-bold text-black">Snowflake</h4>
+<span class="text-[10px] text-gray-400">Data lake</span>
+</div>
+</div>
+<div class="p-4 bg-white border border-gray-200 rounded-xl flex items-center gap-3 shadow-2xs hover:border-black transition-colors">
+<div class="w-8 h-8 rounded bg-amber-500 text-white flex items-center justify-center font-bold text-xs">GD</div>
+<div>
+<h4 class="text-xs font-bold text-black">Google Drive</h4>
+<span class="text-[10px] text-gray-400">Docs sync</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. Transparent Pricing Section -->
+<section class="py-20 md:py-28 bg-white border-b border-gray-100" id="pricing">
+<div class="max-w-4xl mx-auto px-6">
+<div class="text-center mb-16">
+<h2 class="text-3xl sm:text-4xl md:text-[54px] md:leading-[58px] font-headline font-bold text-[#111111] tracking-tight mb-3">
+          Transparent pricing
+        </h2>
+<p class="text-base font-medium text-gray-600">Intercom helpdesk with Fin AI Agent</p>
+</div>
+<!-- Pricing Card Box -->
+<div class="rounded-3xl border-2 border-black p-8 md:p-12 bg-white shadow-xl relative">
+<div class="flex flex-col md:flex-row md:items-baseline justify-between gap-4 pb-8 border-b border-gray-200">
+<div>
+<span class="text-xs font-bold uppercase tracking-wider text-gray-500 block mb-1">ALL-IN-ONE SYSTEM</span>
+<h3 class="text-2xl font-bold font-headline text-black">Intercom helpdesk + Fin AI Agent</h3>
+</div>
+<div class="text-left md:text-right">
+<span class="text-3xl md:text-4xl font-extrabold font-headline text-black tracking-tight">$29 PER SEAT/MO + $0.99 PER OUTCOME</span>
+</div>
+</div>
+<div class="py-8 grid grid-cols-1 md:grid-cols-2 gap-6 text-xs text-gray-700 leading-relaxed">
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-black">check</span>
+<span>Complete omnichannel ticketing, inbox, and workflows for human agents.</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-black">check</span>
+<span>Fin AI Agent resolves complex tickets autonomously across channels.</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-black">check</span>
+<span>Pay $0.99 purely when Fin resolves an inquiry. $0 for handoffs.</span>
+</div>
+<div class="flex items-start gap-2.5">
+<span class="material-symbols-outlined text-[18px] text-black">check</span>
+<span>Copilot 2 assistance included directly in every inbox seat.</span>
+</div>
+</div>
+<p class="text-xs text-gray-600 font-body mb-8 border-t border-gray-100 pt-6">
+          Outcome-based pricing you control. Pay only for what you use and set spending limits so costs never exceed your budget. <a class="underline font-medium text-black" href="#pricing-details">Learn more.</a>
+</p>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<a class="w-full sm:w-auto px-8 py-3.5 bg-black text-white text-xs font-bold rounded-full hover:bg-neutral-800 transition-colors text-center" href="#trial">
+            Start free trial
+          </a>
+<a class="w-full sm:w-auto px-8 py-3.5 bg-gray-100 text-black text-xs font-bold rounded-full hover:bg-gray-200 transition-colors text-center" href="#contact">
+            Contact sales
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. Final Call-to-Action -->
+<section class="py-24 md:py-32 bg-white text-center border-b border-gray-100" id="trial">
+<div class="max-w-4xl mx-auto px-6">
+<h2 class="text-4xl sm:text-6xl md:text-[80px] md:leading-[80px] font-saans font-semibold text-[#111111] tracking-tight mb-8">
+        Perfect customer experiences
+      </h2>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-3 mb-4">
+<a class="w-full sm:w-auto px-8 py-3.5 bg-black text-white text-sm font-semibold rounded-full hover:bg-neutral-800 transition-colors shadow-sm" href="#start">
+          Start free trial
+        </a>
+<a class="w-full sm:w-auto px-8 py-3.5 bg-white border border-gray-200 text-black text-sm font-semibold rounded-full hover:bg-gray-50 transition-colors" href="#demo">
+          View demo
+        </a>
+</div>
+<p class="text-xs text-gray-400 mt-3 font-body">14 day free trial. No credit card required.</p>
+</div>
+</section>
+<!-- 12. Full Official Expanded Footer -->
+<footer class="bg-white border-t border-gray-200 text-xs text-gray-600 font-body">
+<div class="max-w-7xl mx-auto px-6 lg:px-12 py-16">
+<!-- Full Multi-column Intercom Sitemap -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16 leading-relaxed">
+<!-- Col 1 -->
+<div class="space-y-3">
+<h5 class="font-bold text-black uppercase tracking-wider text-[11px] font-headline">Helpdesk Features</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-black transition-colors" href="#">Omnichannel Inbox</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Ticketing</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Copilot</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Workflows &amp; Automation</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Proactive Support</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Reporting &amp; Analytics</a></li>
+</ul>
+</div>
+<!-- Col 2 -->
+<div class="space-y-3">
+<h5 class="font-bold text-black uppercase tracking-wider text-[11px] font-headline">Fin Features</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-black transition-colors" href="#">Fin AI Agent</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Fin 4 Overview</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Knowledge Base Sync</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Multilingual AI</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Zero-Hallucination Guardrails</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Channels: Web, WhatsApp, Email</a></li>
+</ul>
+</div>
+<!-- Col 3 -->
+<div class="space-y-3">
+<h5 class="font-bold text-black uppercase tracking-wider text-[11px] font-headline">Pricing &amp; Solutions</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-black transition-colors" href="#pricing">Pricing Overview</a></li>
+<li><a class="hover:text-black transition-colors" href="#">For Enterprise</a></li>
+<li><a class="hover:text-black transition-colors" href="#">For Mid-Market</a></li>
+<li><a class="hover:text-black transition-colors" href="#">For Early Stage Startups</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Financial Services</a></li>
+<li><a class="hover:text-black transition-colors" href="#">E-Commerce</a></li>
+</ul>
+</div>
+<!-- Col 4 -->
+<div class="space-y-3">
+<h5 class="font-bold text-black uppercase tracking-wider text-[11px] font-headline">Learn &amp; Evaluate</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-black transition-colors" href="#">Customers &amp; Case Studies</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Intercom Blog</a></li>
+<li><a class="hover:text-black transition-colors" href="#">The Intercom Podcast</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Intercom Academy</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Compare with Zendesk</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Customer Service Trends</a></li>
+</ul>
+</div>
+<!-- Col 5 -->
+<div class="space-y-3">
+<h5 class="font-bold text-black uppercase tracking-wider text-[11px] font-headline">Company &amp; Support</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-black transition-colors" href="#">About Us</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Careers</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Security &amp; Compliance</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Responsible AI Policy</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-black transition-colors" href="#">Intercom in Action</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="pt-8 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-[11px] text-gray-500 gap-4">
+<div class="flex flex-wrap items-center gap-6">
+<span>© 2026 Intercom Inc. All rights reserved.</span>
+<a class="hover:text-black transition-colors" href="#">Terms</a>
+<a class="hover:text-black transition-colors" href="#">Privacy</a>
+<a class="hover:text-black transition-colors" href="#">Security</a>
+<a class="hover:text-black transition-colors" href="#">Your Privacy Choices</a>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 cursor-pointer hover:text-black">
+<span class="material-symbols-outlined text-[14px]">language</span>
+<span>English (US)</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

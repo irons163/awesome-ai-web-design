@@ -22,12 +22,69 @@ class Links(HTMLParser):
             if key in ('href','src','poster') and value:
                 self.links.append(value)
 
+
+class PageDependencies(Links):
+    """Read actual markup and CSS, including decoded inert page templates."""
+    def __init__(self):
+        super().__init__(); self.css=[]; self.in_style=False
+    def handle_starttag(self, tag, attrs):
+        super().handle_starttag(tag, attrs)
+        self.in_style = self.in_style or tag == 'style'
+        for key, value in attrs:
+            if key == 'style' and value:
+                self.css.append(value)
+            elif key == 'srcset' and value:
+                # URL tokens may contain commas in query values; descriptors
+                # and whitespace delimit candidates in the HTML algorithm.
+                rest=value
+                while rest.strip(' \t\n\r,'):
+                    rest=rest.lstrip(' \t\n\r,')
+                    match=re.match(r'\S+',rest)
+                    token=match.group(0); rest=rest[len(token):]
+                    candidate=token.rstrip(',')
+                    # An upstream data-image placeholder has an empty 2x
+                    # candidate; a density descriptor is not a local URL.
+                    if not re.fullmatch(r'\d+(?:\.\d+)?[wx]',candidate):
+                        self.links.append(candidate)
+                    if not token.endswith(','):
+                        _, separator, rest=rest.partition(',')
+                        if not separator: break
+    def handle_endtag(self, tag):
+        if tag == 'style': self.in_style=False
+    def handle_data(self, data):
+        if self.in_style: self.css.append(data)
+
+
+def page_dependencies(markup):
+    parser=PageDependencies(); parser.feed(markup)
+    match=re.search(r'(?:const|let|var)\s+CONFIG\s*=\s*', markup)
+    if match:
+        config, _=json.JSONDecoder().raw_decode(markup[match.end():])
+        def templates(value):
+            if isinstance(value, dict):
+                for child in value.values(): templates(child)
+            elif isinstance(value, list):
+                for child in value: templates(child)
+            elif isinstance(value, str) and '<' in value:
+                parser.feed(value)
+        templates(config)
+    css=re.sub(r'/\*.*?\*/', '', '\n'.join(parser.css), flags=re.S)
+    return parser.links+[match[1] for match in re.findall(r'''url\(\s*(['"]?)(.*?)\1\s*\)''', css)]
+
 class CollectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.recipes=json.loads((ROOT/'data/recipes.json').read_text())
         cls.catalog=json.loads((ROOT/'assets/catalog.json').read_text())
         cls.upstream=json.loads((ROOT/'data/upstream.json').read_text())
+        cls.site_built=False
+
+    @classmethod
+    def ensure_site_build(cls):
+        if not cls.site_built:
+            from build_site import main as build_site
+            build_site()
+            cls.site_built=True
 
     def test_complete_public_collection(self):
         slugs={entry['slug'] for entry in self.recipes}
@@ -104,8 +161,8 @@ class CollectionTests(unittest.TestCase):
                 self.assertGreaterEqual((values[1]+.05)/(values[0]+.05),4.5)
 
     def test_static_links_resolve_without_commercial_routes(self):
-        from build_site import OFFICIAL_DRAFTS, main as build_site
-        build_site()
+        from build_site import OFFICIAL_DRAFTS
+        self.ensure_site_build()
         files=[ROOT/'dist/index.html']
         for path in files:
             parser=Links(); parser.feed(path.read_text())
@@ -116,15 +173,31 @@ class CollectionTests(unittest.TestCase):
             draft=ROOT/'dist/official-drafts'/f'{name}.html'
             self.assertTrue(draft.is_file(),draft)
             html=draft.read_text()
-            self.assertIn('尚未視覺驗收',html)
-            parser=Links(); parser.feed(html)
-            for link in parser.links+re.findall(r'url\(([^)]+)\)',html):
+            # Actual render evidence binds these exact bytes. Study labels live
+            # beside the preview and must never be injected during publication.
+            self.assertEqual(draft.read_bytes(),(ROOT/'.stitch-work/current-official'/f'{name}.html').read_bytes())
+            for link in page_dependencies(html):
                 link=unescape(link).strip(' \t\n\r\'"')
+                # Captured search/wizard templates contain runtime placeholders.
+                if '${' in link or re.fullmatch(r'\{[A-Z][A-Z0-9_]*\}(?:[?#].*)?',link): continue
                 # Encoded SVG filter IDs inside data images are fragments,
                 # not missing local files. Preserve the original SVG bytes.
                 if unquote(link).startswith('#'): continue
-                if link.startswith(('#','http:','https:','data:','mailto:','tel:','/')): continue
+                if link.startswith(('#','/')) or re.match(r'[a-z][a-z0-9+.-]*:',link,re.I): continue
                 self.assertTrue((draft.parent/link.split('#')[0].split('?')[0]).exists(),f'{draft}: {link}')
+        metadata=json.loads((ROOT/'dist/assets/official-studies.json').read_text())
+        self.assertEqual(metadata['count'],74)
+        self.assertFalse(metadata['official_consistency_claim'])
+        for study in metadata['studies']:
+            draft=ROOT/'dist'/study['preview']
+            self.assertEqual(hashlib.sha256(draft.read_bytes()).hexdigest(),study['preview_sha256'])
+            self.assertFalse(study['accepted'])
+            self.assertFalse(study['official_consistency_claim'])
+            self.assertIn(study['status_label'],['已比對主要畫面，仍有差異','尚未驗證'])
+            for link in study['study'].values(): self.assertTrue((ROOT/'dist'/link).is_file(),link)
+        for file in (ROOT/'dist/official-drafts').rglob('*'):
+            if file.is_file():
+                self.assertNotRegex(file.name,r'(?:-asset-bundle|-reference|-phases|-response|-pre-).*\.(?:json|html)$')
         for path in [ROOT/'index.html',ROOT/'assets/app.js',ROOT/'README.md']:
             self.assertNotRegex(path.read_text(),r'https?://(?:[^/]*\.)?(?:getdesign\.md/(?:request|design-md-pass)|everyfeed\.ai|sponsors\.voltagent\.dev)')
         self.assertNotRegex((ROOT/'index.html').read_text(),r'<script[^>]+src=["\']https?:')
@@ -136,8 +209,7 @@ class CollectionTests(unittest.TestCase):
                     self.assertTrue((path.parent/link).exists(),f'{path}: {link}')
 
     def test_hosted_images_match_pinned_exports(self):
-        from build_site import main as build_site
-        build_site()
+        self.ensure_site_build()
         hosted = json.loads((ROOT / 'dist/assets/catalog.json').read_text())
         base = json.loads((ROOT / 'data/hosting-assets.json').read_text())['image_base_url']
         self.assertRegex(base, r'^https://raw\.githubusercontent\.com/irons163/awesome-ai-web-design/[a-f0-9]{40}/$')

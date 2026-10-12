@@ -1,0 +1,7 @@
+import fs from 'node:fs/promises';import crypto from 'node:crypto';
+const work='/Users/pchang01/Documents/mygithub/awesome-ai-web-design/.stitch-work/current-official';
+export async function reference(tab,slug,width){
+    const r=await tab.playwright.evaluate(()=>{const html=document.documentElement.outerHTML;return{url:location.href,observed_at:new Date().toISOString(),viewport:{width:innerWidth,height:innerHeight},scrollY,htmlParts:Array.from({length:Math.ceil(html.length/80000)},(_,i)=>html.slice(i*80000,(i+1)*80000)),html_length:html.length,images:[...document.images].map(e=>({alt:e.alt,src:e.currentSrc||e.src,complete:e.complete,naturalWidth:e.naturalWidth})),stylesheets:[...document.querySelectorAll('link[rel="stylesheet"]')].map(e=>e.href),inlineStyleRules:[...document.styleSheets].map(s=>{const index=[...document.querySelectorAll('style')].indexOf(s.ownerNode);if(index<0||s.ownerNode.textContent.trim())return null;try{const text=[...s.cssRules].map(r=>r.cssText).join('\n');return{index,cssParts:Array.from({length:Math.ceil(text.length/80000)},(_,i)=>text.slice(i*80000,(i+1)*80000))}}catch{return null}}).filter(Boolean)}});
+    r.html_sha256=crypto.createHash('sha256').update(r.htmlParts.join('')).digest('hex');
+    await fs.writeFile(work+'/'+slug+'-oct10-official-'+width+'-reference.json',JSON.stringify(r,null,2)+'\n');
+return{width,length:r.html_length,url:r.url,scrollY:r.scrollY};}

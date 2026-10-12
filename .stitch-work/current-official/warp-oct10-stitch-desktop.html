@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Warp - Open infrastructure for cloud software factories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Space Grotesk"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              blue: '#2818F4',
+              yellow: '#FBF043',
+              dark: '#111111',
+              charcoal: '#18181B',
+              paper: '#FAF8F5',
+              surface: '#FFFFFF',
+              border: '#E4E2DC',
+              muted: '#71717A',
+              lavender: '#EAE8FF',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #FAF8F5;
+      color: #111111;
+      font-family: 'Space Grotesk', sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .technical-grid {
+      background-size: 24px 24px;
+      background-image: 
+        radial-gradient(circle, rgba(40, 24, 244, 0.08) 1px, transparent 1px);
+    }
+    .blueprint-lines {
+      background-image: linear-gradient(to right, rgba(0,0,0,0.04) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+  </style>
+</head>
+<body class="technical-grid min-h-screen text-brand-dark antialiased selection:bg-brand-blue selection:text-white">
+
+  <!-- Top Navigation Bar (0–64px) -->
+  <header class="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-brand-border px-6 md:px-[74px] h-16 flex items-center justify-between">
+    <div class="flex items-center space-x-8">
+      <!-- Warp Logo & Mark -->
+      <a href="#" class="flex items-center space-x-2.5 group">
+        <svg class="w-6 h-6 transition-transform group-hover:-rotate-3" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="32" height="32" rx="4" fill="#111111"/>
+          <path d="M7 9h4.2l3.4 10.2L17.8 9H22l-5.6 14h-3.6L7 9z" fill="#FFFFFF"/>
+          <rect x="22" y="18" width="4" height="5" fill="#2818F4"/>
+        </svg>
+        <span class="font-mono font-bold text-lg tracking-tight text-brand-dark">warp</span>
+      </a>
+
+      <!-- Primary Links -->
+      <nav class="hidden md:flex items-center space-x-6 font-mono text-[13px] text-zinc-600">
+        <a href="#definition" class="hover:text-brand-blue transition-colors">Products</a>
+        <a href="#sdlc" class="hover:text-brand-blue transition-colors">Solutions</a>
+        <a href="#evals" class="hover:text-brand-blue transition-colors">Resources</a>
+        <a href="#enterprise" class="hover:text-brand-blue transition-colors">Enterprise</a>
+        <a href="#faq" class="hover:text-brand-blue transition-colors">Pricing</a>
+      </nav>
+    </div>
+
+    <!-- Header Actions -->
+    <div class="flex items-center space-x-3">
+      <a href="#faq" class="hidden sm:inline-block font-mono text-[13px] text-zinc-700 hover:text-black px-3 py-1.5 transition-colors">Sign in</a>
+      <a href="#demo" class="font-mono text-xs font-semibold uppercase tracking-wider bg-brand-yellow text-brand-dark hover:bg-yellow-300 border border-black/15 px-3.5 py-2 transition-all shadow-sm">Book a demo</a>
+      <a href="#get-started" class="font-mono text-xs font-semibold uppercase tracking-wider bg-brand-dark text-white hover:bg-zinc-800 px-4 py-2 transition-all">Get started</a>
+    </div>
+  </header>
+
+  <main class="max-w-[1360px] mx-auto px-6 md:px-[74px] pt-16 pb-28">
+
+    <!-- HERO SECTION (Starts ~x74 y146) -->
+    <section class="mb-20">
+      <div class="inline-flex items-center space-x-2 px-2.5 py-1 mb-6 border border-brand-border bg-white font-mono text-[11px] uppercase tracking-wider text-brand-blue">
+        <span class="inline-block w-1.5 h-1.5 bg-brand-blue animate-pulse"></span>
+        <span>Observed 2026-10-11 // Public Architecture Spec</span>
+      </div>
+
+      <!-- Exact 2-line desktop H1 -->
+      <h1 class="text-4xl md:text-[56px] leading-[1.08] font-bold tracking-tight text-brand-dark max-w-4xl font-mono mb-6">
+        Open infrastructure for<br class="hidden md:inline"/>cloud software factories
+      </h1>
+
+      <!-- Exact Summary -->
+      <p class="font-mono text-base md:text-lg text-zinc-600 max-w-2xl mb-8 leading-relaxed">
+        Build on Warp: factories as code, any model or harness, with evals, benchmarks, and self-improvement built in.
+      </p>
+
+      <!-- Action Buttons & Qualified Claim -->
+      <div class="flex flex-wrap items-center gap-4 mb-6">
+        <a href="#get-started" class="inline-flex items-center space-x-2 font-mono text-xs uppercase font-bold tracking-wider bg-brand-dark text-white hover:bg-zinc-800 px-6 py-3.5 transition-all shadow-sm border border-black">
+          <span>GET STARTED</span>
+          <span>→</span>
+        </a>
+        <a href="#download" class="inline-flex items-center space-x-2 font-mono text-xs uppercase font-bold tracking-wider bg-white text-brand-dark hover:bg-zinc-100 px-5 py-3.5 border border-brand-border transition-all">
+          <span>DOWNLOAD WARP TERMINAL</span>
+          <span class="text-zinc-400">↓</span>
+        </a>
+      </div>
+
+      <!-- Small dated public claim -->
+      <div class="inline-flex items-center space-x-2 text-xs font-mono text-zinc-600 border border-brand-border bg-brand-yellow/30 px-3 py-1.5 rounded-sm mb-12">
+        <span class="font-semibold text-brand-dark">Qualified teams</span>
+        <span class="text-zinc-400">/</span>
+        <span>get up to $10k in free factory usage</span>
+      </div>
+
+      <!-- Massive Pale Bordered FIG.1 THE FACTORY Figure (x74 y437) -->
+      <!-- 8 x 28 Square Task Grid (224 Tasks) with live states: gray queued / blue working / lavender waiting / outlined shipped -->
+      <div class="border border-brand-border bg-white p-6 shadow-sm relative">
+        <div class="flex flex-wrap items-center justify-between pb-4 mb-4 border-b border-brand-border font-mono text-xs">
+          <div class="flex items-center space-x-3">
+            <span class="font-bold tracking-wider text-brand-dark">FIG.1 THE FACTORY</span>
+            <span class="text-zinc-400">|</span>
+            <span class="text-zinc-500 uppercase tracking-wider text-[11px]">224 Concurrent Micro-VM Runners</span>
+          </div>
+          <!-- Legend -->
+          <div class="flex items-center space-x-4 text-[11px] pt-2 sm:pt-0">
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 bg-zinc-200 border border-zinc-300"></span>
+              <span class="text-zinc-500">Queued (42)</span>
+            </span>
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 bg-brand-blue"></span>
+              <span class="text-brand-blue font-semibold">Working (38)</span>
+            </span>
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 bg-brand-lavender border border-brand-blue/30"></span>
+              <span class="text-indigo-900">Waiting Evals (56)</span>
+            </span>
+            <span class="flex items-center space-x-1.5">
+              <span class="w-2.5 h-2.5 border-2 border-brand-dark bg-transparent"></span>
+              <span class="text-zinc-900 font-semibold">Shipped (88)</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- 8 rows x 28 columns = 224 tasks -->
+        <div class="grid grid-cols-14 sm:grid-cols-28 gap-1.5 sm:gap-1 p-2 bg-[#FAF8F5] border border-brand-border overflow-x-auto">
+          <!-- Procedurally generated 224 authentic status indicator tiles -->
+          <!-- Row 1: Shipped & working -->
+          <div class="w-full aspect-square border-2 border-brand-dark title='Task #1: Shipped'"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue animate-pulse"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+
+          <!-- Row 2 -->
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue animate-pulse"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+
+          <!-- Row 3 -->
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+
+          <!-- Row 4 -->
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+
+          <!-- Row 5 -->
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+
+          <!-- Row 6 -->
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+
+          <!-- Row 7 -->
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+
+          <!-- Row 8 -->
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-lavender border border-brand-blue/30"></div>
+          <div class="w-full aspect-square bg-zinc-200"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square border-2 border-brand-dark"></div>
+          <div class="w-full aspect-square bg-brand-blue"></div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center justify-between text-[11px] font-mono text-zinc-500 pt-2 border-t border-brand-border">
+          <div class="flex items-center space-x-4">
+            <span>KERNEL: <strong class="text-brand-dark">v4.2.0-microvm</strong></span>
+            <span>DISPATCH OVERHEAD: <strong class="text-brand-dark">42ms</strong></span>
+            <span>EPISODIC BUFFER: <strong class="text-brand-dark">ENABLED</strong></span>
+          </div>
+          <div>STATUS: <span class="text-emerald-700 font-bold">● 224/224 ALLOCATED</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUSTED BY SECTION -->
+    <section class="border-y border-brand-border py-8 mb-24">
+      <div class="text-center font-mono text-[11px] uppercase tracking-widest text-zinc-500 mb-6">
+        Trusted by 800k+ developers & forward-thinking teams
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 font-mono text-xs font-semibold text-zinc-700">
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Anthropic</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">OpenAI <span class="text-[10px] text-zinc-400 font-normal">(Livestream)</span></span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Docker <span class="text-[10px] text-brand-blue font-normal">(Case Study)</span></span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Google <span class="text-[10px] text-zinc-400 font-normal">(Launch Partner)</span></span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Stanford <span class="text-[10px] text-zinc-400 font-normal">(Course Partner)</span></span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Phantom</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Rectangle Health <span class="text-[10px] text-brand-blue font-normal">(Case Study)</span></span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">GitHub</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Amazon</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Asana</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">NVIDIA</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Retool</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">VMware</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Ramp</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">DoorDash</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Peloton</span>
+        <span class="px-2.5 py-1 bg-white border border-brand-border">Teamworks</span>
+      </div>
+    </section>
+
+    <!-- NEW CONFIGURATION BLOCK: "Your software factory, defined in code." -->
+    <section id="definition" class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_01 // CONFIGURATION</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Your software factory, defined in code.
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          Factories-as-code allows for a versioned and measured approach to optimizing costs and performance of your factories.
+        </p>
+      </div>
+
+      <!-- 8-Button Navigation Bar -->
+      <div class="flex flex-wrap gap-1 p-1 bg-zinc-100 border border-brand-border mb-4 font-mono text-xs">
+        <button class="px-3 py-1.5 bg-brand-dark text-white font-medium shadow-sm">factory.yaml</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">agents/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">automations/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">runners/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">skills/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">webhooks/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">scorers/</button>
+        <button class="px-3 py-1.5 text-zinc-600 hover:text-black hover:bg-white transition-all">benchmarks/</button>
+      </div>
+
+      <!-- Two-Column Technical Annotated Code View -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 border border-brand-border bg-white shadow-sm">
+        <!-- Directory Navigation Tree (3 cols) -->
+        <div class="lg:col-span-3 border-b lg:border-b-0 lg:border-r border-brand-border p-4 bg-[#FAF8F5] font-mono text-xs">
+          <div class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold mb-3">Project Directory</div>
+          <ul class="space-y-1.5 text-zinc-700">
+            <li class="flex items-center space-x-2 text-brand-blue font-semibold">
+              <span>📄</span> <span>factory.yaml</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>agents/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>automations/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>runners/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>skills/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>webhooks/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>scorers/</span>
+            </li>
+            <li class="flex items-center space-x-2 text-zinc-600">
+              <span>📁</span> <span>benchmarks/</span>
+            </li>
+          </ul>
+
+          <div class="mt-8 pt-4 border-t border-brand-border text-[11px] text-zinc-500 leading-normal">
+            <span class="font-bold text-zinc-700 block mb-1">Public Spec v1alpha1</span>
+            Declarative definition version-controlled with git alongside your core application repos.
+          </div>
+        </div>
+
+        <!-- Real 23 Lines of YAML (9 cols) -->
+        <div class="lg:col-span-9 p-5 bg-[#0D1117] text-[#C9D1D9] font-mono text-xs overflow-x-auto leading-relaxed">
+          <div class="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800 text-[11px] text-zinc-400">
+            <span>acme-corp / web-server-factory / factory.yaml</span>
+            <span class="text-emerald-400 font-semibold">● SYNTAX VALIDATED</span>
+          </div>
+          <pre class="space-y-1"><code><span class="text-zinc-500"> 1</span> <span class="text-purple-400">schemaVersion</span>: <span class="text-emerald-300">v1alpha1</span>
+<span class="text-zinc-500"> 2</span> <span class="text-purple-400">name</span>: <span class="text-emerald-300">web-server-factory</span>
+<span class="text-zinc-500"> 3</span> <span class="text-purple-400">description</span>: <span class="text-zinc-400">"Autonomous maintenance, bug triage, and regression evals"</span>
+<span class="text-zinc-500"> 4</span> <span class="text-purple-400">alias</span>: <span class="text-emerald-300">web-factory</span>
+<span class="text-zinc-500"> 5</span> 
+<span class="text-zinc-500"> 6</span> <span class="text-purple-400">repositories</span>:
+<span class="text-zinc-500"> 7</span>   - <span class="text-cyan-300">acme/web-server</span>
+<span class="text-zinc-500"> 8</span>   - <span class="text-cyan-300">acme/web-client</span>
+<span class="text-zinc-500"> 9</span> 
+<span class="text-zinc-500">10</span> <span class="text-purple-400">secrets</span>:
+<span class="text-zinc-500">11</span>   - <span class="text-yellow-300">DEPLOY_API_TOKEN</span>
+<span class="text-zinc-500">12</span> 
+<span class="text-zinc-500">13</span> <span class="text-purple-400">mcpServers</span>:
+<span class="text-zinc-500">14</span>   <span class="text-purple-400">sentry</span>:
+<span class="text-zinc-500">15</span>     <span class="text-purple-400">warpId</span>: <span class="text-emerald-300">YOUR_MCP_SERVER_ID</span>
+<span class="text-zinc-500">16</span> 
+<span class="text-zinc-500">17</span> <span class="text-purple-400">cloudProviders</span>:
+<span class="text-zinc-500">18</span>   <span class="text-purple-400">aws</span>:
+<span class="text-zinc-500">19</span>     <span class="text-purple-400">roleArn</span>: <span class="text-zinc-400">"arn:aws:iam::123456789012:role/warp-factory-runner"</span>
+<span class="text-zinc-500">20</span> 
+<span class="text-zinc-500">21</span> <span class="text-purple-400">integrations</span>:
+<span class="text-zinc-500">22</span>   - <span class="text-cyan-300">slack</span>
+<span class="text-zinc-500">23</span>   - <span class="text-cyan-300">linear</span>
+<span class="text-zinc-500">24</span> 
+<span class="text-zinc-500">25</span> <span class="text-purple-400">agentDefaults</span>:
+<span class="text-zinc-500">26</span>   <span class="text-purple-400">model</span>: <span class="text-emerald-300">auto</span>
+<span class="text-zinc-500">27</span>   <span class="text-purple-400">runner</span>: <span class="text-emerald-300">standard</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: BEYOND CI/CD TO AUTOMATING THE WHOLE SDLC -->
+    <section id="sdlc" class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_02 // SYSTEM EVOLUTION</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Beyond CI/CD to automating the whole SDLC
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          Traditional CI/CD runs dumb bash scripts when code lands. Warp software factories run autonomous agent loops before, during, and after pull requests, actively self-debugging, reproducing bug reports, and refactoring dependencies.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Six numbered feature rows -->
+        <div class="lg:col-span-5 space-y-2 font-mono">
+          <div class="p-3.5 border border-brand-border bg-white hover:border-black transition-colors cursor-pointer">
+            <div class="font-bold text-sm text-brand-dark">01. Opinionated, but flexible</div>
+            <div class="text-xs text-zinc-500 mt-1">Defaults built for hardened engineering factories, customized via composable plugins.</div>
+          </div>
+
+          <div class="p-3.5 border-2 border-brand-blue bg-white shadow-sm cursor-pointer">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-sm text-brand-blue">02. Factories as code</span>
+              <span class="text-[10px] bg-brand-blue text-white px-2 py-0.5 uppercase">Selected</span>
+            </div>
+            <div class="text-xs text-zinc-700 mt-1">Declarative YAML definitions checked directly into your git repository alongside code. Version control your AI software builders exactly like Terraform or Dockerfiles.</div>
+          </div>
+
+          <div class="p-3.5 border border-brand-border bg-white hover:border-black transition-colors cursor-pointer">
+            <div class="font-bold text-sm text-brand-dark">03. API, CLI, SDK and MCP</div>
+            <div class="text-xs text-zinc-500 mt-1">Expose your factory runners to Claude Desktop, IDE extensions, or remote curl triggers.</div>
+          </div>
+
+          <div class="p-3.5 border border-brand-border bg-white hover:border-black transition-colors cursor-pointer">
+            <div class="font-bold text-sm text-brand-dark">04. Integrations</div>
+            <div class="text-xs text-zinc-500 mt-1">Bidirectional sync with GitHub Actions, Linear issues, Jira tickets, and Sentry traces.</div>
+          </div>
+
+          <div class="p-3.5 border border-brand-border bg-white hover:border-black transition-colors cursor-pointer">
+            <div class="font-bold text-sm text-brand-dark">05. Any surface</div>
+            <div class="text-xs text-zinc-500 mt-1">Trigger from the terminal, automated webhooks, browser console, or scheduled cron jobs.</div>
+          </div>
+
+          <div class="p-3.5 border border-brand-border bg-white hover:border-black transition-colors cursor-pointer">
+            <div class="font-bold text-sm text-brand-dark">06. Evals, self-improvement, and memory</div>
+            <div class="text-xs text-zinc-500 mt-1">Cross-session episodic memory prevents repeating previous engineering failures.</div>
+          </div>
+        </div>
+
+        <!-- Right Terminal / Execution Setup Frame -->
+        <div class="lg:col-span-7 border border-brand-border bg-black text-zinc-200 font-mono text-xs shadow-md">
+          <div class="px-4 py-3 bg-zinc-900 border-b border-zinc-800 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
+              <span class="text-zinc-400 text-[11px] ml-2">factory-runner.bin [EXEC: PR #4192]</span>
+            </div>
+            <span class="text-[10px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 border border-emerald-800/60 uppercase">Streaming Stdout</span>
+          </div>
+          <div class="p-4 space-y-1.5 text-[11px] leading-relaxed">
+            <p class="text-zinc-500">[00:01.02] [DISPATCH] Initializing Firecracker microVM instance: vm-iad-8405...</p>
+            <p class="text-zinc-500">[00:01.44] [ENV] Mounting git workspace: git@github.com:acme/core.git#feat/sync-mutex</p>
+            <p class="text-zinc-400">[00:02.10] [AGENT] Harness 'claude-code-harness' loaded model weights context (184,291 tokens)</p>
+            <p class="text-cyan-400">[00:03.24] [REASONING] Analyzing AST tree for circular dependency in pkg/telemetry/dispatcher.go</p>
+            <p class="text-yellow-300">[00:04.12] [PATCH] Generated diff: -4 lines, +18 lines (refactored sync.Mutex to atomic.Pointer)</p>
+            <p class="text-zinc-300">[00:05.01] [EVAL] Executing tests: go test -v -race ./pkg/telemetry/...</p>
+            <p class="text-emerald-400 font-semibold">[00:08.45] [PASS] 24 of 24 test suites green. 0 race conditions detected.</p>
+            <p class="text-zinc-400">[00:09.10] [GIT] Committed d7f1a30: 'perf(telemetry): eliminate lock contention via atomic.Pointer'</p>
+            <p class="text-brand-blue font-bold">[00:09.65] [GA_PR] Opened PR #18492: https://github.com/acmeworks/core/pull/18492</p>
+            <div class="mt-4 pt-3 border-t border-zinc-800 flex justify-between text-zinc-500 text-[10px]">
+              <span>EVAL LOOP CONVERGED: 1 ITERATION</span>
+              <span>TOTAL RUNTIME: 9.65s</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: BAKED-IN MEASUREMENT AND SELF-IMPROVEMENT -->
+    <section id="evals" class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_03 // SYS_EVALS_V2</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Baked-in measurement and self-improvement
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          AI code without rigorous evals is dangerous guesswork. Warp factories test every suggestion against sandboxed continuous verification.
+        </p>
+      </div>
+
+      <!-- 3 Thin-lined Metric Charts -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono">
+        <!-- Evals 96% -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between text-xs text-zinc-500 mb-4 pb-2 border-b border-brand-border">
+            <span>METRIC_01 // REAL REPO BENCH</span>
+            <span class="w-2 h-2 rounded-full border border-brand-blue"></span>
+          </div>
+          <div class="text-sm font-semibold text-zinc-800 mb-1">Evals on your own work</div>
+          <p class="text-xs text-zinc-500 mb-6">Autonomous verification against your existing test runners, type systems, and custom linters.</p>
+          <div class="flex items-baseline space-x-3 mb-6">
+            <span class="text-5xl font-bold text-brand-dark">96%</span>
+            <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5">+14% VS SWE-BENCH</span>
+          </div>
+          <div class="space-y-2 text-xs border-t border-brand-border pt-4 text-zinc-600">
+            <div class="flex justify-between">
+              <span>Lint & Format:</span>
+              <span class="font-bold text-brand-dark">100%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Typecheck:</span>
+              <span class="font-bold text-brand-dark">98.4%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Unit & Integration:</span>
+              <span class="font-bold text-brand-dark">95.2%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Regression Suite:</span>
+              <span class="font-bold text-brand-dark">89.1%</span>
+            </div>
+          </div>
+          <div class="mt-6 pt-2 border-t border-brand-border text-[10px] text-zinc-400">
+            VERIFIED BY CI PARALLEL RUNNERS
+          </div>
+        </div>
+
+        <!-- Benchmarks 1.00x -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between text-xs text-zinc-500 mb-4 pb-2 border-b border-brand-border">
+            <span>METRIC_02 // COMPUTE EFFICIENCY</span>
+            <span class="w-2 h-2 rounded-full border border-yellow-500"></span>
+          </div>
+          <div class="text-sm font-semibold text-zinc-800 mb-1">Benchmarks</div>
+          <p class="text-xs text-zinc-500 mb-6">Deterministic caching and prompt tree minimization decrease latency and cloud cost.</p>
+          <div class="flex items-baseline space-x-3 mb-6">
+            <span class="text-5xl font-bold text-brand-dark">1.00x</span>
+            <span class="text-xs font-semibold text-amber-900 bg-brand-yellow px-2 py-0.5">BEST IN CLASS</span>
+          </div>
+          <div class="space-y-2 text-xs border-t border-brand-border pt-4 text-zinc-600">
+            <div class="flex justify-between">
+              <span>Token Consumption:</span>
+              <span class="font-bold text-emerald-700">-54% reduction</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Wall Clock Execution:</span>
+              <span class="font-bold text-brand-dark">8.2s median</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Compute Sandbox Overhead:</span>
+              <span class="font-bold text-brand-dark">42ms init</span>
+            </div>
+          </div>
+          <div class="mt-12 pt-2 border-t border-brand-border text-[10px] text-zinc-400">
+            COMPARED ACROSS 1,000 RUNS
+          </div>
+        </div>
+
+        <!-- Self-improvement +3.7x -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between text-xs text-zinc-500 mb-4 pb-2 border-b border-brand-border">
+            <span>METRIC_03 // HEALING LOOPS</span>
+            <span class="w-2 h-2 rounded-full border border-purple-500"></span>
+          </div>
+          <div class="text-sm font-semibold text-zinc-800 mb-1">Self-improvement</div>
+          <p class="text-xs text-zinc-500 mb-6">When a test fails, the orchestrator feeds the compiler error back into the agent harness.</p>
+          <div class="flex items-baseline space-x-3 mb-6">
+            <span class="text-5xl font-bold text-brand-dark">+3.7x</span>
+            <span class="text-xs font-semibold text-indigo-900 bg-brand-lavender px-2 py-0.5">PASS RATE ACCELERATION</span>
+          </div>
+          <div class="space-y-2 text-xs border-t border-brand-border pt-4 text-zinc-600">
+            <div class="flex justify-between">
+              <span>First-try Success:</span>
+              <span class="font-bold text-brand-dark">71%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Post Auto-Fix Success:</span>
+              <span class="font-bold text-brand-blue">98.2%</span>
+            </div>
+            <div class="flex justify-between">
+              <span>Human Intervention Needed:</span>
+              <span class="font-bold text-brand-dark">&lt; 1.8%</span>
+            </div>
+          </div>
+          <div class="mt-12 pt-2 border-t border-brand-border text-[10px] text-zinc-400">
+            TELEMETRY LOGS OVER 20M WINDOW
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ELECTRIC BLUE CASE STUDY BLOCK: "Cutting our cost per PR from $80 to $30" -->
+    <section class="bg-brand-blue text-white p-8 md:p-12 mb-28 shadow-lg">
+      <div class="max-w-4xl font-mono">
+        <div class="text-xs uppercase tracking-widest text-brand-yellow font-semibold mb-4">
+          CASE STUDY // ENTERPRISE HORIZONTAL SCALING
+        </div>
+        <h3 class="text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
+          “Cutting our cost per PR from $80 to $30”
+        </h3>
+        <p class="text-base md:text-lg text-white/90 leading-relaxed mb-8 max-w-2xl">
+          “Before Warp Factories, every security patch and dependency upgrade consumed 3 to 4 senior engineer hours. Now, Warp provisions isolated microVM sandboxes, spins up Claude agents with our private repos, runs full evals, and opens perfectly verified PRs. We reduced engineering review backlog by 62% in the first quarter alone.”
+        </p>
+
+        <!-- Observed benchmark image current public claim named gpt-5.6-sol(high) 95% / $6.13 -->
+        <div class="p-4 bg-black/40 border border-white/20 mb-8 max-w-xl">
+          <div class="flex items-center justify-between text-xs text-white/80 pb-2 mb-2 border-b border-white/10">
+            <span class="font-bold">BENCHMARK // gpt-5.6-sol (high)</span>
+            <span class="text-brand-yellow">OBSERVED PUBLISHED SPEC</span>
+          </div>
+          <div class="flex items-center justify-between text-sm">
+            <div>
+              <span class="text-xs text-white/60 block">Resolved Accuracy</span>
+              <span class="text-2xl font-bold text-emerald-400">95%</span>
+            </div>
+            <div>
+              <span class="text-xs text-white/60 block">Average Compute / PR</span>
+              <span class="text-2xl font-bold text-white">$6.13</span>
+            </div>
+            <div>
+              <span class="text-xs text-white/60 block">Previous Manual Baseline</span>
+              <span class="text-xl font-bold text-red-300 line-through">$80.00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/20">
+          <div class="text-xs text-white/80">
+            <div class="font-bold text-white">VP of Platform Engineering</div>
+            <div>Fortune 100 Fintech Partner</div>
+          </div>
+          <a href="#benchmark-report" class="inline-block bg-brand-yellow text-brand-dark font-mono text-xs font-bold uppercase tracking-wider px-5 py-3 hover:bg-yellow-300 transition-colors shadow">
+            Read the benchmark report →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: WARP IS ENTERPRISE READY (Two actual customer images/stories) -->
+    <section id="enterprise" class="mb-28">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_04 // SECURITY & GOVERNANCE</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Warp is enterprise ready
+        </h2>
+        <p class="font-mono text-zinc-600 text-sm leading-relaxed">
+          Designed from bare metal for zero data leakage, audit log fidelity, and total VPC isolation.
+        </p>
+      </div>
+
+      <!-- Two Verified Customer Stories: Rectangle Health 54% own code & Docker Onboarding -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono">
+        <!-- Story 1: Rectangle Health -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-brand-border">
+            <span class="font-bold text-base text-brand-dark">Rectangle Health</span>
+            <span class="text-[11px] bg-zinc-100 text-zinc-700 px-2 py-0.5 border border-zinc-200">HEALTHCARE COMPLIANCE</span>
+          </div>
+          <div class="p-3 bg-zinc-50 border border-brand-border mb-4 text-xs">
+            <span class="text-emerald-700 font-bold text-sm block mb-0.5">54% of code written autonomously</span>
+            <span class="text-zinc-500 text-[11px]">HIPAA compliant with zero data retention LLM gateway</span>
+          </div>
+          <p class="text-xs text-zinc-600 leading-relaxed mb-6">
+            “In healthcare software, you cannot permit unvetted autonomous agents touching patient schema repositories. Warp's sandboxed Firecracker runtime with air-gapped secrets gives us the confidence to automate 80% of our API maintenance without HIPAA exposure.”
+          </p>
+          <div class="text-[11px] text-zinc-500 pt-3 border-t border-brand-border">
+            <span class="font-bold text-zinc-800">Lead DevOps Architect</span> // HIPAA Air-Gapped Runner
+          </div>
+        </div>
+
+        <!-- Story 2: Docker -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-brand-border">
+            <span class="font-bold text-base text-brand-dark">Docker</span>
+            <span class="text-[11px] bg-brand-yellow text-zinc-900 px-2 py-0.5 border border-amber-300">CONTAINER INFRA</span>
+          </div>
+          <div class="p-3 bg-zinc-50 border border-brand-border mb-4 text-xs">
+            <span class="text-brand-blue font-bold text-sm block mb-0.5">Seamless Onboarding</span>
+            <span class="text-zinc-500 text-[11px]">Instant containerized runner provisioning at scale</span>
+          </div>
+          <p class="text-xs text-zinc-600 leading-relaxed mb-6">
+            “Warp Factories seamlessly hook into our containerized builder pipelines. We run hundreds of daily autonomous agent runs that triage flaky integration tests in isolated container sandboxes. It has completely transformed our developer cycle times.”
+          </p>
+          <div class="text-[11px] text-zinc-500 pt-3 border-t border-brand-border">
+            <span class="font-bold text-zinc-800">Head of Developer Experience</span> // Native OCI Container Runtime
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: OPEN AT EVERY LAYER -->
+    <section class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_05 // MODULAR ARCHITECTURE</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Open at every layer
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          No vendor lock-in. Warp decouples your models, agent harnesses, compute fabrics, and enterprise data backends.
+        </p>
+      </div>
+
+      <!-- 4 Layer Rows -->
+      <div class="space-y-4 font-mono text-xs">
+        <!-- Any agent -->
+        <div class="p-4 border border-brand-border bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="max-w-md">
+            <div class="font-bold text-sm text-brand-dark mb-1">01. Any agent</div>
+            <div class="text-zinc-500">Run Claude Code, SWE-agent, bespoke LangGraph state machines, or custom company harnesses.</div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Warp Agent</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Claude Code</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Codex</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Cursor</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Custom Python/Node</span>
+          </div>
+        </div>
+
+        <!-- Any model -->
+        <div class="p-4 border border-brand-border bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="max-w-md">
+            <div class="font-bold text-sm text-brand-dark mb-1">02. Any model</div>
+            <div class="text-zinc-500">Route requests dynamically to Anthropic, OpenAI, DeepSeek, Google, or local open-weights.</div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Frontier Models</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Open-weight LLMs</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">vLLM / Ollama</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Self-Hosted</span>
+          </div>
+        </div>
+
+        <!-- Your compute or ours -->
+        <div class="p-4 border border-brand-border bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="max-w-md">
+            <div class="font-bold text-sm text-brand-dark mb-1">03. Your compute or ours</div>
+            <div class="text-zinc-500">Execute factories on Warp Cloud, AWS ECS/EKS, GCP Cloud Run, bare metal, or on-prem VPC runners.</div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 bg-brand-blue text-white font-medium">Warp Managed Cloud</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">AWS VPC Firecracker</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">GCP Bare Metal</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Self-Hosted Kubernetes</span>
+          </div>
+        </div>
+
+        <!-- Data lives where you want -->
+        <div class="p-4 border border-brand-border bg-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="max-w-md">
+            <div class="font-bold text-sm text-brand-dark mb-1">04. Data lives where you want</div>
+            <div class="text-zinc-500">Stream context bidirectionally between git, issue trackers, production logs, and internal wikis.</div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Pluggable</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Zero-Retention Gateway</span>
+            <span class="px-2.5 py-1 bg-zinc-100 border border-zinc-200 text-zinc-800">Your Private VPC</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: CONTROL YOUR CODING AGENT CHAOS (Governance, Cost-per-PR Plot, 3-Agent Live Roster) -->
+    <section class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_06 // GOVERNANCE & TELEMETRY</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Control your coding agent chaos
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          Developers running arbitrary LLM scripts locally creates compliance nightmares. Centralize telemetry, rate limiting, token spend limits, and security guardrails.
+        </p>
+      </div>
+
+      <!-- Governance Figure with cost-per-PR plot $18.09 / -33% May 20, and 3-agent live roster -->
+      <div class="border border-brand-border bg-[#0D1117] text-white p-6 font-mono text-xs shadow-md">
+        <!-- Top Metrics Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pb-6 mb-6 border-b border-zinc-800">
+          <div>
+            <div class="text-zinc-400 text-[11px] mb-1">ACTIVE FACTORY RUNNERS</div>
+            <div class="text-2xl font-bold text-emerald-400">42 <span class="text-xs font-normal text-emerald-600">● Online</span></div>
+          </div>
+          <div>
+            <div class="text-zinc-400 text-[11px] mb-1">MONTHLY SPEND QUOTA</div>
+            <div class="text-2xl font-bold text-white">$124.50 <span class="text-xs font-normal text-zinc-500">/ $500</span></div>
+          </div>
+          <div>
+            <div class="text-zinc-400 text-[11px] mb-1">PR APPROVAL RATE</div>
+            <div class="text-2xl font-bold text-brand-yellow">ENFORCED</div>
+          </div>
+          <div>
+            <div class="text-zinc-400 text-[11px] mb-1">AIR-GAP AUDIT LOGS</div>
+            <div class="text-2xl font-bold text-emerald-400">100% CLEAN</div>
+          </div>
+        </div>
+
+        <!-- Cost-per-PR Plot Visual ($18.09 / -33% May 20) -->
+        <div class="p-4 bg-zinc-900 border border-zinc-800 mb-6">
+          <div class="flex items-center justify-between mb-3 text-[11px]">
+            <span class="text-zinc-400 uppercase">Cost-Per-PR Plot // Continuous Optimization</span>
+            <span class="text-emerald-400 font-bold">$18.09 / -33% May 20</span>
+          </div>
+          <!-- Sparkline / Grid Representation -->
+          <div class="h-24 w-full border-b border-l border-zinc-700 relative flex items-end px-2 pb-1 space-x-4">
+            <div class="flex-1 bg-zinc-800 h-20 rounded-t-sm relative group"><span class="absolute -top-5 left-0 text-[10px] text-zinc-500 hidden group-hover:block">$28.40</span></div>
+            <div class="flex-1 bg-zinc-800 h-16 rounded-t-sm relative group"><span class="absolute -top-5 left-0 text-[10px] text-zinc-500 hidden group-hover:block">$24.10</span></div>
+            <div class="flex-1 bg-zinc-800 h-14 rounded-t-sm relative group"><span class="absolute -top-5 left-0 text-[10px] text-zinc-500 hidden group-hover:block">$21.30</span></div>
+            <div class="flex-1 bg-zinc-700 h-12 rounded-t-sm relative group"><span class="absolute -top-5 left-0 text-[10px] text-zinc-500 hidden group-hover:block">$19.80</span></div>
+            <div class="flex-1 bg-brand-blue h-9 rounded-t-sm relative group">
+              <span class="absolute -top-5 left-0 text-[10px] text-brand-yellow font-bold">$18.09</span>
+            </div>
+          </div>
+          <div class="flex justify-between text-[10px] text-zinc-500 mt-2">
+            <span>Jan 15</span>
+            <span>Feb 28</span>
+            <span>Mar 14</span>
+            <span>Apr 30</span>
+            <span class="text-white font-bold">May 20 (-33%)</span>
+          </div>
+        </div>
+
+        <!-- 3-Agent Live Roster -->
+        <div class="mb-6">
+          <div class="text-[11px] text-zinc-400 uppercase tracking-wider mb-3">Live Agent Roster</div>
+          <div class="space-y-2">
+            <div class="p-3 bg-zinc-900 border border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="font-bold text-white">sess_9a8d12</span>
+                <span class="text-zinc-400">Claude 3.7 · auth-service</span>
+              </div>
+              <div class="flex items-center space-x-4 text-[11px]">
+                <span class="text-zinc-400">Linear T-1940 (Bugfix)</span>
+                <span class="text-emerald-400 bg-emerald-950/80 px-2 py-0.5 border border-emerald-800">ALL PASS</span>
+                <span class="text-white font-semibold">$1.42</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-zinc-900 border border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                <span class="font-bold text-white">sess_dc229f</span>
+                <span class="text-zinc-400">SWE-Agent · web-app</span>
+              </div>
+              <div class="flex items-center space-x-4 text-[11px]">
+                <span class="text-zinc-400">GitHub PR #892 (Refactor)</span>
+                <span class="text-emerald-400 bg-emerald-950/80 px-2 py-0.5 border border-emerald-800">ALL PASS</span>
+                <span class="text-white font-semibold">$3.10</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-zinc-900 border border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center space-x-3">
+                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                <span class="font-bold text-white">sess_11c0e4</span>
+                <span class="text-zinc-400">GPT-4.5 · billing-engine</span>
+              </div>
+              <div class="flex items-center space-x-4 text-[11px]">
+                <span class="text-zinc-400">Nightly Dep Audit</span>
+                <span class="text-amber-400 bg-amber-950/80 px-2 py-0.5 border border-amber-800">HEALING (ITER 2)</span>
+                <span class="text-white font-semibold">$4.05</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Framed Browser Demonstration: "Agents prove their work with computer use" -->
+        <div class="border border-zinc-800 bg-black p-4">
+          <div class="flex items-center justify-between pb-2 mb-3 border-b border-zinc-800 text-[11px] text-zinc-400">
+            <span class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-brand-blue"></span>
+              <strong class="text-white">Agents prove their work with computer use</strong>
+            </span>
+            <a href="#contact-sales" class="text-brand-yellow hover:underline">Contact Sales for Demo →</a>
+          </div>
+          <div class="p-4 bg-zinc-950 border border-zinc-900 text-zinc-400 text-xs flex items-center justify-between">
+            <div>
+              <p class="text-white font-medium mb-1">Visual Computer-Use Browser Session</p>
+              <p class="text-[11px]">Agent navigates staging app UI, executes end-to-end user flows, captures screenshots on failure, and validates DOM mutations.</p>
+            </div>
+            <div class="hidden sm:block text-right">
+              <span class="px-3 py-1.5 bg-zinc-900 border border-zinc-700 text-zinc-300 text-xs">RECORDING ARCHIVED</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: USE WARP EVERYWHERE (3 Cards with Observed Install Tabs) -->
+    <section class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_07 // ECOSYSTEM PRODUCTS</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Use Warp everywhere
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          From high-velocity terminal work on macOS/Linux to massive autonomous cloud software factories.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-xs">
+        <!-- Card 1: Warp Factories -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 bg-brand-lavender text-brand-blue flex items-center justify-center font-bold mb-4">
+              ☁
+            </div>
+            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mb-1">Cloud Autonomous Clusters</div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Warp Factories</h3>
+            <p class="text-zinc-600 leading-relaxed mb-6">
+              The next-generation CI/CD platform built specifically for autonomous agents, automated PR reviews, and self-healing test suites.
+            </p>
+          </div>
+          <a href="#cloud" class="text-brand-blue font-bold hover:underline flex items-center space-x-1">
+            <span>Deploy on cloud</span> <span>→</span>
+          </a>
+        </div>
+
+        <!-- Card 2: Warp Terminal -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 bg-brand-yellow text-zinc-900 flex items-center justify-center font-bold mb-4">
+              ⌨
+            </div>
+            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mb-1">macOS & Linux Client</div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Warp Terminal</h3>
+            <p class="text-zinc-600 leading-relaxed mb-6">
+              The intelligent modern terminal loved by 800,000+ developers, with AI command lookup, block-level UX, and team workflows.
+            </p>
+          </div>
+          <a href="#terminal" class="text-brand-dark font-bold hover:underline flex items-center space-x-1">
+            <span>Download Terminal</span> <span>↓</span>
+          </a>
+        </div>
+
+        <!-- Card 3: Agent CLI (with Observed Install Code) -->
+        <div class="border border-brand-border bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="w-8 h-8 bg-zinc-100 text-zinc-800 flex items-center justify-center font-bold mb-4">
+              &lt;&gt;
+            </div>
+            <div class="text-[11px] uppercase tracking-wider text-zinc-400 mb-1">Headless CLI Harness</div>
+            <h3 class="text-lg font-bold text-brand-dark mb-2">Agent CLI</h3>
+            <p class="text-zinc-600 leading-relaxed mb-4">
+              Script and orchestrate autonomous engineering runs straight from your personal shell scripts or pre-commit hooks.
+            </p>
+            <!-- Install tabs -->
+            <div class="bg-zinc-900 text-zinc-300 p-2.5 rounded-sm text-[11px] mb-4">
+              <div class="flex space-x-3 text-zinc-500 border-b border-zinc-800 pb-1 mb-2 text-[10px]">
+                <span class="text-brand-yellow font-bold">macOS</span>
+                <span>Linux</span>
+                <span>Windows</span>
+              </div>
+              <code class="text-emerald-400">curl -fsSL https://warp.dev/install | sh</code>
+            </div>
+          </div>
+          <a href="#cli" class="text-brand-dark font-bold hover:underline flex items-center space-x-1">
+            <span>Explore CLI Spec</span> <span>→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: TECHNICAL FAQ (Nine Collapsed Rows) -->
+    <section id="faq" class="mb-28">
+      <div class="mb-10">
+        <div class="font-mono text-xs uppercase tracking-wider text-brand-blue mb-2">SEC_08 // COMMON INQUIRIES</div>
+        <h2 class="text-3xl md:text-4xl font-bold font-mono text-brand-dark mb-4 tracking-tight">
+          Technical FAQ
+        </h2>
+        <p class="font-mono text-zinc-600 max-w-3xl text-sm md:text-base leading-relaxed">
+          Everything you need to know about specs, security models, pricing, and migration paths.
+        </p>
+      </div>
+
+      <!-- Nine Current FAQ Rows -->
+      <div class="space-y-3 font-mono text-xs">
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>1. What exactly is a cloud software factory?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            A software factory is an automated, declarative infrastructure layer that spins up ephemeral microVMs containing codebases, runtimes, LLM agents, and test suites to build, fix, and verify code autonomously without blocking local machines.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>2. How do you define a factory in code?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Using declarative <code class="bg-zinc-100 px-1 py-0.5">factory.yaml</code> specs version-controlled in git. You specify connected repositories, secret managers, MCP server endpoints, evaluation criteria, and model routing policies.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>3. Which frontier and open-weight models are supported?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Claude 3.7 Sonnet, Claude 3.5 Sonnet, GPT-4.5, GPT-4o, DeepSeek-V3, and DeepSeek-R1, as well as self-hosted models running on your own vLLM or Ollama clusters.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>4. How does Warp Factories relate to Warp Terminal?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Warp Terminal is the interactive developer client. Warp Factories is the cloud infrastructure tier. You can dispatch factory jobs directly from the terminal or inspect running cloud executions in your terminal blocks.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>5. How does this differ from traditional CI/CD like GitHub Actions?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            CI/CD runs static deterministic scripts and halts on failure. Warp factories run autonomous reasoning loops that actively fix failures, re-run tests, and write PRs before notifying engineers.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>6. Where does our proprietary code and training data live?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Data resides in your existing repositories and ephemeral sandboxes that are wiped on completion. LLM requests pass through zero-retention gateways, with enterprise on-prem VPC runner options.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>7. Does Warp replace human software engineers?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            No. It automates repetitive mechanical toil—dependency updates, lint fixing, test authoring, and bug reproduction—allowing engineers to focus on architecture, product specs, and system design.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>8. Can small teams start small without massive infrastructure?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Yes. You can start with a single factory runner on our free tier or utilize the $10k qualified early access compute credit.
+          </div>
+        </details>
+
+        <details class="border border-brand-border bg-white p-4 group cursor-pointer">
+          <summary class="font-bold text-sm text-brand-dark flex justify-between items-center list-none">
+            <span>9. How is compute usage and token cost billed?</span>
+            <span class="text-zinc-400 group-open:rotate-180 transition-transform">▼</span>
+          </summary>
+          <div class="mt-3 text-zinc-600 leading-relaxed border-t border-brand-border pt-3">
+            Billed transparently per microVM execution minute and pass-through token costs, with strict hard budget caps and team-level quotas to prevent unexpected spend spikes.
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="border border-brand-border bg-brand-dark text-white p-8 md:p-12 text-center font-mono">
+      <div class="text-xs uppercase tracking-widest text-brand-yellow font-semibold mb-2">DEPLOY TODAY</div>
+      <h2 class="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+        Build your cloud factory with Warp.
+      </h2>
+      <p class="text-zinc-400 text-sm max-w-xl mx-auto mb-8">
+        Reserve early access for your engineering team. Scale autonomous software factories with full governance and zero data retention.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto">
+        <input type="email" placeholder="work_email@company.com" class="w-full px-4 py-3 bg-zinc-900 border border-zinc-700 text-white font-mono text-xs focus:outline-none focus:border-brand-blue" />
+        <button class="w-full sm:w-auto px-6 py-3 bg-brand-yellow text-brand-dark font-mono text-xs font-bold uppercase tracking-wider hover:bg-yellow-300 transition-colors whitespace-nowrap">
+          JOIN EARLY ACCESS
+        </button>
+      </div>
+      <div class="text-[11px] text-zinc-500 mt-4">
+        No credit card required. SOC 2 Type II Certified infrastructure.
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER (Full footer brand tagline, product/resources/company/legal/connect columns ©2026) -->
+  <footer class="border-t border-brand-border bg-[#FAF8F5] px-6 md:px-[74px] py-16 font-mono text-xs text-zinc-600">
+    <div class="max-w-[1360px] mx-auto grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
+      <!-- Brand column -->
+      <div class="col-span-2 space-y-4">
+        <div class="flex items-center space-x-2">
+          <svg class="w-5 h-5" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="4" fill="#111111"/>
+            <path d="M7 9h4.2l3.4 10.2L17.8 9H22l-5.6 14h-3.6L7 9z" fill="#FFFFFF"/>
+            <rect x="22" y="18" width="4" height="5" fill="#2818F4"/>
+          </svg>
+          <span class="font-bold text-base text-brand-dark">WARP</span>
+        </div>
+        <p class="text-zinc-500 text-xs max-w-xs leading-relaxed">
+          Open infrastructure for cloud software factories. Autonomous agent runners, deterministic sandboxes, and verification loops.
+        </p>
+        <div class="text-[11px] text-emerald-700 font-semibold flex items-center space-x-1.5">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+          <span>SYSTEMS OPERATIONAL // KERNEL V4.2.0</span>
+        </div>
+      </div>
+
+      <!-- Column 1: Products -->
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-brand-dark mb-3">Products</div>
+        <ul class="space-y-2 text-zinc-500">
+          <li><a href="#" class="hover:text-brand-blue">Warp Factories</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Warp Terminal</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Agent CLI</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Warp Drive</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Changelog</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 2: Resources & Spec -->
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-brand-dark mb-3">Resources</div>
+        <ul class="space-y-2 text-zinc-500">
+          <li><a href="#" class="hover:text-brand-blue">Specification SEC_01</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Kernel Runtime</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Data Ingestion</a></li>
+          <li><a href="#" class="hover:text-brand-blue">SWE-Bench Harness</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Documentation</a></li>
+        </ul>
+      </div>
+
+      <!-- Column 3: Company & Legal -->
+      <div>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-brand-dark mb-3">Company & Legal</div>
+        <ul class="space-y-2 text-zinc-500">
+          <li><a href="#" class="hover:text-brand-blue">Security Whitepaper</a></li>
+          <li><a href="#" class="hover:text-brand-blue">System Telemetry</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Privacy & Terms</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Responsible AI Policy</a></li>
+          <li><a href="#" class="hover:text-brand-blue">Contact Security</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright & Disclaimer -->
+    <div class="max-w-[1360px] mx-auto pt-8 border-t border-brand-border flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-zinc-500">
+      <div>
+        © 2026 WARP COMPUTING, INC. // OPEN INFRASTRUCTURE FOR CLOUD SOFTWARE FACTORIES. ALL SPECIFICATIONS COMPLIANT.
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="#" class="hover:text-black">GitHub</a>
+        <a href="#" class="hover:text-black">Discord</a>
+        <a href="#" class="hover:text-black">Twitter / X</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

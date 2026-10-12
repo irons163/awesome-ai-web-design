@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notion – The AI workspace that works for you.</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'NotionInter';
+      src: url('https://www.notion.com/front-static/fonts/NotionInter-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'NotionInter';
+      src: url('https://www.notion.com/front-static/fonts/NotionInter-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'NotionInter';
+      src: url('https://www.notion.com/front-static/fonts/NotionInter-SemiBold.woff2') format('woff2');
+      font-weight: 600;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'NotionInter';
+      src: url('https://www.notion.com/front-static/fonts/NotionInter-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'LyonText';
+      src: url('https://www.notion.com/_next/static/media/LyonText-Regular-Web.0v5-4d-mnyixl.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'NotionInter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #050505;
+      background-color: #FFFFFF;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .hero-heading {
+      font-size: 42px;
+      line-height: 48px;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+
+    .section-h2 {
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .card-h3 {
+      font-size: 22px;
+      line-height: 28px;
+      font-weight: 700;
+      letter-spacing: -0.015em;
+    }
+
+    /* Badge highlight for Ship */
+    .ship-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FDF9EA;
+      border: 1.5px solid #F3DF88;
+      border-radius: 9999px;
+      padding: 0px 14px 2px 12px;
+      color: #795700;
+      font-weight: 700;
+      transform: translateY(-2px);
+    }
+    .ship-dot {
+      width: 10px;
+      height: 10px;
+      background: #DEAC14;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="w-[390px] min-h-screen mx-auto bg-white text-[#050505] overflow-x-hidden border-x border-gray-100 shadow-sm">
+<!-- Mobile Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 px-4 h-14 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<!-- Notion Logo -->
+<a class="flex items-center gap-2" href="#">
+<svg class="w-7 h-7" fill="none" viewbox="0 0 100 100">
+<path d="M6.06 14.88L26.39 9.38C29.6 8.52 32.55 10.63 32.78 13.94L34.1 32.96L65.41 11.75C68.32 9.77 72.27 10.27 74.62 12.92L91.86 32.33C93.44 34.11 94.13 36.56 93.75 38.93L87.89 75.39C87.27 79.25 83.84 82.07 79.93 81.89L25.8 79.4C22.65 79.25 19.98 76.96 19.46 73.86L13.78 39.81L7.26 21.05C6.31 18.3 7.37 15.26 9.87 13.76" fill="#000000" fill-opacity="0.05"></path>
+<path clip-rule="evenodd" d="M18.89 17.59L68.74 13.25C74.65 12.73 78.43 17.44 78.43 23.36V74.88C78.43 80.8 73.74 85.5 67.83 85.5L17.98 85.5C12.07 85.5 8.29 80.8 8.29 74.88V23.36C8.29 17.44 12.98 12.73 18.89 17.59ZM24.41 29.59C24.41 27.67 25.96 26.12 27.88 26.12H34.82C36.74 26.12 38.29 27.67 38.29 29.59V33.07C38.29 34.99 39.84 36.54 41.76 36.54C43.68 36.54 45.23 34.99 45.23 33.07V29.59C45.23 27.67 46.78 26.12 48.7 26.12H68.85C70.77 26.12 72.32 27.67 72.32 29.59V69.17C72.32 71.09 70.77 72.64 68.85 72.64H61.91C59.99 72.64 58.44 71.09 58.44 69.17V45.21L40.73 71.78C39.69 73.34 37.91 74.27 36.01 74.27H27.88C25.96 74.27 24.41 72.72 24.41 70.8V29.59Z" fill="#000000" fill-rule="evenodd"></path>
+</svg>
+<span class="font-bold text-xl tracking-tight text-black">Notion</span>
+</a>
+</div>
+<div class="flex items-center gap-2">
+<a class="text-[13px] font-medium text-gray-700 hover:text-black px-2 py-1" href="#">Log in</a>
+<a class="bg-[#0075DE] hover:bg-[#0060B9] text-white text-[13px] font-medium px-3 py-1.5 rounded-md transition shadow-sm" href="#">
+        Get Notion free
+      </a>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="pt-8 pb-10 px-4 text-center">
+<h1 class="hero-heading text-black font-bold tracking-tight mb-4">
+      Where teams and agents <br/>
+<span class="ship-badge">
+<span class="ship-dot"></span>Ship
+      </span>
+      together.
+    </h1>
+<p class="text-[15px] leading-[22px] text-[#5A5A5A] max-w-[340px] mx-auto mb-6 font-normal">
+      Capture context, find answers, and automate tasks with AI built for your team.
+    </p>
+<!-- CTAs -->
+<div class="flex flex-col gap-2.5 max-w-[320px] mx-auto mb-6">
+<a class="w-full bg-[#0075DE] hover:bg-[#0060B9] text-white font-medium text-[15px] py-2.5 px-4 rounded-md transition text-center shadow-sm" href="#">
+        Get Notion free
+      </a>
+<a class="w-full bg-[#F6F5F4] hover:bg-[#EAE8E5] text-[#050505] font-medium text-[15px] py-2.5 px-4 rounded-md transition text-center border border-black/5" href="#">
+        Request a demo
+      </a>
+</div>
+<!-- Video / Visual Interactive Mockup Card -->
+<div class="mt-4 relative rounded-xl border border-gray-200/80 shadow-md bg-white overflow-hidden text-left">
+<!-- Window top bar -->
+<div class="bg-[#FBFBFA] border-b border-gray-200/80 px-3 py-2 flex items-center justify-between text-[11px] text-gray-500">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></span>
+<span class="ml-2 font-medium text-gray-700 flex items-center gap-1">
+<svg class="w-3 h-3 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Ramp HQ
+          </span>
+</div>
+<div class="flex items-center gap-1 text-[11px] text-gray-400">
+<span>Play</span>
+<svg class="w-3.5 h-3.5 fill-current text-gray-500" viewbox="0 0 20 20"><path d="M6.3 3.5v13l10-6.5-10-6.5z"></path></svg>
+</div>
+</div>
+<!-- App Preview Graphic -->
+<div class="p-3 bg-white">
+<div class="flex items-center justify-between border-b border-gray-100 pb-2 mb-2.5">
+<div class="flex items-center gap-1.5">
+<span class="text-sm font-semibold text-gray-900">⚡ Company Tasks</span>
+<span class="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded font-medium">Sprint 24</span>
+</div>
+<span class="text-[10px] bg-blue-50 text-blue-700 font-medium px-2 py-0.5 rounded-full">AI Agent Active</span>
+</div>
+<!-- Task Kanban Mock Mini -->
+<div class="grid grid-cols-2 gap-2 text-[11px]">
+<div class="bg-amber-50/70 border border-amber-200/60 rounded-lg p-2.5">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-amber-800 font-semibold text-[10px] uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> In Progress
+              </span>
+<span class="text-amber-700 text-[10px] font-bold">3</span>
+</div>
+<div class="bg-white p-2 rounded shadow-2xs border border-amber-100 text-[11px] font-medium text-gray-800 mb-1.5">
+              Generate Linear Issue &amp; PRD
+              <div class="text-[9px] text-gray-400 mt-1 flex items-center justify-between">
+<span>🤖 Notion Agent</span>
+<span class="text-emerald-600 font-semibold">Done</span>
+</div>
+</div>
+<div class="bg-white p-2 rounded shadow-2xs border border-amber-100 text-[11px] font-medium text-gray-800">
+              Summarize customer calls
+            </div>
+</div>
+<div class="bg-emerald-50/70 border border-emerald-200/60 rounded-lg p-2.5">
+<div class="flex items-center justify-between mb-1.5">
+<span class="text-emerald-800 font-semibold text-[10px] uppercase tracking-wider flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Complete
+              </span>
+<span class="text-emerald-700 text-[10px] font-bold">14</span>
+</div>
+<div class="bg-white p-2 rounded shadow-2xs border border-emerald-100 text-[11px] font-medium text-gray-800 mb-1.5">
+              Sync Engineering Database
+              <div class="text-[9px] text-gray-400 mt-1">142 tickets triaged</div>
+</div>
+<div class="bg-white p-2 rounded shadow-2xs border border-emerald-100 text-[11px] font-medium text-gray-800">
+              Weekly status email draft
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Social Proof Logos Carousel / Grid -->
+<section class="py-6 border-t border-b border-gray-100 bg-[#FAFAFA]">
+<p class="text-center text-[11px] font-semibold uppercase tracking-wider text-gray-400 mb-4 px-4">
+      The most ambitious companies run on Notion.
+    </p>
+<div class="flex items-center justify-center flex-wrap gap-x-6 gap-y-4 px-6 opacity-75 grayscale hover:grayscale-0 transition-all">
+<img alt="OpenAI" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="A24" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Figma" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="FedEx" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Ramp" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Cursor" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Substack" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Nvidia" class="h-4 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<img alt="Toyota" class="h-3.5 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+</section>
+<!-- Section: AI where your team works -->
+<section class="py-12 px-4">
+<h2 class="section-h2 text-black mb-8">
+      AI where your team works.
+    </h2>
+<!-- Feature 1: Capture knowledge -->
+<div class="mb-8 border border-gray-200/90 rounded-2xl p-5 bg-[#FCFCFB] shadow-xs">
+<p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+        Capture knowledge
+      </p>
+<h3 class="card-h3 text-black mb-2">
+        Bring everything into one system of record.
+      </h3>
+<p class="text-[14px] leading-[20px] text-gray-600 mb-4">
+        Connect Google Drive, Slack, GitHub, and Jira directly into Notion knowledge graphs with universal search.
+      </p>
+<a class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0075DE] hover:underline mb-4" href="#">
+        Explore knowledge base <span>→</span>
+</a>
+<!-- Visual Card Mockup -->
+<div class="w-full rounded-xl border border-gray-200 bg-white overflow-hidden shadow-xs">
+<div class="p-4 bg-gradient-to-b from-blue-50/40 to-white">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-6 h-6 rounded bg-blue-100 flex items-center justify-center text-blue-600 text-xs font-bold">🔍</span>
+<span class="text-xs font-semibold text-gray-800">Universal Workspace Search</span>
+</div>
+<div class="bg-gray-50 border border-gray-200/70 rounded-md p-2.5 text-xs text-gray-500 flex items-center gap-2 mb-2">
+<svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Q3 Product Roadmap specs &amp; feedback</span>
+</div>
+<div class="space-y-1.5 text-[11px]">
+<div class="p-2 rounded bg-white border border-gray-100 flex items-center justify-between">
+<span class="font-medium text-gray-700">📄 PRD: AI Custom Agents 2.0</span>
+<span class="text-[10px] text-gray-400">Notion Doc</span>
+</div>
+<div class="p-2 rounded bg-white border border-gray-100 flex items-center justify-between">
+<span class="font-medium text-gray-700">💬 #product-feedback 142 msgs</span>
+<span class="text-[10px] text-gray-400">Slack</span>
+</div>
+<div class="p-2 rounded bg-white border border-gray-100 flex items-center justify-between">
+<span class="font-medium text-gray-700">🐙 PR #892: Vector Indexing</span>
+<span class="text-[10px] text-gray-400">GitHub</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature 2: Find answers -->
+<div class="mb-8 border border-gray-200/90 rounded-2xl p-5 bg-[#FCFCFB] shadow-xs">
+<p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+        Find answers
+      </p>
+<h3 class="card-h3 text-black mb-2">
+        Get answers, instantly—with citations.
+      </h3>
+<p class="text-[14px] leading-[20px] text-gray-600 mb-4">
+        Ask Notion AI anything. It answers in seconds using trusted context from docs, notes, and connected tools.
+      </p>
+<a class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0075DE] hover:underline mb-4" href="#">
+        Explore Q&amp;A citations <span>→</span>
+</a>
+<!-- Visual Card Mockup: AI Chat & Citations -->
+<div class="w-full rounded-xl border border-gray-200 bg-white overflow-hidden shadow-xs">
+<div class="p-4 bg-gradient-to-b from-purple-50/40 to-white">
+<div class="flex items-start gap-2.5 mb-3">
+<span class="w-6 h-6 rounded-full bg-purple-600 text-white flex items-center justify-center text-xs font-bold shrink-0">✨</span>
+<div class="text-xs text-gray-800 bg-purple-50/80 border border-purple-100 rounded-lg p-2.5">
+<p class="font-medium mb-1">The rollout is planned for Oct 18 across all Tier 1 enterprise workspaces.</p>
+<div class="flex items-center gap-1 mt-2 text-[10px] text-purple-700 font-semibold">
+<span class="bg-purple-100 px-1.5 py-0.5 rounded">Source: Launch Plan v4</span>
+<span class="bg-purple-100 px-1.5 py-0.5 rounded">Linear #ENG-410</span>
+</div>
+</div>
+</div>
+<div class="bg-gray-50 border border-gray-200/70 rounded-md p-2 text-xs text-gray-400 flex items-center justify-between">
+<span>Ask Notion AI anything...</span>
+<svg class="w-4 h-4 text-purple-500" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" fill-rule="evenodd"></path></svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Feature 3: Automate busywork -->
+<div class="border border-gray-200/90 rounded-2xl p-5 bg-[#FCFCFB] shadow-xs">
+<p class="text-[11px] font-bold uppercase tracking-wider text-gray-400 mb-1">
+        Automate busywork
+      </p>
+<h3 class="card-h3 text-black mb-2">
+        Keep work moving 24/7 with agents.
+      </h3>
+<p class="text-[14px] leading-[20px] text-gray-600 mb-4">
+        Custom autonomous agents triage bugs, summarize customer research, and draft specifications right alongside your teammates.
+      </p>
+<a class="inline-flex items-center gap-1 text-[13px] font-semibold text-[#0075DE] hover:underline mb-4" href="#">
+        Explore Notion AI <span>→</span>
+</a>
+<!-- Agent Workflow Banner -->
+<div class="w-full rounded-xl border border-gray-200 bg-white p-3.5 shadow-xs">
+<div class="flex items-center justify-between border-b border-gray-100 pb-2 mb-3">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-red-400"></span>
+<span class="w-2 h-2 rounded-full bg-amber-400"></span>
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="text-[10px] font-semibold text-gray-600 ml-1">Auto-Triage &amp; PRD Generator</span>
+</div>
+<span class="bg-emerald-50 text-emerald-700 font-semibold text-[9px] px-2 py-0.5 rounded-full border border-emerald-200">
+            Running 24/7
+          </span>
+</div>
+<div class="space-y-2 text-[11px]">
+<div class="bg-gray-50 p-2.5 rounded border border-gray-100">
+<div class="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Source Trigger</div>
+<div class="font-semibold text-gray-800">#customer-feedback on Slack</div>
+<div class="text-[10px] text-gray-500">Parsed 142 messages today with AI sentiment analysis.</div>
+</div>
+<div class="bg-blue-50/60 p-2.5 rounded border border-blue-100">
+<div class="text-[9px] font-bold text-blue-600 uppercase tracking-wider mb-0.5">Autonomous Action</div>
+<div class="font-semibold text-blue-900">Generate Linear Issue &amp; Spec</div>
+<div class="text-[10px] text-blue-700">Deduplicated 38 feature requests into 3 high-impact PRDs.</div>
+</div>
+<div class="bg-gray-50 p-2.5 rounded border border-gray-100">
+<div class="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-0.5">Sync Destination</div>
+<div class="font-semibold text-gray-800">Engineering Notion Database</div>
+<div class="text-[10px] text-gray-500">Sprint backlog automatically updated with citations.</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: See what Notion can do -->
+<section class="py-10 px-4 bg-[#FBFBFA] border-t border-b border-gray-100">
+<p class="text-[13px] text-gray-500 font-medium mb-4">
+      See what Notion can do
+    </p>
+<!-- Stacked Action Pills -->
+<div class="flex flex-col gap-2.5">
+<a class="flex items-center justify-between p-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition shadow-2xs group" href="#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 text-sm">✉️</span>
+<span class="text-[14px] font-bold text-gray-900">Triage product feedback</span>
+</div>
+<span class="text-gray-400 group-hover:text-black font-semibold text-sm">→</span>
+</a>
+<a class="flex items-center justify-between p-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition shadow-2xs group" href="#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-purple-50 border border-purple-100 flex items-center justify-center text-purple-600 text-sm">💬</span>
+<span class="text-[14px] font-bold text-gray-900">Resolve support tickets in Slack</span>
+</div>
+<span class="text-gray-400 group-hover:text-black font-semibold text-sm">→</span>
+</a>
+<a class="flex items-center justify-between p-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition shadow-2xs group" href="#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-emerald-50 border border-emerald-100 flex items-center justify-center text-emerald-600 text-sm">🛡️</span>
+<span class="text-[14px] font-bold text-gray-900">Respond to security alerts faster</span>
+</div>
+<span class="text-gray-400 group-hover:text-black font-semibold text-sm">→</span>
+</a>
+<a class="flex items-center justify-between p-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition shadow-2xs group" href="#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-blue-50 border border-blue-100 flex items-center justify-center text-blue-600 text-sm">📊</span>
+<span class="text-[14px] font-bold text-gray-900">Automate weekly reporting</span>
+</div>
+<span class="text-gray-400 group-hover:text-black font-semibold text-sm">→</span>
+</a>
+<a class="flex items-center justify-between p-3.5 bg-white border border-gray-200 rounded-xl hover:border-gray-300 transition shadow-2xs group" href="#">
+<div class="flex items-center gap-3">
+<span class="w-8 h-8 rounded-lg bg-orange-50 border border-orange-100 flex items-center justify-center text-orange-600 text-sm">⚡</span>
+<span class="text-[14px] font-bold text-gray-900">Create your own developer tools</span>
+</div>
+<span class="text-gray-400 group-hover:text-black font-semibold text-sm">→</span>
+</a>
+</div>
+</section>
+<!-- Section: Trusted by teams that ship -->
+<section class="py-12 px-4">
+<h2 class="section-h2 text-black mb-8">
+      Trusted by teams that ship.
+    </h2>
+<div class="space-y-4">
+<!-- Quote Card 1: Cursor -->
+<div class="rounded-2xl p-5 border border-red-100 bg-[#FFF9F8] shadow-2xs">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FF453A]"></span>
+<span class="font-bold text-[15px] text-gray-900">Cursor</span>
+</div>
+<p class="text-[14px] leading-[22px] text-gray-800 font-normal mb-5">
+          “Using the most AI-native tools like Notion is an important competitive advantage for us to stay small while doing a lot.”
+        </p>
+<div class="flex items-center justify-between pt-3 border-t border-red-100/80">
+<div>
+<div class="font-bold text-[13px] text-gray-900">Michael Truell</div>
+<div class="text-[11px] text-gray-500">Co-founder &amp; CEO</div>
+</div>
+<a class="text-[12px] font-semibold text-red-600 hover:underline flex items-center gap-1" href="#">
+            Read story <span>→</span>
+</a>
+</div>
+</div>
+<!-- Quote Card 2: Faire -->
+<div class="rounded-2xl p-5 border border-blue-100 bg-[#F5F9FF] shadow-2xs">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2.5 h-2.5 rounded-full bg-[#0075DE]"></span>
+<span class="font-bold text-[15px] text-gray-900">Faire</span>
+</div>
+<p class="text-[14px] leading-[22px] text-gray-800 font-normal mb-5">
+          “Notion’s thoughtful design speeds up collaboration and decisions so we can deliver impact to our customers faster.”
+        </p>
+<div class="flex items-center justify-between pt-3 border-t border-blue-100/80">
+<div>
+<div class="font-bold text-[13px] text-gray-900">Renee Solorzano</div>
+<div class="text-[11px] text-gray-500">Sr. Director of Product Design</div>
+</div>
+<a class="text-[12px] font-semibold text-blue-600 hover:underline flex items-center gap-1" href="#">
+            Read story <span>→</span>
+</a>
+</div>
+</div>
+<!-- Quote Card 3: Ramp -->
+<div class="rounded-2xl p-5 border border-amber-100 bg-[#FFFDF5] shadow-2xs">
+<div class="flex items-center gap-2 mb-3">
+<span class="w-2.5 h-2.5 rounded-full bg-[#E5A000]"></span>
+<span class="font-bold text-[15px] text-gray-900">Ramp</span>
+</div>
+<p class="text-[14px] leading-[22px] text-gray-800 font-normal mb-5">
+          “Notion Custom Agents help our team go beyond doing work with AI to building AI tools that do the work for them.”
+        </p>
+<div class="flex items-center justify-between pt-3 border-t border-amber-100/80">
+<div>
+<div class="font-bold text-[13px] text-gray-900">Ben Levick</div>
+<div class="text-[11px] text-gray-500">Head of Operations &amp; Internal AI</div>
+</div>
+<a class="text-[12px] font-semibold text-amber-700 hover:underline flex items-center gap-1" href="#">
+            Read story <span>→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Metrics Bar -->
+<section class="py-6 border-t border-b border-gray-100 bg-[#FAFAFA] px-4">
+<div class="grid grid-cols-2 gap-4 text-center">
+<div class="p-3 bg-white border border-gray-200/60 rounded-xl shadow-2xs">
+<div class="text-lg mb-1">🏆</div>
+<div class="text-[12px] font-bold text-gray-900 leading-tight">G2’s #1 knowledge base</div>
+<div class="text-[10px] text-gray-500 mt-0.5">for 3 consecutive years</div>
+</div>
+<div class="p-3 bg-white border border-gray-200/60 rounded-xl shadow-2xs">
+<div class="text-lg mb-1">🌍</div>
+<div class="text-[12px] font-bold text-gray-900 leading-tight">100M users</div>
+<div class="text-[10px] text-gray-500 mt-0.5">in over 50 countries</div>
+</div>
+<div class="p-3 bg-white border border-gray-200/60 rounded-xl shadow-2xs">
+<div class="text-lg mb-1">🚀</div>
+<div class="text-[12px] font-bold text-gray-900 leading-tight">Over 50%</div>
+<div class="text-[10px] text-gray-500 mt-0.5">of YC companies</div>
+</div>
+<div class="p-3 bg-white border border-gray-200/60 rounded-xl shadow-2xs">
+<div class="text-lg mb-1">👥</div>
+<div class="text-[12px] font-bold text-gray-900 leading-tight">1.4M+ community</div>
+<div class="text-[10px] text-gray-500 mt-0.5">global members</div>
+</div>
+</div>
+<div class="text-center mt-3 text-[11px] font-medium text-gray-500">
+      ⚡ 62% of Fortune 100 use Notion
+    </div>
+</section>
+<!-- CTA Section: Get started today -->
+<section class="py-14 px-4 text-center">
+<h2 class="text-[26px] leading-[32px] font-bold text-black mb-5">
+      Get started today.
+    </h2>
+<div class="flex flex-col gap-2.5 max-w-[320px] mx-auto mb-8">
+<a class="w-full bg-[#0075DE] hover:bg-[#0060B9] text-white font-medium text-[15px] py-2.5 px-4 rounded-md transition text-center shadow-sm" href="#">
+        Get Notion free
+      </a>
+<a class="w-full bg-[#F6F5F4] hover:bg-[#EAE8E5] text-[#050505] font-medium text-[15px] py-2.5 px-4 rounded-md transition text-center border border-black/5" href="#">
+        Request a demo
+      </a>
+</div>
+<!-- Quote -->
+<blockquote class="text-[13px] italic font-['LyonText',serif] text-gray-500 max-w-[280px] mx-auto">
+      “We shape our tools, and thereafter our tools shape us.”
+      <footer class="not-italic text-[10px] uppercase font-bold tracking-wider text-gray-400 mt-1 font-sans">
+        — Marshall McLuhan
+      </footer>
+</blockquote>
+</section>
+<!-- Footer -->
+<footer class="bg-white border-t border-gray-200 pt-10 pb-12 px-6 text-[13px] text-gray-600">
+<!-- Brand badge -->
+<div class="flex items-center gap-2 mb-4">
+<svg class="w-6 h-6" fill="none" viewbox="0 0 100 100">
+<path d="M6.06 14.88L26.39 9.38C29.6 8.52 32.55 10.63 32.78 13.94L34.1 32.96L65.41 11.75C68.32 9.77 72.27 10.27 74.62 12.92L91.86 32.33C93.44 34.11 94.13 36.56 93.75 38.93L87.89 75.39C87.27 79.25 83.84 82.07 79.93 81.89L25.8 79.4C22.65 79.25 19.98 76.96 19.46 73.86L13.78 39.81L7.26 21.05C6.31 18.3 7.37 15.26 9.87 13.76" fill="#000000" fill-opacity="0.05"></path>
+<path clip-rule="evenodd" d="M18.89 17.59L68.74 13.25C74.65 12.73 78.43 17.44 78.43 23.36V74.88C78.43 80.8 73.74 85.5 67.83 85.5L17.98 85.5C12.07 85.5 8.29 80.8 8.29 74.88V23.36C8.29 17.44 12.98 12.73 18.89 17.59ZM24.41 29.59C24.41 27.67 25.96 26.12 27.88 26.12H34.82C36.74 26.12 38.29 27.67 38.29 29.59V33.07C38.29 34.99 39.84 36.54 41.76 36.54C43.68 36.54 45.23 34.99 45.23 33.07V29.59C45.23 27.67 46.78 26.12 48.7 26.12H68.85C70.77 26.12 72.32 27.67 72.32 29.59V69.17C72.32 71.09 70.77 72.64 68.85 72.64H61.91C59.99 72.64 58.44 71.09 58.44 69.17V45.21L40.73 71.78C39.69 73.34 37.91 74.27 36.01 74.27H27.88C25.96 74.27 24.41 72.72 24.41 70.8V29.59Z" fill="#000000" fill-rule="evenodd"></path>
+</svg>
+<span class="font-bold text-base text-black">Notion</span>
+</div>
+<p class="text-xs text-gray-500 mb-6">
+      Notion is the connected workspace where better, faster work happens.
+    </p>
+<!-- Accordion / Columns -->
+<div class="grid grid-cols-2 gap-6 mb-8 text-xs">
+<div>
+<h4 class="font-bold text-black mb-3">Product</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-black" href="#">Features</a></li>
+<li><a class="hover:text-black" href="#">What's New</a></li>
+<li><a class="hover:text-black" href="#">Notion AI</a></li>
+<li><a class="hover:text-black" href="#">Pricing</a></li>
+<li><a class="hover:text-black" href="#">Request a demo</a></li>
+<li><a class="hover:text-black" href="#">Download</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-black mb-3">Resources</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-black" href="#">Customer stories</a></li>
+<li><a class="hover:text-black" href="#">Connections</a></li>
+<li><a class="hover:text-black" href="#">Marketplace</a></li>
+<li><a class="hover:text-black" href="#">Help Center</a></li>
+<li><a class="hover:text-black" href="#">Academy</a></li>
+<li><a class="hover:text-black" href="#">Community</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-black mb-3">Company</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-black" href="#">About us</a></li>
+<li><a class="hover:text-black" href="#">Careers</a></li>
+<li><a class="hover:text-black" href="#">Security</a></li>
+<li><a class="hover:text-black" href="#">Status</a></li>
+<li><a class="hover:text-black" href="#">Terms &amp; privacy</a></li>
+<li><a class="hover:text-black" href="#">Your privacy rights</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-black mb-3">Notion for</h4>
+<ul class="space-y-2 text-gray-600">
+<li><a class="hover:text-black" href="#">Enterprise</a></li>
+<li><a class="hover:text-black" href="#">Small businesses</a></li>
+<li><a class="hover:text-black" href="#">Startups</a></li>
+<li><a class="hover:text-black" href="#">Developers</a></li>
+<li><a class="hover:text-black" href="#">Personal</a></li>
+<li><a class="hover:text-black" href="#">Education</a></li>
+</ul>
+</div>
+</div>
+<!-- Copyright -->
+<div class="pt-6 border-t border-gray-100 flex flex-col gap-2 text-[11px] text-gray-400">
+<div class="flex items-center gap-4">
+<span>🌐 English (US)</span>
+<span>Cookie settings</span>
+</div>
+<div>© 2026 Notion Labs, Inc.</div>
+<div class="text-[10px] text-gray-400">Free design study reproducing observed public Notion web experience (2026-10-12 UTC).</div>
+</div>
+</footer>
+</body>
+</html>

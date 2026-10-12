@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Starbucks Official Homepage (Mobile Responsive)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+    @font-face {
+      font-family: 'SoDoSans';
+      src: local('SoDoSans'), local('Helvetica Neue'), local('Arial');
+    }
+    body {
+      font-family: 'SoDoSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #212121;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      width: 100%;
+      max-width: 390px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    /* Specific typography line-height and letter-spacing */
+    .campaign-heading {
+      font-size: 22px;
+      line-height: 33px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .campaign-body {
+      font-size: 16px;
+      line-height: 28px;
+      font-weight: 400;
+    }
+    .outline-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 35px;
+      padding: 0 16px;
+      border: 1px solid #ffffff;
+      border-radius: 9999px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .outline-pill-btn:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    /* Accordion transitions */
+    .accordion-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+    }
+    .accordion-content.expanded {
+      max-height: 500px;
+      transition: max-height 0.35s ease-in-out;
+    }
+    .chevron-icon {
+      transition: transform 0.25s ease;
+    }
+    .chevron-icon.rotated {
+      transform: rotate(180deg);
+    }
+  </style>
+</head>
+<body class="relative min-h-screen bg-white">
+<!-- Mobile Header (72px high) -->
+<header class="sticky top-0 z-40 bg-white border-b border-gray-100 flex items-center justify-between px-4 h-[72px] w-full" style="height: 72px;">
+<!-- Logo 40px at x16, y16 -->
+<a aria-label="Starbucks Home" class="inline-flex items-center" href="https://www.starbucks.com/">
+<svg aria-hidden="true" class="w-10 h-10 text-[#006241]" fill="currentColor" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+<circle cx="50" cy="50" fill="#006241" r="48" stroke="#006241" stroke-width="2"></circle>
+<path d="M50 14 C51 14 52 18 50 20 C48 18 49 14 50 14 Z" fill="#ffffff"></path>
+<path d="M42 22 L50 25 L58 22 L56 28 L62 25 L58 32 L50 30 L42 32 L38 25 L44 28 Z" fill="#ffffff"></path>
+<!-- Star above head -->
+<polygon fill="#ffffff" points="50,17 51.5,21 55.5,21 52.3,23.5 53.5,27.5 50,25 46.5,27.5 47.7,23.5 44.5,21 48.5,21"></polygon>
+<!-- Crown arc & face silhouette -->
+<path d="M40 33 Q50 31 60 33 Q62 39 60 46 Q50 51 40 46 Q38 39 40 33 Z" fill="#ffffff"></path>
+<circle cx="47" cy="38" fill="#006241" r="1.3"></circle>
+<circle cx="53" cy="38" fill="#006241" r="1.3"></circle>
+<path d="M50 40 L50 42.5" stroke="#006241" stroke-linecap="round" stroke-width="1.2"></path>
+<path d="M47.5 44.5 Q50 46.5 52.5 44.5" fill="none" stroke="#006241" stroke-linecap="round" stroke-width="1.2"></path>
+<!-- Hair strands and siren side tails -->
+<path d="M38 35 Q30 42 32 58 Q34 68 40 76 Q34 68 36 54 Q38 42 42 36 Z" fill="#ffffff"></path>
+<path d="M62 35 Q70 42 68 58 Q66 68 60 76 Q66 68 64 54 Q62 42 58 36 Z" fill="#ffffff"></path>
+<!-- Twin tails and details -->
+<path d="M22 45 Q26 62 35 75 Q28 66 26 50 Z" fill="#ffffff"></path>
+<path d="M78 45 Q74 62 65 75 Q72 66 74 50 Z" fill="#ffffff"></path>
+<path d="M25 60 Q20 70 23 80 Q27 75 28 68 Z" fill="#ffffff"></path>
+<path d="M75 60 Q80 70 77 80 Q73 75 72 68 Z" fill="#ffffff"></path>
+<!-- Chest wave -->
+<path d="M42 51 Q50 56 58 51 Q56 64 50 72 Q44 64 42 51 Z" fill="#ffffff"></path>
+</svg>
+</a>
+<!-- Hamburger Menu Button -->
+<button aria-expanded="false" aria-label="Open menu" class="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none focus:ring-2 focus:ring-[#006241]" id="menu-btn" type="button">
+<svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+</svg>
+</button>
+</header>
+<!-- Mobile Drawer Backdrop -->
+<div aria-hidden="true" class="fixed inset-0 bg-black/50 z-50 hidden opacity-0 transition-opacity duration-300" id="drawer-backdrop"></div>
+<!-- Mobile Right Drawer (80% width) -->
+<nav aria-label="Mobile Navigation" class="fixed top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl flex flex-col justify-between" id="drawer-nav" style="visibility: hidden;">
+<div class="p-6">
+<!-- Close Button -->
+<div class="flex justify-end mb-6">
+<button aria-label="Close menu" class="p-2 text-gray-700 hover:text-black" id="close-drawer-btn" type="button">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+<!-- Navigation Links -->
+<ul class="space-y-6 text-lg font-semibold tracking-tight text-gray-900">
+<li><a class="block hover:text-[#006241] py-1" href="https://www.starbucks.com/menu">Menu</a></li>
+<li><a class="block hover:text-[#006241] py-1" href="https://www.starbucks.com/rewards">Rewards</a></li>
+<li><a class="block hover:text-[#006241] py-1" href="https://www.starbucks.com/gift">Gift Cards</a></li>
+</ul>
+<hr class="my-6 border-gray-200"/>
+<!-- Sign in & Join now -->
+<div class="flex flex-col gap-3">
+<a class="w-full text-center py-2.5 px-4 text-sm font-semibold rounded-full border border-black text-black hover:bg-gray-100 transition-colors" href="https://www.starbucks.com/account/signin?ReturnUrl=%2F">
+          Sign in
+        </a>
+<a class="w-full text-center py-2.5 px-4 text-sm font-semibold rounded-full bg-black text-white hover:bg-neutral-800 transition-colors" href="https://www.starbucks.com/account/create">
+          Join now
+        </a>
+</div>
+</div>
+<!-- Find a café at bottom of drawer -->
+<div class="p-6 border-t border-gray-100 bg-gray-50">
+<a class="flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-[#006241]" href="https://www.starbucks.com/store-locator">
+<svg class="w-5 h-5 text-gray-900" fill="currentColor" viewbox="0 0 20 20">
+<path clip-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" fill-rule="evenodd"></path>
+</svg>
+        Find a café
+      </a>
+</div>
+</nav>
+<!-- Announcement Bar (105.48px high on mobile) -->
+<section class="w-full bg-[#32462f] text-white flex flex-col items-center justify-center px-4 text-center" style="height: 105.48px;">
+<h2 class="text-base font-semibold leading-snug tracking-tight mb-2">It's a great day for coffee</h2>
+<a class="inline-flex items-center justify-center h-8 px-4 rounded-full border-2 border-white text-xs font-semibold text-white hover:bg-white/15 transition-all" href="https://www.starbucks.com/menu">
+      Start an order
+    </a>
+</section>
+<!-- 32px White Gap -->
+<div aria-hidden="true" class="w-full h-8 bg-white"></div>
+<!-- Campaign Container: 4 Borderless Rows with 32px gap -->
+<main class="w-full flex flex-col gap-8">
+<!-- Campaign 1: The Aerocano has arrived -->
+<article class="w-full flex flex-col bg-[#006242] text-white overflow-hidden">
+<!-- Image 390x227.5 (exact 1440:840 ratio) -->
+<div class="w-full h-[227.5px] overflow-hidden bg-[#005136]">
+<img alt="A freshly-poured Aerocano. Light foam at the top deepens gradually down the glass into dark espresso." class="w-full h-full object-cover" loading="eager" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Centered copy with 32px vertical and 16px horizontal padding -->
+<div class="flex flex-col items-center text-center px-4 py-8">
+<h1 class="campaign-heading text-white">The Aerocano has arrived</h1>
+<p class="campaign-body text-white mt-6 mb-8 max-w-[340px]">
+          Our smoothest, airiest espresso drink yet. Be one of the first to try the all-new Aerocano in original or caramel. Iced only.
+        </p>
+<a class="outline-pill-btn" href="https://www.starbucks.com/menu/product/27616/iced">
+          Order now
+        </a>
+</div>
+</article>
+<!-- Campaign 2: Fall classics made mini -->
+<article class="w-full flex flex-col bg-[#006242] text-white overflow-hidden">
+<!-- Image 390x227.5 -->
+<div class="w-full h-[227.5px] overflow-hidden bg-[#005136]">
+<img alt="A variety of mini pies grouped together on a wood table." class="w-full h-full object-cover" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Centered copy -->
+<div class="flex flex-col items-center text-center px-4 py-8">
+<h2 class="campaign-heading text-white">Fall classics made mini</h2>
+<p class="campaign-body text-white mt-6 mb-8 max-w-[340px]">
+          Introducing Mini Pies. Available in three seasonal flavors: Pumpkin, Pecan and Apple Crumble. Mix and match or enjoy them all.
+        </p>
+<a class="outline-pill-btn" href="https://www.starbucks.com/discover/featured-menu/">
+          Order now
+        </a>
+</div>
+</article>
+<!-- Campaign 3: Fall is here. Cue the hits. -->
+<article class="w-full flex flex-col bg-[#006242] text-white overflow-hidden">
+<!-- Image 390x227.5 -->
+<div class="w-full h-[227.5px] overflow-hidden bg-[#005136]">
+<img alt="Four fall drinks on a table with hints of people gathered around them." class="w-full h-full object-cover" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Centered copy -->
+<div class="flex flex-col items-center text-center px-4 py-8">
+<h2 class="campaign-heading text-white">Fall is here. Cue the hits.</h2>
+<p class="campaign-body text-white mt-6 mb-8 max-w-[340px]">
+          The fall menu is live, with all your favorites and a few delicious surprises. Pumpkin, pecan, banana bread and chaider, here we come.
+        </p>
+<a class="outline-pill-btn" href="https://www.starbucks.com/discover/featured-menu/">
+          Order now
+        </a>
+</div>
+</article>
+<!-- Campaign 4: Free refills and fall vibes -->
+<article class="w-full flex flex-col bg-[#006242] text-white overflow-hidden">
+<!-- Image 390x227.5 -->
+<div class="w-full h-[227.5px] overflow-hidden bg-[#005136]">
+<img alt="Close-up of someone holding a mug filled with coffee." class="w-full h-full object-cover" loading="lazy" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<!-- Centered copy -->
+<div class="flex flex-col items-center text-center px-4 py-8">
+<h2 class="campaign-heading text-white">Free refills and fall vibes</h2>
+<p class="campaign-body text-white mt-6 mb-8 max-w-[340px]">
+          Enjoy your drink in the café and get refills of hot or iced brewed coffee or tea on us.*
+        </p>
+<a class="outline-pill-btn" href="https://www.starbucks.com/discover/featured-menu/">
+          Order now
+        </a>
+</div>
+</article>
+</main>
+<!-- Legal Footnote with 64px top/bottom margin -->
+<section class="w-full px-6 py-16 text-center">
+<p class="text-black text-[14px] leading-[24.5px] max-w-[340px] mx-auto font-normal">
+      *Free refills of hot and iced brewed coffee and tea during same store visit. Excludes Cold Brew, Nitro Cold Brew, Iced Tea Lemonade, flavored Iced Tea and Starbucks Refreshers® base. At participating stores.
+    </p>
+</section>
+<!-- Divider -->
+<div class="w-full border-t border-gray-200"></div>
+<!-- Collapsible Mobile Footer -->
+<footer class="w-full px-4 pt-6 pb-12 bg-white text-gray-800">
+<!-- 5 Collapsible Accordion Columns -->
+<div class="w-full divide-y divide-gray-200 mb-8 border-b border-gray-200">
+<!-- Accordion 1: About Us -->
+<div class="py-3">
+<button aria-expanded="false" class="accordion-header w-full flex items-center justify-between text-left py-2 font-medium text-[17px] text-gray-900 focus:outline-none" type="button">
+<span>About Us</span>
+<svg class="chevron-icon w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content">
+<ul class="py-2 space-y-3 pl-1 text-[15px] text-gray-600">
+<li><a class="hover:text-black block" href="https://www.starbucks.com/about-us/">Our Company</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/coffee/">Our Coffee</a></li>
+<li><a class="hover:text-black block" href="https://stories.starbucks.com/">Stories and News</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/about-us/archive/">Starbucks Archive</a></li>
+<li><a class="hover:text-black block" href="https://investor.starbucks.com/">Investor Relations</a></li>
+<li><a class="hover:text-black block" href="https://customerservice.starbucks.com/">Customer Service</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/contact/">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<!-- Accordion 2: Careers -->
+<div class="py-3">
+<button aria-expanded="false" class="accordion-header w-full flex items-center justify-between text-left py-2 font-medium text-[17px] text-gray-900 focus:outline-none" type="button">
+<span>Careers</span>
+<svg class="chevron-icon w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content">
+<ul class="py-2 space-y-3 pl-1 text-[15px] text-gray-600">
+<li><a class="hover:text-black block" href="https://www.starbucks.com/careers/culture-and-values/">Culture and Values</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/careers/inclusion-and-diversity/">Inclusion and Diversity</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/careers/college-plan/">College Plan</a></li>
+<li><a class="hover:text-black block" href="https://alumni.starbucks.com/">Alumni Community</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/careers/working-at-starbucks/">U.S. Careers</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/careers/international-careers/">International Careers</a></li>
+</ul>
+</div>
+</div>
+<!-- Accordion 3: Social Impact -->
+<div class="py-3">
+<button aria-expanded="false" class="accordion-header w-full flex items-center justify-between text-left py-2 font-medium text-[17px] text-gray-900 focus:outline-none" type="button">
+<span>Social Impact</span>
+<svg class="chevron-icon w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content">
+<ul class="py-2 space-y-3 pl-1 text-[15px] text-gray-600">
+<li><a class="hover:text-black block" href="https://www.starbucks.com/responsibility/people/">People</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/responsibility/planet/">Planet</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/responsibility/reporting-hub/">Environmental and Social Impact Reporting</a></li>
+</ul>
+</div>
+</div>
+<!-- Accordion 4: For Business Partners -->
+<div class="py-3">
+<button aria-expanded="false" class="accordion-header w-full flex items-center justify-between text-left py-2 font-medium text-[17px] text-gray-900 focus:outline-none" type="button">
+<span>For Business Partners</span>
+<svg class="chevron-icon w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content">
+<ul class="py-2 space-y-3 pl-1 text-[15px] text-gray-600">
+<li><a class="hover:text-black block" href="https://www.starbucks.com/business/landlord-faq/">Landlord Support</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/business/suppliers/">Suppliers</a></li>
+<li><a class="hover:text-black block" href="https://www.starbuckscardb2b.com/">Corporate Gift Card Sales</a></li>
+<li><a class="hover:text-black block" href="https://www.nestlecoffeepartnerssl.com/">Office and Foodservice Coffee</a></li>
+</ul>
+</div>
+</div>
+<!-- Accordion 5: Ways to Shop -->
+<div class="py-3">
+<button aria-expanded="false" class="accordion-header w-full flex items-center justify-between text-left py-2 font-medium text-[17px] text-gray-900 focus:outline-none" type="button">
+<span>Ways to Shop</span>
+<svg class="chevron-icon w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<div class="accordion-content">
+<ul class="py-2 space-y-3 pl-1 text-[15px] text-gray-600">
+<li><a class="hover:text-black block" href="https://www.starbucks.com/ways-to-order/">Order on the App</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucks.com/ways-to-order/delivery/">Delivery</a></li>
+<li><a class="hover:text-black block" href="https://athome.starbucks.com/">Starbucks at Home</a></li>
+<li><a class="hover:text-black block" href="https://www.starbucksreserve.com/">Starbucks Reserve</a></li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Social Profile Icons (Circle Black) -->
+<div class="flex items-center space-x-4 mb-8">
+<!-- Spotify -->
+<a aria-label="Spotify" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://open.spotify.com/user/starbucks">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.498 17.306c-.217.357-.678.472-1.035.255-2.836-1.733-6.406-2.126-10.61-1.164-.407.094-.813-.162-.907-.568-.093-.407.163-.813.569-.907 4.605-1.053 8.553-.61 11.728 1.332.357.217.472.678.255 1.052zm1.468-3.264c-.274.444-.858.587-1.302.313-3.247-1.996-8.2-2.574-12.042-1.408-.5.152-1.032-.132-1.184-.632-.152-.5.132-1.032.632-1.184 4.385-1.332 9.855-.688 13.583 1.609.444.274.587.858.313 1.302zm.126-3.41c-3.894-2.312-10.316-2.525-14.04-1.393-.598.181-1.233-.162-1.414-.76-.182-.598.162-1.233.76-1.414 4.28-1.299 11.373-1.045 15.865 1.621.537.319.713 1.018.394 1.555-.319.537-1.018.713-1.565.391z"></path></svg>
+</a>
+<!-- Facebook -->
+<a aria-label="Facebook" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://facebook.com/starbucks">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M9 8H6v4h3v12h5V12h3.642L18 8h-4V6.333C14 5.374 14.5 5 15.688 5H18V0h-3.808C10.597 0 9 1.582 9 4.615V8z"></path></svg>
+</a>
+<!-- Pinterest -->
+<a aria-label="Pinterest" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://www.pinterest.com/starbucks/">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 0a12 12 0 0 0-4.37 23.18c-.07-.98-.13-2.48.03-3.55.14-.98.92-3.9 1.48-6.27-.14-.28-.35-.69-.35-1.7 0-1.6 .93-2.79 2.08-2.79.98 0 1.46.74 1.46 1.62 0 .99-.63 2.47-.96 3.84-.27 1.15.58 2.09 1.71 2.09 2.06 0 3.64-2.17 3.64-5.3 0-2.77-1.99-4.71-4.83-4.71-3.29 0-5.23 2.47-5.23 5.02 0 .99.38 2.06.86 2.64.09.11.11.21.08.33-.09.38-.3 1.21-.34 1.38-.05.23-.18.28-.41.17-1.52-.71-2.47-2.92-2.47-4.7 0-3.83 2.78-7.34 8.02-7.34 4.21 0 7.48 3 7.48 7.01 0 4.18-2.64 7.55-6.3 7.55-1.23 0-2.39-.64-2.79-1.4l-.76 2.9c-.27 1.06-.99 2.39-1.48 3.2A11.99 11.99 0 0 0 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"></path></svg>
+</a>
+<!-- Instagram -->
+<a aria-label="Instagram" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://instagram.com/starbucks">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</a>
+<!-- YouTube -->
+<a aria-label="YouTube" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://www.youtube.com/starbucks">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<!-- X (Twitter) -->
+<a aria-label="X (formerly Twitter)" class="w-8 h-8 rounded-full bg-black flex items-center justify-center text-white hover:opacity-80 transition-opacity" href="https://x.com/starbucks/">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+</div>
+<!-- Vertical Legal Links -->
+<div class="flex flex-col space-y-4 text-sm text-gray-800 font-normal mb-8">
+<a class="hover:underline" href="https://www.starbucks.com/terms/privacy-policy/">Privacy Notice</a>
+<a class="hover:underline" href="https://www.starbucks.com/terms/consumer-health-privacy/">Consumer Health Privacy Notice</a>
+<a class="hover:underline" href="https://www.starbucks.com/terms/starbucks-terms-of-use/">Terms of Use</a>
+<a class="hover:underline" href="https://www.starbucks.com/personal-information">Do Not Sell or Share My Personal Information</a>
+<a class="hover:underline" href="https://www.starbucks.com/about-us/transparency-in-supply-chains/">Starbucks Transparency in Supply Chains Statement</a>
+<a class="hover:underline" href="https://www.starbucks.com/accessibility/">Accessibility</a>
+<button class="text-left text-gray-800 hover:underline" type="button">Cookie Preferences</button>
+</div>
+<!-- Copyright -->
+<p class="text-[13px] text-gray-500 font-normal">
+      © 2026 Starbucks Coffee Company. All rights reserved.
+    </p>
+</footer>
+<!-- Script for Mobile Drawer and Accordion Interaction -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Drawer elements
+      const menuBtn = document.getElementById('menu-btn');
+      const closeDrawerBtn = document.getElementById('close-drawer-btn');
+      const drawerNav = document.getElementById('drawer-nav');
+      const drawerBackdrop = document.getElementById('drawer-backdrop');
+
+      function openMenu() {
+        drawerNav.style.visibility = 'visible';
+        drawerBackdrop.classList.remove('hidden');
+        // trigger animation
+        requestAnimationFrame(() => {
+          drawerBackdrop.classList.remove('opacity-0');
+          drawerBackdrop.classList.add('opacity-100');
+          drawerNav.classList.remove('translate-x-full');
+        });
+        menuBtn.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMenu() {
+        drawerBackdrop.classList.remove('opacity-100');
+        drawerBackdrop.classList.add('opacity-0');
+        drawerNav.classList.add('translate-x-full');
+        menuBtn.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        setTimeout(() => {
+          drawerBackdrop.classList.add('hidden');
+          drawerNav.style.visibility = 'hidden';
+        }, 300);
+      }
+
+      if (menuBtn && closeDrawerBtn && drawerBackdrop) {
+        menuBtn.addEventListener('click', openMenu);
+        closeDrawerBtn.addEventListener('click', closeMenu);
+        drawerBackdrop.addEventListener('click', closeMenu);
+
+        // Escape key closes menu
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+          }
+        });
+      }
+
+      // Accordion elements
+      const accordions = document.querySelectorAll('.accordion-header');
+      accordions.forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+          const content = btn.nextElementSibling;
+          const icon = btn.querySelector('.chevron-icon');
+
+          if (isExpanded) {
+            btn.setAttribute('aria-expanded', 'false');
+            content.classList.remove('expanded');
+            if (icon) icon.classList.remove('rotated');
+          } else {
+            btn.setAttribute('aria-expanded', 'true');
+            content.classList.add('expanded');
+            if (icon) icon.classList.add('rotated');
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

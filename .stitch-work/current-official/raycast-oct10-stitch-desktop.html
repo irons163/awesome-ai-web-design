@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Raycast — Your shortcut to everything</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "background": "#08080a",
+            "surface": "#0f0f13",
+            "surface-container-lowest": "#050507",
+            "surface-container-low": "#111116",
+            "surface-container": "#18181f",
+            "surface-container-high": "#22222b",
+            "surface-container-highest": "#2d2d38",
+            "outline-subtle": "rgba(255, 255, 255, 0.08)",
+            "primary-red": "#FF6363",
+            "primary-glow": "rgba(255, 99, 99, 0.15)",
+            "on-surface": "#F3F3F7",
+            "on-surface-variant": "#9CA3AF"
+          },
+          fontFamily: {
+            headline: ["Inter", "sans-serif"],
+            body: ["Inter", "sans-serif"]
+          }
+        }
+      }
+    }
+</script>
+<style>
+  .raycast-glow {
+    background: radial-gradient(circle at 50% 30%, rgba(255, 75, 75, 0.16) 0%, rgba(255, 75, 75, 0.03) 40%, transparent 75%);
+  }
+  .red-card-glow {
+    background: radial-gradient(circle at top right, rgba(255, 90, 80, 0.12), transparent 60%);
+  }
+</style>
+</head>
+<body class="bg-background text-on-surface font-body antialiased selection:bg-[#FF6363]/30 selection:text-white min-h-screen relative overflow-x-hidden">
+<!-- TOP NAVIGATION CAPSULE -->
+<div class="fixed top-4 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+<header class="pointer-events-auto rounded-full border border-white/10 bg-[#0f0f14]/85 backdrop-blur-xl shadow-2xl flex items-center justify-between px-5 py-2.5 w-full max-w-5xl transition-all duration-150">
+<!-- Brand -->
+<a class="flex items-center gap-2.5 group" href="#">
+<span class="w-6 h-6 rounded-lg bg-gradient-to-tr from-[#FF3B30] to-[#FF6363] flex items-center justify-center text-white shadow-md shadow-[#FF3B30]/30 group-hover:scale-105 transition-transform">
+<svg fill="currentColor" height="15" viewbox="0 0 24 24" width="15">
+<path d="M4 14.5L14.5 4H20v5.5L9.5 20H4v-5.5z"></path>
+<path d="M9.5 4L4 9.5V4h5.5z" opacity="0.6"></path>
+<path d="M20 14.5L14.5 20H20v-5.5z" opacity="0.6"></path>
+</svg>
+</span>
+<span class="font-headline font-bold text-sm tracking-tight text-white">Raycast</span>
+</a>
+<!-- Center Navigation Links -->
+<nav class="hidden lg:flex items-center gap-6 font-headline text-xs font-medium tracking-tight text-zinc-400">
+<a class="hover:text-white transition-colors" href="#extensions">Store</a>
+<a class="hover:text-white transition-colors" href="#">Pro</a>
+<a class="hover:text-white transition-colors" href="#ai">AI</a>
+<a class="hover:text-white transition-colors" href="#">iOS</a>
+<a class="hover:text-white transition-colors" href="#">Windows</a>
+<a class="hover:text-white transition-colors" href="#">Teams</a>
+<a class="hover:text-white transition-colors" href="#">Enterprise</a>
+<a class="hover:text-white transition-colors" href="#">Blog</a>
+<a class="hover:text-white transition-colors" href="#">Pricing</a>
+</nav>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<a class="text-xs text-zinc-300 hover:text-white font-medium px-2.5 py-1.5 transition-colors" href="#">Log in</a>
+<a class="inline-flex items-center gap-1.5 bg-white text-black hover:bg-zinc-200 text-xs font-semibold px-4 py-1.5 rounded-full transition-all duration-150 active:scale-95 shadow-sm" href="#">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download</span>
+</a>
+</div>
+</header>
+</div>
+<!-- MAIN PAGE CONTAINER -->
+<main class="pt-28 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto space-y-32">
+<!-- 1. HERO SECTION -->
+<section class="relative w-full rounded-3xl border border-white/10 bg-[#0a0a0e] overflow-hidden pt-24 pb-20 px-6 sm:px-12 flex flex-col items-center text-center shadow-2xl raycast-glow">
+<div class="relative z-10 max-w-4xl mx-auto flex flex-col items-center">
+<!-- Announcement pill -->
+<a class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium border border-white/15 bg-white/5 text-zinc-300 hover:border-white/30 hover:text-white transition" href="#">
+<span class="w-1.5 h-1.5 rounded-full bg-[#FF6363] animate-pulse"></span>
+<span>Introducing Raycast Keyboard</span>
+<span class="text-zinc-500">→</span>
+</a>
+<!-- 64px exact Bold Hero Title -->
+<h1 class="font-headline font-extrabold text-5xl sm:text-6xl md:text-[64px] text-white tracking-tight leading-[1.08] drop-shadow-md">
+        Your shortcut to everything.
+      </h1>
+<p class="font-body text-base sm:text-lg md:text-xl text-zinc-400 max-w-2xl mt-6 leading-relaxed">
+        A collection of powerful productivity tools all within an extendable launcher. Fast, ergonomic and reliable.
+      </p>
+<!-- Action cluster -->
+<div class="mt-9 flex flex-col items-center gap-3">
+<a class="inline-flex items-center gap-3 bg-white text-black hover:bg-zinc-100 text-base font-semibold px-8 py-3.5 rounded-full transition-all duration-150 active:scale-95 shadow-xl hover:shadow-white/10" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download for Mac</span>
+</a>
+<!-- Detailed Subtext info -->
+<p class="text-xs text-zinc-400 mt-2 flex flex-wrap items-center justify-center gap-2">
+<span>macOS Tahoe and Apple Silicon required</span>
+<span class="text-zinc-600">·</span>
+<a class="hover:text-white underline decoration-zinc-600" href="#">Install via Homebrew</a>
+<span class="text-zinc-600">·</span>
+<a class="hover:text-white underline decoration-zinc-600" href="#">Download V1</a>
+</p>
+</div>
+</div>
+</section>
+<!-- 2. FEATURE DEMO 1: SHORTCUTS NOT DETOURS -->
+<section class="space-y-8">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Take shortcuts, not detours.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        One interface, everything you need.
+      </p>
+</div>
+<!-- Authentic Mockup Container -->
+<div class="relative w-full rounded-3xl border border-white/10 bg-[#0c0c11] p-4 sm:p-10 md:p-14 shadow-2xl">
+<!-- Command Palette Mockup -->
+<div class="max-w-3xl mx-auto rounded-2xl border border-white/15 bg-[#14141b]/95 backdrop-blur-2xl shadow-2xl overflow-hidden">
+<!-- Search Prompt -->
+<div class="flex items-center gap-3.5 px-5 py-4 border-b border-white/10 bg-white/[0.02]">
+<span class="w-3 h-3 rounded-full bg-[#FF453A]"></span>
+<span class="material-symbols-outlined text-zinc-400 text-xl">search</span>
+<input class="bg-transparent border-none text-white placeholder:text-zinc-500 focus:outline-none w-full text-base font-body tracking-tight cursor-default" placeholder="Search for apps and commands..." readonly="" type="text"/>
+<span class="px-2 py-0.5 rounded text-[11px] font-mono bg-white/10 text-zinc-300 border border-white/10">⌘K</span>
+</div>
+<!-- Command List Items -->
+<div class="p-2 space-y-1 text-sm font-medium">
+<!-- Item 1 (Selected) -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-white/10 text-white cursor-pointer border border-white/5">
+<div class="flex items-center gap-3">
+<span class="w-6 h-6 rounded-md bg-[#5E6AD2]/20 text-[#5E6AD2] flex items-center justify-center font-bold text-xs">L</span>
+<span>Create Issue in Linear</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-400">
+<span>Issue Tracker</span>
+<kbd class="px-2 py-0.5 rounded bg-black/40 text-white font-mono text-[11px] border border-white/10">↵</kbd>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-amber-400 text-lg">dark_mode</span>
+<span>Toggle Dark Mode</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>System</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">⌘T</kbd>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-teal-400 text-lg">storefront</span>
+<span>Search Raycast Store</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Store</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">⌘S</kbd>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-rose-400 text-lg">timer</span>
+<span>Start Timer</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Clock</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">↵</kbd>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-blue-400 text-lg">content_paste</span>
+<span>Clipboard History</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Core</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">⌘V</kbd>
+</div>
+</div>
+<!-- Item 6 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-emerald-400 text-lg">crop_free</span>
+<span>Window Management</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Core</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">⌥↵</kbd>
+</div>
+</div>
+<!-- Item 7 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-purple-400 text-lg">calculate</span>
+<span>Calculator</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Core</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">↵</kbd>
+</div>
+</div>
+<!-- Item 8 -->
+<div class="flex items-center justify-between px-3.5 py-2.5 rounded-xl text-zinc-300 hover:bg-white/5 transition">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-yellow-400 text-lg">mood</span>
+<span>Emoji &amp; Symbols Picker</span>
+</div>
+<div class="flex items-center gap-3 text-xs text-zinc-500">
+<span>Core</span>
+<kbd class="px-2 py-0.5 rounded bg-white/5 text-zinc-400 font-mono text-[11px] border border-white/10">⌘.</kbd>
+</div>
+</div>
+</div>
+<!-- Palette Bottom Action Bar -->
+<div class="px-5 py-2.5 border-t border-white/10 bg-black/40 flex items-center justify-between text-xs text-zinc-400">
+<div class="flex items-center gap-2">
+<span class="font-mono text-zinc-500">Raycast Core</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5">
+              Actions <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">⌘K</kbd>
+</span>
+<span class="flex items-center gap-1.5">
+              Open <kbd class="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">↵</kbd>
+</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 3. PERFORMANCE & PHILOSOPHY (4 PILLARS) -->
+<section class="space-y-10">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        It’s not about saving time.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        It’s about feeling like you’re never wasting it.
+      </p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pillar 1: Fast -->
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between hover:border-white/20 transition">
+<div>
+<span class="material-symbols-outlined text-[#FF6363] text-3xl">bolt</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Fast</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Instant keystroke response with zero lag. Written natively in Swift and Rust for peak responsiveness.
+          </p>
+</div>
+<span class="text-xs font-mono text-zinc-500 mt-6 pt-4 border-t border-white/5">0ms latency overhead</span>
+</div>
+<!-- Pillar 2: Ergonomic -->
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between hover:border-white/20 transition">
+<div>
+<span class="material-symbols-outlined text-[#FF6363] text-3xl">keyboard</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Ergonomic</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Engineered exclusively for keyboard-first flow. Never lift your hands from the keys or break momentum.
+          </p>
+</div>
+<span class="text-xs font-mono text-zinc-500 mt-6 pt-4 border-t border-white/5">Muscle-memory native</span>
+</div>
+<!-- Pillar 3: Personal -->
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between hover:border-white/20 transition">
+<div>
+<span class="material-symbols-outlined text-teal-400 text-3xl">tune</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Personal</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Custom hotkeys, personal aliases, and quick window snapping configurations tailored directly to you.
+          </p>
+</div>
+<span class="text-xs font-mono text-zinc-500 mt-6 pt-4 border-t border-white/5">Fully customizable</span>
+</div>
+<!-- Pillar 4: Reliable -->
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between hover:border-white/20 transition">
+<div>
+<span class="material-symbols-outlined text-emerald-400 text-3xl">verified</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Reliable</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Rock-solid stability designed to run continuously in the background of your operating system.
+          </p>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+            99.8% crash-free rate
+          </span>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. EXTENSIONS SECTION -->
+<section class="space-y-8" id="extensions">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+          There’s an extension for that.
+        </h2>
+<p class="text-zinc-400 text-lg mt-3">
+          Use your favorite tools without even opening them.
+        </p>
+</div>
+<a class="text-[#FF6363] hover:text-white font-medium text-sm flex items-center gap-1.5 transition" href="#">
+<span>Explore 1,000+ extensions in Store</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</div>
+<!-- Real detailed extension cards grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+<!-- 1 Linear -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-[#5E6AD2]/20 text-[#5E6AD2] flex items-center justify-center font-bold text-sm">L</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Productivity</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Linear</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Search and manage issues, create tasks, view cycles instantly.</p>
+</div>
+<!-- 2 Google Translate -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">G</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Language</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Google Translate</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Translate words and sentences into over 100 languages.</p>
+</div>
+<!-- 3 Spotify -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm">♫</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Media</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Spotify Player</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Control playback, search music, liked songs, and playlists.</p>
+</div>
+<!-- 4 Arc -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-rose-500/20 text-rose-400 flex items-center justify-center font-bold text-sm">A</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Browser</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Arc</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Search opened tabs, spaces, easel notes, and recent history.</p>
+</div>
+<!-- 5 TinyPNG -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold text-sm">🐼</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Media</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">TinyPNG</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Smart lossy compression for your WebP, PNG, and JPEG images.</p>
+</div>
+<!-- 6 1Password -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-sm">1P</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Security</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">1Password 8</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Quickly search and copy passwords, 2FA OTP tokens, and accounts.</p>
+</div>
+<!-- 7 JIRA -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-sm">J</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Developer</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Jira</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">View assigned tickets, add worklogs, and transition sprint states.</p>
+</div>
+<!-- 8 Slack -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-sm">#</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Communication</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Slack</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Send quick messages, snooze notifications, and toggle presence.</p>
+</div>
+<!-- 9 Zoom -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-sm">Z</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Meeting</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Zoom</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Join scheduled Zoom meetings and copy upcoming calendar links.</p>
+</div>
+<!-- 10 Timers / Pomodoro -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-sm">🍅</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Focus</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Pomodoro Timer</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Manage focus sessions and breaks with menu bar indicators.</p>
+</div>
+<!-- 11 Notion -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-zinc-700/50 text-white flex items-center justify-center font-bold text-sm">N</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Docs</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Notion</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Search workspaces, append to daily notes, and create database pages.</p>
+</div>
+<!-- 12 Todoist -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-red-600/20 text-red-400 flex items-center justify-center font-bold text-sm">✓</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Tasks</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Todoist</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Quickly capture to-dos with natural date parsing and priorities.</p>
+</div>
+<!-- 13 Google Search -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-sm">🔍</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Web</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Google Search</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Query Google autocomplete suggestions with instant web jumps.</p>
+</div>
+<!-- 14 Obsidian -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-purple-600/20 text-purple-300 flex items-center justify-center font-bold text-sm">O</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Notes</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Obsidian</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Search markdown vault notes and append thoughts seamlessly.</p>
+</div>
+<!-- 15 Google Chrome -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-yellow-500/20 text-yellow-400 flex items-center justify-center font-bold text-sm">🌐</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Browser</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">Google Chrome</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Search bookmarks, active tabs, and navigation history.</p>
+</div>
+<!-- 16 CleanShot X -->
+<div class="p-4 rounded-xl border border-white/10 bg-[#111116] hover:border-white/25 hover:bg-[#16161d] transition group">
+<div class="flex items-center justify-between">
+<div class="w-9 h-9 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center font-bold text-sm">📸</div>
+<span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-white/5 text-zinc-400">Media</span>
+</div>
+<h4 class="font-headline font-semibold text-sm text-white mt-3 group-hover:text-[#FF6363] transition-colors">CleanShot X</h4>
+<p class="text-xs text-zinc-400 mt-1 line-clamp-2">Trigger screen captures, OCR text grabs, and cloud recordings.</p>
+</div>
+</div>
+</section>
+<!-- 5. AI AGENT SECTION -->
+<section class="space-y-10" id="ai">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Meet your new virtual assistant
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        Raycast AI uses the tools you already rely on to get work done.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Feature 1: AI Chat -->
+<div class="rounded-2xl border border-white/10 bg-[#101015] p-6 flex flex-col justify-between relative overflow-hidden red-card-glow">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#FF6363]">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-white">AI Chat</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+            Contextual conversational assistance with multi-model support. Switch effortlessly between leading foundation models.
+          </p>
+<!-- Mini Mockup Chat -->
+<div class="mt-4 p-3 rounded-xl bg-black/40 border border-white/5 text-xs space-y-2">
+<div class="text-zinc-500 font-mono text-[10px]">User</div>
+<p class="text-zinc-300">Summarize the Q3 release schedule for mobile apps.</p>
+<div class="text-[#FF6363] font-mono text-[10px] pt-1">Claude 3.5 Sonnet</div>
+<p class="text-zinc-400">Here's the concise schedule breakdown from Linear:</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 text-xs text-zinc-500 font-mono">
+          Claude 3.5 Sonnet · GPT-4o
+        </div>
+</div>
+<!-- Feature 2: Quick AI -->
+<div class="rounded-2xl border border-white/10 bg-[#101015] p-6 flex flex-col justify-between relative overflow-hidden red-card-glow">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-teal-400">
+<span class="material-symbols-outlined">electric_bolt</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-white">Quick AI</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+            Single keystroke query resolution anywhere in macOS. Translate, fix grammar, or summarize text without context switching.
+          </p>
+<!-- Mini Mockup Quick AI -->
+<div class="mt-4 p-3 rounded-xl bg-black/40 border border-white/5 text-xs space-y-2">
+<div class="flex items-center justify-between text-zinc-500">
+<span class="font-mono text-[10px]">Inline Quick AI</span>
+<kbd class="px-1.5 py-0.5 rounded bg-white/10 text-white font-mono text-[10px]">Tab</kbd>
+</div>
+<div class="text-zinc-300 font-mono text-[11px] bg-white/5 p-2 rounded">
+              "Rewrite this commit message in Conventional Commits format"
+            </div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 text-xs text-zinc-500 font-mono">
+          Trigger with Tab in root
+        </div>
+</div>
+<!-- Feature 3: AI Extensions -->
+<div class="rounded-2xl border border-white/10 bg-[#101015] p-6 flex flex-col justify-between relative overflow-hidden red-card-glow">
+<div class="space-y-4">
+<div class="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-amber-400">
+<span class="material-symbols-outlined">extension</span>
+</div>
+<h3 class="font-headline font-semibold text-xl text-white">AI Extensions</h3>
+<p class="text-sm text-zinc-400 leading-relaxed">
+            Integrated with your tools and codebase. Let AI perform multi-step actions across GitHub, Notion, Linear, and your local files.
+          </p>
+<!-- Mini Mockup AI Tool Exec -->
+<div class="mt-4 p-3 rounded-xl bg-black/40 border border-white/5 text-xs space-y-1.5">
+<div class="flex items-center gap-2 text-emerald-400 text-[11px]">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Executed: Linear.createIssue()</span>
+</div>
+<div class="flex items-center gap-2 text-blue-400 text-[11px]">
+<span class="material-symbols-outlined text-sm">check_circle</span>
+<span>Executed: Slack.notifyChannel()</span>
+</div>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 text-xs text-zinc-500 font-mono">
+          Tool-augmented prompts
+        </div>
+</div>
+</div>
+</section>
+<!-- 6. TESTIMONIAL & SOCIAL PROOF -->
+<section class="space-y-12">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Built for professionals like you.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        Used by seriously productive people.
+      </p>
+</div>
+<!-- Filter Chips -->
+<div class="flex flex-wrap items-center justify-center gap-3 max-w-4xl mx-auto">
+<span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#FF6363]"></span> Software Engineers
+      </span>
+<span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-teal-400"></span> Founders &amp; Executives
+      </span>
+<span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-amber-400"></span> Product Designers
+      </span>
+<span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-purple-400"></span> Product Managers
+      </span>
+<span class="px-4 py-2 rounded-full border border-white/10 bg-white/5 text-xs font-medium text-white flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-blue-400"></span> Tech Leads
+      </span>
+</div>
+<!-- Prominent Quotes (Guillermo Rauch & Notion) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-8 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between">
+<p class="text-lg text-zinc-200 leading-relaxed font-headline">
+          “Raycast is without question the single most important application on my Mac. It speeds up everything I do by at least 10x.”
+        </p>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-white to-zinc-400 text-black font-bold flex items-center justify-center text-sm">
+            GR
+          </div>
+<div>
+<div class="font-headline font-semibold text-sm text-white">Guillermo Rauch</div>
+<div class="text-xs text-zinc-400">CEO &amp; Founder, Vercel</div>
+</div>
+</div>
+</div>
+<div class="p-8 rounded-2xl border border-white/10 bg-[#101015] flex flex-col justify-between">
+<p class="text-lg text-zinc-200 leading-relaxed font-headline">
+          “Raycast has replaced almost a dozen separate utility tools for our design and engineering teams. It is native craft at its finest.”
+        </p>
+<div class="mt-6 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-zinc-700 text-white font-bold flex items-center justify-center text-sm">
+            NT
+          </div>
+<div>
+<div class="font-headline font-semibold text-sm text-white">Notion Engineering Team</div>
+<div class="text-xs text-zinc-400">Platform &amp; Tools</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 24 User Avatar Name Tags Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+<!-- 1 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-red-500/20 text-red-300 font-bold flex items-center justify-center text-[10px]">TP</span>
+<span class="truncate text-zinc-300">Thomas Paul</span>
+</div>
+<!-- 2 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-300 font-bold flex items-center justify-center text-[10px]">SC</span>
+<span class="truncate text-zinc-300">Sarah Chen</span>
+</div>
+<!-- 3 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center text-[10px]">MK</span>
+<span class="truncate text-zinc-300">Max Krohn</span>
+</div>
+<!-- 4 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-300 font-bold flex items-center justify-center text-[10px]">EL</span>
+<span class="truncate text-zinc-300">Elena Rostova</span>
+</div>
+<!-- 5 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 font-bold flex items-center justify-center text-[10px]">DW</span>
+<span class="truncate text-zinc-300">David Walsh</span>
+</div>
+<!-- 6 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-300 font-bold flex items-center justify-center text-[10px]">AK</span>
+<span class="truncate text-zinc-300">Alexandre K.</span>
+</div>
+<!-- 7 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-300 font-bold flex items-center justify-center text-[10px]">NL</span>
+<span class="truncate text-zinc-300">Nikita L.</span>
+</div>
+<!-- 8 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-rose-500/20 text-rose-300 font-bold flex items-center justify-center text-[10px]">JM</span>
+<span class="truncate text-zinc-300">Julien M.</span>
+</div>
+<!-- 9 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-orange-500/20 text-orange-300 font-bold flex items-center justify-center text-[10px]">VR</span>
+<span class="truncate text-zinc-300">Viktor R.</span>
+</div>
+<!-- 10 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-300 font-bold flex items-center justify-center text-[10px]">CS</span>
+<span class="truncate text-zinc-300">Claire Sun</span>
+</div>
+<!-- 11 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-lime-500/20 text-lime-300 font-bold flex items-center justify-center text-[10px]">AR</span>
+<span class="truncate text-zinc-300">Artem R.</span>
+</div>
+<!-- 12 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-fuchsia-500/20 text-fuchsia-300 font-bold flex items-center justify-center text-[10px]">PM</span>
+<span class="truncate text-zinc-300">Petr Miller</span>
+</div>
+<!-- 13 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-violet-500/20 text-violet-300 font-bold flex items-center justify-center text-[10px]">FD</span>
+<span class="truncate text-zinc-300">Felix Ding</span>
+</div>
+<!-- 14 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-sky-500/20 text-sky-300 font-bold flex items-center justify-center text-[10px]">LK</span>
+<span class="truncate text-zinc-300">Lena Keller</span>
+</div>
+<!-- 15 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-yellow-500/20 text-yellow-300 font-bold flex items-center justify-center text-[10px]">BN</span>
+<span class="truncate text-zinc-300">Brian N.</span>
+</div>
+<!-- 16 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-pink-500/20 text-pink-300 font-bold flex items-center justify-center text-[10px]">OT</span>
+<span class="truncate text-zinc-300">Olivia Thorne</span>
+</div>
+<!-- 17 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center text-[10px]">RS</span>
+<span class="truncate text-zinc-300">Ryan Smith</span>
+</div>
+<!-- 18 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-teal-500/20 text-teal-300 font-bold flex items-center justify-center text-[10px]">MT</span>
+<span class="truncate text-zinc-300">Marco T.</span>
+</div>
+<!-- 19 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-red-500/20 text-red-300 font-bold flex items-center justify-center text-[10px]">KG</span>
+<span class="truncate text-zinc-300">Karolina G.</span>
+</div>
+<!-- 20 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-300 font-bold flex items-center justify-center text-[10px]">JH</span>
+<span class="truncate text-zinc-300">Johannes H.</span>
+</div>
+<!-- 21 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-indigo-500/20 text-indigo-300 font-bold flex items-center justify-center text-[10px]">DL</span>
+<span class="truncate text-zinc-300">Daniel Lin</span>
+</div>
+<!-- 22 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-blue-500/20 text-blue-300 font-bold flex items-center justify-center text-[10px]">EG</span>
+<span class="truncate text-zinc-300">Eva Garcia</span>
+</div>
+<!-- 23 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-purple-500/20 text-purple-300 font-bold flex items-center justify-center text-[10px]">TM</span>
+<span class="truncate text-zinc-300">Tim Mayer</span>
+</div>
+<!-- 24 -->
+<div class="px-3 py-2 rounded-xl border border-white/5 bg-white/[0.03] flex items-center gap-2 text-xs">
+<span class="w-6 h-6 rounded-full bg-green-500/20 text-green-300 font-bold flex items-center justify-center text-[10px]">AS</span>
+<span class="truncate text-zinc-300">Alexander S.</span>
+</div>
+</div>
+</section>
+<!-- 7. EFFICIENCY & CORE UTILITIES (12 FEATURES) -->
+<section class="space-y-12">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Don't repeat yourself.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        Automate the things you do all the time.
+      </p>
+</div>
+<!-- 4 Automation Pillars -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015]">
+<span class="material-symbols-outlined text-[#FF6363] text-2xl">content_paste</span>
+<h3 class="font-headline font-semibold text-lg text-white mt-3">Snippets</h3>
+<p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+          Instant dynamic expansions with clipboard triggers, dates, and variable arguments.
+        </p>
+</div>
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015]">
+<span class="material-symbols-outlined text-teal-400 text-2xl">link</span>
+<h3 class="font-headline font-semibold text-lg text-white mt-3">Quicklinks</h3>
+<p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+          One keystroke to navigate any URL, terminal script, or internal deep link in your stack.
+        </p>
+</div>
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015]">
+<span class="material-symbols-outlined text-purple-400 text-2xl">keyboard_command_key</span>
+<h3 class="font-headline font-semibold text-lg text-white mt-3">Hotkeys</h3>
+<p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+          Global shortcuts for daily applications, specific documents, and complex action stacks.
+        </p>
+</div>
+<div class="p-6 rounded-2xl border border-white/10 bg-[#101015]">
+<span class="material-symbols-outlined text-amber-400 text-2xl">terminal</span>
+<h3 class="font-headline font-semibold text-lg text-white mt-3">Aliases</h3>
+<p class="text-sm text-zinc-400 mt-2 leading-relaxed">
+          Short customizable keywords to launch extensions and complex nested workflows directly.
+        </p>
+</div>
+</div>
+<!-- 12-feature interactive chooser grid -->
+<div class="rounded-3xl border border-white/10 bg-[#0e0e13] p-8">
+<div class="mb-6 flex items-center justify-between">
+<h3 class="font-headline font-semibold text-lg text-white">12 Core Built-In Tools</h3>
+<span class="text-xs text-zinc-500 font-mono">Zero installation required</span>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<!-- 1 Notes -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-yellow-400 text-2xl mb-2">sticky_note_2</span>
+<span class="text-xs font-semibold text-white">Notes</span>
+<span class="text-[11px] text-zinc-500 mt-1">Floating notepad</span>
+</div>
+<!-- 2 Flights -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-blue-400 text-2xl mb-2">flight</span>
+<span class="text-xs font-semibold text-white">Flights</span>
+<span class="text-[11px] text-zinc-500 mt-1">Status tracker</span>
+</div>
+<!-- 3 Calculator -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-emerald-400 text-2xl mb-2">calculate</span>
+<span class="text-xs font-semibold text-white">Calculator</span>
+<span class="text-[11px] text-zinc-500 mt-1">Currencies &amp; math</span>
+</div>
+<!-- 4 Files -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-purple-400 text-2xl mb-2">folder</span>
+<span class="text-xs font-semibold text-white">File Search</span>
+<span class="text-[11px] text-zinc-500 mt-1">Instant local files</span>
+</div>
+<!-- 5 Scripts -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-rose-400 text-2xl mb-2">code</span>
+<span class="text-xs font-semibold text-white">Script Commands</span>
+<span class="text-[11px] text-zinc-500 mt-1">Bash, Python, Node</span>
+</div>
+<!-- 6 Windows -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-teal-400 text-2xl mb-2">crop_square</span>
+<span class="text-xs font-semibold text-white">Windows</span>
+<span class="text-[11px] text-zinc-500 mt-1">Screen snappings</span>
+</div>
+<!-- 7 Schedule -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-amber-400 text-2xl mb-2">calendar_month</span>
+<span class="text-xs font-semibold text-white">Schedule</span>
+<span class="text-[11px] text-zinc-500 mt-1">Join meetings</span>
+</div>
+<!-- 8 Reminders -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-orange-400 text-2xl mb-2">notifications</span>
+<span class="text-xs font-semibold text-white">Reminders</span>
+<span class="text-[11px] text-zinc-500 mt-1">Apple sync</span>
+</div>
+<!-- 9 Translation -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-indigo-400 text-2xl mb-2">translate</span>
+<span class="text-xs font-semibold text-white">Translation</span>
+<span class="text-[11px] text-zinc-500 mt-1">Offline &amp; online</span>
+</div>
+<!-- 10 Focus -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-red-400 text-2xl mb-2">hourglass_bottom</span>
+<span class="text-xs font-semibold text-white">Focus</span>
+<span class="text-[11px] text-zinc-500 mt-1">Do not disturb</span>
+</div>
+<!-- 11 Search Screenshots -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-cyan-400 text-2xl mb-2">image_search</span>
+<span class="text-xs font-semibold text-white">OCR Search</span>
+<span class="text-[11px] text-zinc-500 mt-1">Text in images</span>
+</div>
+<!-- 12 Emoji -->
+<div class="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.05] transition flex flex-col items-center text-center">
+<span class="material-symbols-outlined text-yellow-300 text-2xl mb-2">sentiment_satisfied</span>
+<span class="text-xs font-semibold text-white">Emoji &amp; Symbols</span>
+<span class="text-[11px] text-zinc-500 mt-1">Quick copy</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. COMMUNITY SECTION -->
+<section class="space-y-8">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Stay in the loop.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        Join tens of thousands of active builders and enthusiasts.
+      </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Slack -->
+<a class="p-6 rounded-2xl border border-white/10 bg-[#121217] hover:border-[#FF6363]/50 transition flex flex-col justify-between group" href="#">
+<div>
+<span class="font-bold text-xl text-[#FF6363]"># Slack Community</span>
+<p class="text-sm text-zinc-400 mt-3">
+            Share custom scripts, get real-time feedback, and hang out with the creators.
+          </p>
+</div>
+<div class="mt-8 flex items-center justify-between text-xs">
+<span class="font-mono text-white font-semibold">37,000+ members</span>
+<span class="group-hover:translate-x-1 transition-transform text-[#FF6363]">Join workspace →</span>
+</div>
+</a>
+<!-- X / Twitter -->
+<a class="p-6 rounded-2xl border border-white/10 bg-[#121217] hover:border-[#FF6363]/50 transition flex flex-col justify-between group" href="#">
+<div>
+<span class="font-bold text-xl text-[#FF6363]">𝕏 / Twitter</span>
+<p class="text-sm text-zinc-400 mt-3">
+            Follow product announcements, weekly changelogs, tips, and extension spotlights.
+          </p>
+</div>
+<div class="mt-8 flex items-center justify-between text-xs">
+<span class="font-mono text-white font-semibold">90,000+ followers</span>
+<span class="group-hover:translate-x-1 transition-transform text-[#FF6363]">Follow @raycastapp →</span>
+</div>
+</a>
+<!-- YouTube -->
+<a class="p-6 rounded-2xl border border-white/10 bg-[#121217] hover:border-[#FF6363]/50 transition flex flex-col justify-between group" href="#">
+<div>
+<span class="font-bold text-xl text-[#FF6363]">YouTube Channel</span>
+<p class="text-sm text-zinc-400 mt-3">
+            Watch deep dives, workflow breakdowns, tutorial guides, and developer keynotes.
+          </p>
+</div>
+<div class="mt-8 flex items-center justify-between text-xs">
+<span class="font-mono text-white font-semibold">Tutorials &amp; Demos</span>
+<span class="group-hover:translate-x-1 transition-transform text-[#FF6363]">Watch channel →</span>
+</div>
+</a>
+</div>
+</section>
+<!-- 9. DEVELOPER SECTION (BENTO GRID) -->
+<section class="space-y-10">
+<div class="text-center max-w-2xl mx-auto">
+<h2 class="font-headline font-bold text-3xl md:text-5xl tracking-tight text-white">
+        Build the perfect tools.
+      </h2>
+<p class="text-zinc-400 text-lg mt-3">
+        Create custom extensions for yourself or publish to the Store with TypeScript and React. Native performance with standard web technologies.
+      </p>
+</div>
+<!-- Six-card developer bento -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Bento 1: CLI / NPM Snippet (2 cols wide) -->
+<div class="md:col-span-2 p-7 rounded-2xl border border-white/10 bg-[#101016] flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded bg-[#FF6363]/10 text-[#FF6363] text-xs font-mono">Developer API</span>
+<span class="text-xs text-zinc-500 font-mono">TypeScript + React</span>
+</div>
+<h3 class="font-headline font-semibold text-2xl text-white mt-4">One command to start building.</h3>
+<p class="text-zinc-400 text-sm mt-2">
+            Raycast provides full access to system events, UI components, local storage, and secure credentials.
+          </p>
+</div>
+<div class="mt-6 p-4 rounded-xl bg-black/60 border border-white/10 font-mono text-xs text-zinc-300 space-y-1">
+<p><span class="text-[#FF6363]">$</span> npm install -g @raycast/api</p>
+<p><span class="text-[#FF6363]">$</span> ray develop</p>
+</div>
+</div>
+<!-- Bento 2: API Documentation -->
+<div class="p-7 rounded-2xl border border-white/10 bg-[#101016] flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-teal-400 text-3xl">menu_book</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">API Reference</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Detailed guides, code snippets, and design patterns for building robust extensions.
+          </p>
+</div>
+<a class="mt-6 inline-flex items-center gap-1 text-xs text-teal-400 hover:text-white font-medium" href="#">
+<span>Read the Docs</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Bento 3: React UI Components -->
+<div class="p-7 rounded-2xl border border-white/10 bg-[#101016] flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-blue-400 text-3xl">widgets</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">React UI Components</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Lists, Forms, Grids, and Detail views that automatically conform to native macOS aesthetics.
+          </p>
+</div>
+<span class="text-xs font-mono text-zinc-500 mt-6">Native macOS rendering</span>
+</div>
+<!-- Bento 4: Swift Extensions -->
+<div class="p-7 rounded-2xl border border-white/10 bg-[#101016] flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-amber-400 text-3xl">speed</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Swift Extensions</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Execute native Apple frameworks, Keychain queries, and low-level system hooks directly.
+          </p>
+</div>
+<span class="text-xs font-mono text-zinc-500 mt-6">Bare-metal execution</span>
+</div>
+<!-- Bento 5 & 6: Store verification + Developer CLI -->
+<div class="p-7 rounded-2xl border border-white/10 bg-[#101016] flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-emerald-400 text-3xl">verified_user</span>
+<h3 class="font-headline font-semibold text-xl text-white mt-4">Store Verification</h3>
+<p class="text-zinc-400 text-sm mt-2 leading-relaxed">
+            Every extension undergoes automated security scans and manual team review before going live.
+          </p>
+</div>
+<div class="mt-6 flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="text-xs text-zinc-400">Strict sandboxing</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. FINAL CTA -->
+<section class="rounded-3xl border border-white/10 bg-gradient-to-b from-[#14141b] to-[#0a0a0e] p-12 sm:p-16 text-center relative overflow-hidden raycast-glow">
+<div class="relative z-10 max-w-xl mx-auto space-y-6">
+<h2 class="font-headline font-extrabold text-4xl sm:text-5xl tracking-tight text-white">
+        Take the short way.
+      </h2>
+<p class="text-zinc-400 text-base sm:text-lg">
+        Supercharge your productivity today.
+      </p>
+<div class="pt-4 flex flex-col items-center justify-center gap-4">
+<a class="inline-flex items-center gap-3 bg-white text-black hover:bg-zinc-200 text-base font-semibold px-8 py-3.5 rounded-full transition-transform active:scale-95 shadow-2xl" href="#">
+<svg class="w-5 h-5 fill-current" viewbox="0 0 24 24">
+<path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 4.16c.58-.7.98-1.68.87-2.66-.84.03-1.87.56-2.47 1.26-.54.62-.99 1.62-.87 2.57.94.07 1.89-.47 2.47-1.17z"></path>
+</svg>
+<span>Download for Mac</span>
+</a>
+</div>
+<!-- Notes cluster -->
+<div class="flex flex-wrap items-center justify-center gap-4 text-xs text-zinc-500 pt-3">
+<span>macOS Tahoe and Apple Silicon</span>
+<span>•</span>
+<a class="hover:text-white underline underline-offset-4" href="#">Windows (Waitlist)</a>
+<span>•</span>
+<a class="hover:text-white underline underline-offset-4" href="#">iOS Companion</a>
+</div>
+</div>
+</section>
+</main>
+<!-- 11. COMPREHENSIVE 6-COLUMN FOOTER -->
+<footer class="w-full border-t border-white/10 bg-[#070709] mt-32">
+<div class="max-w-7xl mx-auto px-6 sm:px-8 py-16">
+<div class="grid grid-cols-2 md:grid-cols-6 gap-8 text-xs text-zinc-400">
+<!-- Col 1: Product -->
+<div class="space-y-3">
+<h5 class="text-white font-semibold font-headline">Product</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Store</a></li>
+<li><a class="hover:text-white transition" href="#">Pro</a></li>
+<li><a class="hover:text-white transition" href="#">Raycast AI</a></li>
+<li><a class="hover:text-white transition" href="#">Raycast Keyboard</a></li>
+<li><a class="hover:text-white transition" href="#">Pricing</a></li>
+<li><a class="hover:text-white transition" href="#">Changelog</a></li>
+</ul>
+</div>
+<!-- Col 2: Platforms -->
+<div class="space-y-3">
+<h5 class="text-white font-semibold font-headline">Platforms</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">macOS App</a></li>
+<li><a class="hover:text-white transition" href="#">Windows (Waitlist)</a></li>
+<li><a class="hover:text-white transition" href="#">iOS Companion</a></li>
+<li><a class="hover:text-white transition" href="#">Browser Extensions</a></li>
+<li><a class="hover:text-white transition" href="#">Terminal CLI</a></li>
+</ul>
+</div>
+<!-- Col 3: Solutions -->
+<div class="space-y-3">
+<h5 class="text-white font-semibold font-headline">Solutions</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">Teams</a></li>
+<li><a class="hover:text-white transition" href="#">Enterprise</a></li>
+<li><a class="hover:text-white transition" href="#">Startups</a></li>
+<li><a class="hover:text-white transition" href="#">Designers</a></li>
+<li><a class="hover:text-white transition" href="#">Engineers</a></li>
+</ul>
+</div>
+<!-- Col 4: Developers -->
+<div class="space-y-3">
+<h5 class="text-white font-semibold font-headline">Developers</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">API Documentation</a></li>
+<li><a class="hover:text-white transition" href="#">Create Extension</a></li>
+<li><a class="hover:text-white transition" href="#">GitHub Repo</a></li>
+<li><a class="hover:text-white transition" href="#">Community Store</a></li>
+<li><a class="hover:text-white transition" href="#">Developer Guidelines</a></li>
+</ul>
+</div>
+<!-- Col 5: Company & Legal -->
+<div class="space-y-3">
+<h5 class="text-white font-semibold font-headline">Company</h5>
+<ul class="space-y-2">
+<li><a class="hover:text-white transition" href="#">About Us</a></li>
+<li><a class="hover:text-white transition" href="#">Blog</a></li>
+<li><a class="hover:text-white transition" href="#">Careers (Hiring!)</a></li>
+<li><a class="hover:text-white transition" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition" href="#">Terms of Service</a></li>
+<li><a class="hover:text-white transition" href="#">Security Info</a></li>
+</ul>
+</div>
+<!-- Col 6: Newsletter -->
+<div class="col-span-2 md:col-span-1 space-y-3">
+<h5 class="text-white font-semibold font-headline">Newsletter</h5>
+<p class="text-[11px] text-zinc-500 leading-normal">
+          Get weekly extension spotlights and feature updates.
+        </p>
+<form class="space-y-2" onsubmit="event.preventDefault()">
+<input class="w-full bg-[#14141a] border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#FF6363]" placeholder="you@domain.com" type="email"/>
+<button class="w-full bg-white text-black font-semibold rounded-lg py-1.5 hover:bg-zinc-200 transition text-xs" type="submit">
+            Subscribe
+          </button>
+</form>
+</div>
+</div>
+<!-- Bottom Bar -->
+<div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
+<div class="flex items-center gap-3">
+<span class="w-5 h-5 rounded bg-[#FF453A] flex items-center justify-center text-white">
+<svg fill="currentColor" height="12" viewbox="0 0 24 24" width="12">
+<path d="M4 14.5L14.5 4H20v5.5L9.5 20H4v-5.5z"></path>
+</svg>
+</span>
+<span class="text-zinc-300 font-semibold">Raycast</span>
+<span>© 2026 Raycast Technologies Inc. All rights reserved.</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-zinc-300 transition" href="#">System Status</a>
+<a class="hover:text-zinc-300 transition" href="#">Brand Assets</a>
+<a class="hover:text-zinc-300 transition" href="#">Security</a>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

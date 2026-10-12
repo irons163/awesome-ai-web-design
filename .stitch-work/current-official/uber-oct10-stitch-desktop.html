@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Uber - Go anywhere and get anything</title>
+<!-- Tailwind CDN & Lucide Icons -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+    @font-face {
+      font-family: 'UberMove';
+      src: url('https://tb-static.uber.com/prod/red-box/font/UberMove-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'UberMove';
+      src: url('https://tb-static.uber.com/prod/red-box/font/UberMove-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'UberMoveText';
+      src: url('https://tb-static.uber.com/prod/red-box/font/UberMoveText-Regular.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'UberMoveText';
+      src: url('https://tb-static.uber.com/prod/red-box/font/UberMoveText-Medium.woff2') format('woff2');
+      font-weight: 500;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'UberMoveText';
+      src: url('https://tb-static.uber.com/prod/red-box/font/UberMoveText-Bold.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    body {
+      font-family: 'UberMoveText', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #000000;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      margin: 0;
+      padding: 0;
+    }
+
+    .font-ubermove {
+      font-family: 'UberMove', sans-serif;
+    }
+
+    .uber-h1 {
+      font-family: 'UberMove', sans-serif;
+      font-size: 52px;
+      line-height: 64px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .uber-h2 {
+      font-family: 'UberMove', sans-serif;
+      font-size: 36px;
+      line-height: 44px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .uber-container {
+      width: 100%;
+      max-width: 1280px;
+      padding-left: 64px;
+      padding-right: 64px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-white min-h-screen pb-20">
+<!-- 1. TOP NAVIGATION (Fixed 64px, black #000 background, text white) -->
+<header class="w-full bg-black text-white h-16 sticky top-0 z-50">
+<div class="uber-container h-full flex items-center justify-between">
+<!-- Left side: Uber wordmark (bold, 24px) at x64 & Nav links -->
+<div class="flex items-center space-x-7">
+<a class="text-white flex items-center tracking-tight text-[24px] font-ubermove font-bold hover:opacity-80 transition-opacity" href="https://www.uber.com/">
+          Uber
+        </a>
+<nav class="hidden md:flex items-center space-x-1">
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://www.uber.com/ride/">Ride</a>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://www.uber.com/drive/">Earn</a>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://www.uber.com/reserve/">Travel</a>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://www.business.uber.com/">Business</a>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://www.ubereats.com/">Uber Eats</a>
+<div class="relative group">
+<button class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors flex items-center gap-1">
+              About
+              <i class="w-4 h-4 mt-0.5" data-lucide="chevron-down"></i>
+</button>
+</div>
+</nav>
+</div>
+<!-- Right side: EN, Help, Log in, Sign up -->
+<div class="flex items-center space-x-2">
+<button class="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors">
+<i class="w-4 h-4" data-lucide="globe"></i>
+<span>EN</span>
+</button>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://help.uber.com/">Help</a>
+<a class="px-3 py-2 text-sm font-medium rounded-full text-white hover:bg-[#282828] transition-colors" href="https://m.uber.com/looking">Log in</a>
+<a class="ml-1 px-4 py-2 text-sm font-medium rounded-full bg-white text-black hover:bg-neutral-200 transition-colors" href="https://m.uber.com/signup">Sign up</a>
+</div>
+</div>
+</header>
+<!-- 2. HERO SECTION: Black #000 background, Left form (w ~459px), Right collage image (459x459) -->
+<section class="w-full bg-black text-white pt-10 pb-16 border-b border-neutral-900">
+<div class="uber-container">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start relative">
+<!-- Left Column: Form & Heading (w ~459px) -->
+<div class="lg:col-span-6 max-w-[459px] flex flex-col justify-start">
+<!-- Location badge -->
+<div class="inline-flex items-center gap-2 mb-3 text-neutral-400 text-sm font-medium">
+<i class="w-4 h-4 text-white" data-lucide="map-pin"></i>
+<span class="text-white font-semibold">Taipei, CA</span>
+<button class="text-xs text-neutral-400 hover:text-white underline ml-1 cursor-pointer">Change city</button>
+</div>
+<!-- Hero Heading -->
+<h1 class="uber-h1 text-white tracking-tight mb-7">
+            Go anywhere
+          </h1>
+<!-- Control: Pickup now dropdown pill -->
+<div class="mb-5 flex items-center">
+<button class="inline-flex items-center gap-2 bg-[#222222] text-white px-4 py-2.5 rounded-full text-sm font-medium hover:bg-neutral-800 transition-colors">
+<i class="w-4 h-4" data-lucide="clock"></i>
+<span>Pickup now</span>
+<i class="w-3.5 h-3.5 ml-1 text-neutral-400" data-lucide="chevron-down"></i>
+</button>
+</div>
+<!-- Ride Search Form: Twin light rounded input fields (~396px width, 52px height) -->
+<div class="w-full max-w-[396px] space-y-3 relative mb-6">
+<!-- Route line connecting the two -->
+<div class="absolute left-[23px] top-[26px] bottom-[26px] w-[2px] bg-neutral-400 z-10 pointer-events-none"></div>
+<!-- Top: Pickup point -->
+<div class="relative flex items-center bg-[#f3f3f3] hover:bg-[#eaeaea] transition-colors rounded-lg h-[52px] px-4 border border-transparent focus-within:border-black focus-within:bg-white text-black">
+<div class="w-3 h-3 rounded-full bg-black shrink-0 mr-3.5 z-20"></div>
+<input class="w-full bg-transparent text-black text-sm outline-none placeholder:text-neutral-500 font-medium" placeholder="Pickup location" readonly="" type="text" value="Taipei, CA"/>
+<button class="text-neutral-500 hover:text-black p-1">
+<i class="w-4 h-4" data-lucide="locate-fixed"></i>
+</button>
+</div>
+<!-- Bottom: Destination -->
+<div class="relative flex items-center bg-[#f3f3f3] hover:bg-[#eaeaea] transition-colors rounded-lg h-[52px] px-4 border border-transparent focus-within:border-black focus-within:bg-white text-black">
+<div class="w-3 h-3 bg-black shrink-0 mr-3.5 z-20"></div>
+<input class="w-full bg-transparent text-black text-sm outline-none placeholder:text-neutral-500 font-medium" placeholder="Enter destination" type="text"/>
+</div>
+</div>
+<!-- CTA row -->
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center justify-center bg-white text-black font-semibold rounded-lg px-6 py-3 text-sm hover:bg-neutral-200 transition-colors shadow-sm" href="https://m.uber.com/looking">
+              See prices
+            </a>
+<a class="text-sm font-medium text-white underline underline-offset-4 hover:text-neutral-300 transition-colors" href="https://m.uber.com/looking">
+              Log in to see your recent activity
+            </a>
+</div>
+</div>
+<!-- Spacer -->
+<div class="hidden lg:block lg:col-span-1"></div>
+<!-- Right Column: Original 459x459 square collage card with frosted overlay -->
+<div class="lg:col-span-5 flex justify-end">
+<div class="w-[459px] h-[459px] relative rounded-2xl overflow-hidden shadow-lg bg-[#111111] border border-neutral-800 flex flex-col justify-end">
+<!-- Collage Image -->
+<img alt="Uber travel and mobility essentials" class="absolute inset-0 w-full h-full object-cover object-center" onerror="this.src='https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&amp;fit=crop&amp;w=800&amp;q=80'" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCp9adINTznOYTleRm4V0tWpsIdTt5vSo93WMPLCZD0XQ7dWzzcKbfjDKWe1X-A0ZGS8KX58hlZDsai475t_QyF86qQlHGoFrOTc7pMQvJdAPIcchEC2-c1JVFycoJqrGDJzZvzUcbj1hEdKyaKTayJOwaHh0eDNtZs22Ad8g7HYe8qsiyR_f3VYAz7uHCntIUFk5bMYtF7BX_SZVaAMxMZ_3xasnelL_kiD74sCG4BXMfkqD7HpXz3unEZsaAp8jI3BaroEWhDtEBy"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+<!-- Frosted glass pill overlay at bottom of collage card -->
+<div class="relative z-10 m-5 p-4 rounded-xl bg-white/90 backdrop-blur-md shadow-lg border border-white/50">
+<div class="flex items-center justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold tracking-wider uppercase text-neutral-600 mb-0.5">PLANNING A TRIP?</span>
+<h3 class="text-base font-bold text-black font-ubermove">Ready to travel?</h3>
+<p class="text-xs text-neutral-600 mt-0.5">Schedule ahead with Uber Reserve for peace of mind.</p>
+</div>
+<a class="shrink-0 ml-3 bg-black text-white text-xs font-semibold px-4 py-2.5 rounded-full hover:bg-neutral-800 transition-colors flex items-center gap-1.5 shadow-sm" href="https://www.uber.com/reserve">
+                  Schedule ahead →
+                </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. SECTION: 'Explore what you can do with Uber' (White canvas, py-16 px-16) -->
+<section class="w-full bg-white py-16">
+<div class="uber-container">
+<div class="mb-8">
+<h2 class="uber-h2 text-black tracking-tight">Explore what you can do with Uber</h2>
+</div>
+<!-- Six service tiles in clean grid -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<!-- Tile 1: Ride -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/ride/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">Ride</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Go anywhere</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="car"></i>
+</div>
+</div>
+</a>
+<!-- Tile 2: Reserve -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/reserve/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">Reserve</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Schedule ahead</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="calendar"></i>
+</div>
+</div>
+</a>
+<!-- Tile 3: Uber Taxi -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/ride/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">Uber Taxi</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Everyday rides</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="navigation"></i>
+</div>
+</div>
+</a>
+<!-- Tile 4: Airport -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/airports/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">Airport</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Effortless transfers</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="plane"></i>
+</div>
+</div>
+</a>
+<!-- Tile 5: UberBlack -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/ride/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">UberBlack</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Premium comfort</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="shield-check"></i>
+</div>
+</div>
+</a>
+<!-- Tile 6: Courier -->
+<a class="flex flex-col justify-between p-5 bg-[#f3f3f3] hover:bg-[#eaeaea] transition-all rounded-2xl h-44 group cursor-pointer border border-transparent hover:border-neutral-300" href="https://www.uber.com/ride/">
+<div class="flex justify-between items-start">
+<span class="font-ubermove text-lg font-bold text-black">Courier</span>
+<i class="w-5 h-5 text-neutral-400 group-hover:text-black group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all" data-lucide="arrow-up-right"></i>
+</div>
+<div class="flex items-end justify-between">
+<span class="text-xs text-neutral-500 font-medium">Send packages</span>
+<div class="w-11 h-11 bg-white rounded-full flex items-center justify-center shadow-sm">
+<i class="w-5 h-5 text-black" data-lucide="package"></i>
+</div>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- 5. SECTION: 'How to request a ride' (White canvas, py-16 px-16) -->
+<section class="w-full bg-white py-16 border-t border-neutral-100">
+<div class="uber-container">
+<div class="flex items-center justify-between mb-10">
+<div>
+<h2 class="uber-h2 text-black tracking-tight">How to request a ride</h2>
+<p class="text-neutral-600 text-sm mt-1">Simple steps to get wherever you need to go.</p>
+</div>
+<!-- 1/2 pagination / navigation arrows -->
+<div class="flex items-center gap-3">
+<span class="text-xs font-semibold text-neutral-500">1 / 5</span>
+<button class="w-9 h-9 rounded-full bg-[#f3f3f3] flex items-center justify-center hover:bg-neutral-200 transition-colors">
+<i class="w-4 h-4 text-black" data-lucide="chevron-left"></i>
+</button>
+<button class="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center hover:bg-neutral-800 transition-colors">
+<i class="w-4 h-4" data-lucide="chevron-right"></i>
+</button>
+</div>
+</div>
+<!-- Visual progress / journey line artwork with green accent line -->
+<div class="relative mb-8">
+<div class="h-1 bg-neutral-200 rounded-full w-full"></div>
+<div class="absolute top-0 left-0 h-1 bg-[#06C167] rounded-full w-1/5 transition-all"></div>
+</div>
+<!-- Horizontal step gallery -->
+<div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+<!-- Step 1 -->
+<div class="p-5 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<div class="w-8 h-8 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center">1</div>
+<h3 class="font-ubermove font-bold text-base text-black">Get started</h3>
+<p class="text-neutral-600 text-xs leading-relaxed">Enter your destination and choose a vehicle type that suits your needs.</p>
+</div>
+<!-- Step 2 -->
+<div class="p-5 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<div class="w-8 h-8 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center">2</div>
+<h3 class="font-ubermove font-bold text-base text-black">Get matched with a driver</h3>
+<p class="text-neutral-600 text-xs leading-relaxed">A nearby driver will accept your request and you'll see ETA and vehicle info.</p>
+</div>
+<!-- Step 3 -->
+<div class="p-5 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<div class="w-8 h-8 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center">3</div>
+<h3 class="font-ubermove font-bold text-base text-black">Meet your driver</h3>
+<p class="text-neutral-600 text-xs leading-relaxed">Check license plate and car details before getting in.</p>
+</div>
+<!-- Step 4 -->
+<div class="p-5 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<div class="w-8 h-8 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center">4</div>
+<h3 class="font-ubermove font-bold text-base text-black">Enjoy the ride</h3>
+<p class="text-neutral-600 text-xs leading-relaxed">Track your route in real time with shared trip progress.</p>
+</div>
+<!-- Step 5 -->
+<div class="p-5 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<div class="w-8 h-8 rounded-full bg-black text-white text-xs font-bold flex items-center justify-center">5</div>
+<h3 class="font-ubermove font-bold text-base text-black">Rate and tip</h3>
+<p class="text-neutral-600 text-xs leading-relaxed">Share feedback and tip your driver directly through the app.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. SECTION: 'Planning your next getaway?' (Black canvas / dark background #000, text white, py-20 px-16) -->
+<section class="w-full bg-black text-white py-20 border-t border-neutral-900">
+<div class="uber-container">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+<div>
+<div class="inline-flex items-center gap-2 mb-3 bg-neutral-800 text-neutral-300 text-xs px-3 py-1 rounded-full font-medium">
+<i class="w-3.5 h-3.5 text-white" data-lucide="map-pin"></i>
+<span>Taipei, CA</span>
+</div>
+<h2 class="uber-h2 text-white">Planning your next getaway?</h2>
+<p class="text-neutral-400 text-sm mt-2 max-w-xl">
+            Explore popular City Hub destinations, plan seamless flight connections, and take the guesswork out of intercity travel.
+          </p>
+</div>
+<a class="text-sm font-semibold text-white underline underline-offset-4 hover:text-neutral-300 transition-colors" href="https://www.uber.com/cities/">
+          Explore all cities
+        </a>
+</div>
+<!-- Atmospheric visual banner representing travel hubs -->
+<div class="w-full h-80 rounded-2xl overflow-hidden relative border border-neutral-800 shadow-xl">
+<img alt="City hub travel airport lights and destination" class="w-full h-full object-cover filter brightness-[0.85]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdoA30cQ_RmQ7HT2UL4Mybk9hRfkXueUuG2x1VMn5-m7Lg5IwNe5tVB3I7mYhby8d0VlliwZzswPMd9n-v4_TqXxHlgx8CojEATxi5Th7x0bRsa8bmE7nC-93pfAL2tyiaA5Ok6xOVp1TW-jNU7i1nxSLpUABmH1vjq0NitZFW3d7onBg1f6gLf1dEjVS016VWPj8SBd_AEaRJKf9J_ut7wk3qMAav_Z2psrAK-BKNPCsfWjbnK72UhTgZO60RTx8wdXw8Z9PKDKFp"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+<div class="absolute bottom-8 left-8 max-w-md text-white">
+<span class="text-xs font-bold tracking-widest uppercase text-neutral-300">City Hub Guide</span>
+<h3 class="text-2xl font-bold font-ubermove mt-1">Effortless airport transfers and local rides</h3>
+<p class="text-xs text-neutral-300 mt-2">Find reliable pickups at 700+ airports worldwide.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. SECTION: 'More ways to use Uber' (Dark/black background, py-20 px-16) -->
+<section class="w-full bg-black text-white py-20 border-t border-neutral-900">
+<div class="uber-container">
+<div class="mb-10">
+<h2 class="uber-h2 text-white tracking-tight">More ways to use Uber</h2>
+</div>
+<!-- Three photo cards with rich photography -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-[#161616] rounded-2xl overflow-hidden border border-neutral-800 flex flex-col justify-between group hover:border-neutral-600 transition-colors">
+<div class="h-56 overflow-hidden">
+<img alt="Plan your trip in advance" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfJJzLJshrRrCIIG3eN2r5mJRYHeS2VWgFxOqYmzPpsp8ClaEkil6uw9bvL7Ko3vTmqzOEKdk3HFwrEDhsbzZhxy6yyCkPGaoL4m5OC0lycPi2_ZuRSzoibpwbOZSyiZvHFWQSOkvqMdleD5WxLjaZUUCOwLWSCN9DoEeTDlxTnoHkQn5Pa0umu0gqfWVPBKZJ5CY8oSXv807WcKOHZy7CLsxaRCL--agLIcHOJpZxowIYPoseT0kvuJhKR1SPqtN7SJEktbv61u9T"/>
+</div>
+<div class="p-6 space-y-3">
+<h3 class="text-xl font-bold font-ubermove text-white">Plan your trip in advance</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">Reserve a ride up to 90 days ahead for stress-free travel plans and guaranteed pickups.</p>
+<div class="pt-2">
+<a class="text-xs font-semibold text-white underline underline-offset-4 hover:text-neutral-300 inline-flex items-center gap-1" href="https://www.uber.com/reserve">
+                Reserve a ride <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-[#161616] rounded-2xl overflow-hidden border border-neutral-800 flex flex-col justify-between group hover:border-neutral-600 transition-colors">
+<div class="h-56 overflow-hidden">
+<img alt="Ride in style luxury car" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvG9tpBna1qv9AYHsLAp2gfampB70pdpFcg_8hqEOo_tb5k6GtRK2l9R2oMoO-pPVvBDHq_lmQw5gWMYshH_8nKC26wMDc6Am0RuAzWDw8M3OVbX-vdIynEa0bP3VnDJYKE9DjpwSfB9Q8zEkInbUKyVzj25ZMZ7svtIRcqtNrMcCbIvUmRayywOKnNUw1HKYhUNWVn-HcoDhYzX3tNUSRuVSf7chEhYxoQaZ7nN7NAOsbdWi_rHHJzrvf7NjX-gQd6bcyPkwGBk18"/>
+</div>
+<div class="p-6 space-y-3">
+<h3 class="text-xl font-bold font-ubermove text-white">Ride in style</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">Premium comfort and luxury vehicles with top-rated experienced drivers.</p>
+<div class="pt-2">
+<a class="text-xs font-semibold text-white underline underline-offset-4 hover:text-neutral-300 inline-flex items-center gap-1" href="https://www.uber.com/ride">
+                Explore Uber Black <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-[#161616] rounded-2xl overflow-hidden border border-neutral-800 flex flex-col justify-between group hover:border-neutral-600 transition-colors">
+<div class="h-56 overflow-hidden">
+<img alt="Send items courier package" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC74PyLwdnG_vOCQt_ivM8-oW0yi5xMz53Y22iRuPXszOsj4RI6cAQtdzSzim5tZwesM9hoeARElULmmRtcDdPPOufkvvfTG4BNhmsGV-FtidWc1WAJezj9812ASV_MyN-91sRhON8Ed0wDZHF0-Y53R-rZT-D0lYWuO2fTqp8hjgF1O1AngL3c3IOqLNmDfvGErvpd_GaQxqDTzmbstIcrpIHix9Xefs8di5YH5a400BoP5GLSfGMqvdp4MGk0Mh1NVTha-V-vq_BS"/>
+</div>
+<div class="p-6 space-y-3">
+<h3 class="text-xl font-bold font-ubermove text-white">Send items within the day</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">Fast reliable on-demand delivery for parcels, gifts, and personal essentials across town.</p>
+<div class="pt-2">
+<a class="text-xs font-semibold text-white underline underline-offset-4 hover:text-neutral-300 inline-flex items-center gap-1" href="https://www.uber.com/ride">
+                Send a package <i class="w-3.5 h-3.5" data-lucide="arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. SECTION: 'Uber Eats & Delivery' (White canvas, py-20 px-16) -->
+<section class="w-full bg-white py-20">
+<div class="uber-container">
+<div class="mb-8">
+<span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Uber Eats &amp; Delivery</span>
+<h2 class="uber-h2 text-black mt-1">Feed your cravings &amp; stock your pantry</h2>
+</div>
+<!-- Wide hero photo featuring fresh florals/groceries/Uber Eats -->
+<div class="w-full h-72 rounded-2xl overflow-hidden mb-8 relative shadow-sm">
+<img alt="Fresh florals groceries and food delivery" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAa8l6Af73ZMZlf52hhZQ7-iLznfxuK2IPk1sPqZ4AwRYtRjXse0cbWttSrDCEqBDY93u7tbLT7JIBskjnGdK9U9z65QLHrfoQ6194264hrwzztWyplMmNbbPhc3T1hBG1KAv_vk8SVID9jLyhBCpA0tSoxCDoF7wmKMMRkud1pAc2Sd8c1wQSGnU6dNW_sAN-zQ0gtNDILeGdavg5GanWRtL8itwN9vkUlzXxnZXn08uiQBvg-1XxQrARAKzmU7onMTuYOrk3FuBc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 text-white">
+<h3 class="text-2xl font-bold font-ubermove">Delicious meals and groceries, right to your doorstep</h3>
+</div>
+</div>
+<!-- Two featured cards side-by-side -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="p-8 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<h3 class="font-ubermove text-2xl font-bold text-black">Order from your favourite spots</h3>
+<p class="text-neutral-600 text-sm leading-relaxed">
+            Food delivery from top local restaurants and national brands. Track your meal in real time from kitchen to table.
+          </p>
+<div class="pt-2">
+<a class="inline-flex items-center justify-center bg-black text-white text-xs font-semibold px-5 py-3 rounded-lg hover:bg-neutral-800 transition-colors" href="https://www.ubereats.com/">
+              Order food
+            </a>
+</div>
+</div>
+<div class="p-8 rounded-2xl bg-[#f9f9f9] border border-neutral-100 space-y-3">
+<h3 class="font-ubermove text-2xl font-bold text-black">Get essentials delivered</h3>
+<p class="text-neutral-600 text-sm leading-relaxed">
+            Groceries, pharmacy, drinks, and everyday convenience in minutes. Never worry about grocery store lines again.
+          </p>
+<div class="pt-2">
+<a class="inline-flex items-center justify-center bg-black text-white text-xs font-semibold px-5 py-3 rounded-lg hover:bg-neutral-800 transition-colors" href="https://www.ubereats.com/">
+              Shop grocery
+            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. SECTION: 'Uber One' (White canvas, py-20 px-16) -->
+<section class="w-full bg-[#f6f6f6] py-20 border-y border-neutral-200">
+<div class="uber-container">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left: Details -->
+<div class="lg:col-span-6 space-y-5">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-black text-white rounded-md text-xs font-bold tracking-wider">
+            UBER ONE
+          </div>
+<h2 class="uber-h2 text-black">Get member savings on rides and delivery</h2>
+<ul class="space-y-3 text-neutral-700 text-sm">
+<li class="flex items-center gap-2.5">
+<i class="w-5 h-5 text-black shrink-0" data-lucide="check-circle-2"></i>
+<span><strong>$0 Delivery Fee</strong> on eligible orders from restaurants and grocery stores.</span>
+</li>
+<li class="flex items-center gap-2.5">
+<i class="w-5 h-5 text-black shrink-0" data-lucide="check-circle-2"></i>
+<span><strong>5% off</strong> eligible orders and rides with top-rated drivers.</span>
+</li>
+<li class="flex items-center gap-2.5">
+<i class="w-5 h-5 text-black shrink-0" data-lucide="check-circle-2"></i>
+<span>Exclusive member promotions, VIP support, and experiences.</span>
+</li>
+</ul>
+<div class="pt-2">
+<a class="inline-flex items-center justify-center bg-black text-white font-medium px-6 py-3.5 rounded-lg text-sm hover:bg-neutral-800 transition-colors shadow-sm" href="https://www.uber.com/one/">
+              Join Uber One
+            </a>
+</div>
+</div>
+<!-- Right: Photo card of couple enjoying membership perks -->
+<div class="lg:col-span-6">
+<div class="rounded-3xl overflow-hidden aspect-[4/3] bg-neutral-200 shadow-md">
+<img alt="Couple enjoying membership perks with Uber One" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiZm9ChZMt_DoMrYwVnRNacyBvSX-d9G_cSrVxe-y5vgGGEJmfy0yyA2wlruuPPspG5h847wSbSOeGlBNgyvKnxgU3qYFda3-2tHye0FXNZFGCcEP4JvKvooVqoLmXPvyIPFj4IS-4Sj_yCJhD0sA8id1gu6jSAnL12F93Jb94Mlurbh31Xu6ynKMOIyt_ZCfkWcr7dSgFj0QFJrkKGeXeY_dXewW7ZlYYOJLRVTdhx5yJwagGX9giuwIiGaZc28Bf89zpvWWVbe3o"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. SECTION: Wide rounded family-car / road trip photo banner -->
+<section class="w-full bg-white py-14">
+<div class="uber-container">
+<div class="w-full h-80 rounded-3xl overflow-hidden relative shadow-md">
+<img alt="Family car and scenic road trip adventure" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTGFq0EWcj3fb57zwgLmT6KMgWPepeCunuAmj1uo-XY_l0ZjDBk6OaGBZMkf71msNY0iEJ1vK7AJMpyWmhkxwhe8HfLKPy2Y_2Zl_mSQxHKCYatH08Tq6Ii1dsgNPYRzxW7SkZQZj7GLf2jcqyLHs7n5Mo5hnvLWPFFL-YUdoqfEfSkgmEt_LbMGLKZc-vAQEZ_47g-nocLqQMEzFfN7SFNmcvZvj6MMKDLqjFywYJhjVFUozS6haApuQ-Ivdy4eDHnmKZtFN7gq5O"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent"></div>
+<div class="absolute bottom-8 left-8 max-w-lg text-white space-y-2">
+<h3 class="text-3xl font-bold font-ubermove">Wherever you're heading, get there together</h3>
+<p class="text-xs text-neutral-200">Spacious XL rides, child seat options, and easy luggage room for family journeys.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. SECTION: 'Earn with Uber' (Black background #000, text white, py-20 px-16) -->
+<section class="w-full bg-black text-white py-20">
+<div class="uber-container">
+<div class="mb-10">
+<span class="text-xs font-bold uppercase tracking-wider text-neutral-400">Drive &amp; Deliver</span>
+<h2 class="uber-h2 text-white mt-1">Earn with Uber</h2>
+</div>
+<!-- Three column gallery -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- 1: Drive -->
+<div class="bg-[#141414] rounded-2xl p-6 border border-neutral-800 flex flex-col justify-between space-y-6">
+<div class="space-y-3">
+<div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-white">
+<i class="w-6 h-6" data-lucide="car"></i>
+</div>
+<h3 class="text-xl font-bold font-ubermove text-white">Drive and earn on your schedule</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">
+              Be your own boss and set flexible hours. Make money driving when it fits your life best with weekly payouts.
+            </p>
+</div>
+<a class="inline-flex items-center justify-center bg-white text-black font-semibold rounded-lg px-5 py-2.5 text-xs hover:bg-neutral-200 transition-colors w-fit" href="https://www.uber.com/drive/">
+            Get started
+          </a>
+</div>
+<!-- 2: Deliver -->
+<div class="bg-[#141414] rounded-2xl p-6 border border-neutral-800 flex flex-col justify-between space-y-6">
+<div class="space-y-3">
+<div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-white">
+<i class="w-6 h-6" data-lucide="bike"></i>
+</div>
+<h3 class="text-xl font-bold font-ubermove text-white">Deliver when you want</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">
+              Flexible vehicle, scooter, or bicycle delivery options. Pick up food and essentials across your neighborhood.
+            </p>
+</div>
+<a class="inline-flex items-center justify-center bg-white text-black font-semibold rounded-lg px-5 py-2.5 text-xs hover:bg-neutral-200 transition-colors w-fit" href="https://www.uber.com/drive/">
+            Sign up to deliver
+          </a>
+</div>
+<!-- 3: Specialized skills -->
+<div class="bg-[#141414] rounded-2xl p-6 border border-neutral-800 flex flex-col justify-between space-y-6">
+<div class="space-y-3">
+<div class="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center text-white">
+<i class="w-6 h-6" data-lucide="truck"></i>
+</div>
+<h3 class="text-xl font-bold font-ubermove text-white">Earn with your specialized skills</h3>
+<p class="text-neutral-400 text-xs leading-relaxed">
+              Fleet ownership, chauffeur certifications, and courier opportunities designed for commercial drivers.
+            </p>
+</div>
+<a class="inline-flex items-center justify-center bg-white text-black font-semibold rounded-lg px-5 py-2.5 text-xs hover:bg-neutral-200 transition-colors w-fit" href="https://www.uber.com/freight/">
+            Learn more
+          </a>
+</div>
+</div>
+</div>
+</section>
+<!-- 12. SECTION: 'All the benefits of Uber, reimagined for business' (White canvas, py-20 px-16) -->
+<section class="w-full bg-white py-20 border-b border-neutral-100">
+<div class="uber-container">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Text -->
+<div class="lg:col-span-6 space-y-6">
+<span class="text-xs font-bold uppercase tracking-wider text-neutral-500">Uber for Business</span>
+<h2 class="uber-h2 text-black">
+            All the benefits of Uber, reimagined for business
+          </h2>
+<p class="text-neutral-700 text-base leading-relaxed">
+            Transform how your team moves and eats. Centralized billing, automated expense management, executive travel, and meal programs for any organization size.
+          </p>
+<div class="flex flex-wrap items-center gap-4 pt-2">
+<a class="bg-black text-white hover:bg-neutral-800 transition-colors font-medium px-6 py-3.5 rounded-lg text-sm" href="https://www.business.uber.com/">
+              Explore solutions
+            </a>
+<a class="border border-black text-black hover:bg-neutral-100 transition-colors font-medium px-6 py-3.5 rounded-lg text-sm" href="https://www.business.uber.com/contact-sales">
+              Contact sales
+            </a>
+</div>
+</div>
+<!-- Media -->
+<div class="lg:col-span-6">
+<div class="rounded-2xl overflow-hidden aspect-[4/3] bg-neutral-100 shadow-sm">
+<img alt="Professional businesswoman using Uber in vehicle" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaINqZcEoqeNxSc_AO8SHT7rVifDdC99nMXqSiLL86hns-fk3fUaM0UU49VQ4KJ8G7P5UXI6ooXo2Biw873sPFNGhBpiACl0puaS1cBQoqsDSWF18DmyuBGZSyW08JpbZyHfQqKZ3ONh4Lnjyqhk_DKf_wPc_aOTXtvSBYKSyzkf6SCwkBdgieore3P-deZTznsJ3Lj_t1yOGMO5kJ7zeJHZPWUoU1Unp-5NNNaj-YGBsO3UoNudF1nZEqLyX_yMembY7_mYoIs377"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 13. SECTION: 'It's easier in the apps' (Light gray container, py-16 px-16 rounded-3xl mx-16 my-12) -->
+<section class="w-full py-8">
+<div class="uber-container">
+<div class="bg-[#f6f6f6] rounded-3xl p-10 lg:p-14 border border-neutral-200">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-10">
+<div class="space-y-3 max-w-lg">
+<h2 class="font-ubermove text-3xl font-bold text-black">There's more to love in the apps</h2>
+<p class="text-neutral-600 text-sm leading-relaxed">
+              Scan the QR code or visit your app store to download the Uber and Uber Eats apps. Manage your rides, order food, and schedule in seconds.
+            </p>
+</div>
+<!-- Two QR download cards side-by-side -->
+<div class="flex flex-wrap items-center gap-6">
+<!-- QR 1: Uber Rider -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-neutral-200 flex flex-col items-center w-40 text-center">
+<div class="w-24 h-24 bg-black rounded-lg p-2 flex items-center justify-center">
+<i class="w-20 h-20 text-white stroke-[1.25]" data-lucide="qr-code"></i>
+</div>
+<span class="text-xs font-bold text-black mt-2">Uber Rider &amp; Courier</span>
+<span class="text-[10px] text-neutral-500">Scan to download</span>
+</div>
+<!-- QR 2: Uber Eats -->
+<div class="bg-white p-4 rounded-2xl shadow-sm border border-neutral-200 flex flex-col items-center w-40 text-center">
+<div class="w-24 h-24 bg-black rounded-lg p-2 flex items-center justify-center">
+<i class="w-20 h-20 text-white stroke-[1.25]" data-lucide="qr-code"></i>
+</div>
+<span class="text-xs font-bold text-black mt-2">Uber Eats Food &amp; Grocery</span>
+<span class="text-[10px] text-neutral-500">Scan to download</span>
+</div>
+<!-- App Store & Google Play badges -->
+<div class="space-y-3">
+<a class="flex items-center gap-3 px-4 py-2.5 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors text-xs font-medium w-40" href="https://apps.apple.com">
+<i class="w-4 h-4" data-lucide="apple"></i>
+<div class="text-left">
+<div class="text-[9px] text-neutral-400 uppercase leading-none">Download on</div>
+<div class="font-bold text-xs mt-0.5">App Store</div>
+</div>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 bg-black text-white rounded-lg hover:bg-neutral-800 transition-colors text-xs font-medium w-40" href="https://play.google.com">
+<i class="w-4 h-4" data-lucide="play"></i>
+<div class="text-left">
+<div class="text-[9px] text-neutral-400 uppercase leading-none">Get it on</div>
+<div class="font-bold text-xs mt-0.5">Google Play</div>
+</div>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 14. COMPLETE OFFICIAL BLACK FOOTER (Black #000, text gray-300, pt-20 pb-12 px-16) -->
+<footer class="w-full bg-black text-neutral-300 pt-20 pb-12 mt-12">
+<div class="uber-container">
+<!-- Top Row: Logo & Help Center Link -->
+<div class="flex flex-col md:flex-row md:items-center justify-between pb-10 border-b border-neutral-800 gap-4">
+<a class="text-[28px] font-ubermove font-bold tracking-tight text-white" href="https://www.uber.com/">
+          Uber
+        </a>
+<a class="text-sm font-medium text-white hover:text-neutral-400 transition-colors" href="https://help.uber.com/">
+          Visit Help Center
+        </a>
+</div>
+<!-- Registration / public notice -->
+<div class="py-6 border-b border-neutral-800 text-xs text-neutral-400 leading-relaxed">
+        Uber Formosa registration public text: Uber Taiwan Technology Co., Ltd. registered address and business operational licensing notice under Ministry of Transportation and Communications. All ride hailing, delivery, and reserve services are operated in accordance with applicable regional laws.
+      </div>
+<!-- 4-column link directory -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-b border-neutral-800 text-sm">
+<div>
+<h4 class="font-bold text-base text-white mb-4">Company</h4>
+<ul class="space-y-3 text-neutral-400 text-xs">
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/about">About us</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/our-offerings">Our offerings</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/newsroom">Newsroom</a></li>
+<li><a class="hover:text-white transition-colors" href="https://investor.uber.com">Investors</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/blog">Blog</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/careers">Careers</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-base text-white mb-4">Products</h4>
+<ul class="space-y-3 text-neutral-400 text-xs">
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/ride">Ride</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/drive">Drive</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.ubereats.com">Deliver</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.ubereats.com">Eat</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.business.uber.com">Uber for Business</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/freight">Uber Freight</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/gift-cards">Gift cards</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-base text-white mb-4">Global citizenship</h4>
+<ul class="space-y-3 text-neutral-400 text-xs">
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/safety">Safety</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/diversity">Diversity and Inclusion</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/sustainability">Sustainability</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-base text-white mb-4">Travel</h4>
+<ul class="space-y-3 text-neutral-400 text-xs">
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/reserve">Reserve</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/airports">Airports</a></li>
+<li><a class="hover:text-white transition-colors" href="https://www.uber.com/cities">Cities</a></li>
+</ul>
+</div>
+</div>
+<!-- Social & Region utilities -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between py-8 gap-6 border-b border-neutral-800">
+<!-- Social Icons -->
+<div class="flex items-center space-x-6 text-white">
+<a aria-label="Facebook" class="hover:text-neutral-400 transition-colors" href="https://facebook.com/uber">
+<i class="w-5 h-5" data-lucide="facebook"></i>
+</a>
+<a aria-label="Twitter" class="hover:text-neutral-400 transition-colors" href="https://twitter.com/uber">
+<i class="w-5 h-5" data-lucide="twitter"></i>
+</a>
+<a aria-label="YouTube" class="hover:text-neutral-400 transition-colors" href="https://youtube.com/uber">
+<i class="w-5 h-5" data-lucide="youtube"></i>
+</a>
+<a aria-label="LinkedIn" class="hover:text-neutral-400 transition-colors" href="https://linkedin.com/company/uber-com">
+<i class="w-5 h-5" data-lucide="linkedin"></i>
+</a>
+<a aria-label="Instagram" class="hover:text-neutral-400 transition-colors" href="https://instagram.com/uber">
+<i class="w-5 h-5" data-lucide="instagram"></i>
+</a>
+</div>
+<!-- Locality Selector & App store download badges -->
+<div class="flex flex-wrap items-center gap-4">
+<button class="inline-flex items-center gap-2 text-white hover:text-neutral-300 text-xs font-medium">
+<i class="w-4 h-4" data-lucide="globe"></i>
+<span>English</span>
+</button>
+<button class="inline-flex items-center gap-2 text-white hover:text-neutral-300 text-xs font-medium">
+<i class="w-4 h-4" data-lucide="map-pin"></i>
+<span>Taipei, CA</span>
+</button>
+<div class="flex items-center gap-2 ml-2">
+<a class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-white flex items-center gap-1.5 hover:bg-neutral-800" href="https://apps.apple.com">
+<i class="w-3.5 h-3.5" data-lucide="apple"></i> App Store
+            </a>
+<a class="px-2.5 py-1 bg-neutral-900 border border-neutral-800 rounded text-[11px] text-white flex items-center gap-1.5 hover:bg-neutral-800" href="https://play.google.com">
+<i class="w-3.5 h-3.5" data-lucide="play"></i> Google Play
+            </a>
+</div>
+</div>
+</div>
+<!-- Legal & Copyright -->
+<div class="flex flex-col md:flex-row items-start md:items-center justify-between pt-8 text-xs text-neutral-400 gap-4">
+<div>
+          © 2026 Uber Technologies Inc. Unofficial visual study reconstruction.
+        </div>
+<div class="flex flex-wrap gap-6">
+<a class="hover:text-white transition-colors" href="https://www.uber.com/privacy">Privacy</a>
+<a class="hover:text-white transition-colors" href="https://www.uber.com/accessibility">Accessibility</a>
+<a class="hover:text-white transition-colors" href="https://www.uber.com/terms">Terms</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- 3. FIXED BOTTOM BAR: Fixed at viewport bottom, w-[1248px], summary & black 'See prices' -->
+<div class="fixed bottom-0 left-0 right-0 z-40 px-4 pointer-events-none">
+<div class="w-full max-w-[1248px] mx-auto bg-white shadow-2xl py-3 px-6 rounded-t-xl border border-neutral-200 pointer-events-auto flex items-center justify-between">
+<div class="flex items-center space-x-6 text-xs text-neutral-700">
+<div class="flex items-center gap-2">
+<div class="w-2.5 h-2.5 rounded-full bg-black"></div>
+<span class="font-medium text-black">Taipei, CA</span>
+</div>
+<i class="w-3.5 h-3.5 text-neutral-400" data-lucide="arrow-right"></i>
+<div class="text-neutral-500 font-medium">Enter destination to see fare breakdown</div>
+</div>
+<a class="bg-black text-white hover:bg-neutral-800 transition-colors font-medium px-6 py-2.5 rounded-lg text-xs" href="https://m.uber.com/looking">
+        See prices
+      </a>
+</div>
+</div>
+<script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+  </script>
+</body></html>

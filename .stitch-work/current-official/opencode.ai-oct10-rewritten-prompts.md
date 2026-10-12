@@ -1,0 +1,15 @@
+# OpenCode｜實際送交 Google Stitch MCP 的重寫指令
+
+Project：`9141894280460813348`；selected screens：`86adcad1acec4d809d31b9f148f44492`；device：`DESKTOP`。
+
+實際送出：2026-10-10T23:01:52.934Z；返回：2026-10-10T23:06:33.523Z。完整原始回應、HTML、提供者 PNG 與下載雜湊另存。
+
+```text
+Correct this preserved Stitch draft against the dated current anonymous public official homepage https://opencode.ai/. Source actual desktop1280x720 and narrow390x844 DPR1 browser phases were inspected on2026-10-11 Asia/Taipei (capture timestamps remain exact UTC in retained records). Produce the entire responsive long homepage, preserving the observed section order, typography, spacing, images/logos and current wording. Use plain HTML/CSS/JS and public assets; no paid runtime services or subscriptions. Keep analysis, evidence and validation notices outside the recreated page UI. This is an unofficial dated study; do not label it official/verified or assert exact consistency. Do not invent unseen sections, metrics, claims, customer quotes or demo results. Current source screenshots and DOM are different evidence types; hidden/loading source areas below are explicitly limited. Preserve original Stitch exports separately. The new output will be corrected against saved public source/assets and verified in a real browser afterward.
+
+Minimal black/brown monochrome, Berkeley Mono/IBM Plex Mono coding-agent page with thin low-contrast rules, pixel OpenCode wordmark, GitHub/Docs/Data/Zen/Go/Enterprise links and light Download button. Left38px bold monospaced desktop hero "The open source AI coding agent", Free models included or connect any model from any provider including Claude/GPT/Gemini, command-install tabs curl/npm/bun/brew/paru, copy control, then genuine demo/media slot. Current actual end-of-capture source includes What is OpenCode? feature bullets for LSP/multi-session/share links/GitHub Copilot/ChatGPT Plus Pro/75+models/terminal desktop IDE; open-source community graph/metrics with over200,000 GitHub stars,750contributors,over13,000commits and over10Mdevelopers monthly as dated source samples. DO NOT use older quick initial150k/11k/6M figures; late content loaded and height grew3314to4209. Follow Built for privacy first, closed FAQ rows, Zen models section "Access reliable optimized models for coding agents", newsletter field/Subscribe, segmented GitHub/Docs/Changelog/Discord/X footer and Anomaly legal/language links. Narrow is single column, compressed header and full-width install/control/footer rows. Some desktop demo/media area is blank in actual captured phase; do not invent a screenshot or prove animation from the DOM.
+
+Keep links to their real public official destinations. Menus, tab switches and FAQ may be front-end only; do not submit newsletter/login/payment requests or claim functioning account services. Do not add generic dashboard blocks, fabricated photos, a self-awarded fidelity score, or extra pricing/testimonial sections. Source-rendering limitations and remaining differences belong in separate review records, not invented page content.
+```
+
+後續校正以實際官網截圖、完整 DOM、有效 CSSOM 與原始素材為依據。不得臆造圖片、數字或不可見動畫；每次修改都需以當前 SHA-256 重新驗證桌面及窄版。提供者生成圖、頁高相等或 DOM 中存在文字均不能替代實際畫面。

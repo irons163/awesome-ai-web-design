@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Figma: The full-stack creative canvas</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "background": "#ffffff",
+            "on-error": "#ffffff",
+            "on-surface-variant": "#4c4546",
+            "inverse-primary": "#c6c6c6",
+            "primary-fixed": "#e2e2e2",
+            "outline": "#7e7576",
+            "on-tertiary": "#ffffff",
+            "primary-container": "#1b1b1b",
+            "surface-tint": "#5e5e5e",
+            "on-secondary-container": "#646464",
+            "surface-dim": "#dadada",
+            "surface-container-low": "#f3f3f4",
+            "surface-variant": "#e2e2e2",
+            "on-primary": "#ffffff",
+            "inverse-surface": "#2f3131",
+            "tertiary-container": "#1b1b1b",
+            "inverse-on-surface": "#f0f1f1",
+            "secondary-container": "#e2e2e2",
+            "on-primary-fixed": "#1b1b1b",
+            "on-primary-container": "#848484",
+            "on-secondary-fixed-variant": "#474747",
+            "secondary": "#5e5e5e",
+            "on-tertiary-fixed-variant": "#474747",
+            "on-tertiary-container": "#848484",
+            "tertiary-fixed": "#e2e2e2",
+            "secondary-fixed": "#e2e2e2",
+            "tertiary-fixed-dim": "#c6c6c6",
+            "error": "#ba1a1a",
+            "outline-variant": "#e5e5e5",
+            "surface-container": "#f6f6f6",
+            "on-background": "#000000",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-container-highest": "#e2e2e2",
+            "surface-bright": "#ffffff",
+            "primary-fixed-dim": "#c6c6c6",
+            "surface": "#ffffff",
+            "on-secondary-fixed": "#1b1b1b",
+            "tertiary": "#000000",
+            "on-surface": "#000000",
+            "surface-container-high": "#ebebeb",
+            "on-primary-fixed-variant": "#474747",
+            "surface-container-lowest": "#ffffff",
+            "primary": "#000000",
+            "on-tertiary-fixed": "#1b1b1b",
+            "secondary-fixed-dim": "#c6c6c6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "fontFamily": {
+            "headline": ["Inter", "sans-serif"],
+            "display": ["Inter", "sans-serif"],
+            "body": ["Inter", "sans-serif"],
+            "label": ["Inter", "sans-serif"],
+            "mono": ["JetBrains Mono", "monospace"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface antialiased selection:bg-black selection:text-white max-w-[430px] mx-auto min-h-screen border-x border-outline-variant/30 relative">
+<!-- Top Navigation Bar (Mobile 390px spec) -->
+<header class="sticky top-0 w-full z-50 bg-surface-container-lowest/90 backdrop-blur-md border-b border-outline-variant/30">
+<div class="flex justify-between items-center h-14 px-4 w-full">
+<!-- Figma Brand Mark & Wordmark -->
+<a class="flex items-center gap-2.5" href="#">
+<svg class="h-6 w-auto shrink-0" fill="none" height="33" viewbox="0 0 38 57" width="22" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-display font-semibold text-lg tracking-tight text-primary">Figma</span>
+</a>
+<!-- Actions -->
+<div class="flex items-center gap-3">
+<a class="text-xs font-medium text-primary hover:opacity-75 transition-opacity px-1" href="#login">Log in</a>
+<a class="bg-primary text-on-primary text-xs font-medium px-3.5 py-1.5 rounded-full hover:bg-neutral-800 transition-colors" href="#signup">
+          Get started
+        </a>
+</div>
+</div>
+</header>
+<main class="w-full overflow-hidden">
+<!-- Hero Section -->
+<section class="px-4 pt-8 pb-10 flex flex-col items-start border-b border-outline-variant/30">
+<!-- Config Event Pill Notice -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-low border border-outline-variant/50 text-[11px] mb-5 font-normal tracking-tight">
+<span class="font-mono text-[10px] font-semibold bg-black text-white px-1.5 py-0.5 rounded tracking-wider">CONFIG INDIA</span>
+<span class="text-neutral-700">Virtually 15 Oct.</span>
+<a class="font-medium underline hover:text-primary ml-0.5" href="#register">Register</a>
+</div>
+<!-- Main Headline: 36px font-size, 36px line-height, font-weight 400 -->
+<h1 class="text-[36px] leading-[36px] font-normal tracking-[-0.04em] text-primary mb-5">
+        The full-stack creative canvas
+      </h1>
+<p class="text-sm leading-relaxed text-neutral-600 mb-6 font-normal">
+        Figma connects everyone in the design process so teams can deliver better products, faster.
+      </p>
+<!-- Primary CTA button -->
+<a class="inline-flex items-center gap-2 bg-primary text-on-primary text-sm font-medium px-5 py-3 rounded-full hover:bg-neutral-800 transition-all mb-8 shadow-sm" href="#start">
+<span>Get started</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<!-- Hero Artwork: Sanity CDN Canvas Preview -->
+<div class="w-full rounded-xl overflow-hidden border border-outline-variant/50 bg-[#121212] relative shadow-sm">
+<div class="px-3 py-2 bg-[#1e1e1e] border-b border-neutral-800 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="w-2.5 h-2.5 rounded-full bg-[#ff5f56]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#ffbd2e]"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#27c93f]"></span>
+</div>
+<div class="text-[11px] font-mono text-neutral-400 truncate max-w-[170px]">
+            checkout-canvas-v26.fig
+          </div>
+<div class="flex items-center gap-1 text-neutral-400">
+<span class="material-symbols-outlined text-[14px]" data-icon="share">share</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="play_arrow">play_arrow</span>
+</div>
+</div>
+<!-- Real Canvas Mockup Image -->
+<div class="relative w-full aspect-[4/5] bg-neutral-900">
+<img alt="Figma creative canvas interface" class="w-full h-full object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD3J-rbhSC0FGSTStR0WxHxpcRHcKX7PXi2fkFylxMgujZrh3KB-6e3HOAEANLCi34P1678Cy11scj1Tw5jgo0yvWI40LxlBb1JD4mCsdg-NtnI14OltWd4s4FIARIsGsfIONpAZsxAkDhOH3lEWj0pTDwUM089ROH4RQCnECba9fOmjEh4vuXs2ZwSgyjrCBtNE2UZUvipfPmY7_Q48L9Wy7P1--ry2BWpH9aqmbbqwYgN20GAPPDOAZbvHI8dNSDgusfi3KnTH1p"/>
+<!-- Live dynamic interaction chip overlay -->
+<div class="absolute bottom-3 left-3 right-3 bg-white/95 backdrop-blur-md rounded-lg p-2.5 border border-outline-variant/40 shadow-lg flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-mono font-medium text-black">Dev Mode: Synced with main</span>
+</div>
+<span class="text-[11px] font-mono text-neutral-500">24 layers ready</span>
+</div>
+</div>
+</div>
+</section>
+<!-- AI-Native Canvas Section -->
+<section class="px-4 py-12 border-b border-outline-variant/30">
+<div class="mb-6">
+<span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mb-2 block">AI Canvas</span>
+<h2 class="text-[24px] leading-[28.8px] font-normal tracking-[-0.03em] text-primary mb-3">
+          Move fast in the right direction on an AI-native canvas.
+        </h2>
+<p class="text-sm leading-relaxed text-neutral-600">
+          Teammates and AI agents work in the same space with shared context. Generate new ideas, refine, and align—together.
+        </p>
+</div>
+<!-- AI Prompt Interaction & Canvas Graphic Card -->
+<div class="w-full rounded-xl border border-outline-variant/40 bg-surface-container-low p-3.5 space-y-3 mb-6">
+<!-- Mock prompt bar -->
+<div class="bg-surface-container-lowest rounded-lg border border-outline-variant/40 p-3 shadow-xs">
+<div class="flex items-center gap-2 text-neutral-400 mb-2">
+<span class="material-symbols-outlined text-[16px] text-purple-600" data-icon="auto_awesome">auto_awesome</span>
+<span class="text-[11px] font-mono uppercase font-semibold text-purple-700">Figma Agent</span>
+</div>
+<p class="text-xs text-neutral-800 font-mono leading-snug">
+            "Generate 3 alternate layout directions for checkout flow..."
+          </p>
+<div class="mt-2.5 flex items-center justify-between pt-2 border-t border-outline-variant/20">
+<div class="flex items-center gap-1.5">
+<span class="text-[10px] bg-purple-50 text-purple-700 border border-purple-200 px-1.5 py-0.5 rounded font-mono">Mobile App</span>
+<span class="text-[10px] bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded font-mono">3 variations</span>
+</div>
+<span class="text-[10px] text-neutral-400 font-mono">0.4s</span>
+</div>
+</div>
+<!-- 3 generated card variations preview -->
+<div class="grid grid-cols-3 gap-2">
+<!-- Direction A -->
+<div class="rounded-md border border-outline-variant/40 bg-surface-container-lowest p-2 text-center">
+<div class="h-14 bg-neutral-100 rounded mb-1.5 flex flex-col items-center justify-center p-1">
+<div class="w-full h-1 bg-neutral-300 rounded mb-1"></div>
+<div class="w-2/3 h-1 bg-neutral-300 rounded mb-1"></div>
+<div class="w-full h-3 bg-neutral-900 rounded mt-auto"></div>
+</div>
+<span class="text-[10px] font-mono text-neutral-600 block">Express</span>
+</div>
+<!-- Direction B (Selected) -->
+<div class="rounded-md border-2 border-black bg-surface-container-lowest p-2 text-center relative">
+<span class="absolute -top-1.5 right-1 bg-black text-white text-[8px] font-mono px-1 rounded">Chosen</span>
+<div class="h-14 bg-neutral-100 rounded mb-1.5 flex flex-col items-center justify-center p-1">
+<div class="w-3/4 h-2 bg-neutral-300 rounded mb-1"></div>
+<div class="w-full h-4 bg-emerald-50 border border-emerald-300 rounded mb-1"></div>
+<div class="w-full h-3 bg-neutral-900 rounded mt-auto"></div>
+</div>
+<span class="text-[10px] font-mono text-black font-semibold block">One-click</span>
+</div>
+<!-- Direction C -->
+<div class="rounded-md border border-outline-variant/40 bg-surface-container-lowest p-2 text-center">
+<div class="h-14 bg-neutral-100 rounded mb-1.5 flex flex-col items-center justify-center p-1">
+<div class="w-full h-1 bg-neutral-300 rounded mb-1"></div>
+<div class="w-1/2 h-2 bg-neutral-200 rounded mb-1"></div>
+<div class="w-full h-3 bg-neutral-400 rounded mt-auto"></div>
+</div>
+<span class="text-[10px] font-mono text-neutral-600 block">Stacked</span>
+</div>
+</div>
+</div>
+<!-- Collaborator Callout Card -->
+<div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4">
+<h3 class="text-sm font-semibold text-primary mb-1.5">Your built-in creative collaborator</h3>
+<p class="text-xs leading-relaxed text-neutral-600 mb-3">
+          Ask Figma’s agent to add motion to designs, document your design systems, implement feedback, and more.
+        </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#agent">
+<span>Explore Figma's agent</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Product Development Process Section -->
+<section class="px-4 py-12 border-b border-outline-variant/30">
+<div class="mb-6">
+<span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mb-2 block">All-in-one Workflow</span>
+<h2 class="text-[24px] leading-[28.8px] font-normal tracking-[-0.03em] text-primary mb-2">
+          One workspace for your entire product development process.
+        </h2>
+<p class="text-sm leading-relaxed text-neutral-600">
+          Made so your whole team can go from WIP to ship, together.
+        </p>
+</div>
+<!-- Product Mockup Card: Fintech Core 2.0 -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-lowest overflow-hidden mb-6 shadow-xs">
+<!-- App bar within mock -->
+<div class="px-3 py-2 bg-neutral-900 text-white flex items-center justify-between text-xs font-mono">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Fintech Core 2.0</span>
+</div>
+<div class="flex items-center gap-1.5 text-[10px] bg-neutral-800 px-2 py-0.5 rounded border border-neutral-700">
+<span class="material-symbols-outlined text-[12px] text-emerald-400" data-icon="code">code</span>
+<span>Dev Mode</span>
+</div>
+</div>
+<!-- Visual Canvas mockup representation -->
+<div class="p-4 bg-surface-container-low flex flex-col gap-3">
+<!-- Checkout Flow & Tokens -->
+<div class="rounded-lg border border-outline-variant/50 bg-white p-3 shadow-xs">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[11px] font-semibold text-neutral-900 font-mono">Checkout Flow &amp; Tokens</span>
+<span class="text-[10px] bg-neutral-100 text-neutral-600 px-1.5 py-0.5 rounded">Ready for Dev</span>
+</div>
+<div class="rounded bg-neutral-50 border border-neutral-200 p-2.5 flex items-center justify-between">
+<div>
+<p class="text-[10px] font-mono text-neutral-400 uppercase">Transfer amount</p>
+<p class="text-base font-semibold text-neutral-900 font-mono">$1,480.00</p>
+</div>
+<div class="h-7 px-2.5 rounded bg-black text-white text-[11px] flex items-center font-medium">
+                Send Payment
+              </div>
+</div>
+<!-- Inspect metadata -->
+<div class="mt-2.5 pt-2 border-t border-neutral-100 flex items-center justify-between text-[10px] font-mono text-neutral-500">
+<span>Token: <span class="text-neutral-900">$radius-lg</span></span>
+<span>Spacing: <span class="text-neutral-900">16px auto</span></span>
+</div>
+</div>
+</div>
+</div>
+<!-- 2 Feature sub-cards -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Sub card 1 -->
+<div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="draw">draw</span>
+</div>
+<h3 class="text-sm font-semibold text-primary mb-1">Design anything you can imagine</h3>
+<p class="text-xs leading-relaxed text-neutral-600 mb-3">
+            Turn your ideas into apps, websites, and products.
+          </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#design-tools">
+<span>Explore design tools</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Sub card 2 -->
+<div class="rounded-xl border border-outline-variant/30 bg-surface-container-lowest p-4">
+<div class="w-8 h-8 rounded-lg bg-surface-container-low flex items-center justify-center mb-3">
+<span class="material-symbols-outlined text-primary text-[18px]" data-icon="terminal">terminal</span>
+</div>
+<h3 class="text-sm font-semibold text-primary mb-1">Build with intention</h3>
+<p class="text-xs leading-relaxed text-neutral-600 mb-3">
+            Dev tools that take you all the way to production.
+          </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#build-tools">
+<span>Explore build tools</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Powerfully Expressive Section -->
+<section class="px-4 py-12 border-b border-outline-variant/30 bg-surface">
+<div class="mb-6">
+<span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mb-2 block">Craft &amp; Precision</span>
+<h2 class="text-[24px] leading-[28.8px] font-normal tracking-[-0.03em] text-primary mb-2">
+          Powerfully expressive. Incredibly precise.
+        </h2>
+<p class="text-sm leading-relaxed text-neutral-600 mb-2">
+          Every technical tool you need to dial in the details.
+        </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#figma-design">
+<span>Explore Figma Design</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Feature Grid Bento -->
+<div class="space-y-3">
+<!-- 1: Variable Typography Engine Card -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-3 text-[11px] font-mono text-neutral-500">
+<span>VARIABLE TYPOGRAPHY</span>
+<span>wght: 100 - 900</span>
+</div>
+<div class="bg-black text-white p-4 rounded-lg overflow-hidden space-y-1">
+<p class="text-xl font-extralight tracking-widest uppercase">CHROMA</p>
+<p class="text-2xl font-black tracking-tight uppercase">KINETIC</p>
+<p class="text-[10px] font-mono text-neutral-400 tracking-wider pt-2 border-t border-neutral-800">
+              FLUIDITY PRECISION RESONANCE
+            </p>
+</div>
+</div>
+<!-- 2: Vector Network & Curve Handles Card -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-2 text-[11px] font-mono text-neutral-500">
+<span>VECTOR NETWORKS</span>
+<span>Bézier Precision</span>
+</div>
+<div class="h-28 rounded-lg bg-surface-container-lowest border border-outline-variant/40 relative flex items-center justify-center overflow-hidden">
+<!-- Simulated Bézier Curve Graphic -->
+<svg class="w-full h-full" viewbox="0 0 300 100">
+<path d="M 30,80 C 80,10 220,90 270,20" fill="none" stroke="#000" stroke-width="2"></path>
+<!-- Handles -->
+<line stroke="#1ABCFE" stroke-dasharray="2,2" stroke-width="1.5" x1="30" x2="80" y1="80" y2="10"></line>
+<line stroke="#1ABCFE" stroke-dasharray="2,2" stroke-width="1.5" x1="270" x2="220" y1="20" y2="90"></line>
+<circle cx="30" cy="80" fill="#000" r="4"></circle>
+<circle cx="80" cy="10" fill="#1ABCFE" r="3.5"></circle>
+<circle cx="270" cy="20" fill="#000" r="4"></circle>
+<circle cx="220" cy="90" fill="#1ABCFE" r="3.5"></circle>
+</svg>
+<span class="absolute bottom-2 left-2 text-[10px] font-mono bg-neutral-100 text-neutral-700 px-1.5 py-0.5 rounded">
+              Complex curve handles &amp; nodes
+            </span>
+</div>
+</div>
+<!-- 3: Blend Modes & Color Profiles (Butterfly Visual) -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-4">
+<div class="flex items-center justify-between mb-2 text-[11px] font-mono text-neutral-500">
+<span>BLEND MODES</span>
+<span>Display P3 Color</span>
+</div>
+<div class="h-28 rounded-lg bg-neutral-950 flex items-center justify-center relative overflow-hidden">
+<!-- Stylized color spectrum butterfly visual -->
+<div class="relative flex items-center justify-center">
+<div class="w-16 h-16 rounded-full bg-[#FF7262] opacity-80 mix-blend-screen blur-sm transform -translate-x-3"></div>
+<div class="w-16 h-16 rounded-full bg-[#1ABCFE] opacity-80 mix-blend-screen blur-sm transform translate-x-3"></div>
+<div class="w-12 h-12 rounded-full bg-[#0ACF83] opacity-70 mix-blend-screen blur-md absolute"></div>
+<!-- Minimal wing silhouette line -->
+<span class="absolute font-mono text-[11px] text-white tracking-widest font-semibold uppercase">P3 Spectral</span>
+</div>
+<span class="absolute bottom-2 right-2 text-[9px] font-mono text-neutral-400">Difference / Overlay</span>
+</div>
+</div>
+<!-- 4: Text on Path & Noise Card -->
+<div class="grid grid-cols-2 gap-3">
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-3">
+<span class="text-[10px] font-mono text-neutral-500 block mb-2">LAYOUT GRIDS</span>
+<div class="h-16 bg-surface-container-lowest rounded border border-neutral-200 flex items-center justify-center p-2">
+<div class="w-full h-full grid grid-cols-4 gap-1 opacity-60">
+<div class="bg-red-100 border border-red-200 rounded-xs"></div>
+<div class="bg-red-100 border border-red-200 rounded-xs"></div>
+<div class="bg-red-100 border border-red-200 rounded-xs"></div>
+<div class="bg-red-100 border border-red-200 rounded-xs"></div>
+</div>
+</div>
+<p class="text-[11px] text-neutral-800 font-medium mt-2">Text on path &amp; grids</p>
+</div>
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-3">
+<span class="text-[10px] font-mono text-neutral-500 block mb-2">TEXTURE &amp; NOISE</span>
+<div class="h-16 bg-neutral-900 rounded border border-neutral-800 flex items-center justify-center relative overflow-hidden">
+<div class="absolute inset-0 opacity-25 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:6px_6px]"></div>
+<span class="text-[10px] font-mono text-neutral-200 z-10">Generative shaders</span>
+</div>
+<p class="text-[11px] text-neutral-800 font-medium mt-2">Custom shaders</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Start with Design Context Section -->
+<section class="px-4 py-12 border-b border-outline-variant/30">
+<div class="mb-6">
+<span class="text-[11px] font-mono uppercase tracking-wider text-neutral-500 mb-2 block">Figma Make</span>
+<h2 class="text-[24px] leading-[28.8px] font-normal tracking-[-0.03em] text-primary mb-2">
+          Start with design context. Build with consistency.
+        </h2>
+<p class="text-sm leading-relaxed text-neutral-600 mb-3">
+          Your context, codebase, and agents stay connected so what you design is what gets shipped.
+        </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#figma-make">
+<span>Explore Figma Make</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Code & UI Sync Card: PaymentMethodCard -->
+<div class="rounded-xl border border-neutral-800 bg-[#0d0d0d] text-white p-3.5 shadow-sm overflow-hidden">
+<!-- Tab Bar -->
+<div class="flex items-center justify-between pb-2.5 mb-2.5 border-b border-neutral-800 text-[11px] font-mono">
+<div class="flex items-center gap-2">
+<span class="text-emerald-400 font-medium">PaymentMethodCard.tsx</span>
+<span class="text-[10px] bg-neutral-800 text-neutral-400 px-1.5 py-0.5 rounded">React + TS</span>
+</div>
+<span class="text-neutral-500">Dev Mode</span>
+</div>
+<!-- Code Snippet -->
+<pre class="font-mono text-[11px] leading-relaxed text-neutral-300 overflow-x-auto p-1 bg-black/40 rounded"><code><span class="text-purple-400">export const</span> <span class="text-yellow-300">PaymentMethodCard</span> = ({
+  selectedMethod,
+  onAuthorize
+}: <span class="text-blue-300">Props</span>) =&gt; {
+  <span class="text-neutral-500">// Synced with Figma Tokens v2</span>
+  <span class="text-purple-400">return</span> (
+    &lt;<span class="text-emerald-400">Card</span> elevation={<span class="text-neutral-300">Tokens.Shadow.Low</span>}&gt;
+      &lt;<span class="text-emerald-400">Text</span> variant=<span class="text-green-300">"label-sm"</span>&gt;
+        {selectedMethod.title}
+      &lt;/<span class="text-emerald-400">Text</span>&gt;
+    &lt;/<span class="text-emerald-400">Card</span>&gt;
+  );
+};</code></pre>
+<!-- Sync status pill -->
+<div class="mt-3 pt-2.5 border-t border-neutral-800 flex items-center justify-between text-[11px] font-mono text-neutral-400">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+<span>Design token mapping 100% matched</span>
+</div>
+<span class="text-neutral-300 font-semibold underline cursor-pointer">Inspect</span>
+</div>
+</div>
+</section>
+<!-- Social Proof & Customer Stories -->
+<section class="px-4 py-12 border-b border-outline-variant/30">
+<div class="mb-6">
+<h2 class="text-[32px] leading-[35.2px] font-normal tracking-[-0.04em] text-primary">
+          The products you love are designed in Figma
+        </h2>
+</div>
+<!-- Testimonial Quote Card -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-low p-4 mb-4">
+<p class="text-sm leading-relaxed text-neutral-800 font-normal mb-4 italic">
+          “Everyone is able to influence, inspire, and give input without ever leaving the design file. That creates a really transparent, open, and honest process throughout the whole project.”
+        </p>
+<div class="flex items-center gap-3">
+<img alt="Francisco Seiz" class="w-10 h-10 rounded-full object-cover border border-outline-variant/50" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5jA2fY7IPI1VGDClo_3-QwUakVhOZWPhGwFWJcpQPnnxBeOTb12f5Igw0he_v7cYfH7fuaRt3v4DkmK9PdU4mWotBLPGNG-sMigQnLU_nzrTn1sxrd-tFH6mkf6RNTDreFlxauprz4SSjyyiD9ClAa5Pw0NO-E94rxSGv1s9TABTngsCKro6iD3BTxNQ9QyfIPwKoKMrjEYp3-0i0lgDky4CZvFSRGQx_DtT4OM2OmTa1LH2nE1Pd9tfy4YWEUIprpNbhi2KEnUa2"/>
+<div>
+<h4 class="text-xs font-semibold text-primary">Francisco Seiz</h4>
+<p class="text-[11px] text-neutral-500">Senior Design Director, Code and Theory</p>
+</div>
+</div>
+</div>
+<!-- Fortune 500 Stat Card -->
+<div class="rounded-xl border border-outline-variant/40 bg-surface-container-lowest p-5 text-center mb-8">
+<div class="text-[56px] font-bold leading-none tracking-tight text-primary mb-1">
+          95%
+        </div>
+<p class="text-sm font-medium text-neutral-800 mb-1">
+          of the Fortune 500 uses Figma
+        </p>
+<span class="text-[11px] text-neutral-400 font-mono">
+          Based on data from March 2025.
+        </span>
+</div>
+<!-- Logo Bar (Clean mono / sans corporate list) -->
+<div class="w-full">
+<p class="text-[11px] font-mono uppercase tracking-wider text-neutral-400 mb-3 text-center">Trusted by teams everywhere</p>
+<div class="grid grid-cols-3 gap-y-4 gap-x-2 items-center justify-items-center text-xs font-semibold tracking-tight text-neutral-700">
+<span class="font-sans font-bold">airbnb</span>
+<span class="font-sans font-extrabold uppercase text-[11px] tracking-widest">ATLASSIAN</span>
+<span class="font-sans font-semibold">Dropbox</span>
+<span class="font-sans lowercase font-bold">duolingo</span>
+<span class="font-sans font-bold">GitHub</span>
+<span class="font-sans text-[11px]">mercado libre</span>
+<span class="font-sans font-semibold">Microsoft</span>
+<span class="font-sans font-black tracking-widest text-[11px]">NETFLIX</span>
+<span class="font-serif italic font-bold">Pentagram</span>
+<span class="font-sans font-bold">slack</span>
+<span class="font-sans font-black">stripe</span>
+<span class="font-serif text-[10px] text-center font-bold">The New York Times</span>
+<span class="font-sans lowercase font-bold col-span-3 text-center mt-1">zoom</span>
+</div>
+</div>
+</section>
+<!-- Call to Action Banner -->
+<section class="px-4 py-12 bg-black text-white text-center">
+<h2 class="text-[32px] leading-[35.2px] font-normal tracking-[-0.04em] mb-4">
+        Ideas no longer have to wait their turn
+      </h2>
+<p class="text-xs text-neutral-400 mb-6 max-w-xs mx-auto">
+        Sign up for free and start designing with your team today.
+      </p>
+<a class="inline-block bg-white text-black font-medium text-sm px-6 py-2.5 rounded-full hover:bg-neutral-200 transition-colors" href="#get-started">
+        Get started
+      </a>
+</section>
+<!-- Explore Templates / Community Showcase -->
+<section class="px-4 py-12 border-b border-outline-variant/30">
+<div class="mb-5">
+<h2 class="text-[32px] leading-[35.2px] font-normal tracking-[-0.04em] text-primary mb-2">
+          Explore what you can do in Figma.
+        </h2>
+<p class="text-xs leading-relaxed text-neutral-600 mb-2">
+          Browse resources made by the community.
+        </p>
+<a class="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline" href="#templates">
+<span>Browse all templates</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Horizontal scrolling template category badges / cards -->
+<div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-neutral-900 text-white rounded-full">UI kits</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Websites</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Social media</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Mobile apps</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Presentations</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Wireframes</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Illustrations</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Portfolios</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Web ads</span>
+<span class="shrink-0 text-xs font-medium px-3 py-1.5 bg-surface-container-low border border-outline-variant/40 rounded-full text-neutral-800">Icons</span>
+</div>
+<!-- Preview card showcasing community file -->
+<div class="mt-4 rounded-xl border border-outline-variant/40 overflow-hidden bg-surface-container-lowest">
+<div class="h-36 bg-gradient-to-tr from-amber-100 via-rose-100 to-indigo-100 p-4 flex flex-col justify-between">
+<span class="text-[10px] font-mono uppercase bg-white/80 px-2 py-0.5 rounded-full w-max text-black">Featured UI Kit</span>
+<div>
+<p class="text-sm font-semibold text-neutral-900">Design System Starter 2026</p>
+<p class="text-[11px] text-neutral-600">Over 500 components, variables, &amp; tokens</p>
+</div>
+</div>
+<div class="p-3 flex items-center justify-between text-xs text-neutral-600 border-t border-outline-variant/30">
+<span class="font-mono text-[11px]">By Figma Community</span>
+<span class="font-medium text-black underline">Duplicate file</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Mobile Multi-Column Accordion Layout) -->
+<footer class="w-full bg-surface-container-lowest border-t border-outline-variant/40 px-4 py-12">
+<!-- Brand & Socials -->
+<div class="flex items-center justify-between pb-8 mb-6 border-b border-outline-variant/30">
+<div class="flex items-center gap-2">
+<svg class="h-5 w-auto" fill="none" height="27" viewbox="0 0 38 57" width="18" xmlns="http://www.w3.org/2000/svg">
+<path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"></path>
+<path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"></path>
+<path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"></path>
+<path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"></path>
+<path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"></path>
+</svg>
+<span class="font-bold text-lg tracking-tight">Figma</span>
+</div>
+<!-- Social handles -->
+<div class="flex items-center gap-3 text-neutral-600">
+<a aria-label="X (Twitter)" class="text-xs hover:text-black font-semibold" href="#x">X</a>
+<a aria-label="YouTube" class="text-xs hover:text-black font-semibold" href="#youtube">YouTube</a>
+<a aria-label="Instagram" class="text-xs hover:text-black font-semibold" href="#instagram">Instagram</a>
+</div>
+</div>
+<!-- Categorized Columns (Mobile 12px mono headers) -->
+<div class="space-y-6 text-sm">
+<!-- PRODUCT -->
+<div>
+<p class="font-mono text-[12px] font-semibold text-neutral-900 tracking-wider mb-2.5">PRODUCT</p>
+<ul class="space-y-2 text-xs text-neutral-600">
+<li><a class="hover:underline hover:text-primary" href="#figma-design">Figma Design</a></li>
+<li><a class="hover:underline hover:text-primary" href="#figjam">FigJam</a></li>
+<li><a class="hover:underline hover:text-primary" href="#dev-mode">Dev Mode</a></li>
+<li><a class="hover:underline hover:text-primary" href="#figma-make">Figma Make</a></li>
+<li><a class="hover:underline hover:text-primary" href="#design-systems">Design Systems</a></li>
+<li><a class="hover:underline hover:text-primary" href="#downloads">Downloads</a></li>
+</ul>
+</div>
+<!-- PLANS -->
+<div>
+<p class="font-mono text-[12px] font-semibold text-neutral-900 tracking-wider mb-2.5">PLANS</p>
+<ul class="space-y-2 text-xs text-neutral-600">
+<li><a class="hover:underline hover:text-primary" href="#starter">Starter</a></li>
+<li><a class="hover:underline hover:text-primary" href="#professional">Professional</a></li>
+<li><a class="hover:underline hover:text-primary" href="#organization">Organization</a></li>
+<li><a class="hover:underline hover:text-primary" href="#enterprise">Enterprise</a></li>
+</ul>
+</div>
+<!-- USE CASES -->
+<div>
+<p class="font-mono text-[12px] font-semibold text-neutral-900 tracking-wider mb-2.5">USE CASES</p>
+<ul class="space-y-2 text-xs text-neutral-600">
+<li><a class="hover:underline hover:text-primary" href="#ui-design">UI design</a></li>
+<li><a class="hover:underline hover:text-primary" href="#ux-design">UX design</a></li>
+<li><a class="hover:underline hover:text-primary" href="#prototyping">Prototyping</a></li>
+<li><a class="hover:underline hover:text-primary" href="#brainstorming">Brainstorming</a></li>
+<li><a class="hover:underline hover:text-primary" href="#wireframing">Wireframing</a></li>
+<li><a class="hover:underline hover:text-primary" href="#diagramming">Diagramming</a></li>
+</ul>
+</div>
+<!-- RESOURCES -->
+<div>
+<p class="font-mono text-[12px] font-semibold text-neutral-900 tracking-wider mb-2.5">RESOURCES</p>
+<ul class="space-y-2 text-xs text-neutral-600">
+<li><a class="hover:underline hover:text-primary" href="#blog">Blog</a></li>
+<li><a class="hover:underline hover:text-primary" href="#community">Community</a></li>
+<li><a class="hover:underline hover:text-primary" href="#templates">Templates</a></li>
+<li><a class="hover:underline hover:text-primary" href="#learn-design">Learn design</a></li>
+<li><a class="hover:underline hover:text-primary" href="#help-center">Help center</a></li>
+<li><a class="hover:underline hover:text-primary" href="#support">Support</a></li>
+</ul>
+</div>
+<!-- COMPANY -->
+<div>
+<p class="font-mono text-[12px] font-semibold text-neutral-900 tracking-wider mb-2.5">COMPANY</p>
+<ul class="space-y-2 text-xs text-neutral-600">
+<li><a class="hover:underline hover:text-primary" href="#about">About us</a></li>
+<li><a class="hover:underline hover:text-primary" href="#careers">Careers</a></li>
+<li><a class="hover:underline hover:text-primary" href="#newsroom">Newsroom</a></li>
+<li><a class="hover:underline hover:text-primary" href="#security">Security</a></li>
+<li><a class="hover:underline hover:text-primary" href="#privacy">Privacy</a></li>
+<li><a class="hover:underline hover:text-primary" href="#contact">Contact</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Meta Bar -->
+<div class="mt-10 pt-6 border-t border-outline-variant/30 flex flex-col gap-2 text-[11px] text-neutral-500 font-mono">
+<div class="flex items-center justify-between">
+<span>© 2026 Figma, Inc.</span>
+<span class="flex items-center gap-1 text-neutral-700 font-medium">
+<span class="material-symbols-outlined text-[12px]" data-icon="language">language</span>
+          English (US)
+        </span>
+</div>
+<div class="flex items-center gap-3 text-neutral-600">
+<a class="hover:underline" href="#privacy">Privacy policy</a>
+<span>·</span>
+<a class="hover:underline" href="#terms">Terms of service</a>
+</div>
+</div>
+</footer>
+</body></html>

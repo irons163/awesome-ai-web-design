@@ -4,9 +4,9 @@ const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&am
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
 let OFFICIAL_DRAFTS = {};
-let officialDraftsState = 'loading', officialDraftDates = {};
+let officialDraftsState = 'loading', officialDraftDates = {}, officialStudies = {};
 let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'official';
-let documentText = '', documentRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
+let documentText = '', documentRequest = 0, currentPromptText = '', currentPromptRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
 try { const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); saved = new Set(Array.isArray(value) ? value.filter(x => typeof x === 'string') : []); }
 catch { saved = new Set(); }
@@ -82,7 +82,8 @@ function setPreview(view) {
   const official = view === 'official';
   const draft = OFFICIAL_DRAFTS[currentDesign.slug];
   $('#official-preview').hidden = !official;
-  $('#preview-caption').textContent = official ? '官網重製草稿 · 待驗收' : '原始 Google Stitch 生成範例';
+  const study = officialStudies[currentDesign.slug];
+  $('#preview-caption').textContent = official ? `官網重製研究 · ${study?.label || '尚未驗證'}` : '原始 Google Stitch 生成範例';
   $('#preview-pending').hidden = official || ready;
   $('#preview-image').hidden = official || !ready || view !== 'image';
   $('#preview-frame').hidden = official || !ready || view !== 'html';
@@ -93,7 +94,7 @@ function setPreview(view) {
     const link = $('#official-preview-link');
     const hasDraft = !!draft;
     if (hasDraft) {
-      status.textContent = `參考日期：${officialDraftDates[currentDesign.slug]}。這份官網重製草稿尚未完成逐頁視覺驗收。`;
+      status.textContent = `參考日期：${officialDraftDates[currentDesign.slug]}。${study?.label || '尚未驗證'}。${study?.scope || '尚未完成目前主要畫面的比對。'}`;
       link.href = `official-drafts/${draft}.html`;
       link.textContent = `開啟 ${currentDesign.name} 官網重製草稿 ↗`;
     } else {
@@ -144,7 +145,7 @@ async function loadDocument() {
 function openDesign(item) {
   if (currentDesign?.slug === item.slug && $('#design-dialog').open) return;
   lastFocused = document.activeElement;
-  documentRequest++; documentText = ''; currentDesign = item;
+  documentRequest++; currentPromptRequest++; documentText = ''; currentPromptText = ''; currentDesign = item;
   $('#detail-title').textContent = item.name;
   $('#detail-description').textContent = item.description;
   $('#detail-category').textContent = item.categoryLabel;
@@ -165,6 +166,41 @@ function showOfficialDraft(item) {
   $('#official-draft-note').hidden = !draft;
   if (draft) $('#official-draft-link').href = `official-drafts/${draft}.html`;
   else $('#official-draft-link').removeAttribute('href');
+  const study = officialStudies[item.slug];
+  $('#official-study-details').hidden = !study;
+  $('#official-study-scope').textContent = study?.scope || '';
+  $('#official-study-limits').innerHTML = (study?.limits || []).map(value => `<li>${escapeHTML(value)}</li>`).join('');
+  $('#official-study-links').innerHTML = Object.entries(study?.links || {}).map(([key, href]) =>
+    `<a href="${escapeHTML(href)}" target="_blank" rel="noopener">${({analysis:'目前設計分析',prompts:'重寫 AI 指令',review:'畫面校正紀錄'})[key]} ↗</a>`).join('');
+  const analysis = study?.links.analysis;
+  $('#current-analysis-note').hidden = !analysis;
+  if (analysis) $('#current-analysis-link').href = analysis;
+  const prompts = study?.links.prompts;
+  $('#current-prompt-details').hidden = !prompts;
+  $('#current-prompt-details').open = false;
+  $('#current-prompt-text').textContent = '';
+  if (prompts) $('#download-current-prompts').href = prompts;
+  $('#copy-current-prompt').disabled = true;
+}
+async function loadCurrentPrompt() {
+  if (!$('#current-prompt-details').open || currentPromptText) return;
+  const slug = currentDesign?.slug, href = officialStudies[slug]?.links.prompts;
+  if (!href) return;
+  const request = ++currentPromptRequest;
+  $('#current-prompt-text').textContent = '正在讀取目前官網的重寫指令…';
+  try {
+    const response = await fetch(href);
+    if (!response.ok) throw new Error('Current prompt unavailable');
+    const text = await response.text();
+    if (currentDesign?.slug !== slug || request !== currentPromptRequest) return;
+    // Keep the exact dated prompt, including any recorded transcription fix.
+    currentPromptText = text;
+    $('#current-prompt-text').textContent = text;
+    $('#copy-current-prompt').disabled = false;
+  } catch {
+    if (request !== currentPromptRequest) return;
+    $('#current-prompt-text').textContent = '目前無法讀取指令，請使用下載連結。';
+  }
 }
 function dismiss() {
   documentRequest++;
@@ -224,15 +260,25 @@ async function loadOfficialDrafts() {
         file: match[1],
         name: link.textContent.replace(/\s*↗\s*$/, '').trim(),
         date: row.querySelector('td:last-child')?.textContent.trim() || '日期未記錄',
+        status: row.dataset.status || 'unverified',
+        label: row.querySelector('td.draft strong')?.textContent.trim() || '尚未驗證',
+        scope: row.querySelector('.study-scope')?.textContent.trim() || '尚未完成目前主要畫面的比對。',
+        limits: [...row.querySelectorAll('.study-limits li')].map(node => node.textContent.trim()),
+        links: Object.fromEntries(['analysis','prompts','review'].flatMap(key => {
+          const href = row.querySelector(`.study-${key}`)?.getAttribute('href');
+          return /^official-drafts\/[a-z0-9.-]+\.md$/.test(href || '') ? [[key, href]] : [];
+        })),
       }];
     });
     if (!drafts.length) throw new Error('No draft records');
     OFFICIAL_DRAFTS = Object.fromEntries(drafts.map(item => [item.slug, item.file]));
     officialDraftDates = Object.fromEntries(drafts.map(item => [item.slug, item.date]));
+    officialStudies = Object.fromEntries(drafts.map(item => [item.slug, item]));
     officialDraftsState = 'ready';
-    count.textContent = `${drafts.length} 份草稿 · 0 份完成視覺驗收`;
+    const compared = drafts.filter(item => item.status === 'compared_with_differences').length;
+    count.textContent = `${drafts.length} 份草稿 · ${compared} 份已比對主要畫面，仍有差異 · ${drafts.length - compared} 份尚未驗證`;
     grid.innerHTML = drafts.map(item =>
-      `<a href="official-drafts/${escapeHTML(item.file)}.html">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} 草稿 · 待驗收 ↗</span></a>`
+      `<a href="official-drafts/${escapeHTML(item.file)}.html" class="study-${item.status}">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} · ${escapeHTML(item.label)} ↗</span></a>`
     ).join('');
     if (currentDesign) {
       showOfficialDraft(currentDesign);
@@ -275,6 +321,8 @@ $('.detail-tabs').addEventListener('keydown', event => {
 });
 $('.preview-toolbar').addEventListener('click', event => { const button = event.target.closest('[data-preview]'); if (button) setPreview(button.dataset.preview); });
 $('#copy-document').addEventListener('click', event => copyText(documentText, event.currentTarget));
+$('#current-prompt-details').addEventListener('toggle', loadCurrentPrompt);
+$('#copy-current-prompt').addEventListener('click', event => copyText(currentPromptText, event.currentTarget));
 $('#prompt-list').addEventListener('click', event => { const button = event.target.closest('[data-copy-prompt]'); if (button) copyText(currentDesign.prompts[Number(button.dataset.copyPrompt)].text, button); });
 window.addEventListener('hashchange', route);
 window.addEventListener('storage', event => {

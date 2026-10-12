@@ -1,0 +1,15 @@
+# MongoDB｜本次送交 Google Stitch MCP 的重寫指令
+
+以下保留實際送出的完整指令，原始請求／回應與原始下載另存。生成預覽不能替代瀏覽器實際畫面驗證。
+
+## mongodb-oct10-stitch-correction-request.json
+
+Project: `7009341098036768184`；Device: `DESKTOP`；Selected screens: `04b3537e0b414f559f0487cfa469cd3e`
+
+```text
+Correct the MongoDB desktop study to today's actual public homepage https://www.mongodb.com/ (redirected in this public session to https://www.mongodb.com/zh-tw, English text), observed 2026-10-10 at1280x720 and390x844 narrow desktop-UA. September navy Builder/BusinessLeader design is obsolete. Today background is pale cream #fffff4, dark slate ink, green buttons, condensed strong headings, Sohne body. Green announcement strip44px tall; cream95px desktop nav with darkMongoDBwordmark atx32, Products/Resources/Solutions/Company/Pricing, moremenu, green GetStarted. Hero is split, not centered. Leftx48 width530; eyebrow MONGODB ATLAS aty282, condensed64px exact headline at377: EVERY WORKLOAD. ANY CLOUD. / ONE PLATFORM. Bodyaty586 reads Combine real-time operational data, vectors, and elastic scale in a single intelligent data platform built on the document model—deploy across any cloud or your own infrastructure. Green GetStarted and outlined Documentation CTAs. Rightx652y257 width580 displays actual darkslate codepanel atlas_vector_search.js with MongoDB vector search JSON; use realpublicSVG https://images.contentstack.io/v3/assets/blt7151619cb9560896/blt2f481a2fe943cfa7/6734948cd01b2c5c938ebe7f/homepage_hero_vs_static.svg . No AIModelsdashboard, noselector orassistantfield. Trustedbylogos follow at1004: Anthropic,Factory,Mercor,etc. Mainsectionorder: Level Up Your MongoDB Skills aty1380 with AtlasLearningHub/BuildSmarterwithAI/VoyageAI threecards; MongoDBAtlas aty2072 subtitle The multi-cloud, intelligent data platform for any use case and8verticalcapabilities with defaultVectorSearchUseCases; Loved by builders, trusted by enterprises aty2950 with Victoria'sSecret selected200databases/240%APIperformance andcasestudy; Works seamlessly with your tech stack aty4502, real partnerlogos; darknavy finalcta The Intelligent Data Platform for Builders aty5222, START TODAY / Give your agents the whole picture and exactbody History tells agents what happened. Real-time data tells them what’s happening. Retrieval and memory help them act with context. withGetStarted; MORE INFORMATION column AtlasLearningHub/Docs/University/Pricing; creamdensefooter About/Support/Build/DataBasics, Englishlocale, ©2026MongoDB. DeployYourWaysection is absenttoday. Totaldesktopheight6519. Narrow390 hasheader88, hero40px aty208 andstackedcodeimageaty683, LevelUp1716, Atlas3066, customer4152, ecosystem5666, finalcta6304, total8597. Preserve currentcopy and observedassets without inventing photos or statistics. Desktop request only; maintain responsiveHTML and source-faithful design.
+```
+
+## 後續實際校正規則
+
+以當日公開官網的實際截圖、完整 DOM、有效 CSSOM 與原始公開資產為依據；不得加入原頁沒有的數字、區塊或圖片。保留原生 Stitch 原始輸出，將衍生修正另存。每次修改後必須以對應檔案雜湊重新檢查桌面及390px 窄版，逐項記錄圖片、版面、文字、導覽與剩餘差異。頁高相同或生成圖片相似不代表官網一致。

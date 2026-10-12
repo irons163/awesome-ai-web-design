@@ -1,0 +1,1838 @@
+{
+  "bodyText": "Features\nCompany\nEnterprise\nHelp\nDocs\nAI\nPricing\nLog in\nGet started\nJoin us at Resend Forward\nEmail for\ndevelopers\n\nThe best way to reach humans instead of spam folders. Deliver transactional and marketing emails at scale.\n\nGet started\nDocumentation\n\nCompanies of all sizes trust Resend to deliver their most important emails.\n\nExplore Enterprise\nIntegrate this weekend\n\nA simple, elegant interface so you can start sending emails in minutes. It fits right into your code with SDKs for your favorite programming languages.\n\nNode.js\nServerless\nRuby\nPython\nPHP\nCLI\nGo\nRust\nJava\nElixir\n.NET\nREST\nSMTP\nNode.js\nNext.js\nRemix\nNuxt\nExpress\nHono\nRedwood\nBun\nAstro\n1import { Resend } from 'resend';\n2\n\n3const resend = new Resend('re_xxxxxxxxx');\n4\n\n5(async function() {\n6  const { data, error } = await resend.emails.send({\n7    from: 'onboarding@resend.dev',\n8    to: 'delivered@resend.dev',\n9    subject: 'Hello World',\n10    html: '<strong>it works!</strong>'\n11  });\n12\n\n13  if (error) {\n14    return console.log(error);\n15  }\n16\n\n17  console.log(data);\n18})();\nView on GitHub\nDownload ZIP\nFirst-class\ndeveloper experience\n\nWe are a team of engineers who love building tools for other engineers.\nOur goal is to create the email platform we've always wished we had — one that just works.\n\nDelivered\ndelivered@resend.dev\nSend\nHTTP 200:\n{ \"id\": \"26abdd24-36a9-475d-83bf-4d27a31c7def\" }\nHTTP 200:\n{ \"id\": \"cc3817db-d398-4892-8bc0-8bc589a2cfb3\" }\nHTTP 200:\n{ \"id\": \"4ea2f827-c3a2-471e-b0a1-8bb0bcb5c67c\" }\nHTTP 200:\n{ \"id\": \"8e1d73b4-ebe1-485d-bce8-0d7044f1d879\" }\nHTTP 200:\n{ \"id\": \"a08045a6-122a-4e16-ace1-aa81df4278ac\" }\nHTTP 200:\n{ \"id\": \"c3be1838-b80e-457a-9fc5-3abf49c3b33e\" }\nHTTP 200:\n{ \"id\": \"13359f77-466e-436d-9cb2-ff0b0c9a8af4\" }\nHTTP 200:\n{ \"id\": \"4b623d56-e3b7-4e78-a939-2b31eb2c5beb\" }\nTest mode\n\nSimulate events and experiment with our API without the risk of accidentally sending real emails to real people.\n\nLearn more\nComplained\nOct 10\n08:52:08\nto liam@figma.com with feedbackSpam\non\nagent\nSpark\nrunning on\nWindows\nBounced\nOct 10\n08:52:08\nto olivia@xerox.com with typeSpam\non\nagent\nYahoo Mail\nrunning on\nWindows\nBounced\nOct 10\n08:54:19\nto noah@figma.com with typeSpam\non\nagent\nThunderbird\nrunning on\nWindows\nOpened\nOct 10\n08:54:24\nfrom noah@gmail.com with subjectHello world\non\nagent\nGmail\nrunning on\nmacOS\nModular webhooks\n\nReceive real-time notifications directly to your server. Every time an email is delivered, opened, bounces, or a link is clicked.\n\nLearn more\nWrite using a delightful editor\n\nA modern editor that makes it easy for anyone to write, format, and send emails.\nVisually build your email and change the design by adding custom styles.\n\nStyles\nWeekly Acme Newsletter\na day ago\nTest\nSend\nFrom\nyour.name@acme.com\nTo\nNewsletter\nSubscribers\nSubject\nWeekly Newsletter\n\n\n\n\nGo beyond editing\n\nGroup and control your contacts in a simple and intuitive way.\nStraightforward analytics and reporting tools that will help you send better emails.\n\nContact management\n\nImport your list in minutes, regardless the size of your audience. Get full visibility of each contact and their personal attributes.\n\nLearn more\nBroadcast analytics\n\nUnlock powerful insights and understand exactly how your audience is interacting with your broadcast emails.\n\nLearn more\nDevelop emails using React\n\nCreate beautiful templates without having to deal with <table> layouts and HTML.\nPowered by react-email, our open source component library.\n\nGet started\nCheck the docs\nuser-welcome.tsx\nreset-password.tsx\nuser-invite.tsx\nweekly-digest.tsx\n1import { Body, Button, Column, Container, Head, Heading, Hr, Html, Img, Link, Preview, Row, Section, Text, Tailwind } from 'react-email';\n2import * as React from 'react';\n3\n\n4const WelcomeEmail = ({\n5  username = 'Steve',\n6  company = 'ACME',\n7}: WelcomeEmailProps) => {\n8  const previewText = `Welcome to ${company}, ${username}!`;\n9\n\n10  return (\n11    <Html>\n12      <Head />\n13      <Preview>{previewText}</Preview>\n14      <Tailwind>\n15      <Body className=\"bg-white my-auto mx-auto font-sans\">\n16        <Container className=\"my-10 mx-auto p-5 w-[465px]\">\n17          <Section className=\"mt-8\">\n18            <Img\n19              src={`${baseUrl}/static/example-logo.png`}\n20              width=\"80\"\n21              height=\"80\"\n22              alt=\"Logo Example\"\n23              className=\"my-0 mx-auto\"\n24            />\n25          </Section>\n26          <Heading className=\"text-2xl font-normal text-center p-0 my-8 mx-0\">\n27            Welcome to <strong>{company}</strong>, {username}!\n28          </Heading>\n29          <Text className=\"text-sm\">\n30            Hello {username},\n31          </Text>\n32          <Text className=\"text-sm\">\n33            We're excited to have you onboard at <strong>{company}</strong>. We hope you enjoy your journey with us. If you have any questions or need assistance, feel free to reach out.\n34          </Text>\n35          <Section className=\"text-center mt-[32px] mb-[32px]\">\n36              <Button\n37                pX={20}\n38                pY={12}\n39                className=\"bg-[#00A3FF] rounded-sm text-white text-xs font-semibold no-underline text-center\"\n40                href={`${baseUrl}/get-started`}\n41              >\n42                Get Started\n43              </Button>\n44          </Section>\n45          <Text className=\"text-sm\">\n46            Cheers,\n47            <br/>\n48            The {company} Team\n49          </Text>\n50        </Container>\n51      </Body>\n52      </Tailwind>\n53    </Html>\n54  );\n55};\n56\n\n57interface WelcomeEmailProps {\n58  username?: string;\n59  company?: string;\n60}\n61\n\n62const baseUrl = process.env.URL\n63  ? `https://${process.env.URL}`\n64  : '';\n65\n\n66export default WelcomeEmail;\nWelcome to ACME, user!\n\nHello Steve,\n\nWe're excited to have you onboard at ACME. We hope you enjoy your journey with us. If you have any questions or need assistance, feel free to reach out.\n\nGet Started\n\nCheers,\nThe ACME Team\n\nReach humans, not spam folders\nProactive blocklist tracking\n\nBe the first to know if your domain is added to a DNSBLs such as those offered by Spamhaus with removal requests generated by Resend.\n\nFaster time to inbox\n\nSend emails from the region closest to your users. Reduce delivery latency with North American, South American, European, and Asian regions.\n\nBuild confidence with BIMI\n\nShowcase your logo and company branding with BIMI. Receive guidance to obtain a VMC - the email equivalent of a checkmark on social media.\n\nManaged dedicated IPs\n\nGet a fully managed dedicated IP that automatically warms up and autoscales based on your sending volume, no waiting period.\n\nDynamic suppression list\n\nPrevent repeated sending to recipients who no longer want your email and comply with standards like the CAN-SPAM Act and others.\n\nIP and domain monitoring\n\nMonitor your DNS configuration for any errors or regressions. Be notified of any changes that could hinder your deliverability.\n\nVerify DNS records\n\nProtect your reputation by verifying your identity as a legitimate sender. Secure your email communication using DKIM and SPF.\n\nBattle-tested infrastructure\n\nRely on a platform of reputable IP's used by trustworthy senders with distributed workloads across different IP pools.\n\nPrevent spoofing with DMARC\n\nAvoid impersonation by creating DMARC policies and instructing inbox providers on how to treat unauthenticated email.\n\nResend is transforming email for developers. Simple interface, easy integrations, handy templates. What else could we ask for.\n\nGuillermo Rauch\n\nCEO at Vercel\n\nSend with Next.js\nEverything in your control\n\nAll the features you need to manage your email sending, troubleshoot with\ndetailed logs, and protect your domain reputation – without the friction.\n\nIntuitive analytics\nFull visibility\nDomain authentication\nBeyond expectations\n\nResend is driving remarkable developer experiences that enable success\nstories, empower businesses, and fuel growth across industries and individuals.\n\n\"Our team loves Resend. It makes email sending so easy and reliable. After we switched to Dedicated IPs, our deliverability improved tremendously and we don't hear complaints about emails landing on spam anymore.\"\nVlad Matsiiako\nCo-founder of Infisical\n\"As a developer I love the approach that the Resend team is taking. Its so refreshing. They are also extremely user-centric and helpful in terms of getting you up and running, sending beautiful emails that deliver.\"\nHahnbee Lee\nCo-Founder at Mintlify\n\"We value tools that feel stable, well thought out, and aligned with the standards we expect across our stack. Resend meets those expectations. It lets our team stay focused on building the larger platform rather than getting pulled into the overhead that typically comes with legacy email infrastructure.\"\nBradley Greenwood\nVP of Engineering at MrBeast\n\"Our partnership with Resend has been a great experience. They've made sure we can focus on what we do best—building our product and growing our business.\"\nSahil Lavingia\nCEO of Gumroad\n\"Switching over to Resend from SendGrid marked a significant improvement in our email management. We started with a small test - waitlist emails for our iOS and Windows apps. Within 30 minutes, we were done.\"\nThomas Mann\nFounder & CEO of Raycast\n\"The simplicity and reliability of Resend allowed our engineers to focus on building features rather than troubleshooting email infrastructure.\"\nAmadeo Pellicce\nConnectors, Agents and Automations Lead at Replit\n\"We're a small team with a lot on our plates. Email infrastructure is something we don't want to think about, and with Resend we don't have to.\"\nPeter Suhm\nOps at Tailwind\n\"The best part about taking Resend into production was that there was no friction at all.\"\nTara Nagar\nSoftware Engineer at Braintrust\n\"The flexibility of Resend is what we value most. It allows us to quickly adapt and refine our email communications as our products evolve.\"\nGlauber Costa\nFounder and CEO at Turso\n\"Resend is email with simpler APIs, better webhooks, and best-in-class debugging.\"\nDan Farrelly\nCTO and Co-Founder of Inngest\n\"Our team loves Resend. It makes email sending so easy and reliable. After we switched to Dedicated IPs, our deliverability improved tremendously and we don't hear complaints about emails landing on spam anymore.\"\nVlad Matsiiako\nCo-founder of Infisical\n\"As a developer I love the approach that the Resend team is taking. Its so refreshing. They are also extremely user-centric and helpful in terms of getting you up and running, sending beautiful emails that deliver.\"\nHahnbee Lee\nCo-Founder at Mintlify\n\"We value tools that feel stable, well thought out, and aligned with the standards we expect across our stack. Resend meets those expectations. It lets our team stay focused on building the larger platform rather than getting pulled into the overhead that typically comes with legacy email infrastructure.\"\nBradley Greenwood\nVP of Engineering at MrBeast\n\"Our partnership with Resend has been a great experience. They've made sure we can focus on what we do best—building our product and growing our business.\"\nSahil Lavingia\nCEO of Gumroad\n\"Switching over to Resend from SendGrid marked a significant improvement in our email management. We started with a small test - waitlist emails for our iOS and Windows apps. Within 30 minutes, we were done.\"\nThomas Mann\nFounder & CEO of Raycast\n\"The simplicity and reliability of Resend allowed our engineers to focus on building features rather than troubleshooting email infrastructure.\"\nAmadeo Pellicce\nConnectors, Agents and Automations Lead at Replit\n\"We're a small team with a lot on our plates. Email infrastructure is something we don't want to think about, and with Resend we don't have to.\"\nPeter Suhm\nOps at Tailwind\n\"The best part about taking Resend into production was that there was no friction at all.\"\nTara Nagar\nSoftware Engineer at Braintrust\n\"The flexibility of Resend is what we value most. It allows us to quickly adapt and refine our email communications as our products evolve.\"\nGlauber Costa\nFounder and CEO at Turso\n\"Resend is email with simpler APIs, better webhooks, and best-in-class debugging.\"\nDan Farrelly\nCTO and Co-Founder of Inngest\n\"Our team loves Resend. It makes email sending so easy and reliable. After we switched to Dedicated IPs, our deliverability improved tremendously and we don't hear complaints about emails landing on spam anymore.\"\nVlad Matsiiako\nCo-founder of Infisical\n\"As a developer I love the approach that the Resend team is taking. Its so refreshing. They are also extremely user-centric and helpful in terms of getting you up and running, sending beautiful emails that deliver.\"\nHahnbee Lee\nCo-Founder at Mintlify\n\"We value tools that feel stable, well thought out, and aligned with the standards we expect across our stack. Resend meets those expectations. It lets our team stay focused on building the larger platform rather than getting pulled into the overhead that typically comes with legacy email infrastructure.\"\nBradley Greenwood\nVP of Engineering at MrBeast\n\"Our partnership with Resend has been a great experience. They've made sure we can focus on what we do best—building our product and growing our business.\"\nSahil Lavingia\nCEO of Gumroad\n\"Switching over to Resend from SendGrid marked a significant improvement in our email management. We started with a small test - waitlist emails for our iOS and Windows apps. Within 30 minutes, we were done.\"\nThomas Mann\nFounder & CEO of Raycast\n\"The simplicity and reliability of Resend allowed our engineers to focus on building features rather than troubleshooting email infrastructure.\"\nAmadeo Pellicce\nConnectors, Agents and Automations Lead at Replit\n\"We're a small team with a lot on our plates. Email infrastructure is something we don't want to think about, and with Resend we don't have to.\"\nPeter Suhm\nOps at Tailwind\n\"The best part about taking Resend into production was that there was no friction at all.\"\nTara Nagar\nSoftware Engineer at Braintrust\n\"The flexibility of Resend is what we value most. It allows us to quickly adapt and refine our email communications as our products evolve.\"\nGlauber Costa\nFounder and CEO at Turso\n\"Resend is email with simpler APIs, better webhooks, and best-in-class debugging.\"\nDan Farrelly\nCTO and Co-Founder of Inngest\nEmail reimagined.\nAvailable today.\nGet started\n\n2261 Market Street #5039\nSan Francisco, CA 94114\n\nAll systems operational\n\nFeatures\n\nAutomations\nAudiences\nBroadcasts\nInbound\nTemplates\nWebhooks\nDedicated IPs\n\nResources\n\nChangelog\nPricing\nEnterprise\nSecurity\nSOC 2\nGDPR\nBrand\n\nCompany\n\nAbout\nBlog\nCareers\nClubs\nCustomers\nHumans\nPhilosophy\n\nHelp\n\nSupport\nStatus\nMigrate\nKnowledge base\nLegal policies\n\nCommunity\n\nEvents\nInsiders\nOpen source\nWallpapers",
+  "controls": [
+    {
+      "bounds": {
+        "height": 17.1875,
+        "width": 80,
+        "x": 24,
+        "y": 20.40625
+      },
+      "expanded": null,
+      "href": "/home",
+      "label": "Resend",
+      "tag": "A",
+      "text": ""
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 100.1484375,
+        "x": 339.703125,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Features"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 106.1640625,
+        "x": 439.8515625,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Company"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 110.78125,
+        "x": 546.015625,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Enterprise"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 72.828125,
+        "x": 656.796875,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Help"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 76.1875,
+        "x": 729.625,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Docs"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 55.7421875,
+        "x": 805.8125,
+        "y": 0
+      },
+      "expanded": "false",
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "AI"
+    },
+    {
+      "bounds": {
+        "height": 58,
+        "width": 78.734375,
+        "x": 861.5546875,
+        "y": 0
+      },
+      "expanded": null,
+      "href": "/pricing",
+      "label": null,
+      "tag": "A",
+      "text": "Pricing"
+    },
+    {
+      "bounds": {
+        "height": 40,
+        "width": 74.953125,
+        "x": 1053.421875,
+        "y": 9
+      },
+      "expanded": null,
+      "href": "/login",
+      "label": null,
+      "tag": "A",
+      "text": "Log in"
+    },
+    {
+      "bounds": {
+        "height": 40,
+        "width": 111.625,
+        "x": 1144.375,
+        "y": 9
+      },
+      "expanded": null,
+      "href": "/signup",
+      "label": null,
+      "tag": "A",
+      "text": "Get started"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 90.4921875,
+        "x": 145,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Node.js"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 85.7109375,
+        "x": 243.4921875,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Next.js"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 80.265625,
+        "x": 337.203125,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Remix"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 71.328125,
+        "x": 425.46875,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Nuxt"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 92.609375,
+        "x": 504.796875,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Express"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 75.46875,
+        "x": 605.40625,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Hono"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 102.109375,
+        "x": 688.875,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Redwood"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 65.7109375,
+        "x": 798.984375,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Bun"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 75.0625,
+        "x": 872.6953125,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": null,
+      "tag": "BUTTON",
+      "text": "Astro"
+    },
+    {
+      "bounds": {
+        "height": 32,
+        "width": 32,
+        "x": 1103,
+        "y": 2043.1015625
+      },
+      "expanded": null,
+      "href": null,
+      "label": "Copy to clipboard",
+      "tag": "BUTTON",
+      "text": ""
+    }
+  ],
+  "fontStatus": "loaded",
+  "headings": [
+    {
+      "bounds": {
+        "height": 204,
+        "width": 480,
+        "x": 88,
+        "y": 237
+      },
+      "font": {
+        "family": "domaine, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-0.96px",
+        "lineHeight": "96px",
+        "size": "96px",
+        "weight": "400"
+      },
+      "level": "H1",
+      "text": "Email fordevelopers"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1232,
+        "x": 24,
+        "y": 1707
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Integrate this weekend"
+    },
+    {
+      "bounds": {
+        "height": 134.40625,
+        "width": 1232,
+        "x": 24,
+        "y": 2816.6015625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "First-class developer experience"
+    },
+    {
+      "bounds": {
+        "height": 26,
+        "width": 302.125,
+        "x": 65,
+        "y": 3446.0078125
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "26px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Test mode"
+    },
+    {
+      "bounds": {
+        "height": 26,
+        "width": 322.25,
+        "x": 697,
+        "y": 3446.0078125
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "26px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Modular webhooks"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1232,
+        "x": 24,
+        "y": 3969.203125
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Write using a delightful editor"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1232,
+        "x": 24,
+        "y": 5141.40625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Go beyond editing"
+    },
+    {
+      "bounds": {
+        "height": 26,
+        "width": 302.125,
+        "x": 65,
+        "y": 5703.609375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "26px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Contact management"
+    },
+    {
+      "bounds": {
+        "height": 26,
+        "width": 322.25,
+        "x": 697,
+        "y": 5703.609375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "26px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Broadcast analytics"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1232,
+        "x": 24,
+        "y": 6226.8046875
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Develop emails using React"
+    },
+    {
+      "bounds": {
+        "height": 33.59375,
+        "width": 380,
+        "x": 804.9765625,
+        "y": 6741.0078125
+      },
+      "font": {
+        "family": "Helvetica",
+        "letterSpacing": "normal",
+        "lineHeight": "33.6px",
+        "size": "24px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Welcome to ACME, user!"
+    },
+    {
+      "bounds": {
+        "height": 134.40625,
+        "width": 448,
+        "x": 24,
+        "y": 7409.0078125
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Reach humans, not spam folders"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.328125,
+        "x": 24,
+        "y": 7631.4140625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Proactive blocklist tracking"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 461.328125,
+        "y": 7631.4140625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Faster time to inbox"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 898.6640625,
+        "y": 7631.4140625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Build confidence with BIMI"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.328125,
+        "x": 24,
+        "y": 7846.609375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Managed dedicated IPs"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 461.328125,
+        "y": 7846.609375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Dynamic suppression list"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 898.6640625,
+        "y": 7846.609375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "IP and domain monitoring"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.328125,
+        "x": 24,
+        "y": 8061.8046875
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Verify DNS records"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 461.328125,
+        "y": 8061.8046875
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Battle-tested infrastructure"
+    },
+    {
+      "bounds": {
+        "height": 20,
+        "width": 357.3359375,
+        "x": 898.6640625,
+        "y": 8061.8046875
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "normal",
+        "lineHeight": "20px",
+        "size": "20px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Prevent spoofing with DMARC"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1232,
+        "x": 24,
+        "y": 9166.3984375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Everything in your control"
+    },
+    {
+      "bounds": {
+        "height": 24,
+        "width": 113.84375,
+        "x": 104,
+        "y": 9392.6015625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-0.8px",
+        "lineHeight": "24px",
+        "size": "16px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Intuitive analytics"
+    },
+    {
+      "bounds": {
+        "height": 24,
+        "width": 76.7265625,
+        "x": 525.328125,
+        "y": 9392.6015625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-0.8px",
+        "lineHeight": "24px",
+        "size": "16px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Full visibility"
+    },
+    {
+      "bounds": {
+        "height": 24,
+        "width": 151.71875,
+        "x": 946.6640625,
+        "y": 9392.6015625
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-0.8px",
+        "lineHeight": "24px",
+        "size": "16px",
+        "weight": "400"
+      },
+      "level": "H3",
+      "text": "Domain authentication"
+    },
+    {
+      "bounds": {
+        "height": 67.203125,
+        "width": 1280,
+        "x": 0,
+        "y": 10332.3984375
+      },
+      "font": {
+        "family": "aBCFavorit, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-2.8px",
+        "lineHeight": "67.2px",
+        "size": "56px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Beyond expectations"
+    },
+    {
+      "bounds": {
+        "height": 165.59375,
+        "width": 1232,
+        "x": 24,
+        "y": 11015.3984375
+      },
+      "font": {
+        "family": "domaine, ui-sans-serif, system-ui, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+        "letterSpacing": "-0.768px",
+        "lineHeight": "76.8px",
+        "size": "76.8px",
+        "weight": "400"
+      },
+      "level": "H2",
+      "text": "Email reimagined.Available today."
+    }
+  ],
+  "height": 12154,
+  "images": [
+    {
+      "alt": "Floor background",
+      "bounds": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": 58
+      },
+      "loaded": true,
+      "naturalHeight": 540,
+      "naturalWidth": 960,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Flanding-page%2Fbg-hero-1.jpg&w=3840&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Light ray background",
+      "bounds": {
+        "height": 720,
+        "width": 1280,
+        "x": 0,
+        "y": -22
+      },
+      "loaded": true,
+      "naturalHeight": 540,
+      "naturalWidth": 960,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Flanding-page%2Fbg-light.avif&w=3840&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Full-screen image",
+      "bounds": {
+        "height": 214.1328125,
+        "width": 662.2734375,
+        "x": 308.859375,
+        "y": 4419.40625
+      },
+      "loaded": true,
+      "naturalHeight": 194,
+      "naturalWidth": 600,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Fproduct-pages%2Fbroadcast-email-header.webp&w=1200&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Audiences Screenshot",
+      "bounds": {
+        "height": 227.796875,
+        "width": 534,
+        "x": 73,
+        "y": 5387.609375
+      },
+      "loaded": true,
+      "naturalHeight": 308,
+      "naturalWidth": 722,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Fproduct-pages%2Fscreenshot-zoom-audience.avif&w=1920&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Illustration",
+      "bounds": {
+        "height": 227.796875,
+        "width": 534,
+        "x": 705,
+        "y": 5387.609375
+      },
+      "loaded": true,
+      "naturalHeight": 308,
+      "naturalWidth": 722,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Fproduct-pages%2Fscreenshot-zoom-analytics.webp&w=1920&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Logo Example",
+      "bounds": {
+        "height": 80,
+        "width": 80,
+        "x": 954.9765625,
+        "y": 6631.0078125
+      },
+      "loaded": true,
+      "naturalHeight": 72,
+      "naturalWidth": 72,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Fexample-logo.png&w=256&q=75&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Vercel",
+      "bounds": {
+        "height": 34.625,
+        "width": 40,
+        "x": 620,
+        "y": 8381.6875
+      },
+      "loaded": true,
+      "naturalHeight": 1000,
+      "naturalWidth": 1155,
+      "src": "https://resend.com/static/landing-page/vercel.svg?dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Guillermo Rauch",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 543.453125,
+        "y": 8657.6953125
+      },
+      "loaded": true,
+      "naturalHeight": 600,
+      "naturalWidth": 600,
+      "src": "https://resend.com/static/avatars/guillermo-rauch.webp"
+    },
+    {
+      "alt": "Resend Dashboard - Overview",
+      "bounds": {
+        "height": 658.796875,
+        "width": 1232,
+        "x": 24,
+        "y": 9481.6015625
+      },
+      "loaded": true,
+      "naturalHeight": 683,
+      "naturalWidth": 1280,
+      "src": "https://resend.com/_next/image?url=%2Fstatic%2Fproduct-pages%2Fscreenshot-metrics.webp&w=3840&q=100&dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Infisical",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -4618.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 200,
+      "naturalWidth": 200,
+      "src": "https://cdn.resend.com/posts/logo-infisical.jpg"
+    },
+    {
+      "alt": "Vlad Matsiiako",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -4584.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/vlad-matsiiako.jpg"
+    },
+    {
+      "alt": "Mintlify",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -4136.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mintlify.jpg"
+    },
+    {
+      "alt": "Hahnbee Lee",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -4102.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/hahnbee-lee.jpg"
+    },
+    {
+      "alt": "MrBeast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -3654.60205078125,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mrbeast.png"
+    },
+    {
+      "alt": "Bradley Greenwood",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -3620.60205078125,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/bradley-greenwood.jpg"
+    },
+    {
+      "alt": "Gumroad",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -3172.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-gumroad.png"
+    },
+    {
+      "alt": "Sahil Lavingia",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -3138.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/sahil-lavingia.jpg"
+    },
+    {
+      "alt": "Raycast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -2690.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-raycast.png"
+    },
+    {
+      "alt": "Thomas Mann",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -2656.60205078125,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/thomas-mann.jpg"
+    },
+    {
+      "alt": "Replit",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -2208.60205078125,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-replit.png"
+    },
+    {
+      "alt": "Amadeo Pellicce",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -2174.60205078125,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/amadeo-pellicce.jpg"
+    },
+    {
+      "alt": "Tailwind",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -1726.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-tailwind.png"
+    },
+    {
+      "alt": "Peter Suhm",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -1692.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/peter-suhm.jpg"
+    },
+    {
+      "alt": "Braintrust",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -1244.60205078125,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-braintrust.png"
+    },
+    {
+      "alt": "Tara Nagar",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -1210.60205078125,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/tara-nagar.jpg"
+    },
+    {
+      "alt": "Turso",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -762.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-turso.png"
+    },
+    {
+      "alt": "Glauber Costa",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -728.60205078125,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/glauber-costa.jpg"
+    },
+    {
+      "alt": "Inngest",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -280.60205078125,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-inngest.png"
+    },
+    {
+      "alt": "Dan Farrelly",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": -246.60205078125,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/dan-farrelly.jpg"
+    },
+    {
+      "alt": "Infisical",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 201.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 200,
+      "naturalWidth": 200,
+      "src": "https://cdn.resend.com/posts/logo-infisical.jpg"
+    },
+    {
+      "alt": "Vlad Matsiiako",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 235.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/vlad-matsiiako.jpg"
+    },
+    {
+      "alt": "Mintlify",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 683.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mintlify.jpg"
+    },
+    {
+      "alt": "Hahnbee Lee",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 717.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/hahnbee-lee.jpg"
+    },
+    {
+      "alt": "MrBeast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 1165.39794921875,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mrbeast.png"
+    },
+    {
+      "alt": "Bradley Greenwood",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 1199.39794921875,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/bradley-greenwood.jpg"
+    },
+    {
+      "alt": "Gumroad",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 1647.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-gumroad.png"
+    },
+    {
+      "alt": "Sahil Lavingia",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 1681.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/sahil-lavingia.jpg"
+    },
+    {
+      "alt": "Raycast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 2129.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-raycast.png"
+    },
+    {
+      "alt": "Thomas Mann",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 2163.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/thomas-mann.jpg"
+    },
+    {
+      "alt": "Replit",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 2611.39794921875,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-replit.png"
+    },
+    {
+      "alt": "Amadeo Pellicce",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 2645.39794921875,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/amadeo-pellicce.jpg"
+    },
+    {
+      "alt": "Tailwind",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 3093.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-tailwind.png"
+    },
+    {
+      "alt": "Peter Suhm",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 3127.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/peter-suhm.jpg"
+    },
+    {
+      "alt": "Braintrust",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 3575.39794921875,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-braintrust.png"
+    },
+    {
+      "alt": "Tara Nagar",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 3609.39794921875,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/tara-nagar.jpg"
+    },
+    {
+      "alt": "Turso",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 4057.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-turso.png"
+    },
+    {
+      "alt": "Glauber Costa",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 4091.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/glauber-costa.jpg"
+    },
+    {
+      "alt": "Inngest",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 4539.39794921875,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-inngest.png"
+    },
+    {
+      "alt": "Dan Farrelly",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 4573.39794921875,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/dan-farrelly.jpg"
+    },
+    {
+      "alt": "Infisical",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 5021.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 200,
+      "naturalWidth": 200,
+      "src": "https://cdn.resend.com/posts/logo-infisical.jpg"
+    },
+    {
+      "alt": "Vlad Matsiiako",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 5055.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/vlad-matsiiako.jpg"
+    },
+    {
+      "alt": "Mintlify",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 5503.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mintlify.jpg"
+    },
+    {
+      "alt": "Hahnbee Lee",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 5537.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/hahnbee-lee.jpg"
+    },
+    {
+      "alt": "MrBeast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 5985.39794921875,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-mrbeast.png"
+    },
+    {
+      "alt": "Bradley Greenwood",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 6019.39794921875,
+        "y": 10755
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/bradley-greenwood.jpg"
+    },
+    {
+      "alt": "Gumroad",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 6467.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-gumroad.png"
+    },
+    {
+      "alt": "Sahil Lavingia",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 6501.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/sahil-lavingia.jpg"
+    },
+    {
+      "alt": "Raycast",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 6949.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-raycast.png"
+    },
+    {
+      "alt": "Thomas Mann",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 6983.39794921875,
+        "y": 10707
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/thomas-mann.jpg"
+    },
+    {
+      "alt": "Replit",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 7431.39794921875,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-replit.png"
+    },
+    {
+      "alt": "Amadeo Pellicce",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 7465.39794921875,
+        "y": 10694.1953125
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/amadeo-pellicce.jpg"
+    },
+    {
+      "alt": "Tailwind",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 7913.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-tailwind.png"
+    },
+    {
+      "alt": "Peter Suhm",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 7947.39794921875,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/peter-suhm.jpg"
+    },
+    {
+      "alt": "Braintrust",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 8395.3984375,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-braintrust.png"
+    },
+    {
+      "alt": "Tara Nagar",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 8429.3984375,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/tara-nagar.jpg"
+    },
+    {
+      "alt": "Turso",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 8877.3984375,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-turso.png"
+    },
+    {
+      "alt": "Glauber Costa",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 8911.3984375,
+        "y": 10683
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/glauber-costa.jpg"
+    },
+    {
+      "alt": "Inngest",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 9359.3984375,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 100,
+      "naturalWidth": 100,
+      "src": "https://cdn.resend.com/posts/logo-inngest.png"
+    },
+    {
+      "alt": "Dan Farrelly",
+      "bounds": {
+        "height": 40,
+        "width": 40,
+        "x": 9393.3984375,
+        "y": 10659
+      },
+      "loaded": true,
+      "naturalHeight": 320,
+      "naturalWidth": 320,
+      "src": "https://resend.com/static/avatars/dan-farrelly.jpg"
+    },
+    {
+      "alt": "X",
+      "bounds": {
+        "height": 32,
+        "width": 32,
+        "x": 24,
+        "y": 11765.890625
+      },
+      "loaded": false,
+      "naturalHeight": 0,
+      "naturalWidth": 0,
+      "src": "https://resend.com/static/footer-x.svg?dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "GitHub",
+      "bounds": {
+        "height": 32,
+        "width": 32,
+        "x": 72,
+        "y": 11765.890625
+      },
+      "loaded": false,
+      "naturalHeight": 0,
+      "naturalWidth": 0,
+      "src": "https://resend.com/static/footer-github.svg?dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "LinkedIn",
+      "bounds": {
+        "height": 32,
+        "width": 32,
+        "x": 120,
+        "y": 11765.890625
+      },
+      "loaded": false,
+      "naturalHeight": 0,
+      "naturalWidth": 0,
+      "src": "https://resend.com/static/footer-linkedin.svg?dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    },
+    {
+      "alt": "Youtube",
+      "bounds": {
+        "height": 32,
+        "width": 32,
+        "x": 168,
+        "y": 11765.890625
+      },
+      "loaded": false,
+      "naturalHeight": 0,
+      "naturalWidth": 0,
+      "src": "https://resend.com/static/footer-youtube.svg?dpl=dpl_3ALpzhWS5pm16giSirwqrXYysX9T"
+    }
+  ],
+  "observedAt": "2026-10-10T12:54:39.636Z",
+  "scrollWidth": 1280,
+  "scrollY": 0,
+  "title": "Resend · Email for developers",
+  "url": "https://resend.com/",
+  "videos": [
+    {
+      "bounds": {
+        "height": 170,
+        "width": 170,
+        "x": 555,
+        "y": 1521
+      },
+      "poster": "https://resend.com/static/landing-page/3d-integrate-weekend-fallback.avif",
+      "readyState": 4,
+      "src": "https://resend.com/static/landing-page/3d-integrate-weekend.mp4"
+    },
+    {
+      "bounds": {
+        "height": 170,
+        "width": 170,
+        "x": 555,
+        "y": 3783.203125
+      },
+      "poster": "https://resend.com/static/landing-page/3d-broadcast-fallback.jpg",
+      "readyState": 4,
+      "src": "https://resend.com/static/landing-page/3d-broadcast.mp4"
+    },
+    {
+      "bounds": {
+        "height": 170,
+        "width": 170,
+        "x": 555,
+        "y": 6040.8046875
+      },
+      "poster": "https://resend.com/static/landing-page/3d-react-fallback.jpg",
+      "readyState": 4,
+      "src": "https://resend.com/static/landing-page/3d-react.mp4"
+    },
+    {
+      "bounds": {
+        "height": 170,
+        "width": 170,
+        "x": 555,
+        "y": 8980.3984375
+      },
+      "poster": "https://resend.com/static/landing-page/3d-control-fallback.jpg",
+      "readyState": 4,
+      "src": "https://resend.com/static/landing-page/3d-control.mp4"
+    }
+  ],
+  "viewport": {
+    "deviceScope": "CSS responsive viewport, unchanged desktop browser UA",
+    "dpr": 1,
+    "height": 720,
+    "width": 1280
+  },
+  "traversal": [
+    {
+      "height": 12153,
+      "scrollY": 0,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 648,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 1296,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 1944,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 2592,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 3240,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 3888,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 4536,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 5184,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 5832,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 6480,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 6480,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 7128,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 7776,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 8424,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 9072,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 9720,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 10368,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 11016,
+      "viewport": 720
+    },
+    {
+      "height": 12153,
+      "scrollY": 11433,
+      "viewport": 720
+    }
+  ]
+}

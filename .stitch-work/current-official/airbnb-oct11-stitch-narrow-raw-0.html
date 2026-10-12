@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=390, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Airbnb Canada Mobile Homepage</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
+          },
+          colors: {
+            brand: '#ff385c',
+            airbnbDark: '#222222',
+            airbnbMuted: '#6a6a6a',
+            airbnbBorder: '#ebebeb',
+            airbnbBgLight: '#f7f7f7',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Hide scrollbar for clean horizontal swipe strips */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    body {
+      background-color: #ffffff;
+      color: #222222;
+      font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      width: 100%;
+      max-width: 390px;
+      margin: 0 auto;
+      overflow-x: hidden;
+    }
+    .heart-btn.liked svg {
+      fill: #ff385c;
+      stroke: #ff385c;
+    }
+  </style>
+</link></head>
+<body class="relative min-h-screen pb-[70px] select-none text-[13px]">
+<!-- Top Sticky Area (Search Pill + Category Tabs) -->
+<header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md pt-3 pb-2 border-b border-gray-100 shadow-[0_1px_2px_rgba(0,0,0,0.03)]">
+<!-- Search Pill -->
+<div class="px-6 mb-3">
+<div class="w-[342px] h-[56px] rounded-[28px] border border-[#dddddd] shadow-[0_3px_10px_rgba(0,0,0,0.1)] flex items-center px-4 bg-white active:scale-[0.99] transition-transform cursor-pointer">
+<div class="w-10 h-10 flex items-center justify-center mr-3">
+<span class="material-symbols-outlined text-[24px] text-airbnbDark">search</span>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-[14px] font-semibold text-airbnbDark leading-tight">Start your search</span>
+<span class="text-[12px] text-airbnbMuted leading-tight mt-0.5">Anywhere · Any week · Add guests</span>
+</div>
+<button aria-label="Filters" class="ml-auto w-9 h-9 rounded-full border border-gray-200 flex items-center justify-center text-airbnbDark">
+<svg fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" viewbox="0 0 16 16" width="16">
+<line x1="2" x2="14" y1="4" y2="4"></line>
+<circle cx="5" cy="4" fill="white" r="1.5"></circle>
+<line x1="2" x2="14" y1="12" y2="12"></line>
+<circle cx="11" cy="12" fill="white" r="1.5"></circle>
+</svg>
+</button>
+</div>
+</div>
+<!-- Illustrated Categories Bar -->
+<div class="flex items-center gap-6 overflow-x-auto no-scrollbar px-6 h-[44px]">
+<!-- All (selected) -->
+<button class="flex items-center gap-2 pb-1 border-b-2 border-airbnbDark shrink-0 cursor-pointer">
+<img alt="All" class="w-6 h-6 object-contain" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-[12px] font-semibold text-airbnbDark tracking-tight">All</span>
+</button>
+<!-- Homes -->
+<button class="flex items-center gap-2 pb-1 border-b-2 border-transparent text-airbnbMuted hover:text-airbnbDark shrink-0 cursor-pointer transition-colors">
+<img alt="Homes" class="w-6 h-6 object-contain opacity-70" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-[12px] font-medium tracking-tight">Homes</span>
+</button>
+<!-- Experiences -->
+<button class="flex items-center gap-2 pb-1 border-b-2 border-transparent text-airbnbMuted hover:text-airbnbDark shrink-0 cursor-pointer transition-colors">
+<img alt="Experiences" class="w-6 h-6 object-contain opacity-70" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-[12px] font-medium tracking-tight">Experiences</span>
+</button>
+<!-- Services -->
+<button class="flex items-center gap-2 pb-1 border-b-2 border-transparent text-airbnbMuted hover:text-airbnbDark shrink-0 cursor-pointer transition-colors pr-4">
+<img alt="Services" class="w-6 h-6 object-contain opacity-70" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="text-[12px] font-medium tracking-tight">Services</span>
+</button>
+</div>
+</header>
+<!-- Feed Container -->
+<main class="w-full">
+<!-- ROW 1: Stay in Lake Kawaguchi -->
+<section class="mt-4 mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Stay in Lake Kawaguchi</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Lake near Mount Fuji with hot springs</p>
+</div>
+<button aria-label="Next" class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<!-- Horizontal scroll strip -->
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Villa in Fujikawaguchiko" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button aria-label="Save" class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Villa in Fujikawaguchiko</div>
+<div class="text-airbnbMuted mt-0.5">Jan 8–10</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$826 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.97</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Villa in Fujikawaguchiko" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button aria-label="Save" class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Villa in Fujikawaguchiko</div>
+<div class="text-airbnbMuted mt-0.5">Dec 18–20</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$501 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+<!-- Card 3 (partly clipped) -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Home in Fujikawaguchiko" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button aria-label="Save" class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Home in Fujikawaguchiko</div>
+<div class="text-airbnbMuted mt-0.5">Jan 8–10</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$900 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Fujikawaguchiko" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button aria-label="Save" class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Fujikawaguchiko</div>
+<div class="text-airbnbMuted mt-0.5">Dec 25–27</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$126 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.91</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 2: Places to stay in Taitung City -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Places to stay in Taitung City</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Taiwan city on the Pacific coast</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Condo in 鐵花里" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Condo in 鐵花里</div>
+<div class="text-airbnbMuted mt-0.5">Oct 16–18</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$230 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.97</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Taitung City" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Taitung City</div>
+<div class="text-airbnbMuted mt-0.5">Nov 6–8</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$158 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.97</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Taitung City" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Taitung City</div>
+<div class="text-airbnbMuted mt-0.5">Nov 13–15</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$162 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.81</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 3: Available in Taichung City this weekend -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Available in Taichung City this weekend</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Taiwan city with night markets</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in 忠誠里" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in 忠誠里</div>
+<div class="text-airbnbMuted mt-0.5">Oct 10–11</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$224 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.92</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Xitun District" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Xitun District</div>
+<div class="text-airbnbMuted mt-0.5">Oct 10–11</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$94 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.88</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Taichung" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Taichung</div>
+<div class="text-airbnbMuted mt-0.5">Oct 10–11</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$111 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.87</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 4: Homes in Kaohsiung City -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Homes in Kaohsiung City</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Taiwan port city with night markets</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Home in Qianjin District" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Home in Qianjin District</div>
+<div class="text-airbnbMuted mt-0.5">Oct 16–18</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$682 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.79</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Condo in 灣中里" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Condo in 灣中里</div>
+<div class="text-airbnbMuted mt-0.5">Nov 6–8</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$259 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Yancheng District" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Yancheng District</div>
+<div class="text-airbnbMuted mt-0.5">Jan 15–17</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$332 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.9</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 5: Popular homes in Tokyo -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Popular homes in Tokyo</h2>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Rental unit in Shinjuku" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Rental unit in Shinjuku</div>
+<div class="text-airbnbMuted mt-0.5">Oct 30–Nov 1</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$362 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.77</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Taitō-ku" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Taitō-ku</div>
+<div class="text-airbnbMuted mt-0.5">Dec 18–20</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$682 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Shinjuku" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Shinjuku</div>
+<div class="text-airbnbMuted mt-0.5">Dec 4–6</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$1,547 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 6: Stay in Osaka -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Stay in Osaka</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Harbor city and street food capital</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Naniwa Ward" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Naniwa Ward</div>
+<div class="text-airbnbMuted mt-0.5">Dec 4–6</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$129 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.92</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Osaka" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Osaka</div>
+<div class="text-airbnbMuted mt-0.5">Dec 4–6</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$145 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.89</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Osaka" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Osaka</div>
+<div class="text-airbnbMuted mt-0.5">Jan 29–31</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$167 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.92</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 7: Check out homes in Bangkok -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Check out homes in Bangkok</h2>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Sathon" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Sathon</div>
+<div class="text-airbnbMuted mt-0.5">Oct 16–18</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$59 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.9</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Bangkok" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Bangkok</div>
+<div class="text-airbnbMuted mt-0.5">Oct 16–18</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$118 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.92</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Sathon" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Sathon</div>
+<div class="text-airbnbMuted mt-0.5">Oct 23–25</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$81 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.93</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 8: Popular homes in Vancouver -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Popular homes in Vancouver</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Pacific city with mountain views</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Guest suite in Vancouver" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Guest suite in Vancouver</div>
+<div class="text-airbnbMuted mt-0.5">Dec 18–20</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$457 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.86</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Executive Hotel Le Soleil" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Executive Hotel Le Soleil</div>
+<div class="text-airbnbMuted mt-0.5">Oct 23–25</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$828 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.88</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Vancouver" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Vancouver</div>
+<div class="text-airbnbMuted mt-0.5">Nov 13–15</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$275 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.94</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 9: Available next month in Busan -->
+<section class="mb-6">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Available next month in Busan</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">South Korean beach and port city</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Apartment in Dong-gu" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Apartment in Dong-gu</div>
+<div class="text-airbnbMuted mt-0.5">Nov 27–29</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$249 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.88</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Room in Busanjin-gu" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Room in Busanjin-gu</div>
+<div class="text-airbnbMuted mt-0.5">Nov 27–29</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$155 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.95</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Home in Jung-gu" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Home in Jung-gu</div>
+<div class="text-airbnbMuted mt-0.5">Nov 20–22</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$506 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>5.0</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ROW 10: Available next month in Kyoto -->
+<section class="mb-8">
+<div class="flex items-center justify-between px-6 mb-2">
+<div>
+<h2 class="text-[20px] font-semibold text-airbnbDark leading-[24px]">Available next month in Kyoto</h2>
+<p class="text-[12px] text-airbnbMuted leading-[16px] mt-0.5">Ancient temples and shrines</p>
+</div>
+<button class="w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center shrink-0 hover:bg-gray-50 active:scale-95 transition-all text-airbnbDark">
+<svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M9 18l6-6-6-6"></path></svg>
+</button>
+</div>
+<div class="flex gap-3 overflow-x-auto no-scrollbar px-6 scroll-smooth">
+<!-- Card 1 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Rental unit in Shimogyo-ku" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Rental unit in Shimogyo-ku</div>
+<div class="text-airbnbMuted mt-0.5">Nov 6–8</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$442 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.92</span>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Home in Minami Ward" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<span class="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-sm text-airbnbDark text-[11px] font-bold px-2 py-0.5 rounded-full shadow-sm">Guest favourite</span>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Home in Minami Ward</div>
+<div class="text-airbnbMuted mt-0.5">Nov 13–15</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$577 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.95</span>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="w-[165px] shrink-0">
+<div class="relative w-[165px] h-[156.75px] rounded-[20px] overflow-hidden bg-gray-100">
+<img alt="Rental unit in Higashiyama-ku" class="w-full h-full object-cover" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+<button class="heart-btn absolute top-2.5 right-2.5 p-1 rounded-full text-white drop-shadow-md active:scale-90 transition-transform" onclick="this.classList.toggle('liked')">
+<svg fill="rgba(0,0,0,0.3)" height="18" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+</button>
+</div>
+<div class="mt-2 text-[12px] leading-tight">
+<div class="font-medium text-airbnbDark truncate">Rental unit in Higashiyama-ku</div>
+<div class="text-airbnbMuted mt-0.5">Nov 6–8</div>
+<div class="flex items-center justify-between mt-0.5">
+<span class="font-semibold text-airbnbDark">$398 CAD <span class="font-normal text-airbnbMuted">total</span></span>
+<span class="flex items-center gap-1 font-semibold text-airbnbDark"><span class="text-amber-500 text-[10px]">★</span>4.79</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Inspiration for future getaways area -->
+<div class="bg-[#f7f7f7] border-t border-gray-200 pt-8 pb-10 px-6">
+<h3 class="text-[17px] font-semibold text-airbnbDark mb-4">Inspiration for future getaways</h3>
+<!-- Horizontally scrollable sub-tabs -->
+<div class="flex items-center gap-5 overflow-x-auto no-scrollbar border-b border-gray-300 pb-3 mb-6">
+<button class="text-[14px] font-semibold text-airbnbDark border-b-2 border-airbnbDark pb-2.5 shrink-0 -mb-[13px]">Popular</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Coastal</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Islands</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Lakes</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Mountains</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Outdoors</button>
+<button class="text-[14px] font-medium text-airbnbMuted shrink-0 hover:text-airbnbDark transition-colors">Things to do</button>
+</div>
+<!-- 2-column Destination Grid -->
+<div class="grid grid-cols-2 gap-y-4 gap-x-4 mb-6">
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Penticton</a>
+<span class="text-[12px] text-airbnbMuted">House rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Las Vegas</a>
+<span class="text-[12px] text-airbnbMuted">Apartment rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Oakville</a>
+<span class="text-[12px] text-airbnbMuted">Monthly Rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Scarborough</a>
+<span class="text-[12px] text-airbnbMuted">Vacation rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Vancouver Island</a>
+<span class="text-[12px] text-airbnbMuted">Cabin rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Montreal</a>
+<span class="text-[12px] text-airbnbMuted">Pet-friendly rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Fernie</a>
+<span class="text-[12px] text-airbnbMuted">Apartment rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Mexico City</a>
+<span class="text-[12px] text-airbnbMuted">Cabin rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Red Deer</a>
+<span class="text-[12px] text-airbnbMuted">Monthly Rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Richmond</a>
+<span class="text-[12px] text-airbnbMuted">Pet-friendly rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">North York</a>
+<span class="text-[12px] text-airbnbMuted">Apartment rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Los Angeles</a>
+<span class="text-[12px] text-airbnbMuted">Villa rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Newfoundland</a>
+<span class="text-[12px] text-airbnbMuted">Apartment rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Winnipeg</a>
+<span class="text-[12px] text-airbnbMuted">Vacation rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Quebec City</a>
+<span class="text-[12px] text-airbnbMuted">Condo rentals</span>
+</div>
+<div>
+<a class="block font-semibold text-[13px] text-airbnbDark hover:underline" href="#">Halifax</a>
+<span class="text-[12px] text-airbnbMuted">Condo rentals</span>
+</div>
+</div>
+<button class="flex items-center gap-1 font-semibold text-[14px] text-airbnbDark hover:underline cursor-pointer">
+        Show more
+        <svg fill="none" height="14" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24" width="14"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<!-- Vertical Mobile Footer Links -->
+<div class="mt-10 pt-6 border-t border-gray-300 flex flex-col gap-6 text-[13px]">
+<!-- Support -->
+<div>
+<h4 class="font-semibold text-airbnbDark mb-3">Support</h4>
+<ul class="space-y-2 text-airbnbMuted">
+<li><a class="hover:underline" href="#">Help Centre</a></li>
+<li><a class="hover:underline" href="#">AirCover</a></li>
+<li><a class="hover:underline" href="#">Anti-discrimination</a></li>
+<li><a class="hover:underline" href="#">Disability support</a></li>
+<li><a class="hover:underline" href="#">Cancellation options</a></li>
+<li><a class="hover:underline" href="#">Report neighbourhood concern</a></li>
+</ul>
+</div>
+<hr class="border-gray-200"/>
+<!-- Hosting -->
+<div>
+<h4 class="font-semibold text-airbnbDark mb-3">Hosting</h4>
+<ul class="space-y-2 text-airbnbMuted">
+<li><a class="hover:underline" href="#">Airbnb your home</a></li>
+<li><a class="hover:underline" href="#">AirCover for Hosts</a></li>
+<li><a class="hover:underline" href="#">Hosting resources</a></li>
+<li><a class="hover:underline" href="#">Community forum</a></li>
+<li><a class="hover:underline" href="#">Hosting responsibly</a></li>
+<li><a class="hover:underline" href="#">Airbnb-friendly apartments</a></li>
+<li><a class="hover:underline" href="#">Join a free Hosting class</a></li>
+<li><a class="hover:underline" href="#">Find a co-host</a></li>
+</ul>
+</div>
+<hr class="border-gray-200"/>
+<!-- Airbnb -->
+<div>
+<h4 class="font-semibold text-airbnbDark mb-3">Airbnb</h4>
+<ul class="space-y-2 text-airbnbMuted">
+<li><a class="hover:underline" href="#">Newsroom</a></li>
+<li><a class="hover:underline" href="#">New features</a></li>
+<li><a class="hover:underline" href="#">Careers</a></li>
+<li><a class="hover:underline" href="#">Investors</a></li>
+<li><a class="hover:underline" href="#">Gift cards</a></li>
+<li><a class="hover:underline" href="#">Airbnb.org emergency stays</a></li>
+</ul>
+</div>
+<hr class="border-gray-200"/>
+<!-- Currency, Language & Legal -->
+<div class="pt-2 text-[12px] text-airbnbMuted space-y-3">
+<div class="flex items-center gap-4 font-semibold text-airbnbDark text-[13px]">
+<div class="flex items-center gap-1.5 cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">language</span>
+<span>English (CA)</span>
+</div>
+<div class="cursor-pointer">$ CAD</div>
+</div>
+<div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+<span>© 2026 Airbnb, Inc.</span>
+<span>·</span>
+<a class="hover:underline" href="#">Privacy</a>
+<span>·</span>
+<a class="hover:underline" href="#">Terms</a>
+<span>·</span>
+<a class="hover:underline" href="#">Sitemap</a>
+</div>
+<div class="flex items-center gap-3 pt-2 text-airbnbDark">
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95C18.05 21.45 22 17.19 22 12z"></path></svg>
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+<svg fill="currentColor" height="18" viewbox="0 0 24 24" width="18"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Fixed Mobile Bottom Navigation Bar (Height 65px) -->
+<nav class="fixed bottom-0 left-0 right-0 max-w-[390px] mx-auto h-[65px] bg-white border-t border-gray-200 z-50 flex items-center justify-around px-6">
+<!-- Explore (Active) -->
+<button class="flex flex-col items-center justify-center gap-1 text-[#ff385c]">
+<span class="material-symbols-outlined text-[24px]" style="font-variation-settings: 'FILL' 1;">search</span>
+<span class="text-[11px] font-semibold tracking-tight">Explore</span>
+</button>
+<!-- Wishlists -->
+<button class="flex flex-col items-center justify-center gap-1 text-airbnbMuted hover:text-airbnbDark transition-colors">
+<svg fill="none" height="22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="22"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+<span class="text-[11px] font-medium tracking-tight">Wishlists</span>
+</button>
+<!-- Log in -->
+<button class="flex flex-col items-center justify-center gap-1 text-airbnbMuted hover:text-airbnbDark transition-colors">
+<span class="material-symbols-outlined text-[24px]">account_circle</span>
+<span class="text-[11px] font-medium tracking-tight">Log in</span>
+</button>
+</nav>
+</body>
+</html>

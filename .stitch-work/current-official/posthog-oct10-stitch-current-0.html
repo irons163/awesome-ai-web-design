@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PostHog - Your product's context layer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --ph-orange: #eb9d37;
+    --ph-orange-deep: #ca7e1c;
+    --ph-purple: #9d0ec2;
+    --ph-blue: #1c59c6;
+    --ph-ink: #18191b;
+    --ph-window-bg: #f5f2eb;
+  }
+  body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--ph-ink);
+    user-select: none;
+    background-color: #264b28;
+  }
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Authentic lawn green / moss wallpaper with subtle dot grid & grass tufts */
+  .os-desktop-bg {
+    background: radial-gradient(circle at 50% 25%, #355f37 0%, #294c2b 55%, #1c381f 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .os-desktop-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: 
+      radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px),
+      radial-gradient(rgba(0, 0, 0, 0.15) 1.5px, transparent 1.5px);
+    background-size: 28px 28px;
+    background-position: 0 0, 14px 14px;
+    pointer-events: none;
+    opacity: 0.75;
+  }
+
+  /* Desktop shortcuts */
+  .desktop-shortcut {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 82px;
+    padding: 6px 4px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.16s ease;
+    text-align: center;
+  }
+  .desktop-shortcut:hover {
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    transform: translateY(-2px);
+  }
+  .desktop-shortcut span {
+    font-size: 11px;
+    font-weight: 600;
+    color: #f7faf4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+    line-height: 1.15;
+    word-break: break-word;
+  }
+
+  /* Authentic Window Card */
+  .window-card {
+    background: #f5f2eb;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 
+      0 32px 72px -16px rgba(0, 24, 7, 0.52),
+      0 0 0 1px rgba(21, 23, 29, 0.12),
+      0 12px 30px -4px rgba(0, 0, 0, 0.28);
+    border-radius: 20px;
+  }
+
+  /* Internal window scrolling viewport with authentic custom scrollbar */
+  .app-scroll-viewport {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  .app-scroll-viewport::-webkit-scrollbar {
+    width: 9px;
+  }
+  .app-scroll-viewport::-webkit-scrollbar-track {
+    background: #ebe6dc;
+    border-radius: 0 0 18px 0;
+  }
+  .app-scroll-viewport::-webkit-scrollbar-thumb {
+    background: #c7beaf;
+    border-radius: 999px;
+    border: 2px solid #ebe6dc;
+  }
+  .app-scroll-viewport::-webkit-scrollbar-thumb:hover {
+    background: #a99e8d;
+  }
+
+  /* Buttons */
+  .btn-orange {
+    background-color: #eb9d37;
+    color: #17181c;
+    font-weight: 700;
+    transition: all 0.15s ease;
+    box-shadow: 0 2px 0 #bc771f;
+  }
+  .btn-orange:hover {
+    background-color: #f3a846;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 #bc771f;
+  }
+  .btn-orange:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 0 #bc771f;
+  }
+
+  .btn-white {
+    background-color: #ffffff;
+    color: #15171d;
+    border: 1px solid #d8d2c4;
+    font-weight: 600;
+    transition: all 0.15s ease;
+  }
+  .btn-white:hover {
+    background-color: #fcfbf8;
+    border-color: #c0b9a8;
+  }
+
+  /* Context layer text highlight */
+  .context-layer-highlight {
+    background-color: #dbeafe;
+    color: #1e40af;
+    padding: 0 8px;
+    border-radius: 6px;
+    display: inline-block;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+  }
+
+  /* Tab styles */
+  .tab-btn.active {
+    background: #ffffff;
+    border-top: 3px solid #9d0ec2;
+    color: #15171d;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body class="w-[1280px] h-[720px] os-desktop-bg relative overflow-hidden text-[#15171d] antialiased select-none">
+<!-- Subtle organic corner foliage accents -->
+<div class="absolute -left-12 -bottom-12 w-48 h-48 rounded-full bg-[#1b341d]/40 blur-2xl pointer-events-none"></div>
+<div class="absolute -right-12 -top-12 w-56 h-56 rounded-full bg-[#3e683f]/30 blur-2xl pointer-events-none"></div>
+<!-- Decorative grass / daisy vectors in wallpaper corners -->
+<svg class="absolute bottom-3 left-7 opacity-40 pointer-events-none" fill="none" height="50" viewbox="0 0 100 80" width="70">
+<path d="M10,75 Q20,20 30,75 Q45,15 55,75 Q70,30 85,75" stroke="#7fad6b" stroke-linecap="round" stroke-width="6"></path>
+<circle cx="55" cy="18" fill="#fdf07d" r="4"></circle>
+</svg>
+<svg class="absolute bottom-5 right-7 opacity-35 pointer-events-none" fill="none" height="55" viewbox="0 0 100 80" width="80">
+<path d="M15,75 Q30,25 45,75 Q60,10 75,75 Q85,35 95,75" stroke="#7fad6b" stroke-linecap="round" stroke-width="6"></path>
+<circle cx="75" cy="12" fill="#fdf07d" r="4.5"></circle>
+</svg>
+<!-- ============================================================ -->
+<!-- 1. OS TOP MENU / TASKBAR                                     -->
+<!-- ============================================================ -->
+<header class="absolute top-2 left-2 right-2 h-[42px] bg-[#fbf9f4]/95 backdrop-blur-md border border-white/80 rounded-xl shadow-sm z-50 flex items-center justify-between px-3.5">
+<!-- Left: Brand Logo & Navigation -->
+<div class="flex items-center gap-5">
+<a class="flex items-center gap-2 cursor-pointer group" href="#home" title="PostHog">
+<!-- PostHog Hedgehog Logo -->
+<div class="w-6 h-6 rounded bg-[#15171d] flex items-center justify-center p-1 text-white">
+<svg class="w-full h-full" fill="none" viewbox="0 0 24 24">
+<path d="M4 15C4 11 7 8 12 8C17 8 20 11 20 15C20 17 18 19 16 19H8C6 19 4 17 4 15Z" fill="#eb9d37"></path>
+<circle cx="9" cy="13" fill="#15171d" r="1.2"></circle>
+<circle cx="15" cy="13" fill="#15171d" r="1.2"></circle>
+<path d="M7 8L5 5M10 7L10 4M14 7L14 4M17 8L19 5" stroke="#eb9d37" stroke-linecap="round" stroke-width="1.8"></path>
+</svg>
+</div>
+<span class="font-extrabold text-[15px] tracking-tight text-[#15171d]">PostHog</span>
+</a>
+<!-- Menu links -->
+<nav class="flex items-center gap-4 text-[13px] font-semibold text-[#292c34]">
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors flex items-center gap-1">
+          Products
+          <svg fill="none" height="6" viewbox="0 0 10 6" width="10"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-linecap="round" stroke-width="1.5"></path></svg>
+</button>
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Pricing</button>
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Docs</button>
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Community</button>
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors">Company</button>
+<button class="hover:text-black hover:bg-black/5 px-2 py-1 rounded transition-colors text-gray-500">More</button>
+</nav>
+</div>
+<!-- Right: Utility icons & CTA -->
+<div class="flex items-center gap-3">
+<!-- Search icon button -->
+<button class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-black/5 text-[#3e424d] transition" title="Search">
+<svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="15"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+</button>
+<!-- Theme toggle -->
+<button class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-black/5 text-[#3e424d] transition" title="Toggle theme">
+<svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-width="2.2" viewbox="0 0 24 24" width="15"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>
+</button>
+<!-- 100% battery indicator -->
+<div class="flex items-center gap-1.5 px-2 py-1 rounded-lg hover:bg-black/5 text-xs font-semibold text-emerald-700" title="100% Battery / System Online">
+<span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-[11px] font-mono">100%</span>
+</div>
+<!-- Log In -->
+<a class="text-[13px] font-semibold text-[#15171d] hover:underline px-1.5" href="#login">Log in</a>
+<!-- Primary Orange CTA -->
+<a class="btn-orange px-3.5 py-1.5 rounded-lg text-xs tracking-tight flex items-center gap-1.5" href="#signup">
+<span>Get started – free</span>
+<svg fill="none" height="12" stroke="currentColor" stroke-linecap="round" stroke-width="3" viewbox="0 0 24 24" width="12"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</a>
+</div>
+</header>
+<!-- ============================================================ -->
+<!-- 2. DESKTOP SHORTCUTS - LEFT COLUMN                           -->
+<!-- ============================================================ -->
+<div class="absolute left-2.5 top-[62px] bottom-4 w-[116px] flex flex-col justify-start items-center gap-2.5 z-30 pointer-events-auto">
+<!-- Home -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#eef5eb]/95 border border-white/80 shadow-md flex items-center justify-center text-[#23421d]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+</div>
+<span>Home</span>
+</div>
+<!-- Self-driving product -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#faefe0]/95 border border-white/80 shadow-md flex items-center justify-center text-[#b86918]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="3"></circle><path d="M12 3v6M12 15v6M3 12h6M15 12h6"></path></svg>
+</div>
+<span>Self-driving product</span>
+</div>
+<!-- Context warehouse -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#e6f0fa]/95 border border-white/80 shadow-md flex items-center justify-center text-[#215494]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" x2="12" y1="22.08" y2="12"></line></svg>
+</div>
+<span>Context warehouse</span>
+</div>
+<!-- Pricing -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#fdf5df]/95 border border-white/80 shadow-md flex items-center justify-center text-[#8e690f]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v10M15 9.5c-.7-.8-1.7-1.5-3-1.5-2 0-3 1.2-3 2.5 0 2.5 6 1.8 6 4.5 0 1.5-1.2 2.5-3 2.5-1.5 0-2.6-.7-3.3-1.7"></path></svg>
+</div>
+<span>Pricing</span>
+</div>
+<!-- Docs -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#fbf9f4]/95 border border-white/80 shadow-md flex items-center justify-center text-[#353842]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+</div>
+<span>Docs</span>
+</div>
+<!-- Demo -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#fae8fb]/95 border border-white/80 shadow-md flex items-center justify-center text-[#8d1fa8]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+</div>
+<span>Demo</span>
+</div>
+<!-- Talk to human -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#eaf6ef]/95 border border-white/80 shadow-md flex items-center justify-center text-[#1c683b]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+</div>
+<span>Talk to human</span>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- 3. DESKTOP SHORTCUTS - RIGHT COLUMN                          -->
+<!-- ============================================================ -->
+<div class="absolute right-2.5 top-[62px] bottom-4 w-[116px] flex flex-col justify-start items-center gap-2.5 z-30 pointer-events-auto">
+<!-- About us -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#f5effa]/95 border border-white/80 shadow-md flex items-center justify-center text-[#692d91]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="16" y2="12"></line><line x1="12" x2="12.01" y1="8" y2="8"></line></svg>
+</div>
+<span>About us</span>
+</div>
+<!-- Changelog -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#fef7e7]/95 border border-white/80 shadow-md flex items-center justify-center text-[#aa6b08]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</div>
+<span>Changelog</span>
+</div>
+<!-- Company handbook -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#ebf3fc]/95 border border-white/80 shadow-md flex items-center justify-center text-[#1d5aa1]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+</div>
+<span>Handbook</span>
+</div>
+<!-- Store (Merch) -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#fbedee]/95 border border-white/80 shadow-md flex items-center justify-center text-[#a8253b]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+</div>
+<span>Store</span>
+</div>
+<!-- Careers -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#edf7ee]/95 border border-white/80 shadow-md flex items-center justify-center text-[#217537]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+</div>
+<span>Careers</span>
+</div>
+<!-- Trash -->
+<div class="desktop-shortcut">
+<div class="w-10 h-10 rounded-xl bg-[#f2f2f3]/95 border border-white/80 shadow-md flex items-center justify-center text-[#555a66]">
+<svg fill="none" height="21" stroke="currentColor" stroke-width="2.2" viewbox="0 0 24 24" width="21"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" x2="10" y1="11" y2="17"></line><line x1="14" x2="14" y1="11" y2="17"></line></svg>
+</div>
+<span>Trash</span>
+</div>
+</div>
+<!-- ============================================================ -->
+<!-- 4. CENTERED POSTHOG OS APPLICATION WINDOW                    -->
+<!-- ============================================================ -->
+<main class="absolute left-[132px] right-[132px] top-[60px] bottom-[20px] window-card flex flex-col overflow-hidden z-40">
+<!-- Window Titlebar with Traffic Lights -->
+<div class="h-9 px-4 bg-[#ece8dd] border-b border-[#dad3c3] flex items-center justify-between shrink-0 select-none">
+<div class="flex items-center gap-2">
+<div class="w-3.5 h-3.5 rounded-full bg-[#15171d]/20 flex items-center justify-center">
+<div class="w-1.5 h-1.5 rounded-full bg-[#15171d]/70"></div>
+</div>
+<span class="text-xs font-semibold text-[#484c58]">posthog.com — Product OS</span>
+<span class="text-[10px] font-mono px-1.5 py-0.2 rounded bg-[#ded6c4] text-[#4d525f] font-bold">v3.0</span>
+</div>
+<!-- Window Controls (Minimize, Maximize, Close) -->
+<div class="flex items-center gap-2">
+<button class="w-3.5 h-3.5 rounded-full bg-[#d7cfbc] hover:bg-[#c2b9a4] border border-black/10 flex items-center justify-center transition" title="Minimize">
+<span class="w-2 h-0.5 bg-black/60"></span>
+</button>
+<button class="w-3.5 h-3.5 rounded-full bg-[#d7cfbc] hover:bg-[#c2b9a4] border border-black/10 flex items-center justify-center transition" title="Maximize">
+<div class="w-1.5 h-1.5 border border-black/60"></div>
+</button>
+<button class="w-3.5 h-3.5 rounded-full bg-[#e8a3a3] hover:bg-[#db7a7a] border border-black/10 flex items-center justify-center transition" title="Close">
+<span class="text-[9px] leading-none text-black/60 font-bold">×</span>
+</button>
+</div>
+</div>
+<!-- Scrollable Window Viewport (~4,000px+ content height) -->
+<div class="app-scroll-viewport flex-1 bg-[#f5f2eb] text-[#15171d]">
+<!-- ======================================================= -->
+<!-- SECTION 1: HERO & PRODUCT DEMO                          -->
+<!-- ======================================================= -->
+<section class="px-10 pt-8 pb-14 max-w-[950px] mx-auto">
+<!-- PostHog 3.0 Pill Banner -->
+<div class="mb-5 flex items-center">
+<div class="px-3 py-1 rounded-full bg-[#faefe0] border border-[#e5cfa8] inline-flex items-center gap-2 text-xs font-bold text-[#865400]">
+<span class="w-2 h-2 rounded-full bg-[#eb9d37]"></span>
+            PostHog 3.0: The Agent-Ready Data Platform
+          </div>
+</div>
+<!-- Two Column Hero Content -->
+<div class="grid grid-cols-12 gap-7 items-start mb-10">
+<!-- Left Column -->
+<div class="col-span-7 pr-2">
+<h1 class="text-[42px] leading-[1.12] font-black text-[#15171d] tracking-tight mb-5">
+              Your product’s <span class="context-layer-highlight">context layer</span>
+</h1>
+<p class="text-[15px] text-[#474c59] leading-relaxed mb-6 font-medium">
+              PostHog ingests and stores your analytics, errors, replays, and traces so you and your agents can query and act on it.
+            </p>
+<div class="flex items-center gap-3 text-xs font-semibold text-[#5a5f6e]">
+<div class="flex -space-x-1.5 overflow-hidden">
+<div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f5f2eb] bg-[#eb9d37] text-[10px] font-bold text-white flex items-center justify-center">PH</div>
+<div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f5f2eb] bg-[#9d0ec2] text-[10px] font-bold text-white flex items-center justify-center">AI</div>
+<div class="inline-block h-6 w-6 rounded-full ring-2 ring-[#f5f2eb] bg-[#1c59c6] text-[10px] font-bold text-white flex items-center justify-center">SQL</div>
+</div>
+<span>Join <strong class="text-[#15171d]">500,000+ teams</strong> shipping with PostHog.</span>
+</div>
+</div>
+<!-- Right Setup Card -->
+<div class="col-span-5">
+<div class="bg-white rounded-2xl p-6 border border-[#dfd9ca] shadow-sm relative overflow-hidden">
+<div class="absolute -top-10 -right-10 w-28 h-28 bg-[#fdf5e8] rounded-full blur-xl pointer-events-none"></div>
+<h2 class="text-lg font-bold text-[#15171d] mb-4">Set up PostHog for free</h2>
+<ul class="space-y-2.5 mb-6 text-xs font-medium text-[#404450]">
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+<span><strong>97% of users</strong> pay us $0</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+<span>No credit card required</span>
+</li>
+<li class="flex items-center gap-2">
+<div class="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[10px] font-bold shrink-0">✓</div>
+<span>Setup wizard installs PostHog for you</span>
+</li>
+</ul>
+<div class="space-y-2.5">
+<a class="btn-orange w-full py-2.5 rounded-xl text-center block text-sm font-bold shadow-sm" href="#signup">
+                  Get started – free →
+                </a>
+<button class="btn-white w-full py-2.5 rounded-xl text-center flex items-center justify-center gap-2 text-xs font-bold">
+<svg fill="none" height="14" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="14"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+<span>✨ Install with AI</span>
+</button>
+</div>
+<p class="text-[11px] text-center text-gray-400 mt-3 font-medium">Takes ~4 minutes • Self-hostable via Docker</p>
+</div>
+</div>
+</div>
+<!-- Interactive Product Context Tabs & AI Prompt Terminal -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] shadow-sm overflow-hidden mb-6">
+<!-- Tab Navigation Bar -->
+<div class="flex items-center border-b border-[#e5dfd2] bg-[#fbf9f4] px-4 pt-2 gap-2 text-xs font-bold" id="productTabs">
+<button class="tab-btn active px-4 py-2.5 rounded-t-lg transition flex items-center gap-2 text-[#15171d]" onclick="switchTab(0)">
+<span class="w-2 h-2 rounded-full bg-[#9d0ec2]"></span>
+              Ask PostHog anything
+            </button>
+<button class="tab-btn px-4 py-2.5 rounded-t-lg text-gray-500 hover:text-gray-900 transition flex items-center gap-2" onclick="switchTab(1)">
+<span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              Give agents product context
+            </button>
+<button class="tab-btn px-4 py-2.5 rounded-t-lg text-gray-500 hover:text-gray-900 transition flex items-center gap-2" onclick="switchTab(2)">
+<span class="w-2 h-2 rounded-full bg-gray-300"></span>
+              Ship with PostHog
+            </button>
+</div>
+<!-- Product UI Mockup Screen -->
+<div class="p-6 bg-[#faf8f3]" id="tabContent">
+<!-- Query Bar Prompt -->
+<div class="flex items-center justify-between gap-3 bg-white p-3.5 rounded-xl border border-[#ded8c8] shadow-inner mb-5">
+<div class="flex items-center gap-2.5 flex-1">
+<span class="px-2 py-0.5 rounded bg-purple-100 text-[#9d0ec2] font-mono text-xs font-bold shrink-0">AI ✨</span>
+<span class="text-xs font-mono text-[#15171d] font-semibold">Which signup cohort had the highest drop-off after viewing the billing table last week?</span>
+</div>
+<span class="text-[10px] font-mono bg-gray-100 text-gray-600 px-2 py-0.5 rounded border border-gray-200 shrink-0">SQL Generated ⚡ 24ms</span>
+</div>
+<!-- Insights Data Card Grid -->
+<div class="grid grid-cols-3 gap-4 mb-4">
+<!-- Bar Drop Off -->
+<div class="bg-white p-4 rounded-xl border border-[#e5dfd2] shadow-sm">
+<div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+<span class="font-semibold">Drop-off Highlight</span>
+<span class="text-rose-600 font-bold">-42.8% drop</span>
+</div>
+<div class="h-16 flex items-end gap-1.5 pt-2">
+<div class="flex-1 bg-[#1c59c6]/20 rounded-t h-[60%]"></div>
+<div class="flex-1 bg-[#1c59c6]/30 rounded-t h-[75%]"></div>
+<div class="flex-1 bg-[#1c59c6]/50 rounded-t h-[90%]"></div>
+<div class="flex-1 bg-rose-500 rounded-t h-[35%]"></div>
+</div>
+<div class="text-[11px] text-gray-700 mt-2 font-mono font-medium">Cohort #4 (Self-Serve Dev)</div>
+</div>
+<!-- Rageclick Sessions -->
+<div class="bg-white p-4 rounded-xl border border-[#e5dfd2] shadow-sm">
+<div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+<span class="font-semibold">Correlated Replays</span>
+<span class="text-emerald-700 font-bold">1,420 sessions</span>
+</div>
+<div class="bg-[#15171d] text-white rounded-lg p-2.5 font-mono text-[10px] h-16 flex flex-col justify-center">
+<div class="text-amber-400 font-semibold">&gt; rageclick detected:</div>
+<div class="text-gray-300">selector: #enterprise-tier-cta</div>
+</div>
+<div class="text-[11px] text-purple-700 mt-2 font-bold cursor-pointer hover:underline">Watch rageclick highlight tape →</div>
+</div>
+<!-- Context Feed -->
+<div class="bg-white p-4 rounded-xl border border-[#e5dfd2] shadow-sm">
+<div class="flex items-center justify-between text-xs text-gray-500 mb-2">
+<span class="font-semibold">Agent Context Stream</span>
+<span class="bg-purple-100 text-[#9d0ec2] text-[10px] px-1.5 py-0.5 rounded font-bold">MCP Ready</span>
+</div>
+<div class="text-[11px] text-gray-600 leading-snug space-y-1 font-mono">
+<p class="truncate"><span class="text-[#1c59c6] font-bold">SELECT</span> user_id, intent</p>
+<p class="truncate"><span class="text-[#9d0ec2] font-bold">EMBEDDING</span> match 0.94</p>
+<p class="text-emerald-700 font-bold">✓ Synced to Cursor &amp; Claude</p>
+</div>
+<div class="text-[11px] text-gray-400 mt-2 font-mono">Latency: 18ms (cached)</div>
+</div>
+</div>
+<!-- Root cause badge -->
+<div class="bg-[#eef3f8] border border-[#d6e2f0] rounded-xl p-3 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 text-[#244574] font-medium">
+<span class="font-bold">Replays found:</span>
+<span>1,420 sessions with rageclicks on #enterprise-tier-cta</span>
+</div>
+<button class="text-[11px] font-bold text-[#1c59c6] hover:underline">Open Session Replay</button>
+</div>
+</div>
+</div>
+<!-- Product Icons Strip -->
+<div class="flex items-center justify-between py-3 px-6 bg-[#eee8dc] rounded-xl border border-[#ded6c4] text-xs font-bold text-[#3d414d]">
+<span class="flex items-center gap-1.5"><span>📊</span> Product Analytics</span>
+<span class="text-gray-300">•</span>
+<span class="flex items-center gap-1.5"><span>📹</span> Session Replay</span>
+<span class="text-gray-300">•</span>
+<span class="flex items-center gap-1.5"><span>🚩</span> Feature Flags</span>
+<span class="text-gray-300">•</span>
+<span class="flex items-center gap-1.5"><span>🧪</span> A/B Testing</span>
+<span class="text-gray-300">•</span>
+<span class="flex items-center gap-1.5"><span>⚡</span> Error Tracking</span>
+<span class="text-gray-300">•</span>
+<span class="flex items-center gap-1.5"><span>📦</span> Data Warehouse</span>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 2: TRUSTED BY BUILDERS & CLIENT LOGOS           -->
+<!-- ======================================================= -->
+<section class="px-10 py-14 bg-[#faf8f3] border-t border-[#ded8c8]">
+<div class="max-w-[950px] mx-auto">
+<div class="text-center max-w-2xl mx-auto mb-8">
+<span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#9d0ec2] bg-purple-50 px-2.5 py-1 rounded border border-purple-200">TRUSTED BY BUILDERS</span>
+<h2 class="text-2xl font-black text-[#15171d] tracking-tight mt-2 mb-1">
+              Loved by 500,000+ teams from startups to hypergrowth
+            </h2>
+<p class="text-xs font-medium text-[#5a5f6e]">
+              From garage YC batch startups to the largest aerospace and cloud platforms.
+            </p>
+</div>
+<!-- Logos in clean bordered pills/tiles -->
+<div class="grid grid-cols-6 gap-3 mb-8">
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#eb9d37]">Y Combinator</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black tracking-widest text-[#15171d]">AIRBUS</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#15171d]">hasura</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#15171d]">Phantom</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#15171d]">AssemblyAI</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#15171d]">Contra</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-emerald-600">Supabase</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-amber-600">Fireworks</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-rose-500">Raycast</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#1c59c6]">HeyGen</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-[#15171d]">GOV.UK</span>
+</div>
+<div class="p-3 rounded-xl bg-white border border-[#ded8c8] flex flex-col items-center justify-center text-center shadow-xs">
+<span class="text-sm font-black text-rose-600">ElevenLabs</span>
+</div>
+</div>
+<!-- Quote testimonial card -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] p-6 shadow-sm flex items-start gap-4">
+<div class="w-10 h-10 rounded-xl bg-[#faefe0] text-[#865400] flex items-center justify-center text-xl shrink-0 font-serif font-black">
+              “
+            </div>
+<div class="flex-1">
+<p class="text-sm font-medium text-[#2d323e] leading-relaxed mb-2">
+                “PostHog replaced 5 different analytics and observability tools we had open. The session replay combined with LLM tracking is unbeatable.”
+              </p>
+<div class="text-xs font-bold text-[#15171d]">
+                VP Engineering, Series B AI Infrastructure
+              </div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 3: ALL YOUR DATA, WORKING TOGETHER              -->
+<!-- ======================================================= -->
+<section class="px-10 py-14 bg-[#f5f2eb] border-t border-[#ded8c8]">
+<div class="max-w-[950px] mx-auto">
+<div class="mb-8">
+<span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1c59c6] bg-blue-50 px-2.5 py-1 rounded border border-blue-200">ALL-IN-ONE TOOLKIT</span>
+<h2 class="text-3xl font-black text-[#15171d] tracking-tight mt-2 mb-1">
+              All your data, working together
+            </h2>
+<p class="text-xs font-medium text-[#5a5f6e]">
+              One SDK to install. Zero data silos. Stop stitch-welding disparate SaaS vendors.
+            </p>
+</div>
+<!-- 4 Feature Cards Grid -->
+<div class="grid grid-cols-2 gap-5 mb-8">
+<!-- 1. Product & Web Analytics -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-9 h-9 rounded-xl bg-[#eef5eb] text-emerald-800 flex items-center justify-center text-lg">📊</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold">Realtime</span>
+</div>
+<h3 class="text-base font-black text-[#15171d] mb-2">Product &amp; Web Analytics</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-4">
+                  Funnels, retention graphs, user paths, custom SQL trends without leaving your IDE. Interactive code snippet preview.
+                </p>
+</div>
+<div class="bg-[#15171d] text-gray-200 rounded-xl p-3 font-mono text-[11px]">
+<span class="text-purple-400">posthog.capture</span>(<span class="text-amber-300">'button_clicked'</span>, { cohort: <span class="text-emerald-400">'beta'</span> });
+              </div>
+</div>
+<!-- 2. Session Replay + Errors -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-9 h-9 rounded-xl bg-[#faefe0] text-amber-800 flex items-center justify-center text-lg">📹</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-100 text-amber-800 font-bold">5,000 free/mo</span>
+</div>
+<h3 class="text-base font-black text-[#15171d] mb-2">Session Replay + Errors</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-4">
+                  Watch user frustrations, console errors, and network timings in video-quality replays.
+                </p>
+</div>
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#e5dfd2] text-xs flex items-center justify-between">
+<span class="font-mono text-rose-600 font-bold">Uncaught SyntaxError</span>
+<span class="text-[11px] font-bold text-[#1c59c6] hover:underline cursor-pointer">Replay @ 01:24 ▷</span>
+</div>
+</div>
+<!-- 3. Feature Flags & A/B Testing -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-9 h-9 rounded-xl bg-[#f6e6fb] text-purple-800 flex items-center justify-center text-lg">🚩</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-100 text-[#9d0ec2] font-bold">1M calls free</span>
+</div>
+<h3 class="text-base font-black text-[#15171d] mb-2">Feature Flags &amp; A/B Testing</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-4">
+                  Roll out gradually, test conversion hypotheses, and kill bugs remotely with zero redeploys.
+                </p>
+</div>
+<div class="flex items-center gap-2 text-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+<span class="font-mono font-medium text-gray-700">flag: checkout_v2 (50% rollout active)</span>
+</div>
+</div>
+<!-- 4. LLM Observability -->
+<div class="bg-white rounded-2xl border border-[#ded8c8] p-6 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-3">
+<div class="w-9 h-9 rounded-xl bg-[#ebf3fc] text-blue-800 flex items-center justify-center text-lg">⚡</div>
+<span class="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-100 text-blue-800 font-bold">PostHog 3.0</span>
+</div>
+<h3 class="text-base font-black text-[#15171d] mb-2">LLM Observability</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-4">
+                  Trace agent actions, token expenses, latency, and ground-truth user outcomes side-by-side.
+                </p>
+</div>
+<div class="flex items-center justify-between text-xs font-mono bg-[#f0f6ff] p-2.5 rounded-xl border border-blue-100">
+<span class="text-[#1c59c6] font-bold">claude-3-5-sonnet</span>
+<span class="text-gray-600">842 tokens • $0.0025</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 4: GENEROUS FREE TIERS & USAGE-BASED PRICING    -->
+<!-- ======================================================= -->
+<section class="px-10 py-14 bg-[#faf8f3] border-t border-[#ded8c8]">
+<div class="max-w-[950px] mx-auto">
+<div class="mb-8">
+<span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#eb9d37] bg-amber-50 px-2.5 py-1 rounded border border-amber-200">PREDICTABLE BILLING</span>
+<h2 class="text-3xl font-black text-[#15171d] tracking-tight mt-2 mb-1">
+              Generous free tiers. Predictable pricing.
+            </h2>
+<p class="text-xs font-medium text-[#5a5f6e]">
+              Start free, scale smoothly, pay only for what you consume above thresholds.
+            </p>
+</div>
+<!-- Free Forever Tier Card -->
+<div class="bg-white rounded-2xl border-2 border-[#eb9d37] p-7 shadow-sm mb-6 relative">
+<div class="flex items-start justify-between mb-6 pb-4 border-b border-[#ece7da]">
+<div>
+<h3 class="text-2xl font-black text-[#15171d]">$0 <span class="text-base font-medium text-gray-500">/month</span></h3>
+<p class="text-xs font-semibold text-[#865400]">Every single project starts here</p>
+</div>
+<a class="btn-orange px-5 py-2 rounded-xl text-xs font-bold" href="#claim">Claim Free Tier</a>
+</div>
+<div class="grid grid-cols-5 gap-4 text-center">
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#ded8c8]">
+<div class="text-base font-black text-[#15171d]">1,000,000</div>
+<div class="text-[11px] font-semibold text-gray-600">Event Analytics / mo</div>
+</div>
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#ded8c8]">
+<div class="text-base font-black text-[#15171d]">5,000</div>
+<div class="text-[11px] font-semibold text-gray-600">Session Replays / mo</div>
+</div>
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#ded8c8]">
+<div class="text-base font-black text-[#15171d]">1,000,000</div>
+<div class="text-[11px] font-semibold text-gray-600">Feature Flag calls</div>
+</div>
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#ded8c8]">
+<div class="text-base font-black text-[#15171d]">10,000</div>
+<div class="text-[11px] font-semibold text-gray-600">LLM Traces events</div>
+</div>
+<div class="p-3 bg-[#faf8f3] rounded-xl border border-[#ded8c8]">
+<div class="text-base font-black text-[#15171d]">Unlimited</div>
+<div class="text-[11px] font-semibold text-gray-600">Team Members</div>
+</div>
+</div>
+<div class="mt-4 pt-3 text-center text-xs text-gray-500 font-medium">
+              💡 <strong>98% of customers pay $0</strong>. Set strict spending limits so you never receive surprise bills.
+            </div>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 5: WHY ENGINEERS CHOOSE POSTHOG                 -->
+<!-- ======================================================= -->
+<section class="px-10 py-14 bg-[#f5f2eb] border-t border-[#ded8c8]">
+<div class="max-w-[950px] mx-auto">
+<div class="mb-8">
+<span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#9d0ec2] bg-purple-50 px-2.5 py-1 rounded border border-purple-200">DEVELOPER FIRST</span>
+<h2 class="text-3xl font-black text-[#15171d] tracking-tight mt-2 mb-1">
+              Why engineers choose PostHog
+            </h2>
+<p class="text-xs font-medium text-[#5a5f6e]">
+              Built for software teams that write code, automate deploys, and despise enterprise fluff.
+            </p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<!-- Bullet 1 -->
+<div class="bg-white p-5 rounded-2xl border border-[#ded8c8] shadow-sm">
+<div class="text-xs font-mono font-bold text-[#eb9d37] mb-1">01 / ARCHITECTURE</div>
+<h4 class="text-sm font-black text-[#15171d] mb-1.5">Built for Devs</h4>
+<p class="text-xs text-gray-600 leading-normal">
+                Python, TypeScript &amp; ClickHouse. APIs for everything, clean SDKs, and webhook triggers for automated action pipelines.
+              </p>
+</div>
+<!-- Bullet 2 -->
+<div class="bg-white p-5 rounded-2xl border border-[#ded8c8] shadow-sm">
+<div class="text-xs font-mono font-bold text-[#9d0ec2] mb-1">02 / TRANSPARENCY</div>
+<h4 class="text-sm font-black text-[#15171d] mb-1.5">Open Source Core</h4>
+<p class="text-xs text-gray-600 leading-normal">
+                Transparent roadmap, inspect code anytime on GitHub, self-host via Docker, or deploy in your private VPC.
+              </p>
+</div>
+<!-- Bullet 3 -->
+<div class="bg-white p-5 rounded-2xl border border-[#ded8c8] shadow-sm">
+<div class="text-xs font-mono font-bold text-[#1c59c6] mb-1">03 / COMPLIANCE</div>
+<h4 class="text-sm font-black text-[#15171d] mb-1.5">EU Data Residency</h4>
+<p class="text-xs text-gray-600 leading-normal">
+                Host in Frankfurt (EU) or US East (Virginia). GDPR and HIPAA compliant with signed BAAs and SOC 2 Type II assurance.
+              </p>
+</div>
+<!-- Bullet 4 -->
+<div class="bg-white p-5 rounded-2xl border border-[#ded8c8] shadow-sm">
+<div class="text-xs font-mono font-bold text-emerald-600 mb-1">04 / PERFORMANCE</div>
+<h4 class="text-sm font-black text-[#15171d] mb-1.5">Fast SQL Queries</h4>
+<p class="text-xs text-gray-600 leading-normal">
+                Powered by ClickHouse for sub-second aggregations across billions of events without manual ETL orchestration.
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 6: BEDTIME READING                              -->
+<!-- ======================================================= -->
+<section class="px-10 py-14 bg-[#faf8f3] border-t border-[#ded8c8]">
+<div class="max-w-[950px] mx-auto">
+<div class="flex items-center justify-between mb-8 pb-3 border-b border-[#ded8c8]">
+<div>
+<span class="text-[11px] font-mono font-bold uppercase tracking-wider text-[#1c59c6] bg-blue-50 px-2.5 py-1 rounded border border-blue-200">ENGINEERING CULTURE</span>
+<h2 class="text-3xl font-black text-[#15171d] tracking-tight mt-2 mb-1">
+                Bedtime reading
+              </h2>
+<p class="text-xs font-medium text-[#5a5f6e]">
+                Unvarnished essays on building startups, ClickHouse internals, and surviving product launches.
+              </p>
+</div>
+<div class="text-right">
+<span class="text-xs font-bold text-[#15171d]">110,000+ engineers</span>
+<div class="text-[10px] text-gray-400 font-mono">read our weekly handbook</div>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-5">
+<a class="bg-white rounded-2xl p-5 border border-[#ded8c8] shadow-sm hover:border-[#15171d] transition group block" href="#blog1">
+<div class="text-[10px] font-mono font-bold text-[#9d0ec2] uppercase mb-2">SALES CULTURE • 6 MIN READ</div>
+<h3 class="text-sm font-black text-[#15171d] group-hover:text-[#1c59c6] transition mb-2">
+                Why we don't have traditional sales reps
+              </h3>
+<p class="text-xs text-gray-500 leading-normal">
+                How giving users self-service products and developer-friendly documentation scales faster than quota pressure.
+              </p>
+</a>
+<a class="bg-white rounded-2xl p-5 border border-[#ded8c8] shadow-sm hover:border-[#15171d] transition group block" href="#blog2">
+<div class="text-[10px] font-mono font-bold text-[#eb9d37] uppercase mb-2">ENGINEERING ROLES • 8 MIN READ</div>
+<h3 class="text-sm font-black text-[#15171d] group-hover:text-[#1c59c6] transition mb-2">
+                Product engineer vs. software engineer: What's the difference?
+              </h3>
+<p class="text-xs text-gray-500 leading-normal">
+                The shift toward end-to-end builders who write code, talk to users, and deploy their own experiments daily.
+              </p>
+</a>
+<a class="bg-white rounded-2xl p-5 border border-[#ded8c8] shadow-sm hover:border-[#15171d] transition group block" href="#blog3">
+<div class="text-[10px] font-mono font-bold text-[#1c59c6] uppercase mb-2">SCALE &amp; ARCHITECTURE • 11 MIN READ</div>
+<h3 class="text-sm font-black text-[#15171d] group-hover:text-[#1c59c6] transition mb-2">
+                How ClickHouse handles 100 billion rows without setting on fire
+              </h3>
+<p class="text-xs text-gray-500 leading-normal">
+                Partitioning schemes, columnar compression, and vectorized SIMD execution for real-time analytics.
+              </p>
+</a>
+</div>
+</div>
+</section>
+<!-- ======================================================= -->
+<!-- SECTION 7: RETRO PRINTED SOFTWARE-BOX ADVERTISEMENT     -->
+<!-- ======================================================= -->
+<section class="px-10 py-16 bg-[#eee8dc] border-t border-[#ded8c8] text-center relative overflow-hidden">
+<div class="max-w-[720px] mx-auto relative z-10">
+<!-- Retro Box & Floppy Disk Mockup Motif -->
+<div class="flex items-center justify-center gap-6 mb-7">
+<!-- 90s Big Box Software Package -->
+<div class="w-32 h-44 bg-gradient-to-br from-[#18191c] via-[#242833] to-[#15171d] rounded-xl border-2 border-[#eb9d37] shadow-xl p-3 flex flex-col justify-between text-left text-white transform -rotate-3 hover:rotate-0 transition">
+<div class="flex justify-between items-start">
+<span class="text-[8px] font-mono uppercase tracking-widest text-[#eb9d37]">v2026.10</span>
+<span class="text-[8px] bg-red-600 px-1 py-0.5 rounded font-bold uppercase">WIN/MAC</span>
+</div>
+<div class="text-center my-auto">
+<div class="w-10 h-10 mx-auto rounded-full bg-[#eb9d37] flex items-center justify-center text-lg font-black text-[#15171d] shadow-md mb-1.5">
+                  🦔
+                </div>
+<div class="font-black text-xs tracking-tight text-white">PostHog OS</div>
+<div class="text-[8px] text-gray-300 font-mono">Product Operating System</div>
+</div>
+<div class="text-[8px] text-gray-400 font-mono border-t border-gray-700 pt-1">
+                Unlimited Replays Inside
+              </div>
+</div>
+<!-- Floppy Disk Vector -->
+<div class="w-28 h-28 rounded-lg bg-[#2b2d35] border-2 border-white/60 shadow-lg p-2.5 flex flex-col justify-between transform rotate-6 hover:rotate-0 transition text-left">
+<div class="bg-gray-300 h-8 rounded-sm p-1 flex items-center justify-between">
+<div class="w-4 h-5 bg-[#15171d] rounded-xs"></div>
+<span class="text-[8px] font-mono font-bold text-gray-800">POSTHOG 1.44MB</span>
+</div>
+<div class="bg-white rounded p-1 text-[8px] font-mono text-gray-800 text-center font-bold">
+                FORMATTED HD
+              </div>
+</div>
+</div>
+<h2 class="text-3xl font-black text-[#15171d] tracking-tight mb-2">
+            Ship products people want
+          </h2>
+<p class="text-xs text-[#525766] max-w-md mx-auto mb-5 font-medium">
+            Join hundreds of thousands of engineers shipping faster with unified context, session replay, and flags.
+          </p>
+<!-- Cloud Region Switcher -->
+<div class="inline-flex items-center p-1 bg-white rounded-xl border border-[#ded8c8] shadow-xs mb-5 text-xs font-semibold" id="regionPicker">
+<button class="px-3.5 py-1.5 rounded-lg bg-[#15171d] text-white region-btn" onclick="setRegion('us')">
+              🇺🇸 US Cloud (Virginia)
+            </button>
+<button class="px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-black region-btn" onclick="setRegion('eu')">
+              🇪🇺 EU Cloud (Frankfurt)
+            </button>
+</div>
+<div class="text-xs text-gray-500 font-bold mb-4 font-mono">
+            Regular Price: <span class="line-through text-gray-400">$99</span> <span class="text-emerald-700 font-black">FREE</span>
+</div>
+<!-- Big orange CTA -->
+<div class="flex items-center justify-center gap-3 mb-5">
+<a class="btn-orange px-8 py-3 rounded-xl text-sm font-extrabold tracking-tight shadow-md flex items-center gap-2" href="#signup">
+<span>Get started – free →</span>
+</a>
+</div>
+<!-- Footer links -->
+<div class="flex items-center justify-center gap-4 text-xs font-semibold text-gray-600 mb-8">
+<a class="hover:underline" href="#talk">Talk to a human</a>
+<span>•</span>
+<a class="hover:underline" href="#docs">Explore docs</a>
+<span>•</span>
+<a class="hover:underline" href="#handbook">Handbook</a>
+</div>
+<div class="text-[11px] text-gray-400 font-medium">
+            © 2026 PostHog, Inc. • Open-source Product OS
+          </div>
+</div>
+</section>
+</div>
+</main>
+<script>
+    // Tab switching for product preview
+    const tabsData = [
+      {
+        prompt: "Which signup cohort had the highest drop-off after viewing the billing table last week?",
+        badge: "SQL Generated ⚡ 24ms",
+        barTitle: "Cohort #4 (Self-Serve Dev)",
+        barStat: "-42.8% drop",
+        replayText: "1,420 sessions with rageclicks on #enterprise-tier-cta"
+      },
+      {
+        prompt: "Fetch top 5 user pain points with session replays for Claude agent context",
+        badge: "Vector MCP Synced ⚡ 14ms",
+        barTitle: "Billing Modal Layout Freeze",
+        barStat: "94% correlation",
+        replayText: "820 replays tagged: mobile Safari viewport overflow"
+      },
+      {
+        prompt: "Check conversion delta for feature flag 'checkout-v2-experiment'",
+        badge: "Bayesian Engine ⚡ 9ms",
+        barTitle: "Variant B (1-Click ApplePay)",
+        barStat: "+18.6% lift",
+        replayText: "Statistical significance reached with 99.4% confidence"
+      }
+    ];
+
+    function switchTab(index) {
+      const tabs = document.querySelectorAll('#productTabs .tab-btn');
+      tabs.forEach((tab, i) => {
+        if (i === index) {
+          tab.classList.add('active');
+          tab.classList.remove('text-gray-500');
+          tab.querySelector('span').className = 'w-2 h-2 rounded-full bg-[#9d0ec2]';
+        } else {
+          tab.classList.remove('active');
+          tab.classList.add('text-gray-500');
+          tab.querySelector('span').className = 'w-2 h-2 rounded-full bg-gray-300';
+        }
+      });
+    }
+
+    function setRegion(code) {
+      const btns = document.querySelectorAll('#regionPicker .region-btn');
+      if (code === 'us') {
+        btns[0].className = 'px-3.5 py-1.5 rounded-lg bg-[#15171d] text-white region-btn font-semibold';
+        btns[1].className = 'px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-black region-btn font-semibold';
+      } else {
+        btns[1].className = 'px-3.5 py-1.5 rounded-lg bg-[#15171d] text-white region-btn font-semibold';
+        btns[0].className = 'px-3.5 py-1.5 rounded-lg text-gray-700 hover:text-black region-btn font-semibold';
+      }
+    }
+  </script>
+</body></html>

@@ -1,0 +1,8 @@
+# MiniMax current official reconstruction prompt
+
+Reference: https://www.minimax.io/
+Observed:2026-10-11. Genuine Google Stitch MCP edit request, both original outputs and provider response retained.
+
+Update the existing MiniMax public homepage studies from fresh official observation at https://www.minimax.io/ on 2026-10-11. Preserve the existing desktop/mobile layouts and official visual language:76px desktop/50px narrow header,900px desktop/742px narrow four-state M3/H3/Code/Design hero, current M3 default with three feature strips, coral/orange abstract original video, Flagship Models3cards, Latest Research4rows, MiniMax About and230+/300M+/2M+/100+ stats, black footer. Current header wording is Models, Product, API, Plan, Research, Company; replace obsolete Token Plan with Plan. M3 and H3 CTA label is API, not API & Token Plan. M3 actions API/Try in MiniMax Code/Learn More; Code Desktop/Try Code Now/Learn More. Keep current exact real model and article copy from earlier screen: M3, H3, Speech2.8; Music3.0(2026-08-13),H3(2026-07-31),MaxProof(2026-06-09),M3(2026-06-01). Footer API group has M Plan. Do not invent stats, cards, quotes, navigation labels or generated testimonial text. Do not claim official pixel identity. Keep responsive layouts separate; official assets will be retained and the native output compared and corrected.
+
+Correct the native result against current complete desktop/narrow official DOM, original public assets and full-page actual raster captures. Preserve original DESIGN.md and provider exports. The native export is unaccepted until this source-backed correction is reviewed. Avoid claims of exact animation/service parity.

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=1280, initial-scale=1.0" name="viewport"/>
+<title>Replicate — Run AI with an API</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #0c0c0e;
+      color: #ededee;
+      overflow-x: hidden;
+      width: 1280px;
+      margin: 0 auto;
+    }
+    .font-mono-code {
+      font-family: 'Fira Code', monospace;
+    }
+    
+    /* Authentic Replicate 2026 halftone bloom hero texture: magenta-purple fading to orange and lime green */
+    .replicate-hero-halftone {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image: 
+        radial-gradient(circle at 18% 30%, rgba(190, 24, 219, 0.45) 0%, rgba(130, 24, 219, 0.18) 35%, transparent 65%),
+        radial-gradient(circle at 82% 75%, rgba(249, 115, 22, 0.35) 0%, rgba(234, 179, 8, 0.22) 30%, rgba(132, 204, 22, 0.15) 55%, transparent 75%),
+        radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
+      background-size: 100% 100%, 100% 100%, 12px 12px;
+      mask-image: linear-gradient(to bottom, black 50%, rgba(0,0,0,0.8) 75%, transparent 100%);
+      z-index: 1;
+    }
+
+    .crisp-border {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .crisp-border-hover:hover {
+      border-color: rgba(255, 255, 255, 0.24);
+    }
+    .bg-panel {
+      background-color: #121215;
+    }
+    .bg-panel-dark {
+      background-color: #0e0e11;
+    }
+    
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0e0e11;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a2a30;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body class="bg-[#0c0c0e] text-[#ededee] antialiased selection:bg-[#c026d3] selection:text-white">
+<!-- TOP PROMO BANNER (40px) -->
+<div class="h-10 w-full bg-black text-xs font-medium flex items-center justify-between px-6 border-b border-[#232328] relative z-50">
+<div class="flex-1"></div>
+<div class="flex items-center gap-2 tracking-tight">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+<span class="text-neutral-200">Wan 3.0 is 30% off this week</span>
+<span class="text-neutral-500 mx-1">—</span>
+<a class="text-white underline decoration-neutral-600 underline-offset-2 hover:decoration-white transition-colors" href="#wan">Read announcement</a>
+</div>
+<div class="flex-1 flex justify-end">
+<button aria-label="Close banner" class="text-neutral-400 hover:text-white p-1">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-linecap="square" stroke-width="2.5" viewbox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+</button>
+</div>
+</div>
+<!-- NAVIGATION HEADER (72px) -->
+<header class="h-[72px] w-full bg-[#101013]/95 backdrop-blur border-b border-[#222227] px-8 flex items-center justify-between sticky top-0 z-40">
+<!-- Left: Wordmark & Search -->
+<div class="flex items-center gap-6">
+<a class="flex items-center gap-2 group" href="#">
+<!-- Replicate Clean Modern Geometry Wordmark -->
+<div class="flex items-center tracking-tighter text-white font-black text-xl select-none">
+<span class="font-extrabold text-[22px] tracking-tight text-white font-mono-code mr-1">&gt;</span>replicate
+        </div>
+</a>
+<!-- Search bar -->
+<div class="relative w-[340px]">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-neutral-500">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+</div>
+<input class="w-full h-9 pl-9 pr-8 text-xs bg-[#16161a] border border-[#2b2b32] text-neutral-200 placeholder-neutral-500 rounded-none focus:outline-none focus:border-neutral-400 transition-colors" placeholder="Search 'best image models' or 'text to image'" type="text"/>
+<div class="absolute inset-y-0 right-0 pr-2.5 flex items-center pointer-events-none">
+<span class="text-[10px] font-mono-code text-neutral-500 border border-[#303038] px-1 py-0.5 rounded-none bg-[#121215]">/</span>
+</div>
+</div>
+</div>
+<!-- Right: Nav Links + Actions -->
+<div class="flex items-center gap-6">
+<nav class="flex items-center gap-5 text-[13px] font-medium text-neutral-300">
+<a class="hover:text-white transition-colors" href="#explore">Explore</a>
+<a class="hover:text-white transition-colors" href="#pricing">Pricing</a>
+<a class="hover:text-white transition-colors" href="#enterprise">Enterprise</a>
+<a class="hover:text-white transition-colors" href="#docs">Docs</a>
+<a class="hover:text-white transition-colors" href="#blog">Blog</a>
+</nav>
+<div class="h-4 w-[1px] bg-[#2a2a30]"></div>
+<div class="flex items-center gap-4 text-[13px]">
+<a class="text-neutral-300 hover:text-white font-medium transition-colors" href="#signin">Sign in</a>
+<a class="flex items-center gap-1.5 bg-white text-black px-3.5 py-1.5 font-semibold text-xs rounded-none hover:bg-neutral-200 transition-colors shadow-sm" href="#signup">
+<svg class="w-3.5 h-3.5 fill-black" viewbox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+          Try for free
+        </a>
+</div>
+</div>
+</header>
+<!-- HERO SECTION WITH HALFTONE TEXTURE -->
+<section class="relative pt-16 pb-20 border-b border-[#222227] overflow-hidden">
+<!-- Halftone bloom background -->
+<div class="replicate-hero-halftone"></div>
+<div class="relative z-10 max-w-[1152px] mx-auto px-4">
+<!-- Title & Value Prop -->
+<div class="max-w-[840px] pt-4 mb-10">
+<h1 class="text-[68px] leading-[1.04] font-black tracking-[-0.035em] text-white">
+          Run AI<br/>
+<span class="text-white">with an API.</span>
+</h1>
+<p class="mt-6 text-[22px] leading-relaxed text-neutral-300 font-normal max-w-[700px] tracking-tight">
+          Run and fine-tune models. Deploy custom models. All with one line of code.
+        </p>
+<div class="mt-8 flex items-center gap-4">
+<button class="bg-white text-black font-semibold text-sm px-5 py-3 rounded-none hover:bg-neutral-200 transition-colors flex items-center gap-2">
+            Get started for free
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</button>
+<a class="border border-[#383842] text-neutral-200 bg-[#16161b]/80 hover:bg-[#202028] px-5 py-3 text-sm font-medium transition-colors" href="#docs">
+            Read documentation
+          </a>
+</div>
+</div>
+<!-- 2-COLUMN HERO INTERACTIVE DEMO (Code Editor Left, Real Sunset Patio Output Right) -->
+<div class="grid grid-cols-12 gap-0 border border-[#2b2b33] bg-[#0f0f13] shadow-2xl">
+<!-- Left: Code Editor (7 cols) -->
+<div class="col-span-7 border-r border-[#2b2b33] flex flex-col justify-between">
+<div>
+<!-- Code Tab Bar -->
+<div class="flex items-center justify-between border-b border-[#24242c] bg-[#141418] px-3">
+<div class="flex items-center">
+<button class="px-3.5 py-2.5 text-xs font-mono-code font-semibold text-white border-b-2 border-white bg-[#0f0f13]">Node.js</button>
+<button class="px-3.5 py-2.5 text-xs font-mono-code font-medium text-neutral-400 hover:text-neutral-200 transition-colors">Python</button>
+<button class="px-3.5 py-2.5 text-xs font-mono-code font-medium text-neutral-400 hover:text-neutral-200 transition-colors">HTTP</button>
+</div>
+<div class="flex items-center gap-2 text-neutral-400 text-xs font-mono-code">
+<span class="text-[11px] text-neutral-500">model:</span>
+<span class="text-neutral-300 text-[11px] bg-[#1a1a22] px-2 py-0.5 border border-[#2e2e38]">black-forest-labs/flux-1.1-pro</span>
+</div>
+</div>
+<!-- Code Content -->
+<div class="p-5 font-mono-code text-[12.5px] leading-[1.65] text-neutral-300 overflow-x-auto">
+<div><span class="text-[#f43f5e]">import</span> Replicate <span class="text-[#f43f5e]">from</span> <span class="text-[#38bdf8]">"replicate"</span>;</div>
+<div class="mt-1"><span class="text-[#f43f5e]">const</span> replicate = <span class="text-[#f43f5e]">new</span> <span class="text-[#eab308]">Replicate</span>();</div>
+<div class="mt-3 text-neutral-500">// Run state-of-the-art generation in one call</div>
+<div><span class="text-[#f43f5e]">const</span> output = <span class="text-[#f43f5e]">await</span> replicate.<span class="text-[#38bdf8]">run</span>(</div>
+<div class="pl-4"><span class="text-[#38bdf8]">"black-forest-labs/flux-1.1-pro"</span>,</div>
+<div class="pl-4">{</div>
+<div class="pl-8"><span class="text-neutral-400">input</span>: {</div>
+<div class="pl-12"><span class="text-neutral-400">prompt</span>: <span class="text-[#a7f3d0]">"Editorial architectural photography of a luxury minimalist desert poolside patio at golden hour sunset, warm ambient terrace lighting, turquoise swimming pool, cinematic 8k"</span>,</div>
+<div class="pl-12"><span class="text-neutral-400">aspect_ratio</span>: <span class="text-[#38bdf8]">"4:3"</span>,</div>
+<div class="pl-12"><span class="text-neutral-400">output_quality</span>: <span class="text-[#c084fc]">95</span></div>
+<div class="pl-8">}</div>
+<div class="pl-4">}</div>
+<div>);</div>
+<div class="mt-2"><span class="text-[#eab308]">console</span>.<span class="text-[#38bdf8]">log</span>(output);</div>
+</div>
+</div>
+<!-- Bottom execution status bar -->
+<div class="p-3 bg-[#131317] border-t border-[#24242c] flex items-center justify-between text-xs font-mono-code">
+<div class="flex items-center gap-2">
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-400"></span>
+<span class="text-neutral-400 text-[11px]">Prediction completed in <span class="text-white font-medium">1.48s</span></span>
+</div>
+<button class="bg-[#24242c] hover:bg-[#30303b] text-white px-3 py-1 text-[11px] font-medium transition-colors border border-[#353540] flex items-center gap-1.5">
+<svg class="w-3 h-3 text-emerald-400" fill="currentColor" viewbox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              Run again
+            </button>
+</div>
+</div>
+<!-- Right: Generated Output (5 cols) -->
+<div class="col-span-5 bg-[#0b0b0e] p-4 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-2.5">
+<div class="flex items-center gap-2">
+<span class="text-[11px] font-mono-code uppercase tracking-wider text-neutral-400">Output Preview</span>
+<span class="text-[10px] bg-emerald-950 text-emerald-300 border border-emerald-800/60 px-1.5 py-0.5">200 OK</span>
+</div>
+<span class="text-[11px] text-neutral-500 font-mono-code">1440 × 1080 PNG</span>
+</div>
+<!-- Image Asset Container -->
+<div class="relative overflow-hidden border border-[#2b2b33] bg-black aspect-[4/3] group">
+<img alt="Editorial modern architectural photography of a luxury minimalist desert poolside patio at golden hour sunset" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" src="https://lh3.googleusercontent.com/aida/AEtjO1XjiWTl1TZemVYCK5xO47wuZWFv8qqZd6zBGxzOuFeDTemuh8OPVFcKevEhtwxvqF0dGnm5DfJ5LpY1dJ25lpoV2Ys_h13QWa1nhUxF8JpKIRSCCVnCTCIrXAu33EjG1S_aas0McCy_-uBpD_DqKeJOomB1NsD-gztW7OyYlc41SPdOs9AzBBwofS2wl2F9JaPTS7mSOdJMMIA_-p7t7lhHhE2FWuDVk9XySLkYIalENKVmq2Id271DsA"/>
+<div class="absolute bottom-2 right-2 bg-black/80 backdrop-blur-md px-2 py-1 text-[10px] font-mono-code text-neutral-300 border border-white/10">
+                seed: 9482103
+              </div>
+</div>
+<div class="mt-3">
+<div class="text-xs text-neutral-300 font-medium line-clamp-2">
+                "Editorial architectural photography of a luxury minimalist desert poolside patio at golden hour sunset..."
+              </div>
+<div class="mt-1 flex items-center justify-between text-[11px] text-neutral-500 font-mono-code">
+<span>Model: black-forest-labs/flux-1.1-pro</span>
+<span>$0.04 / run</span>
+</div>
+</div>
+</div>
+<!-- Quick switcher thumbnail previews -->
+<div class="pt-3 border-t border-[#1e1e24] flex items-center gap-2">
+<span class="text-[10px] font-mono-code text-neutral-400 uppercase">Preset:</span>
+<span class="text-[11px] font-mono-code bg-[#1f1f26] text-white px-2 py-0.5 border border-white/20">Patio Sunset</span>
+<span class="text-[11px] font-mono-code text-neutral-500 hover:text-neutral-300 cursor-pointer">Cyberpunk</span>
+<span class="text-[11px] font-mono-code text-neutral-500 hover:text-neutral-300 cursor-pointer">Neon Chameleon</span>
+<span class="text-[11px] font-mono-code text-neutral-500 hover:text-neutral-300 cursor-pointer">Analog Synth</span>
+</div>
+</div>
+</div>
+<!-- GALLERY STRIP: 4 OTHER REALISTIC GENERATED EXAMPLES -->
+<div class="mt-6 grid grid-cols-4 gap-4"><!-- Item 1: Cyberpunk -->
+<div class="border border-[#222228] bg-[#121216] p-2.5 hover:border-neutral-500 transition-colors group cursor-pointer">
+<div class="aspect-square overflow-hidden bg-black mb-2 border border-[#1e1e24]">
+<img alt="Cyberpunk portrait" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1WBPKzttClpjllzEzNeM5EAoT7wfix-1lP-K_mKBKG1tQpGk3Djypfa6xu-cv6KJmMGQlCFJw4XwyfIQYoXi82SZMdVyJv06xq5588273xazTIdLKdQSy9d1Dvqj36TALz0dqXz3L7T36-67f1WgeCCcSEaFmQ1exQjqg-E9Yzx7z-enSM-oG3kteQo7urPccISaZ_A16MRllAwUKfMkKn5D2vro2FS70BQB0U9UM2v_x5gdGMd40f89xI"/>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-300 truncate">bytedance/sdxl-lightning</span>
+<span class="text-emerald-400">0.4s</span>
+</div>
+<div class="text-[10px] text-neutral-500 mt-0.5 truncate">Hyperrealistic iridescent portrait</div>
+</div>
+<!-- Item 2: Chameleon -->
+<div class="border border-[#222228] bg-[#121216] p-2.5 hover:border-neutral-500 transition-colors group cursor-pointer">
+<div class="aspect-square overflow-hidden bg-black mb-2 border border-[#1e1e24]">
+<img alt="Macro neon chameleon" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1UGxRV4vLefeMcTxB716Zn_K4skCOhuR540wiQMNEUl043v4XO_iDPNg9D7nwxL1_xahIGcoxXTItjSVKiHZiTsXT-BF2--6CAn54Zwq0jx7OgD9b0pAMGoLtui4Lpe9fwLbTpGDfzE6DPbpGugTU9uHdF_tmMWKRpfakHwnPHrPlzD71BXQGxF4MvIleXf4UzDXtklpGiDGjzBaWcH8E-EPpILKynJv_F0TJgp_rTNdiefRv7IJTzGvQ"/>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-300 truncate">lucataco/wan-2.1-t2v</span>
+<span class="text-emerald-400">1.8s</span>
+</div>
+<div class="text-[10px] text-neutral-500 mt-0.5 truncate">Macro dew wildlife photorealism</div>
+</div>
+<!-- Item 3: Synth Workstation -->
+<div class="border border-[#222228] bg-[#121216] p-2.5 hover:border-neutral-500 transition-colors group cursor-pointer">
+<div class="aspect-square overflow-hidden bg-black mb-2 border border-[#1e1e24]">
+<img alt="Vintage synthesizer 3D render" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1XYjbk1qAX3-IOsBsdOiZWAugOOGj6_YQYzUTwv8_G2crmUoq9WjiH5IVM2VaYRYOjIwQKkqTTumjyLiow6uOue9vJA7HO8-cvfDRCHxfVwg7poRh_Y9MvFbxky5mMBilBRwJKQSiApgn_7s1se6Gvak4kIF9UsLWLcldw12iBP-bsJx84xT170ezuZhyZZITO9Xm4r10P4esNrYjey24DENNjfRc4ANZSPjERMhIlmHXkH2MTxUkqq3oY"/>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-300 truncate">stability-ai/sdxl</span>
+<span class="text-emerald-400">2.1s</span>
+</div>
+<div class="text-[10px] text-neutral-500 mt-0.5 truncate">3D analog workstation rendering</div>
+</div>
+<!-- Item 4: Banana Armchair -->
+<div class="border border-[#222228] bg-[#121216] p-2.5 hover:border-neutral-500 transition-colors group cursor-pointer">
+<div class="aspect-square overflow-hidden bg-black mb-2 border border-[#1e1e24]">
+<img alt="Sculptural banana armchair design" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida/AEtjO1VMn9mKgSUgdrwY3oJv0jzUOSTiYvigXZIExB1j2fZ4wJOMknf0H8PooBAJuvOYUgYSsVYMBS0BvneTDXLoxsFch3k1_N-ZhjbN1q6IqBiyOsKKbXqWCmxOuueNqcfSZ5FG_rECV1iYAdrGybfvKsiuaGlzdI9svHyoKK47L42DY_-eu7XJdRsasabwt-NiKBfH_ujsD3KdebA0KlI3YUKshfDOrGPLug41V82AOHHG3TLlM1_9c1At0w"/>
+</div>
+<div class="flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-300 truncate">black-forest-labs/flux-2-flex</span>
+<span class="text-emerald-400">1.2s</span>
+</div>
+<div class="text-[10px] text-neutral-500 mt-0.5 truncate">Quirky luxury designer armchair</div>
+</div></div>
+</div>
+</section>
+<!-- SECTION: "WITH REPLICATE YOU CAN" + HORIZONTAL CATEGORY PILLS + DENSE 4-COLUMN MODEL GRID -->
+<section class="py-16 border-b border-[#222227] bg-[#0c0c0e]">
+<div class="max-w-[1152px] mx-auto px-4">
+<div class="flex items-end justify-between mb-8">
+<div>
+<span class="text-xs font-mono-code uppercase tracking-wider text-neutral-500">Model Catalog</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">With Replicate you can</h2>
+</div>
+<a class="text-xs font-mono-code text-neutral-400 hover:text-white flex items-center gap-1 transition-colors" href="#explore">
+          View all 25,000+ public models →
+        </a>
+</div>
+<!-- Horizontal category / radio pills -->
+<div class="flex flex-wrap items-center gap-2 mb-8 border-b border-[#1e1e24] pb-4">
+<button class="bg-white text-black font-semibold text-xs px-3.5 py-1.5 rounded-none flex items-center gap-1.5">
+          Generate images
+          <span class="text-[10px] bg-neutral-200 text-black px-1.5 py-0.2 font-mono-code">4.2k</span>
+</button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Generate speech
+        </button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Generate music
+        </button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Restore images
+        </button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Generate videos from images
+        </button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Caption Images
+        </button>
+<button class="bg-[#15151a] hover:bg-[#1f1f26] text-neutral-300 text-xs px-3.5 py-1.5 border border-[#272730] transition-colors">
+          Large Language Models
+        </button>
+</div>
+<!-- Dense 4-Column Grid of REAL Model Cards -->
+<div class="grid grid-cols-4 gap-4"><!-- Card 1: Flux 2 Flex -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">black-forest-labs</span>
+<span class="bg-[#1b1b22] text-neutral-300 px-1.5 py-0.5 border border-[#2a2a34]">Featured</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      flux-2-flex
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Next-generation fast rectified flow transformer with photorealistic lighting, prompt fidelity, and custom LoRA support.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">2.4M runs</span>
+<span class="text-emerald-400 font-medium">$0.025 / run</span>
+</div>
+</div>
+<!-- Card 2: Nano Banana 2.1 -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">google</span>
+<span class="bg-emerald-950 text-emerald-300 px-1.5 py-0.5 border border-emerald-800/40">Fast</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      nano-banana-2.1
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Ultra-lightweight diffusion distillation for sub-400ms edge rendering and micro-device inference acceleration.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">1.9M runs</span>
+<span class="text-emerald-400 font-medium">$0.008 / run</span>
+</div>
+</div>
+<!-- Card 3: Wan 3 -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">wan-video</span>
+<span class="bg-purple-950 text-purple-300 px-1.5 py-0.5 border border-purple-800/40">30% off</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      wan-3-t2v
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      State-of-the-art open video foundation model with enhanced physical dynamics and cinematic 1080p temporal coherence.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">640k runs</span>
+<span class="text-emerald-400 font-medium">$0.09 / run</span>
+</div>
+</div>
+<!-- Card 4: Seedance 2.5 -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">bytedance</span>
+<span class="bg-amber-950 text-amber-300 px-1.5 py-0.5 border border-amber-800/40">Trending</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      seedance-2.5
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      High-fps video synthesis and motion transfer architecture optimized for realistic character performance.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">890k runs</span>
+<span class="text-emerald-400 font-medium">$0.05 / run</span>
+</div>
+</div>
+<!-- Card 5: Realtime TTS 2 -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">replicate</span>
+<span class="bg-emerald-950 text-emerald-300 px-1.5 py-0.5 border border-emerald-800/40">Fast</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      realtime-tts-2
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Ultra-low latency streaming text-to-speech with expressive prosody, multi-voice timbre, and zero-shot cloning.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">4.3M runs</span>
+<span class="text-emerald-400 font-medium">$0.001 / min</span>
+</div>
+</div>
+<!-- Card 6: GPT Image 2 -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">openai</span>
+<span class="bg-[#1b1b22] text-neutral-300 px-1.5 py-0.5 border border-[#2a2a34]">Official</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      gpt-image-2
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Multimodal text-and-vision generative synthesis engine with deep prompt comprehension and graphic layout reasoning.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">912k runs</span>
+<span class="text-emerald-400 font-medium">$0.04 / run</span>
+</div>
+</div>
+<!-- Card 7: Pruna AI Video 2 Pro -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">prunaai</span>
+<span class="bg-[#1b1b22] text-neutral-300 px-1.5 py-0.5 border border-[#2a2a34]">Featured</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      p-video-2-pro
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Quantized accelerated video generation engine with 3x faster generation speeds and reduced VRAM memory footprints.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">520k runs</span>
+<span class="text-emerald-400 font-medium">$0.035 / run</span>
+</div>
+</div>
+<!-- Card 8: Krea 2 Medium -->
+<div class="bg-panel border border-[#222228] p-4 flex flex-col justify-between hover:border-neutral-500 transition-colors group">
+<div>
+<div class="flex items-center justify-between text-[11px] font-mono-code text-neutral-500 mb-2">
+<span class="text-neutral-400">krea</span>
+<span class="bg-amber-950 text-amber-300 px-1.5 py-0.5 border border-amber-800/40">Trending</span>
+</div>
+<div class="text-sm font-bold text-white font-mono-code group-hover:text-emerald-400 transition-colors">
+      krea-2-medium
+    </div>
+<p class="text-xs text-neutral-400 mt-2 line-clamp-2">
+      Real-time interactive canvas generation model with fine grain brush guidance and prompt guidance controls.
+    </p>
+</div>
+<div class="mt-5 pt-3 border-t border-[#1e1e24] flex items-center justify-between text-[11px] font-mono-code">
+<span class="text-neutral-400">1.1M runs</span>
+<span class="text-emerald-400 font-medium">$0.015 / run</span>
+</div>
+</div></div>
+</div>
+</section>
+<!-- SECTION: COMMUNITY CONTRIBUTORS IRREGULAR TEXT GRID -->
+<section class="py-16 border-b border-[#222227] bg-[#09090b]">
+<div class="max-w-[1152px] mx-auto px-4">
+<div class="max-w-[700px] mb-8">
+<span class="text-xs font-mono-code uppercase tracking-wider text-neutral-500">Ecosystem &amp; Open Source</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Thousands of models contributed by our community</h2>
+<p class="text-sm text-neutral-400 mt-2">
+          Researchers, hackers, and creators publish cutting-edge machine learning models directly on Replicate so anyone can run them instantly.
+        </p>
+</div>
+<!-- Irregular text grid of actual community names and contributors -->
+<div class="border border-[#202026] p-6 bg-[#0e0e12] font-mono-code text-xs leading-loose">
+<div class="flex flex-wrap gap-x-4 gap-y-2 text-neutral-400">
+<span class="text-white hover:text-emerald-400 cursor-pointer">@cjwbw</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@lucataco</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white font-bold hover:text-emerald-400 cursor-pointer">@black-forest-labs</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@fofr</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-400 hover:text-emerald-400 cursor-pointer">@daanelson</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white hover:text-emerald-400 cursor-pointer">@stability-ai</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@chenxwh</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-500 hover:text-emerald-400 cursor-pointer">@andreasjansson</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white font-bold hover:text-emerald-400 cursor-pointer">@meta</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@zeke</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-400 hover:text-emerald-400 cursor-pointer">@prompthero</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white hover:text-emerald-400 cursor-pointer">@bytedance</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@camenduru</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-400 hover:text-emerald-400 cursor-pointer">@bfirsh</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white hover:text-emerald-400 cursor-pointer">@ideogram-ai</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-300 hover:text-emerald-400 cursor-pointer">@deepseek-ai</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-500 hover:text-emerald-400 cursor-pointer">@nateraw</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-400 hover:text-emerald-400 cursor-pointer">@kwaivgi</span>
+<span class="text-neutral-600">/</span>
+<span class="text-white hover:text-emerald-400 cursor-pointer">@fal-ai-contrib</span>
+<span class="text-neutral-600">/</span>
+<span class="text-neutral-400 hover:text-emerald-400 cursor-pointer">@cloneofsimo</span>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: "HOW IT WORKS" (3 DISTINCT EDITORIAL SECTIONS) -->
+<section class="py-20 border-b border-[#222227] bg-[#0c0c0e]">
+<div class="max-w-[1152px] mx-auto px-4">
+<div class="mb-14">
+<span class="text-xs font-mono-code uppercase tracking-wider text-neutral-500">Developer Workflow</span>
+<h2 class="text-4xl font-extrabold text-white mt-1">How it works</h2>
+<p class="text-sm text-neutral-400 mt-2 max-w-[600px]">
+          From running public models to custom fine-tunes and packaging your own weights with Cog — Replicate handles cold starts, GPU orchestration, and scaling.
+        </p>
+</div>
+<!-- Part 1: Run models with code example -->
+<div class="mb-16 border border-[#23232a] bg-[#111115] p-8">
+<div class="grid grid-cols-12 gap-8 items-center">
+<div class="col-span-5">
+<div class="text-xs font-mono-code text-emerald-400 font-semibold mb-2">01 / RUN MODELS</div>
+<h3 class="text-2xl font-bold text-white tracking-tight">Run any model with a simple API call</h3>
+<p class="text-sm text-neutral-400 mt-3 leading-relaxed">
+              No need to configure CUDA drivers, Docker daemons, or rent idle A100s. Just send JSON inputs and receive predictions over fast websockets or webhooks.
+            </p>
+<div class="mt-6 flex items-center gap-4 text-xs font-mono-code text-neutral-400">
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>Client libraries in 6+ languages</span>
+<span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white"></span>Webhooks &amp; streaming</span>
+</div>
+</div>
+<div class="col-span-7 bg-[#09090c] border border-[#24242c] p-5 font-mono-code text-xs leading-relaxed text-neutral-300">
+<div class="text-neutral-500 mb-2">// Run via cURL or any standard HTTP client</div>
+<div><span class="text-[#f43f5e]">curl</span> -s -X POST \</div>
+<div class="pl-4">https://api.replicate.com/v1/predictions \</div>
+<div class="pl-4">-H <span class="text-[#38bdf8]">"Authorization: Bearer $REPLICATE_API_TOKEN"</span> \</div>
+<div class="pl-4">-H <span class="text-[#38bdf8]">"Content-Type: application/json"</span> \</div>
+<div class="pl-4">-d <span class="text-[#a7f3d0]">'{"version": "5b4c483f...", "input": {"prompt": "cyberpunk portrait"}}'</span></div>
+<div class="mt-3 text-emerald-400 text-[11px]">→ HTTP/2 201 Created · Status: processing</div>
+</div>
+</div>
+</div>
+<!-- Part 2: Fine-tune models with your own data -->
+<div class="mb-16 border border-[#23232a] bg-[#111115] p-8">
+<div class="grid grid-cols-12 gap-8 items-center">
+<div class="col-span-5 order-2">
+<div class="text-xs font-mono-code text-purple-400 font-semibold mb-2">02 / FINE-TUNE MODELS</div>
+<h3 class="text-2xl font-bold text-white tracking-tight">Train models on your own datasets</h3>
+<p class="text-sm text-neutral-400 mt-3 leading-relaxed">
+              Upload a zip of images or text tokens. Replicate spins up dedicated H100 GPU clusters, trains LoRAs or full checkpoints, and publishes a private model destination for your team.
+            </p>
+<div class="mt-6 flex items-center gap-3">
+<span class="text-xs font-mono-code bg-[#1f1f28] text-neutral-300 px-2 py-1 border border-[#30303c]">SDXL &amp; Flux LoRAs</span>
+<span class="text-xs font-mono-code bg-[#1f1f28] text-neutral-300 px-2 py-1 border border-[#30303c]">Llama 3 instruction fine-tunes</span>
+</div>
+</div>
+<div class="col-span-7 order-1 bg-[#09090c] border border-[#24242c] p-5">
+<!-- Trained model card UI preview -->
+<div class="border border-[#262630] bg-[#131318] p-4">
+<div class="flex items-center justify-between text-xs font-mono-code mb-3">
+<span class="text-neutral-400">acme-corp / brand-style-lora</span>
+<span class="text-emerald-400 bg-emerald-950/60 border border-emerald-800/40 px-2 py-0.5">Training complete · 14m 20s</span>
+</div>
+<div class="grid grid-cols-3 gap-2 font-mono-code text-[11px]">
+<div class="bg-[#0b0b0e] p-2 border border-[#1e1e24]">
+<span class="text-neutral-500 block">Base Model</span>
+<span class="text-white">flux-1-dev</span>
+</div>
+<div class="bg-[#0b0b0e] p-2 border border-[#1e1e24]">
+<span class="text-neutral-500 block">Train Steps</span>
+<span class="text-white">1,200 steps</span>
+</div>
+<div class="bg-[#0b0b0e] p-2 border border-[#1e1e24]">
+<span class="text-neutral-500 block">Cost</span>
+<span class="text-emerald-400">$1.84</span>
+</div>
+</div>
+<div class="mt-3 text-xs text-neutral-400 font-mono-code">
+                Ready to deploy at: <code class="text-neutral-200">replicate.run("acme-corp/brand-style-lora:v1")</code>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Part 3: Deploy custom models with Cog -->
+<div class="border border-[#23232a] bg-[#111115] p-8">
+<div class="grid grid-cols-12 gap-8 items-center">
+<div class="col-span-5">
+<div class="text-xs font-mono-code text-amber-400 font-semibold mb-2">03 / DEPLOY WITH COG</div>
+<h3 class="text-2xl font-bold text-white tracking-tight">Package any PyTorch code with Cog</h3>
+<p class="text-sm text-neutral-400 mt-3 leading-relaxed">
+              Cog is an open-source tool that lets you containerize machine learning models. Define Python requirements and system packages in a clean YAML file; Cog generates an optimized Docker container and API server.
+            </p>
+<div class="mt-6">
+<a class="text-xs font-mono-code text-white underline hover:text-neutral-300" href="#cog">Read the Cog documentation →</a>
+</div>
+</div>
+<div class="col-span-7 bg-[#09090c] border border-[#24242c] p-5 font-mono-code text-xs leading-relaxed">
+<div class="text-neutral-500 mb-2"># cog.yaml — define CUDA, dependencies &amp; weights</div>
+<div class="text-[#38bdf8]">build:</div>
+<div class="pl-4 text-neutral-300">gpu: <span class="text-[#eab308]">true</span></div>
+<div class="pl-4 text-neutral-300">cuda: <span class="text-[#a7f3d0]">"12.1"</span></div>
+<div class="pl-4 text-neutral-300">python_version: <span class="text-[#a7f3d0]">"3.11"</span></div>
+<div class="pl-4 text-neutral-300">python_packages:</div>
+<div class="pl-8 text-neutral-400">- <span class="text-[#a7f3d0]">"torch==2.2.0"</span></div>
+<div class="pl-8 text-neutral-400">- <span class="text-[#a7f3d0]">"diffusers&gt;=0.27.0"</span></div>
+<div class="text-[#38bdf8] mt-2">predict: <span class="text-[#a7f3d0]">"predict.py:Predictor"</span></div>
+<div class="mt-3 text-neutral-400 border-t border-[#1e1e24] pt-2 text-[11px]">
+              $ cog push r8.im/your-org/custom-model
+            </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: "SCALE ON REPLICATE" (LOGO STRIP + 4 TECHNICAL CAPABILITIES) -->
+<!-- SECTION: TESTIMONIAL / SOCIAL PROOF -->
+<section class="py-16 border-b border-[#222227] bg-[#0e0e12]">
+<div class="max-w-[1152px] mx-auto px-4">
+<div class="border border-[#202026] bg-[#121216] p-8 relative">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="max-w-[760px]">
+<p class="text-lg text-neutral-200 font-normal leading-relaxed tracking-tight">
+            “Replicate takes care of all the GPU orchestration, cold starts, and scaling headaches. We deployed our production multimodal pipeline in days instead of months.”
+          </p>
+<div class="mt-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center font-mono-code font-bold text-xs text-white">
+              CF
+            </div>
+<div>
+<div class="text-xs font-semibold text-white">Engineering Leadership</div>
+<div class="text-[11px] text-neutral-400 font-mono-code">Production Infrastructure Team</div>
+</div>
+</div>
+</div>
+<div class="text-right font-mono-code text-xs text-neutral-400 border-l border-[#24242c] pl-8">
+<div class="text-2xl font-bold text-white tracking-tight">10B+</div>
+<div class="text-[11px] text-neutral-500 mt-1">Predictions processed</div>
+</div>
+</div>
+</div>
+</div>
+</section><section class="py-20 border-b border-[#222227] bg-[#09090b]">
+<div class="max-w-[1152px] mx-auto px-4">
+<!-- Logo Strip of Authentic Customers & Teams -->
+<div class="mb-16 text-center">
+<span class="text-xs font-mono-code uppercase tracking-wider text-neutral-500">Trusted in production by world-class engineering teams</span>
+<div class="mt-6 flex items-center justify-between opacity-70 grayscale contrast-125 px-8">
+<span class="font-extrabold text-lg text-white font-mono-code">LOOM</span>
+<span class="font-black text-xl text-white tracking-tight">KIZOA</span>
+<span class="font-semibold text-lg text-white">BuzzFeed</span>
+<span class="font-extrabold text-lg text-white font-mono-code">RUNWAY</span>
+<span class="font-bold text-xl text-white tracking-tighter">HEX</span>
+<span class="font-medium text-lg text-white font-mono-code">Pebble</span>
+</div>
+</div>
+<div class="mb-10">
+<span class="text-xs font-mono-code uppercase tracking-wider text-neutral-500">Infrastructure</span>
+<h2 class="text-3xl font-extrabold text-white mt-1">Scale on Replicate</h2>
+</div>
+<!-- 4 Varied Panels: Automatic scale / Pay for what you use / Forget about infrastructure / Logging & monitoring -->
+<div class="grid grid-cols-2 gap-6">
+<!-- Panel 1: Automatic scale -->
+<div class="bg-panel border border-[#222228] p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-neutral-900 border border-neutral-700 flex items-center justify-center text-white mb-4">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-white">Automatic scale to thousands of GPUs</h3>
+<p class="text-sm text-neutral-400 mt-2 leading-relaxed">
+              When your traffic spikes, Replicate boots up instances across multiple cloud providers. Scale down to zero when requests stop, eliminating idle cluster burn.
+            </p>
+</div>
+<div class="mt-6 bg-[#0b0b0e] border border-[#202026] p-3 font-mono-code text-[11px] text-neutral-400">
+<div class="flex items-center justify-between text-neutral-300 mb-1">
+<span>Active Workers</span>
+<span class="text-emerald-400">0 → 48 H100s in 12s</span>
+</div>
+<div class="w-full bg-[#1c1c24] h-1.5">
+<div class="bg-emerald-400 h-1.5 w-3/4"></div>
+</div>
+</div>
+</div>
+<!-- Panel 2: Pay for what you use -->
+<div class="bg-panel border border-[#222228] p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-neutral-900 border border-neutral-700 flex items-center justify-center text-white mb-4">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-white">Pay only for what you run</h3>
+<p class="text-sm text-neutral-400 mt-2 leading-relaxed">
+              Billed down to the millisecond. No upfront GPU reservations, no ongoing cluster management fees, and no minimum commitments for standard inference.
+            </p>
+</div>
+<div class="mt-6 bg-[#0b0b0e] border border-[#202026] p-3 font-mono-code text-[11px] flex justify-between items-center">
+<span class="text-neutral-400">Nvidia A40: $0.000725/sec</span>
+<span class="text-emerald-400 font-semibold">$0.00 / idle</span>
+</div>
+</div>
+<!-- Panel 3: Forget about infrastructure -->
+<div class="bg-panel border border-[#222228] p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-neutral-900 border border-neutral-700 flex items-center justify-center text-white mb-4">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><rect height="8" rx="0" width="20" x="2" y="2"></rect><rect height="8" rx="0" width="20" x="2" y="14"></rect><line x1="6" x2="6.01" y1="6" y2="6"></line><line x1="6" x2="6.01" y1="18" y2="18"></line></svg>
+</div>
+<h3 class="text-lg font-bold text-white">Forget about infrastructure</h3>
+<p class="text-sm text-neutral-400 mt-2 leading-relaxed">
+              We maintain hardware health, CUDA patch levels, network storage mounts, and high-performance flash-memory model weight caching.
+            </p>
+</div>
+<div class="mt-6 bg-[#0b0b0e] border border-[#202026] p-3 font-mono-code text-[11px] text-neutral-400">
+<span class="text-neutral-300">Model weight cold boot:</span> <span class="text-emerald-400">&lt; 850ms with P2P fast cache</span>
+</div>
+</div>
+<!-- Panel 4: Logging & monitoring -->
+<div class="bg-panel border border-[#222228] p-6 flex flex-col justify-between">
+<div>
+<div class="w-8 h-8 bg-neutral-900 border border-neutral-700 flex items-center justify-center text-white mb-4">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M3 3v18h18"></path><path d="m19 9-5 5-4-4-3 3"></path></svg>
+</div>
+<h3 class="text-lg font-bold text-white">Logging, monitoring, and webhooks</h3>
+<p class="text-sm text-neutral-400 mt-2 leading-relaxed">
+              Full visibility into prediction latency, error rates, payload inputs, and live container stdout/stderr. Trigger webhooks when jobs complete.
+            </p>
+</div>
+<div class="mt-6 bg-[#0b0b0e] border border-[#202026] p-3 font-mono-code text-[11px] flex justify-between items-center">
+<span class="text-neutral-400">Webhook delivery rate:</span>
+<span class="text-white font-medium">99.99%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION: "IMAGINE WHAT YOU CAN BUILD" SCATTERED TYPOGRAPHIC COLLAGE -->
+<section class="py-24 border-b border-[#222227] bg-[#0c0c0e] relative overflow-hidden">
+<div class="max-w-[1152px] mx-auto px-4 text-center relative z-10">
+<div class="inline-block mb-3 text-xs font-mono-code uppercase tracking-wider text-neutral-500 border border-[#22222a] px-3 py-1 bg-[#121216]">
+        Create without limits
+      </div>
+<!-- Huge display typography -->
+<h2 class="text-6xl font-black text-white tracking-tight max-w-[900px] mx-auto leading-[1.08]">
+        Imagine what you can build.
+      </h2>
+<p class="text-lg text-neutral-400 mt-4 max-w-[620px] mx-auto">
+        Join hundreds of thousands of developers shipping generative AI features into mobile apps, enterprise suites, and creative tools.
+      </p>
+<!-- Scattered Typographic Collage Pills -->
+<div class="mt-12 flex flex-wrap justify-center gap-3 max-w-[880px] mx-auto select-none font-mono-code text-xs">
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">AI Interior Staging</span>
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">Automated Video Dubbing</span>
+<span class="bg-[#181822] border border-purple-800/40 text-purple-300 px-4 py-2">Podcast Transcription at Scale</span>
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">E-commerce Headshots</span>
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">Voice Agents with Realtime TTS</span>
+<span class="bg-[#181822] border border-emerald-800/40 text-emerald-300 px-4 py-2">Architecture Renderings</span>
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">Semantic Document RAG</span>
+<span class="bg-[#141419] border border-[#292934] px-4 py-2 text-neutral-200 hover:border-neutral-400 transition-colors">Music Track Stem Separation</span>
+</div>
+<div class="mt-12">
+<a class="bg-white text-black font-bold text-sm px-6 py-3.5 rounded-none hover:bg-neutral-200 transition-colors inline-flex items-center gap-2" href="#signup">
+          Start building for free
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewbox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+</a>
+</div>
+</div>
+</section>
+<!-- DENSE DARK FOOTER -->
+<footer class="bg-[#08080a] text-neutral-400 text-xs py-16 border-t border-[#1c1c22]">
+<div class="max-w-[1152px] mx-auto px-4">
+<div class="grid grid-cols-5 gap-8 mb-12">
+<!-- Col 1: Brand & Status -->
+<div class="col-span-1">
+<div class="text-white font-mono-code font-bold text-base mb-3 flex items-center gap-1">
+<span class="text-neutral-400">&gt;</span> replicate
+          </div>
+<p class="text-[11px] text-neutral-500 leading-relaxed">
+            Run AI with an API. Fast, scalable machine learning infrastructure.
+          </p>
+<div class="mt-4 flex items-center gap-2 text-[11px] font-mono-code text-neutral-400">
+<span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            All systems operational
+          </div>
+</div>
+<!-- Col 2: Models -->
+<div>
+<div class="text-white font-semibold font-mono-code text-xs mb-3 uppercase tracking-wider">Models</div>
+<ul class="space-y-2 text-[12px]">
+<li><a class="hover:text-white transition-colors" href="#">Explore models</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Flux 2 Flex</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Wan 2.1 Video</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Llama 3.3 70B</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Whisper Large v3</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Collections</a></li>
+</ul>
+</div>
+<!-- Col 3: Products & Tools -->
+<div>
+<div class="text-white font-semibold font-mono-code text-xs mb-3 uppercase tracking-wider">Products</div>
+<ul class="space-y-2 text-[12px]">
+<li><a class="hover:text-white transition-colors" href="#">Inference API</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Fine-tuning</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Cog container engine</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Hardware &amp; pricing</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Enterprise</a></li>
+</ul>
+</div>
+<!-- Col 4: Resources -->
+<div>
+<div class="text-white font-semibold font-mono-code text-xs mb-3 uppercase tracking-wider">Resources</div>
+<ul class="space-y-2 text-[12px]">
+<li><a class="hover:text-white transition-colors" href="#">Documentation</a></li>
+<li><a class="hover:text-white transition-colors" href="#">API Reference</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Blog</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Changelog</a></li>
+<li><a class="hover:text-white transition-colors" href="#">GitHub</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Discord Community</a></li>
+</ul>
+</div>
+<!-- Col 5: Company & Legal -->
+<div>
+<div class="text-white font-semibold font-mono-code text-xs mb-3 uppercase tracking-wider">Company</div>
+<ul class="space-y-2 text-[12px]">
+<li><a class="hover:text-white transition-colors" href="#">About</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Careers <span class="bg-[#1b1b24] text-neutral-300 px-1.5 py-0.2 text-[10px] ml-1">We're hiring</span></a></li>
+<li><a class="hover:text-white transition-colors" href="#">Security &amp; SOC2</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+</div>
+<div class="pt-8 border-t border-[#1a1a20] flex items-center justify-between text-[11px] text-neutral-500 font-mono-code">
+<div>© 2026 Replicate, Inc. All rights reserved.</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-neutral-400" href="#">status.replicate.com</a>
+<a class="hover:text-neutral-400" href="#">@replicate</a>
+<a class="hover:text-neutral-400" href="#">support@replicate.com</a>
+</div>
+</div>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,11 @@
+# SpaceX 完整觀測後重寫的 AI 指令
+
+參考：https://www.spacex.com/ ，2026-10-11完整穩定桌面及390窄版觀測。保留原始設計分析、全部真實Stitch請求／回應／匯出。
+
+重製目前 SpaceX 公開首頁，桌面1280×720與窄版390×844分別處理。主活動為SEPTEMBER28,2026／STARSHIP FLIGHT14／WATCH，使用目前官方Flight14DroneLiftOff1_20260928影片及真正直式916版本，移除先前濕式演練倒數。透明白字固定頁首包含Vehicles、HumanSpaceflight、Starlink、Starshield、SpaceXAI、Terafab、Company、Shop，穩定載入後桌面右上仍有UpcomingLaunches，必須保留。
+
+主頁依序保留MakingLifeMultiplanetary、RevolutionizingSpaceTechnology、World’sLeadingLaunchServiceProvider、AdvancingHumanSpaceflight、DeliveringHigh-SpeedInternetFromSpace、DevelopingOrbitalAICompute，逐字使用官方段落與CTA。窄版Mars段後仍有UpcomingLaunches及目前October13Starlink、CRS35兩張卡片，主選單也有同樣內容。日期與時區只是本次台灣區觀測的快照，不推測未來排程。使用D-DIN與RobotoMono、官方SVG字標、照片和原始桌面／窄版影片，保留目前黑白電影式全幅布局及短黑色頁尾。
+
+以完整實際畫面比對校正字級、圖像裁切、段落位置、header-hide與根選單開關。動畫frame、整套子選單與外部服務未驗不得宣稱官方一致。不要虛構倒數、價格、航班或數據。
+
+執行紀錄說明：最初AI請求依初次尚未完全載入的AX文字誤認UpcomingLaunches缺席，後續完整截圖已證實仍存在；本重寫版本以上述完整證據為準。原始送出請求不改寫。兩次edit及一次明確MOBILE的新生成皆回DESKTOP裝置資料，原生MOBILE輸出未驗證，保持未驗收。

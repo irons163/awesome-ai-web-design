@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear — Mobile Homepage Benchmark</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;510;590;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        background: '#010102',
+        surface: '#08080a',
+        'surface-card': '#0c0d12',
+        'surface-elevated': '#12141a',
+        'border-subtle': 'rgba(255, 255, 255, 0.08)',
+        'border-strong': 'rgba(255, 255, 255, 0.14)',
+        primary: '#5e6ad2',
+        'primary-hover': '#6f7cf4',
+        accent: '#5e6ad2',
+        'text-primary': '#f7f8f8',
+        'text-secondary': '#8a8f98',
+        'text-muted': '#62666d'
+      },
+      fontFamily: {
+        sans: ['"Inter Variable"', 'Inter', '-apple-system', 'BlinkMacSystemFont', '"SF Pro Display"', 'Segoe UI', 'Roboto', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Menlo', 'Monaco', 'Courier New', 'monospace']
+      }
+    }
+  }
+}
+</script>
+<style>
+  * {
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  body {
+    background-color: #010102;
+    color: #f7f8f8;
+    font-family: "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+  .linear-glow {
+    background: radial-gradient(circle at 50% 0%, rgba(94, 106, 210, 0.15), transparent 70%);
+  }
+  .hero-glow {
+    background: radial-gradient(circle at 50% 40%, rgba(120, 119, 198, 0.12) 0%, rgba(94, 106, 210, 0.04) 50%, transparent 80%);
+  }
+  .glass-card {
+    background: rgba(14, 15, 20, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .badge-gradient {
+    background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.02) 100%);
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+</style>
+</head>
+<body class="w-full min-h-screen text-[#f7f8f8] bg-[#010102]">
+
+  <!-- Mobile Top Navigation Bar -->
+  <header class="sticky top-0 z-50 w-full h-14 bg-[#010102]/80 backdrop-blur-md border-b border-white/[0.08] px-4 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <!-- Linear Official Mark / SVG -->
+      <a href="#" class="flex items-center gap-2 group">
+        <svg class="w-4 h-4 text-white" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M1.2 56.4L43.6 98.8C44.4 99.6 45.6 100 46.8 100C48 100 49.2 99.6 50 98.8L98.8 50C99.6 49.2 100 48 100 46.8C100 45.6 99.6 44.4 98.8 43.6L56.4 1.2C55.6 0.4 54.4 0 53.2 0C52 0 50.8 0.4 50 1.2L1.2 50C0.4 50.8 0 52 0 53.2C0 54.4 0.4 55.6 1.2 56.4ZM46.8 89.2L10.8 53.2L53.2 10.8L89.2 46.8L46.8 89.2Z"/>
+          <path d="M42.4 34.8C40.8 33.2 38.4 33.2 36.8 34.8C35.2 36.4 35.2 38.8 36.8 40.4L59.6 63.2C61.2 64.8 63.6 64.8 65.2 63.2C66.8 61.6 66.8 59.2 65.2 57.6L42.4 34.8Z"/>
+        </svg>
+        <span class="font-medium tracking-tight text-white text-[15px]">Linear</span>
+      </a>
+    </div>
+    <div class="flex items-center gap-2.5">
+      <a href="#" class="text-[13px] text-[#8a8f98] hover:text-white px-2.5 py-1 transition-colors">Log in</a>
+      <a href="#" class="text-[13px] font-medium text-black bg-white hover:bg-neutral-200 px-3 py-1 rounded-full transition-colors">Sign up</a>
+    </div>
+  </header>
+
+  <!-- Hero Section (Mobile 390px calibrated) -->
+  <section class="relative px-6 pt-10 pb-12 overflow-hidden hero-glow">
+    <!-- Loops Announcement Badge -->
+    <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full badge-gradient mb-6 text-[12px] text-[#8a8f98] hover:border-white/20 transition-colors">
+      <span class="px-1.5 py-0.2 bg-[#5e6ad2]/20 text-[#8b95ec] font-medium rounded text-[10px] tracking-wide uppercase">New</span>
+      <span class="text-white/90">Loops</span>
+      <span class="text-[#8a8f98]">→</span>
+    </div>
+
+    <!-- Main Headline - Measured: 38px size, 41.8px line-height, weight 510 -->
+    <h1 class="text-[34px] leading-[38px] sm:text-[38px] sm:leading-[41.8px] font-[510] tracking-[-0.03em] text-[#f7f8f8] mb-4">
+      The product development system for teams and agents
+    </h1>
+
+    <p class="text-[16px] leading-[22px] text-[#8a8f98] font-normal mb-7 max-w-[340px]">
+      Purpose-built for planning and building products. Designed for the AI era.
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col gap-2.5 mb-10">
+      <a href="#" class="w-full flex items-center justify-center h-10 px-4 bg-white text-black font-medium text-[14px] rounded-lg shadow-sm hover:bg-neutral-200 transition-colors">
+        Get started
+      </a>
+      <a href="#" class="w-full flex items-center justify-center h-10 px-4 bg-white/[0.05] border border-white/[0.1] text-white font-medium text-[14px] rounded-lg hover:bg-white/[0.08] transition-colors">
+        Contact sales
+      </a>
+    </div>
+
+    <!-- Hero Interactive Issue / Agent Workspace Preview (Mobile Fitted 340-360px) -->
+    <div class="relative w-full rounded-xl border border-white/[0.1] bg-[#0c0d12] shadow-2xl overflow-hidden p-3.5">
+      <!-- Window Header Bar -->
+      <div class="flex items-center justify-between pb-3 border-b border-white/[0.06] mb-3">
+        <div class="flex items-center gap-2">
+          <div class="flex gap-1.5">
+            <div class="w-2.5 h-2.5 rounded-full bg-red-500/80"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></div>
+            <div class="w-2.5 h-2.5 rounded-full bg-green-500/80"></div>
+          </div>
+          <span class="text-[11px] text-[#62666d] ml-1.5 font-mono">DRV-8852</span>
+        </div>
+        <span class="text-[10px] font-medium px-2 py-0.5 rounded bg-amber-500/10 text-amber-300 border border-amber-500/20">In Progress</span>
+      </div>
+
+      <!-- Issue Title (Measured heading: "Faster app launch") -->
+      <h2 class="text-[18px] sm:text-[20px] font-[590] leading-[24px] text-white tracking-tight mb-2">
+        Faster app launch
+      </h2>
+      <p class="text-[12px] leading-[17px] text-[#8a8f98] mb-4">
+        Render UI before vehicle_state sync when minimum required state is present, instead of blocking on full refresh during iOS startup.
+      </p>
+
+      <!-- Activity Timeline Mini-card -->
+      <div class="rounded-lg bg-white/[0.02] border border-white/[0.06] p-3 text-[11px] space-y-2.5">
+        <div class="flex items-start gap-2">
+          <div class="w-4 h-4 rounded-full bg-[#5e6ad2]/20 flex items-center justify-center text-[9px] text-[#8b95ec] font-bold mt-0.5">L</div>
+          <div>
+            <span class="font-medium text-white">Linear Agent</span>
+            <span class="text-[#62666d]">· 2min ago</span>
+            <div class="mt-0.5 text-[#8a8f98]">Changed 2 files · Draft PR awaiting review</div>
+          </div>
+        </div>
+        <div class="pl-6 pt-1 border-t border-white/[0.04] text-[10px] text-[#62666d]">
+          <span class="text-emerald-400 font-mono">+22 −10</span> Reset dimmed ride rows
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Powering Companies Marquee / Logo Grid -->
+  <section class="py-8 border-y border-white/[0.06] bg-[#010102]">
+    <div class="px-6 text-center mb-5">
+      <p class="text-[11px] uppercase tracking-wider text-[#62666d] font-medium">
+        Powering the companies building the future
+      </p>
+    </div>
+    <div class="px-6 grid grid-cols-3 gap-y-4 gap-x-2 text-center items-center text-[13px] font-medium text-[#8a8f98]">
+      <div class="hover:text-white transition-colors">OpenAI</div>
+      <div class="hover:text-white transition-colors">Ramp</div>
+      <div class="hover:text-white transition-colors">Vercel</div>
+      <div class="hover:text-white transition-colors">Scale</div>
+      <div class="hover:text-white transition-colors">Cursor</div>
+      <div class="hover:text-white transition-colors">Retool</div>
+      <div class="hover:text-white transition-colors">Cash App</div>
+      <div class="hover:text-white transition-colors">Monzo</div>
+      <div class="hover:text-white transition-colors">Opendoor</div>
+    </div>
+  </section>
+
+  <!-- Core Thesis / Species Section -->
+  <section class="px-6 py-14">
+    <!-- Measured: 24px size, 31.92px lineHeight, 510 weight -->
+    <h2 class="text-[23px] sm:text-[24px] leading-[31px] font-[510] tracking-[-0.02em] text-[#f7f8f8] mb-10">
+      A new species of product tool. Purpose-built for modern teams with AI workflows at its core, Linear sets a new standard for planning and building products.
+    </h2>
+
+    <div class="space-y-8">
+      <!-- Fig 0.1 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+        <span class="text-[11px] font-mono text-[#62666d] uppercase tracking-wider block mb-2">Fig 0.1</span>
+        <h3 class="text-[16px] font-medium text-white mb-1.5">Purpose-built</h3>
+        <p class="text-[13px] leading-[19px] text-[#8a8f98]">
+          Linear is shaped by the practices and principles of world-class product teams.
+        </p>
+      </div>
+
+      <!-- Fig 0.2 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+        <span class="text-[11px] font-mono text-[#62666d] uppercase tracking-wider block mb-2">Fig 0.2</span>
+        <h3 class="text-[16px] font-medium text-white mb-1.5">Powered by agents</h3>
+        <p class="text-[13px] leading-[19px] text-[#8a8f98]">
+          Designed for workflows shared by humans and agents. From drafting PRDs to pushing PRs.
+        </p>
+      </div>
+
+      <!-- Fig 0.3 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+        <span class="text-[11px] font-mono text-[#62666d] uppercase tracking-wider block mb-2">Fig 0.3</span>
+        <h3 class="text-[16px] font-medium text-white mb-1.5">Designed for speed</h3>
+        <p class="text-[13px] leading-[19px] text-[#8a8f98]">
+          Reduces noise and restores momentum to help teams ship with high velocity and focus.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 1: Intake and integrations -->
+  <section class="px-6 py-12 border-t border-white/[0.06]">
+    <h2 class="text-[24px] leading-[31.92px] font-[510] tracking-[-0.02em] text-[#f7f8f8] mb-3">
+      Intake<br>and integrations
+    </h2>
+    <p class="text-[14px] leading-[20px] text-[#8a8f98] mb-4">
+      Automatically turn conversations and customer feedback into actionable issues that are instantly routed, labeled, and prioritized for the right team.
+    </p>
+    <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#8b95ec] hover:underline mb-8">
+      Learn more <span>→</span>
+    </a>
+
+    <!-- Mobile Issue Board Simulation -->
+    <div class="rounded-xl border border-white/[0.08] bg-[#0c0d12] p-4 shadow-xl">
+      <div class="flex items-center justify-between mb-3 text-[11px] text-[#8a8f98]">
+        <span class="font-mono uppercase text-[#62666d]">Triage Stream</span>
+        <span class="text-emerald-400 font-mono text-[10px]">● Auto-route: Active</span>
+      </div>
+
+      <div class="space-y-2.5">
+        <!-- Backlog card -->
+        <div class="p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-mono text-[#62666d]">ENG-2085</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-white/[0.06] text-[#8a8f98]">Backlog · 8</span>
+          </div>
+          <div class="text-[12px] font-medium text-white truncate">Reduce UI flicker during autonomy...</div>
+        </div>
+
+        <!-- In Progress card with agent triage -->
+        <div class="p-2.5 rounded-lg bg-[#5e6ad2]/[0.06] border border-[#5e6ad2]/20">
+          <div class="flex items-center justify-between mb-1">
+            <span class="text-[11px] font-mono text-[#8b95ec]">ENG-1487</span>
+            <span class="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-300">In Progress · 3</span>
+          </div>
+          <div class="text-[12px] font-medium text-white truncate">Remove contentData from GraphQL API</div>
+          <div class="mt-2 text-[10px] text-[#8a8f98] bg-black/30 p-1.5 rounded">
+            💬 <span class="text-white/90">didier:</span> We’re blocking initial render on vehicle_state sync...
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature tags -->
+      <div class="mt-4 pt-3 border-t border-white/[0.06] flex flex-wrap gap-1.5 text-[10px] text-[#8a8f98]">
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Linear Agent +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Customer Requests +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Triage +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Linear Asks +</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Planning and monitoring -->
+  <section class="px-6 py-12 border-t border-white/[0.06]">
+    <h2 class="text-[24px] leading-[31.92px] font-[510] tracking-[-0.02em] text-[#f7f8f8] mb-3">
+      Planning<br>and monitoring
+    </h2>
+    <p class="text-[14px] leading-[20px] text-[#8a8f98] mb-4">
+      Plan and navigate from idea to launch. Align your team with product initiatives, strategic roadmaps, and clear, up-to-date PRDs.
+    </p>
+    <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#8b95ec] hover:underline mb-8">
+      Learn more <span>→</span>
+    </a>
+
+    <!-- Roadmap & Timeline Visual Preview -->
+    <div class="rounded-xl border border-white/[0.08] bg-[#0c0d12] p-4 shadow-xl">
+      <div class="flex items-center justify-between text-[11px] mb-3">
+        <span class="font-medium text-white">Roadmap: H1 & H2 Initiatives</span>
+        <span class="text-[#62666d] text-[10px] font-mono">Q2-Q3 2026</span>
+      </div>
+
+      <!-- Timeline bars -->
+      <div class="space-y-3 text-[11px]">
+        <div>
+          <div class="flex justify-between text-[#8a8f98] text-[10px] mb-1">
+            <span>UI Refresh</span>
+            <span class="text-emerald-400">Completed 100%</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
+            <div class="h-full bg-indigo-500 rounded-full w-full"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between text-[#8a8f98] text-[10px] mb-1">
+            <span>Split fares</span>
+            <span class="text-amber-300">Active Sprint</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
+            <div class="h-full bg-amber-400 rounded-full w-[65%]"></div>
+          </div>
+        </div>
+
+        <div>
+          <div class="flex justify-between text-[#8a8f98] text-[10px] mb-1">
+            <span>Autonomy telemetry reliability</span>
+            <span class="text-purple-300">Beta GA</span>
+          </div>
+          <div class="w-full h-2 rounded-full bg-white/[0.06] overflow-hidden">
+            <div class="h-full bg-purple-500 rounded-full w-[40%]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent metrics callout -->
+      <div class="mt-4 pt-3 border-t border-white/[0.06] flex items-center justify-between">
+        <div>
+          <div class="text-[10px] text-[#62666d] uppercase font-mono">Cycle time by agent</div>
+          <div class="text-[12px] font-medium text-white">Reduced 4.2d to 3.8h</div>
+        </div>
+        <div class="text-right">
+          <div class="text-[11px] text-emerald-400 font-mono font-medium">−76%</div>
+          <div class="text-[9px] text-[#62666d]">Lead time to review</div>
+        </div>
+      </div>
+
+      <!-- Feature tags -->
+      <div class="mt-3 flex flex-wrap gap-1.5 text-[10px] text-[#8a8f98]">
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Projects +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Documents +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Pulse +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Initiatives +</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: AI and automations -->
+  <section class="px-6 py-12 border-t border-white/[0.06]">
+    <h2 class="text-[24px] leading-[31.92px] font-[510] tracking-[-0.02em] text-[#f7f8f8] mb-3">
+      AI and<br>automations
+    </h2>
+    <p class="text-[14px] leading-[20px] text-[#8a8f98] mb-4">
+      Build and deploy AI agents that work alongside you as teammates. Work on complex tasks together or delegate entire issues end-to-end.
+    </p>
+    <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#8b95ec] hover:underline mb-8">
+      Learn more <span>→</span>
+    </a>
+
+    <!-- Multi-Agent Cards Preview -->
+    <div class="space-y-3">
+      <!-- Agent 1: Linear Opus 5 -->
+      <div class="p-3.5 rounded-xl border border-white/[0.08] bg-[#0c0d12]">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-[#5e6ad2]"></div>
+            <span class="text-[12px] font-medium text-white">Linear Opus 5</span>
+          </div>
+          <span class="text-[10px] text-[#62666d] font-mono">Autonomous Lead</span>
+        </div>
+        <p class="text-[11px] leading-[16px] text-[#8a8f98] mb-2 font-mono bg-black/40 p-2 rounded border border-white/[0.04]">
+          "I’ve synthesized the past 14 customer transcripts regarding session recovery. Drafted RFC-41 and created 4 linked sub-tasks."
+        </p>
+        <div class="flex items-center justify-between text-[10px] text-[#62666d]">
+          <span>Execution time: 42s</span>
+          <span class="text-[#8b95ec]">4 sub-tasks created</span>
+        </div>
+      </div>
+
+      <!-- Agent 2: Cursor -->
+      <div class="p-3.5 rounded-xl border border-white/[0.08] bg-[#0c0d12]">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div>
+            <span class="text-[12px] font-medium text-white">Cursor</span>
+          </div>
+          <span class="text-[10px] text-[#62666d] font-mono">Coding Agent</span>
+        </div>
+        <p class="text-[11px] leading-[16px] text-[#8a8f98] mb-2 font-mono bg-black/40 p-2 rounded border border-white/[0.04]">
+          "Checked out branch feat/realtime-gw. Refactored the handshake protocol and verified TLS ticket caching with 98% test coverage."
+        </p>
+        <div class="flex items-center justify-between text-[10px] text-[#62666d]">
+          <span class="text-emerald-400">Diff: +224 / -48</span>
+          <span class="text-white">PR #4842 ready</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Feature tags -->
+    <div class="mt-4 flex flex-wrap gap-1.5 text-[10px] text-[#8a8f98]">
+      <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Linear Agent +</span>
+      <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Coding sessions +</span>
+      <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Triage +</span>
+      <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Linear MCP +</span>
+    </div>
+  </section>
+
+  <!-- Section 4: Build, review, and ship -->
+  <section class="px-6 py-12 border-t border-white/[0.06]">
+    <h2 class="text-[24px] leading-[31.92px] font-[510] tracking-[-0.02em] text-[#f7f8f8] mb-3">
+      Build, review,<br>and ship
+    </h2>
+    <p class="text-[14px] leading-[20px] text-[#8a8f98] mb-4">
+      Streamline code reviews with clear diffs, better context, and fewer back-and-forth comments. Keep PRs moving without sacrificing quality.
+    </p>
+    <a href="#" class="inline-flex items-center gap-1.5 text-[13px] font-medium text-[#8b95ec] hover:underline mb-8">
+      Learn more <span>→</span>
+    </a>
+
+    <!-- Unified Code Review & PR Diffs Mockup -->
+    <div class="rounded-xl border border-white/[0.08] bg-[#0c0d12] overflow-hidden shadow-xl">
+      <!-- PR Diff Header -->
+      <div class="px-3.5 py-2.5 bg-white/[0.02] border-b border-white/[0.06] flex items-center justify-between text-[11px]">
+        <div class="flex items-center gap-2">
+          <span class="font-mono text-[#8b95ec]">DRV-8852</span>
+          <span class="text-white truncate max-w-[170px]">Render UI before vehicle_state sync</span>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">#3481 merged</span>
+      </div>
+
+      <!-- Code Diff Lines -->
+      <div class="p-3 font-mono text-[10px] leading-[17px] bg-[#08080a] overflow-x-auto">
+        <div class="text-[#62666d] mb-1">// VehicleStateProvider.swift (Diff view)</div>
+        <div class="text-emerald-400/90 bg-emerald-500/10 px-1 rounded-sm">+ await synchronizeVehicleState(blocking: false)</div>
+        <div class="text-emerald-400/90 bg-emerald-500/10 px-1 rounded-sm">+ guard let cachedSnapshot = cache.readImmediateState() else {</div>
+        <div class="text-rose-400/90 bg-rose-500/10 px-1 rounded-sm">- return await synchronizeVehicleState(blocking: true)</div>
+        <div class="text-[#8a8f98] px-1">  return renderOptimisticUI(from: cachedSnapshot)</div>
+      </div>
+
+      <!-- Feature Tags -->
+      <div class="p-3 border-t border-white/[0.06] flex flex-wrap gap-1.5 text-[10px] text-[#8a8f98]">
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Issues +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Git automations +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Guided reviews +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Cycles +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Diffs +</span>
+        <span class="px-2 py-0.5 rounded-full bg-white/[0.04]">Releases +</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Changelog Section -->
+  <section class="px-6 py-12 border-t border-white/[0.06]">
+    <div class="flex items-center justify-between mb-6">
+      <span class="text-[12px] font-mono text-[#62666d] uppercase tracking-wider">Changelog</span>
+      <a href="#" class="text-[12px] text-[#8a8f98] hover:text-white flex items-center gap-1">View all <span>→</span></a>
+    </div>
+
+    <div class="space-y-4">
+      <!-- Item 1 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/60">
+        <div class="text-[10px] font-mono text-[#62666d] mb-1">OCT 8, 2026</div>
+        <h3 class="text-[14px] font-medium text-white mb-1.5">Stacked pull requests</h3>
+        <p class="text-[12px] leading-[18px] text-[#8a8f98]">
+          Stacked pull requests are now displayed in Linear Diffs. Move through a stack and see review, CI, and merge status at a glance.
+        </p>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/60">
+        <div class="text-[10px] font-mono text-[#62666d] mb-1">SEP 24, 2026</div>
+        <h3 class="text-[14px] font-medium text-white mb-1.5">New controls for Linear coding agent</h3>
+        <p class="text-[12px] leading-[18px] text-[#8a8f98]">
+          Coding sessions are the shortest path from issue to diff. Assign a task to Linear Agent, and it works in a secure cloud environment to write and test code.
+        </p>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/60">
+        <div class="text-[10px] font-mono text-[#62666d] mb-1">SEP 10, 2026</div>
+        <h3 class="text-[14px] font-medium text-white mb-1.5">Loops for product management</h3>
+        <p class="text-[12px] leading-[18px] text-[#8a8f98]">
+          Loops are recurring agent workflows for teams. They now respond to more workspace activity, including changes to initiatives, projects, and cycles.
+        </p>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/60">
+        <div class="text-[10px] font-mono text-[#62666d] mb-1">SEP 3, 2026</div>
+        <h3 class="text-[14px] font-medium text-white mb-1.5">Priority inbox</h3>
+        <p class="text-[12px] leading-[18px] text-[#8a8f98]">
+          The new Priority tab separates what needs your attention from what can wait, so urgent reviews blocking a release never get buried.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials & Customer Quotes -->
+  <section class="px-6 py-12 border-t border-white/[0.06] space-y-4">
+    <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+      <p class="text-[13px] leading-[20px] text-white/90 mb-3">
+        "You’ll probably build a better product, just because of the craft that using Linear infuses on your brain."
+      </p>
+      <div class="text-[11px]">
+        <div class="font-medium text-white">Gabriel Peal</div>
+        <div class="text-[#62666d]">Staff Software Engineer, OpenAI</div>
+      </div>
+    </div>
+
+    <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+      <p class="text-[13px] leading-[20px] text-white/90 mb-3">
+        "Our speed is intense and Linear helps us be action biased."
+      </p>
+      <div class="text-[11px]">
+        <div class="font-medium text-white">Nik Koblov</div>
+        <div class="text-[#62666d]">Head of Engineering, Ramp</div>
+      </div>
+    </div>
+
+    <div class="p-4 rounded-xl border border-white/[0.06] bg-[#0c0d12]/50">
+      <p class="text-[13px] leading-[20px] text-white/90 mb-3">
+        "Linear is excellent, just excellent. It has the right opinions for fast moving teams."
+      </p>
+      <div class="text-[11px]">
+        <div class="font-medium text-white">Kaz Nejatian</div>
+        <div class="text-[#62666d]">COO, Opendoor</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enterprise / Scale Callout -->
+  <section class="px-6 py-10 text-center border-t border-white/[0.06]">
+    <h3 class="text-[18px] font-medium text-white mb-2">
+      Linear powers over 40,000 product teams.
+    </h3>
+    <p class="text-[13px] text-[#8a8f98] mb-4">
+      From ambitious startups to major enterprises.
+    </p>
+    <a href="#" class="inline-flex items-center gap-1 text-[13px] text-[#8b95ec] hover:underline">
+      Customer stories →
+    </a>
+  </section>
+
+  <!-- Pre-footer CTA - Measured: 38px, lineHeight 41.8px -->
+  <section class="px-6 py-14 border-t border-white/[0.06] text-center linear-glow">
+    <h2 class="text-[34px] sm:text-[38px] leading-[38px] sm:leading-[41.8px] font-[510] tracking-[-0.03em] text-[#f7f8f8] mb-6">
+      Built for the future.<br>Available today.
+    </h2>
+    <div class="flex flex-col gap-2.5 max-w-[320px] mx-auto">
+      <a href="#" class="w-full flex items-center justify-center h-10 px-4 bg-white text-black font-medium text-[14px] rounded-lg hover:bg-neutral-200 transition-colors">
+        Get started
+      </a>
+      <a href="#" class="w-full flex items-center justify-center h-10 px-4 bg-white/[0.05] border border-white/[0.1] text-white font-medium text-[14px] rounded-lg hover:bg-white/[0.08] transition-colors">
+        Contact sales
+      </a>
+    </div>
+  </section>
+
+  <!-- Official Mobile 2-Column Footer (Product, Features, Company, Resources, Connect, Legal) -->
+  <footer class="px-6 pt-10 pb-16 border-t border-white/[0.06] bg-[#010102] text-[13px] text-[#8a8f98]">
+    <!-- Measured grid: 2 columns with 155px width per column -->
+    <div class="grid grid-cols-2 gap-y-8 gap-x-6 mb-12">
+      <!-- Col 1: Product -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Product</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">Overview</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Pricing</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">New</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Customers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Docs</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 2: Features -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Features</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">Intake</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Planning</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">AI & Agents</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Build & Ship</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Insights</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Integrations</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 3: Company -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Company</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Now</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Method</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Quality</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Brand</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 4: Resources -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Resources</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">Switch</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Download</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Documentation</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Developers</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Status</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Enterprise</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 5: Connect -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Connect</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">Contact us</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">X (Twitter)</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Discord</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">YouTube</a></li>
+        </ul>
+      </div>
+
+      <!-- Col 6: Legal -->
+      <div>
+        <h4 class="text-[13px] font-[510] text-[#f7f8f8] mb-3">Legal</h4>
+        <ul class="space-y-2.5 text-[12px]">
+          <li><a href="#" class="hover:text-white transition-colors">Privacy</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Terms</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">DPA</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">AUP</a></li>
+          <li><a href="#" class="hover:text-white transition-colors">Security</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom Copyright & Wordmark -->
+    <div class="pt-6 border-t border-white/[0.06] flex items-center justify-between text-[11px] text-[#62666d]">
+      <div class="flex items-center gap-2">
+        <svg class="w-3.5 h-3.5 text-white/60" viewBox="0 0 100 100" fill="currentColor">
+          <path d="M1.2 56.4L43.6 98.8C44.4 99.6 45.6 100 46.8 100C48 100 49.2 99.6 50 98.8L98.8 50C99.6 49.2 100 48 100 46.8C100 45.6 99.6 44.4 98.8 43.6L56.4 1.2C55.6 0.4 54.4 0 53.2 0C52 0 50.8 0.4 50 1.2L1.2 50C0.4 50.8 0 52 0 53.2C0 54.4 0.4 55.6 1.2 56.4ZM46.8 89.2L10.8 53.2L53.2 10.8L89.2 46.8L46.8 89.2Z"/>
+        </svg>
+        <span>Linear Orbit, Inc.</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <span>© 2026</span>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

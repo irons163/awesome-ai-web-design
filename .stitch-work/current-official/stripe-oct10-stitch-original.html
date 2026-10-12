@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stripe | Financial Infrastructure for the Internet (Canada)</title>
+<!-- Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Public+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: "#5336f5",
+              primary: "#635bff",
+              hover: "#4926e8",
+              dark: "#0a0a23",
+              muted: "#74778d",
+              light: "#f6f9fc",
+              border: "#e3e8ee",
+              subtle: "#e6ebf1"
+            }
+          },
+          fontFamily: {
+            sans: ["Inter", "-apple-system", "BlinkMacSystemFont", "Segoe UI", "Roboto", "sans-serif"],
+            display: ["Inter", "sans-serif"],
+            mono: ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
+          },
+          borderRadius: {
+            DEFAULT: "4px",
+            sm: "2px",
+            md: "4px",
+            lg: "6px",
+            xl: "8px",
+            "2xl": "12px",
+            "3xl": "16px"
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    
+    /* Stripe vertical guide lines aesthetic */
+    .stripe-guide-lines {
+      background-image: linear-gradient(to right, #f0f3f7 1px, transparent 1px);
+      background-size: calc(100% / 4) 100%;
+    }
+    
+    /* Subtle wave mesh background emulation */
+    .stripe-mesh-wave {
+      background: radial-gradient(circle at 90% 15%, rgba(255, 178, 122, 0.45) 0%, rgba(255, 122, 178, 0.28) 28%, rgba(138, 117, 255, 0.22) 50%, rgba(255, 255, 255, 0) 70%),
+                  linear-gradient(135deg, #ffffff 50%, #fbfafd 100%);
+    }
+
+    /* Dropdown hover behavior */
+    .dropdown-group:hover .dropdown-menu {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body class="bg-white text-brand-dark font-sans antialiased selection:bg-[#e2dfff] selection:text-[#130c59]">
+<!-- Top Navigation Header (76px high, max-w-[1232px] centered) -->
+<header class="h-[76px] sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-brand-border/60 transition-all">
+<div class="max-w-[1232px] h-full mx-auto px-6 flex items-center justify-between">
+<!-- Left: Logo & Links -->
+<div class="flex items-center gap-9">
+<!-- Stripe Logo -->
+<a aria-label="Stripe Home" class="flex items-center text-brand-dark hover:opacity-85 transition-opacity" href="https://stripe.com/en-ca">
+<svg class="h-6 w-auto fill-current" viewbox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+<path d="M59.64 14.28c0-4.48-2.18-8-6.42-8-4.26 0-6.84 3.52-6.84 8 0 5.3 3.08 7.94 7.42 7.94 2.12 0 3.72-.48 4.94-1.16v-3.48c-1.22.62-2.58.96-4.14.96-1.74 0-3.26-.64-3.5-2.62h8.5c0-.2.04-1.28.04-1.64zm-8.52-1.54c.14-1.8 1.28-2.54 2.3-2.54 1 0 2.14.74 2.3 2.54h-4.6zm-11.44-6.46c-1.8 0-3 .84-3.66 1.48V6.6h-4.68v18.7h4.86v-5.64c.68.56 1.76 1.24 3.44 1.24 3.56 0 6.64-2.82 6.64-7.46 0-4.34-3.08-7.16-6.6-7.16zm-1.18 11.24c-1.16 0-2.1-.42-2.6-1.04v-4.68c.5-.66 1.44-1.1 2.6-1.1 1.94 0 3.22 1.56 3.22 3.42 0 1.94-1.28 3.4-3.22 3.4zm-14.8-13.88l-4.88 1.04v3.98h3.3v3.74h-3.3v6.32c0 1.26.96 1.68 2.06 1.68.74 0 1.34-.08 1.64-.2v3.76c-.6.26-1.6.48-2.88.48-3.34 0-5.68-1.78-5.68-5.58V8.92H14.1V6.6l4.74-.98V.64zm-13.4 5.94H5.42v15.32h4.88V6.6zm-2.44-6.38a2.95 2.95 0 00-2.96 2.96c0 1.64 1.32 2.96 2.96 2.96 1.62 0 2.94-1.32 2.94-2.96A2.95 2.95 0 005.46.22zM2.84 10.36C1.22 9.4.42 8.46.42 6.94c0-2.26 2.22-3.86 5.6-3.86 1.96 0 3.8.44 5.04 1.14l-1.44 3.6c-1.12-.56-2.38-.88-3.6-.88-1.28 0-2.02.5-2.02 1.18 0 .76.7 1.14 2.24 1.7 2.62.96 4.3 2.14 4.3 4.62 0 2.76-2.36 4.48-6.14 4.48-2.3 0-4.48-.56-5.84-1.44l1.4-3.76c1.1.7 2.74 1.26 4.44 1.26 1.38 0 2.1-.48 2.1-1.24 0-.8-.66-1.22-2.3-1.8z"></path>
+</svg>
+</a>
+<!-- Interactive Header Dropdown Menus -->
+<nav class="hidden md:flex items-center gap-7">
+<!-- Products Dropdown -->
+<div class="relative dropdown-group py-6">
+<button class="flex items-center gap-1 text-[15px] font-semibold text-brand-dark hover:text-brand-purple transition-colors">
+              Products
+              <span class="material-symbols-outlined text-[18px] text-brand-muted" data-icon="expand_more">expand_more</span>
+</button>
+<div class="dropdown-menu hidden absolute top-[68px] -left-12 w-[580px] bg-white rounded-xl shadow-2xl border border-brand-border p-6 transition-all duration-150 z-50">
+<div class="grid grid-cols-2 gap-6">
+<div>
+<div class="text-[11px] font-bold tracking-wider text-brand-muted uppercase mb-3">Payments &amp; Revenue</div>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/payments">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="credit_card">credit_card</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Payments</div>
+<div class="text-xs text-brand-muted leading-snug">Online and in-person payments</div>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/billing">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="sync">sync</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Billing</div>
+<div class="text-xs text-brand-muted leading-snug">Subscriptions &amp; recurring billing</div>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/connect">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="hub">hub</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Connect</div>
+<div class="text-xs text-brand-muted leading-snug">Multiparter platform payouts</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+<div>
+<div class="text-[11px] font-bold tracking-wider text-brand-muted uppercase mb-3">Financial Services</div>
+<ul class="space-y-3">
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/issuing">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="credit_card_heart">credit_card_heart</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Issuing</div>
+<div class="text-xs text-brand-muted leading-snug">Physical and virtual cards</div>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/terminal">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="point_of_sale">point_of_sale</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Terminal</div>
+<div class="text-xs text-brand-muted leading-snug">Custom in-person POS hardware</div>
+</div>
+</a>
+</li>
+<li>
+<a class="group flex items-start gap-3" href="https://stripe.com/en-ca/radar">
+<span class="material-symbols-outlined text-brand-primary group-hover:text-brand-purple mt-0.5" data-icon="shield">shield</span>
+<div>
+<div class="text-sm font-semibold text-brand-dark group-hover:text-brand-purple">Radar</div>
+<div class="text-xs text-brand-muted leading-snug">AI-driven fraud prevention</div>
+</div>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- Solutions Dropdown -->
+<div class="relative dropdown-group py-6">
+<button class="flex items-center gap-1 text-[15px] font-semibold text-brand-dark hover:text-brand-purple transition-colors">
+              Solutions
+              <span class="material-symbols-outlined text-[18px] text-brand-muted" data-icon="expand_more">expand_more</span>
+</button>
+<div class="dropdown-menu hidden absolute top-[68px] -left-12 w-64 bg-white rounded-xl shadow-2xl border border-brand-border p-5 z-50">
+<ul class="space-y-2.5 text-sm">
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/use-cases/saas">SaaS</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/use-cases/marketplaces">Marketplaces</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/use-cases/ecommerce">Ecommerce</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/enterprise">Enterprise</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/startups">Startups</a></li>
+</ul>
+</div>
+</div>
+<!-- Developers Dropdown -->
+<div class="relative dropdown-group py-6">
+<button class="flex items-center gap-1 text-[15px] font-semibold text-brand-dark hover:text-brand-purple transition-colors">
+              Developers
+              <span class="material-symbols-outlined text-[18px] text-brand-muted" data-icon="expand_more">expand_more</span>
+</button>
+<div class="dropdown-menu hidden absolute top-[68px] -left-12 w-72 bg-white rounded-xl shadow-2xl border border-brand-border p-5 z-50">
+<ul class="space-y-3 text-sm">
+<li><a class="block font-medium hover:text-brand-purple" href="https://docs.stripe.com">Documentation</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://docs.stripe.com/api">API reference</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://github.com/stripe">SDKs &amp; Libraries</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/agentic-commerce">Build with Agentic AI</a></li>
+</ul>
+</div>
+</div>
+<!-- Resources Dropdown -->
+<div class="relative dropdown-group py-6">
+<button class="flex items-center gap-1 text-[15px] font-semibold text-brand-dark hover:text-brand-purple transition-colors">
+              Resources
+              <span class="material-symbols-outlined text-[18px] text-brand-muted" data-icon="expand_more">expand_more</span>
+</button>
+<div class="dropdown-menu hidden absolute top-[68px] -left-12 w-64 bg-white rounded-xl shadow-2xl border border-brand-border p-5 z-50">
+<ul class="space-y-2.5 text-sm">
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/guides">Guides &amp; Insights</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/customers">Customer Stories</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripe.com/en-ca/newsroom">Newsroom</a></li>
+<li><a class="block font-medium hover:text-brand-purple" href="https://stripepress.com">Stripe Press</a></li>
+</ul>
+</div>
+</div>
+<a class="text-[15px] font-semibold text-brand-dark hover:text-brand-purple transition-colors" href="https://stripe.com/en-ca/pricing">
+            Pricing
+          </a>
+</nav>
+</div>
+<!-- Right Action Buttons (4px border-radius, authentic Stripe styling) -->
+<div class="flex items-center gap-3">
+<!-- Sign in button -->
+<a class="hidden sm:inline-flex items-center justify-center h-9 px-4 text-sm font-semibold text-brand-dark bg-white border border-brand-border rounded-[4px] hover:border-brand-muted transition-colors shadow-sm" href="https://dashboard.stripe.com">
+          Sign in
+        </a>
+<!-- Contact sales button -->
+<a class="inline-flex items-center justify-center h-9 px-4 text-sm font-semibold text-white bg-brand-purple hover:bg-brand-hover rounded-[4px] transition-colors shadow-sm" href="https://stripe.com/en-ca/contact/sales">
+          Contact sales
+        </a>
+<!-- Mobile Menu Toggle Button -->
+<button aria-label="Toggle Navigation Menu" class="md:hidden flex items-center p-2 rounded-[4px] text-brand-dark hover:bg-brand-light" id="mobileMenuBtn">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</div>
+<!-- Mobile Dropdown Navigation -->
+<div class="hidden md:hidden bg-white border-b border-brand-border px-6 py-4 space-y-3" id="mobileMenu">
+<a class="block text-sm font-semibold text-brand-dark py-1" href="https://stripe.com/en-ca/payments">Products</a>
+<a class="block text-sm font-semibold text-brand-dark py-1" href="https://stripe.com/en-ca/solutions">Solutions</a>
+<a class="block text-sm font-semibold text-brand-dark py-1" href="https://docs.stripe.com">Developers</a>
+<a class="block text-sm font-semibold text-brand-dark py-1" href="https://stripe.com/en-ca/pricing">Pricing</a>
+<div class="pt-2 border-t border-brand-border flex gap-2">
+<a class="flex-1 text-center py-2 text-sm font-semibold border border-brand-border rounded-[4px]" href="https://dashboard.stripe.com">Sign in</a>
+<a class="flex-1 text-center py-2 text-sm font-semibold bg-brand-purple text-white rounded-[4px]" href="https://stripe.com/en-ca/contact/sales">Contact sales</a>
+</div>
+</div>
+</header>
+<!-- Main Hero Section (Single Flowing H1, NO Split Screen, Textured Wave Behind Right) -->
+<section class="relative pt-16 pb-20 overflow-hidden border-b border-brand-border">
+<!-- Atmospheric Sweeping Wave background -->
+<div class="absolute inset-0 pointer-events-none -z-10 stripe-mesh-wave overflow-hidden">
+<!-- High fidelity fallback wave image positioned right-top -->
+<img alt="" class="absolute top-0 right-0 w-[55vw] max-w-[1000px] h-full object-cover object-left opacity-90 mix-blend-multiply" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh0y-N34l3Alseok4QpxZCWwQt5bD6TAdq7GMzmshBc4UW3_EepNWhHI53VvN-IedicQWMCFAU7L_qSG9je8AQhlbbu4lcswRboP6EFqzzIj2ufY_A9wNyouArzk6nRekZES5cmQ3ZQT3wSnSogmGcJ2i_N5kYFP7H7xgiXIthx4CPgdxL0EIIvKEP7Nx-d8IwIiJgXDdtBkrP-bbzuYRSskGVb_b35O6gyc7TZZlT5nm5Ik-ITQAaiuAgbwZ34cCAVvaugBev4UeW"/>
+</div>
+<div class="max-w-[1232px] mx-auto px-6">
+<!-- Eyebrow: Global GDP live counter -->
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/90 border border-brand-border/80 text-xs font-semibold text-brand-dark mb-7 shadow-xs">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-purple opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-brand-purple"></span>
+</span>
+<span class="text-brand-muted">Global GDP running on Stripe:</span>
+<span class="font-bold font-mono text-brand-purple" id="live-gdp-counter">1.184%</span>
+</div>
+<!-- Single Flowing H1 Heading (48px weight 300, line-height 55.2px, max-w-[960px]) -->
+<div class="max-w-[960px] mb-8">
+<h1 class="text-[34px] sm:text-[42px] lg:text-[48px] font-light leading-[1.15] tracking-tight">
+<span class="text-[#0a0a23] font-light">Financial infrastructure to grow your revenue.</span>
+<span class="text-[#74778d] font-light"> Accept payments, offer financial services and implement custom revenue models – from your first transaction to your billionth.</span>
+</h1>
+</div>
+<!-- CTA Row (4px radius buttons) -->
+<div class="flex flex-wrap items-center gap-3.5 mb-16">
+<a class="inline-flex items-center gap-2 h-11 px-5 rounded-[4px] bg-brand-purple hover:bg-brand-hover text-white text-[15px] font-semibold transition-colors shadow-sm" href="https://dashboard.stripe.com/register">
+<span>Get started</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<button class="inline-flex items-center gap-2.5 h-11 px-5 rounded-[4px] bg-white border border-brand-border hover:border-brand-muted text-brand-dark text-[15px] font-semibold transition-colors shadow-sm">
+<svg class="w-4 h-4" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.27 21.39 7.35 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.17 0 10.03 0 12s.45 3.83 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.35 0 3.27 2.61 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span>Sign up with Google</span>
+</button>
+</div>
+<!-- Partner Logo Grid (Authentic partners specified in prompt) -->
+<div class="pt-10 border-t border-brand-border/60">
+<p class="text-xs font-semibold text-brand-muted uppercase tracking-wider mb-6">Powering commerce for leading platforms worldwide</p>
+<div class="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-9 gap-x-8 gap-y-6 items-center text-brand-muted/80 opacity-80 hover:opacity-100 transition-opacity">
+<span class="font-bold text-sm tracking-tight text-brand-dark">OpenAI</span>
+<span class="font-semibold text-sm">FreshBooks</span>
+<span class="font-black text-sm tracking-tighter">amazon</span>
+<span class="font-black text-sm tracking-wide text-brand-dark">SKIP</span>
+<span class="font-bold text-sm">NVIDIA</span>
+<span class="font-bold text-sm">Jobber</span>
+<span class="font-bold italic text-sm">Ford</span>
+<span class="font-medium text-sm">1Password</span>
+<span class="font-semibold text-sm text-brand-dark">Google</span>
+<span class="font-medium text-sm">Jane Software</span>
+<span class="font-bold text-sm text-brand-dark">shopify</span>
+<span class="font-bold text-sm">MetLife</span>
+<span class="font-semibold text-sm">Marriott</span>
+<span class="font-bold text-sm">Figma</span>
+<span class="font-bold text-sm text-brand-dark">ANTHROPIC</span>
+<span class="font-medium text-sm">Brightwheel</span>
+<span class="font-black text-sm tracking-wider">Uber</span>
+<span class="font-mono font-semibold text-sm">Cursor</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 1: Flexible solutions for every business model. (Bento Grid) -->
+<section class="py-24 bg-white border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<!-- Section Header -->
+<div class="max-w-[800px] mb-14">
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          Flexible solutions for every business model.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed">
+          Grow your business with a comprehensive set of payments and financial tools – designed to work individually or together.
+        </p>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Large Card 1: Spans 2 columns - Payments with artwork -->
+<div class="md:col-span-2 rounded-xl border border-brand-border bg-brand-light/40 overflow-hidden flex flex-col justify-between p-8 hover:shadow-lg transition-all group">
+<div>
+<h3 class="text-[26px] font-light leading-[29px] text-brand-dark mb-3">
+              Accept and optimise payments globally – online and in person
+            </h3>
+<p class="text-[15px] text-brand-muted leading-relaxed max-w-xl mb-6">
+              Increase conversion rates, localize payment options with Canadian Interac Debit, Apple Pay, and Google Pay, and build unified commerce experiences.
+            </p>
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple group-hover:translate-x-1 transition-transform" href="https://stripe.com/en-ca/payments">
+              Explore Payments <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Card Image illustration referencing prompt asset -->
+<div class="mt-8 rounded-lg overflow-hidden border border-brand-border bg-white shadow-sm">
+<img alt="Stripe payment checkout and terminal hardware presentation" class="w-full h-56 object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAjH5JlBJQAmha2fzRA6uZGh1ArwnJyuFPs5bNPgMBhs3Vb6p8AB7s142JCYu3NjwGXgCirHDoPRBhyJQ5b4QQa5FkC62L2_4iLv78rdqhS3zIHHCWsNz7dBkENkPlCzBzEkVlGd8iZo6aG1yVuCTYzFU-3GLPiQb3FPwRqkZ8tC_AEvdfAZ604zeLTpnk-6PbbhWq7q5xN6vAJx-LtQLUtAnYupG9nADwcCsL0JzBgENeUIOX4f-MNNFPx7MJkY3i_4w5zZg6TB0P0"/>
+</div>
+</div>
+<!-- Card 2: Billing card (Usage meter / subscription tier) -->
+<div class="rounded-xl border border-brand-border bg-white p-8 flex flex-col justify-between hover:shadow-lg transition-all group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#f0f0ff] flex items-center justify-center text-brand-purple mb-6">
+<span class="material-symbols-outlined" data-icon="sync">sync</span>
+</div>
+<h3 class="text-[26px] font-light leading-[29px] text-brand-dark mb-3">
+              Enable any billing model
+            </h3>
+<p class="text-[15px] text-brand-muted leading-relaxed mb-6">
+              Automate subscriptions, usage-based metering, customized contract billing, and smart AI retries with Stripe Billing.
+            </p>
+<!-- Usage preview mockup -->
+<div class="bg-brand-light rounded-lg p-4 border border-brand-border text-xs space-y-2.5">
+<div class="flex justify-between items-center font-semibold text-brand-dark">
+<span>Enterprise Growth Tier</span>
+<span class="font-mono text-brand-purple">$4,250/mo</span>
+</div>
+<div class="w-full bg-brand-border rounded-full h-1.5 overflow-hidden">
+<div class="bg-brand-purple h-full" style="width: 74%"></div>
+</div>
+<div class="flex justify-between text-[11px] text-brand-muted">
+<span>Usage: 740,000 / 1,000,000 API calls</span>
+<span class="text-green-600 font-semibold">Active</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-brand-subtle">
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple group-hover:translate-x-1 transition-transform" href="https://stripe.com/en-ca/billing">
+              Explore Billing <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Row 2 Card 1: Monetise through agentic commerce -->
+<div class="rounded-xl border border-brand-border bg-white p-8 flex flex-col justify-between hover:shadow-lg transition-all group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#eff6ff] flex items-center justify-center text-blue-600 mb-6">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<h3 class="text-[26px] font-light leading-[29px] text-brand-dark mb-3">
+              Monetise through agentic commerce
+            </h3>
+<p class="text-[15px] text-brand-muted leading-relaxed mb-6">
+              Equip autonomous AI agents to initiate checkouts, pay micro-invoices, and negotiate transactional contracts on programmed limits.
+            </p>
+<div class="bg-brand-dark text-white rounded-lg p-3 font-mono text-[11px] leading-relaxed">
+<span class="text-brand-muted">// Agent API Checkout</span><br/>
+<span class="text-[#c3c0ff]">agent.checkout.create({</span><br/>
+                model: <span class="text-amber-300">"claude-3-5-sonnet"</span>,<br/>
+                max_budget: <span class="text-emerald-400">"$250.00 CAD"</span><br/>
+<span class="text-[#c3c0ff]">});</span>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-brand-subtle">
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple group-hover:translate-x-1 transition-transform" href="https://stripe.com/en-ca/agentic-commerce">
+              Explore Agentic APIs <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Row 2 Card 2: Create a card issuing programme -->
+<div class="rounded-xl border border-brand-border bg-white p-8 flex flex-col justify-between hover:shadow-lg transition-all group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#fef3c7] flex items-center justify-center text-amber-700 mb-6">
+<span class="material-symbols-outlined" data-icon="credit_card_heart">credit_card_heart</span>
+</div>
+<h3 class="text-[26px] font-light leading-[29px] text-brand-dark mb-3">
+              Create a card issuing programme
+            </h3>
+<p class="text-[15px] text-brand-muted leading-relaxed mb-6">
+              Create, distribute, and manage physical and virtual payment cards instantly with granular spending controls and real-time ledger hooks.
+            </p>
+<!-- Card visual preview -->
+<div class="h-28 rounded-lg bg-gradient-to-r from-slate-900 to-slate-800 text-white p-3.5 flex flex-col justify-between shadow-xs">
+<div class="flex justify-between items-center text-[11px] font-mono tracking-wider opacity-75">
+<span>COMMERCIAL CARD</span>
+<span class="material-symbols-outlined text-sm" data-icon="contactless">contactless</span>
+</div>
+<div class="flex justify-between items-end text-xs font-mono">
+<span>•••• 4192</span>
+<span class="text-[10px] text-slate-300">STRIPE ISSUING</span>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-brand-subtle">
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple group-hover:translate-x-1 transition-transform" href="https://stripe.com/en-ca/issuing">
+              Explore Issuing <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Row 2 Card 3: Stablecoins and crypto -->
+<div class="rounded-xl border border-brand-border bg-white p-8 flex flex-col justify-between hover:shadow-lg transition-all group">
+<div>
+<div class="w-10 h-10 rounded-lg bg-[#ecfdf5] flex items-center justify-center text-emerald-600 mb-6">
+<span class="material-symbols-outlined" data-icon="currency_exchange">currency_exchange</span>
+</div>
+<h3 class="text-[26px] font-light leading-[29px] text-brand-dark mb-3">
+              Access borderless money movement with stablecoins and crypto
+            </h3>
+<p class="text-[15px] text-brand-muted leading-relaxed mb-6">
+              Accept USDC from customers across 150+ countries with automatic settlement into your Canadian bank account in CAD or preferred fiat.
+            </p>
+<div class="bg-brand-light rounded-lg p-3 border border-brand-border flex items-center justify-between text-xs">
+<div class="flex items-center gap-2">
+<span class="w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-[10px]">$</span>
+<span class="font-semibold text-brand-dark">USDC Pay-in</span>
+</div>
+<span class="material-symbols-outlined text-brand-muted text-sm" data-icon="arrow_forward">arrow_forward</span>
+<div class="text-right font-semibold text-emerald-700">CAD Direct EFT</div>
+</div>
+</div>
+<div class="mt-8 pt-4 border-t border-brand-subtle">
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple group-hover:translate-x-1 transition-transform" href="https://stripe.com/en-ca/crypto">
+              Explore Crypto Rails <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Row 3: Embed payments in your platform (Spans 3 columns with Connect background artwork) -->
+<div class="md:col-span-3 rounded-xl border border-brand-border overflow-hidden relative group">
+<div class="relative h-64 sm:h-72 w-full bg-brand-dark">
+<img alt="Stripe Connect multi-party marketplace background" class="w-full h-full object-cover object-center opacity-85 group-hover:scale-[1.01] transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBD3ixJAIEGki5lgwfTRFuXKDalQNT9JCbgPj2U499wp8qito8GNZO-hOAK0-UC0HzL353F96n6caaWQA_jJdVHEOA73y4_pKPo1Apt4vUoo5jNymTGLVc0r2htlkkwPnJVmGI_ixlYb7YexvQ6jMYTE3gQqRwYlaHgOspwAL21agOogbcZIhVcDuWgQH1hdbp_MFf2PPuc3WOoMAej6JGIcN2SVBWkWBJk35Cdkzg7Lw9KI0DnG6Lo1cHwieAwDBdHYafZZuRBcVtL"/>
+<div class="absolute inset-0 bg-gradient-to-r from-brand-dark/95 via-brand-dark/70 to-transparent p-8 sm:p-12 flex flex-col justify-center max-w-2xl text-white">
+<span class="text-xs font-bold tracking-widest text-[#a594fd] uppercase mb-2">Multi-Party Monetisation</span>
+<h3 class="text-[26px] sm:text-[30px] font-light leading-tight text-white mb-3">
+                Embed payments in your platform
+              </h3>
+<p class="text-[15px] text-slate-200 leading-relaxed mb-6">
+                Power marketplaces and software platforms with end-to-end seller onboarding, split payouts, integrated tax calculations, and customized financing with Stripe Connect.
+              </p>
+<div>
+<a class="inline-flex items-center text-sm font-semibold text-white bg-brand-purple hover:bg-brand-hover px-4 py-2 rounded-[4px] transition-colors" href="https://stripe.com/en-ca/connect">
+                  Explore Connect <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Stripe Sessions banner -->
+<section class="bg-[#0a0a23] text-white py-4 px-6 border-y border-slate-800">
+<div class="max-w-[1232px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-sm">
+<div class="flex items-center gap-3">
+<span class="px-2 py-0.5 rounded-[4px] bg-brand-purple text-xs font-bold uppercase tracking-wider">Sessions 2026</span>
+<span class="font-normal text-slate-200">Building the economic infrastructure for AI.</span>
+</div>
+<a class="inline-flex items-center gap-1 font-semibold text-[#a594fd] hover:text-white transition-colors" href="https://stripe.com/en-ca/sessions">
+<span>Watch now</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</section>
+<!-- Section 3: The backbone of global commerce (Metrics & Globe Styling) -->
+<section class="py-24 bg-white border-b border-brand-border relative">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-16">
+<span class="text-xs font-bold text-brand-purple tracking-widest uppercase mb-2 block">Global Scale &amp; Reliability</span>
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          The backbone of global commerce.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed">
+          From high-velocity startups to the world's most demanding enterprises, businesses rely on Stripe's hardened network to scale without limits.
+        </p>
+</div>
+<!-- 4 Key Metrics Row -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-8 py-10 border-y border-brand-border">
+<div>
+<div class="text-4xl sm:text-5xl lg:text-6xl font-light text-brand-dark tracking-tight mb-2">135+</div>
+<p class="text-sm text-brand-muted leading-snug">currencies and payment methods supported</p>
+</div>
+<div>
+<div class="text-4xl sm:text-5xl lg:text-6xl font-light text-brand-dark tracking-tight mb-2">US$1.9tn</div>
+<p class="text-sm text-brand-muted leading-snug">in payments volume processed in 2025</p>
+</div>
+<div>
+<div class="text-4xl sm:text-5xl lg:text-6xl font-light text-brand-purple tracking-tight mb-2">99.999%</div>
+<p class="text-sm text-brand-muted leading-snug">historical uptime for Stripe services</p>
+</div>
+<div>
+<div class="text-4xl sm:text-5xl lg:text-6xl font-light text-brand-dark tracking-tight mb-2">200M+</div>
+<p class="text-sm text-brand-muted leading-snug">active subscriptions managed on Stripe Billing</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Powering businesses of all sizes (Accordion + Services) -->
+<section class="py-24 bg-brand-light/50 border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-14">
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          Powering businesses of all sizes.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed">
+          Run your business on a reliable platform that adapts to your needs.
+        </p>
+</div>
+<!-- Enterprise subsection banner -->
+<div class="bg-white rounded-xl border border-brand-border p-8 mb-12 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6">
+<div class="max-w-2xl">
+<div class="text-xs font-bold uppercase tracking-wider text-brand-purple mb-2">Enterprise Scale</div>
+<h3 class="text-xl font-medium text-brand-dark mb-2">Transform your enterprise with agile financial infrastructure</h3>
+<p class="text-sm text-brand-muted leading-relaxed">
+            50% of Fortune 100 companies have used Stripe to grow their businesses – from expanding internationally to reimagining the customer experience.
+          </p>
+</div>
+<a class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-[4px] bg-brand-purple hover:bg-brand-hover text-white text-sm font-semibold transition-colors shrink-0" href="https://stripe.com/en-ca/enterprise">
+<span>Stripe for enterprises</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Customer Case Study Accordion Unit (Hertz highlighted) -->
+<div class="bg-white rounded-xl border border-brand-border overflow-hidden mb-16 shadow-sm">
+<!-- Accordion Item 1 (Open / Detailed): Hertz -->
+<div class="p-8 border-b border-brand-border grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#fafbfc]">
+<div class="lg:col-span-8">
+<span class="inline-block px-2.5 py-0.5 rounded-[4px] bg-[#eef0ff] text-brand-purple text-xs font-bold mb-3">Featured Case Study</span>
+<h3 class="text-2xl font-normal text-brand-dark mb-3">Hertz unifies commerce with Stripe.</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+              To power global car rentals and vehicle maintenance operations across 160 countries and 11,000+ locations, Hertz partnered with Stripe. With Terminal at thousands of rental desks and Payment Element checkouts on mobile, Hertz reduced chargebacks and unified reservations globally.
+            </p>
+<div class="flex flex-wrap items-center gap-2 text-xs text-brand-dark font-medium mb-5">
+<span class="text-brand-muted">Products used:</span>
+<span class="px-2 py-0.5 bg-white border border-brand-border rounded-[4px]">Payments</span>
+<span class="px-2 py-0.5 bg-white border border-brand-border rounded-[4px]">Terminal</span>
+<span class="px-2 py-0.5 bg-white border border-brand-border rounded-[4px]">Connect</span>
+<span class="px-2 py-0.5 bg-white border border-brand-border rounded-[4px]">Radar</span>
+<span class="px-2 py-0.5 bg-white border border-brand-border rounded-[4px]">Stripe Sigma</span>
+</div>
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/customers/hertz">
+              Read the Hertz story <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="lg:col-span-4 flex justify-center">
+<img alt="Hertz rental desk mobile terminal artwork" class="w-56 h-auto object-contain rounded-lg drop-shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAl8BKzFfkS853D0ZdhykTGO5Z1P3RgEAAc4V10viZxLwl3UDegQ6UoXv9wWmQ_eC4urSg6XSNQdPo7xfCk_U4LyHs7OR4KwFdY23mMXrY_w8liUqS3TvubVlB05BOkzjm2RJmhIkA1OpitmbeZIAJ-IxT5YOQ875J6AoqdEJfK2luJ-LloEZy3PYHPG7BQym_o8Yq50OhzXnNKAwzOzAqixJLpCiqTqzQMmmPNE9teYrvCB0YTKSiae3wCnZDT3DUmmtq1pixUaP4r"/>
+</div>
+</div>
+<!-- Accordion Item 2: URBN -->
+<div class="p-6 border-b border-brand-border flex items-center justify-between hover:bg-brand-light cursor-pointer">
+<div>
+<h4 class="text-base font-semibold text-brand-dark">URBN consolidates $5 billion in online and in-store revenue onto Stripe.</h4>
+<p class="text-xs text-brand-muted mt-0.5">Unified omnichannel consumer shopping for Urban Outfitters, Anthropologie, and Free People.</p>
+</div>
+<span class="material-symbols-outlined text-brand-muted" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Accordion Item 3: Instacart -->
+<div class="p-6 border-b border-brand-border flex items-center justify-between hover:bg-brand-light cursor-pointer">
+<div>
+<h4 class="text-base font-semibold text-brand-dark">Instacart powers online grocery delivery with Stripe.</h4>
+<p class="text-xs text-brand-muted mt-0.5">High-volume order routing, customer checkout, and automated shopper payouts.</p>
+</div>
+<span class="material-symbols-outlined text-brand-muted" data-icon="chevron_right">chevron_right</span>
+</div>
+<!-- Accordion Item 4: Le Monde -->
+<div class="p-6 flex items-center justify-between hover:bg-brand-light cursor-pointer">
+<div>
+<h4 class="text-base font-semibold text-brand-dark">Le Monde improves local and international payments with Stripe.</h4>
+<p class="text-xs text-brand-muted mt-0.5">Accelerating digital subscriber growth with seamless recurring billing and localized methods.</p>
+</div>
+<span class="material-symbols-outlined text-brand-muted" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Three Service Columns -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 bg-white rounded-xl border border-brand-border">
+<div class="w-8 h-8 rounded-[4px] bg-[#eef0ff] text-brand-purple flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg" data-icon="engineering">engineering</span>
+</div>
+<h4 class="text-base font-bold text-brand-dark mb-2">Professional services.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Collaborate directly with Stripe technical engineers and solutions architects to design, build, and optimize critical implementations.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/professional-services">Learn about services →</a>
+</div>
+<div class="p-6 bg-white rounded-xl border border-brand-border">
+<div class="w-8 h-8 rounded-[4px] bg-[#eef0ff] text-brand-purple flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg" data-icon="verified_user">verified_user</span>
+</div>
+<h4 class="text-base font-bold text-brand-dark mb-2">Stripe-certified experts.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Connect with an ecosystem of certified system integrators and agency partners vetted to deliver production-ready architectures.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/partners">Find a certified partner →</a>
+</div>
+<div class="p-6 bg-white rounded-xl border border-brand-border">
+<div class="w-8 h-8 rounded-[4px] bg-[#eef0ff] text-brand-purple flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-lg" data-icon="headset_mic">headset_mic</span>
+</div>
+<h4 class="text-base font-bold text-brand-dark mb-2">Support plans.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Access 24/7 technical assistance, guaranteed SLAs, designated technical account managers, and proactive monitoring.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/support">Compare support tiers →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 5: Build a foundation for your startup that enables faster growth. -->
+<section class="py-24 bg-white border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-12">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[4px] bg-[#eef0ff] text-brand-purple text-xs font-bold uppercase tracking-wider mb-4">
+          Stripe for startups
+        </span>
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          Build a foundation for your startup that enables faster growth.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed">
+          From stablecoin pioneers to 88% of the Forbes AI 50, Stripe helps startups build what’s next on easy-to-integrate financial infrastructure.
+        </p>
+</div>
+<!-- Customer story pills grid -->
+<div class="flex flex-wrap gap-2.5 mb-12">
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Lovable</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Gamma</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Runway</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Supabase</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Linear</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">ElevenLabs</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Browserbase</span>
+<span class="px-3.5 py-1.5 rounded-[4px] bg-brand-light border border-brand-border text-xs font-medium text-brand-dark">Decagon</span>
+</div>
+<!-- Two Startup Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="p-8 rounded-xl border border-brand-border bg-brand-light/30 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold text-brand-dark mb-2">Stripe Startups programme</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-6">
+              Access up to $100,000 in fee-free payment processing credits, dedicated partner discounts, and technical guidance from Stripe startup advocates.
+            </p>
+</div>
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/startups">
+            Apply to programme <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="p-8 rounded-xl border border-brand-border bg-brand-light/30 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-bold text-brand-dark mb-2">Stripe Atlas</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-6">
+              Incorporate a Delaware C-Corp, obtain your federal EIN, issue founder stock, and open a US business bank account in just a few days from Canada or anywhere.
+            </p>
+</div>
+<a class="inline-flex items-center text-sm font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/atlas">
+            Incorporate with Atlas <span class="material-symbols-outlined text-sm ml-1" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Make your SaaS platform a complete financial operating system. -->
+<section class="py-24 bg-brand-light/40 border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-14">
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-[4px] bg-[#eef0ff] text-brand-purple text-xs font-bold uppercase tracking-wider mb-4">
+          Stripe for platforms
+        </span>
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          Make your SaaS platform a complete financial operating system.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed">
+          Embed payments and customized financial workflows directly into software interfaces, turning payment processing into a profit driver.
+        </p>
+</div>
+<!-- Three Platform Guides -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<div class="p-6 bg-white rounded-xl border border-brand-border shadow-xs">
+<span class="text-xs font-mono font-bold text-brand-purple block mb-2">01 / VELOCITY</span>
+<h4 class="text-lg font-bold text-brand-dark mb-2">Get to market faster.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Use turnkey hosted components to onboard merchants, handle KYC compliance checks, and tokenize credit details without regulatory delay.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/connect">Read the implementation guide →</a>
+</div>
+<div class="p-6 bg-white rounded-xl border border-brand-border shadow-xs">
+<span class="text-xs font-mono font-bold text-brand-purple block mb-2">02 / MONETISATION</span>
+<h4 class="text-lg font-bold text-brand-dark mb-2">Grow new lines of revenue.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Monetise transactions by capturing take-rates, charging platform fees on recurring subscriptions, and distributing co-branded virtual debit cards.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/connect">Learn revenue models →</a>
+</div>
+<div class="p-6 bg-white rounded-xl border border-brand-border shadow-xs">
+<span class="text-xs font-mono font-bold text-brand-purple block mb-2">03 / GOVERNANCE</span>
+<h4 class="text-lg font-bold text-brand-dark mb-2">Manage platform risk.</h4>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Protect against chargeback liability, automate multi-jurisdiction sales tax collection, and maintain automated fraud review queues.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline" href="https://stripe.com/en-ca/tax">Explore compliance tooling →</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Reliable, extensible infrastructure for every stack. -->
+<section class="py-24 bg-white border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-14">
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-3">
+          Reliable, extensible infrastructure for every stack.
+        </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed mb-4">
+          Adapt Stripe to your business needs with flexible integration options.
+        </p>
+<a class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-purple hover:underline" href="https://docs.stripe.com">
+<span>View developer docs</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+<!-- Subsection 1: Connect to existing systems -->
+<div class="p-6 rounded-xl border border-brand-border bg-brand-light/30">
+<div class="w-8 h-8 rounded-[4px] bg-white border border-brand-border flex items-center justify-center text-brand-dark mb-4">
+<span class="material-symbols-outlined text-base" data-icon="cable">cable</span>
+</div>
+<h3 class="text-lg font-bold text-brand-dark mb-2">Connect to existing systems.</h3>
+<p class="text-sm text-brand-muted leading-relaxed">
+            Pre-built connectors for NetSuite, Salesforce, Adobe Commerce, WooCommerce, and hundreds of ERP platforms allow synchronization without custom backend code.
+          </p>
+</div>
+<!-- Subsection 2: Scale with confidence + metrics -->
+<div class="p-6 rounded-xl border border-brand-border bg-brand-light/30">
+<div class="w-8 h-8 rounded-[4px] bg-white border border-brand-border flex items-center justify-center text-brand-dark mb-4">
+<span class="material-symbols-outlined text-base" data-icon="speed">speed</span>
+</div>
+<h3 class="text-lg font-bold text-brand-dark mb-2">Scale with confidence.</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Infrastructure engineered to absorb massive Black Friday traffic spikes without latency drops or throttling.
+          </p>
+<div class="space-y-1.5 text-xs font-mono text-brand-dark border-t border-brand-border pt-3">
+<div><span class="font-bold text-brand-purple">500M+</span> API requests / day</div>
+<div><span class="font-bold text-brand-purple">10k+</span> API requests / second</div>
+<div><span class="font-bold text-brand-purple">150k+</span> transactions / minute</div>
+</div>
+</div>
+<!-- Subsection 3: Choose an integration path -->
+<div class="p-6 rounded-xl border border-brand-border bg-brand-light/30">
+<div class="w-8 h-8 rounded-[4px] bg-white border border-brand-border flex items-center justify-center text-brand-dark mb-4">
+<span class="material-symbols-outlined text-base" data-icon="alt_route">alt_route</span>
+</div>
+<h3 class="text-lg font-bold text-brand-dark mb-2">Choose an integration path.</h3>
+<ul class="text-xs text-brand-muted space-y-2 mt-2">
+<li><span class="font-bold text-brand-dark">Don’t code?</span> Use Stripe Payment Links and pre-built no-code invoices.</li>
+<li><span class="font-bold text-brand-dark">Use a pre-integrated platform.</span> Connect Stripe with Shopify, Squarespace, or Xero.</li>
+<li><span class="font-bold text-brand-dark">Build your own integration.</span> Take full control with client SDKs and rich APIs.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 8: What’s happening & See the latest from Stripe. -->
+<section class="py-24 bg-brand-light/30 border-b border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<div class="max-w-3xl mb-14">
+<span class="text-xs font-bold text-brand-purple tracking-widest uppercase mb-2 block">Updates &amp; Insights</span>
+<h2 class="text-[32px] font-light text-brand-dark tracking-tight mb-2">
+          What’s happening
+        </h2>
+<p class="text-lg text-brand-muted font-normal">See the latest from Stripe.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Card 1: Annual letter -->
+<div class="p-6 bg-white rounded-xl border border-brand-border hover:shadow-md transition-shadow">
+<span class="text-xs font-bold text-brand-purple block mb-2">ANNUAL LETTER</span>
+<h3 class="text-base font-bold text-brand-dark mb-2">Businesses on Stripe generated US$1.9tn in 2025.</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Our founders share reflections on global financial infrastructure, generative AI commerce breakthroughs, and agentic workflows.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline inline-flex items-center gap-1" href="https://stripe.com/en-ca/annual-updates">
+            Read the letter <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2: Stripe Press Book -->
+<div class="p-6 bg-white rounded-xl border border-brand-border hover:shadow-md transition-shadow">
+<span class="text-xs font-bold text-brand-purple block mb-2">STRIPE PRESS</span>
+<h3 class="text-base font-bold text-brand-dark mb-2">Entrepreneurship starts with ideas.</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            Stripe Press publishes books about economic and technological progress. Discover our latest publication on engineering leadership and scale.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline inline-flex items-center gap-1" href="https://stripepress.com">
+            Explore book catalogue <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3: Works in Progress -->
+<div class="p-6 bg-white rounded-xl border border-brand-border hover:shadow-md transition-shadow">
+<span class="text-xs font-bold text-brand-purple block mb-2">WORKS IN PROGRESS</span>
+<h3 class="text-base font-bold text-brand-dark mb-2">Ideas on technology, progress, and growth.</h3>
+<p class="text-sm text-brand-muted leading-relaxed mb-4">
+            An online magazine dedicated to sharing deep research, longform essays, and thoughtful essays on how to accelerate human prosperity.
+          </p>
+<a class="text-xs font-semibold text-brand-purple hover:underline inline-flex items-center gap-1" href="https://worksinprogress.co">
+            Read Works in Progress <span class="material-symbols-outlined text-xs" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 9: Ready to get started? -->
+<section class="py-24 bg-white border-b border-brand-border text-center">
+<div class="max-w-[760px] mx-auto px-6">
+<h2 class="text-[32px] sm:text-[40px] font-light text-brand-dark tracking-tight mb-4">
+        Ready to get started?
+      </h2>
+<p class="text-lg text-brand-muted font-normal leading-relaxed mb-8">
+        Create an account instantly, or contact us to design a custom package for your business.
+      </p>
+<!-- Action buttons -->
+<div class="flex flex-wrap justify-center items-center gap-3 mb-10">
+<a class="inline-flex items-center gap-2 h-11 px-5 rounded-[4px] bg-brand-purple hover:bg-brand-hover text-white text-[15px] font-semibold transition-colors shadow-sm" href="https://dashboard.stripe.com/register">
+<span>Start now</span>
+<span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="inline-flex items-center justify-center h-11 px-5 rounded-[4px] bg-brand-light border border-brand-border hover:border-brand-muted text-brand-dark text-[15px] font-semibold transition-colors" href="https://stripe.com/en-ca/contact/sales">
+          Contact sales
+        </a>
+</div>
+<!-- Quick helper links -->
+<div class="flex flex-wrap justify-center items-center gap-6 text-sm">
+<a class="font-semibold text-brand-purple hover:underline flex items-center gap-1" href="https://stripe.com/en-ca/pricing">
+          See what you’ll pay <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+<a class="font-semibold text-brand-purple hover:underline flex items-center gap-1" href="https://docs.stripe.com">
+          Start building <span class="material-symbols-outlined text-sm" data-icon="chevron_right">chevron_right</span>
+</a>
+</div>
+</div>
+</section>
+<!-- Section 10: Dense Authentic Footer -->
+<footer class="bg-brand-light/60 text-brand-dark py-16 border-t border-brand-border">
+<div class="max-w-[1232px] mx-auto px-6">
+<!-- Columns Grid -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 mb-14 text-xs">
+<!-- Col 1: Brand & Locale -->
+<div class="col-span-2 lg:col-span-2">
+<a aria-label="Stripe" class="inline-block mb-4 text-brand-dark" href="https://stripe.com/en-ca">
+<svg class="h-5 w-auto fill-current" viewbox="0 0 60 25" xmlns="http://www.w3.org/2000/svg">
+<path d="M59.64 14.28c0-4.48-2.18-8-6.42-8-4.26 0-6.84 3.52-6.84 8 0 5.3 3.08 7.94 7.42 7.94 2.12 0 3.72-.48 4.94-1.16v-3.48c-1.22.62-2.58.96-4.14.96-1.74 0-3.26-.64-3.5-2.62h8.5c0-.2.04-1.28.04-1.64zm-8.52-1.54c.14-1.8 1.28-2.54 2.3-2.54 1 0 2.14.74 2.3 2.54h-4.6zm-11.44-6.46c-1.8 0-3 .84-3.66 1.48V6.6h-4.68v18.7h4.86v-5.64c.68.56 1.76 1.24 3.44 1.24 3.56 0 6.64-2.82 6.64-7.46 0-4.34-3.08-7.16-6.6-7.16zm-1.18 11.24c-1.16 0-2.1-.42-2.6-1.04v-4.68c.5-.66 1.44-1.1 2.6-1.1 1.94 0 3.22 1.56 3.22 3.42 0 1.94-1.28 3.4-3.22 3.4zm-14.8-13.88l-4.88 1.04v3.98h3.3v3.74h-3.3v6.32c0 1.26.96 1.68 2.06 1.68.74 0 1.34-.08 1.64-.2v3.76c-.6.26-1.6.48-2.88.48-3.34 0-5.68-1.78-5.68-5.58V8.92H14.1V6.6l4.74-.98V.64zm-13.4 5.94H5.42v15.32h4.88V6.6zm-2.44-6.38a2.95 2.95 0 00-2.96 2.96c0 1.64 1.32 2.96 2.96 2.96 1.62 0 2.94-1.32 2.94-2.96A2.95 2.95 0 005.46.22zM2.84 10.36C1.22 9.4.42 8.46.42 6.94c0-2.26 2.22-3.86 5.6-3.86 1.96 0 3.8.44 5.04 1.14l-1.44 3.6c-1.12-.56-2.38-.88-3.6-.88-1.28 0-2.02.5-2.02 1.18 0 .76.7 1.14 2.24 1.7 2.62.96 4.3 2.14 4.3 4.62 0 2.76-2.36 4.48-6.14 4.48-2.3 0-4.48-.56-5.84-1.44l1.4-3.76c1.1.7 2.74 1.26 4.44 1.26 1.38 0 2.1-.48 2.1-1.24 0-.8-.66-1.22-2.3-1.8z"></path>
+</svg>
+</a>
+<div class="flex items-center gap-1.5 text-brand-dark font-medium mb-3">
+<span>🇨🇦 Canada (English)</span>
+</div>
+<p class="text-brand-muted leading-relaxed max-w-xs">
+            Financial infrastructure for the internet. Millions of companies of all sizes use Stripe online and in person.
+          </p>
+</div>
+<!-- Col 2: Products and pricing -->
+<div>
+<h4 class="font-bold text-brand-dark uppercase tracking-wider mb-3">Products &amp; pricing</h4>
+<ul class="space-y-2 text-brand-muted">
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/pricing">Pricing</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/payments">Payments</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/billing">Billing</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/connect">Connect</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/issuing">Issuing</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/terminal">Terminal</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/radar">Radar</a></li>
+</ul>
+</div>
+<!-- Col 3: Solutions -->
+<div>
+<h4 class="font-bold text-brand-dark uppercase tracking-wider mb-3">Solutions</h4>
+<ul class="space-y-2 text-brand-muted">
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/startups">Startups</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/enterprise">Enterprises</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/use-cases/saas">SaaS</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/use-cases/marketplaces">Platforms</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/use-cases/ecommerce">Ecommerce</a></li>
+</ul>
+</div>
+<!-- Col 4: Developers -->
+<div>
+<h4 class="font-bold text-brand-dark uppercase tracking-wider mb-3">Developers</h4>
+<ul class="space-y-2 text-brand-muted">
+<li><a class="hover:text-brand-dark" href="https://docs.stripe.com">Documentation</a></li>
+<li><a class="hover:text-brand-dark" href="https://docs.stripe.com/api">API reference</a></li>
+<li><a class="hover:text-brand-dark" href="https://docs.stripe.com/sdks">Libraries &amp; SDKs</a></li>
+<li><a class="hover:text-brand-dark" href="https://status.stripe.com">API status</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/agentic-commerce">Build with Agentic</a></li>
+</ul>
+</div>
+<!-- Col 5: Resources & Company -->
+<div>
+<h4 class="font-bold text-brand-dark uppercase tracking-wider mb-3">Company</h4>
+<ul class="space-y-2 text-brand-muted">
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/about">About Stripe</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/jobs">Jobs</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/newsroom">Newsroom</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripepress.com">Stripe Press</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/climate">Climate</a></li>
+</ul>
+</div>
+<!-- Col 6: Support -->
+<div>
+<h4 class="font-bold text-brand-dark uppercase tracking-wider mb-3">Support</h4>
+<ul class="space-y-2 text-brand-muted">
+<li><a class="hover:text-brand-dark" href="https://support.stripe.com">Support center</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/contact/sales">Contact sales</a></li>
+<li><a class="hover:text-brand-dark" href="https://dashboard.stripe.com/login">Manage my account</a></li>
+<li><a class="hover:text-brand-dark" href="https://stripe.com/en-ca/guides">Guides</a></li>
+</ul>
+</div>
+</div>
+<!-- Footer Bottom Bar -->
+<div class="pt-8 border-t border-brand-border flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-brand-muted">
+<div>
+          © 2026 Stripe, Inc.
+        </div>
+<div class="flex flex-wrap items-center gap-6">
+<a class="hover:text-brand-dark" href="https://stripe.com/en-ca/privacy">Privacy &amp; terms</a>
+<a class="hover:text-brand-dark" href="https://stripe.com/en-ca/sitemap">Sitemap</a>
+<a class="hover:text-brand-dark" href="https://stripe.com/en-ca/cookie-settings">Cookie settings</a>
+</div>
+</div>
+</div>
+</footer>
+<!-- Subtle Script: GDP Counter Simulation & Mobile Nav Toggle -->
+<script>
+    // Live subtle fluctuating GDP counter simulation
+    const gdpEl = document.getElementById('live-gdp-counter');
+    if (gdpEl) {
+      let base = 1.184;
+      setInterval(() => {
+        const delta = (Math.random() * 0.004) - 0.002;
+        base = Math.max(1.175, Math.min(1.225, base + delta));
+        gdpEl.textContent = base.toFixed(3) + '%';
+      }, 3000);
+    }
+
+    // Mobile nav toggle
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (mobileBtn && mobileMenu) {
+      mobileBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+    }
+  </script>
+</body></html>

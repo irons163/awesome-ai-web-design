@@ -21,12 +21,17 @@ async function settleUntil(predicate) {
   assert.fail('Catalog UI did not reach the expected state');
 }
 
-async function fixture(t, slug, progressMarkup = progress) {
+async function fixture(t, slug, progressMarkup = progress, studyDocuments = {}) {
   const dom = new JSDOM(html, {
     url: `https://catalog.test/#/design/${encodeURIComponent(slug)}`,
     runScripts: 'outside-only',
   });
-  t.after(() => dom.window.close());
+  t.after(async () => {
+    // Programmatic details.open changes enqueue a toggle event. Let it finish
+    // while this fixture still has its document before disposing the window.
+    await delay(0);
+    dom.window.close();
+  });
   const { window } = dom;
   const query = selector => window.document.querySelector(selector);
   window.HTMLDialogElement.prototype.showModal = function () {
@@ -42,6 +47,9 @@ async function fixture(t, slug, progressMarkup = progress) {
       return { ok: true, json: async () => JSON.parse(catalog) };
     }
     if (path === 'official-progress.html') return pendingProgress;
+    if (Object.hasOwn(studyDocuments, path)) {
+      return {ok:true, text:async () => studyDocuments[path]};
+    }
     throw new Error(`Unexpected fetch: ${path}`);
   };
   window.eval(application);
@@ -147,4 +155,37 @@ test('opening another brand resets an original preview choice to its official dr
   await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/spotify.html');
   assertOfficialOnly(ui.query);
   assert.equal(ui.query('#detail-title').textContent, 'Spotify');
+});
+
+test('a current rendered review shows its bounded comparison and visible limits', async t => {
+  const ui = await fixture(t, 'elevenlabs');
+  ui.revealProgress();
+  await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/elevenlabs.html');
+  assert.match(ui.query('#official-preview-status').textContent, /已比對主要畫面，仍有差異/);
+  assert.match(ui.query('#official-study-scope').textContent, /互動未驗證/);
+  assert.equal(ui.query('#official-study-details').hidden, false);
+  assert.ok(ui.query('#official-study-limits').children.length > 0);
+  assert.match(ui.query('#official-study-links').textContent, /目前設計分析.*重寫 AI 指令.*畫面校正紀錄/);
+});
+
+test('dated reproduction prompts load intact alongside the original three prompts', async t => {
+  const markup = new JSDOM(progress);
+  const row = markup.window.document.querySelector('#elevenlabs');
+  const href = row.querySelector('.study-prompts').getAttribute('href');
+  markup.window.close();
+  const exactPrompt = '# 實際重寫指令\n\nPreserve the current source and recorded differences.\n';
+  const ui = await fixture(t, 'elevenlabs', progress, {[href]:exactPrompt});
+  ui.revealProgress();
+  await settleUntil(() => !ui.query('#current-prompt-details').hidden);
+  assert.equal(ui.query('#prompt-list').children.length, 3);
+  assert.equal(ui.query('#download-current-prompts').getAttribute('href'), href);
+  ui.query('#current-prompt-details').open = true;
+  ui.query('#current-prompt-details').dispatchEvent(new ui.window.Event('toggle'));
+  await settleUntil(() => ui.query('#copy-current-prompt').disabled === false);
+  assert.equal(ui.query('#current-prompt-text').textContent, exactPrompt);
+  ui.window.location.hash = '#/design/wired';
+  await settleUntil(() => ui.query('#detail-title').textContent === 'WIRED');
+  assert.equal(ui.query('#current-prompt-text').textContent, '');
+  assert.equal(ui.query('#current-prompt-details').open, false);
+  assert.equal(ui.query('#prompt-list').children.length, 3);
 });

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpaceX Mobile Homepage Study (Refreshed)</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow-x: hidden;
+    }
+    .spacex-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .btn-spacex {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 30px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 2px solid #ffffff;
+      color: #ffffff;
+      background: transparent;
+      transition: all 0.25s ease-in-out;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-spacex:hover, .btn-spacex:active {
+      background: #ffffff;
+      color: #000000;
+    }
+    .hero-section {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 640px;
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+  </style>
+</head>
+<body class="bg-black text-white relative">
+
+  <!-- Mobile Fixed Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-5 bg-gradient-to-b from-black/80 via-black/30 to-transparent">
+    <!-- SpaceX Stylized Minimal Mark -->
+    <a href="#" class="flex items-center text-white hover:opacity-80 transition-opacity">
+      <svg class="h-4.5 w-auto fill-current" viewBox="0 0 160 22" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 17.5h8.5c7.5 0 13.2-3.4 13.2-10.1C21.7 3.6 16 .3 8.5.3H0v17.2zm3.8-14.3h4.7c5 0 9.2 2 9.2 7 0 5-4.2 7-9.2 7H3.8V3.2zM27.9 17.5h3.8v-7.1h8.6v-3.1h-8.6V3.2h9.9V.3H27.9v17.2zM47 17.5h3.8l7-12.8 7 12.8h3.8l-8.8-16.1-2-2.9h-1.6L47 17.5zm10.7-16.5l5.3 9.7h-10.6l5.3-9.7zM74.4 7.4c0-6.1 4.7-10.3 11.3-10.3 4.2 0 7.7 1.7 9.5 4.7l-3.1 1.8c-1.4-2.2-3.6-3.4-6.4-3.4-4.6 0-7.5 3-7.5 7.2 0 4.2 2.9 7.2 7.5 7.2 2.8 0 5-1.2 6.4-3.4l3.1 1.8c-1.8 2.9-5.3 4.7-9.5 4.7-6.6 0-11.3-4.2-11.3-10.3zM101.8 17.5H120v-3.1h-14.4V.3h-3.8v17.2zM134.4 17.5l9.8-20.2h-4.2l-7.7 15.9-7.7-15.9h-4.2l9.8 20.2h4.2z"/>
+      </svg>
+    </a>
+
+    <!-- Hamburger Toggle Button -->
+    <button id="menu-btn" aria-label="Toggle Navigation" class="text-white p-2 focus:outline-none cursor-pointer">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </header>
+
+  <!-- Mobile Fullscreen Navigation Overlay -->
+  <div id="mobile-menu" class="fixed inset-0 bg-black z-50 flex flex-col justify-between p-8 transform translate-x-full transition-transform duration-300 ease-in-out">
+    <div class="flex items-center justify-between">
+      <span class="text-white text-base tracking-widest uppercase font-bold">SPACEX</span>
+      <button id="close-btn" aria-label="Close Navigation" class="text-white p-2 focus:outline-none cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+    <nav class="flex flex-col space-y-6 my-auto text-lg font-bold tracking-widest text-white uppercase font-sans">
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">VEHICLES</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">HUMAN SPACEFLIGHT</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">STARLINK</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">STARSHIELD</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">SPACEXAI</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">TERAFAB</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">COMPANY</a>
+      <a href="#" class="hover:text-gray-400 py-1 border-b border-neutral-900">SHOP</a>
+    </nav>
+    <div class="pt-6 border-t border-neutral-800 text-xs text-neutral-500 uppercase tracking-wider text-center">
+      SPACEX © 2026
+    </div>
+  </div>
+
+  <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    if (menuBtn && closeBtn && mobileMenu) {
+      menuBtn.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-full');
+      });
+      closeBtn.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+      });
+    }
+  </script>
+
+  <!-- 1. STARSHIP FLIGHT 14 / WATCH (No Countdown) -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WT3gdXZZA_wspOyd4eNnz_YZIH2F4iQVEqWjWZ-ZIWKMQ7iaxBa-BcF6GvxO9N28Fn-Rtf6-Yo99sGkEsMO7iA0lWcFQrBLZ5_oGzg5-BwqstHoxlrBDqHBNz-oaFdHHwiyIPqCifMLejLstqResP4uErLFW4oeAc-79dxS3mHZGKOyprr98nvq_VvC1C-BnscMtGF7feas5AjyDODfrpyRJtGvAA8uZ-nvofarOzGOI6-qhjCddoa-CA7');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <h1 class="spacex-heading text-4xl font-extrabold text-white leading-tight mb-5">
+        STARSHIP<br>FLIGHT 14
+      </h1>
+      <div>
+        <a href="#" class="btn-spacex">WATCH</a>
+      </div>
+    </div>
+    <div class="absolute bottom-5 left-1/2 -translate-x-1/2 z-10 text-white/70 animate-bounce">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2. MAKING LIFE MULTIPLANETARY / EXPLORE -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1VXiJ4hUxFGmB-98_ypUCcKFXmRc_XGPg5hlJh0NBWvXadGyrrn7JzuEkDB4CuFxcU3tfwRiFlYUgZ9malJZHWgKAXrNQdnvc7eiSmAF1yEoFHLfcopQhiFp24WQ_HD0oAMTjuNce9uoNEja0r5HLH1t4NoymbQgZ6oVEJnoEpHu7-LKSXNkyESBkinl2Qbv2R80OaaS9cs1tv8k3pCYBxfZ-rAFHWgvE8Fa7w-SnDXprRUXLP_5MdJs4oq');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">MISSION ARCHITECTURE</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        MAKING LIFE<br>MULTIPLANETARY
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        SpaceX is developing fully reusable transportation systems capable of carrying crew and cargo to Earth orbit, the Moon, Mars, and beyond to ensure the long-term survival of human consciousness.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">EXPLORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. REVOLUTIONIZING SPACE TECHNOLOGY / LEARN MORE -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1UzGkY2rnFYia5lVIGYIkcwQhsFsL1XNjBPT9n_tNR4Fbc3BuD-F6A5lPTE1Lwl7kRQM1XfEFfUYzI8H5chnlPWADQmN0kDCLdCnhUuk9ZLMGRYks8ptchxSW_fdM8g2-e77Tm70y9dkW9XUPs18uB1T4NLRTcnw0MxOZsgVFKetweWXQlivJo_NGS9txSHIX_T5ZBzmePk3583_zylngdiPfwlLf05oyymVs1ejG4_w0tWAbQQwOcPjdOz');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">FULL REUSABILITY</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        REVOLUTIONIZING<br>SPACE TECHNOLOGY
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        Starship is designed to rapidly transport satellite constellations and deep-space payloads with radical cost reductions through rapid multi-engine re-ignition and stainless steel aerodynamic heat shielding.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">LEARN MORE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. WORLD'S LEADING LAUNCH SERVICE PROVIDER / RESERVE YOUR RIDE -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1UURFFl_vVscO9EtKStiNSezebeZTG1cB87vERRSdgt_wuDFm4UsygQOnhm5B_PzSe6R1JCtFXxja2YfhPsJ3ZZR83P83TpREB402QzzqrvHM2ihX0qn5ZiKPpsQ1-XqaU16Yvy7GaeX7fV9K9CVZGGuNfVXhamI8-l9lAewWwAgxaDJHS1JjoAQgBuMA01GoR_XpBV_Dk3qbK86MRBn711aAxOpsuAYNNRVxBaNRH8WmzIUxLEttpvniA');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">PROVEN RELIABILITY</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        WORLD’S LEADING<br>LAUNCH SERVICE PROVIDER
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        Falcon 9 and Falcon Heavy continue to achieve record-breaking operational cadences with precision autonomous drone ship recoveries and dual booster returns to launch site pads.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">RESERVE YOUR RIDE</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. ADVANCING HUMAN SPACEFLIGHT / JOIN A MISSION -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1V2sRd93nuCJVCdydu_AagtA5uoOkLlkXk3DFB_29rXhwSGFk-Mwxyd-obiWK91uYhRkAkOV5DJgMTFIkKedlXeKpDztx1IPxmNc1xnrc1AreJl_9plPBKSCbpwnpKSJH-VPsDmSGMTm4eyI-g_gEkBrRbOZUsmlvsZUPwfUlKoHGa9ugI8I-6FPPoonbHoJnok4CvzzCctCDt-0GfmFrNQi21dUkBnLmXBfmhqg1458Jw0Oat3rjMwvpZ6');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">COMMERCIAL CREW</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        ADVANCING HUMAN<br>SPACEFLIGHT
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        Dragon is the first commercial spacecraft to reliably ferry astronauts to and from the International Space Station, while opening civilian orbital journeys, high-altitude research missions, and spacewalks.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">JOIN A MISSION</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. DELIVERING HIGH-SPEED INTERNET FROM SPACE / ORDER NOW -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1WeAfFdmglYUVWD0QqnlBz5kRGEzuCiwUHKhlU6b102h5KQZcUhkVl0egFM_gS8Ec4e_0vj-59E-hzGQCMUoaPRHwkjMWwd-Z_hdFvTmV-6mD92wHwF7ZSHL_uhqIcCUnKhwqTA58r1GP6OeJUdYG8njBn0ehzGUktE_0MFF8wi77WX6-dv_4NhvAjDcmBGJLJkonoB1iR39hy1CGqC8jjGwJEQ_yuKVIx2Kt_jZGuBY_R8G6oyYoEVx-kD');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">GLOBAL CONNECTIVITY</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        DELIVERING HIGH-SPEED<br>INTERNET FROM SPACE
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        Engineered by SpaceX, Starlink delivers broadband internet capable of streaming, online gaming, video calls and enterprise connectivity to the world’s most rural and remote locations across all seven continents.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">ORDER NOW</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. DEVELOPING ORBITAL AI COMPUTE / STARMIND -->
+  <section class="hero-section" style="background-image: url('https://lh3.googleusercontent.com/aida/AEtjO1Wru2N5rBTaqbLdQNmqkvkthbhYWNcgKIlhYqMEc1FPejzquL74_fa11fiKk2tpwGA6ZTSABdgVGMemFsPDbO8H4P-XI2yEXMH18OJxA3CFyb1g7JkrWZnRFHAsu1hLWq9NTwms6pI9f8ccEmyNfe7cUOfBWqpLWVgskz8EJCKo2hXBOWds1meeaQE5N0CUem5PC2fiIOOdzEE2PPrag_p6uSo0Kxei9h-A0n6ucT-TfOljMG_oHJix3sxU');">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent pointer-events-none"></div>
+    <div class="relative z-10 px-6 pb-16">
+      <span class="block text-[11px] uppercase tracking-widest text-neutral-400 font-semibold mb-2">NEXT-GEN PAYLOADS</span>
+      <h2 class="spacex-heading text-3xl font-extrabold text-white leading-tight mb-3">
+        DEVELOPING ORBITAL<br>AI COMPUTE
+      </h2>
+      <p class="text-xs text-neutral-300 leading-relaxed mb-6">
+        Deploying high-throughput space-based tensor processors interconnected via multi-gigabit inter-satellite optical laser links for direct in-orbit sensor analytics, autonomous navigation, and planetary observation.
+      </p>
+      <div>
+        <a href="#" class="btn-spacex">STARMIND</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mobile Minimal Footer -->
+  <footer class="bg-black py-8 px-6 text-center border-t border-neutral-900">
+    <div class="flex flex-col items-center space-y-3 text-[11px] font-semibold text-neutral-400 tracking-wider uppercase font-sans">
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">
+        <a href="#" class="hover:text-white transition-colors">CAREERS</a>
+        <a href="#" class="hover:text-white transition-colors">UPDATES</a>
+        <a href="#" class="hover:text-white transition-colors">PRIVACY POLICY</a>
+        <a href="#" class="hover:text-white transition-colors">SUPPLIERS</a>
+        <a href="#" class="hover:text-white transition-colors">INVESTOR RELATIONS</a>
+        <a href="#" class="hover:text-white transition-colors inline-flex items-center">
+          <svg class="w-3 h-3 fill-current" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+        </a>
+      </div>
+      <span class="text-neutral-500 pt-1">SPACEX © 2026</span>
+    </div>
+  </footer>
+
+</body>
+</html>

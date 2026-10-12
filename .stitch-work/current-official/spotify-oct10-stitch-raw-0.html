@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Spotify – Web Player</title>
+<style>
+    @font-face {
+      font-family: 'SpotifyMixUI';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUI-Regular-76c92fb1a35c462f73429fa8865163eb.woff2') format('woff2');
+      font-weight: 400;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SpotifyMixUI';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUI-Bold-09c45a3a0ce9d2971e62cb26e97760fb.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+    @font-face {
+      font-family: 'SpotifyMixUITitle';
+      src: url('https://encore.scdn.co/fonts/SpotifyMixUITitleVariable-08bab3354d40f74e5177917b5ae80894.woff2') format('woff2');
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #000000;
+      color: #FFFFFF;
+      font-family: 'SpotifyMixUI', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      line-height: normal;
+      overflow-x: hidden;
+      padding-bottom: 110px;
+    }
+
+    /* Top Bar */
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background-color: #000000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      height: 64px;
+    }
+
+    .brand-logo svg {
+      fill: #ffffff;
+      width: 32px;
+      height: 32px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-open-app {
+      background-color: transparent;
+      color: #ffffff;
+      border: 1px solid #727272;
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-login {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 9999px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Main Container */
+    .content-container {
+      background: linear-gradient(180deg, #1f1f1f 0%, #121212 240px, #121212 100%);
+      border-radius: 8px 8px 0 0;
+      padding-top: 16px;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* Section Styles */
+    .shelf {
+      margin-bottom: 28px;
+    }
+
+    .shelf-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      padding: 0 16px 12px;
+    }
+
+    .shelf-title {
+      font-family: 'SpotifyMixUITitle', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.02em;
+    }
+
+    .shelf-show-all {
+      font-size: 13px;
+      font-weight: 700;
+      color: #b3b3b3;
+      text-decoration: none;
+    }
+
+    .shelf-carousel {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      padding: 0 16px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .shelf-carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .card {
+      flex: 0 0 140px;
+      width: 140px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-artwork {
+      width: 140px;
+      height: 140px;
+      position: relative;
+      background-color: #282828;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+
+    .card-artwork img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-artwork.artist-round {
+      border-radius: 50%;
+    }
+
+    .card-artwork.artist-round img {
+      border-radius: 50%;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 4px;
+      line-height: 1.25;
+    }
+
+    .card-sub {
+      font-size: 12px;
+      font-weight: 400;
+      color: #b3b3b3;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* Footer / Sitemap */
+    .site-footer {
+      padding: 32px 16px 24px;
+      background-color: #121212;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 24px;
+    }
+
+    .footer-section {
+      margin-bottom: 24px;
+    }
+
+    .footer-heading {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+
+    .footer-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-list a {
+      color: #a7a7a7;
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #282828;
+      padding-top: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      color: #a7a7a7;
+      font-size: 12px;
+    }
+
+    .lang-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #727272;
+      border-radius: 9999px;
+      padding: 6px 12px;
+      width: fit-content;
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    /* Floating Signup Banner */
+    .floating-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+      background: linear-gradient(90deg, #af2896, #509bf5);
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .banner-text {
+      flex: 1;
+    }
+
+    .banner-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .banner-sub {
+      font-size: 12px;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    .banner-btn {
+      background-color: #ffffff;
+      color: #000000;
+      border: none;
+      border-radius: 9999px;
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<!-- Sticky Header Bar -->
+<header class="top-bar">
+<div aria-label="Spotify" class="brand-logo">
+<svg viewbox="0 0 24 24">
+<path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.48.66.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15.06 10.561 18.78 12.84c.361.181.54.78.181 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"></path>
+</svg>
+</div>
+<div class="top-actions">
+<button class="btn-open-app">Open App</button>
+<button class="btn-login">Log in</button>
+</div>
+</header>
+<!-- Main Content Shelves -->
+<main class="content-container">
+<!-- Trending songs -->
+<section class="shelf">
+<div class="shelf-header">
+<h2 class="shelf-title">Trending songs</h2>
+<a class="shelf-show-all" href="#">Show all</a>
+</div>
+<div class="shelf-carousel">
+<div class="card">
+<div class="card-artwork">
+<img alt="FANTASTIC BABY - KR Ver." src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">FANTASTIC BABY - KR Ver.</div>
+<div class="card-sub">BIGBANG</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="CRASH" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">CRASH</div>
+<div class="card-sub">ALLDAY PROJECT</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="自由的你" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">自由的你</div>
+<div class="card-sub">G.E.M.</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="假性愛" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">假性愛</div>
+<div class="card-sub">薇薇</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Universe" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Universe</div>
+<div class="card-sub">DAESUNG</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="HOME SWEET HOME" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">HOME SWEET HOME (feat. TAEYANG &amp; DAESUNG)</div>
+<div class="card-sub">G-DRAGON , TAEYANG , DAESUNG</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Die With A Smile" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Die With A Smile</div>
+<div class="card-sub">Lady Gaga , Bruno Mars</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="對等關係" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">對等關係 (feat. 張惠妹)</div>
+<div class="card-sub">Ronghao Li , A-Mei Chang</div>
+</div>
+</div>
+</section>
+<!-- Popular artists -->
+<section class="shelf">
+<div class="shelf-header">
+<h2 class="shelf-title">Popular artists</h2>
+<a class="shelf-show-all" href="#">Show all</a>
+</div>
+<div class="shelf-carousel">
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="Jay Chou" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Jay Chou</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="Stefanie Sun" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Stefanie Sun</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="Mayday" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Mayday</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="JOLIN" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">JOLIN</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="LBI利比" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">LBI利比</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="JJ Lin" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">JJ Lin</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="Eason Chan" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Eason Chan</div>
+<div class="card-sub">Artist</div>
+</div>
+<div class="card">
+<div class="card-artwork artist-round">
+<img alt="ROSÉ" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">ROSÉ</div>
+<div class="card-sub">Artist</div>
+</div>
+</div>
+</section>
+<!-- Popular albums and singles -->
+<section class="shelf">
+<div class="shelf-header">
+<h2 class="shelf-title">Popular albums and singles</h2>
+<a class="shelf-show-all" href="#">Show all</a>
+</div>
+<div class="shelf-carousel">
+<div class="card">
+<div class="card-artwork">
+<img alt="Ruby" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Ruby</div>
+<div class="card-sub">JENNIE</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="SEVENTEEN 5th Album 'HAPPY BURSTDAY'" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">SEVENTEEN 5th Album 'HAPPY BURSTDAY'</div>
+<div class="card-sub">SEVENTEEN</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="rosie" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">rosie</div>
+<div class="card-sub">ROSÉ</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="电视剧《难哄》影视原声带·只喜欢你Love Moments" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">电视剧《难哄》影视原声带·只喜欢你Love Moments</div>
+<div class="card-sub">Various Artists</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Übermensch" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Übermensch</div>
+<div class="card-sub">G-DRAGON</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="11月的蕭邦" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">11月的蕭邦</div>
+<div class="card-sub">Jay Chou</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Amazing Show同名專輯" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Amazing Show同名專輯</div>
+<div class="card-sub">Amazing Show</div>
+</div>
+</div>
+</section>
+<!-- Popular radio -->
+<section class="shelf">
+<div class="shelf-header">
+<h2 class="shelf-title">Popular radio</h2>
+<a class="shelf-show-all" href="#">Show all</a>
+</div>
+<div class="shelf-carousel">
+<div class="card">
+<div class="card-artwork">
+<img alt="JOLIN Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">JOLIN Radio</div>
+<div class="card-sub">With F.I.R., Amber Kuo, Landy Wen and more</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="告五人 Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">告五人 Radio</div>
+<div class="card-sub">With EggPlantEgg, Amazing Show, Ronghao Li and more</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Wu Bai Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Wu Bai Radio</div>
+<div class="card-sub">With Zhang Yu Sheng, EggPlantEgg, Wanfang and more</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Jay Chou Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Jay Chou Radio</div>
+<div class="card-sub">With Leehom Wang, Eason Chan, Stefanie Sun and more</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="頑童Mj116 Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">頑童Mj116 Radio</div>
+<div class="card-sub">With G.U.T.S, 瘦子E.SO, MC HotDog and more</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Amazing Show Radio" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Amazing Show Radio</div>
+<div class="card-sub">With PA PUN BAND, 芒果醬 Mango Jump, Fire EX. and more</div>
+</div>
+</div>
+</section>
+<!-- Featured Charts -->
+<section class="shelf">
+<div class="shelf-header">
+<h2 class="shelf-title">Featured Charts</h2>
+<a class="shelf-show-all" href="#">Show all</a>
+</div>
+<div class="shelf-carousel">
+<div class="card">
+<div class="card-artwork">
+<img alt="Top Songs - Global" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Top Songs - Global</div>
+<div class="card-sub">Your weekly update of the most played tracks right now - Global.</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Top Songs - Taiwan" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Top Songs - Taiwan</div>
+<div class="card-sub">Your weekly update of the most played tracks right now - Taiwan.</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Top 50 - Global" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Top 50 - Global</div>
+<div class="card-sub">Your daily update of the most played tracks right now - Global.</div>
+</div>
+<div class="card">
+<div class="card-artwork">
+<img alt="Top 50 - Taiwan" src="https://www.gstatic.com/labs-code/stitch/stitch-placeholder-300x300.svg"/>
+</div>
+<div class="card-title">Top 50 - Taiwan</div>
+<div class="card-sub">Your daily update of the most played tracks right now - Taiwan.</div>
+</div>
+</div>
+</section>
+<!-- Site Footer -->
+<footer class="site-footer">
+<div class="footer-section">
+<h4 class="footer-heading">Company</h4>
+<ul class="footer-list">
+<li><a href="#">About</a></li>
+<li><a href="#">Jobs</a></li>
+<li><a href="#">For the Record</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4 class="footer-heading">Communities</h4>
+<ul class="footer-list">
+<li><a href="#">For Artists</a></li>
+<li><a href="#">For Creators</a></li>
+<li><a href="#">For Authors</a></li>
+<li><a href="#">Developers</a></li>
+<li><a href="#">Advertising</a></li>
+<li><a href="#">Investors</a></li>
+<li><a href="#">Vendors</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4 class="footer-heading">Useful links</h4>
+<ul class="footer-list">
+<li><a href="#">Support</a></li>
+<li><a href="#">Free Mobile App</a></li>
+<li><a href="#">Popular by Country</a></li>
+<li><a href="#">Top Song Lyrics</a></li>
+<li><a href="#">Import your music</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h4 class="footer-heading">Spotify Plans</h4>
+<ul class="footer-list">
+<li><a href="#">Premium Individual</a></li>
+<li><a href="#">Premium Duo</a></li>
+<li><a href="#">Premium Family</a></li>
+<li><a href="#">Premium Student</a></li>
+<li><a href="#">Spotify Free</a></li>
+</ul>
+</div>
+<div class="footer-bottom">
+<div class="lang-badge">
+<svg fill="currentColor" height="16" viewbox="0 0 16 16" width="16">
+<path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm5.93 7H9.98a12.87 12.87 0 0 0-.89-4.83A6.98 6.98 0 0 1 13.93 7zM8 2.05c.5.95.96 2.38 1.13 4.95H6.87C7.04 4.43 7.5 3 8 2.05zM2.07 7A6.98 6.98 0 0 1 6.91 2.17 12.87 12.87 0 0 0 6.02 7H2.07zm0 2h3.95c.08 1.74.4 3.44.89 4.83A6.98 6.98 0 0 1 2.07 9zm5.93 4.95c-.5-.95-.96-2.38-1.13-4.95h2.26c-.17 2.57-.63 4-1.13 4.95zm1.98-4.95h3.95a6.98 6.98 0 0 1-4.84 4.83 12.87 12.87 0 0 0 .89-4.83z"></path>
+</svg>
+          English
+        </div>
+<div>© 2026 Spotify AB</div>
+</div>
+</footer>
+</main>
+<!-- Sticky Bottom Preview Banner -->
+<aside class="floating-banner">
+<div class="banner-text">
+<div class="banner-eyebrow">Preview of Spotify</div>
+<div class="banner-sub">Sign up to get unlimited songs and podcasts with occasional ads. No credit card needed.</div>
+</div>
+<button class="banner-btn">Sign up free</button>
+</aside>
+</body>
+</html>

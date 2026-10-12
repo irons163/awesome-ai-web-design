@@ -1,0 +1,7 @@
+# Genuine Google Stitch provenance
+
+Fresh DESKTOP edit: project3475135956023589157, session3758292531391471751, screen56e867d5984f47beb5ab189a1bec779c. Full raw MCP response and exact prompt: wise-oct10-native-correction-response.json / wise-oct10-native-correction-prompt.txt. Independent rawHTML, unchanged original provider thumbnail and full2560×15974 PNG; PIL confirms actual full dimensions match declaration. Native export original URLs/SHA256 are saved in wise-oct10-native-export-hashes.json. Prior native Canada screens, DESIGN.md and design-md remain preserved.
+
+Provider calls its reconstruction authentic, exact and its reviews verified; these are unverified provider claims, not screenshot evidence. It invents a forest enterprise/API-code treatment, Monzo/MorganStanley partner logos, interactive currency badge matrix, and expanded GUARANTEED RATE LOCK wording. Actual source has the original pale platform card/skyline StandardChartered/Aspire/Mandiri/GMO image, public country-flag link list and GUARANTEED heading; final source correction uses the observed content. Provider's illustration and feature interpretations are not service verification.
+
+Suggestions preserved: inspect corresponding WiseTaiwan mobile responsive variant; compare currency corridor rates between Canada/Taiwan; zoom into the rate calculator module. This task only reconstructs dated UI and does not perform financial corridor advice or transactions. No new native MOBILE correction is claimed. No purchases/paid upgrades performed; account billing not audited.

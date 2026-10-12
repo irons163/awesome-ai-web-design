@@ -1,0 +1,15 @@
+# IBM｜本次送交 Google Stitch MCP 的重寫指令
+
+以下保留實際送出的完整指令，原始請求／回應與原始下載另存。生成預覽不能替代瀏覽器實際畫面驗證。
+
+## ibm-oct10-stitch-correction-request.json
+
+Project: `7359757949367034854`；Device: `DESKTOP`；Selected screens: `90899cf5e77649ab95f8ace30564b53e`
+
+```text
+Update the existing IBM Canada desktop study to the current public homepage https://www.ibm.com/ca-en observed 2026-10-10 at 1280x720. Preserve authentic IBM Carbon styling, real IBM 8-bar wordmark, IBM Plex Sans, square white grid and blue #0f62fe. The September campaign is obsolete. Today's header is49px high, IBM atx32, then Software/Infrastructure/Consulting/Support/Think and line utility icons. Hero begins x32y107. The left column is436px, central media x500y107 width592 height395, right Latest News x1124 width140. Exact headline lightweight47px on3lines: Own your digital / future, on your / terms. It has blue-to-violet text, not huge bold black. Exact body atx32y387: Protect your data, maintain full transparency and deploy AI with accountability. CTAs y469 height114: solid blue Path to digital sovereignty; outlined How Digital Sovereignty Shapes Business Imperatives. Each width202,16pxgap. Actual current central media is a pale-gray field of many vertical blue/white fibers sweeping like an open book (not purple cable helix). Official browser image URL https://assets.ibm.com/is/image/ibm/digital-sovereignty-leadspace-fiber:3x2?fmt=png-alpha&dpr=on%2C2&wid=640&hei=427 . Latest News shows New IBM CHRO Study: Canadian Employees Worry AI Is Eroding Skills as Critical Thinking Gains Importance, then IBM Study: Canadian Sports Fans Expect More From the Fan Experience as AI Reshapes Sports, truncated to4lines, linkarrows and1/2/3/4 pager. Recommended for you starts y675, four flat rowcards: Learn — Digital sovereignty solutions; Free trial — Experience the full power of IBM Bob: Get 50 Bobcoins for 30 days; News — IBM Cloud announces Sovereignty Risk Profile; Webinar — Learn from Maximo experts specializing in Energy & Utilities and Manufacturing. Image thumbnails80px atleft, textnearby, not large hero-width imagecards. Below exact current sectionorder: Smarter impact powered by IBM aty952 with InnovMarine, Blue Pearl, Riverty, IBM four case study cards; then Promotions and special offers banner; Top enterprise technology aty1858 with8products IBM Bob, watsonx Orchestrate, Confluent, FlashSystem, Vault, Maximo, Planning Analytics, Consulting; Inside IBM threecolumns; Stay connected and What's New at IBM newsletter sidebyside aty2940; full footer Discover/Follow and Connect/About in two grouped columns, realIBMwordmark. Totalcurrentdesktopheight4303. Currentmobile390x844 renders samewording with hero33px and stakedCTAs, imagebelow, onecolumncasestudies, productcards, collapsedfooter; itsheight7740. This edit is DESKTOP; do not invent product claims or picture substitutes. Preserve all current visible source text supplied here. Do not add fake testimonial or dashboards.
+```
+
+## 後續實際校正規則
+
+以當日公開官網的實際截圖、完整 DOM、有效 CSSOM 與原始公開資產為依據；不得加入原頁沒有的數字、區塊或圖片。保留原生 Stitch 原始輸出，將衍生修正另存。每次修改後必須以對應檔案雜湊重新檢查桌面及390px 窄版，逐項記錄圖片、版面、文字、導覽與剩餘差異。頁高相同或生成圖片相似不代表官網一致。

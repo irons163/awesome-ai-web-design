@@ -1,0 +1,19 @@
+# BMW M｜重寫 AI 指令與實際生成紀錄
+
+以下為本次實際送交 Google Stitch MCP 的完整原始指令，逐字保留；供應商輸出不能替代畫面驗證。
+
+```text
+Update this existing BMW M study to the actual current public official homepage https://www.bmw-m.com/en/index.html observed2026-10-11. Use a charcoal #262626 canvas, BMW Type Next thin white uppercase headlines, blue rectangular buttons, original BMW/M badges, top diagonal M blue/red stripe, and full-width dark editorial layout. Desktop1280x720 and responsive narrow390x844; current measured heights7042/9053. Match the actual public content and image crops, avoiding generic automobile cards or invented specifications.
+Desktop header: BMW/M logo, The Ultimate Driving Machine, Home,Magazine,Models,M Motorsport,AREA M,Heritage,More,Search. Narrow has logo and hamburger.
+Current hero is THE BMW iX4 M60 xDRIVE. with Experience now, red performance SUV rear three-quarter photo/video, left text/right large image, small supplementary portrait overlap on desktop; narrow big cropped SUV image first, title/button below.
+Next paired teasers: Six Models, Exclusive Features, Unique Details./THE100 JAHRE NÜRBURGRING EDITION. and AREA M./YOUR ULTIMATE BMW M EXPERIENCE. Then BOOK GAMES OF DRIFT. with complete source description, Experience more: what is Games of Drift?, Terms and Conditions, Book now, Secure your spectator ticket now, and the specially liveried BMW M2 Tire Eater image.
+MORE FROM BMW M MAGAZINE. horizontal carousel uses the current actual articles: SHARPER LOOK,MORE POWER.;BODYWORK WITH CHARACTER.;FROM APRIL FOOL'S JOKE TO NÜRBURGRING HERO.;ON TRACK FOR A RECORD LAP.;A CHAMPION IN MINIATURE.;BIG IN JAPAN.;LOWER CONSUMPTION,FULL PERFORMANCE. Keep original public photos and exact titles; do not fabricate article thumbnails.
+MORE NEW M MODELS. includes THE M350,THE X5 M60e,THE M2,THE M760e and i7 M70,THE XM Label with tall official vehicle photos. Then paired tiles OWNING THE STREETS./BMW M–Partner of Street League Skateboarding. and Innovative natural fibre composites for BMW M series models./FROM MOTORSPORT TO SERIES PRODUCTION.
+BMW M LIFESTYLE. with original lifestyle photo and Shop M Lifestyle, then centered BMW M CHATBOT/Do you have a question?, MORE BMW M./Experience now. carousel of actual In-Car Apps,Community,M Power Electrified,Culture,Individual,Performance Parts,Wallpaper,MotoGP destinations. Then paired The BMW M3 Touring24H./THE ULTIMATE TOURING. and The BMW M2 Racing./ENTRY FOR EXPERTS. Then large centered BMW M NEWSLETTER/Subscribe now.
+Full charcoal footer: Deutsch/English selector, Quicklinks,BMW-M.com,Visit Us On,More BMW Websites; all observed destinations/legal/accessibility/EU battery/DSA links; ©BMW M GmbH2026. Narrow stacks these groups as the actual source does, preserving generous vertical gaps.
+Use source-backed artwork, branding, language, spacing, fonts and link destinations. Preserve carousel/video current sampled states; exact autoplay, timing, search/menu/account/newsletter/service functionality remains separate and unverified. Do not invent unavailable images or claim exact official visual consistency. Retain genuine native exports unchanged before any source correction and actual screenshot review. This educational study is free to view; do not include payment, booking submission or sign-in service code.
+```
+
+後續校正指令：
+
+按目前 BMW M 公開英文首頁校正：深灰背景、BMW原始字型、iX4 M60 xDRIVE英雄車照與直向人物影片區、Nürburgring／AREA M、Games of Drift、Magazine、車款列、Street League／自然纖維、Lifestyle、Chatbot、More BMW M、賽事雙圖、電子報及完整頁尾。遵循1280×720與390×844實際取樣。頁頂顯示導覽、向下捲動才收起，保留官方實際雜誌相位。影片下載失敗時只用有來源截圖與裁切紀錄的官方靜態影格，明列動畫未驗證。

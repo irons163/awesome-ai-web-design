@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cursor — The AI Code Editor</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Plus+Jakarta+Sans:wght@400;450;500;600&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --bg: #14120b;
+      --card-bg: #1b1915;
+      --card-border: #23211b;
+      --border-subtle: #2c2921;
+      --text: #edecec;
+      --text-muted: #8e8c85;
+      --text-subtle: #636058;
+      --accent-orange: #d97736;
+      --accent-orange-hover: #ea8544;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .font-cursor-gothic {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      letter-spacing: -0.015em;
+    }
+    .font-serif-quote {
+      font-family: 'Newsreader', Georgia, serif;
+    }
+    /* Subtle custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #14120b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #23211b;
+      border-radius: 3px;
+    }
+    .cursor-hero-title {
+      font-size: 26px;
+      line-height: 32.5px;
+      font-weight: 500;
+      max-width: 658px;
+    }
+    .btn-white {
+      background-color: #edecec;
+      color: #14120b;
+      font-weight: 500;
+      transition: background-color 0.15s ease, opacity 0.15s ease;
+    }
+    .btn-white:hover {
+      background-color: #ffffff;
+    }
+    .btn-dark {
+      background-color: #1b1915;
+      color: #edecec;
+      border: 1px solid #23211b;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+    .btn-dark:hover {
+      background-color: #221f19;
+      border-color: #38352b;
+    }
+    .orange-link {
+      color: #d97736;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      transition: color 0.15s ease;
+      text-decoration: none;
+    }
+    .orange-link:hover {
+      color: #ea8544;
+    }
+    .landscape-bg {
+      background: linear-gradient(180deg, rgba(20,18,11,0.2) 0%, rgba(20,18,11,0.85) 100%), 
+                  radial-gradient(ellipse at 50% 20%, #443c2c 0%, #201e18 45%, #14120b 85%);
+    }
+  </style>
+</head>
+<body class="selection:bg-[#38352b] selection:text-[#edecec]">
+<!-- Top Sticky Navigation (52px high, bounds x20-x1260) -->
+<header class="fixed top-0 left-0 right-0 h-[52px] bg-[#14120b] border-b border-[#23211b] z-50 px-5 flex items-center justify-between">
+<div class="w-full max-w-[1240px] mx-auto flex items-center justify-between text-[13px]">
+<!-- Brand Logo & Cube -->
+<a class="flex items-center gap-2.5 text-[#edecec] tracking-tight hover:opacity-90" href="https://cursor.com">
+<svg class="text-[#edecec]" fill="none" height="18" viewbox="0 0 24 24" width="18">
+<!-- Authentic Isometric Cube -->
+<polygon fill="#edecec" fill-opacity="0.95" points="12 2, 21 7.2, 12 12.4, 3 7.2"></polygon>
+<polygon fill="#edecec" fill-opacity="0.7" points="12 12.4, 21 7.2, 21 17.6, 12 22.8"></polygon>
+<polygon fill="#edecec" fill-opacity="0.45" points="12 12.4, 3 7.2, 3 17.6, 12 22.8"></polygon>
+</svg>
+<span class="font-medium tracking-normal text-[14px]">Cursor</span>
+</a>
+<!-- Center Links: Models, Product, Enterprise, Pricing, Resources -->
+<nav class="hidden md:flex items-center gap-7 text-[#8e8c85]">
+<a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/models">Models</a>
+<a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/product">Product</a>
+<a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/enterprise">Enterprise</a>
+<a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/pricing">Pricing</a>
+<a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/resources">Resources</a>
+</nav>
+<!-- Right Actions: Sign in, Contact sales, Download -->
+<div class="flex items-center gap-3">
+<a class="text-[#8e8c85] hover:text-[#edecec] text-[13px] px-2 py-1 transition-colors" href="https://cursor.com/login">Sign in</a>
+<a class="hidden sm:inline-flex items-center text-[12px] text-[#edecec] bg-[#1b1915] border border-[#23211b] hover:border-[#3a372e] rounded-full px-3 py-1.5 transition-colors" href="https://cursor.com/contact">
+          Contact sales
+        </a>
+<a class="inline-flex items-center text-[12px] bg-[#edecec] text-[#14120b] font-medium rounded-full px-3.5 py-1.5 hover:bg-white transition-colors" href="https://cursor.com/download">
+          Download
+        </a>
+</div>
+</div>
+</header>
+<!-- Main Container -->
+<main class="w-full pt-[52px]">
+<!-- HERO SECTION -->
+<section class="max-w-[1280px] mx-auto px-5 pt-24 pb-12">
+<!-- Two-line 26px heading left aligned -->
+<h1 class="cursor-hero-title text-[#edecec] mb-6">
+        Cursor is your coding agent for building ambitious software.
+      </h1>
+<!-- CTA Action Pills -->
+<div class="flex flex-wrap items-center gap-3 mb-10">
+<a class="btn-white inline-flex items-center gap-2 rounded-full px-4 py-2 text-[13px]" href="https://cursor.com/download">
+<span>Download for macOS</span>
+<svg class="w-3.5 h-3.5 opacity-70" fill="currentColor" viewbox="0 0 16 16">
+<path clip-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="btn-dark inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-[13px] text-[#edecec]" href="https://cursor.com/demo">
+<span>Request a demo</span>
+<span class="text-[#8e8c85]">›</span>
+</a>
+</div>
+<!-- HUGE DEMO FRAME WITH REAL MULTI-PANE WORKSPACE AND FLOATING TERMINAL -->
+<div class="w-full max-w-[1240px] mx-auto rounded-lg border border-[#23211b] p-2.5 sm:p-5 landscape-bg relative shadow-2xl overflow-hidden">
+<!-- IDE Window Frame -->
+<div class="w-full bg-[#1b1915] rounded-md border border-[#2c2921] shadow-xl overflow-hidden flex flex-col text-[12px] relative">
+<!-- Top Window Bar & File Tabs -->
+<div class="h-9 bg-[#171511] border-b border-[#23211b] flex items-center justify-between px-3 select-none">
+<!-- Window Traffic Lights -->
+<div class="flex items-center gap-1.5 w-16">
+<span class="w-2.5 h-2.5 rounded-full bg-[#3d3a33] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#3d3a33] inline-block"></span>
+<span class="w-2.5 h-2.5 rounded-full bg-[#3d3a33] inline-block"></span>
+</div>
+<!-- Tabs: feature-prd.md, presence.ts, mission-control.tsx -->
+<div class="flex items-center h-full gap-0.5 overflow-x-auto text-[11px] font-mono">
+<div class="flex items-center gap-2 px-3 h-full bg-[#1b1915] border-t border-t-[#d97736] border-r border-[#23211b] text-[#edecec]">
+<span class="text-[#8e8c85]">M↓</span>
+<span>feature-prd.md</span>
+<span class="text-[#636058] hover:text-[#edecec] ml-1">×</span>
+</div>
+<div class="flex items-center gap-2 px-3 h-full bg-[#171511] border-r border-[#23211b] text-[#8e8c85] hover:text-[#edecec]">
+<span class="text-[#8e8c85]">TS</span>
+<span>presence.ts</span>
+<span class="text-[#636058] hover:text-[#edecec] ml-1">×</span>
+</div>
+<div class="flex items-center gap-2 px-3 h-full bg-[#171511] text-[#8e8c85] hover:text-[#edecec]">
+<span class="text-[#d97736]">TSX</span>
+<span>mission-control.tsx</span>
+</div>
+</div>
+<!-- Status / Branch pill -->
+<div class="flex items-center gap-2 text-[11px] text-[#8e8c85] font-mono">
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> agent active</span>
+<span class="text-[#3d3a33]">|</span>
+<span>main*</span>
+</div>
+</div>
+<!-- Main IDE Body: 3-column Layout (Tree, Editor, Composer/Agent) -->
+<div class="grid grid-cols-12 min-h-[520px]">
+<!-- Left: File Tree (2 cols) -->
+<div class="col-span-2 hidden md:block bg-[#161410] border-r border-[#23211b] p-3 text-[11px] text-[#8e8c85] font-mono">
+<div class="text-[10px] uppercase tracking-wider text-[#636058] mb-2 font-semibold">Explorer</div>
+<div class="space-y-1">
+<div class="flex items-center gap-1.5 text-[#edecec]">
+<span>▾</span> <span class="text-[#8e8c85]">📁</span> <span>mission-control</span>
+</div>
+<div class="pl-4 space-y-1 border-l border-[#23211b] ml-1.5 mt-1">
+<div class="flex items-center gap-1.5 text-[#edecec] bg-[#22201a] px-1.5 py-0.5 rounded">
+<span>📄</span> <span>feature-prd.md</span>
+</div>
+<div class="flex items-center gap-1.5 hover:text-[#edecec] px-1.5 py-0.5">
+<span>📄</span> <span>presence.ts</span>
+</div>
+<div class="flex items-center gap-1.5 hover:text-[#edecec] px-1.5 py-0.5">
+<span>⚛️</span> <span>mission-control.tsx</span>
+</div>
+<div class="flex items-center gap-1.5 hover:text-[#edecec] px-1.5 py-0.5">
+<span>📄</span> <span>telemetry.go</span>
+</div>
+<div class="flex items-center gap-1.5 hover:text-[#edecec] px-1.5 py-0.5">
+<span>📄</span> <span>routes.config.json</span>
+</div>
+</div>
+<div class="flex items-center gap-1.5 pt-2 text-[#636058]">
+<span>▸</span> <span class="text-[#636058]">📁</span> <span>agents-worker</span>
+</div>
+</div>
+</div>
+<!-- Center: Editor / Plan Document "Mission Control Interface" (6 cols) -->
+<div class="col-span-12 md:col-span-6 bg-[#1b1915] p-5 font-mono text-[12px] border-r border-[#23211b] flex flex-col justify-between">
+<div>
+<!-- Plan Document Header -->
+<div class="border-b border-[#23211b] pb-3 mb-4">
+<div class="text-[10px] uppercase tracking-wider text-[#8e8c85] mb-1">Specification / Plan</div>
+<div class="text-[15px] font-cursor-gothic text-[#edecec] font-medium">Mission Control Interface</div>
+<p class="text-[11px] text-[#8e8c85] mt-0.5 font-normal">Cursor Agent v4.18 • Task #1042 execution stream</p>
+</div>
+<!-- Structured markdown / agent actions -->
+<div class="space-y-3.5 text-[#8e8c85] text-[11.5px] leading-relaxed">
+<div class="flex items-start gap-2">
+<span class="text-[#d97736] font-semibold">1.</span>
+<div>
+<span class="text-[#edecec]">Establish live telemetry websocket channel</span>
+<p class="text-[11px] text-[#636058]">Connected to internal cluster at <code class="text-[#edecec] bg-[#14120b] px-1 py-0.5 rounded">wss://core.internal/stream</code></p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-[#d97736] font-semibold">2.</span>
+<div>
+<span class="text-[#edecec]">Sync multi-agent worker state into presence matrix</span>
+<p class="text-[11px] text-[#636058]">Subscribing to active heartbeat signals across 16 parallel runner pods.</p>
+</div>
+</div>
+<div class="flex items-start gap-2">
+<span class="text-[#d97736] font-semibold">3.</span>
+<div>
+<span class="text-[#edecec]">Generate zero-latency reactive canvas dashboard</span>
+<p class="text-[11px] text-[#636058]">Optimized batch render pass with webgl fallback in <code class="text-[#edecec] bg-[#14120b] px-1 py-0.5 rounded">mission-control.tsx</code></p>
+</div>
+</div>
+</div>
+<!-- Active Code Diff Pane with green additions / red deletions -->
+<div class="mt-5 rounded border border-[#23211b] bg-[#14120b] p-3 text-[11px]">
+<div class="text-[10px] text-[#636058] mb-2 flex items-center justify-between border-b border-[#201e18] pb-1">
+<span>presence.ts — Suggested diff</span>
+<span class="text-[#d97736] bg-[#d97736]/10 px-1.5 py-0.5 rounded">Applied</span>
+</div>
+<div class="text-[#8e8c85] space-y-0.5 font-mono">
+<div class="text-[#555248]">  export interface AgentSession {</div>
+<div class="text-[#555248]">    id: string;</div>
+<div class="bg-red-950/40 text-red-300 px-1 -mx-1">-   legacyStatus: 'idle' | 'executing';</div>
+<div class="bg-emerald-950/40 text-emerald-300 px-1 -mx-1">+   status: 'running' | 'paused' | 'evaluating';</div>
+<div class="bg-emerald-950/40 text-emerald-300 px-1 -mx-1">+   assignedTask: MissionControlTask;</div>
+<div class="text-[#555248]">    heartbeatMs: number;</div>
+<div class="text-[#555248]">  }</div>
+</div>
+</div>
+</div>
+<!-- Terminal Mini Bar -->
+<div class="mt-4 pt-3 border-t border-[#23211b] flex items-center justify-between text-[11px] text-[#636058]">
+<div class="flex items-center gap-2">
+<span class="text-emerald-400">✓</span>
+<span>Compiled in 142ms</span>
+</div>
+<span>4 files touched • 2 runners listening</span>
+</div>
+</div>
+<!-- Right: Prompt / Composer / Agent Control (4 cols) -->
+<div class="col-span-12 md:col-span-4 bg-[#181612] p-4 flex flex-col justify-between">
+<div>
+<!-- Agent Header -->
+<div class="flex items-center justify-between pb-3 border-b border-[#23211b]">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-[#d97736]"></span>
+<span class="font-medium text-[#edecec] text-[12px]">Agent Composer</span>
+</div>
+<span class="text-[10px] font-mono text-[#8e8c85] bg-[#22201a] px-2 py-0.5 rounded border border-[#23211b]">claude-3-5-sonnet</span>
+</div>
+<!-- Chat history bubbles -->
+<div class="mt-4 space-y-3 text-[11.5px]">
+<!-- User message -->
+<div class="bg-[#201e18] p-2.5 rounded border border-[#23211b] text-[#edecec]">
+<span class="text-[10px] text-[#8e8c85] block mb-1 font-mono">You</span>
+                    Build out the telemetry presence subscriber and verify end-to-end integration tests.
+                  </div>
+<!-- Agent response -->
+<div class="bg-[#14120b] p-2.5 rounded border border-[#23211b] text-[#8e8c85] space-y-2">
+<div class="flex items-center justify-between text-[10px] text-[#636058] font-mono">
+<span>Cursor Agent</span>
+<span>12s ago</span>
+</div>
+<p class="text-[#edecec]">I have verified the telemetry payload schema and hooked the websocket feed into <code class="text-[#d97736]">presence.ts</code>.</p>
+<div class="bg-[#1b1915] p-2 rounded border border-[#2b2820] text-[10.5px] font-mono text-[#8e8c85]">
+<div class="text-emerald-400">✓ 18 unit tests passed</div>
+<div class="text-[#636058]">✓ 0 regressions detected</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Input Composer Box -->
+<div class="mt-4 pt-3 border-t border-[#23211b]">
+<div class="bg-[#14120b] border border-[#23211b] rounded p-2 text-[11px]">
+<div class="text-[#636058]">Follow up or prompt the agent...</div>
+<div class="flex items-center justify-between mt-3 text-[10px] text-[#636058]">
+<span>⌘K to prompt</span>
+<span class="bg-[#23201a] text-[#edecec] px-2 py-0.5 rounded border border-[#2c2921]">Submit</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sleek Floating Terminal Overlay demonstrating parallel agent execution -->
+<div class="hidden sm:flex absolute bottom-4 left-6 right-6 lg:left-36 lg:right-36 bg-[#12100a]/95 border border-[#38352b] rounded-lg p-3 shadow-2xl backdrop-blur-md items-center justify-between text-[11px] font-mono text-[#8e8c85]">
+<div class="flex items-center gap-3">
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+</span>
+<span class="text-[#edecec]">parallel runner fleet:</span>
+<span class="text-[#d97736]">pod-094 running pytest</span>
+<span class="text-[#636058] hidden md:inline">|</span>
+<span class="text-[#8e8c85] hidden md:inline">webhook dispatch -&gt; staging.preview.cursor.sh</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] bg-[#222019] text-[#edecec] px-2 py-0.5 rounded border border-[#2c2921]">agent sync: 99.8%</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- TRUSTED TEAMS / CUSTOMER TILES (8 monochrome tiles) -->
+<section class="max-w-[1280px] mx-auto px-5 py-14">
+<div class="text-center mb-7">
+<h2 class="text-[14px] text-[#8e8c85] font-normal tracking-wide">
+          Trusted every day by teams that build world-class software
+        </h2>
+</div>
+<!-- 8 Low-contrast dark bordered tiles: Stripe, Datadog, Linear, NVIDIA, Figma, Ramp, Decagon, Adobe -->
+<div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2.5 max-w-[1240px] mx-auto">
+<!-- Tile 1: Stripe -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-semibold tracking-wider text-[14px]">stripe</span>
+</div>
+<!-- Tile 2: Datadog -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-medium tracking-wide text-[13px] uppercase">DATADOG</span>
+</div>
+<!-- Tile 3: Linear -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<div class="flex items-center gap-1.5">
+<svg class="w-3.5 h-3.5 fill-current" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="10"></circle>
+<path d="M20 50 L80 50" stroke="currentColor" stroke-width="10"></path>
+</svg>
+<span class="font-medium text-[13.5px]">Linear</span>
+</div>
+</div>
+<!-- Tile 4: NVIDIA -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-bold tracking-widest text-[13px]">NVIDIA</span>
+</div>
+<!-- Tile 5: Figma -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-medium text-[14px]">Figma</span>
+</div>
+<!-- Tile 6: Ramp -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-medium tracking-wide text-[14px]">ramp</span>
+</div>
+<!-- Tile 7: Decagon -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-medium text-[13.5px]">decagon</span>
+</div>
+<!-- Tile 8: Adobe -->
+<div class="h-14 bg-[#1b1915] border border-[#23211b] rounded flex items-center justify-center text-[#8e8c85] hover:text-[#edecec] transition-colors">
+<span class="font-bold tracking-wider text-[13.5px]">Adobe</span>
+</div>
+</div>
+</section>
+<!-- FOUR WIDE FEATURE PANELS -->
+<section class="max-w-[1280px] mx-auto px-5 py-8 space-y-6">
+<!-- PANEL 1: Agents turn ideas into code -->
+<div class="max-w-[1240px] mx-auto bg-[#1b1915] border border-[#23211b] rounded-lg p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Editorial Text -->
+<div class="lg:col-span-5 space-y-4">
+<h3 class="text-[22px] leading-snug font-normal text-[#edecec]">
+            Agents turn ideas into code
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#8e8c85]">
+            Accelerate development by handing off tasks to Cursor, while you focus on making decisions.
+          </p>
+<div class="pt-2">
+<a class="orange-link" href="https://cursor.com/agents">
+<span>Learn about agentic development</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Product UI: Dark Cursor planner -->
+<div class="lg:col-span-7 bg-[#14120b] border border-[#23211b] rounded-md p-5 font-mono text-[12px]">
+<div class="flex items-center justify-between border-b border-[#23211b] pb-2.5 mb-3 text-[11px] text-[#8e8c85]">
+<span class="text-[#edecec] font-medium font-sans">Cursor Planner — Mission Control Interface</span>
+<span class="bg-[#201e18] px-2 py-0.5 rounded text-[10px]">Auto-resolving</span>
+</div>
+<div class="space-y-2 text-[#8e8c85]">
+<div class="bg-[#1b1915] p-2.5 rounded border border-[#222019] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-[#d97736]">●</span>
+<span class="text-[#edecec]">Draft spec for presence websocket</span>
+</div>
+<span class="text-[10px] text-emerald-400">Completed</span>
+</div>
+<div class="bg-[#1b1915] p-2.5 rounded border border-[#222019] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="text-amber-500 animate-pulse">●</span>
+<span class="text-[#edecec]">Synthesizing schema into presence.ts</span>
+</div>
+<span class="text-[10px] text-amber-500">In Progress</span>
+</div>
+<div class="bg-[#1b1915] p-2.5 rounded border border-[#222019] flex items-center justify-between opacity-60">
+<div class="flex items-center gap-2">
+<span class="text-[#636058]">○</span>
+<span>Run test coverage and browser snapshot check</span>
+</div>
+<span class="text-[10px] text-[#636058]">Queued</span>
+</div>
+</div>
+</div>
+</div>
+<!-- PANEL 2: Works autonomously, runs in parallel -->
+<div class="max-w-[1240px] mx-auto bg-[#1b1915] border border-[#23211b] rounded-lg p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Product UI: cursor.com/agent task board with real demo tasks -->
+<div class="lg:col-span-7 order-2 lg:order-1 bg-[#14120b] border border-[#23211b] rounded-md p-5 font-mono text-[11px]">
+<div class="flex items-center justify-between border-b border-[#23211b] pb-2.5 mb-3 text-[11px] text-[#8e8c85]">
+<span class="text-[#edecec] font-sans font-medium">cursor.com/agent — Remote Runner Fleet</span>
+<span class="text-[#636058]">4 active runners</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+<!-- Task 1: Acme Research Dashboard -->
+<div class="bg-[#181612] p-3 rounded border border-[#23211b]">
+<div class="text-[10px] text-[#636058] uppercase">Task #401</div>
+<div class="text-[#edecec] font-sans font-medium text-[12px] mt-0.5">Acme Research Dashboard</div>
+<p class="text-[#8e8c85] text-[10.5px] mt-1">Spinning up isolated sandbox with headless chrome for visual regression.</p>
+<div class="mt-2.5 flex items-center justify-between text-[10px] text-[#d97736]">
+<span>Building UI...</span>
+<span>82%</span>
+</div>
+</div>
+<!-- Task 2: Live Telemetry Pipeline -->
+<div class="bg-[#181612] p-3 rounded border border-[#23211b]">
+<div class="text-[10px] text-[#636058] uppercase">Task #402</div>
+<div class="text-[#edecec] font-sans font-medium text-[12px] mt-0.5">Live Telemetry Pipeline</div>
+<p class="text-[#8e8c85] text-[10.5px] mt-1">Benchmarking message queue ingestion rate under 50k mock events/sec.</p>
+<div class="mt-2.5 flex items-center justify-between text-[10px] text-emerald-400">
+<span>Passing tests</span>
+<span>Complete</span>
+</div>
+</div>
+<!-- Task 3: Zero-Downtime Deploys -->
+<div class="bg-[#181612] p-3 rounded border border-[#23211b]">
+<div class="text-[10px] text-[#636058] uppercase">Task #403</div>
+<div class="text-[#edecec] font-sans font-medium text-[12px] mt-0.5">Zero-Downtime Deploys</div>
+<p class="text-[#8e8c85] text-[10.5px] mt-1">Generating Blue-Green Kubernetes rollouts configuration.</p>
+<div class="mt-2.5 flex items-center justify-between text-[10px] text-[#8e8c85]">
+<span>Review PR #88</span>
+<span>Ready</span>
+</div>
+</div>
+<!-- Task 4: Binary Protocol Parser -->
+<div class="bg-[#181612] p-3 rounded border border-[#23211b]">
+<div class="text-[10px] text-[#636058] uppercase">Task #404</div>
+<div class="text-[#edecec] font-sans font-medium text-[12px] mt-0.5">Binary Protocol Parser</div>
+<p class="text-[#8e8c85] text-[10.5px] mt-1">Fuzz testing custom endianness buffer serializer.</p>
+<div class="mt-2.5 flex items-center justify-between text-[10px] text-amber-500">
+<span>Fuzzing 10k cases</span>
+<span>Running</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Editorial Text -->
+<div class="lg:col-span-5 order-1 lg:order-2 space-y-4">
+<h3 class="text-[22px] leading-snug font-normal text-[#edecec]">
+            Works autonomously, runs in parallel
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#8e8c85]">
+            Agents use their own computers to build, test, and demo features end to end for you to review.
+          </p>
+<div class="pt-2">
+<a class="orange-link" href="https://cursor.com/cloud-agent">
+<span>Explore cloud agents</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</div>
+<!-- PANEL 3: In every tool, at every step -->
+<div class="max-w-[1240px] mx-auto bg-[#1b1915] border border-[#23211b] rounded-lg p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Editorial Text -->
+<div class="lg:col-span-5 space-y-4">
+<h3 class="text-[22px] leading-snug font-normal text-[#edecec]">
+            In every tool, at every step
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#8e8c85]">
+            Cursor runs in your terminal, collaborates in Slack, and reviews PRs in GitHub.
+          </p>
+<!-- Exact mono install command -->
+<div class="pt-3">
+<div class="bg-[#14120b] border border-[#23211b] rounded px-3 py-2 text-[12px] font-mono text-[#edecec] flex items-center justify-between">
+<span class="truncate">curl https://cursor.com/install -fsS | bash</span>
+<span class="text-[10px] text-[#636058] ml-2">copy</span>
+</div>
+</div>
+</div>
+<!-- Product UI: Overlapping Slack thread + terminal agent interface -->
+<div class="lg:col-span-7 landscape-bg p-5 rounded-md border border-[#23211b] space-y-3 relative overflow-hidden">
+<!-- Terminal Agent Interface -->
+<div class="bg-[#14120b] border border-[#23211b] rounded p-3 text-[11px] font-mono shadow-lg">
+<div class="flex items-center gap-1.5 text-[#636058] border-b border-[#201e18] pb-1.5 mb-2">
+<span class="w-2 h-2 rounded-full bg-[#3d3a33]"></span>
+<span>cursor-cli — terminal agent</span>
+</div>
+<div class="text-[#8e8c85] space-y-1">
+<div><span class="text-emerald-400">$</span> cursor agent --review-pr 142</div>
+<div class="text-[#edecec]">Analyzing diff against main... 3 files checked.</div>
+<div class="text-[#636058]">✓ Identified missing null-check in auth middleware. PR comment posted.</div>
+</div>
+</div>
+<!-- Slack Collaboration Card -->
+<div class="bg-[#181612] border border-[#23211b] rounded p-3 text-[11px] shadow-lg max-w-[90%] ml-auto">
+<div class="flex items-center gap-2 mb-1.5">
+<div class="w-4 h-4 rounded bg-[#d97736] flex items-center justify-center text-[9px] text-[#14120b] font-bold">C</div>
+<span class="text-[#edecec] font-medium font-sans">Cursor Bot</span>
+<span class="text-[10px] text-[#636058] font-mono">11:04 AM</span>
+</div>
+<p class="text-[#8e8c85] font-sans">
+              I generated the staging preview for the Mission Control dashboard: <span class="text-[#edecec] underline">https://staging.acme.corp/preview/1042</span>. All integration checks passed.
+            </p>
+</div>
+</div>
+</div>
+<!-- PANEL 4: Hand work to AI teammates -->
+<div class="max-w-[1240px] mx-auto bg-[#1b1915] border border-[#23211b] rounded-lg p-8 sm:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<!-- Product UI: Agent Workspace Permissions -->
+<div class="lg:col-span-7 order-2 lg:order-1 bg-[#14120b] border border-[#23211b] rounded-md p-5 text-[12px]">
+<div class="border-b border-[#23211b] pb-2 mb-4 flex items-center justify-between text-[11px] text-[#8e8c85] font-mono">
+<span>Agent Workspace Permissions</span>
+<span class="text-emerald-400">Authenticated</span>
+</div>
+<div class="space-y-3 font-mono text-[11.5px]">
+<div class="flex items-center justify-between bg-[#1b1915] p-3 rounded border border-[#222019]">
+<div class="flex items-center gap-3">
+<span class="text-base">🐙</span>
+<div>
+<div class="text-[#edecec] font-sans">GitHub Organization</div>
+<div class="text-[10px] text-[#8e8c85]">Branch creation, automated PRs, code review</div>
+</div>
+</div>
+<span class="text-[11px] text-[#8e8c85]">Active</span>
+</div>
+<div class="flex items-center justify-between bg-[#1b1915] p-3 rounded border border-[#222019]">
+<div class="flex items-center gap-3">
+<span class="text-base">💬</span>
+<div>
+<div class="text-[#edecec] font-sans">Slack Workspace</div>
+<div class="text-[10px] text-[#8e8c85]">Direct notifications, standup synthesis</div>
+</div>
+</div>
+<span class="text-[11px] text-[#8e8c85]">Connected</span>
+</div>
+<div class="flex items-center justify-between bg-[#1b1915] p-3 rounded border border-[#222019]">
+<div class="flex items-center gap-3">
+<span class="text-base">☁️</span>
+<div>
+<div class="text-[#edecec] font-sans">Cloud Infrastructure Runners</div>
+<div class="text-[10px] text-[#8e8c85]">Isolated headless VMs, test cluster access</div>
+</div>
+</div>
+<span class="text-[11px] text-[#8e8c85]">Ready</span>
+</div>
+</div>
+</div>
+<!-- Editorial Text -->
+<div class="lg:col-span-5 order-1 lg:order-2 space-y-4">
+<h3 class="text-[22px] leading-snug font-normal text-[#edecec]">
+            Hand work to AI teammates
+          </h3>
+<p class="text-[15px] leading-relaxed text-[#8e8c85]">
+            Bots can sign in to your tools, use them just like you do, and come back with finished work.
+          </p>
+<div class="pt-2">
+<a class="orange-link" href="https://cursor.com">
+<span>Download Grok Bot</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- SIX CUSTOMER QUOTE CARDS WITH REAL PORTRAITS -->
+<section class="max-w-[1280px] mx-auto px-5 py-16">
+<div class="text-center mb-12">
+<h2 class="text-[36px] font-normal text-[#edecec] tracking-tight">
+          The new way to build software.
+        </h2>
+</div>
+<!-- 6 quote cards with avatars -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1240px] mx-auto">
+<!-- Diana Hu -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "Cursor has fundamentally shifted how our engineering team iterates on product."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="Diana Hu" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhbpDMfbYu90H1Zm4ywBU4RwLw5fx4OM6DOhPgd_8ORvs_9dUtWtL3jd_EH8JNCy8Uvz-lXwiwCBu8fX0HTOk8z0pcgxoPkxKis6e1wh6GA1w83F0SgUI9Ydr1ZeseQQEny1My2dvEwq7a22Q7ECEq7hbM_iUYyVbSHBLbNOI59So8wagpgP4sChXYJNp3vzgn64yDB9JVF0Fn6YXAJ6OjY7SYXeTyn8ALPwuo2ltqt-hS578Fr34XzoU0fe_tV62jjE9wafTfgCY"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">Diana Hu</div>
+<div class="text-[11px] text-[#8e8c85]">Co-founder &amp; Head of Product</div>
+</div>
+</div>
+</div>
+<!-- Jensen Huang -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "Software engineering will never be the same. The computer is now your programming partner."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="Jensen Huang" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGn-DLxKY06J9VlgMf8E8hv8lKYeoTUnkUGjEKMZQT13ZNiMti6534qw7itHc0M2xTF9zMfbx-IIU4xzcDwrXrrNALlSdS5YMAmR4C-LgqsTFE57PLpGYA1axo1jWie3slpP1ICGdW4iXSNzqZnibMgINVum1cjyOLuEXwU58Uty1WoOQwUCI6UJ5tLNRJ4LQCeWrjbOE63bGFfi5VPE1QQ1ZXAYb8yvTEfO0-KFVF068kxcBjD-4WMoOD0Iva6rOBHW_Xq6p3ltI"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">Jensen Huang</div>
+<div class="text-[11px] text-[#8e8c85]">CEO, NVIDIA</div>
+</div>
+</div>
+</div>
+<!-- Andrej Karpathy -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "Programming is changing so fast. Cursor is an indispensable part of my coding flow."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="Andrej Karpathy" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAktyi3dxR8Vbd898HHNgofVe4TGlV5mAPH6Mrg1ZI8pXgSaFDlZUM2Z9DqzMI6gcMMk-aUNTI4fCcq6OdASwgQlAygyj8J4S1Z5Sc_gBq9Tr8Jkobir5tmz4KDDoeCnaB36yqIw8OkKb-EJQzk6RvlGQe1l65NFJqPJHO-EjlzxcdEVLI4P0fWnlJT3ti3UXXDBiBEUiCFWAQ1fAPNTCLSn_wz5IWewDTEmIWTpgXfgwaQg7vW8-Kc7oGI8drxxHCds3qYHREqiyg"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">Andrej Karpathy</div>
+<div class="text-[11px] text-[#8e8c85]">Eureka Labs, ex-OpenAI / Tesla</div>
+</div>
+</div>
+</div>
+<!-- Patrick Collison -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "High leverage engineering teams adopt high leverage tools."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="Patrick Collison" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEG06c3ugLekIemysZ3WTHnrrahM6n_1HnUqN6ZW5Cx1eCsoEIHL2FwkfcKclVk2boIu2xhK8KGumm1hH25KpM6lA_WHnO2IPdvDggZbMRqlM-wVBsEyPrm1DvLnO1HIBJ5edIoGrNvuDL14De-bGC1lLLPYDbF50pSUSrd43uagwlaHjZrOvK2Wp-GEYTDhPIhq1B8n5iatSiPMfaMTnHF3VaBzv3HZc8Glm3AImNiTDGa1SHsYPezGVh5H386u6adF7m6CL_u9Q"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">Patrick Collison</div>
+<div class="text-[11px] text-[#8e8c85]">CEO, Stripe</div>
+</div>
+</div>
+</div>
+<!-- shadcn -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "It feels like software development was rebuilt from first principles around modern LLMs."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="shadcn" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1FAAMjdKQbrEVv-8cGLkZb2qvpy2U0NkMggK3hNsYHJu8uOaQqe57d_Jk1TRA46j6u-jglXmGfvxmXgi0CrBo6WTuXNHCppY2XPKVWNq2shTJdFWriihn5j9cUM7fTfjZHWdmCJKlaCJr03cbW7R3Q7WMapQQpto5rCe-lIAuRfcoWI_RKk_dx61EqJPqgNri-BOrA_TFZHsqr8US4-l3hHyQI8vroNp7lISrU_5zSZH3YDzEif6RRlBezgvcSxYGUMM46MoUyXg"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">shadcn</div>
+<div class="text-[11px] text-[#8e8c85]">Creator of ui.shadcn.com</div>
+</div>
+</div>
+</div>
+<!-- Greg Brockman -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div class="text-[13px] text-[#8e8c85] leading-relaxed mb-6 font-serif-quote italic">
+            "The natural interface for AI models is an active code workspace."
+          </div>
+<div class="border-t border-[#23211b] pt-3 flex items-center gap-3">
+<img alt="Greg Brockman" class="w-10 h-10 rounded-full object-cover border border-[#2c2921]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlz705dEeftbbOB9wWudrh9pVVDhXvuB3eMJevin-b20cMM197Y-loJ18Hnr891g6qVtlgSFpfQsz_nJQrxlnvHTRXpdLlmg_cd0s5crjK3PI6Zx4b2LgQI5z9sp6FCCyDGcc6_gl9ShOPQqj6LvN_WqLqHWCGAb80BFTjD1i9aIX9m1lDOssrVyOtStQSlZL43-rlzuG8tA7iuO4NjydVPoAEClW2xaRusYE2NY5RAkiBTDgPkYPUSxJ3y7DjHjwui4Tgbth312o"/>
+<div>
+<div class="text-[13px] font-medium text-[#edecec]">Greg Brockman</div>
+<div class="text-[11px] text-[#8e8c85]">President, OpenAI</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- STAY ON THE FRONTIER WITH PRODUCT FIGURES -->
+<section class="max-w-[1280px] mx-auto px-5 py-10">
+<div class="max-w-[1240px] mx-auto">
+<h2 class="text-[22px] font-normal text-[#edecec] mb-6">
+          Stay on the frontier
+        </h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Card 1: Model Switcher -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="text-[16px] font-normal text-[#edecec] mb-2">Use the best model for every task</div>
+<p class="text-[13px] leading-relaxed text-[#8e8c85] mb-5">
+                Choose cutting-edge models for each task. Switch seamlessly between leading frontier models without leaving your workspace.
+              </p>
+</div>
+<!-- Mini Model Switcher widget -->
+<div class="bg-[#14120b] border border-[#23211b] rounded p-2.5 space-y-1.5 text-[11px] font-mono">
+<div class="flex items-center justify-between px-2 py-1 bg-[#201e18] rounded text-[#edecec]">
+<span>Claude 3.5 Sonnet</span>
+<span class="text-emerald-400 text-[10px]">Default</span>
+</div>
+<div class="flex items-center justify-between px-2 py-1 hover:bg-[#1a1813] rounded text-[#8e8c85]">
+<span>GPT-4o</span>
+<span class="text-[10px] text-[#636058]">Fast reasoning</span>
+</div>
+<div class="flex items-center justify-between px-2 py-1 hover:bg-[#1a1813] rounded text-[#8e8c85]">
+<span>OpenAI o1</span>
+<span class="text-[10px] text-[#636058]">Deep math / code</span>
+</div>
+<div class="flex items-center justify-between px-2 py-1 hover:bg-[#1a1813] rounded text-[#8e8c85]">
+<span>Cursor Fast</span>
+<span class="text-[10px] text-[#636058]">Low-latency edit</span>
+</div>
+</div>
+</div>
+<!-- Card 2: Agent loop with test runner -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="text-[16px] font-normal text-[#edecec] mb-2">Build with autonomous agents</div>
+<p class="text-[13px] leading-relaxed text-[#8e8c85] mb-5">
+                Launch fleets of agents in parallel. Let them run builds, run tests, and iterate on solutions across your repositories.
+              </p>
+</div>
+<!-- Agent execution trace widget -->
+<div class="bg-[#14120b] border border-[#23211b] rounded p-2.5 space-y-1.5 text-[11px] font-mono">
+<div class="flex items-center gap-2 text-emerald-400">
+<span>✓</span>
+<span>Branch validation: feature/auth-agent</span>
+</div>
+<div class="flex items-center gap-2 text-[#8e8c85]">
+<span class="text-[#d97736] animate-pulse">●</span>
+<span>Executing test suite (42/42 tests pass)</span>
+</div>
+<div class="flex items-center gap-2 text-[#636058]">
+<span>○</span>
+<span>Auto-rebase on upstream main</span>
+</div>
+</div>
+</div>
+<!-- Card 3: Enterprise governance & SOC2 -->
+<div class="bg-[#1b1915] border border-[#23211b] rounded-lg p-6 flex flex-col justify-between">
+<div>
+<div class="text-[16px] font-normal text-[#edecec] mb-2">Develop enduring software</div>
+<p class="text-[13px] leading-relaxed text-[#8e8c85] mb-5">
+                Secure enterprise-scale development. Built with SOC 2 compliance, strict privacy boundaries, and enterprise governance.
+              </p>
+</div>
+<!-- Security compliance widget -->
+<div class="bg-[#14120b] border border-[#23211b] rounded p-2.5 space-y-2 text-[11px]">
+<div class="flex items-center justify-between text-[#edecec]">
+<span class="flex items-center gap-1.5"><span class="text-emerald-400">🛡️</span> SOC 2 Type II</span>
+<span class="text-emerald-400 font-mono text-[10px]">Certified</span>
+</div>
+<div class="flex items-center justify-between text-[#8e8c85]">
+<span>Zero Data Retention</span>
+<span class="text-[#8e8c85] font-mono text-[10px]">Enforced</span>
+</div>
+<div class="flex items-center justify-between text-[#8e8c85]">
+<span>VPC Isolated Execution</span>
+<span class="text-[#8e8c85] font-mono text-[10px]">Available</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CHANGELOG ROW WITH OCTOBER 6, 2026 ENTRY -->
+<section class="max-w-[1280px] mx-auto px-5 py-10">
+<div class="max-w-[1240px] mx-auto">
+<div class="flex items-center justify-between mb-4">
+<h2 class="text-[18px] font-normal text-[#edecec]">Changelog</h2>
+<a class="text-[12px] text-[#8e8c85] hover:text-[#edecec] transition-colors" href="https://cursor.com/changelog">View all updates →</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<!-- Oct 6, 2026 -->
+<a class="block bg-[#1b1915] border border-[#23211b] hover:border-[#38352b] rounded-lg p-4 transition-colors" href="https://cursor.com/changelog">
+<div class="text-[11px] font-mono text-[#d97736] mb-1">Oct 6, 2026</div>
+<div class="text-[13.5px] font-medium text-[#edecec]">Remote control for local agents</div>
+<p class="text-[11.5px] text-[#8e8c85] mt-1 line-clamp-2">Control headless desktop sessions and local processes directly from mobile and web.</p>
+</a>
+<!-- Sep 23 -->
+<a class="block bg-[#1b1915] border border-[#23211b] hover:border-[#38352b] rounded-lg p-4 transition-colors" href="https://cursor.com/changelog">
+<div class="text-[11px] font-mono text-[#8e8c85] mb-1">Sep 23</div>
+<div class="text-[13.5px] font-medium text-[#edecec]">Rollouts and Security Review</div>
+<p class="text-[11.5px] text-[#8e8c85] mt-1 line-clamp-2">Enterprise-grade rollout controls and granular policy management for cloud agents.</p>
+</a>
+<!-- Sep 18 -->
+<a class="block bg-[#1b1915] border border-[#23211b] hover:border-[#38352b] rounded-lg p-4 transition-colors" href="https://cursor.com/changelog">
+<div class="text-[11px] font-mono text-[#8e8c85] mb-1">Sep 18</div>
+<div class="text-[13.5px] font-medium text-[#edecec]">Cursor Projects</div>
+<p class="text-[11.5px] text-[#8e8c85] mt-1 line-clamp-2">Organize multi-repo workstreams with unified agent context and persistent plans.</p>
+</a>
+<!-- Sep 2 -->
+<a class="block bg-[#1b1915] border border-[#23211b] hover:border-[#38352b] rounded-lg p-4 transition-colors" href="https://cursor.com/changelog">
+<div class="text-[11px] font-mono text-[#8e8c85] mb-1">Sep 2</div>
+<div class="text-[13.5px] font-medium text-[#edecec]">Self-hosted machines</div>
+<p class="text-[11.5px] text-[#8e8c85] mt-1 line-clamp-2">Connect internal runner infrastructure to execute agent tasks securely within your VPC.</p>
+</a>
+</div>
+</div>
+</section>
+<!-- RESEARCH-TEAM BLOCK & RECENT HIGHLIGHTS WITH IMAGE_3 -->
+<section class="max-w-[1280px] mx-auto px-5 py-12">
+<div class="max-w-[1240px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+<!-- Research statement + team photo -->
+<div class="lg:col-span-6 bg-[#1b1915] border border-[#23211b] rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="text-[10px] font-mono uppercase tracking-wider text-[#8e8c85] mb-3">Our Mission</div>
+<p class="text-[18px] leading-relaxed text-[#edecec] mb-6">
+              Cursor is an applied research team focused on building the future of software development.
+            </p>
+<!-- Embedded Real Research Team Image -->
+<div class="rounded-lg overflow-hidden border border-[#2c2921] mb-6 shadow-md">
+<img alt="Cursor applied AI research laboratory team" class="w-full h-56 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB262ZAQ0F2UUyxpcqQHvUICAXqDVbpJaLaJlo4C7283jqM-sp3cVrelY0qN3vVPCSbjyXdaQiAIajskucGTK0HWpFi-AM--OqzA4PCmqvhdLwwPF6bEpTXoxRYHaUZHND4uc5VWRbBpipwJ4HruCUJLQGpafc9j8h5r3-jucYJOOnh0bxcQAAPbN5trwSe2bvKbXqH7CFNIYD6BqUL1kDNQV4zEv4uHTLnbG4sejUo0v3Kmc5_xEY3RRxR5fK4HLezgPFhVFteIw8"/>
+</div>
+</div>
+<div>
+<a class="orange-link" href="https://cursor.com/careers">
+<span>Join us</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Recent highlights list -->
+<div class="lg:col-span-6 bg-[#1b1915] border border-[#23211b] rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="text-[10px] font-mono uppercase tracking-wider text-[#8e8c85] mb-3">Recent Highlights</div>
+<ul class="divide-y divide-[#23211b] text-[13px]">
+<li class="py-4 flex items-center justify-between">
+<a class="text-[#edecec] hover:text-[#d97736] transition-colors pr-4" href="https://cursor.com/blog">ShadowWorkspace architecture for zero-delay indexing</a>
+<span class="text-[11px] font-mono text-[#636058] shrink-0">Blog</span>
+</li>
+<li class="py-4 flex items-center justify-between">
+<a class="text-[#edecec] hover:text-[#d97736] transition-colors pr-4" href="https://cursor.com/blog">Benchmarking code agent iteration cycles on real-world repositories</a>
+<span class="text-[11px] font-mono text-[#636058] shrink-0">Research</span>
+</li>
+<li class="py-4 flex items-center justify-between">
+<a class="text-[#edecec] hover:text-[#d97736] transition-colors pr-4" href="https://cursor.com/blog">Privacy and data boundaries in enterprise agentic deployments</a>
+<span class="text-[11px] font-mono text-[#636058] shrink-0">Security</span>
+</li>
+</ul>
+</div>
+<div class="pt-6 border-t border-[#23211b]">
+<a class="orange-link" href="https://cursor.com/blog">
+<span>Read all research papers</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- LARGE CENTERED CTA: "Try Cursor now." -->
+<section class="max-w-[1280px] mx-auto px-5 py-24 text-center">
+<div class="max-w-[1240px] mx-auto">
+<h2 class="text-[52px] sm:text-[72px] font-normal tracking-tight text-[#edecec] mb-8">
+          Try Cursor now.
+        </h2>
+<div>
+<a class="btn-white inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] shadow-lg" href="https://cursor.com/download">
+<span>Download for macOS</span>
+<svg class="w-4 h-4 opacity-70" fill="currentColor" viewbox="0 0 16 16">
+<path clip-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" fill-rule="evenodd"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+<!-- DENSE FIVE-COLUMN DARK FOOTER WITH THEME TOGGLE AND LANGUAGE SELECTOR -->
+<footer class="border-t border-[#23211b] bg-[#14120b] pt-16 pb-12 px-5 text-[12px]">
+<div class="max-w-[1240px] mx-auto">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-8 mb-16 text-[#8e8c85]">
+<!-- Column 1: Product -->
+<div>
+<div class="text-[#edecec] font-medium mb-3 text-[13px]">Product</div>
+<ul class="space-y-2">
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/download">Download</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/pricing">Pricing</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/models">Models</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/changelog">Changelog</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/features">Features</a></li>
+</ul>
+</div>
+<!-- Column 2: Resources -->
+<div>
+<div class="text-[#edecec] font-medium mb-3 text-[13px]">Resources</div>
+<ul class="space-y-2">
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/docs">Documentation</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/forum">Forum</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/blog">Blog</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/community">Community</a></li>
+</ul>
+</div>
+<!-- Column 3: Company -->
+<div>
+<div class="text-[#edecec] font-medium mb-3 text-[13px]">Company</div>
+<ul class="space-y-2">
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/about">About</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/careers">Careers</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/enterprise">Enterprise</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/contact">Contact</a></li>
+</ul>
+</div>
+<!-- Column 4: Legal -->
+<div>
+<div class="text-[#edecec] font-medium mb-3 text-[13px]">Legal</div>
+<ul class="space-y-2">
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/terms">Terms of Service</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/privacy">Privacy Policy</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com/security">Security</a></li>
+</ul>
+</div>
+<!-- Column 5: Connect -->
+<div>
+<div class="text-[#edecec] font-medium mb-3 text-[13px]">Connect</div>
+<ul class="space-y-2">
+<li><a class="hover:text-[#edecec] transition-colors" href="https://x.com/cursor_run">X / Twitter</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://github.com/getcursor">GitHub</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://discord.gg/cursor">Discord</a></li>
+<li><a class="hover:text-[#edecec] transition-colors" href="https://cursor.com">Newsletter</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom bar: Anysphere copyright, theme toggle, and language selector -->
+<div class="border-t border-[#23211b] pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-[#636058] gap-4">
+<div class="flex items-center gap-2">
+<svg class="text-[#8e8c85]" fill="none" height="14" viewbox="0 0 24 24" width="14">
+<polygon fill="#8e8c85" fill-opacity="0.9" points="12 2, 21 7.2, 12 12.4, 3 7.2"></polygon>
+<polygon fill="#8e8c85" fill-opacity="0.6" points="12 12.4, 21 7.2, 21 17.6, 12 22.8"></polygon>
+<polygon fill="#8e8c85" fill-opacity="0.35" points="12 12.4, 3 7.2, 3 17.6, 12 22.8"></polygon>
+</svg>
+<span>© 2026 Anysphere</span>
+</div>
+<div class="flex items-center gap-6">
+<!-- Language Selector -->
+<div class="flex items-center gap-1.5 hover:text-[#8e8c85] transition-colors cursor-pointer">
+<span>English (US)</span>
+<svg class="w-3 h-3" fill="currentColor" viewbox="0 0 16 16">
+<path clip-rule="evenodd" d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z" fill-rule="evenodd"></path>
+</svg>
+</div>
+<!-- Theme Toggle -->
+<div class="flex items-center gap-2 border border-[#23211b] rounded-full px-2.5 py-1 text-[#8e8c85]">
+<span class="text-[#edecec]">● Dark</span>
+<span>○ Light</span>
+</div>
+<span>cursor.com</span>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<!-- Discreet Cookie Notice Consent Banner -->
+<div class="fixed bottom-4 right-4 z-40 max-w-sm bg-[#1b1915] border border-[#2c2921] rounded-lg p-3.5 shadow-2xl text-[12px] text-[#8e8c85] backdrop-blur-md">
+<div class="flex items-start justify-between gap-3 mb-2">
+<p class="leading-snug text-[#edecec]">
+        We use essential cookies to enhance your workspace experience and analyze agent performance.
+      </p>
+</div>
+<div class="flex items-center justify-end gap-2 pt-1">
+<button class="text-[11px] text-[#8e8c85] hover:text-[#edecec] px-2 py-1 transition-colors">
+        Customize preferences
+      </button>
+<button class="btn-white text-[11px] px-3 py-1 rounded-full">
+        Accept
+      </button>
+</div>
+</div>
+</body></html>

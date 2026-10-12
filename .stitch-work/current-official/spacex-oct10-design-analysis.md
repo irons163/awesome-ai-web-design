@@ -1,0 +1,5 @@
+# SpaceX 現行官方首頁設計分析
+
+目前主活動為2026年9月28日StarshipFlight14起飛，影片已由舊濕式演練切換到DroneLiftOff。七個電影式主區塊、D-DIN大寫字、RobotoMono日期與簡單線框CTA、原始照片／影片構成深色首頁。桌面與窄版總高6438／6416。穩定完整載入後UpcomingLaunches仍在桌面右上、窄版Mars之後及手機主選單內，保留本次台灣時區October13Starlink與CRS35卡片。桌面與手機各三支原影片及原字體、圖像均保存。GoogleStitch已完成三次真實原生操作並保留原始輸出，但明確手機請求仍回DESKTOP metadata，原生手機輸出不宣稱已通過；窄版校正版另外依官方來源與實際畫面核對。
+
+原始 DESIGN.md、先前原生 Stitch 匯出與本次完整資料均保留。此為有明確範圍的視覺研究；未驗證項目不得宣稱官方一致。

@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Slack: Where work happens | All your people and AI agents working together</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1d1c1d;
+      background-color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+    }
+    .brand-purple { background-color: #611f69; }
+    .brand-purple-hover:hover { background-color: #4a154b; }
+    .aubergine-dark { background-color: #4a154b; }
+    .aubergine-deep { background-color: #3b113c; }
+    
+    /* Horizontal scroll snap */
+    .snap-x-mandatory {
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+    }
+    .snap-card {
+      scroll-snap-align: start;
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    
+    /* Active states */
+    .ai-card.active {
+      border-left: 3px solid #ecb22e;
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
+    .pillar-btn.active {
+      border-color: #611f69;
+      color: #611f69;
+      background-color: #f4ede4;
+      font-weight: 700;
+    }
+    .hero-tab.active {
+      background-color: #f4ede4;
+      color: #1d1c1d;
+      border-color: #ebdcd0;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-white text-[#1d1c1d] overflow-x-hidden selection:bg-[#f4ede4] selection:text-[#4a154b]">
+<!-- NAVIGATION HEADER -->
+<header class="w-full bg-white h-20 border-b border-gray-100 flex items-center justify-between px-4 sm:px-8 lg:px-12 sticky top-0 z-50 bg-white/95 backdrop-blur-md">
+<div class="flex items-center gap-6 lg:gap-10">
+<!-- Slack from Salesforce Logo -->
+<a aria-label="Slack homepage" class="flex-shrink-0 flex items-center" href="https://slack.com">
+<img alt="Slack" class="h-7 md:h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEgavbKuOiBykywl8u3GqZZJ_yQZa5uSNyNcItCGQ20nuxCcuhRvrMqG11ChIxCLmkE3LBiwny4PbkXRunWbiytZOhAzIZv6Yy96bRmBk1i4eyZnN_0ulGXB6a43zPUHAJ0YLhZk1LhaHMkjBkjYicEuKD8jsfvV2ZgOVNO4PlgIz54TDQ8zuo_ItPyGhVaWyMlPquv9tmRAMGc0ZsJDD42j9HFX4sA8bo2FNyDuE62uE7G0rZn2FJnJB9CcMAgt3wtmo6qKnXThDW"/>
+</a>
+<!-- Desktop Nav Items -->
+<nav aria-label="Primary Navigation" class="hidden lg:flex items-center gap-7 text-[15px] font-semibold text-[#1d1c1d]">
+<div class="relative group cursor-pointer flex items-center gap-1.5 hover:text-[#4a154b] transition-colors py-2">
+<span>Features</span>
+<svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-[#4a154b] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+<div class="relative group cursor-pointer flex items-center gap-1.5 hover:text-[#4a154b] transition-colors py-2">
+<span>Solutions</span>
+<svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-[#4a154b] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+<a class="hover:text-[#4a154b] transition-colors py-2" href="#enterprise">Enterprise</a>
+<div class="relative group cursor-pointer flex items-center gap-1.5 hover:text-[#4a154b] transition-colors py-2">
+<span>Resources</span>
+<svg class="w-3.5 h-3.5 text-gray-500 group-hover:text-[#4a154b] transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</div>
+<a class="hover:text-[#4a154b] transition-colors py-2" href="https://slack.com/pricing">Pricing</a>
+</nav>
+</div>
+<!-- Right Header Utilities -->
+<div class="flex items-center gap-3 md:gap-4 text-sm font-bold">
+<!-- Search -->
+<button aria-label="Search" class="p-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-full transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+</button>
+<a class="hidden sm:inline-block text-[#1d1c1d] hover:text-[#4a154b] px-2 py-1 font-semibold transition-colors" href="https://slack.com/signin">Sign in</a>
+<!-- Secondary: REQUEST A DEMO -->
+<a class="hidden md:inline-flex items-center justify-center border border-[#611f69] text-[#611f69] font-bold text-xs uppercase tracking-wider px-4 py-3 rounded hover:bg-[#611f69]/5 transition-colors" href="https://slack.com/contact-sales">
+        Request a Demo
+      </a>
+<!-- Primary: GET STARTED -->
+<a class="inline-flex items-center justify-center bg-[#611f69] text-white font-bold text-xs uppercase tracking-wider px-4 py-3 rounded hover:bg-[#4a154b] shadow-sm transition-colors" href="https://slack.com/get-started">
+        Get Started
+      </a>
+<!-- Hamburger for Mobile -->
+<button aria-label="Open Mobile Menu" class="lg:hidden p-2 text-gray-700 hover:text-black hover:bg-gray-100 rounded-md ml-1" id="mobileMenuBtn">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path></svg>
+</button>
+</div>
+</header>
+<!-- MOBILE NAVIGATION DRAWER -->
+<div class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden transition-opacity" id="mobileDrawer">
+<div class="fixed right-0 top-0 bottom-0 w-[85%] max-w-[360px] bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+<div>
+<div class="flex items-center justify-between pb-4 border-b border-gray-100">
+<img alt="Slack" class="h-6 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwCI4eB1ETyatArhg7JmxwqUiaegPflclKyVpkdnYaYpcoOjvdNVDLkiDUgyVLRZafseHHvPlkgBUuknIYFG8WxIB4l8aJbF9V9685-P7Lqn1F5qIJ5Iu3GzaEILWaP3JyxedylmmbSW3K1tNcRaSa-6WLnTnSq4Aohdspmoeceyrlk0K6_LJxyj8-NSUysZoEG38mbv-PDFByJLhzEpznFKGFRI75oYrz2BgDmJBlbkHKIumMkxoNXyOf1m4rFG5Dd0e8MRWH-vtt"/>
+<button aria-label="Close menu" class="p-2 text-gray-500 hover:text-black rounded-full" id="closeDrawerBtn">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+<nav class="flex flex-col gap-4 mt-6 text-base font-semibold text-[#1d1c1d]">
+<a class="py-1 hover:text-[#4a154b]" href="#">Features</a>
+<a class="py-1 hover:text-[#4a154b]" href="#">Solutions</a>
+<a class="py-1 hover:text-[#4a154b]" href="#enterprise">Enterprise</a>
+<a class="py-1 hover:text-[#4a154b]" href="#">Resources</a>
+<a class="py-1 hover:text-[#4a154b]" href="https://slack.com/pricing">Pricing</a>
+<a class="py-1 hover:text-[#4a154b]" href="https://slack.com/signin">Sign In</a>
+</nav>
+</div>
+<div class="flex flex-col gap-3 pt-6 border-t border-gray-100">
+<a class="w-full text-center border-2 border-[#611f69] text-[#611f69] font-bold text-xs uppercase tracking-wider py-3 rounded" href="https://slack.com/contact-sales">
+          Request a Demo
+        </a>
+<a class="w-full text-center bg-[#611f69] text-white font-bold text-xs uppercase tracking-wider py-3 rounded" href="https://slack.com/get-started">
+          Get Started
+        </a>
+<div class="flex items-center justify-center gap-2 text-xs text-gray-500 pt-2">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtD9Vx35xwAVBgQGuluzMlpNZkC9GQiKSbJe-otgvNwN1jbWuEOJ8SmDIPEQDML2N5UtrLH-LTzhSRPNPI3AUzJMeLRsEUozkotUwKWSK0ZHnXJKSLGX6a9bKIovXyFAGVkHXoSTdh7AwF-GmRHYLFdY1Bp8Qk2Asr9BbRZhT8bYEPrI_2oaV72hO7jWIPfHL3Am-PwCt1deLmkMfnQMwJmXlxSv_A2SHVAmnKPBM13zrl4dzewt98ht8E-RPnBkAtQEnOVcVBbkDl"/>
+<span>Download Slack for Desktop</span>
+</div>
+</div>
+</div>
+</div>
+<main class="w-full">
+<!-- HERO SECTION -->
+<section class="w-full bg-white pt-14 md:pt-20 pb-16 px-4 sm:px-6 lg:px-8 text-center max-w-7xl mx-auto flex flex-col items-center">
+<h1 class="text-4xl sm:text-5xl md:text-[62px] lg:text-[66px] font-extrabold text-[#1d1c1d] tracking-tight leading-[1.08] max-w-4xl">
+        All your people and AI agents working together.
+      </h1>
+<p class="mt-6 text-lg sm:text-xl md:text-2xl text-gray-700 max-w-2xl font-normal leading-relaxed">
+        Slack connects your team. Slackbot multiplies what they can do.
+      </p>
+<!-- CTA Row -->
+<div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+<a class="w-full sm:w-auto bg-[#611f69] text-white font-bold text-sm tracking-wider uppercase px-8 py-4 rounded hover:bg-[#4a154b] transition-all shadow-sm" href="https://slack.com/get-started">
+          Get Started
+        </a>
+<a class="w-full sm:w-auto bg-white border-2 border-[#611f69] text-[#611f69] font-bold text-sm tracking-wider uppercase px-8 py-4 rounded hover:bg-[#611f69]/5 transition-all" href="https://slack.com/contact-sales">
+          Find Your Plan
+        </a>
+</div>
+<!-- Customer Logos -->
+<div class="mt-16 w-full max-w-5xl">
+<p class="text-xs uppercase font-extrabold tracking-widest text-gray-500 mb-8">
+          Trusted by top teams
+        </p>
+<div class="flex flex-wrap items-center justify-center gap-8 sm:gap-12 md:gap-16">
+<img alt="GM" class="h-8 md:h-9 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzHcLOiDigfbfuPpV4Pj4bYJ1mnHEiZ0bp-kyP7yM5rSKygGbNf4nKnbA8n_u9N8YqzY7Dq3Z0p5XoXWGxOakoWAmYRe9OdW3VGWhiUhW_M1JsmJ5bU41mhpTXfyWHsQAMVk63PmHUH_Rnpc1m3rrykaKfysnpITNg8LTlOMA68wk435xhaAQ30a4icU3TnNSLNsUghxAxn5TItrFSZsSTsJZHtAHPDYKzgaGp8m7Z8PDHrvaDDsK6yXfkdi1A3NDgyAiCIftISfwI"/>
+<img alt="OpenAI" class="h-7 md:h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIv4Ppu5oG5oNXhgLYwOpDqmFZclPD2-r5Kcc7HRE5sLd2xCZch6OKyVANnuDIugpocrwkum3gzfPahk97t6DecI0QuapcDsix0JGzT2ZI5-ok8PtkjS4xERyk5tt6Nry4ZQrDo-521qyM0XP471G2wT4wlAwgrW_EjZYONjG3-1TdAUZe3hr08mrtuEMzF77skCbZwIzC-hVDRVw_W0NG3CxuXxOGLBP2KB7GyX9oTyYoUQ1JH9ETjyaSy41pOwmlRvVGl_7PYABv"/>
+<img alt="Target" class="h-8 md:h-9 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDVECszRj90LHsP52wn3pXoHwSnJ9F1XE-Gkwxcwhr9I2aci_ZWfrqnJwP2W_caZNsMoi9DUecBfXa-lEnfuFCaHWJpLPo-U2lWVd_gN1fc3bY2GVGcrV-QquLsztXHMGn_EPQyuUm8wR2CJWM22mYGstf9TTBz6EEDvh-aaiHCWvDanFTHhTDIq_Pv_3WqU8lIWqpjTGc4lUmcf_32RIhMz4ZgNh5NK65kmHcObUf0BL6ZMH5uAp53VKPB0B-emzLeFcxo9kQ6Fh1A"/>
+<img alt="Paramount" class="h-8 md:h-9 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0bWXolrkdG9X6xlPd3Pb6fqsiZOLm_HASz-0P4h4fOWy_Qi6a_SqBgcTYNSjcRtwdF3e_UaKMMQhO17S9kvkA2lkEydiUjSehBEtxqhdQqZHv0l3F1yD4fnMs5-t6r7cbxw_StoPfEN0zTdiuABATKJ9zJ16TCHSzBisL0f8tTOd13Pv6RQIRbv0E9tZ8QxJA6hQc0n6H9QTYG1EdB19_TRaUDtMEUruKVGGwl6Vvsw_PQpt_NafkX5hIynzAkOAQb-Dc1sBMz3JF"/>
+<img alt="Stripe" class="h-7 md:h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFQ1pHtYNV91iNjgB5uzV_IrlrwebA6TJ1lWUJPYAIqHG0x4QrM-NX1GuQajICy3V9EjPeVDUzJUwrz6qu9JDXZUXspIsUuW5wH0FriI76l1u6uXwZwHeXRRsDFni4ZsksIwe7rCS8c4xFGiIh8nHkMuDSB2eijkHvF_mJFJRODY63G1VH-YFq_1jW_tMK1gKVmnzsClwq5dw1hAwXyOaWMED4CXJfKZmMJYmVryfcyQN6BESpfdUX_0QYkOcPa_7J3IOUoQzsLfUA"/>
+<img alt="IBM" class="h-7 md:h-8 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHsdbttug9l2XfXqYjIt0nphlFLTjoRiZHj9Jr12QvZGq8vJ2Cwrz5RwltmOMLrtfpKT3bB4DJ8vXVcr-q_d2lkGxceBSkU5YIKPIyASHM9B2YMu2V1JOnN4JhrgFQFhb4E0C-O_kv8nFJJ5yimhO7p8Bfyd1MSnr9Js0YjUZdsEwJoPpfzDw3q-uxvY5tQRXAdVj9Csn5nLdZlc3RvfHfi6a503zbk_o0ne1MRv3pPcfZXtfGqwOHu07KmsFMp-9RnVnPW0QNQwr9"/>
+</div>
+</div>
+<!-- Main Product Video Canvas -->
+<div class="mt-14 w-full max-w-[940px] mx-auto rounded-2xl shadow-2xl overflow-hidden border border-gray-200/90 bg-white">
+<video autoplay="" class="w-full h-auto block" loop="" muted="" playsinline="" poster="https://a.slack-edge.com/5cb5052/marketing/img/homepage/revamped-25/hero/hp-hero@2x.jpg">
+<source src="https://a.slack-edge.com/5cb5052/marketing/img/homepage/revamped-25/hero/hp-hero@2x.mp4" type="video/mp4"/>
+</video>
+</div>
+<!-- 5 Product Tabs with real SVG icons -->
+<div class="mt-8 flex flex-wrap items-center justify-center gap-2.5 max-w-4xl px-2">
+<button class="hero-tab active inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-[#f4ede4] text-[#1d1c1d] border border-[#ebdcd0] shadow-sm transition-colors">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEV02UbssEluMNOwfqdIbWgYorKVM33AbOdS0mIIwf__EHH-rYXBdzJ4n4wE8kjhEutQH6_elW3d4ipUdv3K5jvnFj8I7bNOyQvNsho7xTQbTqMTclzGQhf4pTuW6iRoSg8buBqiMcJ6HQlkDqOgYi53G46tanntAxiuAo6h4jSJHo47UYef3Cc7cyTq0H_Ck2dTA8Aj7-GM_ESYwUzLoEAzslcQb90qnHn7F29SF62rzR1RsEp_-mcA7LM6nacOVwEKrJ934vYer8"/>
+<span>Ask Slackbot</span>
+</button>
+<button class="hero-tab inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 border border-transparent transition-colors">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwYrSwdMMO_CuoEwpD8yQHvlA8Ag6xOFsHPz49pR_xda15hjZakK-2N-L89RlnXL3x0LVYDKkhyReDjk_f2UvBRcAZcGGz41L0KGT6Cit1OJKn6nhuuSJAmJUqntLxNYTB0FT25xTVZaq5KCEdgWib_s5HhMi5cauTpSxeFvekHRc7IV7DNuEXudn-_32lJGfZwjDbXowIefYcUGd04uwdCC3rZrQSj11VwYHXXkDuF5i8iN12GJSOGszJHcZhLyiErP0S8msgb2fz"/>
+<span>Plan launches</span>
+</button>
+<button class="hero-tab inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 border border-transparent transition-colors">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrRI1QU5z-jaxHX8REGzoUCMTKDSSBV-kr2BysUFIK70vHL0stf-13Pl6emJsLBCUwd-lXsmCkVsdVbzTmstCUat4UOwNfPyvGsuAGWRtn2ktBWQAuKUpLyS0Jdia7c7y4f0xb_yE1lbY9jKafafukgPQl40wV_AWngMJAofTv9R4gYE7Pjk2u4gmWYjmPD-EnZhTKjC2iW2AcjjYuaeTr5ZEfSGMFGAOI8_QFM2xSwAHaDpgpogKS10eHv2iRs_8uivWJ_hqRLHOr"/>
+<span>Run projects</span>
+</button>
+<button class="hero-tab inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 border border-transparent transition-colors">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJAEURh7HBygO7XDZ6lwzpaLGx75jq11GeRiy21mLd6iOwEo8L9sdYZ-VndcRIaVZPIf4TG3mwdzOQ32TFun8J-R9pcVR31CHJg0yeBrDl8JNIQ3iPvNsnwpGzIWyPr9k0bC4BzM0eoRE3HQkaEGydabwx6gyK8mFkzN25i5j6sKtlAcEM6Csmdf2uPUMWWUfoTARvqpo6bNJkEOClMNmL2yqygmFKWAYwlbsaxSLRcZ6-cN3h1ygXPOw1uycqGQjfKpVDvU6DKGgb"/>
+<span>Chat with clients</span>
+</button>
+<button class="hero-tab inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-gray-700 bg-gray-50 hover:bg-gray-100 border border-transparent transition-colors">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAsnR3vOzqQPi9lUSgZLwSX-pDxfrrhmCb9QLrgAUYzB6BxcxOBC3WyYxwnc0cxxvMZ5pN_r8agOGIbIzfbEL5BfvLfcaiZxPQwNeZVdINesVphvHR0G8PKtSTG8FCAek8Zr9nWzWnUg8tnNFXtJ82xzfuQd0LAH7Xms1aDhfc5PQrecl7ou39aswLjbouoxefTPkwKVPECrgso4qyC2hsNq_HteyGb2cqLojb2js3ulM8fXVYpb20PBZlo8d543oin0AbYJH3hb_YF"/>
+<span>Automate tasks</span>
+</button>
+</div>
+</section>
+<!-- 4. DEEP PURPLE AI SECTION -->
+<section class="w-full bg-[#4a154b] text-white py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-4xl mx-auto mb-16">
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-tight">
+            Reimagine what’s possible with AI and agents.
+          </h2>
+<p class="mt-5 text-base sm:text-lg text-purple-100 font-normal leading-relaxed max-w-3xl mx-auto opacity-95">
+            AI in Slack doesn’t make you think, it helps you do. It summarizes and searches based on actual conversations, and with it, makes every app and agent more helpful and contextually aware than ever.
+          </p>
+</div>
+<!-- Interactive AI Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-[#3b113c] p-6 lg:p-10 rounded-2xl border border-white/10 shadow-2xl">
+<!-- Left Options Navigation -->
+<div class="lg:col-span-5 flex flex-col gap-2">
+<button class="ai-card active w-full text-left p-4 rounded-lg cursor-pointer transition-all flex items-center justify-between group" data-media="github">
+<span class="font-bold text-base text-white">Review code with Github Copilot</span>
+<svg class="w-4 h-4 text-[#ecb22e]" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path></svg>
+</button>
+<button class="ai-card w-full text-left p-4 rounded-lg cursor-pointer text-purple-200 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group">
+<span class="font-medium text-base">Update deals just by asking Slackbot</span>
+</button>
+<button class="ai-card w-full text-left p-4 rounded-lg cursor-pointer text-purple-200 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group">
+<span class="font-medium text-base">Summarize a conversation you missed</span>
+</button>
+<button class="ai-card w-full text-left p-4 rounded-lg cursor-pointer text-purple-200 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group">
+<div class="flex items-center gap-2">
+<span class="font-medium text-base">Get fast answers with Claude</span>
+<img alt="Claude" class="h-4 w-auto object-contain opacity-80 inline-block" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYbNRZw2XokIRJfm717bjvOjk_iRP91-Zrnr5nfNLNr7jQcLKUq2s3ZBUDronGPSqvLoKOKRIF7Q-HPVHR6I7bTDHYlPTrG8wO3k-8kSr2Lnles1f5XkhWuwjVHdp1TUg6NWlyGBGIg6ApmcmlrxE6XcZ-HreTBKR_P6rWZZshZ_Cej50i3mt0tPpcc9KkrSvRHJ1y6uW3gFxe3k-jslbLfVzANRch171ZEMdhGoyeCAixxY-LoFvyyT_ssA4gPJ8F52QloBHXhmAO"/>
+</div>
+</button>
+<button class="ai-card w-full text-left p-4 rounded-lg cursor-pointer text-purple-200 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group">
+<span class="font-medium text-base">Turn on AI note-taking in huddles</span>
+</button>
+<button class="ai-card w-full text-left p-4 rounded-lg cursor-pointer text-purple-200 hover:text-white hover:bg-white/5 transition-all flex items-center justify-between group">
+<span class="font-medium text-base">Lookup customer data in Agentforce</span>
+</button>
+</div>
+<!-- Right Real UI Media Poster/Video -->
+<div class="lg:col-span-7 flex justify-center">
+<div class="rounded-xl overflow-hidden shadow-2xl border border-white/15 bg-[#1a1d21] w-full">
+<video autoplay="" class="w-full h-auto block" id="aiVideoPlayer" loop="" muted="" playsinline="" poster="https://a.slack-edge.com/d83eb17/marketing/img/homepage/revamped-25/dark-component/uis/github@2x.jpg">
+<source src="https://a.slack-edge.com/6dfe43d/marketing/img/homepage/revamped-25/dark-component/uis/github@2x.webm" type="video/webm"/>
+</video>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 5. "WHAT'S NEW IN SLACK" (8 cards grid / horizontal scroll) -->
+<section class="w-full bg-[#f8f9fa] py-20 px-4 sm:px-6 lg:px-12 border-b border-gray-200">
+<div class="max-w-7xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<span class="text-xs uppercase font-extrabold tracking-widest text-[#611f69]">Innovation</span>
+<h2 class="text-3xl md:text-4xl font-extrabold text-[#1d1c1d] mt-2">What’s new in Slack</h2>
+</div>
+<a class="text-[#611f69] font-bold text-sm hover:underline mt-4 md:mt-0 flex items-center gap-1 group" href="https://slack.com/blog/news/">
+            See all product announcements <span class="group-hover:translate-x-1 transition-transform">›</span>
+</a>
+</div>
+<!-- 8 Cards Container: Grid on XL, smooth horizontal swipe on mobile -->
+<div class="flex md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 overflow-x-auto snap-x-mandatory no-scrollbar pb-4 md:pb-0">
+<!-- Card 1 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<img alt="Slack CRM insights" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGw7UYK7O_kQfP56wBRATFpDaYV_X_E_Bq3xf-6kr18JTSDgJH82AIE5gKI1iIh97zI4bUiM5P0TWxIih2O8sl5T8U483Gtu0l_RwXcRZqZc1ZjefUBuARuPIWuH6wi95wZspIlk2BYvHIB2v0wudRbiYDSW7t35qimJvNq8MDWWcv38vM9JcvraN9K4T_vA0AVKs6wyUzBU7p8Li1eYP8pOAwXDNRLVojEwGKweeHmq8cSdyCT3OHUhyw4GrEatwswmr2B569MSYC"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-[#611f69] mb-3">CRM</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Slack CRM: Generate meeting insights &amp; Salesforce tasks</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Automatically synthesize client discussions into deal milestones and action items.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 2 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<img alt="Slackbot in Lightning" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMrpA4JhoyMrCPX-WPMQaJJginCmsTGCqKch5JUR0RZiohj_84TYZANfPnkLAx2OjtcqJwpm8KZ38WhkJtGEBgeS0Pc2O46BhkZzjzmhxwl0jD30nPR5bS2f37gnr5kE49B1GW2QJ_iQQ5vCVIV_BEqVwBz1XdE4TBfqtfjYztiRUYPelejlS4vD17yuRaB8v7adhpt7lH9UC4tVKrQ7RrCpX8gGco8FGIgen5lmPlKsQiUVsjc5R8YsFV_fYQ-PgFF445NBzY64cJ"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-100 text-blue-800 mb-3">Salesforce</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Slackbot in Lightning</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Access Slack intelligence directly within Salesforce Lightning console views.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 3 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-[#f4ede4] overflow-hidden flex items-center justify-center">
+<img alt="Work Object Embeds" class="w-full h-full object-contain p-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAroc35nXXO7Q12yFqMSQhxCNk1nbPe7u6KsZrGUXs7Ei2laHx2379ZGxOiuRljkXW3UUfbiUZQE3tQrlfUykFEArDbADIky9mFbFmQWOKNwT4nCdSbAkA0qobTub42c0BZ5UmNDSh6VoEyFmwerAlCVgqC4ukFFY0KCfTBKv2_uAgGjW2ExLh8zuJqhBXyvhI_FWGpSzCPmdlpQi-uHpED3vCK_zWWXAxFpu_S0wo_cLjqhCXijmEpW5SdhBGrGZSj-p4jEKpgu6pl"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-amber-100 text-amber-900 mb-3">Extensibility</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Work Object Embeds</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Embed rich records from any system of record directly in conversation feeds.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 4 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-[#f4ede4] overflow-hidden flex items-center justify-center">
+<img alt="Slack Lists MCP Server" class="w-full h-full object-contain p-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDTVbgvpwHdGrBBtoNWxA7tedNAp-mU9gjJvdCdWA23mFy2RFH4abEf0l0X4X4SJ8jAL1Jndi1CU0sPkWMHhoPvXONwlk_1ZWSQhyOp4_uOW3GttvlwHOwglcRJJrdsFVOXMuDlKXOykJdjDg2emHfhl8Un7oE4OpiOzNbSYIiZw5niFgUEdW1iwR4VoJm6OoW5PqKoQjduQ15bsY9NuwonJA_BTaVYISyssY9BTneYRGKwzFrkKuZSo4zOhCp-tDqeaMsPnYVbTqV"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-[#611f69] mb-3">Developer</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Slack Lists in the Slack MCP Server</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Connect structured project data to Anthropic and OpenAI MCP agents seamlessly.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 5 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<img alt="Gmail Domain-Wide Auth" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAu22e0gYAJnAIZFODn_hlOa-6i6ooP8KDnUklkbLH-qJ6E2lmgPYfq2WY1qLuGP2n-Puw96kvZdVy_sqq1r6oGq5fr-b71LGnMCznxd1JAzw7EdNXmK-mQdCbDDhw1wU7r42syIxd3eXe74-91ZyIc2TTuvadq6FIY_WwK_S9yd2iH1AfedEllumhmY4F4oZCB8IPh1O49drNDElBT147NVMHPJLd4i-aw5urqenvMZnXX-1hRoQmNDxvC9ztzQtNQ7Wkty8-cKFFT"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 mb-3">Admin</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Gmail Domain-Wide Auth (DWA)</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Enterprise security configuration for centralized workspace email integration.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 6 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-[#f4ede4] overflow-hidden flex items-center justify-center">
+<img alt="Slack MCP Server File Upload" class="w-full h-full object-contain p-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASQNhW7cUdT56wKJNOf1Ne0Km_CjsNL7RJ3qUgvAlPSDyARTU3HGz9dkDlaksk--AdmJKf_aFf71dDwUxQdPArSw6UK0pi1T-sue53RgtI7EFPUHHBOhahf-Hi1ypFRyfR3SJCJ8VJr5uDgQjJu93uvX3-HHqFjdjBCLpUncxB_1dnaTWQjh2fzGrYNCPlmjseQd_8YmjqK6P7wOdEJNW-JgbNE2cGcgOEOAj3Z1nr6eEGxI9Dx_FNYs8noErn5y85BBKOjAAlMTbV"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-purple-100 text-[#611f69] mb-3">Developer</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Slack MCP Server: File Upload &amp; Channels</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Expanded API primitives for next-gen agent orchestration and workspace context.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 7 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<img alt="HTML rendering mobile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCyN0wc3X9Be9crudouC7WWrcyMzgIYNqKj5LE8LmICR9M-ygL8yMHJYLNubJHe36PL4yZoiO5NlRTz1BxQEskZulaO30FbnoCR0m4nWxZWs2xOQMKIncNNfpKI6bFJcAmHPwD8jSInEyTmSfbA8BJn1BGYEuLzHtOq-XgfgwmTk6GCa3DY-ELJlifi3WOfDY1m9WpCjDppUvdMunc4NDskX01-X0X-BXJ0swcdgAKShEjFudfNilf2-aEieVIScixfVFqklQikkpE"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-cyan-100 text-cyan-900 mb-3">Mobile</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">HTML file rendering on mobile</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Native in-app previewing for rich web reports, dashboards, and documents.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+<!-- Card 8 -->
+<article class="min-w-[280px] sm:min-w-[320px] md:min-w-0 snap-card bg-white rounded-lg border border-gray-200 hover:shadow-lg transition-all duration-200 flex flex-col overflow-hidden">
+<div class="h-44 w-full bg-gray-100 overflow-hidden flex items-center justify-center">
+<img alt="Slackbot Analytics" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA7mic6uySdNnIFyWOvPWg6SWIzoD6L3JI4O8MbTnoOmM2_6N9B_S-S73bTRsF0tapbWNoDhjjXZRe5TndD3Ozjhx6Uj-M3v183-Kl3N90CrNu6cUiS9gASQXFPV-YKe_5FElaKh-yEKxh-ktBNXjyb2gCR2McvcPSogViuZ2L2vqrk9yPTNjhmmgSrzmYpnRXYVElWuwapLT2WxoI0H7iJR4FepfaWDXIEN2Yp4Ym_wzOMbKXIZ88-fkVoiHCnZHg4Ro72_4r-DgxC"/>
+</div>
+<div class="p-6 flex flex-col flex-grow justify-between">
+<div>
+<span class="inline-block text-[11px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-indigo-100 text-indigo-900 mb-3">Analytics</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mb-2 leading-snug">Slackbot Analytics</h3>
+<p class="text-sm text-gray-600 leading-relaxed">Monitor agent utilization, response efficacy, and time saved across teams.</p>
+</div>
+<a class="mt-6 text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center gap-1" href="#">
+                Learn more <span aria-hidden="true">→</span>
+</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- 6. STICKY PILLAR SECTION: "A modern foundation for every team" -->
+<section class="w-full bg-white py-20 px-4 sm:px-6 lg:px-12 border-b border-gray-100" id="enterprise">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-12">
+<h2 class="text-3xl md:text-4xl font-extrabold text-[#1d1c1d]">A modern foundation for every team</h2>
+<p class="mt-3 text-gray-600 text-base md:text-lg">Unify your institutional knowledge, conversations, and tooling in one intelligent space.</p>
+</div>
+<!-- Pillar Navigation Switcher -->
+<div class="flex items-center justify-center gap-2 sm:gap-4 mb-10 overflow-x-auto pb-2">
+<button class="pillar-btn active px-6 py-3 rounded-full text-sm font-semibold border border-transparent transition-all" data-pillar="knowledge">Knowledge</button>
+<button class="pillar-btn px-6 py-3 rounded-full text-sm font-semibold border border-gray-200 text-gray-600 hover:text-black hover:border-gray-300 transition-all" data-pillar="people">People</button>
+<button class="pillar-btn px-6 py-3 rounded-full text-sm font-semibold border border-gray-200 text-gray-600 hover:text-black hover:border-gray-300 transition-all" data-pillar="process">Process</button>
+<button class="pillar-btn px-6 py-3 rounded-full text-sm font-semibold border border-gray-200 text-gray-600 hover:text-black hover:border-gray-300 transition-all" data-pillar="platform">Platform</button>
+</div>
+<!-- Dynamic Pillar Display Card -->
+<div class="bg-[#fcfaf7] border border-[#ebdcd0] rounded-3xl p-6 sm:p-10 lg:p-12 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-5 flex flex-col justify-center">
+<span class="text-xs font-bold uppercase tracking-widest text-[#611f69] mb-3" id="pillarEyebrow">Enterprise Knowledge</span>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-[#1d1c1d] mb-4" id="pillarTitle">Turn institutional memory into immediate momentum.</h3>
+<p class="text-base text-gray-700 leading-relaxed mb-6" id="pillarDesc">
+              Search across conversation channels, canvas guides, and attached files with AI-powered synthesis. New hires onboard faster, and distributed squads stay synchronized.
+            </p>
+<div class="flex items-center gap-6 pt-4 border-t border-[#ebdcd0]/70">
+<div>
+<p class="text-2xl font-extrabold text-[#1d1c1d]">90%</p>
+<p class="text-xs text-gray-600 font-medium">Faster retrieval</p>
+</div>
+<div class="h-8 w-px bg-gray-300"></div>
+<div>
+<p class="text-2xl font-extrabold text-[#1d1c1d]">2.4x</p>
+<p class="text-xs text-gray-600 font-medium">Team adoption</p>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 flex justify-center">
+<div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200/90 bg-white w-full">
+<img alt="Slack UI displays an AI answer to a search query." class="w-full h-auto object-cover block" id="pillarImage" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCevFyJ9wGWU-U9bTsFUUsi-g4rCw9nQluCJSgdYSmChdfTGIJdioMPR8OKslxzYj8Lsk3jKmNOHJwtbbujq8syfOAsowLbvrJTqcpnCuMA7fuoBSkZwZeHHhQWdQQEulwJXrDsltpI7Dgei9InJvun_bzOl0vNkm2UG_ScsV2xs8zFX2z7fuSs0kpbeLY4__JA7YbfaWjQykhzRJMpvp3PCbDx6AV2-P5h8ZYwvtShY9TVRLbGvqt__96kfrnDW1mP7XZGipX1eX9_"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. BUSINESS GROWTH & CUSTOMER STORIES -->
+<section class="w-full bg-white py-20 px-4 sm:px-6 lg:px-12">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-xs uppercase font-extrabold tracking-widest text-[#611f69]">Growth</span>
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1d1c1d] mt-2">We’re in the business of growing businesses.</h2>
+</div>
+<!-- 3 Quantitative Metrics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+<div class="p-8 rounded-2xl bg-[#f8f9fa] border border-gray-100 flex flex-col">
+<span class="text-5xl sm:text-6xl font-extrabold text-[#611f69] tracking-tight mb-4">90%</span>
+<p class="text-base text-gray-700 leading-relaxed font-medium">
+              of Slack users say it improves company culture and transparency across distributed workforces.<sup>2</sup>
+</p>
+</div>
+<div class="p-8 rounded-2xl bg-[#f8f9fa] border border-gray-100 flex flex-col">
+<span class="text-5xl sm:text-6xl font-extrabold text-[#611f69] tracking-tight mb-4">43</span>
+<p class="text-base text-gray-700 leading-relaxed font-medium">
+              minutes saved per user, every single workday through automated workflows and bot integrations.<sup>3</sup>
+</p>
+</div>
+<div class="p-8 rounded-2xl bg-[#f8f9fa] border border-gray-100 flex flex-col">
+<span class="text-5xl sm:text-6xl font-extrabold text-[#611f69] tracking-tight mb-4">87%</span>
+<p class="text-base text-gray-700 leading-relaxed font-medium">
+              of Fortune 100 companies rely on Slack to innovate, organize projects, and safely build with AI.
+            </p>
+</div>
+</div>
+<!-- Featured Case Study Hero: OpenAI -->
+<div class="mb-14">
+<h3 class="text-2xl sm:text-3xl font-extrabold text-[#1d1c1d] mb-8 text-center md:text-left">
+            The most innovative companies run their business in Slack.
+          </h3>
+<div class="bg-[#1a1d21] rounded-3xl overflow-hidden shadow-2xl text-white grid grid-cols-1 lg:grid-cols-12 items-center">
+<div class="lg:col-span-5 p-8 sm:p-12 flex flex-col justify-between h-full">
+<div>
+<img alt="OpenAI" class="h-8 w-auto mb-8 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmjaIQnIGQQzaQpRKKpTOCszzYl4s_jxGl_Ci8uNthW3OO96BcCDh3q4kPgccqt58P0rQLTb3du3_Wn7ktx_46RXVTBhPtnlhZEiLnsDX_TAyzJzsihyIB8RmSJlT8UVYZOir_mxiJ9qh46eofMmLGqyr5TAtlAC2vZdk18Z79umgY4KC_vDHu-hk2qJGOyx7zY8La0Tvpne79jlE-ZaVPz8ZqwsZLgzwtH1I2otcKBvwUmx-BDXptvh83jlVXoXuWV9GdyPZUGkjH"/>
+<blockquote class="text-xl sm:text-2xl font-semibold leading-snug mb-6 text-gray-100">
+                  “How OpenAI Connects with Customers and Expands ChatGPT with Slack”
+                </blockquote>
+<p class="text-sm text-gray-300 leading-relaxed">
+                  OpenAI engineers, product teams, and customer success agents build, orchestrate API monitors, and collaborate seamlessly in Slack channels.
+                </p>
+</div>
+<div class="mt-8">
+<a class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-white hover:text-purple-300 transition-colors" href="#">
+                  Read OpenAI story <span aria-hidden="true">→</span>
+</a>
+</div>
+</div>
+<div class="lg:col-span-7 relative h-full min-h-[340px] flex items-center justify-center bg-black overflow-hidden group cursor-pointer">
+<video autoplay="" class="w-full h-full object-cover" loop="" muted="" playsinline="" poster="https://a.slack-edge.com/54df558/marketing/img/homepage/revamped-24/customer-videos/preview-posters/openai-poster@2x.jpg">
+<source src="https://a.slack-edge.com/0158981/marketing/img/homepage/revamped-24/customer-videos/preview-clips/openai@2x.webm" type="video/webm"/>
+</video>
+<div class="absolute inset-0 bg-black/25 flex items-center justify-center group-hover:bg-black/15 transition-colors">
+<img alt="Play Video" class="w-16 h-16 sm:w-20 sm:h-20 transform group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDf49qdpsAzL0Nv-u2z3ScrldAER3W_R1FcBaUE9xJqSpXhRsVtNU6zddJry3J8o70k_AKbEyWVgRKbUsu3uzb8f5C_fv6WDbWrxmBznaSSiXrHBZNcAFLQfw0-SCIt_maR1zEEwheXaZOWv6NXrka90F0VCxm28rLhPuIrYbmqyNP8eSkBy66RsM-L49owQMx_Dzbmy1AUuFWqoSxEhP91AdIUluaqCaTej_0CSfcfPsQWTiSFDN9ERNrxNgBW4HtA6-x-zTDPPKjJ"/>
+</div>
+</div>
+</div>
+</div>
+<!-- 3 Customer Stories Grid: Box, Caraway, Rivian -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-8 rounded-2xl bg-white border border-gray-200 hover:shadow-lg transition-shadow flex flex-col justify-between">
+<div>
+<img alt="Box" class="h-7 w-auto object-contain mb-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6Z0YQ_lLRXfL70dRK36wMC2NruvZF1NIkTpJYtMxgIT5IJpwClyz6aR1d24Gt3Uu6Qnq2mp_xVDSwR4jn-cd5BgUZtVv4ulyKCAyOU8OWbkr1msaRqEKFV-ZwHKx6k3tId-d7mFWmAKDdW0M3Kap78zndknjLZpFCpBVEb17s83TWWnbF9GzU1Jiqzbw6ckcr5cy24jKpqrpjtRZNE1Sa3Fsn31yP5Kzm3-tyacbHSqDtlpeBH1qodgbLJ0y03MEzm2anJGR1NQ1w"/>
+<p class="text-base text-gray-700 italic mb-4 leading-relaxed">
+                “Slack Connect slashed our turnaround time on critical cross-company projects from days to minutes.”
+              </p>
+</div>
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline pt-4 flex items-center gap-1" href="#">
+              Read Box story <span aria-hidden="true">→</span>
+</a>
+</div>
+<div class="p-8 rounded-2xl bg-white border border-gray-200 hover:shadow-lg transition-shadow flex flex-col justify-between">
+<div>
+<img alt="Caraway" class="h-6 w-auto object-contain mb-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9WdxD8tGn0cuQm4aVr3Ri90T2P_lgpxG1-YhNB7tKcoUFhtTE8KdcE0l3Eix5mnnMwXR1b7iUWDCElVDUq8w_DE29um-z264XTZXO9g24SdxjWT8wFsPal6Levexc7jnUGOmLLzT5-kljutMghkJC_guS3MrppVoyU4JTAdsZQDbzCnolMrFtrOpy66fPhKlIJ-S7pq3BricyYiVXv1tD3GMI8tkEjPskdOvarFzIFDG9zh8D_n1EcC4PhKKszQRZUnzjDFKXizMY"/>
+<p class="text-base text-gray-700 italic mb-4 leading-relaxed">
+                “Managing inventory pipelines, drops, and customer service escalation in Slack keeps our squad nimble.”
+              </p>
+</div>
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline pt-4 flex items-center gap-1" href="#">
+              Read Caraway story <span aria-hidden="true">→</span>
+</a>
+</div>
+<div class="p-8 rounded-2xl bg-white border border-gray-200 hover:shadow-lg transition-shadow flex flex-col justify-between">
+<div>
+<img alt="Rivian" class="h-7 w-auto object-contain mb-6" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAid63ow9wqS0Q1VOKwJAVqCLs7YIW7mfSbUU567nz870dWHPNC0BrSyuF6uFeSrERCOzuSaYV1ydHRtY4PLg8rtrKJpOcEARe9apWMKo_v_zNPp75b3TvFcvmecjIjRcD58DMNtKp23G916wHSJGfc8rIZNsf4ZtCmq_ML3gfJCiX7C2FfqAJ2GElW8zCMCuyRbXqG-MBDEwhCVAT09PD-_LgQcypqNpaYBVlKEIcYca7rK_BPdeqKnS-5oBywzxNzgpwYeJpklI8v"/>
+<p class="text-base text-gray-700 italic mb-4 leading-relaxed">
+                “Every electric vehicle assembly checkpoint connects engineering and assembly via Slack channels.”
+              </p>
+</div>
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline pt-4 flex items-center gap-1" href="#">
+              Read Rivian story <span aria-hidden="true">→</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. SCALE & G2 AWARDS SECTION -->
+<section class="w-full bg-[#f8f9fa] py-20 px-4 sm:px-6 lg:px-12 border-t border-b border-gray-200">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1d1c1d]">Millions of people love to work in Slack.</h2>
+</div>
+<!-- 4 Global Usage Stats -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center mb-16">
+<div class="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+<p class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#611f69]">700M+</p>
+<p class="mt-2 text-xs sm:text-sm text-gray-600 font-semibold">weekly messages synthesized by AI</p>
+</div>
+<div class="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+<p class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#611f69]">4M+</p>
+<p class="mt-2 text-xs sm:text-sm text-gray-600 font-semibold">workflows run each week without code</p>
+</div>
+<div class="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+<p class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#611f69]">3M+</p>
+<p class="mt-2 text-xs sm:text-sm text-gray-600 font-semibold">active custom &amp; ecosystem apps</p>
+</div>
+<div class="p-6 bg-white rounded-xl border border-gray-200 shadow-sm">
+<p class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#611f69]">1.7M+</p>
+<p class="mt-2 text-xs sm:text-sm text-gray-600 font-semibold">connected organizations via Slack Connect</p>
+</div>
+</div>
+<!-- G2 Market Leadership & 6 Badges -->
+<div class="bg-white rounded-2xl p-8 sm:p-12 border border-gray-200 shadow-sm text-center">
+<p class="text-sm font-extrabold uppercase tracking-widest text-[#611f69] mb-2">Recognized Excellence</p>
+<h3 class="text-2xl sm:text-3xl font-extrabold text-[#1d1c1d] mb-8">Leader in over 303 G2 market reports<sup>4</sup></h3>
+<div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
+<img alt="Best Results - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCF5fc_FKgMYeUjPeomCyZfli1OheoUha-4lCHTfwFA4EvzOBR5LVbMmuYS5Wu2fo1V2CQOwICqiyb0xwN681AEpdJsrQLw0DZeNtt7u9esCo3FrREBNRpWKtgcbUCmfojeyBjV0H-D-IFJNe48bnkTKnnTfivexkygbB3ukJVSgIvFyC_rxmwQB6ZnT4OWDQnwvt1LICSAhY_nsT1UH57d1q4KU3HSiHjb1lP81yBDmu8h4UcphhR0tt_9DKVVdoFypXIAniF5nJV3"/>
+<img alt="Easiest Setup - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAjObkPBri6_SQzz44_7XmKICnYAfwEcv8co-gIc-pXQqBfpiVQ8OaJk6V6IDv46pQeLU2cTPZp6dvyidM-roFIkj7dLb-KUXWVEn999vxNyg1yokJRDSEopzDC0AxNK0beQtahX2mg_K6lAekNjl-6H9o3MO1fUTUp7MOaN4xKkLvukcUixwln44hDnzjnEii6Rn-uwKVBAiyRZvSGzxLtonbyL7GzEB07TWVR2Ftd2s9XWTujes274CzG13Bms8TjWKicQc9YImN"/>
+<img alt="Highest User Adoption - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpYlh9tbqX8b1ceU4hcRmR-mVrTbkIdj9zU360BHEo78HlCdiEQFk-Abvf-5W4-Jrl9vC9dcpolXiD_yMIF__7G0inyJjs8tYDZo1FlzjSD3tur_3a3PHOhwLPma6_g_7tzTuyt8RPIiDsFa3hz9NXcs-6Wnn9VMOfyIz-A31D-Ec1dcsZ4uLWY4ckGjXvZli2QPQn5hK4T-f944ZJTm-OqLa9RhCf-u5CTs76imqT8Xqm6p1YlrC3laKiBxleHKB6xMpccKk41Eq4"/>
+<img alt="Leader Small Business - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeSRbSASccKBD2Bu6pa85AzxtcijS9gJRT4htw_07KbO24VC0yxSXxVud1AzDdLvDcH1-v9_uMTIPmCpUGkg8MSIuVCIMSaJOY7K1kTzyxXEvhAAPCFEcjWJw6WaDA-PlzyecYurlwBaE1wmyqARwa8Fx00BfSkhHPtJ4UJ28hoNCwa44nPNDM4SCNZt6vk3lvfQlAsnRWRFcyhjqgcbJLVoLKkj_9LMW1yIgAX433OgBJgVognqfPUPhzwO8-LcKRdjjouYqzPRNd"/>
+<img alt="Leader Mid-Market - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaDT62BEhKW06o64EZAOIU-ZZrYFxJRVNrVAkwsHGnfO0y2AljwnS8z-FOBxW1PsRIIYrB5ias4Cf_sOWwBfdLWUGAY7ckxlmm7hpa8fSLCunekHvIKbqgglDHNBibpqSS4nRZx90MfrHgXhMit9E70njsiLZlnfHN-C5tqVuFSi-Wc39RfJPqPGd5nooBTtBoRNlCMxf3TQ-x3ZH3G99Hx9wtDtBxlRLetPhHrqAO6vxiLizn8HiOafZ3i3eLnU7KFIbYNmXxHLvF"/>
+<img alt="Leader Enterprise - Spring 2026" class="h-28 w-auto object-contain hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxBiJJHcVCFhYNMYeifdc4j-ns4tIidTH5Nltb2O2mVBc6KMcj3PMxgo2WCvu6-0C0_dwE3kkqm2lteo02bQ4cmK8G2Y_zY4KJwLgw7jeBEVxW7Nku9ijfAkgGIKKX4QbtGclV9ll31uh2NWWUrJARlc13Kgz0rqPNiUI2fkmNLNl82Q3IvtCiEJzhPgMMJAKG2Gy0sfVyTzyOhehVr0QAXqPvMf7j3SbPpVUFrh4d-85KUYcB7eZsQm4GUFBFENTOmfpzVpGKYvA2"/>
+</div>
+</div>
+</div>
+</section>
+<!-- 9. RESOURCE DEEP DIVE (4 Illustrated Resource Cards) -->
+<section class="w-full bg-white py-20 px-4 sm:px-6 lg:px-12">
+<div class="max-w-7xl mx-auto">
+<div class="text-center max-w-3xl mx-auto mb-14">
+<h2 class="text-3xl sm:text-4xl font-extrabold text-[#1d1c1d]">Your Slack deep dive starts here.</h2>
+<p class="mt-3 text-gray-600 text-base">Explore tactical guides, industry research reports, and live webinars.</p>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Resource 1 -->
+<div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="h-48 overflow-hidden bg-gray-100">
+<img alt="Report promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8Ah-P5A2Tfd_lZlMtFv98nKfR-wlr6zk4tYLIIhzI6iLUDRB2U_xP3tIbs-sff2yPuoCd2SAOO2I157IUZlziY3qB20BcTV7mjsUG_VZ29TKJuq_BXOj8b3tRxd5MeffmmSrHAwbFh6FK9L-5rm_tkUvVbatkmCfpOrw_3P1r1qPCd7OLN_nUUgInRqJjqIT-B7kPLhOALIFGA6Z0UVBX0gVydoNxwxh3kI2CT8eqVLgOh_3-ND8rpyiJO9k-5KCdh9RHSkXtd1CB"/>
+</div>
+<div class="p-6">
+<span class="text-[11px] font-extrabold uppercase tracking-widest text-purple-700">Report</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mt-2 mb-2 group-hover:text-[#611f69] transition-colors leading-snug">The Cost of Business as Usual in the AI Era.</h3>
+<p class="text-xs text-gray-600 leading-relaxed">Discover how AI-first communication architectures boost agility and eliminate tool fragmentation.</p>
+</div>
+</div>
+<div class="px-6 pb-6">
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center justify-between" href="#">
+<span>Read report</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Resource 2 -->
+<div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="h-48 overflow-hidden bg-gray-100">
+<img alt="Ebook promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCb6CS44kojU04gWBbFEbIgtycqTik7saVnY-YMNO7GTSgtl0BY9GrSTyURdt14j8cafoN7L3JRzLfEG7VtPcZp8nClRKBgWzAut-hn1z86RBO4pxbpaMmo2P-EmmwPyMZqcsmIyRVWFiqnQpFPQaL1rM_76a5RsXcCrVOiltsCRUjn5hbLGFvZuiyRbebr4aR_ntiWSZj9ZmIIAx7dshXXyRAxaT44S4-6wkkTBBCXBm_cc6Nod4Qc8vxsB3KT6quw5GCfXJmLoTH_"/>
+</div>
+<div class="p-6">
+<span class="text-[11px] font-extrabold uppercase tracking-widest text-emerald-700">Ebook</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mt-2 mb-2 group-hover:text-[#611f69] transition-colors leading-snug">Unlock Agentic Productivity for Every Employee</h3>
+<p class="text-xs text-gray-600 leading-relaxed">A practical guide to deploying autonomous agents in team channels to handle routine operations.</p>
+</div>
+</div>
+<div class="px-6 pb-6">
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center justify-between" href="#">
+<span>Download ebook</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Resource 3 -->
+<div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="h-48 overflow-hidden bg-gray-100">
+<img alt="Webinar promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-YJUZHtil2i8qkO47tfQEPCoVKYfFkMk-JUxNZH9na06_MVaiWLS6xtrhAe94BAc6vSK7Nb-7xvxgEY9AdR45yG4IRMKO-G7V6zKM_N8fVPhfj7x5ffeuKvnnq0bVozpotCW7fy3jtkYByvD-N6zLPbPW_3DudAJAsNa26oTUdTC6ucEMTcy_Bs6nKiNgFs66LjmqYXSsyQB_qym4pMMs1Uqt7NdbneeQKVwTtWUntYgQCilRTdE6DyD7q0zgKS39gc8VsGCgYRDF"/>
+</div>
+<div class="p-6">
+<span class="text-[11px] font-extrabold uppercase tracking-widest text-blue-700">Webinar</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mt-2 mb-2 group-hover:text-[#611f69] transition-colors leading-snug">Agentforce 2.0: Agentforce Arrives in Slack</h3>
+<p class="text-xs text-gray-600 leading-relaxed">Watch the launch breakdown of Salesforce Agentforce integrated natively inside your workspace.</p>
+</div>
+</div>
+<div class="px-6 pb-6">
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center justify-between" href="#">
+<span>Watch now</span>
+<span>→</span>
+</a>
+</div>
+</div>
+<!-- Resource 4 -->
+<div class="bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-xl transition-all duration-200 flex flex-col justify-between group">
+<div>
+<div class="h-48 overflow-hidden bg-gray-100">
+<img alt="Guide promo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASokK1PuRAxomvi31fxpabQdv4M03AyvTdfZhqoT4HRyNYiZmVm5GeqDWQSrLVKsSJ8bhMI_IImUlnTBzMuMdVvK5ezgTyMuhvk-iQYvD7fa86LiF-2ipY8-eDLBanw-Evvwc3d77gAi16fGj9BRPWsUL2M4lPSpjFJbJm81BdzAKXRo3c1AJHltIcGTDpuxG9DdKGzhBt2GJ2IWWYtyPaRzB2843JIM0-IYnSqAB7XjWk-qG-AnIo5pxxbdpOIszP_qPrr7jII01l"/>
+</div>
+<div class="p-6">
+<span class="text-[11px] font-extrabold uppercase tracking-widest text-amber-800">Guide</span>
+<h3 class="text-base font-bold text-[#1d1c1d] mt-2 mb-2 group-hover:text-[#611f69] transition-colors leading-snug">10 Ways to Replace Ineffective Meetings</h3>
+<p class="text-xs text-gray-600 leading-relaxed">Actionable asynchronous habits for high-output engineering, design, and product squads.</p>
+</div>
+</div>
+<div class="px-6 pb-6">
+<a class="text-xs font-bold uppercase tracking-wider text-[#611f69] hover:underline flex items-center justify-between" href="#">
+<span>Get the guide</span>
+<span>→</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. FINAL CTA BANNER -->
+<section class="w-full bg-[#4a154b] text-white py-20 px-4 sm:px-6 lg:px-12 text-center relative overflow-hidden" style="border-radius: 40px 40px 0 0;">
+<div class="max-w-4xl mx-auto relative z-10">
+<h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+          See all you can accomplish in Slack.
+        </h2>
+<p class="mt-4 text-purple-200 text-base sm:text-lg max-w-xl mx-auto">
+          Get started for free, or talk to our team about tailored plans for enterprise scale.
+        </p>
+<div class="mt-9 flex flex-col sm:flex-row items-center justify-center gap-4">
+<a class="w-full sm:w-auto bg-white text-[#4a154b] font-bold text-xs uppercase tracking-wider px-8 py-4 rounded hover:bg-gray-100 transition-colors shadow-lg" href="https://slack.com/get-started">
+            Get Started
+          </a>
+<a class="w-full sm:w-auto border-2 border-white text-white font-bold text-xs uppercase tracking-wider px-8 py-4 rounded hover:bg-white/10 transition-colors" href="https://slack.com/contact-sales">
+            Talk to Sales
+          </a>
+</div>
+</div>
+<!-- Subtle Ambient Glow -->
+<div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-purple-600/30 blur-3xl pointer-events-none rounded-full"></div>
+</section>
+<!-- 11. FIVE DETAILED DATA FOOTNOTES -->
+<section class="w-full bg-[#f9f9f9] py-10 px-4 sm:px-6 lg:px-12 border-b border-gray-200 text-xs text-gray-500 leading-relaxed">
+<div class="max-w-7xl mx-auto space-y-1.5">
+<p>1. Gartner Magic Quadrant for Unified Communications as a Service, Worldwide, 2025.</p>
+<p>2. Slack Customer Success Metrics Survey conducted across 2,400+ enterprise accounts, 2026.</p>
+<p>3. Based on internal telemetry data measuring active workflows executed globally across enterprise workspaces.</p>
+<p>4. G2 Spring 2026 Grid Reports: Enterprise, Mid-Market, and Small Business Team Collaboration categories.</p>
+<p>5. Third-party vendor integrations require appropriate licensing and administrative configuration.</p>
+</div>
+</section>
+</main>
+<!-- 12. COMPLETE FOOTER -->
+<footer class="w-full bg-white text-[#1d1c1d] pt-16 pb-12 px-4 sm:px-6 lg:px-12">
+<div class="max-w-7xl mx-auto">
+<!-- Top Grid: Logo + 5 Link Columns -->
+<div class="grid grid-cols-2 md:grid-cols-6 gap-8 pb-14 border-b border-gray-100">
+<!-- Logo Column -->
+<div class="col-span-2 md:col-span-1">
+<a aria-label="Slack Home" href="https://slack.com">
+<svg class="w-8 h-8" viewbox="0 0 120 120">
+<path d="M26.2 76.5a12.8 12.8 0 1 1-12.8-12.8h12.8v12.8zm6.5 0a12.8 12.8 0 1 1 25.6 0v32.1a12.8 12.8 0 1 1-25.6 0V76.5z" fill="#E01E5A"></path>
+<path d="M43.5 26.2a12.8 12.8 0 1 1 12.8-12.8v12.8H43.5zm0 6.5a12.8 12.8 0 1 1 0 25.6H11.4a12.8 12.8 0 1 1 0-25.6h32.1z" fill="#36C5F0"></path>
+<path d="M93.8 43.5a12.8 12.8 0 1 1 12.8 12.8H93.8V43.5zm-6.5 0a12.8 12.8 0 1 1-25.6 0V11.4a12.8 12.8 0 1 1 25.6 0v32.1z" fill="#2EB67D"></path>
+<path d="M76.5 93.8a12.8 12.8 0 1 1-12.8 12.8V93.8h12.8zm0-6.5a12.8 12.8 0 1 1 0-25.6h32.1a12.8 12.8 0 1 1 0 25.6H76.5z" fill="#ECB22E"></path>
+</svg>
+</a>
+</div>
+<!-- Col 1: PRODUCT -->
+<div>
+<h4 class="text-xs uppercase font-extrabold tracking-wider text-gray-900 mb-4">Product</h4>
+<ul class="space-y-2.5 text-sm text-gray-600">
+<li><a class="hover:text-[#4a154b]" href="#">Features</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Enterprise</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Security</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Slack Connect</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Customer Stories</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Pricing</a></li>
+</ul>
+</div>
+<!-- Col 2: WHY SLACK? -->
+<div>
+<h4 class="text-xs uppercase font-extrabold tracking-wider text-gray-900 mb-4">Why Slack?</h4>
+<ul class="space-y-2.5 text-sm text-gray-600">
+<li><a class="hover:text-[#4a154b]" href="#">Slack vs. Email</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Channels</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Engagement</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Scale</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Watch the Demo</a></li>
+</ul>
+</div>
+<!-- Col 3: FEATURES -->
+<div>
+<h4 class="text-xs uppercase font-extrabold tracking-wider text-gray-900 mb-4">Features</h4>
+<ul class="space-y-2.5 text-sm text-gray-600">
+<li><a class="hover:text-[#4a154b]" href="#">Slackbot</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Huddles</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Canvas</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Clips</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Workflow Builder</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Slack Code</a></li>
+</ul>
+</div>
+<!-- Col 4: SOLUTIONS -->
+<div>
+<h4 class="text-xs uppercase font-extrabold tracking-wider text-gray-900 mb-4">Solutions</h4>
+<ul class="space-y-2.5 text-sm text-gray-600">
+<li><a class="hover:text-[#4a154b]" href="#">Engineering</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">IT</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Customer Service</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Sales</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Project Management</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Marketing</a></li>
+</ul>
+</div>
+<!-- Col 5: RESOURCES & COMPANY -->
+<div>
+<h4 class="text-xs uppercase font-extrabold tracking-wider text-gray-900 mb-4">Company</h4>
+<ul class="space-y-2.5 text-sm text-gray-600">
+<li><a class="hover:text-[#4a154b]" href="#">About Us</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Leadership</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">News</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Media Kit</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Careers</a></li>
+<li><a class="hover:text-[#4a154b]" href="#">Slack Shop</a></li>
+</ul>
+</div>
+</div>
+<!-- Utilities Row: Locale, Download, CCPA, Social Icons -->
+<div class="py-8 flex flex-wrap items-center justify-between gap-4 border-b border-gray-100 text-xs font-semibold text-gray-700">
+<div class="flex flex-wrap items-center gap-6">
+<!-- Region -->
+<button class="inline-flex items-center gap-2 hover:text-[#4a154b]">
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span>Change region: English (US)</span>
+<svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<!-- Download Desktop -->
+<a class="inline-flex items-center gap-2 hover:text-[#4a154b]" href="https://slack.com/download">
+<img alt="" class="w-4 h-4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCxJmql5sbBhS4dYNT0wmqIfEPWOuz2z2gFvNo0GgKisYzAisu2LCsjZ3Tf6Od46uhqoFvXwayDUssSvCx1C9JGNs-g1tUMnDbK5vHugkYeyRJFLsLwhz4U_7x1_dkVbx_AI6eEQSgdGcXwfhC6vD3DiAeeEUEsX9Fpc1s7PN1e0pbxxXzRXnb1c8ym08aaP6EZeRtvJpcqsSMsBjmH0tYOIugTwYU9fhrZ4FF2h4Bo6sDKyo_HZY2n6UPmUKd_zbFJJYGpk6xlNVFp"/>
+<span>Download Slack</span>
+</a>
+<!-- Privacy Choice -->
+<a class="inline-flex items-center gap-2 hover:text-[#4a154b]" href="#">
+<img alt="" class="w-5 h-auto" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3K-9gJOb1X2dRtA8DhbUhiXirsAy9V0Js12CkhJusovQrv6cOTE7Kw78AxqH37U8TZV7yWh_l4GlsrXaEFNtAuSDYhZS7fGYzsQDg2gE1AjbyEwNK9UTu9dDSv1NnZhLpCfBKmhoeuwGkz7Wes51CfrMD0Ae1Gle1Yg-oxis4uDCw1Ktju7X81oqg51LGxlwcgS8Xn6yKPy-qRD7Wl-Mui-Yg2hyfZmWIkMx3JzOhJRKSNGDlUn5XhetyPfrspmMtL9XIk_-VPSvp"/>
+<span>Your Privacy Choices</span>
+</a>
+</div>
+<!-- Social Icons -->
+<div class="flex items-center gap-5 text-gray-600">
+<!-- LinkedIn -->
+<a aria-label="LinkedIn" class="hover:text-[#4a154b] transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.64 1.64 0 1 0 0-3.28 1.64 1.64 0 0 0 0 3.28m1.37 9.74v-8.37H5.1v8.37h2.73z"></path></svg>
+</a>
+<!-- Twitter / X -->
+<a aria-label="X" class="hover:text-[#4a154b] transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
+</a>
+<!-- YouTube -->
+<a aria-label="YouTube" class="hover:text-[#4a154b] transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+<!-- Facebook -->
+<a aria-label="Facebook" class="hover:text-[#4a154b] transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+<!-- TikTok -->
+<a aria-label="TikTok" class="hover:text-[#4a154b] transition-colors" href="#">
+<svg class="w-4 h-4 fill-current" viewbox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.97v7.62c.03 2.11-.6 4.26-1.89 5.9-1.57 2.05-4.04 3.27-6.63 3.33-2.6.09-5.18-.98-6.93-2.89-1.78-1.93-2.58-4.63-2.2-7.22.38-2.63 2.03-4.94 4.38-6.14 1.61-.83 3.46-1.13 5.26-.88v4.11c-1.07-.3-2.25-.13-3.19.46-.95.59-1.58 1.61-1.7 2.73-.13 1.15.29 2.33 1.12 3.12.83.8 2.02 1.16 3.16.97 1.15-.17 2.12-.99 2.53-2.07.24-.65.34-1.34.33-2.03V.02h-.05z"></path></svg>
+</a>
+</div>
+</div>
+<!-- Legal copyright notice -->
+<div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+<div class="flex flex-wrap items-center gap-4">
+<a class="hover:underline" href="#">Privacy</a>
+<a class="hover:underline" href="#">Terms</a>
+<a class="hover:underline" href="#">Cookie Preferences</a>
+<a class="hover:underline" href="#">Security</a>
+</div>
+<div>
+<span>©2026 Slack Technologies, LLC, a Salesforce company. All rights reserved. Various trademarks held by their respective owners.</span>
+</div>
+</div>
+</div>
+</footer>
+<!-- INTERACTIVITY CONTROLLERS -->
+<script>
+    // 1. Mobile Menu Drawer Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+    const mobileDrawer = document.getElementById('mobileDrawer');
+
+    if (mobileMenuBtn && closeDrawerBtn && mobileDrawer) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileDrawer.classList.remove('hidden');
+      });
+      closeDrawerBtn.addEventListener('click', () => {
+        mobileDrawer.classList.add('hidden');
+      });
+      mobileDrawer.addEventListener('click', (e) => {
+        if (e.target === mobileDrawer) {
+          mobileDrawer.classList.add('hidden');
+        }
+      });
+    }
+
+    // 2. Pillar Switcher Data & Behavior
+    const pillarData = {
+      knowledge: {
+        eyebrow: "Enterprise Knowledge",
+        title: "Turn institutional memory into immediate momentum.",
+        desc: "Search across conversation channels, canvas guides, and attached files with AI-powered synthesis. New hires onboard faster, and distributed squads stay synchronized.",
+        img: "https://a.slack-edge.com/c3ea545/marketing/img/homepage/revamped-25/carousels/img-meet-slackbot.png",
+        alt: "Slack UI displays an AI answer to a search query."
+      },
+      people: {
+        eyebrow: "Global Collaboration",
+        title: "Bring partners, customers, and teams into one room.",
+        desc: "Connect external vendors via secure Slack Connect channels, jump into low-latency huddles, and communicate with shared canvas whiteboards in real time.",
+        img: "https://a.slack-edge.com/5cb5052/marketing/img/homepage/revamped-25/carousels/img-people-1.png",
+        alt: "Slack UI shows conversation thread between a team and an Agentforce agent."
+      },
+      process: {
+        eyebrow: "Automated Workflows",
+        title: "Build no-code automations in minutes.",
+        desc: "Standardize requests, gather approvals, and connect third-party endpoints using Workflow Builder without asking engineering for sprint capacity.",
+        img: "https://a.slack-edge.com/5cb5052/marketing/img/homepage/revamped-25/carousels/img-process-2.png",
+        alt: "A workflow builder outlines steps to send a message to a channel and add steps."
+      },
+      platform: {
+        eyebrow: "Ecosystem Integrations",
+        title: "Over 2,600 tools integrated with Salesforce trust.",
+        desc: "Deploy enterprise agents, pull logs from Vercel, sync tickets with Jira, and streamline code reviews directly from developer channels.",
+        img: "https://a.slack-edge.com/5cb5052/marketing/img/homepage/revamped-25/carousels/img-platform-1.png",
+        alt: "Slack platform tools integration with partner logo."
+      }
+    };
+
+    const pillarButtons = document.querySelectorAll('.pillar-btn');
+    const pillarEyebrow = document.getElementById('pillarEyebrow');
+    const pillarTitle = document.getElementById('pillarTitle');
+    const pillarDesc = document.getElementById('pillarDesc');
+    const pillarImage = document.getElementById('pillarImage');
+
+    pillarButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        pillarButtons.forEach(b => {
+          b.classList.remove('active');
+          b.classList.add('border-gray-200', 'text-gray-600');
+        });
+        btn.classList.add('active');
+        btn.classList.remove('border-gray-200', 'text-gray-600');
+
+        const key = btn.dataset.pillar;
+        const data = pillarData[key];
+        if (data && pillarEyebrow && pillarTitle && pillarDesc && pillarImage) {
+          pillarEyebrow.textContent = data.eyebrow;
+          pillarTitle.textContent = data.title;
+          pillarDesc.textContent = data.desc;
+          pillarImage.src = data.img;
+          pillarImage.alt = data.alt;
+        }
+      });
+    });
+
+    // 3. AI Section Interactive Card Selection
+    const aiCards = document.querySelectorAll('.ai-card');
+    aiCards.forEach(card => {
+      card.addEventListener('click', () => {
+        aiCards.forEach(c => {
+          c.classList.remove('active');
+          c.classList.add('text-purple-200');
+        });
+        card.classList.add('active');
+        card.classList.remove('text-purple-200');
+      });
+    });
+
+    // 4. Hero Tab Click state
+    const heroTabs = document.querySelectorAll('.hero-tab');
+    heroTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        heroTabs.forEach(t => {
+          t.classList.remove('active', 'bg-[#f4ede4]', 'border-[#ebdcd0]');
+          t.classList.add('text-gray-700', 'bg-gray-50', 'border-transparent');
+        });
+        tab.classList.add('active', 'bg-[#f4ede4]', 'border-[#ebdcd0]');
+        tab.classList.remove('text-gray-700', 'bg-gray-50', 'border-transparent');
+      });
+    });
+  </script>
+</body></html>

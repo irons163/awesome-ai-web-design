@@ -1,0 +1,7 @@
+# Rewritten AI instruction — Resend current public homepage
+
+Reconstruct https://resend.com/ as independently observed2026-10-10. Retain the genuine Google Stitch MCP original screen, rawHTML/PNG, metadata, DESIGN.md/design-md and prior analysis independently. Main structure is unchanged, so the9月27日 generation may be reused; do not label the get_screen retrieval a new generation.
+
+Use complete verified resend-oct10-official-1280-reference.json and390-reference.json and63 exact public originals in resend-oct10-assets.json. Preserve the current Forward banner, Domaine/Favorit fonts, real12customer logos,13language/9framework navigation, exact sample code, editor initial state, contact and analytics images, React template, nine deliverability cards, real testimony, dashboard and full footer. Do not invent customers, technical claims or code. A product file named analytics is not a tracking endpoint.
+
+Compare actual rendered pages at1280×720 and390×844 CSS pixels,DPR1,unchanged desktopUA. Verify all73DOMimages/fonts, page heights, no overflow and full sequential screenshot coverage. Keep source-unloaded Floor/Light images and empty desktop WebGL explicit. Preserve current public video assets while declaring frame timing differences. Document the narrow header raster correction and React code-pane scroll difference. Navigation/demo controls are captured initial states until separately implemented and verified. Never send email or submit account/newsletter forms. accepted=false while these differences remain.

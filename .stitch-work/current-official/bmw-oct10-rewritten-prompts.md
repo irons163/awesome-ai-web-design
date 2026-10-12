@@ -1,0 +1,15 @@
+# BMW 台灣｜重寫 AI 指令與實際生成紀錄
+
+以下為本次實際送交 Google Stitch MCP 的完整原始指令，逐字保留；供應商輸出不能替代畫面驗證。
+
+```text
+Rebuild the BMW Taiwan public homepage observed on 2026-10-11 at https://www.bmw.com.tw/zh/index.html. Create a complete current responsive page, not an old BMW concept or generic automobile landing page. Match the real current Chinese Traditional wording and order. Desktop reference1280x720, narrow390x844, page heights3512/4297 after disabling optional analytics/marketing cookies through the visible source settings. Use BMW Type Next light typography, white body, BMW blue rectangular CTAs, dark photographic full-width panels, actual round BMW logo at the top left.
+Current hero: wet road/blue-sky BMW iX3 photo; small 全新 BMW; huge thin white iX3210px desktop; subtitle 開啟駕馭樂趣的全新時代。; CTAs 立即訂購 and 即刻探索. Header has 所有車型、訂製您的BMW、購車及優惠、探索BMW plus account/cart/dealer icons; mobile has collapsed navigation.
+Then 探索您的BMW with four equal icon columns: Online Shop線上訂車/立即訂購;預約賞車/立即預約;訂製您的BMW/立即訂製;規格配備表下載/立即前往. Then three actual full-width image bands in this exact order: The New BMW iX5 on pale landscape/white background; 全新BMW i7 純電豪華旗艦 with 致敬傳奇 and silver car/dark gradient; THE NEW BMW/i3/感受全新世代的靈魂悸動 with blue sedan/rocky road. Keep original photographic crops and light white titles; iX5/i7 headings48px desktop, i3 thin210px. CTAs 立即探索/瞭解更多.
+Then two-column white BMW行車紀錄器3.0 PRO accessories photo plus 高解析畫質及多項智慧操作功能，提供絕佳車輛保護，為您車輛安全面面守護 and 瞭解更多. Full light-gray footer with My BMW download bar, groups 瞭解更多BMW,其他,BMW Service售後服務,購車及優惠,所有系列; social icons Facebook Instagram YouTube LinkedIn, Copyright © BMW AG2026,法律聲明,Cookies. Narrow stacks the actual content with corresponding narrow crops and collapsed footer groups. Floating white contact bubble is at lower right.
+Use only source-backed branding, photos, wording, link destinations and publicly visible details; never invent product claims, prices, testimonials or missing images. Keep raw generator exports separate from subsequent source corrections. Do not claim official visual consistency; actual desktop/narrow screenshot review and unresolved differences will be recorded separately. The study is free to access and does not recreate ordering, login, payment or account services.
+```
+
+後續校正指令：
+
+依目前 BMW 台灣公開頁面及1280×720／390×844實際取樣校正。保留當日 iX3／iX5／i7／i3、行車記錄器3.0Pro、MyBMW與完整頁尾順序、BMW Type Next字型、原始車照及響應式裁切。只對經實際取樣的畫面做結論；頁尾收合、選單、預約試駕、登入及其他服務操作未驗證時明確標示。原生Stitch輸出不可覆寫，校正檔另存。

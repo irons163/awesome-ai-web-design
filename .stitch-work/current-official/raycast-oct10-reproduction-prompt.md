@@ -1,0 +1,7 @@
+# Rewritten AI instruction — Raycast current public homepage
+
+Reconstruct https://www.raycast.com/ as observed2026-10-11 using complete verified1280/390DOMchunks and320preserved public originals. Retain genuine new Google Stitch MCP screenprojects/387001424469432311/screens/cb9590a067c64d1aa152bc70fac85d31 and full raw response/HTML/fullPNG/thumbnail separately. Preserve prior screens,D﻿ESIGN.md/design-md and analysis.
+
+Keep exact current capsule navigation,64pxhero,macOSTahoe/AppleSilicon copy,RaycastKeyboardannouncement,completeTakeShortcutslauncher,keyboardfeatures,realextensions,AIChat/QuickAI/AIExtensions,24actualpeople,Snippets/Quicklinks/Hotkeys,12utilities,communityvideos,developerSVGtechnicalfigures,bottomCTAandfullsixcolumnfooter. Use exact observed Granola/Things workflow fragment,notinventedtext. Restore selected narrow reel scrollLeft and retain visible Subscribe submit value while text inputs remain readonly. Do not adopt provider-invented0ms/SwiftRustclaims,NotionEngineeringquote,oldmodelnames,WindowsWaitlistornpmCLI.
+
+Compare actual1280×720/390×844CSSviewports,unchangeddesktopUA; guard trueimage dimensions andcompletecoverage,exclude333/219pxcaptures. Mainfullphaseproofusespre-label-patchSHA; proveexacttwoinputdiff andcapturefinalfooter separately. DeclareemptyWebGL,WindowManagementvsClipboardselection,fixedAIworkflow26pxheightdifference,animateddemos/keyframes,unwiredcontrols,realdevices/services/publishedlimits. No formsubmission,purchaseorupgrade. accepted=falsewhilethese remain.

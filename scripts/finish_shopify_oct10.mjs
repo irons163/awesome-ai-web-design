@@ -1,0 +1,11 @@
+import fs from 'node:fs/promises';import {JSDOM,VirtualConsole} from 'jsdom';
+const r=new URL('../.stitch-work/current-official/',import.meta.url);const p=new URL('shopify.html',r);const dom=new JSDOM(await fs.readFile(p,'utf8'),{virtualConsole:new VirtualConsole()});const d=dom.window.document;
+const e=d.querySelector('[data-component-name="hp-globe-interactive"]');e.dataset.localStaticGlobe='';for(const x of [...e.children]){x.setAttribute('aria-hidden','true');x.style.visibility='hidden';}
+const pic=d.createElement('picture');pic.className='oct10-globe-static';pic.innerHTML='<source media="(min-width:900px)" srcset="shopify-assets/oct10-globe-static-desktop.png"><img src="shopify-assets/oct10-globe-static-narrow.png" alt="Static capture of Shopify’s public illuminated globe and merchant factoids, including merchants in 175 countries. Interactive 3D rotation is not reproduced.">';e.append(pic);
+const css=d.createElement('style');css.textContent=`.oct10-globe-static{display:block;position:absolute;left:0;top:214.73px;width:100%;height:auto;pointer-events:none;mask-image:linear-gradient(transparent,#000 5%,#000 95%,transparent)}.oct10-globe-static img{display:block;width:100%;height:auto;max-width:none}@media(min-width:900px){.oct10-globe-static{left:226.8px;top:236.75px;width:900px;height:820px}}`;
+d.head.append(css);
+// Blob stream URLs are bound to the official origin. Preserve its real current poster as the declared static hero fallback.
+d.querySelectorAll('video[src^="blob:"]').forEach(v=>{v.removeAttribute('src');v.removeAttribute('autoplay');v.dataset.localPosterFallback='official streaming hero video not bundled';});
+// Existing public CSS checkbox navigation remains native; add Escape and close-after-navigation.
+const js=d.createElement('script');js.textContent=`document.addEventListener('keydown',e=>{if(e.key==='Escape'){const c=document.getElementById('bk-nav-hamburger');if(c)c.checked=false;}});document.querySelectorAll('header a').forEach(a=>a.addEventListener('click',()=>{const c=document.getElementById('bk-nav-hamburger');if(c)c.checked=false;}));`;
+d.body.append(js);await fs.writeFile(p,'<!DOCTYPE html>\n'+d.documentElement.outerHTML);console.log('Shopify declared static globe/poster fallback added');

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mistral AI — Sovereign, Open, and Efficient AI</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Inter Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface-container-high": "#2a2a2d",
+            "primary-fixed-dim": "#ffb59f",
+            "outline-variant": "#5a413a",
+            "surface-container-low": "#1b1b1e",
+            "secondary": "#ffb4a4",
+            "on-background": "#e4e1e6",
+            "surface-dim": "#131316",
+            "on-error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#624000",
+            "on-secondary": "#640d00",
+            "on-secondary-fixed-variant": "#8d1700",
+            "tertiary": "#ffba4a",
+            "surface-tint": "#ffb59f",
+            "surface-container": "#1f1f22",
+            "on-primary-fixed": "#3a0a00",
+            "inverse-primary": "#ae3100",
+            "secondary-fixed-dim": "#ffb4a4",
+            "surface-variant": "#353438",
+            "on-primary-fixed-variant": "#852400",
+            "secondary-container": "#af1f01",
+            "secondary-fixed": "#ffdad3",
+            "on-primary": "#5e1700",
+            "on-surface-variant": "#e2bfb5",
+            "primary": "#ffb59f",
+            "surface-container-highest": "#353438",
+            "surface-bright": "#39393c",
+            "primary-fixed": "#ffdbd0",
+            "on-secondary-fixed": "#3e0500",
+            "tertiary-fixed": "#ffddb1",
+            "on-primary-container": "#531300",
+            "tertiary-container": "#c38400",
+            "on-secondary-container": "#ffc3b6",
+            "inverse-surface": "#e4e1e6",
+            "error": "#ffb4ab",
+            "error-container": "#93000a",
+            "on-tertiary-container": "#3b2500",
+            "background": "#131316",
+            "outline": "#a98a81",
+            "surface-container-lowest": "#0e0e11",
+            "on-tertiary": "#442b00",
+            "on-error": "#690005",
+            "inverse-on-surface": "#303033",
+            "tertiary-fixed-dim": "#ffba4a",
+            "primary-container": "#f6602f",
+            "on-surface": "#e4e1e6",
+            "on-tertiary-fixed": "#291800",
+            "surface": "#131316"
+          },
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "gutter": "0px",
+            "space-lg": "24px",
+            "margin": "0px",
+            "space-md": "16px",
+            "space-sm": "8px",
+            "space-xl": "48px",
+            "space-xs": "4px"
+          },
+          fontFamily: {
+            "headline-lg": ["Inter"],
+            "display-hero": ["Inter"],
+            "body-md": ["Inter"],
+            "label-md": ["Inter"],
+            "display-hero-mobile": ["Inter"],
+            "label-sm": ["Inter"],
+            "headline-md": ["Inter"],
+            "body-lg": ["Inter"]
+          },
+          fontSize: {
+            "headline-lg": ["44px", { lineHeight: "50px", letterSpacing: "-0.02em", fontWeight: "500" }],
+            "display-hero": ["72px", { lineHeight: "76px", letterSpacing: "-0.035em", fontWeight: "600" }],
+            "body-md": ["15px", { lineHeight: "22px", fontWeight: "400" }],
+            "label-md": ["13px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "display-hero-mobile": ["40px", { lineHeight: "44px", letterSpacing: "-0.025em", fontWeight: "600" }],
+            "label-sm": ["11px", { lineHeight: "14px", letterSpacing: "0.04em", fontWeight: "500" }],
+            "headline-md": ["28px", { lineHeight: "34px", letterSpacing: "-0.015em", fontWeight: "500" }],
+            "body-lg": ["18px", { lineHeight: "28px", fontWeight: "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    /* Pixel Grid Texture & Accent Elements */
+    .pixel-step {
+      image-rendering: pixelated;
+    }
+    .grid-hairline {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(90, 65, 58, 0.12) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(90, 65, 58, 0.12) 1px, transparent 1px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased selection:bg-primary-container selection:text-white font-body-md text-body-md overflow-x-hidden">
+<!-- ========================================================================= -->
+<!-- TopNavBar (Shared Component JSON Source of Truth) -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 w-full h-[49px] bg-background border-b border-outline-variant z-50 flex items-stretch">
+<div class="w-full flex items-stretch justify-between px-0">
+<!-- Brand Logo Cell -->
+<a class="flex items-center gap-2.5 px-6 border-r border-outline-variant hover:bg-surface-container transition-colors duration-150 select-none group" href="#">
+<!-- Mistral Pixel Flame Logo Symbol -->
+<div class="flex items-center gap-0.5">
+<div class="w-2 h-4 bg-tertiary"></div>
+<div class="w-2 h-5 bg-primary-container"></div>
+<div class="w-2 h-3 bg-secondary-container"></div>
+</div>
+<span class="font-label-md text-label-md tracking-widest uppercase font-semibold text-on-surface">Mistral AI</span>
+</a>
+<!-- Center Navigation Links (Exact Shared Component JSON strings & styles) -->
+<nav class="hidden md:flex items-stretch divide-x divide-outline-variant">
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md border-b-2 border-primary hover:bg-surface-container transition-colors duration-150" href="#">Products</a>
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md opacity-80 hover:opacity-100 hover:bg-surface-container transition-colors duration-150" href="#">Industries</a>
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md opacity-80 hover:opacity-100 hover:bg-surface-container transition-colors duration-150" href="#">Research</a>
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md opacity-80 hover:opacity-100 hover:bg-surface-container transition-colors duration-150" href="#">Developers</a>
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md opacity-80 hover:opacity-100 hover:bg-surface-container transition-colors duration-150" href="#">Blog</a>
+<a class="px-5 flex items-center text-on-surface font-label-md text-label-md opacity-80 hover:opacity-100 hover:bg-surface-container transition-colors duration-150" href="#">Company</a>
+</nav>
+<!-- Trailing Action Cells (JSON: Start building / Get in touch) -->
+<div class="flex items-stretch border-l border-outline-variant">
+<a class="hidden sm:flex items-center px-4 font-label-md text-label-md text-on-surface opacity-85 hover:opacity-100 hover:bg-surface-container transition-colors duration-150 border-r border-outline-variant" href="#solutions">
+          Start building
+        </a>
+<a class="flex items-center px-5 font-label-md text-label-md font-semibold text-on-primary bg-primary-container hover:bg-secondary-container transition-colors duration-150" href="#contact">
+          Get in touch
+        </a>
+</div>
+</div>
+</header>
+<!-- Main Content Matrix Container (1280px Grid) -->
+<main class="pt-[49px] w-full max-w-[1280px] mx-auto border-x border-outline-variant min-h-screen">
+<!-- ========================================================================= -->
+<!-- Hero Section (Desktop Reconstruction ~471px with Asymmetric Matrix & Pixel Accents) -->
+<!-- ========================================================================= -->
+<section class="relative w-full border-b border-outline-variant bg-surface-container-lowest grid-hairline overflow-hidden">
+<!-- Architectural Pixel Accents (Left & Right Flanks) -->
+<div class="absolute left-3 top-8 hidden lg:flex flex-col gap-1 select-none pointer-events-none opacity-80">
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-tertiary"></div>
+<div class="w-3 h-3 bg-transparent"></div>
+</div>
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-tertiary"></div>
+<div class="w-3 h-3 bg-primary-container"></div>
+</div>
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-primary-container"></div>
+<div class="w-3 h-3 bg-secondary-container"></div>
+</div>
+<!-- Pixel Cat Accent -->
+<div class="mt-8 flex flex-col gap-0.5 opacity-90 pl-1">
+<div class="flex gap-0.5"><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-transparent"></div><div class="w-1.5 h-1.5 bg-on-surface"></div></div>
+<div class="flex gap-0.5"><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-on-surface"></div></div>
+<div class="flex gap-0.5"><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-on-surface"></div></div>
+<div class="flex gap-0.5"><div class="w-1.5 h-1.5 bg-transparent"></div><div class="w-1.5 h-1.5 bg-on-surface"></div><div class="w-1.5 h-1.5 bg-transparent"></div></div>
+</div>
+</div>
+<div class="absolute right-4 top-10 hidden lg:flex flex-col gap-1 select-none pointer-events-none opacity-80 items-end">
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-secondary-container"></div>
+<div class="w-3 h-3 bg-primary-container"></div>
+</div>
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-primary-container"></div>
+<div class="w-3 h-3 bg-tertiary"></div>
+</div>
+<div class="flex gap-1">
+<div class="w-3 h-3 bg-transparent"></div>
+<div class="w-3 h-3 bg-tertiary"></div>
+</div>
+<div class="mt-12 w-2.5 h-2.5 bg-primary-container rotate-45"></div>
+</div>
+<!-- Hero Core Container -->
+<div class="px-6 py-16 md:py-20 flex flex-col items-center text-center max-w-4xl mx-auto relative z-10">
+<!-- Enormous Centered Two-Line Headline -->
+<h1 class="font-display-hero text-[52px] md:text-[80px] leading-[1.05] tracking-tight font-semibold text-on-surface mb-6">
+          Mistral 
+          <span class="inline-flex items-center align-middle mx-1.5 px-2 py-1 bg-surface-container border border-outline-variant rounded-none">
+<!-- French gradient pixel blocks flag -->
+<span class="flex items-center gap-0.5">
+<span class="w-2.5 h-4 bg-tertiary"></span>
+<span class="w-2.5 h-4 bg-primary-container"></span>
+<span class="w-2.5 h-4 bg-secondary-container"></span>
+</span>
+</span> 
+          is #1
+          <br class="hidden sm:inline"/>
+<span class="text-on-surface">in Sovereign AI.</span>
+</h1>
+<!-- Sub-pill Announcement Button -->
+<a class="group inline-flex items-center gap-3 px-4 py-2 border border-outline-variant bg-surface-container-low hover:bg-surface-container hover:border-primary-container transition-all duration-150 select-none mb-8" href="#models">
+<div class="w-2 h-2 bg-primary-container animate-pulse"></div>
+<span class="font-label-md text-label-md text-on-surface">Introducing Mistral Large 4</span>
+<span class="material-symbols-outlined text-outline group-hover:text-primary transition-colors text-base" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<!-- Supporting Technical Value Descriptor -->
+<p class="font-body-lg text-body-lg text-outline max-w-2xl text-center">
+          Delivering frontier foundation weights, deterministic reasoning models, and sovereign infrastructure deployment for global organizations and public institutions.
+        </p>
+<!-- CTAs Segmented Micro-Bar -->
+<div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+<a class="px-6 py-2.5 bg-on-surface text-surface-container-lowest font-label-md text-label-md font-semibold hover:bg-primary-fixed-dim transition-colors duration-150" href="#try">
+            Start building
+          </a>
+<a class="px-6 py-2.5 border border-outline-variant text-on-surface bg-surface-container-low hover:bg-surface-container font-label-md text-label-md transition-colors duration-150" href="#benchmarks">
+            View benchmarks
+          </a>
+</div>
+</div>
+<!-- Bottom Geometric Mosaic Strip -->
+<div class="w-full h-2 flex divide-x divide-background border-t border-outline-variant">
+<div class="flex-1 bg-tertiary"></div>
+<div class="flex-1 bg-primary-container"></div>
+<div class="flex-1 bg-secondary-container"></div>
+<div class="flex-1 bg-tertiary-container"></div>
+<div class="flex-1 bg-outline-variant"></div>
+<div class="flex-1 bg-surface-variant"></div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Client Logo Rail (Hairline Monochromatic Compartment) -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface-container-lowest py-6 px-6">
+<div class="text-center font-label-sm text-label-sm uppercase tracking-wider text-outline mb-4">
+        Trusted in critical production by sovereign enterprises
+      </div>
+<div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 opacity-75 hover:opacity-100 transition-opacity duration-200">
+<span class="font-headline-md text-headline-md tracking-tighter font-semibold text-on-surface">AXA</span>
+<span class="font-headline-md text-headline-md tracking-widest font-semibold text-on-surface">ASML</span>
+<span class="font-headline-md text-headline-md tracking-tight font-medium text-on-surface">CISCO</span>
+<span class="font-headline-md text-headline-md tracking-wide font-normal text-on-surface">Snowflake</span>
+<span class="font-headline-md text-headline-md tracking-widest font-semibold text-on-surface">CMA CGM</span>
+<span class="font-headline-md text-headline-md tracking-tight font-semibold text-on-surface">HSBC</span>
+<span class="font-headline-md text-headline-md tracking-wider font-light text-on-surface">ERICSSON</span>
+<span class="font-headline-md text-headline-md tracking-tight font-medium text-on-surface">TotalEnergies</span>
+<span class="font-headline-md text-headline-md tracking-widest font-semibold text-on-surface">ESA</span>
+<span class="font-headline-md text-headline-md tracking-widest font-bold text-on-surface">BMW</span>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Floating Value Proposition / Dynamic Tag Cloud Matrix -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface px-6 py-16 text-center">
+<div class="max-w-3xl mx-auto mb-10">
+<h2 class="font-headline-lg text-headline-lg text-on-surface mb-3">
+          No one else should hold the strings to your
+        </h2>
+<p class="font-body-md text-body-md text-outline">
+          True independence requires hosting weights where your jurisdiction mandates, preserving core proprietary reasoning.
+        </p>
+</div>
+<!-- Dynamic Pill Tags Cloud -->
+<div class="max-w-4xl mx-auto flex flex-wrap items-center justify-center gap-2.5">
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-tertiary"></div>
+<span>Process knowledge</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-primary-container"></div>
+<span>Intellectual property</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-secondary-container"></div>
+<span>Invention</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-tertiary"></div>
+<span>Data</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-primary-container"></div>
+<span>Core product development</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-tertiary"></div>
+<span>Quality standards</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-secondary-container"></div>
+<span>Discovery</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-primary-container"></div>
+<span>Proprietary AI</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-tertiary"></div>
+<span>Private code base</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-secondary-container"></div>
+<span>Decision logic</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-primary-container"></div>
+<span>Engineering practices</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 border border-outline-variant bg-surface-container text-on-surface font-label-md text-label-md hover:border-primary transition-colors">
+<div class="w-1.5 h-1.5 bg-tertiary"></div>
+<span>Design tradeoffs</span>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Core Architecture Section (4 Interactive Structural Pillars) -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface-container-lowest" id="solutions">
+<!-- Section Masthead -->
+<div class="p-8 md:p-12 border-b border-outline-variant">
+<span class="font-label-sm text-label-sm tracking-wider uppercase text-primary">Architectural Autonomy</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2 max-w-2xl">
+          Mistral lets you decide how AI works in your organization.
+        </h2>
+</div>
+<!-- 4-Quadrant Partitioned Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<!-- Pillar 1: Frontier Open Models -->
+<div class="p-8 md:p-10 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 border-b border-outline-variant md:border-b">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-tertiary font-mono">01 // WEIGHTS</span>
+<div class="w-3 h-3 bg-tertiary"></div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+              We make the models. You keep them.
+            </h3>
+<p class="font-body-md text-body-md text-outline mb-6">
+              Sovereign frontier weights licensed under open terms. Run fully offline, air-gapped, or inside private clouds with zero leakage to centralized providers.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center justify-between">
+<span class="font-label-md text-label-md text-outline">Mistral Small, Large &amp; Pixtral</span>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Research <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Pillar 2: Proprietary Intelligence -->
+<div class="p-8 md:p-10 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 border-b border-outline-variant">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-primary-container font-mono">02 // ADAPTATION</span>
+<div class="w-3 h-3 bg-primary-container"></div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+              We give you the tools. You tailor the models.
+            </h3>
+<p class="font-body-md text-body-md text-outline mb-6">
+              Fine-tune, distill, and align frontier architectures with your proprietary corporate corpus. Full precision quantization and LoRA hyperparameter control.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center justify-between">
+<span class="font-label-md text-label-md text-outline">Mistral Forge Toolkit</span>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Forge <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Pillar 3: AI Operations -->
+<div class="p-8 md:p-10 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 border-b md:border-b-0">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-secondary-container font-mono">03 // PLATFORM</span>
+<div class="w-3 h-3 bg-secondary-container"></div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+              We build the software. You put AI to work.
+            </h3>
+<p class="font-body-md text-body-md text-outline mb-6">
+              Enterprise workflows, deterministic function calling, agent orchestration, and code intelligence engines integrated straight into existing IDEs and data lakes.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center gap-4">
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Vibe <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<span class="text-outline-variant">|</span>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Studio <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Pillar 4: Flexible Compute -->
+<div class="p-8 md:p-10 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-label-sm text-label-sm text-tertiary font-mono">04 // HOSTING</span>
+<div class="w-3 h-3 bg-tertiary"></div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+              We host it. Or you do.
+            </h3>
+<p class="font-body-md text-body-md text-outline mb-6">
+              Deploy via European sovereign endpoints with carbon-neutral guarantees, or operate on bare metal clusters inside defense-grade isolated perimeter networks.
+            </p>
+</div>
+<div class="pt-4 border-t border-outline-variant flex items-center gap-4">
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Inference <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<span class="text-outline-variant">|</span>
+<a class="font-label-md text-label-md text-primary hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+              Discover Compute <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Customer Proof & Evidence Section (Tabbed Verification & Case Studies) -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface">
+<!-- Header with Eyebrow -->
+<div class="p-8 md:p-12 border-b border-outline-variant flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary">See Sovereign AI at work.</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">
+            Learn about our customers
+          </h2>
+</div>
+<!-- Industry Filter Pills -->
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 font-label-md text-label-md bg-surface-container border border-primary text-on-surface">Energy &amp; utilities</button>
+<button class="px-3 py-1.5 font-label-md text-label-md border border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container">Manufacturing</button>
+<button class="px-3 py-1.5 font-label-md text-label-md border border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container">Financial services</button>
+<button class="px-3 py-1.5 font-label-md text-label-md border border-outline-variant text-outline hover:text-on-surface hover:bg-surface-container">Public sector</button>
+</div>
+</div>
+<!-- 4-Grid Customer Case Studies Matrix -->
+<div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<!-- Case 1: TotalEnergies -->
+<div class="p-8 flex flex-col justify-between border-b border-outline-variant">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">TotalEnergies</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container border border-outline-variant text-tertiary">Multimodal Subsurface</span>
+</div>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Accelerating reservoir exploration and complex seismic survey interpretation using private fine-tuned vision-reasoning multimodal models.
+            </p>
+<div class="bg-surface-container-low p-4 border border-outline-variant mb-6">
+<span class="font-headline-md text-headline-md text-primary font-mono block">4.2x Faster</span>
+<span class="font-label-sm text-label-sm text-outline">Reduction in geophysical report synthesis cycles</span>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic border-l-2 border-primary-container pl-3">
+            "Mistral allows us to maintain strict intellectual property sovereignty over decades of proprietary geological assets."
+          </p>
+</div>
+<!-- Case 2: ASML -->
+<div class="p-8 flex flex-col justify-between border-b border-outline-variant">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">ASML</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container border border-outline-variant text-primary">Hardware Diagnostics</span>
+</div>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Deploying deterministic code models across extreme ultraviolet (EUV) lithography diagnostics pipelines with sovereign on-prem isolation.
+            </p>
+<div class="bg-surface-container-low p-4 border border-outline-variant mb-6">
+<span class="font-headline-md text-headline-md text-primary font-mono block">70% Quicker</span>
+<span class="font-label-sm text-label-sm text-outline">Isolation of complex semiconductor sub-system telemetry anomalies</span>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic border-l-2 border-tertiary pl-3">
+            "High throughput inference with strict internal confidentiality guarantees for high-precision engineering teams."
+          </p>
+</div>
+<!-- Case 3: BNP Paribas -->
+<div class="p-8 flex flex-col justify-between border-b md:border-b-0 border-outline-variant">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">BNP Paribas</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container border border-outline-variant text-secondary">Compliance &amp; KYC</span>
+</div>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Standardized cross-border KYC and regulatory review procedures using air-gapped on-premise Mistral Large deployment clusters.
+            </p>
+<div class="bg-surface-container-low p-4 border border-outline-variant mb-6">
+<span class="font-headline-md text-headline-md text-primary font-mono block">Weeks to Days</span>
+<span class="font-label-sm text-label-sm text-outline">Turnaround on sovereign institutional client onboarding</span>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic border-l-2 border-secondary-container pl-3">
+            "Eliminating third-party data egress risks while keeping full compliance with European banking directives."
+          </p>
+</div>
+<!-- Case 4: European Patent Office -->
+<div class="p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">European Patent Office</span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 bg-surface-container border border-outline-variant text-tertiary">Prior Art Ingestion</span>
+</div>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Cross-lingual prior art document transcription and translation spanning 38 official languages with deterministic citation mapping.
+            </p>
+<div class="bg-surface-container-low p-4 border border-outline-variant mb-6">
+<span class="font-headline-md text-headline-md text-primary font-mono block">99.4% Accuracy</span>
+<span class="font-label-sm text-label-sm text-outline">Multilingual legal term extraction and alignment</span>
+</div>
+</div>
+<p class="font-label-md text-label-md text-on-surface-variant italic border-l-2 border-outline pl-3">
+            "Sovereign natural language understanding that meets stringent legal verification mandates across Europe."
+          </p>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Deep Dive Cards ("Go deeper.") -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface-container-lowest">
+<div class="p-8 border-b border-outline-variant">
+<span class="font-label-sm text-label-sm tracking-wider uppercase text-outline">Explore Mistral AI</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-1">Go deeper.</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-outline-variant">
+<!-- Card 1: Research -->
+<div class="p-8 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 group">
+<div>
+<div class="w-full h-36 bg-surface-container-low border border-outline-variant mb-6 flex flex-col justify-center items-center relative overflow-hidden">
+<!-- Pixel Grid Graphic -->
+<div class="flex gap-1 mb-2">
+<div class="w-4 h-4 bg-tertiary"></div>
+<div class="w-4 h-4 bg-primary-container"></div>
+<div class="w-4 h-4 bg-secondary-container"></div>
+</div>
+<span class="font-mono text-xs text-outline tracking-widest">WEIGHTS &amp; REASONING</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Research</h3>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Next-generation multimodal reasoning, mathematical formalization, and state-of-the-art open frontier weights.
+            </p>
+</div>
+<a class="font-label-md text-label-md text-primary group-hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+            Explore Open Weights <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Card 2: Sovereign AI -->
+<div class="p-8 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 group">
+<div>
+<div class="w-full h-36 bg-surface-container-low border border-outline-variant mb-6 flex flex-col justify-center items-center relative overflow-hidden">
+<!-- Pixel Lock Shape -->
+<div class="flex flex-col items-center">
+<div class="w-6 h-4 border-2 border-primary-container rounded-t-sm mb-0.5"></div>
+<div class="w-10 h-8 bg-surface-container-high border border-outline-variant flex items-center justify-center">
+<div class="w-2 h-2 bg-primary-container"></div>
+</div>
+</div>
+<span class="font-mono text-xs text-outline tracking-widest mt-2">SECURE PERIMETER</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Sovereign AI</h3>
+<p class="font-body-md text-body-md text-outline mb-4">
+              Complete deployment sovereignty, defense-grade isolation, zero telemetry retention, and full architectural custody.
+            </p>
+</div>
+<a class="font-label-md text-label-md text-primary group-hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+            Read Architecture Whitepaper <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+<!-- Card 3: Cloud -->
+<div class="p-8 flex flex-col justify-between hover:bg-surface-container transition-colors duration-150 group">
+<div>
+<div class="w-full h-36 bg-surface-container-low border border-outline-variant mb-6 flex flex-col justify-center items-center relative overflow-hidden">
+<!-- Pixel Server Cluster Stack -->
+<div class="flex flex-col gap-1 w-20">
+<div class="h-2 bg-surface-container border border-outline-variant flex justify-between px-1 items-center"><div class="w-1 h-1 bg-tertiary"></div><div class="w-2 h-0.5 bg-outline"></div></div>
+<div class="h-2 bg-surface-container border border-outline-variant flex justify-between px-1 items-center"><div class="w-1 h-1 bg-primary-container"></div><div class="w-2 h-0.5 bg-outline"></div></div>
+<div class="h-2 bg-surface-container border border-outline-variant flex justify-between px-1 items-center"><div class="w-1 h-1 bg-secondary-container"></div><div class="w-2 h-0.5 bg-outline"></div></div>
+</div>
+<span class="font-mono text-xs text-outline tracking-widest mt-3">EU DATA CENTERS</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">Cloud</h3>
+<p class="font-body-md text-body-md text-outline mb-4">
+              European sovereign API endpoints, dedicated high-throughput TPU/GPU clusters, and high-SLA corporate availability.
+            </p>
+</div>
+<a class="font-label-md text-label-md text-primary group-hover:text-on-surface flex items-center gap-1 transition-colors" href="#">
+            Access Cloud Endpoints <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- Vibe Developer Desktop App Promotion Banner -->
+<!-- ========================================================================= -->
+<section class="border-b border-outline-variant bg-surface-container-low p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="max-w-xl">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-2 h-2 bg-primary-container"></div>
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-outline">Desktop Client</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface mb-2">
+          Get Mistral Vibe for macOS &amp; Linux
+        </h3>
+<p class="font-body-md text-body-md text-outline">
+          Native local CLI and developer workstation environment with built-in code auto-completion, contextual workspace indexing, and direct sovereign endpoint routing.
+        </p>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="px-5 py-2.5 bg-on-surface text-surface-container-lowest font-label-md text-label-md font-semibold flex items-center gap-2 hover:bg-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+          Download for Mac (.dmg)
+        </button>
+<button class="px-5 py-2.5 border border-outline-variant bg-surface-container font-label-md text-label-md text-on-surface hover:bg-surface-container-high transition-colors">
+          Linux (.tar.gz)
+        </button>
+</div>
+</section>
+</main>
+<!-- ========================================================================= -->
+<!-- Footer (Shared Component JSON Source of Truth) -->
+<!-- ========================================================================= -->
+<footer class="w-full border-t border-outline-variant bg-surface-container-lowest">
+<!-- Top Footer Multi-Column Grid -->
+<div class="w-full max-w-[1280px] mx-auto px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-10">
+<!-- Brand & Mission Column -->
+<div class="flex flex-col gap-4 md:col-span-1">
+<div class="flex items-center gap-2">
+<div class="flex gap-0.5">
+<div class="w-2 h-3.5 bg-tertiary"></div>
+<div class="w-2 h-4.5 bg-primary-container"></div>
+<div class="w-2 h-2.5 bg-secondary-container"></div>
+</div>
+<span class="font-headline-md text-headline-md font-semibold text-on-surface">Mistral AI</span>
+</div>
+<p class="font-body-md text-body-md text-outline">
+          Sovereign, open, and efficient artificial intelligence architectures for research laboratories, enterprises, and public administrations worldwide.
+        </p>
+<div class="flex items-center gap-3 pt-2">
+<span class="font-mono text-xs text-outline px-2 py-1 bg-surface-container border border-outline-variant">PARIS</span>
+<span class="font-mono text-xs text-outline px-2 py-1 bg-surface-container border border-outline-variant">SAN FRANCISCO</span>
+<span class="font-mono text-xs text-outline px-2 py-1 bg-surface-container border border-outline-variant">LONDON</span>
+</div>
+</div>
+<!-- Column 1: Build with us -->
+<div class="flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">Build with us</span>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Customers</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Partners</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Brand &amp; Assets</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Pricing Tiers</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Get Mistral Vibe</a>
+</div>
+<!-- Column 2: Dive deeper -->
+<div class="flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">Dive deeper</span>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Coding Models</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Document Intelligence</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Multimodal Speech</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Applied AI Services</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">All Use Cases</a>
+</div>
+<!-- Column 3: Company & Trust -->
+<div class="flex flex-col gap-3">
+<span class="font-label-md text-label-md text-on-surface font-semibold uppercase tracking-wider">Company</span>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Terms of Service</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Privacy Policy</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Privacy choices</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Data Processing Agreement</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Trust Center</a>
+<a class="text-outline font-label-sm text-label-sm hover:text-primary transition-colors duration-150" href="#">Legal Notice</a>
+</div>
+</div>
+<!-- Bottom Separation Line & Meta Shell -->
+<div class="border-t border-outline-variant">
+<div class="w-full max-w-[1280px] mx-auto px-6 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+<!-- Exact JSON Copyright String -->
+<span class="text-outline font-label-sm text-label-sm">
+          © 2025 Mistral AI. All rights reserved. Sovereign, open, and efficient AI.
+        </span>
+<!-- Social Links & Network Links -->
+<div class="flex items-center gap-6">
+<a class="text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors duration-150" href="#">GitHub</a>
+<a class="text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors duration-150" href="#">X</a>
+<a class="text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors duration-150" href="#">LinkedIn</a>
+<a class="text-outline hover:text-on-surface font-label-sm text-label-sm transition-colors duration-150" href="#">Discord</a>
+<div class="flex items-center gap-1 text-outline text-xs pl-4 border-l border-outline-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span>All Systems Operational</span>
+</div>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

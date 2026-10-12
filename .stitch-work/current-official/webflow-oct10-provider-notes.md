@@ -1,0 +1,7 @@
+# Genuine Google Stitch provenance
+
+Fresh DESKTOP edit: project10252451392776701350, session5355423059680385170, screen27bc8f49a42646d49a2c5a276eb65fd2. Full response and exact request: webflow-oct10-native-correction-response.json and webflow-oct10-native-correction-prompt.txt. Raw HTML, provider original thumbnail and full2560×14392 PNG are independently preserved, with original URLs/SHA256 in webflow-oct10-native-export-hashes.json. Actual full PNG size confirmed by PIL2560×14392. Existing native desktop/mobile, DESIGN.md and design-md remain unchanged.
+
+Provider claims exact/verified public metrics and lineup. Those claims are not validation. Its invented Real business metrics, real revenue heading and altered Fivetran98% faster deployment velocity, Walker&Dunlop56% organic traffic growth, DocuSign1170% ROI differ from the observed source meanings of increase in speed to market, form fills and traffic YoY. Its logo list includes monday.com/Checkout.com while the actual desktop strip visibly includes Stripe/Dyson. Its explanation of Dyson as global production/localized governance is unsupported interpretation. Final source correction uses actual public content, not these claims.
+
+Provider suggestions preserved: generate corresponding390px version; inspect sales form responsive layout/breakpoints; refine AEO/AI visibility tile. No fresh native MOBILE correction claimed. Native output itself is not screenshot validation. No purchases or paid upgrades performed; billing not audited.

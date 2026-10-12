@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MongoDB: The Developer Data Platform | Unified Database for AI</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700;800&amp;family=Space+Mono:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              cream: '#fffff4',
+              ink: '#001e2b',
+              body: '#1c2d38',
+              muted: '#5c6f78',
+              green: '#00ed64',
+              greenhover: '#02ec64',
+              border: '#e5e9e8',
+              cardbg: '#ffffff',
+              darknavy: '#001e2b',
+              navycard: '#082333',
+              navyborder: '#173a4d'
+            }
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          fontFamily: {
+            headline: ["Space Grotesk", "sans-serif"],
+            display: ["Space Grotesk", "sans-serif"],
+            body: ["Inter", "sans-serif"],
+            mono: ["Space Mono", "monospace"]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #fffff4;
+      color: #1c2d38;
+      font-family: 'Inter', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#fffff4] text-[#1c2d38] antialiased selection:bg-[#00ed64] selection:text-[#001e2b]">
+<!-- Top Announcement Banner: 44px height vivid green strip -->
+<header class="w-full bg-[#00ed64] text-[#001e2b] h-[44px] px-4 flex items-center justify-center text-xs md:text-sm font-semibold tracking-tight border-b border-[#00d65a] z-50 relative" role="banner">
+<div class="max-w-[1280px] w-full flex items-center justify-center gap-2">
+<span>MongoDB 8.0 is here: 32% better throughput, lower latency, and reduced memory architecture.</span>
+<a class="inline-flex items-center gap-1 font-bold underline hover:opacity-80 transition-opacity ml-1" href="#read-announcement">
+        Read announcement
+        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+</header>
+<!-- Navigation: 95px height pale cream nav (#fffff4) -->
+<nav class="sticky top-0 z-40 w-full bg-[#fffff4]/95 backdrop-blur-md border-b border-[#e5e9e8]">
+<div class="w-full h-[95px] px-6 lg:px-12 max-w-[1280px] mx-auto flex items-center justify-between">
+<!-- Left: Logo & Core Nav -->
+<div class="flex items-center gap-10">
+<!-- Authentic MongoDB Logo -->
+<a class="flex items-center gap-2.5 group" href="#">
+<svg class="w-7 h-8 text-[#00ed64]" fill="none" viewbox="0 0 32 38" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.938 1.5C15.938 1.5 8.5 8.428 8.5 18.562C8.5 25.043 12.062 30.081 15.656 33.35C15.844 33.521 16.031 33.521 16.219 33.35C19.812 30.081 23.375 25.043 23.375 18.562C23.375 8.428 15.938 1.5 15.938 1.5Z" fill="#001e2b"></path>
+<path d="M15.938 1.5V33.35C19.812 30.081 23.375 25.043 23.375 18.562C23.375 8.428 15.938 1.5 15.938 1.5Z" fill="#00ed64"></path>
+</svg>
+<span class="font-headline font-bold text-2xl tracking-tight text-[#001e2b] flex items-center">
+            MongoDB<span class="text-[#00ed64]">.</span>
+</span>
+</a>
+<!-- Desktop Links -->
+<div class="hidden lg:flex items-center gap-8 text-[15px] font-medium font-body text-[#001e2b]">
+<a class="hover:text-[#006e2a] transition-colors duration-150 flex items-center gap-1" href="#products">Products <span class="material-symbols-outlined text-base">expand_more</span></a>
+<a class="hover:text-[#006e2a] transition-colors duration-150 flex items-center gap-1" href="#resources">Resources <span class="material-symbols-outlined text-base">expand_more</span></a>
+<a class="hover:text-[#006e2a] transition-colors duration-150 flex items-center gap-1" href="#solutions">Solutions <span class="material-symbols-outlined text-base">expand_more</span></a>
+<a class="hover:text-[#006e2a] transition-colors duration-150" href="#company">Company</a>
+<a class="hover:text-[#006e2a] transition-colors duration-150" href="#pricing">Pricing</a>
+<button aria-label="More options" class="text-[#5c6f78] hover:text-[#001e2b] transition-colors pt-1">
+<span class="material-symbols-outlined text-xl">more_horiz</span>
+</button>
+</div>
+</div>
+<!-- Right: Action Bar -->
+<div class="flex items-center gap-6">
+<button aria-label="Language selector" class="text-[#001e2b] hover:text-[#006e2a] p-1.5 flex items-center">
+<span class="material-symbols-outlined text-2xl">language</span>
+</button>
+<a class="text-sm font-semibold text-[#001e2b] hover:text-[#006e2a] px-2" href="#signin">
+          Sign In
+        </a>
+<a class="bg-[#00ed64] hover:bg-[#02ec64] text-[#001e2b] font-headline font-bold text-sm px-6 py-2.5 rounded border border-[#001e2b] shadow-sm transition-all duration-150 active:scale-95" href="#get-started">
+          Get Started
+        </a>
+</div>
+</div>
+</nav>
+<!-- Split Hero Section (x48 to x1232 layout) -->
+<section class="w-full pt-12 pb-20 border-b border-[#e5e9e8] bg-[#fffff4]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+<!-- Left Column (~530px) -->
+<div class="lg:col-span-6 flex flex-col items-start text-left">
+<span class="font-mono text-xs font-bold uppercase tracking-widest text-[#001e2b] bg-[#eef5ee] border border-[#d6e8d6] px-3 py-1 rounded mb-6">
+          MONGODB ATLAS
+        </span>
+<h1 class="font-headline font-extrabold text-4xl sm:text-5xl lg:text-[64px] tracking-tight leading-[1.05] uppercase text-[#001e2b]">
+          EVERY WORKLOAD.<br/>ANY CLOUD.<br/>ONE PLATFORM.
+        </h1>
+<p class="mt-6 text-lg sm:text-[19px] text-[#1c2d38] font-normal leading-relaxed max-w-[530px]">
+          Combine real-time operational data, vectors, and elastic scale in a single intelligent data platform built on the document model—deploy across any cloud or your own infrastructure.
+        </p>
+<div class="mt-8 flex flex-wrap items-center gap-4">
+<a class="px-8 py-3 bg-[#00ed64] hover:bg-[#02ec64] text-[#001e2b] font-headline font-bold text-base rounded border border-[#001e2b] shadow-sm transition-all" href="#get-started">
+            Get Started
+          </a>
+<a class="px-8 py-3 bg-transparent hover:bg-black/5 text-[#001e2b] font-headline font-semibold text-base rounded border border-[#001e2b] transition-all" href="#documentation">
+            Documentation
+          </a>
+</div>
+</div>
+<!-- Right Column (~580px) -->
+<div class="lg:col-span-6 w-full flex justify-center">
+<div class="w-full max-w-[580px] bg-[#001e2b] rounded-lg shadow-2xl overflow-hidden border border-[#173a4d]">
+<!-- Mac Window Header -->
+<div class="bg-[#041620] px-4 py-3 border-b border-[#173a4d] flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+<span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+<span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+<span class="ml-3 font-mono text-xs text-[#a0b3be]">atlas_vector_search.js</span>
+</div>
+<span class="inline-flex items-center gap-1.5 font-mono text-[11px] text-[#00ed64] bg-[#0c2e3d] px-2 py-0.5 rounded">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00ed64] animate-pulse"></span> Vector Search Live
+            </span>
+</div>
+<!-- Hero Vector Search Official Visual Asset -->
+<div class="p-4 bg-[#001e2b] flex items-center justify-center">
+<img alt="MongoDB Atlas Vector Search" class="w-full h-auto rounded-lg shadow-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCaxW68xhRxmUlPHiErSH1X-LcgBe_2QvmFnkNIjqGzONzeRFoYoWoCgtXFcWnsGqe_IllROgRX-diU860btRJHF0AE31KsdBcxnV39MXFa4WkprmKH4jeXi3uTXgVnZf8HYbHGMNt4_IIaZ88D8WtSvgzUq1HIrWM5jPNvDrGbL-PMGUeqFvPEu1lg0N5TFKZxDdepmiyDLgW9u0VB5CGGh1mZLe7g5ZUlLbEA-Nh1Edyx42C8NF9iSCf-Dxim3tNSEUHVlfDLR4I"/>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 4. Trusted By / Logos Strip -->
+<section class="py-12 border-b border-[#e5e9e8] bg-[#fbfbf6]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12 text-center">
+<p class="font-mono text-xs uppercase tracking-widest text-[#5c6f78] font-bold mb-8">
+        EMPOWERING AI INNOVATORS AND MODERN TEAMS
+      </p>
+<div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 text-[#001e2b] opacity-85">
+<span class="font-headline font-bold text-xl tracking-wider">Factory</span>
+<span class="font-headline font-semibold text-xl tracking-wide">MERCOR</span>
+<span class="font-headline font-bold text-xl tracking-tight flex items-center gap-1.5">
+<span class="text-xl">🤗</span> Hugging Face
+        </span>
+<span class="font-headline font-bold text-xl tracking-normal">Fireworks.ai</span>
+<span class="font-headline font-black text-xl tracking-wider">ANTHROPIC</span>
+<span class="font-headline font-bold text-xl tracking-tight flex items-center gap-1.5">
+<span class="w-3.5 h-3.5 rounded-full bg-blue-600 inline-block"></span> coinbase
+        </span>
+</div>
+</div>
+</section>
+<!-- 5. 'Level Up Your MongoDB Skills' Section -->
+<section class="py-20 border-b border-[#e5e9e8] bg-[#fffff4]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+<div>
+<span class="text-xs font-bold text-[#006e2a] uppercase tracking-wider font-mono">Developer Enablement</span>
+<h2 class="text-3xl sm:text-4xl font-headline font-bold text-[#001e2b] mt-2">Level Up Your MongoDB Skills</h2>
+<p class="text-[#5c6f78] mt-2 text-base max-w-xl">Curated hands-on architectures, developer tools, and cutting-edge guides to build production-grade applications.</p>
+</div>
+<a class="mt-4 md:mt-0 text-sm font-bold text-[#001e2b] hover:text-[#006e2a] flex items-center gap-1.5 group" href="#all-resources">
+          Explore all developer resources <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Resource Card 1 -->
+<div class="bg-white border border-[#e5e9e8] hover:border-[#001e2b] p-8 rounded flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-sm">
+<div>
+<div class="w-12 h-12 rounded bg-[#eef5ee] text-[#006e2a] flex items-center justify-center mb-6 group-hover:bg-[#00ed64] group-hover:text-[#001e2b] transition-colors">
+<span class="material-symbols-outlined text-2xl">school</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#001e2b] mb-3">Atlas Learning Hub</h3>
+<p class="text-sm text-[#5c6f78] leading-relaxed">Access interactive labs, multi-cloud certification pathways, and video courses by MongoDB engineers.</p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#f0f3f2] flex items-center text-xs font-bold text-[#001e2b] group-hover:text-[#006e2a]">
+            Start free course <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Resource Card 2 -->
+<div class="bg-white border border-[#e5e9e8] hover:border-[#001e2b] p-8 rounded flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-sm">
+<div>
+<div class="w-12 h-12 rounded bg-[#eef5ee] text-[#006e2a] flex items-center justify-center mb-6 group-hover:bg-[#00ed64] group-hover:text-[#001e2b] transition-colors">
+<span class="material-symbols-outlined text-2xl">auto_awesome</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#001e2b] mb-3">Build Smarter with AI</h3>
+<p class="text-sm text-[#5c6f78] leading-relaxed">Comprehensive reference architectures for LLM short-term memory, autonomous multi-agent pipelines, and scalable enterprise RAG.</p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#f0f3f2] flex items-center text-xs font-bold text-[#001e2b] group-hover:text-[#006e2a]">
+            Read AI blueprints <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+<!-- Resource Card 3 -->
+<div class="bg-white border border-[#e5e9e8] hover:border-[#001e2b] p-8 rounded flex flex-col justify-between transition-all group hover:-translate-y-1 shadow-sm">
+<div>
+<div class="w-12 h-12 rounded bg-[#eef5ee] text-[#006e2a] flex items-center justify-center mb-6 group-hover:bg-[#00ed64] group-hover:text-[#001e2b] transition-colors">
+<span class="material-symbols-outlined text-2xl">hub</span>
+</div>
+<h3 class="text-xl font-headline font-bold text-[#001e2b] mb-3">Voyage AI Integration</h3>
+<p class="text-sm text-[#5c6f78] leading-relaxed">Pair cutting-edge embedding models directly with Atlas Vector Search to achieve superior retrieval accuracy with lower compute.</p>
+</div>
+<div class="mt-8 pt-4 border-t border-[#f0f3f2] flex items-center text-xs font-bold text-[#001e2b] group-hover:text-[#006e2a]">
+            View integration guide <span class="material-symbols-outlined text-sm ml-1 group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 6. 'MongoDB Atlas - The multi-cloud, intelligent data platform for any use case' Section -->
+<section class="py-24 border-b border-[#e5e9e8] bg-[#fbfbf6]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="text-xs font-bold text-[#006e2a] uppercase tracking-wider font-mono">Unified Architecture</span>
+<h2 class="text-3xl sm:text-5xl font-headline font-bold text-[#001e2b] mt-3">
+          MongoDB Atlas - The multi-cloud, intelligent data platform for any use case
+        </h2>
+<p class="text-[#5c6f78] mt-4 text-base sm:text-lg">
+          Consolidate your stack. Deliver rich search, real-time analytics, and transactional integrity from one single developer data surface.
+        </p>
+</div>
+<!-- Tab Navigation + Feature Showcase Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Vertical Navigation List (8 capabilities) -->
+<div class="lg:col-span-4 bg-white border border-[#e5e9e8] rounded p-2 flex flex-col gap-1 shadow-sm">
+<!-- Active: Vector Search -->
+<button class="w-full text-left px-5 py-4 rounded bg-[#001e2b] text-white flex items-center justify-between font-headline font-bold text-base transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00ed64]">travel_explore</span>
+              Vector Search
+            </span>
+<span class="material-symbols-outlined text-sm text-[#00ed64]">arrow_forward_ios</span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">stream</span>
+              Stream Processing
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">database</span>
+              Operational
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">sync_alt</span>
+              Transactional
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">search</span>
+              Text Search
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">insights</span>
+              Analytical
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">schema</span>
+              Graph
+            </span>
+</button>
+<button class="w-full text-left px-5 py-3.5 rounded hover:bg-[#f6f9f8] text-[#1c2d38] flex items-center justify-between font-headline font-medium text-sm transition-colors">
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#5c6f78]">location_on</span>
+              Geospatial
+            </span>
+</button>
+</div>
+<!-- Right Feature Showcase Card: Vector Search Use Cases -->
+<div class="lg:col-span-8 bg-white border border-[#e5e9e8] rounded p-8 sm:p-10 shadow-sm flex flex-col justify-between">
+<div>
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-[#eef5ee] border border-[#d6e8d6] rounded text-xs font-semibold text-[#006e2a] mb-5">
+<span class="w-2 h-2 rounded-full bg-[#00ed64]"></span>
+              High-Velocity Vector Engine
+            </div>
+<h3 class="text-2xl sm:text-3xl font-headline font-bold text-[#001e2b] mb-4">
+              Vector Search Use Cases: Zero Lag, Full Context
+            </h3>
+<p class="text-[#1c2d38] text-base leading-relaxed mb-8">
+              Unlike disparate vector-only niche databases, MongoDB Atlas allows you to store operational document properties alongside high-dimensional vector embeddings in the exact same schema. Query live records with semantic similarity and fine-grained metadata filters in a single atomic transaction.
+            </p>
+<!-- Highlights -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+<div class="bg-[#fbfbf6] p-5 rounded border border-[#e5e9e8]">
+<h4 class="font-headline font-bold text-[#001e2b] text-sm flex items-center gap-2 mb-1.5">
+<span class="material-symbols-outlined text-[#006e2a] text-lg">bolt</span>
+                  Eliminate Brittle ETL
+                </h4>
+<p class="text-xs text-[#5c6f78] leading-relaxed">No need to export data over fragile pipelines to separate vector databases. Zero latency drift.</p>
+</div>
+<div class="bg-[#fbfbf6] p-5 rounded border border-[#e5e9e8]">
+<h4 class="font-headline font-bold text-[#001e2b] text-sm flex items-center gap-2 mb-1.5">
+<span class="material-symbols-outlined text-[#006e2a] text-lg">tune</span>
+                  Hybrid Search Capabilities
+                </h4>
+<p class="text-xs text-[#5c6f78] leading-relaxed">Combine full-text Lucene fuzzy lexical search with k-nearest neighbors in one combined scoring call.</p>
+</div>
+</div>
+</div>
+<!-- CTAs -->
+<div class="flex flex-wrap items-center gap-4 pt-6 border-t border-[#f0f3f2]">
+<a class="px-6 py-2.5 bg-[#00ed64] hover:bg-[#02ec64] text-[#001e2b] font-headline font-bold text-sm rounded border border-[#001e2b] transition-all shadow-sm" href="#learn-more-vector">
+              Learn More
+            </a>
+<a class="px-6 py-2.5 bg-transparent hover:bg-black/5 border border-[#001e2b] text-[#001e2b] font-headline font-semibold text-sm rounded transition-all" href="#docs-vector">
+              Documentation
+            </a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 7. 'Loved by builders, trusted by enterprises' Case Study Section -->
+<section class="py-24 border-b border-[#e5e9e8] bg-[#fffff4]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="text-center mb-16">
+<span class="text-xs font-bold text-[#006e2a] uppercase tracking-wider font-mono">Proof of Scale</span>
+<h2 class="text-3xl sm:text-4xl font-headline font-bold text-[#001e2b] mt-2">Loved by builders, trusted by enterprises</h2>
+<p class="text-[#5c6f78] mt-2 text-base">Powering mission-critical workflows across global finance, retail, and healthcare.</p>
+</div>
+<!-- Featured Victoria's Secret Migration Case Study Card -->
+<div class="bg-white border border-[#e5e9e8] rounded p-8 lg:p-12 shadow-sm">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+<div class="lg:col-span-7">
+<span class="text-xs font-mono font-bold uppercase tracking-widest text-[#006e2a]">Case Study Highlight</span>
+<h3 class="text-2xl sm:text-4xl font-headline font-bold text-[#001e2b] mt-2 mb-4">
+              Victoria’s Secret Modernizes Real-Time Retail with MongoDB Atlas
+            </h3>
+<p class="text-[#1c2d38] text-sm sm:text-base leading-relaxed mb-6">
+              To support massive peak holiday shopping events and unified real-time inventory management across thousands of omni-channel stores, Victoria’s Secret migrated hundreds of legacy transactional databases into a consolidated MongoDB Atlas environment.
+            </p>
+<a class="inline-flex items-center gap-2 text-sm font-bold text-[#001e2b] hover:text-[#006e2a] hover:underline" href="#read-case-study">
+              Read the customer story <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<!-- Big Metrics -->
+<div class="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="bg-[#fbfbf6] border border-[#e5e9e8] p-6 rounded text-center flex flex-col justify-center">
+<div class="font-headline font-extrabold text-4xl sm:text-5xl text-[#001e2b] mb-1">
+                200
+              </div>
+<p class="text-xs uppercase tracking-wider text-[#001e2b] font-bold">Databases Migrated</p>
+<p class="text-[11px] text-[#5c6f78] mt-1">Completed seamlessly in just 4 months</p>
+</div>
+<div class="bg-[#fbfbf6] border border-[#e5e9e8] p-6 rounded text-center flex flex-col justify-center">
+<div class="font-headline font-extrabold text-4xl sm:text-5xl text-[#001e2b] mb-1">
+                240%
+              </div>
+<p class="text-xs uppercase tracking-wider text-[#001e2b] font-bold">API Performance</p>
+<p class="text-[11px] text-[#5c6f78] mt-1">Throughput improvement for checkout services</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 8. 'Works seamlessly with your tech stack' Section -->
+<section class="py-20 border-b border-[#e5e9e8] bg-[#fbfbf6]">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12 text-center">
+<span class="text-xs font-bold text-[#006e2a] uppercase tracking-wider font-mono">Ecosystem</span>
+<h2 class="text-3xl font-headline font-bold text-[#001e2b] mt-2 mb-4">Works seamlessly with your tech stack</h2>
+<p class="text-[#5c6f78] text-sm max-w-2xl mx-auto mb-12">
+        Pre-built connectors, managed drivers for every major language, and turnkey AI framework extensions.
+      </p>
+<div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-4">
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">AWS</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">First-Party VPC</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">Google Cloud</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">Vertex AI Partner</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">Microsoft Azure</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">Azure OpenAI Hub</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#006e2a]">LangChain</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">Vector &amp; Memory</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">LlamaIndex</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">RAG Doc Store</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">Docker</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">Official Images</span>
+</div>
+<div class="bg-white border border-[#e5e9e8] py-6 px-3 rounded flex flex-col items-center justify-center gap-2 hover:border-[#001e2b] transition-colors shadow-sm">
+<span class="font-bold text-sm text-[#001e2b]">Kubernetes</span>
+<span class="text-[10px] text-[#5c6f78] font-mono">Atlas Operator</span>
+</div>
+</div>
+</div>
+</section>
+<!-- 10. Dark Slate High-Impact CTA Section ("The Intelligent Data Platform for Builders") -->
+<section class="py-24 bg-[#001e2b] text-white">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<!-- Left Main CTA Content -->
+<div class="lg:col-span-8">
+<span class="font-mono text-xs font-bold uppercase tracking-widest text-[#00ed64] bg-[#0c2e3d] px-3 py-1 rounded inline-block mb-6">
+            START TODAY
+          </span>
+<h2 class="text-3xl sm:text-5xl font-headline font-extrabold tracking-tight text-white mb-4">
+            The Intelligent Data Platform for Builders
+          </h2>
+<p class="text-slate-300 text-lg leading-relaxed max-w-2xl mb-8">
+            History tells agents what happened. Real-time data tells them what’s happening. Retrieval and memory help them act with context.
+          </p>
+<div class="flex flex-wrap items-center gap-4">
+<a class="px-8 py-3 bg-[#00ed64] hover:bg-[#02ec64] text-[#001e2b] font-headline font-bold text-base rounded border border-[#00ed64] shadow-md transition-all active:scale-95" href="#cta-get-started">
+              Get Started
+            </a>
+</div>
+</div>
+<!-- Right Side Nav: MORE INFORMATION -->
+<div class="lg:col-span-4 bg-[#082333] border border-[#173a4d] p-8 rounded">
+<h4 class="font-mono text-xs font-bold uppercase tracking-wider text-slate-400 mb-6">
+            MORE INFORMATION
+          </h4>
+<ul class="space-y-4 text-sm font-medium">
+<li>
+<a class="flex items-center justify-between text-white hover:text-[#00ed64] transition-colors py-1 border-b border-[#173a4d]" href="#learning-hub">
+<span>Atlas Learning Hub</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-white hover:text-[#00ed64] transition-colors py-1 border-b border-[#173a4d]" href="#docs">
+<span>Documentation</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-white hover:text-[#00ed64] transition-colors py-1 border-b border-[#173a4d]" href="#university">
+<span>MongoDB University</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</li>
+<li>
+<a class="flex items-center justify-between text-white hover:text-[#00ed64] transition-colors py-1" href="#pricing">
+<span>Pricing</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- 11. Dense Cream Footer -->
+<footer class="w-full bg-[#fffff4] border-t border-[#e5e9e8] text-[#5c6f78] text-xs font-body">
+<div class="max-w-[1280px] mx-auto px-6 lg:px-12 py-16 flex flex-col gap-12">
+<!-- Top Brand Row -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center pb-8 border-b border-[#e5e9e8] gap-6">
+<div class="flex items-center gap-2.5">
+<svg class="w-6 h-7 text-[#00ed64]" fill="none" viewbox="0 0 32 38" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.938 1.5C15.938 1.5 8.5 8.428 8.5 18.562C8.5 25.043 12.062 30.081 15.656 33.35C15.844 33.521 16.031 33.521 16.219 33.35C19.812 30.081 23.375 25.043 23.375 18.562C23.375 8.428 15.938 1.5 15.938 1.5Z" fill="#001e2b"></path>
+<path d="M15.938 1.5V33.35C19.812 30.081 23.375 25.043 23.375 18.562C23.375 8.428 15.938 1.5 15.938 1.5Z" fill="#00ed64"></path>
+</svg>
+<span class="font-headline font-bold text-xl text-[#001e2b]">MongoDB<span class="text-[#00ed64]">.</span></span>
+</div>
+<div class="flex flex-wrap items-center gap-6 text-[#1c2d38] font-medium">
+<a class="hover:text-[#006e2a] transition-colors" href="#twitter">Twitter / X</a>
+<a class="hover:text-[#006e2a] transition-colors" href="#github">GitHub</a>
+<a class="hover:text-[#006e2a] transition-colors" href="#linkedin">LinkedIn</a>
+<a class="hover:text-[#006e2a] transition-colors" href="#youtube">YouTube</a>
+<a class="hover:text-[#006e2a] transition-colors" href="#reddit">Reddit</a>
+</div>
+</div>
+<!-- Links Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-8">
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">About</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#careers">Careers</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#investors">Investor Relations</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#leadership">Leadership</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#press">Press</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Support</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#portal">Customer Support</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#status">Atlas Status</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#forums">Community Forums</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#consulting">Consulting</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Build</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#dev-center">Developer Center</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#docs-build">Documentation</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#libraries">Libraries &amp; Drivers</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#university-build">MongoDB University</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Data Basics</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#nosql">What is NoSQL?</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#vectors">Vector Search 101</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#document">Document Model</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#cloud">Cloud Database</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Products</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#atlas">Atlas</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#community">Community Server</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#enterprise">Enterprise Advanced</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#pricing">Pricing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Solutions</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#ai">Generative AI</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#serverless">Serverless</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#edge">Edge &amp; Mobile</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#analytics">Real-Time Analytics</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Company</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#about">About Us</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#contact">Contact Us</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#partners">Partners</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#newsroom">Newsroom</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-headline font-bold text-[#001e2b] text-sm mb-4">Legal &amp; Trust</h4>
+<ul class="space-y-2.5">
+<li><a class="hover:text-[#001e2b] transition-colors" href="#trust">Trust Center</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#privacy">Privacy Notice</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#terms">Terms of Use</a></li>
+<li><a class="hover:text-[#001e2b] transition-colors" href="#security">Security</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Copyright & English Locale Row -->
+<div class="pt-8 border-t border-[#e5e9e8] flex flex-col md:flex-row justify-between items-center text-xs text-[#5c6f78] gap-4">
+<div>
+          © 2026 MongoDB, Inc. All rights reserved. MongoDB, Mongo, and the leaf logo are registered trademarks of MongoDB, Inc.
+        </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base">language</span>
+<span class="font-medium text-[#1c2d38]">English (US)</span>
+</div>
+</div>
+</div>
+</footer>
+</body></html>

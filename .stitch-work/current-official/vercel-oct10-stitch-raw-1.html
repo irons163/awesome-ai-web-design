@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vercel: Build and deploy the AI Web</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @font-face {
+      font-family: 'GeistSans';
+      src: url('https://vercel.com/vc-ap-vercel-marketing/_next/static/immutable/media/Geist_Variable-s.p.2v-cf9syxr5ni.woff2') format('woff2');
+      font-weight: 100 900;
+      font-style: normal;
+    }
+    :root {
+      --font-geist: 'GeistSans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    body {
+      font-family: var(--font-geist);
+      background-color: #000000;
+      color: #ededed;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .triangle-logo {
+      width: 0;
+      height: 0;
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-bottom: 14px solid #ffffff;
+    }
+  </style>
+</head>
+<body class="bg-black text-[#ededed] selection:bg-white selection:text-black">
+
+  <!-- Top Announcement Banner -->
+  <a href="#" class="block w-full border-b border-[#222222] bg-[#000000] py-2 px-4 text-center text-[12px] tracking-tight text-[#888888] hover:text-white transition-colors duration-150">
+    <span class="inline-flex items-center gap-1">
+      Ship 26 is coming to SF <span class="text-white font-medium ml-1">Get your ticket &rarr;</span>
+    </span>
+  </a>
+
+  <!-- Mobile Sticky Header -->
+  <header class="sticky top-0 z-50 flex h-14 w-full items-center justify-between border-b border-[#1f1f1f] bg-black/85 backdrop-blur-md px-5">
+    <div class="flex items-center gap-2">
+      <div class="triangle-logo"></div>
+    </div>
+    <div class="flex items-center gap-3">
+      <a href="#" class="rounded-full bg-[#1c1c1c] px-3 py-1.5 text-xs font-medium text-white hover:bg-[#2c2c2c] transition-all border border-[#2e2e2e]">Sign Up</a>
+      <button aria-label="Toggle Menu" class="flex h-8 w-8 items-center justify-center rounded-md border border-[#222222] text-[#888888] hover:text-white">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="4" y1="7" x2="20" y2="7"></line>
+          <line x1="4" y1="17" x2="20" y2="17"></line>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="w-full px-5 pt-8 pb-16 flex flex-col items-start max-w-[390px] mx-auto overflow-hidden">
+
+    <!-- Hero Glowing Triangle / Ambient Graphic (Rendered via clean CSS & SVG) -->
+    <div class="relative w-full aspect-[4/3] rounded-2xl border border-[#222222] bg-[#050505] overflow-hidden flex items-center justify-center mb-8 shadow-2xl">
+      <!-- Radial ambient glow background -->
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15)_0%,rgba(0,0,0,0.95)_70%)] pointer-events-none"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(56,189,248,0.08)_0%,transparent_60%)] pointer-events-none"></div>
+      
+      <div class="relative z-10 flex flex-col items-center">
+        <!-- Vercel Brand Center Icon with soft ambient aura -->
+        <div class="relative">
+          <div class="absolute -inset-4 bg-white/20 blur-xl rounded-full"></div>
+          <svg width="60" height="52" viewBox="0 0 76 65" fill="none" class="relative drop-shadow-[0_0_25px_rgba(255,255,255,0.7)]">
+            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#ffffff" />
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="w-full">
+      <h1 class="text-[48px] font-normal leading-[56px] tracking-[-0.03em] text-[#ededed] mb-4">
+        Agentic<br/>Infrastructure
+      </h1>
+
+      <p class="text-[15px] font-normal leading-[24px] text-[#888888] mb-6">
+        For coding agents to ship apps and agents automated by agents. Deploy, coordinate, and orchestrate autonomous systems at internet scale. Built for software engineering teams.
+      </p>
+
+      <!-- CTAs -->
+      <div class="flex flex-col gap-3 w-full mb-8">
+        <a href="#" class="flex h-11 w-full items-center justify-center rounded-full bg-white text-black font-medium text-[14px] hover:bg-[#dcdcdc] transition-all gap-2 shadow-sm">
+          <svg width="12" height="11" viewBox="0 0 76 65" fill="currentColor">
+            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+          </svg>
+          Deploy now
+        </a>
+        <a href="#" class="flex h-11 w-full items-center justify-center rounded-full bg-[#111111] text-[#ededed] font-medium text-[14px] border border-[#222222] hover:bg-[#1a1a1a] transition-all">
+          Talk to sales
+        </a>
+      </div>
+
+      <!-- Hero 3 Feature Points -->
+      <div class="w-full flex flex-col divide-y divide-[#1e1e1e] border-y border-[#1e1e1e] mb-12">
+        <div class="py-3 flex flex-col">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-[#666666]">Architecture</div>
+          <div class="text-[14px] font-medium text-[#ededed] mt-0.5">For coding agents</div>
+          <div class="text-[13px] text-[#888888] leading-snug mt-1">
+            For coding agents to deploy in their native language, with Vercel's API, CLI, MCP, and Skills.
+          </div>
+        </div>
+        <div class="py-3 flex flex-col">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-[#666666]">Scale</div>
+          <div class="text-[14px] font-medium text-[#ededed] mt-0.5">To ship apps and agents</div>
+          <div class="text-[13px] text-[#888888] leading-snug mt-1">
+            To ship apps and agents in Sandboxed VMs, with durable backends, powered by hundreds of models.
+          </div>
+        </div>
+        <div class="py-3 flex flex-col">
+          <div class="text-[11px] font-mono uppercase tracking-wider text-[#666666]">Telemetry</div>
+          <div class="text-[14px] font-medium text-[#ededed] mt-0.5">Automated by agents</div>
+          <div class="text-[13px] text-[#888888] leading-snug mt-1">
+            Automated by agents who autonomously investigate errors, plan fixes, and open PRs.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo / Trusted By strip -->
+    <section class="w-full pb-14 border-b border-[#1c1c1c]">
+      <div class="text-[10px] uppercase font-mono tracking-widest text-[#555555] mb-4">
+        Trusted by industry leaders
+      </div>
+      <div class="flex flex-wrap gap-x-4 gap-y-2 text-[12px] font-mono tracking-tight text-[#777777]">
+        <span>BLACKBOX.AI</span>
+        <span>/</span>
+        <span>CHARLES SCHWAB</span>
+        <span>/</span>
+        <span>DOORDASH</span>
+        <span>/</span>
+        <span>OPENAI</span>
+        <span>/</span>
+        <span>SUPREME</span>
+        <span>/</span>
+        <span>THE WEATHER CO.</span>
+        <span>/</span>
+        <span>POLYMARKET</span>
+      </div>
+    </section>
+
+    <!-- SECTION 1: Build agents -->
+    <section class="w-full pt-14 pb-12 border-b border-[#1c1c1c]">
+      <div class="text-[11px] uppercase font-mono tracking-wider text-[#666666] mb-2">
+        01 &bull; Intelligence Layer
+      </div>
+      <h2 class="text-[32px] font-[450] leading-[40px] tracking-[-0.02em] text-[#ededed] mb-3">
+        Build agents on infrastructure that thinks like them
+      </h2>
+      <p class="text-[14px] leading-[22px] text-[#888888] mb-6">
+        Notion powers millions of agent conversations daily on Vercel.
+      </p>
+
+      <!-- Notion Interactive Mockup Terminal Frame -->
+      <div class="w-full rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden mb-6 shadow-2xl font-mono">
+        <div class="flex items-center justify-between px-3.5 py-2.5 border-b border-[#222222] bg-[#080808]">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="ml-2 text-[10px] text-[#666666]">notion.so/agents/orchestrator</span>
+          </div>
+          <span class="text-[10px] text-[#4ade80] bg-[#11261a] px-2 py-0.5 rounded border border-[#1b3d28]">Cluster: Healthy</span>
+        </div>
+        <div class="p-4 text-[12px] leading-[20px] text-[#888888] space-y-2.5">
+          <div class="text-[#555555]">// Dispatching task to autonomous planner...</div>
+          <div class="text-[#cccccc] flex items-center gap-1.5">
+            <span class="text-[#4ade80]">&#10003;</span> [sandbox-inst-492] Memory snapshot hydrated (14ms)
+          </div>
+          <div class="text-[#cccccc] flex items-center gap-1.5">
+            <span class="text-[#4ade80]">&#10003;</span> [gateway] Routing prompt to claude-3-5-sonnet via Gateway
+          </div>
+          <div class="text-[11px] text-[#777777] pt-1">
+            Token throughput: 114 tps &bull; Cache hit ratio: 94.2% &bull; Regional egress: iad1
+          </div>
+          <div class="border-t border-[#1a1a1a] pt-2 flex items-center justify-between text-[11px] text-[#555555]">
+            <span>Active thread: #exec-2026-928</span>
+            <span class="text-[#4ade80]">Durable state: Committed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature items -->
+      <div class="flex flex-col gap-3">
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">01 Durable Orchestration</div>
+          <div class="text-[13px] text-[#a0a0a0]">Stateful execution surviving restarts across distributed agent sessions.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">02 Sandboxed Environments</div>
+          <div class="text-[13px] text-[#a0a0a0]">Isolated micro-VMs per user session with instant code evaluation.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">03 AI Model Gateway</div>
+          <div class="text-[13px] text-[#a0a0a0]">Multi-provider unified latency fallback, caching, and token budgeting.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">04 Fluid Compute</div>
+          <div class="text-[13px] text-[#a0a0a0]">Sub-millisecond elastic scale designed specifically for streaming agent steps.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Ship apps -->
+    <section class="w-full pt-14 pb-12 border-b border-[#1c1c1c]">
+      <div class="text-[11px] uppercase font-mono tracking-wider text-[#666666] mb-2">
+        02 &bull; Global Network
+      </div>
+      <h2 class="text-[32px] font-[450] leading-[40px] tracking-[-0.02em] text-[#ededed] mb-3">
+        Ship apps that scale from zero to millions instantly
+      </h2>
+      <p class="text-[14px] leading-[22px] text-[#888888] mb-6">
+        Zapier serves over 100 million monthly website visits on Vercel.
+      </p>
+
+      <!-- Zapier Edge Telemetry Mockup Frame -->
+      <div class="w-full rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden mb-6 shadow-2xl font-mono">
+        <div class="flex items-center justify-between px-3.5 py-2.5 border-b border-[#222222] bg-[#080808]">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="ml-2 text-[10px] text-[#666666]">zapier.com/app/dashboard/mesh</span>
+          </div>
+          <span class="text-[10px] text-[#4ade80]">99.999% Uptime</span>
+        </div>
+        <div class="p-4 space-y-3">
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div class="p-2.5 rounded bg-black border border-[#1a1a1a]">
+              <div class="text-[#666666]">REQUESTS</div>
+              <div class="text-[16px] text-white font-medium mt-0.5">142.8M</div>
+              <div class="text-[#4ade80] text-[10px]">&uarr; 18.4% this mo</div>
+            </div>
+            <div class="p-2.5 rounded bg-black border border-[#1a1a1a]">
+              <div class="text-[#666666]">COLD STARTS</div>
+              <div class="text-[16px] text-white font-medium mt-0.5">0.00%</div>
+              <div class="text-[#888888] text-[10px]">Edge warming active</div>
+            </div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-[#888888] pt-1 border-t border-[#1a1a1a]">
+            <span>Edge POPs active: 102 locations</span>
+            <span class="text-[#4ade80] font-mono">DDoS Shield Active</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature items -->
+      <div class="flex flex-col gap-3">
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">01 Global Delivery</div>
+          <div class="text-[13px] text-[#a0a0a0]">Smart routing across 100+ edge POPs with sub-20ms edge caching.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">02 Deployment Environments</div>
+          <div class="text-[13px] text-[#a0a0a0]">Instant branch URLs for every pull request with automated previews.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">03 Serverless Functions</div>
+          <div class="text-[13px] text-[#a0a0a0]">Concurrency without connection limits and zero infrastructure management.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">04 Web Application Firewall</div>
+          <div class="text-[13px] text-[#a0a0a0]">Deep packet inspection, automatic DDoS defense, and bot identification.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Host platforms -->
+    <section class="w-full pt-14 pb-12 border-b border-[#1c1c1c]">
+      <div class="text-[11px] uppercase font-mono tracking-wider text-[#666666] mb-2">
+        03 &bull; Multi-Tenant Engine
+      </div>
+      <h2 class="text-[32px] font-[450] leading-[40px] tracking-[-0.02em] text-[#ededed] mb-3">
+        Host platforms that serve every customer
+      </h2>
+      <p class="text-[14px] leading-[22px] text-[#888888] mb-6">
+        Mintlify powers documentation for over 20,000 companies on Vercel.
+      </p>
+
+      <!-- Mintlify Multi-tenant Frame -->
+      <div class="w-full rounded-xl border border-[#222222] bg-[#0c0c0c] overflow-hidden mb-6 shadow-2xl font-mono">
+        <div class="flex items-center justify-between px-3.5 py-2.5 border-b border-[#222222] bg-[#080808]">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-[#2a2a2a]"></span>
+            <span class="ml-2 text-[10px] text-[#666666]">docs.mintlify.com/platform/tenants</span>
+          </div>
+          <span class="text-[10px] text-[#4ade80] bg-[#11261a] px-2 py-0.5 rounded border border-[#1b3d28]">20,412 Active</span>
+        </div>
+        <div class="p-3.5 space-y-2 text-[11px]">
+          <div class="p-2 rounded bg-black border border-[#1a1a1a] flex items-center justify-between">
+            <span class="text-[#cccccc]">docs.stripe.com</span>
+            <span class="text-[#4ade80] text-[10px]">SSL Active &bull; Isolated</span>
+          </div>
+          <div class="p-2 rounded bg-black border border-[#1a1a1a] flex items-center justify-between">
+            <span class="text-[#cccccc]">docs.anthropic.com</span>
+            <span class="text-[#4ade80] text-[10px]">SSL Active &bull; Isolated</span>
+          </div>
+          <div class="p-2 rounded bg-black border border-[#1a1a1a] flex items-center justify-between">
+            <span class="text-[#cccccc]">docs.perplexity.ai</span>
+            <span class="text-[#4ade80] text-[10px]">SSL Active &bull; Isolated</span>
+          </div>
+          <div class="text-[10px] text-[#555555] pt-1">
+            Wildcard ingress route configured: Vercel Multi-Zone Engine
+          </div>
+        </div>
+      </div>
+
+      <!-- Feature items -->
+      <div class="flex flex-col gap-3">
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">01 Tenant Isolation</div>
+          <div class="text-[13px] text-[#a0a0a0]">Zero cross-account data leakage across millions of custom subdomains.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">02 Domain Management</div>
+          <div class="text-[13px] text-[#a0a0a0]">Automated programmatic DNS verification and propagation.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">03 Custom SSL Certificates</div>
+          <div class="text-[13px] text-[#a0a0a0]">Instant TLS provisioning via API with zero configuration needed.</div>
+        </div>
+        <div class="rounded-lg border border-[#1f1f1f] bg-[#0a0a0a] p-3.5">
+          <div class="font-mono text-[11px] text-[#777777] mb-0.5">04 Preview URLs</div>
+          <div class="text-[13px] text-[#a0a0a0]">Unique review sandbox for each customer commit and documentation release.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Recently shipped -->
+    <section class="w-full pt-14 pb-12 border-b border-[#1c1c1c]">
+      <div class="flex items-baseline justify-between mb-6">
+        <h2 class="text-[32px] font-[450] leading-[40px] tracking-[-0.02em] text-[#ededed]">
+          Recently shipped
+        </h2>
+        <a href="#" class="text-[12px] font-mono text-[#888888] hover:text-white transition-colors">
+          View Changelog &rarr;
+        </a>
+      </div>
+
+      <div class="flex flex-col gap-4">
+        <!-- Card 1: eve framework -->
+        <div class="rounded-xl border border-[#222222] bg-[#0c0c0c] p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[11px] font-mono text-[#777777]">October 2026</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1f1f1f] text-[#888888] border border-[#2a2a2a]">GA</span>
+          </div>
+          <div class="flex items-center gap-2 mb-2">
+            <span class="w-3.5 h-3.5 rounded-full bg-[#3b82f6] inline-block"></span>
+            <h3 class="text-[17px] font-medium text-white tracking-tight">eve framework</h3>
+          </div>
+          <p class="text-[13px] leading-[20px] text-[#888888] mb-4">
+            eve is a framework for building durable agents with state management designed for multi-step agent actions.
+          </p>
+          <a href="#" class="inline-flex items-center text-[12px] font-medium text-white hover:underline gap-1">
+            Read announcement &rarr;
+          </a>
+        </div>
+
+        <!-- Card 2: Passport identity -->
+        <div class="rounded-xl border border-[#222222] bg-[#0c0c0c] p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[11px] font-mono text-[#777777]">October 2026</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#11261a] text-[#4ade80] border border-[#1b3d28]">Preview</span>
+          </div>
+          <h3 class="text-[17px] font-medium text-white tracking-tight mb-1">Passport identity</h3>
+          <div class="text-[11px] font-mono text-[#666666] mb-2">Passport &bull; Pasaporte &bull; Passaporto &bull; パスポート</div>
+          <p class="text-[13px] leading-[20px] text-[#888888] mb-4">
+            Secure every internal agent, app, and deployment with your identity provider. Okta, Azure AD, and Google Workspace support.
+          </p>
+          <a href="#" class="inline-flex items-center text-[12px] font-medium text-white hover:underline gap-1">
+            Explore Passport &rarr;
+          </a>
+        </div>
+
+        <!-- Card 3: Containers -->
+        <div class="rounded-xl border border-[#222222] bg-[#0c0c0c] p-5">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-[11px] font-mono text-[#777777]">September 2026</span>
+            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#1f1f1f] text-[#888888] border border-[#2a2a2a]">GA</span>
+          </div>
+          <div class="rounded-lg bg-black p-3 font-mono text-[11px] text-[#888888] mb-3 border border-[#1a1a1a]">
+            <div class="text-white">&Delta; vercel deploy --docker</div>
+            <div class="text-[#4ade80] mt-1">&#10003; Building image from Dockerfile.vercel</div>
+            <div class="text-[#4ade80]">&#10003; Stored image in your project's registry</div>
+            <div class="text-[#4ade80]">&#10003; Deployed to Fluid compute</div>
+          </div>
+          <h3 class="text-[17px] font-medium text-white tracking-tight mb-2">Containers</h3>
+          <p class="text-[13px] leading-[20px] text-[#888888] mb-4">
+            Run production workloads in isolated containers on Vercel. Native Dockerfile builds with zero orchestrator overhead.
+          </p>
+          <a href="#" class="inline-flex items-center text-[12px] font-medium text-white hover:underline gap-1">
+            Learn about Containers &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: Built by you, or your agents -->
+    <section class="w-full pt-16 pb-16 text-center border-b border-[#1c1c1c]">
+      <h2 class="text-[32px] font-[450] leading-[40px] tracking-[-0.02em] text-[#ededed] mb-3">
+        Built by you, or your agents
+      </h2>
+      <p class="text-[14px] leading-[22px] text-[#888888] mb-8">
+        From the first prompt to global scale. Deploy high-reliability AI apps today on the standard frontend and agent cloud.
+      </p>
+
+      <div class="flex flex-col gap-3 w-full">
+        <a href="#" class="flex h-11 w-full items-center justify-center rounded-full bg-white text-black font-medium text-[14px] hover:bg-[#dcdcdc] transition-all gap-2 shadow-sm">
+          <svg width="12" height="11" viewBox="0 0 76 65" fill="currentColor">
+            <path d="M37.5274 0L75.0548 65H0L37.5274 0Z" />
+          </svg>
+          Deploy now
+        </a>
+        <a href="#" class="flex h-11 w-full items-center justify-center rounded-full bg-[#111111] text-[#ededed] font-medium text-[14px] border border-[#222222] hover:bg-[#1a1a1a] transition-all">
+          Onboard your agent
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 6: Site Map Footer (2-column layout per measured bounding boxes) -->
+    <footer class="w-full pt-12 pb-16">
+      <div class="grid grid-cols-2 gap-x-6 gap-y-10 text-[13px] mb-12">
+        <!-- Col 1: Agent Stack -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Agent Stack</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">AI SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">AI Gateway</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Sandbox</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Workflows</a></li>
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5">Passport <span class="text-[9px] px-1 bg-[#222222] rounded text-[#4ade80]">New</span></a></li>
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5">eve <span class="text-[9px] px-1 bg-[#222222] rounded text-[#4ade80]">New</span></a></li>
+          </ul>
+        </div>
+
+        <!-- Col 2: Core Platform -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Core Platform</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">CI/CD</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Content Delivery</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Fluid Compute</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Observability</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Platform Security</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">WAF</a></li>
+          </ul>
+        </div>
+
+        <!-- Security -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Security</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Passport SSO</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Enterprise Firewall</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">DDoS Mitigation</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">SOC2 Type II</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Data Isolation</a></li>
+          </ul>
+        </div>
+
+        <!-- Tools -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Tools</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Vercel Drop</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Vercel Agent</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Vercel Plugin</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Agent Skills</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Domains</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">v0</a></li>
+          </ul>
+        </div>
+
+        <!-- Frameworks -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Frameworks</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors flex items-center gap-1.5">eve <span class="text-[9px] px-1 bg-[#222222] rounded text-[#4ade80]">New</span></a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Next.js</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Nuxt</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">SvelteKit</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Nitro</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Turborepo</a></li>
+          </ul>
+        </div>
+
+        <!-- SDKs -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">SDKs</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Vercel SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Workflow SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Flags SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Chat SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Queues SDK</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Streamdown</a></li>
+          </ul>
+        </div>
+
+        <!-- Build -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Build</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">AI Apps</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Web Apps</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Marketing Sites</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Platforms</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Commerce</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Platform Engineers</a></li>
+          </ul>
+        </div>
+
+        <!-- Learn -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Learn</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Docs</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Blog</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Changelog</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Knowledge Base</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Academy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Community</a></li>
+          </ul>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Explore</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Customers</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Marketplace</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Templates</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Partner Finder</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Vercel + AWS</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Company</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">About</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Careers</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Press</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Events</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Startups</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Open Source</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal & Trust -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Legal & Trust</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Terms of Service</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Cookie Policy</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">DPA</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Trust Center</a></li>
+          </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+          <h4 class="text-[14px] font-medium text-white mb-3">Social</h4>
+          <ul class="flex flex-col gap-2.5 text-[#888888]">
+            <li><a href="#" class="hover:text-white transition-colors">GitHub</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">X / Twitter</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">LinkedIn</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">YouTube</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom System Status & Copyright -->
+      <div class="pt-6 border-t border-[#1a1a1a] flex flex-col gap-4 text-[12px] text-[#666666]">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-[#00e599]"></span>
+            <span class="text-[#ededed] font-medium">All systems normal</span>
+          </div>
+          <div class="flex items-center rounded-md border border-[#222222] bg-[#0c0c0c] p-0.5 text-[11px]">
+            <span class="px-2 py-0.5 rounded bg-[#1e1e1e] text-white">dark</span>
+            <span class="px-2 py-0.5 text-[#777777]">light</span>
+          </div>
+        </div>
+        <div class="flex items-center justify-between text-[#555555]">
+          <span>&copy; 2026 Vercel, Inc.</span>
+          <span>Unofficial Study (390&times;6671)</span>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+</body>
+</html>
