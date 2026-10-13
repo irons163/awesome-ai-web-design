@@ -12,6 +12,7 @@ const html = read('index.html');
 const application = read('assets/app.js');
 const catalog = read('assets/catalog.json');
 const progress = read('dist/official-progress.html');
+const studies = JSON.parse(read('dist/assets/official-studies.json')).studies;
 
 async function settleUntil(predicate) {
   for (let attempt = 0; attempt < 30; attempt++) {
@@ -73,6 +74,14 @@ function assertOfficialOnly(query) {
   assert.equal(query('#preview-frame').getAttribute('sandbox'), 'allow-scripts');
 }
 
+function assertCurrentStudyStatus(query, slug) {
+  const study = studies.find(item => item.slug === slug);
+  assert.ok(study, `Missing published study metadata: ${slug}`);
+  assert.ok(query('#official-preview-status').textContent.includes(
+    `參考日期：${study.date}。${study.status_label}。`));
+  assert.equal(query('#official-study-scope').textContent, study.scope);
+}
+
 test('a direct brand link defaults to the official draft and waits for its progress', async t => {
   const ui = await fixture(t, 'wired');
   assertOfficialOnly(ui.query);
@@ -80,7 +89,7 @@ test('a direct brand link defaults to the official draft and waits for its progr
   ui.revealProgress();
   await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/wired.html');
   assertOfficialOnly(ui.query);
-  assert.match(ui.query('#official-preview-status').textContent, /2026-10-09.*尚未/);
+  assertCurrentStudyStatus(ui.query, 'wired');
   assert.equal(ui.query('#open-preview').getAttribute('href'), 'https://catalog.test/official-drafts/wired.html');
   assert.equal(ui.query('#official-preview-link').target, '_blank');
   assert.equal(ui.query('#official-preview-link').rel, 'noopener');
@@ -126,7 +135,7 @@ for (const slug of ['pinterest', 'vodafone']) {
     ui.revealProgress();
     await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === `official-drafts/${slug}.html`);
     assertOfficialOnly(ui.query);
-    assert.match(ui.query('#official-preview-status').textContent, /2026-10-09.*尚未/);
+    assertCurrentStudyStatus(ui.query, slug);
     assert.match(ui.query('.official-drafts-count').textContent, /74 份草稿/);
   });
 }

@@ -210,7 +210,8 @@ for(const brand of ['vodafone','pinterest']) {
   const intro='<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>'+brand+' — dated official-site working study</title>';
   // Changing the original icon-play class also moves the hero button into the
   // text column. Change only its original icon glyph, preserving its geometry.
-  const controls=brand==='vodafone'?'<style>.action-button[data-study-paused="true"]::before{content:"\\e91e"}</style>':'';
+  const controls=brand==='vodafone'?'<style>.action-button[data-study-paused="true"]::before{content:"\\e91e"}</style><style id="study-static-visibility">'+fs.readFileSync(path.resolve('scripts/vodafone-static-study.css'),'utf8')+'</style>':
+    '<style id="study-narrow-adaptation">'+fs.readFileSync(path.resolve('scripts/pinterest-narrow-study.css'),'utf8')+'</style>';
   const templates=['desktop','mobile'].map(mode=>'<template id="study-'+mode+'-source">'+documents[mode].body.innerHTML+'</template>').join('');
   const script='<script id="study-runtime">const CONFIG='+JSON.stringify(configuration).replace(/</g,'\\u003c')+';('+runtime.toString()+')();</script>';
   const html='<!doctype html><html lang="en"><head>'+intro+head.innerHTML+controls+'</head><body>'+templates+script+'</body></html>';

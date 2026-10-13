@@ -7,6 +7,7 @@ from pathlib import Path
 from urllib.parse import urljoin, urlsplit
 
 from official_html_tree import Node, Tree
+from localize_preserved_images import localize_images
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / '.stitch-work/current-official'
@@ -136,7 +137,8 @@ def main():
                         for name, state in (('drawer', STATES['navigationDrawer']), ('drawer-tech', STATES['navigationTechExpanded']), ('following', STATES['followingPanel'])))
     tab_data = '<script type="application/json" id="study-source-tabs">' + json.dumps(DETAILS['tabs']).replace('<', '\\u003c') + '</script>'
     body.children = [Node(text=markup + templates + tab_data), element('script', content=(ROOT / 'scripts/theverge-current-official.js').read_text())]
-    (WORK / 'theverge.html').write_text('<!doctype html>' + html.render() + '\n')
+    output, _ = localize_images('<!doctype html>' + html.render() + '\n', ORIGIN, ASSETS, REFERENCE['images'], WORK)
+    (WORK / 'theverge.html').write_text(output)
     print(json.dumps({'draft': 'theverge.html', 'original_stylesheets': original_sheets, 'style_blocks': len(rules), 'original_font_files': len(FONTS), 'accepted': False}))
 
 

@@ -7,6 +7,7 @@ from pathlib import Path
 from urllib.parse import urljoin
 
 from official_html_tree import Node, Tree
+from localize_preserved_images import localize_images
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / '.stitch-work/current-official'
@@ -179,6 +180,7 @@ def main():
     state = '<script type="application/json" id="study-wired-ui">' + json.dumps(ui).replace('<', '\\u003c') + '</script>'
     body.children = [Node(text=public_body + templates + state), element('script', content=(ROOT / 'scripts/wired-current-official.js').read_text())]
     output = '<!doctype html>' + html.render() + '\n'
+    output, _ = localize_images(output, ORIGIN, ASSETS, REFERENCE['images'], WORK)
     (WORK / 'wired.html').write_text(output)
     print(json.dumps({'draft': 'wired.html', 'original_fonts': len(FONTS), 'style_blocks': len(rules), 'retained_assets': len({a['path'] for a in ASSETS if a['retained']}), 'accepted': False}))
 
