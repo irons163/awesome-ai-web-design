@@ -7,7 +7,7 @@ import zipfile
 from html.parser import HTMLParser
 from html import unescape
 from pathlib import Path
-from urllib.parse import unquote
+from urllib.parse import quote, unquote
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'scripts'))
@@ -163,6 +163,9 @@ class CollectionTests(unittest.TestCase):
     def test_static_links_resolve_without_commercial_routes(self):
         from build_site import OFFICIAL_DRAFTS
         self.ensure_site_build()
+        hosted=json.loads((ROOT/'dist/assets/official-media-hosting.json').read_text())
+        hosted_assets={asset['path']:asset for asset in hosted['assets']}
+        redirects={parts[0]:(parts[1],parts[2]) for line in (ROOT/'dist/_redirects').read_text().splitlines() if len(parts:=line.split())==3}
         files=[ROOT/'dist/index.html']
         for path in files:
             parser=Links(); parser.feed(path.read_text())
@@ -184,7 +187,11 @@ class CollectionTests(unittest.TestCase):
                 # not missing local files. Preserve the original SVG bytes.
                 if unquote(link).startswith('#'): continue
                 if link.startswith(('#','/')) or re.match(r'[a-z][a-z0-9+.-]*:',link,re.I): continue
-                self.assertTrue((draft.parent/link.split('#')[0].split('?')[0]).exists(),f'{draft}: {link}')
+                relative=unquote(link.split('#')[0].split('?')[0])
+                if not (draft.parent/relative).exists():
+                    self.assertIn(relative,hosted_assets,f'{draft}: {link}')
+                    source='/official-drafts/'+quote(relative,safe='/')
+                    self.assertEqual(redirects[source],(hosted['base_url']+quote(relative,safe='/'),'302'))
         metadata=json.loads((ROOT/'dist/assets/official-studies.json').read_text())
         self.assertEqual(metadata['count'],74)
         self.assertFalse(metadata['official_consistency_claim'])
@@ -201,6 +208,23 @@ class CollectionTests(unittest.TestCase):
         for path in [ROOT/'index.html',ROOT/'assets/app.js',ROOT/'README.md']:
             self.assertNotRegex(path.read_text(),r'https?://(?:[^/]*\.)?(?:getdesign\.md/(?:request|design-md-pass)|everyfeed\.ai|sponsors\.voltagent\.dev)')
         self.assertNotRegex((ROOT/'index.html').read_text(),r'<script[^>]+src=["\']https?:')
+
+    def test_hosted_official_media_are_immutable_and_uploadable(self):
+        self.ensure_site_build()
+        config=json.loads((ROOT/'dist/assets/official-media-hosting.json').read_text())
+        self.assertRegex(config['source_commit'],r'^[0-9a-f]{40}$')
+        self.assertIn('/'+config['source_commit']+'/',config['base_url'])
+        rules=(ROOT/'dist/_redirects').read_text().splitlines()
+        self.assertEqual(len(rules),len(config['assets']))
+        self.assertLessEqual(len(rules),2000)
+        for asset in config['assets']:
+            original=ROOT/'.stitch-work/current-official'/asset['path']
+            self.assertEqual(original.stat().st_size,asset['bytes'])
+            self.assertEqual(hashlib.sha256(original.read_bytes()).hexdigest(),asset['sha256'])
+            self.assertFalse((ROOT/'dist/official-drafts'/asset['path']).exists())
+        total=sum(p.stat().st_size for p in (ROOT/'dist').rglob('*') if p.is_file())
+        self.assertLessEqual(total,config['max_bundle_bytes'])
+        self.assertLess(total,512*1024*1024)
 
     def test_readme_links_resolve(self):
         for path in [ROOT/'README.md']+list((ROOT/'design-md').glob('*/README.md')):

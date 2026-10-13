@@ -4,6 +4,7 @@ import json
 import shutil
 from pathlib import Path
 from publication import stage_official_content
+from hosted_media import compact_hosted_media
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / 'dist'
 DRAFT_SOURCE = ROOT / '.stitch-work/current-official'
@@ -37,6 +38,7 @@ def main():
     catalog_path.write_text(json.dumps(catalog, ensure_ascii=False, separators=(',', ':')) + '\n')
     progress = json.loads((DRAFT_SOURCE / 'progress.json').read_text())
     summary = stage_official_content(ROOT, OUTPUT, progress, catalog['designs'])
+    summary.update(compact_hosted_media(ROOT, OUTPUT))
     print(json.dumps(summary))
     print(f'Staged public website in {OUTPUT}')
 

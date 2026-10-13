@@ -1,13 +1,38 @@
 import sys
 import unittest
+import hashlib
+import json
+import tempfile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from publication import references, study_status
+from hosted_media import compact_hosted_media
 
 
 class PublicationTests(unittest.TestCase):
+    def test_media_redirects_preserve_html_and_reject_mutable_or_changed_sources(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);work=root/'.stitch-work/current-official';out=root/'dist'
+            (root/'data').mkdir();(work/'example-assets').mkdir(parents=True);(out/'official-drafts/example-assets').mkdir(parents=True);(out/'assets').mkdir()
+            original=b'unchanged original media';source=work/'example-assets/photo.png';source.write_bytes(original)
+            staged=out/'official-drafts/example-assets/photo.png';staged.write_bytes(original)
+            html=b'<img src="example-assets/photo.png">';(out/'official-drafts/example.html').write_bytes(html)
+            commit='a'*40;base='https://raw.githubusercontent.com/owner/repo/'+commit+'/.stitch-work/current-official/'
+            config={'source_commit':commit,'base_url':base,'max_bundle_bytes':10000,'assets':[{'path':'example-assets/photo.png','bytes':len(original),'sha256':hashlib.sha256(original).hexdigest()}]}
+            config_path=root/'data/hosted-official-media.json';config_path.write_text(json.dumps(config))
+            compact_hosted_media(root,out)
+            self.assertEqual(source.read_bytes(),original)
+            self.assertEqual((out/'official-drafts/example.html').read_bytes(),html)
+            self.assertIn(base+'example-assets/photo.png 302',(out/'_redirects').read_text())
+            staged.write_bytes(original)
+            config['base_url']=base.replace(commit,'main');config_path.write_text(json.dumps(config))
+            with self.assertRaisesRegex(ValueError,'immutable'):compact_hosted_media(root,out)
+            config['base_url']=base;config_path.write_text(json.dumps(config));source.write_bytes(b'changed')
+            with self.assertRaisesRegex(ValueError,'changed'):compact_hosted_media(root,out)
+            self.assertEqual(staged.read_bytes(),original)
+
     def status(self, record, current='current'):
         return study_status(ROOT, 'example', {'slug':'example','name':'Example'}, {}, record, current, [])
 

@@ -10,7 +10,9 @@ The Verge and WIRED now load checksum-verified preserved images instead of allow
 
 ## Automated checks
 
-Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The nine checks cover:
+Large official media use exact static redirects to original bytes at a verified immutable GitHub commit. Both build entry points validate file sizes and SHA-256 before removing those copies from the deployment package; source files and study HTML stay intact. Regression checks reject mutable references or altered media and require an uploadable static bundle. The local `/dist/` preview applies the same redirect rules.
+
+Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The collection checks cover:
 
 - All 74 designs have their analysis, rewritten task prompts, README, original Stitch HTML export, generation prompt, and provenance record.
 - All 222 task prompts are distinct and include their corresponding design context.

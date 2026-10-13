@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {stageOfficialContent} from './publication.mjs';
+import {compactHostedMedia} from './hosted_media.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const OUTPUT = path.join(ROOT, 'dist');
 const DRAFT_SOURCE = path.join(ROOT, '.stitch-work/current-official');
@@ -38,6 +39,7 @@ function main() {
   write(catalogPath, JSON.stringify(catalog) + '\n');
   const progress = json(path.join(DRAFT_SOURCE, 'progress.json'));
   const summary = stageOfficialContent(ROOT, OUTPUT, progress, catalog.designs);
+  Object.assign(summary, compactHostedMedia(ROOT, OUTPUT));
   console.log(JSON.stringify(summary));
   console.log('Staged public website in ' + OUTPUT);
 }
