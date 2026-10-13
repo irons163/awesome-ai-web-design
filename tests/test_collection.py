@@ -71,6 +71,26 @@ def page_dependencies(markup):
     css=re.sub(r'/\*.*?\*/', '', '\n'.join(parser.css), flags=re.S)
     return parser.links+[match[1] for match in re.findall(r'''url\(\s*(['"]?)(.*?)\1\s*\)''', css)]
 
+
+def restore_publication_bytes(published, record, config):
+    """Undo only the recorded URL spans, rejecting every other changed byte."""
+    assert hashlib.sha256(published).hexdigest() == record['published_sha256']
+    chunks, cursor, shift = [], 0, 0
+    for start, end, original, asset in record['replacements']:
+        replacement = config['base_url'] + quote(asset, safe='/')
+        if '\\/' in original:
+            replacement = replacement.replace('/', '\\/')
+        replacement = replacement.encode()
+        at = start + shift
+        assert published[at:at + len(replacement)] == replacement
+        chunks.extend((published[cursor:at], original.encode()))
+        cursor = at + len(replacement)
+        shift += len(replacement) - (end - start)
+    chunks.append(published[cursor:])
+    restored = b''.join(chunks)
+    assert hashlib.sha256(restored).hexdigest() == record['source_sha256']
+    return restored
+
 class CollectionTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -164,8 +184,7 @@ class CollectionTests(unittest.TestCase):
         from build_site import OFFICIAL_DRAFTS
         self.ensure_site_build()
         hosted=json.loads((ROOT/'dist/assets/official-media-hosting.json').read_text())
-        hosted_assets={asset['path']:asset for asset in hosted['assets']}
-        redirects={parts[0]:(parts[1],parts[2]) for line in (ROOT/'dist/_redirects').read_text().splitlines() if len(parts:=line.split())==3}
+        publication=json.loads((ROOT/'dist/assets/official-media-publication.json').read_text())
         files=[ROOT/'dist/index.html']
         for path in files:
             parser=Links(); parser.feed(path.read_text())
@@ -176,9 +195,11 @@ class CollectionTests(unittest.TestCase):
             draft=ROOT/'dist/official-drafts'/f'{name}.html'
             self.assertTrue(draft.is_file(),draft)
             html=draft.read_text()
-            # Actual render evidence binds these exact bytes. Study labels live
-            # beside the preview and must never be injected during publication.
-            self.assertEqual(draft.read_bytes(),(ROOT/'.stitch-work/current-official'/f'{name}.html').read_bytes())
+            # Preserve every original byte except reversible media URL spans.
+            # Render evidence remains bound to the complete preserved source.
+            record=publication['files'].get(name+'.html')
+            restored=restore_publication_bytes(draft.read_bytes(),record,hosted) if record else draft.read_bytes()
+            self.assertEqual(restored,(ROOT/'.stitch-work/current-official'/f'{name}.html').read_bytes())
             for link in page_dependencies(html):
                 link=unescape(link).strip(' \t\n\r\'"')
                 # Captured search/wizard templates contain runtime placeholders.
@@ -188,16 +209,14 @@ class CollectionTests(unittest.TestCase):
                 if unquote(link).startswith('#'): continue
                 if link.startswith(('#','/')) or re.match(r'[a-z][a-z0-9+.-]*:',link,re.I): continue
                 relative=unquote(link.split('#')[0].split('?')[0])
-                if not (draft.parent/relative).exists():
-                    self.assertIn(relative,hosted_assets,f'{draft}: {link}')
-                    source='/official-drafts/'+quote(relative,safe='/')
-                    self.assertEqual(redirects[source],(hosted['base_url']+quote(relative,safe='/'),'302'))
+                self.assertTrue((draft.parent/relative).exists(),f'{draft}: {link}')
         metadata=json.loads((ROOT/'dist/assets/official-studies.json').read_text())
         self.assertEqual(metadata['count'],74)
         self.assertFalse(metadata['official_consistency_claim'])
         for study in metadata['studies']:
             draft=ROOT/'dist'/study['preview']
-            self.assertEqual(hashlib.sha256(draft.read_bytes()).hexdigest(),study['preview_sha256'])
+            self.assertEqual(hashlib.sha256(draft.read_bytes()).hexdigest(),study['published_preview_sha256'])
+            self.assertEqual(hashlib.sha256((ROOT/'.stitch-work/current-official'/draft.name).read_bytes()).hexdigest(),study['preview_sha256'])
             self.assertFalse(study['accepted'])
             self.assertFalse(study['official_consistency_claim'])
             self.assertIn(study['status_label'],['已比對主要畫面，仍有差異','尚未驗證'])
@@ -214,9 +233,12 @@ class CollectionTests(unittest.TestCase):
         config=json.loads((ROOT/'dist/assets/official-media-hosting.json').read_text())
         self.assertRegex(config['source_commit'],r'^[0-9a-f]{40}$')
         self.assertIn('/'+config['source_commit']+'/',config['base_url'])
-        rules=(ROOT/'dist/_redirects').read_text().splitlines()
-        self.assertEqual(len(rules),len(config['assets']))
-        self.assertLessEqual(len(rules),2000)
+        publication=json.loads((ROOT/'dist/assets/official-media-publication.json').read_text())
+        self.assertEqual(publication['transport'],'absolute_immutable_urls')
+        self.assertFalse((ROOT/'dist/_redirects').exists())
+        for name,record in publication['files'].items():
+            restored=restore_publication_bytes((ROOT/'dist/official-drafts'/name).read_bytes(),record,config)
+            self.assertEqual(restored,(ROOT/'.stitch-work/current-official'/name).read_bytes())
         for asset in config['assets']:
             original=ROOT/'.stitch-work/current-official'/asset['path']
             self.assertEqual(original.stat().st_size,asset['bytes'])

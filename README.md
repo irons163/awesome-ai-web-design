@@ -82,7 +82,7 @@ pnpm run test:preview
 
 ## 免費與來源
 
-正式站的大型官網圖片、影片與字型透過 `_redirects` 指向 GitHub 固定 commit 的原始檔案，以符合部署包上傳大小限制。對應清單與 SHA-256 保存在 `data/hosted-official-media.json`；建置前會核對本機原始檔，草稿 HTML 保持原樣。本機原始素材仍完整保留；`/dist/` 預覽由 `serve.py` 套用相同重新導向規則。
+正式站的發布副本將大型官網圖片、影片與字型網址改為 GitHub 固定 commit 的原始檔案，以符合部署大小限制。原始草稿 HTML 與素材完整保留；`data/hosted-official-media.json` 記錄來源及 SHA-256，建置輸出的 `assets/official-media-publication.json` 記錄每一段網址替換的位置與前後檔案雜湊。檢查會撤銷替換，確認其餘所有位元組（含內嵌 SVG）維持原樣。本機 `/dist/` 預覽與正式站使用相同副本。
 
 本專案的所有內容均直接開放下載，沒有付費牆、私有訂製入口或支付整合。MIT 授權仍允許使用者將內容用於商業專案；「免費提供」不等於限制下游商用。
 

@@ -12,20 +12,37 @@ from hosted_media import compact_hosted_media
 
 
 class PublicationTests(unittest.TestCase):
-    def test_media_redirects_preserve_html_and_reject_mutable_or_changed_sources(self):
+    def test_media_publication_preserves_original_and_rejects_mutable_or_changed_sources(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);work=root/'.stitch-work/current-official';out=root/'dist'
             (root/'data').mkdir();(work/'example-assets').mkdir(parents=True);(out/'official-drafts/example-assets').mkdir(parents=True);(out/'assets').mkdir()
             original=b'unchanged original media';source=work/'example-assets/photo.png';source.write_bytes(original)
             staged=out/'official-drafts/example-assets/photo.png';staged.write_bytes(original)
-            html=b'<img src="example-assets/photo.png">';(out/'official-drafts/example.html').write_bytes(html)
+            html=('你好 🧩 <svg><path d="M0 0"/></svg><img src="example-assets/photo.png">'
+                  '<div style="background-image:url(&quot;./example-assets/photo.png&quot;)"></div>'
+                  '<img src="/official-drafts/example-assets/photo.png?width=640">'
+                  '<script type="application/json">{"image":"example-assets\\/photo.png"}</script>').encode()
+            (out/'official-drafts/example.html').write_bytes(html);(work/'example.html').write_bytes(html)
+            css=b'.hero{background:url("photo.png#original")}'
+            (out/'official-drafts/example-assets/style.css').write_bytes(css);(work/'example-assets/style.css').write_bytes(css)
             commit='a'*40;base='https://raw.githubusercontent.com/owner/repo/'+commit+'/.stitch-work/current-official/'
             config={'source_commit':commit,'base_url':base,'max_bundle_bytes':10000,'assets':[{'path':'example-assets/photo.png','bytes':len(original),'sha256':hashlib.sha256(original).hexdigest()}]}
             config_path=root/'data/hosted-official-media.json';config_path.write_text(json.dumps(config))
             compact_hosted_media(root,out)
             self.assertEqual(source.read_bytes(),original)
-            self.assertEqual((out/'official-drafts/example.html').read_bytes(),html)
-            self.assertIn(base+'example-assets/photo.png 302',(out/'_redirects').read_text())
+            self.assertEqual((work/'example.html').read_bytes(),html)
+            published=(out/'official-drafts/example.html').read_bytes()
+            url=base+'example-assets/photo.png'
+            expected=('你好 🧩 <svg><path d="M0 0"/></svg><img src="'+url+'">'
+                      '<div style="background-image:url(&quot;'+url+'&quot;)"></div>'
+                      '<img src="'+url+'?width=640">'
+                      '<script type="application/json">{"image":"'+url.replace('/','\\/')+'"}</script>').encode()
+            self.assertEqual(published,expected)
+            self.assertEqual((work/'example-assets/style.css').read_bytes(),css)
+            self.assertEqual((out/'official-drafts/example-assets/style.css').read_bytes(),b'.hero{background:url("'+url.encode()+b'#original")}')
+            self.assertFalse((out/'_redirects').exists())
+            proof=json.loads((out/'assets/official-media-publication.json').read_text())
+            self.assertEqual(proof['files']['example.html']['source_sha256'],hashlib.sha256(html).hexdigest())
             staged.write_bytes(original)
             config['base_url']=base.replace(commit,'main');config_path.write_text(json.dumps(config))
             with self.assertRaisesRegex(ValueError,'immutable'):compact_hosted_media(root,out)
