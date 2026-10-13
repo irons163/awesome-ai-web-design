@@ -1,8 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
+import {parseArgs} from 'node:util';
 import {JSDOM,VirtualConsole} from 'jsdom';
 
+const {values:options}=parseArgs({options:{brand:{type:'string'},'reference-prefix':{type:'string'}}});
+if(options.brand&&!['pinterest','vodafone'].includes(options.brand))throw new Error('Unknown study brand');
+if(options['reference-prefix']&&(!options.brand||!new RegExp('^'+options.brand+'-[a-z0-9-]+$').test(options['reference-prefix'])))throw new Error('A dated reference prefix must belong to the selected brand');
 const work=path.resolve('.stitch-work/current-official');
 const read=name=>JSON.parse(fs.readFileSync(path.join(work,name),'utf8'));
 const hash=bytes=>crypto.createHash('sha256').update(bytes).digest('hex');
@@ -39,16 +43,34 @@ function runtime() {
     if(CONFIG.brand==='pinterest'){
       const list=document.querySelector('.carousel--mode-multi-brand-module-carousel');
       if(list){
+        list.tabIndex=0;
+        list.setAttribute('aria-label',document.documentElement.lang.startsWith('zh')?'瀏覽靈感圖版':'Browse inspiration boards');
         const update=()=>document.querySelectorAll('[data-test-id="carousel-overlay-previous"],[data-test-id="carousel-overlay-next"]').forEach(button=>{
           const previous=button.getAttribute('data-test-id').endsWith('previous');
           const shown=previous?list.scrollLeft>1:list.scrollLeft<list.scrollWidth-list.clientWidth-1;
           button.parentElement.classList.toggle('opacity0_k',!shown);
           button.parentElement.classList.toggle('opacity1_k',shown);
           button.parentElement.style.pointerEvents=shown?'auto':'none';
+          button.disabled=!shown;
+          button.setAttribute('aria-hidden',String(!shown));
         });
         list.addEventListener('scroll',update,{passive:true});update();
+        list.addEventListener('keydown',event=>{
+          if(!['ArrowLeft','ArrowRight','Home','End'].includes(event.key)||event.altKey||event.ctrlKey||event.metaKey)return;
+          event.preventDefault();
+          if(event.key==='Home'||event.key==='End')list.scrollTo({left:event.key==='Home'?0:list.scrollWidth-list.clientWidth,behavior:'smooth'});
+          else scrollPinterest(event.key==='ArrowLeft'?-1:1);
+        });
       }
     }
+  }
+  function scrollPinterest(direction) {
+    const list=document.querySelector('.carousel--mode-multi-brand-module-carousel');
+    if(!list)return;
+    const [first,second]=list.children;
+    const pitch=second?second.offsetLeft-first.offsetLeft:list.clientWidth;
+    const step=pitch>0?Math.ceil(list.clientWidth/pitch)*pitch:list.clientWidth;
+    list.scrollBy({left:direction*step,behavior:'smooth'});
   }
   function menu(open) {
     const element=document.getElementById('menu');
@@ -121,16 +143,17 @@ function runtime() {
       if(slider){event.preventDefault();carousel(slider);return;}
     } else {
       const label=control.getAttribute('aria-label')||control.textContent.trim();
-      if(/^(Log in|I already have an account)$/.test(label)){location.assign('https://www.pinterest.com/login/');return;}
-      if(/Sign up|Join Pinterest|Continue/.test(label)){location.assign('https://www.pinterest.com/');return;}
-      if(/^View (Previous|Next)$/.test(label)) {
-        const list=document.querySelector('.carousel--mode-multi-brand-module-carousel');
-        if(list){
-          const [first,second]=list.children;
-          const pitch=second?second.offsetLeft-first.offsetLeft:list.clientWidth;
-          const step=pitch>0?Math.ceil(list.clientWidth/pitch)*pitch:list.clientWidth;
-          list.scrollBy({left:(label.endsWith('Previous')?-1:1)*step,behavior:'smooth'});
-        }return;
+      const testId=control.getAttribute('data-test-id')||'';
+      if(/^carousel-overlay-(previous|next)$/.test(testId)) {
+        event.preventDefault();scrollPinterest(testId.endsWith('previous')?-1:1);return;
+      }
+      if(/^(Log in|I already have an account|登入|我已經有帳號)$/.test(label)||testId==='login-button-homepage-redesign-top-module'){location.assign('https://www.pinterest.com/login/');return;}
+      if(/Sign up|Join Pinterest|Continue|註冊|加入 Pinterest|繼續/.test(label)||testId==='join-pinterest-button-homepage-redesign-top-module'){location.assign('https://www.pinterest.com/');return;}
+      if(/^(Scroll (up|down)|向[上下]捲動頁面)$/.test(label)) {
+        const sections=[...document.querySelectorAll('[data-homepage-section]')];
+        const current=sections.indexOf(control.closest('[data-homepage-section]'));
+        const direction=/up|向上/.test(label)?-1:1;
+        sections[Math.max(0,Math.min(sections.length-1,current+direction))]?.scrollIntoView({behavior:'smooth',block:'start'});
       }
     }
   });
@@ -140,7 +163,9 @@ function runtime() {
   install();
 }
 
-for(const brand of ['vodafone','pinterest']) {
+for(const brand of options.brand?[options.brand]:['vodafone','pinterest']) {
+  const prefix=options['reference-prefix']||brand;
+  const provenanceName=options['reference-prefix']?prefix+'-asset-provenance.json':brand+'-browser-asset-provenance.json';
   const native=read(brand+'-stitch-generated.json');
   if(!native.screens?.length)throw new Error('A genuine native Stitch export is required before creating a working draft');
   for(const screen of native.screens)for(const file of screen.exports){
@@ -150,7 +175,7 @@ for(const brand of ['vodafone','pinterest']) {
   const assets=new Map();
   const prior=path.join(work,brand+'-asset-provenance.json');
   if(fs.existsSync(prior))for(const a of JSON.parse(fs.readFileSync(prior)).assets||[])if(a.retained)assets.set(a.source_url,a);
-  for(const a of read(brand+'-browser-asset-provenance.json').assets)assets.set(a.source_url,a);
+  for(const a of read(provenanceName).assets)assets.set(a.source_url,a);
   for(const a of assets.values()) {
     const bytes=fs.readFileSync(path.join(work,a.path));
     if(bytes.length!==a.bytes||hash(bytes)!==a.sha256)throw new Error('Original public asset differs from provenance');
@@ -163,7 +188,15 @@ for(const brand of ['vodafone','pinterest']) {
     return assets.get(absolute)?.path||absolute;
   };
   const css=(text,base=origin)=>text.replace(/url\(\s*(['"]?)(.*?)\1\s*\)/g,(match,quote,value)=>/^(data:|#)/i.test(value)?match:'url("'+url(value,base)+'")');
-  function localize(document) {
+  function localize(document,reference) {
+    if(options['reference-prefix']){
+      if(reference.images.length!==document.images.length)throw new Error('Observed image list does not match source');
+      [...document.images].forEach((image,index)=>{
+        const observed=reference.images[index];
+        if(!observed.complete||!observed.naturalWidth||!assets.has(observed.src))throw new Error('Loaded original image is missing');
+        image.setAttribute('src',observed.src);image.removeAttribute('srcset');
+      });
+    }
     document.querySelectorAll('base,meta[http-equiv],link:not([rel="stylesheet"]),[id^="codex-browser-"]').forEach(element=>element.remove());
     document.querySelectorAll('style').forEach(element=>element.textContent=css(element.textContent));
     document.querySelectorAll('link[rel="stylesheet"]').forEach(element=>{
@@ -187,17 +220,17 @@ for(const brand of ['vodafone','pinterest']) {
     // Keep Pinterest's own visible Google button; the live account iframe is
     // excluded from the study, so the public overlay supplies its click target.
     document.querySelectorAll('[data-test-id="dweb-google-button-social"]').forEach(element=>{
-      element.setAttribute('aria-label','Continue with Google on Pinterest');
+      element.setAttribute('aria-label',document.documentElement.lang.startsWith('zh')?'使用 Google 帳號繼續登入 Pinterest':'Continue with Google on Pinterest');
       element.style.pointerEvents='auto';
     });
     document.querySelectorAll('form').forEach(element=>{element.removeAttribute('action');element.removeAttribute('method');});
   }
   const documents={},references={};
   for(const mode of ['desktop','mobile']) {
-    const reference=read(brand+'-'+mode+'-browser-reference.json');
+    const reference=read(prefix+'-'+mode+'-browser-reference.json');
     const html=reference.htmlParts.join('');
     if(hash(html)!==reference.html_sha256)throw new Error('Rendered source record changed');
-    const document=parse(html);localize(document);documents[mode]=document;references[mode]=reference;
+    const document=parse(html);localize(document,reference);documents[mode]=document;references[mode]=reference;
   }
   const configuration={brand,bodyClasses:{},htmlClasses:{}};
   for(const mode of ['desktop','mobile']){configuration.bodyClasses[mode]=documents[mode].body.className;configuration.htmlClasses[mode]=documents[mode].documentElement.className;}
@@ -214,11 +247,13 @@ for(const brand of ['vodafone','pinterest']) {
     '<style id="study-narrow-adaptation">'+fs.readFileSync(path.resolve('scripts/pinterest-narrow-study.css'),'utf8')+'</style>';
   const templates=['desktop','mobile'].map(mode=>'<template id="study-'+mode+'-source">'+documents[mode].body.innerHTML+'</template>').join('');
   const script='<script id="study-runtime">const CONFIG='+JSON.stringify(configuration).replace(/</g,'\\u003c')+';('+runtime.toString()+')();</script>';
-  const html='<!doctype html><html lang="en"><head>'+intro+head.innerHTML+controls+'</head><body>'+templates+script+'</body></html>';
+  const language=documents.desktop.documentElement.lang||'en';
+  if(!/^[a-zA-Z-]+$/.test(language))throw new Error('Invalid source language');
+  const html='<!doctype html><html lang="'+language+'"><head>'+intro+head.innerHTML+controls+'</head><body>'+templates+script+'</body></html>';
   fs.writeFileSync(path.join(work,brand+'.html'),html);
   fs.writeFileSync(path.join(work,brand+'-draft-build-record.json'),JSON.stringify({accepted:false,
-    native_exports:brand+'-stitch-generated.json',source_references:Object.fromEntries(Object.entries(references).map(([mode,r])=>[mode,{file:brand+'-'+mode+'-browser-reference.json',observed_at:r.observed_at,html_sha256:r.html_sha256}])),
-    asset_provenance:brand+'-browser-asset-provenance.json',working_draft:{path:brand+'.html',bytes:Buffer.byteLength(html),sha256:hash(html)},
+    native_exports:brand+'-stitch-generated.json',source_references:Object.fromEntries(Object.entries(references).map(([mode,r])=>[mode,{file:prefix+'-'+mode+'-browser-reference.json',observed_at:r.observed_at,html_sha256:r.html_sha256}])),
+    asset_provenance:provenanceName,working_draft:{path:brand+'.html',bytes:Buffer.byteLength(html),sha256:hash(html)},
     method:'Separate source-backed correction of genuine Stitch output. Original native exports and all original media bytes stay unchanged. Rendered comparison and complete behavior acceptance are pending.',
     limitations:brand==='pinterest'?['Narrow reference uses the existing browser and shows bodyWidth800 at390px; real mobile user-agent layout remains unverified.','Original public Google-button SVG and overlay retained, with its live account frame excluded; sign-in/sign-up actions go to the official website and the study does not collect credentials.']:['Exact media frame/timing, all carousels, desktop mega-menus, search, footer accordions, tablet and live publication require review.']},null,2)+'\n');
   console.log(JSON.stringify({brand,bytes:Buffer.byteLength(html),sha256:hash(html),assets:assets.size}));
