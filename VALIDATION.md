@@ -10,7 +10,7 @@ The Verge and WIRED now load checksum-verified preserved images instead of allow
 
 ## Automated checks
 
-Large official media use exact static redirects to original bytes at a verified immutable GitHub commit. Both build entry points validate file sizes and SHA-256 before removing those copies from the deployment package; source files and study HTML stay intact. Regression checks reject mutable references or altered media and require an uploadable static bundle. The local `/dist/` preview applies the same redirect rules.
+Large official images, videos, and fonts use exact static redirects to original bytes at a verified immutable GitHub commit. Both build entry points validate file sizes and SHA-256 before removing those copies from the deployment package; source files and study HTML stay intact. Regression checks reject mutable references or altered media and require an uploadable static bundle. The local `/dist/` preview applies the same redirect rules.
 
 Run `python3 scripts/rewrite_prompts.py`, `python3 scripts/build.py`, then `python3 -m unittest discover -s tests -v`. The collection checks cover:
 

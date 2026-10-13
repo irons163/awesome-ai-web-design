@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const media = new Set(['.mp4','.webm','.png','.jpg','.jpeg','.webp','.avif','.gif']);
+const media = new Set(['.mp4','.webm','.png','.jpg','.jpeg','.webp','.avif','.gif','.woff','.woff2','.ttf','.otf']);
 const hash = file => crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
 const encode = name => name.split('/').map(encodeURIComponent).join('/').replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
 function bytes(directory) {

@@ -224,7 +224,7 @@ class CollectionTests(unittest.TestCase):
             self.assertFalse((ROOT/'dist/official-drafts'/asset['path']).exists())
         total=sum(p.stat().st_size for p in (ROOT/'dist').rglob('*') if p.is_file())
         self.assertLessEqual(total,config['max_bundle_bytes'])
-        self.assertLess(total,512*1024*1024)
+        self.assertLess(total,256*1024*1024)
 
     def test_readme_links_resolve(self):
         for path in [ROOT/'README.md']+list((ROOT/'design-md').glob('*/README.md')):

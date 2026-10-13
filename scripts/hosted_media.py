@@ -6,7 +6,7 @@ import shutil
 from pathlib import Path
 from urllib.parse import quote
 
-MEDIA = {'.mp4', '.webm', '.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif'}
+MEDIA = {'.mp4', '.webm', '.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.woff', '.woff2', '.ttf', '.otf'}
 
 
 def compact_hosted_media(root, output):
