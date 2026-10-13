@@ -6,6 +6,7 @@ import json
 import re
 import shutil
 from urllib.parse import unquote
+from study_covers import covers_for,cover_for
 
 
 def read_json(path):
@@ -148,6 +149,7 @@ def stage_official_content(root, output, progress, catalog):
     assert len(catalog) == len(progress) == 74
     remote = read_json(root / 'data/official-remote-assets.json')['assets']
     studies, audit = [], []
+    covers=covers_for(root,catalog)
     for item in catalog:
         brand = 'linear' if item['slug'] == 'linear.app' else item['slug']
         source = source_file(work, brand + '.html')
@@ -156,6 +158,7 @@ def stage_official_content(root, output, progress, catalog):
         manifest = manifest_for(work, brand, current)
         texts = study_texts(work, brand, record, manifest)
         status = study_status(work, brand, item, progress[item['slug']], record, current, texts)
+        status['cover']=cover_for(root,covers[item['slug']],brand,current)
         html = raw
         for asset in remote:
             if asset['path'] not in html:
@@ -231,7 +234,7 @@ def stage_official_content(root, output, progress, catalog):
     for study in studies:
         limits = ''.join('<li>' + escape(value) + '</li>' for value in study['remaining_differences'])
         links = ''.join(f'<a class="study-{key}" href="{escape(value)}">{labels[key]} ↗</a> ' for key, value in study['study'].items())
-        rows.append(f'<tr id="{escape(study["slug"])}" data-status="{study["status"]}"><th scope="row"><a href="{study["preview"]}">{escape(study["name"])} ↗</a></th><td class="draft"><strong>{escape(study["status_label"])}</strong><br><small class="study-scope">{escape(study["scope"])}</small><details><summary>範圍與差異</summary><a class="study-source" href="{escape(study["reference_url"])}" target="_blank" rel="noopener">公開官網 ↗</a><ul class="study-limits">{limits}</ul>{links}</details></td><td>{escape(study["date"])}</td></tr>')
+        rows.append(f'<tr id="{escape(study["slug"])}" data-status="{study["status"]}" data-cover="{escape(study["cover"]["src"])}"><th scope="row"><a href="{study["preview"]}">{escape(study["name"])} ↗</a></th><td class="draft"><strong>{escape(study["status_label"])}</strong><br><small class="study-scope">{escape(study["scope"])}</small><details><summary>範圍與差異</summary><a class="study-source" href="{escape(study["reference_url"])}" target="_blank" rel="noopener">公開官網 ↗</a><ul class="study-limits">{limits}</ul>{links}</details></td><td>{escape(study["date"])}</td></tr>')
     page = f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>74個網站重製進度 · Awesome AI Web Design</title><style>body{{font:16px/1.6 system-ui,sans-serif;background:#f8f7f3;color:#20211f;margin:0}}main{{max-width:1120px;margin:auto;padding:48px 24px 96px}}a{{color:inherit}}h1{{font-size:clamp(32px,5vw,54px);line-height:1.1}}table{{border-collapse:collapse;table-layout:fixed;width:100%;background:white;margin-top:32px}}th,td{{box-sizing:border-box;text-align:left;border-bottom:1px solid #e2e0da;padding:16px;vertical-align:top;overflow-wrap:anywhere}}th:first-child{{width:18%}}th:last-child{{width:18%}}small{{color:#666}}details{{max-width:100%;min-width:0;margin-top:8px}}summary{{cursor:pointer}}details ul{{padding-inline-start:20px}}li{{margin-bottom:8px}}.draft strong{{color:#a34317}}td a{{display:inline-block;max-width:calc(100% - 8px);margin:4px 8px 4px 0;overflow-wrap:anywhere}}@media(max-width:600px){{main{{padding:28px 12px}}th,td{{padding:10px 6px;font-size:13px}}th:first-child{{width:22%}}th:last-child{{width:23%}}}}</style></head><body><main><header><a href="index.html#official-drafts">← 返回設計集</a></header><h1>74個網站重製進度</h1><p>{compared}份已比對主要畫面、仍有差異；{len(studies)-compared}份尚未驗證。所有研究均為免費的日期限定重製，未宣稱與官方完全一致。</p><p>已比對僅涵蓋記錄的公開首頁與尺寸。動畫、服務、其他尺寸及目前部署須依每頁紀錄判讀。原有74份設計分析及222則指令完整保留。</p><table><thead><tr><th>品牌</th><th>狀態與範圍</th><th>參考日期</th></tr></thead><tbody>{"".join(rows)}</tbody></table></main></body></html>'
     (output / 'official-progress.html').write_text(page)
     (root / '.stitch-work/publication-plan.json').write_text(json.dumps(dict(official_consistency_claim=False, studies=audit), ensure_ascii=False, indent=2) + '\n')

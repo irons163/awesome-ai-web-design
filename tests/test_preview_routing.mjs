@@ -66,13 +66,18 @@ async function fixture(t, slug, progressMarkup = progress, studyDocuments = {}) 
 
 function assertOfficialOnly(query) {
   assert.equal(query('#official-preview').hidden, false);
-  assert.equal(query('[data-preview="official"]').getAttribute('aria-pressed'), 'true');
+  assert.equal(query('#creation-history').open, false);
   for (const selector of ['#preview-frame', '#preview-image']) {
     assert.equal(query(selector).hidden, true);
     assert.equal(query(selector).hasAttribute('src'), false);
   }
   assert.equal(query('#preview-actions').hidden, true);
   assert.equal(query('#preview-frame').getAttribute('sandbox'), 'allow-scripts');
+}
+async function openHistory(ui,view='image') {
+  ui.query('#creation-history').open=true;
+  await settleUntil(()=>ui.query('#preview-image').hasAttribute('src'));
+  ui.query(`[data-preview="${view}"]`).click();
 }
 
 function assertCurrentStudyStatus(query, slug) {
@@ -96,17 +101,20 @@ test('a direct brand link defaults to the official draft and waits for its progr
   assert.equal(ui.query('#official-preview-link').rel, 'noopener');
 });
 
-test('late progress does not replace an explicitly selected original HTML preview', async t => {
+test('late progress updates the main preview while preserving an explicitly opened AI history', async t => {
   const ui = await fixture(t, 'wired');
-  ui.query('[data-preview="html"]').click();
+  await openHistory(ui,'html');
   assert.equal(ui.query('#preview-frame').getAttribute('src'), ui.original.html);
   ui.revealProgress();
-  await settleUntil(() => ui.query('.official-drafts-count').textContent.includes('份草稿'));
-  assert.equal(ui.query('#official-preview').hidden, true);
+  await settleUntil(() => ui.query('.official-drafts-count').textContent.includes('份參考紀錄'));
+  assert.equal(ui.query('#official-preview').hidden, false);
   assert.equal(ui.query('#preview-frame').hidden, false);
   assert.equal(ui.query('#preview-frame').getAttribute('src'), ui.original.html);
   assert.equal(ui.query('[data-preview="html"]').getAttribute('aria-pressed'), 'true');
-  ui.query('[data-preview="official"]').click();
+  assert.equal(ui.query('#open-preview').getAttribute('href'),'https://catalog.test/official-drafts/wired.html');
+  assert.equal(ui.query('#open-generation-preview').getAttribute('href'),ui.original.html);
+  ui.query('#creation-history').open=false;
+  await settleUntil(()=>!ui.query('#preview-frame').hasAttribute('src'));
   assertOfficialOnly(ui.query);
   assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'official-drafts/wired.html');
 });
@@ -124,10 +132,10 @@ test('a brand without an official draft stays pending instead of showing its fic
   await settleUntil(() => ui.query('#official-preview-status').textContent.includes('尚無'));
   assertOfficialOnly(ui.query);
   assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'official-progress.html');
-  assert.equal(ui.query('#official-draft-note').hidden, true);
-  ui.query('[data-preview="image"]').click();
+  assert.equal(ui.query('#current-preview-image').hidden,true);
+  await openHistory(ui);
   assert.equal(ui.query('#preview-image').getAttribute('src'), ui.original.image);
-  assert.match(ui.query('#preview-caption').textContent, /原始/);
+  assert.equal(ui.query('#preview-caption').textContent,'設計預覽');
 });
 
 for (const slug of ['pinterest', 'vodafone']) {
@@ -137,7 +145,7 @@ for (const slug of ['pinterest', 'vodafone']) {
     await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === `official-drafts/${slug}.html`);
     assertOfficialOnly(ui.query);
     assertCurrentStudyStatus(ui.query, slug);
-    assert.match(ui.query('.official-drafts-count').textContent, /74 份草稿/);
+    assert.match(ui.query('.official-drafts-count').textContent, /74 份參考紀錄/);
   });
 }
 
@@ -160,11 +168,26 @@ test('opening another brand resets an original preview choice to its official dr
   const ui = await fixture(t, 'wired');
   ui.revealProgress();
   await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/wired.html');
-  ui.query('[data-preview="html"]').click();
+  await openHistory(ui,'html');
   ui.window.location.hash = '#/design/spotify';
   await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/spotify.html');
   assertOfficialOnly(ui.query);
   assert.equal(ui.query('#detail-title').textContent, 'Spotify');
+});
+
+test('all catalog covers and the default detail image depict the same current study', async t=>{
+  const ui=await fixture(t,'pinterest');
+  assert.equal(ui.query('#catalog').querySelectorAll('img').length,0);
+  ui.revealProgress();
+  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===74);
+  for(const study of studies){
+    const image=ui.query(`[data-design="${study.slug}"] .card-art img`);
+    assert.equal(image.getAttribute('src'),study.cover.src);
+    assert.equal(study.cover.preview_sha256,study.preview_sha256);
+  }
+  const current=studies.find(study=>study.slug==='pinterest');
+  assert.equal(ui.query('#current-preview-image').getAttribute('src'),current.cover.src);
+  assertOfficialOnly(ui.query);
 });
 
 test('a current rendered review shows its bounded comparison and visible limits', async t => {

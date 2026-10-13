@@ -9,9 +9,24 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from publication import references, study_status
 from hosted_media import compact_hosted_media
+from study_covers import cover_for
 
 
 class PublicationTests(unittest.TestCase):
+    def test_current_cover_rejects_changed_preview_evidence_or_image(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);work=root/'.stitch-work/current-official';work.mkdir(parents=True)
+            folder=root/'assets/current-previews';folder.mkdir(parents=True)
+            (work/'source.png').write_bytes(b'actual retained screenshot');(work/'review.json').write_bytes(b'current review');(folder/'cover.webp').write_bytes(b'derived cover')
+            digest=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+            record={'brand':'example','preview_sha256':'current','source':{'path':'source.png','sha256':digest(work/'source.png')},'result':{'path':'review.json','sha256':digest(work/'review.json')},'image':{'path':'assets/current-previews/cover.webp','sha256':digest(folder/'cover.webp'),'bytes':13,'width':800,'height':450}}
+            self.assertEqual(cover_for(root,record,'example','current')['preview_sha256'],'current')
+            with self.assertRaisesRegex(ValueError,'Stale'):cover_for(root,record,'example','new')
+            (work/'source.png').write_bytes(b'changed screenshot')
+            with self.assertRaisesRegex(ValueError,'evidence'):cover_for(root,record,'example','current')
+            (work/'source.png').write_bytes(b'actual retained screenshot');(folder/'cover.webp').write_bytes(b'changed cover')
+            with self.assertRaisesRegex(ValueError,'image'):cover_for(root,record,'example','current')
+
     def test_media_publication_preserves_original_and_rejects_mutable_or_changed_sources(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);work=root/'.stitch-work/current-official';out=root/'dist'
