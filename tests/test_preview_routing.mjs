@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { readFileSync, existsSync } from 'node:fs';
 import { setTimeout as delay } from 'node:timers/promises';
 import test from 'node:test';
 import { JSDOM } from 'jsdom';
@@ -11,8 +11,9 @@ const read = path => readFileSync(new URL(path, root), 'utf8');
 const html = read('index.html');
 const application = read('assets/app.js');
 const catalog = read('assets/catalog.json');
-const progress = read('dist/official-progress.html');
-const studies = JSON.parse(read('dist/assets/official-studies.json')).studies;
+const published = existsSync(new URL('dist/client/official-progress.html', root)) ? 'dist/client/' : 'dist/';
+const progress = read(published + 'official-progress.html');
+const studies = JSON.parse(read(published + 'assets/official-studies.json')).studies;
 
 async function settleUntil(predicate) {
   for (let attempt = 0; attempt < 30; attempt++) {

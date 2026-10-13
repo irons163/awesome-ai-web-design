@@ -4,9 +4,11 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {stageOfficialContent} from './publication.mjs';
-import {compactHostedMedia} from './hosted_media.mjs';
+import {compactHostedMedia,compactCatalogMedia} from './hosted_media.mjs';
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const OUTPUT = path.join(ROOT, 'dist');
+const args = process.argv.slice(2);
+if(args.length && (args.length!==2 || args[0]!=='--output' || !['dist','public'].includes(args[1]))) throw new Error('Expected --output dist or --output public');
+const OUTPUT = path.join(ROOT, args[1] || 'dist');
 const DRAFT_SOURCE = path.join(ROOT, '.stitch-work/current-official');
 const json = file => JSON.parse(fs.readFileSync(file, 'utf8'));
 const write = (file, text) => fs.writeFileSync(file, text);
@@ -25,17 +27,9 @@ function main() {
       filter: source => path.basename(source) !== 'all-designs.zip' });
   }
   fs.rmSync(path.join(OUTPUT, 'assets', 'all-designs.zip'), { force: true });
-  const imageBase = json(path.join(ROOT, 'data', 'hosting-assets.json')).image_base_url.replace(/\/?$/, '/');
   const catalogPath = path.join(OUTPUT, 'assets', 'catalog.json');
   const catalog = json(catalogPath);
-  for (const item of catalog.designs) {
-    if (item.preview.status !== 'generated') continue;
-    for (const key of ['image', 'thumbnail']) {
-      const relative = item.preview[key];
-      item.preview[key] = imageBase + relative;
-      fs.rmSync(path.join(OUTPUT, relative), { force: true });
-    }
-  }
+  compactCatalogMedia(ROOT,OUTPUT,catalog);
   write(catalogPath, JSON.stringify(catalog) + '\n');
   const progress = json(path.join(DRAFT_SOURCE, 'progress.json'));
   const summary = stageOfficialContent(ROOT, OUTPUT, progress, catalog.designs);

@@ -52,14 +52,15 @@ python3 scripts/build.py
 python3 -m unittest discover -s tests -v
 ```
 
-有 Node.js 的環境也可執行 `npm run build`，用不依賴 Python 的入口建立 Sites 靜態網站；`npm run build:bundle`、`npm run dev` 和 `npm test` 仍呼叫相應的 Python 指令，不需 `npm install`。
+原始收藏仍可用 `python3 scripts/serve.py` 預覽。正式站使用 Vinext Worker，需 Node.js 22.13 以上及 pnpm 11.25；`pnpm run build` 會保留靜態頁面並加入同源素材路由，`pnpm run dev` 可預覽相同的伺服器行為。
 
 預覽入口的非同步載入、品牌連結及原始範例切換另有 DOM 測試。這套測試使用 jsdom，不是瀏覽器畫面驗收；執行前需安裝開發套件並建置網站：
 
 ```bash
-pnpm install --frozen-lockfile --ignore-scripts
+pnpm install --frozen-lockfile
 pnpm run build
 pnpm run test:preview
+pnpm run test:media
 ```
 
 - `design-md/<slug>/DESIGN.md`：完整設計分析，加上全新 AI 指令。
@@ -76,13 +77,13 @@ pnpm run test:preview
 
 ## 網站發布
 
-網站採純靜態部署。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `python3 scripts/build_site.py` 將可公開的網站檔案整理到 `dist/`。正式網站由 Sites 託管；GitHub 儲存庫保存完整原始碼。 完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結。`dist/` 不包含這個大型 ZIP。正式網站的原始截圖與縮圖引用 GitHub 固定 commit 的原檔，避免部署包過大；來源設定在 `data/hosting-assets.json`。更新 Stitch 圖片時，先推送完整匯出，再把該檔的 commit 更新為實際推送版本。下載包與一般本機預覽仍使用完整本機圖片。
+正式網站由 Sites 託管，採 Vinext Worker 搭配靜態頁面。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `pnpm run build`；輸出為 `dist/client/` 與 `dist/server/`。`python3 scripts/build_site.py` 或 `pnpm run build:static` 可單獨檢查靜態檔案整理結果，但移除的大型素材需由 Worker 路由提供。完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；網站使用最新 Release 的固定下載連結，部署包不包含大型 ZIP。首頁截圖與縮圖沿用本地相對網址，Worker 依 `data/hosting-assets.json` 的清單串流取得 GitHub 固定 commit 的原檔。更新 Stitch 圖片時，先推送完整匯出，再更新清單的 commit、位元組數及 SHA-256。下載包與原始收藏的本機預覽仍使用完整本機圖片。
 
 網站另提供逐步製作的官網重製草稿，並在 [74 站進度頁](https://awesome-ai-web-design.philqq100.chatgpt.site/official-progress.html) 註明各品牌狀態與參考日期。Google Stitch 的原始生成稿另行保存；公開草稿再依保存的官方頁面資料與素材重製。這些草稿尚未完成整頁、互動和響應式視覺驗收，不能宣稱與品牌現行官網一致。`build_site.py` 僅將草稿 HTML 與實際引用的素材放入 `dist/official-drafts/`；這些品牌素材仍屬原權利人，亦不包含在下載 ZIP 中。
 
 ## 免費與來源
 
-正式站的發布副本將大型官網圖片、影片與字型網址改為 GitHub 固定 commit 的原始檔案，以符合部署大小限制。原始草稿 HTML 與素材完整保留；`data/hosted-official-media.json` 記錄來源及 SHA-256，建置輸出的 `assets/official-media-publication.json` 記錄每一段網址替換的位置與前後檔案雜湊。檢查會撤銷替換，確認其餘所有位元組（含內嵌 SVG）維持原樣。本機 `/dist/` 預覽與正式站使用相同副本。
+正式站的大型官網圖片、影片與字型由同源 Worker 路由提供，以符合部署大小限制。路由只接受 `data/hosted-official-media.json` 清單內、已驗證的 GitHub 固定 commit 原檔，並支援影片分段讀取；不轉送訪客認證或 Cookie。原始草稿 HTML、CSS、JavaScript 與素材完整保留，發布時不替換其中的相對網址。`assets/official-media-publication.json` 記錄來源與發布檔案雜湊，兩者必須完全相同，包含內嵌 SVG。使用 `pnpm run dev` 預覽完整同源載入行為。
 
 本專案的所有內容均直接開放下載，沒有付費牆、私有訂製入口或支付整合。MIT 授權仍允許使用者將內容用於商業專案；「免費提供」不等於限制下游商用。
 

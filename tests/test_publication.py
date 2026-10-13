@@ -32,17 +32,14 @@ class PublicationTests(unittest.TestCase):
             self.assertEqual(source.read_bytes(),original)
             self.assertEqual((work/'example.html').read_bytes(),html)
             published=(out/'official-drafts/example.html').read_bytes()
-            url=base+'example-assets/photo.png'
-            expected=('你好 🧩 <svg><path d="M0 0"/></svg><img src="'+url+'">'
-                      '<div style="background-image:url(&quot;'+url+'&quot;)"></div>'
-                      '<img src="'+url+'?width=640">'
-                      '<script type="application/json">{"image":"'+url.replace('/','\\/')+'"}</script>').encode()
-            self.assertEqual(published,expected)
+            self.assertEqual(published,html)
             self.assertEqual((work/'example-assets/style.css').read_bytes(),css)
-            self.assertEqual((out/'official-drafts/example-assets/style.css').read_bytes(),b'.hero{background:url("'+url.encode()+b'#original")}')
+            self.assertEqual((out/'official-drafts/example-assets/style.css').read_bytes(),css)
             self.assertFalse((out/'_redirects').exists())
             proof=json.loads((out/'assets/official-media-publication.json').read_text())
             self.assertEqual(proof['files']['example.html']['source_sha256'],hashlib.sha256(html).hexdigest())
+            self.assertEqual(proof['files']['example.html']['published_sha256'],hashlib.sha256(html).hexdigest())
+            self.assertEqual(proof['files']['example.html']['replacements'],[])
             staged.write_bytes(original)
             config['base_url']=base.replace(commit,'main');config_path.write_text(json.dumps(config))
             with self.assertRaisesRegex(ValueError,'immutable'):compact_hosted_media(root,out)
