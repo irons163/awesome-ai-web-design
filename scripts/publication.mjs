@@ -1,6 +1,7 @@
 // Exact public dependency closure and conservative, hash-bound study labels.
 import fs from 'node:fs';
 import {coversFor,coverFor} from './study_covers.mjs';
+import {writeStudyPack} from './study_pack.mjs';
 import path from 'node:path';
 import {createHash} from 'node:crypto';
 
@@ -191,6 +192,7 @@ export function stageOfficialContent(root, output, progress, catalog) {
     audit.push({brand, preview_sha256: current, published_sha256: current, preview_copied_without_mutation: true,
       result: resultName, manifest: manifest?.filename || null, assets: [...assets].sort(), dependency_aliases:aliases, study_text: texts, bytes: [...assets].reduce((total, relative) => total + fs.statSync(dependencyFile(relative)).size, 0)});
   }
+  writeStudyPack(output, studies);
   const compared = studies.filter(study => study.status === 'compared_with_differences').length;
   fs.writeFileSync(path.join(output, 'assets/official-studies.json'), JSON.stringify({count: studies.length, compared_with_differences: compared, unverified: studies.length - compared, official_consistency_claim: false, studies}) + '\n');
   const rows = studies.map(study => `<tr id="${escape(study.slug)}" data-status="${study.status}" data-cover="${escape(study.cover.src)}"><th scope="row"><a href="${study.preview}">${escape(study.name)} ↗</a></th><td class="draft"><strong>${escape(study.status_label)}</strong><br><small class="study-scope">${escape(study.scope)}</small><details><summary>範圍與差異</summary><a class="study-source" href="${escape(study.reference_url)}" target="_blank" rel="noopener">公開官網 ↗</a><ul class="study-limits">${study.remaining_differences.map(value => '<li>' + escape(value) + '</li>').join('')}</ul>${Object.entries(study.study).map(([key, value]) => `<a class="study-${key}" href="${escape(value)}">${({analysis:'目前設計分析',prompts:'重寫 AI 指令',review:'畫面校正紀錄'})[key]} ↗</a> `).join('')}</details></td><td>${escape(study.date)}</td></tr>`);

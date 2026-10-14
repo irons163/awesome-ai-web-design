@@ -3,6 +3,7 @@ import unittest
 import hashlib
 import json
 import tempfile
+from zipfile import ZipFile
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -10,9 +11,27 @@ sys.path.insert(0,str(ROOT/'scripts'))
 from publication import references, study_status
 from hosted_media import compact_hosted_media
 from study_covers import cover_for
+from study_pack import write_study_pack
 
 
 class PublicationTests(unittest.TestCase):
+    def test_download_pack_contains_the_current_files_and_rejects_missing_study_links(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory);(output/'assets').mkdir();(output/'official-drafts').mkdir()
+            analysis=b'# Current analysis\n';prompts=b'# Current prompt\n'
+            (output/'official-drafts/example-analysis.md').write_bytes(analysis)
+            (output/'official-drafts/example-reproduction-prompt.md').write_bytes(prompts)
+            study=dict(slug='example',date='2026-10-13',preview='official-drafts/example.html',preview_sha256='current',study=dict(analysis='official-drafts/example-analysis.md',prompts='official-drafts/example-reproduction-prompt.md'))
+            write_study_pack(output,[study]);first=(output/'assets/design-references.zip').read_bytes()
+            with ZipFile(output/'assets/design-references.zip') as archive:
+                self.assertIsNone(archive.testzip())
+                self.assertEqual(archive.read('example/DESIGN.md'),analysis)
+                self.assertEqual(archive.read('example/PROMPTS.md'),prompts)
+                self.assertEqual(json.loads(archive.read('SOURCES.json'))[0]['preview_sha256'],'current')
+            write_study_pack(output,[study]);self.assertEqual((output/'assets/design-references.zip').read_bytes(),first)
+            del study['study']['analysis']
+            with self.assertRaisesRegex(ValueError,'current analysis'):write_study_pack(output,[study])
+
     def test_current_cover_rejects_changed_preview_evidence_or_image(self):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory);work=root/'.stitch-work/current-official';work.mkdir(parents=True)

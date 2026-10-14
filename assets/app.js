@@ -6,7 +6,7 @@ const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','f
 let OFFICIAL_DRAFTS = {};
 let officialDraftsState = 'loading', officialDraftDates = {}, officialStudies = {};
 let designs = [], category = 'all', savedOnly = false, currentDesign = null, currentTab = 'preview', previewMode = 'official';
-let documentText = '', documentRequest = 0, currentPromptText = '', currentPromptRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
+let documentText = '', documentSource = '', documentRequest = 0, currentPromptText = '', currentPromptSource = '', currentPromptRequest = 0, toastTimer, lastFocused, returningHash = '#collection';
 let saved;
 try { const value = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); saved = new Set(Array.isArray(value) ? value.filter(x => typeof x === 'string') : []); }
 catch { saved = new Set(); }
@@ -80,7 +80,8 @@ function setTab(name, focus = false) {
     if (active && focus) button.focus();
   });
   ['preview','document','prompts'].forEach(id => { $(`#panel-${id}`).hidden = id !== name; });
-  if (name === 'document' && !documentText) loadDocument();
+  if (name === 'document') loadDocument();
+  if (name === 'prompts') loadCurrentPrompt();
 }
 function setPreview(view) {
   previewMode = view;
@@ -139,81 +140,96 @@ function setPreview(view) {
 }
 
 async function loadDocument() {
+  if (!currentDesign) return;
+  const slug = currentDesign.slug, href = officialStudies[slug]?.links.analysis;
+  if (documentSource === href && documentText) return;
   const request = ++documentRequest;
-  const slug = currentDesign.slug;
-  $('#document-text').textContent = '讀取完整文件中…';
+  documentText = ''; documentSource = href || '';
   $('#copy-document').disabled = true;
+  $('#document-text').textContent = officialDraftsState === 'loading' ? '正在讀取這份預覽的設計規格…' : '這份預覽的設計規格暫時無法載入，請重新整理頁面。原始分析可在製作紀錄查看。';
+  if (!href) return;
+  $('#document-text').textContent = '正在讀取設計規格…';
   try {
-    const response = await fetch(`design-md/${encodeURIComponent(slug)}/DESIGN.md`);
+    const response = await fetch(href);
     if (!response.ok) throw new Error('Document unavailable');
     const text = await response.text();
-    if (request !== documentRequest || currentDesign?.slug !== slug) return;
+    if (request !== documentRequest || currentDesign?.slug !== slug || officialStudies[slug]?.links.analysis !== href) return;
     documentText = text; $('#document-text').textContent = text; $('#copy-document').disabled = false;
   } catch {
-    if (request !== documentRequest) return;
+    if (request !== documentRequest || currentDesign?.slug !== slug) return;
     $('#document-text').textContent = '無法載入文件。請切換分頁再重試，或使用上方下載按鈕。';
   }
 }
 function openDesign(item) {
   if (currentDesign?.slug === item.slug && $('#design-dialog').open) return;
   lastFocused = document.activeElement;
-  documentRequest++; currentPromptRequest++; documentText = ''; currentPromptText = ''; currentDesign = item;
+  documentRequest++; currentPromptRequest++; documentText = ''; documentSource = ''; currentPromptText = ''; currentPromptSource = ''; currentDesign = item;
   $('#detail-title').textContent = item.name;
   $('#detail-description').textContent = item.description;
   $('#detail-category').textContent = item.categoryLabel;
-  $('#download-design').href = `design-md/${encodeURIComponent(item.slug)}/DESIGN.md`;
-  $('#download-design').download = `${item.slug}-DESIGN.md`;
-  $('#download-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
-  $('#download-prompts').download = `${item.slug}-PROMPTS.md`;
-  showOfficialDraft(item);
+  const originalAnalysis = `design-md/${encodeURIComponent(item.slug)}/DESIGN.md`;
+  $('#original-design-link').href = originalAnalysis;
+  $('#download-original-design').href = originalAnalysis;
+  $('#download-original-design').download = `${item.slug}-original-DESIGN.md`;
+  $('#download-original-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
+  $('#download-original-prompts').download = `${item.slug}-original-PROMPTS.md`;
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
   $('#creation-history').open=false;
+  $('#original-prompt-details').open=false;
+  $('#document-text').textContent = ''; $('#current-prompt-text').textContent = '';
+  $('#copy-document').disabled = true; $('#copy-current-prompt').disabled = true;
   setTab('preview'); setPreview('official');
+  showOfficialDraft(item);
   if (!$('#design-dialog').open) $('#design-dialog').showModal();
   $('#design-dialog').scrollTop = 0;
   $('#close-dialog').focus();
   document.title = `${item.name} — Awesome AI Web Design`;
 }
 function showOfficialDraft(item) {
-  $('#creation-history').hidden=item.preview.status!=='generated';
   const study = officialStudies[item.slug];
   $('#official-study-details').hidden = !study;
   $('#official-study-scope').textContent = study?.scope || '';
   $('#official-study-limits').innerHTML = (study?.limits || []).map(value => `<li>${escapeHTML(value)}</li>`).join('');
   $('#official-study-links').innerHTML = Object.entries(study?.links || {}).map(([key, href]) =>
     `<a href="${escapeHTML(href)}" target="_blank" rel="noopener">${({analysis:'目前設計分析',prompts:'重寫 AI 指令',review:'畫面校正紀錄'})[key]} ↗</a>`).join('');
-  const analysis = study?.links.analysis;
-  $('#current-analysis-note').hidden = !analysis;
-  if (analysis) $('#current-analysis-link').href = analysis;
-  const prompts = study?.links.prompts;
-  $('#current-prompt-details').hidden = !prompts;
-  $('#current-prompt-details').open = false;
-  $('#current-prompt-text').textContent = '';
-  if (prompts) $('#download-current-prompts').href = prompts;
-  $('#copy-current-prompt').disabled = true;
+  for (const [selector, kind, filename] of [['#download-design','analysis','DESIGN.md'],['#download-prompts','prompts','PROMPTS.md']]) {
+    const link = $(selector), href = study?.links[kind];
+    link.hidden = !href;
+    if (href) { link.href = href; link.download = `${item.slug}-${filename}`; }
+    else link.removeAttribute('href');
+  }
+  const reference = study ? `參考日期：${study.date} · 與設計預覽對應` : officialDraftsState === 'loading' ? '正在讀取預覽對應內容…' : '參考紀錄暫時無法載入';
+  $('#document-reference').textContent = reference;
+  $('#prompt-reference').textContent = reference;
+  if (currentTab === 'document') loadDocument();
+  if (currentTab === 'prompts') loadCurrentPrompt();
 }
 async function loadCurrentPrompt() {
-  if (!$('#current-prompt-details').open || currentPromptText) return;
+  if (!currentDesign) return;
   const slug = currentDesign?.slug, href = officialStudies[slug]?.links.prompts;
-  if (!href) return;
+  if (currentPromptSource === href && currentPromptText) return;
   const request = ++currentPromptRequest;
-  $('#current-prompt-text').textContent = '正在讀取目前官網的重寫指令…';
+  currentPromptText = ''; currentPromptSource = href || '';
+  $('#copy-current-prompt').disabled = true;
+  $('#current-prompt-text').textContent = officialDraftsState === 'loading' ? '正在讀取這份預覽的 AI 指令…' : '這份預覽的 AI 指令暫時無法載入，請重新整理頁面。原始指令可在製作紀錄查看。';
+  if (!href) return;
+  $('#current-prompt-text').textContent = '正在讀取 AI 指令…';
   try {
     const response = await fetch(href);
     if (!response.ok) throw new Error('Current prompt unavailable');
     const text = await response.text();
-    if (currentDesign?.slug !== slug || request !== currentPromptRequest) return;
+    if (currentDesign?.slug !== slug || request !== currentPromptRequest || officialStudies[slug]?.links.prompts !== href) return;
     // Keep the exact dated prompt, including any recorded transcription fix.
     currentPromptText = text;
     $('#current-prompt-text').textContent = text;
     $('#copy-current-prompt').disabled = false;
   } catch {
-    if (request !== currentPromptRequest) return;
+    if (request !== currentPromptRequest || currentDesign?.slug !== slug) return;
     $('#current-prompt-text').textContent = '目前無法讀取指令，請使用下載連結。';
   }
 }
 function dismiss() {
-  documentRequest++;
+  documentRequest++; currentPromptRequest++;
   if ($('#design-dialog').open) $('#design-dialog').close();
   currentDesign = null;
   document.title = 'Awesome AI Web Design — 免費設計參考集';
@@ -301,7 +317,7 @@ async function loadOfficialDrafts() {
     count.textContent = '參考紀錄暫時無法載入';
     refreshCardArt();
     grid.innerHTML = '<a href="official-progress.html">查看完整進度 ↗</a>';
-    if (currentDesign) setPreview(previewMode);
+    if (currentDesign) { showOfficialDraft(currentDesign); setPreview(previewMode); }
   }
 }
 $('#search').addEventListener('input', render);
@@ -335,7 +351,6 @@ $('.detail-tabs').addEventListener('keydown', event => {
 $('#creation-history').addEventListener('click', event => { const button = event.target.closest('[data-preview]'); if (button) setPreview(button.dataset.preview); });
 $('#creation-history').addEventListener('toggle',()=>{if(currentDesign)setPreview($('#creation-history').open?(previewMode==='official'?'image':previewMode):'official');});
 $('#copy-document').addEventListener('click', event => copyText(documentText, event.currentTarget));
-$('#current-prompt-details').addEventListener('toggle', loadCurrentPrompt);
 $('#copy-current-prompt').addEventListener('click', event => copyText(currentPromptText, event.currentTarget));
 $('#prompt-list').addEventListener('click', event => { const button = event.target.closest('[data-copy-prompt]'); if (button) copyText(currentDesign.prompts[Number(button.dataset.copyPrompt)].text, button); });
 window.addEventListener('hashchange', route);

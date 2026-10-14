@@ -43,21 +43,27 @@ async function fixture(t, slug, progressMarkup = progress, studyDocuments = {}) 
     this.removeAttribute('open');
   };
   let resolveProgress;
+  const requested = [], copied = [];
+  Object.defineProperty(window.navigator, 'clipboard', {value:{writeText:async text=>copied.push(text)}});
   const pendingProgress = new Promise(resolve => { resolveProgress = resolve; });
   window.fetch = async path => {
+    requested.push(path);
     if (path === 'assets/catalog.json') {
       return { ok: true, json: async () => JSON.parse(catalog) };
     }
     if (path === 'official-progress.html') return pendingProgress;
     if (Object.hasOwn(studyDocuments, path)) {
-      return {ok:true, text:async () => studyDocuments[path]};
+      const content=studyDocuments[path];
+      if(typeof content==='function')return content();
+      return {ok:content!==false, text:async () => content};
     }
+    if (/^official-drafts\/[a-z0-9.-]+\.md$/.test(path)) return {ok:true,text:async()=>read(published+path)};
     throw new Error(`Unexpected fetch: ${path}`);
   };
   window.eval(application);
   await settleUntil(() => query('#design-dialog').open);
   return {
-    window, query,
+    window, query, requested, copied,
     revealProgress: () => resolveProgress({ ok: true, text: async () => progressMarkup }),
     failProgress: () => resolveProgress({ ok: false }),
     original: JSON.parse(catalog).designs.find(item => item.slug === slug).preview,
@@ -162,6 +168,13 @@ test('a failed progress request preserves the official view with a recovery link
   await settleUntil(() => ui.query('#official-preview-status').textContent.includes('無法載入'));
   assertOfficialOnly(ui.query);
   assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'official-progress.html');
+  assert.equal(ui.query('#download-design').hidden,true);
+  assert.equal(ui.query('#download-prompts').hidden,true);
+  assert.match(ui.query('#document-reference').textContent,/無法載入/);
+  ui.query('#tab-document').click();
+  assert.equal(ui.query('#copy-document').disabled,true);
+  assert.match(ui.query('#document-text').textContent,/重新整理/);
+  assert.ok(!ui.requested.some(path=>path.startsWith('design-md/')));
 });
 
 test('opening another brand resets an original preview choice to its official draft', async t => {
@@ -201,7 +214,7 @@ test('a current rendered review shows its bounded comparison and visible limits'
   assert.match(ui.query('#official-study-links').textContent, /目前設計分析.*重寫 AI 指令.*畫面校正紀錄/);
 });
 
-test('dated reproduction prompts load intact alongside the original three prompts', async t => {
+test('the main AI tab copies and downloads its dated prompt, with the original three in history', async t => {
   const markup = new JSDOM(progress);
   const row = markup.window.document.querySelector('#elevenlabs');
   const href = row.querySelector('.study-prompts').getAttribute('href');
@@ -209,16 +222,85 @@ test('dated reproduction prompts load intact alongside the original three prompt
   const exactPrompt = '# 實際重寫指令\n\nPreserve the current source and recorded differences.\n';
   const ui = await fixture(t, 'elevenlabs', progress, {[href]:exactPrompt});
   ui.revealProgress();
-  await settleUntil(() => !ui.query('#current-prompt-details').hidden);
+  await settleUntil(() => ui.query('#download-prompts').getAttribute('href')===href);
   assert.equal(ui.query('#prompt-list').children.length, 3);
-  assert.equal(ui.query('#download-current-prompts').getAttribute('href'), href);
-  ui.query('#current-prompt-details').open = true;
-  ui.query('#current-prompt-details').dispatchEvent(new ui.window.Event('toggle'));
+  assert.ok(ui.query('#creation-history').contains(ui.query('#prompt-list')));
+  assert.equal(ui.query('#original-prompt-details').open,false);
+  assert.equal(ui.query('#download-original-prompts').getAttribute('href'),'design-md/elevenlabs/PROMPTS.md');
+  ui.query('#tab-prompts').click();
   await settleUntil(() => ui.query('#copy-current-prompt').disabled === false);
   assert.equal(ui.query('#current-prompt-text').textContent, exactPrompt);
+  ui.query('#copy-current-prompt').click();
+  await settleUntil(()=>ui.copied.length===1);
+  assert.equal(ui.copied[0],exactPrompt);
   ui.window.location.hash = '#/design/wired';
   await settleUntil(() => ui.query('#detail-title').textContent === 'WIRED');
   assert.equal(ui.query('#current-prompt-text').textContent, '');
-  assert.equal(ui.query('#current-prompt-details').open, false);
+  assert.equal(ui.query('#copy-current-prompt').disabled,true);
   assert.equal(ui.query('#prompt-list').children.length, 3);
 });
+
+test('a directly opened analysis waits for metadata then reads, copies and downloads the same current file',async t=>{
+  const study=studies.find(row=>row.slug==='pinterest'),href=study.study.analysis;
+  const exact='# Current dated analysis\n\nPreserve this exact content.\n';
+  const ui=await fixture(t,'pinterest',progress,{[href]:exact});
+  ui.query('#tab-document').click();
+  assert.equal(ui.query('#copy-document').disabled,true);
+  assert.equal(ui.query('#download-design').hidden,true);
+  assert.ok(!ui.requested.some(path=>path.startsWith('design-md/')));
+  ui.revealProgress();
+  await settleUntil(()=>!ui.query('#copy-document').disabled);
+  assert.equal(ui.query('#document-text').textContent,exact);
+  assert.equal(ui.query('#download-design').getAttribute('href'),href);
+  assert.ok(ui.query('#document-reference').textContent.includes(study.date));
+  assert.equal(ui.query('#current-analysis-note'),null);
+  ui.query('#copy-document').click();
+  await settleUntil(()=>ui.copied.length===1);
+  assert.equal(ui.copied[0],exact);
+  assert.equal(ui.query('#download-original-design').getAttribute('href'),'design-md/pinterest/DESIGN.md');
+  assert.equal(ui.query('#creation-history').open,false);
+});
+
+test('all 74 primary analysis and prompt links match their preview while original files remain in history',async t=>{
+  const ui=await fixture(t,'pinterest');ui.revealProgress();
+  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===74);
+  for(const study of studies){
+    ui.window.location.hash='#/design/'+encodeURIComponent(study.slug);
+    await settleUntil(()=>ui.query('#detail-title').textContent===study.name);
+    assert.ok(study.study.analysis&&study.study.prompts,study.slug);
+    assert.equal(ui.query('#download-design').getAttribute('href'),study.study.analysis);
+    assert.equal(ui.query('#download-prompts').getAttribute('href'),study.study.prompts);
+    assert.equal(ui.query('#download-original-design').getAttribute('href'),`design-md/${study.slug}/DESIGN.md`);
+    assert.equal(ui.query('#download-original-prompts').getAttribute('href'),`design-md/${study.slug}/PROMPTS.md`);
+    assert.equal(ui.query('#creation-history').open,false);
+  }
+});
+
+for(const [tab,kind,output,copy] of [['document','analysis','#document-text','#copy-document'],['prompts','prompts','#current-prompt-text','#copy-current-prompt']]){
+  test(`late ${kind} responses cannot overwrite a newly selected brand`,async t=>{
+    const first=studies.find(row=>row.slug==='pinterest').study[kind],second=studies.find(row=>row.slug==='wired').study[kind];
+    let completeFirst;
+    const waiting=new Promise(resolve=>completeFirst=resolve);
+    const ui=await fixture(t,'pinterest',progress,{[first]:()=>waiting,[second]:'# WIRED current content\n'});
+    ui.revealProgress();await settleUntil(()=>ui.query('#download-design').hidden===false);
+    ui.query('#tab-'+tab).click();await settleUntil(()=>ui.requested.includes(first));
+    ui.window.location.hash='#/design/wired';await settleUntil(()=>ui.query('#detail-title').textContent==='WIRED');
+    ui.query('#tab-'+tab).click();await settleUntil(()=>!ui.query(copy).disabled);
+    completeFirst({ok:true,text:async()=>'# Obsolete Pinterest response\n'});await delay(10);
+    assert.equal(ui.query(output).textContent,'# WIRED current content\n');
+    ui.query(copy).click();await settleUntil(()=>ui.copied.length===1);
+    assert.equal(ui.copied[0],'# WIRED current content\n');
+  });
+
+  test(`failed current ${kind} requests stay explicit and can retry without loading the old file`,async t=>{
+    const href=studies.find(row=>row.slug==='pinterest').study[kind];let attempts=0;
+    const ui=await fixture(t,'pinterest',progress,{[href]:()=>({ok:++attempts>1,text:async()=>'# Current content after retry\n'})});
+    ui.revealProgress();await settleUntil(()=>ui.query('#download-design').hidden===false);
+    ui.query('#tab-'+tab).click();await settleUntil(()=>ui.query(output).textContent.includes('無法'));
+    assert.equal(ui.query(copy).disabled,true);
+    assert.ok(!ui.requested.some(path=>path.startsWith('design-md/')));
+    ui.query('#tab-preview').click();ui.query('#tab-'+tab).click();
+    await settleUntil(()=>!ui.query(copy).disabled);
+    assert.equal(ui.query(output).textContent,'# Current content after retry\n');
+  });
+}

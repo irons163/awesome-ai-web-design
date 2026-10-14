@@ -7,6 +7,7 @@ import re
 import shutil
 from urllib.parse import unquote
 from study_covers import covers_for,cover_for
+from study_pack import write_study_pack
 
 
 def read_json(path):
@@ -226,6 +227,7 @@ def stage_official_content(root, output, progress, catalog):
         audit.append(dict(brand=brand, preview_sha256=current, published_sha256=current, preview_copied_without_mutation=True,
                           result=result_name, manifest=(manifest or {}).get('filename'), assets=sorted(assets), dependency_aliases=aliases, study_text=texts,
                           bytes=sum(dependency_file(relative).stat().st_size for relative in assets)))
+    write_study_pack(output, studies)
     compared = sum(study['status'] == 'compared_with_differences' for study in studies)
     (output / 'assets/official-studies.json').write_text(json.dumps(dict(count=len(studies), compared_with_differences=compared, unverified=len(studies)-compared,
         official_consistency_claim=False, studies=studies), ensure_ascii=False, separators=(',', ':')) + '\n')
