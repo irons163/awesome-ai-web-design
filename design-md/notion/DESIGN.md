@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Notion-design-analysis
-description: Notion presents itself as the all-in-one workspace through a confident, illustration-rich brand voice — anchored by a deep navy hero band ({colors.brand-navy}) decorated with brand-colored sticky-note dots and mesh wire illustrations, a signature purple pill primary CTA ({colors.primary}), and a rich palette of pastel-tinted feature cards that echo the colorful database properties of the live product. The system uses a Notion-Sans (Inter-based) typeface across every UI surface, anchors a 4-tier pricing comparison (Free / Plus / Business / Enterprise), and presents the live workspace UI mockup directly inside the hero band. Coverage spans homepage, Enterprise, Product AI, Product Agents, Startups, and Pricing surfaces.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Notion"
+description: "文件式結構與柔和色面，讓知識容易整理。"
 
 colors:
   primary: "#5645d4"
@@ -443,416 +444,160 @@ components:
     padding: "{spacing.xxs} 0"
 ---
 
-## Overview
-
-Notion presents itself as the all-in-one workspace through a confident, illustration-rich brand voice. The homepage opens with **"Meet the night shift."** rendered centered over a deep navy hero band ({colors.brand-navy}), decorated with brand-colored sticky-note dots and mesh wire illustrations scattered around the headline. The signature **purple pill primary CTA** ({colors.primary}) "Get Notion free" sits at the visual center, paired with an outlined "Request a demo" secondary. Below the buttons, a real Notion workspace UI mockup card (the "Ramp HQ" kanban board) breaks out of the hero band with a deep diffuse drop shadow.
-
-Below the hero, the page cycles through a distinctive sequence of feature sections: a dense sticky-note "Keep work moving 24/7" panel with red/blue/green/purple/teal status icons; a **bold yellow** ({colors.card-tint-yellow-bold}) "Ask your on-demand assistants" banner card flanked by orange/rose/mint pastel feature tiles showing assistant UI mockups; and a "Bring all your work together" 3-column grid with brand-colored mockups (sky-blue tutorial card, light Notion calendar, brown/rust testimonial slate). The pricing page renders 4 tiers (Free / Plus / Business / Enterprise) horizontally with one tier featured (purple-bordered) and a dense feature comparison table running below.
-
-The system uses a Notion-Sans typeface (Inter-based) across every UI surface — humanist-geometric character that pairs naturally with the colorful illustrations. Buttons are `{rounded.md}` (8px) rectangles, NOT pills — distinguishing Notion's sober rectangular geometry from competitors that use pills universally. Cards use `{rounded.lg}` (12px) consistently.
-
-**Key Characteristics:**
-- Deep navy hero band ({colors.brand-navy}) with scattered sticky-note dots + mesh wire decorative illustrations
-- **Signature purple pill** ({colors.primary}) primary CTA — Notion's recognizable "Get Notion free" button color
-- Real Notion workspace UI mockup card embedded in the hero with deep drop shadow
-- Bold yellow feature banner ({colors.card-tint-yellow-bold}) for high-emphasis content sections
-- Pastel feature card palette (peach, rose, mint, lavender, sky, yellow) echoing the live product database properties
-- Notion-Sans (Inter-based) across every UI surface
-- 8px-rounded buttons (NOT pills), 12px-rounded cards — sober editorial geometry
-- 4-tier pricing comparison with dense feature table
-- Centered hero layout (different from the left-aligned norm of most B2B SaaS)
-
-## Colors
-
-> Source pages: notion.com/ (homepage), /enterprise, /product/ai, /product/agents, /startups, /pricing. Token coverage was identical across all six pages.
-
-### Brand & Primary
-- **Notion Purple** ({colors.primary}): Signature primary CTA color — the unmistakable "Get Notion free" pill button. Reserved for the dominant CTA only.
-- **Purple Pressed** ({colors.primary-pressed}): Pressed-state variant
-- **Purple Deep** ({colors.primary-deep}): Deeper variant for emphasis
-- **Brand Navy** ({colors.brand-navy}): Hero band background — deep navy
-- **Brand Navy Deep** ({colors.brand-navy-deep}): Deeper navy for promo banner
-- **Brand Navy Mid** ({colors.brand-navy-mid}): Mid-spectrum navy
-- **Link Blue** ({colors.link-blue}): Inline text link blue (NOT primary CTA)
-- **Link Blue Pressed** ({colors.link-blue-pressed}): Pressed-state link blue
-
-### Brand Color Spectrum (echoes live product database properties)
-- **Brand Pink** ({colors.brand-pink}): Pink accent
-- **Brand Pink Deep** ({colors.brand-pink-deep}): Deeper pink
-- **Brand Orange** ({colors.brand-orange}): Orange accent
-- **Brand Orange Deep** ({colors.brand-orange-deep}): Deeper orange-rust
-- **Brand Purple** ({colors.brand-purple}): Purple accent variant
-- **Brand Purple 300** ({colors.brand-purple-300}): Light purple
-- **Brand Purple 800** ({colors.brand-purple-800}): Deep purple for tag text
-- **Brand Teal** ({colors.brand-teal}): Teal accent
-- **Brand Green** ({colors.brand-green}): Bright green
-- **Brand Yellow** ({colors.brand-yellow}): Soft yellow
-- **Brand Brown** ({colors.brand-brown}): Brand brown for "earthy" tints
-
-### Card Tints (Pastel Feature Card Backgrounds)
-- **Tint Peach** ({colors.card-tint-peach}): Pale peach
-- **Tint Rose** ({colors.card-tint-rose}): Pale rose-pink
-- **Tint Mint** ({colors.card-tint-mint}): Pale mint-green
-- **Tint Lavender** ({colors.card-tint-lavender}): Pale lavender
-- **Tint Sky** ({colors.card-tint-sky}): Pale sky-blue
-- **Tint Yellow** ({colors.card-tint-yellow}): Pale yellow
-- **Tint Yellow Bold** ({colors.card-tint-yellow-bold}): Bold yellow for high-emphasis feature banners ("Ask your on-demand assistants")
-- **Tint Cream** ({colors.card-tint-cream}): Cream tint
-- **Tint Gray** ({colors.card-tint-gray}): Neutral surface
-
-### Surface
-- **Canvas White** ({colors.canvas}): Page background and primary card surface
-- **Surface** ({colors.surface}): Subtle section backgrounds, search-pill rest, featured pricing tier
-- **Surface Soft** ({colors.surface-soft}): Quieter section divisions
-- **Hairline** ({colors.hairline}): 1px borders and primary dividers
-- **Hairline Soft** ({colors.hairline-soft}): Quieter dividers
-- **Hairline Strong** ({colors.hairline-strong}): Stronger 1px border for inputs
-
-### Text
-- **Ink Deep** ({colors.ink-deep}): Pure black for emphasis
-- **Ink** ({colors.ink}): Primary headlines and body text
-- **Charcoal** ({colors.charcoal}): Body emphasis (Notion's signature warm-charcoal)
-- **Slate** ({colors.slate}): Secondary text
-- **Steel** ({colors.steel}): Tertiary, footer links
-- **Stone** ({colors.stone}): Muted labels
-- **Muted** ({colors.muted}): Disabled, placeholders
-- **On Dark** ({colors.on-dark}): White text on dark surfaces
-- **On Dark Muted** ({colors.on-dark-muted}): Reduced-opacity white
-
-### Semantic
-- **Success** ({colors.semantic-success}): Confirmation green
-- **Warning** ({colors.semantic-warning}): Mid-priority alerts (orange)
-- **Error** ({colors.semantic-error}): Validation errors (red)
-
-## Typography
-
-### Font Family
-**Notion Sans** (primary): Notion's custom Inter-based variable typeface. Fallbacks: Inter, -apple-system, system-ui, 'Segoe UI', Helvetica, sans-serif. Humanist-geometric character used across every UI surface.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.hero-display}` | 80px | 600 | 1.05 | -2px | Hero ("Meet the night shift") |
-| `{typography.display-lg}` | 56px | 600 | 1.10 | -1px | Section openers |
-| `{typography.heading-1}` | 48px | 600 | 1.15 | -0.5px | Page-level headlines ("Try for free") |
-| `{typography.heading-2}` | 36px | 600 | 1.20 | -0.5px | Subsection headlines ("Keep work moving 24/7") |
-| `{typography.heading-3}` | 28px | 600 | 1.25 | 0 | Card titles |
-| `{typography.heading-4}` | 22px | 600 | 1.30 | 0 | Feature tile titles |
-| `{typography.heading-5}` | 18px | 600 | 1.40 | 0 | FAQ questions |
-| `{typography.subtitle}` | 18px | 400 | 1.50 | 0 | Hero subtitle |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Primary body text |
-| `{typography.body-md-medium}` | 16px | 500 | 1.55 | 0 | Body emphasis |
-| `{typography.body-sm}` | 14px | 400 | 1.50 | 0 | Secondary body |
-| `{typography.body-sm-medium}` | 14px | 500 | 1.50 | 0 | Active sidebar, button labels |
-| `{typography.caption-bold}` | 13px | 600 | 1.40 | 0 | Badge labels |
-| `{typography.button-md}` | 14px | 500 | 1.30 | 0 | Button labels |
+# Notion 延伸設計規格
 
-### Principles
-- Tight hero leading (1.05) on 80px display
-- Negative letter-spacing on display sizes (-2px to -0.5px)
-- Generous body leading (1.55) for documentation readability
-- 600 weight for headlines + 500 for buttons; 400 body
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Layout
+## 來源與規格層次
 
-### Spacing System
-- **Base unit**: 4px (8px primary increment)
-- **Tokens**: `{spacing.xxs}` (4px) through `{spacing.hero}` (120px)
-- **Section rhythm**: Marketing pages use `{spacing.section-lg}` (96px); pricing tightens to `{spacing.section}` (64px)
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Grid & Container
-- 1280px max-width with 32px gutters
-- Pricing: 4-tier card row at desktop with dense comparison table
-- Homepage: centered hero with workspace mockup below buttons; alternating colorful feature card sections
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`1334c2660d22ebaf1c5d16fbdc92c35ae6d5a79066aef4a06bec43c76b088c28`。
+- 目前首頁參考日期：2026-10-12。
+- 目前公開來源：https://www.notion.com/。
+- 目前預覽：`official-drafts/notion.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Whitespace Philosophy
-Marketing surfaces use generous breathing room between feature card bands. Workspace mockup card on hero gets full-width treatment with deep drop shadow.
+## 整體視覺方向
 
-## Elevation & Depth
+文件式結構與柔和色面，讓知識容易整理。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow; `{colors.hairline}` border | Default cards, table rows |
-| 1 (subtle) | `rgba(15, 15, 15, 0.04) 0px 1px 2px 0px` | Hover-elevated tiles |
-| 2 (card) | `rgba(15, 15, 15, 0.08) 0px 4px 12px 0px` | Feature cards |
-| 3 (mockup) | `rgba(15, 15, 15, 0.20) 0px 24px 48px -8px` | Hero workspace mockup card |
-| 4 (modal) | `rgba(15, 15, 15, 0.16) 0px 16px 48px -8px` | Modals, dropdowns |
+製作團隊知識首頁，包含頁面標題、文件連結卡片與簡潔側欄。閱讀欄寬保持舒適，圖示只作輔助定位，文件狀態須清楚標示。
 
-### Decorative Depth
-- Hero workspace mockup card uses deep diffuse drop shadow (Level 3) — significant elevation against the navy band
-- Pastel feature cards carry their own visual weight via tint backgrounds
-- Sticky-note dot illustrations and mesh wires add atmospheric decoration to navy hero
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Shapes
+## 色彩、字型與繁體中文排版
 
-### Border Radius Scale
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Tag chips |
-| `{rounded.sm}` | 6px | Type badges |
-| `{rounded.md}` | 8px | Buttons, inputs, search-pill |
-| `{rounded.lg}` | 12px | Cards, pricing tiers, agent tiles, workspace mockup |
-| `{rounded.xl}` | 16px | Larger feature panels |
-| `{rounded.xxl}` | 20px | Featured product showcases |
-| `{rounded.xxxl}` | 24px | Larger feature cards |
-| `{rounded.full}` | 9999px | Status badges, pill tabs (NOT regular buttons) |
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-Notion's geometry is sober-editorial — `{rounded.md}` (8px) buttons distinguish it from pill-button-everywhere brands.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-## Components
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 80px | 600 | 1.05 | -2px |
+| 56px | 600 | 1.10 | -1px |
+| 48px | 600 | 1.15 | -0.5px |
+| 36px | 600 | 1.20 | -0.5px |
+| 28px | 600 | 1.25 | 0 |
+| 22px | 600 | 1.30 | 0 |
+| 18px | 600 | 1.40 | 0 |
+| 18px | 400 | 1.50 | 0 |
+| 16px | 400 | 1.55 | 0 |
+| 16px | 500 | 1.55 | 0 |
+| 14px | 400 | 1.50 | 0 |
+| 14px | 500 | 1.50 | 0 |
+| 13px | 600 | 1.40 | 0 |
+| 14px | 500 | 1.30 | 0 |
 
-> Per the no-hover policy, hover states are NOT documented.
+## 版面與元件結構
 
-### Buttons
+此參考可先實作：文件連結卡片，包含擁有者、上次編輯時間與收藏切換。
 
-**`button-primary`** — Signature purple rectangular primary CTA, the dominant action.
-- Background `{colors.primary}`, text `{colors.on-primary}`, typography `{typography.button-md}`, padding `10px 18px`, rounded `{rounded.md}`.
-- Pressed state `button-primary-pressed` deepens to `{colors.primary-pressed}`.
-- Disabled state uses `{colors.hairline}` background.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-**`button-dark`** — Black rectangular CTA on light backgrounds.
-- Background `{colors.ink-deep}`, text `{colors.on-dark}`, typography `{typography.button-md}`, padding `10px 18px`, rounded `{rounded.md}`.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-**`button-secondary`** — Outlined rectangular for secondary actions ("Request a demo").
-- Background transparent, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, typography `{typography.button-md}`, padding `10px 18px`, rounded `{rounded.md}`.
+## 操作與狀態
 
-**`button-on-dark`** — White button on dark hero bands.
-- Background `{colors.on-dark}`, text `{colors.ink}`, typography `{typography.button-md}`, padding `10px 18px`, rounded `{rounded.md}`.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**`button-secondary-on-dark`** — Outlined button on dark.
-- Background transparent, text `{colors.on-dark}`, border `1px solid {colors.on-dark-muted}`, typography `{typography.button-md}`, padding `10px 18px`, rounded `{rounded.md}`.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**`button-ghost`** — Quieter ghost button.
-- Background transparent, text `{colors.ink}`, typography `{typography.button-md}`, padding `8px 12px`, rounded `{rounded.sm}`.
+## 圖片、動態與無障礙
 
-**`button-link`** — Inline blue text link (NOT primary purple).
-- Background transparent, text `{colors.link-blue}`, typography `{typography.body-sm-medium}`, padding `0`.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Cards & Containers
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`card-base`** — Standard content card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
+## 來源中的技術值補充
 
-**`card-feature`** — Feature card with larger padding.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`card-feature-yellow-bold`** — Bold yellow feature banner for high-emphasis content ("Ask your on-demand assistants").
-- Background `{colors.card-tint-yellow-bold}`, text `{colors.charcoal}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`.
+- `rgba(15, 15, 15, 0.04) 0px 1px 2px 0px`
+- `rgba(15, 15, 15, 0.08) 0px 4px 12px 0px`
+- `rgba(15, 15, 15, 0.20) 0px 24px 48px -8px`
+- `rgba(15, 15, 15, 0.16) 0px 16px 48px -8px`
+- `10px 18px`
+- `1px solid {colors.hairline-strong}`
+- `1px solid {colors.on-dark-muted}`
+- `8px 12px`
+- `1px solid {colors.hairline}`
+- `2px solid {colors.primary}`
+- `4px 10px`
+- `2px 8px`
+- `1px solid {colors.hairline-soft}`
 
-**`card-feature-peach`** + **`card-feature-rose`** + **`card-feature-mint`** + **`card-feature-sky`** + **`card-feature-lavender`** + **`card-feature-yellow`** + **`card-feature-cream`** — Pastel-tinted feature cards.
-- Each variant uses its corresponding `card-tint-*` color as background, text `{colors.charcoal}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`.
+## 日期限定首頁觀察
 
-**`card-agent-tile`** — Agent assistant tile.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
+2026-10-12 UTC匿名英文公開首頁，白底大黑字、藍色CTA、手繪角色與產品工作區。讓團隊與 AI 代理…together標題輪替，桌面初次取樣Think、結束DOM及窄版Ship。桌面Ramp HQ影片，窄版為手繪角色列；後續在團隊工作的地方使用 AI知識／引用／代理功能、五項任務、Cursor／Faire／Ramp見證、跑馬統計、末尾CTA與多欄／窄版雙欄頁尾。保留204個原始素材URL。桌面4412px七段、窄版4004px五段，真1280×720與390×844完整覆蓋，主代理實看全部4張對照圖。來源窄版六張含頁尾重拍，不把重拍當新增覆蓋。
 
-**`card-template`** — Template thumbnail card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.lg}`, border `1px solid {colors.hairline}`.
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-**`card-startup-perk`** — Startup-program perk grid item.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-**`pricing-card`** — Standard pricing tier card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
+## 已知差異與驗證範圍
 
-**`pricing-card-featured`** — Featured pricing tier (Plus or Business — purple-bordered).
-- Background `{colors.surface}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `2px solid {colors.primary}`.
+- MOBILE請求實際回傳DESKTOP2560×10454，沒有產生真窄版；生成稿簡化工作區、見證與頁尾，已獨立保留。
+- 桌面來源首屏為藍色Think，來源結束DOM及本機固定綠色Ship，是明顯文字／顏色差異；窄版兩者Ship。來源桌面見證卡尚未載入人物照片，本機原圖完整顯示；影片、跑馬Logo、統計位置與滑入也未同步。
+- 除桌面輪替主標題各一項文字無法配對外，兩版其餘標題量測無差異。頁高一致不證明所有影片／圖片影格一致。來源窄版phase5為相同頁尾重拍，本機五段已完整覆蓋且保留實際數量。
+- D7／N5真原生畫面完整覆蓋，無可見缺圖或橫向溢出。根選單／桌面下拉、任務切換、見證輪播、播放控制、語言、Cookie選單、帳戶及外部產品功能未驗證；沒有登入、註冊或提交表單。
+- 390px為桌面UA響應式測試，非實機。原分析及指令保留，研究免費、未啟用付費方案，不推定供應商帳單。accepted=false、official_consistency_claim=false，待全74頁整合後更新既有站。
 
-### Inputs & Forms
-
-**`text-input`** — Standard text field.
-- Background `{colors.canvas}`, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, rounded `{rounded.md}`, padding `{spacing.sm} {spacing.md}`, height 44px.
-
-**`text-input-focused`** — Activated state.
-- Border switches to `2px solid {colors.primary}` (purple).
-
-**`search-pill`** — Search bar.
-- Background `{colors.surface}`, text `{colors.steel}`, typography `{typography.body-md}`, rounded `{rounded.md}`, height 44px, border `1px solid {colors.hairline}`.
-
-### Tabs
-
-**`pill-tab`** + **`pill-tab-active`** — Pill-style tab nav for top-level switching.
-- Inactive: text `{colors.steel}`, border `1px solid {colors.hairline}`, padding `{spacing.xs} {spacing.md}`, rounded `{rounded.full}`.
-- Active: background `{colors.ink-deep}`, text `{colors.on-dark}`.
-
-**`segmented-tab`** + **`segmented-tab-active`** — Underline-style tab navigation.
-- Inactive: text `{colors.steel}`, no border. Active: text `{colors.ink}`, 2px bottom border in `{colors.ink}`.
-
-### Badges & Status
-
-**`badge-purple`** — Purple status badge (matches primary CTA).
-- Background `{colors.primary}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-pink`** — Pink accent badge.
-- Background `{colors.brand-pink}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-orange`** — Orange accent badge.
-- Background `{colors.brand-orange}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-tag-purple`** — Soft-purple feature tag chip.
-- Background `{colors.card-tint-lavender}`, text `{colors.brand-purple-800}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-tag-orange`** — Soft-orange feature tag.
-- Background `{colors.card-tint-peach}`, text `{colors.brand-orange-deep}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-tag-green`** — Soft-mint feature tag.
-- Background `{colors.card-tint-mint}`, text `{colors.brand-green}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-popular`** — "Most Popular" tier indicator.
-- Background `{colors.primary}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`promo-banner`** — Light surface promo strip ABOVE the top nav.
-- Background `{colors.surface}`, text `{colors.ink}`, typography `{typography.body-sm-medium}`, padding `{spacing.sm} {spacing.md}`. ("Developers: Get a first look at our new Developer Platform on May 13.")
-
-### Tables
-
-**`comparison-table`** — Pricing feature comparison table.
-- Background `{colors.canvas}`, text `{colors.ink}`, typography `{typography.body-sm}`, rounded `{rounded.md}`, border `1px solid {colors.hairline}`.
-
-**`comparison-row`** — Individual feature row.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.lg}`, bottom border `1px solid {colors.hairline-soft}`.
-
-### Documentation Components
-
-**`workspace-mockup-card`** — Embedded Notion workspace UI mockup on hero band ("Ramp HQ" kanban board).
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, border `1px solid {colors.hairline}`, deep shadow `rgba(15, 15, 15, 0.20) 0px 24px 48px -8px`. Carries actual Notion product UI mock.
-
-**`testimonial-card`** — Customer testimonial card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`logo-wall-item`** — Customer logo wordmark cell.
-- Background transparent, text `{colors.steel}`, typography `{typography.body-md-medium}`, padding `{spacing.lg}`.
-
-**`faq-accordion-item`** — FAQ panel.
-- Background `{colors.canvas}`, rounded `{rounded.md}`, padding `{spacing.xl}`, bottom border `1px solid {colors.hairline}`.
-
-**`stat-row`** — Stats strip with bar chart visualization ("More productivity. Fewer tools.").
-- Background `{colors.surface}`, text `{colors.ink}`, rounded `{rounded.lg}`, padding `{spacing.section-sm}`.
-
-**`cta-banner-light`** — Light surface CTA banner.
-- Background `{colors.surface}`, text `{colors.ink}`, rounded `{rounded.lg}`, padding `{spacing.section}`.
-
-### Navigation
-
-**Top Navigation (Marketing)** — Sticky white bar.
-- Background `{colors.canvas}`, height ~64px, bottom border `1px solid {colors.hairline}`.
-- Left: Notion "N" logo + "Product / AI / Solutions / Resources / Enterprise / Pricing / Request a demo" links.
-- Right: "Get Notion free" purple button + "Log in" link.
-
-### Signature Components
-
-**`hero-band-dark`** — Deep navy hero band with embedded workspace mockup and decorative dots/wires.
-- Background `{colors.brand-navy}`, text `{colors.on-dark}`, padding `{spacing.hero}`.
-- Layout: centered headline `{typography.hero-display}`, subtitle, button row (`button-primary` purple + `button-secondary-on-dark`), `workspace-mockup-card` below.
-- Atmospheric decoration: scattered colorful sticky-note dots and mesh wire illustrations around the hero content (NOT a literal pattern fill — handled per-page via SVG/illustration).
-
-**`footer-region`** — Multi-column light footer.
-- Background `{colors.canvas}`, padding `{spacing.section} {spacing.xxl}`, top border `1px solid {colors.hairline}`.
-- 6-column link grid (Product / Download / Resources / Notion for / Company / Legal).
-
-**`footer-link`** — Individual footer link.
-- Background transparent, text `{colors.steel}`, typography `{typography.body-sm}`, padding `{spacing.xxs} 0`.
-
-## Do's and Don'ts
-
-### Do
-- Use `{colors.primary}` (purple) as the dominant CTA across all surfaces — it's the brand's recognizable signal
-- Pair deep navy hero bands ({colors.brand-navy}) with the purple button + decorative sticky-note dots
-- Use pastel feature card tints (peach, rose, mint, lavender, sky, yellow) generously
-- Use `{colors.card-tint-yellow-bold}` for high-emphasis "Ask the assistant"-style banner cards
-- Apply `{rounded.md}` (8px) to buttons consistently — Notion uses rectangles, not pills
-- Apply `{rounded.lg}` (12px) to all card families
-- Maintain Notion-Sans across every UI surface
-- Use the workspace mockup card on hero bands to show actual product UI
-
-### Don't
-- Don't use the purple for body text or large background surfaces
-- Don't use pill-shaped buttons; Notion's geometry is rectangular-sober
-- Don't mix link-blue ({colors.link-blue}) with primary-purple ({colors.primary}) — they have distinct roles
-- Don't apply heavy shadows on flat documentation cards
-- Don't replace Notion-Sans with a generic Inter
-
-## Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile (small) | < 480px | Single column. Hero 36px. Pricing 1-up. |
-| Mobile (large) | 480 – 767px | Feature cards 2-up. Hero 48px. |
-| Tablet | 768 – 1023px | 2-column feature grids. Hero 56px. |
-| Desktop | 1024 – 1279px | 4-tier pricing card row. Hero 72px. |
-| Wide Desktop | ≥ 1280px | Full 80px hero presentation. |
-
-### Touch Targets
-- Buttons render at 40–44px effective height
-- Form inputs render at 44px height
-- Pill tabs ~32px → 44px on mobile
-
-### Collapsing Strategy
-- **Promo banner** stays full-width; truncates at < 480px
-- **Top nav** below 1024px collapses to hamburger
-- **Hero band**: workspace mockup card moves below text/buttons on mobile
-- **Pricing tiers**: 4-column → 2-column tablet → 1-column mobile
-- **Feature cards**: 3-up desktop → 2-up tablet → 1-up mobile
-- **Hero typography**: 80px → 56px → 48px → 36px
-- **Footer**: 6-column desktop → 3-column tablet → accordion mobile
-
-### Image Behavior
-- Workspace mockup card maintains aspect ratio
-- Pastel illustrations inside feature cards scale proportionally
-- Customer logo wall: wordmarks at consistent 60–80px height
-
-## Known Gaps
-
-- Specific dark-mode token values not surfaced beyond hero bands
-- Animation/transition timings not extracted; recommend 150–200ms ease
-- Form validation success state not explicitly captured
-- Pastel-tint mapping (which feature uses which tint) is observation-based — the actual brand library may have more entries
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Notion-inspired interface. Implement this working page: A team knowledge home with an editable-looking page title, linked document cards, and a quiet sidebar. Keep the reading column comfortable, use icons as secondary orientation, and make document status explicit.
+先閱讀隨附的 DESIGN.md，以 Notion 的設計語言作為介面參考。請完成以下可操作頁面：製作團隊知識首頁，包含頁面標題、文件連結卡片與簡潔側欄。閱讀欄寬保持舒適，圖示只作輔助定位，文件狀態須清楚標示。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Notion-inspired interface. Build a linked-document card with owner, last-edited label, and a favorite toggle. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Notion 的設計語言作為介面參考。請製作文件連結卡片，包含擁有者、上次編輯時間與收藏切換。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Notion-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A team knowledge home with an editable-looking page title, linked document cards, and a quiet sidebar. Keep the reading column comfortable, use icons as secondary orientation, and make document status explicit.
+先閱讀隨附的 DESIGN.md，以 Notion 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作團隊知識首頁，包含頁面標題、文件連結卡片與簡潔側欄。閱讀欄寬保持舒適，圖示只作輔助定位，文件狀態須清楚標示。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

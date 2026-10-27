@@ -1,0 +1,29 @@
+{
+    admin off
+    auto_https off
+    persist_config off
+}
+
+:8080 {
+    root * /srv/site/current/www
+    encode zstd gzip
+
+    @hidden path_regexp hidden (^|/)\.
+    @media path_regexp media (?i)\.(avif|gif|ico|jpe?g|png|svg|webp|woff2?|ttf|otf|mp4|webm)$
+    @markdown path *.md
+    @download query download=1
+
+    route {
+        respond @hidden 404
+        header {
+            Cache-Control "no-cache"
+            X-Content-Type-Options "nosniff"
+            Referrer-Policy "strict-origin-when-cross-origin"
+        }
+        header @media Cache-Control "public, max-age=604800"
+        header @markdown Content-Type "text/plain; charset=utf-8"
+        header @download Content-Disposition "attachment"
+        try_files {path} {path}.html {path}/index.html
+        file_server
+    }
+}

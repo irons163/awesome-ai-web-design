@@ -1,16 +1,8 @@
 ---
-version: alpha
-name: Revolut-design-analysis
-description: |
-  Revolut's marketing surfaces pair a stark black canvas with the brand's
-  cobalt-violet (`#494fdf`) and a wide accent palette of deep, fully-saturated
-  product colours — teal, light-blue, deep pink, light-green, warning orange.
-  The system reads as fintech-meets-product-brochure: oversized 80px–136px
-  Aeonik Pro display headlines, generous whitespace, photography-led hero
-  bands, and full-width product mockups (cards, phones, terminals) shown as
-  hero objects inside near-black sections. Most surfaces are either black or
-  off-white; pill-shaped buttons and rounded-12/20px content cards carry the
-  consumer-financial-app feel without crossing into playful territory.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Revolut"
+description: "俐落字級與深淺卡片，整理多種金融資訊。"
 
 colors:
   primary: "#494fdf"
@@ -299,376 +291,187 @@ components:
     padding: 80px 24px
 ---
 
-## Overview
-
-Revolut's marketing canvas operates in a high-contrast two-mode system: a
-**near-black storytelling canvas** (`{colors.canvas-dark}` — `#000000`)
-that hosts hero bands, product mockups, and the planning section, alternating
-with **white catalogue bands** (`{colors.canvas-light}` — `#ffffff`) that
-host comparison tables, FAQ rows, and download tiles. The two modes switch
-in full-bleed bands rather than soft transitions; sections slam against each
-other to create the magazine-spread rhythm the brand is known for.
-
-The display typography is **Aeonik Pro at weight 500**, used at sizes from
-20px to 136px. The flagship hero ("Banking & Beyond", "Join the 70+ million
-using Revolut") sits at 80–136px with `lineHeight: 1.0` and tight negative
-letter-spacing. Body type is **Inter** at weight 400 — open-source,
-no-nonsense, paired with positive tracking (`0.24px`) on UI labels for
-slightly more mechanical precision.
-
-The brand accent is `{colors.primary}` (`#494fdf`) — a saturated cobalt
-violet — but it appears scarcely on marketing surfaces. The actual primary
-CTA on the hero is the **white pill on black** ("Choose your subscription"),
-and the cobalt violet is reserved for featured plan cards, secondary CTAs in
-white sections, and the brand glyph itself. A wide secondary palette of deep
-teal, light-blue, deep-pink, light-green, warning orange, and yellow appears
-inside product mockups and feature illustrations — never as button surfaces.
-
-**Key Characteristics:**
-- Two-mode canvas system — `{colors.canvas-dark}` (true black) for storytelling, `{colors.canvas-light}` (white) for browsing — switched in full-bleed bands.
-- Display typography is **Aeonik Pro 500** at sizes 20–136px with tight `lineHeight: 1.0` and large negative letter-spacing on display sizes.
-- The actual primary CTA is `{component.button-primary}` — a **white pill with black text**, sitting on the dark canvas as the brightest pixel. Cobalt-violet `{colors.primary}` is reserved for featured plan cards and secondary CTAs.
-- Eight saturated accent colours live inside product mockups and illustrations only, never as button surfaces — teal, light-blue, deep-pink, light-green, warning orange, yellow, brown, danger red.
-- All buttons are pill-shaped (`{rounded.full}`); content cards use `{rounded.lg}` (20px); inputs and small chips use `{rounded.md}` (12px).
-- Photography is product-led — phone mockups, card mockups, terminal mockups — shown full-bleed inside dark sections with no caption overlay.
-
-## Colors
-
-### Brand & Accent
-- **Cobalt Violet** (`{colors.primary}` — `#494fdf`): the brand accent. Reserved for featured plan cards (`{component.plan-card-featured}`), the brand wordmark icon, and secondary CTAs in white-canvas regions.
-- **Cobalt Bright** (`{colors.primary-bright}` — `#4f55f1`): a one-step-up bright variant used in inline link colour and accent-photo headers.
-- **Cobalt Deep** (`{colors.primary-deep}` — `#3a40c4`): the active/pressed state of cobalt elements.
-- **On-Primary** (`{colors.on-primary}` — `#ffffff`): label colour on top of `{colors.primary}` surfaces.
-
-### Surface
-- **Canvas Light** (`{colors.canvas-light}` — `#ffffff`): the white catalogue mode for FAQ, download tiles, comparison tables.
-- **Canvas Dark** (`{colors.canvas-dark}` — `#000000`): the storytelling canvas — true black, never near-black.
-- **Surface Soft** (`{colors.surface-soft}` — `#f4f4f4`): a subtle off-white used on download tiles, soft buttons, and inset card groups inside white bands.
-- **Surface Card** (`{colors.surface-card}` — `#ffffff`): pure white card surface, used for feature cards in white-canvas regions.
-- **Surface Deep** (`{colors.surface-deep}` — `#0a0a0a`): a one-step-up dark surface for inset cards inside black-canvas regions.
-- **Surface Elevated** (`{colors.surface-elevated}` — `#16181a`): the planning-section card background — slightly luminous, lifts plan cards off the black canvas.
-- **Hairline Light** (`{colors.hairline-light}` — `#e2e2e7`): 1px dividers inside white bands.
-- **Hairline Dark** (`{colors.hairline-dark}` — `rgba(255,255,255,0.12)`): the corresponding low-contrast divider in dark regions.
-- **Hairline Strong** (`{colors.hairline-strong}` — `#191c1f`): structural full-strength dividers and the outline of light cards.
-
-### Text
-- **Ink** (`{colors.ink}` — `#191c1f`): primary text colour. Notably warmer than pure black, paired with the white canvas for body legibility.
-- **Body** (`{colors.body}` — `#1f2226`): long-form body where `{colors.ink}` would feel slightly too sharp.
-- **Charcoal** (`{colors.charcoal}` — `#3a3d40`): captions, secondary nav.
-- **Mute** (`{colors.mute}` — `#505a63`): supporting text.
-- **Ash** (`{colors.ash}` — `#5c5e60`): tertiary text, footer copy.
-- **Stone** (`{colors.stone}` — `#8d969e`): metadata, subtle captions.
-- **Faint** (`{colors.faint}` — `#c9c9cd`): disabled foreground, hairline replacements.
-- **On-Dark** (`{colors.on-dark}` — `#ffffff`): primary text on `{colors.canvas-dark}`.
-- **On-Dark Mute** (`{colors.on-dark-mute}` — `rgba(255,255,255,0.72)`): secondary text in dark regions.
-
-### Semantic
-- **Accent Teal** (`{colors.accent-teal}` — `#00a87e`): used in product mockup illustrations.
-- **Accent Light Blue** (`{colors.accent-light-blue}` — `#007bc2`): inline link colour in dark photo headers.
-- **Accent Blue Link** (`{colors.accent-blue-link}` — `#376cd5`): default inline link colour on white surfaces.
-- **Accent Light Green** (`{colors.accent-light-green}` — `#428619`): success / positive product callouts.
-- **Accent Green Text** (`{colors.accent-green-text}` — `#006400`): inline success text.
-- **Accent Yellow** (`{colors.accent-yellow}` — `#b09000`): caution / pending state in product mockups.
-- **Accent Warning** (`{colors.accent-warning}` — `#ec7e00`): full-saturation orange used in warning illustrations.
-- **Accent Pink** (`{colors.accent-pink}` — `#e61e49`): deep pink — used inside product photography and category iconography.
-- **Accent Danger** (`{colors.accent-danger}` — `#e23b4a`): destructive / error state.
-- **Accent Deep Red** (`{colors.accent-deep-red}` — `#8b0000`): inline error text.
-- **Accent Brown** (`{colors.accent-brown}` — `#936d62`): a single warm-neutral used in metals tier card chrome.
-- **Link** (`{colors.link}` — `#376cd5`): default inline link colour. Same as `{colors.accent-blue-link}`.
-
-## Typography
-
-### Font Family
-
-Revolut ships a two-family stack:
-
-- **Aeonik Pro** — proprietary humanist sans-serif used for all display sizes (20px+) at weight 500. Carries the brand's editorial confidence; tightens dramatically with negative letter-spacing at large sizes.
-- **Inter** — open-source workhorse for body, button labels, captions, and metadata. Always at weight 400 or 600, with positive tracking (`0.16–0.24px`) on UI labels.
-
-When Aeonik Pro cannot be licensed, **Inter Display**, **General Sans**, or **Söhne** are credible substitutes — all share the warm geometric character. Apply -1% letter-spacing on display sizes to match the original tightness.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xxl}` | 136px | 500 | 1.0 | -2.72px | The flagship hero ("Banking & Beyond"). One per page. |
-| `{typography.display-xl}` | 80px | 500 | 1.0 | -0.8px | Section openers ("Join the 70+ million using Revolut"). |
-| `{typography.display-lg}` | 48px | 500 | 1.21 | -0.48px | Sub-section titles. |
-| `{typography.display-md}` | 40px | 500 | 1.2 | -0.4px | Feature card titles. |
-| `{typography.heading-lg}` | 32px | 500 | 1.19 | -0.32px | Plan card titles. |
-| `{typography.heading-md}` | 24px | 500 | 1.33 | 0 | Section sub-titles. |
-| `{typography.heading-sm}` | 20px | 500 | 1.4 | 0 | List headers, prominent labels. |
-| `{typography.body-lg}` | 18px | 400 | 1.56 | -0.09px | Marketing prose. |
-| `{typography.body-md}` | 16px | 400 | 1.5 | 0.24px | Default body. |
-| `{typography.body-md-bold}` | 16px | 600 | 1.5 | 0.16px | Emphatic body. |
-| `{typography.body-sm}` | 14px | 400 | 1.43 | 0 | Captions, metadata. |
-| `{typography.button-lg}` | 20px | 500 | 1.4 | 0 | Hero CTAs (Aeonik Pro). |
-| `{typography.button-md}` | 16px | 600 | 1.5 | 0.24px | Default button label. |
-| `{typography.button-sm}` | 14px | 600 | 1.43 | 0 | Pill chips, sub-nav. |
-| `{typography.caption}` | 13px | 400 | 1.4 | 0 | Footer disclosure, regulatory text. |
-| `{typography.link-emph}` | 16px | 700 | 1.5 | 0.24px | Emphatic inline link in dark mode. |
-
-### Principles
-- Display sizes always run at weight 500 with `lineHeight: 1.0` (or 1.19–1.21 below 48px). The negative letter-spacing scales with size — bigger types tighten more.
-- Body Inter sits at weight 400 with positive tracking (`0.24px`) — the small spacing nudge makes UI labels feel slightly mechanical, fitting fintech precision.
-- Hero CTAs use the Aeonik Pro `{typography.button-lg}` variant; everything below the hero uses the Inter `{typography.button-md}`.
-- Inline links inside dark photo regions step up to weight 700 (`{typography.link-emph}`) so they hold contrast against the canvas without using the cobalt accent.
-
-### Note on Font Substitutes
-
-When Aeonik Pro is unavailable, clamp display `lineHeight` to 1.0 explicitly and apply -1% letter-spacing on display sizes. Inter Display, General Sans, or Söhne will read closest to the original. Inter is open-source and should be used directly.
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4px, with the working scale on multiples of 4 / 8 / 16.
-- **Tokens**: `{spacing.xxs}` 4px · `{spacing.xs}` 6px · `{spacing.sm}` 8px · `{spacing.md}` 14px · `{spacing.lg}` 16px · `{spacing.xl}` 24px · `{spacing.xxl}` 32px · `{spacing.xxxl}` 48px · `{spacing.block}` 80px · `{spacing.section}` 88px · `{spacing.band}` 120px.
-- Section padding: `{spacing.section}` (88px) vertical between bands; `{spacing.band}` (120px) on the hero band and the closing planning section.
-- Card internal padding: `{spacing.xxl}` (32px) on `{component.feature-card-light}`, `{component.plan-card}`, `{component.feature-card-dark}`.
-
-### Grid & Container
-- **Max content width** ≈ 1200px on body sections; hero bands run full-bleed.
-- **Plan grid**: 4-up plan cards on the home page, stacking 2-up at tablet and 1-up at small mobile.
-- **Feature grid**: 3-up at desktop, 2-up at tablet, 1-up at mobile.
-- **Product mockup bands**: a single full-width hero photo of a phone or card mockup, no surrounding chrome — the asset itself is the section.
-
-### Whitespace Philosophy
-- Whitespace is generous and editorial — sections breathe at 88–120px so display headlines have room to register at 80–136px without feeling cramped.
-- Inside cards, padding stays at 32px so feature copy and plan tiers have a consistent rhythm.
-- Hairline `{colors.hairline-light}` dividers replace shadow on white surfaces; `{colors.hairline-dark}` carries the corresponding role in dark regions.
-
-## Elevation & Depth
-
-| Level | Treatment | Use |
-|---|---|---|
-| 0 — flat | No shadow, no border | Default canvas bands (light or dark), full-bleed hero. |
-| 1 — surface card | `{colors.surface-card}` (white) on `{colors.surface-soft}` band | Feature cards inside light bands. |
-| 2 — surface elevated dark | `{colors.surface-elevated}` (`#16181a`) on `{colors.canvas-dark}` | Plan cards inside the planning section. |
-| 3 — featured surface | `{colors.primary}` on `{colors.canvas-dark}` | Featured plan card (cobalt violet inversion). |
-| 4 — product mockup | Full-bleed photo asset | Hero phone / card / terminal mockup bands. |
-
-The system has **no traditional drop-shadow language**. Surfaces register depth via colour-blocking (light → dark band switches) and surface-luminance shifts (`{colors.canvas-dark}` → `{colors.surface-elevated}`). Photography mockups carry their own depth from the asset itself.
-
-### Decorative Depth
-- **Product mockup hero bands** — the home page features a phone mockup full-bleed against `{colors.canvas-dark}`, with the device's own glow providing the only atmospheric depth. No additional gradients, no shadows.
-- **Featured plan card** — the cobalt-violet `{component.plan-card-featured}` sits inside the otherwise dark planning grid as a single saturated colour block, marking the recommended tier visually.
-- **Card metals tier** — the brand uses `{colors.accent-brown}` and a deep gradient on metals card mockups to signal premium without resorting to gold-on-black metallic effects.
-
-## Shapes
+# Revolut 延伸設計規格
 
-### Border Radius Scale
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Hero bands, full-bleed sections, footer. |
-| `{rounded.sm}` | 8px | Inline tags, small chips. |
-| `{rounded.md}` | 12px | Form inputs, download tiles. |
-| `{rounded.lg}` | 20px | Feature cards, plan cards. |
-| `{rounded.xl}` | 28px | Product mockup containers. |
-| `{rounded.full}` | 9999px | Buttons, pills, badges, tabs. |
-
-### Photography Geometry
-- Phone mockups: 9:19.5 (vertical) with `{rounded.xl}` corners on the device chrome.
-- Card mockups: 1.586:1 (credit-card aspect) with `{rounded.lg}` corners.
-- Terminal/POS mockups: 4:3 with `{rounded.xl}` corners and substantial padding around the device.
-- Lifestyle photography (rare): 16:9 with `{rounded.lg}` corners.
-
-## Components
-
-### Buttons
-
-**`button-primary`** — white CTA on dark
-- Background `{colors.canvas-light}`, label `{colors.canvas-dark}`, type `{typography.button-md}`, padding `14px 28px`, `rounded: {rounded.full}`, height 48px.
-- The brand's primary CTA, used on every dark hero band ("Choose your subscription", "Get started").
-- Pressed state lives in `button-primary-pressed` (background `{colors.faint}`).
-
-**`button-dark`** — dark CTA on light
-- Background `{colors.canvas-dark}`, label `{colors.on-dark}`, type `{typography.button-md}`, `rounded: {rounded.full}`.
-- The reverse-canvas equivalent of `{component.button-primary}` — used inside white catalogue bands.
-
-**`button-soft`** — soft surface CTA
-- Background `{colors.surface-soft}`, label `{colors.ink}`, type `{typography.button-md}`, `rounded: {rounded.full}`.
-- Tertiary action in white-canvas regions ("Learn more", "View FAQs").
-
-**`button-outline-light`** — outlined CTA on light
-- Background `{colors.canvas-light}`, label `{colors.ink}`, 1px solid `{colors.hairline-strong}`, type `{typography.button-md}`, `rounded: {rounded.full}`.
-- Secondary action when paired with `{component.button-dark}`.
-
-**`button-outline-dark`** — outlined CTA on dark
-- Background `{colors.canvas-dark}`, label `{colors.on-dark}`, 1px solid `{colors.on-dark}`, type `{typography.button-md}`, `rounded: {rounded.full}`, padding `13px 27px`, height 48px.
-- Dark-canvas counterpart of `{component.button-outline-light}`; used inside dark hero bands as a tertiary action when paired with `{component.button-primary}`.
-
-**`button-pill-sm`** — small pill chip
-- Background `{colors.surface-soft}`, label `{colors.ink}`, type `{typography.button-sm}`, `rounded: {rounded.full}`, padding `8px 16px`, height 36px.
-- Sub-nav chips, filter pills.
-
-### Cards & Containers
-
-**`hero-band-dark`** — full-bleed dark hero
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, type `{typography.display-xxl}` for the title, padding `{spacing.section}` (88px) vertical, `rounded: {rounded.none}`.
-- Used only on the home page hero band.
-
-**`hero-band-photo`** — photo-led hero
-- Background `{colors.canvas-dark}` with full-bleed product photography, text `{colors.on-dark}`, type `{typography.display-xl}`, `rounded: {rounded.none}`.
-- Used on product pages — phone or card mockup as the full-band canvas.
-
-**`feature-card-light`** — feature card on white
-- Background `{colors.surface-card}`, text `{colors.ink}`, 1px solid `{colors.hairline-light}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}` (32px).
-- Used in white catalogue bands for feature comparisons.
-
-**`feature-card-dark`** — feature card on dark
-- Background `{colors.surface-elevated}`, text `{colors.on-dark}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}`.
-- Used inside dark storytelling sections.
-
-**`plan-card`** — subscription plan card
-- Background `{colors.surface-elevated}`, text `{colors.on-dark}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}` (32px).
-- Plan name in `{typography.heading-lg}` ("Standard", "Plus", "Premium", "Metal", "Ultra").
-
-**`plan-card-featured`** — featured plan card
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}`.
-- Cobalt-violet inversion of `{component.plan-card}` — used on the recommended tier.
-
-**`product-mockup`** — full-bleed product asset
-- Background `{colors.canvas-dark}`, the asset itself fills the band, `rounded: {rounded.xl}` on the device chrome.
-- Phone, card, and terminal mockups — no caption overlay, no surrounding chrome.
-
-**`download-tile`** — app store download tile
-- Background `{colors.surface-soft}`, text `{colors.ink}`, type `{typography.body-sm}`, `rounded: {rounded.md}`, padding `12px 20px`, height 56px.
-- App Store + Google Play download buttons, side-by-side.
-
-### Inputs & Forms
-
-**`text-input`** — default input
-- Background `{colors.canvas-light}`, text `{colors.ink}`, type `{typography.body-md}`, 1px solid `{colors.hairline-light}`, `rounded: {rounded.md}`, padding `14px 16px`, height 56px.
-- Generous height for fintech accessibility — comfortably exceeds WCAG AAA touch target.
-
-### Navigation
-
-**`nav-bar`** — top nav (desktop)
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, type `{typography.button-md}`, height 64px.
-- Left: wordmark logo. Centre: top-level nav ("Personal", "Business", "Company"). Right: language switcher + "Log in" + `{component.button-primary}`.
-
-**`nav-bar`** (mobile)
-- Same height 64px, collapses centre nav into a hamburger icon. Logo stays left, sign-in CTA stays right.
-
-**`sub-nav-pill`** — sub-nav chip
-- Pill chips set in a horizontal row inside dark sections (e.g. "Personal", "Business", "Premium"), `{component.sub-nav-pill}` styling.
-
-### Signature Components
-
-**`badge-tag`** — neutral tag
-- Background `{colors.surface-soft}`, text `{colors.ink}`, type `{typography.caption}`, `rounded: {rounded.full}`, padding `4px 12px`.
-- Inline tags inside feature cards.
-
-**`badge-feature`** — feature highlight badge
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.caption}`, `rounded: {rounded.full}`, padding `4px 12px`.
-- "New", "Most popular" badges anchored on plan cards.
-
-**`footer`** — global footer
-- Background `{colors.canvas-dark}`, text `{colors.on-dark-mute}`, type `{typography.body-sm}`, `rounded: {rounded.none}`, padding `80px 24px`.
-- Multi-column quick-links grid above a copyright + regulatory disclosure block separated by `{colors.divider-soft}`.
-
-## Do's and Don'ts
-
-### Do
-- Switch full bands between `{colors.canvas-dark}` (storytelling) and `{colors.canvas-light}` (catalogue). The two-mode rhythm is core.
-- Use `{component.button-primary}` (white pill on dark) as the primary CTA on every dark hero band. It's the brand's loudest action.
-- Reserve `{colors.primary}` for the featured plan card and the brand wordmark — the cobalt should feel like a deliberate stamp, not a colour theme.
-- Set hero headlines in **Aeonik Pro 500** at 80–136px with `lineHeight: 1.0` and large negative letter-spacing.
-- Use **Inter** for body, button labels, captions — never substitute Aeonik Pro for body type.
-- Apply `{rounded.full}` to every button and pill; `{rounded.lg}` (20px) to feature and plan cards; `{rounded.md}` (12px) to inputs.
-- Show product mockups full-bleed inside dark sections — the asset IS the section.
-- Use the wide accent palette (`{colors.accent-teal}`, `{colors.accent-pink}`, `{colors.accent-light-green}`, etc.) inside product illustrations and iconography only.
-
-### Don't
-- Don't use accent colours (`{colors.accent-teal}`, `{colors.accent-pink}`, etc.) as button surfaces. They live inside illustrations only.
-- Don't use a near-black canvas. The brand is `#000000`, not `#0a0a0a`.
-- Don't pair white text with cobalt violet inside body content — `{colors.primary}` is for the featured plan card surface, not large prose.
-- Don't add drop shadows on cards. Elevation is canvas + surface-luminance shifts.
-- Don't introduce a secondary brand colour. Cobalt violet is the only brand stamp.
-- Don't loosen Aeonik Pro `lineHeight` past 1.0 on display sizes. Tight stacking is structural.
-- Don't bump body Inter to weight 500. Use 400 (default) or 600 (emphatic) — never the in-between.
-- Don't pair `{colors.canvas-dark}` with another dark surface beyond `{colors.surface-elevated}`. The surface ladder has only two dark steps.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Desktop XL | ≥ 1440px | 4-up plan grid, full-bleed product mockup bands, max content 1200. |
-| Desktop | 1280–1439px | Container shrinks; xl side padding. |
-| Tablet Large | 1024–1279px | Plan grid 4-up; feature grid 3-up. |
-| Tablet | 768–1023px | Plan grid 2-up; feature grid 2-up. |
-| Mobile Large | 426–767px | Plan grid 1-up; feature grid 1-up; nav collapses to hamburger; hero `display-xxl` clamps to 64px. |
-| Mobile | ≤ 425px | All grids 1-up; hero clamps to 48px; section padding `{spacing.section}` collapses to 64px. |
-
-### Touch Targets
-- All buttons ship at minimum 48px tall — comfortably exceeds WCAG AAA (44px). Default `{component.button-primary}` is 48px.
-- `{component.text-input}` is 56px tall — fintech-grade accessibility.
-- `{component.button-pill-sm}` (36px) is bumped to 44px on mobile via padding adjustment.
-
-### Collapsing Strategy
-- Top-level nav collapses to hamburger at < 1024px; the wordmark and `{component.button-primary}` stay anchored.
-- Hero `{typography.display-xxl}` clamps: 136px → 80px → 64px → 48px across the breakpoint ladder.
-- Plan grid steps from 4-up to 2-up at < 1024px to 1-up at < 768px.
-- Product mockup bands maintain full-bleed at every breakpoint; the asset crops inward rather than letterboxing.
-- Sub-nav pills convert from a wrap row to a horizontal scroll-rail at < 768px.
-
-### Image Behavior
-- Phone and card mockups are served at 1.5× and 2× DPR; below 768px the system swaps to a smaller hero crop.
-- Product photography retains its own atmospheric lighting at every breakpoint — no responsive variant assets.
-
-## Known Gaps
-
-- Pressed/active visual states are documented for `button-primary-pressed` only; other components rely on focus-ring (browser default) for interactive feedback.
-- Logged-in app surfaces (transactions, transfers, account settings) are out of scope — only the public marketing canvas is documented.
-- The wide accent palette (`{colors.accent-teal}` through `{colors.accent-brown}`) is captured from the extracted token set, but exact usage inside product illustrations varies per market and product line; document per-illustration rather than as system buttons.
-- Mobile-app screenshot art direction (phone bezels, status bars) is product-photography territory and not standardised as design tokens.
+## 來源與規格層次
+
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
+
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`876771c0710237f6561e2bc735468f7702733c4c1fd4feccebd0acab3a2d3eac`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.revolut.com/。
+- 目前預覽：`official-drafts/revolut.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
+
+## 整體視覺方向
+
+俐落字級與深淺卡片，整理多種金融資訊。
+
+製作個人財務概念儀表板，包含帳戶摘要、分類篩選與交易詳細資訊。字型清晰，餘額標為示範資料，以色彩建立層級，不加入虛構的報酬宣稱。
+
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
+
+## 色彩、字型與繁體中文排版
+
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
+
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
+
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
+
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 136px | 500 | 1.0 | -2.72px |
+| 80px | 500 | 1.0 | -0.8px |
+| 48px | 500 | 1.21 | -0.48px |
+| 40px | 500 | 1.2 | -0.4px |
+| 32px | 500 | 1.19 | -0.32px |
+| 24px | 500 | 1.33 | 0 |
+| 20px | 500 | 1.4 | 0 |
+| 18px | 400 | 1.56 | -0.09px |
+| 16px | 400 | 1.5 | 0.24px |
+| 16px | 600 | 1.5 | 0.16px |
+| 14px | 400 | 1.43 | 0 |
+| 20px | 500 | 1.4 | 0 |
+| 16px | 600 | 1.5 | 0.24px |
+| 14px | 600 | 1.43 | 0 |
+| 13px | 400 | 1.4 | 0 |
+| 16px | 700 | 1.5 | 0.24px |
+
+## 版面與元件結構
+
+此參考可先實作：交易詳細資訊卡片，包含示範金額、幣別、分類與狀態。
+
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
+
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
+
+## 操作與狀態
+
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
+
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
+
+## 圖片、動態與無障礙
+
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
+
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
+
+## 來源中的技術值補充
+
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
+
+- `#494fdf`
+- `#000000`
+- `#ffffff`
+- `0.24px`
+- `#4f55f1`
+- `#3a40c4`
+- `#f4f4f4`
+- `#0a0a0a`
+- `#16181a`
+- `#e2e2e7`
+- `rgba(255,255,255,0.12)`
+- `#191c1f`
+- `#1f2226`
+- `#3a3d40`
+- `#505a63`
+- `#5c5e60`
+- `#8d969e`
+- `#c9c9cd`
+- `rgba(255,255,255,0.72)`
+- `#00a87e`
+- `#007bc2`
+- `#376cd5`
+- `#428619`
+- `#006400`
+- `#b09000`
+- `#ec7e00`
+- `#e61e49`
+- `#e23b4a`
+- `#8b0000`
+- `#936d62`
+- `0.16–0.24px`
+- `14px 28px`
+- `13px 27px`
+- `8px 16px`
+- `12px 20px`
+- `14px 16px`
+- `4px 12px`
+- `80px 24px`
+
+## 日期限定首頁觀察
+
+以2026-10-11 UTC匿名英國公開首頁為來源，保留Banking & Beyond人物首屏、Your salary、80+ million／13 million UK、七個評獎、Life meets savings、Elevate your spend、AIR、安全、5,000+股票與ETF、五種方案及完整法規頁尾。Revolut字型、黑白大標與原始人物／介面照片構成主要層級；390px版把薪資卡片及評獎重新排列。101份官方原始素材已保存，含8個MP4，直接下載沒有失敗。桌面7599px共11段，窄版10694px共13段，主代理實看全部7張對照圖；主要內容和幾何已比對，動畫與影片仍有可見差異。45個標題的桌面首屏捲動有2項差異，窄版幾何量測沒有差異；幾何量測不代表所有像素一致。
+
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
+
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
+
+## 已知差異與驗證範圍
+
+- 本次MCP明確要求MOBILE，供應商實際回傳DESKTOP 2560×18156；完整原生檔已保存及目視，不能稱為真正手機生成成功。成品390px為桌面UA響應式重製。
+- 桌面首屏Banking與Your Salary僅重現已觀測起點／終點，中間捲動過渡未同步，2個標題幾何差異保留。主要區塊採IntersectionObserver恢復可見內容；邊界淡入速度與官方截圖不同，部分下一區塊標題在該幀仍較暗。
+- 官網桌面消費卡片影片取樣為黑底，成品為已載入的原始卡片影片；窄版卡片、AIR及安全影像的影格、明暗、儲蓄卡片動態位置仍有實際差異。不能把這些畫面描述為完全一致；未同步所有動態影格。
+- 窄版根選單已實看，展開、X與Escape關閉通過。次層選單、桌面展開選單、儲蓄／卡片其他tab、頁尾手風琴、QR、cookie／語言／地區及帳號等外部服務未全面驗證。
+- 利率、方案、評獎與使用者數字為官方觀察時文字，並非持續更新或投資建議。研究免費瀏覽，未啟動任何付費功能、金融服務或交易；正式部署仍未驗證。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Revolut-inspired interface. Implement this working page: A personal finance concept dashboard with account summaries, category filters, and a transaction detail sheet. Keep the typography crisp and mark balances as sample data; use color for hierarchy instead of invented performance claims.
+先閱讀隨附的 DESIGN.md，以 Revolut 的設計語言作為介面參考。請完成以下可操作頁面：製作個人財務概念儀表板，包含帳戶摘要、分類篩選與交易詳細資訊。字型清晰，餘額標為示範資料，以色彩建立層級，不加入虛構的報酬宣稱。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Revolut-inspired interface. Build a transaction detail card with sample amount, currency, category, and status. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Revolut 的設計語言作為介面參考。請製作交易詳細資訊卡片，包含示範金額、幣別、分類與狀態。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Revolut-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A personal finance concept dashboard with account summaries, category filters, and a transaction detail sheet. Keep the typography crisp and mark balances as sample data; use color for hierarchy instead of invented performance claims.
+先閱讀隨附的 DESIGN.md，以 Revolut 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作個人財務概念儀表板，包含帳戶摘要、分類篩選與交易詳細資訊。字型清晰，餘額標為示範資料，以色彩建立層級，不加入虛構的報酬宣稱。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

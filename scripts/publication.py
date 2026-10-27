@@ -8,6 +8,7 @@ import shutil
 from urllib.parse import unquote
 from study_covers import covers_for,cover_for
 from study_pack import write_study_pack
+from localization import load_localizations, localize_study
 
 
 def read_json(path):
@@ -150,6 +151,7 @@ def stage_official_content(root, output, progress, catalog):
     assert len(catalog) == len(progress) == 74
     remote = read_json(root / 'data/official-remote-assets.json')['assets']
     studies, audit = [], []
+    localizations = load_localizations(root, catalog)
     covers=covers_for(root,catalog)
     for item in catalog:
         brand = 'linear' if item['slug'] == 'linear.app' else item['slug']
@@ -223,21 +225,29 @@ def stage_official_content(root, output, progress, catalog):
         shutil.copy2(source, destination / (brand + '.html'))
         if digest(source) != current or digest(destination / (brand + '.html')) != current:
             raise ValueError('Preview changed during publication staging: ' + brand)
+        localize_study(root, destination, status, localizations)
         studies.append(status)
         audit.append(dict(brand=brand, preview_sha256=current, published_sha256=current, preview_copied_without_mutation=True,
                           result=result_name, manifest=(manifest or {}).get('filename'), assets=sorted(assets), dependency_aliases=aliases, study_text=texts,
                           bytes=sum(dependency_file(relative).stat().st_size for relative in assets)))
     write_study_pack(output, studies)
     compared = sum(study['status'] == 'compared_with_differences' for study in studies)
-    (output / 'assets/official-studies.json').write_text(json.dumps(dict(count=len(studies), compared_with_differences=compared, unverified=len(studies)-compared,
+    (output / 'assets/official-studies.json').write_text(json.dumps(dict(locale='zh-TW', count=len(studies), compared_with_differences=compared, unverified=len(studies)-compared,
         official_consistency_claim=False, studies=studies), ensure_ascii=False, separators=(',', ':')) + '\n')
     rows = []
     labels = dict(analysis='目前設計分析', prompts='重寫 AI 指令', review='畫面校正紀錄')
     for study in studies:
         limits = ''.join('<li>' + escape(value) + '</li>' for value in study['remaining_differences'])
         links = ''.join(f'<a class="study-{key}" href="{escape(value)}">{labels[key]} ↗</a> ' for key, value in study['study'].items())
-        rows.append(f'<tr id="{escape(study["slug"])}" data-status="{study["status"]}" data-cover="{escape(study["cover"]["src"])}"><th scope="row"><a href="{study["preview"]}">{escape(study["name"])} ↗</a></th><td class="draft"><strong>{escape(study["status_label"])}</strong><br><small class="study-scope">{escape(study["scope"])}</small><details><summary>範圍與差異</summary><a class="study-source" href="{escape(study["reference_url"])}" target="_blank" rel="noopener">公開官網 ↗</a><ul class="study-limits">{limits}</ul>{links}</details></td><td>{escape(study["date"])}</td></tr>')
-    page = f'<!doctype html><html lang="zh-Hant"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>74個網站重製進度 · Awesome AI Web Design</title><style>body{{font:16px/1.6 system-ui,sans-serif;background:#f8f7f3;color:#20211f;margin:0}}main{{max-width:1120px;margin:auto;padding:48px 24px 96px}}a{{color:inherit}}h1{{font-size:clamp(32px,5vw,54px);line-height:1.1}}table{{border-collapse:collapse;table-layout:fixed;width:100%;background:white;margin-top:32px}}th,td{{box-sizing:border-box;text-align:left;border-bottom:1px solid #e2e0da;padding:16px;vertical-align:top;overflow-wrap:anywhere}}th:first-child{{width:18%}}th:last-child{{width:18%}}small{{color:#666}}details{{max-width:100%;min-width:0;margin-top:8px}}summary{{cursor:pointer}}details ul{{padding-inline-start:20px}}li{{margin-bottom:8px}}.draft strong{{color:#a34317}}td a{{display:inline-block;max-width:calc(100% - 8px);margin:4px 8px 4px 0;overflow-wrap:anywhere}}@media(max-width:600px){{main{{padding:28px 12px}}th,td{{padding:10px 6px;font-size:13px}}th:first-child{{width:22%}}th:last-child{{width:23%}}}}</style></head><body><main><header><a href="index.html#official-drafts">← 返回設計集</a></header><h1>74個網站重製進度</h1><p>{compared}份已比對主要畫面、仍有差異；{len(studies)-compared}份尚未驗證。所有研究均為免費的日期限定重製，未宣稱與官方完全一致。</p><p>已比對僅涵蓋記錄的公開首頁與尺寸。動畫、服務、其他尺寸及目前部署須依每頁紀錄判讀。原有74份設計分析及222則指令完整保留。</p><table><thead><tr><th>品牌</th><th>狀態與範圍</th><th>參考日期</th></tr></thead><tbody>{"".join(rows)}</tbody></table></main></body></html>'
+        rows.append(f'<tr id="{escape(study["slug"])}" data-status="{study["status"]}" data-cover="{escape(study["cover"]["src"])}" data-implementation-version="{escape(study.get("implementation_version", ""))}"><th scope="row"><a href="{study["preview"]}">{escape(study["name"])} ↗</a></th><td class="draft"><strong>{escape(study["status_label"])}</strong><br><small class="study-scope">{escape(study["scope"])}</small><details><summary>範圍與差異</summary><a class="study-source" href="{escape(study["reference_url"])}" target="_blank" rel="noopener">公開官網 ↗</a><ul class="study-limits">{limits}</ul>{links}</details></td><td>{escape(study["date"])}</td></tr>')
+    page = f'<!doctype html><html lang="zh-Hant-TW"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>開發比對紀錄 · Awesome AI Web Design</title><style>body{{font:16px/1.6 system-ui,sans-serif;background:#f8f7f3;color:#20211f;margin:0}}main{{max-width:1120px;margin:auto;padding:48px 24px 96px}}a{{color:inherit}}h1{{font-size:clamp(32px,5vw,54px);line-height:1.1}}table{{border-collapse:collapse;table-layout:fixed;width:100%;background:white;margin-top:32px}}th,td{{box-sizing:border-box;text-align:left;border-bottom:1px solid #e2e0da;padding:16px;vertical-align:top;overflow-wrap:anywhere}}th:first-child{{width:18%}}th:last-child{{width:18%}}small{{color:#666}}details{{max-width:100%;min-width:0;margin-top:8px}}summary{{cursor:pointer}}details ul{{padding-inline-start:20px}}li{{margin-bottom:8px}}.draft strong{{color:#a34317}}td a{{display:inline-block;max-width:calc(100% - 8px);margin:4px 8px 4px 0;overflow-wrap:anywhere}}@media(max-width:600px){{main{{padding:28px 12px}}th,td{{padding:10px 6px;font-size:13px}}th:first-child{{width:22%}}th:last-child{{width:23%}}}}</style></head><body><main><header><a href="index.html#official-drafts">← 返回設計集</a></header><h1>開發比對紀錄</h1><p>此頁供開發維護查閱。一般瀏覽請見<a href="reference-sources.html">設計參考來源</a>。</p><p>{compared}份已比對主要畫面、仍有差異；{len(studies)-compared}份尚未驗證。所有研究均為免費的日期限定重製，未宣稱與官方完全一致。</p><p>已比對僅涵蓋記錄的公開首頁與尺寸。動畫、服務、其他尺寸及目前部署須依每頁紀錄判讀。74份延伸設計規格與222則任務指令已重新產出為繁體中文（台灣用語）。原始預覽與截圖保留來源原貌。</p><table><thead><tr><th>品牌</th><th>狀態與範圍</th><th>參考日期</th></tr></thead><tbody>{"".join(rows)}</tbody></table></main></body></html>'
     (output / 'official-progress.html').write_text(page)
+    source_rows = ''.join(
+        f'<tr><th scope="row"><a href="index.html#/design/{escape(study["slug"])}">{escape(study["name"])}</a></th>'
+        f'<td><a href="{escape(study["reference_url"])}" target="_blank" rel="noopener">{escape(study["name"])} 官網 ↗</a></td>'
+        f'<td>{escape(study["date"])}</td></tr>' for study in studies)
+    source_head = page.split('<body>', 1)[0].replace('<title>開發比對紀錄', '<title>設計參考來源')
+    sources_page = source_head + f'<body><main><header><a href="index.html#collection">← 返回設計集</a></header><h1>設計參考來源</h1><p>以下列出 {len(studies)} 份設計預覽的公開參考來源與日期。</p><p>此預覽供設計參考，部分互動為示範。參考內容以標示日期為準。</p><table><thead><tr><th>設計</th><th>參考來源</th><th>參考日期</th></tr></thead><tbody>{source_rows}</tbody></table></main></body></html>'
+    (output / 'reference-sources.html').write_text(sources_page)
     (root / '.stitch-work/publication-plan.json').write_text(json.dumps(dict(official_consistency_claim=False, studies=audit), ensure_ascii=False, indent=2) + '\n')
     return dict(count=len(studies), compared_with_differences=compared, public_asset_count=sum(len(row['assets']) for row in audit), public_asset_bytes=sum(row['bytes'] for row in audit))

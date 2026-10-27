@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Superhumon-Inspired-design-analysis
-description: An inspired interpretation of Superhumon's design language — a fast-email productivity brand split between an editorial dark hero (deep indigo navy with violet-sky atmospheric backdrop and a portrait subject) and a quiet white content body with off-warm-grey ink. The system uses a single proprietary variable display sans, heavy weight 460–540 with tight tracking, and a deep-teal closing CTA band that breaks the indigo/white rhythm with a warm dark interlude. Buttons are tight rounded rectangles, pricing is sober and dense, and the brand reads more like a high-end newsletter than a SaaS app.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Superhuman"
+description: "深紫與暖白的輕盈對比，聚焦鍵盤效率。"
 
 colors:
   primary: "#1b1938"
@@ -211,276 +212,163 @@ components:
     padding: 64px 24px
 ---
 
-## Overview
+# Superhuman 延伸設計規格
 
-Superhumon's marketing pages open in an editorial dark register: a deep indigo navy `{colors.primary}` (`#1b1938`) canvas overlaid with a soft violet-and-sky atmospheric backdrop and a half-bleed portrait subject (often a person looking off-frame, photographed at twilight). Headlines render in `{typography.display-xxl}` (Super Sans VF at 64px / weight 540) with negative tracking, set in white over the indigo. A single rounded-rectangle CTA button anchors each band — never two, never three.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-The body of every page flips to white. `{colors.canvas}` (`#ffffff`) takes over below the hero, with body type in `{colors.ink}` (`#292827` — a slightly warm dark grey, never pure black) and feature rows alternating between white and `{colors.canvas-soft}` (a barely-tinted off-white). Pricing tiers sit on this white surface; the featured tier inverts to the indigo navy, completing the brand's binary polarity.
+## 來源與規格層次
 
-Every page closes with a **deep-teal CTA band** (`{colors.surface-teal-deep}` — `#0e3030`). The teal is a single chromatic interlude: rich, almost-black green-blue, that breaks up what would otherwise be an indigo/white-only page. The teal band always contains the closing CTA in `{typography.display-lg}` paired with a single white-pill button.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-Typography runs **Super Sans VF** — a proprietary variable display sans — at unusual mid-weights (460, 540, 600). The variable axes let the brand pick precise sub-default weights that read as warmer and more human than typical 400/500/700 SaaS scales. Display sizes use negative letter-spacing of -1.32px to -0.315px depending on size; line-heights are unusually tight (0.96 on 48px display).
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`738def8a9cdfe200c62c62d8f383f8395efa488d5366c99dbe7d8fb3afd667f7`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://superhuman.com/。
+- 目前預覽：`official-drafts/superhuman.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-**Key Characteristics:**
-- Three-canvas system: indigo navy (`{colors.primary}`) for hero, white (`{colors.canvas}`) for body, deep teal (`{colors.surface-teal-deep}`) for closing CTA.
-- Half-bleed portrait subject in the hero with violet-sky atmospheric backdrop — the brand uses a person looking off-frame as a recurring visual.
-- Single CTA per band; the marketing pages never crowd actions.
-- Super Sans VF at sub-default weights (460, 540, 600) — the brand's typographic warmth signature.
-- Tight line-heights (0.96) on display sizes — vertical compression as editorial density.
-- Off-warm-grey body ink (`#292827`) — never pure black; the brand's quiet warmth.
-- Pill-shaped on-hero CTA in pale violet (`{colors.surface-violet-soft}`); rounded-rectangle CTAs everywhere else.
+## 整體視覺方向
 
-## Colors
+深紫與暖白的輕盈對比，聚焦鍵盤效率。
 
-> **Source pages:** home (`/`), `/products/go-ai-assistant`, `/contact-sales`, `/plans`.
+製作郵件效率工具概念頁，包含簡潔收件匣、展開的閱讀面板與可見快捷鍵。暖色中性閱讀區與深紫色外框交替，以清楚選取與快速掃讀為優先。
 
-### Brand & Accent
-- **Primary Indigo Navy** (`{colors.primary}` — `#1b1938`): The brand's primary surface and CTA color. Hero canvas, filled rounded-rectangle button, featured pricing tier.
-- **Indigo Deep** (`{colors.primary-deep}` — `#0e0c1f`): Pressed-state lift / deeper navy used in hero gradient stops.
-- **Surface Violet Soft** (`{colors.surface-violet-soft}` — `#c9b4fa`): The hero pill-button fill — pale violet over the indigo canvas. Also appears in atmospheric backdrops.
-- **Surface Teal Deep** (`{colors.surface-teal-deep}` — `#0e3030`): The signature closing-CTA band color. Rich green-blue, almost black.
-- **Surface Teal Mid** (`{colors.surface-teal-mid}` — `#155555`): Slightly lifted teal for nested chrome inside the band.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): Default body background.
-- **Canvas Soft** (`{colors.canvas-soft}` — `#fafaf8`): Barely-warm off-white for alternating feature-row bands.
-- **Hairline** (`{colors.hairline}` — `#e8e4dd`): 1px borders, slightly warm grey.
-- **Hairline Dark** (`{colors.hairline-dark}` — `#3f3a52`): 1px borders on dark surfaces.
+## 色彩、字型與繁體中文排版
 
-### Text
-- **Ink** (`{colors.ink}` — `#292827`): Default body text. Warm dark grey, never pure black.
-- **Ink Mute** (`{colors.ink-mute}` — `#73706d`): Secondary text, captions.
-- **Ink Faint** (`{colors.ink-faint}` — `#9a9794`): Tertiary / disabled text.
-- **On Primary** (`{colors.on-primary}` — `#ffffff`): Text on dark navy / teal surfaces.
-- **On Dark Mute** (`{colors.on-dark-mute}` — translucent white): Secondary text on dark.
-- **On Dark Faint** (`{colors.on-dark-faint}` — translucent white): Tertiary text on dark.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## Typography
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-The display and UI tier is **Super Sans VF** — a proprietary variable sans (variable axes for weight, with the brand using sub-default 460 / 540 / 600 weights). Fallback chain is the system font stack.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 64px | 540 | 0.96 | 0 |
+| 48px | 460 | 0.96 | -1.32px |
+| 28px | 540 | 1.14 | -0.63px |
+| 22px | 460 | 1.1 | -0.315px |
+| 20px | 460 | 1.2 | -0.4px |
+| 18px | 540 | 1.5 | -0.135px |
+| 16px | 460 | 1.5 | 0 |
+| 18.72px | 700 | 1.5 | 0 |
+| 16px | 700 | 1.0 | 0 |
+| 14px | 600 | 1.0 | 0 |
+| 14px | 460 | 1.4 | 0 |
+| 12px | 540 | 1.4 | 0 |
 
-For substitution use **Inter Variable** (open-source) at weight 460 / 540 / 600 — Inter's variable axes match Super Sans VF's behavior closely. Avoid fixed-weight Inter at 400 / 500 / 600 — the brand specifically picks the in-between weights.
+## 版面與元件結構
 
-### Hierarchy
+此參考可先實作：收件匣資料列，包含已讀未讀、寄件者、主旨與快捷鍵提示。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xxl}` | 64px | 540 | 0.96 | 0 | Hero headline |
-| `{typography.display-xl}` | 48px | 460 | 0.96 | -1.32px | Section opener on light surfaces |
-| `{typography.display-lg}` | 28px | 540 | 1.14 | -0.63px | Sub-section / feature title |
-| `{typography.display-md}` | 22px | 460 | 1.1 | -0.315px | Card title |
-| `{typography.heading-lg}` | 20px | 460 | 1.2 | -0.4px | Compact card title |
-| `{typography.body-lg}` | 18px | 540 | 1.5 | -0.135px | Marketing body lead |
-| `{typography.body-md}` | 16px | 460 | 1.5 | 0 | Default UI body |
-| `{typography.body-strong}` | 18.72px | 700 | 1.5 | 0 | Emphasized body |
-| `{typography.button-md}` | 16px | 700 | 1.0 | 0 | Rounded-rectangle button label |
-| `{typography.button-cap}` | 14px | 600 | 1.0 | 0 | Compact button label |
-| `{typography.caption}` | 14px | 460 | 1.4 | 0 | Helper, footnote |
-| `{typography.micro}` | 12px | 540 | 1.4 | 0 | Pill label, fine print |
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Principles
-- **Sub-default weights.** The brand picks 460 / 540 / 600 instead of 400 / 500 / 700 — a quiet warmth in the typography that distinguishes it from default SaaS systems.
-- **Tight display leading.** 0.96 on 48–64px display — the type stacks unusually compact.
-- **Negative tracking on display sizes.** -1.32px at 48px scaling proportionally — tightens the variable letterforms into editorial density.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Note on Font Substitutes
-**Inter Variable** (open-source via Google Fonts) is the recommended substitute. Set `font-variation-settings: "wght" 540` for display, 460 for body — Inter's variable axes match. Avoid fixed-weight Inter; the in-between weights are the brand's signature.
+## 操作與狀態
 
-## Layout
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Spacing System
-- **Base unit**: 8px (with 2 / 4 / 12 sub-tokens for fine work).
-- **Tokens**: `{spacing.xxs}` 2px · `{spacing.xs}` 4px · `{spacing.sm}` 8px · `{spacing.md}` 12px · `{spacing.lg}` 16px · `{spacing.xl}` 24px · `{spacing.xxl}` 32px · `{spacing.huge}` 64px.
-- **Section padding**: 64–96px on most sections; closing teal band uses 96–128px for editorial weight.
-- **Card internal padding**: 32px on pricing cards; 24px on alternating feature rows.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Grid & Container
-- Hero spans full viewport width with the violet-sky backdrop edge-to-edge; content centers in a ~960px column.
-- Body content centers in ~960–1100px.
-- Pricing collapses 3-up → 2-up → 1-up at 1024 / 768 breakpoints.
+## 圖片、動態與無障礙
 
-### Whitespace Philosophy
-The brand uses generous editorial whitespace on both polarities — dark hero and white body. Section gaps tend toward 96px; the teal closing band gets up to 128px of vertical air. The whitespace itself is part of the brand's "considered, slow-tempo" feel.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-## Elevation & Depth
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 | Flat | Default surface |
-| 1 | `box-shadow: 0 1px 3px rgba(0,0,0,0.08)` | Subtle card lift |
-| 2 | `box-shadow: 0 8px 24px rgba(0,0,0,0.12)` | Floating panels, modals |
-| 3 | Atmospheric backdrop (violet-sky over indigo) | The hero's depth medium |
+## 來源中的技術值補充
 
-### Decorative Depth
-The hero's depth is the **violet-sky atmospheric backdrop** — a soft indigo-to-violet-to-sky-blue radial wash that sits behind the portrait subject. Implemented as a CSS radial gradient or large background image. Below the hero, depth is minimal — the white canvas is flat.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-## Shapes
+- `#1b1938`
+- `#ffffff`
+- `#292827`
+- `#0e3030`
+- `#0e0c1f`
+- `#c9b4fa`
+- `#155555`
+- `#fafaf8`
+- `#e8e4dd`
+- `#3f3a52`
+- `#73706d`
+- `#9a9794`
+- `box-shadow: 0 1px 3px rgba(0,0,0,0.08)`
+- `box-shadow: 0 8px 24px rgba(0,0,0,0.12)`
 
-### Border Radius Scale
+## 日期限定首頁觀察
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Hairline tags |
-| `{rounded.sm}` | 6px | Form inputs |
-| `{rounded.md}` | 8px | Buttons (the brand's signature button shape — rounded rectangle, never pill) |
-| `{rounded.lg}` | 12px | Pricing cards, feature cards |
-| `{rounded.xl}` | 16px | Modal dialogs, large feature cards |
-| `{rounded.full}` | 9999px | Pill tabs in feature row, hero CTA |
+取樣來源：https://superhuman.com/。匿名可讀的英文公開頁面。
 
-### Photography Geometry
-The hero uses **half-bleed portrait subjects** — a person photographed at twilight, looking off-frame, occupying the right half of the hero. The portrait extends edge-to-edge vertically and stops mid-canvas horizontally; type sits on the left side. Other photography is rare; product UI mockups handle most other illustrative needs.
+現行官網為白色導覽與淡紫公告、深色發光 Mail 首屏：「使用 Superhuman Mail，每週節省 4 小時以上」、左側文案／右側真實 Mail 示範，搭配 Mail、Go、Docs 切換。
 
-## Components
+下方依序有品牌列、Go 助理、Grammarly／Email Assistant／Daily Briefs、客戶見證、Mail 排程、Docs、企業方案、彩色 CTA 與密集深色頁尾。
 
-### Buttons
+桌面首屏與全頁高度已對照實際官網取樣；窄版在排程與 Docs 等區塊仍有間距差異，且影片畫格會隨播放時間改變。
 
-**`button-primary-dark`** — the dominant rounded-rectangle CTA on white surfaces.
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button-md}`, padding `{spacing.md} {spacing.xl}` (12px 20px), rounded `{rounded.md}` 8px.
-- Pressed state `button-primary-dark-pressed` shifts to `{colors.primary-deep}`.
+原有 DESIGN.md、PROMPTS.md 與 STITCH-PROMPT.md 保留；本檔為日期限定補充。研究頁免費瀏覽，未開啟付費方案或交易；不對外部生成服務的帳戶計費狀態作保證。
 
-**`button-on-dark-pill`** — the hero CTA in pale violet pill shape.
-- Background `{colors.surface-violet-soft}`, text `{colors.primary}`, same typography, padding 12px 20px, rounded `{rounded.full}`. The pill shape only appears on the hero — body CTAs use the rounded rectangle.
+驗證範圍為匿名公開首頁、1280×720 與390×844、DPR1、桌面 UA。未完成實體手機、其他地區、完整互動或服務驗證；目前 accepted=false，不宣稱與官方一致。
 
-**`button-secondary-outline`** — outline alternative on white.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1px solid `{colors.hairline-dark}` border, same shape as `button-primary-dark`.
+## 已知差異與驗證範圍
 
-**`button-on-teal`** — CTA inside the closing teal band.
-- Background `{colors.canvas}`, text `{colors.surface-teal-deep}`, rounded-rectangle, same typography.
+- 最新桌面整頁高 7320px，與取樣來源相同；窄版穩定後為 10308px，來源為 10530px。下方郵件、排程、Docs 及企業區的間距、狀態仍有可見差異。
+- 公開 Mail 影片曾確認載入及播放，但遠端影片可用性、精確畫格與轉場時間未固定，也未完整驗證。
+- 產品分頁轉場、展開導覽與帳戶流程尚未驗證。
 
-### Cards & Containers
-
-**`card-feature-light`** — feature card on white.
-- Background `{colors.canvas}`, padding `{spacing.xxl}`, rounded `{rounded.lg}`, 1px `{colors.hairline}` border.
-
-**`card-pricing`** — standard pricing tier card.
-- Background `{colors.canvas}`, padding `{spacing.xxl}`, rounded `{rounded.lg}`, 1px `{colors.hairline}` border.
-
-**`card-pricing-featured`** — inverted indigo featured tier.
-- Background `{colors.primary}`, text `{colors.on-primary}`, otherwise identical to `card-pricing`.
-
-**`card-teal-band`** — the closing CTA band on every page.
-- Background `{colors.surface-teal-deep}`, text `{colors.on-primary}`, padding `{spacing.huge}` 64px, rounded `{rounded.lg}` 12px (often radius-less in practice when full-bleed). Holds a single closing headline in `{typography.display-lg}` and a `button-on-teal`.
-
-**`card-feature-row`** — alternating feature-row card on the body.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, padding `{spacing.xl}` 24px, rounded `{rounded.md}` 8px. Used in pairs/triplets to explain features below the hero.
-
-### Inputs & Forms
-
-**`text-input`** — standard form input.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-md}`, padding `{spacing.sm}+ {spacing.md}` (10px 12px), rounded `{rounded.sm}` 6px, 1px `{colors.hairline}` border.
-
-### Navigation
-
-**`nav-bar-dark`** — top nav over the indigo hero.
-- Background `{colors.primary}`, text `{colors.on-primary}`, padding `{spacing.lg} {spacing.xl}`. Logo on the left, nav center, "Get Started" `button-on-dark-pill` on the right.
-
-**`nav-bar-light`** — top nav on body / pricing pages.
-- Background `{colors.canvas}`, text `{colors.ink}`, otherwise same structure with `button-primary-dark` on the right.
-
-### Pills, Tags, and Chips
-
-**`pill-tab-light`** — feature-row tab selector.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.button-cap}`, padding `{spacing.sm} {spacing.lg}`, rounded `{rounded.full}`. Used in the feature category picker (Mail / Channels / Code / AI / Calendar etc.) below the hero.
-
-### Signature Components
-
-**Half-Bleed Portrait Hero** — a person photographed at twilight, occupying the right half of the indigo hero with violet-sky atmospheric backdrop behind. Type and CTA sit on the left side. The portrait is the brand's recurring visual signature.
-
-**Closing Teal Band** — every page closes with a `card-teal-band` containing a `{typography.display-lg}` closing headline and a single `button-on-teal`. The teal is the page's resolving chord.
-
-**`link-on-light`** — inline links on body.
-- Text `{colors.ink}` rendered in `{typography.body-md}` with persistent underline.
-
-**`footer-light`** — site-wide footer.
-- Background `{colors.canvas}`, text `{colors.ink-mute}`, type `{typography.caption}`, padding `{spacing.huge} {spacing.xl}` (64px 24px). Holds 4 columns of link groups, social icons, and a small legal/copyright row.
-
-## Do's and Don'ts
-
-### Do
-- Pair every hero with the violet-sky atmospheric backdrop and a half-bleed portrait subject when possible.
-- Render display tiers at sub-default weights (460 / 540) — the warmth is the typographic signature.
-- Use rounded-rectangle CTAs at 8px radius everywhere except the hero (where pill-shaped is the rule).
-- Close every marketing page with a deep-teal CTA band.
-- Use warm dark grey `{colors.ink}` for body text — never pure black.
-- Apply tight 0.96 line-height on display sizes; the editorial compression is the brand.
-
-### Don't
-- Don't use pill-shaped buttons in the body of the page; the pill is hero-only.
-- Don't bump display weight above 540 unless using `body-strong` (700) for emphasized inline body.
-- Don't render body text in pure black — the warm grey `#292827` is part of the brand.
-- Don't omit the closing teal band — every marketing page closes with it.
-- Don't introduce additional accent colors beyond indigo, violet-soft, teal, and the off-warm-greys.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Wide | ≥ 1440px | Half-bleed portrait at full scale; teal band 128px tall |
-| Desktop | 1024–1440px | Default content max-width; pricing 3-up |
-| Tablet | 768–1023px | Pricing 2-up; portrait crops tighter |
-| Mobile | < 768px | Pricing 1-up; hamburger nav; display drops 64 → 36px |
-
-### Touch Targets
-- Buttons hit ≥ 44×44px on mobile via 12px vertical padding × 16px line-height. WCAG AAA.
-- Form fields stay at the 44px minimum height.
-
-### Collapsing Strategy
-- Display tiers stair-step 64 → 48 → 36 → 28 → 22px.
-- Half-bleed portrait crops to head-and-shoulders on mobile; atmospheric backdrop simplifies.
-- Pricing tiers stair-step 3-up → 2-up → 1-up.
-- Top nav collapses to hamburger below 768px.
-- Closing teal band reduces vertical padding from 128 → 64px on mobile.
-
-### Image Behavior
-Hero portrait uses `srcset` with desktop / mobile crops — desktop favors the full half-bleed composition; mobile crops to head-and-shoulders.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Superhuman-inspired interface. Implement this working page: An email productivity concept with a quiet inbox, an expanded reading pane, and visible shortcuts. Alternate warm neutral reading surfaces with deep violet framing; prioritize clear selection and rapid scanning over decorative glow.
+先閱讀隨附的 DESIGN.md，以 Superhuman 的設計語言作為介面參考。請完成以下可操作頁面：製作郵件效率工具概念頁，包含簡潔收件匣、展開的閱讀面板與可見快捷鍵。暖色中性閱讀區與深紫色外框交替，以清楚選取與快速掃讀為優先。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Superhuman-inspired interface. Build an inbox row with read-unread state, sender, subject, and shortcut hints. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Superhuman 的設計語言作為介面參考。請製作收件匣資料列，包含已讀未讀、寄件者、主旨與快捷鍵提示。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Superhuman-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An email productivity concept with a quiet inbox, an expanded reading pane, and visible shortcuts. Alternate warm neutral reading surfaces with deep violet framing; prioritize clear selection and rapid scanning over decorative glow.
+先閱讀隨附的 DESIGN.md，以 Superhuman 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作郵件效率工具概念頁，包含簡潔收件匣、展開的閱讀面板與可見快捷鍵。暖色中性閱讀區與深紫色外框交替，以清楚選取與快速掃讀為優先。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

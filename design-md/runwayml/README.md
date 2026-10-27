@@ -2,13 +2,13 @@
 
 電影式暗場搭配白色閱讀區，讓作品成為焦點。
 
-這套設計規格與所有指令均可免費使用，無須登入。
+設計規格與 AI 指令已重新產出為繁體中文（台灣用語），可免費使用，無須登入。
 
-- [完整設計規格](DESIGN.md)
-- [重新撰寫的 AI 指令](PROMPTS.md)
-- [Google Stitch 頁面](preview.html)
-- [生成用指令](STITCH-PROMPT.md)
-- [生成紀錄](STITCH.json)
+- [延伸設計規格](DESIGN.md)
+- [三則 AI 實作指令](PROMPTS.md)
+- [繁體中文生成指令](STITCH-PROMPT.zh-TW.md)
+- [原始 Google Stitch 預覽](preview.html)
+- [原始生成紀錄](STITCH.json)
 - [回到總目錄](../../README.md)
 
-設計分析源自 VoltAgent 的 MIT 開源資料；AI 指令由本專案重新撰寫。範例透過 Google Stitch MCP 生成，包含原始 HTML、截圖及生成紀錄，不是品牌官方網站。
+設計分析源自 VoltAgent 的 MIT 開源資料；規格與 AI 指令由本專案以台灣繁體中文重新整理。Google Stitch 原生 HTML、截圖及生成紀錄保留來源原貌，不是品牌官方網站；目前日期限定的參考分析請由網站設計詳情閱讀。

@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Zapier-Inspired-design-analysis
-description: An inspired interpretation of Zapier's design language — a workflow-automation platform whose surface combines warm-cream neutrals (`#fffefb` canvas, `#f8f4f0` soft cream) with deep coffee ink (`#201515`) and a single saturated orange CTA accent (`#ff4f00`); typography pairs the proprietary Degular Display family at hero scale with Inter for sub-displays and body, giving the brand a confident-warm rather than cool-tech voice.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Zapier"
+description: "暖白與亮橙色，將自動化步驟排列清楚。"
 
 colors:
   primary: "#ff4f00"
@@ -228,7 +229,6 @@ components:
     typography: "{typography.body-sm}"
     padding: "{spacing.3xl} {spacing.xl}"
 
-  # ─── Examples (illustrative) — auto-derived; resolve any TO_FILL markers below ───
   ex-pricing-tier:
     description: "Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface."
     backgroundColor: "{colors.canvas-soft}"
@@ -288,297 +288,161 @@ components:
     rounded: "{rounded.md}"
     padding: "{spacing.md} {spacing.lg}"
     typography: "{typography.body-sm}"
-
 ---
 
+# Zapier 延伸設計規格
 
-## Overview
-
-Zapier is the original "connect your apps" workflow automation platform — and the marketing surface today reads as confidently-mature. The brand pairs a warm-cream canvas `{colors.canvas}` (`#fffefb`) with a deep coffee-ink `{colors.ink}` (`#201515`) and a single saturated orange `{colors.primary}` (`#ff4f00`) CTA. The warmth in the neutrals — slightly cream rather than pure white — is the brand's defining temperature signal.
-
-Type carries the second voice. The proprietary `Degular Display` family carries hero displays at weight 500. The brand uses `Inter` for everything else — sub-displays, body, button, eyebrow. The two-face pairing reads as "the brand has its own typeface for the loud moments and uses the workhorse for the rest" — modest and unflashy.
-
-Cards are universally `{rounded.md}` 12 px. Buttons share the same 12 px radius — not pills, not square. The brand sits between the friendly-rounded and the technical-square camps with a deliberate middle position.
-
-**Key Characteristics:**
-- A single primary CTA color `{colors.primary}` (`#ff4f00`) — saturated orange. The brand's conversion signature.
-- Warm-cream canvas `{colors.canvas}` (`#fffefb`) — not pure white. The temperature IS the brand voice.
-- Deep coffee ink `{colors.ink}` (`#201515`) — not pure black. Warmth carries through to text.
-- Proprietary Degular Display for hero-scale, Inter for everything else. Two-face system.
-- `{rounded.md}` 12 px for buttons and cards — the brand's middle-radius signature.
-- A muted cream / coffee neutral ladder — `{colors.canvas-soft}` (`#f8f4f0`), `{colors.mute}` (`#c5c0b1`), `{colors.body-mid}` (`#939084`), `{colors.body}` (`#605d52`) — every neutral carries warmth, none are cool grey.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Colors
-
-### Brand & Accent
-- **Zapier Orange** (`{colors.primary}` — `#ff4f00`): The single brand accent. Every primary CTA pill, every conversion target. The saturated orange IS the brand.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#fffefb`): Warm off-white page background.
-- **Canvas Soft** (`{colors.canvas-soft}` — `#f8f4f0`): Cream-tinted soft surface for cards / inset regions.
-
-### Text
-- **Ink** (`{colors.ink}` — `#201515`): Deep coffee — every heading and primary text.
-- **Ink Soft** (`{colors.ink-soft}` — `#2f2a26`): Near-black with brown warmth.
-- **Ink Mid** (`{colors.ink-mid}` — `#36342e`): Mid-emphasis text.
-- **Body** (`{colors.body}` — `#605d52`): Default body text color.
-- **Body Mid** (`{colors.body-mid}` — `#939084`): Secondary body / metadata.
-- **Mute** (`{colors.mute}` — `#c5c0b1`): Lowest-priority text — fine print, low-emphasis captions.
-
-### Semantic
-The brand doesn't surface a separate semantic palette on its marketing pages. Status / validation cues borrow from the ink + orange hierarchy.
+## 來源與規格層次
 
-## Typography
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Font Family
-Two faces ladder the system:
-1. **Degular Display** — proprietary geometric display sans used for hero headlines at weight 500. The brand's typographic signature.
-2. **Inter** — used for sub-displays, body, links, buttons, and eyebrows. Weights 400 / 500 / 600 / 700 are present.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`66251e8ee1a45f84cf696df46d71b3a1fa02cb82eaa6aa27e050deadc39da20d`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://zapier.com/。
+- 目前預覽：`official-drafts/zapier.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Hierarchy
+## 整體視覺方向
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 56px | 500 | 56px | 0 | Hero headline (Degular Display). |
-| `{typography.display-lg}` | 48px | 500 | 48px | 0 | Sub-hero displays (Degular Display). |
-| `{typography.display-md}` | 32px | 500 | 36px | 1px | Section displays (Degular Display, positive tracking). |
-| `{typography.display-sub-lg}` | 48px | 500 | 49.92px | 0 | Inter-rendered sub-display. |
-| `{typography.display-sub-md}` | 32px | 400 | 40px | 0 | Inter sub-display. |
-| `{typography.display-sub-sm}` | 24px | 600 | 30px | -0.6px | Card titles (Inter, semibold). |
-| `{typography.display-xs}` | 20px | 700 | 25px | -0.5px | Inline display micro-headings. |
-| `{typography.body-lg}` | 20px | 400 | 30px | -0.2px | Lead paragraphs. |
-| `{typography.body-md}` | 18px | 400 | 27px | 0 | Default body. |
-| `{typography.body-md-strong}` | 18px | 600 | 27px | 0 | Bolded inline body. |
-| `{typography.body-sm}` | 16px | 400 | 24px | 0 | Secondary body. |
-| `{typography.body-sm-strong}` | 16px | 600 | 24px | 0 | Bold caption. |
-| `{typography.caption}` | 14px | 400 | 21px | 0 | Fine print. |
-| `{typography.eyebrow-uppercase}` | 14px | 500 | 14px | 1px | UPPERCASE eyebrow (Degular Display, positive tracking). |
-| `{typography.button-md}` | 18px | 600 | 27px | 0 | Primary button label. |
-| `{typography.button-sm}` | 14.4px | 700 | 14.4px | 0.144px | Small button label. |
+暖白與亮橙色，將自動化步驟排列清楚。
 
-### Principles
-- **Degular Display 500 for hero, Inter for everything else.** Strict role separation.
-- **Positive tracking on the Degular eyebrow** — `1 px` at 14 px is the brand's signature label style.
-- **Sentence-case headlines.** The brand never uppercases display sizes.
+製作自動化流程建置概念頁，包含觸發條件、有順序的動作與測試結果面板。橘色標示目前步驟，連線關係具語意標示，設定未完成前不可執行示範。
 
-### Note on Font Substitutes
-Degular Display is proprietary. Open-source substitutes:
-- **Display** — *Inter* weight 500 at hero scale comes closest. *Mona Sans* weight 500 is a softer alternative.
-- **Sub-display + body** — *Inter* is the brand's actual second face.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Layout
+## 色彩、字型與繁體中文排版
 
-### Spacing System
-- **Base unit**: 4 px.
-- **Tokens**: `{spacing.xxs}` 2 px · `{spacing.xs}` 4 px · `{spacing.sm}` 8 px · `{spacing.md}` 12 px · `{spacing.lg}` 16 px · `{spacing.xl}` 24 px · `{spacing.2xl}` 32 px · `{spacing.3xl}` 48 px · `{spacing.4xl}` 64 px.
-- **Section padding**: bands use `{spacing.4xl}` 64 px top/bottom.
-- **Card interior**: cards at `{spacing.xl}` 24 px.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Grid & Container
-- Marketing container ~1280 px wide; centred with gutters.
-- Hero: split at desktop (headline left, illustration right); stacked at mobile.
-- Pricing tier grid: 3 / 4-up at desktop.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Responsive Strategy
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-#### Breakpoints
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 56px | 500 | 56px | 0 |
+| 48px | 500 | 48px | 0 |
+| 32px | 500 | 36px | 1px |
+| 48px | 500 | 49.92px | 0 |
+| 32px | 400 | 40px | 0 |
+| 24px | 600 | 30px | -0.6px |
+| 20px | 700 | 25px | -0.5px |
+| 20px | 400 | 30px | -0.2px |
+| 18px | 400 | 27px | 0 |
+| 18px | 600 | 27px | 0 |
+| 16px | 400 | 24px | 0 |
+| 16px | 600 | 24px | 0 |
+| 14px | 400 | 21px | 0 |
+| 14px | 500 | 14px | 1px |
+| 18px | 600 | 27px | 0 |
+| 14.4px | 700 | 14.4px | 0.144px |
 
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | Hero stacks; grids 1-up; hamburger nav. |
-| Tablet | 768–1023px | 2-up grids. |
-| Desktop | ≥ 1024px | Full grids; hero split. |
+## 版面與元件結構
 
-#### Touch Targets
-Buttons render ~48 px tall (12 vertical padding + 27 line). WCAG AAA met.
+此參考可先實作：自動化步驟，包含設定中、就緒、執行中與失敗狀態。
 
-#### Image Behavior
-The brand uses illustrative SVGs of zaps / workflows + product screenshots inside `{rounded.md}` framed cards. Photography is rare.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-## Elevation & Depth
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-| Level | Treatment | Use |
-|---|---|---|
-| Level 0 — Flat | No shadow, no border. | Default for hero. |
-| Level 1 — Hairline | 1 px solid `{colors.ink}` border. | Pricing-tier card chrome, outline buttons. |
-| Level 2 — Soft Card | `{colors.canvas-soft}` cream fill against `{colors.canvas}` page. | Default content cards — surface contrast carries elevation. |
+## 操作與狀態
 
-## Shapes
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Border Radius Scale
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Full-bleed bands. |
-| `{rounded.sm}` | 6px | Inline pills, form inputs. |
-| `{rounded.md}` | 12px | The brand's canonical button + card radius. |
-| `{rounded.pill}` | 9999px | Status pills, badges. |
-| `{rounded.full}` | 9999px | Circular icon containers. |
+## 圖片、動態與無障礙
 
-## Components
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Buttons
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`button-primary`** — the orange CTA.
-- Background `{colors.primary}`, text `{colors.on-primary}` (warm white), label `{typography.button-md}`, padding `{spacing.md} {spacing.xl}`, shape `{rounded.md}` 12 px.
+## 來源中的技術值補充
 
-**`button-secondary`** — the dark coffee-ink CTA.
-- Background `{colors.ink}`, text `{colors.on-primary}`, same typography / padding / shape.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`button-tertiary`** — the outline CTA.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, same typography / padding / shape.
+- `#fffefb`
+- `#f8f4f0`
+- `#201515`
+- `#ff4f00`
+- `#c5c0b1`
+- `#939084`
+- `#605d52`
+- `#2f2a26`
+- `#36342e`
 
-**`button-text`** — text-only CTA used inside cards / nav.
-- Background `{colors.canvas}`, text `{colors.ink}`, body in `{typography.button-sm}`, padding `{spacing.sm} {spacing.lg}`, shape `{rounded.md}`.
+## 日期限定首頁觀察
 
-### Cards & Containers
+來源 https://zapier.com/，觀察2026-10-11。目前仍是 迎接 AI 代理時代的自動化 的暖白編輯式首頁：56px黏性導覽、Degular Display兩行桌面主標、三行窄版主標、橘色email與描邊Google按鈕；桌面原始產品影片位於x128/y459，寬1024px。保留真實原始字型、logo與產品影像，不使用生成稿中的終端機或虛構控制台。
 
-**`card-content`** — the default cream content card.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, padding `{spacing.xl}`, shape `{rounded.md}`.
+完整順序為合作品牌條、Build anywhere宣言、Zapier MCP、Next Gen Zaps、深咖啡Crunchbase引言區、Fluid Determinism四級卡與Ticket intake圖、Governance、Mercari案例、Security與Platform controls、讓 AI 創造投資報酬、完整A-Z/分類/社群/法律頁尾。引用與數字均保留為當日公開畫面內容，不代表產品效能查核。
 
-**`card-feature-cream`** — the cream feature card.
-- Same chrome as `card-content`. Hosts headline + body + illustration.
+透過 原生 Google Stitch MCP 新增桌面校正畫面，完整回應、精確指令、HTML與原始縮圖/完整 PNG 截圖獨立保留；原DESIGN.md、design-md、先前桌面/手機稿不變。具體頁面以完整當日官方DOM/CSS與141份公開素材校正。瀏覽器資源匯出有21項CORS/response-type失敗，精確已觀察資源網址的公開HTTP下載補全，最終素材失敗0。
 
-**`card-feature-dark`** — the polarity-flipped dark coffee card.
-- Background `{colors.ink}`, text `{colors.on-primary}`, padding `{spacing.xl}`, shape `{rounded.md}`.
+來源與成品各保存桌面1280×720及窄版390×844完整14段實際畫面；真實影像尺寸與無缺段覆蓋皆檢查。全部5張桌面、6張窄版比較圖已逐段目視核對；頁高9508/11137相合，44張DOM圖片載入、字型完成、無水平溢位。主標位置/尺寸為桌面x256/y190/768×112、窄版x20/y138/350×120。動畫淡入、影片/品牌條時間點及互動差異仍明列。
 
-**`pricing-card`** — the default pricing tier card.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, padding `{spacing.xl}`, shape `{rounded.md}`.
+## 已知差異與驗證範圍
 
-**`pricing-card-featured`** — the polarity-flipped featured pricing tier.
-- Background `{colors.ink}`, text `{colors.on-primary}`, same shape / padding.
+- 官網多個實際來源階段的捲動進場內容仍有淡入與位移，校正版固定於完全顯示狀態；精確透明度、位移與顯示時間尚未驗收為一致。
+- 主視覺、MCP、工作流程與治理影片的畫格、播放狀態，以及移動合作商標的位置因時間不同。原始公開媒體位元組保留，逐格動態同步不在本次範圍。
+- 大型導覽選單及行動版面板、功能摺疊、代理商滑塊與分頁、客戶輪播、頁尾載入更多、Cookie、隱私、完整鍵盤焦點與帳戶服務，尚未在靜態校正版實作或驗收。連結導向觀察到的官網，未送出帳戶或表單。
+- 新 Stitch 編輯稿僅為桌面，先前原生桌面及行動版輸出保留；原始比對未涵蓋其他尺寸、真實手機、路由、語言與正式部署。
 
-### Inputs & Forms
-
-**`text-input`** — the canonical text input.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, body in `{typography.body-md}`, padding `{spacing.md} {spacing.lg}`, shape `{rounded.sm}` 6 px.
-
-### Navigation
-
-**`nav-bar`** — the sticky top nav.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`.
-
-**`nav-link`** — link items inside nav.
-- Text `{colors.ink}`, set in `{typography.body-sm}`.
-
-**`footer`** — the dark coffee footer.
-- Background `{colors.ink}`, text `{colors.canvas-soft}`, padding `{spacing.3xl} {spacing.xl}`. Body in `{typography.body-sm}`.
-
-### Signature Components
-
-**`hero-band`** — the cream hero band.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.4xl} {spacing.xl}`. Headline in `{typography.display-xl}` (Degular Display 56 px / 500).
-
-**`hero-band-dark`** — the polarity-flipped dark coffee hero.
-- Background `{colors.ink}`, text `{colors.on-primary}`, same scale.
-
-**`content-band-cream`** — the cream content band that follows hero.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, padding `{spacing.4xl} {spacing.xl}`. Section headline in `{typography.display-lg}`.
-
-**`content-band-light`** — the white content band.
-- Background `{colors.canvas}`, text `{colors.ink}`, same padding / scale.
-
-**`eyebrow-uppercase`** — the small UPPERCASE Degular eyebrow above section headlines.
-- Text `{colors.ink}`, set in `{typography.eyebrow-uppercase}` (14 px / 500 / `1 px` tracking).
-
-**`badge-pill`** — the inline pill for metadata / tag.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, body in `{typography.body-sm}`, padding `{spacing.xs} {spacing.md}`, shape `{rounded.pill}`.
-
-### Examples (illustrative)
-
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
-
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
-
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
-
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
-
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
-
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
-
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
-
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
-
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` Zapier orange for every primary CTA. The saturated orange IS the conversion signature.
-- Keep canvas WARM — `{colors.canvas}` `#fffefb` cream, not pure white. The temperature is the brand voice.
-- Set hero headlines in `{typography.display-xl}` Degular Display weight 500. Sentence-case, no uppercase.
-- Pair Degular Display (hero, eyebrow) with Inter (everything else). Two faces, two roles.
-- Use `{rounded.md}` 12 px for buttons + cards. The middle radius is the brand's signature.
-- Pair orange CTA with ink-dark text on cream backgrounds — the three-token rhythm is the brand's whole conversion story.
-
-### Don't
-- Don't replace cream canvas with pure white. The warmth is the brand.
-- Don't use pure black ink. The coffee-warmth in `#201515` carries through every text color.
-- Don't render CTAs as pills. The brand's button is 12 px rounded rectangle.
-- Don't introduce a second chromatic accent. Orange + cream + coffee is the entire palette.
-- Don't substitute Degular Display with a cool geometric sans (e.g., generic Helvetica) — the brand's display face has warm proportions that the substitute doesn't capture.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Zapier-inspired interface. Implement this working page: An automation builder concept with a trigger, an ordered action sequence, and a test-result panel. Use orange to mark the current step, keep connectors semantically labeled, and show incomplete configuration before allowing a demo run.
+先閱讀隨附的 DESIGN.md，以 Zapier 的設計語言作為介面參考。請完成以下可操作頁面：製作自動化流程建置概念頁，包含觸發條件、有順序的動作與測試結果面板。橘色標示目前步驟，連線關係具語意標示，設定未完成前不可執行示範。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Zapier-inspired interface. Build an automation step with setup, ready, running, and failed states. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Zapier 的設計語言作為介面參考。請製作自動化步驟，包含設定中、就緒、執行中與失敗狀態。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Zapier-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An automation builder concept with a trigger, an ordered action sequence, and a test-result panel. Use orange to mark the current step, keep connectors semantically labeled, and show incomplete configuration before allowing a demo run.
+先閱讀隨附的 DESIGN.md，以 Zapier 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作自動化流程建置概念頁，包含觸發條件、有順序的動作與測試結果面板。橘色標示目前步驟，連線關係具語意標示，設定未完成前不可執行示範。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

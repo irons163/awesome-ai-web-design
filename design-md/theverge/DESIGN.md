@@ -1,357 +1,243 @@
-# Design System Inspired by The Verge
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "The Verge"
+description: "酸綠與紫色交錯，搭配有力的編輯字級。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#3cffd0"
+  canvas: "#131313"
+  ink: "#ffffff"
+  source-01: "#131313"
+  source-02: "#3cffd0"
+  source-03: "#5200ff"
+  source-04: "#ffffff"
+  source-05: "#2d2d2d"
+  source-06: "#309875"
+  source-07: "#3860be"
+  source-08: "#1eaedb"
+  source-09: "#3d00bf"
+  source-10: "#313131"
+  source-11: "#000000"
+  source-12: "#949494"
+  source-13: "#e9e9e9"
+  source-14: "#8c8c8c"
+  source-15: "#c2c2c2"
+  source-16: "#0500ff"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-The Verge's 2024 redesign feels like somebody wired a Condé Nast magazine to a chiptune soundboard. The canvas is almost-black (`#131313`), the headlines are built from a brutally heavy display face (Manuka) that runs up to 107px, and the whole page is peppered with acid-mint `#3cffd0` and ultraviolet `#5200ff` that behave less like brand colors and more like hazard tape. Story tiles are not quiet gray cards — they're saturated, full-bleed color blocks (yellow, pink, orange, blue, purple) that feel like pasted-up rave flyers arranged into a timeline. The mood is "developer console meets club night meets tech tabloid": serious enough to cover a congressional hearing, loud enough to review a synthesizer.
+# The Verge 延伸設計規格
 
-What makes this system unmistakable is the **StoryStream** timeline: a vertical feed where every post is a rounded rectangle — often 20–40px radius — filled edge-to-edge with color, framed by a thin border, and marked by a mono-uppercase timestamp on its left rail. Stories don't float on a grid; they stack on a dashed vertical rule like commits in a git log. Above that, a massive **"The Verge" wordmark** dominates the masthead in Manuka at hero scale, letting the reader know before any headline loads that this is editorial territory, not a template.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-There is no "light mode" on the homepage — the dark canvas is the product, and the only time the palette inverts is when a single story tile takes a mint or yellow fill. The depth is almost entirely flat: **hairline 1px borders** (`#ffffff`, `#3cffd0`, or `#5200ff`) do the work that shadows would do on a Material-flavored site. Every container is either `#131313` with a 1px outline, a fully saturated accent block, or a slate-gray `#2d2d2d` secondary surface.
+## 來源與規格層次
 
-**Key Characteristics:**
-- Near-black editorial canvas (`#131313`) as the default surface — no light mode on the homepage
-- Acid-mint `#3cffd0` + ultraviolet `#5200ff` as hazard-tape accents, never quiet background wash
-- Massive Manuka display headlines up to 107px — the single loudest type move in mainstream tech media
-- Rounded pill-card everything: 20/24/30/40px corner radii, never square
-- Fully saturated color-block story tiles (mint, purple, yellow, pink, orange, electric blue) on a dark page
-- Timeline "StoryStream" feed with mono uppercase timestamps rather than a traditional magazine grid
-- Flat depth — 1px borders in white, mint, purple do the work that shadows would do elsewhere
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`e6451d05d609c8bed4b8a671bbffe184f8ee829964bfea906171c56e2d91318d`。
+- 目前首頁參考日期：2026-10-13。
+- 目前公開來源：https://www.theverge.com/。
+- 目前預覽：`official-drafts/theverge.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary (Brand Hazards)
-- **Jelly Mint** (`#3cffd0`): The Verge's signature acid-mint accent. Used as CTA button fill, link underlines, active tab borders, and high-attention story-tile backgrounds. Treat it as the visual equivalent of neon safety paint — applied sparingly to the most important element on screen.
-- **Verge Ultraviolet** (`#5200ff`): The complementary brand hazard. Used for secondary color-block tiles, promotional spans, and the occasional outlined button. Often applied at 0.9 alpha to soften its cathode intensity.
+## 整體視覺方向
 
-### Secondary & Accent
-- **Console Mint Border** (`#309875`): A darker variant of the jelly mint used on card outlines and button borders where pure mint would over-saturate.
-- **Deep Link Blue** (`#3860be`): The link *hover* color — the one moment blue appears on the site. It replaces mint/white/black on hover across every link style.
-- **Focus Cyan** (`#1eaedb`): Reserved for button focus rings. Never shown outside a keyboard-focus state.
-- **Purple Rule** (`#3d00bf`): A darker ultraviolet variant used as the vertical border on StoryStream `<li>` items.
+酸綠與紫色交錯，搭配有力的編輯字級。
 
-### Surface & Background
-- **Canvas Black** (`#131313`): The default dark surface for the entire homepage. Almost-but-not-quite pure black — has just enough warmth to feel like a printed newsprint negative rather than an OLED void.
-- **Surface Slate** (`#2d2d2d`): Secondary card background, used when a story tile doesn't need to be a saturated color block.
-- **Image Frame** (`#313131`): The 1px border that wraps inline imagery.
-- **Hazard White** (`#ffffff`): Used as story-tile fill, button border, and primary text. When white appears as a large block, it's an editorial decision — a "spotlight" on that tile.
-- **Absolute Black** (`#000000`): Reserved for text on the mint/yellow/white tiles — the only place it appears.
+製作科技雜誌首頁，包含主要新聞、明確區分的主題區與緊湊次要標題。薄荷綠與紫色各自負責不同編輯層級，中繼資料弱於文章標題。
 
-### Neutrals & Text
-- **Primary Text** (`#ffffff`): Headlines and display text on the canvas.
-- **Secondary Text** (`#949494`): Bylines, timestamps, photo credits. The mid-gray that anchors the metadata layer.
-- **Muted Text** (`#e9e9e9`): Button text on dark slate buttons. Slightly off-white to reduce screen glare.
-- **Inverted Text** (`#131313`): Used only on accent tiles (mint, yellow, white) to keep contrast legible.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Semantic & Accent
-- **Focus Ring** (`#1eaedb`): Keyboard focus only.
-- **Overlay Black** (`rgba(0, 0, 0, 0.33)`): Subtle 1px ring used as the quiet shadow alternative on stacked cards.
-- **Dim Gray** (`#8c8c8c`): Active/pressed button background — the "pressed down" state.
+## 色彩、字型與繁體中文排版
 
-### Gradient System
-The Verge uses **zero decorative gradients**. The only gradient-like treatment is the transition from a saturated accent story tile (mint/purple/yellow) back to the `#131313` canvas between rows. Color is applied in solid blocks, not as washes. This is a deliberate choice — the site's hazard-tape visual identity would dissolve if anything faded.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## 3. Typography Rules
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
-- **Manuka** (Klim Type Foundry) — fallback: Impact, Helvetica. The signature display face for The Verge wordmark and feature headlines. A heavy-weight (900) industrial sans-serif with a condensed, almost-athletic stance. Runs at 60–107px on the homepage, never smaller.
-- **PolySans** (PanGram Pangram / Nikolas Wrobel) — fallback: Helvetica, Arial. The UI and secondary headline workhorse. Covers weights 300 / 500 / 700 across the system — everything from kicker captions to body decks.
-- **PolySans Mono** — fallback: Courier New, Courier. The monospaced sibling, used exclusively for ALL-CAPS labels: kickers, timestamps, category tags, button labels. This mono-uppercase usage is the second-most-identifiable Verge detail after Manuka.
-- **FK Roman Standard** (Florian Karsten) — fallback: Georgia. A serif used sparingly for specific body/caption treatments (article excerpts, certain review pulls). Adds a "print-magazine" counterpoint to the PolySans stack.
-- **Roboto** — fallback: `-apple-system`, `system-ui`. Utility UI font for widgets and legacy modules.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-### Hierarchy
+| 用途 | 字型 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- | --- |
+| `hero-wordmark-/-display` | Manuka | 107px / 6.69rem | 900 | 0.80 | 1.07px |
+| `secondary-display` | Manuka | 90px / 5.63rem | 900 | 0.80 | — |
+| `tertiary-display` | Manuka | 60px / 3.75rem | 900 | 0.80 | — |
+| `large-headline` | PolySans | 34px / 2.13rem | 700 | 1.00 | — |
+| `heading-wide` | PolySans | 32px / 2.00rem | 400 | 1.10 | 0.32px |
+| `heading-medium` | PolySans | 24px / 1.50rem | 700 | 1.00 | — |
+| `heading-small` | PolySans | 20px / 1.25rem | 700 | 1.00 | — |
+| `light-capitalized-label` | PolySans | 19px / 1.19rem | 300 | 1.20 | 1.9px |
+| `all-caps-label-xl` | PolySans | 18px / 1.13rem | 400 | 1.10 | 1.8px |
+| `bold-body` | PolySans | 16px / 1.00rem | 700 | 1.00 | — |
+| `body-relaxed` | PolySans | 16px / 1.00rem | 500 | 1.60 | — |
+| `inline-label` | PolySans | 15px / 0.94rem | 400 | 1.20 | 0.15px |
+| `body-compact` | PolySans | 13px / 0.81rem | 400 | 1.60 | — |
+| `eyebrow-all-caps` | PolySans | 12px / 0.75rem | 400 | 1.30 | 1.8px |
+| `tag-label` | PolySans | 12px / 0.75rem | 400 | 1.20 | 0.72px |
+| `caption-micro` | PolySans | 11px / 0.69rem | 400 | 1.20 | 1.1px |
+| `meta-nano` | PolySans | 10px / 0.63rem | 500 | 1.40 | 1.5px |
+| `mono-button-label` | PolySans Mono | 12px / 0.75rem | 600 | 2.00 | 1.5px |
+| `mono-timestamp` | PolySans Mono | 11px / 0.69rem | 500/600 | 1.20 | 1.1–1.8px |
+| `serif-body` | FK Roman Standard | 16px / 1.00rem | 400 | 1.30 | -0.16px |
+| `serif-caption` | FK Roman Standard | 20px / 1.25rem | 400 | 1.20 | — |
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|---|---|---|---|---|---|---|
-| Hero Wordmark / Display | Manuka | 107px / 6.69rem | 900 | 0.80 | 1.07px | The top-of-page "The Verge" logo and feature headlines |
-| Secondary Display | Manuka | 90px / 5.63rem | 900 | 0.80 | — | Section-level feature headlines |
-| Tertiary Display | Manuka | 60px / 3.75rem | 900 | 0.80 | — | Inline feature callouts |
-| Large Headline | PolySans | 34px / 2.13rem | 700 | 1.00 | — | Section and module headlines |
-| Heading Wide | PolySans | 32px / 2.00rem | 400 | 1.10 | 0.32px | Sub-heroes, promotional units |
-| Heading Medium | PolySans | 24px / 1.50rem | 700 | 1.00 | — | Story tile headlines in the main feed |
-| Heading Small | PolySans | 20px / 1.25rem | 700 | 1.00 | — | Compact tile headlines |
-| Light Capitalized Label | PolySans | 19px / 1.19rem | 300 | 1.20 | 1.9px | Thin-weight capitalized eyebrows — a distinctive Verge move |
-| All-Caps Label XL | PolySans | 18px / 1.13rem | 400 | 1.10 | 1.8px | UPPERCASE section kickers |
-| Bold Body | PolySans | 16px / 1.00rem | 700 | 1.00 | — | Emphasis within decks |
-| Body Relaxed | PolySans | 16px / 1.00rem | 500 | 1.60 | — | Long-form reading body |
-| Inline Label | PolySans | 15px / 0.94rem | 400 | 1.20 | 0.15px | UI labels and secondary headlines |
-| Body Compact | PolySans | 13px / 0.81rem | 400 | 1.60 | — | Secondary captions and decks |
-| Eyebrow All-Caps | PolySans | 12px / 0.75rem | 400 | 1.30 | 1.8px | UPPERCASE kicker above tile headlines |
-| Tag Label | PolySans | 12px / 0.75rem | 400 | 1.20 | 0.72px | UPPERCASE category tag |
-| Caption Micro | PolySans | 11px / 0.69rem | 400 | 1.20 | 1.1px | UPPERCASE bylines |
-| Meta Nano | PolySans | 10px / 0.63rem | 500 | 1.40 | 1.5px | UPPERCASE timestamp microtext |
-| Mono Button Label | PolySans Mono | 12px / 0.75rem | 600 | 2.00 | 1.5px | UPPERCASE button text, very open leading |
-| Mono Timestamp | PolySans Mono | 11px / 0.69rem | 500/600 | 1.20 | 1.1–1.8px | UPPERCASE StoryStream timestamps |
-| Serif Body | FK Roman Standard | 16px / 1.00rem | 400 | 1.30 | -0.16px | Review decks, print-voice excerpts |
-| Serif Caption | FK Roman Standard | 20px / 1.25rem | 400 | 1.20 | — | Magazine-style pull quotes |
+## 版面與元件結構
 
-### Principles
-- **Manuka is always the hero, never the UI.** If you see Manuka below 60px you're looking at a bug. It exists to *shout the brand*, not to label a button.
-- **PolySans is the workhorse, PolySans Mono is its uniformed sibling.** Mono is used exclusively for UPPERCASE labels, timestamps, tags, and certain buttons. Lowercase mono doesn't exist in this system.
-- **Thin-weight (300) capitalized headlines** are a signature Verge move. The 19–20px weight-300 with 1.9px tracking creates a "fashion magazine whisper" that contrasts with the 107px Manuka shout above it. This whisper-vs-shout contrast is the typographic fingerprint.
-- **Letter-spacing has two registers**: positive (0.72–1.9px) for ALL-CAPS mono and sans labels, negative (`-0.16px`) for the rare serif appearances, barely-positive (0.32px, 1.07px) for massive display. Plain 0 letter-spacing is rare.
-- **FK Roman Standard is the editorial exception**, not the rule. Reserve it for long-form print-voice moments — reviews, critic pulls, masthead essays. Never use it in UI.
-- **Line heights are tight** (0.80–1.30) for every display and label, relaxed (1.60–2.00) only for reading body and mono button labels. The leading jump is intentional — it gives the page a "telegraph ticker" rhythm.
+此參考可先實作：新聞卡片，包含分類、作者、發布時間與清楚的標題層級。
 
-### Note on Font Substitutes
-The 0.80 line-height on Manuka display (107px, 90px, 60px) assumes the **proprietary Manuka face from Klim Type Foundry**, which has aggressively tight vertical metrics designed for athletic stance at large sizes. If you substitute with wide-metric open-source condensed displays like **Anton**, **Oswald**, **Bebas Neue**, or **Archivo Black**, loosen display line-heights by approximately **+0.10 to +0.15** to prevent ascender/descender collisions (e.g., 0.80 → 0.95). PolySans substitutes (Space Grotesk, DM Sans, Hanken Grotesk) work at the token values without adjustment — their metrics are close enough. PolySans Mono substitutes (Space Mono, JetBrains Mono) and FK Roman substitutes (Newsreader, Literata) also work without adjustment.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-## 4. Component Stylings
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Buttons
+## 操作與狀態
 
-**Primary — Jelly Mint Pill**
-- Background: `#3cffd0` (Jelly Mint)
-- Text: `#000000` (Absolute Black), PolySans 16px / 700 or PolySans Mono 12px / 600 UPPERCASE
-- Border: none (pure fill)
-- Border radius: `24px` — fully rounded pill
-- Padding: `10px 24px`
-- Outline: `none` at rest
-- Hover: background shifts to `rgba(255, 255, 255, 0.2)` (translucent white), text stays black, adds a 1px `#c2c2c2` ring shadow
-- Active: background `rgba(140, 140, 140, 0.87)`, opacity `0.5`, ring shadow `#8c8c8c`
-- Focus: background `#1eaedb`, white text, 1px solid `#0500ff` border, translucent white focus ring
-- Transition: ~180ms ease on background and shadow
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**Secondary — Dark Slate Pill**
-- Background: `#2d2d2d` (Surface Slate)
-- Text: `#e9e9e9` (Muted Text), PolySans 16px / 400
-- Border: none
-- Border radius: `24px`
-- Padding: `10px 24px`
-- Outline: `rgb(233, 233, 233) none 0px`
-- Hover: same translucent white invert as primary — `rgba(255, 255, 255, 0.2)` bg, black text, 1px `#c2c2c2` ring
-- Focus: same cyan focus treatment as primary
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**Tertiary — Outlined Mint**
-- Background: transparent
-- Text: `#3cffd0`, PolySans Mono 12px / 600 UPPERCASE, 1.5px tracking
-- Border: `1px solid #3cffd0`
-- Border radius: `40px` — larger pill for secondary outline style
-- Padding: ~`10px 20px`
-- Hover: inverts to mint fill, black text
-- Transition: 150ms ease
+## 圖片、動態與無障礙
 
-**Outlined Ultraviolet (Promotional)**
-- Background: transparent
-- Text: `#5200ff` or `#ffffff`
-- Border: `1px solid #5200ff`
-- Border radius: `30px`
-- Used for "Subscribe" or "Join the Stream" style promotional callouts
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**Pill Tag (Non-interactive)**
-- Background: saturated accent (`#3cffd0`, `#5200ff`, yellow, etc.)
-- Text: black or white depending on background luminance
-- Border radius: `20px` (tighter radius than buttons — this is the *text pill*)
-- Font: PolySans Mono 11px / 600 UPPERCASE, 1.8px tracking
-- Padding: ~`4px 10px`
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Cards & Containers
+## 來源中的技術值補充
 
-**StoryStream Tile**
-- Background: either `#131313` + 1px white border, OR a saturated accent fill (mint, purple, yellow, pink, orange, white)
-- Border radius: `20px` (standard) or `24px` (feature)
-- Border: `1px solid #ffffff` (on dark) or `0px 0px 1px solid #3cffd0` (on mint) or nothing (on saturated fill)
-- Padding: ~24–32px interior
-- Hover: no lift, no scale — the headline text color transitions from white to `#3860be` (deep link blue)
-- Transition: 150ms ease on color only
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**Feature Card (Top Story)**
-- Background: `#131313` with 1px hairline border, OR full-bleed color accent
-- Border radius: `24px`
-- Padding: 32px+
-- Image inside: clipped to match the outer radius (`3px` or `4px` inner radius when nested)
-- Hover: text color shift only; the image remains static
+- `#131313`
+- `#3cffd0`
+- `#5200ff`
+- `#ffffff`
+- `#2d2d2d`
+- `#309875`
+- `#3860be`
+- `#1eaedb`
+- `#3d00bf`
+- `#313131`
+- `#000000`
+- `#949494`
+- `#e9e9e9`
+- `rgba(0, 0, 0, 0.33)`
+- `#8c8c8c`
+- `-0.16px`
+- `24px`
+- `10px 24px`
+- `rgba(255, 255, 255, 0.2)`
+- `#c2c2c2`
+- `rgba(140, 140, 140, 0.87)`
+- `#0500ff`
+- `rgb(233, 233, 233) none 0px`
+- `1px solid #3cffd0`
+- `40px`
+- `10px 20px`
+- `1px solid #5200ff`
+- `30px`
+- `20px`
+- `4px 10px`
+- `1px solid #ffffff`
+- `0px 0px 1px solid #3cffd0`
+- `3px`
+- `4px`
+- `2px`
+- `0px -1px 0px 0px inset #3cffd0`
+- `rgba(0,0,0,0) 0px 0px 0px 0px inset`
+- `rgba(0, 0, 0, 0.33) 0px 0px 0px 1px`
+- `0px -1px 0px 0px inset`
 
-**StoryStream Rail (Timeline)**
-- A vertical dashed or solid rule (1px `#3d00bf` or `#ffffff`) runs along the left edge of each item, marking the timeline spine
-- Timestamps sit on the left rail in PolySans Mono 11px / 500 / UPPERCASE / 1.1px tracking
-- Each entry is a pill-cornered rectangle separated from its neighbors by 12–16px vertical gap
+## 日期限定首頁觀察
 
-### Inputs & Forms
-- **Default**: `#131313` background, 1px solid `#ffffff` or `#949494` border, `2px` border radius (tight, newspaper-form feel), PolySans 15px text in `#ffffff`, placeholder in `#949494`.
-- **Focus**: border transitions to `#3cffd0` (jelly mint) with optional `1px solid #5200ff` inner ring on deep focus. No glow.
-- **Error**: border turns `#5200ff` (ultraviolet — used as error/alert accent here, not the usual red).
-- **Transition**: ~150ms ease on border-color.
+參考日期：2026-10-13。來源：https://www.theverge.com/
 
-### Navigation
+依已保存的預覽、畫面量測與同日期比對紀錄整理；文件整理日期為 2026-10-14，未重新擷取官網。
 
-- **Top nav**: thin `#131313` bar with the Verge wordmark (Manuka) left-aligned, a search icon and a few UPPERCASE mono category links (12–14px, PolySans Mono, 1.5–1.8px tracking), and a single mint-pill CTA (usually "Subscribe") pinned right.
-- **Wordmark**: massive on first scroll — the homepage treats the "The Verge" logo as a hero element, not a 32px corner logo.
-- **Hover**: every link transitions from `#ffffff` to `#3860be` (deep link blue). No underline — it's a color-only response.
-- **Active section**: marked by a 1px mint underline (inset box-shadow `0px -1px 0px 0px inset #3cffd0`)
-- **Mobile**: the wordmark shrinks, category nav collapses into a hamburger drawer. Inside the drawer, links are mono-uppercase and stack with 16–20px gaps.
+## 版面與層級
 
-### Image Treatment
+此分析對應目前保存的淺色 The Verge 研究預覽。2026-10-13 的官網比對使用深色頁面；兩者的主題與內容差異已記錄，不能把這份分析當成最新官網的全面描述。
 
-- **Aspect ratios**: 16:9 dominates for hero and feature images, 4:3 for mid-feed, 1:1 for thumbnails and author avatars.
-- **Corners**: always rounded to match the parent card — `3px`, `4px`, or inherit `20px` / `24px` from the tile.
-- **Frame**: 1px `#313131` or `#ffffff` hairline around photography, giving a "contained Polaroid" feel.
-- **Full-bleed**: only within the color-block tiles, where the image runs to the padded edge of the accent fill.
-- **Hover**: static — no zoom, no scale, no opacity shift. The headline below is the only interactive response.
-- **Lazy loading**: `loading="lazy"` on everything below the first fold; eager on the masthead hero only.
+桌面首頁以顯著品牌字樣、分類導覽、主新聞和側欄新聞流建立編輯層級。下方包含筆電專題、編輯推薦、熱門與討論排行、AI 專題，以及 Tech、Reviews、AI、Policy、Science 等分類內容。主文章圖像、標題、作者和時間共同構成新聞卡片。
 
-### StoryStream Timeline Item (Distinctive)
+## 視覺規則
 
-- Vertical rail line (1px `#3d00bf` or `#ffffff` on `#131313`)
-- Mono timestamp on the left in PolySans Mono 11px / UPPERCASE
-- Pill-cornered body card (20px radius) with kicker, headline, and optional deck
-- Stacked vertically with 12–16px gap, the rail continuing between them
-- Often interleaved with full-bleed accent tiles that "break" the timeline rhythm for emphasis
+此預覽使用淺色背景、黑色文字及紫色操作／選取重點。字型以 polySans 與 Helvetica／Arial 替代組成；保存的桌面專題標題量測為 24px。以字型重量、圖像大小、分隔線和欄位比例建立密集內容的層級，避免對每則新聞加上相同的大面積框線或陰影。
 
-## 5. Layout Principles
+保留已保存的原始圖片及其比例。比對紀錄確認圖片元素可載入，但部分快照版位仍為灰色區塊；成功載入不代表素材已補齊。
 
-### Spacing System
-- **Base unit**: 8px.
-- **Scale**: 1, 2, 4, 5, 6, 8, 9, 10, 12, 14, 15, 16, 20, 24, 25px.
-- **Section padding**: 32–64px vertical between major feed sections. StoryStream items themselves are tighter — 12–16px gaps.
-- **Card padding**: 20–32px interior. Feature cards expand to 40–48px.
-- **Inline spacing**: kickers sit ~6–10px above headlines; headlines sit ~10–14px above decks; timestamps sit ~6–8px below decks.
-- **Micro-scale**: The 2/4/5/6/9/10px values are used inside buttons, pills, and tight label clusters, not in the editorial grid.
+## 窄版與使用
 
-### Grid & Container
-- **Max width**: ~1280–1300px (dembrandt detected breakpoints at 1200/1280/1300).
-- **Column patterns**: a 12-column underlying grid that resolves into 3-column hero + 1-column StoryStream rail + feature panels. The homepage feels freeform because color-block tiles frequently span 2–3 columns on a whim.
-- **Container padding**: 24px mobile / 48px desktop on the outer edges.
-- **Gutters**: 16–24px between columns, tighter (8–12px) inside StoryStream items.
+窄版把編輯內容轉為可順序閱讀的排列，保留 Top Stories／Latest／Following 切換與選單入口。紀錄已檢查這些切換及 Escape 關閉，其他輪播、完整鍵盤流程、廣告和影音仍有未驗收範圍。未來實作以可讀標題、清楚目前分頁、焦點與內容載入狀態為要求。
 
-### Whitespace Philosophy
-The Verge treats whitespace like a club DJ treats silence — as a dramatic reset between loud moments. The canvas is so dark and the accents are so saturated that even 32px of empty `#131313` between two tiles acts as a palette cleanser. The page is not airy like Apple or Stripe; it's **paced**, with loud hazard-color blocks interrupting stretches of near-black. Whitespace carries the rhythm, not the elegance.
+## 已知差異與參考紀錄
 
-### Border Radius Scale
-- **2px** — inputs, small badges (feels like a typewriter tag)
-- **3px** — inline images (just enough to soften against the canvas)
-- **4px** — nested card images and small button variants
-- **20px** — standard pill cards and color-block tiles
-- **24px** — feature tile radius and primary button pill
-- **30px** — large promotional buttons
-- **40px** — outlined CTA pills (the loudest pill in the system)
-- **50%** — avatar circles, icon buttons, and certain round badges
+- 本次官網為深色主題，日期限定草稿為原先保存的淺色主題；沒有主張同主題逐像素一致。
+- 官網新聞、專題、排行與草稿不同，桌機和窄版文件高度也不同，仍需更新內容後再驗收。
+- 部分原始快照區塊仍只有灰色圖片版位；圖片元素成功載入不代表這些未擷取版位已補齊。
+- 廣告、動態影音、完整鍵盤流程、所有輪播、其他尺寸及正式部署仍待驗收。
 
-Eight discrete radius values — a **lot** for a single site. This is deliberate: the rhythm between 2px typewriter tags, 20px pill cards, and 40px outlined buttons creates a "nested scale" feel where every component announces its hierarchy through its corners.
+比對紀錄：[The Verge 畫面校正紀錄](theverge-oct13-visual-review.md)。目前預覽：[The Verge](theverge.html)。
 
-## 6. Depth & Elevation
+## 已知差異與驗證範圍
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 | No border, no shadow | Default `#131313` canvas text |
-| 1 | `rgba(0,0,0,0) 0px 0px 0px 0px inset` (placeholder) | Reset state for interactive elements |
-| 2 | `1px solid #ffffff` or `#313131` hairline | Image frames and quiet card outlines |
-| 3 | `1px solid #3cffd0` hairline | Active button outlines, focused story tiles |
-| 4 | `1px solid #5200ff` hairline | Promotional/alternate state outlines |
-| 5 | `rgba(0, 0, 0, 0.33) 0px 0px 0px 1px` | The single "atmospheric" ring — applied to layered cards |
-| 6 | `0px -1px 0px 0px inset` (mint/black/white) | Active tab underline — a signature Verge move |
-| 7 | Saturated accent fill (`#3cffd0`, `#5200ff`, white, yellow, pink) | Story-tile elevation via color, not shadow |
+- 本次官網為深色主題，日期限定草稿為原先保存的淺色主題；沒有主張同主題逐像素一致。
+- 官網新聞、專題、排行與草稿不同，桌機和窄版文件高度也不同，仍需更新內容後再驗收。
+- 部分原始快照區塊仍只有灰色圖片版位；圖片元素成功載入不代表這些未擷取版位已補齊。
+- 廣告、動態影音、完整鍵盤流程、所有輪播、其他尺寸及正式部署仍待驗收。
 
-The Verge's depth philosophy is **color-as-elevation**. When something needs to stand out, it doesn't get a shadow — it gets a mint fill or a 1px hazard-color border. There are 14 shadow entries in the extracted tokens, but all of them are either inset underlines (0px -1px inset) or near-transparent 1px rings — none of them are traditional elevation shadows. The `#131313` canvas stays perfectly flat throughout, and hierarchy is carried by color saturation.
-
-### Decorative Depth
-- **1px inset underline** on active tabs/nav links (mint, black, or white depending on context)
-- **Subtle `rgba(0, 0, 0, 0.33)` 1px ring** on stacked cards — the only effect that faintly resembles a shadow
-- **No gradients, no glows, no atmospheric blurs** anywhere. The hazard-tape aesthetic would break if anything faded softly.
-
-## 7. Do's and Don'ts
-
-### Do
-- **Do** use `#131313` as the canvas for every view. There is no light mode.
-- **Do** use Jelly Mint (`#3cffd0`) and Verge Ultraviolet (`#5200ff`) as hazard accents — buttons, borders, active states, and saturated color-block tiles.
-- **Do** use Manuka exclusively at 60px+ for hero headlines. Treat anything smaller as a bug.
-- **Do** round everything: 20px for cards, 24px for feature cards, 30–40px for pill buttons.
-- **Do** use PolySans Mono for UPPERCASE labels, timestamps, kickers, and button text. Lowercase mono doesn't exist here.
-- **Do** apply 1.5–1.9px letter-spacing to every ALL-CAPS label — this is a Verge signature.
-- **Do** use saturated color-block tiles (mint, purple, yellow, pink, orange, white) to elevate a story — never a drop shadow.
-- **Do** use `#3860be` (deep link blue) as the hover color on every link, regardless of base color.
-- **Do** apply the StoryStream timeline rail (1px dashed/solid `#3d00bf` or white) on feed views.
-- **Do** use thin-weight (300) PolySans at 19–20px with 1.9px tracking for "fashion-whisper" capitalized eyebrows — the contrast with the 107px Manuka shout is the whole voice.
-
-### Don't
-- **Don't** use a light background. The dark canvas is the product.
-- **Don't** add `box-shadow` for elevation. Use 1px borders or saturated accent fills instead.
-- **Don't** use square corners. Every interactive and content container is rounded.
-- **Don't** use Manuka for UI, buttons, or body copy. It's strictly display.
-- **Don't** use lowercase mono. PolySans Mono is always UPPERCASE.
-- **Don't** let mint and ultraviolet appear as background washes — they're hazard accents, not canvas tints.
-- **Don't** use gradients anywhere. The system is solid color blocks only.
-- **Don't** introduce new accent colors outside the declared mint / purple / yellow / pink / orange tile palette.
-- **Don't** pair Manuka with FK Roman Standard in the same headline cluster — Manuka is the only display shout, serif pulls are reserved for body moments.
-- **Don't** use `#3cffd0` text on a `#131313` background at under 16px — the contrast vibrates at small sizes.
-
-## 8. Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Small Mobile | <400px | Single column, Manuka hero scales down to ~48–54px, StoryStream rail collapses to inline timestamps |
-| Mobile | 400–549px | Single column, color-block tiles stack full-width, nav is a hamburger drawer |
-| Large Mobile | 550–767px | Still single column but padding opens up, tile radii stay at 20px |
-| Tablet | 768–1023px | 2-column StoryStream with feature card spanning, wordmark shrinks ~50% |
-| Small Desktop | 1024–1179px | Full 3–4 column editorial grid, mint pill CTA restored to nav |
-| Desktop | 1180–1299px | Max padding, Manuka wordmark at full hero scale |
-| Large Desktop | ≥1300px | Container caps at ~1280–1300px, whitespace expands at the margins, no further scaling |
-
-The dembrandt sweep detected 26 intermediate breakpoints (1300 → 1280 → 1200 → 1181 → 1180 → 1179 → 1024 → 1023 → 901 → 900 → 897 → 896 → 890 → 769 → 768 → 620 → 605 → 600 → 550 → 549 → 530 → 426 → 425 → 400 → 320). The Verge tunes its grid at virtually every major device boundary — an unusually aggressive responsive strategy.
-
-### Touch Targets
-- Primary pill buttons are ~44px minimum height (10px vertical padding + 16px text + 2px border) — meets WCAG AA.
-- Mono uppercase nav links are smaller (~28–32px tall) — for derivative work, pad to 44px on mobile.
-- Circle icon buttons are 40–44px circles, touch-friendly.
-
-### Collapsing Strategy
-- **Nav**: wordmark scales from hero (Manuka 60–107px) to ~24–32px on mobile. Category links collapse to a hamburger drawer below 900px.
-- **Grid**: 4-col → 3-col → 2-col → 1-col. Feature cards that span 2 columns on desktop reflow to full-width single-column on mobile.
-- **Spacing**: section padding tightens from 64px → 32px → 20px. Tile interior padding tightens from 32px → 20px.
-- **Type**: Manuka hero scales from 107px to ~48–54px on mobile. PolySans headlines scale from 34px → 24px. Mono labels stay pinned at 11–12px (they don't shrink further or they become unreadable).
-- **Color tiles**: accent story blocks never lose saturation on mobile — they just reflow to full width.
-
-### Image Behavior
-- Responsive raster via `srcset`, aspect ratios preserved.
-- No art-direction swaps — same crop scales across all viewports.
-- `loading="lazy"` on everything below the fold, `eager` on the masthead hero.
-- Images inside color-block tiles inherit the tile's inner radius (4px or 20px nested).
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a The Verge-inspired interface. Implement this working page: A technology magazine front page with a dominant lead story, sharply separated topic bands, and dense secondary headlines. Give mint and violet distinct editorial roles and keep metadata quieter than story titles.
+先閱讀隨附的 DESIGN.md，以 The Verge 的設計語言作為介面參考。請完成以下可操作頁面：製作科技雜誌首頁，包含主要新聞、明確區分的主題區與緊湊次要標題。薄荷綠與紫色各自負責不同編輯層級，中繼資料弱於文章標題。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a The Verge-inspired interface. Build a story card with section label, author, timestamp, and a readable headline hierarchy. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 The Verge 的設計語言作為介面參考。請製作新聞卡片，包含分類、作者、發布時間與清楚的標題層級。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a The Verge-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A technology magazine front page with a dominant lead story, sharply separated topic bands, and dense secondary headlines. Give mint and violet distinct editorial roles and keep metadata quieter than story titles.
+先閱讀隨附的 DESIGN.md，以 The Verge 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作科技雜誌首頁，包含主要新聞、明確區分的主題區與緊湊次要標題。薄荷綠與紫色各自負責不同編輯層級，中繼資料弱於文章標題。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

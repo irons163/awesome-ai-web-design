@@ -5,7 +5,7 @@ import re
 import shutil
 from pathlib import Path
 
-MEDIA = {'.mp4', '.webm', '.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.woff', '.woff2', '.ttf', '.otf'}
+MEDIA = {'.mp4', '.webm', '.png', '.jpg', '.jpeg', '.webp', '.avif', '.gif', '.svg', '.woff', '.woff2', '.ttf', '.otf'}
 TEXT = {'.html', '.css', '.js', '.mjs', '.json'}
 
 

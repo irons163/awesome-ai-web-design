@@ -1,16 +1,8 @@
 ---
-version: alpha
-name: Resend-design-analysis
-description: |
-  Resend's marketing surfaces sit on a near-pure black canvas with off-white
-  text and a single signature color — the deep editorial-serif Domaine
-  Display headline mark — that gives an otherwise utilitarian developer-tool
-  brand its print-magazine confidence. The system pairs Domaine Display
-  (oversized 76px–96px serif, ss01/ss04/ss11 features on) with ABC Favorit
-  for body and Inter for UI. Surfaces rely on subtle 6–9% opacity gradient
-  glows, hairline 1px borders made from translucent white, and a strict
-  rounded-12px container vocabulary. There is no decorative chrome — just
-  type, code, and atmospheric depth.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Resend"
+description: "近黑底色、單色字級與精簡開發者介面。"
 
 colors:
   primary: "#fcfdff"
@@ -264,360 +256,182 @@ components:
     padding: 64px 32px
 ---
 
-## Overview
-
-Resend looks like a developer tool with the typography of an editorial.
-Every page opens on `{colors.canvas}` (`#000000`), and the loudest element on
-the canvas is not a button or a brand stamp — it's a 96px Domaine Display
-serif headline ("Email for developers", "Email reimagined") with the
-`ss01 / ss04 / ss11` stylistic alternates engaged. That single typographic
-decision sets the brand tone: confident, considered, slightly literary, and
-priced on quality rather than novelty.
-
-The supporting cast is technical. Body copy switches to **ABC Favorit** for
-marketing prose and **Inter** for UI labels, while code blocks render in
-**Geist Mono** inside `{component.code-window}` shells with hairline traffic-
-light dots. Surface depth is built almost entirely from translucent white —
-6% borders, 14% strong borders, 4% dividers — over a deep `{colors.surface-deep}`
-layer that sits just below the canvas black. There are no gradients painted
-across full bands, just **soft atmospheric glows** (orange, blue, green, red,
-yellow) anchored at the top of select sections, all at low opacity.
-
-Page rhythm cycles in a single dark register: hero stripe → atmospheric
-section → code window section → email mockup section → pricing or feature
-grid → black footer. The brand never warms to a light surface; even
-secondary email mockups are rendered as compact white cards inside the dark
-canvas, framed like print insets in a black-bordered magazine page.
-
-**Key Characteristics:**
-- Pure black canvas (`{colors.canvas}` — `#000000`) on every public page; off-white text (`{colors.ink}` — `#fcfdff`) carries the full read.
-- A serif-led type system: **Domaine Display** at 76–96px for hero headlines, **ABC Favorit** for marketing body, **Inter** for UI, **Geist Mono** for code.
-- Six accent glow colours used only as low-opacity atmospheric washes (`{colors.accent-orange}`, `{colors.accent-blue}`, `{colors.accent-green}`, `{colors.accent-red}`, `{colors.accent-yellow}`) — never as buttons or solid surfaces.
-- Strict container vocabulary: `{rounded.lg}` (12px) for feature cards, code wells, and email mockups; `{rounded.md}` (8px) for buttons; `{rounded.full}` for pills and avatars.
-- Translucent white borders (`{colors.hairline}` 6% / `{colors.hairline-strong}` 14%) replace shadows entirely — the system has no traditional drop-shadow elevation language.
-- `{component.button-primary}` is a small white rectangle with black text — counterintuitive contrast that becomes the page's brightest pixel and works as a single visual anchor.
-
-## Colors
-
-### Brand & Accent
-- **Primary White** (`{colors.primary}` — `#fcfdff`): the brand's de facto accent. Reserved for `{component.button-primary}` (white pill on black canvas), Domaine display headlines, and the active text colour. White is the loudest possible colour on this canvas — that's the signature.
-- **Primary On** (`{colors.primary-on}` — `#000000`): label colour on top of `{colors.primary}` surfaces. Black text on white pill is the brand's CTA pattern.
-- **Surface Light** (`{colors.surface-light}` — `#f1f7fe`): a subtle blue-tinted off-white used as the active/pressed state of `{component.button-primary}`.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#000000`): the default page background. True black, never near-black.
-- **Surface Card** (`{colors.surface-card}` — `#0a0a0c`): the standard inset card surface, just lighter than canvas to register a step up in elevation.
-- **Surface Elevated** (`{colors.surface-elevated}` — `#101012`): a second elevation step used on featured pricing tiers and ghost button surfaces.
-- **Surface Deep** (`{colors.surface-deep}` — `#06060a`): code window background — slightly cooler and darker than the canvas itself, suggesting depth via temperature.
-- **Hairline** (`{colors.hairline}` — `rgba(255,255,255,0.06)`): the soft 1px translucent-white divider used between rows and around feature cards.
-- **Hairline Strong** (`{colors.hairline-strong}` — `rgba(255,255,255,0.14)`): the structural 1px border on cards, code wells, and form inputs.
-- **Divider Soft** (`{colors.divider-soft}` — `rgba(255,255,255,0.04)`): low-contrast dividers between footer columns.
-
-### Text
-- **Ink** (`{colors.ink}` — `#fcfdff`): primary text colour on the dark canvas. Faintly blue-cool to feel like printed paper rather than pure white pop.
-- **Body** (`{colors.body}` — `rgba(252,253,255,0.86)`): long-form body text where pure ink would feel too sharp.
-- **Charcoal** (`{colors.charcoal}` — `rgba(252,253,255,0.7)`): captions, secondary nav labels.
-- **Mute** (`{colors.mute}` — `#a1a4a5`): supporting text and inactive labels.
-- **Ash** (`{colors.ash}` — `#888e90`): tertiary text, footer copy.
-- **Stone** (`{colors.stone}` — `#464a4d`): disabled foreground.
-- **On-Light** (`{colors.on-light}` — `#000000`): label colour inside the rare email-mockup white cards.
-- **On-Light Mute** (`{colors.on-light-mute}` — `rgba(0,0,51,0.7)`): secondary text inside email mockups.
-
-### Semantic
-- **Accent Orange** (`{colors.accent-orange}` — `#ff801f`) + glow (`{colors.accent-orange-glow}` — `rgba(255,89,0,0.22)`): atmospheric warm wash anchored to "Email reimagined" / customer story sections. Solid orange never appears as a button or surface — only the glow.
-- **Accent Yellow** (`{colors.accent-yellow}` — `#ffc53d`): used in inline highlight strokes and "first-class developer experience" key callouts.
-- **Accent Blue** (`{colors.accent-blue}` — `#3b9eff`) + glow (`{colors.accent-blue-glow}` — `rgba(0,117,255,0.34)`): inline link colour and the cool atmospheric wash on the "Integrate this weekend" section.
-- **Accent Green** (`{colors.accent-green}` — `#11ff99`) + glow (`{colors.accent-green-glow}` — `rgba(34,255,153,0.18)`): success status dots and the "delivery confirmed" feature glow.
-- **Accent Red** (`{colors.accent-red}` — `#ff2047`) + glow (`{colors.accent-red-glow}` — `rgba(255,32,71,0.34)`): inline error red and the "reach humans, not spam folders" attention wash.
-- **Link** (`{colors.link}` — `#3b9eff`): inline link colour — same as accent blue.
-
-## Typography
-
-### Font Family
-
-Resend ships a four-family stack:
-
-- **Domaine Display** — proprietary editorial serif used exclusively for hero headlines at 76px+, with `ss01 / ss04 / ss11` stylistic sets engaged for a slightly tighter, more print-magazine look.
-- **ABC Favorit** — proprietary humanist sans-serif used for marketing body copy, hero subtitles, and pill labels. Carries `ss01 / ss03 / ss04` features for tabular figures and alternate glyphs.
-- **Inter** — open-source sans-serif used for UI: button labels, captions, card body text, nav links.
-- **Geist Mono** — open-source monospace used in code wells.
-
-When proprietary families cannot be licensed, **Söhne** or **Tiempos Headline** stand in for Domaine Display, and **Geist** or **Inter Tight** can replace ABC Favorit. Inter and Geist Mono are open-source and should be used directly.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xxl}` | 96px | 400 | 1.0 | -0.96px | Home hero ("Email for developers"). One per page. |
-| `{typography.display-xl}` | 76.8px | 400 | 1.0 | -0.768px | Section openers ("Email reimagined", "Available today"). |
-| `{typography.display-lg}` | 56px | 400 | 1.2 | -2.8px | ABC Favorit display sub-titles. |
-| `{typography.heading-md}` | 24px | 500 | 1.5 | -0.4px | Card titles, section sub-titles. |
-| `{typography.heading-sm}` | 20px | 500 | 1.3 | -0.3px | List headers. |
-| `{typography.subtitle}` | 20px | 400 | 1.3 | 0 | Hero subtitles. |
-| `{typography.body-lg}` | 18px | 400 | 1.5 | 0 | Marketing prose. |
-| `{typography.body-md}` | 16px | 400 | 1.5 | -0.8px | ABC Favorit body. |
-| `{typography.body-sm}` | 14px | 400 | 1.43 | 0 | Captions, metadata. |
-| `{typography.button-md}` | 14px | 500 | 1.43 | 0 | Default button label. |
-| `{typography.button-sm}` | 14px | 500 | 1.43 | 0.35px | Pill labels, inline links. |
-| `{typography.caption}` | 12px | 400 | 1.5 | 0 | Footer disclosure, copyright. |
-| `{typography.caption-emph}` | 14px | 600 | 1.0 | 0 | Emphatic small caption — Helvetica fallback. |
-| `{typography.code-md}` | 13px | 400 | 1.6 | 0 | Code blocks, inline code. |
-
-### Principles
-- Display sizes always run at `lineHeight: 1.0` with negative letter-spacing — the Domaine Display headlines pack into solid typographic blocks rather than open prose lines.
-- Body weight stays at 400 across `{typography.body-lg}` and `{typography.body-md}`. The serif/sans family change carries hierarchy, not weight bumps.
-- ABC Favorit always runs with `ss01 / ss04 / ss11` engaged; Inter never carries OpenType features. Code in Geist Mono never carries ligatures.
-- Inline links use `{typography.button-sm}` with positive letter-spacing (`0.35px`) and ABC Favorit — the small spacing nudge gives interactive prose its precision.
+# Resend 延伸設計規格
 
-### Note on Font Substitutes
-
-When Domaine Display is unavailable, clamp `lineHeight` to 1.0 explicitly and apply `font-feature-settings: "ss01", "liga"` on the substitute serif to mimic the alternate glyphs. Söhne or Tiempos Headline will read closest. ABC Favorit substitutes (Geist, Inter Tight) typically default to looser tracking — apply -0.5% letter-spacing on body sizes to compensate.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Layout
-
-### Spacing System
-- **Base unit**: 4px, with the working scale on multiples of 4 / 8 / 16.
-- **Tokens**: `{spacing.xxs}` 2px · `{spacing.xs}` 4px · `{spacing.sm}` 8px · `{spacing.md}` 12px · `{spacing.lg}` 16px · `{spacing.xl}` 24px · `{spacing.xxl}` 32px · `{spacing.xxxl}` 48px · `{spacing.section}` 96px · `{spacing.band}` 128px.
-- Section padding: `{spacing.section}` (96px) vertical between bands; `{spacing.band}` (128px) on the hero stripe and closing footer transition.
-- Card internal padding: `{spacing.xxl}` (32px) on `{component.feature-card}`, `{component.pricing-tier}`, and `{component.code-window}`.
+## 來源與規格層次
+
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
+
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`f57aef780511cfed2ad2bf1cc4c57f15469ff265128108e22fba3104813f88a3`。
+- 目前首頁參考日期：2026-10-12。
+- 目前公開來源：https://resend.com/。
+- 目前預覽：`official-drafts/resend.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
+
+## 整體視覺方向
+
+近黑底色、單色字級與精簡開發者介面。
+
+製作郵件傳送儀表板，包含精簡活動表格、郵件詳細內容與程式碼範例。使用明亮文字與細緻深色邊框，狀態標籤須有文字，時間須標示時區。
 
-### Grid & Container
-- **Max content width** ≈ 1200px on body sections.
-- **Feature grid**: 3 columns at desktop, 2 at tablet, 1 at mobile.
-- **Pricing**: 3-tier grid centred at desktop; centre tier promotes to `{component.pricing-tier-featured}` (one-step-elevated surface).
-- **Code-story splits**: a 2-up split — narrative copy left, `{component.code-window}` right — collapsing to stacked at < 1024px.
-- **Email mockup band**: a single white card (640px max width) centred in the dark canvas with generous vertical padding to read like a print magazine inset.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Whitespace Philosophy
-- Whitespace is editorial and generous — full-bleed sections breathe at 96–128px so Domaine Display headlines have room to register at scale.
-- Inside cards, padding stays at 32px so feature copy and code wells have a consistent rhythm with the outer grid.
-- Hairline `{colors.hairline}` and `{colors.hairline-strong}` carry the role drop shadows would in a brighter system; the dark canvas suppresses traditional shadow depth entirely.
+## 色彩、字型與繁體中文排版
 
-## Elevation & Depth
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 — flat | No shadow, no border | Default canvas, full-bleed bands. |
-| 1 — surface card | `{colors.surface-card}` (`#0a0a0c`) + 1px `{colors.hairline-strong}` | Feature cards, pricing tiers, form inputs. |
-| 2 — elevated | `{colors.surface-elevated}` (`#101012`) + 1px `{colors.hairline-strong}` | Featured pricing tier, ghost button. |
-| 3 — code well | `{colors.surface-deep}` (`#06060a`) + 1px `{colors.hairline-strong}` | Code window, terminal shells. |
-| 4 — atmospheric glow | Low-opacity radial gradient (`{colors.accent-*-glow}`) anchored at section top | Section openers ("Integrate this weekend", "Email reimagined"). |
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-The system has **no traditional drop shadow language**. Every surface either gets a translucent-white hairline border or sits inside an atmospheric glow. The dark canvas absorbs shadow naturally; surfaces register depth via temperature and luminance shifts rather than blur.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
+
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 96px | 400 | 1.0 | -0.96px |
+| 76.8px | 400 | 1.0 | -0.768px |
+| 56px | 400 | 1.2 | -2.8px |
+| 24px | 500 | 1.5 | -0.4px |
+| 20px | 500 | 1.3 | -0.3px |
+| 20px | 400 | 1.3 | 0 |
+| 18px | 400 | 1.5 | 0 |
+| 16px | 400 | 1.5 | -0.8px |
+| 14px | 400 | 1.43 | 0 |
+| 14px | 500 | 1.43 | 0 |
+| 14px | 500 | 1.43 | 0.35px |
+| 12px | 400 | 1.5 | 0 |
+| 14px | 600 | 1.0 | 0 |
+| 13px | 400 | 1.6 | 0 |
 
-### Decorative Depth
-- **Atmospheric section glows** — six accent colours each with a paired glow token (orange, yellow, blue, green, red, plus a deep slate for "everything in your context"). Each section opens with a single radial wash anchored at the top edge of the section, falling off to canvas black within ~600px vertical distance. Never two glows in the same section.
-- **Email card insets** — the "Beyond experience" mockup band lifts a single white email card off the black canvas, giving it the only true light-on-dark contrast in the system. The card uses no shadow; the contrast itself is the elevation.
-- **Code window traffic lights** — `{component.code-window}` shells include a row of three coloured dots (red `{colors.accent-red}`, yellow `{colors.accent-yellow}`, green `{colors.accent-green}`) at the top — the only place all three semantic colours appear together as solid surfaces.
+## 版面與元件結構
 
-## Shapes
+此參考可先實作：郵件活動資料列，包含已送達、等待中與退信狀態。
 
-### Border Radius Scale
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Hero stripe, full-bleed bands, footer. |
-| `{rounded.xs}` | 4px | Inline tags inside code wells. |
-| `{rounded.sm}` | 6px | Code tabs, mid-size chips. |
-| `{rounded.md}` | 8px | Buttons, form inputs. |
-| `{rounded.lg}` | 12px | Feature cards, pricing tiers, code wells, email mockups. |
-| `{rounded.xl}` | 16px | Larger feature panels. |
-| `{rounded.full}` | 9999px | Pills, status dots, contributor avatars. |
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Photography Geometry
-- The system uses almost no photography. Visual interest comes from typography + atmospheric glows + code wells + the white email-card insets.
-- When portraits appear (testimonial avatars), they are circular (`{rounded.full}`) at 32px, sitting inline with body copy.
-- Email mockup cards run at 4:5 portrait aspect with `{rounded.lg}` corners.
+## 操作與狀態
 
-## Components
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Buttons
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**`button-primary`** — white CTA
-- Background `{colors.primary}`, label `{colors.primary-on}`, type `{typography.button-md}`, padding `8px 16px`, `rounded: {rounded.md}`, height 36px.
-- The brightest pixel on the canvas. Used for "Get started", "Sign up", "Try Resend".
-- Pressed state lives in `button-primary-pressed` (background `{colors.surface-light}`).
-
-**`button-ghost`** — translucent CTA
-- Background `{colors.surface-elevated}`, label `{colors.ink}`, 1px `{colors.hairline-strong}`, type `{typography.button-md}`, `rounded: {rounded.md}`, height 36px.
-- Equal-weight secondary action paired with `{component.button-primary}`.
-
-**`button-outline`** — outlined CTA
-- Background `{colors.canvas}`, label `{colors.ink}`, 1px `{colors.hairline-strong}`, type `{typography.button-md}`, `rounded: {rounded.md}`, height 36px.
-- Tertiary action; appears on its own next to inline links.
-
-### Cards & Containers
-
-**`hero-stripe`** — full-bleed hero
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.display-xxl}` for the headline, padding `96px 32px`, `rounded: {rounded.none}`.
-- Used only on the home page hero band; carries the 96px Domaine Display headline and a single `{component.button-primary}` CTA. No photography, no atmospheric glow inside the hero itself — the glow appears on the section that follows.
-
-**`feature-card`** — feature highlight card
-- Background `{colors.surface-card}`, text `{colors.ink}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}` (32px).
-- Used in the home grid: "Despite emails using React", "So beyond editing", etc. No outline by default — relies on canvas black contrast.
-
-**`feature-card-bordered`** — outlined feature card
-- Background `{colors.surface-card}`, text `{colors.ink}`, 1px `{colors.hairline-strong}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}`.
-- Used when feature cards sit close together and need explicit separation.
-
-**`pricing-tier`** — pricing tier card
-- Background `{colors.surface-card}`, text `{colors.ink}`, 1px `{colors.hairline-strong}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}` (32px).
-- Tier name in `{typography.heading-md}` + price in `{typography.display-lg}` (ABC Favorit, 56px).
-
-**`pricing-tier-featured`** — recommended tier
-- Background `{colors.surface-elevated}`, text `{colors.ink}`, 1px `{colors.hairline-strong}`, type `{typography.body-md}`, `rounded: {rounded.lg}`, padding `{spacing.xxl}`.
-- Centre tier elevated by surface luminance, not by colour.
-
-**`code-window`** — code well
-- Background `{colors.surface-deep}`, text `{colors.body}`, type `{typography.code-md}`, 1px `{colors.hairline-strong}`, `rounded: {rounded.lg}`, padding `{spacing.xl}` (24px).
-- Includes a 3-dot traffic-light row at top using `{colors.accent-red}` / `{colors.accent-yellow}` / `{colors.accent-green}` for chrome, plus a tab strip below it.
-
-**`code-tab`** — code language tab
-- Background `{colors.surface-card}`, text `{colors.charcoal}`, type `{typography.code-md}`, `rounded: {rounded.sm}`, padding `6px 12px`.
-- Active tab bumps text to `{colors.ink}` and adds a subtle `{colors.hairline-strong}` underline.
-
-**`email-mockup`** — email-card inset
-- Background `{colors.surface-card}` (or the rare `#ffffff` when rendered as a light-island inset), text `{colors.ink}` (or `{colors.on-light}` for white insets), type `{typography.body-md}`, `rounded: {rounded.lg}`, padding 0.
-- Used in the "Beyond experience" band to demonstrate rendered email output.
-
-### Inputs & Forms
-
-**`text-input`** — default input
-- Background `{colors.surface-card}`, text `{colors.ink}`, type `{typography.body-sm}`, 1px `{colors.hairline-strong}`, `rounded: {rounded.md}`, padding `10px 14px`, height 40px.
-- Sign-up and waitlist email fields. Focus state thickens the border to `{colors.ink}` (no separate ring colour).
-
-### Navigation
-
-**`nav-bar`** — top nav (desktop)
-- Background `{colors.canvas}`, text `{colors.body}`, type `{typography.button-sm}`, height 64px, single hairline `{colors.hairline}` bottom border.
-- Left: wordmark logo. Centre: top-level nav ("Features", "Pricing", "Docs", "Customers"). Right: "Sign in" link + `{component.button-primary}`.
-
-**`nav-bar`** (mobile)
-- Same height 64px, collapses centre nav into a hamburger icon. Logo stays left, sign-in CTA stays right.
-
-**`sub-nav-pill`** — pill-style sub-nav
-- Pill chips set in a horizontal row above content (e.g. on the customers index), `{component.sub-nav-pill}` styling.
-
-### Signature Components
-
-**`badge-pill`** — neutral pill
-- Background `{colors.surface-elevated}`, text `{colors.body}`, type `{typography.caption}`, `rounded: {rounded.full}`, padding `4px 10px`.
-- Inline tags ("New", "Beta", "v3.0") inside hero copy and customer story headers.
-
-**`status-dot`** — status indicator
-- Background `{colors.accent-green}`, `rounded: {rounded.full}`, 8px square.
-- Inline indicator next to "Status: Operational" in the footer or system status references.
-
-**`contributor-avatar`** — testimonial avatar
-- Background `{colors.surface-card}` placeholder, `rounded: {rounded.full}`, 32×32px.
-- Used inline with customer testimonials.
-
-**`footer`** — global footer
-- Background `{colors.canvas}`, text `{colors.charcoal}`, type `{typography.body-sm}`, `rounded: {rounded.none}`, padding `64px 32px`.
-- Multi-column quick-links grid above a single-line copyright row separated by `{colors.divider-soft}`.
-
-## Do's and Don'ts
-
-### Do
-- Use `{colors.canvas}` (true black) as the default page background. Every public page lives here.
-- Reserve `{component.button-primary}` (white pill) as the only solid bright surface. One per viewport at most.
-- Set hero headlines in **Domaine Display** at 76–96px with `lineHeight: 1.0` and `ss01 / ss04 / ss11` features engaged.
-- Use **ABC Favorit** for marketing body, **Inter** for UI labels, **Geist Mono** for code. Keep the lanes strict.
-- Build elevation from translucent-white hairlines, not drop shadows.
-- Use `{colors.accent-*-glow}` tokens as low-opacity radial atmospheric washes — never as solid surfaces.
-- Set buttons and inputs to `{rounded.md}` (8px); cards and code wells to `{rounded.lg}` (12px); pills and avatars to `{rounded.full}`.
-- Use the white email-mockup inset sparingly — it's the only deliberately-light surface and should feel like a print pull-quote.
-
-### Don't
-- Don't use a near-black canvas. The brand sits on `#000000`, not `#0a0a0a`.
-- Don't apply solid colour to atmospheric accent tokens. `{colors.accent-orange}` is for inline highlights only — its glow form is for backdrops.
-- Don't add drop shadows to feature cards or code wells. Translucent white borders carry depth on this canvas.
-- Don't bump body weight to 600 for emphasis. Use family change (Inter → ABC Favorit → Domaine Display) instead.
-- Don't render code outside `{component.code-window}` — even small inline code uses Geist Mono and a `{colors.surface-card}` background.
-- Don't loosen Domaine Display `lineHeight` past 1.0. Tight stacking is structural to the brand.
-- Don't introduce a secondary brand accent. White is the brand on black — accents are atmospheric only.
-- Don't bring photography front-and-centre. The brand reads as type-and-code, not photography-led.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Desktop XL | ≥ 1440px | Full max-width 1200 body, 3-up feature grid, side-by-side code-story splits. |
-| Desktop | 1280–1439px | Container shrinks; xl side padding. |
-| Tablet Large | 1024–1279px | Feature grid stays 3-up, code-story remains 2-up. |
-| Tablet | 768–1023px | Feature grid 2-up, code-story stacks (narrative on top), pricing stacks vertically. |
-| Mobile Large | 426–767px | Feature grid 1-up; nav collapses to hamburger; hero `{typography.display-xxl}` clamps to 56px. |
-| Mobile | ≤ 425px | All grids 1-up, hero clamps to 44px, section padding `{spacing.section}` collapses to 64px. |
-
-### Touch Targets
-- All buttons ship at minimum 36px tall on desktop, scaling to 44px on mobile via padding adjustment. WCAG AAA met on mobile.
-- `{component.text-input}` is 40px tall — comfortable but not large. Mobile scales to 48px via padding.
-- `{component.sub-nav-pill}` stays at 36px on desktop, 40px on mobile.
-
-### Collapsing Strategy
-- Top-level nav collapses to hamburger at < 1024px; the wordmark and `{component.button-primary}` stay anchored.
-- Hero `{typography.display-xxl}` clamps: 96px → 76px → 56px → 44px across the breakpoint ladder.
-- Pricing 3-up stacks vertically at < 1024px with the featured tier remaining centre-stacked.
-- Code-story splits switch from side-by-side to stacked at < 1024px, code well always second.
-- Atmospheric glows scale with section width but maintain the same opacity — they fade naturally at small viewports.
-
-### Image Behavior
-- Email mockup cards reflow at 1:1 aspect on mobile to remain readable.
-- Atmospheric glows are CSS gradients — no asset cost, no breakpoint variation.
-- Customer testimonial avatars stay 32px circular regardless of breakpoint.
-
-## Known Gaps
-
-- Pressed/active visual states are documented only for `button-primary-pressed`; other components rely on the default focus-ring (browser default) for interactive feedback.
-- Logged-in dashboard surfaces (API keys, sending logs, audience management) are out of scope; only the public marketing canvas is documented.
-- Email-template editor surfaces (a key product feature) are not extracted — those live behind authentication.
-- The atmospheric glow rendering uses CSS radial gradients; exact stops and angles vary per section and are not standardised as tokens — render per section-specific design judgment.
+## 圖片、動態與無障礙
+
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
+
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
+
+## 來源中的技術值補充
+
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
+
+- `#000000`
+- `#fcfdff`
+- `#f1f7fe`
+- `#0a0a0c`
+- `#101012`
+- `#06060a`
+- `rgba(255,255,255,0.06)`
+- `rgba(255,255,255,0.14)`
+- `rgba(255,255,255,0.04)`
+- `rgba(252,253,255,0.86)`
+- `rgba(252,253,255,0.7)`
+- `#a1a4a5`
+- `#888e90`
+- `#464a4d`
+- `rgba(0,0,51,0.7)`
+- `#ff801f`
+- `rgba(255,89,0,0.22)`
+- `#ffc53d`
+- `#3b9eff`
+- `rgba(0,117,255,0.34)`
+- `#11ff99`
+- `rgba(34,255,153,0.18)`
+- `#ff2047`
+- `rgba(255,32,71,0.34)`
+- `0.35px`
+- `8px 16px`
+- `96px 32px`
+- `6px 12px`
+- `#ffffff`
+- `10px 14px`
+- `4px 10px`
+- `64px 32px`
+- `#0a0a0a`
+
+## 日期限定首頁觀察
+
+首頁採黑色背景、Domaine 襯線主標與 Favorit 內文，以開發者郵件服務作為主題。保留 Forward 活動提示、12 個實際客戶商標、13 種語言及 9 個 Node 框架導覽。完整內容包含 SDK 與程式碼、測試與 webhook、編輯器初始白色區域、聯絡人管理、群發分析、React 郵件預覽、9 張送達功能卡、客戶引言、儀表板及頁尾。
+
+2026-10-12 補充檢查完整涵蓋桌面及窄版各 17 張實際視窗，共 34 張，並檢視 15 張原日期比較圖與 1 張新官網頂部對照。所有觀察到的 DOM 圖片與字型載入，未觀察到水平溢位；來源桌面日期仍為 2026-10-10，新桌面觀察逾時，未新增完整官網巡覽。
+
+本機地面與光束原圖已載入，但原日期官網曾有待載入狀態。窄版頁首採明確記錄的可讀性修正，與來源 120px 模糊帶不同；方塊、4 支影片、跑馬燈與程式碼區內部捲動仍有差異。新窄版官網整合文案為今天上午，預覽保留原日期的這個週末；不能據此宣稱與最新整頁完全一致。
+
+## 已知差異與驗證範圍
+
+- 10 月 10 日官網桌面來源的地面及光束圖片尚未就緒，WebGL 方塊為空白；保存的公開原始背景可在本機載入。10 月 12 日新桌面來源拍攝逾時，因此桌面 WebGL 與最新來源一致性尚未驗證。
+- 窄版頁首採已記錄的 CSS 繪製穩定修正：提高子元素層級並移除 before 模糊層。來源分段截圖有 120px 模糊帶，修正後頁首可讀，屬明確視覺差異。
+- 窄版方塊與 4 支產品影片、客戶引言跑馬燈、狀態脈動及示範動態識別值、時間固定或呈現不同畫格；一張桌面比較中的 React 程式碼面板內部捲動也不同。未宣稱動畫、畫格及狀態一致。
+- 導覽下拉與行動版選單、SDK 及框架切換、複製控制、測試模式與編輯器、React 檔案、檢視及主題分頁、工具提示與儀表板分頁皆保留初始擷取狀態，完整行為及鍵盤焦點尚未驗收。
+- 登入、寄信、電子報、帳戶服務、實體手機及其他寬度不在本次比對範圍內；原始比對也未涵蓋最終部署。輸入欄唯讀，服務連結導向官網。
+- 新官網窄版 DOM 的整合文案為「今天上午」，目前預覽保留原先「這個週末」。新窄版頂部方塊角度不同，但主視覺文字與版面相合。新桌面觀察逾時，沒有新的桌面來源截圖或整頁巡覽；原桌面來源日期仍為 2026-10-10。
+- 本次補充的新官網觀察僅涵蓋頂部視窗及完整 DOM。完整視覺比較仍依原日期官網證據，未宣稱與最新整頁完全一致；accepted=false。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Resend-inspired interface. Implement this working page: An email delivery dashboard with a compact activity table, message detail, and a code example. Use bright text and subtle dark borders; status chips must include words and timestamps must have an explicit timezone.
+先閱讀隨附的 DESIGN.md，以 Resend 的設計語言作為介面參考。請完成以下可操作頁面：製作郵件傳送儀表板，包含精簡活動表格、郵件詳細內容與程式碼範例。使用明亮文字與細緻深色邊框，狀態標籤須有文字，時間須標示時區。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Resend-inspired interface. Build an email activity row with delivered, pending, and bounced states. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Resend 的設計語言作為介面參考。請製作郵件活動資料列，包含已送達、等待中與退信狀態。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Resend-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An email delivery dashboard with a compact activity table, message detail, and a code example. Use bright text and subtle dark borders; status chips must include words and timestamps must have an explicit timezone.
+先閱讀隨附的 DESIGN.md，以 Resend 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作郵件傳送儀表板，包含精簡活動表格、郵件詳細內容與程式碼範例。使用明亮文字與細緻深色邊框，狀態標籤須有文字，時間須標示時區。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

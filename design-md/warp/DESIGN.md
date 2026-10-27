@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Warp-Inspired-design-analysis
-description: An inspired interpretation of Warp's design language — an agentic terminal-and-development-environment brand whose surface is a warm near-charcoal canvas (a tint warmer than pure black), broken only by clean Inter typography, the occasional Instrument Serif italic moment, and dense terminal-mockup imagery; CTAs are unusually understated, with shape geometry running tighter than most marketing sites.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Warp"
+description: "暖灰終端機與區塊式指令，兼顧工具感與閱讀。"
 
 colors:
   primary: "#f7f5f0"
@@ -211,7 +212,6 @@ components:
     typography: "{typography.body-sm}"
     padding: "{spacing.3xl} {spacing.xl}"
 
-  # ─── Examples (illustrative) — auto-derived; resolve any TO_FILL markers below ───
   ex-pricing-tier:
     description: "Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface."
     backgroundColor: "{colors.canvas-soft}"
@@ -271,303 +271,162 @@ components:
     rounded: "{rounded.md}"
     padding: "{spacing.sm} {spacing.md}"
     typography: "{typography.body-sm}"
-
 ---
 
+# Warp 延伸設計規格
 
-## Overview
-
-Warp is an "agentic development environment" — a terminal application that wraps an AI agent — and its marketing site mirrors the product's posture: a single dark band running the entire page, warmer than pure black (`{colors.canvas}` `#2b2622` carries a hint of brown-beige from the brand's oklch-defined warmth value), with copy set almost entirely in Inter. The page reads more like a developer's reading-mode editor than a marketing surface.
-
-The decoration is restrained. Two terminal screenshots open the hero (split between the two main product modes — agent + terminal). A partner-logo strip (Anthropic / OpenAI / Google / Stanford) sits below the hero on a slightly warmer tile surface. A single testimonial card with a portrait photograph. A press-coverage list. Then the page closes with download tiles for Mac / Linux / Windows. There is no gradient, no atmospheric backdrop, no illustration system.
-
-Type is the second decisive voice. Hero display sits at 64 px Inter weight 400 with `-1.6px` tracking — restrained for a hero, deliberately quiet. The brand carries DM Mono as its monospace face for code blocks, and Instrument Serif italics occasionally appear for editorial moments. Body text is 16 px Inter at line-height 1.5, very readable.
-
-**Key Characteristics:**
-- A single primary "color" — really an off-white `{colors.primary}` (`#f7f5f0`) — that doubles as text on canvas and as the button-primary fill. There is no chromatic brand accent.
-- Warm dark canvas (`{colors.canvas}` `#2b2622`) is the only page surface. The brand's defining tone is the brown-warmth, not pure black.
-- Extremely tight button radii — 3 / 4 px (1 / 2× the brand's `{rounded.md}` 4 px base) — the brand never uses generous pill shapes for CTAs. Only icon containers use `{rounded.full}`.
-- Inter sans + DM Mono mono is the canonical pairing. Instrument Serif appears as a third editorial face for occasional italics.
-- Terminal-mockup imagery is the brand's only consistent decorative system — no gradients, no atmospheric overlays.
-- A subtle warm tint runs through every neutral; even body text and dividers carry a hint of warmth rather than neutral gray.
-
-## Colors
-
-### Brand & Accent
-- **Off White Primary** (`{colors.primary}` — `#f7f5f0`): The brand's "primary" is a warm off-white. Used as button-primary fill, as default text on canvas, as the wordmark color. There is no chromatic brand accent — the off-white IS the brand's distinguishing tone.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#2b2622`): The warm dark page background. Resolved from `oklch(22.0% 0.004 84.6)`. Slightly browner than pure black, slightly warmer than a neutral gray — the warmth IS the brand's identity.
-- **Canvas Soft** (`{colors.canvas-soft}` — `#383330`): A lighter warm-dark fill used for cards, mockup chrome, and partner-logo tiles.
-- **Hairline** (`{colors.hairline}` — `#3f3a36`): 1 px solid divider on dark surfaces.
-
-### Text
-- **Ink** (`{colors.ink}` — `#f7f5f0`): Default text on canvas — same off-white as the primary, intentionally unified.
-- **Body Strong** (`{colors.body-strong}` — `#dad2c1`): Mid-emphasis body text.
-- **Body** (`{colors.body}` — `#c9c0ad`): Secondary body text — captions, supporting copy, press-coverage rows.
-- **Mute** (`{colors.mute}` — `#aea69c`): Lowest-priority text — timestamps, fine print, footer secondary lines. Resolved from `oklch(71.5% 0.008 84.6)`.
-
-### Semantic
-The brand doesn't surface a separate error / warning / success palette in its marketing pages. Validation cues come from the unified off-white system; in-product semantic colors live in the terminal application proper.
-
-## Typography
-
-### Font Family
-Three faces ladder the system:
-1. **Inter** for every display, body, button, link, and label role. Weights 400 / 500 are the working pair. Used with the brand's "Inter Fallback" custom face as the metric-compatible system fallback.
-2. **DM Mono** for terminal mockups, command snippets, and code blocks. Weight 400 only. Loaded as `--font-dm-mono`.
-3. **Instrument Serif** for occasional editorial italic moments — rare on the marketing surface, but documented as a third face for emphasised tagline-style phrases. **Abel** is also loaded as a fourth fallback for headline emphasis.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 64px | 400 | 70.4px | -1.6px | Hero headline ("Warp is the agentic development environment"). |
-| `{typography.display-lg}` | 48px | 400 | 52.8px | -1.2px | Section headlines. |
-| `{typography.display-md}` | 32px | 500 | 40px | -0.8px | Sub-section displays. |
-| `{typography.display-sm}` | 24px | 500 | 32px | -0.4px | Card titles and lead emphasis. |
-| `{typography.display-serif}` | 48px | 400 | 52px | -0.5px | Instrument Serif italic editorial moments. |
-| `{typography.body-lg}` | 18px | 400 | 28px | 0 | Lead paragraphs. |
-| `{typography.body-md}` | 16px | 400 | 24px | 0 | Default body. |
-| `{typography.body-md-strong}` | 16px | 500 | 24px | 0 | Bold inline body. |
-| `{typography.body-sm}` | 14px | 400 | 20px | 0 | Secondary body. |
-| `{typography.body-sm-strong}` | 14px | 500 | 20px | 0 | Nav link / button labels. |
-| `{typography.caption}` | 12px | 400 | 16px | 0 | Captions, fine print. |
-| `{typography.code}` | 13px | 400 | 18px | 0 | Terminal mockup body. |
-| `{typography.code-md}` | 14px | 400 | 20px | 0 | Inline command snippets. |
-| `{typography.button-md}` | 14px | 500 | 20px | 0 | Button labels. |
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-### Principles
-- **Hero display at weight 400** — the brand reads as quietly confident, not as a billboard.
-- **Negative tracking is part of the voice.** `-1.6 px` at 64 px hero, scaling down through display levels.
-- **Inter for narrative, DM Mono for technical.** Strict role separation.
+## 來源與規格層次
 
-### Note on Font Substitutes
-All three faces are open or freely-loadable:
-- **Inter** — load directly from Google Fonts or Vercel-hosted CDN.
-- **DM Mono** — open-source on Google Fonts.
-- **Instrument Serif** — open-source on Google Fonts.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## Layout
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`60012ba6ceadd586b7496ce5c6b875a2b9278a7b936884d94808ca49c3399d26`。
+- 目前首頁參考日期：2026-10-12。
+- 目前公開來源：https://www.warp.dev/。
+- 目前預覽：`official-drafts/warp.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Spacing System
-- **Base unit**: 4 px (with occasional 10 px and 6 px values for button padding).
-- **Tokens**: `{spacing.xxs}` 2 px · `{spacing.xs}` 4 px · `{spacing.sm}` 8 px · `{spacing.md}` 10 px · `{spacing.lg}` 16 px · `{spacing.xl}` 24 px · `{spacing.2xl}` 32 px · `{spacing.3xl}` 48 px · `{spacing.4xl}` 64 px · `{spacing.5xl}` 96 px.
-- **Section padding**: hero / content bands use `{spacing.5xl}` 96 px on desktop.
-- **Card interior**: cards sit at `{spacing.xl}` 24 px.
+## 整體視覺方向
 
-### Grid & Container
-- Marketing content centres at roughly 1200 px width.
-- Hero: 2-column at desktop (split between two terminal screenshots), stacks at mobile.
-- Partner logos: 5-up wrapping flex row.
-- Download tiles: 3-up at desktop (Mac / Linux / Windows), 1-up at mobile.
+暖灰終端機與區塊式指令，兼顧工具感與閱讀。
 
-### Responsive Strategy
+製作終端機工作區概念頁，包含分開的指令區塊、易讀輸出與精簡歷史側欄。依分析使用暖色中性色，每個區塊可獨立複製，不加入多餘裝飾。
 
-#### Breakpoints
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | Hero stacks; 1-up grids; nav hamburger. |
-| Tablet | 768–1023px | 2-up grids. |
-| Desktop | ≥ 1024px | Full hero split; 3-up download tiles. |
+## 色彩、字型與繁體中文排版
 
-#### Touch Targets
-Buttons render at ~36 px tall (8 px vertical padding + 20 px line-height). Mobile inflates touch area through additional padding to meet WCAG 44 × 44 px floor.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-#### Collapsing Strategy
-- Nav: full link row + Sign in / Download right cluster at desktop. Hamburger at mobile.
-- Hero terminal-mockup split: stacks vertically at mobile.
-- Press / job rows: full-width single column; stay legible at all widths.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-#### Image Behavior
-- **Terminal mockups**: rendered as dark cards with the actual terminal UI inside (warm canvas + colored syntax). Aspect ratio ~3:2.
-- **Partner logos**: monochrome SVGs on dark tile cards.
-- **Testimonial portraits**: 1:1 square crop inside `{rounded.md}` card chrome.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-## Elevation & Depth
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 64px | 400 | 70.4px | -1.6px |
+| 48px | 400 | 52.8px | -1.2px |
+| 32px | 500 | 40px | -0.8px |
+| 24px | 500 | 32px | -0.4px |
+| 48px | 400 | 52px | -0.5px |
+| 18px | 400 | 28px | 0 |
+| 16px | 400 | 24px | 0 |
+| 16px | 500 | 24px | 0 |
+| 14px | 400 | 20px | 0 |
+| 14px | 500 | 20px | 0 |
+| 12px | 400 | 16px | 0 |
+| 13px | 400 | 18px | 0 |
+| 14px | 400 | 20px | 0 |
+| 14px | 500 | 20px | 0 |
 
-| Level | Treatment | Use |
-|---|---|---|
-| Level 0 — Flat | No shadow, no border. | Default for hero band. |
-| Level 1 — Hairline | 1 px solid `{colors.hairline}` border on `{colors.canvas-soft}`. | Default card chrome. |
-| Level 2 — Inset Card | Canvas-soft fill against canvas background with 1 px hairline. | Mockup cards, download tiles, testimonial cards. |
+## 版面與元件結構
 
-The brand uses surface-contrast and hairline borders for elevation; soft drop-shadows do not appear in the marketing surface.
+此參考可先實作：指令歷史區塊，包含輸入、輸出、時間與複製回饋。
 
-## Shapes
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Border Radius Scale
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Full-bleed bands. |
-| `{rounded.xxs}` | 1px | Tightest in-text indicator. |
-| `{rounded.xs}` | 2px | Inline very-small chips. |
-| `{rounded.sm}` | 3px | Default button radius — extremely tight. |
-| `{rounded.md}` | 4px | Card chrome (the brand's `--radius` base). |
-| `{rounded.lg}` | 6px | Slightly larger cards. |
-| `{rounded.pill}` | 9999px | Icon containers, status pills. |
+## 操作與狀態
 
-### Photography Geometry
-- Terminal mockups: ~3:2 inside `{rounded.md}` card chrome.
-- Partner logos: monochrome SVGs at consistent 24 px height inside tile cards.
-- Testimonial portraits: 1:1 square inside `{rounded.md}`.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-## Components
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Buttons
+## 圖片、動態與無障礙
 
-**`button-primary`** — the off-white CTA on dark canvas.
-- Background `{colors.primary}` (off-white), text `{colors.on-primary}` (warm dark), label `{typography.button-md}`, padding `{spacing.sm} {spacing.lg}`, shape `{rounded.sm}` 3 px. Tight.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`button-secondary-ghost`** — the ghost-style secondary used for nav and tertiary actions.
-- Background `{colors.canvas}`, text `{colors.ink}`, no border, same typography / shape.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`button-icon-circular`** — the circular icon container.
-- Background `{colors.canvas}`, ink icon, shape `{rounded.full}`. Used for nav controls (search, theme).
+## 來源中的技術值補充
 
-### Cards & Containers
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`card-content`** — the default content card on canvas-soft.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, 1 px solid `{colors.hairline}`, padding `{spacing.xl}`, shape `{rounded.md}`.
+- `#2b2622`
+- `-1.6px`
+- `#f7f5f0`
+- `oklch(22.0% 0.004 84.6)`
+- `#383330`
+- `#3f3a36`
+- `#dad2c1`
+- `#c9c0ad`
+- `#aea69c`
+- `oklch(71.5% 0.008 84.6)`
 
-**`card-mockup`** — the terminal-screenshot mockup card.
-- Same chrome as `card-content` but body in `{typography.code}` (DM Mono) when text appears inside.
+## 日期限定首頁觀察
 
-**`download-tile`** — the Mac / Linux / Windows download tile.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, hairline border, padding `{spacing.xl}`, shape `{rounded.md}`. Hosts a platform icon + label + download CTA.
+新版首頁以程式碼定義軟體工廠為主題，使用白色與淡紫紙張背景、細黑線、技術等寬字型、74px 桌面邊距、56px 兩行主標、皇家藍 #2818F4 與淡黃色預約示範操作。主視覺包含 8×28 任務格、17 個品牌、8 個設定分類與 23 行 factory.yaml，接續 6 項 SDLC、3 個品質指標、藍色成本案例、企業故事、4 層開放架構、治理圖表、3 項產品、9 項常見問題與完整 2026 頁尾。
 
-**`partner-logo-tile`** — the canvas-soft tile hosting a partner logo.
-- Background `{colors.canvas-soft}`, monochrome logo SVG inside, padding `{spacing.lg}`, shape `{rounded.md}`.
+2026-10-12 補充檢查涵蓋桌面 14 張、窄版 17 張實際視窗，共 31 張，並檢視 13 張原日期比較圖及 2 張新官網頂部對照。所有觀察到的 DOM 圖片與字型已載入，未觀察到水平溢位。96%、1.00X 與 +3.7 保留為來源畫面資料，不擴充為新的效能承諾。
 
-**`testimonial-card`** — the single quote-style card with a portrait.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, padding `{spacing.xl}`, shape `{rounded.md}`. Portrait 1:1 + body in `{typography.body-md}`.
+每個 PR 成本圖使用原始官網實際視窗的獨立區域擷取，沒有多加外框；電腦操作區僅是來源示意。任務狀態、商標、顯示透明度與示意瀏覽器狀態仍不同。新官網頂部主標、響應式版面及頁高相合，但不代表時間、服務或最新整頁一致。
 
-**`press-row`** — the press-coverage list item.
-- Background `{colors.canvas}` (no fill — sits on the canvas band), 1 px solid bottom border `{colors.hairline}`, body in `{typography.body-md}`, padding `{spacing.lg}` 0.
+## 已知差異與驗證範圍
 
-**`job-row`** — the "Join our team" list item (single row per open role).
-- Background `{colors.canvas}`, 1 px solid bottom border, body in `{typography.body-md-strong}`, padding `{spacing.lg}` 0.
-
-### Inputs & Forms
-
-**`text-input`** — the dark-canvas text input.
-- Background `{colors.canvas-soft}`, text `{colors.ink}`, 1 px solid `{colors.hairline}`, body in `{typography.body-sm}`, padding `{spacing.sm} {spacing.md}`, shape `{rounded.sm}`.
-
-### Navigation
-
-**`nav-bar`** — the sticky top nav.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`.
-
-**`nav-link`** — link items in nav.
-- Background `{colors.canvas}`, text `{colors.ink}`, body in `{typography.body-sm-strong}`, padding `{spacing.xs} {spacing.md}`, shape `{rounded.sm}`.
-
-**`footer`** — the footer band.
-- Background `{colors.canvas}`, text `{colors.body}`, padding `{spacing.3xl} {spacing.xl}`. Body in `{typography.body-sm}`.
-
-### Signature Components
-
-**`hero-band`** — the dark hero band hosting the 64-px Inter headline.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.5xl} {spacing.xl}`. Headline `{typography.display-xl}` (64 px / 400 / `-1.6 px`). Below: a 2-column terminal-mockup split.
-
-**`content-band`** — the standard content band.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.5xl} {spacing.xl}`. Section headline `{typography.display-md}`.
-
-### Examples (illustrative)
-
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
-
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
-
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
-
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
-
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
-
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
-
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
-
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
-
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` off-white for primary CTA pills and default text. There is no chromatic accent.
-- Use tight `{rounded.sm}` 3 px or `{rounded.md}` 4 px button radii. The brand never uses generous pills for CTAs.
-- Set hero headlines in Inter weight 400 with `-1.6 px` tracking. The brand reads as quietly confident.
-- Pair Inter (sentence-case) with DM Mono (code blocks, terminal mockups).
-- Keep the warm-dark canvas tone — pure black breaks the brand's identity.
-
-### Don't
-- Don't introduce a chromatic brand accent. The off-white-on-warm-dark IS the brand's voice.
-- Don't render the hero headline in heavy weight (700+). The brand's display is intentionally light.
-- Don't use generous pill CTAs. The brand's button radius is 3-4 px, almost rectangular.
-- Don't replace the warm dark canvas with neutral gray or pure black. The warmth IS the brand.
-- Don't drop a soft drop-shadow on cards. Hairlines + surface contrast carry elevation.
+- 224 個任務格線狀態、PR 數、即時成員、商標跑馬燈位置、啟動文字與顯示透明度，會隨擷取動畫階段不同。校正版保留觀察到的靜態任務、成員與 CSS 動態；精確時間尚未驗收，官網窄版本身也截到部分標題淡入中的狀態。
+- 每個 PR 成本畫布採原日期官網桌面與窄版實際截圖裁切，具來源及獨立範圍紀錄；是靜態圖，沒有滑鼠移入、拖曳或即時重算。電腦操作故事為擷取示意，不是可用瀏覽器或業務表單。
+- 頁首已還原於 scrollY=0，捲動後顯示桌面藍色章節導覽；本機 64px 切換門檻未獨立確認為官網精確值，轉場位置尚未驗收。
+- 設定目錄分頁、資料夾展開、SDLC 切換、行動版選單、登入與開始使用面板、常見問題、作業系統切換、複製下載與音效控制，尚未實作或驗收為完整官方互動。公開目的地連結保留，未操作帳戶、送出表單、執行指令或下載安裝。
+- 新 Stitch 原生輸出僅為桌面。宣告的 2560×16384 截圖實際匯出為 2560×16383 PNG，未宣稱有新行動版輸出。供應者宣稱真實、即時 stdout 串流及 +3.7x 並非驗證；校正版保留實際觀察的 SDLC 圖及 +3.7。
+- 其他頁面、帳戶產品服務、真實手機與未測寬度不在本次比對範圍內，原始比對也未涵蓋正式部署。accepted=false，未宣稱全面官方一致。
+- 新官網桌面與窄版頂部的主標題、響應式版面及量測頁高與目前相同；工廠任務格線位置、執行與已發布數量、顯示時間可見不同，時間與服務一致性尚未驗收。
+- 本次補充的新官網觀察僅涵蓋頂部視窗及完整 DOM。完整視覺比較仍依原日期官網證據，未宣稱與最新整頁完全一致；accepted=false。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Warp-inspired interface. Implement this working page: A terminal workspace concept with separate command blocks, readable output, and a small command-history rail. Use the warm neutral palette from the analysis and make each block independently copyable without adding ornamental chrome.
+先閱讀隨附的 DESIGN.md，以 Warp 的設計語言作為介面參考。請完成以下可操作頁面：製作終端機工作區概念頁，包含分開的指令區塊、易讀輸出與精簡歷史側欄。依分析使用暖色中性色，每個區塊可獨立複製，不加入多餘裝飾。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Warp-inspired interface. Build a command history block with input, output, timestamp, and copy feedback. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Warp 的設計語言作為介面參考。請製作指令歷史區塊，包含輸入、輸出、時間與複製回饋。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Warp-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A terminal workspace concept with separate command blocks, readable output, and a small command-history rail. Use the warm neutral palette from the analysis and make each block independently copyable without adding ornamental chrome.
+先閱讀隨附的 DESIGN.md，以 Warp 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作終端機工作區概念頁，包含分開的指令區塊、易讀輸出與精簡歷史側欄。依分析使用暖色中性色，每個區塊可獨立複製，不加入多餘裝飾。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

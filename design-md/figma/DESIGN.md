@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Figma-design-analysis
-description: "A confident black-and-white editorial frame interrupted by oversized, hand-cut pastel color blocks. The marketing canvas is rigorously monochrome — figmaSans variable type, pure white surfaces, pure black ink, pill-shaped CTAs — while each story section drops the page into a saturated lime, lavender, cream, mint, or pink panel that reads like a sticky note placed on a clean desk. The result is a design system that feels both technical and joyful — a tool for serious work, made by people who like color."
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Figma"
+description: "大膽色塊、俐落黑線與充滿活力的構圖。"
 
 colors:
   primary: "#000000"
@@ -270,346 +271,147 @@ components:
     padding: 64px 32px
 ---
 
-## Overview
-
-Figma's marketing canvas is, at the system level, an editor-clean black-and-white frame. The chrome — top nav, body type, footer, primary CTA — is monochrome. Headlines are oversized `{typography.display-xl}` set in `figmaSans` with aggressive negative tracking, body copy hovers around weight 320–340 of the same variable family, and small mono `{typography.eyebrow}` and `{typography.caption}` labels (figmaMono, all-caps, positive tracking) act as section markers. Every CTA is a pill — `{rounded.pill}` — and the primary action across the entire site is the same black `{components.button-primary}` paired with the same white `{components.button-secondary}`.
-
-What makes the design unique is what happens **between** those monochrome bookends: the page repeatedly drops into oversized pastel **color-block sections** — lime, lavender, cream, mint, pink, coral, and a deep navy — that span the full content width with `{rounded.lg}` corners and `{spacing.xxl}` interior padding. These blocks are where the storytelling lives. They aren't accents tucked into a card; they take over a whole viewport's worth of vertical space, like a designer arranging giant sticky notes on a clean wall. FigJam is the most pastel-saturated, the home page rotates through the full set, and the pricing page ends with a lime FAQ panel — same vocabulary, different rhythm per route.
-
-This is a system built on contrast: the monochrome chrome makes the color blocks feel intentional rather than decorative, and the color blocks make the monochrome chrome feel like editorial paper rather than enterprise SaaS. Density is generous, line-heights are tight on display sizes, and the interface never reaches for shadows or gradients to do the work that color blocks and confident typography already do.
+# Figma 延伸設計規格
 
-**Key Characteristics:**
-- Monochrome system core: `{colors.primary}` (black) and `{colors.canvas}` (white) carry every CTA, every body line, every footer link.
-- Oversized pastel **color-block sections** (`{colors.block-lime}`, `{colors.block-lilac}`, `{colors.block-cream}`, `{colors.block-mint}`, `{colors.block-pink}`, `{colors.block-coral}`, `{colors.block-navy}`) define the narrative rhythm of every long-form page.
-- Pill is the only button shape — `{rounded.pill}` for text CTAs, `{rounded.full}` for icon buttons. No square buttons anywhere.
-- `figmaSans` variable typeface used at unusually fine weight increments (320, 330, 340, 450, 480, 540) — the type system reads as a single voice that flexes rather than a multi-weight family.
-- Tight negative letter-spacing on display sizes (-1.72px at 86px, -0.96px at 64px) creates a confident editorial cadence.
-- `figmaMono` reserved for category labels, eyebrows, and captions — always uppercase, positive tracking — to flag taxonomy without competing with display type.
-- Color-block page rhythm (home): white hero → marquee strip → white feature → lime systems block → navy ship-products block → coral developer block → white template grid → white footer.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Colors
+## 來源與規格層次
 
-> Source pages: figma.com (home), /design/, /figjam/brainstorming-tool/, /pricing/, /contact/.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Brand & Accent
-- **Black** ({colors.primary}): The system primary. Every primary CTA, every headline, every body line, the marquee strip, the inverse canvas of dark sections.
-- **White** ({colors.on-primary}): Inverse text on black surfaces; also the canvas color used as the foreground of secondary pill buttons (`{components.button-secondary}`).
-- **Magenta Promo** ({colors.accent-magenta}): A single saturated CTA pink reserved for promotional inline buttons — appears, for example, on the lilac "Save your spot" Release Notes banner. Use scarcely; it is not a section color.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`9eb326587031c076b40fc9a453eff5a6bcb46afca7df104f4a9ac8072dae12e0`。
+- 目前首頁參考日期：2026-10-12。
+- 目前公開來源：https://www.figma.com/。
+- 目前預覽：`official-drafts/figma.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Surface
-- **Canvas** ({colors.canvas}): Default page background and the body of every white card.
-- **Inverse Canvas** ({colors.inverse-canvas}): Footer, marquee strip, and a subset of "ship products"-style story sections.
-- **Surface Soft** ({colors.surface-soft}): Off-white tile background used for icon buttons, template cards, and feature illustration tiles when they sit on the white canvas.
-- **Hairline** ({colors.hairline}): 1px borders on form inputs, pricing cards, and table dividers.
-- **Hairline Soft** ({colors.hairline-soft}): Even subtler dividers — comparison-table row separators and footer column rules.
-- **Block Lime** ({colors.block-lime}): The signature **systems / FAQ / contact-form** color block. Recurs across home, pricing, contact.
-- **Block Lilac** ({colors.block-lilac}): Hero block on `/design/`; also the inline Release Notes promo banner.
-- **Block Cream** ({colors.block-cream}): Soft warm background — FigJam hero strip, template-grid section.
-- **Block Mint** ({colors.block-mint}): FigJam pastel section.
-- **Block Pink** ({colors.block-pink}): FigJam pastel section.
-- **Block Coral** ({colors.block-coral}): "Ship products" coral story block on home.
-- **Block Navy** ({colors.block-navy}): Deep indigo story block — only place dark surfaces appear above the footer.
+## 整體視覺方向
 
-### Text
-- **Ink** ({colors.ink}): All headline, body, and caption type on light surfaces. There is no softer mid-gray text role on marketing — body copy is always black at weight 320–340, and weight (not opacity) carries the hierarchy.
-- **Inverse Ink** ({colors.inverse-ink}): Type on inverse-canvas surfaces (footer, marquee strip, navy color block).
-- **On-Inverse Soft** ({colors.on-inverse-soft}): White used at ~16% opacity for circular icon-button surfaces against dark sections (token captures the base color; the translucency is applied at render time).
+大膽色塊、俐落黑線與充滿活力的構圖。
 
-### Semantic
-- **Success Green** ({colors.semantic-success}): Comparison-table checkmarks on pricing. Used as a glyph fill, not a surface.
-- **Overlay Scrim** ({colors.overlay-scrim}): Black used at ~60% opacity behind modal / video-overlay surfaces (token captures the base; opacity applied at render time).
+製作協作設計工作坊頁，包含寬闊主視覺、彩色專案卡片與小型共用畫布示範。輪廓清楚，以色彩區分工作空間，不把所有顏色塞進同一元件。
 
-## Typography
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Font Family
+## 色彩、字型與繁體中文排版
 
-- **figmaSans** — Figma's proprietary variable typeface; fallback stack `figmaSans Fallback, SF Pro Display, system-ui, helvetica`. Variable weight axis is exercised at unusually fine increments (320, 330, 340, 450, 480, 540, 700) — the design system reads as a single voice modulating rather than a stepped weight family.
-- **figmaMono** — Proprietary monospace; fallback `figmaMono Fallback, SF Mono, menlo`. Used exclusively for eyebrow labels and captions, always uppercase with positive letter-spacing.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-OpenType `kern` is enabled across every role.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Hierarchy
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 86px | 340 | 1.00 | -1.72px | Hero headlines (home, FigJam) |
-| `{typography.display-lg}` | 64px | 340 | 1.10 | -0.96px | Section opener headlines |
-| `{typography.headline}` | 26px | 540 | 1.35 | -0.26px | Story-block titles inside color blocks |
-| `{typography.subhead}` | 26px | 340 | 1.35 | -0.26px | Long-form intro paragraphs that sit at near-headline scale |
-| `{typography.card-title}` | 24px | 700 | 1.45 | 0 | Pricing-tier titles, feature card titles |
-| `{typography.body-lg}` | 20px | 330 | 1.40 | -0.14px | Lead body copy on hero, contact form labels |
-| `{typography.body}` | 18px | 320 | 1.45 | -0.26px | Default body |
-| `{typography.body-sm}` | 16px | 330 | 1.45 | -0.14px | Card body, footer link list |
-| `{typography.link}` | 20px | 480 | 1.40 | -0.10px | Inline link emphasis |
-| `{typography.button}` | 20px | 480 | 1.40 | -0.10px | All pill buttons, primary and secondary |
-| `{typography.eyebrow}` | 18px | 400 | 1.30 | 0.54px | figmaMono uppercase section eyebrows |
-| `{typography.caption}` | 12px | 400 | 1.00 | 0.60px | figmaMono uppercase captions, footer column heads |
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 86px | 340 | 1.00 | -1.72px |
+| 64px | 340 | 1.10 | -0.96px |
+| 26px | 540 | 1.35 | -0.26px |
+| 26px | 340 | 1.35 | -0.26px |
+| 24px | 700 | 1.45 | 0 |
+| 20px | 330 | 1.40 | -0.14px |
+| 18px | 320 | 1.45 | -0.26px |
+| 16px | 330 | 1.45 | -0.14px |
+| 20px | 480 | 1.40 | -0.10px |
+| 20px | 480 | 1.40 | -0.10px |
+| 18px | 400 | 1.30 | 0.54px |
+| 12px | 400 | 1.00 | 0.60px |
 
-### Principles
+## 版面與元件結構
 
-- **Weight, not size, carries hierarchy on body copy.** A 20px paragraph at weight 330 sits next to a 20px link at weight 480 — the eye reads emphasis without scale change.
-- **Negative letter-spacing scales with size.** Display-xl pulls -1.72px; subhead pulls only -0.26px. Body copy stays near-zero. The result is editorial-feeling display type without sacrificing readability at body size.
-- **Mono is taxonomy, not body.** figmaMono is reserved for eyebrows and captions — never used to set a paragraph.
-- **Tight line-heights on display, generous on body.** Display sizes run 1.00–1.10; body runs 1.40–1.45. The contrast reinforces that headlines are graphics and body copy is for reading.
+此參考可先實作：工作坊卡片，包含參與者縮寫、專案狀態與加入操作。
 
-### Note on Font Substitutes
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-If implementing without access to figmaSans / figmaMono, suitable open-source substitutes are **Inter** (or **Geist**) for the sans, and **JetBrains Mono** (or **Geist Mono**) for the mono. Inter at variable weights closely matches the fine-grained weight axis figmaSans uses; expect to manually adjust line-heights down by ~0.02 to compensate for Inter's slightly taller x-height.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-## Layout
+## 操作與狀態
 
-### Spacing System
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-- **Base unit**: 8px.
-- **Tokens (front matter)**: `{spacing.hair}` 1px · `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 96px.
-- Section interior padding: `{spacing.xxl}` (48px) on color-block sections.
-- Card interior padding: `{spacing.lg}` (24px) on pricing cards and template tiles.
-- Form input padding: `{spacing.sm}` 12px vertical · 14px horizontal.
-- Button padding: `{spacing.xs}` 8px vertical · `{spacing.lg}` 24px horizontal for pill buttons (the asymmetric `8px 18px 10px` extracted on `button-secondary` nudges the type optically inside the pill).
-- Universal rhythm constant: `{spacing.section}` (96px) — the vertical gap between major content sections holds across home, pricing, and FigJam pages.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Grid & Container
+## 圖片、動態與無障礙
 
-- Max content width sits around 1280px (one of the explicit breakpoints), with side gutters that scale from `{spacing.xxl}` on desktop down to `{spacing.lg}` on mobile.
-- Three- and four-column grids on the desktop pricing comparison and FigJam template galleries.
-- Color-block sections break the column grid — they span content width with full bleed inside the rounded `{rounded.lg}` corners, then place a single editorial column of headline + body inside.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Whitespace Philosophy
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-White space is used to make the color blocks feel deliberate. Between every colored panel and the next, the page returns to white canvas with `{spacing.section}` of breathing room. Inside a color block, the type itself is given generous side margins (often more than 1/4 of the block's width on each side) so the panel reads as a poster, not a wall of copy.
+## 來源中的技術值補充
 
-## Elevation & Depth
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow, no border | Default for color-block sections, inverse-canvas footer, hero |
-| 1 (hairline) | 1px `{colors.hairline}` border on `{colors.canvas}` | Pricing cards, form inputs, comparison table cells |
-| 2 (soft elevation) | Subtle drop shadow approx 0 4px 16px rgba(0,0,0,0.06) | Floating template tiles, dropdown menus |
-| 3 (modal) | Stronger shadow + `{colors.overlay-scrim}` behind | Video / image lightbox overlays |
+- `8px 18px 10px`
 
-Figma's marketing system is shadow-light by design — the color blocks substitute for traditional elevation. Where most SaaS sites use a shadowed white card to draw attention, Figma uses a saturated background panel. This makes the rare actual shadow (e.g., a floating template card hovering over a cream section) feel like an exception worth noticing.
+## 日期限定首頁觀察
 
-### Decorative Depth
+2026-10-12 UTC實際觀測匿名英文公開首頁，主視覺為全方位創作畫布、白色畫布與偏移堆疊的產品畫面／鳥類播放器。固定紫色Config India橫幅保留15 October免費線上活動的當時文案；活動定向不代表實際地理位置。其後依序為AI-native canvas與內建代理、產品開發工作區、精確設計工具拼貼、Figma Make程式脈絡、Code and Theory見證與Fortune500資料、完整CTA、社群範本與黑色多欄／窄版堆疊頁尾，包含Weave NEW與Motion NEW。保留FigmaSans及原始照片／介面素材；10個實際公開嵌入影片另保存原公開縮圖和無轉碼HLS影片容器轉封裝。桌面8340px與窄版9794px各12段，主代理實看全部6張完整對照圖，真1280×720與390×844、沒有漏段／本機缺圖／橫向溢出。窄版34個標題幾何差異0，桌面6項主要為進場位移，不能當成官方一致。
 
-- **Color-block sections** are the primary depth device. The change from white canvas to lime / lavender / cream is the section break.
-- **Sticky-note style component thumbnails** in FigJam — slightly off-axis pastel rectangles arranged like notes on a board — read as collage, not card-stack.
-- **Embedded product UI mocks** (Figma Design panels, FigJam canvas snippets) appear as flat compositions on color blocks; their internal shadows are subtle and stay within the mock.
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-## Shapes
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-### Border Radius Scale
+## 已知差異與驗證範圍
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 2px | Anchor / link decoration corners |
-| `{rounded.sm}` | 6px | Small chips, sub-nav tabs |
-| `{rounded.md}` | 8px | Form inputs, list items, image frames |
-| `{rounded.lg}` | 24px | Pricing cards, color-block sections, large image containers |
-| `{rounded.xl}` | 32px | Hero feature panels, oversized callouts |
-| `{rounded.pill}` | 50px | All text CTAs (primary, secondary, tab toggles) |
-| `{rounded.full}` | 9999px | Circular icon buttons, comparison-table checkmark glyphs |
+- 本次Stitch確實回傳MOBILE780×13438，原始生成稿獨立保留；生成稿的程式介面首屏、標籤與頁尾配置仍有來源不符，不作為官方一致的證據。校正版是獨立後續版本。
+- 10個Vimeo影片只來自官方實際嵌入的公開播放器網址，公開embed permission已記錄。縮圖為未修改原始圖片；影片為實際HLS所列畫質的無轉碼、僅視訊容器轉封裝，並非原MP4容器逐位元組不變。播放器設定、傳輸簽名、工作階段及原始回應全部留在私人工作資料，沒有使用登入、權限繞過或bypass token。
+- 影片與GIF影格、游標、圖片置換、Logo跑馬燈、滑入及模糊載入狀態未同步；桌面部分來源取樣為空白揭露中間幀，本機顯示完整工具拼貼與CTA。來源桌面50%計數器為中途影格，本機採來源可及文案、說明文字與窄版都確認的最終95%。因此仍有清楚可見差異。
+- 桌面標題量測有6項差異，其中五項約32px為來源初始進場位移，另範本標題約4.8px；窄版幾何差異0並不證明動畫或服務一致。全部24張目前稿原生視窗與對照圖已實看，實際載入HTML與目前磁碟檔逐位元組相同。
+- 窄版根選單已實看且X／Escape通過；次層與桌面下拉選單、範本輪播、語言切換、橫幅關閉及全部影片控制狀態未完整驗證。沒有登入、註冊、提交銷售表單或外部服務操作。
+- 390px為桌面UA響應式測試，非實機。原目錄分析與原始AI指令保留，研究免費瀏覽，沒有啟動付費方案；不推定供應商使用量帳單。accepted=false且official_consistency_claim=false，正式更新待全部74頁整合後另驗證。
 
-### Photography & Illustration Geometry
-
-- Image frames use `{rounded.md}` (8px) — generous enough to feel friendly, conservative enough to read as editorial.
-- Template thumbnails on the home grid sit in `{rounded.md}` tiles with `{spacing.md}` interior padding around the embedded preview.
-- FigJam pastel sticky-note component thumbnails preserve a small `{rounded.sm}` corner that mimics actual sticky paper.
-- No avatar circles appear in marketing surfaces — Figma's marketing avoids personification.
-
-## Components
-
-### Buttons
-
-**`button-primary`** — The black "Get started for free" pill that appears in the top nav, every hero, and every closing CTA.
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button}`, padding 10px 20px, rounded `{rounded.pill}`.
-- Pressed state lives in `button-primary-pressed` (same surface; the live site relies on micro-scale rather than a darkened fill).
-
-**`button-secondary`** — White pill with black text. Used for tertiary navigation actions ("Contact sales") and as the visual counterpart to the primary pill.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.button}`, padding 8px 18px 10px (asymmetric vertical to optically center the type), rounded `{rounded.pill}`. No border.
-
-**`button-tertiary-text`** — Plain text link styled as a button hit target inside top nav and footer.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.link}`, rounded `{rounded.full}` (hit target only), padding `{spacing.xs}` `{spacing.sm}`.
-
-**`button-icon-circular`** — 40px circular icon button used for carousel controls, social links, and inline actions on light surfaces.
-- Background `{colors.surface-soft}`, text `{colors.ink}`, rounded `{rounded.full}`, size 40px.
-
-**`button-icon-circular-inverse`** — Same shape, used on inverse-canvas / dark color blocks.
-- Background `{colors.on-inverse-soft}` (translucent white), text `{colors.inverse-ink}`, rounded `{rounded.full}`, size 40px.
-
-**`button-magenta-promo`** — Saturated pink pill used only inside promotional surfaces such as the lilac "Save your spot" Release Notes banner. Reserved for moments where Figma's product team wants the CTA to pop against an already-colored panel.
-- Background `{colors.accent-magenta}`, text `{colors.on-primary}`, type `{typography.button}`, rounded `{rounded.pill}`, padding 10px 18px.
-
-### Pricing Tabs
-
-**`pricing-tab-default`** + **`pricing-tab-selected`** — The pill-toggle that switches between Starter / Professional / Organization / Enterprise on `/pricing/`.
-- Default: `{colors.canvas}` background, `{colors.ink}` text, rounded `{rounded.pill}`.
-- Selected: `{colors.primary}` background, `{colors.on-primary}` text — exactly the same surface as `button-primary`, which makes the selected tab feel like an active CTA, not a passive state.
-
-### Inputs & Forms
-
-**`text-input`** + **`text-input-focused`** — Form fields on `/contact/` and pricing seat-count steppers.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.md}`, padding 12px 14px.
-- Focused state retains the same surface — focus is communicated via ring, not via fill change.
-
-### Cards & Containers
-
-**`pricing-card`** — Each tier on `/pricing/`.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding `{spacing.lg}`. Stroked with `{colors.hairline}` rather than shadowed.
-
-**`pricing-card-feature-row`** — Single row inside the comparison table.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`. Row separator is `{colors.hairline-soft}`.
-
-**`template-card`** — Thumbnail tile in the home "Explore what people are making" grid and the FigJam template gallery.
-- Background `{colors.surface-soft}`, text `{colors.ink}`, type `{typography.body-sm}`, rounded `{rounded.md}`, padding `{spacing.md}`.
-
-**`feature-illustration-tile`** — Larger composition tile that holds a product UI mock or pastel illustration.
-- Background `{colors.surface-soft}`, text `{colors.ink}`, type `{typography.eyebrow}`, rounded `{rounded.md}`, padding `{spacing.lg}`.
-
-### Color-Block Sections (signature)
-
-The defining surface of Figma's marketing. Each is a full-content-width panel with `{rounded.lg}` corners and `{spacing.xxl}` interior padding. Variants:
-
-**`color-block-section`** — lime ground for "systems" stories (home), pricing FAQ, and the contact form.
-- Background `{colors.block-lime}`, text `{colors.ink}`, type `{typography.subhead}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`.
-
-**`color-block-section-lilac`** — lavender ground for `/design/` hero and FigJam highlight sections.
-- Background `{colors.block-lilac}`, otherwise identical structure.
-
-**`color-block-section-navy`** — deep indigo ground for the home "Ship products" story block. The only inverse color-block surface above the footer.
-- Background `{colors.block-navy}`, text `{colors.inverse-ink}`, otherwise identical structure.
-
-(Cream, mint, pink, and coral block variants follow the same shape with their respective `{colors.block-*}` surface.)
-
-### Promo Banner
-
-**`promo-banner-lilac`** — The Release Notes / "Save your spot" inline banner that floats above the contact form.
-- Background `{colors.block-lilac}`, text `{colors.ink}`, type `{typography.body-sm}`, rounded `{rounded.md}`, padding `{spacing.md}` `{spacing.lg}`. Carries a `button-magenta-promo` on the right edge.
-
-### Navigation
-
-**`top-nav`** — Sticky white bar with logo, primary nav links, sign-in link, and the right-anchored `button-secondary` ("Contact sales") + `button-primary` ("Get started for free") pair.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`, height 56px.
-- Mobile: collapses primary links into a hamburger that opens a full-canvas overlay; the two pill CTAs remain visible on the bar.
-
-**`marquee-strip`** — Thin black ribbon directly under the nav that scrolls through customer logos in white.
-- Background `{colors.inverse-canvas}`, text `{colors.inverse-ink}`, type `{typography.body-sm}`, height 36px.
-
-### Comparison Glyphs
-
-**`comparison-checkmark`** — Green check used in the pricing comparison matrix.
-- Background `{colors.canvas}`, glyph color `{colors.semantic-success}`, rounded `{rounded.full}`, size 16px.
-
-### Footer
-
-**`footer`** — Dense link grid on white canvas with the wordmark "Figma" set in display weight at the top-left.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.caption}` for column headings and small links, padding `{spacing.section}` top/bottom · `{spacing.xl}` sides.
-
-## Do's and Don'ts
-
-### Do
-
-- Reserve `{colors.primary}` for genuine primary CTAs and selected states (e.g., `pricing-tab-selected`). Don't use it as a decorative accent.
-- When introducing a story section, choose **one** color block from the `{colors.block-*}` family and let it span full content width with `{rounded.lg}` corners and `{spacing.xxl}` interior padding.
-- Keep type in `figmaSans` at variable weights — pick from 320, 330, 340, 480, 540, 700 to express hierarchy. Avoid intermediate weights outside this set.
-- Use `figmaMono` only for eyebrows and captions, always uppercase, with the documented positive letter-spacing.
-- Compose every CTA as a pill (`{rounded.pill}`) and every icon button as a circle (`{rounded.full}`).
-- Allow the page to **return to white canvas** between every two color blocks so each block reads as deliberate.
-- Pair `button-primary` and `button-secondary` whenever a section needs both a primary action and a sales / secondary action — the black-and-white pair is the brand signature.
-
-### Don't
-
-- Don't introduce mid-gray text. Body hierarchy comes from `figmaSans` weight, not from opacity.
-- Don't add drop shadows to color-block sections — the color is the depth device.
-- Don't introduce new accent colors outside the documented `{colors.block-*}` palette and `{colors.accent-magenta}`. Adding, e.g., a saturated brand orange would break the system.
-- Don't combine more than one color block visible inside a single viewport — Figma's pacing always lets the white canvas separate them.
-- Don't square off CTAs. Square buttons read as a different brand.
-- Don't put `figmaMono` in body copy — it's a taxonomy tool, not a reading typeface.
-- Don't replace the `pricing-tab-selected` black fill with a colored tab; the brand pattern is "selected = primary surface".
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| 4k | 1920px | Max content width holds at 1280px; gutters expand |
-| Desktop-XL | 1440px | Default desktop layout |
-| Desktop | 1400px | Comparison table column widths normalize |
-| Desktop-S | 1280px | Pricing 4-up tier grid maintained |
-| Tablet | 960px | Pricing collapses 4-up → 2-up; nav becomes hamburger |
-| Mobile-L | 768px | Color-block sections become full-bleed (no rounded corners on edges) |
-| Mobile | 560px | Display-xl reduces from 86px to ~48px; pill CTAs go full-width |
-| Mobile-XS | 559px | Two-column footer collapses to single column |
-
-### Touch Targets
-
-- Pill buttons (`button-primary`, `button-secondary`) maintain a minimum 44px tap height across all viewports — achieved by combining `{typography.button}` 20px line-height with the documented vertical padding.
-- Circular icon buttons (`button-icon-circular`) are 40px on desktop and grow to 44px on touch viewports.
-- Form input minimum tap target on `/contact/` is 48px high.
-
-### Collapsing Strategy
-
-- **Nav**: desktop horizontal nav with two right-anchored pills collapses to a hamburger overlay below 960px. The two pills (`Contact sales`, `Get started for free`) stay visible on the bar above 560px and stack in the overlay below.
-- **Pricing tier grid**: 4-up → 2-up at 960px → 1-up below 768px. The pill toggle stays horizontal and scrolls horizontally if needed below 560px.
-- **Color-block sections**: above 768px the section keeps `{spacing.xxl}` of canvas around it so the rounded corners read; below 768px the corners are removed and the block bleeds to viewport edge for a poster effect.
-- **Comparison table**: below 960px the matrix collapses into per-tier accordions to avoid horizontal scroll.
-
-### Image Behavior
-
-- Product UI mocks inside color blocks scale proportionally and never crop. Below 768px they shrink rather than reflow.
-- Template thumbnails in the home grid use lazy loading and animate in on scroll.
-- Sticky-note style FigJam thumbnails maintain their slight off-axis rotation across breakpoints — the rotation is a brand signal, not a desktop-only flourish.
-
-## Known Gaps
-
-- The exact pastel hex values of `{colors.block-*}` are derived from screenshot pixels; the production source likely uses named tokens that aren't exposed via CSS variables. Treat the documented hex values as faithful approximations rather than exact brand specs.
-- Dark mode is not documented because the marketing site does not ship a dark theme — the closest analog is the navy color-block (`color-block-section-navy`) and the inverse-canvas footer.
-- Form-field error and validation styling is not visible on `/contact/` because no error states render in the static screenshot. Inputs have hairline borders and rounded `{rounded.md}` corners; error treatment is not documented.
-- The animated marquee-strip and color-block reveal animations are not documented (per the no-interaction policy).
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Figma-inspired interface. Implement this working page: A collaborative design workshop page with a generous hero, colored project tiles, and a small shared-canvas demonstration. Keep outlines crisp and use color to distinguish spaces; avoid applying all available colors to one component.
+先閱讀隨附的 DESIGN.md，以 Figma 的設計語言作為介面參考。請完成以下可操作頁面：製作協作設計工作坊頁，包含寬闊主視覺、彩色專案卡片與小型共用畫布示範。輪廓清楚，以色彩區分工作空間，不把所有顏色塞進同一元件。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Figma-inspired interface. Build a workshop card with participant initials, project status, and a join action. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Figma 的設計語言作為介面參考。請製作工作坊卡片，包含參與者縮寫、專案狀態與加入操作。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Figma-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A collaborative design workshop page with a generous hero, colored project tiles, and a small shared-canvas demonstration. Keep outlines crisp and use color to distinguish spaces; avoid applying all available colors to one component.
+先閱讀隨附的 DESIGN.md，以 Figma 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作協作設計工作坊頁，包含寬闊主視覺、彩色專案卡片與小型共用畫布示範。輪廓清楚，以色彩區分工作空間，不把所有顏色塞進同一元件。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

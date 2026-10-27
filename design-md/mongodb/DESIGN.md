@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: MongoDB-design-analysis
-description: MongoDB carries a strong dual-mode visual identity — dark deep-teal hero bands with bright MongoDB green ({colors.brand-green}) CTAs paired with stark white documentation surfaces. The signature green pill button is unmistakable across product, pricing, learning, and AI use-case surfaces. The system uses Euclid Circular A as its display face, anchors a 3-tier pricing comparison (Free / Flex / Dedicated), and presents extensive course catalogs in card grids with colored category tags. Coverage spans homepage, Atlas product page, Community Edition, MongoDB University, AI use cases, and pricing.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "MongoDB"
+description: "深青綠與鮮綠色，連接資料與開發者體驗。"
 
 colors:
   primary: "#00ed64"
@@ -402,402 +403,166 @@ components:
     padding: "{spacing.xxs} 0"
 ---
 
-## Overview
-
-MongoDB carries a strong dual-mode visual identity — dark deep-teal hero bands with the unmistakable bright MongoDB green ({colors.brand-green}) CTA pill paired with stark white documentation and pricing surfaces. The homepage opens with "One data platform. Unlimited AI potential." headline over a deep navy hero, the green pill sitting at the visual center as the primary CTA. Lower on the page, embedded code mockup cards (terminal-aesthetic) sit on the dark hero band, breaking out into white feature cards below. The pricing page renders a 3-tier comparison (Free / Flex / Dedicated) with a featured tier highlighted in soft mint background and bright green border. The MongoDB University page presents a course catalog grid where each tile carries a colored category tag (orange, purple, green, teal) — these are MongoDB's category-encoding accent colors and are the only place outside the brand green where saturated color appears.
-
-The system uses Euclid Circular A as its display face. The face is contemporary geometric — confident but not overly playful — and pairs naturally with both the developer-tool aesthetic of the database product and the educational positioning of the learning surfaces. Cards use `{rounded.lg}` (12px) corners; buttons use `{rounded.full}` pills universally. The brand-teal palette ({colors.brand-teal-deep}) anchors hero bands, footer, code mockups, and the dark CTA banners.
-
-**Key Characteristics:**
-- Deep navy/teal hero bands ({colors.brand-teal-deep}) with bright MongoDB green ({colors.brand-green}) CTA pills
-- Stark white pricing/documentation surfaces with colored category tags for course tiles (purple, orange, green, teal)
-- Euclid Circular A across every UI surface
-- Pill-shaped buttons ({rounded.full}) and 12px-rounded cards
-- 3-tier pricing comparison (Free / Flex / Dedicated) with featured-mint highlight tier
-- Code mockup cards with terminal-aesthetic dark canvas
-
-## Colors
-
-> Source pages: mongodb.com/ (homepage), /products/platform/atlas-database (Atlas product), /products/self-managed/community-edition, learn.mongodb.com/ (MongoDB University), /solutions/use-cases/artificial-intelligence (AI), /pricing (3-tier comparison). Token coverage was identical across all six pages.
-
-### Brand & Accent
-- **MongoDB Green** ({colors.brand-green}): The brand's most recognizable signal — bright pill-CTA color
-- **Green Dark** ({colors.brand-green-dark}): Inline link color, secondary green
-- **Green Mid** ({colors.brand-green-mid}): Mid-spectrum green for atmospheric tints
-- **Green Soft** ({colors.brand-green-soft}): Pale-mint background tint for success badges and featured pricing tier
-- **Brand Teal Deep** ({colors.brand-teal-deep}): Deep navy-teal for hero bands, footer
-- **Brand Teal** ({colors.brand-teal}): Mid-spectrum teal
-- **Brand Teal Mid** ({colors.brand-teal-mid}): Lighter teal for hero platform cards
-
-### Category Accent (Course Tags)
-- **Accent Purple** ({colors.accent-purple}): Course tag for "Database & Security"
-- **Accent Orange** ({colors.accent-orange}): Course tag for "Search"
-- **Accent Pink** ({colors.accent-pink}): Course tag variant
-- **Accent Blue** ({colors.accent-blue}): Course tag variant for atlas/cloud topics
-
-### Surface
-- **Canvas White** ({colors.canvas}): Page background and primary card surface
-- **Canvas Dark** ({colors.canvas-dark}): Code-block backgrounds, dark mockup canvas
-- **Surface** ({colors.surface}): Subtle section backgrounds, search-pill rest
-- **Surface Soft** ({colors.surface-soft}): Quieter section divisions
-- **Surface Feature** ({colors.surface-feature}): Pale mint background for featured pricing tier
-- **Hairline** ({colors.hairline}): 1px borders and primary dividers
-- **Hairline Soft** ({colors.hairline-soft}): Quieter dividers
-- **Hairline Strong** ({colors.hairline-strong}): Stronger 1px border for inputs
-- **Hairline Dark** ({colors.hairline-dark}): Border on dark surfaces
-
-### Text
-- **Ink** ({colors.ink}): Primary headlines and body text (deep navy-teal)
-- **Charcoal** ({colors.charcoal}): Body emphasis
-- **Slate** ({colors.slate}): Secondary text
-- **Steel** ({colors.steel}): Tertiary text, captions
-- **Stone** ({colors.stone}): Muted labels
-- **Muted** ({colors.muted}): Disabled, placeholders
-- **On Dark** ({colors.on-dark}): White text on dark surfaces
-- **On Dark Muted** ({colors.on-dark-muted}): Reduced-opacity white
-
-### Semantic
-- **Warning Background** ({colors.semantic-warning-bg}): Pale yellow callout bg
-- **Warning Text** ({colors.semantic-warning-text}): Warning state copy color
-
-## Typography
-
-### Font Family
-**Euclid Circular A** (primary): MongoDB's geometric sans-serif. Fallbacks: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif.
-**Source Code Pro** (code): Monospace for code mockups. Fallbacks: 'SF Mono', Menlo, Consolas, monospace.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.hero-display}` | 72px | 500 | 1.10 | -1.5px | Hero ("One data platform") |
-| `{typography.display-lg}` | 56px | 500 | 1.15 | -1px | Major section openers |
-| `{typography.heading-1}` | 48px | 500 | 1.20 | -0.5px | Page-level headlines |
-| `{typography.heading-2}` | 36px | 500 | 1.25 | -0.5px | Subsection headlines |
-| `{typography.heading-3}` | 28px | 500 | 1.30 | 0 | Card titles |
-| `{typography.heading-4}` | 22px | 500 | 1.35 | 0 | Feature tile titles |
-| `{typography.heading-5}` | 18px | 600 | 1.40 | 0 | Smaller card titles, FAQ questions |
-| `{typography.subtitle}` | 18px | 400 | 1.50 | 0 | Hero subtitle, lead body |
-| `{typography.body-md}` | 16px | 400 | 1.55 | 0 | Primary body text |
-| `{typography.body-sm}` | 14px | 400 | 1.50 | 0 | Secondary body, table cells |
-| `{typography.body-sm-medium}` | 14px | 500 | 1.50 | 0 | Active sidebar, button labels |
-| `{typography.caption-bold}` | 13px | 600 | 1.40 | 0 | Badge labels |
-| `{typography.micro-uppercase}` | 11px | 600 | 1.40 | 1px | Section eyebrows, course category tags |
-| `{typography.button-md}` | 14px | 600 | 1.30 | 0 | Pill button labels |
-| `{typography.code-md}` | 14px | 400 | 1.55 | 0 | Code mockups |
-
-### Principles
-- Tight hero leading (1.10) on 72px display
-- Negative letter-spacing on display sizes (-1.5px to -0.5px)
-- 600 weight reserved for buttons and small emphasis (FAQ headings, badges)
-- Generous body leading (1.55) for technical documentation readability
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4px (8px primary increment)
-- **Tokens**: `{spacing.xxs}` (4px) through `{spacing.hero}` (120px)
-- **Section rhythm**: Marketing pages use `{spacing.section-lg}` (96px); pricing tightens to `{spacing.section}` (64px)
-
-### Grid & Container
-- 1280px max-width with 32px gutters
-- Pricing: 3-tier card row, dense feature comparison table below
-- Learn catalog: 3-up course tile grid, 4-up certification grid
-- AI use cases: 2-column hero with atmospheric illustration
+# MongoDB 延伸設計規格
 
-### Whitespace Philosophy
-Marketing surfaces give content generous breathing room — `{spacing.hero}` (120px) hero padding for deep teal bands. Pricing/learn surfaces tighten dramatically.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Elevation & Depth
+## 來源與規格層次
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow; `{colors.hairline}` border | Default cards, table rows |
-| 1 (subtle) | `rgba(0, 30, 43, 0.04) 0px 1px 2px 0px` | Hover-elevated tiles |
-| 2 (card) | `rgba(0, 30, 43, 0.08) 0px 4px 12px 0px` | Feature cards |
-| 3 (mockup) | `rgba(0, 30, 43, 0.12) 0px 12px 24px -4px` | Code mockup over hero |
-| 4 (modal) | `rgba(0, 30, 43, 0.16) 0px 16px 48px -8px` | Modals, dropdowns |
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Decorative Depth
-- Dark teal hero bands carry atmospheric gradient depth
-- Code mockup cards on hero use canvas-dark surface with terminal aesthetic
-- Pale-mint pricing-feature tier uses brand-tinted shadow
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`ff12313682adaae912022b4678cf03aa245fbc6fc582a25958a9e10fa2f77c3e`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://www.mongodb.com/zh-tw。
+- 目前預覽：`official-drafts/mongodb.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-## Shapes
+## 整體視覺方向
 
-### Border Radius Scale
+深青綠與鮮綠色，連接資料與開發者體驗。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Course category tags |
-| `{rounded.sm}` | 6px | Type badges, code chips |
-| `{rounded.md}` | 8px | Inputs, search-pill, code blocks |
-| `{rounded.lg}` | 12px | Cards, pricing tiers, course tiles |
-| `{rounded.xl}` | 16px | Larger feature panels |
-| `{rounded.xxl}` | 24px | Featured product showcases |
-| `{rounded.full}` | 9999px | All buttons, status badges |
+製作文件資料庫瀏覽器，包含集合側欄、易讀的 JSON 詳細內容與查詢範例。深青色建立結構，綠色只用於重點操作；巢狀資料可展開，觸控區域不可過小。
 
-### Photography Geometry
-- Hero illustrations sit on full-bleed dark backgrounds
-- Course tile thumbnails use `{rounded.lg}` corners
-- Customer logos wall: wordmarks at consistent 60–80px height
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Components
+## 色彩、字型與繁體中文排版
 
-> Per the no-hover policy, hover states are NOT documented. Default and pressed/active states only.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Buttons
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-**`button-primary`** — Bright MongoDB green pill primary CTA, the dominant action.
-- Background `{colors.brand-green}`, text `{colors.on-primary}` (deep navy), typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
-- Pressed state `button-primary-pressed` deepens to `{colors.primary-pressed}`.
-- Disabled state `button-primary-disabled` uses `{colors.hairline}` background.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-**`button-secondary`** — Outlined pill for secondary actions.
-- Background transparent, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 72px | 500 | 1.10 | -1.5px |
+| 56px | 500 | 1.15 | -1px |
+| 48px | 500 | 1.20 | -0.5px |
+| 36px | 500 | 1.25 | -0.5px |
+| 28px | 500 | 1.30 | 0 |
+| 22px | 500 | 1.35 | 0 |
+| 18px | 600 | 1.40 | 0 |
+| 18px | 400 | 1.50 | 0 |
+| 16px | 400 | 1.55 | 0 |
+| 14px | 400 | 1.50 | 0 |
+| 14px | 500 | 1.50 | 0 |
+| 13px | 600 | 1.40 | 0 |
+| 11px | 600 | 1.40 | 1px |
+| 14px | 600 | 1.30 | 0 |
+| 14px | 400 | 1.55 | 0 |
 
-**`button-on-dark`** — Bright green pill on dark hero bands.
-- Background `{colors.brand-green}`, text `{colors.on-primary}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
+## 版面與元件結構
 
-**`button-secondary-on-dark`** — Outlined pill on dark backgrounds.
-- Background transparent, text `{colors.on-dark}`, border `1px solid {colors.hairline-dark}`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
+此參考可先實作：集合摘要，包含文件數量、索引狀態與空集合提示。
 
-**`button-ghost`** — Quieter rectangular ghost button.
-- Background transparent, text `{colors.ink}`, typography `{typography.button-md}`, padding `8px 12px`, rounded `{rounded.md}`.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-**`button-link`** — Inline green text link.
-- Background transparent, text `{colors.brand-green-dark}`, typography `{typography.body-sm-medium}`, padding `0`.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Cards & Containers
+## 操作與狀態
 
-**`card-base`** — Standard content card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**`card-feature`** — Feature card with larger padding.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**`card-product-deploy`** — Product deployment card ("MongoDB Atlas / Community").
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
+## 圖片、動態與無障礙
 
-**`card-feature-dark`** — Dark teal feature card on hero band.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`card-course`** — MongoDB University course tile.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-- Top: colored category tag. Below: title `{typography.heading-5}`, description `{typography.body-sm}`, "Get Started →" link.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`card-cert`** — Certification card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
+## 來源中的技術值補充
 
-**`pricing-card`** — Standard pricing tier card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`pricing-card-featured`** — Featured pricing tier (Flex tier, mint background + green border).
-- Background `{colors.surface-feature}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `2px solid {colors.brand-green}`.
+- `rgba(0, 30, 43, 0.04) 0px 1px 2px 0px`
+- `rgba(0, 30, 43, 0.08) 0px 4px 12px 0px`
+- `rgba(0, 30, 43, 0.12) 0px 12px 24px -4px`
+- `rgba(0, 30, 43, 0.16) 0px 16px 48px -8px`
+- `10px 22px`
+- `1px solid {colors.hairline-strong}`
+- `1px solid {colors.hairline-dark}`
+- `8px 12px`
+- `1px solid {colors.hairline}`
+- `2px solid {colors.brand-green}`
+- `2px solid {colors.brand-green-dark}`
+- `2px 8px`
+- `4px 10px`
+- `1px solid {colors.hairline-soft}`
 
-### Inputs & Forms
+## 日期限定首頁觀察
 
-**`text-input`** — Standard text field.
-- Background `{colors.canvas}`, text `{colors.ink}`, border `1px solid {colors.hairline-strong}`, rounded `{rounded.md}`, padding `{spacing.sm} {spacing.md}`, height 44px.
+取樣來源：https://www.mongodb.com/zh-tw。官網根目錄重新導向 /zh-tw，但實際可見首頁仍為英文。
 
-**`text-input-focused`** — Activated state.
-- Border switches to `2px solid {colors.brand-green-dark}`.
+本次官方入口導向 /zh-tw，但實際可見文案為英文。頁首有輪播公告，奶油白底首屏以窄體大標「各種工作負載，各種雲端，整合於單一平台。」搭配右側真實程式碼圖。
 
-**`search-pill`** — Standard 44px search bar.
-- Background `{colors.surface}`, text `{colors.steel}`, typography `{typography.body-md}`, rounded `{rounded.md}`, height 44px, border `1px solid {colors.hairline-strong}`.
+後續區塊以深藍、奶油白交替，包含學習卡、Atlas 使用案例、企業客戶輪播、整合夥伴、代理程式 CTA 及深色多欄頁尾。原先深藍置中選擇器版型已過時。
 
-**`search-pill-large`** — Large 56px search bar (top of MongoDB University catalog).
-- Background `{colors.canvas}`, text `{colors.steel}`, typography `{typography.body-md}`, rounded `{rounded.md}`, height 56px, border `1px solid {colors.hairline-strong}`.
+全頁截圖查出企業客戶輪播保留 opacity-inc00 初始隱藏狀態，已用原內容與原資產改為靜態可見。另移除頂部 noscript 解析殘留文字，並恢復桌面最後 CTA 的原始 compass.svg；最新桌面與窄版全頁已逐段確認這三項修正。
 
-### Tabs
+原有 DESIGN.md、PROMPTS.md 與 STITCH-PROMPT.md 保留；本檔為日期限定補充。研究頁免費瀏覽，未開啟付費方案或交易；不對外部生成服務的帳戶計費狀態作保證。
 
-**`pill-tab`** + **`pill-tab-active`** — Pill-style tab nav (top of pricing: "MongoDB Atlas / Enterprise Advanced").
-- Inactive: text `{colors.steel}`, border `1px solid {colors.hairline}`, padding `{spacing.xs} {spacing.md}`, rounded `{rounded.full}`.
-- Active: background `{colors.ink}`, text `{colors.on-dark}`.
+驗證範圍為匿名公開首頁、1280×720 與390×844、DPR1、桌面 UA。未完成實體手機、其他地區、完整互動或服務驗證；目前 accepted=false，不宣稱與官方一致。
 
-**`segmented-tab`** + **`segmented-tab-active`** — Underline-style tab navigation.
-- Inactive: text `{colors.steel}`, no border. Active: text `{colors.brand-green-dark}`, 2px bottom border in `{colors.brand-green-dark}`.
+## 已知差異與驗證範圍
 
-### Badges & Status
+- 最新 5637… 截圖完整涵蓋桌面 10 段、窄版 11 段，均綁定目前雜湊。已確認客戶商標與引言還原、跳脫的 noscript 開頭文字移除，桌面操作區顯示精確原始羅盤插圖，窄版仍依來源隱藏。
+- 最新桌面高 6503px，來源為 6519px，少 16px；窄版 8597px 與來源相同。先前窄版 45px 位移來自已移除的開頭文字列，並非僅因公告狀態。客戶輪播選取及合作商標順序可見不同，精確同步與剩餘桌面間距、透明度差異尚未驗證。
+- 導覽展開、Atlas 使用情境分頁、客戶輪播轉場及助理行為尚未實作或驗證。
 
-**`badge-green`** — Bright green badge for new product highlights.
-- Background `{colors.brand-green}`, text `{colors.on-primary}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-green-soft`** — Pale-mint pill for success/free indicators.
-- Background `{colors.brand-green-soft}`, text `{colors.brand-green-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-purple`** — Purple course category tag.
-- Background `{colors.accent-purple}`, text `{colors.on-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-orange`** — Orange course category tag.
-- Background `{colors.accent-orange}`, text `{colors.on-dark}`, typography `{typography.caption-bold}`, rounded `{rounded.sm}`, padding `2px 8px`.
-
-**`badge-popular`** — "Most Popular" tier indicator (dark teal pill with green text).
-- Background `{colors.brand-teal-deep}`, text `{colors.brand-green}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`promo-banner`** — Dark teal sticky promo strip ABOVE the top nav.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, typography `{typography.body-sm-medium}`, padding `{spacing.sm} {spacing.md}`.
-
-### Code
-
-**`code-block`** — Code container.
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, typography `{typography.code-md}`, rounded `{rounded.md}`, padding `{spacing.md}`.
-
-**`code-mockup-card`** — Embedded code mockup on hero band.
-- Background `{colors.canvas-dark}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.lg}`. Carries terminal-aesthetic code snippet.
-
-### Tables
-
-**`comparison-table`** — Pricing feature comparison table.
-- Background `{colors.canvas}`, text `{colors.ink}`, typography `{typography.body-sm}`, rounded `{rounded.md}`, border `1px solid {colors.hairline}`.
-
-**`comparison-row`** — Individual feature row.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.lg}`, bottom border `1px solid {colors.hairline-soft}`.
-
-### Documentation Components
-
-**`service-tile`** — Tile in "Customize your deployment" 6-up grid.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xl}`, border `1px solid {colors.hairline}`.
-
-**`why-card`** — "Loved by builders" feature card.
-- Background `{colors.surface}`, rounded `{rounded.lg}`, padding `{spacing.xl}`.
-
-**`customer-testimonial-card`** — Customer quote card.
-- Background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline}`.
-
-**`logo-wall-item`** — Customer logo wordmark cell.
-- Background transparent, text `{colors.steel}`, typography `{typography.body-md-medium}`, padding `{spacing.lg}`.
-
-**`faq-accordion-item`** — FAQ panel.
-- Background `{colors.canvas}`, rounded `{rounded.md}`, padding `{spacing.xl}`, bottom border `1px solid {colors.hairline}`.
-
-### Navigation
-
-**Top Navigation (Marketing)** — Sticky white bar.
-- Background `{colors.canvas}`, height ~64px, bottom border `1px solid {colors.hairline}`.
-- Left: MongoDB leaf logo + "Solutions / Resources / Company / Pricing" links.
-- Right: "Sign In" link + bright-green pill "Try Free" CTA.
-
-### Signature Components
-
-**`hero-band-dark`** — Deep teal hero band with embedded code mockup.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, padding `{spacing.hero}`.
-- Layout: centered headline `{typography.hero-display}`, subtitle, button row, `code-mockup-card` below.
-
-**`hero-platform-card`** — Lighter-teal platform showcase card on dark hero.
-- Background `{colors.brand-teal-mid}`, text `{colors.on-dark}`, rounded `{rounded.xl}`, padding `{spacing.xxl}`.
-
-**`cta-banner-dark`** — Dark CTA banner at the bottom of feature pages.
-- Background `{colors.brand-teal-deep}`, text `{colors.on-dark}`, rounded `{rounded.lg}`, padding `{spacing.section}`.
-
-**`footer-region`** — Dark teal multi-column footer.
-- Background `{colors.brand-teal-deep}`, padding `{spacing.section} {spacing.xxl}`.
-- 6-column link grid.
-- Section headings in `{typography.body-sm-medium}` `{colors.on-dark}`.
-
-**`footer-link`** — Individual footer link.
-- Background transparent, text `{colors.on-dark-muted}`, typography `{typography.body-sm}`, padding `{spacing.xxs} 0`.
-
-## Do's and Don'ts
-
-### Do
-- Use `{colors.brand-green}` (bright MongoDB green) for primary CTAs everywhere
-- Pair dark-teal hero bands with bright green CTA pills
-- Apply `{rounded.full}` to every button, every status badge
-- Apply `{rounded.lg}` (12px) to cards consistently
-- Use category accent colors (purple, orange, green, teal) ONLY for course tags
-- Maintain Euclid Circular A across every UI surface
-- Use code mockup cards with terminal-aesthetic content for product showcases
-
-### Don't
-- Don't use the bright green for body text or large surfaces
-- Don't introduce additional accent colors beyond the brand green and category-encoding palette
-- Don't soften corners on buttons; the pill is a brand signature
-- Don't replace deep teal hero bands with white hero bands
-- Don't apply heavy shadows on flat documentation cards; reserve elevation for code mockups
-- Don't use Source Code Pro for prose
-
-## Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile (small) | < 480px | Single column. Hero 36px. Pricing 1-up. Course catalog 1-up. |
-| Mobile (large) | 480 – 767px | Course tiles 2-up. Hero 48px. |
-| Tablet | 768 – 1023px | 2-column feature grids. Hero 56px. |
-| Desktop | 1024 – 1279px | 3-tier pricing card row. 3-up course catalog. Hero 64px. |
-| Wide Desktop | ≥ 1280px | Full 72px hero presentation. |
-
-### Touch Targets
-- Pill buttons render at 40–44px effective height
-- Form inputs render at 44px height
-- Search pill (large) renders at 56px
-- Pill tabs ~32px → 44px on mobile
-
-### Collapsing Strategy
-- **Promo banner** stays full-width; truncates at < 480px
-- **Top nav** below 1024px collapses to hamburger
-- **Hero band**: code mockup card moves below text on mobile
-- **Pricing tiers**: 3-column → 2-column tablet → 1-column mobile
-- **Course catalog**: 3-up → 2-up tablet → 1-up mobile
-- **Hero typography**: 72px → 56px → 48px → 36px
-- **Footer**: 6-column desktop → 3-column tablet → accordion mobile
-
-### Image Behavior
-- Atmospheric AI imagery uses 16:9 ratio with full-bleed scaling
-- Code mockup card content remains readable across breakpoints
-- Customer logo wall: wordmarks at consistent 60–80px height
-
-## Known Gaps
-
-- Specific dark-mode token values for canvas/surface beyond hero bands not surfaced
-- Animation/transition timings not extracted; recommend 150–200ms ease
-- Form validation success state not explicitly captured
-- Course-tile category color mappings are observation-based
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a MongoDB-inspired interface. Implement this working page: A document database explorer with a collection rail, readable JSON detail, and an example query panel. Combine deep teal structure with selective green actions; keep nested data expandable without relying on tiny targets.
+先閱讀隨附的 DESIGN.md，以 MongoDB 的設計語言作為介面參考。請完成以下可操作頁面：製作文件資料庫瀏覽器，包含集合側欄、易讀的 JSON 詳細內容與查詢範例。深青色建立結構，綠色只用於重點操作；巢狀資料可展開，觸控區域不可過小。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a MongoDB-inspired interface. Build a collection summary with document count, index status, and an empty-collection state. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 MongoDB 的設計語言作為介面參考。請製作集合摘要，包含文件數量、索引狀態與空集合提示。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a MongoDB-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A document database explorer with a collection rail, readable JSON detail, and an example query panel. Combine deep teal structure with selective green actions; keep nested data expandable without relying on tiny targets.
+先閱讀隨附的 DESIGN.md，以 MongoDB 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作文件資料庫瀏覽器，包含集合側欄、易讀的 JSON 詳細內容與查詢範例。深青色建立結構，綠色只用於重點操作；巢狀資料可展開，觸控區域不可過小。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

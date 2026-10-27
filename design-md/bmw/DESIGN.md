@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: BMW-design-analysis
-description: BMW's corporate site — distinct from BMW M's motorsport-bombastic variant, this is a measured and settled corporate-automotive interface. On a light (cream-tinted white) canvas, BMW corporate blue (#1c69d4) carries every primary CTA; dark navy hero bands frame model photography. BMW Type Next Latin sets the entire hierarchy on two weights — heavy 700 display and Light 300 body. Configuration and reservation flows ride a card-based 4-up grid, where each card holds a model render, a name, and a "Learn More" link.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "BMW"
+description: "精準網格搭配深淺交錯的產品敘事。"
 
 colors:
   primary: "#1c69d4"
@@ -268,314 +269,147 @@ components:
     padding: 64px
 ---
 
-## Overview
-
-BMW's corporate site carries a far more **measured, corporate-automotive** interface than its motorsport-bombastic cousin BMW M. The atmosphere is light: `{colors.canvas}` (#ffffff) is the base surface, `{colors.surface-card}` (#fafafa) carries the soft-grey card plates, and dark navy `{colors.surface-dark}` (#1a2129) appears only inside hero bands — one per page, framing the lead model render.
-
-Type runs BMW's licensed **BMW Type Next Latin** at two weights: heavy 700 (display + button + nav) and Light 300 (body + secondary copy). That contrast — heavy display next to thin paragraph — is the editorial signature, channeling the brand's "European-engineered" voice. Weight 500 is deliberately absent; weight 400 only appears on caption and nav-link in neutral utility contexts.
-
-The brand action color, **BMW corporate blue** (`{colors.primary}` — #1c69d4), works alone across every primary CTA — buttons are **rectangular, 0px corner**, with white type. The site rotates a blue-button + dark-navy-hero combination across page rhythm. The M tricolor stripe (`{colors.m-blue-light}` → `{colors.m-blue-dark}` → `{colors.m-red}`) only appears in motorsport contexts and as M-model badges/dividers — never in the corporate site's main language.
-
-The configuration and reservation flows add a dealer-side inventory UI on top of the same system — filter chips, model cards, price tables — but typography and color stay identical; only density goes up.
-
-**Key Characteristics:**
-- Light `{colors.canvas}` is the base surface; dark navy `{colors.surface-dark}` appears only inside hero bands — page rhythm relies on contrast.
-- BMW corporate blue (`{colors.primary}` — #1c69d4) acts as the single primary action color.
-- BMW Type Next Latin: weight 700 display against weight 300 body is the signature.
-- Buttons are **rectangular, 0px radius** — corporate dialect, distinct from M's sportier radii.
-- Model cards run as 4-up or 5-up grids with no hairline border or only minimal border — just white plate + photo + title.
-- Photography (model renders) sits in environment, no shadow — depth comes entirely from color-block contrast.
-- M tricolor stripe appears only in M-model contexts — not part of the corporate language.
-- Section rhythm holds at `{spacing.section}` (80px) for every major band.
-
-## Colors
-
-### Brand & Accent
-- **BMW Blue (Primary)** (`{colors.primary}` — #1c69d4): The single brand action color. All primary CTAs, "Learn More" link prefixes (blue text), nav-link active state. Press shifts to `{colors.primary-active}` (#0653b6).
-- **M Blue Light** (`{colors.m-blue-light}` — #0066b1) + **M Blue Dark** (`{colors.m-blue-dark}` — #1c69d4) + **M Red** (`{colors.m-red}` — #e22718): The M tricolor stripe — appears on the corporate site only on M-model pages and the "M" badge. Never as CTA colors.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — #ffffff): The default page surface.
-- **Surface Soft** (`{colors.surface-soft}` — #f7f7f7): Soft grey for the footer and sub-navigation bands.
-- **Surface Card** (`{colors.surface-card}` — #fafafa): The light plate behind a model card's photo block.
-- **Surface Strong** (`{colors.surface-strong}` — #ebebeb): A slightly heavier grey used as a section divider.
-- **Surface Dark** (`{colors.surface-dark}` — #1a2129): Dark navy for hero bands and large dark CTAs. Not pure black — carries a warm undertone.
-- **Surface Dark Elevated** (`{colors.surface-dark-elevated}` — #262e38): One step lighter, used for nested cards on top of the dark hero.
-
-### Hairlines
-- **Hairline** (`{colors.hairline}` — #e6e6e6): The 1px divider — input outline, configurator card outline, table separator.
-- **Hairline Strong** (`{colors.hairline-strong}` — #cccccc): A more visible 1px outline — disabled secondary buttons, emphasized table border.
-
-### Text
-- **Ink** (`{colors.ink}` — #262626): All display and primary text. Not pure black — soft against photography.
-- **Body** (`{colors.body}` — #3c3c3c): Default running text.
-- **Body Strong** (`{colors.body-strong}` — #1a1a1a): Emphasized paragraphs and lead text.
-- **Muted** (`{colors.muted}` — #6b6b6b): Footer links, breadcrumbs, captions.
-- **Muted Soft** (`{colors.muted-soft}` — #9a9a9a): Disabled text, fine-print legal.
-- **On Primary** (`{colors.on-primary}` — #ffffff): White text on a blue button.
-- **On Dark** (`{colors.on-dark}` — #ffffff): White text on a dark hero band.
-- **On Dark Soft** (`{colors.on-dark-soft}` — #bbbbbb): A slightly muted white for secondary text on dark bands.
-
-### Semantic
-- **Success** (`{colors.success}` — #22c55e): Confirmation messages and "available" indicators.
-- **Warning** (`{colors.warning}` — #f59e0b): Warning callouts.
-- **Error** (`{colors.error}` — #dc2626): Validation errors.
-
-## Typography
-
-### Font Family
-The system runs **BMW Type Next Latin** in two cuts: regular (display + UI labels) and **BMW Type Next Latin Light** (body + secondary copy). Fallback stack: `system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`.
-
-The display/body split is functional:
-- BMW Type Next Latin (700) → display headlines, button labels, nav links
-- BMW Type Next Latin Light (300) → paragraphs, descriptive copy
-- BMW Type Next Latin (400) → caption, neutral nav-link contexts
-
-This three-way split mirrors BMW M's — corporate and the M sub-brand share the same typographic DNA; only the weight/size ratios differ.
+# BMW 延伸設計規格
 
-### Hierarchy
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 64px | 700 | 1.05 | 0 | Hero h1 ("iX3", model name) |
-| `{typography.display-lg}` | 48px | 700 | 1.1 | 0 | Section heads |
-| `{typography.display-md}` | 32px | 700 | 1.15 | 0 | Sub-section heads |
-| `{typography.display-sm}` | 24px | 700 | 1.25 | 0 | CTA-band headlines |
-| `{typography.title-lg}` | 20px | 700 | 1.3 | 0 | Card group titles |
-| `{typography.title-md}` | 18px | 700 | 1.4 | 0 | Model card title, intro paragraphs |
-| `{typography.title-sm}` | 16px | 700 | 1.4 | 0 | Inventory card title, list label |
-| `{typography.body-md}` | 16px | 300 (Light) | 1.55 | 0 | Default body — BMW Type Next Latin Light |
-| `{typography.body-sm}` | 14px | 300 (Light) | 1.55 | 0 | Footer body, fine-print |
-| `{typography.caption}` | 12px | 400 | 1.4 | 0.5px | Photo captions, meta |
-| `{typography.label-uppercase}` | 13px | 700 | 1.3 | 1.5px | "LEARN MORE" inline links, category tabs |
-| `{typography.button}` | 14px | 700 | 1.0 | 0.5px | Standard CTA button label |
-| `{typography.nav-link}` | 14px | 400 | 1.4 | 0.3px | Top-nav menu items |
+## 來源與規格層次
 
-### Principles
-- The **700/300 contrast** is the editorial signature. Weight 500 is absent from the system.
-- **No negative letter-spacing** — BMW Type Next Latin works on a wide body, so tracking stays at default. Apple/Cal.com-style tightening reads off-brand here.
-- **UPPERCASE inline links** — "LEARN MORE"-style CTAs run uppercase with 1.5px tracking. The "machined precision" voice.
-- **Weight 400 lives in a narrow lane** — only caption and nav-link, both neutral utility roles.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Note on Font Substitutes
-BMW Type Next Latin is a licensed BMW typeface. Open-source alternatives:
-- **Inter** (variable) — close match at weight 700/300. Leave letter-spacing at 0.0em.
-- **Saira Condensed** — for a slightly more compressed BMW Type feel.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`fac0f58f01327b7a18f59556667dbe45d0fae0271f226d3fc9b3eb9692583569`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://www.bmw.com.tw/zh/index.html。
+- 目前預覽：`official-drafts/bmw.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-## Layout
+## 整體視覺方向
 
-### Spacing System
-- **Base unit:** 8px.
-- **Tokens:** `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 80px.
-- **Section padding:** `{spacing.section}` (80px) for every major editorial band.
-- **Card internal padding:** `{spacing.lg}` (24px) for model and feature cards.
+精準網格搭配深淺交錯的產品敘事。
 
-### Grid & Container
-- **Max content width:** ~1440px center-aligned.
-- **Editorial body:** A single 12-column grid.
-- **Model card grids:** 4-up or 5-up at desktop, 2-up at tablet, 1-up on mobile.
-- **Configurator inventory grids:** 3-up filter row + 4-up vehicle cards, dense layout.
+製作車款探索頁，包含寬幅主視覺、車身類型篩選與規格比較。照片不可影響控制項辨識；清楚呈現已選篩選條件，不加入多餘的裝飾漸層。
 
-### Whitespace Philosophy
-BMW's whitespace strategy is tighter than BMW M's motorsport-aerated grenadier — the corporate side is more utility-driven. Section rhythm is 80px (not M's 96px). Card padding is 24px (not M's 32px). The page is denser, more dealership-functional.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Elevation & Depth
+## 色彩、字型與繁體中文排版
 
-| Level | Treatment | Use |
-|---|---|---|
-| Flat | No shadow, no border | Body, top nav, footer, hero bands |
-| Soft hairline | 1px `{colors.hairline}` border | Configurator option tile, table divider |
-| Card surface | `{colors.surface-card}` background — no shadow | Model card photo plate |
-| Photographic | Edge-to-edge photography | Hero band, model renders |
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-The system never uses a drop shadow. Depth comes entirely from (a) color-block contrast (light canvas vs dark hero) and (b) photographic subject + lighting.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Decorative Depth
-- **`m-stripe-divider`** — a 4px-tall horizontal tricolor stripe (`{colors.m-blue-light}` → `{colors.m-blue-dark}` → `{colors.m-red}`). Only in M-model contexts, motorsport badges, or as an M-related section divider. Not part of the main corporate flow.
-- **Photographic depth** — full-bleed vehicle photography (lighting + subject) does the work chrome would otherwise do.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-## Shapes
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 64px | 700 | 1.05 | 0 |
+| 48px | 700 | 1.1 | 0 |
+| 32px | 700 | 1.15 | 0 |
+| 24px | 700 | 1.25 | 0 |
+| 20px | 700 | 1.3 | 0 |
+| 18px | 700 | 1.4 | 0 |
+| 16px | 700 | 1.4 | 0 |
+| 16px | 300 (Light) | 1.55 | 0 |
+| 14px | 300 (Light) | 1.55 | 0 |
+| 12px | 400 | 1.4 | 0.5px |
+| 13px | 700 | 1.3 | 1.5px |
+| 14px | 700 | 1.0 | 0.5px |
+| 14px | 400 | 1.4 | 0.3px |
 
-### Border Radius Scale
+## 版面與元件結構
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Every button, card, input, configurator chip — the dominant radius |
-| `{rounded.xs}` | 2px | Very small badges, very rare |
-| `{rounded.sm}` | 4px | Small inline button (rare) |
-| `{rounded.md}` | 8px | Mobile-only collapse cards (rare) |
-| `{rounded.lg}` | 12px | Very rare — modal/dialog corners |
-| `{rounded.pill}` | 9999px | Filter chips in some contexts (rare) |
-| `{rounded.full}` | 9999px / 50% | Avatar, circular icon button |
+此參考可先實作：車款選擇卡片，包含規格與加入比較的切換功能。
 
-The radius hierarchy is binary: **rectangular for everything, circular only for icon buttons.** A clear departure from the soft-cornered SaaS dialect of Apple or Cal.com — closer to BMW corporate-automotive's "engineered precision" voice.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Photography Geometry
-- Hero photography is full-bleed at 16:9 or 21:9 cinematic ratio.
-- Model card photos sit at 16:10, edge-to-edge with `{rounded.none}` corners.
-- Configurator vehicle renders sit on a white studio background, full silhouette visible.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-## Components
+## 操作與狀態
 
-### Top Navigation
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**`top-nav`** — A white sticky nav bar pinned to the top of the page. 64px tall, `{colors.canvas}` background. Left: BMW circular badge logo; center: primary horizontal menu (Models, Next Generation, Pre-Owned, Dealers, Test Drive); right: cart icon, language picker, profile. Menu items render in `{typography.nav-link}` (14px / 400 / 0.3px tracking).
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Buttons
+## 圖片、動態與無障礙
 
-**`button-primary`** — The signature primary CTA. Background `{colors.primary}` (BMW Blue #1c69d4), text `{colors.on-primary}`, type `{typography.button}` (BMW Type Next Latin 14px / 700 / 0.5px tracking), padding 14px × 32px, height 48px, rounded `{rounded.none}` (0px — rectangular). Press state: `button-primary-active` shifts to `{colors.primary-active}`.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`button-secondary`** — A white button with a hairline outline. Background `{colors.canvas}`, text `{colors.ink}`, 1px `{colors.hairline-strong}` border, same padding + height + radius.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`button-secondary-on-dark`** — Used over a dark hero band. Background transparent, text `{colors.on-dark}`, 1px `{colors.on-dark}` border, same rectangular shape.
+## 來源中的技術值補充
 
-**`button-text-link`** — An inline UPPERCASE letter-spaced link. No background, text `{colors.ink}`, type `{typography.label-uppercase}` (13px / 700 / 1.5px tracking). Reads as "LEARN MORE", terminated by a `›` chevron.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`text-link`** — An inline link inside body copy. `{colors.ink}` text, no underline by default; underlines per context.
+額外數值以開頭的來源設定為準。
 
-### Cards & Containers
+## 日期限定首頁觀察
 
-**`hero-band-dark`** — Full-width dark navy hero. Background `{colors.surface-dark}`, text `{colors.on-dark}`, vertical padding `{spacing.section}` (80px). Centered: model name in `{typography.display-xl}` (64px / 700) + sub-headline + vehicle render (right-aligned or below). A single `{component.button-primary}` (blue) or `{component.button-secondary-on-dark}`.
+來源為 BMW 台灣目前公開官方首頁。首屏為藍色 iX3 正面車照、濕地倒影與大幅天空，BMW Type Next 細字標題置於圖上，桌面取樣210px主標保留原有比例。下接四個購車服務圖示，再依官方順序排列 iX5 山景、i7 淺色漸層、i3 岩地車照、行車記錄器3.0Pro與MyBMW區塊。主要圖像與字型取自實際官方來源。
 
-**`hero-photo-band`** — A light-canvas model showcase band. Background `{colors.canvas}`, text `{colors.ink}`. The vehicle render takes the wide area; right or below, a headline + two link CTAs + sub-tagline.
+桌面保留滿寬英雄圖、左右配置與灰色多欄頁尾；390px窄版使用官方直向裁切、堆疊段落與五項收合頁尾標題。官方cookie介面已關閉非必要用途。桌面5段、窄版6段均已實際檢視，頁高3512／4297px，29／24個標題量測相同，所列取樣沒有可見破圖或橫向溢位。這些是主要靜態畫面的限定檢查。
 
-**`model-card`** — Used in 4-up or 5-up model card grids on the homepage ("BMW iX3", "BMW iX", "BMW 5 Series"). Background `{colors.canvas}`, rounded `{rounded.none}`, padding `{spacing.lg}` (24px). Contents: model render at the top (`{component.model-card-photo}` on `{colors.surface-card}`), model name in `{typography.title-md}` (18px / 700) below, a one-line tagline in `{typography.body-sm}` (14px / 300), and a `{component.button-text-link}` ("LEARN MORE ›").
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-**`model-card-photo`** — The card's photo plate. Background `{colors.surface-card}` (#fafafa — soft grey), rounded `{rounded.none}`, vehicle render in full silhouette. Zero padding — the photo runs edge-to-edge.
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-**`feature-photo-card`** — A feature/lifestyle card. Background `{colors.canvas}`, padding `{spacing.lg}`. 16:9 photo at the top, `{typography.title-md}` headline + body excerpt below.
+## 已知差異與驗證範圍
 
-**`spec-cell`** — A technical spec cell (model detail page). Transparent background, separated by hairline dividers. Value on top (`{typography.display-sm}` 24px / 700), label below (`{typography.label-uppercase}`).
+- 桌面與窄版主要靜態畫面已實際比對；圖片裁切、抗鋸齒與載入時間相位仍可能有差異。相同頁高與標題幾何不代表所有像素一致。
+- 頁尾手風琴、主選單、輪播、預約試駕、帳戶與其他服務操作未驗證；未提交表單或進行交易。
+- 目前為本機1280×720與390×844桌面UA的響應式檢查，實體手機及公開部署版本尚未驗證。
 
-### Inventory & Configurator
-
-**`inventory-card`** — One card per vehicle on the dealer inventory page. Background `{colors.canvas}`, padding `{spacing.md}` (16px), rounded `{rounded.none}`. Vehicle photo on top, model + variant name + price + "View" link below.
-
-**`filter-chip`** + **`filter-chip-active`** — Inventory filter chips (model, year, price range). Inactive: background `{colors.canvas}`, 1px `{colors.hairline-strong}` border, text `{colors.ink}`, type `{typography.caption}`. Active: background `{colors.ink}`, text `{colors.on-dark}`. Padding 8px × 14px, radius `{rounded.none}`.
-
-**`configurator-option-tile`** + **`configurator-option-tile-selected`** — Configurator selection cell (color, wheels, upholstery). Inactive: background `{colors.canvas}`, 1px hairline. Selected: 2px `{colors.primary}` border. Padding 16px × 24px, radius `{rounded.none}`.
-
-### Inputs & Forms
-
-**`text-input`** — Standard text input. Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-md}`, rounded `{rounded.none}` (0px), padding 14px × 16px, height 48px, 1px hairline border. On focus, the border thickens to ink.
-
-**`cookie-consent-card`** — Cookie banner. Background `{colors.canvas}`, 1px hairline, padding `{spacing.lg}` (24px), `{typography.body-sm}` (14px / 300 — Light even in legal copy).
-
-### Tabs / Tags
-
-**`category-tab`** + **`category-tab-active`** — Category sub-nav. Inactive: transparent + `{colors.muted}` UPPERCASE label. Active: transparent + `{colors.ink}` UPPERCASE label + 2px ink underline. 12px vertical padding, no horizontal radius.
-
-### Brand Signature
-
-**`m-stripe-divider`** — A 4px-tall horizontal tricolor stripe (`{colors.m-blue-light}` → `{colors.m-blue-dark}` → `{colors.m-red}`). Only in M-model contexts, motorsport badges, or as an M-related section divider. Absent from the corporate main flow; on M-model detail pages and the M Performance badge it plays an inline divider role.
-
-### CTA / Footer
-
-**`cta-band-photo`** — A pre-footer "Discover the New iX3"-style band. Background `{colors.surface-dark}` with a full-bleed vehicle photo. Centered headline in `{typography.display-md}` (32px / 700) + a single `{component.button-secondary-on-dark}`. 80px padding.
-
-**`footer`** — The closing soft-grey footer. Background `{colors.surface-soft}` (#f7f7f7 — not pure white — soft grey), text `{colors.body}`. A 4-column link list: Models / Services / Dealers / About. Vertical padding 64px. Below, a copyright line in `{typography.body-sm}` with `{colors.muted}`.
-
-## Do's and Don'ts
-
-### Do
-- Sit every page on `{colors.canvas}` (pure white); reserve `{colors.surface-dark}` for hero bands only.
-- Pair primary CTAs with `{colors.primary}` (BMW Blue) + `{colors.on-primary}` white text + `{rounded.none}` 0px corners — the corporate signature.
-- Set display headlines in BMW Type Next Latin 700 and body in Light 300. The contrast is non-negotiable.
-- Use UPPERCASE letter-spaced links like "LEARN MORE" as inline CTAs.
-- Place the model card photo on `{colors.surface-card}` with the title beneath — the standard BMW corporate pattern.
-- Hold section rhythm at `{spacing.section}` (80px) — tighter than BMW M's 96px.
-- Reserve the M tricolor stripe for M-model contexts and motorsport dividers.
-
-### Don't
-- Don't add a brand color other than blue — BMW Blue is the only primary action color.
-- Don't use pill or rounded buttons — `{rounded.none}` (0px) rectangular IS the brand button.
-- Don't drop display weight to 500 — the system uses 700 / 400 / 300; 500 is absent.
-- Don't bold body type — Light 300 is the BMW corporate editorial voice.
-- Don't add drop shadows to cards — depth comes from photo + color-block contrast.
-- Don't repeat the same surface mode across two consecutive bands — light → dark hero → light → light feature → dark CTA → light footer rotation is required.
-- Don't use the M tricolor stripe as a CTA fill — divider/accent role only.
-- Don't mix languages in a single page — UI language must stay consistent.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | Hamburger nav; hero h1 64→40px; model card grid 1-up; configurator filter chips 2-up; footer 4 col → 1 col |
-| Tablet | 768–1024px | Top nav narrows, secondary menu hides under "More"; model card 2-up; inventory 2-up |
-| Desktop | 1024–1440px | Full top-nav; 4-up or 5-up model card grid; inventory 3-up; full configurator UI |
-| Wide | > 1440px | Same as desktop, content fixed at 1440px; gutters absorb the rest |
-
-### Touch Targets
-- `{component.button-primary}` minimum 48 × 48px — above WCAG AAA (44 × 44).
-- `{component.text-input}` height 48px.
-- Category tabs run with 12px vertical padding, giving an effective tap area > 44px.
-
-### Collapsing Strategy
-- The top nav collapses to a hamburger below 768px; the menu opens as a full-screen sheet.
-- The hero band's internal layout drops to a single column.
-- Model card grid 4-up/5-up → 2-up → 1-up.
-- The configurator filter chip row scrolls horizontally on mobile.
-- The M tricolor stripe stays at 4px height across every breakpoint.
-
-### Image Behavior
-- Model renders scale at every breakpoint while preserving native aspect ratios.
-- Hero photography may shift to a more vertical crop on mobile (art direction).
-- Inventory vehicle photos may move from 16:9 to 4:3 on mobile.
-
-## Known Gaps
-
-- BMW Type Next Latin is licensed to BMW and not published as a public web font; Inter at weights 700/300 is documented as the substitute.
-- Animation and transition timings (configurator color swap, model card hover-reveal) are out of scope here.
-- Form validation states beyond `{component.text-input}` focus were not extracted — error/success states would need a dedicated form page.
-- The dealer inventory sub-domain shares typography and color with the main corporate site; only UI density rises (filters, tables, prices).
-- A cookie consent overlay can occlude part of the hero — the lead hero band content may not be fully captured.
-- The M tricolor stripe appears infrequently on this corporate site; full motorsport context lives on the BMW M site.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a BMW-inspired interface. Implement this working page: A vehicle discovery page with a wide visual introduction, body-style filters, and a specification comparison. Keep photography subordinate to readable controls, and make selected filters obvious without extra decorative gradients.
+先閱讀隨附的 DESIGN.md，以 BMW 的設計語言作為介面參考。請完成以下可操作頁面：製作車款探索頁，包含寬幅主視覺、車身類型篩選與規格比較。照片不可影響控制項辨識；清楚呈現已選篩選條件，不加入多餘的裝飾漸層。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a BMW-inspired interface. Build a vehicle selection card with specifications and a compare toggle. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 BMW 的設計語言作為介面參考。請製作車款選擇卡片，包含規格與加入比較的切換功能。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a BMW-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A vehicle discovery page with a wide visual introduction, body-style filters, and a specification comparison. Keep photography subordinate to readable controls, and make selected filters obvious without extra decorative gradients.
+先閱讀隨附的 DESIGN.md，以 BMW 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作車款探索頁，包含寬幅主視覺、車身類型篩選與規格比較。照片不可影響控制項辨識；清楚呈現已選篩選條件，不加入多餘的裝飾漸層。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

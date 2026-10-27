@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Meta-design-analysis
-description: Meta's design system spans hardware commerce (Quest VR, Ray-Ban Meta AI glasses) and brand surfaces with a confident product-merchandising voice. The system pairs a stark white canvas with full-bleed photographic product cards, a confident Optimistic VF wordmark/headline face, dual-CTA hero patterns (black primary + outlined secondary), and a saturated cobalt blue (#0064E0) for in-product purchase actions. Pill-shaped 100px-radius buttons, generous 24-32px card rounding, and tight three-tier text hierarchy carry across homepage, product detail (PDP), buy-now configurator, and accessory subpages.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Meta"
+description: "大幅影像與藍色操作，建立明確產品層次。"
 
 colors:
   primary: "#0064e0"
@@ -348,373 +349,169 @@ components:
     border: "1px solid {colors.hairline-soft}"
 ---
 
-## Overview
-
-Meta's commerce surfaces (homepage, Quest configurator, Ray-Ban product detail, prescription page) read as a confident hardware merchandiser. The brand voice is photography-first: large, full-bleed product imagery dominates above-the-fold real estate, with white space and tight typographic hierarchy carrying the rest. The system has a recognizable dual-CTA pattern — a black pill-shaped primary on marketing surfaces shifting to a saturated cobalt blue ({colors.primary}) inside the buy-now flows, paired with an outlined ghost button for secondary navigation.
-
-Optimistic VF — Meta's variable display face — anchors the entire system, ranging from a 64px hero display down to a 12px caption. The face's `ss01` and `ss02` stylistic sets are switched on across every heading role, contributing to the brand's slightly humanist, friendly geometric character. Below 768px the system collapses cleanly: hero stacks, pill nav becomes a hamburger, three-up feature grids flatten to a single column, and product configurators drop their right-rail summary into a sticky bottom bar.
-
-**Key Characteristics:**
-- Stark white canvas ({colors.canvas}) carrying full-bleed product photography with `{rounded.xxxl}` (32px) corner softening on showcase tiles
-- Two-tier primary button system: marketing CTAs use {colors.ink-button} pills; commerce CTAs use {colors.primary} cobalt pills inside buy-now panels
-- Optimistic VF as the universal display + body face with consistent `ss01, ss02` OpenType features
-- Pill-shaped buttons ({rounded.full}) and `{rounded.xxxl}`/`{rounded.feature}` cards as the dominant geometric signature
-- Saturated promotional banners (yellow {colors.warning}, dark {colors.ink-deep}) used sparingly above the nav for time-bound offers
-- Photographic feature cards with no card chrome (no border, no shadow) — the product imagery IS the surface treatment
-
-## Colors
-
-> Source pages: meta.com/ (homepage), /ai-glasses/ray-ban-meta-skyler-gen-2/ (PDP), /quest/quest-3s/buy-now/ (configurator), /ai-glasses/prescription/ (lens upsell). Token coverage was identical across all four pages — the design system is genuinely unified.
-
-### Brand & Accent
-- **Cobalt Primary** ({colors.primary}): The buy-now CTA color. Used on every "Add to cart", "Configure", "Pre-order" button inside the commerce flow and the right-rail purchase panel.
-- **Deep Cobalt** ({colors.primary-deep}): Pressed-state and dark-surface variant of the cobalt primary; also the active link color.
-- **Soft Cobalt** ({colors.primary-soft}): Translucent background tint for informational callouts (`{colors.primary-soft}` at 15% alpha).
-- **Facebook Blue** ({colors.fb-blue}): Selected radio/checkbox state and inline form-control activation color.
-- **Meta Link Blue** ({colors.meta-link}): Reserved for legacy navigation and footer link affordances.
-- **Oculus Purple** ({colors.oculus-purple}): VR product accent — used inside Quest-branded surfaces for category emphasis.
-
-### Surface
-- **Canvas White** ({colors.canvas}): Page background and primary card surface.
-- **Soft Cloud** ({colors.surface-soft}): Subtle product-thumbnail and warranty-card background; also the search-pill rest state.
-- **Hairline Gray** ({colors.hairline}): 1px input border and form-control divider.
-- **Hairline Soft** ({colors.hairline-soft}): Quieter divider used on cards, footer separators, and section breaks.
-
-### Text
-- **Deep Ink** ({colors.ink-deep}): Primary headline and body text on light surfaces.
-- **Ink** ({colors.ink}): Standard body and secondary headline text.
-- **Charcoal** ({colors.charcoal}): Tertiary body text and form-button labels.
-- **Slate** ({colors.slate}): Section-header copy and supporting microcopy.
-- **Steel** ({colors.steel}): Quieter caption text and footer link hierarchy.
-- **Stone** ({colors.stone}): Disabled or de-emphasized labels.
-
-### Semantic
-- **Success** ({colors.success}): "In stock", "Free returns" affirmations.
-- **Attention** ({colors.attention}): Mid-priority alerts and timed callouts.
-- **Warning** ({colors.warning}): Promotional banners ("Get 25% off…") and limited-time tags.
-- **Critical** ({colors.critical}): Validation errors, destructive feedback.
-- **Critical Strong** ({colors.critical-strong}): Form-input error border and inline error labels.
-
-## Typography
-
-### Font Family
-**Optimistic VF** is Meta's proprietary variable display face. Fallbacks: Montserrat, Helvetica, Arial, Noto Sans. The variable axes carry from 300 (light heading-md, used for editorial intro headlines like "Look forward") through 500 (display, hero, heading-sm) up to 700 (subtitle, body emphasis, button labels). Stylistic sets `ss01` and `ss02` are switched on across every heading role — they soften the geometry and give the type a slightly humanist breathing.
-
-A secondary Helvetica fallback chain is used for technical microcopy (12px) inside spec sheets and footer fine print.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | OpenType | Use |
-|---|---|---|---|---|---|---|
-| `{typography.hero-display}` | 64px | 500 | 1.16 | 0 | ss01, ss02 | Homepage hero ("Get 25% off…", category opener) |
-| `{typography.display-lg}` | 48px | 500 | 1.17 | 0 | ss01, ss02 | Section-opener display ("Made for prescriptions. Built for comfort.") |
-| `{typography.heading-lg}` | 36px | 500 | 1.28 | 0 | ss01, ss02 | Subsection headlines ("Why buy from Meta", "Tech specs") |
-| `{typography.heading-md}` | 28px | 300 | 1.21 | 0 | ss01, ss02 | Editorial subheads in lighter weight ("Look forward", "Built for prescriptions") |
-| `{typography.heading-sm}` | 24px | 500 | 1.25 | 0 | ss01, ss02 | Card titles, feature-tile headers |
-| `{typography.subtitle-lg}` | 18px | 700 | 1.44 | 0 | — | Bold callouts, FAQ question titles |
-| `{typography.subtitle-md}` | 18px | 400 | 1.44 | 0 | — | Body lead and longer-line subtitles |
-| `{typography.body-md}` | 16px | 400 | 1.50 | -0.16px | — | Primary body text |
-| `{typography.body-md-bold}` | 16px | 700 | 1.50 | -0.16px | — | Body emphasis and link-md |
-| `{typography.body-sm}` | 14px | 400 | 1.43 | -0.14px | — | Secondary body, helper text |
-| `{typography.body-sm-bold}` | 14px | 700 | 1.43 | -0.14px | — | Pill tab labels, footer headings |
-| `{typography.caption-bold}` | 12px | 700 | 1.33 | 0 | — | Badge labels, timestamps |
-| `{typography.caption}` | 12px | 400 | 1.33 | 0 | — | Footer fine print, legal microcopy |
-| `{typography.button-md}` | 14px | 700 | 1.43 | -0.14px | — | Pill button labels |
-| `{typography.link-md}` | 16px | 700 | 1.50 | -0.16px | — | Inline navigation links |
-
-### Principles
-- Negative letter-spacing on body roles (`-0.14px` to `-0.16px`) tightens the type fractionally — Optimistic VF was designed for this snug-but-not-condensed setting.
-- Editorial subheads use the 300 weight to introduce visual rest between the 500-weight display headlines and the 400-weight body, creating a three-tier visual rhythm.
-- All headings carry `ss01, ss02` stylistic sets together — the design treats them as a paired alternates package, never one without the other.
-- Buttons, pill tabs, and footer headings share `{typography.body-sm-bold}` (14px / 700 / -0.14px), creating a tight visual relationship between interactive elements.
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4px increment with 8px as the dominant primary step.
-- **Tokens**: `{spacing.xxs}` (4px) · `{spacing.xs}` (8px) · `{spacing.sm}` (10px) · `{spacing.md}` (12px) · `{spacing.base}` (16px) · `{spacing.lg}` (20px) · `{spacing.xl}` (24px) · `{spacing.xxl}` (32px) · `{spacing.xxxl}` (40px) · `{spacing.section-sm}` (48px) · `{spacing.section}` (64px) · `{spacing.section-lg}` (80px) · `{spacing.hero}` (120px).
-- **Section rhythm**: Marketing sections separate at `{spacing.section-lg}` (80px); product detail sections compress to `{spacing.section}` (64px); FAQ stacks tighten further to `{spacing.xxl}` (32px).
-- **Card internal padding**: Standard `{spacing.xxl}` (32px); icon-feature tiles compress to `{spacing.xl}` (24px); promo-strip cards expand to `{spacing.section}` (64px) for hero presence.
-
-### Grid & Container
-- Marketing page max-width sits around 1280px with 32–48px gutters.
-- The PDP layout uses a 2-column split: hero gallery (~58% width) + sticky purchase rail (~42%, with `max-width: 380px` on the rail).
-- Three-up feature grids ("Why buy from Meta") use a 24px column gap; six-up product thumbnail rows (color/SKU pickers) use a 12px gap.
-
-### Whitespace Philosophy
-Whitespace is product-photography-first. Hero sections give product imagery 50–70% of the viewport height; copy is given oxygen to breathe in `{spacing.xxl}` to `{spacing.xxxl}` blocks above and below. Inside the configurator, whitespace tightens — the buy-now panel is information-dense, with `{spacing.base}` to `{spacing.lg}` rhythm between option groups.
-
-## Elevation & Depth
-
-The system runs predominantly flat. Elevation is reserved for two interaction layers:
-
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow; `{rounded.xxxl}` rounding + `{colors.hairline-soft}` border | Default product cards, why-buy tiles |
-| 1 (subtle) | `rgba(0, 0, 0, 0.2) 1px 1px 0px 0px` | Pill-tab activation indicator |
-| 2 (sticky panel) | `rgba(20, 22, 26, 0.3) 0px 1px 4px 0px` | PDP right-rail purchase summary, sticky mobile checkout bar |
+# Meta 延伸設計規格
 
-### Decorative Depth
-- Photography-as-depth: full-bleed product imagery on `{rounded.xxxl}` cards creates atmospheric layering without shadows.
-- Translucent overlays (`rgba(255, 255, 255, 0.1)` to `rgba(10, 19, 23, 0.12)`) cover dark hero photography to lift legibility of overlaid text.
-- Decorative pastel tints inside accessory cards — soft pink, ice-blue, mint — appear briefly behind product cutouts but are NOT formalized as system tokens (treated as photographic content).
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Shapes
+## 來源與規格層次
 
-### Border Radius Scale
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 2px | Inline checkbox marks, fine UI corners |
-| `{rounded.sm}` | 4px | Tags, micro-controls |
-| `{rounded.md}` | 6px | Square thumbnail rounding |
-| `{rounded.lg}` | 8px | Form inputs, radio-option containers |
-| `{rounded.xl}` | 16px | Standard feature cards, FAQ accordion items |
-| `{rounded.xxl}` | 24px | Warranty / accessory tiles, ghost-style action cards |
-| `{rounded.xxxl}` | 32px | Photographic feature cards, big promo strips |
-| `{rounded.feature}` | 40px | Accessory hero panels, "Built for prescriptions" cards |
-| `{rounded.full}` | 100px | Pill buttons, tab chips, badges |
-| `{rounded.circle}` | 50% | Color swatches, circular icon buttons |
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`b6c7fe474746207740a39258d8d01d75073f6769d2fc569868f90941e47ddd78`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.meta.com/ca/。
+- 目前預覽：`official-drafts/meta.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Photography Geometry
-- Product hero photography sits in `{rounded.xxxl}` (32px) frames more often than rectangles.
-- Color/material swatches are perfect circles (`{rounded.circle}`, 32px diameter, 2px white border ring when selected).
-- Square product thumbnails (`aspect-ratio: 1/1`) use `{rounded.xl}` rounding.
-- Six-up "color & SKU" picker rows use 1:1 aspect tiles with `{rounded.lg}` (8px) corners — tighter than the hero photography frames to differentiate selection-grid context from showcase context.
+## 整體視覺方向
 
-## Components
+大幅影像與藍色操作，建立明確產品層次。
 
-> Per the no-hover policy, hover states are NOT documented for any component below. Default and pressed/active states only.
+製作連網裝置展示頁，明亮產品區與深色沉浸範例交錯。主要操作維持一致的藍色，提供直接比較功能，不要求使用者捲過所有照片。
 
-### Buttons
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-**`button-primary`** — Black pill primary CTA for marketing surfaces ("Shop", "Pre-order").
-- Background `{colors.ink-button}`, text `{colors.on-ink-button}`, typography `{typography.button-md}`, padding `14px 30px`, rounded `{rounded.full}`.
-- Pressed state `button-primary-pressed` flips background to `{colors.charcoal}`.
-- Disabled state `button-primary-disabled` uses `{colors.disabled-text}` background.
+## 色彩、字型與繁體中文排版
 
-**`button-buy-cta`** — Cobalt pill primary CTA for commerce flows ("Add to cart", "Configure", "Continue").
-- Background `{colors.primary}`, text `{colors.on-primary}`, typography `{typography.button-md}`, padding `14px 30px`, rounded `{rounded.full}`.
-- Pressed state `button-buy-cta-pressed` deepens background to `{colors.primary-deep}`.
-- This variant ONLY appears inside the buy-now configurator and PDP purchase rail. Marketing surfaces use `button-primary` instead.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-**`button-secondary`** — Outlined ghost CTA, often paired with primary in dual-CTA hero patterns.
-- Background transparent, text `{colors.ink-deep}`, border `2px solid {colors.ink-deep}`, typography `{typography.button-md}`, padding `12px 28px`, rounded `{rounded.full}`.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-**`button-ghost`** — Quieter outlined variant used for tertiary CTAs.
-- Background transparent, text `{colors.ink-deep}`, border `2px solid rgba(10, 19, 23, 0.12)`, typography `{typography.button-md}`, padding `10px 22px`, rounded `{rounded.full}`.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-**`button-pill-tab`** + **`button-pill-tab-active`** — Top-of-page category navigation pills ("Glasses / Quest / Apps").
-- Inactive: background `{colors.canvas}`, text `{colors.ink}`, border `1px solid {colors.hairline}`, padding `8px 16px`, rounded `{rounded.full}`.
-- Active: background `{colors.ink-deep}`, text `{colors.canvas}`. No border in active state — the dark fill replaces it.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 64px | 500 | 1.16 | 0 |
+| 48px | 500 | 1.17 | 0 |
+| 36px | 500 | 1.28 | 0 |
+| 28px | 300 | 1.21 | 0 |
+| 24px | 500 | 1.25 | 0 |
+| 18px | 700 | 1.44 | 0 |
+| 18px | 400 | 1.44 | 0 |
+| 16px | 400 | 1.50 | -0.16px |
+| 16px | 700 | 1.50 | -0.16px |
+| 14px | 400 | 1.43 | -0.14px |
+| 14px | 700 | 1.43 | -0.14px |
+| 12px | 700 | 1.33 | 0 |
+| 12px | 400 | 1.33 | 0 |
+| 14px | 700 | 1.43 | -0.14px |
+| 16px | 700 | 1.50 | -0.16px |
 
-**`button-icon-circular`** — 40×40px circular utility buttons (carousel arrows, share, favorite).
-- Background `{colors.canvas}`, icon color `{colors.ink}`, rounded `{rounded.circle}`.
+## 版面與元件結構
 
-### Cards & Containers
+此參考可先實作：裝置特色選擇器，包含可辨識的選取狀態與圖片說明。
 
-**`card-product-feature`** — White feature card with product photography and copy (homepage "Designed for sport", "Advanced. Inside and out.").
-- Background `{colors.canvas}`, rounded `{rounded.xxxl}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline-soft}`.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-**`card-feature-photo`** — Edge-to-edge photographic showcase tile with NO chrome (homepage "Built for prescriptions" full-bleed glasses card).
-- Background `{colors.canvas}` (visible only at the corners), rounded `{rounded.xxxl}`, no padding, no border. The image fills the card; copy is overlaid bottom-left in white.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-**`card-promo-strip`** — Dark full-width promo card with embedded copy + CTAs (homepage "Meta Quest brings the magic of virtual reality" wide strip).
-- Background `{colors.ink-deep}`, text `{colors.canvas}`, rounded `{rounded.xxxl}`, padding `{spacing.section}`.
+## 操作與狀態
 
-**`card-icon-feature`** — Three-up feature tile with line icon, headline, and short copy ("Free 2-day delivery", "Free 30-day returns", "Worry-free warranty", "Buy now, pay later").
-- Background `{colors.canvas}`, rounded `{rounded.xl}`, padding `{spacing.xl}`, border `1px solid {colors.hairline-soft}`.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**`card-checkout-summary`** — PDP right-rail sticky summary with title, price, color picker, "Add to cart" button.
-- Background `{colors.canvas}`, rounded `{rounded.xl}`, padding `{spacing.xl}`, border `1px solid {colors.hairline-soft}`, shadow `rgba(20, 22, 26, 0.3) 0px 1px 4px 0px`.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**`product-thumbnail`** — Square product image cell used in color/SKU pickers and "People also bought" rows.
-- Background `{colors.surface-soft}`, rounded `{rounded.xl}`, padding `{spacing.base}`, aspect-ratio `1 / 1`.
+## 圖片、動態與無障礙
 
-**`warranty-card`** — Promo callout for warranty + finance offers ("1y Warranty", "Meta Horizon+").
-- Background `{colors.surface-soft}`, rounded `{rounded.xxl}`, padding `{spacing.xxl}`. Uses pastel-tinted variants for additional perks.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`why-buy-tile`** — 4-up reassurance tile row in the lower marketing zone.
-- Background `{colors.canvas}`, rounded `{rounded.xl}`, padding `{spacing.xxl} {spacing.xl}`, border `1px solid {colors.hairline-soft}`. Heading in `{typography.subtitle-lg}`, body in `{typography.body-sm}`.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Inputs & Forms
+## 來源中的技術值補充
 
-**`text-input`** — Standard form field (footer email subscribe, support form).
-- Background `{colors.canvas}`, text `{colors.ink}`, border `1px solid {colors.hairline}`, rounded `{rounded.lg}`, padding `{spacing.md}`, height 44px.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`text-input-focused`** — Activated state.
-- Border switches to `2px solid {colors.fb-blue}`.
+- `-0.14px`
+- `-0.16px`
+- `max-width: 380px`
+- `rgba(0, 0, 0, 0.2) 1px 1px 0px 0px`
+- `rgba(20, 22, 26, 0.3) 0px 1px 4px 0px`
+- `rgba(255, 255, 255, 0.1)`
+- `rgba(10, 19, 23, 0.12)`
+- `14px 30px`
+- `2px solid {colors.ink-deep}`
+- `12px 28px`
+- `2px solid rgba(10, 19, 23, 0.12)`
+- `10px 22px`
+- `1px solid {colors.hairline}`
+- `8px 16px`
+- `1px solid {colors.hairline-soft}`
+- `2px solid {colors.fb-blue}`
+- `1px solid {colors.critical-strong}`
+- `1px solid rgba(10, 19, 23, 0.12)`
+- `2px solid #0143b5`
+- `2px solid {colors.canvas}`
+- `4px 10px`
 
-**`text-input-error`** — Validation error state.
-- Border switches to `1px solid {colors.critical-strong}`; error label below in `{colors.critical-strong}` `{typography.body-sm}`.
+## 日期限定首頁觀察
 
-**`search-pill`** — Top-nav search field.
-- Background `{colors.surface-soft}`, text `{colors.steel}`, typography `{typography.body-sm}`, rounded `{rounded.full}`, height 40px.
+2026-10-11 UTC實際觀測加拿大英文公開首頁，使用認識全新 Meta Glasses首屏及LISA 演繹 Meta Glasses、Ray-Ban Meta、Ray-Ban Meta Audio、Meta VR Glasses、Muse Charm、Oakley Meta、Meta Ray-Ban Display、Meta Quest 3S八個商品區塊。Optimistic VF字型、藍色膠囊按鈕、圓角照片卡和白色頁尾構成主要視覺。窄版為單欄商品及橫向類別／服務卡，保留當時Meta Store已展開的頁尾群組。67份原始公開素材共7.8MB，未解決的直接下載失敗為0。桌面6964px共10段、窄版8787px共11段，主代理實看全部6張對照圖，20個h1–h3的文字與幾何量測沒有差異；以role=heading繪製的首屏也以實際截圖檢視，不把缺少h2標籤誤認成缺內容。
 
-**`radio-option`** + **`radio-option-selected`** — Configurator option cards (storage, color variant, shipping option).
-- Inactive: background `{colors.canvas}`, rounded `{rounded.lg}`, padding `{spacing.lg}`, border `1px solid rgba(10, 19, 23, 0.12)`.
-- Selected: border switches to `2px solid #0143b5` (deep cobalt) — the cobalt theme persists into form-control selection signaling.
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-**`color-swatch-circle`** — Round color/material picker (Ray-Ban frame finishes, glass colors).
-- 32px diameter, `{rounded.circle}`, `2px solid {colors.canvas}` ring on selection over the swatch's own fill color.
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-### Badges & Status
+## 已知差異與驗證範圍
 
-**`badge-promo-yellow`** — Limited-time offer chip ("Limited time", "Sale").
-- Background `{colors.warning}`, text `{colors.ink-deep}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
+- 這次要求MOBILE但供應商回傳DESKTOP 2560×16646；原生稿照片為大量佔位框，沒有當成官方一致成品。原始檔完整保存，成品是後續按實際來源校正的獨立版本。
+- 首屏原始影片的播放時間、人物影格及Play／Pause按鈕狀態與來源取樣不同。窄版首屏導覽背景模糊／透明度和選單背景透出的影片色彩及捲動條有可見差異；導覽過渡時機未同步。
+- 桌面第一次來源取樣尚在調整高度，第一段高度6900px，後續6964px，造成17項64.4px標題差異；該批保留為私人診斷，最終桌面已改用穩定6964px全頁取樣，不混算為相同畫面。
+- 窄版根選單已實看，X／Escape通過；選單次層、桌面選單、地區／搜尋／影片控制、類別／服務輪播其他狀態、全部頁尾手風琴及Newsletter/購物/帳號/融資服務未驗證。沒有輸入個資或建立帳號、訂閱、購物、融資。
+- 390px為桌面UA響應式取樣；官網內容會依時間、地區和載入狀態改變。主要靜態畫面已核對但不宣稱完全一致；正式部署仍未驗證。
 
-**`badge-attention`** — Mid-priority status indicator ("Almost gone", "Selling fast").
-- Background `{colors.attention}`, text `{colors.canvas}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-success`** — Affirmative status ("In stock", "Verified", "Free shipping").
-- Background `{colors.success}`, text `{colors.canvas}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`badge-critical`** — Urgent/destructive label ("Out of stock", "Discontinued", error chips).
-- Background `{colors.critical}`, text `{colors.canvas}`, typography `{typography.caption-bold}`, rounded `{rounded.full}`, padding `4px 10px`.
-
-**`promo-banner`** — Sticky full-width promotional strip ABOVE the top nav ("Get 25% off the #1 selling AI glasses").
-- Background `{colors.ink-deep}` (or `{colors.warning}` for yellow promo variants), text `{colors.canvas}` (or `{colors.ink-deep}` on yellow), typography `{typography.body-sm-bold}`, padding `{spacing.md} {spacing.xl}`. Carries one-line offer copy plus an inline CTA link.
-
-### Navigation
-
-**Top Navigation (Desktop)** — Sticky white bar with category pill tabs, search, account, cart.
-- Background `{colors.canvas}`, height ~64px with bottom `1px solid {colors.hairline-soft}`.
-- Left: Meta wordmark logo (61×14px). Center: pill-tab category nav. Right: search-pill + circular icon buttons (account, cart).
-
-**Top Navigation (Mobile)** — Compressed to logo + hamburger + cart icon. Pill-tab nav slides into a full-screen drawer below 768px.
-
-**Promo Banner** — Full-width strip ABOVE the nav for time-bound offers.
-- Background `{colors.ink-deep}` or `{colors.warning}` (yellow), text `{colors.canvas}` or `{colors.ink-deep}`, typography `{typography.body-sm-bold}`, padding `{spacing.md} {spacing.xl}`. Carries one-line offer copy + inline link.
-
-**Breadcrumb (PDP)** — Inline path above the product hero ("Glasses › Ray-Ban Meta › Skyler (Gen 2)").
-- Typography `{typography.body-sm}`, separator dot in `{colors.stone}`, active leaf in `{colors.ink}`, parent links in `{colors.steel}`.
-
-### Signature Components
-
-**`hero-band-marketing`** — Full-bleed photographic hero with overlaid copy + dual-CTA pair.
-- Edge-to-edge product photography on a dark or photographic background. Overlay copy in `{typography.hero-display}` white. Below the title: 1-line subtitle in `{typography.subtitle-md}` then `button-primary` + `button-secondary` pair.
-
-**`product-gallery-pdp`** — Product detail page main hero: 4-up vertical thumbnail strip on the left, large product image center, sticky purchase rail right.
-- Thumbnails: 80×80px, `{rounded.lg}`, `{colors.surface-soft}` background, 1px `{colors.hairline-soft}` border (active border switches to `{colors.ink-deep}`).
-- Main image area: ~720×720px on desktop, `{rounded.xxxl}` rounding, photographic surface.
-- Sticky rail uses `card-checkout-summary`.
-
-**`color-sku-picker-row`** — Six-up grid of square product variants with name + price below each.
-- Tile background `{colors.surface-soft}`, rounded `{rounded.lg}`, image padded `{spacing.base}`. Active tile border switches to `2px solid {colors.ink-deep}`. Below the tile: variant name in `{typography.body-sm-bold}` and price in `{typography.body-sm}`.
-
-**`feature-icon-row`** — Four reassurance benefits ("Free 2-day delivery", "Free 30-day returns", "Worry-free warranty", "Buy now, pay later").
-- 4-column grid, each cell uses `card-icon-feature` chrome with a 32px line icon at top, headline `{typography.subtitle-lg}`, body `{typography.body-sm}`.
-
-**`faq-accordion`** — Vertical stack of expandable Q&A items.
-- Each item uses `faq-accordion-item` chrome. Question in `{typography.subtitle-lg}` left, chevron icon (`{colors.steel}`, 20px) right. Expanded answer drops in `{typography.body-md}` text below with `{spacing.base}` top padding.
-
-**`tech-specs-table`** — Two-column key/value table for product specifications.
-- Row layout: spec label (`{typography.body-sm-bold}` `{colors.ink}`) left, spec value (`{typography.body-sm}` `{colors.charcoal}`) right. Row separator `1px solid {colors.hairline-soft}`. Section headers in `{typography.heading-sm}` above each spec group.
-
-**`testimonial-customer-card`** — Small editorial card with author + quote + photo.
-- Background `{colors.canvas}`, rounded `{rounded.xl}`, padding `{spacing.xxl}`, border `1px solid {colors.hairline-soft}`. Avatar circle 40px, byline in `{typography.body-sm-bold}`, quote in `{typography.body-md}`.
-
-**`footer-region`** — Dense multi-column site footer.
-- Background `{colors.canvas}`, top border `1px solid {colors.hairline-soft}`, padding `{spacing.section} {spacing.xxl}`. Six column groups with section headings in `{typography.body-sm-bold}` `{colors.ink}` and link lists in `{typography.body-sm}` `{colors.steel}`. Bottom row contains language picker, region selector, legal links in `{typography.caption}` `{colors.stone}`.
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` (cobalt) for buy-now CTAs only — its visual weight is meaningful precisely because it doesn't appear on marketing pages.
-- Use `{colors.ink-button}` (black) for marketing-surface primary CTAs. Pair with `{colors.button-secondary}` ghost outline for the secondary action.
-- Apply `{rounded.full}` to every button, every category pill, every badge, every chip — buttons are NEVER squared in Meta's system.
-- Apply `{rounded.xxxl}` to photographic product cards and `{rounded.xl}` to icon-feature tiles to maintain the visible card-hierarchy contrast.
-- Switch on `ss01, ss02` together for any Optimistic VF heading. Never one stylistic set without the other.
-- Use the 300-weight `{typography.heading-md}` for editorial subheads — it creates the brand's signature visual rhythm against the 500-weight displays.
-
-### Don't
-- Don't use `{colors.primary}` (cobalt) for marketing-surface primary buttons — it conflicts with Meta's brand-history positioning of black-CTA-on-white-canvas marketing.
-- Don't introduce additional accent colors beyond cobalt + Oculus purple. The hardware brand is deliberately monochromatic outside its product photography.
-- Don't soften the corners of pill buttons below `{rounded.full}`. The pill is a brand signature.
-- Don't run feature cards without rounding — `{rounded.xxxl}` is the minimum for any photographic surface.
-- Don't reduce `{typography.body-md}` line-height below 1.50 — the negative letter-spacing already tightens the metric and any further compression breaks legibility.
-- Don't apply heavy shadows to marketing cards. Elevation is a commerce-flow signal, not a marketing flourish.
-
-## Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile (small) | < 480px | Single column. Hero text drops to `{typography.display-lg}` or smaller. Pill tabs collapse into hamburger drawer. PDP gallery stacks above purchase rail; rail becomes sticky bottom bar. |
-| Mobile (large) | 480 – 767px | Same as small but feature tiles render two-up. |
-| Tablet | 768 – 1023px | Two-column feature grids. Pill-tab nav returns. PDP gallery + purchase rail render side-by-side at compressed proportions (~60/40). |
-| Desktop | 1024 – 1359px | Full three- and four-up feature grids; full pill-tab category nav; PDP at standard 58/42 split. |
-| Wide Desktop | ≥ 1360px | Same as desktop with wider hero gutters and larger product photography. |
-
-### Touch Targets
-- Pill buttons render at 40–44px effective height (with the 14px button text + `14px 30px` padding). Above the WCAG AAA 44px floor.
-- Circular icon buttons are 40×40px — at the AA floor; bumps to 44×44px on mobile via override.
-- Color swatch circles are 32×32px. To hit AAA, the swatch carries a 12px clear hit zone around it (effective hit target ~56px).
-- Form inputs render at 44px height to align with primary button height.
-
-### Collapsing Strategy
-- **Promo banner** stays full-width on all breakpoints; truncates with ellipsis on small mobile, retains the inline link affordance.
-- **Pill-tab nav** below 768px collapses into a hamburger drawer; the active tab is rendered as a label inside the closed nav.
-- **PDP layout**: gallery stacks above the purchase summary at < 1024px; the summary becomes a sticky bottom bar with price + "Add to cart" button at < 768px. The full summary remains scrollable above the sticky bar.
-- **Feature grids** (3-up, 4-up) collapse to 2-up at 768–1023px and 1-up at < 768px. Card padding compresses from `{spacing.xxl}` to `{spacing.xl}` at the 1-up breakpoint.
-- **Hero typography**: `{typography.hero-display}` (64px) drops to `{typography.heading-lg}` (36px) at < 768px and `{typography.heading-sm}` (24px) at < 480px.
-- **Footer**: 6-column desktop layout reflows to 2-column at tablet and accordion-collapsed groups at mobile.
-
-### Image Behavior
-- Product photography uses 1:1 (thumbnails, color pickers), 4:3 (PDP gallery), and 16:9 (homepage promo strips) ratios.
-- Hero photography is full-bleed with `{rounded.xxxl}` corners; lazy-loaded below the fold.
-- Product variant images preserve their `{rounded.lg}` thumbnails across all breakpoints — they never go full-width on mobile.
-
-## Known Gaps
-
-- Selected/checked states for non-button form controls (toggle, multi-select) were not visible on the captured surfaces — implement following the cobalt-on-white pattern from `radio-option-selected`.
-- Animation/transition timings are not extracted; recommend 150–250ms ease-out for primary surface transitions and 300ms ease-in-out for accordion expand/collapse.
-- Specific dark-mode token values for canvas, surface, ink, and hairline are not defined; the brand has not surfaced a published dark-mode token set on these commerce pages.
-- Pastel decorative tints inside accessory cards (soft pink, ice blue, mint) appear visually but are not formalized — treat them as photographic content, not as system colors.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Meta-inspired interface. Implement this working page: A connected-device showcase alternating bright product sections with dark immersive examples. Keep the primary blue action consistent and provide a comparison path that does not depend on scrolling through every photograph.
+先閱讀隨附的 DESIGN.md，以 Meta 的設計語言作為介面參考。請完成以下可操作頁面：製作連網裝置展示頁，明亮產品區與深色沉浸範例交錯。主要操作維持一致的藍色，提供直接比較功能，不要求使用者捲過所有照片。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Meta-inspired interface. Build a device feature selector with a visible selected state and descriptive captions. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Meta 的設計語言作為介面參考。請製作裝置特色選擇器，包含可辨識的選取狀態與圖片說明。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Meta-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A connected-device showcase alternating bright product sections with dark immersive examples. Keep the primary blue action consistent and provide a comparison path that does not depend on scrolling through every photograph.
+先閱讀隨附的 DESIGN.md，以 Meta 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作連網裝置展示頁，明亮產品區與深色沉浸範例交錯。主要操作維持一致的藍色，提供直接比較功能，不要求使用者捲過所有照片。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

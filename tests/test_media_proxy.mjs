@@ -40,6 +40,19 @@ test('supports video-style byte ranges and preserves 206/416 response headers',a
   }
 });
 
+test('immutable SVG originals keep their bytes and image content type',async()=>{
+  const svg=Buffer.from('<svg xmlns="http://www.w3.org/2000/svg"><path d="M0 0"/></svg>');
+  const asset={path:'example/original.svg',bytes:svg.length,sha256:createHash('sha256').update(svg).digest('hex')};
+  const handler=createMediaHandler([{prefix:'/official-drafts/',base,assets:[asset]}],async(url)=>{
+    assert.equal(url,base+asset.path);
+    return new Response(svg);
+  });
+  const response=await handler(request(asset.path));
+  assert.equal(response.headers.get('Content-Type'),'image/svg+xml');
+  assert.deepEqual(Buffer.from(await response.arrayBuffer()),svg);
+  assert.equal(response.headers.get('X-Content-Type-Options'),'nosniff');
+});
+
 test('conditional requests return 304 without fetching and stale If-Range gets full content',async()=>{
   let calls=0;
   const handler=createMediaHandler(groups,async(_,options)=>{

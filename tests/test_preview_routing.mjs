@@ -89,9 +89,9 @@ async function openHistory(ui,view='image') {
 function assertCurrentStudyStatus(query, slug) {
   const study = studies.find(item => item.slug === slug);
   assert.ok(study, `Missing published study metadata: ${slug}`);
-  assert.ok(query('#official-preview-status').textContent.includes(
-    `參考日期：${study.date}。${study.status_label}。`));
-  assert.equal(query('#official-study-scope').textContent, study.scope);
+  assert.equal(query('#official-preview-status').textContent, `參考日期：${study.date}`);
+  assert.equal(query('#official-study-source').getAttribute('href'), study.reference_url);
+  assert.equal(query('#official-study-source').textContent, `${study.name} 官網 ↗`);
 }
 
 test('a direct brand link defaults to the official draft and waits for its progress', async t => {
@@ -111,8 +111,10 @@ test('late progress updates the main preview while preserving an explicitly open
   const ui = await fixture(t, 'wired');
   await openHistory(ui,'html');
   assert.equal(ui.query('#preview-frame').getAttribute('src'), ui.original.html);
+  assert.equal(ui.query('#download-html').getAttribute('href'), ui.original.html+'?download=1');
+  assert.equal(ui.query('#generation-prompt').getAttribute('href'), ui.original.prompt+'?download=1');
   ui.revealProgress();
-  await settleUntil(() => ui.query('.official-drafts-count').textContent.includes('份參考紀錄'));
+  await settleUntil(() => ui.query('.official-drafts-count').textContent.includes('份參考來源'));
   assert.equal(ui.query('#official-preview').hidden, false);
   assert.equal(ui.query('#preview-frame').hidden, false);
   assert.equal(ui.query('#preview-frame').getAttribute('src'), ui.original.html);
@@ -137,7 +139,7 @@ test('a brand without an official draft stays pending instead of showing its fic
   ui.revealProgress();
   await settleUntil(() => ui.query('#official-preview-status').textContent.includes('尚無'));
   assertOfficialOnly(ui.query);
-  assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'official-progress.html');
+  assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'reference-sources.html');
   assert.equal(ui.query('#current-preview-image').hidden,true);
   await openHistory(ui);
   assert.equal(ui.query('#preview-image').getAttribute('src'), ui.original.image);
@@ -151,7 +153,7 @@ for (const slug of ['pinterest', 'vodafone']) {
     await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === `official-drafts/${slug}.html`);
     assertOfficialOnly(ui.query);
     assertCurrentStudyStatus(ui.query, slug);
-    assert.match(ui.query('.official-drafts-count').textContent, /74 份參考紀錄/);
+    assert.match(ui.query('.official-drafts-count').textContent, /74 份參考來源/);
   });
 }
 
@@ -167,9 +169,10 @@ test('a failed progress request preserves the official view with a recovery link
   ui.failProgress();
   await settleUntil(() => ui.query('#official-preview-status').textContent.includes('無法載入'));
   assertOfficialOnly(ui.query);
-  assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'official-progress.html');
+  assert.equal(ui.query('#official-preview-link').getAttribute('href'), 'reference-sources.html');
   assert.equal(ui.query('#download-design').hidden,true);
   assert.equal(ui.query('#download-prompts').hidden,true);
+  assert.equal(ui.query('#download-implementation-pack').hidden,true);
   assert.match(ui.query('#document-reference').textContent,/無法載入/);
   ui.query('#tab-document').click();
   assert.equal(ui.query('#copy-document').disabled,true);
@@ -203,15 +206,20 @@ test('all catalog covers and the default detail image depict the same current st
   assertOfficialOnly(ui.query);
 });
 
-test('a current rendered review shows its bounded comparison and visible limits', async t => {
-  const ui = await fixture(t, 'elevenlabs');
+test('public preview keeps source and date while detailed checks stay in developer records', async t => {
+  const ui = await fixture(t, 'starbucks');
   ui.revealProgress();
-  await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/elevenlabs.html');
-  assert.match(ui.query('#official-preview-status').textContent, /已比對主要畫面，仍有差異/);
-  assert.match(ui.query('#official-study-scope').textContent, /互動未驗證/);
+  await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/starbucks.html');
+  assertCurrentStudyStatus(ui.query, 'starbucks');
   assert.equal(ui.query('#official-study-details').hidden, false);
-  assert.ok(ui.query('#official-study-limits').children.length > 0);
-  assert.match(ui.query('#official-study-links').textContent, /目前設計分析.*重寫 AI 指令.*畫面校正紀錄/);
+  assert.equal(ui.query('#download-implementation-pack').hidden,false);
+  assert.equal(ui.query('#download-implementation-pack').getAttribute('href'),'assets/design-packs/starbucks.zip');
+  assert.equal(ui.query('#official-study-limits'), null);
+  assert.equal(ui.query('#official-study-scope'), null);
+  assert.match(ui.query('#official-preview .preview-note').textContent, /此預覽供設計參考，部分互動為示範/);
+  assert.doesNotMatch(ui.query('#official-preview').textContent, /RGB|2560|中繼資料|像素|未驗證/);
+  assert.match(progress, /開發比對紀錄/);
+  assert.match(progress, /0\.249/);
 });
 
 test('the main AI tab copies and downloads its dated prompt, with the original three in history', async t => {
@@ -222,11 +230,11 @@ test('the main AI tab copies and downloads its dated prompt, with the original t
   const exactPrompt = '# 實際重寫指令\n\nPreserve the current source and recorded differences.\n';
   const ui = await fixture(t, 'elevenlabs', progress, {[href]:exactPrompt});
   ui.revealProgress();
-  await settleUntil(() => ui.query('#download-prompts').getAttribute('href')===href);
+  await settleUntil(() => ui.query('#download-prompts').getAttribute('href')===href+'?download=1');
   assert.equal(ui.query('#prompt-list').children.length, 3);
   assert.ok(ui.query('#creation-history').contains(ui.query('#prompt-list')));
   assert.equal(ui.query('#original-prompt-details').open,false);
-  assert.equal(ui.query('#download-original-prompts').getAttribute('href'),'design-md/elevenlabs/PROMPTS.md');
+  assert.equal(ui.query('#download-original-prompts').getAttribute('href'),'design-md/elevenlabs/PROMPTS.md?download=1');
   ui.query('#tab-prompts').click();
   await settleUntil(() => ui.query('#copy-current-prompt').disabled === false);
   assert.equal(ui.query('#current-prompt-text').textContent, exactPrompt);
@@ -251,13 +259,13 @@ test('a directly opened analysis waits for metadata then reads, copies and downl
   ui.revealProgress();
   await settleUntil(()=>!ui.query('#copy-document').disabled);
   assert.equal(ui.query('#document-text').textContent,exact);
-  assert.equal(ui.query('#download-design').getAttribute('href'),href);
+  assert.equal(ui.query('#download-design').getAttribute('href'),href+'?download=1');
   assert.ok(ui.query('#document-reference').textContent.includes(study.date));
   assert.equal(ui.query('#current-analysis-note'),null);
   ui.query('#copy-document').click();
   await settleUntil(()=>ui.copied.length===1);
   assert.equal(ui.copied[0],exact);
-  assert.equal(ui.query('#download-original-design').getAttribute('href'),'design-md/pinterest/DESIGN.md');
+  assert.equal(ui.query('#download-original-design').getAttribute('href'),'design-md/pinterest/DESIGN.md?download=1');
   assert.equal(ui.query('#creation-history').open,false);
 });
 
@@ -268,10 +276,10 @@ test('all 74 primary analysis and prompt links match their preview while origina
     ui.window.location.hash='#/design/'+encodeURIComponent(study.slug);
     await settleUntil(()=>ui.query('#detail-title').textContent===study.name);
     assert.ok(study.study.analysis&&study.study.prompts,study.slug);
-    assert.equal(ui.query('#download-design').getAttribute('href'),study.study.analysis);
-    assert.equal(ui.query('#download-prompts').getAttribute('href'),study.study.prompts);
-    assert.equal(ui.query('#download-original-design').getAttribute('href'),`design-md/${study.slug}/DESIGN.md`);
-    assert.equal(ui.query('#download-original-prompts').getAttribute('href'),`design-md/${study.slug}/PROMPTS.md`);
+    assert.equal(ui.query('#download-design').getAttribute('href'),study.study.analysis+'?download=1');
+    assert.equal(ui.query('#download-prompts').getAttribute('href'),study.study.prompts+'?download=1');
+    assert.equal(ui.query('#download-original-design').getAttribute('href'),`design-md/${study.slug}/DESIGN.md?download=1`);
+    assert.equal(ui.query('#download-original-prompts').getAttribute('href'),`design-md/${study.slug}/PROMPTS.md?download=1`);
     assert.equal(ui.query('#creation-history').open,false);
   }
 });

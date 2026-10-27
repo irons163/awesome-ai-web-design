@@ -2,7 +2,7 @@
 // Bodies stay as streams so large videos do not consume the isolate's memory.
 const types = {
   png: 'image/png', jpg: 'image/jpeg', jpeg: 'image/jpeg', webp: 'image/webp',
-  avif: 'image/avif', gif: 'image/gif', mp4: 'video/mp4', webm: 'video/webm',
+  avif: 'image/avif', gif: 'image/gif', svg: 'image/svg+xml', mp4: 'video/mp4', webm: 'video/webm',
   woff: 'font/woff', woff2: 'font/woff2', ttf: 'font/ttf', otf: 'font/otf',
 };
 const encode = value => value.split('/').map(encodeURIComponent).join('/');

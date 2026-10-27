@@ -1,375 +1,199 @@
-# Design System Inspired by Mastercard
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Mastercard"
+description: "溫暖米色與圓弧構圖，讓內容輕鬆流動。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#CF4500"
+  canvas: "#F3F0EE"
+  ink: "#141413"
+  source-01: "#F3F0EE"
+  source-02: "#141413"
+  source-03: "#EB001B"
+  source-04: "#F79E1B"
+  source-05: "#CF4500"
+  source-06: "#F37338"
+  source-07: "#9A3A0A"
+  source-08: "#FCFBFA"
+  source-09: "#FFFFFF"
+  source-10: "#F4F4F4"
+  source-11: "#262627"
+  source-12: "#696969"
+  source-13: "#555555"
+  source-14: "#565656"
+  source-15: "#D1CDC7"
+  source-16: "#3860BE"
+  source-17: "#000000"
+  source-18: "#2B2B2B"
+  source-19: "#E8E2DA"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Mastercard's experience reads like a warm, editorial magazine built from soft stone and signal orange. The canvas is a muted putty-cream (`#F3F0EE`) — not white, not gray, but a color that feels like the paper of a premium annual report. On top of that canvas, everything that matters is shaped like a stadium, a pill, or a perfect circle. The dominant visual gesture is the **oversized radius**: heroes carry 40-point corners, cards go fully pill-shaped, service images are cropped into circular orbits, and buttons either complete the pill or fit snugly at 20 points. There are almost no sharp corners anywhere on the page.
+# Mastercard 延伸設計規格
 
-The second gesture is **orbit and trajectory**. Circular image masks don't sit still — they're connected by thin, hand-drawn-feeling orange arcs that span entire viewport widths, implying a constellation of services rather than a list. Each circle has a small attached "satellite" — a white micro-CTA holding an arrow icon — docked onto its perimeter like a moon. This is the most distinctive thing about Mastercard's current design language: the circles feel like they're in motion even though the page is still.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-Typography is rendered entirely in **MarkForMC**, Mastercard's proprietary geometric sans. Headlines are set at a medium weight (500) with tight negative letter-spacing (-2%), giving them confidence without shouting. Body copy runs at the same family in a slightly lighter weight (450) — a weight you rarely see on the web, chosen because it reads softer than regular 400 without feeling thin. The whole system — warm cream surfaces, pill shapes, circular portraits, traced-orange orbits, black CTAs — feels simultaneously institutional (a 60-year-old payments network) and editorial (a modern brand magazine), which is exactly the tension Mastercard wants to hold.
+## 來源與規格層次
 
-**Key Characteristics:**
-- Warm cream canvas (`#F3F0EE`) replaces traditional white — every surface is tinted, never sterile
-- Extreme border-radius as design language: 40px, 99px, 1000px dominate; anything square is a cookie-banner third-party
-- Circular image portraits with attached white satellite-CTAs and traced-orange orbital paths
-- Ghost "watermark" headlines (cream-on-cream text at heading scale) layered behind circle portraits
-- Black primary CTAs with 20px radius in the body — the cookie-banner orange is kept to consent flows
-- Floating pill-shaped navigation that docks below the viewport top with rounded shoulders
-- Eyebrow labels with a tiny accent dot + uppercase bold tracking — used as the section-category signal
-- Dark warm-black footer (`#141413`) with four-column link layout and large conversational headline
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`d213b2c9040361bfb02ac2848598d218b3c15f21fc21c2ae78f1824e0e8b89b8`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.mastercard.com/tw/zh.html。
+- 目前預覽：`official-drafts/mastercard.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary
-- **Mastercard Red** (`#EB001B`): The left circle of the Mastercard mark — used only in the brand logo, never as a UI color.
-- **Mastercard Yellow** (`#F79E1B`): The right circle of the Mastercard mark — used only in the brand logo, never as a UI color.
-- **Ink Black** (`#141413`): The warm near-black used for primary CTAs, headline text on cream, and the footer surface. Slightly warm (the `13` blue value pulls toward the cream) so it never feels jet-black on the warm canvas.
+## 整體視覺方向
 
-### Secondary & Accent
-- **Signal Orange** (`#CF4500`): The burnt/rust CTA orange used on consent actions and eyebrow dots. Deeper than the brand yellow, brighter than ink — it's the page's single aggressive color and must be used sparingly.
-- **Light Signal Orange** (`#F37338`): A lighter carroty orange used for carousel active indicators and decorative orbital arcs. Always acts as an attention cue, never as body color.
-- **Clay Brown** (`#9A3A0A`): The deep rust used for secondary link-style buttons (e.g., cookie details). Sits between ink and signal orange.
+溫暖米色與圓弧構圖，讓內容輕鬆流動。
 
-### Surface & Background
-- **Canvas Cream** (`#F3F0EE`): The page canvas. Warm, putty-toned, the default body background. All editorial sections sit on this.
-- **Lifted Cream** (`#FCFBFA`): One step lighter than canvas — used for nested "raised" sections that want to feel like paper laid on paper.
-- **White** (`#FFFFFF`): Reserved for the floating navigation pill, modal cards, secondary button fills, and small satellite-CTA circles attached to image portraits.
-- **Soft Bone** (`#F4F4F4`): A cool-gray alternative surface used inside a handful of component subregions.
+製作支付服務介紹頁，使用奶油色閱讀區、圓角圖片與橘紅色重點。以短章節說明服務，圓形圖案僅作裝飾，不作缺少標示的控制項。
 
-### Neutrals & Text
-- **Ink Black** (`#141413`): Primary headline and body text color.
-- **Charcoal** (`#262627`): A slightly softer black used for some text alternates.
-- **Slate Gray** (`#696969`): Muted secondary text — eyebrow label alternative, disabled states, "Privacy Choices" bottom-row text.
-- **Granite** (`#555555`) and **Graphite** (`#565656`): Deeper gray for inline body accents and link alternates.
-- **Dust Taupe** (`#D1CDC7`): Very muted cream-gray used for disabled or "whisper" text (e.g., placeholder-like empty state labels). Low contrast on cream; use only for subdued content.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Semantic & Accent
-- **Link Blue** (`#3860BE`): A deep, slightly dusty blue used for inline links and informational callouts. Saturated enough to read as a link without being neon.
-- **Priceless Red + Yellow**: The full-color Mastercard logo mark is the only place the brand's red and yellow appear together; they lock the identity to the page without acting as a UI palette.
+## 色彩、字型與繁體中文排版
 
-### Gradient System
-Mastercard uses no programmatic gradients in the core UI. The visual impression of "gradient" comes from two places:
-- **Circular image portraits** where a warm-orange photo subject (a card, a sunflower, a beverage) fades to the cream canvas at its edge
-- **Deep card shadows** on elevated content (`rgba(0,0,0,0.08) 0px 24px 48px`) that create a soft halo beneath pill-shaped media
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## 3. Typography Rules
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
-- **Primary**: `MarkForMC` — Mastercard's proprietary geometric sans. Every headline, body paragraph, button, nav link, and footer link on the page.
-- **Secondary**: `MarkOffcForMC` — an "Official" cut used in a minority of contexts (legal text, some forms).
-- **Fallback stack**: `SofiaSans, Arial, sans-serif` — Sofia Sans is a reasonable open-source stand-in; Arial is the final web-safe fallback.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-### Hierarchy
+| 用途 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- |
+| `h1-(hero)` | 64px | 500 | 64px | -1.28px (-2%) |
+| `h2-(section)` | 36px | 500 | 44px | -0.72px (-2%) |
+| `h3-(card-title)` | 24px | 500 | 28.8px (1.2) | -0.48px (-2%) |
+| `h4-(subhead)` | 14px | 700 | 18.2px (1.3) | normal |
+| `eyebrow-(h5)` | 14px | 700 | 14px | 0.56px (+4%) |
+| `body-paragraph` | 16px | 450 | 22.4px (1.4) | normal |
+| `nav-link-/-button-label` | 16px | 500 | 16px | -0.48px (-3%) |
+| `footer-link` | 14px | 450 | ~20px | normal |
+| `footer-column-header` | 12–14px | 700 | 14px | 0.56px (+4%) |
 
-| Role | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|--------|-------------|----------------|-------|
-| H1 (hero) | 64px | 500 | 64px | -1.28px (-2%) | Set to `1:1` line-height for very tight vertical rhythm on multi-line hero |
-| H2 (section) | 36px | 500 | 44px | -0.72px (-2%) | Used in ghost-watermark headline treatments and section titles |
-| H3 (card title) | 24px | 500 | 28.8px (1.2) | -0.48px (-2%) | Titles inside service/solution cards |
-| H4 (subhead) | 14px | 700 | 18.2px (1.3) | normal | Rarely used in marketing surfaces |
-| Eyebrow (H5) | 14px | 700 | 14px | 0.56px (+4%) | Uppercase, paired with a tiny accent dot (e.g., "• SERVICES") |
-| Body paragraph | 16px | 450 | 22.4px (1.4) | normal | The half-step 450 weight is MarkForMC's signature — softer than 500, firmer than 400 |
-| Nav link / Button label | 16px | 500 | 16px | -0.48px (-3%) | Tight, compact, no text-transform |
-| Footer link | 14px | 450 | ~20px | normal | Lighter weight on dark footer for airier density |
-| Footer column header | 12–14px | 700 | 14px | 0.56px (+4%) | Uppercase, muted gray, short tracking |
+## 版面與元件結構
 
-### Principles
-- **Weight 450 is load-bearing**. Most brands use 400/500/700; Mastercard uses 450 for body copy, which creates an unusually soft reading tone. Replacing it with 400 flattens the identity.
-- **Tight negative tracking on headlines** (-2%) gives display text its editorial density — the words lock together rather than breathe.
-- **Uppercase tracking only on the eyebrow scale** (14px / 700 / +4% tracking). Don't use uppercase anywhere else; no shouty section titles.
-- **One-font system**. Resist the urge to add a second typeface for contrast. The contrast comes from scale, weight, and letter-spacing, not from a serif or display accent.
-- **Line-height ratio drops with size**. H1 is 1:1, H3 is 1.2, body is 1.4. Tight display, comfortable reading.
+此參考可先實作：服務優點卡片，包含圓弧圖片裁切與精簡文字操作。
 
-### Note on Font Substitutes
-MarkForMC is proprietary and licensed. When rebuilding a matching aesthetic without access to the original:
-- **Sofia Sans** (Google Fonts) is the closest open-source match — it's already in Mastercard's declared fallback stack.
-- **Inter** at weights 450/500/700 works as a generic stand-in; expect slightly taller x-height and looser letter shapes.
-- **Neue Haas Grotesk** or **Geist** can approximate the geometric feel for commercial projects.
-- Whichever substitute is used, preserve the **-2% letter-spacing on headlines** and the **450 body weight** (use `font-weight: 450` with variable fonts, or substitute `font-weight: 400` and tighten the letter-spacing by ~-0.5% to compensate).
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-## 4. Component Stylings
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Buttons
+## 操作與狀態
 
-**Primary — Ink Pill**
-- Background: Ink Black (`#141413`)
-- Text: Canvas Cream (`#F3F0EE`) — not pure white
-- Border: 1.5px solid Ink Black (same as bg, creates crisp edge)
-- Radius: 20px
-- Padding: 6px 24px
-- Font: MarkForMC 16px / weight 500 / letter-spacing -0.32px
-- Default: as above; solid warm-black pill on cream canvas
-- Active / pressed: subtle inward-shrink or 2px offset (not a hover variant)
-- Use for: all marketing CTAs in the page body ("Learn more", "Explore", "Discover")
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**Secondary — Outlined Pill**
-- Background: White (`#FFFFFF`)
-- Text: Ink Black (`#141413`)
-- Border: 1.5px solid Ink Black
-- Radius: 20px
-- Padding: 6px 24px
-- Font: MarkForMC 16px / weight 450 / line-height 20.8px
-- Default: white-on-cream pill with crisp ink outline
-- Active / pressed: subtle compression
-- Use for: secondary actions paired with a primary, or standalone utility CTAs
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**Consent / Signal — Orange Pill**
-- Background: Signal Orange (`#CF4500`)
-- Text: White (`#FFFFFF`)
-- Border: 0
-- Radius: 24px
-- Padding: 1px 30px (very tight vertical, wide horizontal)
-- Font: MarkForMC 13px / weight 400 / letter-spacing 0.13px
-- Default: as above; bright rust pill with white text
-- Use for: cookie consent, privacy preference, and other legally-distinct confirmations. **Do not** use this orange for marketing CTAs — it reads as a compliance color.
+## 圖片、動態與無障礙
 
-**Satellite — Circular Micro-CTA**
-- Background: White (`#FFFFFF`)
-- Icon: Ink Black arrow (`→`) at ~20px
-- Border: none
-- Radius: 50% (perfect circle)
-- Size: ~50–60px diameter
-- Shadow: none or very subtle (the portrait's shadow carries the elevation)
-- Default: docks onto the bottom-right edge of a circular portrait, protruding partway outside the portrait's circle
-- Use for: the primary entry point into service/solution cards; always paired with a circular portrait
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**Icon-Only Circle Button (carousel, play/pause)**
-- Background: transparent or white
-- Icon: 10–20px centered
-- Border: 1px solid Ink Black (when on cream) or none (when over media)
-- Radius: 50%
-- Size: 40px diameter minimum for carousel controls; 80px for hero video play
-- Use for: carousel pagination/play-pause, hero video play, search toggle
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Cards & Containers
+## 來源中的技術值補充
 
-**Hero Media Frame (Stadium)**
-- Background: Dark video or full-bleed imagery (typically black `#000000` or `#2B2B2B` behind video)
-- Radius: 40px all corners (creates a stadium shape on wide viewports)
-- Width: ~full viewport minus ~48px gutter on each side
-- Height: ~60–70% of viewport
-- Shadow: none (sits directly on canvas)
-- Corners: the extreme 40px radius on a media element is the most iconic Mastercard gesture — do not round less
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**Service / Solution Portrait Card**
-- Shape: Perfect circle (radius 50%) or ellipse (radius 999px / 1000px)
-- Diameter: 260–340px desktop; ~220px mobile
-- Image crop: square source, cropped to circle
-- Attached element: White satellite circular CTA (see above) docked bottom-right, ~40% outside the portrait
-- Eyebrow below: accent dot + uppercase label (e.g., "• SERVICES", "• SOLUTIONS")
-- Title below: H3 (24px / weight 500 / -2% tracking), 1–2 lines max
-- Decorative orbit: thin ~1px Light Signal Orange curved line spanning from this card outward to the next, implying connection
+- `#F3F0EE`
+- `#141413`
+- `#EB001B`
+- `#F79E1B`
+- `#CF4500`
+- `#F37338`
+- `#9A3A0A`
+- `#FCFBFA`
+- `#FFFFFF`
+- `#F4F4F4`
+- `#262627`
+- `#696969`
+- `#555555`
+- `#565656`
+- `#D1CDC7`
+- `#3860BE`
+- `rgba(0,0,0,0.08) 0px 24px 48px`
+- `#000000`
+- `#2B2B2B`
+- `#E8E2DA`
+- `1px solid`
+- `rgba(255,255,255,0.4)`
+- `rgba(0, 0, 0, 0.04) 0px 4px 24px 0px`
+- `rgba(0, 0, 0, 0.08) 0px 24px 48px 0px`
+- `rgba(0, 0, 0, 0.25) 0px 70px 110px 0px`
 
-**Pill Carousel Card**
-- Radius: 1000px (full pill) or 40px corners (rounded stadium)
-- Width: ~40–60% of viewport
-- Height: ~380–420px (portrait-pill orientation)
-- Content: full-bleed photography with small overlaid chip labels
-- Chip inside: White pill (~ 999px radius), Ink Black text, padding 8px 20px, used for category tags like "Story"
-- Large inline CTA inside: Ink Pill button, oversized (padding 16px 40px, radius 40px)
+## 日期限定首頁觀察
 
-**Ghost Watermark Text Block**
-- Font: MarkForMC 72–128px / weight 500 / tight -2% tracking
-- Color: Canvas Cream slightly darkened (`#E8E2DA` or similar — cream-on-cream)
-- Position: layered behind portrait circles, bleeding off the viewport edge
-- Purpose: sets section theme without competing with foreground copy
+2026-10-11至12 UTC實際觀測台灣繁體中文公開首頁 https://www.mastercard.com/tw/zh.html，保留驅動經濟，賦能民眾、梅西交換球衣、2026影響報告、旅行方案、共創無價可能六個方案、卡片與權益、無價體驗及完整繁體中文頁尾。SofiaSans／mccom字型、紅黃雙圓商標、白色浮動膠囊導覽、奶白底與圓形／直立膠囊照片為主要設計。52份原始素材包含5份已載入快取的唯讀保存；原始15次403均保留，未重試拒絕網址。9個圖片尺寸網址無法取用，明確映射到另一已觀測尺寸的同一張原始素材；原始缺圖狀態仍列為可見差異。桌面9968px共14段、窄版8881px共11段，25張原生視窗及全部7張對照圖由主代理實看；每張真實1280×720／390×844，沒有橫向溢出或本機缺圖。窄版27個標題幾何差異0，桌面4項差異與首張輪播動畫狀態有關，不能把量測當完全一致。
 
-### Inputs & Forms
-Minimal form surface on the marketing page. The search input in the nav header is:
-- Initial state: a 48px circular button with a magnifier icon
-- Expanded state: horizontal input field, border `1px solid` Ink Black at ~50% opacity, radius 999px, padding 12px 24px, white background
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-**Country/language selector (footer)**
-- Background: Ink Black (same as footer)
-- Text: White
-- Border: 1px solid `rgba(255,255,255,0.4)`
-- Radius: 999px (full pill)
-- Icon: downward chevron on the right
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-### Navigation
+## 已知差異與驗證範圍
 
-**Floating Nav Pill (desktop)**
-- Container: white-to-translucent-white pill floating below the very top of the viewport with a ~24px top margin
-- Radius: 999px / 1000px (full pill)
-- Padding: ~16px 40px internal
-- Shadow: very soft (`rgba(0, 0, 0, 0.04) 0px 4px 24px 0px`) — just enough to lift it off the cream canvas
-- Content: Mastercard logo left, primary link group center ("For you", "For business", "For the world", "For innovators", "News and trends"), search icon right
-- Link spacing: ~48–56px gap between primary links
-- Link style: Ink Black, weight 500, 16px, no underline, no pill surround until active
+- Stitch這次確實回傳MOBILE 780×14886，原始檔完整另存；生成稿仍有多張自行產生的商務／城市照片、不同頁尾與額外設計，不當成官方一致成品。校正版為獨立後續版本。
+- 官網本次取樣本身有缺圖：桌面六張、窄版五張的naturalWidth為0。15個原始HTTP403紀錄完整保留，未重新請求或更換網址繞過；5份已載入快取資料以唯讀方式保存。9個失敗圖片尺寸使用已觀測另一尺寸且原始路徑相同的保存資料；校正版因此可顯示照片，但與來源當時白區／破圖不同，不宣稱圖片畫面一致。桌面16:9主影片仍不可下載，未改用窄版影片代替。
+- 桌面縮放、圖片高度增長、水平滑入、文字淡入與第一張輪播的動畫進度仍有可見差異。已修正全部凍結成結尾狀態的問題、恢復第一張梅西輪播，最後D/N完整實拍無漏段，但不宣稱動畫時序或GIF影格同步。
+- 來源窄版首屏取樣為白色影片初始畫面與Pause圖示，校正版保留暫停黑底及Play狀態，存在明顯差異；影片播放／靜音／無價體驗影片控制未驗證。
+- 窄版根選單已實看且X／Escape通過；官網選單中的外部Chat啟動器在本機選單未顯示。次層／桌面選單、搜尋、輪播其他狀態、地區切換、頁尾手風琴與外部聊天／金融／卡片／申請服務未驗證，未輸入個資、開戶、申請或支付。
+- 390px為桌面UA響應式取樣。當代公開來源與原目錄設計分析、原始指令分開保存；主要畫面已核對但accepted=false，沒有與官方一致的聲明。正式部署待全74項整合後另驗證。
 
-**Mobile Nav**
-- The same pill shape but collapsed to: logo + hamburger menu button + search icon only
-- Menu opens into a full-screen overlay with the primary links stacked vertically
-
-### Image Treatment
-
-- **Aspect ratios used**: 1:1 (all service portraits — cropped to circle), ~3:4 or ~4:5 (carousel pill cards), 16:9 or wider (hero video frame)
-- **Full-bleed vs padded**: Hero is viewport-wide with gutters; service portraits are always centered in their column with generous whitespace around; footer imagery is rare
-- **Masking**: Aggressive circular masking is the defining treatment — square source images are cropped to perfect circles of matching diameter. Never use rectangular service imagery.
-- **Lazy loading**: Standard `loading="lazy"` with a soft blur-up transition from a cream-tinted placeholder, preserving the warm palette during load
-
-### Decorative Orbital Lines
-
-A signature motif: thin (~1–1.5px) single-weight curved lines in Light Signal Orange (`#F37338`) tracing arcs between circular portraits. These lines:
-- Imply connection between service cards without literal arrows
-- Span widths from ~200px up to full-viewport arcs
-- Feel hand-drawn (subtle irregularity) rather than perfect CSS curves
-- Appear only in sections with circular portrait content — never on pill sections, never in the footer
-
-### Footer
-
-- Background: Ink Black (`#141413`)
-- Text: White
-- Padding: 48px horizontal 100px / bottom 148px (very tall bottom space)
-- Structure: large conversational H2 ("We're always here when you need us") left-aligned, then a 4-column link grid below
-- Column headers: uppercase, muted, weight 700, letter-spacing +4%
-- Link rows: white, weight 450, 14px; entries prefixed with a small icon (support bubble, card, map pin, question mark) for the "NEED HELP?" column
-- External link marker: a small upper-right arrow (`↗`) after link text
-- Bottom row (below a 1px white-at-opacity divider): copyright + privacy small-print + country-language pill dropdown + four social icons (LinkedIn, Facebook, X, YouTube)
-
-## 5. Layout Principles
-
-### Spacing System
-- **Base unit**: 8px (confirmed by dembrandt extraction and computed styles)
-- **Scale**: 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128 (powers of 8)
-- **Section vertical padding**: ~96–128px between major sections on desktop; ~48–64px on mobile
-- **Card internal padding**: 32–40px on desktop, ~24px on mobile
-- **Nav top margin**: ~24px from viewport top (the pill floats, doesn't touch)
-
-### Grid & Container
-- **Max content width**: ~1200–1280px centered, with ~48–100px horizontal gutter
-- **Column pattern**: 12-column implied, but practical layouts use 2-up asymmetric (large headline left, supporting text right), 1-up full-bleed (hero, video), or staggered single-portrait placement (service cards sit in varying grid positions creating the "constellation" feel)
-- **Footer grid**: 4 equal columns on desktop, collapses to single column accordion on mobile
-
-### Whitespace Philosophy
-Mastercard treats whitespace as structure, not absence. A typical service section has:
-- A ghost headline occupying the top ~40% of the section (mostly empty cream)
-- A single circular portrait positioned ~60% down, asymmetric to left or right
-- ~300–500px of blank canvas between the portrait and the next section
-This deliberate emptiness tells the eye "slow down, read one thing at a time" — the opposite of dense dashboard UIs.
-
-### Border Radius Scale
-
-| Radius | Use |
-|--------|-----|
-| 3–6px | Tiny decorative elements, cookie banner micro-chips |
-| 20px | Primary and secondary body CTAs (the signature button radius) |
-| 24px | Consent/orange pill buttons, modal inner chips |
-| 40px | Hero media frames, large section container corners, H2 pill labels |
-| 50% | Circular portraits, icon-only buttons, satellite CTAs |
-| 99px / 999px / 1000px | Full pill shapes — navigation, carousel cards, footer country selector, primary inline chips |
-
-The scale is unusual: most systems use 4/8/12/16. Mastercard skips those and commits to **either small (≤6), medium-large (20–40), or full-pill (99+)**. The middle ground of 8–12 is absent, which is why the UI feels either "precise and utility" or "soft and editorial" with no in-between.
-
-## 6. Depth & Elevation
-
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| 0 | No shadow | The default — 95% of surfaces sit directly on cream canvas |
-| 1 | `rgba(0, 0, 0, 0.04) 0px 4px 24px 0px` | Floating nav pill — barely-there lift |
-| 2 | `rgba(0, 0, 0, 0.08) 0px 24px 48px 0px` | Hero media frames, elevated cards — a soft large-radius halo rather than a hard drop |
-| 3 | `rgba(0, 0, 0, 0.25) 0px 70px 110px 0px` | Rare; dramatic elevation on a feature tile |
-
-### Shadow Philosophy
-Mastercard uses shadows as **atmospheric cushioning**, not directional light. The Level 2 shadow has a 48px spread and only 8% opacity — it barely exists as dark pixels but creates a "the card is breathing above the canvas" feel. There are almost no hard-edged, tight shadows anywhere in the system. Border lines are preferred over shadows for functional delineation (form inputs, footer divider).
-
-### Decorative Depth
-- **Orbital arcs** (Light Signal Orange, ~1px): trace connective paths across sections
-- **Ghost watermark headlines**: cream-on-cream text gives sections an almost-pressed-paper quality
-- **Circle-image fade**: warm-toned photography at the edge of circular portraits dissolves into the canvas, implying soft atmospheric depth
-
-## 7. Do's and Don'ts
-
-### Do
-- Use Canvas Cream (`#F3F0EE`) as the default body background — never pure white
-- Mask service/feature imagery as perfect circles, not rectangles or rounded rectangles
-- Attach a white satellite CTA to the bottom-right of each circular portrait
-- Set headlines in MarkForMC weight 500 with -2% letter-spacing
-- Use weight 450 (not 400) for body paragraphs
-- Keep primary CTAs as Ink Black pills (20px radius) with cream text
-- Use Signal Orange only on consent, legal, or compliance actions
-- Float the nav as a rounded white pill below the viewport top, not flush at y=0
-- Build page rhythm from three surface tones: canvas cream → lifted cream → ink footer
-- Use thin Light Signal Orange arcs between service cards to imply connection
-
-### Don't
-- Don't use pure white as a page background — it breaks the warm editorial tone
-- Don't round image frames at 8–16px — Mastercard either uses full-pill, 40px, or full-circle. In-between radii look generic
-- Don't use Signal Orange for marketing CTAs — it reads as cookie-consent orange and dilutes the legal color signal
-- Don't mix typefaces — no serif accent, no script, no secondary display font
-- Don't crowd the nav with more than six top-level links — the pill is meant to feel airy
-- Don't drop hard shadows — all elevation should use 48px+ spread and ≤10% opacity
-- Don't use uppercase for anything larger than the 14px eyebrow label
-- Don't omit the tiny accent dot before eyebrow labels — it's the identity
-- Don't place circular portraits on a grid — their magic comes from asymmetric placement
-
-## 8. Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile | ≤ 767px | Nav pill shows logo + menu + search only; primary links hide behind hamburger; service portraits stack single-column centered; hero headline drops from 64px to ~40px; footer columns collapse into a vertical accordion |
-| Tablet | 768–1023px | Nav pill shows 2–3 primary links truncated; service portraits arrange 2-up; hero headline ~48px |
-| Desktop | ≥ 1024px | Full nav with 5 primary links centered; service portraits asymmetrically placed with decorative orbital lines; hero headline 64px |
-| Wide | ≥ 1440px | Content max-width caps at ~1280px; gutters grow symmetrically; orbital lines extend further |
-
-### Touch Targets
-All interactive elements comfortably exceed 44×44px. The satellite CTA (circle + arrow) is ~50–60px. The nav pill buttons are ~48px tall. Mobile hamburger and search are 48×48px. No link or button drops below 40px in any breakpoint.
-
-### Collapsing Strategy
-- **Nav**: full pill → compact pill with hamburger. Pill shape is preserved across breakpoints — always rounded, always floating.
-- **Service grid**: asymmetric constellation → 2-up → 1-up stack. Orbital arcs are removed on mobile (they only work with asymmetric placement).
-- **Spacing**: section vertical padding compresses from 128px to 48px on mobile.
-- **Content**: two-column hero (headline left / supporting text right) becomes stacked (headline on top, supporting text below).
-- **Footer**: 4 columns → 1 column accordion with chevron toggles per section.
-
-### Image Behavior
-Circular portraits scale proportionally (maintaining the perfect circle at every size). Hero video frames maintain their 40px radius at every breakpoint, but the frame itself shrinks with the viewport. Lazy loading is standard with a cream-tinted blur-up placeholder, preserving the palette during load.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Mastercard-inspired interface. Implement this working page: A payment-services information page with cream reading sections, rounded image windows, and orange-red emphasis. Explain the service through short chapters and keep circle motifs decorative rather than using them as unlabeled controls.
+先閱讀隨附的 DESIGN.md，以 Mastercard 的設計語言作為介面參考。請完成以下可操作頁面：製作支付服務介紹頁，使用奶油色閱讀區、圓角圖片與橘紅色重點。以短章節說明服務，圓形圖案僅作裝飾，不作缺少標示的控制項。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Mastercard-inspired interface. Build a service benefit card with an orbital image crop and a concise text action. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Mastercard 的設計語言作為介面參考。請製作服務優點卡片，包含圓弧圖片裁切與精簡文字操作。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Mastercard-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A payment-services information page with cream reading sections, rounded image windows, and orange-red emphasis. Explain the service through short chapters and keep circle motifs decorative rather than using them as unlabeled controls.
+先閱讀隨附的 DESIGN.md，以 Mastercard 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作支付服務介紹頁，使用奶油色閱讀區、圓角圖片與橘紅色重點。以短章節說明服務，圓形圖案僅作裝飾，不作缺少標示的控制項。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

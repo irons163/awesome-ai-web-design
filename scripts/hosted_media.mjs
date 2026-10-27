@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const media = new Set(['.mp4','.webm','.png','.jpg','.jpeg','.webp','.avif','.gif','.woff','.woff2','.ttf','.otf']);
+const media = new Set(['.mp4','.webm','.png','.jpg','.jpeg','.webp','.avif','.gif','.svg','.woff','.woff2','.ttf','.otf']);
 const text = new Set(['.html','.css','.js','.mjs','.json']);
 const hash = data => crypto.createHash('sha256').update(data).digest('hex');
 function files(directory) {

@@ -1,160 +1,188 @@
-# Design System Inspired by Kraken
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Kraken"
+description: "紫色按鈕與冷灰中性色，保持清楚可信。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#7132f5"
+  canvas: "#ffffff"
+  ink: "#101114"
+  source-01: "#7132f5"
+  source-02: "#5741d8"
+  source-03: "#5b1ecf"
+  source-04: "#101114"
+  source-05: "#149e61"
+  source-06: "#686b82"
+  source-07: "#9497a9"
+  source-08: "#ffffff"
+  source-09: "#dedee5"
+  source-10: "#026b3f"
+  source-11: "#484b5e"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Kraken's website is a clean, trustworthy crypto exchange that uses purple as its commanding brand color. The design operates on white backgrounds with Kraken Purple (`#7132f5`, `#5741d8`, `#5b1ecf`) creating a distinctive, professional crypto identity. The proprietary Kraken-Brand font handles display headings with bold (700) weight and negative tracking, while Kraken-Product (with IBM Plex Sans fallback) serves as the UI workhorse.
+# Kraken 延伸設計規格
 
-**Key Characteristics:**
-- Kraken Purple (`#7132f5`) as primary brand with darker variants (`#5741d8`, `#5b1ecf`)
-- Kraken-Brand (display) + Kraken-Product (UI) dual font system
-- Near-black (`#101114`) text with cool blue-gray neutral scale
-- 12px radius buttons (rounded but not pill)
-- Subtle shadows (`rgba(0,0,0,0.03) 0px 4px 24px`) — whisper-level
-- Green accent (`#149e61`) for positive/success states
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## 2. Color Palette & Roles
+## 來源與規格層次
 
-### Primary
-- **Kraken Purple** (`#7132f5`): Primary CTA, brand accent, links
-- **Purple Dark** (`#5741d8`): Button borders, outlined variants
-- **Purple Deep** (`#5b1ecf`): Deepest purple
-- **Purple Subtle** (`rgba(133,91,251,0.16)`): Purple at 16% — subtle button backgrounds
-- **Near Black** (`#101114`): Primary text
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Neutral
-- **Cool Gray** (`#686b82`): Primary neutral, borders at 24% opacity
-- **Silver Blue** (`#9497a9`): Secondary text, muted elements
-- **White** (`#ffffff`): Primary surface
-- **Border Gray** (`#dedee5`): Divider borders
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`ec8c144ecf3f6a891e9e56cbfbff1dbbb12e7ab5f958326cd03d942c84a7907a`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://www.kraken.com/ca。
+- 目前預覽：`official-drafts/kraken.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Semantic
-- **Green** (`#149e61`): Success/positive at 16% opacity for badges
-- **Green Dark** (`#026b3f`): Badge text
+## 整體視覺方向
 
-## 3. Typography Rules
+紫色按鈕與冷灰中性色，保持清楚可信。
 
-### Font Families
-- **Display**: `Kraken-Brand`, fallbacks: `IBM Plex Sans, Helvetica, Arial`
-- **UI / Body**: `Kraken-Product`, fallbacks: `Helvetica Neue, Helvetica, Arial`
+製作資訊用途的行情總覽，採白色背景、紫色操作與圓角矩形卡片。數字對齊、說明精簡，所有行情都明確標示為示範資料。
 
-### Hierarchy
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing |
-|------|------|------|--------|-------------|----------------|
-| Display Hero | Kraken-Brand | 48px | 700 | 1.17 | -1px |
-| Section Heading | Kraken-Brand | 36px | 700 | 1.22 | -0.5px |
-| Sub-heading | Kraken-Brand | 28px | 700 | 1.29 | -0.5px |
-| Feature Title | Kraken-Product | 22px | 600 | 1.20 | normal |
-| Body | Kraken-Product | 16px | 400 | 1.38 | normal |
-| Body Medium | Kraken-Product | 16px | 500 | 1.38 | normal |
-| Button | Kraken-Product | 16px | 500–600 | 1.38 | normal |
-| Caption | Kraken-Product | 14px | 400–700 | 1.43–1.71 | normal |
-| Small | Kraken-Product | 12px | 400–500 | 1.33 | normal |
-| Micro | Kraken-Product | 7px | 500 | 1.00 | uppercase |
+## 色彩、字型與繁體中文排版
 
-## 4. Component Stylings
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Buttons
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-**Primary Purple**
-- Background: `#7132f5`
-- Text: `#ffffff`
-- Padding: 13px 16px
-- Radius: 12px
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-**Purple Outlined**
-- Background: `#ffffff`
-- Text: `#5741d8`
-- Border: `1px solid #5741d8`
-- Radius: 12px
+| 用途 | 字型 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- | --- |
+| 主視覺大標題 | Kraken-Brand | 48px | 700 | 1.17 | -1px |
+| 區段標題 | Kraken-Brand | 36px | 700 | 1.22 | -0.5px |
+| 次標題 | Kraken-Brand | 28px | 700 | 1.29 | -0.5px |
+| 功能標題 | Kraken-Product | 22px | 600 | 1.20 | normal |
+| 內文 | Kraken-Product | 16px | 400 | 1.38 | normal |
+| 內文中字重 | Kraken-Product | 16px | 500 | 1.38 | normal |
+| 按鈕 | Kraken-Product | 16px | 500–600 | 1.38 | normal |
+| 補充說明 | Kraken-Product | 14px | 400–700 | 1.43–1.71 | normal |
+| 小型文字 | Kraken-Product | 12px | 400–500 | 1.33 | normal |
+| 微型文字 | Kraken-Product | 7px | 500 | 1.00 | uppercase |
 
-**Purple Subtle**
-- Background: `rgba(133,91,251,0.16)`
-- Text: `#7132f5`
-- Padding: 8px
-- Radius: 12px
+## 版面與元件結構
 
-**White Button**
-- Background: `#ffffff`
-- Text: `#101114`
-- Radius: 10px
-- Shadow: `rgba(0,0,0,0.03) 0px 4px 24px`
+此參考可先實作：資產摘要，包含具標示的區間選擇與資料無法取得的提示。
 
-**Secondary Gray**
-- Background: `rgba(148,151,169,0.08)`
-- Text: `#101114`
-- Radius: 12px
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Badges
-- Success: `rgba(20,158,97,0.16)` bg, `#026b3f` text, 6px radius
-- Neutral: `rgba(104,107,130,0.12)` bg, `#484b5e` text, 8px radius
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-## 5. Layout Principles
+## 操作與狀態
 
-### Spacing: 1px, 2px, 3px, 4px, 5px, 6px, 8px, 10px, 12px, 13px, 15px, 16px, 20px, 24px, 25px
-### Border Radius: 3px, 6px, 8px, 10px, 12px, 16px, 9999px, 50%
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-## 6. Depth & Elevation
-- Subtle: `rgba(0,0,0,0.03) 0px 4px 24px`
-- Micro: `rgba(16,24,40,0.04) 0px 1px 4px`
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-## 7. Do's and Don'ts
+## 圖片、動態與無障礙
 
-### Do
-- Use Kraken Purple (#7132f5) for CTAs and links
-- Apply 12px radius on all buttons
-- Use Kraken-Brand for headings, Kraken-Product for body
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Don't
-- Don't use pill buttons — 12px is the max radius for buttons
-- Don't use other purples outside the defined scale
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-## 8. Responsive Behavior
-Breakpoints: 375px, 425px, 640px, 768px, 1024px, 1280px, 1536px
+## 來源中的技術值補充
+
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
+
+- `#7132f5`
+- `#5741d8`
+- `#5b1ecf`
+- `#101114`
+- `rgba(0,0,0,0.03) 0px 4px 24px`
+- `#149e61`
+- `rgba(133,91,251,0.16)`
+- `#686b82`
+- `#9497a9`
+- `#ffffff`
+- `#dedee5`
+- `#026b3f`
+- `1px solid #5741d8`
+- `rgba(148,151,169,0.08)`
+- `rgba(20,158,97,0.16)`
+- `rgba(104,107,130,0.12)`
+- `#484b5e`
+- `rgba(16,24,40,0.04) 0px 1px 4px`
+
+## 日期限定首頁觀察
+
+取樣來源：https://www.kraken.com/ca。透過公開國家與語言介面明確選擇加拿大英文版，來源位於 /ca。
+
+本次取樣為加拿大英文 /ca、拒絕非必要 Cookie 並關閉地區提示。淡紫首屏為「掌握資金的力量」，下方為 Pro、Kraken、Wallet、Krak 深色產品卡。
+
+後續有代理程式工具、20x 槓桿、日期限定行情表、開戶 CTA、法律說明與現行 Payward 頁尾。390px 取樣為窄版桌面 UA，不是實體手機。
+
+實際截圖查出多個卡片只剩背景：原頁把文字與圖片包在初始 --opacity-start:0 的捲動顯示層。已保留原資產與文字，固定為所記錄的最終 opacity／transform；新版桌面與窄版全頁已實際確認產品文字及圖片恢復。
+
+原有 DESIGN.md、PROMPTS.md 與 STITCH-PROMPT.md 保留；本檔為日期限定補充。研究頁免費瀏覽，未開啟付費方案或交易；不對外部生成服務的帳戶計費狀態作保證。
+
+驗證範圍為匿名公開首頁、1280×720 與390×844、DPR1、桌面 UA。未完成實體手機、其他地區、完整互動或服務驗證；目前 accepted=false，不宣稱與官方一致。
+
+## 已知差異與驗證範圍
+
+- 最新 62c3… 截圖完整涵蓋桌面 10 段、窄版 10 段，從頂部至頁尾無缺段。實際影像已確認 Pro 交易畫面、Kraken 與 Wallet 手機畫面、Krak 卡片、CLI 程式碼及 20x 插圖可見，先前空白面板已修正。
+- 最新穩定桌面高 6722px，來源為 6685px，相差 37px；窄版 7958px 與來源相同。窄版首屏頁首及內容約高出 9px，來源電子郵件欄有焦點框及密碼管理員圖示，本機沒有；這些狀態差異與精確顯示動畫仍保留。
+- 不同日期來源的行情價格不同，未宣稱即時行情一致。公開選單、搜尋、語言、產品操作、應用程式橫幅關閉及所有帳戶、交易服務尚未驗證。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Kraken-inspired interface. Implement this working page: An informational market overview on a white canvas with purple actions and rounded rectangular cards. Use clear number alignment and concise explanations, keeping all displayed market values explicitly illustrative.
+先閱讀隨附的 DESIGN.md，以 Kraken 的設計語言作為介面參考。請完成以下可操作頁面：製作資訊用途的行情總覽，採白色背景、紫色操作與圓角矩形卡片。數字對齊、說明精簡，所有行情都明確標示為示範資料。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Kraken-inspired interface. Build an asset summary with a labeled range selector and an unavailable-data message. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Kraken 的設計語言作為介面參考。請製作資產摘要，包含具標示的區間選擇與資料無法取得的提示。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Kraken-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An informational market overview on a white canvas with purple actions and rounded rectangular cards. Use clear number alignment and concise explanations, keeping all displayed market values explicitly illustrative.
+先閱讀隨附的 DESIGN.md，以 Kraken 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作資訊用途的行情總覽，採白色背景、紫色操作與圓角矩形卡片。數字對齊、說明精簡，所有行情都明確標示為示範資料。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

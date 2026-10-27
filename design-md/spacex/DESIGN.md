@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Spacex-Inspired-design-analysis
-description: An inspired interpretation of Spasex's design language — a mission-oriented aerospace brand built on pure black canvas, full-bleed photographic and video heroes of rockets and Mars landscapes, and uppercase D-DIN display type set in tight vertical leading. UI chrome is intentionally minimal a single ghost outlined pill button per band, all-caps eyebrow microtext, and a fixed top nav over photography. The system is unapologetically austere — black, white, and the imagery itself.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "SpaceX"
+description: "黑白全幅敘事，以影像與大字級建立張力。"
 
 colors:
   primary: "#000000"
@@ -148,253 +149,150 @@ components:
     padding: 32px 24px
 ---
 
-## Overview
+# SpaceX 延伸設計規格
 
-Spasex's design language is an exercise in negation: pure black canvas, white display type set in tight vertical leading and uppercase, full-bleed photography or autoplaying rocket-launch video as the only chrome. There is no brand color beyond black-and-white; there are no decorative shapes; there are no card grids or pricing tables on the marketing pages. Every band is a single full-viewport photograph or video paired with one all-caps headline at `{typography.display-xxl}` (80px D-DIN-Bold) and one ghost-outlined pill CTA. The composition is closer to a film title card than a SaaS landing page.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-The brand's depth is photographic. Mars landscapes, rocket exhaust plumes, the F9 booster on a launchpad at sunset — these are the design system. Type sits over them at high opacity with no scrim, no gradient overlay; the photographs are graded so the type lands cleanly. When type does need a background, it sits on `{colors.canvas-night-soft}` (a barely-lifted near-black) with a 1px hairline in `{colors.hairline-on-dark}`.
+## 來源與規格層次
 
-Typography splits between **D-DIN-Bold** for display tiers (uppercase, tight tracking, condensed feel) and **D-DIN** regular for body and button labels. There is no third family — even pricing on the shop site uses the same two cuts. The display sizes are unusually tight in vertical leading (0.95–1.25) and unusually loose in horizontal tracking (1.6px positive at 80px) — the brand feels engineered rather than designed.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-**Key Characteristics:**
-- Single canvas: pure `{colors.canvas-night}` (`#000000`) for marketing; `{colors.canvas-light}` only on the shop site.
-- Display tier in uppercase D-DIN-Bold with positive horizontal tracking (1.6px at 80px) — the brand's typographic signature.
-- Full-bleed photography or autoplaying video as the dominant decorative element; type sits directly on imagery with no scrim.
-- Single ghost-outlined pill CTA per band, at `{rounded.pill}` 32px radius — never filled, never accent-colored.
-- All-caps eyebrow microtext (`{typography.micro-cap}` and `{typography.button-cap}`) with positive 0.96–1.17px tracking — every chrome element shouts in caps.
-- Fixed top nav overlaid on photography — no opaque background, just white-on-image.
-- Tight 0.95 line-height on the 80px display — vertical compression is the engineering aesthetic.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`75cec77c4dd6ac31acb52840ca4dff94d2292c39ac04a2752df0a3a1a578bc93`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.spacex.com/。
+- 目前預覽：`official-drafts/spacex.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-## Colors
+## 整體視覺方向
 
-> **Source pages:** home (`/`), `/shop`, `/vehicles/starship`, `/humanspaceflight/overview`, `/mission`.
+黑白全幅敘事，以影像與大字級建立張力。
 
-### Brand & Accent
-The brand has no accent colors. Black and white do all the chromatic work; photography supplies every other hue.
+製作任務紀錄頁，包含大型章節視覺、精簡任務資訊與時間索引。介面採黑白，圖片主導畫面，導覽與圖片說明仍清楚可讀。
 
-### Surface
-- **Canvas Night** (`{colors.canvas-night}` — `#000000`): Default marketing canvas. Pure black, no tint.
-- **Canvas Night Soft** (`{colors.canvas-night-soft}` — `#0a0a0a`): Barely-lifted near-black for content sections that need a subtle separation from the pure-black hero.
-- **Canvas Light** (`{colors.canvas-light}` — `#ffffff`): The shop site's product surface.
-- **Canvas Cool** (`{colors.canvas-cool}` — `#f0f0fa`): A pale cool-blue-white used as the secondary surface on the shop site and as the hover-canvas of certain ghost buttons.
-- **Hairline on Dark** (`{colors.hairline-on-dark}` — `#3a3a3f`): 1px borders on dark surface chrome.
-- **Hairline on Light** (`{colors.hairline-on-light}` — `#e0e0e8`): Borders on shop-site cards.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Text
-- **On Primary** (`{colors.on-primary}` — `#ffffff`): Default text on dark canvas; the dominant text color across the marketing site.
-- **On Primary Mute** (`{colors.on-primary-mute}` — `#f0f0fa`): Slightly cooled-white used for secondary text on dark surfaces — barely distinguishable from `{colors.on-primary}` but enough to suggest a hierarchy.
-- **Ink** (`{colors.ink}` — `#000000`): Default text on light surfaces (shop site).
-- **Ink Mute** (`{colors.ink-mute}` — `#5a5a5f`): Secondary text on light surfaces.
+## 色彩、字型與繁體中文排版
 
-### Link
-- **Link on Dark** (`{colors.link-on-dark}` — `#ffffff`): Underlined inline link on dark canvas.
-- **Link Blue Fallback** (`{colors.link-blue-fallback}` — `#0000ee`): The browser default that appears in unstyled fallback contexts — documented for completeness, not used as a brand color.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## Typography
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-The display tier is **D-DIN-Bold** — a condensed industrial sans inspired by the German DIN 1451 standard (used on autobahn road signage and engineering blueprints). When unavailable, fall back to **Arial Narrow**, then Arial, then Verdana — the fallback chain prioritizes width compression over ornament.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 80px | 700 | 0.95 | 1.6px |
+| 60px | 700 | 1.2 | 1.2px |
+| 48px | 700 | 1.25 | 0.96px |
+| 16px | 400 | 1.7 | 0.32px |
+| 16px | 400 | 1.5 | 0.32px |
+| 13.008px | 700 | 0.94 | 1.17px |
+| 12px | 400 | 2.0 | 0.96px |
+| 13.008px | 400 | 1.5 | 0 |
 
-The UI tier is **D-DIN** (regular weight) — the same family at standard width — used for body, button labels, and captions.
+## 版面與元件結構
 
-D-DIN is freely available from the **DIN Type Foundry** (and a free version under the same name is widely distributed). For maximum brand fidelity, use D-DIN directly; as a substitute, **Inter** at heavy weights (700+) with letter-spacing of 1.6px positive tracking approximates the rhythm. Avoid serif or humanist sans alternatives.
+此參考可先實作：任務摘要，包含日期、狀態與可展開的技術資訊清單。
 
-### Hierarchy
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xxl}` | 80px | 700 | 0.95 | 1.6px | Hero headline (uppercase) |
-| `{typography.display-xl}` | 60px | 700 | 1.2 | 1.2px | Section opener (uppercase) |
-| `{typography.display-lg}` | 48px | 700 | 1.25 | 0.96px | Sub-section heading (uppercase) |
-| `{typography.body-lg}` | 16px | 400 | 1.7 | 0.32px | Marketing body lead |
-| `{typography.body-md}` | 16px | 400 | 1.5 | 0.32px | Default UI body |
-| `{typography.button-cap}` | 13.008px | 700 | 0.94 | 1.17px | All-caps button label |
-| `{typography.micro-cap}` | 12px | 400 | 2.0 | 0.96px | All-caps eyebrow / nav item |
-| `{typography.caption}` | 13.008px | 400 | 1.5 | 0 | Helper / footer text |
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Principles
-- **Uppercase across display.** Every display tier renders in uppercase. The brand never uses sentence-case display headlines.
-- **Tight vertical leading on display.** 0.95 at 80px and 1.2 at 60px — the type stacks engineer-tight.
-- **Wide horizontal tracking.** Positive 0.96–1.6px tracking on display sizes; positive 0.96–1.17px on caps eyebrows. The wide tracking is the brand's signature optical air.
-- **No mono.** Code blocks are not part of the brand's typographic system.
+## 操作與狀態
 
-### Note on Font Substitutes
-**D-DIN** is freely available (the original DIN-style face under that name is widely distributed). When unavailable, use **Inter** at 700 weight with `letter-spacing: 1.6px`, `text-transform: uppercase`, and `line-height: 0.95` for display sizes — this matches the rhythm. Avoid Helvetica or Arial at default weights — the brand needs the condensed industrial cut. Avoid serif fallbacks entirely.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-## Layout
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Spacing System
-- **Base unit**: 8px (with denser sub-units 4 / 12 / 16 / 18 / 24).
-- **Tokens**: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 18px · `{spacing.xl}` 24px · `{spacing.xxl}` 32px · `{spacing.huge}` 48px.
-- **Section padding**: full-viewport bands on marketing — no internal padding above/below; the photograph IS the section. On the shop site, sections use 48–64px vertical padding.
+## 圖片、動態與無障礙
 
-### Grid & Container
-- Marketing pages have no container — every band is full-viewport-width, full-viewport-height (or close to it) with photography filling the entire frame.
-- Shop product grid: 4-up at desktop, 2-up at tablet, 1-up at mobile.
-- Type sits inside an inner ~1200px reading column centered horizontally over the full-bleed photograph.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Whitespace Philosophy
-The marketing pages have minimal traditional whitespace — the photograph occupies all space. "Whitespace" here means the dark sky in a rocket photograph or the empty stretch of Martian terrain. Negative space is photographic, not a UI choice. On the shop site whitespace returns to standard 32px grid gutters.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-## Elevation & Depth
+## 來源中的技術值補充
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 | Flat | Default — and the only level on marketing surfaces |
-| 1 | Photographic — full-bleed image or video | The primary depth medium; photographs do all the lifting |
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-The brand does not use drop shadows, blurs, glows, or gradient overlays. Depth is photographic: a rocket launching at twilight has natural atmospheric depth that no CSS shadow could simulate. When type needs separation from imagery, the image is graded darker rather than scrimmed.
+- `#000000`
+- `#0a0a0a`
+- `#ffffff`
+- `#f0f0fa`
+- `#3a3a3f`
+- `#e0e0e8`
+- `#5a5a5f`
+- `#0000ee`
+- `letter-spacing: 1.6px`
 
-### Decorative Depth
-Photography and autoplaying rocket-launch video are the only decorative depth. There are no illustrations, no icons beyond a few minimal SVG arrow chevrons in nav and CTA hover states.
+## 日期限定首頁觀察
 
-## Shapes
+目前主活動為2026年9月28日StarshipFlight14起飛，影片已由舊濕式演練切換到DroneLiftOff。七個電影式主區塊、D-DIN大寫字、RobotoMono日期與簡單線框CTA、原始照片／影片構成深色首頁。桌面與窄版總高6438／6416。穩定完整載入後UpcomingLaunches仍在桌面右上、窄版Mars之後及手機主選單內，保留本次台灣時區October13Starlink與CRS35卡片。桌面與手機各三支原影片及原字型、圖像均保存。GoogleStitch已完成三次真實原生操作並保留原始輸出，但明確手機請求仍回DESKTOP metadata，原生手機輸出不宣稱已通過；窄版校正版另外依官方來源與實際畫面核對。
 
-### Border Radius Scale
+原始 DESIGN.md、先前原生 Stitch 匯出與本次完整資料均保留。此為有明確範圍的視覺研究；未驗證項目不得宣稱官方一致。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Form inputs (shop site) |
-| `{rounded.sm}` | 8px | Shop product card chrome, video frames |
-| `{rounded.md}` | 16px | Larger surface chrome |
-| `{rounded.pill}` | 32px | Ghost outlined pill CTAs (the brand's signature button shape) |
-| `{rounded.full}` | 9999px | Circular play-button overlays on video frames |
+## 已知差異與驗證範圍
 
-### Photography Geometry
-Every photograph is full-viewport-bleed, edge-to-edge, never inset in a card on the marketing site. On the shop site, product photography sits inside `{rounded.sm}` 8px containers with no shadow. Aspect ratios on marketing photography vary with the source image — there is no enforced ratio; the photograph leads.
+- 原始升空、火星旋轉及 Falcon Heavy 降落 MP4 可在本機播放，但精確畫格、播放時間與捲動動畫階段不同。
+- Google Stitch 原生行動版輸出仍未解決：明確指定行動版的編輯與新生成雖完成，仍回傳桌面中繼資料。原始輸出保留且未驗收；本機 390px 窄版影像驗證另外處理。
+- 即將發射與 9 月 28 日活動日期僅為當日公開快照，卡片呈現觀察到的台灣時間 10 月 13 日活動；未推論未來時程或即時倒數。
+- 主選單開關與主要關閉狀態已比較。全部桌面滑鼠移入分支、行動版巢狀摺疊、發射卡片選擇、轉場及外部服務尚未完整實作或驗證。
+- 官網與本機窄版 DOM 在 390px 視窗皆回報 398px 捲動寬度，保留底層 8px 溢位並依觀察裁切；水平互動尚未驗證。
+- 購買、Starlink 訂購、搭乘預約、任務報名、徵才、商店及投資人服務導向官方目的地，未送出或重建服務。
+- 其他寬度與實體裝置尚未驗證；原始比對未涵蓋最終公開部署。
 
-## Components
-
-### Buttons
-
-**`button-ghost-on-dark`** — the universal CTA on marketing surfaces.
-- Background `{colors.canvas-night}` (transparent against the photographed canvas), 1px solid `{colors.on-primary}` border, text `{colors.on-primary}`, type `{typography.button-cap}` (uppercase, 13px / 700 / 1.17px tracking), padding `{spacing.lg} {spacing.xl}` (18px 24px), rounded `{rounded.pill}` 32px.
-
-**`button-ghost-on-light`** — the same button on shop / light pages.
-- Background `{colors.canvas-light}` (transparent against light canvas), 1px solid `{colors.ink}` border, text `{colors.ink}`, otherwise identical.
-
-**`button-filled-cool`** — fill variant on shop product cards.
-- Background `{colors.canvas-cool}`, text `{colors.ink}`, same pill geometry. Used as "Add to cart" or similar product CTAs.
-
-### Cards & Containers
-
-**`card-photo-band`** — full-bleed photographic band on marketing pages.
-- Background `{colors.canvas-night}`, padding 0, rounded `{rounded.xs}`. The photograph fills the entire band; type and CTA sit overlaid.
-
-**`card-shop-product`** — product card on the shop site.
-- Background `{colors.canvas-light}`, padding `{spacing.md}` 16px, rounded `{rounded.sm}` 8px, 1px `{colors.hairline-on-light}` border. Product photo on top, name in `{typography.body-md}`, price in `{typography.body-md}` 700 weight, "Add to cart" button at the bottom.
-
-### Inputs & Forms
-
-**`text-input`** — form input on the shop site.
-- Background `{colors.canvas-light}`, text `{colors.ink}`, type `{typography.body-md}`, padding `{spacing.sm} {spacing.md}` (12px 16px), rounded `{rounded.xs}` 4px, 1px `{colors.hairline-on-light}` border.
-
-### Navigation
-
-**`nav-bar-overlay`** — top nav across the marketing site.
-- Background `{colors.canvas-night}` (transparent over the hero photo), text `{colors.on-primary}`, type `{typography.button-cap}` (uppercase). Logo wordmark on the left at ~147×19px, nav items horizontal in caps, padding `{spacing.xl} {spacing.xxl}` (24px 32px). The nav is fixed/sticky on scroll, retaining the overlay treatment.
-
-### Signature Components
-
-**Full-Bleed Photo / Video Hero** — every marketing band is a full-viewport photograph or autoplaying rocket-launch video. Type and CTA sit overlaid on the photograph at high opacity with no scrim. The photograph is graded so type lands cleanly without an overlay layer.
-
-**Uppercase Display Headline** — the 80px D-DIN-Bold uppercase headline with 1.6px positive tracking is the brand's most recognizable typographic moment. Always uppercase, always bold-weight, always positively tracked.
-
-**`link-on-dark`** — inline links on dark canvas.
-- Text `{colors.link-on-dark}` (white) with persistent underline.
-
-**`link-on-light`** — inline links on light canvas.
-- Text `{colors.ink}` with persistent underline.
-
-**`footer-dark`** — site-wide footer.
-- Background `{colors.canvas-night}`, text `{colors.on-primary}`, type `{typography.caption}`, padding `{spacing.xxl} {spacing.xl}` (32px 24px). Holds nav columns in `{typography.micro-cap}` (uppercase), and a small legal/copyright row at the bottom.
-
-## Do's and Don'ts
-
-### Do
-- Use full-bleed photography or autoplaying video as the dominant decorative element on every marketing band.
-- Render display tiers in uppercase D-DIN-Bold with positive 0.96–1.6px letter-spacing — the wide tracking is the signature.
-- Use a single `{button-ghost-on-dark}` per band — the brand does NOT show two CTAs side by side on marketing surfaces.
-- Pair every photograph with type that respects the imagery — no scrims, no gradients, no overlays. Grade the photo, not the canvas.
-- Keep nav overlay-style (transparent, white-on-image) on marketing pages.
-
-### Don't
-- Don't introduce brand accent colors — black, white, and photography are the entire palette.
-- Don't use drop shadows or gradient overlays on dark canvas — they fight the photography.
-- Don't render display tiers in sentence-case or title-case — uppercase is the brand.
-- Don't put filled buttons on marketing surfaces — the ghost outlined pill is the only marketing CTA.
-- Don't use serif or humanist sans alternatives — the condensed industrial DIN cut is non-negotiable.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Wide | ≥ 1500px | Full hero photograph; max-content type column at 1200px |
-| Desktop | 1280–1499px | Default desktop layout |
-| Laptop | 961–1279px | Type column tightens; photo crops adjust |
-| Tablet | 768–960px | Display drops 80 → 60px; nav compresses |
-| Mobile | 600–767px | Display drops to 48px; ghost button retains pill shape |
-| Small Mobile | < 600px | Display drops to 40px; nav becomes hamburger |
-
-### Touch Targets
-- Ghost pill buttons hit ≥ 50×50px due to the 18px vertical padding × 13px line-height. WCAG AAA compliant.
-- Form fields stay at the 44px minimum height.
-
-### Collapsing Strategy
-- Display sizes stair-step 80 → 60 → 48 → 40px through the breakpoints.
-- Photography re-crops to focal subject on smaller widths (rocket centered, Mars landscape centered).
-- Top nav collapses to hamburger below 768px; menu retains the dark overlay treatment.
-- Shop product grid stair-steps 4-up → 2-up → 1-up.
-
-### Image Behavior
-Marketing photography uses `srcset` for desktop / tablet / mobile with art-direction crops at major breakpoints. Mobile crops favor the central focal subject; wide crops favor environmental context (full launch pad, full Martian horizon).
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a SpaceX-inspired interface. Implement this working page: A mission archive with large visual chapter openings, concise mission facts, and a chronological index. Keep the palette monochrome and allow imagery to lead while preserving readable navigation and captions.
+先閱讀隨附的 DESIGN.md，以 SpaceX 的設計語言作為介面參考。請完成以下可操作頁面：製作任務紀錄頁，包含大型章節視覺、精簡任務資訊與時間索引。介面採黑白，圖片主導畫面，導覽與圖片說明仍清楚可讀。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a SpaceX-inspired interface. Build a mission summary with date, status, and an expandable technical fact list. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 SpaceX 的設計語言作為介面參考。請製作任務摘要，包含日期、狀態與可展開的技術資訊清單。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a SpaceX-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A mission archive with large visual chapter openings, concise mission facts, and a chronological index. Keep the palette monochrome and allow imagery to lead while preserving readable navigation and captions.
+先閱讀隨附的 DESIGN.md，以 SpaceX 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作任務紀錄頁，包含大型章節視覺、精簡任務資訊與時間索引。介面採黑白，圖片主導畫面，導覽與圖片說明仍清楚可讀。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

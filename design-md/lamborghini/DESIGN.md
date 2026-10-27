@@ -1,308 +1,217 @@
-# Design System Inspired by Lamborghini
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Lamborghini"
+description: "純黑、大寫字級與金色細節，凝聚視線。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#FFC000"
+  canvas: "#000000"
+  ink: "#FFFFFF"
+  source-01: "#000000"
+  source-02: "#FFC000"
+  source-03: "#FFFFFF"
+  source-04: "#917300"
+  source-05: "#FFCE3E"
+  source-06: "#29ABE2"
+  source-07: "#3860BE"
+  source-08: "#202020"
+  source-09: "#181818"
+  source-10: "#F8F8F8"
+  source-11: "#E6E6E6"
+  source-12: "#F5F5F5"
+  source-13: "#494949"
+  source-14: "#7D7D7D"
+  source-15: "#969696"
+  source-16: "#666666"
+  source-17: "#555555"
+  source-18: "#313131"
+  source-19: "#1EAEDB"
+  source-20: "#DDDDDD"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Lamborghini's website is a cathedral of darkness — a digital stage where jet-black surfaces stretch infinitely and every element emerges from the void like a machine under a spotlight. The page is almost entirely black. Not dark gray, not near-black — true, uncompromising black (`#000000`) that saturates the viewport and refuses to yield. Into this abyss, white type and Lamborghini Gold (`#FFC000`) are deployed with surgical precision, creating a visual language that feels like walking through a nighttime motorsport event where every surface absorbs light except the things that matter.
+# Lamborghini 延伸設計規格
 
-The hero is a full-viewport video — dark, cinematic, immersive — showing event footage or vehicle reveals with the Lamborghini bull logo floating ethereally above. The navigation is minimal: a centered bull logo, a "MENU" hamburger on the left, and search/bookmark icons on the right, all rendered in white against the black canvas. There are no borders, no visible nav containers, no background color on the header — just white marks floating in darkness. The overall mood is nocturnal luxury: exclusive, theatrical, and deliberately intimidating. Each section transition is a scroll through darkness into the next revelation.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-Typography is the voice of this darkness. LamboType — a custom Neo-Grotesk typeface created by Character Type and design agency Strichpunkt — is used for everything from 120px uppercase display headlines to 10px micro labels. Its distinctive 12° angled terminals are inspired by the aerodynamic lines of Lamborghini's super sports cars, and its proportions range from Normal to Ultracompressed width. Headlines SHOUT in uppercase at enormous scales with tight line-heights (0.92 at 120px), creating dense blocks of text that feel stamped from steel. The typeface carries hexagonal geometric DNA — constructed from hexagons, three-armed stars, and circles — that echoes throughout the interface in the hexagonal pause button and UI icons. Built on Bootstrap grid with 68 Element Plus/UI components, the technical infrastructure is substantial beneath the theatrical surface.
+## 來源與規格層次
 
-**Key Characteristics:**
-- True black (`#000000`) dominant surfaces with white and gold as the only relief colors
-- LamboType custom Neo-Grotesk font with 12° angled terminals inspired by aerodynamic car lines
-- Lamborghini Gold (`#FFC000`) as the sole accent color — used exclusively for primary CTA buttons
-- All-uppercase display typography at extreme scales (120px, 80px, 54px) with tight line-heights
-- Full-viewport video heroes with cinematic event/vehicle content
-- Zero border-radius on buttons — sharp, angular, uncompromising rectangles
-- Hexagonal motifs in UI elements (pause button, icon system) echoing brand geometry
-- Bootstrap grid system + Element Plus/UI 68 components underneath
-- Transparent ghost buttons with white borders at 50% opacity as the secondary CTA pattern
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`d2b33e3a11eb741fe16ea4357d48efcca0b812b75f2bd176230b501549fd90ac`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.lamborghini.com/en-en。
+- 目前預覽：`official-drafts/lamborghini.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary
-- **Lamborghini Gold** (`#FFC000`): The signature accent color — a warm, saturated amber-gold (rgb 255, 192, 0) used exclusively for primary action buttons ("Discover More", "Tickets", "Start Configuration"). The only chromatic color in the entire interface, it ignites against the black canvas like a headlight cutting through night
-- **Pure White** (`#FFFFFF`): Primary text color on dark surfaces, logo rendering, nav elements, and light-mode button fills — the voice that speaks from the darkness
+## 整體視覺方向
 
-### Secondary & Accent
-- **Dark Gold** (`#917300`): Hover/pressed state for gold buttons — a deep amber (rgb 145, 115, 0) that darkens the gold to signal interaction
-- **Gold Text** (`#FFCE3E`): Slightly lighter gold variant (rgb 255, 206, 62) used for inline text accents and highlighted labels
-- **Cyan Pulse** (`#29ABE2`): Electric blue-cyan (rgb 41, 171, 226) appearing as an informational accent and interactive element highlight
-- **Link Blue** (`#3860BE`): Medium blue (rgb 56, 96, 190) used universally for link hover states across all text colors
+純黑、大寫字級與金色細節，凝聚視線。
 
-### Surface & Background
-- **Absolute Black** (`#000000`): The dominant surface color — used for page background, hero sections, header, footer, and most containers
-- **Charcoal** (`#202020`): Elevated dark surface (rgb 32, 32, 32) — the primary "dark gray" for cards, panels, and text containers sitting above the black canvas
-- **Dark Iron** (`#181818`): Subtle surface variant (rgb 24, 24, 24) — barely distinguishable from black, used for footer and deep sections
-- **Overlay Black** (`rgba(0,0,0,0.7)`): Semi-transparent overlay for modals and video dimming
-- **Near White** (`#F8F8F8`): Rare light surface (rgb 248, 248, 248) for content blocks in white-mode sections
-- **Mist** (`#E6E6E6`): Light gray surface for secondary light-mode containers
+製作富張力的車款系列頁，以寬闊黑色區段、醒目章節標示與決策處的金色強調呈現。使用俐落角度與每段單一焦點，圖片上的控制項仍須清楚可讀。
 
-### Neutrals & Text
-- **Pure White** (`#FFFFFF`): Primary text on dark backgrounds — headlines, body, nav labels
-- **Smoke** (`#F5F5F5`): Secondary text on dark surfaces — slightly softer than pure white
-- **Graphite** (`#494949`): Dark gray text on light surfaces (rgb 73, 73, 73)
-- **Ash** (`#7D7D7D`): Mid-range gray for muted text, timestamps, and metadata (rgb 125, 125, 125)
-- **Steel** (`#969696`): Lighter gray for disabled text and subtle labels (rgb 150, 150, 150)
-- **Slate** (`#666666`): Alternative mid-gray for secondary content
-- **Iron** (`#555555`): Dark mid-gray for body text variants
-- **Shadow** (`#313131`): Very dark gray for text on dark surfaces where white is too strong
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Semantic & Accent
-- **Cyan Pulse** (`#29ABE2`): Used for informational highlights and interactive feedback
-- **Link Blue** (`#3860BE`): Universal hover state for all hyperlinks
-- **Teal Action** (`#1EAEDB`): Button hover background for transparent/ghost variants (rgb 30, 174, 219)
+## 色彩、字型與繁體中文排版
 
-### Gradient System
-- No explicit gradients in the color palette — the dark-to-light progression is achieved through surface layering: `#000000` → `#181818` → `#202020` → `#494949` → `#7D7D7D`
-- Video heroes use natural atmospheric gradients from the content itself
-- Top-of-page gradient: subtle dark-to-darker fade at the edges of full-bleed imagery
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## 3. Typography Rules
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
-- **Display & UI**: `LamboType`, Roboto, Helvetica Neue, Arial — custom Neo-Grotesk typeface by Character Type for Lamborghini's 2024 brand refresh. Available in widths from Normal to Ultracompressed and weights from Light (300) to Black. Features 12° angled terminals inspired by aerodynamic car geometry, hexagonal construction logic, and support for 200+ languages including Latin, Cyrillic, and Greek
-- **Fallback/UI**: `Open Sans` — used for some button/form contexts as system fallback
-- **No italic variants** observed on the marketing site — the brand voice is always upright
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-### Hierarchy
+| 用途 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- |
+| `hero-display` | 120px (7.50rem) | 400 | 0.92 | normal |
+| `display-2` | 80px (5.00rem) | 400 | 1.13 | normal |
+| 區段標題 | 54px (3.38rem) | 400 | 1.19 | normal |
+| `sub-section` | 40px (2.50rem) | 400 | 1.15 | normal |
+| `feature-heading` | 27px (1.69rem) | 400 | 1.37 | normal |
+| `card-title` | 24px (1.50rem) | 400 | — | normal |
+| `body-large` | 18px (1.13rem) | 400 | 1.56 | normal |
+| `body-/-ui` | 16px (1.00rem) | 400/700 | 1.50 | normal/0.16px |
+| `button-large` | 16px (1.00rem) | 400 | 1.50 | normal |
+| `button-standard` | 14.4px (0.90rem) | 300/700 | 1.00 | 0.14–0.2px |
+| `button-small` | 13px (0.81rem) | 300/500 | 1.20 | 0.13–0.2px |
+| 補充說明 | 14px (0.88rem) | 600/700 | 1.14–1.50 | -0.42px |
+| `label` | 12px (0.75rem) | 400/500 | 1.83 | 0.96px |
+| 微型文字 | 10px (0.63rem) | 400 | 1.00–2.00 | 0.225px |
 
-| Role | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|--------|-------------|----------------|-------|
-| Hero Display | 120px (7.50rem) | 400 | 0.92 | normal | LamboType, uppercase, maximum impact |
-| Display 2 | 80px (5.00rem) | 400 | 1.13 | normal | LamboType, uppercase, major section titles |
-| Section Title | 54px (3.38rem) | 400 | 1.19 | normal | LamboType, uppercase |
-| Sub-section | 40px (2.50rem) | 400 | 1.15 | normal | LamboType, uppercase |
-| Feature Heading | 27px (1.69rem) | 400 | 1.37 | normal | LamboType, uppercase |
-| Card Title | 24px (1.50rem) | 400 | — | normal | LamboType |
-| Body Large | 18px (1.13rem) | 400 | 1.56 | normal | LamboType, mixed case and uppercase variants |
-| Body / UI | 16px (1.00rem) | 400/700 | 1.50 | normal/0.16px | LamboType, primary body text |
-| Button Large | 16px (1.00rem) | 400 | 1.50 | normal | Gold CTA buttons |
-| Button Standard | 14.4px (0.90rem) | 300/700 | 1.00 | 0.14–0.2px | LamboType, uppercase, ghost buttons |
-| Button Small | 13px (0.81rem) | 300/500 | 1.20 | 0.13–0.2px | LamboType, compact button variant |
-| Caption | 14px (0.88rem) | 600/700 | 1.14–1.50 | -0.42px | LamboType, uppercase, negative tracking |
-| Label | 12px (0.75rem) | 400/500 | 1.83 | 0.96px | LamboType, uppercase badges and micro labels |
-| Micro | 10px (0.63rem) | 400 | 1.00–2.00 | 0.225px | LamboType, uppercase, smallest text |
+## 版面與元件結構
 
-### Principles
-- **ALL-CAPS is the default voice**: Display and feature headings are universally uppercase. This creates a shouting, commanding tone that matches the brand's aggression
-- **Extreme scale range**: From 120px heroes to 10px micro labels — a 12:1 ratio that creates dramatic visual hierarchy
-- **Tight line-heights at scale**: Display sizes use 0.92-1.19 line-height, creating dense, compressed blocks of type that feel stamped rather than typeset
-- **Weight 400 dominates**: Unlike many design systems that use bold for emphasis, Lamborghini's regular weight carries the headlines — the typeface itself is so distinctive it doesn't need weight variation
-- **Negative tracking on captions**: -0.42px letter-spacing on 14px captions creates a compressed, technical aesthetic
-- **Positive tracking on micro text**: +0.225px at 10px ensures legibility at the smallest sizes
-- **Single typeface discipline**: LamboType handles everything — the 12° angled terminals and hexagonal geometry provide visual coherence across all sizes
+此參考可先實作：技術特色面板，包含圖片說明與可使用鍵盤操作的詳細資訊切換。
 
-## 4. Component Stylings
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Buttons
-All buttons use **zero border-radius** — sharp, angular rectangles that echo the aggressive lines of Lamborghini vehicles.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-**Gold Accent CTA** — The primary action:
-- Default: bg `#FFC000` (Lamborghini Gold), text `#000000`, padding 24px, fontSize 16px, fontWeight 400, borderRadius 0px, no border
-- Hover: bg `#917300` (Dark Gold), darkens significantly
-- Class: `btn-accent btn-large`
-- Used for: "Discover More", "Tickets", "Start Configuration"
+## 操作與狀態
 
-**Transparent Ghost** — The secondary action on dark backgrounds:
-- Default: bg transparent, text `#FFFFFF`, border 1px solid `#FFFFFF`, padding 16px, opacity 0.5
-- Hover: bg `#1EAEDB` (Teal Action), text white, opacity 0.7
-- Focus: bg `#1EAEDB`, border 1px solid `#000000`, outline 2px solid `#000000`
-- Used for: secondary CTAs on hero sections and dark panels
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**White Filled** — Light-mode primary:
-- Default: bg `#FFFFFF`, text `#202020`, no border
-- Used for: CTAs on dark sections where gold isn't appropriate
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**Black Filled** — Dark filled variant:
-- Default: bg `#000000`, text `#202020`
-- Used for: Inverted CTA on light sections
+## 圖片、動態與無障礙
 
-**Gray Neutral** — Subtle action:
-- Default: bg `#969696`, text `#202020`
-- Used for: secondary/tertiary actions, badge-like buttons
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Cards & Containers
-- Background: `#202020` (Charcoal) on black canvas, or `#000000` on lighter sections
-- Border: `0px 1px solid #202020` bottom borders for section dividers
-- Border-radius: 0px (completely sharp corners)
-- Shadow: minimal, uses overlay opacity for depth
-- Content: full-bleed photography + overlaid text in white
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Inputs & Forms
-- Minimal form presence on the marketing site
-- Switch elements: border-radius 20px (the only rounded element), border 1px solid `#DDDDDD`
-- Cookie banner input style: white text on black with `#7D7D7D` borders
+## 來源中的技術值補充
 
-### Navigation
-- **Desktop**: Centered bull logo, "MENU" hamburger with icon on left, search icon + bookmarks icon on right
-- **Background**: Transparent (inherits black page background)
-- **Sticky**: Fixed to top, floats above content
-- **No visible borders or shadows** — elements float in the darkness
-- **"MENU" label**: White text at 14px weight 400, uppercase, accompanies hamburger icon
-- **Hexagonal motifs**: Pause button on hero sections uses hexagonal outline shape
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-### Image Treatment
-- **Hero**: Full-viewport video sections (100vh) with cinematic event/vehicle footage
-- **Event photography**: Full-bleed aerial shots of Lamborghini Arena events
-- **Vehicle imagery**: High-contrast studio shots on dark backgrounds, full-width
-- **Aspect ratios**: Predominantly 16:9 and wider for cinematic feel
-- **Dark gradient overlays**: Subtle darkening at top/bottom edges of video to ensure text legibility
+- `#000000`
+- `#FFC000`
+- `#FFFFFF`
+- `#917300`
+- `#FFCE3E`
+- `#29ABE2`
+- `#3860BE`
+- `#202020`
+- `#181818`
+- `rgba(0,0,0,0.7)`
+- `#F8F8F8`
+- `#E6E6E6`
+- `#F5F5F5`
+- `#494949`
+- `#7D7D7D`
+- `#969696`
+- `#666666`
+- `#555555`
+- `#313131`
+- `#1EAEDB`
+- `0px 1px solid #202020`
+- `#DDDDDD`
+- `rgba(0,0,0,0.5)`
+- `rgba(0,0,0,0.25)`
 
-### Distinctive Components
-- **Hexagonal Pause Button**: Video control uses a hexagonal outline (matching the brand's geometric DNA from the typeface), positioned bottom-right of hero sections
-- **Progress Bar**: Thin white line at bottom of hero sections indicating video/slide progress
-- **Badge/Tag**: bg `#969696`, text white, padding 8px, fontSize 10px, borderRadius 2px — tiny metallic pills
+## 日期限定首頁觀察
 
-## 5. Layout Principles
+本次研究以 2026 年 10 月 11 日實際取樣的 Lamborghini 英文公開首頁為來源，主題是「駕馭的全新境界／REVUELTO SV」。首屏使用全幅汽車影片、黑色漸層與白色極窄大寫 LamboType 字型。桌面版以左側單行主標、右側白色 DISCOVER MORE 按鈕形成水平張力；上方固定導覽列讓左側 Menu、中央白色公牛標誌與右側搜尋保持清楚。390px 取樣則改為直向影片裁切、圖上左對齊文字與寬幅按鈕，不能把桌面影片某一影格當成手機同時影格。
 
-### Spacing System
-- **Base unit**: 8px
-- **Full scale**: 2px, 4px, 5px, 8px, 10px, 12px, 15px, 16px, 20px, 24px, 32px, 40px, 48px, 56px
-- **Button padding**: 16px (ghost), 24px (gold accent)
-- **Section padding**: 48–56px vertical, 40px horizontal
-- **Small spacing**: 2–5px for fine adjustments (badge padding, border spacing)
+白底 MODELS 區使用大片留白、Revuelto 原始字標、縮窄大寫標語與銀色 Revuelto SV 車照，桌面旁露出下一個 Urus 家族的一部分。當次預設家族下方是 Revuelto SV、Revuelto Miura 60° Homage、Revuelto 三個車款名稱，再以赭黃色 EXPLORE THE MODEL、START CONFIGURATION、ENQUIRE 和三個圓點建立操作層級。燃耗、排放與上市核准階段文字位於區塊下緣，須保留官方原文及當次地區條件；沒有觀察到的其他輪播狀態不能據此宣稱已驗證。窄版保留相同主次順序，車照、主要按鈕和法律文字依實際響應式畫面堆疊。
 
-### Grid & Container
-- **Framework**: Bootstrap grid system (container + row + col)
-- **Max width**: 1440px (largest breakpoint)
-- **Columns**: Standard 12-column Bootstrap grid
-- **Full-bleed**: Hero sections break out of grid to fill viewport edge-to-edge
-- **Content areas**: Centered within 1200px max-width containers
+Dealer Locator 使用真實經銷據點內的橘色 SUV 照片，白色大標與 FIND YOUR DEALER 按鈕置於左側。下接黑色 Configure your 區塊：上方排列 Revuelto SV、Urus SE Performante、Temerario、Revuelto、Urus SE，預設畫面用左側大字、黃色 START CONFIGURATION、線框 ENQUIRE 與右側銀色車頭照片；窄版則上下排列。該首頁沒有這次原生生成另外加入的新聞段落、配色調色盤或經銷據點統計。
 
-### Whitespace Philosophy
-Lamborghini uses darkness as whitespace. The generous black expanses between content blocks serve the same function as white space in a light design — creating breathing room that elevates each element to the status of exhibit. A model name floating in the middle of a black viewport has the same visual weight as a gallery piece on a white wall. The absence of color IS the design.
+黑色頁尾包含 Company、Cookie settings、Financials、Media Center、Sitemap、Careers、Recall Campaign、Privacy & Legal、Newsletter、Contact us、Accessibility 共 11 項連結，以及 11 個社群入口。桌面採多欄，窄版改為縱向連結和換行圖示。下方保留 Legal Guarantee／EU GARAN 標籤、依 IP 地區顯示排放值的說明、reCAPTCHA 法律連結、2026 年版權與 AUDI AG 關係文字、非法股票銷售警告，最後以白色公牛標誌收尾。它們是實際來源的版面內容，不是研究頁提供的法律或金融判斷。
 
-### Border Radius Scale
-| Value | Context |
-|-------|---------|
-| 0px | Default for everything — buttons, cards, containers, images |
-| 1px | Subtle span elements |
-| 2px | Badges, close buttons, cookie elements — barely perceptible |
-| 20px | Toggle switches only — the sole rounded element |
+真實 Google Stitch MCP 新輸出已另外保存，並已實際查看原始 PNG。它雖採用 Revuelto SV 題名，仍混入舊素材、木製車模、錯誤標誌縮圖、官方當次首頁沒有的「182 Centres in 54 Markets」、額外 RANGE／NETWORK 眉題和 AD PERSONAM PALETTE。頁面頂端、HTML 標題與 Study Version 還保留 2026-10-06，和本次 10 月 11 日來源及輸出底端日期互相矛盾。這些屬於原生生成偏差，應透過已保存的官方字型、影像、DOM／CSS 與實際畫面另檔校正，不能覆寫原始輸出來掩蓋偏差。
 
-## 6. Depth & Elevation
+此段目前只記錄來源與原生輸出的研究結果。桌面與窄版來源各 6 張、實際尺寸 1280×720／390×844，取樣範圍覆蓋來源頁高 4136／4389px。桌面來源的 documentWidth 為 2890px，且桌面第 1 段、窄版第 0 段各記錄一個矩形破圖候選；初次 lazy-load 診斷另保留暫時缺少配置圖等現象。這些資料不能直接推導成可見破圖數或畫面一致結論。校正預覽的最終雜湊、逐段對照圖、主代理實際檢查及其差異仍待補入，現在不宣稱已完成重製畫面驗證。
 
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Level 0 (Abyss) | `#000000` flat | Page background, deepest layer |
-| Level 1 (Surface) | `#181818` or `#202020` | Cards, content panels, elevated sections |
-| Level 2 (Overlay) | `rgba(0,0,0,0.7)` | Modal backdrops, video dimming |
-| Level 3 (Fog) | `rgba(0,0,0,0.5)` | Lighter overlays, hover states |
-| Level 4 (Mist) | `rgba(0,0,0,0.25)` | Subtle depth hints |
+最終校正稿已由主代理實際檢視4張全部桌面／窄版對照圖，兩種尺寸各6段完整覆蓋，頁高4136／4389px；各11筆標題紀錄量測無差異。首屏導覽從底部擷取的實色狀態修正為頁首漸層透明狀態，捲動後恢復實色；根層選單的桌面／窄版開關與Escape已實際操作。影片與導覽淡入相位仍不同，這些檢查不代表每一像素或所有互動一致。
 
-### Shadow Philosophy
-Lamborghini achieves depth through surface color layering rather than shadows. On a black canvas, traditional drop shadows are invisible — instead, the system creates elevation by shifting from absolute black to progressively lighter dark grays: `#000000` → `#181818` → `#202020` → `#494949`. This "darkness gradient" approach means that elevated elements are literally lighter than their surroundings, inverting the traditional shadow model.
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
 
-### Decorative Depth
-- Full-bleed video provides atmospheric depth through cinematic lighting
-- The hexagonal pause button floats with a thin white outline stroke
-- Progress bars at hero section bottoms create a subtle horizon line
-- No gradients, glows, or blur effects on UI elements — the photography provides all visual richness
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
 
-## 7. Do's and Don'ts
+## 已知差異與驗證範圍
 
-### Do
-- Use absolute black (`#000000`) as the primary background — never dark gray as a substitute
-- Apply Lamborghini Gold (`#FFC000`) exclusively for primary CTA buttons — never for decorative purposes
-- Set all display headings in uppercase with LamboType — the brand voice is always SHOUTING
-- Use zero border-radius on buttons and cards — sharp angles are non-negotiable
-- Maintain tight line-heights (0.92–1.19) on display type to create dense, architectural text blocks
-- Use the transparent ghost button (white border, 50% opacity) as the secondary CTA on dark backgrounds
-- Let full-viewport video/photography carry emotional weight — UI is infrastructure, not decoration
-- Reserve hexagonal geometry for UI icons and the video control button
-- Use weight 400 (regular) for headlines — the typeface is distinctive enough without bold emphasis
-- Keep the gray palette achromatic — all neutrals are pure gray without color tinting
+- 最終SHA-256 336ec88c932b5d4c59f09519437c022145b0771e83671f4680e5c4d1c727edf1 的1280×720／390×844本機畫面已重新完整實拍並逐張檢視；各6段、4張對照圖及原生輸出均由主代理實際查看。accepted=false，不宣稱與官方一致。
+- 來源首屏影片在桌面與窄版的取樣時刻及裁切不同；本地 HLS→MP4 是衍生封裝，沒有證明影片逐影格同步、原播放器或全媒體狀態一致。
+- 官方與本機桌面documentWidth2890大於1280，窄版無document overflow。矩形破圖候選各1個：桌面phase1的IMG在x2245、窄版phase0在x780，均在測試視窗橫向外的其他輪播內容；此檢測未排除橫向離屏。已查看主要畫面的實際影像，不能把其他輪播狀態擴稱零破圖。初次lazy診斷另留存。
+- 根層Menu桌面／窄版開啟、按鈕關閉與Escape已在最終版本實際操作，body捲動鎖定與恢復已確認。子層、語言／字級／動畫偏好、搜尋及所有車型／家族輪播狀態仍未驗證；官方與本機的開關遮罩、頁首背景淡入及影片相位沒有同步。
+- Discover More、經銷據點、詢價、配置器、cookie設定、訂閱、聯絡、帳戶與其他服務流程未提交或完整驗證；連結與靜態按鈕存在不等於服務可用。
+- 來源取樣為匿名英文公開工作階段，可能受IP地區、載入時序與公開內容更新影響；390px是桌面UA的響應式畫面，實體手機、其他寬度與最後公開部署仍未驗證。
+- 保留舊分析、原指令與歷次原生輸出；新native的木模型、虛構數字與日期混雜偏差另列，不把供應商題名中的Official當成官方一致證明。
 
-### Don't
-- Introduce additional accent colors beyond gold — the monochrome-plus-gold system is sacred
-- Apply border-radius to buttons or cards — curved edges contradict the angular vehicle aesthetic
-- Use LamboType in italic or decorative styles — the brand is always upright and direct
-- Add gradients to buttons or surfaces — depth comes from surface layering, not blending
-- Use light backgrounds as the primary canvas — darkness is the default state, light is the exception
-- Mix lowercase into display headings — the uppercase convention communicates authority and power
-- Add hover animations with scale or translate — interactions should be color-only (background/opacity shifts)
-- Use Open Sans for display text — LamboType must handle all visible typography
-- Create busy layouts with many small elements — Lamborghini's design is about singular, bold statements
-- Apply shadows to elements — on a black canvas, shadows are meaningless; use surface color shifts instead
-
-## 8. Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile Small | <425px | Single column, reduced type scale, stacked buttons |
-| Mobile | 425-576px | Single column, hamburger nav, hero text ~40px |
-| Tablet Small | 576-768px | 2-column grid begins, padding adjusts |
-| Tablet | 768-1024px | 2-column layout, expanded hero, vehicle cards side-by-side |
-| Desktop | 1024-1280px | Full navigation, 3+ column grids, display text at 80px |
-| Desktop Large | 1280-1440px | Full layout, hero at 120px display, max-width containers |
-| Wide | >1440px | Content centered, margins expand, hero fills viewport |
-
-### Touch Targets
-- Gold CTA buttons: 48px+ minimum height with 24px padding (exceeds WCAG 44×44px)
-- Ghost buttons: 48px+ with 16px padding
-- Hamburger menu: large touch target (~48px square)
-- Hexagonal pause button: approximately 48px diameter
-
-### Collapsing Strategy
-- **Navigation**: Always hamburger-based ("MENU" + icon) — no horizontal nav expansion on any breakpoint
-- **Hero video**: Maintains full-viewport height across all breakpoints, adjusting object-fit
-- **Display type**: Scales from 120px (desktop) → 80px (tablet) → 54px/40px (mobile)
-- **Button layout**: Side-by-side on desktop, stacks vertically on mobile
-- **Grid columns**: 3-column → 2-column → 1-column progression
-- **Section spacing**: Reduces from 56px → 40px → 24px vertical padding
-
-### Image Behavior
-- Hero videos use `object-fit: cover` to maintain cinematic framing at all sizes
-- Vehicle images scale within their containers with maintained aspect ratios
-- Event photography crops to viewport width on narrow screens
-- Background images darken at edges to maintain text contrast on all viewports
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lamborghini-inspired interface. Implement this working page: A dramatic vehicle collection with spacious black sections, strong uppercase labels, and gold accents at decision points. Use angular alignment and one visual focal point per section; keep controls legible over imagery.
+先閱讀隨附的 DESIGN.md，以 Lamborghini 的設計語言作為介面參考。請完成以下可操作頁面：製作富張力的車款系列頁，以寬闊黑色區段、醒目章節標示與決策處的金色強調呈現。使用俐落角度與每段單一焦點，圖片上的控制項仍須清楚可讀。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lamborghini-inspired interface. Build a technical feature panel with an image caption and a keyboard-operable detail toggle. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Lamborghini 的設計語言作為介面參考。請製作技術特色面板，包含圖片說明與可使用鍵盤操作的詳細資訊切換。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lamborghini-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A dramatic vehicle collection with spacious black sections, strong uppercase labels, and gold accents at decision points. Use angular alignment and one visual focal point per section; keep controls legible over imagery.
+先閱讀隨附的 DESIGN.md，以 Lamborghini 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作富張力的車款系列頁，以寬闊黑色區段、醒目章節標示與決策處的金色強調呈現。使用俐落角度與每段單一焦點，圖片上的控制項仍須清楚可讀。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

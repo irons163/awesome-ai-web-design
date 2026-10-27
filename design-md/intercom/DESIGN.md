@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Intercom-design-analysis
-description: "An editorial customer-service marketing canvas built around a soft cream-white ground, charcoal type set in Saans (Intercom's proprietary geometric sans), and a single confident Fin Orange (#ff5600) reserved for the Fin AI brand. Cards live as floating white tiles with thin hairline borders and minimal radii (8–16px). Display headlines run Saans at weight 500 with measured negative tracking. The system reads as a careful, product-led publication: product screenshots dominate, ornament is rare, and the only place chromatic energy enters is the Fin Orange CTA."
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Intercom"
+description: "暖白底與橙色訊號，讓對話更有親和力。"
 
 colors:
   primary: "#111111"
@@ -252,332 +253,151 @@ components:
     padding: 64px 32px
 ---
 
-## Overview
-
-Intercom's marketing canvas is a soft cream-white ground (`{colors.canvas}` ≈ #f5f1ec) — not pure white. The warmth is the brand's signal: this is editorial, calm, and product-focused, not bright SaaS. On top of the cream canvas sit white floating cards (`{colors.surface-1}`), thin hairline dividers (`{colors.hairline}`), and charcoal type (`{colors.ink}` #111111).
-
-Display type is **Saans** — Intercom's proprietary geometric sans — set at weight 500 with measured negative letter-spacing (-2.0px on 72px display). Body type is the same family at weight 400. The single proprietary mono is **SaansMono**, used sparingly for code snippets and product UI screenshots embedded in the marketing surface.
-
-The single chromatic accent is **Fin Orange** (`{colors.fin-orange}` #ff5600) — Intercom's AI-product brand color. It surfaces on the Fin product CTA, the Fin badge in pricing, and a few inline emphasis moments. It is NOT a system primary; the system primary is charcoal `{colors.ink}`. Intercom also maintains a small **report palette** (`{colors.report-blue}`, `{colors.report-green}`, `{colors.report-pink}`, `{colors.report-lime}`) used inside in-product analytics surfaces shown in mockups.
+# Intercom 延伸設計規格
 
-The page rhythm is heavy on **product mockups**: every section's payload is a high-fidelity screenshot of Intercom's product UI, framed in white cards with `{rounded.xl}` 16px corners. The marketing chrome is intentionally quiet so the product can be the protagonist.
-
-**Key Characteristics:**
-- **Cream canvas** (`{colors.canvas}` #f5f1ec) is the brand's defining surface — neither white nor gray, deliberately warm.
-- Product-screenshot-led page rhythm: every section centers a product mockup card, marketing chrome stays minimal.
-- **Saans** proprietary sans-serif carries the entire hierarchy; SaansMono for code-only contexts.
-- **Charcoal** `{colors.ink}` (#111111) is the system primary — buttons, headlines, body type all sit on charcoal.
-- **Fin Orange** (`{colors.fin-orange}` #ff5600) is the AI product color — used on the Fin CTA and Fin badge, never decoratively.
-- Display tracking pulls aggressively negative (-2.0px on 72px); body stays at 0.
-- Card corners stay modest at `{rounded.lg}` 12px and `{rounded.xl}` 16px — never pill-rounded; never square.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Colors
+## 來源與規格層次
 
-> Source pages: intercom.com (home), /pricing, /helpdesk, /customers, /helpdesk/inbox.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Brand & Accent
-- **Charcoal** ({colors.ink}): The system primary surface. Headlines, body type, primary CTA pill background — all charcoal.
-- **White** ({colors.on-primary}): Text on charcoal CTAs; canvas of floating cards.
-- **Fin Orange** ({colors.fin-orange}): The AI-product accent. Used on the Fin CTA, Fin badge, and a small set of inline emphasis moments.
-- **Report Orange** ({colors.report-orange}): A slightly different orange used inside the report / analytics palette for in-product mockups.
-- **Brand Blue** ({colors.brand-blue}): Saturated brand blue (#0007cb) — used on a small set of marketing illustrations.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`4e2cee491b06405f7c5d494a195c10ab1e5eb8f130f07623fe7b1de8990031fa`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://www.intercom.com/。
+- 目前預覽：`official-drafts/intercom.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Surface
-- **Canvas** ({colors.canvas}): Default page background — soft cream-white #f5f1ec.
-- **Surface 1** ({colors.surface-1}): Pure white — used for floating cards (pricing, feature, product-mockup).
-- **Surface 2** ({colors.surface-2}): Slightly darker cream — startup-discount banner, alt-row stripes.
-- **Hairline** ({colors.hairline}): 1px borders on cards — soft warm gray (#d3cec6).
-- **Hairline Soft** ({colors.hairline-soft}): Even softer dividers between FAQ rows and footer columns.
-- **Inverse Canvas** ({colors.inverse-canvas}): Pure black — only on the testimonial / quote callout strip.
-- **Inverse Surface 1** ({colors.inverse-surface-1}): One step lighter — hovered footer items in dark contexts.
+## 整體視覺方向
 
-### Text
-- **Ink** ({colors.ink}): All headlines, body type, button labels — charcoal #111111.
-- **Ink Muted** ({colors.ink-muted}): Secondary type at #626260 — meta info, deselected pricing tabs.
-- **Ink Subtle** ({colors.ink-subtle}): Tertiary type at #7b7b78 — footer columns, helper text.
-- **Ink Tertiary** ({colors.ink-tertiary}): Quaternary type at #9c9fa5 — disabled, footnotes.
-- **Inverse Ink** ({colors.inverse-ink}): White on black — quote-strip type.
-- **Inverse Ink Muted** ({colors.inverse-ink-muted}): Light gray on black — quote-strip meta.
+暖白底與橙色訊號，讓對話更有親和力。
 
-### Semantic & Report Palette (in-product mockups)
-- **Error Red** ({colors.semantic-error}): Form validation, destructive states.
-- **Success Green** ({colors.semantic-success}): Positive states (also `{colors.report-green}`).
-- **Report Blue** ({colors.report-blue}): Analytics chart blue.
-- **Report Pink** ({colors.report-pink}): Analytics chart pink.
-- **Report Lime** ({colors.report-lime}): Analytics chart lime.
-- **Report Cyan** ({colors.report-cyan}): Phone country selector accent.
+製作客服收件匣，包含對話清單、易讀的訊息串與客戶資訊面板。使用暖色中性背景及集中的橘色主要操作，以結構區分客服訊息、客戶訊息與系統事件。
 
-The report palette appears INSIDE product UI mockups — these are Intercom's in-product chart colors, not marketing surface colors.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Typography
+## 色彩、字型與繁體中文排版
 
-### Font Family
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-- **Saans** — Intercom's proprietary geometric sans, fallback `Saans Fallback, ui-sans-serif, system-ui`. Carries display, body, eyebrow, and button.
-- **SaansMono** — Proprietary mono, fallback `SaansMono Fallback, ui-monospace`. Used inside code snippets shown in product mockups.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-The same family carries the entire hierarchy. Hierarchy is carried by size + weight + tracking, not by family change.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-### Hierarchy
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 72px | 500 | 1.05 | -2.0px |
+| 56px | 500 | 1.10 | -1.4px |
+| 40px | 500 | 1.15 | -0.8px |
+| 28px | 500 | 1.20 | -0.5px |
+| 22px | 500 | 1.25 | -0.3px |
+| 20px | 400 | 1.40 | -0.2px |
+| 18px | 400 | 1.50 | -0.1px |
+| 16px | 400 | 1.50 | 0 |
+| 14px | 400 | 1.50 | 0 |
+| 12px | 400 | 1.40 | 0 |
+| 15px | 500 | 1.20 | 0 |
+| 14px | 500 | 1.30 | 0 |
+| 13px | 400 | 1.50 | 0 |
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 72px | 500 | 1.05 | -2.0px | Largest hero headline |
-| `{typography.display-lg}` | 56px | 500 | 1.10 | -1.4px | Section opener headlines |
-| `{typography.display-md}` | 40px | 500 | 1.15 | -0.8px | Sub-section headlines |
-| `{typography.headline}` | 28px | 500 | 1.20 | -0.5px | Pricing tier titles, CTA banner |
-| `{typography.card-title}` | 22px | 500 | 1.25 | -0.3px | Card title, feature card |
-| `{typography.subhead}` | 20px | 400 | 1.40 | -0.2px | Lead body, intro paragraphs |
-| `{typography.body-lg}` | 18px | 400 | 1.50 | -0.1px | Hero subhead, lead paragraphs |
-| `{typography.body}` | 16px | 400 | 1.50 | 0 | Default body |
-| `{typography.body-sm}` | 14px | 400 | 1.50 | 0 | Card body, footer |
-| `{typography.caption}` | 12px | 400 | 1.40 | 0 | Captions, meta |
-| `{typography.button}` | 15px | 500 | 1.20 | 0 | Pill / square button labels |
-| `{typography.eyebrow}` | 14px | 500 | 1.30 | 0 | Section eyebrow (sentence case) |
-| `{typography.mono}` | 13px | 400 | 1.50 | 0 | SaansMono for code in mockups |
+## 版面與元件結構
 
-### Principles
+此參考可先實作：對話撰寫區，包含草稿、傳送中、已傳送與重試狀態。
 
-- **Weight 500 carries display.** Saans at 500 reads as confident without bold.
-- **Negative letter-spacing scales with size.** -2.0px at 72px (≈3% of size), down to 0 on body.
-- **Line-heights tighten on display, relax on body.** 1.05 at display-xl, 1.50 at body.
-- **No mono on chrome.** SaansMono lives in product UI; marketing chrome stays in Saans.
-- **Eyebrow uses sentence case** at 14px / 500 weight — no all-caps tracking.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Note on Font Substitutes
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-If implementing without Saans, suitable substitutes include **Söhne** (paid), **Inter** (free, weight 500), or **Geist Sans** (free). Inter at weight 500 is the closest free substitute; SaansMono can be approximated with **JetBrains Mono** at weight 400.
+## 操作與狀態
 
-## Layout
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Spacing System
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-- **Base unit**: 8px.
-- **Tokens (front matter)**: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 96px.
-- Card interior padding: `{spacing.lg}` 24px on pricing/feature cards; `{spacing.xl}` 32px on testimonial/discount cards; `{spacing.xxl}` 48px on CTA banners.
-- Pill button padding: 10px vertical · 18px horizontal.
+## 圖片、動態與無障礙
 
-### Grid & Container
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-- Max content width sits around 1280px.
-- Card grids are 3-up at desktop, 2-up at tablet, 1-up at mobile.
-- Pricing tier grid is 3-up; comparison strip below shows checkmarks per tier.
-- Product mockup cards span full content width — they're the protagonist of every section.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Whitespace Philosophy
+## 來源中的技術值補充
 
-The cream canvas does the work white space would in another brand. Sections separate by ample vertical breathing room (`{spacing.section}` 96px) plus the lift-onto-white cards.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-## Elevation & Depth
+額外數值以開頭的來源設定為準。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow, no border | Default for body type, hero text, footer |
-| 1 (lift on cream) | `{colors.surface-1}` white background on `{colors.canvas}` cream | Pricing cards, feature cards, product mockups |
-| 2 (hairline lift) | `{colors.surface-1}` + 1px `{colors.hairline}` border | Floating tiles with extra definition |
-| 3 (deep accent) | `{colors.inverse-canvas}` true black | Quote / testimonial callout strip |
+## 日期限定首頁觀察
 
-Intercom resists drop shadows. Depth is communicated by the white-on-cream surface change.
+取樣來源：https://www.intercom.com/。Public anonymous session; locale/聊天覆蓋層可能不同。
 
-### Decorative Depth
+官網使用奶油白背景、細邊線、Saans 字型、四張裝飾照片與「A 整合 AI 與真人客服的完整系統」。首屏有 Start free trial、View demo，並保留現行多彩 Fin4 橫幅。
 
-- **Product UI mockups** dominate every section's right column or center band — these are screenshots, not illustrations.
-- **No atmospheric gradients, no spotlight cards, no pastel section blocks.** The cream + white system is deliberately restrained.
+主要順序為 Inbox／Copilot2、AI Helpdesk、Fin AI Agent、團隊與 Fin 協作、客戶見證、整合、價格及頁尾。桌面大標80px，390px 窄版40px。
 
-## Shapes
+第一次原生指令錯將照片及彩色橫幅移除，已以第二次真實 Stitch 編輯更正；兩次原始指令與輸出均完整保留。實際全頁驗證另發現 Fin 的 Rive 動畫區留白，不能以頁高相同判定一致。
 
-### Border Radius Scale
+原有 DESIGN.md、PROMPTS.md 與 STITCH-PROMPT.md 保留；本檔為日期限定補充。研究頁免費瀏覽，未開啟付費方案或交易；不對外部生成服務的帳戶計費狀態作保證。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Small chips, badges |
-| `{rounded.sm}` | 6px | Inline tags |
-| `{rounded.md}` | 8px | All buttons, form inputs |
-| `{rounded.lg}` | 12px | Pricing cards, feature cards, FAQ rows |
-| `{rounded.xl}` | 16px | Product mockup cards |
-| `{rounded.xxl}` | 24px | Oversized CTA banners |
-| `{rounded.pill}` | 9999px | Tab toggles |
-| `{rounded.full}` | 9999px | Avatar circles |
+驗證範圍為匿名公開首頁、1280×720 與390×844、DPR1、桌面 UA。未完成實體手機、其他地區、完整互動或服務驗證；目前 accepted=false，不宣稱與官方一致。
 
-### Photography & Illustration Geometry
+## 已知差異與驗證範圍
 
-- Product UI screenshots dominate the marketing surface; they sit in `{rounded.xl}` 16px tiles.
-- Customer logo tiles render at small sizes (~24–32px logo height) on `{colors.canvas}` cream with no border.
-- Avatar circles in testimonial cards use `{rounded.full}` at 40–48px sizes.
+- 最新桌面整頁高 9492px，與來源相同；窄版為 10419px，來源為 10421px。這不代表視覺一致：處理複雜查詢的第一個桌面 Fin 面板明顯空白，保存的來源 HTML 也有空的延遲載入媒體容器。
+- 重新檢查啟用中的官網來源，也顯示空白 Fin 面板且沒有 canvas 或 video 節點，實際截圖與片段已保存。完整 React 資料識別出兩份原始 Rive 素材，已連同網址、大小與雜湊保存；先前 Chrome 影像曾有可見階段，但原始 Rive 的正常繪製或直接取得的可見階段仍待驗證，未捏造替代圖。
+- 來源通知及聊天 iframe 覆蓋層未納入。未啟用分頁的圖片與 complete=false 的 SVG 不直接視為可見破圖；產品分頁、摺疊區、導覽及服務狀態尚未驗證。
 
-## Components
-
-### Buttons
-
-**`button-primary`** — Charcoal CTA. The default primary CTA across all pages.
-- Background `{colors.ink}`, text `{colors.on-primary}`, type `{typography.button}`, padding 10px 18px, rounded `{rounded.md}`.
-- Pressed state lives in `button-primary-pressed`.
-
-**`button-secondary`** — White button on cream. Used for secondary CTAs.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.button}`, padding 10px 18px, rounded `{rounded.md}`. 1px `{colors.hairline}` border.
-
-**`button-tertiary`** — Plain text button.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-**`button-fin`** — Fin Orange CTA — reserved for Fin AI product CTAs.
-- Background `{colors.fin-orange}`, text `{colors.on-primary}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-### Pricing Tabs
-
-**`pricing-tab-default`** + **`pricing-tab-selected`** — Pill-toggle on `/pricing`.
-- Default: `{colors.canvas}` background, `{colors.ink-muted}` text, rounded `{rounded.pill}`.
-- Selected: `{colors.surface-1}` white background, `{colors.ink}` text — selected = lift onto white.
-
-### Cards & Containers
-
-**`pricing-card`** — Each tier on `/pricing`.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 24px.
-
-**`pricing-card-featured`** — Featured / recommended tier — inverts to charcoal.
-- Background `{colors.ink}`, text `{colors.on-primary}`, otherwise identical structure.
-
-**`feature-card`** — Generic feature highlight.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 24px.
-
-**`product-mockup-card`** — The dominant card type — frames a high-fidelity product UI screenshot.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.xl}`, padding 24px.
-
-**`testimonial-card`** — Customer quote with avatar + name + company.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body-lg}`, rounded `{rounded.lg}`, padding 32px.
-
-**`startup-discount-card`** — The "Startups get 90% off" tinted card.
-- Background `{colors.surface-2}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 32px.
-
-**`customer-logo-tile`** — Small tile in the customer marquee.
-- Background `{colors.canvas}`, text `{colors.ink-muted}`, type `{typography.caption}`, rounded `{rounded.xs}`, padding 16px.
-
-**`cta-banner`** — Closing CTA panel near page bottom.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.headline}`, rounded `{rounded.lg}`, padding 48px.
-
-### Inputs & Forms
-
-**`text-input`** + **`text-input-focused`** — Form fields on contact and search overlays.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.md}`, padding 10px 14px.
-
-### FAQ
-
-**`faq-row`** — Expandable accordion row in the pricing FAQ.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.md}`, padding 24px. 1px `{colors.hairline-soft}` bottom rule.
-
-### Navigation
-
-**`top-nav`** — Sticky cream bar with the Intercom wordmark left, nav links centered, log-in + sign-up pair right.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`, height 56px.
-
-### Footer
-
-**`footer`** — Dense link grid on `{colors.canvas}` cream with the Intercom wordmark left.
-- Background `{colors.canvas}`, text `{colors.ink-muted}`, type `{typography.caption}`, padding 64px 32px.
-
-## Do's and Don'ts
-
-### Do
-
-- Reserve `{colors.canvas}` cream as the system's anchor surface — never replace with pure white.
-- Lift cards from cream onto white (`{colors.surface-1}`) for hierarchy.
-- Use **`button-fin`** Fin Orange ONLY on Fin AI product CTAs and Fin badges.
-- Pair Saans display at weight 500 with body at 400.
-- Use product UI screenshots as the protagonist of every section.
-- Use `{rounded.lg}` 12px for cards and `{rounded.xl}` 16px for product mockup tiles.
-- Apply negative tracking proportionally to display sizes.
-
-### Don't
-
-- Don't use pure white as the canvas.
-- Don't use Fin Orange as a section background or as a generic primary CTA.
-- Don't add drop shadows to floating cards.
-- Don't introduce a second display family.
-- Don't pill-round CTAs.
-- Don't write all-caps tracked eyebrows.
-- Don't promote the report palette colors to brand-level surfaces.
-- Don't combine charcoal CTAs and Fin Orange CTAs in the same viewport.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Desktop-XL | 1440px | Default desktop layout |
-| Desktop | 1280px | Card grid 3-up maintained |
-| Tablet | 1024px | Card grid 3-up → 2-up |
-| Mobile-Lg | 768px | Pricing comparison becomes accordion; nav hamburger |
-| Mobile | 480px | Single-column; display-xl scales 72px → ~32px |
-
-### Touch Targets
-
-- CTAs hold ≥40px tap height across viewports.
-- Pricing tab pills hold ≥40px tap height.
-- Form inputs hold ≥44px tap target on touch.
-
-### Collapsing Strategy
-
-- **Top nav**: links collapse to hamburger below 768px; primary CTA stays visible.
-- **Card grids**: 3-up → 2-up at 1024px → 1-up below 768px.
-- **Pricing comparison**: collapses into per-tier accordion below 768px.
-- **Display type**: `{typography.display-xl}` 72px scales toward `{typography.display-md}` 40px on mobile.
-
-### Image Behavior
-
-- Product UI screenshots maintain aspect ratio and never crop.
-- Customer logos in the marquee may collapse from 6-up to 3-up below 768px.
-
-## Known Gaps
-
-- The **report palette** lives in product analytics dashboards rendered inside marketing mockups; they are documented for completeness but are not brand surface colors.
-- Form-field error and validation styling is not visible on the inspected pages.
-- Dark mode is not documented because the marketing site does not ship a dark theme.
-- The helpdesk / inbox product surfaces show in-product UI states that aren't formal marketing chrome.
-- Saans and SaansMono are proprietary; an open-source substitute (Inter, Söhne, Geist) is acceptable.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Intercom-inspired interface. Implement this working page: A support inbox with a conversation list, readable thread, and customer context panel. Use warm neutral surfaces and a focused orange action; distinguish agent messages, customer messages, and system events structurally.
+先閱讀隨附的 DESIGN.md，以 Intercom 的設計語言作為介面參考。請完成以下可操作頁面：製作客服收件匣，包含對話清單、易讀的訊息串與客戶資訊面板。使用暖色中性背景及集中的橘色主要操作，以結構區分客服訊息、客戶訊息與系統事件。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Intercom-inspired interface. Build a conversation composer with draft, sending, sent, and retry states. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Intercom 的設計語言作為介面參考。請製作對話撰寫區，包含草稿、傳送中、已傳送與重試狀態。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Intercom-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A support inbox with a conversation list, readable thread, and customer context panel. Use warm neutral surfaces and a focused orange action; distinguish agent messages, customer messages, and system events structurally.
+先閱讀隨附的 DESIGN.md，以 Intercom 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作客服收件匣，包含對話清單、易讀的訊息串與客戶資訊面板。使用暖色中性背景及集中的橘色主要操作，以結構區分客服訊息、客戶訊息與系統事件。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

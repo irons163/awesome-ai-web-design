@@ -1,264 +1,191 @@
-# Design System Inspired by Runway
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Runway"
+description: "電影式暗場搭配白色閱讀區，讓作品成為焦點。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#000000"
+  canvas: "#ffffff"
+  ink: "#000000"
+  source-01: "#767d88"
+  source-02: "#7d848e"
+  source-03: "#000000"
+  source-04: "#030303"
+  source-05: "#1a1a1a"
+  source-06: "#ffffff"
+  source-07: "#fefefe"
+  source-08: "#e9ecf2"
+  source-09: "#27272a"
+  source-10: "#404040"
+  source-11: "#3f3f3f"
+  source-12: "#a7a7a7"
+  source-13: "#c9ccd1"
+  source-14: "#d0d4d4"
+  source-15: "#6b7280"
+  source-16: "#0c0c0c"
+  source-17: "#999999"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Runway's interface is a cinematic reel brought to life as a website — a dark, editorial, film-production-grade design where full-bleed photography and video ARE the primary UI elements. This is not a typical tech product page; it's a visual manifesto for AI-powered creativity. Every section feels like a frame from a film: dramatic lighting, sweeping landscapes, and intimate human moments captured in high-quality imagery that dominates the viewport.
+# Runway 延伸設計規格
 
-The design language is built on a single typeface — abcNormal — a clean, geometric sans-serif that handles everything from 48px display headlines to 11px uppercase labels. This single-font commitment creates an extreme typographic uniformity that lets the visual content speak louder than the text. Headlines use tight line-heights (1.0) with negative letter-spacing (-0.9px to -1.2px), creating compressed text blocks that feel like film titles rather than marketing copy.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-What makes Runway distinctive is its complete commitment to visual content as design. Rather than illustrating features with icons or diagrams, Runway shows actual AI-generated and AI-enhanced imagery — cars driving through cinematic landscapes, artistic portraits, architectural renders. The interface itself retreats into near-invisibility: minimal borders, zero shadows, subtle cool-gray text, and a dark palette that puts maximum focus on the photography.
+## 來源與規格層次
 
-**Key Characteristics:**
-- Cinematic full-bleed photography and video as primary UI elements
-- Single typeface system: abcNormal for everything from display to micro labels
-- Dark-dominant palette with cool-toned neutrals (#767d88, #7d848e)
-- Zero shadows, minimal borders — the interface is intentionally invisible
-- Tight display typography (line-height 1.0) with negative tracking (-0.9px to -1.2px)
-- Uppercase labels with positive letter-spacing for navigational structure
-- Weight 450 (unusual intermediate) for small uppercase text — precision craft
-- Editorial magazine layout with mixed-size image grids
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`6a0df23a1c67ae0b5f3488ca5eba6d8d76685b41f020178a0ce87a084d939b45`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://runway.com/。
+- 目前預覽：`official-drafts/runwayml.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary
-- **Runway Black** (`#000000`): The primary page background and maximum-emphasis text.
-- **Deep Black** (`#030303`): A near-imperceptible variant for layered dark surfaces.
-- **Dark Surface** (`#1a1a1a`): Card backgrounds and elevated dark containers.
-- **Pure White** (`#ffffff`): Primary text on dark surfaces and light-section backgrounds.
+## 整體視覺方向
 
-### Surface & Background
-- **Near White** (`#fefefe`): The lightest surface — barely distinguishable from pure white.
-- **Cool Cloud** (`#e9ecf2`): Light section backgrounds with a cool blue-gray tint.
-- **Border Dark** (`#27272a`): The single dark-mode border color — barely visible containment.
+電影式暗場搭配白色閱讀區，讓作品成為焦點。
 
-### Neutrals & Text
-- **Charcoal** (`#404040`): Primary body text on light surfaces and secondary text.
-- **Near Charcoal** (`#3f3f3f`): Slightly lighter variant for dark-section secondary text.
-- **Cool Slate** (`#767d88`): Secondary body text — a distinctly blue-gray cool neutral.
-- **Mid Slate** (`#7d848e`): Tertiary text, metadata descriptions.
-- **Muted Gray** (`#a7a7a7`): De-emphasized content, timestamps.
-- **Cool Silver** (`#c9ccd1`): Light borders and dividers.
-- **Light Silver** (`#d0d4d4`): The lightest border/divider variant.
-- **Tailwind Gray** (`#6b7280`): Standard Tailwind neutral for supplementary text.
-- **Dark Link** (`#0c0c0c`): Darkest link text — nearly black.
-- **Footer Gray** (`#999999`): Footer links and deeply muted content.
+製作影片專案圖庫，包含寬幅預覽、簡潔專題介紹與精簡製作說明。每份預覽搭配有用的靜態圖片與說明，不只依靠自動播放傳達內容。
 
-### Gradient System
-- **None in the interface.** Visual richness comes entirely from photographic content — AI-generated and enhanced imagery provides all the color and gradient the design needs. The interface itself is intentionally colorless.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## 3. Typography Rules
+## 色彩、字型與繁體中文排版
 
-### Font Family
-- **Universal**: `abcNormal`, with fallback: `abcNormal Fallback`
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-*Note: abcNormal is a custom geometric sans-serif. For external implementations, Inter or DM Sans serve as close substitutes.*
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Hierarchy
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display / Hero | abcNormal | 48px (3rem) | 400 | 1.00 (tight) | -1.2px | Maximum size, film-title presence |
-| Section Heading | abcNormal | 40px (2.5rem) | 400 | 1.00–1.10 | -1px to 0px | Feature section titles |
-| Sub-heading | abcNormal | 36px (2.25rem) | 400 | 1.00 (tight) | -0.9px | Secondary section markers |
-| Card Title | abcNormal | 24px (1.5rem) | 400 | 1.00 (tight) | normal | Article and card headings |
-| Feature Title | abcNormal | 20px (1.25rem) | 400 | 1.00 (tight) | normal | Small headings |
-| Body / Button | abcNormal | 16px (1rem) | 400–600 | 1.30–1.50 | -0.16px to normal | Standard body, nav links |
-| Caption / Label | abcNormal | 14px (0.88rem) | 500–600 | 1.25–1.43 | 0.35px (uppercase) | Metadata, section labels |
-| Small | abcNormal | 13px (0.81rem) | 400 | 1.30 (tight) | -0.16px to -0.26px | Compact descriptions |
-| Micro / Tag | abcNormal | 11px (0.69rem) | 450 | 1.30 (tight) | normal | Uppercase tags, tiny labels |
+| 用途 | 字型 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- | --- |
+| `display-/-hero` | abcNormal | 48px (3rem) | 400 | 1.00 （緊密） | -1.2px |
+| 區段標題 | abcNormal | 40px (2.5rem) | 400 | 1.00–1.10 | -1px to 0px |
+| 次標題 | abcNormal | 36px (2.25rem) | 400 | 1.00 （緊密） | -0.9px |
+| `card-title` | abcNormal | 24px (1.5rem) | 400 | 1.00 （緊密） | normal |
+| 功能標題 | abcNormal | 20px (1.25rem) | 400 | 1.00 （緊密） | normal |
+| `body-/-button` | abcNormal | 16px (1rem) | 400–600 | 1.30–1.50 | -0.16px to normal |
+| `caption-/-label` | abcNormal | 14px (0.88rem) | 500–600 | 1.25–1.43 | 0.35px (uppercase) |
+| 小型文字 | abcNormal | 13px (0.81rem) | 400 | 1.30 （緊密） | -0.16px to -0.26px |
+| `micro-/-tag` | abcNormal | 11px (0.69rem) | 450 | 1.30 （緊密） | normal |
 
-### Principles
-- **One typeface, complete expression**: abcNormal handles every text role. The design achieves variety through size, weight, case, and letter-spacing rather than font-family switching.
-- **Tight everywhere**: Nearly every size uses line-height 1.0–1.30 — even body text is relatively compressed. This creates a dense, editorial feel.
-- **Weight 450 — the precision detail**: Some small uppercase labels use weight 450, an uncommon intermediate between regular (400) and medium (500). This micro-craft signals typographic sophistication.
-- **Negative tracking as default**: Even body text uses -0.16px to -0.26px letter-spacing, keeping everything slightly tighter than default.
-- **Uppercase as structure**: Labels at 14px and 11px use `text-transform: uppercase` with positive letter-spacing (0.35px) to create navigational signposts that contrast with the tight lowercase text.
+## 版面與元件結構
 
-## 4. Component Stylings
+此參考可先實作：影片專案卡片，包含片長、格式、說明與播放暫停控制項。
 
-### Buttons
-- Text: weight 600 at 14px abcNormal
-- Background: likely transparent or dark, with minimal border
-- Radius: small (4px) for button-like links
-- The button design is extremely restrained — no heavy fills or borders detected
-- Interactive elements blend into the editorial flow
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Cards & Containers
-- Background: transparent or Dark Surface (`#1a1a1a`)
-- Border: `1px solid #27272a` (dark mode) — barely visible containment
-- Radius: small (4–8px) for functional elements; 16px for alert-style containers
-- Shadow: zero — no shadows on any element
-- Cards are primarily photographic — the image IS the card
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Navigation
-- Minimal horizontal nav — transparent over hero content
-- Logo: Runway wordmark in white/black
-- Links: abcNormal at 16px, weight 400–600
-- Hover: text shifts to white or higher opacity
-- Extremely subtle — designed to not compete with visual content
+## 操作與狀態
 
-### Image Treatment
-- Full-bleed cinematic photography and video dominate
-- AI-generated content shown at large scale as primary visual elements
-- Mixed-size image grids creating editorial magazine layouts
-- Dark overlays on hero images for text readability
-- Product screenshots with subtle rounded corners (8px)
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Distinctive Components
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**Cinematic Hero**
-- Full-viewport image or video with text overlay
-- Headline in 48px abcNormal, white on dark imagery
-- The image is always cinematic quality — film-grade composition
+## 圖片、動態與無障礙
 
-**Research Article Cards**
-- Photographic thumbnails with article titles
-- Mixed-size grid layout (large feature + smaller supporting)
-- Clean text overlay or below-image caption style
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**Trust Bar**
-- Company logos (leading organizations across industries)
-- Clean, monochrome treatment
-- Horizontal layout with generous spacing
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**Mission Statement**
-- "We are building AI to simulate the world through imagination, art and aesthetics"
-- On a dark background with white text
-- The emotional close — artistic and philosophical
+## 來源中的技術值補充
 
-## 5. Layout Principles
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-### Spacing System
-- Base unit: 8px
-- Scale: 4px, 6px, 8px, 12px, 16px, 20px, 24px, 28px, 32px, 48px, 64px, 78px
-- Section vertical spacing: generous (48–78px)
-- Component gaps: 16–24px
+- `#000000`
+- `#030303`
+- `#1a1a1a`
+- `#ffffff`
+- `#fefefe`
+- `#e9ecf2`
+- `#27272a`
+- `#404040`
+- `#3f3f3f`
+- `#767d88`
+- `#7d848e`
+- `#a7a7a7`
+- `#c9ccd1`
+- `#d0d4d4`
+- `#6b7280`
+- `#0c0c0c`
+- `#999999`
+- `1px solid #27272a`
 
-### Grid & Container
-- Max container width: up to 1600px (cinema-wide)
-- Hero: full-viewport, edge-to-edge
-- Content sections: centered with generous margins
-- Image grids: asymmetric, magazine-style mixed sizes
-- Footer: full-width dark section
+## 日期限定首頁觀察
 
-### Whitespace Philosophy
-- **Cinema-grade breathing**: Large vertical gaps between sections create a scrolling experience that feels like watching scenes change.
-- **Images replace whitespace**: Where other sites use empty space, Runway fills it with photography. The visual content IS the breathing room.
-- **Editorial grid asymmetry**: The image grid uses intentionally varied sizes — large hero images paired with smaller supporting images, creating visual rhythm.
+入口 https://runwayml.com/ 目前轉到 https://runway.com/，觀察2026-10-11。當日新增藍色企業促銷公告，桌面高48px、窄版60.5px；白色64px固定導覽，下接黑底原始影片主視覺。abcNormal 主標 打造真實世界的智慧 的實測位置，桌面為x58.75/y347.53/520.49×43.89、38.17px字型；窄版為x50.59/y280.11/288.83×64.39、28px字型。
 
-### Border Radius Scale
-- Sharp (4px): Buttons, small interactive elements
-- Subtle (6px): Links, small containers
-- Comfortable (8px): Standard containers, image cards
-- Generous (16px): Alert-style containers, featured elements
+完整順序保留合作品牌SVG列、三平台Creative/Dev/Robotics介紹、平台選擇與Creative使用方式頁籤、模糊流動Research影像與三個研究連結、Runway Ads/Praxis-1/OpenAI Marketplace/Claude Motion四則當日新聞，以及完整黑色多欄頁尾。品牌或產品宣傳文字僅代表當日官方頁面，不代表另行產品查核。
 
-## 6. Depth & Elevation
+官方平台面板會自動輪播，造成頁高變動。本次透過可見按鈕明確選定 Runway Creative / Runway 使用方式，再以每段狀態檢查完整拍攝：來源與成品桌面各7段、窄版各12段，頁高5015/9377px。每張實際影像尺寸、連續捲動覆蓋、前後捲動與頁高一致、成品hash皆驗證；全部3張桌面與5張窄版比較圖逐段目視檢查。16張DOM圖片與字型載入完成、無水平溢位，主標位置和尺寸完全相合。
 
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Flat (Level 0) | No shadow, no border | Everything — the dominant state |
-| Bordered (Level 1) | `1px solid #27272a` | Alert containers only |
-| Dark Section (Level 2) | Dark bg (#000000 / #1a1a1a) with light text | Hero, features, footer |
-| Light Section (Level 3) | White/Cool Cloud bg with dark text | Content sections, research |
+原生 Google Stitch MCP 新增桌面畫面，完整指令、回應、原始HTML、未改縮圖和完整 PNG 截圖分開保留；具體重製再使用完整當日官方DOM/CSS及44份公開原始素材校正。已修正公告被固定導覽遮蓋與Dev區塊原始背景圖漏載；Mux播放器使用原始srcset海報，不以生成圖片替代。舊版與不穩定輪播證據均另外保留，不混作本次完整驗證。
 
-**Shadow Philosophy**: Runway uses **zero shadows**. This is a film-production design decision — in cinema, depth comes from lighting, focus, and composition, not drop shadows. The interface mirrors this philosophy: depth is communicated through dark/light section alternation, photographic depth-of-field, and overlay transparency — never through CSS box-shadow.
+## 已知差異與驗證範圍
 
-## 7. Do's and Don'ts
+- 官網首頁在 Creative、Dev 與 Robotics 面板間自動輪播，頁高因此變動。本次明確選定 Runway Creative 與使用方式分頁；Dev、Robotics 及其他 Creative 分頁尚未驗收，靜態預覽保留選定狀態。
+- Mux shadow root 影片與 HLS 播放，以精確觀察到的公開 srcset 海報替代。主視覺、Creative、Robotics 與使用情境面板呈現不同動態階段或靜態海報，Research 影片畫格時間也不同，未宣稱逐格或播放一致。
+- 官網窄版頂部截於轉場中，導覽覆蓋藍色宣傳橫幅；校正版頁首先位於可見橫幅下方，再於捲動後固定頂部。合作商標位置及被固定導覽遮住的部分，在連續階段中不同，尚未驗收為精確一致。
+- 導覽與行動版面板、平台分頁切換、Cookie、隱私、語言、完整鍵盤焦點及帳戶、API、聯絡流程，尚未在靜態校正版實作或驗收。觀察到的連結導向官網，未送出帳戶或表單。
+- 新 Stitch 編輯稿僅為桌面版本，先前桌面、行動版及原始設計資料仍可溯源；原始比對未涵蓋其他寬度、實體手機、路由、語言與正式部署。
 
-### Do
-- Use full-bleed cinematic photography as the primary visual element
-- Use abcNormal for all text — maintain the single-typeface commitment
-- Keep display line-heights at 1.0 with negative letter-spacing for film-title density
-- Use the cool-gray neutral palette (#767d88, #7d848e) for secondary text
-- Maintain zero shadows — depth comes from photography and section backgrounds
-- Use uppercase with letter-spacing for navigational labels (14px, 0.35px spacing)
-- Apply small border-radius (4–8px) — the design is NOT pill-shaped
-- Let visual content (photos, videos) dominate — the UI should be invisible
-- Use weight 450 for micro labels — the precision matters
-
-### Don't
-- Don't add decorative colors to the interface — the only color comes from photography
-- Don't use heavy borders or shadows — the interface must be nearly invisible
-- Don't use pill-shaped radius — Runway's geometry is subtly rounded, not circular
-- Don't use bold (700+) weight — 400–600 is the full range, with 450 as a precision tool
-- Don't compete with the visual content — text overlays should be minimal and restrained
-- Don't use gradient backgrounds in the interface — gradients exist only in photography
-- Don't use more than one typeface — abcNormal handles everything
-- Don't use body line-height above 1.50 — the tight, editorial feel is core
-- Don't reduce image quality — cinematic photography IS the design
-
-## 8. Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile | <640px | Single column, stacked images, reduced hero text |
-| Tablet | 640–768px | 2-column image grids begin |
-| Small Desktop | 768–1024px | Standard layout |
-| Desktop | 1024–1280px | Full layout, expanded hero |
-| Large Desktop | 1280–1600px | Maximum cinema-width container |
-
-### Touch Targets
-- Navigation links at comfortable 16px
-- Article cards serve as large touch targets
-- Buttons at 14px weight 600 with adequate padding
-
-### Collapsing Strategy
-- **Navigation**: Collapses to hamburger on mobile
-- **Hero**: Full-bleed maintained, text scales down
-- **Image grids**: Multi-column → 2-column → single column
-- **Research articles**: Feature-size cards → stacked full-width
-- **Trust logos**: Horizontal scroll or reduced grid
-
-### Image Behavior
-- Cinematic images scale proportionally
-- Full-bleed hero maintained across all sizes
-- Image grids reflow to fewer columns
-- Video content maintains aspect ratio
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Runway-inspired interface. Implement this working page: A film project gallery with wide visual previews, a quiet editorial introduction, and concise production notes. Avoid autoplay as the only way to understand a project; pair each preview with a useful still image and caption.
+先閱讀隨附的 DESIGN.md，以 Runway 的設計語言作為介面參考。請完成以下可操作頁面：製作影片專案圖庫，包含寬幅預覽、簡潔專題介紹與精簡製作說明。每份預覽搭配有用的靜態圖片與說明，不只依靠自動播放傳達內容。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Runway-inspired interface. Build a film project card with duration, format, caption, and play-pause controls. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Runway 的設計語言作為介面參考。請製作影片專案卡片，包含片長、格式、說明與播放暫停控制項。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Runway-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A film project gallery with wide visual previews, a quiet editorial introduction, and concise production notes. Avoid autoplay as the only way to understand a project; pair each preview with a useful still image and caption.
+先閱讀隨附的 DESIGN.md，以 Runway 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作影片專案圖庫，包含寬幅預覽、簡潔專題介紹與精簡製作說明。每份預覽搭配有用的靜態圖片與說明，不只依靠自動播放傳達內容。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Wired-Inspired-design-analysis
-description: An inspired interpretation of Wired's design language — a flagship technology-magazine brand whose surface is a strict editorial duet of stark black wordmark on white canvas, anchored by a tall narrow custom display serif for hero headlines, a humanist serif body face for long-form reading, and a clean sans face for metadata; layout reads like a printed magazine ported to the web with very little marketing chrome.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "WIRED"
+description: "報紙式密度、襯線標題與精簡藍色連結。"
 
 colors:
   primary: "#000000"
@@ -187,7 +188,6 @@ components:
     typography: "{typography.body-sm}"
     padding: "{spacing.4xl} {spacing.xl}"
 
-  # ─── Examples (illustrative) — auto-derived; resolve any TO_FILL markers below ───
   ex-pricing-tier:
     description: "Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface."
     backgroundColor: "{colors.canvas-soft}"
@@ -247,298 +247,180 @@ components:
     rounded: "{rounded.none}"
     padding: "{spacing.md} {spacing.lg}"
     typography: "{typography.body-sm}"
-
 ---
 
+# WIRED 延伸設計規格
 
-## Overview
-
-Wired is the flagship technology-magazine brand under Condé Nast — and the web surface refuses to dress itself as a SaaS marketing site. The page is unmistakably an editorial product: a white canvas, a strict black wordmark in the brand's proprietary `WiredDisplay` (a tall, narrow, high-contrast serif used at 64 px), and stacked story cards that read as a printed magazine grid ported to the screen. There is no atmospheric gradient, no decorative chrome, no chromatic accent — the brand's only colour beyond the black-and-white duet is the small `{colors.link}` (`#057dbc`) used for inline body links inside long-form articles.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-Type carries the entire identity. Three families ladder the system: `WiredDisplay` (the proprietary high-contrast serif) for hero / section headlines; `BreveText` (a humanist serif) for long-form body and bylines; and `Apercu` (a humanist sans) for metadata, captions, eyebrow tags, and buttons. The pairing is editorial-grade: serifs for narrative, sans for navigation and structural labels.
-
-Buttons are square. The brand uses `{rounded.none}` 0 px corners across the entire UI — newsletter sign-ups, login forms, "Read more" CTAs all render as sharp rectangles. The only circular shape is the `button-icon-circular` used for social-share affordances. There are no soft drop-shadows; the brand uses hairline borders for elevation when needed.
+## 來源與規格層次
 
-**Key Characteristics:**
-- A strict black-and-white duet with no chromatic accent except the inline link blue `{colors.link}`. The brand reads as a printed magazine.
-- Three-face typographic system — `WiredDisplay` serif for display, `BreveText` serif for body, `Apercu` sans for metadata and buttons.
-- Square buttons (`{rounded.none}`) — the brand never softens corners on interactive elements.
-- A magazine-style story grid: large feature card at top, two-up secondary, then a vertical stack of bylined story rows separated by `{colors.hairline}` 1 px dividers.
-- The brand's only signature decorative move is the **masthead band** — a thin black strip with the wordmark centred, no other decoration.
-- A near-black `{colors.ink}` (`#000000`) footer band, no graphics, just text columns and the wordmark repeating.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## Colors
-
-### Brand & Accent
-- **Ink Black** (`{colors.primary}` — `#000000`): The brand's only "accent." Used for wordmark, headlines, CTAs, footer fill. Pure black, never softened.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): The default page background.
-- **Canvas Soft** (`{colors.canvas-soft}` — `#f5f5f5`): Rare tint used for the comment-section background and search-result row hover states (not in the main page rhythm).
-- **Hairline** (`{colors.hairline}` — `#e0e0e0`): 1 px dividers between story rows. The brand's only "line."
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`6412c9f6569f10fd8da1919dfc69ba9f1dbb1ba8428ed95cd5560fb0b6d0662d`。
+- 目前首頁參考日期：2026-10-13。
+- 目前公開來源：https://www.wired.com/。
+- 目前預覽：`official-drafts/wired.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Text
-- **Ink** (`{colors.ink}` — `#000000`): Every headline, every body paragraph in BreveText.
-- **Ink Soft** (`{colors.ink-soft}` — `#1a1a1a`): A near-black variant used for caption-strong / footer link emphasis.
-- **Body** (`{colors.body}` — `#757575`): Secondary metadata — bylines, timestamps, supporting body lines.
+## 整體視覺方向
 
-### Semantic
-The brand operates with one inline link colour and no separate error / success / warning palette in its marketing surface. Validation cues on form pages use the ink black + body grey hierarchy.
+報紙式密度、襯線標題與精簡藍色連結。
 
-- **Link** (`{colors.link}` — `#057dbc`): The inline body-link blue. Used only inside long-form article body copy, never on UI buttons or navigation.
+製作長篇科技刊物，使用醒目的襯線標題、精簡作者資訊與多欄相關文章。以分隔線及字級建立層級，閱讀欄寬舒適，不使用卡片陰影。
 
-## Typography
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Font Family
-Three families ladder the system:
-1. **WiredDisplay** — the proprietary tall-narrow high-contrast serif used exclusively for display headlines (64 px hero, scaling down to 26 px sub-display). The brand's most-recognisable typographic signature.
-2. **BreveText** — the proprietary humanist serif used for long-form body, bylines, and editorial captions. Used at 16 – 19 px line-height 1.45 – 1.50 for comfortable reading density.
-3. **Apercu** — a humanist sans used for nav, button labels, category eyebrows, metadata, and captions. Weights 400 / 700.
+## 色彩、字型與繁體中文排版
 
-Inter is loaded as a fourth fallback face for embedded utility surfaces (the comment section, account pages) but does not appear on the main marketing / article surface.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Hierarchy
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-hero}` | 64px | 400 | 59.5px | -0.5px | Cover-story headline. |
-| `{typography.display-lg}` | 48px | 400 | 50.4px | -0.4px | Major section / feature headlines. |
-| `{typography.display-md}` | 32px | 400 | 35.2px | -0.3px | Story-card large variant. |
-| `{typography.display-sm}` | 26px | 400 | 28px | 0 | Sub-display headings inside long-form articles. |
-| `{typography.display-xs}` | 20px | 700 | 24px | -0.28px | Sans (Apercu) display micro-headings for category callouts. |
-| `{typography.body-serif-lg}` | 19px | 400 | 27.93px | 0.108px | Lead paragraph of an article (BreveText). |
-| `{typography.body-serif-md}` | 16px | 400 | 24px | 0.09px | Default article body (BreveText). |
-| `{typography.body-md}` | 17px | 400 | 20px | 0 | Sans body (Apercu) for nav / metadata. |
-| `{typography.body-md-strong}` | 17px | 700 | 22px | -0.144px | Bold sans body. |
-| `{typography.body-sm}` | 14px | 400 | 18px | 0.4px | Secondary sans body. |
-| `{typography.body-sm-strong}` | 14px | 700 | 18px | 0.4px | Bold caption / nav-link. |
-| `{typography.byline}` | 12.73px | 700 | 28px | 0.108px | Article byline (BreveText). |
-| `{typography.caption}` | 12px | 400 | 16px | 0 | Fine print, image captions. |
-| `{typography.button-md}` | 16px | 700 | 20px | 0.3px | Button label. |
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-### Principles
-- **Serif for narrative, sans for structure.** The serif faces never carry button labels or nav text; the sans face never carries article body.
-- **Display weight 400** — the proprietary WiredDisplay reads as elegant by virtue of its thin-tall-narrow design at default weight, not via weight 700+.
-- **Bylines use BreveText weight 700 with relaxed line-height 2.2.** The vertical breathing is part of the editorial signature.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 64px | 400 | 59.5px | -0.5px |
+| 48px | 400 | 50.4px | -0.4px |
+| 32px | 400 | 35.2px | -0.3px |
+| 26px | 400 | 28px | 0 |
+| 20px | 700 | 24px | -0.28px |
+| 19px | 400 | 27.93px | 0.108px |
+| 16px | 400 | 24px | 0.09px |
+| 17px | 400 | 20px | 0 |
+| 17px | 700 | 22px | -0.144px |
+| 14px | 400 | 18px | 0.4px |
+| 14px | 700 | 18px | 0.4px |
+| 12.73px | 700 | 28px | 0.108px |
+| 12px | 400 | 16px | 0 |
+| 16px | 700 | 20px | 0.3px |
 
-### Note on Font Substitutes
-The three proprietary faces have no exact substitutes. Best open-source approximations:
-- **WiredDisplay** — *Playfair Display* weight 400 at large display sizes captures the high-contrast didone feel, though wider than the brand's tall-narrow proportions.
-- **BreveText** — *Lora* or *Source Serif Pro* at 16 – 19 px.
-- **Apercu** — *Inter* or *Manrope* weights 400 / 700.
+## 版面與元件結構
 
-## Layout
+此參考可先實作：文章摘要，包含作者、閱讀時間與主題標示。
 
-### Spacing System
-- **Base unit**: 4 px.
-- **Tokens**: `{spacing.xxs}` 2 px · `{spacing.xs}` 4 px · `{spacing.sm}` 8 px · `{spacing.md}` 12 px · `{spacing.lg}` 16 px · `{spacing.xl}` 20 px · `{spacing.2xl}` 24 px · `{spacing.3xl}` 32 px · `{spacing.4xl}` 48 px.
-- **Section padding**: hero / story grid use `{spacing.4xl}` 48 px top/bottom on desktop.
-- **Story row padding**: `{spacing.lg}` 16 px vertical between bylined story rows.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-### Grid & Container
-- Marketing content uses a wide container (~1400 px max).
-- Cover-story grid: 1 large hero + 2-up secondary stories + vertical stack.
-- Story-row stack: full-width single column with hairline dividers.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Responsive Strategy
+## 操作與狀態
 
-#### Breakpoints
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 768px | Cover hero 64→40 px; all grids 1-up; hamburger nav. |
-| Tablet | 768–1023px | 2-up secondary story grid. |
-| Desktop | ≥ 1024px | Full magazine grid. |
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-#### Touch Targets
-Button-primary renders ~44 px tall (12 vertical padding + 20 line). WCAG AAA at all widths.
+## 圖片、動態與無障礙
 
-#### Collapsing Strategy
-- Nav: full link row + Subscribe CTA at desktop. Hamburger at mobile.
-- Magazine grid: hero stays full-width; 2-up secondary drops to 1-up at mobile.
-- Story rows: stay single-column at all viewports.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-#### Image Behavior
-- Cover images: full-bleed 16:9 hero / 4:3 secondary.
-- Article body images: full-width inside the article column.
-- Author avatars: small inline circular crops next to bylines.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-## Elevation & Depth
+## 來源中的技術值補充
 
-| Level | Treatment | Use |
-|---|---|---|
-| Level 0 — Flat | No shadow, no border. | Default — almost every surface lives at this level. |
-| Level 1 — Hairline | 1 px solid `{colors.hairline}` border. | Story-row dividers, input borders. |
-| Level 2 — Heavy Black Border | 2 px solid `{colors.ink}` border. | Subscribe CTA on certain campaign moments. |
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-The brand uses no drop-shadows. Surface contrast and hairline borders carry all visual hierarchy.
+- `#057dbc`
+- `#000000`
+- `#ffffff`
+- `#f5f5f5`
+- `#e0e0e0`
+- `#1a1a1a`
+- `#757575`
 
-## Shapes
+## 日期限定首頁觀察
 
-### Border Radius Scale
+參考日期：2026-10-13。來源：https://www.wired.com/
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Every interactive shape — buttons, inputs, cards. The brand's signature square geometry. |
-| `{rounded.full}` | 9999px | Circular icon containers only (social-share, account avatar). |
+依已保存的預覽、畫面量測與同日期比對紀錄整理；文件整理日期為 2026-10-14，未重新擷取官網。
 
-### Photography Geometry
-- Cover stories: 16:9 hero, edge-to-edge.
-- Secondary story cards: 4:3 thumbnails.
-- Article body images: native aspect, full column width.
-- Bylines / avatars: circular `{rounded.full}` 28 px crops.
+## 版面與層級
 
-## Components
+這份分析對應目前保存的 WIRED 淺色首頁研究。桌面以品牌導覽和廣告留白起始，接 Today's Picks、主要新聞與 Trending Stories；下方按不同專題、分類及新聞卡片延續編輯內容。
 
-### Buttons
+核心視覺是窄幅、粗重的大標題，搭配主文章圖像、較小文章欄與排行側欄。主文、推薦與列表的尺寸差異建立清楚閱讀順序，黑色區塊標籤及分隔線再區分內容群組。
 
-**`button-primary`** — the square black CTA.
-- Background `{colors.primary}`, text `{colors.on-primary}`, label `{typography.button-md}` (Apercu 16 px / 700 / 0.3 px tracking), padding `{spacing.md} {spacing.xl}`, shape `{rounded.none}` 0 px.
+## 視覺規則
 
-**`button-outline`** — the white outline CTA.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, same typography / padding / shape.
+白底、近黑正文與深色標題形成主要對比。保存的字型包含 WiredDisplay 與 WIRED Mono；1280px 量測中主文章標題約 64px，次要新聞標題約 26px，欄位標籤約 13px。等寬字型用於欄位／資訊標示，不把全部文章內文改為等寬字。
 
-**`button-icon-circular`** — the circular share-icon button.
-- Background `{colors.canvas}`, ink icon, shape `{rounded.full}`.
+保留主圖與新聞圖片的原始比例，按主文、列表和側欄調整字級與留白。廣告區只是保存的版位；第三方廣告創意和帳戶服務不屬於這份靜態研究的完整功能。
 
-### Cards & Containers
+## 窄版與使用
 
-**`story-card-large`** — the cover-story card with `{typography.display-md}` headline.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.lg}`. No border — the card lives on the canvas with the photo doing the work.
+390px 草稿依可讀順序排列文章與側欄資訊，保存紀錄中沒有水平溢出且圖片元素可載入。官網窄版當時的文件寬度為 970px，不能以草稿窄版的可用性推定兩者一致。窄版選單、帳戶面板與 Escape 已檢查；完整鍵盤、影音、其他尺寸與服務仍有未驗收範圍。
 
-**`story-card`** — the secondary story card.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md}`. Photo at top, sans display heading + body lead below.
+## 已知差異與參考紀錄
 
-**`story-row`** — the bylined story list row.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.hairline}` bottom border, body in `{typography.body-md-strong}`, padding `{spacing.lg}` 0.
+- 官網與日期限定草稿的新聞、主視覺、專題順序及整頁高度不同，尚未認定與目前官網一致。
+- 本次官網窄版文件捲動寬度為 970px；比較圖僅取左側 390px，完整原圖另行保存，沒有隱藏此限制。
+- 官網部分圖片仍未載入；草稿桌機仍有 1 個未載入的非主要版面圖片，廣告創意及第三方帳戶功能不納入靜態草稿。
+- 官網在量測與截圖間發生高度變化；兩組原始數字均保存，尚未單獨確認變動原因。
+- 完整互動、影音與輪播、其他尺寸、無障礙流程及正式部署仍待驗收。
 
-### Inputs & Forms
+比對紀錄：[WIRED 畫面校正紀錄](wired-oct13-visual-review.md)。目前預覽：[WIRED](wired.html)。
 
-**`text-input`** — the standard text input.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.ink}` border, body in `{typography.body-md}`, padding `{spacing.md} {spacing.lg}`, shape `{rounded.none}`.
+## 已知差異與驗證範圍
 
-### Navigation
+- 官網與日期限定草稿的新聞、主視覺、專題順序及整頁高度不同，尚未認定與目前官網一致。
+- 本次官網窄版文件捲動寬度為 970px；比較圖僅取左側 390px，完整原圖另行保存，沒有隱藏此限制。
+- 官網部分圖片仍未載入；草稿桌機仍有 1 個未載入的非主要版面圖片，廣告創意及第三方帳戶功能不納入靜態草稿。
+- 官網在量測與截圖間發生高度變化；兩組原始數字均保存，尚未單獨確認變動原因。
+- 完整互動、影音與輪播、其他尺寸、無障礙流程及正式部署仍待驗收。
 
-**`nav-bar`** — the top nav, light by default.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`. Layout: hamburger left, masthead centre, Subscribe right.
-
-**`nav-link`** — link items inside nav.
-- Text `{colors.ink}`, set in `{typography.body-sm-strong}` (Apercu 14 / 700).
-
-**`footer`** — the black footer band.
-- Background `{colors.primary}`, text `{colors.on-primary}`, padding `{spacing.4xl} {spacing.xl}`. Body in `{typography.body-sm}` (Apercu 14 / 400). Footer column eyebrows in `{typography.body-sm-strong}`.
-
-### Signature Components
-
-**`hero-band`** — the white hero band hosting the cover-story.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.4xl} {spacing.xl}`. Cover headline in `{typography.display-hero}` (WiredDisplay 64 px).
-
-**`masthead-band`** — the thin top band with the wordmark.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.md} {spacing.xl}`. The wordmark sits centred; flanked by section nav.
-
-**`category-eyebrow`** — the small uppercase category label above story headlines.
-- Text `{colors.ink}`, set in `{typography.body-sm-strong}` (Apercu 14 / 700 — though some campaigns use ALL CAPS via CSS).
-
-**`byline-row`** — the article byline strip.
-- Background `{colors.canvas}`, text `{colors.body}`, body in `{typography.byline}` (BreveText 12.73 / 700 / line-height 2.2). Includes an author avatar + name + date.
-
-**`hairline-divider`** — the 1 px line between story rows.
-- 1 px solid `{colors.hairline}`.
-
-### Examples (illustrative)
-
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
-
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
-
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
-
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
-
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
-
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
-
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
-
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
-
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` black for the wordmark, every CTA, and the footer fill. The brand IS the strict black-on-white duet.
-- Set hero headlines in `{typography.display-hero}` (WiredDisplay 64 px weight 400). The proprietary serif IS the brand's typographic signature.
-- Use `{rounded.none}` 0 px on every button and form input. The brand reads as a printed magazine — square corners are non-negotiable.
-- Pair WiredDisplay (serif display) with BreveText (serif body) and Apercu (sans labels). Three faces, three roles.
-- Render story rows with `{colors.hairline}` 1 px dividers — the brand's only elevation cue.
-
-### Don't
-- Don't introduce a chromatic brand accent. The link blue is reserved for inline body links inside articles only.
-- Don't round button corners. The brand never softens its rectangular geometry.
-- Don't drop a soft drop-shadow on cards. Surface contrast and hairlines carry elevation.
-- Don't substitute the proprietary serif faces with a generic sans for display. The serif voice is the brand.
-- Don't promote display weight beyond 400. The brand's elegance is in the typeface design, not bold weight.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a WIRED-inspired interface. Implement this working page: A long-form technology journal with a strong serif headline, compact byline, and multi-column related stories. Establish hierarchy with rules and type scale; keep the article column comfortable and avoid card shadows.
+先閱讀隨附的 DESIGN.md，以 WIRED 的設計語言作為介面參考。請完成以下可操作頁面：製作長篇科技刊物，使用醒目的襯線標題、精簡作者資訊與多欄相關文章。以分隔線及字級建立層級，閱讀欄寬舒適，不使用卡片陰影。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a WIRED-inspired interface. Build an editorial story summary with byline, reading time, and topic label. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 WIRED 的設計語言作為介面參考。請製作文章摘要，包含作者、閱讀時間與主題標示。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a WIRED-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A long-form technology journal with a strong serif headline, compact byline, and multi-column related stories. Establish hierarchy with rules and type scale; keep the article column comfortable and avoid card shadows.
+先閱讀隨附的 DESIGN.md，以 WIRED 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作長篇科技刊物，使用醒目的襯線標題、精簡作者資訊與多欄相關文章。以分隔線及字級建立層級，閱讀欄寬舒適，不使用卡片陰影。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

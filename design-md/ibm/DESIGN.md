@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: IBM-design-analysis
-description: "An enterprise-marketing canvas faithful to Carbon Design System: white surfaces, charcoal type, IBM Blue (#0f62fe) as the single confident accent, and a deliberately flat-square aesthetic where corners stay at 0–4px. Type runs IBM Plex Sans at light weight 300 for display sizes (a brand signature) and 400/600 for body and emphasis. Cards live as thin-bordered tiles with no shadow; sections separate via subtle gray rows. The chrome is square, the typography is light, and the only color in the system is one assertive blue — the result reads as old-world enterprise gravitas reframed for the cloud era."
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "IBM"
+description: "嚴謹網格、方角元件與清楚的藍色層級。"
 
 colors:
   primary: "#0f62fe"
@@ -259,329 +260,151 @@ components:
     padding: 64px 32px
 ---
 
-## Overview
-
-IBM's marketing system is a faithful application of **Carbon Design System** — IBM's open-source enterprise design system. The dominant surface is `{colors.canvas}` pure white with `{colors.surface-1}` light gray for elevation, charcoal `{colors.ink}` (#161616) for text, and IBM Blue `{colors.primary}` (#0f62fe) as the single brand accent.
+# IBM 延伸設計規格
 
-The defining choice is **flat geometry**: every CTA, every card, every input, every container uses square corners (`{rounded.none}` 0px) with thin 1px borders. There are no rounded pills, no soft shadows, no atmospheric gradients. The system is engineered, not stylized.
-
-**IBM Plex Sans** carries the entire type hierarchy. Display sizes (76 / 60 / 42px) run at weight **300** — IBM's signature light display treatment that makes 76px feel calmer than competing brands' 700-weight display. Body type sits at weight 400 with `letter-spacing: 0.16px` (a Carbon precision detail) and line-height 1.50. The voice reads as careful, technical, and trustworthy.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-The system reaches for color rarely — IBM Blue marks links, primary CTAs, and the rare full-bleed CTA banner. Charcoal carries every other surface that isn't white. The result is enterprise gravitas without the enterprise stiffness: rigorous, light-weighted, and intentionally restrained.
+## 來源與規格層次
 
-**Key Characteristics:**
-- **Carbon Design System** — IBM's marketing chrome IS Carbon. Buttons are square, inputs are square-with-bottom-rule, corners stay at 0px.
-- **Light-weight display type**: Plex Sans at weight 300 for 42–76px headlines is the brand's typographic signature.
-- **One accent color**: `{colors.primary}` IBM Blue carries every link, primary CTA, and CTA banner. There is no second brand color.
-- White canvas + light gray (`{colors.surface-1}`) + charcoal (`{colors.ink}`) cover 95% of surfaces.
-- Footer inverts to charcoal (`{colors.inverse-canvas}` #161616) — the only dark surface above the page break.
-- Card hierarchy is carried by 1px hairlines and surface change, never by drop shadow.
-- `letter-spacing: 0.16px` on body is a Carbon precision detail — the small positive tracking is part of the brand voice.
-- Page rhythm: utility bar → top nav → hero with light-weight headline → feature card grid → customer logo marquee → enterprise feature row → training section → newsletter / sign-in CTA → dark footer.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## Colors
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`a668c2346a0458fcbb68a98af14beff1c504cd9ffb643491a60aa4c6add7dfa0`。
+- 目前首頁參考日期：2026-10-10。
+- 目前公開來源：https://www.ibm.com/ca-en。
+- 目前預覽：`official-drafts/ibm.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-> Source pages: ibm.com (home), /software/ai-productivity, /consulting, /products/cloud-pak-for-aiops, /products/bare-metal-servers, community.ibm.com.
+## 整體視覺方向
 
-### Brand & Accent
-- **IBM Blue** ({colors.primary}): The single brand accent. Links, primary CTAs, CTA banner backgrounds, focus rings.
-- **Blue 60** ({colors.blue-60}): Hovered link state.
-- **Blue 80** ({colors.blue-80}): Pressed primary button.
-- **Blue Hover** ({colors.blue-hover}): Hover state for primary buttons.
+嚴謹網格、方角元件與清楚的藍色層級。
 
-### Surface
-- **Canvas** ({colors.canvas}): Default page background.
-- **Surface 1** ({colors.surface-1}): Light gray (#f4f4f4) — input fields, alternate-row stripes, subtle section bands.
-- **Surface 2** ({colors.surface-2}): Slightly darker gray (#e0e0e0) — disabled fields, hairline-as-fill for separators.
-- **Hairline** ({colors.hairline}): 1px borders on cards, inputs, dividers.
-- **Hairline Strong** ({colors.hairline-strong}): 1px charcoal underline on focused inputs (Carbon's signature focus treatment).
-- **Inverse Canvas** ({colors.inverse-canvas}): Charcoal #161616 — footer surface.
-- **Inverse Surface 1** ({colors.inverse-surface-1}): One step lighter than inverse canvas — footer column dividers, hovered footer items.
+製作企業營運儀表板，採結構清楚的欄位格線與緊湊但易讀的表格。所有欄位對齊，圓角保持節制，以藍色表示選取；已有分隔線時避免再疊加陰影。
 
-### Text
-- **Ink** ({colors.ink}): All headlines and emphasized body type — charcoal #161616.
-- **Ink Muted** ({colors.ink-muted}): Secondary type at #525252 — meta, sub-headlines, footer body.
-- **Ink Subtle** ({colors.ink-subtle}): Tertiary type at #8c8c8c — disabled, helper text, captions.
-- **Inverse Ink** ({colors.inverse-ink}): White on charcoal — footer headings.
-- **Inverse Ink Muted** ({colors.inverse-ink-muted}): Light gray on charcoal — footer body.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Semantic
-- **Success Green** ({colors.semantic-success}): Carbon green-50 — success states.
-- **Warning Yellow** ({colors.semantic-warning}): Carbon yellow-30 — warning states.
-- **Error Red** ({colors.semantic-error}): Carbon red-60 — error states; danger button background.
-- **Info Blue** ({colors.semantic-info}): Identical to primary — informational badges.
+## 色彩、字型與繁體中文排版
 
-## Typography
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Font Family
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-- **IBM Plex Sans** — IBM's open-source proprietary typeface (free for any use). Geometric, slightly humanist, designed specifically for enterprise UI. Fallback: `Helvetica Neue, Arial, sans-serif`.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-The same family carries display, body, and caption — there is no display + body pairing. Hierarchy is carried by **size + weight** rather than by family change. Plex Sans is also free / open-source under the SIL Open Font License — making it the easiest custom face on this list to substitute for in implementation.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 76px | 300 | 1.17 | -0.5px |
+| 60px | 300 | 1.17 | -0.4px |
+| 42px | 300 | 1.20 | 0 |
+| 32px | 400 | 1.25 | 0 |
+| 24px | 400 | 1.33 | 0 |
+| 20px | 400 | 1.40 | 0 |
+| 18px | 400 | 1.50 | 0 |
+| 16px | 400 | 1.50 | 0.16px |
+| 14px | 400 | 1.29 | 0.16px |
+| 14px | 600 | 1.29 | 0.16px |
+| 12px | 400 | 1.33 | 0.32px |
+| 14px | 400 | 1.29 | 0.16px |
+| 14px | 400 | 1.29 | 0.16px |
 
-### Hierarchy
+## 版面與元件結構
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 76px | 300 | 1.17 | -0.5px | Largest hero headline |
-| `{typography.display-lg}` | 60px | 300 | 1.17 | -0.4px | Section opener headlines |
-| `{typography.display-md}` | 42px | 300 | 1.20 | 0 | Sub-section headlines, hero card title |
-| `{typography.headline}` | 32px | 400 | 1.25 | 0 | Card collection heading, FAQ category |
-| `{typography.card-title}` | 24px | 400 | 1.33 | 0 | Feature card title |
-| `{typography.subhead}` | 20px | 400 | 1.40 | 0 | Lead body next to display headlines |
-| `{typography.body-lg}` | 18px | 400 | 1.50 | 0 | Hero subhead, lead paragraphs |
-| `{typography.body}` | 16px | 400 | 1.50 | 0.16px | Default body |
-| `{typography.body-sm}` | 14px | 400 | 1.29 | 0.16px | Card body, footer columns |
-| `{typography.body-emphasis}` | 14px | 600 | 1.29 | 0.16px | Selected tab label, emphasized body line |
-| `{typography.caption}` | 12px | 400 | 1.33 | 0.32px | Captions, meta, utility bar |
-| `{typography.button}` | 14px | 400 | 1.29 | 0.16px | All button labels |
-| `{typography.eyebrow}` | 14px | 400 | 1.29 | 0.16px | Section eyebrows (Carbon avoids strong eyebrows; uses sentence case 14px) |
+此參考可先實作：資料表格工具列，包含搜尋、資料列選取與批次操作回饋。
 
-### Principles
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-- **Light-weight display is the brand voice.** Plex Sans at weight 300 for 76px headlines reads as quietly authoritative — switching to 700 would make it look like every other enterprise site.
-- **Carbon's `letter-spacing: 0.16px`** on body sizes is a precision detail. Don't remove it.
-- **No mono** on marketing surfaces (Plex Mono exists but lives in product surfaces only).
-- **Eyebrow typography uses sentence case 14px** — Carbon resists the all-caps tracked eyebrow common to other enterprise brands.
-- **Line-heights tighten on display, relax on body**: 1.17 at display-xl, 1.50 at body — proportional to size.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Note on Font Substitutes
+## 操作與狀態
 
-IBM Plex Sans is **free and open-source** (SIL OFL license) and available on Google Fonts. It is the recommended implementation. The Plex family also includes Plex Mono and Plex Serif if expanded typographic needs arise.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-## Layout
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Spacing System
+## 圖片、動態與無障礙
 
-- **Base unit**: 4px (Carbon's signature 4-pixel grid).
-- **Tokens (front matter)**: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 96px.
-- Card interior padding: `{spacing.lg}` 24px on feature cards; `{spacing.xl}` 32px on product cards; `{spacing.xxl}` 48px on hero cards and CTA banners.
-- Button padding: 12px vertical · 16px horizontal — Carbon spec.
-- Form input padding: 11px vertical · 16px horizontal.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Grid & Container
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-- Carbon's 16-column grid at desktop, scaling to 8 / 4 columns at tablet / mobile.
-- Max content width sits around 1584px (Carbon's max-grid breakpoint).
-- Card grids are 4-up at desktop, 2-up at tablet, 1-up at mobile.
-- The customer logo marquee uses fixed-width tiles in a flex row, scrolling horizontally on smaller viewports.
+## 來源中的技術值補充
 
-### Whitespace Philosophy
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-Carbon uses precise alignment to a 4-pixel grid as its whitespace system. Sections separate via thin gray rows (`{colors.surface-1}`) rather than via large vertical gaps. Content is dense by design — IBM's customers expect to see a lot on a page, not a lot of air.
+- `letter-spacing: 0.16px`
 
-## Elevation & Depth
+## 日期限定首頁觀察
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow, no border | Default for body type, hero text, footer body |
-| 1 (hairline) | 1px `{colors.hairline}` border on canvas | Feature cards, inputs, list items |
-| 2 (surface lift) | `{colors.surface-1}` background on canvas | Alternate-row banners, hovered cards |
-| 3 (focus ring) | 2px `{colors.primary}` outline + 1px `{colors.hairline-strong}` underline | Focused input, focused button |
+取樣來源：https://www.ibm.com/ca-en。Canada English
 
-Carbon resists drop shadows on marketing — depth is carried by surface change and 1px hairlines. The exception is product / app surfaces (Carbon documents shadow tokens for elevated panels), but the marketing site barely uses them.
+加拿大英文官網採用白底、IBM Plex、藍色主按鈕與細分隔線。首屏為「依你的方式，掌握數位未來」、數位主權說明、兩個 CTA、書本／光纖造型圖片，以及右側新聞。
 
-### Decorative Depth
+下方依序為四張推薦卡、Smarter impact、Top enterprise technology、Inside IBM、Stay connected／電子報、深色頁尾。桌面頁尾有品牌、Discover、Connect、Follow、About；390px 窄版使用五列收合項目。
 
-- **Soft blue gradient backdrops** appear behind some hero illustrations — a faint blue-to-white wash that warms the canvas without competing with the headline.
-- **No atmospheric depth.** No spotlight cards, no pastel section blocks, no gradient panels.
+本次實際校正首屏、新聞、推薦圖片與文字、圖片溢位、頁尾分組及窄版收合。窄版 Discover 開合已實際操作並留下截圖。
 
-## Shapes
+原有 DESIGN.md、PROMPTS.md 與 STITCH-PROMPT.md 保留；本檔為日期限定補充。研究頁免費瀏覽，未開啟付費方案或交易；不對外部生成服務的帳戶計費狀態作保證。
 
-### Border Radius Scale
+驗證範圍為匿名公開首頁、1280×720 與390×844、DPR1、桌面 UA。未完成實體手機、其他地區、完整互動或服務驗證；目前 accepted=false，不宣稱與官方一致。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Default — every button, card, input, container |
-| `{rounded.xs}` | 2px | Small badges (rare exception) |
-| `{rounded.sm}` | 4px | Avatar circles squared, dropdown menus |
-| `{rounded.md}` | 6px | (Used rarely; documented for completeness) |
-| `{rounded.lg}` | 8px | (Used rarely; documented for completeness) |
-| `{rounded.pill}` | 9999px | Status pills, badges in product UI (rare on marketing) |
+## 已知差異與驗證範圍
 
-The brand commits to flat 0px corners. The other tokens exist for product / mobile surfaces but rarely surface on marketing.
+- 最新校正版桌面高度為 4161px，官網來源為 4303px；窄版為 7229px，來源為 7740px。影響力、產品及 Inside IBM 卡片樣式、缺少的宣傳列與電子報配置仍有明顯差異。
+- 校正版頁尾保留觀察到的分組、法律連結及深色窄版配置；電子報必填與隱私文字、停用送出按鈕外觀及原始 Cookie 偏好服務尚未完整重現。
+- 原生 Stitch 下方內容含虛構宣稱，仍保留為供應者草稿；網站預覽使用依實際來源手動校正的頁面。
 
-### Photography & Illustration Geometry
-
-- IBM uses photography (people, hardware, sports cars) and abstract illustration (geometric mesh, dotted patterns) interchangeably.
-- Image frames are flat — no rounded corners.
-- Customer logo tiles sit on `{rounded.none}` 0px tiles with thin 1px borders.
-
-## Components
-
-### Buttons
-
-**`button-primary`** — Blue solid CTA. The default primary across all pages.
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button}`, padding 12px 16px, rounded `{rounded.none}`.
-- Pressed state lives in `button-primary-pressed` (background shifts to `{colors.blue-80}`).
-
-**`button-secondary`** — Charcoal solid button — Carbon's "secondary" treatment.
-- Background `{colors.ink}`, text `{colors.inverse-ink}`, type `{typography.button}`, padding 12px 16px, rounded `{rounded.none}`.
-
-**`button-tertiary`** — White button with blue 1px border + blue text. Used for tertiary CTAs.
-- Background `{colors.canvas}`, text `{colors.primary}`, type `{typography.button}`, rounded `{rounded.none}`, padding 12px 16px. (Border in implementation: 1px `{colors.primary}`.)
-
-**`button-ghost`** — Plain text + chevron, no background until hover.
-- Background `{colors.canvas}`, text `{colors.primary}`, type `{typography.button}`, rounded `{rounded.none}`, padding 12px 16px.
-
-**`button-danger`** — Carbon's destructive variant.
-- Background `{colors.semantic-error}`, text `{colors.on-primary}`, type `{typography.button}`, rounded `{rounded.none}`, padding 12px 16px.
-
-### Cards & Containers
-
-**`feature-card`** — Default feature highlight tile on the home and product pages.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.none}`, padding 24px. Stroked with 1px `{colors.hairline}`.
-
-**`feature-card-elevated`** — Same shape on `{colors.surface-1}` ground — used for "Recommended" cards in the latest-content carousel.
-- Background `{colors.surface-1}`, otherwise identical structure.
-
-**`product-card`** — Larger product showcase tile.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.none}`, padding 32px.
-
-**`hero-card`** — Hero composition card with light-weight title, body, and CTA.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.display-md}`, rounded `{rounded.none}`, padding 48px.
-
-**`cta-banner`** — Full-width blue CTA panel near the bottom of the page.
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.headline}`, rounded `{rounded.none}`, padding 48px.
-
-**`resource-tile`** — Smaller article / case-study tile.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`, rounded `{rounded.none}`, padding 16px.
-
-**`customer-logo-tile`** — Single tile in the customer marquee on the home page (Ferrari, Pfizer, etc.).
-- Background `{colors.canvas}`, text `{colors.ink-muted}`, type `{typography.caption}`, rounded `{rounded.none}`, padding 24px. 1px hairline border.
-
-### Inputs & Forms
-
-**`text-input`** + **`text-input-focused`** + **`text-input-error`** — Carbon's input chrome.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.none}`, padding 11px 16px.
-- Focus state replaces the bottom 1px hairline with a 2px `{colors.primary}` underline (Carbon's signature focus treatment).
-- Error state adds 2px `{colors.semantic-error}` bottom underline.
-
-**`newsletter-input`** — The "Stay connected" newsletter capture on the home page.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.none}`, padding 11px 16px. Adjacent submit is `button-primary`.
-
-### Tabs
-
-**`product-tab`** + **`product-tab-selected`** — The horizontal tab strip on product pages and the home "Recommended" carousel.
-- Default: `{colors.canvas}` background, `{colors.ink-muted}` text, rounded `{rounded.none}`, padding 16px 20px. Bottom 1px hairline.
-- Selected: `{colors.canvas}` background, `{colors.ink}` text, `{typography.body-emphasis}` weight, bottom 2px `{colors.primary}` underline. Same padding / rounding.
-
-### Navigation
-
-**`top-nav`** — Sticky white bar with the IBM logomark left, nav categories center, and search / sign-in icons right.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`, height 48px. 1px bottom hairline.
-
-**`utility-bar`** — Slim gray ribbon above the top nav with location switch, contact, search shortcuts.
-- Background `{colors.surface-1}`, text `{colors.ink-muted}`, type `{typography.caption}`, height 32px.
-
-### Footer
-
-**`footer`** — Charcoal footer (`{colors.inverse-canvas}`) with the IBM wordmark left and 5–6 columns of caption-sized links. The only inverted surface above the page break.
-- Background `{colors.inverse-canvas}`, text `{colors.inverse-ink-muted}`, type `{typography.body-sm}`, padding 64px 32px.
-
-## Do's and Don'ts
-
-### Do
-
-- Use `{rounded.none}` 0px on every CTA, card, input, and container. The flat-square aesthetic is the brand.
-- Pair Plex Sans weight 300 for display sizes (42px+) with weight 400 for body. Resist the urge to bold the headline.
-- Reserve `{colors.primary}` IBM Blue for primary CTAs, links, focused-input underlines, and CTA banner. Do not use it as a card background or eyebrow color.
-- Apply `letter-spacing: 0.16px` to body sizes. It's a Carbon precision detail and part of the typographic voice.
-- Use surface change (`canvas` → `surface-1`) and 1px hairlines for card hierarchy. Skip drop shadows.
-- Stick to sentence case for eyebrows and section labels — Carbon resists all-caps tracking.
-- Invert to `{colors.inverse-canvas}` only at the footer; the rest of the page stays light.
-
-### Don't
-
-- Don't round corners on buttons, cards, or inputs. Even 4px rounded corners break the Carbon look.
-- Don't bold display headlines. Plex Sans at weight 300 is the brand voice; weight 700 makes it look generic.
-- Don't add atmospheric depth (gradient backdrops, drop shadows, atmospheric overlays) outside the documented soft-blue hero gradient.
-- Don't introduce a second brand color. IBM Blue is the only chromatic accent; status semantics use the documented green / yellow / red.
-- Don't replace IBM Plex Sans with Inter or Helvetica without preserving the `letter-spacing: 0.16px` and weight-300 display treatment.
-- Don't use pill-shaped buttons. Carbon uses square corners; pills read as a different brand.
-- Don't write all-caps tracked eyebrows. Carbon's eyebrows are sentence case at 14px.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Max | 1584px | Carbon max grid; gutters expand |
-| Desktop-XL | 1312px | Default desktop layout |
-| Desktop | 1056px | Card grid 4-up maintained |
-| Tablet | 672px | Card grid 4-up → 2-up; nav becomes hamburger |
-| Mobile | 320px | Single-column; display-xl scales 76px → ~32px |
-
-### Touch Targets
-
-- Carbon spec: 48px minimum tap target. Buttons and inputs hold 48px on touch viewports.
-- Top-nav links grow from 36px to 48px tap height on touch.
-- Tab strip rows hold 48px tap height.
-
-### Collapsing Strategy
-
-- **Top nav**: links collapse to a hamburger overlay below 672px. Logomark and search icon stay on the bar.
-- **Utility bar**: hides below 672px to reclaim vertical space.
-- **Card grid**: 4-up → 2-up at 1056px → 1-up below 672px.
-- **Display type**: `{typography.display-xl}` 76px scales toward 42px on mobile while preserving the weight-300 treatment.
-- **Footer**: 6-column link grid → 3-column at tablet → 1-column at mobile.
-
-### Image Behavior
-
-- Customer logos in the marquee maintain aspect ratio and may collapse to 2-row scroll below 672px.
-- Hero illustrations scale proportionally; below 672px they may stack above the headline rather than sit beside it.
-
-## Known Gaps
-
-- IBM's product surfaces (cloud-pak, watson, datacap) have richer Carbon component usage (data tables, graph cells, breadcrumbs, contextual menus) that aren't present on the marketing pages inspected — those components live in Carbon's documentation rather than in the marketing extraction.
-- Form-field error and validation styling is documented in Carbon docs; the inspected pages didn't render error states.
-- Dark mode is documented in Carbon as Gray-100 theme but isn't exposed on these marketing pages — only the footer inverts. The full dark theme is a separate Carbon palette not extracted here.
-- The community.ibm.com sub-domain uses a different chrome (community-platform white-label) that approximates Carbon but isn't strict — the documented system applies to ibm.com proper.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a IBM-inspired interface. Implement this working page: An enterprise operations dashboard using a structured column grid and compact but readable tables. Align every field and keep corners restrained; use blue for selection and avoid shadows when dividers already establish hierarchy.
+先閱讀隨附的 DESIGN.md，以 IBM 的設計語言作為介面參考。請完成以下可操作頁面：製作企業營運儀表板，採結構清楚的欄位格線與緊湊但易讀的表格。所有欄位對齊，圓角保持節制，以藍色表示選取；已有分隔線時避免再疊加陰影。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a IBM-inspired interface. Build a data table toolbar with search, row selection, and bulk-action feedback. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 IBM 的設計語言作為介面參考。請製作資料表格工具列，包含搜尋、資料列選取與批次操作回饋。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a IBM-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An enterprise operations dashboard using a structured column grid and compact but readable tables. Align every field and keep corners restrained; use blue for selection and avoid shadows when dividers already establish hierarchy.
+先閱讀隨附的 DESIGN.md，以 IBM 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作企業營運儀表板，採結構清楚的欄位格線與緊湊但易讀的表格。所有欄位對齊，圓角保持節制，以藍色表示選取；已有分隔線時避免再疊加陰影。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

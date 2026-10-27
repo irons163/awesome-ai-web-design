@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Webflow-Inspired-design-analysis
-description: An inspired interpretation of Webflow's design language — a visual web development platform whose surface contrasts a deep near-black `#080808` primary against a generous white canvas, broken by a five-stop chromatic accent system (purple / pink / blue / orange / green) that maps to the brand's product categories, and anchored by the proprietary WF Visual Sans family used at restrained 500 / 600 weights with negative tracking.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Webflow"
+description: "大膽黑白區塊與亮藍色，配合精準版面結構。"
 
 colors:
   primary: "#080808"
@@ -252,7 +253,6 @@ components:
     typography: "{typography.body-sm}"
     padding: "{spacing.3xl} {spacing.3xl}"
 
-  # ─── Examples (illustrative) — auto-derived; resolve any TO_FILL markers below ───
   ex-pricing-tier:
     description: "Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface."
     backgroundColor: "{colors.canvas}"
@@ -312,324 +312,170 @@ components:
     rounded: "{rounded.md}"
     padding: "{spacing.md} {spacing.lg}"
     typography: "{typography.body-sm}"
-
 ---
 
+# Webflow 延伸設計規格
 
-## Overview
-
-Webflow positions itself as the visual web development platform — the marketing surface reads as a confident professional product, not a tech startup. The default page is a generous white canvas (`{colors.canvas}`) with a deep near-black `{colors.primary}` (`#080808`) for the brand's primary CTA, typography, and ink. Around this restrained primary, the brand layers a five-stop chromatic accent system — `{colors.accent-purple}` `#7a3dff`, `{colors.accent-pink}` `#ed52cb`, `{colors.accent-blue}` `#3b89ff`, `{colors.accent-orange}` `#ff6b00`, `{colors.accent-green}` `#00d722` — each mapped to one of the platform's product categories (design, CMS, hosting, ecommerce, etc.). These accents appear as full-card fills inside the product-category grid, not as button colours; the brand's primary CTA stays near-black.
-
-Type carries the second decisive voice. The proprietary `WF Visual Sans Variable` family carries every display, body, and label role at weight 500 / 600 — the brand never goes heavier than semibold, never lighter than regular. Hero display sits at 80 px / weight 600 / `-0.8 px` tracking — confident but not shouting. Uppercase eyebrows in 15 px weight 500 with `1.5 px` positive tracking mark every section header.
-
-The shape system is restrained. Buttons take a tight `{rounded.sm}` 4 px radius — neither pill nor square; the brand reads as engineered. Cards step up to `{rounded.md}` 8 px. Pill (`{rounded.full}` 9999 px) is reserved for circular icon containers. Layered drop-shadows on featured cards add modest elevation but never feel material-heavy.
-
-**Key Characteristics:**
-- A two-colour conversion hierarchy — `{colors.primary}` near-black for every primary CTA, white-on-hairline for every secondary. Chromatic accents are used as full surface fills on category cards, never as button backgrounds.
-- The brand's signature is its **five-stop chromatic category palette**: purple / pink / blue / orange / green, each tied to a product surface. Used at full saturation as card fills.
-- Hero typography at 80 px weight 600 with `-0.8 px` tracking — restrained, confident, never billboard-loud.
-- WF Visual Sans Variable is the single family; the brand uses no separate sans for body / display. WFVisualSans-Mono / Inconsolata appears only for technical captions.
-- Tight `{rounded.sm}` 4 px button geometry; cards at `{rounded.md}` 8 px. The brand never uses pill CTAs.
-- Layered multi-offset drop-shadows on featured cards — the brand's only elevation cue.
-
-## Colors
-
-### Brand & Accent
-- **Ink Black** (`{colors.primary}` — `#080808`): The brand's primary conversion colour. Every primary CTA, every heading, every wordmark. Deeper than pure black to read as branded.
-- **Accent Purple** (`{colors.accent-purple}` — `#7a3dff`): One of the five chromatic category accents — used for design / build product surfaces.
-- **Accent Pink** (`{colors.accent-pink}` — `#ed52cb`): Magenta accent — used for animation / interaction product surfaces.
-- **Accent Blue** (`{colors.accent-blue}` — `#3b89ff`): Bright cyan-blue — used for SEO / analytics product surfaces.
-- **Accent Blue Deep** (`{colors.accent-blue-deep}` — `#006acc`): The deeper blue used for emphasis links.
-- **Accent Blue Info** (`{colors.accent-blue-info}` — `#146ef5`): The badge-info blue.
-- **Accent Orange** (`{colors.accent-orange}` — `#ff6b00`): Used for hosting / infrastructure product surfaces.
-- **Accent Green** (`{colors.accent-green}` — `#00d722`): Used for ecommerce / status-success surfaces.
-- **Accent Yellow** (`{colors.accent-yellow}` — `#ffae13`): Used for warning / collaboration product surfaces.
-- **Accent Red** (`{colors.accent-red}` — `#ee1d36`): Used for error / destructive states.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): The default page background.
-- **Hairline** (`{colors.hairline}` — `#d8d8d8`): 1 px solid borders — input borders, card chrome, divider lines.
-
-### Text
-- **Ink** (`{colors.ink}` — `#080808`): Default text and headings.
-- **Ink Strong** (`{colors.ink-strong}` — `#222222`): Near-black emphasis.
-- **Body** (`{colors.body}` — `#363636`): Default body paragraph color.
-- **Body Mid** (`{colors.body-mid}` — `#5a5a5a`): Mid-emphasis secondary text — footer lines, captions.
-- **Mute** (`{colors.mute}` — `#898989`): Lower-priority text.
-- **Mute Soft** (`{colors.mute-soft}` — `#ababab`): The lightest text role — placeholder text, fine print.
-
-### Semantic
-- **Info Blue** (`{colors.accent-blue-info}` — `#146ef5`): Info badge / notification.
-- **Success Green** (`{colors.accent-green}` — `#00d722`): Success indicators.
-- **Warning Yellow** (`{colors.accent-yellow}` — `#ffae13`): Warning states.
-- **Error Red** (`{colors.accent-red}` — `#ee1d36`): Validation / destructive.
-
-## Typography
-
-### Font Family
-A single proprietary family carries every typographic role: **WF Visual Sans Variable** (with `Arial` system fallback). Weights 400 / 500 / 550 / 600 are present; the brand never uses 700 / 800 / 900. A monospace variant — **WFVisualSans-Mono** with `Inconsolata` fallback — handles rare technical caption moments and code-style labels. OpenType features `"ss02"`, `"ss10"`, `"zero"` are enabled in the mono variant for the styled zero glyph.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xxl}` | 80px | 600 | 83.2px | -0.8px | Hero headline. |
-| `{typography.display-xl}` | 56px | 600 | 58.24px | 0 | Sub-hero displays. |
-| `{typography.display-lg}` | 44.8px | 600 | 46.6px | 0 | Section headlines. |
-| `{typography.display-md}` | 32px | 500 | 41.6px | 0 | Card-cluster headlines. |
-| `{typography.display-sm}` | 24px | 500 | 31.2px | 0 | Sub-section displays. |
-| `{typography.display-xs}` | 20px | 500 | 28px | 0 | Inline display micro-headings. |
-| `{typography.eyebrow-uppercase}` | 15px | 500 | 19.5px | 1.5px | UPPERCASE eyebrow tags above sections. |
-| `{typography.eyebrow-uppercase-sm}` | 12px | 500 | 12px | 0.6px | Small uppercase metadata. |
-| `{typography.body-lg}` | 28.8px | 400 | 46.08px | -0.288px | Lead paragraphs. |
-| `{typography.body-md}` | 16px | 400 | 25.6px | -0.16px | Default body. |
-| `{typography.body-md-strong}` | 16px | 500 | 25.6px | -0.16px | Bolded inline body. |
-| `{typography.body-sm}` | 14px | 400 | 22.4px | 0 | Secondary body. |
-| `{typography.body-sm-strong}` | 14px | 500 | 22.4px | 0 | Bold caption / nav-link. |
-| `{typography.caption}` | 12.8px | 550 | 15.36px | 0 | Badge labels (the brand's signature 550 weight). |
-| `{typography.caption-mono}` | 12px | 400 | 18px | 0 | Mono code captions. |
-| `{typography.button-md}` | 16px | 500 | 25.6px | -0.16px | Button labels. |
-
-### Principles
-- **Weight ceiling at 600.** The brand never uses 700+. Confident, not loud.
-- **Negative tracking at display sizes.** `-0.8 px` at 80 px, scaling through. Tight kerning is part of the voice.
-- **Uppercase eyebrows mark every section.** 15 px / weight 500 / `1.5 px` positive tracking is the brand's signature label style.
-- **Single family across the system.** No separate display vs body face. The variable axes do the work.
-
-### Note on Font Substitutes
-WF Visual Sans Variable is proprietary. Open-source substitutes:
-- **Display + body** — *Inter* weights 400 / 500 / 600 with `font-feature-settings: "ss01"` enabled is the closest stylistic match.
-- **Mono** — *Inconsolata* (the documented fallback) or *DM Mono*.
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4 px (with frequent 0.4 / 0.8 sub-multiples for fine padding).
-- **Tokens**: `{spacing.xxs}` 2 px · `{spacing.xs}` 4 px · `{spacing.sm}` 8 px · `{spacing.md}` 12 px · `{spacing.lg}` 16 px · `{spacing.xl}` 20 px · `{spacing.2xl}` 24 px · `{spacing.3xl}` 32 px.
-- **Section padding**: hero / content bands use `{spacing.3xl}` 32 px gutters with generous vertical spacing.
-- **Card interior padding**: feature and pricing cards sit at `{spacing.3xl}` 32 px.
-
-### Grid & Container
-- Marketing container is wide (effectively edge-to-edge with `{spacing.3xl}` gutters).
-- Category card grid: 2 / 3-up at desktop with mixed sizing (some larger feature cards span 2 columns).
-- Pricing tier grid: 3-up at desktop, 1-up at mobile.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-### Responsive Strategy
+## 來源與規格層次
 
-#### Breakpoints
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 479px | Hero stacks; all grids 1-up. |
-| Mobile-Large | 479–767px | Same as Mobile. |
-| Tablet | 768–991px | 2-up grids. |
-| Desktop | ≥ 992px | Full multi-up grids. |
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`0bd8e7d15828df524290873b2ad6cd6a97c366daffc1b802527e9882e1640395`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://webflow.com/。
+- 目前預覽：`official-drafts/webflow.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-#### Touch Targets
-Buttons render at ~44 px (12 px vertical padding + 25.6 px line-height). WCAG AAA met.
+## 整體視覺方向
 
-#### Collapsing Strategy
-- Nav: full link row at desktop. Hamburger at mobile.
-- Category card grid: 2 / 3 / 4-up at desktop, drops to 1-up at mobile.
-- Pricing tier: 3 / 4-up at desktop, 1-up at mobile.
+大膽黑白區塊與亮藍色，配合精準版面結構。
 
-#### Image Behavior
-- Category cards: full-bleed solid colour fills (no photography).
-- Product screenshots: 16:9 inside `{rounded.md}` card chrome.
-- No portrait imagery in the marketing surface.
+製作視覺化網站建置工具總覽，包含畫布預覽、元件導覽與精簡發布檢查清單。藍色用於編輯情境與有效操作，清楚區分畫布內容及應用程式控制項。
 
-## Elevation & Depth
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-| Level | Treatment | Use |
-|---|---|---|
-| Level 0 — Flat | No shadow, no border. | Default bands. |
-| Level 1 — Hairline | 1 px solid `{colors.hairline}` border on `{colors.canvas}`. | Default card chrome and input borders. |
-| Level 2 — Layered Drop | Multi-stop layered shadow with subtle warm offsets — `0 84px 24px rgba(0,0,0,0), 0 54px 22px rgba(0,0,0,0.01), 0 30px 18px rgba(0,0,0,0.04), 0 13px 13px rgba(0,0,0,0.08), 0 3px 7px rgba(0,0,0,0.09)`. | Featured cards needing visible lift. |
-| Level 3 — Layered Drop Strong | Deeper version of Level 2 with `0.12` final offset opacity. | Pricing / modal-level emphasis. |
-| Level 4 — Heavy Modal | Extremely heavy multi-stop — `0 24px 24px rgba(0,0,0,0.26), 0 6px 13px rgba(0,0,0,0.29)` final stops. | Modal / dialog surfaces. |
+## 色彩、字型與繁體中文排版
 
-### Decorative Depth
-- The chromatic category cards (full-saturation purple / pink / blue / orange / green fills) provide visual depth through pure colour contrast against the white canvas.
-- Layered shadow recipes are the brand's only true atmospheric effect — they're 5-stop drop-shadow stacks with very low individual opacities.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## Shapes
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Border Radius Scale
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Full-bleed bands. |
-| `{rounded.xs}` | 2px | Tight inline pills. |
-| `{rounded.sm}` | 4px | The brand's canonical button + badge + small-element radius. |
-| `{rounded.md}` | 8px | Card chrome and feature / category cards. |
-| `{rounded.full}` | 9999px | Circular icon containers only. |
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 80px | 600 | 83.2px | -0.8px |
+| 56px | 600 | 58.24px | 0 |
+| 44.8px | 600 | 46.6px | 0 |
+| 32px | 500 | 41.6px | 0 |
+| 24px | 500 | 31.2px | 0 |
+| 20px | 500 | 28px | 0 |
+| 15px | 500 | 19.5px | 1.5px |
+| 12px | 500 | 12px | 0.6px |
+| 28.8px | 400 | 46.08px | -0.288px |
+| 16px | 400 | 25.6px | -0.16px |
+| 16px | 500 | 25.6px | -0.16px |
+| 14px | 400 | 22.4px | 0 |
+| 14px | 500 | 22.4px | 0 |
+| 12.8px | 550 | 15.36px | 0 |
+| 12px | 400 | 18px | 0 |
+| 16px | 500 | 25.6px | -0.16px |
 
-## Components
+## 版面與元件結構
 
-### Buttons
+此參考可先實作：元件導覽資料列，包含巢狀層級、顯示狀態與鍵盤焦點。
 
-**`button-primary`** — the canonical near-black CTA.
-- Background `{colors.primary}` (`#080808`), text `{colors.on-primary}` white, label `{typography.button-md}` (16 px weight 500), padding `{spacing.md} {spacing.xl}`, shape `{rounded.sm}` 4 px.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-**`button-secondary`** — the white outline CTA.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.hairline}` border, same typography + padding + shape.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-**`button-text-arrow`** — the underlined text-link CTA with arrow used in long-form sections.
-- Background `{colors.canvas}`, text `{colors.ink}`, no border, body in `{typography.button-md}`, padding `{spacing.xl}` 0.
+## 操作與狀態
 
-**`button-icon-circular`** — the circular icon button for carousel controls.
-- Background `{colors.canvas}`, ink icon, shape `{rounded.full}`.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-### Cards & Containers
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**`card-feature`** — the canonical feature card on canvas.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.hairline}`, padding `{spacing.3xl}`, shape `{rounded.md}`. Often elevated to Level 2 shadow when featured.
+## 圖片、動態與無障礙
 
-**`card-feature-dark`** — the polarity-flipped feature card on near-black.
-- Background `{colors.primary}`, text `{colors.on-primary}`, padding `{spacing.3xl}`, shape `{rounded.md}`.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`card-pricing`** — the pricing-tier card.
-- Background `{colors.canvas}`, text `{colors.ink}`, hairline border, padding `{spacing.3xl}`, shape `{rounded.md}`. Layered shadow on the featured tier.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Inputs & Forms
+## 來源中的技術值補充
 
-**`text-input`** — the canonical text input.
-- Background `{colors.canvas}`, text `{colors.ink}`, 1 px solid `{colors.hairline}`, body in `{typography.body-md}`, padding `{spacing.md} {spacing.lg}`, shape `{rounded.sm}`.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-### Navigation
+- `#080808`
+- `#7a3dff`
+- `#ed52cb`
+- `#3b89ff`
+- `#ff6b00`
+- `#00d722`
+- `#006acc`
+- `#146ef5`
+- `#ffae13`
+- `#ee1d36`
+- `#ffffff`
+- `#d8d8d8`
+- `#222222`
+- `#363636`
+- `#5a5a5a`
+- `#898989`
+- `#ababab`
+- `0 84px 24px rgba(0,0,0,0), 0 54px 22px rgba(0,0,0,0.01), 0 30px 18px rgba(0,0,0,0.04), 0 13px 13px rgba(0,0,0,0.08), 0 3px 7px rgba(0,0,0,0.09)`
+- `0 24px 24px rgba(0,0,0,0.26), 0 6px 13px rgba(0,0,0,0.29)`
 
-**`nav-bar`** — the sticky top nav.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.lg} {spacing.3xl}`.
+## 日期限定首頁觀察
 
-**`nav-link`** — link items inside `nav-bar`.
-- Text `{colors.ink}`, set in `{typography.body-sm-strong}`.
+來源 https://webflow.com/，實際觀察與最後校正2026-10-11。黑底、WF Visual Sans Variable 字型與藍色品牌CTA，46px Conf26公告列加68px黏性導覽。主標 打造下一個可能，桌面字級74.8571px、行高77.8514px；窄版置中兩行。依序保留行銷成果拼貼、真實客戶商標、Introducing Source視覺、四項能力、300,000+品牌六張客戶卡、目前新的 將網站化為成長引擎 六欄表單、Dyson編輯器原圖、Recent updates三張、#MadeinWebflow作品及完整目錄頁尾。成果數字只記錄官方當日公開呈現，未作金融或成效背書。
 
-**`footer`** — the footer band.
-- Background `{colors.canvas}`, text `{colors.body-mid}`, padding `{spacing.3xl} {spacing.3xl}`. Body in `{typography.body-sm}`.
+原保存版本銷售區文案不同，因此使用 原生 Google Stitch MCP 產生新的桌面校正稿，完整回應、原始HTML、原始縮圖及全尺寸PNG均分開保留。供應者自行更改部分資料意思，沒有當作已驗證來源。具體頁面以完整當日官方DOM/CSS及226份公開原素材校正。WebGL空白在實際比較中被找出，已用官方原始作品圖與觀察到的角度/位置恢復為靜態CSS展示；不是以整頁截圖冒充頁面。
 
-### Signature Components
+1280×720桌面10段及390×844窄版12段，來源與最後校正版均實際逐視窗完整拍攝，PIL實際尺寸與上下覆蓋檢查完成。全部4張桌面及5張窄版比較圖目視檢查。頁高7188/9466完全相合，主標與頁尾位置相合；兩尺寸194張DOM圖片載入、字型完成、無水平溢位。來源20個WebGL-held空src節點由GPU渲染，校正版從記錄的公開held URL恢復圖片；Bing追蹤像素移除。
 
-**`hero-band`** — the white hero band.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.3xl} {spacing.3xl}`. Headline in `{typography.display-xxl}` (80 px weight 600).
+## 已知差異與驗證範圍
 
-**`hero-band-dark`** — the polarity-flipped near-black hero band (used on some campaign pages).
-- Background `{colors.primary}`, text `{colors.on-primary}`, same padding / headline scale.
+- 官網主視覺跑馬燈持續移動，依來源校正的頁面保留擷取位置，因此不同截圖時間的左右卡片位置不同。
+- WebGL 的 #MadeinWebflow 圖庫，以精確記錄的公開圖片與 DOM 變形重建為靜態 CSS 替代。桌面角度及配置符合已記錄階段；窄版水平位置因官網捲動移動而不同。GPU 動態、滑鼠移入變暗、開啟卡片及專案對話框尚未重現或驗收。
+- 選單、使用者類型選擇、客戶輪播、影片播放與對話框、Cookie、完整鍵盤焦點及其他互動狀態，未在主要畫面比對中驗收。來源是在拒絕全部 Cookie 後擷取，未送出外部表單。
+- 業務洽詢表單為唯讀；帳戶、聯絡業務、註冊、其他路由、真實手機與其他寬度不在本次範圍，原始比對也未涵蓋正式部署。
+- 新 Stitch 修正版僅為桌面。供應者改動部分資料、標題與商標描述；最終校正版使用實際來源紀錄，未宣稱有新原生行動版修正。
 
-**`content-band`** — the standard content band on canvas.
-- Background `{colors.canvas}`, text `{colors.ink}`, padding `{spacing.3xl} {spacing.3xl}`. Section headline in `{typography.display-lg}`.
-
-**`category-card-purple`** — full-fill purple category card.
-- Background `{colors.accent-purple}`, text white, padding `{spacing.3xl}`, shape `{rounded.md}`.
-
-**`category-card-pink`** — full-fill pink category card.
-- Background `{colors.accent-pink}`, text white, padding `{spacing.3xl}`, shape `{rounded.md}`.
-
-**`category-card-blue`** — full-fill blue category card.
-- Background `{colors.accent-blue}`, text white, padding `{spacing.3xl}`, shape `{rounded.md}`.
-
-**`category-card-orange`** — full-fill orange category card.
-- Background `{colors.accent-orange}`, text white, padding `{spacing.3xl}`, shape `{rounded.md}`.
-
-**`category-card-green`** — full-fill green category card (uses ink text for legibility against the lighter green).
-- Background `{colors.accent-green}`, text `{colors.primary}` (ink), padding `{spacing.3xl}`, shape `{rounded.md}`.
-
-**`badge-info`** + **`badge-info-soft`** — info badges in solid blue or soft outline.
-- Filled: bg `{colors.accent-blue-info}` text white. Soft: bg canvas, text `{colors.accent-blue-info}`. Both at `{typography.caption}` (12.8 px weight 550) — the brand's signature 550-weight caption.
-
-### Examples (illustrative)
-
-> Auto-derived kit-mirror demonstration surfaces (`scripts/derive-examples-block.mjs`). Each `ex-*` entry references brand-native primitives so downstream consumers (`/preview-design`, `/generate-kit`) re-skin the same 10 surfaces consistently. `TO_FILL` markers indicate missing primitives — resolve in the LLM judgment pass.
-
-**`ex-pricing-tier`** — Default Pricing tier card. Re-uses feature-card chrome with brand canvas-soft surface.
-- Properties: `backgroundColor`, `textColor`, `borderColor`, `rounded`, `padding`
-
-**`ex-pricing-tier-featured`** — Featured/highlighted tier — polarity-flipped surface (dark fill + light text in light mode, light fill + dark text in dark mode).
-- Properties: `backgroundColor`, `textColor`, `rounded`, `padding`
-
-**`ex-product-selector`** — What's Included summary card — re-purposed for SaaS / B2B verticals (NOT a literal product gallery).
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-cart-drawer`** — Subscription summary — re-purposed for SaaS / B2B (line items per add-on, not literal cart).
-- Properties: `backgroundColor`, `rounded`, `padding`, `item-divider`
-
-**`ex-app-shell-row`** — Sidebar nav row inside the App Shell example. Active state uses brand primary as the indicator.
-- Properties: `backgroundColor`, `activeIndicator`, `rounded`, `padding`
-
-**`ex-data-table-cell`** — Default data-table th + td chrome. Header uses mono-caps eyebrow typography; body uses body-sm.
-- Properties: `headerBackground`, `headerTypography`, `bodyTypography`, `cellPadding`, `rowBorder`
-
-**`ex-auth-form-card`** — Sign-in / sign-up card. Re-uses feature-card chrome with text-input primitives inside.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-modal-card`** — Modal dialog surface — same chrome as feature-card with elevated shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`
-
-**`ex-empty-state-card`** — Empty-state illustration frame.
-- Properties: `backgroundColor`, `rounded`, `padding`, `captionTypography`
-
-**`ex-toast`** — Toast notification surface — feature-card shape + medium shadow.
-- Properties: `backgroundColor`, `rounded`, `padding`, `typography`
-
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` (`#080808`) for every primary CTA, every heading, and every wordmark. Near-black is the conversion colour.
-- Use the five chromatic accents (purple / pink / blue / orange / green) as full-fill category cards, NOT as button backgrounds.
-- Set hero headlines in `{typography.display-xxl}` weight 600 with `-0.8 px` tracking.
-- Pair the proprietary WF Visual Sans family across every typographic role.
-- Use `{rounded.sm}` 4 px for buttons, `{rounded.md}` 8 px for cards. The brand never uses pill CTAs.
-- Use layered multi-stop drop-shadows on featured cards — the brand's distinctive elevation recipe.
-
-### Don't
-- Don't promote button-medium weight to 700+. The brand's weight ceiling is 600.
-- Don't use chromatic accents as button backgrounds. They're surface fills, not actions.
-- Don't render CTAs as pills. The brand's button geometry is tight 4 px rectangle.
-- Don't introduce a sixth accent colour. The 5-stop palette is the system.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Webflow-inspired interface. Implement this working page: A visual site-building overview with a canvas preview, component navigator, and concise publishing checklist. Keep blue for editing context and useful actions; show a clear distinction between canvas content and application controls.
+先閱讀隨附的 DESIGN.md，以 Webflow 的設計語言作為介面參考。請完成以下可操作頁面：製作視覺化網站建置工具總覽，包含畫布預覽、元件導覽與精簡發布檢查清單。藍色用於編輯情境與有效操作，清楚區分畫布內容及應用程式控制項。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Webflow-inspired interface. Build a component navigator row with nesting, visibility state, and keyboard focus. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Webflow 的設計語言作為介面參考。請製作元件導覽資料列，包含巢狀層級、顯示狀態與鍵盤焦點。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Webflow-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A visual site-building overview with a canvas preview, component navigator, and concise publishing checklist. Keep blue for editing context and useful actions; show a clear distinction between canvas content and application controls.
+先閱讀隨附的 DESIGN.md，以 Webflow 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作視覺化網站建置工具總覽，包含畫布預覽、元件導覽與精簡發布檢查清單。藍色用於編輯情境與有效操作，清楚區分畫布內容及應用程式控制項。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

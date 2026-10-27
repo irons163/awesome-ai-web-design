@@ -1,6 +1,7 @@
 'use strict';
 const $ = selector => document.querySelector(selector);
 const escapeHTML = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+const downloadURL = href => `${href}?download=1`;
 const STORAGE_KEY = 'awesome-ai-web-design:favorites:v1';
 const FEATURED = ['claude','linear.app','stripe','notion','vercel','supabase','figma','apple','spotify'];
 let OFFICIAL_DRAFTS = {};
@@ -102,17 +103,17 @@ function setPreview(view) {
     const link = $('#official-preview-link');
     const hasDraft = !!draft;
     if (hasDraft) {
-      status.textContent = `參考日期：${officialDraftDates[currentDesign.slug]}。${study?.label || '尚未驗證'}。`;
+      status.textContent = `參考日期：${officialDraftDates[currentDesign.slug]}`;
       link.href = `official-drafts/${draft}.html`;
       link.textContent = `開啟 ${currentDesign.name} 完整預覽 ↗`;
     } else {
       status.textContent = officialDraftsState === 'loading' ? '正在讀取預覽…' :
-        officialDraftsState === 'error' ? '預覽暫時無法載入，請查看參考紀錄。' : '此設計尚無可開啟的完整預覽。';
-      link.href = 'official-progress.html';
-      link.textContent = '查看全部參考紀錄 ↗';
+        officialDraftsState === 'error' ? '預覽暫時無法載入，請查看參考來源。' : '此設計尚無可開啟的完整預覽。';
+      link.href = 'reference-sources.html';
+      link.textContent = '查看參考來源 ↗';
     }
     $('#open-preview').href = link.href;
-    $('#open-preview').textContent = hasDraft ? '開啟完整預覽 ↗' : '查看參考紀錄 ↗';
+    $('#open-preview').textContent = hasDraft ? '開啟完整預覽 ↗' : '查看參考來源 ↗';
     const image=$('#current-preview-image');
     image.hidden=!hasDraft||!study?.cover;
     if(!image.hidden){image.src=study.cover;image.alt=`${currentDesign.name} 設計預覽，參考日期 ${officialDraftDates[currentDesign.slug]}`;}
@@ -128,9 +129,9 @@ function setPreview(view) {
     else $('#preview-frame').removeAttribute('src');
     $('#preview-frame').title = `${currentDesign.name} — Stitch 生成的 HTML 頁面`;
     $('#open-generation-preview').href = preview.html;
-    $('#download-html').href = preview.html;
+    $('#download-html').href = downloadURL(preview.html);
     $('#generation-record').href = preview.provenance;
-    $('#generation-prompt').href = preview.prompt;
+    $('#generation-prompt').href = downloadURL(preview.prompt);
   } else {
     $('#preview-frame').removeAttribute('src');
     $('#preview-image').removeAttribute('src');
@@ -157,7 +158,7 @@ async function loadDocument() {
     documentText = text; $('#document-text').textContent = text; $('#copy-document').disabled = false;
   } catch {
     if (request !== documentRequest || currentDesign?.slug !== slug) return;
-    $('#document-text').textContent = '無法載入文件。請切換分頁再重試，或使用上方下載按鈕。';
+    $('#document-text').textContent = '無法載入檔案。請切換分頁再重試，或使用上方下載按鈕。';
   }
 }
 function openDesign(item) {
@@ -169,9 +170,9 @@ function openDesign(item) {
   $('#detail-category').textContent = item.categoryLabel;
   const originalAnalysis = `design-md/${encodeURIComponent(item.slug)}/DESIGN.md`;
   $('#original-design-link').href = originalAnalysis;
-  $('#download-original-design').href = originalAnalysis;
+  $('#download-original-design').href = downloadURL(originalAnalysis);
   $('#download-original-design').download = `${item.slug}-original-DESIGN.md`;
-  $('#download-original-prompts').href = `design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`;
+  $('#download-original-prompts').href = downloadURL(`design-md/${encodeURIComponent(item.slug)}/PROMPTS.md`);
   $('#download-original-prompts').download = `${item.slug}-original-PROMPTS.md`;
   $('#prompt-list').innerHTML = item.prompts.map((prompt,index) => `<article class="prompt-card"><div class="prompt-heading"><h3>${String(index+1).padStart(2,'0')} / ${escapeHTML(prompt.title)}</h3><button class="button secondary" data-copy-prompt="${index}" aria-label="複製${escapeHTML(prompt.title)}指令">複製指令 ↗</button></div><pre tabindex="0">${escapeHTML(prompt.text)}</pre></article>`).join('');
   $('#creation-history').open=false;
@@ -187,18 +188,23 @@ function openDesign(item) {
 }
 function showOfficialDraft(item) {
   const study = officialStudies[item.slug];
-  $('#official-study-details').hidden = !study;
-  $('#official-study-scope').textContent = study?.scope || '';
-  $('#official-study-limits').innerHTML = (study?.limits || []).map(value => `<li>${escapeHTML(value)}</li>`).join('');
-  $('#official-study-links').innerHTML = Object.entries(study?.links || {}).map(([key, href]) =>
-    `<a href="${escapeHTML(href)}" target="_blank" rel="noopener">${({analysis:'目前設計分析',prompts:'重寫 AI 指令',review:'畫面校正紀錄'})[key]} ↗</a>`).join('');
+  const sourceLink = $('#official-study-source');
+  const hasSource = /^https?:\/\//i.test(study?.source || '');
+  $('#official-study-details').hidden = !hasSource;
+  sourceLink.textContent = `${item.name} 官網 ↗`;
+  if (hasSource) sourceLink.href = study.source;
+  else sourceLink.removeAttribute('href');
   for (const [selector, kind, filename] of [['#download-design','analysis','DESIGN.md'],['#download-prompts','prompts','PROMPTS.md']]) {
     const link = $(selector), href = study?.links[kind];
     link.hidden = !href;
-    if (href) { link.href = href; link.download = `${item.slug}-${filename}`; }
+    if (href) { link.href = downloadURL(href); link.download = `${item.slug}-${filename}`; }
     else link.removeAttribute('href');
   }
-  const reference = study ? `參考日期：${study.date} · 與設計預覽對應` : officialDraftsState === 'loading' ? '正在讀取預覽對應內容…' : '參考紀錄暫時無法載入';
+  const pack = $('#download-implementation-pack');
+  pack.hidden = !study?.implementationVersion;
+  if (!pack.hidden) { pack.href = `assets/design-packs/${encodeURIComponent(item.slug)}.zip`; pack.download = `${item.slug}-implementation.zip`; }
+  else pack.removeAttribute('href');
+  const reference = study ? `參考日期：${study.date}${study.implementationVersion ? ` · 實作規格 ${study.implementationVersion}` : ''}` : officialDraftsState === 'loading' ? '正在讀取預覽對應內容…' : '參考紀錄暫時無法載入';
   $('#document-reference').textContent = reference;
   $('#prompt-reference').textContent = reference;
   if (currentTab === 'document') loadDocument();
@@ -288,9 +294,8 @@ async function loadOfficialDrafts() {
         date: row.querySelector('td:last-child')?.textContent.trim() || '日期未記錄',
         status: row.dataset.status || 'unverified',
         cover: /^assets\/current-previews\/[a-z0-9.-]+-[a-f0-9]{16}\.webp$/.test(row.dataset.cover || '')?row.dataset.cover:null,
-        label: row.querySelector('td.draft strong')?.textContent.trim() || '尚未驗證',
-        scope: row.querySelector('.study-scope')?.textContent.trim() || '尚未完成目前主要畫面的比對。',
-        limits: [...row.querySelectorAll('.study-limits li')].map(node => node.textContent.trim()),
+        source: row.querySelector('.study-source')?.getAttribute('href') || '',
+        implementationVersion: /^\d{4}-\d{2}-\d{2}$/.test(row.dataset.implementationVersion || '') ? row.dataset.implementationVersion : null,
         links: Object.fromEntries(['analysis','prompts','review'].flatMap(key => {
           const href = row.querySelector(`.study-${key}`)?.getAttribute('href');
           return /^official-drafts\/[a-z0-9.-]+\.md$/.test(href || '') ? [[key, href]] : [];
@@ -303,10 +308,9 @@ async function loadOfficialDrafts() {
     officialStudies = Object.fromEntries(drafts.map(item => [item.slug, item]));
     officialDraftsState = 'ready';
     refreshCardArt();
-    const compared = drafts.filter(item => item.status === 'compared_with_differences').length;
-    count.textContent = `${drafts.length} 份參考紀錄 · ${compared} 份已記錄畫面差異`;
+    count.textContent = `${drafts.length} 份參考來源`;
     grid.innerHTML = drafts.map(item =>
-      `<a href="official-drafts/${escapeHTML(item.file)}.html" class="study-${item.status}">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} · ${escapeHTML(item.label)} ↗</span></a>`
+      `<a href="official-drafts/${escapeHTML(item.file)}.html">${escapeHTML(item.name)} <span>${escapeHTML(item.date)} ↗</span></a>`
     ).join('');
     if (currentDesign) {
       showOfficialDraft(currentDesign);
@@ -314,9 +318,9 @@ async function loadOfficialDrafts() {
     }
   } catch {
     officialDraftsState = 'error';
-    count.textContent = '參考紀錄暫時無法載入';
+    count.textContent = '參考來源暫時無法載入';
     refreshCardArt();
-    grid.innerHTML = '<a href="official-progress.html">查看完整進度 ↗</a>';
+    grid.innerHTML = '<a href="reference-sources.html">查看參考來源 ↗</a>';
     if (currentDesign) { showOfficialDraft(currentDesign); setPreview(previewMode); }
   }
 }

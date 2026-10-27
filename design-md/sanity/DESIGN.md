@@ -1,364 +1,195 @@
-# Design System Inspired by Sanity
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Sanity"
+description: "黃白色面、粗體章節與珊瑚紅，整理內容工作流程。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#f36458"
+  canvas: "#0b0b0b"
+  ink: "#ededed"
+  source-01: "#0b0b0b"
+  source-02: "#212121"
+  source-03: "#353535"
+  source-04: "#797979"
+  source-05: "#b9b9b9"
+  source-06: "#ededed"
+  source-07: "#ffffff"
+  source-08: "#0052ef"
+  source-09: "#f36458"
+  source-10: "#000000"
+  source-11: "#55beff"
+  source-12: "#afe3ff"
+  source-13: "#19d600"
+  source-14: "#dd0000"
+  source-15: "#37cd84"
+  source-16: "#072227"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Sanity's website is a developer-content platform rendered as a nocturnal command center -- dark, precise, and deeply structured. The entire experience sits on a near-black canvas (`#0b0b0b`) that reads less like a "dark mode toggle" and more like the natural state of a tool built for people who live in terminals. Where most CMS marketing pages reach for friendly pastels and soft illustration, Sanity leans into the gravity of its own product: structured content deserves a structured stage.
+# Sanity 延伸設計規格
 
-The signature typographic voice is waldenburgNormal -- a distinctive, slightly geometric sans-serif with tight negative letter-spacing (-0.32px to -4.48px at display sizes) that gives headlines a compressed, engineered quality. At 112px hero scale with -4.48px tracking, the type feels almost machined -- like precision-cut steel letterforms. This is paired with IBM Plex Mono for code and technical labels, creating a dual-register voice: editorial authority meets developer credibility.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-What makes Sanity distinctive is the interplay between its monochromatic dark palette and vivid, saturated accent punctuation. The neutral scale runs from pure black through a tightly controlled gray ramp (`#0b0b0b` -> `#212121` -> `#353535` -> `#797979` -> `#b9b9b9` -> `#ededed` -> `#ffffff`) with no warm or cool bias -- just pure, achromatic precision. Against this disciplined backdrop, a neon green accent (display-p3 green) and electric blue (`#0052ef`) land with the impact of signal lights in a dark control room. The orange-red CTA (`#f36458`) provides the only warm touch in an otherwise cool system.
+## 來源與規格層次
 
-**Key Characteristics:**
-- Near-black canvas (`#0b0b0b`) as the default, natural environment -- not a dark "mode" but the primary identity
-- waldenburgNormal with extreme negative tracking at display sizes, creating a precision-engineered typographic voice
-- Pure achromatic gray scale -- no warm or cool undertones, pure neutral discipline
-- Vivid accent punctuation: neon green, electric blue (`#0052ef`), and coral-red (`#f36458`) against the dark field
-- Pill-shaped primary buttons (99999px radius) contrasting with subtle rounded rectangles (3-6px) for secondary actions
-- IBM Plex Mono as the technical counterweight to the editorial display face
-- Full-bleed dark sections with content contained in measured max-width containers
-- Hover states that shift to electric blue (`#0052ef`) across all interactive elements -- a consistent "activation" signal
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`4ec131c5b7bc42f51ee9d09e8ca279d7d8ee37d7c62e99170fbac21e1e46dc9c`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.sanity.io/。
+- 目前預覽：`official-drafts/sanity.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary Brand
-- **Sanity Black** (`#0b0b0b`): The primary canvas and dominant surface color. Not pure black but close enough to feel absolute. The foundation of the entire visual identity.
-- **Pure Black** (`#000000`): Used for maximum-contrast moments, deep overlays, and certain border accents.
-- **Sanity Red** (`#f36458`): The primary CTA and brand accent -- a warm coral-red that serves as the main call-to-action color. Used for "Get Started" buttons and primary conversion points.
+## 整體視覺方向
 
-### Accent & Interactive
-- **Electric Blue** (`#0052ef`): The universal hover/active state color across the entire system. Buttons, links, and interactive elements all shift to this blue on hover. Also used as `--color-blue-700` for focus rings and active states.
-- **Light Blue** (`#55beff` / `#afe3ff`): Secondary blue variants used for accent backgrounds, badges, and dimmed blue surfaces.
-- **Neon Green** (`color(display-p3 .270588 1 0)`): A vivid, wide-gamut green used as `--color-fg-accent-green` for success states and premium feature highlights. Falls back to `#19d600` in sRGB.
-- **Accent Magenta** (`color(display-p3 .960784 0 1)`): A vivid wide-gamut magenta for specialized accent moments.
+黃白色面、粗體章節與珊瑚紅，整理內容工作流程。
 
-### Surface & Background
-- **Near Black** (`#0b0b0b`): Default page background and primary surface.
-- **Dark Gray** (`#212121`): Elevated surface color for cards, secondary containers, input backgrounds, and subtle layering above the base canvas.
-- **Medium Dark** (`#353535`): Tertiary surface and border color for creating depth between dark layers.
-- **Pure White** (`#ffffff`): Used for inverted sections, light-on-dark text, and specific button surfaces.
-- **Light Gray** (`#ededed`): Light surface for inverted/light sections and subtle background tints.
+製作內容營運頁，包含醒目的編輯式頁首、資料結構範例與有組織的工作流程面板。珊瑚色用於最高優先操作，等寬標示只用於技術中繼資料。
 
-### Neutrals & Text
-- **White** (`#ffffff`): Primary text color on dark surfaces, maximum legibility.
-- **Silver** (`#b9b9b9`): Secondary text, body copy on dark surfaces, muted descriptions, and placeholder text.
-- **Medium Gray** (`#797979`): Tertiary text, metadata, timestamps, and de-emphasized content.
-- **Charcoal** (`#212121`): Text on light/inverted surfaces.
-- **Near Black Text** (`#0b0b0b`): Primary text on white/light button surfaces.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Semantic
-- **Error Red** (`#dd0000`): Destructive actions, validation errors, and critical warnings -- a pure, high-saturation red.
-- **GPC Green** (`#37cd84`): Privacy/compliance indicator green.
-- **Focus Ring Blue** (`#0052ef`): Focus ring color for accessibility, matching the interactive blue.
+## 色彩、字型與繁體中文排版
 
-### Border System
-- **Dark Border** (`#0b0b0b`): Primary border on dark containers -- barely visible, maintaining minimal containment.
-- **Subtle Border** (`#212121`): Standard border for inputs, textareas, and card edges on dark surfaces.
-- **Medium Border** (`#353535`): More visible borders for emphasized containment and dividers.
-- **Light Border** (`#ffffff`): Border on inverted/light elements or buttons needing contrast separation.
-- **Orange Border** (`color(display-p3 1 0.3333 0)`): Special accent border for highlighted/featured elements.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-## 3. Typography Rules
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Font Family
-- **Display / Headline**: `waldenburgNormal`, fallback: `waldenburgNormal Fallback, ui-sans-serif, system-ui`
-- **Body / UI**: `waldenburgNormal`, fallback: `waldenburgNormal Fallback, ui-sans-serif, system-ui`
-- **Code / Technical**: `IBM Plex Mono`, fallback: `ibmPlexMono Fallback, ui-monospace`
-- **Fallback / CJK**: `Helvetica`, fallback: `Arial, Hiragino Sans GB, STXihei, Microsoft YaHei, WenQuanYi Micro Hei`
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-*Note: waldenburgNormal is a custom typeface. For external implementations, use Inter or Space Grotesk as the sans substitute (geometric, slightly condensed feel). IBM Plex Mono is available on Google Fonts.*
+| 用途 | 字型 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- | --- |
+| `display-/-hero` | waldenburgNormal | 112px (7rem) | 400 | 1.00 （緊密） | -4.48px |
+| `hero-secondary` | waldenburgNormal | 72px (4.5rem) | 400 | 1.05 （緊密） | -2.88px |
+| 區段標題 | waldenburgNormal | 48px (3rem) | 400 | 1.08 （緊密） | -1.68px |
+| `heading-large` | waldenburgNormal | 38px (2.38rem) | 400 | 1.10 （緊密） | -1.14px |
+| `heading-medium` | waldenburgNormal | 32px (2rem) | 425 | 1.24 （緊密） | -0.32px |
+| `heading-small` | waldenburgNormal | 24px (1.5rem) | 425 | 1.24 （緊密） | -0.24px |
+| `subheading` | waldenburgNormal | 20px (1.25rem) | 425 | 1.13 （緊密） | -0.2px |
+| `body-large` | waldenburgNormal | 18px (1.13rem) | 400 | 1.50 | -0.18px |
+| 內文 | waldenburgNormal | 16px (1rem) | 400 | 1.50 | normal |
+| `body-small` | waldenburgNormal | 15px (0.94rem) | 400 | 1.50 | -0.15px |
+| 補充說明 | waldenburgNormal | 13px (0.81rem) | 400-500 | 1.30-1.50 | -0.13px |
+| `small-caption` | waldenburgNormal | 12px (0.75rem) | 400 | 1.50 | -0.12px |
+| `micro-/-label` | waldenburgNormal | 11px (0.69rem) | 500-600 | 1.00-1.50 | normal |
+| `code-body` | IBM Plex Mono | 15px (0.94rem) | 400 | 1.50 | normal |
+| `code-caption` | IBM Plex Mono | 13px (0.81rem) | 400-500 | 1.30-1.50 | normal |
+| `code-micro` | IBM Plex Mono | 10-12px | 400 | 1.30-1.50 | normal |
 
-### Hierarchy
+## 版面與元件結構
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display / Hero | waldenburgNormal | 112px (7rem) | 400 | 1.00 (tight) | -4.48px | Maximum impact, compressed tracking |
-| Hero Secondary | waldenburgNormal | 72px (4.5rem) | 400 | 1.05 (tight) | -2.88px | Large section headers |
-| Section Heading | waldenburgNormal | 48px (3rem) | 400 | 1.08 (tight) | -1.68px | Primary section anchors |
-| Heading Large | waldenburgNormal | 38px (2.38rem) | 400 | 1.10 (tight) | -1.14px | Feature section titles |
-| Heading Medium | waldenburgNormal | 32px (2rem) | 425 | 1.24 (tight) | -0.32px | Card titles, subsection headers |
-| Heading Small | waldenburgNormal | 24px (1.5rem) | 425 | 1.24 (tight) | -0.24px | Smaller feature headings |
-| Subheading | waldenburgNormal | 20px (1.25rem) | 425 | 1.13 (tight) | -0.2px | Sub-section markers |
-| Body Large | waldenburgNormal | 18px (1.13rem) | 400 | 1.50 | -0.18px | Intro paragraphs, descriptions |
-| Body | waldenburgNormal | 16px (1rem) | 400 | 1.50 | normal | Standard body text |
-| Body Small | waldenburgNormal | 15px (0.94rem) | 400 | 1.50 | -0.15px | Compact body text |
-| Caption | waldenburgNormal | 13px (0.81rem) | 400-500 | 1.30-1.50 | -0.13px | Metadata, descriptions, tags |
-| Small Caption | waldenburgNormal | 12px (0.75rem) | 400 | 1.50 | -0.12px | Footnotes, timestamps |
-| Micro / Label | waldenburgNormal | 11px (0.69rem) | 500-600 | 1.00-1.50 | normal | Uppercase labels, tiny badges |
-| Code Body | IBM Plex Mono | 15px (0.94rem) | 400 | 1.50 | normal | Code blocks, technical content |
-| Code Caption | IBM Plex Mono | 13px (0.81rem) | 400-500 | 1.30-1.50 | normal | Inline code, small technical labels |
-| Code Micro | IBM Plex Mono | 10-12px | 400 | 1.30-1.50 | normal | Tiny code labels, uppercase tags |
+此參考可先實作：內容狀態面板，包含草稿、審閱中與已發布階段。
 
-### Principles
-- **Extreme negative tracking at scale**: Display headings at 72px+ use aggressive negative letter-spacing (-2.88px to -4.48px), creating a tight, engineered quality that distinguishes Sanity from looser editorial typography.
-- **Single font, multiple registers**: waldenburgNormal handles both editorial display and functional UI text. The weight range is narrow (400-425 for most, 500-600 only for tiny labels), keeping the voice consistent.
-- **OpenType feature control**: Typography uses deliberate feature settings including `"cv01", "cv11", "cv12", "cv13", "ss07"` for display sizes and `"calt" 0` for body text, fine-tuning character alternates for different contexts.
-- **Tight headings, relaxed body**: Headings use 1.00-1.24 line-height (extremely tight), while body text breathes at 1.50. This contrast creates clear visual hierarchy.
-- **Uppercase for technical labels**: IBM Plex Mono captions and small labels frequently use `text-transform: uppercase` with tight line-heights, creating a "system readout" aesthetic for technical metadata.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-## 4. Component Stylings
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Buttons
+## 操作與狀態
 
-**Primary CTA (Pill)**
-- Background: Sanity Red (`#f36458`)
-- Text: White (`#ffffff`)
-- Padding: 8px 16px
-- Border Radius: 99999px (full pill)
-- Border: none
-- Hover: Electric Blue (`#0052ef`) background, white text
-- Font: 16px waldenburgNormal, weight 400
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**Secondary (Dark Pill)**
-- Background: Near Black (`#0b0b0b`)
-- Text: Silver (`#b9b9b9`)
-- Padding: 8px 12px
-- Border Radius: 99999px (full pill)
-- Border: none
-- Hover: Electric Blue (`#0052ef`) background, white text
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-**Outlined (Light Pill)**
-- Background: White (`#ffffff`)
-- Text: Near Black (`#0b0b0b`)
-- Padding: 8px
-- Border Radius: 99999px (full pill)
-- Border: 1px solid `#0b0b0b`
-- Hover: Electric Blue (`#0052ef`) background, white text
+## 圖片、動態與無障礙
 
-**Ghost / Subtle**
-- Background: Dark Gray (`#212121`)
-- Text: Silver (`#b9b9b9`)
-- Padding: 0px 12px
-- Border Radius: 5px
-- Border: 1px solid `#212121`
-- Hover: Electric Blue (`#0052ef`) background, white text
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**Uppercase Label Button**
-- Font: 11px waldenburgNormal, weight 600, uppercase
-- Background: transparent or `#212121`
-- Text: Silver (`#b9b9b9`)
-- Letter-spacing: normal
-- Used for tab-like navigation and filter controls
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Cards
+## 來源中的技術值補充
 
-**Dark Content Card**
-- Background: `#212121`
-- Border: 1px solid `#353535` or `#212121`
-- Border Radius: 6px
-- Padding: 24px
-- Text: White (`#ffffff`) for titles, Silver (`#b9b9b9`) for body
-- Hover: subtle border color shift or elevation change
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**Feature Card (Full-bleed)**
-- Background: `#0b0b0b` or full-bleed image/gradient
-- Border: none or 1px solid `#212121`
-- Border Radius: 12px
-- Padding: 32-48px
-- Contains large imagery with overlaid text
+- `#0b0b0b`
+- `#212121`
+- `#353535`
+- `#797979`
+- `#b9b9b9`
+- `#ededed`
+- `#ffffff`
+- `#0052ef`
+- `#f36458`
+- `#000000`
+- `#55beff`
+- `#afe3ff`
+- `#19d600`
+- `#dd0000`
+- `#37cd84`
+- `#072227`
 
-### Inputs
+## 日期限定首頁觀察
 
-**Text Input / Textarea**
-- Background: Near Black (`#0b0b0b`)
-- Text: Silver (`#b9b9b9`)
-- Border: 1px solid `#212121`
-- Padding: 8px 12px
-- Border Radius: 3px
-- Focus: outline with `var(--focus-ring-color)` (blue), 2px solid
-- Focus background: shifts to deep cyan (`#072227`)
+內容營運首頁採黃白相間的編輯式系統，搭配醒目的原始字型、章節圖像、產品與編輯器插圖，以及自動化節點。依完整來源與原始媒體調整版面，保留主要介紹、編輯器、自動化、API、客戶故事與頁尾的資訊順序。
 
-**Search Input**
-- Background: `#0b0b0b`
-- Text: Silver (`#b9b9b9`)
-- Padding: 0px 12px
-- Border Radius: 3px
-- Placeholder: Medium Gray (`#797979`)
+編輯器與自動化示範以保存的可見狀態呈現。產品選取、客戶輪播、時間標示及動畫階段仍有差異；這些示範不代表可用的編輯器、API 或後端服務。
 
-### Navigation
+## 已知差異與驗證範圍
 
-**Top Navigation**
-- Background: Near Black (`#0b0b0b`) with backdrop blur
-- Height: auto, compact padding
-- Logo: left-aligned, Sanity wordmark
-- Links: waldenburgNormal 16px, Silver (`#b9b9b9`)
-- Link Hover: Electric Blue via `--color-fg-accent-blue`
-- CTA Button: Sanity Red pill button right-aligned
-- Separator: 1px border-bottom `#212121`
+- 主視覺使用原始公開影片，但畫格、商標跑馬燈及載入階段不同。初次尚未載入的主視覺證據，已在 readyState=4 後重拍並記錄中繼資料。
+- 編輯器示範固定為一個擷取狀態；輸入標題、選取外框、發布紀錄、時間及背景與較早原生畫格不同，其行為尚未重現。
+- 自動化視覺保留原始面板、節點及 SVG 標記，但原生畫布連線脈動、通知時間、分頁分支與滑鼠移入互動尚未重現。
+- API 插圖固定於擷取的選取情境，桌面為定價、窄版為行銷，與較早來源的教學及定價輪播階段不同；情境切換及後端助理尚未實作。
+- 客戶故事固定為 02 Tecovas，原生截圖則為 01 Yust／03 Complex；自動選擇、客戶背景影片、本機窄版空白背景、轉場及控制仍未解決。
+- 首屏重拍是在操作選單之後，焦點、滑鼠移入樣式及浮動助理淡入時間，可能與互動前的原生第一畫格不同。
+- 桌面及行動版巢狀導覽、AI 助理、主題、同意設定、電子報、指令複製、SDK 及示範、其他頁面與帳戶服務尚未完整重現或驗收；官方連結仍可用，後端表單未送出。
+- 頁尾狀態可能顯示擷取的最終值，較早官網桌面截圖則為載入中。來源有明確日期，不代表即時服務狀態檢查。
+- 其他寬度及實體裝置需另行驗證；原始比對未涵蓋正式部署。
 
-**Footer**
-- Background: Near Black (`#0b0b0b`)
-- Multi-column link layout
-- Links: Silver (`#b9b9b9`), hover to blue
-- Section headers: White (`#ffffff`), 13px uppercase IBM Plex Mono
-
-### Badges / Pills
-
-**Neutral Subtle**
-- Background: White (`#ffffff`)
-- Text: Near Black (`#0b0b0b`)
-- Padding: 8px
-- Font: 13px
-- Border Radius: 99999px
-
-**Neutral Filled**
-- Background: Near Black (`#0b0b0b`)
-- Text: White (`#ffffff`)
-- Padding: 8px
-- Font: 13px
-- Border Radius: 99999px
-
-## 5. Layout Principles
-
-### Spacing System
-Base unit: **8px**
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| space-1 | 1px | Hairline gaps, border-like spacing |
-| space-2 | 2px | Minimal internal padding |
-| space-3 | 4px | Tight component internal spacing |
-| space-4 | 6px | Small element gaps |
-| space-5 | 8px | Base unit -- button padding, input padding, badge padding |
-| space-6 | 12px | Standard component gap, button horizontal padding |
-| space-7 | 16px | Section internal padding, card spacing |
-| space-8 | 24px | Large component padding, card internal spacing |
-| space-9 | 32px | Section padding, container gutters |
-| space-10 | 48px | Large section vertical spacing |
-| space-11 | 64px | Major section breaks |
-| space-12 | 96-120px | Hero vertical padding, maximum section spacing |
-
-### Grid & Container
-- Max content width: ~1440px (inferred from breakpoints)
-- Page gutter: 32px on desktop, 16px on mobile
-- Content sections use full-bleed backgrounds with centered, max-width content
-- Multi-column layouts: 2-3 columns on desktop, single column on mobile
-- Card grids: CSS Grid with consistent gaps (16-24px)
-
-### Whitespace Philosophy
-Sanity uses aggressive vertical spacing between sections (64-120px) to create breathing room on the dark canvas. Within sections, spacing is tighter (16-32px), creating dense information clusters separated by generous voids. This rhythm gives the page a "slides" quality -- each section feels like its own focused frame.
-
-### Border Radius Scale
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| radius-xs | 3px | Inputs, textareas, subtle rounding |
-| radius-sm | 4-5px | Secondary buttons, small cards, tags |
-| radius-md | 6px | Standard cards, containers |
-| radius-lg | 12px | Large cards, feature containers, forms |
-| radius-pill | 99999px | Primary buttons, badges, nav pills |
-
-## 6. Depth & Elevation
-
-### Shadow System
-
-| Level | Value | Usage |
-|-------|-------|-------|
-| Level 0 (Flat) | none | Default state for most elements -- dark surfaces create depth through color alone |
-| Level 1 (Subtle) | 0px 0px 0px 1px `#212121` | Border-like shadow for minimal containment without visible borders |
-| Level 2 (Focus) | 0 0 0 2px `var(--color-blue-500)` | Focus ring for inputs and interactive elements |
-| Level 3 (Overlay) | Backdrop blur + semi-transparent dark | Navigation overlay, modal backgrounds |
-
-### Depth Philosophy
-Sanity's depth system is almost entirely **colorimetric** rather than shadow-based. Elevation is communicated through surface color shifts: `#0b0b0b` (ground) -> `#212121` (elevated) -> `#353535` (prominent) -> `#ffffff` (inverted/highest). This approach is native to dark interfaces where traditional drop shadows would be invisible. The few shadows that exist are ring-based (0px 0px 0px Npx) or blur-based (backdrop-filter) rather than offset shadows, maintaining the flat, precision-engineered aesthetic.
-
-Border-based containment (1px solid `#212121` or `#353535`) serves as the primary spatial separator, with the border darkness calibrated to be visible but not dominant. The system avoids "floating card" aesthetics -- everything feels mounted to the surface rather than hovering above it.
-
-## 7. Do's and Don'ts
-
-### Do
-- Use the achromatic gray scale as the foundation -- maintain pure neutral discipline with no warm/cool tinting
-- Apply Electric Blue (`#0052ef`) consistently as the universal hover/active state across all interactive elements
-- Use extreme negative letter-spacing (-2px to -4.48px) on display headings 48px and above
-- Keep primary CTAs as full-pill shapes (99999px radius) with the coral-red (`#f36458`)
-- Use IBM Plex Mono uppercase for technical labels, tags, and system metadata
-- Communicate depth through surface color (dark-to-light) rather than shadows
-- Maintain generous vertical section spacing (64-120px) on the dark canvas
-- Use `"cv01", "cv11", "cv12", "cv13", "ss07"` OpenType features for display typography
-
-### Don't
-- Don't introduce warm or cool color tints to the neutral scale -- Sanity's grays are pure achromatic
-- Don't use drop shadows for elevation -- dark interfaces demand colorimetric depth
-- Don't apply border-radius between 13px and 99998px -- the system jumps from 12px (large card) directly to pill (99999px)
-- Don't mix the coral-red CTA with the electric blue interactive color in the same element
-- Don't use heavy font weights (700+) -- the system maxes out at 600 and only for 11px uppercase labels
-- Don't place light text on light surfaces or dark text on dark surfaces without checking the gray-on-gray contrast ratio
-- Don't use traditional offset box-shadows -- ring shadows (0 0 0 Npx) or border-based containment only
-- Don't break the tight line-height on headings -- 1.00-1.24 is the range, never go to 1.5+ for display text
-
-## 8. Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Behavior |
-|------|-------|----------|
-| Desktop XL | >= 1640px | Full layout, maximum content width |
-| Desktop | >= 1440px | Standard desktop layout |
-| Desktop Compact | >= 1200px | Slightly condensed desktop |
-| Laptop | >= 1100px | Reduced column widths |
-| Tablet Landscape | >= 960px | 2-column layouts begin collapsing |
-| Tablet | >= 768px | Transition zone, some elements stack |
-| Mobile Large | >= 720px | Near-tablet layout |
-| Mobile | >= 480px | Single-column, stacked layout |
-| Mobile Small | >= 376px | Minimum supported width |
-
-### Collapsing Strategy
-- **Navigation**: Horizontal links collapse to hamburger menu below 768px
-- **Hero typography**: Scales from 112px -> 72px -> 48px -> 38px across breakpoints, maintaining tight letter-spacing ratios
-- **Grid layouts**: 3-column -> 2-column at ~960px, single-column below 768px
-- **Card grids**: Horizontal scrolling on mobile instead of wrapping (preserving card aspect ratios)
-- **Section spacing**: Vertical padding reduces by ~40% on mobile (120px -> 64px -> 48px)
-- **Button sizing**: CTA pills maintain padding but reduce font size; ghost buttons stay fixed
-- **Code blocks**: Horizontal scroll with preserved monospace formatting
-
-### Mobile-Specific Adjustments
-- Full-bleed sections extend edge-to-edge with 16px internal gutters
-- Touch targets: minimum 44px for all interactive elements
-- Heading letter-spacing relaxes slightly at mobile sizes (less aggressive negative tracking)
-- Image containers switch from fixed aspect ratios to full-width with auto height
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Sanity-inspired interface. Implement this working page: A content operations page with a strong editorial header, schema example, and structured workflow panels. Keep coral for the highest-priority action and use monospaced labels only for technical metadata.
+先閱讀隨附的 DESIGN.md，以 Sanity 的設計語言作為介面參考。請完成以下可操作頁面：製作內容營運頁，包含醒目的編輯式頁首、資料結構範例與有組織的工作流程面板。珊瑚色用於最高優先操作，等寬標示只用於技術中繼資料。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Sanity-inspired interface. Build a content status panel with draft, review, and published stages. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Sanity 的設計語言作為介面參考。請製作內容狀態面板，包含草稿、審閱中與已發布階段。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Sanity-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A content operations page with a strong editorial header, schema example, and structured workflow panels. Keep coral for the highest-priority action and use monospaced labels only for technical metadata.
+先閱讀隨附的 DESIGN.md，以 Sanity 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作內容營運頁，包含醒目的編輯式頁首、資料結構範例與有組織的工作流程面板。珊瑚色用於最高優先操作，等寬標示只用於技術中繼資料。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

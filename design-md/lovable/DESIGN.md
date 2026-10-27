@@ -1,318 +1,184 @@
-# Design System Inspired by Lovable
+---
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Lovable"
+description: "奶油色、柔和邊框與深色操作按鈕。"
 
-## 1. Visual Theme & Atmosphere
+colors:
+  primary: "#1c1c1c"
+  canvas: "#f7f4ed"
+  ink: "#1c1c1c"
+  source-01: "#f7f4ed"
+  source-02: "#1c1c1c"
+  source-03: "#eceae4"
+  source-04: "#fcfbf8"
+  source-05: "#5f5f5d"
+  source-06: "#3b82f6"
+  source-07: "#ffffff"
+typography:
+  reference:
+    fontFamily: "system-ui, sans-serif"
+---
 
-Lovable's website radiates warmth through restraint. The entire page sits on a creamy, parchment-toned background (`#f7f4ed`) that immediately separates it from the cold-white conventions of most developer tool sites. This isn't minimalism for minimalism's sake — it's a deliberate choice to feel approachable, almost analog, like a well-crafted notebook. The near-black text (`#1c1c1c`) against this warm cream creates a contrast ratio that's easy on the eyes while maintaining sharp readability.
+# Lovable 延伸設計規格
 
-The custom Camera Plain Variable typeface is the system's secret weapon. Unlike geometric sans-serifs that signal "tech company," Camera Plain has a humanist warmth — slightly rounded terminals, organic curves, and a comfortable reading rhythm. At display sizes (48px–60px), weight 600 with aggressive negative letter-spacing (-0.9px to -1.5px) compresses headlines into confident, editorial statements. The font uses `ui-sans-serif, system-ui` as fallbacks, acknowledging that the custom typeface carries the brand personality.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-What makes Lovable's visual system distinctive is its opacity-driven depth model. Rather than using a traditional gray scale, the system modulates `#1c1c1c` at varying opacities (0.03, 0.04, 0.4, 0.82–0.83) to create a unified tonal range. Every shade of gray on the page is technically the same hue — just more or less transparent. This creates a visual coherence that's nearly impossible to achieve with arbitrary hex values. The border system follows suit: `1px solid #eceae4` for light divisions and `1px solid rgba(28, 28, 28, 0.4)` for stronger interactive boundaries.
+## 來源與規格層次
 
-**Key Characteristics:**
-- Warm parchment background (`#f7f4ed`) — not white, not beige, a deliberate cream that feels hand-selected
-- Camera Plain Variable typeface with humanist warmth and editorial letter-spacing at display sizes
-- Opacity-driven color system: all grays derived from `#1c1c1c` at varying transparency levels
-- Inset shadow technique on buttons: `rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset`
-- Warm neutral border palette: `#eceae4` for subtle, `rgba(28,28,28,0.4)` for interactive elements
-- Full-pill radius (`9999px`) used extensively for action buttons and icon containers
-- Focus state uses `rgba(0,0,0,0.1) 0px 4px 12px` shadow for soft, warm emphasis
-- shadcn/ui + Radix UI component primitives with Tailwind CSS utility styling
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-## 2. Color Palette & Roles
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`f25b81d01a29a62ed8beccbc25d7681f3303c581b557750f3f22ee7554e71a32`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://lovable.dev/。
+- 目前預覽：`official-drafts/lovable.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Primary
-- **Cream** (`#f7f4ed`): Page background, card surfaces, button surfaces. The foundation — warm, paper-like, human.
-- **Charcoal** (`#1c1c1c`): Primary text, headings, dark button backgrounds. Not pure black — organic warmth.
-- **Off-White** (`#fcfbf8`): Button text on dark backgrounds, subtle highlight. Barely distinguishable from pure white.
+## 整體視覺方向
 
-### Neutral Scale (Opacity-Based)
-- **Charcoal 100%** (`#1c1c1c`): Primary text, headings, dark surfaces.
-- **Charcoal 83%** (`rgba(28,28,28,0.83)`): Strong secondary text.
-- **Charcoal 82%** (`rgba(28,28,28,0.82)`): Body copy.
-- **Muted Gray** (`#5f5f5d`): Secondary text, descriptions, captions.
-- **Charcoal 40%** (`rgba(28,28,28,0.4)`): Interactive borders, button outlines.
-- **Charcoal 4%** (`rgba(28,28,28,0.04)`): Subtle hover backgrounds, micro-tints.
-- **Charcoal 3%** (`rgba(28,28,28,0.03)`): Barely-visible overlays, background depth.
+奶油色、柔和邊框與深色操作按鈕。
 
-### Surface & Border
-- **Light Cream** (`#eceae4`): Card borders, dividers, image outlines. The warm divider line.
-- **Cream Surface** (`#f7f4ed`): Card backgrounds, section fills — same as page background for seamless integration.
+製作專案起始頁，包含寬闊的需求撰寫區、建議起點與精簡的近期專案圖庫。內容周圍保留暖色背景，以內嵌深色按鈕作為主要操作。
 
-### Interactive
-- **Ring Blue** (`#3b82f6` at 50% opacity): `--tw-ring-color`, Tailwind focus ring.
-- **Focus Shadow** (`rgba(0,0,0,0.1) 0px 4px 12px`): Focus and active state shadow — soft, warm, diffused.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Inset Shadows
-- **Button Inset** (`rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px`): The signature multi-layer inset shadow on dark buttons.
+## 色彩、字型與繁體中文排版
 
-## 3. Typography Rules
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-### Font Family
-- **Primary**: `Camera Plain Variable`, with fallbacks: `ui-sans-serif, system-ui`
-- **Weight range**: 400 (body/reading), 480 (special display), 600 (headings/emphasis)
-- **Feature**: Variable font with continuous weight axis — allows fine-tuned intermediary weights like 480.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Hierarchy
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-| Role | Font | Size | Weight | Line Height | Letter Spacing | Notes |
-|------|------|------|--------|-------------|----------------|-------|
-| Display Hero | Camera Plain Variable | 60px (3.75rem) | 600 | 1.00–1.10 (tight) | -1.5px | Maximum impact, editorial |
-| Display Alt | Camera Plain Variable | 60px (3.75rem) | 480 | 1.00 (tight) | normal | Lighter hero variant |
-| Section Heading | Camera Plain Variable | 48px (3.00rem) | 600 | 1.00 (tight) | -1.2px | Feature section titles |
-| Sub-heading | Camera Plain Variable | 36px (2.25rem) | 600 | 1.10 (tight) | -0.9px | Sub-sections |
-| Card Title | Camera Plain Variable | 20px (1.25rem) | 400 | 1.25 (tight) | normal | Card headings |
-| Body Large | Camera Plain Variable | 18px (1.13rem) | 400 | 1.38 | normal | Introductions |
-| Body | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal | Standard reading text |
-| Button | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal | Button labels |
-| Button Small | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal | Compact buttons |
-| Link | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal | Underline decoration |
-| Link Small | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal | Footer links |
-| Caption | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal | Metadata, small text |
+| 用途 | 字型 | 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- | --- | --- |
+| 主視覺大標題 | Camera Plain Variable | 60px (3.75rem) | 600 | 1.00–1.10 （緊密） | -1.5px |
+| `display-alt` | Camera Plain Variable | 60px (3.75rem) | 480 | 1.00 （緊密） | normal |
+| 區段標題 | Camera Plain Variable | 48px (3.00rem) | 600 | 1.00 （緊密） | -1.2px |
+| 次標題 | Camera Plain Variable | 36px (2.25rem) | 600 | 1.10 （緊密） | -0.9px |
+| `card-title` | Camera Plain Variable | 20px (1.25rem) | 400 | 1.25 （緊密） | normal |
+| `body-large` | Camera Plain Variable | 18px (1.13rem) | 400 | 1.38 | normal |
+| 內文 | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal |
+| 按鈕 | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal |
+| `button-small` | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal |
+| `link` | Camera Plain Variable | 16px (1.00rem) | 400 | 1.50 | normal |
+| `link-small` | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal |
+| 補充說明 | Camera Plain Variable | 14px (0.88rem) | 400 | 1.50 | normal |
 
-### Principles
-- **Warm humanist voice**: Camera Plain Variable gives Lovable its approachable personality. The slightly rounded terminals and organic curves contrast with the sharp geometric sans-serifs used by most developer tools.
-- **Variable weight as design tool**: The font supports continuous weight values (e.g., 480), enabling nuanced hierarchy beyond standard weight stops. Weight 480 at 60px creates a display style that feels lighter than semibold but stronger than regular.
-- **Compression at scale**: Headlines use negative letter-spacing (-0.9px to -1.5px) for editorial impact. Body text stays at normal tracking for comfortable reading.
-- **Two weights, clear roles**: 400 (body/UI/links/buttons) and 600 (headings/emphasis). The narrow weight range creates hierarchy through size and spacing, not weight variation.
+## 版面與元件結構
 
-## 4. Component Stylings
+此參考可先實作：專案需求撰寫區，包含範例建議、輸入驗證與生成狀態。
 
-### Buttons
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-**Primary Dark (Inset Shadow)**
-- Background: `#1c1c1c`
-- Text: `#fcfbf8`
-- Padding: 8px 16px
-- Radius: 6px
-- Shadow: `rgba(0,0,0,0) 0px 0px 0px 0px, rgba(0,0,0,0) 0px 0px 0px 0px, rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px`
-- Active: opacity 0.8
-- Focus: `rgba(0,0,0,0.1) 0px 4px 12px` shadow
-- Use: Primary CTA ("Start Building", "Get Started")
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-**Ghost / Outline**
-- Background: transparent
-- Text: `#1c1c1c`
-- Padding: 8px 16px
-- Radius: 6px
-- Border: `1px solid rgba(28,28,28,0.4)`
-- Active: opacity 0.8
-- Focus: `rgba(0,0,0,0.1) 0px 4px 12px` shadow
-- Use: Secondary actions ("Log In", "Documentation")
+## 操作與狀態
 
-**Cream Surface**
-- Background: `#f7f4ed`
-- Text: `#1c1c1c`
-- Padding: 8px 16px
-- Radius: 6px
-- No border
-- Active: opacity 0.8
-- Use: Tertiary actions, toolbar buttons
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**Pill / Icon Button**
-- Background: `#f7f4ed`
-- Text: `#1c1c1c`
-- Radius: 9999px (full pill)
-- Shadow: same inset pattern as primary dark
-- Opacity: 0.5 (default), 0.8 (active)
-- Use: Additional actions, plan mode toggle, voice recording
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Cards & Containers
-- Background: `#f7f4ed` (matches page)
-- Border: `1px solid #eceae4`
-- Radius: 12px (standard), 16px (featured), 8px (compact)
-- No box-shadow by default — borders define boundaries
-- Image cards: `1px solid #eceae4` with 12px radius
+## 圖片、動態與無障礙
 
-### Inputs & Forms
-- Background: `#f7f4ed`
-- Text: `#1c1c1c`
-- Border: `1px solid #eceae4`
-- Radius: 6px
-- Focus: ring blue (`rgba(59,130,246,0.5)`) outline
-- Placeholder: `#5f5f5d`
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Navigation
-- Clean horizontal nav on cream background, fixed
-- Logo/wordmark left-aligned (128.75 x 22px)
-- Links: Camera Plain 14–16px weight 400, `#1c1c1c` text
-- CTA: dark button with inset shadow, 6px radius
-- Mobile: hamburger menu with 6px radius button
-- Subtle border or no border on scroll
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-### Links
-- Color: `#1c1c1c`
-- Decoration: underline (default)
-- Hover: primary accent (via CSS variable `hsl(var(--primary))`)
-- No color change on hover — decoration carries the interactive signal
+## 來源中的技術值補充
 
-### Image Treatment
-- Showcase/portfolio images with `1px solid #eceae4` border
-- Consistent 12px border radius on all image containers
-- Soft gradient backgrounds behind hero content (warm multi-color wash)
-- Gallery-style presentation for template/project showcases
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-### Distinctive Components
+- `#f7f4ed`
+- `#1c1c1c`
+- `1px solid #eceae4`
+- `1px solid rgba(28, 28, 28, 0.4)`
+- `rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset`
+- `#eceae4`
+- `rgba(28,28,28,0.4)`
+- `9999px`
+- `rgba(0,0,0,0.1) 0px 4px 12px`
+- `#fcfbf8`
+- `rgba(28,28,28,0.83)`
+- `rgba(28,28,28,0.82)`
+- `#5f5f5d`
+- `rgba(28,28,28,0.04)`
+- `rgba(28,28,28,0.03)`
+- `#3b82f6`
+- `rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px`
+- `rgba(0,0,0,0) 0px 0px 0px 0px, rgba(0,0,0,0) 0px 0px 0px 0px, rgba(255,255,255,0.2) 0px 0.5px 0px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px 0px`
+- `1px solid rgba(28,28,28,0.4)`
+- `rgba(59,130,246,0.5)`
+- `rgba(255,255,255,0.2) 0px 0.5px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px`
+- `#ffffff`
 
-**AI Chat Input**
-- Large prompt input area with soft borders
-- Suggestion pills with `#eceae4` borders
-- Voice recording / plan mode toggle buttons as pill shapes (9999px)
-- Warm, inviting input area — not clinical
+## 日期限定首頁觀察
 
-**Template Gallery**
-- Card grid showing project templates
-- Each card: image + title, `1px solid #eceae4` border, 12px radius
-- Hover: subtle shadow or border darkening
-- Category labels as text links
+現行首頁以 Camera Plain Variable 字型、彩色 Lovable 商標、中央對話框與脈動漸層展開。三張產品示範卡後是深色平台區，依序呈現 Hosting、app stack、payments、security、跨裝置五組官方 SVG；再接六品牌、客戶輪播、1.2/60/900 million 資料與圖表、結尾對話框和完整多欄頁尾。此次逐段觀測顯示主要內容與原生 Stitch 參考相同，因此保留既有真正 DESKTOP 與已補正 actual MOBILE 輸出。本次改正原草稿客戶區、頁尾及完整平台區版面，仍誠實保留漸層動畫差異。
 
-**Stats Bar**
-- Large metrics: "0M+" pattern in 48px+ weight 600
-- Descriptive text below in muted gray
-- Horizontal layout with generous spacing
+原始 DESIGN.md、先前原生 Stitch 匯出與本次完整資料均保留。此為有明確範圍的視覺研究；未驗證項目不得宣稱官方一致。
 
-## 5. Layout Principles
+## 已知差異與驗證範圍
 
-### Spacing System
-- Base unit: 8px
-- Scale: 8px, 10px, 12px, 16px, 24px, 32px, 40px, 56px, 80px, 96px, 128px, 176px, 192px, 208px
-- The scale expands generously at the top end — sections use 80px–208px vertical spacing for editorial breathing room
+- 主視覺脈動 canvas 以保存的原始靜態紋理呈現；兩種寬度的色彩強度與垂直漸層位置仍明顯不同於官網即時畫布。畫布、文字與提示動畫尚未一致。
+- 3 組功能示範與客戶輪播固定於擷取狀態；客戶導覽、其他客戶狀態、自動播放與轉場尚未完整實作或驗證。
+- 行動版主選單開啟及 Escape 關閉已測試；固定不透明背景與官網轉場畫格不同。巢狀解決方案及資源面板、桌面導覽與語言選擇尚未驗證。
+- 需求輸入、建立、語音、登入註冊、計費、即時服務、外部目的地、其他寬度及實體手機不在本次比對範圍內；原始比對也未涵蓋正式部署。
+- 原生行動版修正保留參考標題，但改動順序及媒體網址；供應者輸出未驗收，與依來源校正的已檢查預覽分開保存。
 
-### Grid & Container
-- Max content width: approximately 1200px (centered)
-- Hero: centered single-column with massive vertical padding (96px+)
-- Feature sections: 2–3 column grids
-- Full-width footer with multi-column link layout
-- Showcase sections with centered card grids
-
-### Whitespace Philosophy
-- **Editorial generosity**: Lovable's spacing is lavish at section boundaries (80px–208px). The warm cream background makes these expanses feel cozy rather than empty.
-- **Content-driven rhythm**: Tight internal spacing within cards (12–24px) contrasts with wide section gaps, creating a reading rhythm that alternates between focused content and visual rest.
-- **Section separation**: Footer uses `1px solid #eceae4` border and 16px radius container. Sections defined by generous spacing rather than border lines.
-
-### Border Radius Scale
-- Micro (4px): Small buttons, interactive elements
-- Standard (6px): Buttons, inputs, navigation menu
-- Comfortable (8px): Compact cards, divs
-- Card (12px): Standard cards, image containers, templates
-- Container (16px): Large containers, footer sections
-- Full Pill (9999px): Action pills, icon buttons, toggles
-
-## 6. Depth & Elevation
-
-| Level | Treatment | Use |
-|-------|-----------|-----|
-| Flat (Level 0) | No shadow, cream background | Page surface, most content |
-| Bordered (Level 1) | `1px solid #eceae4` | Cards, images, dividers |
-| Inset (Level 2) | `rgba(255,255,255,0.2) 0px 0.5px 0px inset, rgba(0,0,0,0.2) 0px 0px 0px 0.5px inset, rgba(0,0,0,0.05) 0px 1px 2px` | Dark buttons, primary actions |
-| Focus (Level 3) | `rgba(0,0,0,0.1) 0px 4px 12px` | Active/focus states |
-| Ring (Accessibility) | `rgba(59,130,246,0.5)` 2px ring | Keyboard focus on inputs |
-
-**Shadow Philosophy**: Lovable's depth system is intentionally shallow. Instead of floating cards with dramatic drop-shadows, the system relies on warm borders (`#eceae4`) against the cream surface to create gentle containment. The only notable shadow pattern is the inset shadow on dark buttons — a subtle multi-layer technique where a white highlight line sits at the top edge while a dark ring and soft drop handle the bottom. This creates a tactile, pressed-into-surface feeling rather than a hovering-above-surface feeling. The warm focus shadow (`rgba(0,0,0,0.1) 0px 4px 12px`) is deliberately diffused and large, creating a soft glow rather than a sharp outline.
-
-### Decorative Depth
-- Hero: soft, warm multi-color gradient wash (pinks, oranges, blues) behind hero — atmospheric, barely visible
-- Footer: gradient background with warm tones transitioning to the bottom
-- No harsh section dividers — spacing and background warmth handle transitions
-
-## 7. Do's and Don'ts
-
-### Do
-- Use the warm cream background (`#f7f4ed`) as the page foundation — it's the brand's signature warmth
-- Use Camera Plain Variable at display sizes with negative letter-spacing (-0.9px to -1.5px)
-- Derive all grays from `#1c1c1c` at varying opacity levels for tonal unity
-- Use the inset shadow technique on dark buttons for tactile depth
-- Use `#eceae4` borders instead of shadows for card containment
-- Keep the weight system narrow: 400 for body/UI, 600 for headings
-- Use full-pill radius (9999px) only for action pills and icon buttons
-- Apply opacity 0.8 on active states for responsive tactile feedback
-
-### Don't
-- Don't use pure white (`#ffffff`) as a page background — the cream is intentional
-- Don't use heavy box-shadows for cards — borders are the containment mechanism
-- Don't introduce saturated accent colors — the palette is intentionally warm-neutral
-- Don't use weight 700 (bold) — 600 is the maximum weight in the system
-- Don't apply 9999px radius on rectangular buttons — pills are for icon/action toggles
-- Don't use sharp focus outlines — the system uses soft shadow-based focus indicators
-- Don't mix border styles — `#eceae4` for passive, `rgba(28,28,28,0.4)` for interactive
-- Don't increase letter-spacing on headings — Camera Plain is designed to run tight at scale
-
-## 8. Responsive Behavior
-
-### Breakpoints
-| Name | Width | Key Changes |
-|------|-------|-------------|
-| Mobile Small | <600px | Tight single column, reduced padding |
-| Mobile | 600–640px | Standard mobile layout |
-| Tablet Small | 640–700px | 2-column grids begin |
-| Tablet | 700–768px | Card grids expand |
-| Desktop Small | 768–1024px | Multi-column layouts |
-| Desktop | 1024–1280px | Full feature layout |
-| Large Desktop | 1280–1536px | Maximum content width, generous margins |
-
-### Touch Targets
-- Buttons: 8px 16px padding (comfortable touch)
-- Navigation: adequate spacing between items
-- Pill buttons: 9999px radius creates large tap-friendly targets
-- Menu toggle: 6px radius button with adequate sizing
-
-### Collapsing Strategy
-- Hero: 60px → 48px → 36px headline scaling with proportional letter-spacing
-- Navigation: horizontal links → hamburger menu at 768px
-- Feature cards: 3-column → 2-column → single column stacked
-- Template gallery: grid → stacked vertical cards
-- Stats bar: horizontal → stacked vertical
-- Footer: multi-column → stacked single column
-- Section spacing: 128px+ → 64px on mobile
-
-### Image Behavior
-- Template screenshots maintain `1px solid #eceae4` border at all sizes
-- 12px border radius preserved across breakpoints
-- Gallery images responsive with consistent aspect ratios
-- Hero gradient softens/simplifies on mobile
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lovable-inspired interface. Implement this working page: A project-start page with a generous brief composer, suggested starting points, and a compact recent-project gallery. Keep the warm canvas visible around the content and use an inset dark button as the main action.
+先閱讀隨附的 DESIGN.md，以 Lovable 的設計語言作為介面參考。請完成以下可操作頁面：製作專案起始頁，包含寬闊的需求撰寫區、建議起點與精簡的近期專案圖庫。內容周圍保留暖色背景，以內嵌深色按鈕作為主要操作。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lovable-inspired interface. Build a project brief composer with example suggestions, validation, and a generation status. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Lovable 的設計語言作為介面參考。請製作專案需求撰寫區，包含範例建議、輸入驗證與生成狀態。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Lovable-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: A project-start page with a generous brief composer, suggested starting points, and a compact recent-project gallery. Keep the warm canvas visible around the content and use an inset dark button as the main action.
+先閱讀隨附的 DESIGN.md，以 Lovable 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作專案起始頁，包含寬闊的需求撰寫區、建議起點與精簡的近期專案圖庫。內容周圍保留暖色背景，以內嵌深色按鈕作為主要操作。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

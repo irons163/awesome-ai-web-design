@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: Ferrari-design-analysis
-description: A luxury-automotive brand whose marketing surfaces read as cinematic editorial. The base canvas is **near-black** (`#181818`) holding pure white display type; white-canvas bands appear only inside specific editorial contexts (preowned listings, pricing tables). The single brand voltage is **Rosso Corsa** (`#da291c`) — the iconic Ferrari racing red — used scarcely on primary CTAs, the Cavallino mark, and Formula 1 race-position highlights. Type runs **FerrariSans** at modest weights (display 500, body 400) — never bombastic. Spacing follows an explicit 8px token ladder (`xxxs` 4px through `super` 128px); generous editorial pacing throughout. The brand's strongest visual signature is the **full-bleed cinematic hero photograph** that fills the viewport top with car photography, model details, or trackside livery — followed by a tighter editorial body layout below.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Ferrari"
+description: "黑白光影與克制的紅色，帶出速度感。"
 
 colors:
   primary: "#da291c"
@@ -269,299 +270,156 @@ components:
     typography: "{typography.body-sm}"
 ---
 
-## Overview
-
-Ferrari's marketing site reads as cinematic editorial — closer to a luxury-magazine spread than a typical car-OEM site. The base canvas is **near-black** (`{colors.canvas}` — #181818) holding pure white display type; white-canvas bands appear only inside specific editorial contexts (preowned listings, pricing tables, dealer surfaces). The single brand voltage is **Rosso Corsa** (`{colors.primary}` — #da291c), the iconic Ferrari racing red, used scarcely on primary CTAs, the Cavallino mark, and Formula 1 race-position highlights.
-
-Type runs **FerrariSans** as the single sans family at modest weights — display 500, body 400. CTA labels render in uppercase with generous tracking (1.1-1.4px). The brand never uses bold display copy.
-
-The brand's strongest visual signature is the **full-bleed cinematic hero photograph** — top-of-page imagery shows car photography, model details, or trackside livery without any chrome competing with it. Headlines float over the bottom of the photo or sit in a tight band beneath. Spacing follows the explicit 8px token ladder: `xxxs` 4 / `xxs` 8 / `xs` 16 / `sm` 24 / `md` 32 / `lg` 48 / `xl` 64 / `xxl` 96 / `super` 128.
-
-**Key Characteristics:**
-- Single accent: `{colors.primary}` (Rosso Corsa #da291c) for primary CTAs, the Cavallino, F1 race-position highlights. Used scarcely.
-- Near-black canvas (#181818) — never pure black. White-canvas bands only inside editorial contexts.
-- Single sans family: FerrariSans across every text role.
-- Display weight stays at 500 — never bold.
-- CTA labels render uppercase with 1.4px tracking.
-- Sharp `{rounded.none}` (0px) corners on every CTA, card, and band — luxury-automotive precision.
-- Full-bleed cinematic hero photography is the page chrome.
-- Explicit 8px spacing token ladder with named scale (xxxs through super).
-- Hairlines + photographic depth — no drop shadow tiers.
-
-## Colors
-
-### Brand & Accent
-- **Rosso Corsa** (`{colors.primary}` — #da291c): The iconic Ferrari racing red. Primary CTA fill, Cavallino mark, F1 driver-position highlights. Used scarcely.
-- **Rosso Corsa Active** (`{colors.primary-active}` — #b01e0a): Press state.
-- **Rosso Corsa Hover-darker** (`{colors.primary-hover}` — #9d2211): Documented for completeness; per the no-hover policy this is not used in preview HTML.
-- **Hypersail Yellow** (`{colors.accent-yellow-hypersail}` — #fff200) + **Yellow** (`{colors.accent-yellow}` — #f6e500): Sub-brand accents reserved for the Hypersail sailing program and the global focus-ring color. Not part of the main automotive palette.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — #181818): Near-black page floor — never pure black, slight warmth.
-- **Canvas Elevated** (`{colors.canvas-elevated}` — #303030): Cards and panels on dark canvas.
-- **Canvas Light** (`{colors.canvas-light}` — #ffffff): White editorial bands (preowned listings, pricing).
-- **Surface Card** (`{colors.surface-card}` — #303030): Same as canvas-elevated — driver cards, livery photo plates.
-- **Surface Soft Light** (`{colors.surface-soft-light}` — #f7f7f7): Light editorial alternating band.
-- **Surface Strong Light** (`{colors.surface-strong-light}` — #ebebeb): Light-canvas dividers, badges.
-
-### Hairlines
-- **Hairline** (`{colors.hairline}` — #303030): 1px divider on dark — same hex as `{colors.canvas-elevated}`.
-- **Hairline On Light** (`{colors.hairline-on-light}` — #d2d2d2): 1px divider on light bands.
-- **Hairline Soft** (`{colors.hairline-soft}` — #ebebeb): Lighter divider.
-
-### Text
-- **Ink** (`{colors.ink}` — #ffffff): Display, body emphasis on dark.
-- **Body** (`{colors.body}` — #969696): Default running-text on dark.
-- **Body Strong** (`{colors.body-strong}` — #ffffff): Same as ink.
-- **Body On Light** (`{colors.body-on-light}` — #181818): Default text on light bands.
-- **Muted** (`{colors.muted}` — #666666): Sub-titles, captions on dark.
-- **Muted Soft** (`{colors.muted-soft}` — #8f8f8f): Disabled link text.
-- **On Primary** (`{colors.on-primary}` — #ffffff): White text on Rosso Corsa.
-
-### Semantic
-- **Info** (`{colors.semantic-info}` — #4c98b9): Info badges, callout backgrounds.
-- **Success** (`{colors.semantic-success}` — #03904a): Confirmation.
-- **Warning** (`{colors.semantic-warning}` — #f13a2c): Validation warnings.
-
-## Typography
-
-### Font Family
-**FerrariSans** is the licensed single sans family across every text role. Fallback: `-apple-system, system-ui, sans-serif`. No display/body family split.
+# Ferrari 延伸設計規格
 
-### Hierarchy
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-mega}` | 80px | 500 | 1.05 | -1.6px | Homepage hero h1 |
-| `{typography.display-xl}` | 56px | 500 | 1.1 | -1.12px | Subsidiary heroes |
-| `{typography.display-lg}` | 36px | 500 | 1.2 | -0.36px | Section heads, livery band |
-| `{typography.display-md}` | 26px | 500 | 1.5 | 0.195px | Sub-section heads |
-| `{typography.title-md}` | 18px | 700 | 1.2 | 0 | Component titles |
-| `{typography.title-sm}` | 16px | 500 | 1.4 | 0.08px | List labels |
-| `{typography.body-md}` | 14px | 400 | 1.5 | 0 | Default body |
-| `{typography.body-sm}` | 13px | 400 | 1.5 | 0 | Footer body |
-| `{typography.caption}` | 12px | 400 | 1.4 | 0 | Photo captions |
-| `{typography.caption-uppercase}` | 11px | 600 | 1.4 | 1.1px | Section labels, badges |
-| `{typography.button}` | 14px | 700 | 1.0 | 1.4px (uppercase) | CTA pill labels |
-| `{typography.nav-link}` | 13px | 600 | 1.4 | 0.65px (uppercase) | Top-nav menu items |
-| `{typography.number-display}` | 80px | 700 | 1.0 | -1.6px | Race position highlights, spec values |
+## 來源與規格層次
 
-### Principles
-- **Display weight stays at 500.** Editorial confidence, not bombastic. The cinematic photography is doing the visual heavy-lifting — type doesn't need to compete.
-- **CTA labels are uppercase with 1.4px tracking.** Luxury-precision feel.
-- **Nav labels are uppercase with 0.65px tracking.** Consistent with CTA voice.
-- **Negative letter-spacing on display only.** -0.36px to -1.6px on display sizes; body stays at 0.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Note on Font Substitutes
-FerrariSans is licensed. Open-source substitute: **Inter** at weight 500 with letter-spacing -1%, or **Söhne** for closer humanist proportions.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`5e74de5d39ca9cec9ea8a2383af5e139efd6bde1c4b899466d44a71c8677c8ec`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.ferrari.com/en-US。
+- 目前預覽：`official-drafts/ferrari.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-## Layout
+## 整體視覺方向
 
-### Spacing System
-- **Base unit:** 4px.
-- **Tokens:** `{spacing.xxxs}` 4px · `{spacing.xxs}` 8px · `{spacing.xs}` 16px · `{spacing.sm}` 24px · `{spacing.md}` 32px · `{spacing.lg}` 48px · `{spacing.xl}` 64px · `{spacing.xxl}` 96px · `{spacing.super}` 128px.
-- **Section padding:** `{spacing.xxl}` (96px) for major bands; `{spacing.super}` (128px) reserved for hero band depth.
+黑白光影與克制的紅色，帶出速度感。
 
-### Grid & Container
-- Max content width: ~1280px on editorial bands. Hero photography goes full-bleed.
-- Editorial body: 12-column grid.
-- Feature card grids: 2-up at desktop for hero splits, 3-up for benefit grids, 4-up for preowned listing tiles.
-- Footer: 5-column at desktop.
+製作車款專題頁，讓深淺故事章節交錯，並提供精簡的車款摘要。紅色只用於明確重點，透過有力的圖片裁切與章節標題建立閱讀節奏。
 
-### Whitespace Philosophy
-Generous editorial pacing. Cinematic hero photography occupies generous viewport real-estate; body sections sit in tighter editorial layouts beneath. The canvas-light editorial bands (preowned, pricing) carry tighter density than the dark cinema bands.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Elevation & Depth
+## 色彩、字型與繁體中文排版
 
-The system uses **photographic depth + brightness-step** elevation. No drop shadows except a single soft-small `{shadow.small}` documented in extracted tokens.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-| Level | Treatment | Use |
-|---|---|---|
-| Flat (canvas) | `{colors.canvas}` (#181818) | Body bands, footer |
-| Card | `{colors.canvas-elevated}` (#303030) | Driver cards, livery plates |
-| Light band | `{colors.canvas-light}` (#ffffff) | Preowned listings, pricing |
-| Hairline border | 1px `{colors.hairline}` or `{colors.hairline-on-light}` | Card outlines, dividers |
-| Soft drop | `0 4px 8px rgba(0,0,0,0.1)` | Hovered cards (single shadow tier) |
-| Photographic | Full-bleed cinema imagery | Hero band, livery photographs |
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Decorative Depth
-- **Full-bleed cinema photography** is the brand's primary depth treatment.
-- **Brand red gradient** (`linear-gradient(180deg, #a00c01, #da291c 64%)`): The Rosso Corsa gradient used inside accent bands and CTA hover states.
-- **Dark grey gradient** (`linear-gradient(180deg, #3c3c3c, #030303 64%)`): Atmospheric darken used at section transitions.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-## Shapes
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 80px | 500 | 1.05 | -1.6px |
+| 56px | 500 | 1.1 | -1.12px |
+| 36px | 500 | 1.2 | -0.36px |
+| 26px | 500 | 1.5 | 0.195px |
+| 18px | 700 | 1.2 | 0 |
+| 16px | 500 | 1.4 | 0.08px |
+| 14px | 400 | 1.5 | 0 |
+| 13px | 400 | 1.5 | 0 |
+| 12px | 400 | 1.4 | 0 |
+| 11px | 600 | 1.4 | 1.1px |
+| 14px | 700 | 1.0 | 1.4px (uppercase) |
+| 13px | 600 | 1.4 | 0.65px (uppercase) |
+| 80px | 700 | 1.0 | -1.6px |
 
-### Border Radius Scale
+## 版面與元件結構
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Every CTA, card, band — dominant radius |
-| `{rounded.xs}` | 2px | Tight badges (rare) |
-| `{rounded.sm}` | 4px | Form inputs |
-| `{rounded.md}` | 6px | Compact cards (rare) |
-| `{rounded.lg}` | 8px | Mobile-only collapse cards |
-| `{rounded.xl}` | 12px | Modal/dialog corners (rare) |
-| `{rounded.full}` | 9999px | Avatar plates, badge pills |
+此參考可先實作：車款故事面板，包含圖片說明與可使用鍵盤展開的規格資訊。
 
-The radius vocabulary is **sharp by default**. Sharp 0px corners are the brand button shape — never rounded pills. Pill geometry is reserved for badge labels only.
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-## Components
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-### Top Navigation
+## 操作與狀態
 
-**`top-nav-on-dark`** — Default top nav on dark hero pages. Background `{colors.canvas}`, text `{colors.ink}`, height 64px. Layout: Cavallino mark left, primary horizontal menu (Models / F1 / Lifestyle / Owners / Preowned), language picker + utilities right. Menu items render uppercase with 0.65px tracking.
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-**`top-nav-on-light`** — White-canvas variant for editorial light bands.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Buttons
+## 圖片、動態與無障礙
 
-**`button-primary`** — The signature Rosso Corsa CTA. Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.button}` (14px / 700 / 1.4px tracking, uppercase), padding 14px × 32px, height 48px, **rounded `{rounded.none}` (0px — sharp corners)**.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-**`button-primary-active`** — Press state. Background `{colors.primary-active}`.
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-**`button-outline-on-dark`** — Transparent with 1px white border. Background transparent, text `{colors.ink}`, 1px white border, same sharp 0px corners.
+## 來源中的技術值補充
 
-**`button-outline-on-light`** — Transparent with 1px ink border on light bands.
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-**`button-tertiary-text`** — Inline text link, uppercase tracking.
+- `#181818`
+- `#da291c`
+- `0 4px 8px rgba(0,0,0,0.1)`
+- `linear-gradient(180deg, #a00c01, #da291c 64%)`
+- `linear-gradient(180deg, #3c3c3c, #030303 64%)`
 
-### Hero Bands
+## 日期限定首頁觀察
 
-**`hero-band-cinema`** — Full-bleed cinematic photograph. Background `{colors.canvas}` underneath, but the photo fills the viewport. Display headline floats over the bottom of the photo or sits in a tight band beneath, in `{typography.display-mega}` (80px / 500 / -1.6px). One primary CTA + one outline CTA. Zero padding — the photo fills edge-to-edge.
+來源為 https://www.ferrari.com/en-US 。沿用 oct10 檔名前綴；最新來源與實際畫面觀察時間為2026-10-11T23:08Z之後，臺北時間2026-10-12。新聞第一則已更新為「Charles 在濱海灣登上頒獎台」，舊 qualifying 報導不再留在目前稿件。新聞第二則 Barcelona 為本預覽的選定靜態狀態。
 
-**`hero-band-light`** — White-canvas variant for editorial bands. Background `{colors.canvas-light}`, text `{colors.body-on-light}`, padding 96px.
+官方首頁以滿版影片、透明黑色導航與白色新聞區形成對比。Scuderia Ferrari HP 首屏佔完整視窗；三封面指示器與四則新聞輪播皆有原始資料。六張照片卡在1280px形成兩欄，在390px依序堆疊。Sketch Body 沒有 Magazine 小標。灰色 Newsletter 區接黑色五類頁尾，窄版呈閉合列；完整社群、公司法律文字、隱私連結、國別與 Shell 標記均保留。
 
-### Cards
+真正的兩次 Google Stitch 桌面修改與未改動輸出已保存。首次生成含與來源不同的字型、影像、EN-US工具、01/04索引與 Sketch Body 小標，因此再以完整公開 DOM、220個開放 shadow roots、64份 adopted CSS 與實際公開素材逐項校正。保留正常CSS瀏覽器200回應的原始 Ferrari 字型；不載入追蹤與服務腳本。
 
-**`feature-card-photo`** — Image-first card. Background `{colors.canvas}`, text `{colors.ink}`, rounded `{rounded.none}`. Image fills the top edge-to-edge; title + body sit beneath in tight typography.
+目前 SHA 的稿件重新載入後，桌面1280×720與窄版390×844各有7張真正視窗截圖，連續覆蓋4337與5258px。每張核對實際檔案尺寸、網址、捲動位置、頁高與擷取時稿件雜湊。兩版19張DOM圖片全部載入，沒有橫向溢出。首屏、六卡與Newsletter共8個主要標題的文字及邊界差值皆為0。補充同一 Barcelona 新聞狀態的兩版實拍，以及官方窄版動畫完成後再走一次的7張完整實拍；所有比較圖已實際開啟檢視。
 
-**`feature-card-light`** — White-canvas variant. Background `{colors.canvas-light}`, text `{colors.body-on-light}`, rounded `{rounded.none}`, padding 32px.
+完整官方第一趟窄版截圖仍保留尚未出現的動畫卡與輪播過渡，第二趟真實截圖可見全部照片。預覽採原始公開影片海報與動畫終態，不重現HLS影格、入場/輪播時序、Play、Menu、Search、Subscribe、頁尾展開或外部服務。桌面額外新聞實拍的官方導航仍顯示，本地向下捲動狀態已收起，兩者差異亦保留。7個未使用的替代/CJK字型網址405仍記錄，不能宣稱所有取得嘗試成功。
 
-**`driver-card`** — F1 driver portrait card. Background `{colors.canvas-elevated}`, text `{colors.ink}`, rounded `{rounded.none}`, padding 24px. Layout: driver portrait + name + race number + team badge.
+## 已知差異與驗證範圍
 
-### Editorial Surfaces
-
-**`livery-band`** — A full-width Rosso Corsa accent band. Background `{colors.primary}`, text `{colors.ink}`, type `{typography.display-lg}`, 96px padding. Used as a standout livery callout between dark editorial bands.
-
-**`preowned-listing-card`** — Used in the preowned Ferrari listing grid. Background `{colors.canvas-light}`, text `{colors.body-on-light}`, rounded `{rounded.none}`, padding 24px. Layout: car photo top + model name + year/mileage + price.
-
-### Spec & Race Surfaces
-
-**`spec-cell`** — Technical spec callout. Transparent background, value in `{typography.number-display}` (80px / 700 / -1.6px white), label below in `{typography.caption-uppercase}`.
-
-**`race-position-cell`** — F1 driver finishing position. Same number-display geometry but text in `{colors.primary}` Rosso Corsa for the brand's racing identity.
-
-**`race-calendar-row`** — Hairline-divided row in the F1 race calendar. Layout: date column left, race name + circuit middle, results column right.
-
-### Forms & Tags
-
-**`text-input-on-dark`** — Background `{colors.canvas}`, text `{colors.ink}`, rounded `{rounded.sm}` (4px), padding 14px × 16px, height 48px, 1px `{colors.hairline}` border.
-
-**`text-input-on-light`** — White-canvas variant.
-
-**`badge-pill`** — Small uppercase pill. Background `{colors.canvas-elevated}`, text `{colors.ink}`, type `{typography.caption-uppercase}` (11px / 600 / 1.1px tracking, uppercase), rounded `{rounded.full}` (9999px), padding 4px × 12px. The only place pill geometry is used.
-
-### Newsletter / CTA / Footer
-
-**`newsletter-input-band`** — Newsletter signup band. Background `{colors.canvas-elevated}`, padding 32px, rounded `{rounded.sm}`. Holds an inline email input + primary CTA.
-
-**`cta-band-dark`** — Pre-footer band. Background `{colors.canvas}`, centered display headline in `{typography.display-lg}`, single Rosso Corsa CTA. 96px padding.
-
-**`footer-dark`** — Closing dark footer. Background `{colors.canvas}`, text `{colors.body}`. 5-column link list. 64×48px padding.
-
-**`footer-link`** — Background transparent, text `{colors.body}`, type `{typography.body-sm}`.
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` (Rosso Corsa) for primary CTAs, the Cavallino mark, and F1 race-position highlights.
-- Set every CTA at `{rounded.none}` (0px sharp corners) — the brand's signature precision.
-- Render CTA labels in uppercase with 1.4px tracking via `{typography.button}`.
-- Pair every hero with a full-bleed cinematic photograph — the photograph IS the depth.
-- Use the explicit 8px spacing ladder (`xxxs` through `super`) rather than ad-hoc px values.
-- Keep display weight at 500 — never bold.
-
-### Don't
-- Don't introduce a saturated brand color other than Rosso Corsa.
-- Don't use rounded or pill CTAs — sharp 0px corners are the brand button.
-- Don't bold display copy. The cinematic photography does the visual heavy-lifting.
-- Don't use Hypersail yellow outside the Hypersail sailing program context.
-- Don't use pure black canvas. The brand canvas is `{colors.canvas}` (#181818) — slightly warm.
-- Don't add drop shadow tiers. Photography + brightness-step elevation carry the depth.
-- Don't extract a CTA color from a third-party widget (cookie consent, OneTrust). The brand's CTA color is what appears on actual product CTAs, not on injected modals.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Mobile | < 640px | Hero photograph crops vertically; hero h1 80→32px; feature card grid 1-up; nav hamburger; preowned listing 1-up. |
-| Tablet | 640–1024px | Hero h1 56px; feature card grid 2-up; preowned listing 2-up. |
-| Desktop | 1024–1280px | Full hero h1 80px; feature card grid 3-up; preowned listing 4-up. |
-| Wide | > 1280px | Editorial body content caps at 1280px; hero photography continues full-bleed. |
-
-### Touch Targets
-- Primary CTA at 48px height — at WCAG AAA (44 × 44).
-- Nav items render uppercase with 0.65px tracking, padded for an effective 48px tap area.
-
-### Collapsing Strategy
-- Top nav switches to hamburger below 768px.
-- Hero photograph reframes per breakpoint via art direction — desktop carries wide cinematic; mobile crops tighter or shifts to vertical.
-- Feature card grid: 4-up → 3-up → 2-up → 1-up.
-- F1 driver cards: 2-up at desktop, 1-up at mobile.
-
-## Known Gaps
-
-- FerrariSans is a licensed typeface; Inter at weight 500 is the documented substitute.
-- Animation timings (hero parallax, livery band entrance, race position counter) out of scope.
-- In-product surfaces (preowned configurator, F1 telemetry overlays) only partially captured via marketing surfaces.
-- Form validation states beyond focus not visible on captured surfaces.
-- Hypersail yellow tokens are extracted but only appear in the Hypersail sailing program context — documented as scoped accents.
+- 第一張主視覺使用原始公開靜態海報，與官網 HLS 影片的畫格可見不同；播放及封面控制尚未實作。其他封面保留在來源範本中，但其啟用後畫面尚未驗收。
+- 官網新聞自動輪播；首次完整桌面拍攝顯示第 3 則，首次窄版拍攝跨越新聞及顯示動畫。另存的兩種寬度 Barcelona 來源截圖及第二次完整窄版拍攝，顯示預覽選用的第 2 則。自動輪播、導覽按鈕與轉場時間仍有差異。
+- 官網進場及幕簾動畫在預覽中固定為最終靜態狀態。第一次窄版官網拍攝包含尚未顯示的卡片，原始影像保留；第二次另存的 7 張 390×844 來源截圖顯示全部 6 張卡片。未宣稱畫格時間或動畫一致。
+- 桌面向下捲動時以簡單門檻隱藏頁首；另選的 Barcelona 官網桌面畫面仍有頁首，本機向下畫面則隱藏。完整上下捲動導覽、滑鼠移入選單、搜尋、訂閱、頁尾與社群摺疊、鍵盤焦點、隱私及無障礙服務尚未實作或驗收。
+- 7 個未使用的替代、中字重及中日韓字型網址回傳 405。所需 Body-Font 取自正常瀏覽器 CSS 的 200 回應，兩份主要 FerrariSans 一般與中字重字型已保存；兩種寬度的已觀察圖片皆可載入。其他語言與替代字型尚未驗收。
+- 兩份新的 Stitch 桌面編輯稿分別保留，先前行動版與原始設計資料仍可溯源。390px 為使用桌面瀏覽器識別的 CSS 窄版，並非真實手機；原始比對未涵蓋其他寬度、路由、帳戶、車款設定器、購買服務及正式部署。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Ferrari-inspired interface. Implement this working page: An automotive editorial page with alternating dark and light story chapters and a concise model summary. Reserve red for deliberate emphasis; use strong image crops and uppercase headings to establish pace.
+先閱讀隨附的 DESIGN.md，以 Ferrari 的設計語言作為介面參考。請完成以下可操作頁面：製作車款專題頁，讓深淺故事章節交錯，並提供精簡的車款摘要。紅色只用於明確重點，透過有力的圖片裁切與章節標題建立閱讀節奏。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Ferrari-inspired interface. Build a model story panel with a visual caption and an accessible specification disclosure. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Ferrari 的設計語言作為介面參考。請製作車款故事面板，包含圖片說明與可使用鍵盤展開的規格資訊。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Ferrari-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An automotive editorial page with alternating dark and light story chapters and a concise model summary. Reserve red for deliberate emphasis; use strong image crops and uppercase headings to establish pace.
+先閱讀隨附的 DESIGN.md，以 Ferrari 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作車款專題頁，讓深淺故事章節交錯，並提供精簡的車款摘要。紅色只用於明確重點，透過有力的圖片裁切與章節標題建立閱讀節奏。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

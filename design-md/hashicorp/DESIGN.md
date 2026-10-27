@@ -1,7 +1,8 @@
 ---
-version: alpha
-name: HashiCorp-design-analysis
-description: "An enterprise-infrastructure marketing canvas built around a near-black ground (#000000) and a system of per-product accent colors — Terraform purple, Vault yellow, Consul pink, Waypoint cyan, Vagrant blue — that act as identity tokens rather than decorative palette. Display type is hashicorpSans set in 600/700 with tight 1.17–1.21 line-heights; body type runs the same family at 500 weight with relaxed 1.50–1.71 line-heights. Cards live as charcoal surfaces with 1px translucent gray borders; product showcase cards lift into per-product chromatic gradients. The system reads as confident, technical, and intentionally multi-product — every section quietly signals which HashiCorp tool it represents."
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "HashiCorp"
+description: "規律黑白網格，承載多產品技術資訊。"
 
 colors:
   primary: "#000000"
@@ -263,350 +264,144 @@ components:
     padding: 64px 32px
 ---
 
-## Overview
-
-HashiCorp's marketing canvas is a near-black ground that serves a multi-product portfolio without ever feeling generic. The dominant surface is `{colors.canvas}` (pure black) layered with `{colors.surface-1}` charcoal cards and 1px translucent gray hairlines. The chrome is monochrome — white pill-rounded buttons (`{components.button-primary}`), white type, gray secondary type — but the system is held together by a **palette of per-product accent colors** that signal which HashiCorp tool a given section belongs to: Terraform purple, Vault yellow, Consul red, Waypoint cyan, Vagrant blue, Nomad green, Boundary coral.
-
-Display type is **hashicorpSans** at weights 600/700 with tight line-heights (1.17–1.21); body type is the same family at 500 weight with deliberately relaxed line-heights (1.50–1.71) — the contrast feels editorial, not enterprise-templated. CTAs use small `{rounded.md}` 8px corners rather than pills, which keeps the system reading as developer-facing rather than consumer-y.
-
-The signature device is the **product-card** family — each HashiCorp product gets its own colored card variant on the home and infrastructure pages, lifting Terraform into a violet ground, Vault into yellow, Waypoint into cyan. These aren't decorative gradients — they're identity surfaces. A reader scrolling the page can tell which product a section is about from the corner of their eye.
-
-**Key Characteristics:**
-- Black-canvas marketing system: `{colors.canvas}` is the surface for hero, body, pricing, comparison tables, and footer alike.
-- **Per-product color identity**: Terraform `{colors.product-terraform}`, Vault `{colors.product-vault}`, Waypoint `{colors.product-waypoint}`, Vagrant `{colors.product-vagrant}`, Consul `{colors.product-consul}`, Nomad `{colors.product-nomad}`, Boundary `{colors.product-boundary}` — each with its own button + card variant.
-- Display headlines run hashicorpSans 600/700 with line-height 1.17–1.21 (tight); body runs the same family at 500 with 1.50–1.71 (relaxed) — the proportional gap is the brand's voice.
-- CTA shape is `{rounded.md}` 8px — not a pill — keeping the system reading as developer-tool rather than consumer-app.
-- Charcoal surface lift (canvas → surface-1 → surface-2) instead of shadow-driven elevation.
-- 1px translucent gray hairlines (`rgba(178,182,189,0.1)`) define cards and dividers — the borders are felt more than seen.
-- Eyebrow typography (12–13px, 600 weight, 0.6px positive tracking, uppercase) marks every section as a category label.
+# HashiCorp 延伸設計規格
 
-## Colors
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-> Source pages: hashicorp.com/en (home), /en/infrastructure-cloud, /en/products/terraform, /en/pricing, /en/resources?contentType=PDF.
+## 來源與規格層次
 
-### Brand & Accent
-- **Black** ({colors.primary}): The system primary surface. Canvas, footer, comparison tables, hero — all black.
-- **White** ({colors.on-primary}): Inverse text on black; canvas of `button-primary`.
-- **Accent Blue** ({colors.accent-blue}): Hyperlinks across the marketing surface.
-- **Visited Purple** ({colors.semantic-visited}): Visited-link state.
-
-### Surface
-- **Canvas** ({colors.canvas}): Default page background.
-- **Surface 1** ({colors.surface-1}): Charcoal one step above canvas — feature cards, pricing cards, resource tiles.
-- **Surface 2** ({colors.surface-2}): Two steps above — featured pricing card, secondary buttons, hovered product chrome.
-- **Surface 3** ({colors.surface-3}): Three steps above — small chips, badges, sub-nav backgrounds.
-- **Hairline** ({colors.hairline}): 1px borders on cards and dividers.
-- **Hairline Soft** ({colors.hairline-soft}): Subtler dividers — comparison-table rows.
-- **Inverse Canvas** ({colors.inverse-canvas}): Pure white — used as the surface of `button-primary` only.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Text
-- **Ink** ({colors.ink}): All headline and emphasized body type — pure white.
-- **Ink Muted** ({colors.ink-muted}): Secondary type at #b2b6bd — meta info, footer columns.
-- **Ink Subtle** ({colors.ink-subtle}): Tertiary type at #656a76 — form helper text, timestamps, footnotes.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`fee458a74c9f4d1460b88b98113f8cc7702e95262b2397b0d0bc796a14918f22`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.hashicorp.com/en。
+- 目前預覽：`official-drafts/hashicorp.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-### Per-Product Identity (signature)
-HashiCorp's marketing isn't held together by a single accent color — it's held together by a system of product-specific accents, each used to mark which tool a section represents.
+## 整體視覺方向
 
-- **Terraform Purple** ({colors.product-terraform}): Terraform sections, terraform CTAs, the violet 3D cube on the home hero.
-- **Terraform Bright** ({colors.product-terraform-bright}): Saturated highlight — link emphasis on Terraform pages.
-- **Vault Yellow** ({colors.product-vault}): Vault sections and CTAs.
-- **Consul Red** ({colors.product-consul}): Consul sections.
-- **Waypoint Cyan** ({colors.product-waypoint}): Waypoint sections, deep variant `{colors.product-waypoint-deep}` for hover/active.
-- **Vagrant Blue** ({colors.product-vagrant}): Vagrant sections.
-- **Nomad Green** ({colors.product-nomad}): Nomad sections.
-- **Boundary Coral** ({colors.product-boundary}): Boundary sections.
+規律黑白網格，承載多產品技術資訊。
 
-### Semantic
-- **Success** ({colors.semantic-success}): Positive states (also reused as Nomad green).
-- **Warning** ({colors.semantic-warning}): Warning states (also Vault yellow).
-- **Error** ({colors.semantic-error}): Error states (also Consul red).
-- **Amber 100** ({colors.amber-100}): Soft warm highlight — extracted but used sparingly.
-- **Amber 200** ({colors.amber-200}): Saturated amber for caution badges.
-- **Blue 7** ({colors.blue-7}): Deep navy used in unified-core gradients.
+製作基礎架構產品目錄，對齊產品系列、程式碼範例與工作流程圖。整體保持黑白，各產品的強調色只出現在已標示的對應範圍內。
 
-## Typography
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-### Font Family
+## 色彩、字型與繁體中文排版
 
-- **hashicorpSans** — HashiCorp's proprietary marketing typeface. Geometric, clean, slightly humanist. Fallback stack `__hashicorpSans_Fallback_96f0ca` (system font), then `-apple-system, BlinkMacSystemFont, Segoe UI, helvetica, arial`.
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-The same family carries display, body, button, and caption — no separate display + body pairing. Hierarchy is carried by weight (500 body / 600 emphasis / 700 display) and by a deliberate line-height contrast (tight on display, relaxed on body).
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-### Hierarchy
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 80px | 700 | 1.17 | -2.5px | Largest hero headline |
-| `{typography.display-lg}` | 56px | 700 | 1.18 | -1.6px | Section opener headlines |
-| `{typography.display-md}` | 40px | 600 | 1.19 | -1.0px | Sub-section headlines |
-| `{typography.headline}` | 28px | 600 | 1.21 | -0.6px | Pricing tier titles, CTA banner heading |
-| `{typography.card-title}` | 22px | 600 | 1.18 | -0.4px | Feature card title |
-| `{typography.subhead}` | 20px | 600 | 1.35 | -0.2px | Long-form intro paragraphs |
-| `{typography.body-lg}` | 18px | 500 | 1.69 | 0 | Hero subhead, lead body |
-| `{typography.body}` | 16px | 500 | 1.50 | 0 | Default body |
-| `{typography.body-sm}` | 14px | 500 | 1.71 | 0 | Card body, footer columns |
-| `{typography.caption}` | 13px | 500 | 1.38 | 0.2px | Meta, comparison cell labels |
-| `{typography.button}` | 14px | 600 | 1.29 | 0 | Pill / square CTA buttons |
-| `{typography.eyebrow}` | 12px | 600 | 1.23 | 0.6px | Uppercase section eyebrows |
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 80px | 700 | 1.17 | -2.5px |
+| 56px | 700 | 1.18 | -1.6px |
+| 40px | 600 | 1.19 | -1.0px |
+| 28px | 600 | 1.21 | -0.6px |
+| 22px | 600 | 1.18 | -0.4px |
+| 20px | 600 | 1.35 | -0.2px |
+| 18px | 500 | 1.69 | 0 |
+| 16px | 500 | 1.50 | 0 |
+| 14px | 500 | 1.71 | 0 |
+| 13px | 500 | 1.38 | 0.2px |
+| 14px | 600 | 1.29 | 0 |
+| 12px | 600 | 1.23 | 0.6px |
 
-### Principles
+## 版面與元件結構
 
-- **Tight on display, relaxed on body.** Display sits at line-height 1.17–1.21; body lifts to 1.50–1.71. The size + line-height contrast carries hierarchy.
-- **Weight hierarchy is small.** 500 body / 600 emphasis / 700 display. No light / black extremes — the brand reads as engineered.
-- **Eyebrow positive-tracked uppercase 12px is the section header.** Every meaningful section has one above the headline.
-- **No mono.** Despite being a developer-tools brand, the marketing surface uses no monospace face — code voice is reserved for in-product surfaces.
+此參考可先實作：基礎架構資源面板，包含狀態標示與可展開的設定內容。
 
-### Note on Font Substitutes
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
 
-If implementing without hashicorpSans, suitable open-source substitutes include **Inter** (closest geometric character set), **Geist Sans**, or **IBM Plex Sans**. Inter at weights 500 / 600 / 700 closely approximates hashicorpSans's proportions; expect to manually adjust line-heights down by ~0.02 to match.
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
 
-## Layout
+## 操作與狀態
 
-### Spacing System
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
 
-- **Base unit**: 8px (the primary increments are 4 / 8 / 12 / 16 / 24 / 32 / 48).
-- **Tokens (front matter)**: `{spacing.hair}` 1px · `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 24px · `{spacing.xl}` 32px · `{spacing.xxl}` 48px · `{spacing.section}` 96px.
-- Card interior padding: `{spacing.lg}` 24px on product cards; `{spacing.xl}` 32px on pricing cards; `{spacing.xxl}` 48px on CTA banners.
-- Button padding: 10px vertical · 18px horizontal on `{components.button-primary}`.
-- Universal rhythm constant: `{spacing.section}` (96px) vertical gap between major sections.
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
 
-### Grid & Container
+## 圖片、動態與無障礙
 
-- Max content width sits around 1280px with side gutters scaling from `{spacing.xxl}` on desktop down to `{spacing.lg}` on mobile.
-- Product card grids are 3-up on desktop, 2-up at tablet, 1-up on mobile.
-- Pricing tier grid is 3-up across desktop; comparison table beneath uses fixed-width left column.
-- Resource directory (PDF library) uses 4-up dense thumbnail grid.
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
 
-### Whitespace Philosophy
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
 
-The dark canvas IS the whitespace. Sections separate by surface lift (canvas → surface-1) rather than by gaps in white. Within a section, generous `{spacing.xl}` 32px gaps separate cards; `{spacing.lg}` 24px separates rows.
+## 來源中的技術值補充
 
-## Elevation & Depth
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
 
-| Level | Treatment | Use |
-|---|---|---|
-| 0 (flat) | No shadow, no border | Canvas-mounted display type, hero, footer |
-| 1 (charcoal lift) | `{colors.surface-1}` background + 1px `rgba(178,182,189,0.1)` border | Default cards, resource tiles, pricing cards |
-| 2 (surface-2 lift) | `{colors.surface-2}` background + 1px `{colors.hairline}` border | Featured pricing card, hovered cards, sub-nav |
-| 3 (product chromatic) | Per-product accent color background — Terraform purple, Vault yellow, Waypoint cyan | Product showcase cards |
+- `rgba(178,182,189,0.1)`
 
-The product chromatic level isn't a "modal lift" — it's an identity device. A Terraform card sits at the same z-plane as a feature-card; the difference is meaning, not depth.
+## 日期限定首頁觀察
 
-### Decorative Depth
+現行首頁使用紫色光線幾何主視覺、Do cloud right 大標題與深炭黑長頁。平台、Infragraph、解決方案、生命週期管理、合作夥伴、認證及資源區塊以寬鬆留白與交錯圖文建立節奏；桌面跑馬燈在390px改為標誌矩陣，導覽改為白色全螢幕。最新 Agentic runtime security 與 Cyber Risk2026 文案均依現場觀察保留。
 
-- **3D product visuals** — isometric purple cubes (Terraform), translucent yellow safes (Vault), and similar product-tinted illustrations sit in the right column of hero sections.
-- **1px translucent gray hairlines** are the dominant edge — borders are visible without competing.
-- **No drop shadows on dark.** Cards lift via surface change, never shadow.
+原始 DESIGN.md、先前原生 Stitch 匯出與本次完整資料均保留。此為有明確範圍的視覺研究；未驗證項目不得宣稱官方一致。
 
-## Shapes
+## 已知差異與驗證範圍
 
-### Border Radius Scale
+- 目前公開 SVG 圖示集回傳 HTTP 429，造成原生箭頭、HCP 徽章、生命週期及產品圖示、語言及社群圖示、選單及關閉圖示缺漏，屬於可見差異。另有 4 個未使用的巢狀選單裝飾圖示也回傳 429。
+- 桌面客戶商標跑馬燈的時間階段不同，原生動畫與轉場的精確時間尚未驗證。
+- 僅比對預設 Accelerate、最新消息分頁與行動版主選單。其他分頁、桌面下拉選單、行動版巢狀面板、語言、Cookie 及表單尚未實作或完整檢查。
+- 註冊區為唯讀視覺研究；帳戶、訂閱、業務洽詢及需登入的服務仍導向官方目的地。
+- 僅檢查使用桌面瀏覽器識別的 1280×720 與 390×844 響應式畫面；其他寬度、實體手機與最終公開部署不在原始比對範圍內。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.xs}` | 4px | Small chips / badges |
-| `{rounded.sm}` | 6px | Inline tag |
-| `{rounded.md}` | 8px | All CTA buttons, form inputs, list items |
-| `{rounded.lg}` | 12px | Feature cards, product cards, pricing cards |
-| `{rounded.xl}` | 16px | Large illustrative tiles |
-| `{rounded.xxl}` | 24px | CTA banner panels |
-| `{rounded.pill}` | 9999px | Eyebrow-style product pills (small chips) |
-| `{rounded.full}` | 9999px | Avatar circles (rare on marketing) |
-
-### Photography & Illustration Geometry
-
-- Product 3D illustrations use full-bleed within their container — no rounded inner mask.
-- Logo chips in the customer marquee sit on `{rounded.sm}` 6px tiles with 1px hairline.
-- Resource thumbnails use `{rounded.lg}` 12px corners.
-
-## Components
-
-### Buttons
-
-**`button-primary`** — White rounded-rect CTA. Used as primary CTA on all pages.
-- Background `{colors.inverse-canvas}`, text `{colors.inverse-ink}`, type `{typography.button}`, padding 10px 18px, rounded `{rounded.md}`.
-- Pressed state lives in `button-primary-pressed`.
-
-**`button-secondary`** — Charcoal rounded-rect. Secondary CTA, "Read docs" / "Talk to sales".
-- Background `{colors.surface-2}`, text `{colors.ink}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-**`button-tertiary`** — Bare ghost button on canvas with text-only treatment.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-**`button-product-terraform`** — Terraform-tinted CTA on Terraform pages.
-- Background `{colors.product-terraform}`, text `{colors.ink}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-**`button-product-vault`** — Vault-yellow CTA.
-- Background `{colors.product-vault}`, text `{colors.inverse-ink}` (yellow needs dark text), type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-**`button-product-waypoint`** — Waypoint-cyan CTA.
-- Background `{colors.product-waypoint}`, text `{colors.inverse-ink}`, type `{typography.button}`, rounded `{rounded.md}`, padding 10px 18px.
-
-(Vagrant blue, Nomad green, Consul red, Boundary coral follow the same pattern with their respective `{colors.product-*}` token.)
-
-### Cards & Containers
-
-**`product-card`** — Default product showcase card — surface-1 charcoal.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 24px.
-
-**`product-card-terraform`** — Product card with Terraform purple ground (used as identity surface, not modal elevation).
-- Background `{colors.product-terraform}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 24px.
-
-**`product-card-vault`** — Vault-yellow ground.
-- Background `{colors.product-vault}`, text `{colors.inverse-ink}`, otherwise identical structure.
-
-**`product-card-waypoint`** — Waypoint-cyan ground.
-- Background `{colors.product-waypoint}`, text `{colors.inverse-ink}`, otherwise identical structure.
-
-(Other product variants follow the same shape with their respective product token.)
-
-**`feature-card`** — Generic feature highlight on surface-1.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 24px.
-
-**`pricing-card`** — Pricing tier on `/en/pricing`.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.lg}`, padding 32px.
-
-**`pricing-card-featured`** — Recommended tier (visually emphasized via surface lift).
-- Background `{colors.surface-2}`, otherwise identical structure.
-
-**`resource-card`** — PDF / whitepaper / guide tile in the resources directory.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body-sm}`, rounded `{rounded.lg}`, padding 16px.
-
-### Inputs & Forms
-
-**`text-input`** + **`text-input-focused`** — Form fields on pricing seat-count and contact forms.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.body}`, rounded `{rounded.md}`, padding 10px 14px.
-- Focused state retains the same surface; the focus ring is a 1px `{colors.accent-blue}` outline.
-
-### Pills & Chips
-
-**`product-pill`** — Small product-name chip used above hero headlines and on resource cards to label which product a piece of content belongs to.
-- Background `{colors.surface-1}`, text `{colors.ink-muted}`, type `{typography.caption}`, rounded `{rounded.pill}`, padding 4px 10px.
-
-### Comparison Table
-
-**`comparison-row`** — Single row inside the pricing comparison table.
-- Background `{colors.canvas}`, text `{colors.ink-muted}`, type `{typography.body-sm}`. Row separator is `{colors.hairline-soft}`.
-
-### CTA Banner
-
-**`cta-banner`** — Large rounded panel used at the bottom of long-form pages with a closing CTA.
-- Background `{colors.surface-1}`, text `{colors.ink}`, type `{typography.subhead}`, rounded `{rounded.xxl}`, padding 48px.
-
-### Navigation
-
-**`top-nav`** — Sticky black bar with HashiCorp logomark left, primary nav links centered, and a `button-primary` ("Sign up") + `button-secondary` ("Sign in") pair right.
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-sm}`, height 64px.
-- Mobile: collapses primary links into a hamburger; the primary CTA remains visible.
-
-### Footer
-
-**`footer`** — Dense link grid on `{colors.canvas}` with the wordmark at left and 5–6 columns of caption-sized links.
-- Background `{colors.canvas}`, text `{colors.ink-muted}`, type `{typography.caption}`, padding 64px 32px.
-
-## Do's and Don'ts
-
-### Do
-
-- Reserve `{colors.canvas}` (black) and `{colors.surface-1}` (charcoal) as the system's two anchor surfaces. Every band of the page is one or the other.
-- When introducing a section about a specific HashiCorp product, use that product's `{colors.product-*}` token consistently — for the section pill, the CTA button, and (where appropriate) the showcase card background.
-- Use `{rounded.md}` 8px on CTA buttons; HashiCorp's brand reads as engineered, not consumer.
-- Pair tight display line-heights (1.17–1.21) with relaxed body line-heights (1.50–1.71). The contrast IS the brand voice.
-- Use the eyebrow typography (`{typography.eyebrow}`, uppercase, 0.6px tracking) above every meaningful section.
-- Use surface lift (canvas → surface-1 → surface-2) to express hierarchy on dark.
-- Reserve product-chromatic cards for product identity; keep generic feature cards on `{colors.surface-1}`.
-
-### Don't
-
-- Don't ship a light-mode marketing page. HashiCorp's marketing brand IS dark.
-- Don't introduce mid-tone gray text outside the documented `ink` / `ink-muted` / `ink-subtle` set.
-- Don't square off CTA corners — use `{rounded.md}` 8px, not 0px.
-- Don't use a product accent color for a CTA on a page that isn't about that product. Terraform purple on the Vault page is a brand violation.
-- Don't combine multiple product accents in the same viewport — the system says "this section is about THIS tool", and mixing accents breaks that signal.
-- Don't add drop shadows on dark; surface lift carries elevation.
-- Don't replace `hashicorpSans` with a display-only sans for headlines and a different family for body. The brand is held together by one family across the full hierarchy.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Desktop-XL | 1440px | Default desktop layout |
-| Desktop | 1280px | Pricing 3-up grid maintained |
-| Tablet | 1024px | Product card grid 3-up → 2-up |
-| Mobile-Lg | 768px | Pricing comparison becomes per-tier accordion; nav becomes hamburger |
-| Mobile | 480px | Single-column everything; display-xl scales 80px → ~36px |
-
-### Touch Targets
-
-- CTA buttons (`button-primary`, `button-secondary`) maintain ≥40px tap height across viewports.
-- Product pills are 24px tall on desktop and grow to 28px on touch viewports.
-- Form inputs hold ≥44px tap target on touch viewports.
-
-### Collapsing Strategy
-
-- **Nav**: horizontal nav with right-anchored CTAs collapses to a hamburger overlay below 768px. The primary CTA stays visible on the bar.
-- **Product card grid**: 3-up → 2-up at 1024px → 1-up below 768px.
-- **Pricing comparison table**: collapses into per-tier accordions below 768px to avoid horizontal scroll.
-- **Display type**: `{typography.display-xl}` 80px scales toward `{typography.display-md}` 40px on mobile while preserving the negative-tracking percentage.
-
-### Image Behavior
-
-- 3D product illustrations (cubes, safes, etc.) maintain aspect ratio and never crop; below 768px they shrink rather than reflow.
-- Customer logo marquee scales horizontally and may wrap to a second row at narrow widths.
-
-## Known Gaps
-
-- The exact product-color hex values come from the `--mds-color-*` CSS variable set extracted directly; they are HashiCorp's canonical brand spec.
-- Shadow tokens are not extensively documented because the dark surface system uses surface lift instead of shadow elevation.
-- Form-field error and validation styling is not visible on the inspected pages.
-- Dark mode is the only marketing mode — light-mode adaptation is not documented.
-- Product-card variants for Consul, Nomad, Vagrant, and Boundary follow the documented Terraform / Vault / Waypoint pattern but are referenced in prose only; if they need formal entries they can be added as `product-card-consul`, `product-card-nomad`, etc.
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a HashiCorp-inspired interface. Implement this working page: An infrastructure product directory with aligned product families, code examples, and a workflow diagram. Keep the overall frame monochrome; use each product accent only inside its own labeled context.
+先閱讀隨附的 DESIGN.md，以 HashiCorp 的設計語言作為介面參考。請完成以下可操作頁面：製作基礎架構產品目錄，對齊產品系列、程式碼範例與工作流程圖。整體保持黑白，各產品的強調色只出現在已標示的對應範圍內。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a HashiCorp-inspired interface. Build an infrastructure resource panel with a status label and expandable configuration. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 HashiCorp 的設計語言作為介面參考。請製作基礎架構資源面板，包含狀態標示與可展開的設定內容。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a HashiCorp-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An infrastructure product directory with aligned product families, code examples, and a workflow diagram. Keep the overall frame monochrome; use each product accent only inside its own labeled context.
+先閱讀隨附的 DESIGN.md，以 HashiCorp 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作基礎架構產品目錄，對齊產品系列、程式碼範例與工作流程圖。整體保持黑白，各產品的強調色只出現在已標示的對應範圍內。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。

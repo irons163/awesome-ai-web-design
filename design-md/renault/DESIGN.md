@@ -1,16 +1,8 @@
 ---
-version: alpha
-name: Renault-design-analysis
-description: |
-  Renault's web presence pairs the freshly-modernised Renault diamond
-  (the 2021 flat-line rhombus mark) with a stark black-and-white canvas, a
-  signature Sunlight Yellow accent, and the proprietary NouvelR display
-  typeface. The system reads as confident, photography-first automotive — large
-  hero cars on neutral or atmospheric backdrops, square-edged or barely-rounded
-  containers, and a small disciplined palette where every coloured element is
-  intentional. Tile grids, full-bleed banners, and a recurring "configurator"
-  surface (white card, yellow accent dots, neutral product chrome) carry the
-  mass-market dealership tone without crossing into luxury.
+version: zh-TW-2026-10-15
+language: zh-TW
+name: "Renault"
+description: "俐落方角與明亮色帶，形成大膽的章節感。"
 
 colors:
   primary: "#ffed00"
@@ -264,364 +256,171 @@ components:
     padding: 64px 24px
 ---
 
-## Overview
-
-Renault's Turkish marketing surfaces are unapologetically high-contrast: a
-white canvas for browsing, a black canvas for product storytelling, and a
-single Sunlight Yellow accent (`{colors.primary}` — `#ffed00`) reserved for
-the most consequential actions. The brand's modernised flat diamond logo sets
-the tone — geometric, confident, slightly industrial — and the system follows
-suit. Square corners dominate, hairline borders are rare, and elevation is
-expressed through colour blocking rather than shadow.
-
-The typography is monolithic. Every text on the site is set in **NouvelR**,
-Renault's bespoke display family, with a strong preference for weight 700 at
-display sizes (with a tight `lineHeight: 0.95`) and weight 400 for body. There
-is no secondary serif, no decorative italic, no script — the discipline is
-the signature.
-
-Page rhythm cycles between three surface modes: a **white catalogue mode** for
-listings and configurators (`{colors.canvas}` with hairline-thin
-`{colors.hairline}` dividers), a **black storytelling mode** for hero
-sections, lifestyle imagery, and the lower half of campaign pages, and brief
-**yellow accent moments** (`{colors.primary}` tiles, "NEW" badges, R5-coded
-yellow paint shots) that punctuate the otherwise neutral palette.
-
-**Key Characteristics:**
-- Two-tone canvas system — `{colors.canvas}` (white) for browsing, `{colors.surface-dark}` (black) for storytelling — switched in full-bleed bands rather than subtle gradations.
-- A single brand accent — `{colors.primary}` Sunlight Yellow — used scarcely on primary CTAs, "NEW" badges, R5 hero photography, and configurator dot indicators.
-- **NouvelR everywhere**, with `{typography.display-xl}` headlines at 56px / weight 700 / `lineHeight: 0.95` so condensed multi-line headlines stack cleanly.
-- Square geometry: `{rounded.xs}` (2px) on buttons, `{rounded.none}` on tiles and product cards, `{rounded.pill}` reserved exclusively for sub-nav chips and decorative badges.
-- Photography-first product tiles — vehicle photos full-bleed inside otherwise neutral cards, with copy stacked beneath rather than overlaid.
-- Page-level rhythm cycles white → black → yellow accent → black, with the wordmark and footer always closing on `{colors.surface-dark}`.
-
-## Colors
-
-### Brand & Accent
-- **Sunlight Yellow** (`{colors.primary}` — `#ffed00`): the brand accent. Reserved for primary CTAs, "NEW" / "yeni" badges, configurator dot indicators, and full-bleed promotional tiles. Never decorative.
-- **Sunlight Yellow Pressed** (`{colors.primary-deep}` — `#e6d200`): the active/pressed state of `{colors.primary}` buttons and tiles.
-- **On-Primary** (`{colors.on-primary}` — `#000000`): label colour on top of `{colors.primary}` surfaces. Yellow always pairs with black text — never white.
-
-### Surface
-- **Canvas** (`{colors.canvas}` — `#ffffff`): the default page background and card surface.
-- **Surface Soft** (`{colors.surface-soft}` — `#f7f7f7`): subtle elevation step for grouped configurator rows and inactive form fields.
-- **Surface Dark** (`{colors.surface-dark}` — `#000000`): the alternate canvas, used for hero bands, footer, and full-bleed storytelling sections.
-- **Surface Deep** (`{colors.surface-deep}` — `#111111`): a one-step-up elevation inside `{colors.surface-dark}` regions for inset cards and form panels.
-- **Hairline** (`{colors.hairline}` — `#f2f2f2`): the soft 1px divider between rows on white surfaces.
-- **Hairline Strong** (`{colors.hairline-strong}` — `#000000`): full-strength dividers on white, plus all card / button outlines.
-- **Divider Dark** (`{colors.divider-dark}` — `rgba(255,255,255,0.16)`): the corresponding low-contrast divider used inside `{colors.surface-dark}` regions.
-
-### Text
-- **Ink** (`{colors.ink}` — `#000000`): primary text colour on white surfaces. The same value also drives logos, icons, and outline borders — black is structural, not decorative.
-- **Body** (`{colors.body}` — `#222222`): secondary body text where pure black would feel too heavy in long paragraphs.
-- **Charcoal** (`{colors.charcoal}` — `#333333`): captions, metadata, and small labels.
-- **Mute** (`{colors.mute}` — `#666666`): supporting text and inactive nav labels.
-- **Ash** (`{colors.ash}` — `#8a8a8a`): placeholder text, disabled labels.
-- **Stone** (`{colors.stone}` — `#c4c4c4`): disabled-state foreground.
-- **On-Dark** (`{colors.on-dark}` — `#ffffff`): primary text on `{colors.surface-dark}` surfaces.
-- **On-Dark Mute** (`{colors.on-dark-mute}` — `rgba(255,255,255,0.72)`): secondary text in dark regions; preserves the brand's high-contrast feel without resorting to mid-grey.
-
-### Semantic
-- **Error** (`{colors.error}` — `#be6464`): muted desaturated red used for inline form errors. Notably warmer than typical pure-red error states.
-- **Warning** (`{colors.warning}` — `#f0ad4e`): amber alert.
-- **Success** (`{colors.success}` — `#8dc572`): muted green confirmation.
-- **Info** (`{colors.info}` — `#337ab7`): a desaturated mid-blue used in informational chips.
-- **Link** (`{colors.link}` — `#0000ee`): the unstyled-anchor default kept for fallback inline text links — production links inherit `{colors.ink}` and rely on underline/weight rather than colour.
-
-## Typography
-
-### Font Family
-
-The entire system is set in **NouvelR**, Renault's proprietary display
-family, used across navigation, headlines, body, captions, and button
-labels. The family carries a slightly geometric, semi-condensed personality
-with tall x-heights and squared apexes that pair naturally with the diamond
-logomark.
-
-When NouvelR cannot be licensed, suitable open-source substitutes include
-**Inter Tight**, **Manrope**, or **HK Grotesk Semi Condensed** — all share
-the geometric-with-warmth feel and adapt cleanly to weights 400 / 600 / 700.
-Tighten `lineHeight` on display sizes to ~0.95 to match the original; do not
-relax it.
-
-### Hierarchy
-
-| Token | Size | Weight | Line Height | Letter Spacing | Use |
-|---|---|---|---|---|---|
-| `{typography.display-xl}` | 56px | 700 | 0.95 | 0 | Hero headlines, campaign titles ("E-TECH ELEKTRİKLİ", "REVOLUTION"). |
-| `{typography.display-lg}` | 40px | 700 | 0.95 | 0 | Secondary section titles. |
-| `{typography.display-md}` | 32px | 700 | 0.95 | 0 | Page-level H1 on sub-pages and configurator panels. |
-| `{typography.heading-lg}` | 24px | 700 | 0.95 | 0 | Section headers, card titles. |
-| `{typography.heading-md}` | 20px | 700 | 0.95 | 0 | Sub-section headers, prominent labels. |
-| `{typography.heading-sm}` | 18px | 700 | 1.0 | 0 | Tile titles, list group headers. |
-| `{typography.subtitle}` | 19.2px | 600 | 1.3 | 0 | Lead paragraphs, hero subtitles. |
-| `{typography.body-lg}` | 18px | 400 | 1.5 | 0 | Long-form body. |
-| `{typography.body-md}` | 16px | 400 | 1.4 | 0 | Default body and form fields. |
-| `{typography.body-sm}` | 14px | 400 | 1.57 | 0 | Captions, metadata. |
-| `{typography.button-lg}` | 16px | 700 | 1.0 | 0 | Large CTAs in hero bands. |
-| `{typography.button-md}` | 14.4px | 700 | 1.0 | 0.144px | Default button label across the system. |
-| `{typography.button-sm}` | 13px | 600 | 1.2 | 0.13px | Sub-nav pills, small in-card actions. |
-| `{typography.caption}` | 12px | 400 | 1.4 | 0 | Footer disclosure, regulatory text. |
-| `{typography.overline}` | 10px | 700 | 1.45 | 0 | Short uppercase labels above titles. |
-
-### Principles
-- Display sizes always weight 700, always at `lineHeight: 0.95`. The tightness is what makes the brand feel confident rather than corporate.
-- Body copy stays at weight 400 — never 500. The contrast between body and display is part of the system.
-- Button labels carry a tiny positive letter-spacing (`0.144px` on `{typography.button-md}`) — almost imperceptible, but it adds the small bit of mechanical precision the brand wants on CTAs.
-- No italics, no script, no decorative ligatures.
-
-### Note on Font Substitutes
-
-NouvelR is licensed; substitutes (Inter Tight / Manrope / HK Grotesk Semi
-Condensed) preserve the geometric character but typically render with
-slightly looser line heights at display sizes — clamp display
-`lineHeight` to 0.95 explicitly to match the source.
-
-## Layout
-
-### Spacing System
-- **Base unit**: 4px, with the working scale built on multiples of 4 and 8.
-- **Tokens**: `{spacing.xxs}` 4px · `{spacing.xs}` 8px · `{spacing.sm}` 12px · `{spacing.md}` 16px · `{spacing.lg}` 20px · `{spacing.xl}` 24px · `{spacing.xxl}` 32px · `{spacing.xxxl}` 40px · `{spacing.section}` 80px.
-- Section padding (full-bleed band → next band): `{spacing.section}` (80px) on desktop, collapsing to `{spacing.xxxl}` (40px) on mobile.
-- Promo-tile internal padding: `{spacing.xxl}` (32px) all sides on desktop.
-- Configurator row vertical padding: `{spacing.xl}` (24px) top/bottom with hairline divider between rows.
-
-### Grid & Container
-- **Max content width** ≈ 1440px. Beyond that, content remains centred and the dark/light bands extend full-bleed.
-- **Promo grid** on the homepage: a 2-column tile grid on desktop, dropping to 1-up on mobile. Each tile is square-cornered (`{rounded.none}`) with the photography or solid colour as the background.
-- **Vehicle range grids**: 3 to 4 cars per row at desktop, collapsing 2-up at tablet and 1-up at small mobile.
-- **Configurator** uses a fixed left visualisation pane (~60% width) with a right-hand scrolling option list (~40% width) on desktop.
+# Renault 延伸設計規格
 
-### Whitespace Philosophy
-- Whitespace is structural, not decorative. Sections are separated by colour-blocking (white → black) rather than soft padding ramps.
-- Inside cards and configurator rows, padding is generous but never airy — the brand is mass-market, so density is acceptable.
-- Hairline `{colors.hairline}` dividers on white surfaces create the sense of catalogue precision; on dark surfaces, `{colors.divider-dark}` carries the same role.
+語言：繁體中文（台灣用語，zh-TW）。在地化更新：2026-10-20。
 
-## Elevation & Depth
-
-| Level | Treatment | Use |
-|---|---|---|
-| 0 — flat | No shadow, no border | Default page surface, full-bleed bands. |
-| 1 — outline | 1px solid `{colors.hairline-strong}` or `{colors.hairline}` | Promo tiles on light, vehicle cards, configurator panels. |
-| 2 — colour-blocked elevation | Surface colour shift (e.g. `{colors.canvas}` card sitting inside a `{colors.surface-soft}` band) | Configurator detail cards, related-content rows. |
-| 3 — dark inversion | Card swaps to `{colors.surface-dark}` against a `{colors.canvas}` band | "Ticari araç" hero promo tiles, lifestyle storytelling cards. |
+## 來源與規格層次
 
-Drop shadows are extracted from the system but rarely visible on the marketing
-surfaces. When they appear, they are very subtle (~10% opacity, 2–4px blur)
-and used on floating elements like the configurator's sticky summary bar.
+這份規格將較早保存的品牌設計資料重新整理為可實作的繁體中文文件。來源設定中的色碼、字級、字重、行高、間距、圓角與元件識別字保留，供開發工具讀取；敘述與操作指令改用台灣用語。這些延伸設定不等同於目前日期限定首頁的逐項實測值，若兩者不同，依下方的日期限定觀察及對應預覽判讀。
 
-### Decorative Depth
-- The R5 hero band uses an atmospheric mesh-gradient backdrop — purple-to-pink-to-yellow glow behind the car silhouette — that acts as the only true atmospheric depth in the system. Everywhere else, depth is structural (colour-blocking + outlines), not atmospheric.
-- E-TECH electric powertrain pages use a luminous magenta-to-violet gradient behind cutaway diagrams, reserved for the electric sub-brand.
+- 原始資料版本：`1a783491c9539c3153c2fc96c16d59131e024f4e`。
+- 原始 DESIGN.md 摘要：`433de1f16966f10e74ae94b5f8310df412ca1a254e014478631a28d61088aadc`。
+- 目前首頁參考日期：2026-10-11。
+- 目前公開來源：https://www.renaultgroup.com/。
+- 目前預覽：`official-drafts/renault.html`。
+- 台灣繁體中文規格與指令是本次重新產出的內容；來源截圖及原生生成紀錄保留原貌。
 
-## Shapes
+## 整體視覺方向
 
-### Border Radius Scale
+俐落方角與明亮色帶，形成大膽的章節感。
 
-| Token | Value | Use |
-|---|---|---|
-| `{rounded.none}` | 0px | Tiles, vehicle cards, dividers, banner bands, full-bleed images. |
-| `{rounded.xs}` | 2px | Default buttons (primary yellow, secondary black, outline). |
-| `{rounded.sm}` | 3px | Tab panels, small chips. |
-| `{rounded.md}` | 4px | Form labels, inline tags. |
-| `{rounded.pill}` | 46px | Sub-nav pills, "yeni" / "NEW" badges, decorative carousel chips. |
-| `{rounded.full}` | 9999px | Configurator colour swatches, avatar dots. |
+製作電動車指南，搭配醒目章節標題、節制的黃色操作與實用車款比較。漸層只放在專屬圖片區，文字與表單使用穩定純色背景。
 
-### Photography Geometry
-- Vehicle photography is **always square-cornered** (`{rounded.none}`). No rounded vehicle hero shots, no soft-edged car cards.
-- Aspect ratios cluster around **16:9** (hero bands), **1:1** (square promo tiles), and **4:3** (vehicle range cards). Lifestyle imagery sometimes runs **2:1 wide** for full-bleed bands.
-- Avatars and small profile cues — when present — use `{rounded.full}` circles to contrast with the otherwise square geometry.
+先建立主要內容、輔助資訊與操作之間的層級，再套用色彩及裝飾。品牌色應有明確用途；主要操作、選取、錯誤及停用狀態要能分辨。避免將多套參考風格混在同一頁，也不要僅替換通用卡片的顏色。
 
-## Components
+## 色彩、字型與繁體中文排版
 
-### Buttons
+上方來源設定保留原始色彩角色與數值。主要品牌色用於最重要的操作；背景、內容表面、主要文字、次要文字與分隔線各自維持一致用途。資訊不能只依賴顏色，狀態須同時有文字或圖示標示。
 
-**`button-primary`** — yellow CTA
-- Background `{colors.primary}`, label `{colors.on-primary}`, type `{typography.button-md}`, padding `14px 24px`, `rounded: {rounded.xs}`.
-- The single most important action on a page (e.g. "Hemen randevu al", "Hesapla", "Konfigüratörü başlat").
-- Pressed state lives in `button-primary-pressed` (background `{colors.primary-deep}`).
-
-**`button-secondary-dark`** — solid black CTA
-- Background `{colors.surface-dark}`, label `{colors.on-dark}`, type `{typography.button-md}`, `rounded: {rounded.xs}`.
-- Equal-weight secondary action paired with `{component.button-primary}`, or the primary action when used on a yellow tile background.
+原字型名稱可作為拉丁字母參考。繁體中文字型優先使用可取得的 `Noto Sans TC`、`PingFang TC`、`Microsoft JhengHei`，最後才使用 `sans-serif`。原字型未涵蓋中文時必須提供替代，不以缺字或圖片文字呈現正文。專有字型無法取得時，記錄替代字型與可能的字寬差異。
 
-**`button-outline-dark`** — outlined CTA on light
-- Background `{colors.canvas}`, label `{colors.ink}`, 1px solid `{colors.hairline-strong}`, type `{typography.button-md}`, `rounded: {rounded.xs}`.
-- Tertiary action; appears alongside primary/secondary for "Detayları gör", "Modeller", etc.
+中文標題以語意分段，避免為模仿英文大寫字距而拉散中文字。內文行高、欄寬與段落間距以可讀性為準；英文型號、網址、程式碼及長連結可以換行或在自己的區域捲動，不可撐開整份文件。價格、規格及比較欄位保持數字與單位對齊。
 
-**`button-outline-light`** — outlined CTA on dark
-- Background `{colors.surface-dark}`, label `{colors.on-dark}`, 1px solid `{colors.on-dark}`, type `{typography.button-md}`, `rounded: {rounded.xs}`.
-- The dark-canvas counterpart to `{component.button-outline-dark}`.
-
-**`button-pill`** — sub-nav chip
-- Background `{colors.canvas}`, label `{colors.ink}`, 1px solid `{colors.hairline-strong}`, type `{typography.button-sm}`, `rounded: {rounded.pill}`, height 36px.
-- The only place the system uses a pill — for top-level filter chips ("Servis & randevu", "Sahiplik dönemi geçişi", "Kampanyalar") and configurator tab switches.
-
-**`button-icon-square`** — small icon button
-- Background `{colors.canvas}`, 1px solid `{colors.hairline-strong}`, `rounded: {rounded.xs}`, 40×40px square.
-- Carousel arrows, share, language switcher.
-
-### Cards & Containers
-
-**`promo-tile-light`** — white promo tile
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.heading-lg}`, padding `{spacing.xxl}`, `rounded: {rounded.none}`.
-- Used in the homepage 2-up grid for "Hybrid araç modelleri", "binek araç satış kampanyaları" tiles.
-
-**`promo-tile-dark`** — black promo tile
-- Background `{colors.surface-dark}`, text `{colors.on-dark}`, type `{typography.heading-lg}`, padding `{spacing.xxl}`, `rounded: {rounded.none}`.
-- Lifestyle / commercial-vehicle storytelling tiles ("ticari araç satış kampanyaları").
-
-**`promo-tile-yellow`** — accent promo tile
-- Background `{colors.primary}`, text `{colors.on-primary}`, type `{typography.heading-lg}`, padding `{spacing.xxl}`, `rounded: {rounded.none}`.
-- The single "PARLAK SARI" / "Sunlight Yellow" attention tile that anchors a campaign band. Reserved — usually one per page maximum.
-
-**`vehicle-card`** — car listing card
-- Background `{colors.canvas}`, full-bleed product photography on top, text below, `rounded: {rounded.none}`, no outer border.
-- Includes vehicle name (`{typography.heading-md}`), variant subtitle (`{typography.body-sm}`), and a single trailing arrow icon.
-
-**`hero-banner`** — full-bleed hero
-- Background `{colors.surface-dark}` with full-bleed photo or atmospheric gradient, content stacked left, type `{typography.display-xl}` for the title.
-- "SCENIC E-TECH ELEKTRİKLİ" hero on the homepage.
-
-### Inputs & Forms
-
-**`text-input`** — default input
-- Background `{colors.canvas}`, text `{colors.ink}`, type `{typography.body-md}`, 1px bottom border `{colors.hairline-strong}`, `rounded: {rounded.none}`, padding `{spacing.sm} {spacing.md}`, height 48px.
-- Inputs intentionally minimal — borderless on top and sides, single hairline at the bottom — keeping the catalogue feel.
-
-### Configurator
-
-**`configurator-row`** — option list row
-- Background `{colors.canvas}`, separator hairline `{colors.hairline}` between rows, padding `{spacing.xl}` top/bottom, type `{typography.body-md}`.
-- Right-side scrolling list on the configurator: "kasa tipi", "motor seçimi", "versiyon seçimi", "renk seçenekleri", etc.
-
-**`configurator-swatch`** — circular colour pick
-- Background `{colors.surface-soft}` (or the actual car colour), `rounded: {rounded.full}`, 56×56px.
-- Used for paint colour selection. Active state adds a 1px solid `{colors.hairline-strong}` ring.
-
-### Navigation
-
-**`nav-bar`** — top nav (desktop)
-- Background `{colors.canvas}`, type `{typography.button-md}`, height 60px, hairline `{colors.hairline}` bottom border.
-- Left: diamond logomark. Centre: top-level nav ("Modeller", "Hizmetler", "Renault Yaşamı", "MyRenault"). Right: language switcher + login icon.
-
-**`nav-bar`** (mobile)
-- Same height 60px, collapses centre nav into a hamburger icon. Logo stays left, login stays right.
-
-**`sub-nav-pill`** — pill-style sub-nav
-- Pill chips set in a horizontal scroll bar between hero and content body (e.g. "Servis & randevu", "Sahiplik dönemi geçişi", "Kampanyalar"), `{component.button-pill}` styling.
-
-### Signature Components
-
-**`badge-new`** — "yeni" badge
-- Background `{colors.primary}`, label `{colors.on-primary}`, type `{typography.button-md}`, `rounded: {rounded.full}`, padding `6px 14px`.
-- Anchored on the bottom-left of new vehicle cards.
-
-**`footer`** — global footer
-- Background `{colors.surface-dark}`, text `{colors.on-dark}`, type `{typography.body-sm}`, padding `64px 24px`.
-- Three-column legal/quick-links/locale grid above a single-line copyright row separated by `{colors.divider-dark}`.
-
-## Do's and Don'ts
-
-### Do
-- Reserve `{colors.primary}` exclusively for primary CTAs, "yeni"/"NEW" badges, and at most one accent promo tile per band — `{component.promo-tile-yellow}` is intentionally rare.
-- Pair `{colors.primary}` only with `{colors.on-primary}` text. Yellow + white is forbidden.
-- Set everything in **NouvelR** — no secondary serif, no script, no decorative italic.
-- Hold display headlines at `{typography.display-xl}` weight 700 with `lineHeight: 0.95` so they stack tightly on multi-line wraps.
-- Use `{rounded.xs}` (2px) on every standard button — the near-flat corner is part of the brand.
-- Switch full bands between `{colors.canvas}` and `{colors.surface-dark}` for storytelling rhythm. Avoid mid-greys as section backgrounds.
-- Show vehicle photography full-bleed inside `{component.vehicle-card}` with copy stacked beneath, never overlaid.
-- Use `{component.sub-nav-pill}` (`{rounded.pill}`) only for sub-nav and small filter rows — never for primary CTAs.
-
-### Don't
-- Don't introduce a secondary accent colour. Yellow is the only brand accent; semantic colours (`{colors.error}`, `{colors.success}`, `{colors.warning}`) are functional, not decorative.
-- Don't round vehicle cards or promo tiles. Square-cornered photography is core to the brand expression.
-- Don't soften body weights to 500 or 600 — the system relies on the 400 / 700 contrast.
-- Don't apply `{colors.primary}` to body text or large surfaces beyond the single accent tile per band.
-- Don't add atmospheric gradient washes outside the dedicated R5 / E-TECH hero contexts.
-- Don't pair light grey text on white. Body text steps through `{colors.body}`, `{colors.charcoal}`, `{colors.mute}` — `{colors.ash}` and `{colors.stone}` are reserved for placeholders and disabled states.
-- Don't add drop shadows to vehicle cards or promo tiles — the system is shadow-free at the catalogue level.
-
-## Responsive Behavior
-
-### Breakpoints
-
-| Name | Width | Key Changes |
-|---|---|---|
-| Desktop XL | ≥ 1440px | Full max-width container, 3–4 column vehicle grid, 2-up promo tile grid. |
-| Desktop | 1280–1439px | Same layout, container shrinks to viewport with `{spacing.xl}` side padding. |
-| Tablet Large | 1024–1279px | Vehicle grid drops to 3-up, configurator left/right panes resize to 55/45. |
-| Tablet | 768–1023px | Promo tile grid collapses to 2-up, sub-nav pills become horizontal scroll. |
-| Mobile Large | 426–767px | Vehicle grid 2-up, configurator switches to stacked panes (visualisation on top, options below), nav collapses to hamburger. |
-| Mobile | ≤ 425px | All grids 1-up, hero `{typography.display-xl}` clamps to ~40px, section padding `{spacing.section}` collapses to `{spacing.xxxl}`. |
-
-### Touch Targets
-- All buttons ship at minimum 44×44px on mobile; default `{component.button-primary}` is 48px tall, comfortably exceeding WCAG AAA.
-- `{component.sub-nav-pill}` (36px) is bumped to 40px tall on mobile via increased vertical padding.
-- `{component.button-icon-square}` (40px) sits at the WCAG AA minimum and remains tappable, but should grow to 44px when used as a primary navigation control.
-
-### Collapsing Strategy
-- Top-level nav collapses to hamburger at < 1024px; the logo and login icon stay anchored.
-- 2-up promo grid collapses to 1-up at < 768px; tile padding shrinks from `{spacing.xxl}` to `{spacing.lg}`.
-- Configurator switches from side-by-side to stacked at < 1024px, with the visualisation pinned to the top of the viewport on scroll.
-- Display headlines clamp: `{typography.display-xl}` 56px → 40px → 32px across the breakpoint ladder.
-- Sub-nav pills convert from a wrap row to a horizontal scroll-rail at < 768px.
-
-### Image Behavior
-- Vehicle photography is served at 1.5× and 2× DPR; below 768px, the system swaps to a portrait-oriented composition where art direction allows.
-- Hero atmospheric gradients (R5, E-TECH) load lazily after primary content; they are not blocking.
-- Lifestyle / commercial photography in `{component.promo-tile-dark}` keeps the same 16:9 framing across breakpoints, cropping inward rather than letterboxing.
-
-## Known Gaps
-
-- Active/pressed visual states are not consistently observable in static surfaces; `button-primary-pressed` documents the extracted darkened-yellow value, but no other component has a pressed variant promoted to the YAML.
-- Drop-shadow values exist in the extracted tokens but are rarely surfaced visually; only the configurator's sticky summary bar uses them on the captured pages.
-- The MyRenault application surfaces (logged-in product) are out of scope for this extraction — only the public marketing canvas is documented.
-- Form-field focus styling is not extracted; the system likely relies on a thicker bottom border at `{colors.ink}`, but this is not visually confirmed on the captured pages.
+| 字級 | 字重 | 行高 | 字距 |
+| --- | --- | --- | --- |
+| 56px | 700 | 0.95 | 0 |
+| 40px | 700 | 0.95 | 0 |
+| 32px | 700 | 0.95 | 0 |
+| 24px | 700 | 0.95 | 0 |
+| 20px | 700 | 0.95 | 0 |
+| 18px | 700 | 1.0 | 0 |
+| 19.2px | 600 | 1.3 | 0 |
+| 18px | 400 | 1.5 | 0 |
+| 16px | 400 | 1.4 | 0 |
+| 14px | 400 | 1.57 | 0 |
+| 16px | 700 | 1.0 | 0 |
+| 14.4px | 700 | 1.0 | 0.144px |
+| 13px | 600 | 1.2 | 0.13px |
+| 12px | 400 | 1.4 | 0 |
+| 10px | 700 | 1.45 | 0 |
+
+## 版面與元件結構
+
+此參考可先實作：車款比較選擇器，包含續航里程、充電資訊與明確單位。
+
+先辨識導覽、主要內容、次要內容與頁尾，再依來源設定安排容器寬度、格線、間距及圓角。相同層級使用同一組設計變數；元件內距與區段留白分開管理。表單標示放在欄位旁，補充說明及驗證訊息與對應欄位保持連結。
+
+桌面多欄在窄版依內容順序堆疊；保留必要的篩選與主要操作，不將無法容納的文字裁切掉。資料表、程式碼或水平內容列可在自己的容器內捲動，使用者仍應能辨識後續內容。不同尺寸採同一份有意義的閱讀順序。
+
+## 操作與狀態
+
+| 狀態 | 實作要求 |
+| --- | --- |
+| 預設 | 顯示操作名稱、目前內容與必要說明。 |
+| 滑鼠移入與焦點 | 重點清楚且不只靠色彩；鍵盤焦點可見。 |
+| 已選取 | 同時呈現視覺狀態與 aria-selected 或 aria-pressed。 |
+| 停用 | 說明無法操作的原因，避免只有降低透明度。 |
+| 載入 | 呈現文字進度或等待狀態，避免重複送出。 |
+| 空白與錯誤 | 清楚說明原因，提供可行的修正或重試方式。 |
+
+所有可見按鈕都應產生可理解的結果。範例資料要明確標示，不能讓讀者誤以為連上真實帳戶、付款、訂單或模型後端。需要外部服務的操作應提供對應目的地或說明，不偽造成功結果。
+
+## 圖片、動態與無障礙
+
+圖片保留長寬比例與主要構圖，補上有用途的替代文字；純裝飾圖不重複朗讀。影片提供可理解的海報及播放狀態，資訊不能只在動態畫面中出現。尊重減少動態效果設定，避免閃爍與阻礙閱讀的自動移動。
+
+導覽、表單、分頁、對話框與展開控制須支援鍵盤。互動元素使用語意標記，觸控區域建議至少 44px；焦點不可被固定頁首遮住。驗證長中文標題、混合中英文、空內容及載入失敗，並在 390px、768px、1440px 檢查排版。這些是新專案的實作建議，不是原官網通過無障礙檢測的宣稱。
+
+## 來源中的技術值補充
+
+以下保留原始資料中的 CSS 值與數值片段。程式碼屬性及識別字維持原文；實際角色應與上方來源設定及對應元件一起閱讀，不單獨套用沒有語境的數值。
+
+- `#ffed00`
+- `#e6d200`
+- `#000000`
+- `#ffffff`
+- `#f7f7f7`
+- `#111111`
+- `#f2f2f2`
+- `rgba(255,255,255,0.16)`
+- `#222222`
+- `#333333`
+- `#666666`
+- `#8a8a8a`
+- `#c4c4c4`
+- `rgba(255,255,255,0.72)`
+- `#be6464`
+- `#f0ad4e`
+- `#8dc572`
+- `#337ab7`
+- `#0000ee`
+- `0.144px`
+- `14px 24px`
+- `6px 14px`
+- `64px 24px`
+
+## 日期限定首頁觀察
+
+2026-10-11 UTC 實際觀測匿名法文官網。黑底首屏以圓角巴黎車展主視覺及倒數組成，桌面119px導覽區與左右輪播預覽，窄版切為緊湊導覽和直向資訊。新聞、五張主題影像卡（303／232／75／100／12篇）、三項永續支柱、雙欄招募及Renault／Dacia／Alpine品牌依原順序保留。RenaultGroup Variable字型、官方照片、白底永續與完整頁尾形成清楚層級；窄版品牌與新聞僅核對第一個輪播狀態。桌面6115px、窄版9130px全頁實拍已逐張檢視，共6張對照圖，14／18個h1–h3量測文字及幾何無觀測差異，但這不是全面一致證明。
+
+**已比對主要靜態畫面，仍有差異；accepted=false，不宣稱與官方一致。**
+
+既有設計分析及原始指令保留。本次官方來源、真實 Google Stitch MCP 原始輸出、校正檔與實際瀏覽器畫面分開記錄。研究頁面免費瀏覽，沒有啟動付費方案或交易。
+
+## 已知差異與驗證範圍
+
+- 桌面與窄版的股價及倒數為觀測快照；兩寬取樣秒數不同，與後續官網動態時間不一致，沒有官方行情或倒數API。
+- 官網在窄版第一次向下捲動取樣仍顯示導覽，成品收起較早；導覽與選單動畫過渡未同步。初次官方選單截圖尚在滑入，另存穩定選單影像才用於比對，兩者不可混用。
+- 13筆高密度圖片直接下載回403，紀錄完整保存且未重試。10個DOM圖片URL使用官網瀏覽器已載入、相同路徑的實際resource密度映射；原始public resource bytes未修改。未將密度不同宣稱為逐位元官方素材一致。
+- 主要頁面、窄版根層選單畫面與X／Escape已實看；桌面展開選單、窄版次層、語言／無障礙／搜尋／cookie設定、輪播其他狀態、頁尾手風琴與PDF外部內容未驗證。
+- 390px為桌面UA響應式畫面，不是實體手機。先前真正MOBILE Stitch生成獨立保留；這次更新生成為DESKTOP。付費方案、帳號與服務未啟動；正式部署尚未驗證。
+
+以上限制沿用原參考日期的比對紀錄。本次繁體中文整理不會把未驗證的影片、動畫、服務或尺寸改標為已通過；目前預覽仍未宣稱與官方完全一致。
 <!-- Original AI instructions: awesome-ai-web-design -->
 
-## Provenance and scope
+## 來源與使用範圍
 
-Visual analysis adapted from VoltAgent/awesome-design-md under the MIT license; see the repository LICENSE and ATTRIBUTION.md. Brand names identify the reference only. The AI instructions below are independently authored for this collection. The accessibility checks in these instructions take precedence over conflicting legacy interaction notes.
+設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。
 
-## Original AI task prompts
+## 重新撰寫的 AI 任務指令
 
-Place DESIGN.md beside your project, then choose a task below. These instructions were written for this free collection. Replace sample content with your own requirements.
+語言：繁體中文（台灣用語，zh-TW）。將 DESIGN.md 放入專案，再選擇下方任務。這些指令由本專案重新撰寫；請把示範內容替換為自己的產品需求。
 
 ## 建立新頁面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Renault-inspired interface. Implement this working page: An electric vehicle guide with bold chapter headings, restrained yellow controls, and a practical model comparison. Let gradients occupy only dedicated image areas, keeping text and forms on stable solid surfaces.
+先閱讀隨附的 DESIGN.md，以 Renault 的設計語言作為介面參考。請完成以下可操作頁面：製作電動車指南，搭配醒目章節標題、節制的黃色操作與實用車款比較。漸層只放在專屬圖片區，文字與表單使用穩定純色背景。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 製作元件
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Renault-inspired interface. Build a model comparison selector with range, charging details, and explicit units. Show it inside a small, realistic example using the existing component conventions. Derive its proportions and visual hierarchy from the reference; do not simply recolor a generic card. Support default, focused, disabled, loading, and error states wherever they apply. Use meaningful sample content and make every visible action functional.
+先閱讀隨附的 DESIGN.md，以 Renault 的設計語言作為介面參考。請製作車款比較選擇器，包含續航里程、充電資訊與明確單位。沿用現有元件慣例，放入精簡且符合實際情境的範例。比例與資訊層級應來自參考規格，不能只替通用卡片換色。依需求支援預設、焦點、停用、載入與錯誤狀態。使用有意義的示範資料，讓每個可見操作都有明確結果。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. 
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
 ## 改造既有介面
 
 ```text
-Read the attached DESIGN.md as the visual reference for a Renault-inspired interface. Restyle the selected page while preserving its routes, data, behavior, and user-facing meaning. First identify the existing page hierarchy and the smallest reusable token and component changes. Use this composition as a visual direction, adapting it to the page rather than adding unrelated features: An electric vehicle guide with bold chapter headings, restrained yellow controls, and a practical model comparison. Let gradients occupy only dedicated image areas, keeping text and forms on stable solid surfaces.
+先閱讀隨附的 DESIGN.md，以 Renault 的設計語言作為介面參考。重新設計選定頁面，同時保留路由、資料、行為與使用者可理解的意義。先確認頁面層級，再找出最少且可重複使用的設計變數與元件調整。以下構圖作為視覺方向，依現有頁面調整：製作電動車指南，搭配醒目章節標題、節制的黃色操作與實用車款比較。漸層只放在專屬圖片區，文字與表單使用穩定純色背景。
 
-Use my product name and content. Prefer existing project components and the current stack. Map the documented colors, typography, spacing, and radii to reusable tokens before styling. Use available system or open fonts when a listed font is unavailable; explain the substitution. Apply the visual changes in coherent component groups and check for unintended changes elsewhere. Report the main before-and-after differences.
+使用我的產品名稱、內容與資料格式，優先沿用專案現有元件及技術。開始製作樣式前，先將色彩、字體、間距與圓角整理為可重複使用的設計變數。指定字型無法取得時，使用可用的系統字型或開源字型，並說明替代方式。介面文案、按鈕、提示、錯誤訊息、圖片替代文字、註解與交付說明，一律使用繁體中文（台灣用語）。使用「專案、元件、資料、建立、預設、載入、登入、連結、儲存、影片」等台灣用語。保留品牌名稱、檔名、網址、API 識別字與可執行程式碼；HTML 語言設為 zh-Hant-TW。依完整元件群組套用變更，檢查其他頁面是否受影響，並說明調整前後的主要差異。
 
-Make interactive elements work and expose their state to assistive technology. Provide visible keyboard focus, labeled controls, reduced-motion support, and at least 44px touch targets. If an imported visual rule conflicts with usability, make the smallest accessible adjustment and record it. Check the result at 390px, 768px, and 1440px, including long text and empty content. Finish with the implemented files, verification results, and any remaining assumptions.
+讓互動元件可實際操作，並將狀態提供給輔助科技。具備可見的鍵盤焦點、清楚的欄位標示、減少動態效果，以及至少 44px 的觸控區域。參考視覺與可用性衝突時，作最小幅度的無障礙調整並記錄原因。在 390px、768px、1440px 寬度檢查版面，涵蓋繁體中文長標題、長內容、空白及錯誤狀態。金額、數量與日期依資料本身的幣別、單位及時區呈現，以 zh-TW 格式顯示，不擅自換算。最後交付完成的檔案、實際驗證結果與仍待確認的假設，不把未檢查項目宣稱為通過。
 ```
 
-## Iteration workflow
+## 逐次調整流程
 
-1. Name one observable problem in the current result, such as weak hierarchy or clipped content.
-2. Locate the matching token or component rule in DESIGN.md and propose a bounded change.
-3. Apply that change without modifying unrelated routes or data behavior.
-4. Inspect keyboard focus, narrow-screen layout, and representative content states.
-5. Report the result and any deliberate departure from the visual reference.
+1. 先指出一個可實際觀察的問題，例如層級不清或內容遭裁切。
+2. 在 DESIGN.md 找到對應設計變數或元件規則，提出範圍明確的調整。
+3. 套用調整，保留無關的路由與資料行為。
+4. 檢查鍵盤焦點、窄版排版，以及代表性的內容與錯誤狀態。
+5. 用繁體中文說明結果，以及刻意偏離參考外觀的原因。
