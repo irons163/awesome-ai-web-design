@@ -1,102 +1,139 @@
 # Awesome AI Web Design
 
-**74 套設計參考、222 則重新撰寫的 AI 指令，全部免費。**
+**74 套品牌設計參考，附繁體中文設計規格、AI 指令與 CSS 起始檔。**
 
-[開啟免費設計集](https://webdesign.zero2codex.dev) · [GitHub 原始碼](https://github.com/irons163/awesome-ai-web-design)
+[開啟網站](https://webdesign.zero2codex.dev/) · [下載全部實作包](https://webdesign.zero2codex.dev/assets/design-references.zip) · [參考來源](https://webdesign.zero2codex.dev/reference-sources.html)
 
-在網站下載喜歡的設計實作包，把 `DESIGN.md` 與 `PROMPTS.md` 交給 AI，再填入自己的內容與功能需求。74 份主要規格已補齊色碼、字級、間距、響應式條件、元件行為及無圖做法，並區分來源宣告與實作建議。全部使用繁體中文（台灣用語），沒有帳號、訂閱、付費下載或廣告。
+選一套喜歡的設計，下載實作包，把規格與需求交給 AI 開發工具，開始製作自己的介面。介面說明、主要設計規格與 AI 指令皆使用繁體中文（台灣用語）；品牌名稱、程式碼與原始預覽保留原文。
 
-這是以 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 為基礎的獨立免費版本，不是原作者的官方網站。保留原始 MIT 授權與來源，詳見 [ATTRIBUTION.md](ATTRIBUTION.md)。
+所有設計與下載免費開放，不需帳號、訂閱或 API 金鑰，沒有付費牆與廣告。
 
-## 立即使用
+## 可以做什麼
 
-1. 在[網站](https://webdesign.zero2codex.dev/)選一套設計，於「AI 指令」分頁下載「此設計實作包」。
-2. 解壓後將主要 `DESIGN.md` 與 `PROMPTS.md` 放進專案，填入自己的產品名稱、內容、功能與資料。也可採用同版本 `starter.css` 與 `TOKENS.json`。
-3. 把需求與指令交給能讀取專案檔案的 AI 開發工具；缺少圖片時採用規格內的文字版做法，依 `ASSETS.md` 補充自己的素材。
-4. 實際檢查手機版、鍵盤操作及每項主要功能，再依結果修正。規格可用於前端原型，登入、付款及資料庫等服務仍須依需求實作與驗收。
+- **找設計**：搜尋品牌與關鍵字，搭配 10 種領域分類及明暗模式篩選。
+- **看預覽**：開啟品牌詳情，查看介面、設計規格、AI 指令與參考日期。
+- **開始實作**：取得角色色碼、字級、間距、版面斷點、元件欄位與互動行為，搭配 CSS 起始檔建立介面。
+- **複製與下載**：複製規格或指令，下載單份文件、單品牌實作包或全部 74 套資料。
+- **收藏設計**：收藏儲存在目前瀏覽器，重新整理後仍保留，並在同網域的分頁間同步。
 
-每品牌包有 10 個檔案：上述 6 份文件及數值檔，加上 `README.md`、`SOURCES.json`、`LICENSE`、`ATTRIBUTION.md`。主要 `DESIGN.md` 本身已含必要數值及 CSS，不依賴缺少的延伸檔案，也不保證生成結果與原官網相同。原始碼下方目錄的 `design-md/` 保留歷史延伸分析；目前網站及下載包的主要規格由 `data/implementation/` 與 `data/zh-TW/` 產出。
+網站支援桌面與手機瀏覽。收藏不會同步至其他裝置；品牌預覽中的部分互動使用示範資料。
 
-例如：
+## 怎麼使用
+
+1. 開啟[網站](https://webdesign.zero2codex.dev/)，搜尋品牌或使用篩選，挑一套設計。
+2. 進入「AI 指令」分頁，下載「此設計實作包」並解壓縮。
+3. 將整包資料放入專案的 `design-reference/` 資料夾，填入自己的產品名稱、內容、功能與資料需求。
+4. 請 AI 開發工具讀取 `DESIGN.md` 與 `PROMPTS.md`，依規格實作，再檢查手機版、鍵盤操作及主要功能。
+
+例如，將下列指令交給能讀取專案檔案的 AI 開發工具：
 
 ```text
-先讀取專案根目錄的 DESIGN.md，將它作為這次介面的視覺規格。
-我要做一個可以搜尋、篩選與收藏文章的閱讀清單。
-沿用目前技術架構，先建立共用的色彩與字級設計變數，再實作完整的操作流程。
-使用我的產品名稱和內容；檢查手機版、鍵盤操作與空清單狀態。
-完成後列出變更檔案、驗證結果，以及需要我補充的內容。
+請先讀取 design-reference/DESIGN.md 與 design-reference/PROMPTS.md。
+
+我要做一個繁體中文的閱讀清單網站，功能包含文章搜尋、分類篩選與收藏。
+請沿用專案現有的技術架構，依設計規格建立色彩、字級、間距與共用元件。
+需要時參考 TOKENS.json 與 starter.css；缺少素材時依 ASSETS.md 採用文字版做法。
+
+使用我的產品名稱與內容，先完成可在本機操作的前端原型。
+收藏先儲存在瀏覽器，並處理空清單、搜尋無結果、鍵盤焦點與手機版。
+完成後說明變更檔案、實際驗證結果與需要我補充的資料。
 ```
 
-其他工作流程：[從網站建立設計分析](prompts/analyze-website.md) · [依參考實作](prompts/build-interface.md) · [視覺檢查與修正](prompts/review-interface.md)
+資料包提供製作前端介面的依據。實際結果需要依產品需求調整與測試；登入、付款或資料庫等服務另依專案需求串接，規格不保證與品牌官網像素相同。
 
-## 本機展示網站
+## 實作包裡有什麼
 
-只需要 Python 3.9 以上，不需安裝套件：
+每個單品牌 ZIP 共 10 個檔案，與網站主要分頁的規格及指令使用同一份內容。
+
+| 檔案 | 用途 |
+| --- | --- |
+| `DESIGN.md` | 完整視覺規格、元件行為、響應式條件與必要 CSS，可獨立閱讀。 |
+| `PROMPTS.md` | 可填入產品需求的繁體中文 AI 實作指令。 |
+| `TOKENS.json` | 色彩、字級、間距等設計數值，供工具讀取。 |
+| `starter.css` | 與主要規格一致的 CSS 起始檔。 |
+| `ASSETS.md`、`ASSETS.json` | 素材需求、建議路徑與缺少圖片時的做法。 |
+| `README.md`、`SOURCES.json` | 使用說明、參考日期與來源依據。 |
+| `LICENSE`、`ATTRIBUTION.md` | 授權與來源聲明。 |
+
+[全部實作包](https://webdesign.zero2codex.dev/assets/design-references.zip) 共 448 個檔案：74 組主要規格、指令、設計數值、CSS 與兩份素材說明，加上共用說明、來源清單、授權及致謝。資料包未附品牌商標、專有字型或完整官網媒體；規格提供系統字型與無圖版做法。
+
+原始碼另保留 74 份延伸設計分析、222 則任務指令，以及 Google Stitch 的原始 HTML、截圖與生成紀錄。網站主要分頁與下載包採用目前的實作規格；延伸分析與原始預覽可供深入研究。
+
+## 本機開發
+
+需要 Node.js 22.13 以上、pnpm 11.25.0；重新產出內容與執行 Python 測試另需 Python 3.9 以上。
 
 ```sh
-python3 scripts/serve.py
+git clone https://github.com/irons163/awesome-ai-web-design.git
+cd awesome-ai-web-design
+pnpm install --frozen-lockfile
+pnpm run dev
 ```
 
-若連接埠已被使用，可改成 `python3 scripts/serve.py --port 4178`。
+依終端機顯示的網址開啟網站；本機預設為 [http://127.0.0.1:5173](http://127.0.0.1:5173)。開發伺服器提供主站與同源素材路由，部分預覽素材需連線讀取。
 
-從完整原始碼 ZIP 解壓後可直接啟動伺服器。網站的「下載全部」是設計實作資料包，共 448 個檔案：74 組規格、AI 指令、數值、CSS、素材說明與清單，加上總說明、來源清單、授權與致謝；不含完整預覽網站或品牌素材。開發用途的完整原始碼包另由 `python3 scripts/build.py` 在本機重建為 `assets/all-designs.zip`，ZIP 不會將自己遞迴封裝在內。
+若只需瀏覽原始收藏，可執行 `python3 scripts/serve.py`，再開啟 [http://127.0.0.1:4173](http://127.0.0.1:4173)。此模式不提供主站目前預覽所需的發布路由。請透過伺服器瀏覽，直接開啟 `index.html` 可能受到瀏覽器讀取限制。
 
-開啟 **http://127.0.0.1:4173**。可搜尋品牌或關鍵字、依領域和明暗模式篩選、收藏設計、比較 Stitch 生成頁面、閱讀全文、複製指令，以及下載單一檔案或全部 ZIP。收藏只儲存在目前瀏覽器。
+## 更新內容與驗證
 
-網站預覽由 Google Stitch MCP 依各份設計分析與專屬情境實際生成，保留原始 HTML 與截圖，不是品牌原站截圖。每份範例附有生成指令、Stitch project/screen ID 與檔案 SHA-256。HTML 是靜態介面範例，可能使用 Google Fonts、Tailwind CDN 或 Stitch 匯出的外部圖片，部分操作與資料僅供展示。直接開 `index.html` 時瀏覽器可能阻擋讀取資料；請使用上述本機伺服器。
-
-品牌詳情頁預設提供官網重製草稿入口與參考日期；沒有可用草稿時會顯示進度。原始 Stitch 截圖和 HTML 可切換查看。各品牌已知差異依參考紀錄判讀，預覽入口的切換不代表已與現行官網一致。
-
-## 開發與驗證
+修改設計方向、元件需求或中文內容後，依序執行：
 
 ```sh
 python3 scripts/localize_zh_tw.py
 python3 scripts/build.py
 python3 -m unittest discover -s tests -v
-```
-
-原始收藏仍可用 `python3 scripts/serve.py` 預覽。目前正式網站使用 VPS 靜態託管，詳見原始碼中的 `deploy/vps/README.md`。原 Sites 託管版本保留 Vinext Worker 建置方式，需 Node.js 22.13 以上及 pnpm 11.25；`pnpm run build` 會保留靜態頁面並加入同源素材路由，`pnpm run dev` 可預覽相同的伺服器行為。
-
-預覽入口的非同步載入、品牌連結及原始範例切換另有 DOM 測試。這套測試使用 jsdom，不是瀏覽器畫面驗收；執行前需安裝開發套件並建置網站：
-
-```bash
-pnpm install --frozen-lockfile
-pnpm run build
 pnpm run test:preview
 pnpm run test:catalog
 pnpm run test:pinterest
 pnpm run test:media
+pnpm exec tsc --noEmit
+pnpm run build
 ```
 
-- `design-md/<slug>/DESIGN.md`：完整設計分析，加上全新 AI 指令。
-- `design-md/<slug>/PROMPTS.md`：三種任務指令與迭代流程。
-- `design-md/<slug>/preview.html`：Stitch 匯出的原始 HTML。
-- `design-md/<slug>/preview.png`：Stitch 原始生成截圖。
-- `design-md/<slug>/STITCH-PROMPT.md` / `STITCH.json`：生成指令與可追溯的來源紀錄。
-- `data/recipes.json`：本專案撰寫的品牌情境與元件需求。
-- `data/implementation/`：74 組實作方向、元件欄位與行為、完整規格數值及來源依據；詳見該目錄的 `README.md`。
-- `data/zh-TW/studies.json`：網站主要規格、AI 指令及同版本實作包內容。
-- `data/upstream.json`：匯入版本、每份原始文件的 SHA-256。
-- `assets/catalog.json`：由設計檔案與情境資料產生的網站目錄。
-- `assets/all-designs.zip`：建置產出的完整下載包，包含設計、AI 指令、HTML、原始截圖、網站原始碼與授權；不提交二進位 ZIP，發布到 GitHub Releases。
+內容檢查涵蓋 74 組規格與指令、來源雜湊、繁體中文用語及 75 個 ZIP 的解壓內容。操作測試涵蓋搜尋、複合篩選、收藏、剪貼簿、路由、鍵盤與錯誤處理。DOM 測試使用 jsdom；版面與實際操作仍需在瀏覽器檢查。持續整合流程見 [.github/workflows/check.yml](.github/workflows/check.yml)。
 
-修改在地化內容後先執行 `localize_zh_tw.py`；再執行 `build.py` 更新目錄和下載包。`build.py` 只驗證並封裝既有 Stitch 匯出，不會產生、重繪或覆蓋預覽，也不會發起 AI 請求。要更新範例，需在 Stitch 重新生成並透過 `scripts/import_stitch.py` 匯入 MCP 結果。金鑰只供生成工具使用，不會放入網站或下載包。一般檢查流程由 `.github/workflows/check.yml` 提供。
+`localize_zh_tw.py` 產出繁體中文內容，`build.py` 更新目錄與完整原始收藏 ZIP；兩者不會呼叫 AI 或重新生成預覽。完整原始收藏 ZIP 位於 `assets/all-designs.zip`，供開發用途，不包含在正式網站的「下載全部」中。
 
-## 網站發布
+| 位置 | 內容 |
+| --- | --- |
+| [data/implementation/](data/implementation/README.md) | 74 組實作方向、元件需求、完整數值與來源依據。 |
+| [data/zh-TW/](data/zh-TW/README.md) | 中文文案、來源鎖定與產出的主要規格。 |
+| `design-md/<slug>/` | 延伸分析、三類任務指令、Stitch 原始預覽與生成紀錄。 |
+| `assets/app.js`、`assets/style.css` | 設計目錄與詳情頁介面。 |
+| `scripts/`、`tests/` | 內容產出、網站建置、部署打包與測試。 |
+| [deploy/vps/](deploy/vps/README.md) | VPS 部署方式、Caddy／Nginx 範本與驗收紀錄。 |
 
-目前正式網站為 [webdesign.zero2codex.dev](https://webdesign.zero2codex.dev/)，由自有 VPS 與 Caddy 提供 HTTPS；原始預覽素材已還原為同源靜態檔案。以下保留原 Sites 託管的建置方式：Vinext Worker 搭配靜態頁面。執行 `python3 scripts/build.py` 更新資料與下載包，再執行 `pnpm run build`；輸出為 `dist/client/` 與 `dist/server/`。`python3 scripts/build_site.py` 或 `pnpm run build:static` 可單獨檢查靜態檔案整理結果，但移除的大型素材需由 Worker 路由提供。完整 ZIP 需由同一份來源 commit 建置，並以 `all-designs.zip` 檔名上傳至 GitHub Releases；主要下載入口使用本次建置的 assets/design-references.zip，與網站顯示的繁體中文內容一致；大型原始碼包不納入正式靜態部署。首頁截圖與縮圖沿用本地相對網址，Worker 依 `data/hosting-assets.json` 的清單串流取得 GitHub 固定 commit 的原檔。更新 Stitch 圖片時，先推送完整匯出，再更新清單的 commit、位元組數及 SHA-256。下載包與原始收藏的本機預覽仍使用完整本機圖片。
+其他工作流程：[從網站建立設計分析](prompts/analyze-website.md) · [依參考實作](prompts/build-interface.md) · [視覺檢查與修正](prompts/review-interface.md)
 
-網站另提供逐步製作的官網重製草稿，並在 [74 站進度頁](https://webdesign.zero2codex.dev/official-progress.html) 註明各品牌狀態與參考日期。Google Stitch 的原始生成稿另行保存；公開草稿再依保存的官方頁面資料與素材重製。目前 74 份研究已記錄主要畫面比對與差異，完整互動、所有尺寸及品牌服務仍未全面驗收，不能宣稱與品牌現行官網完全一致。`build_site.py` 僅將草稿 HTML 與實際引用的素材放入 `dist/official-drafts/`；這些品牌素材仍屬原權利人，亦不包含在下載 ZIP 中。
+## 自行部署
 
-## 免費與來源
+正式網站 [webdesign.zero2codex.dev](https://webdesign.zero2codex.dev/) 使用自有 VPS 與 Caddy 提供 HTTPS。網站為靜態檔案，伺服器不需 Node.js、pnpm 或資料庫；搜尋、篩選、收藏與複製都在瀏覽器執行。
 
-原 Sites 託管版本的大型官網圖片、影片與字型由同源 Worker 路由提供，以符合部署大小限制。路由只接受 `data/hosted-official-media.json` 清單內、已驗證的 GitHub 固定 commit 原檔，並支援影片分段讀取；不轉送訪客認證或 Cookie。原始草稿 HTML、CSS、JavaScript 與素材完整保留，發布時不替換其中的相對網址。`assets/official-media-publication.json` 記錄來源與發布檔案雜湊，兩者必須完全相同，包含內嵌 SVG。使用 `pnpm run dev` 預覽完整同源載入行為。
+在開發電腦準備完整靜態部署包：
 
-本專案的所有內容均直接開放下載，沒有付費牆、私有訂製入口或支付整合。MIT 授權仍允許使用者將內容用於商業專案；「免費提供」不等於限制下游商用。
+```sh
+node scripts/build_site.mjs --output public
+python3 scripts/package_vps.py --output .test-artifacts/vps-ready
+```
 
-色彩和字型資料是匯入版本的分析紀錄，尚未逐一重新查核所有品牌當前網站。品牌名稱、商標與專有字型屬於各自權利人，下載包不包含品牌商標或專有字型檔案。無障礙要求優先於匯入分析中過小的觸控目標或缺少焦點狀態的建議。
+請使用尚不存在或空的輸出目錄。打包時會從完整原始碼還原預覽素材，並依來源清單核對雜湊。產出的 `www/` 可交由 Caddy 或 Nginx 託管；包內附每個檔案的大小、SHA-256 與伺服器設定範本。上傳、HTTPS 與版本切換方式見 [VPS 部署說明](deploy/vps/README.md)。
+
+原 Sites 託管的 Vinext Worker 建置入口仍保留，執行 `pnpm run build` 產生 `dist/client/` 與 `dist/server/`。`pnpm run build:static` 僅整理靜態檔案，大型素材仍需同源路由或 VPS 打包還原後才能完整提供。
+
+## 來源與授權
+
+本專案以 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 為基礎，加入繁體中文內容、重新撰寫的 AI 指令、實作規格與可操作的設計目錄，保留原始著作權與 MIT 授權。詳細來源見 [ATTRIBUTION.md](ATTRIBUTION.md)。
+
+設計數值依保存的參考資料與實作建議整理，主要規格會標示依據。每個品牌的觀察日期與範圍見[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)；原始 Stitch HTML、截圖及生成證據保留原貌。
+
+程式與文字依 [MIT](LICENSE) 授權提供。品牌名稱、商標、字型、圖片與影片的權利屬各自權利人；使用時請保留適用的授權與來源聲明。
 
 ## 設計目錄
+
+以下為原始碼中的延伸分析與任務指令。使用目前的主要規格與實作包，請至[網站設計目錄](https://webdesign.zero2codex.dev/)。
+
+<details>
+<summary>展開全部 74 套設計</summary>
 
 <!-- COLLECTION:START -->
 
@@ -226,10 +263,8 @@ pnpm run test:media
 
 <!-- COLLECTION:END -->
 
+</details>
+
 ## 參與貢獻
 
-歡迎新增設計分析、修正資料或改善 AI 指令。請閱讀 [CONTRIBUTING.md](CONTRIBUTING.md)。
-
-## 授權
-
-[MIT](LICENSE)。原始設計分析 © 2026 VoltAgent；新指令、程式與預覽 © 2026 Awesome AI Web Design contributors。
+歡迎新增設計分析、修正資料或改善 AI 指令。請先閱讀 [CONTRIBUTING.md](CONTRIBUTING.md)，並附上來源與實際驗證結果。
