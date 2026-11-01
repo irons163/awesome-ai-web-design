@@ -273,22 +273,15 @@ def attribution(locks):
         f'| {row["name"]} | {row["date"]} | [公開來源]({row["reference_url"]}) · '
         f'[比對紀錄](official-progress.html#{slug}) |'
         for slug, row in sorted(locks.items()))
-    return f'''# 來源、致謝與改寫說明
+    return f'''# 授權與資料來源
 
-本專案為獨立的免費設計參考集，設計分析改寫自 **VoltAgent/awesome-design-md**。
+Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，免費提供繁體中文設計參考、AI 實作指令、可操作預覽與下載工具。
 
-- 上游專案：https://github.com/VoltAgent/awesome-design-md
-- 匯入版本：`f6961238d5cddcf8042a74a70fc400ec67181abb`
-- 匯入日期：2026-09-22。
-- 原始著作權：Copyright (c) 2026 VoltAgent。
-- 授權：MIT；原始授權與著作權聲明完整保留於 [LICENSE](LICENSE)。
-- 上游檔案路徑與 SHA-256 保留於原始碼的 `data/upstream.json`。
+## 本專案製作的內容
 
-## 本次繁體中文整理
+目錄介面、中文摘要、重新撰寫的 AI 指令、通用工作流程、實作規格、預覽整合、建置程式、說明及測試，由 Awesome AI Web Design 貢獻者製作，採 [MIT 授權](LICENSE)。
 
-74 份延伸設計規格、222 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 {UPDATED} 重新產出為繁體中文（台灣用語）。原先上游的代理提示及逐次調整章節，由本專案獨立撰寫的任務指令取代；不把上游設計資料宣稱為本專案原創。
-
-目錄介面、中文摘要、AI 指令、通用工作流程、預覽整合、建置程式、說明及測試，由 Awesome AI Web Design 貢獻者製作，同樣採 MIT 授權。延伸規格保留來源設定中的技術值；目前首頁研究另依各品牌參考日期及範圍判讀，兩者不混作同一天的實際量測。
+74 份延伸設計規格、222 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 {UPDATED} 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
 
 ## 預覽與原始生成紀錄
 
@@ -303,6 +296,15 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 品牌名稱、商標、字型、圖片及影片屬各自權利人。這些參考素材不因本專案的程式與文字採 MIT 授權，就一併成為 MIT 授權素材。個別素材保留來源網址、檔案大小及 SHA-256；資料包中的 Markdown 用於說明設計，不包含完整官網媒體或品牌服務。
 
 部分預覽使用固定版本 hls.js 1.7.3 精簡播放器，採 Apache-2.0 授權；套件授權及完整性紀錄隨原始資源保留。原始網站連結、外部服務及受原權利人管理的內容，維持各自目的地。
+
+## 歷史匯入資料與授權
+
+早期匯入的設計分析仍有部分來源設定與技術值沿用於延伸規格，相關來源與授權集中記錄於此。
+
+- 資料來源：[VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md)。
+- 匯入版本：`f6961238d5cddcf8042a74a70fc400ec67181abb`；匯入日期：2026-09-22。
+- 原始著作權：Copyright (c) 2026 VoltAgent；MIT 著作權與授權條文保留於 [LICENSE](LICENSE)。
+- 原始檔案路徑與 SHA-256 記錄於原始碼的 `data/upstream.json`。
 
 ## 74 份日期限定研究的來源
 

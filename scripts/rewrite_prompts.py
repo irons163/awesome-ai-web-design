@@ -79,10 +79,10 @@ def main():
             '產出可操作且具響應式版面的完整頁面。所有新文案使用台灣繁體中文，保留必要品牌與技術識別字。'
             '保留原始輸出及生成紀錄，另存後續調整，不以生成服務的自我宣稱代替實際瀏覽器檢查。\n```\n')
         base = remove_upstream_instructions((folder/'DESIGN.md').read_text())
-        notice = '\n\n## 來源與使用範圍\n\n設計資料改寫自採 MIT 授權的 VoltAgent/awesome-design-md，詳見 LICENSE 與 ATTRIBUTION.md。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。\n'
+        notice = '\n\n## 來源與使用範圍\n\n資料來源與適用授權集中於專案根目錄的 ATTRIBUTION.md 與 LICENSE。品牌名稱僅用於識別參考來源，並非官方授權或服務。下方 AI 指令由本專案獨立撰寫；若既有互動備註與無障礙要求衝突，以此處的可用性檢查為準。\n'
         # Idempotent regeneration: the provenance notice belongs to the generated section.
         (folder/'DESIGN.md').write_text(base + MARKER + notice + '\n' + prompt_doc.replace('# '+entry['name']+' — AI 實作指令', '## 重新撰寫的 AI 任務指令', 1))
-        (folder/'README.md').write_text(f"# {entry['name']}\n\n{entry['description']}\n\n設計規格與 AI 指令已重新產出為繁體中文（台灣用語），可免費使用，無須登入。\n\n- [延伸設計規格](DESIGN.md)\n- [三則 AI 實作指令](PROMPTS.md)\n- [繁體中文生成指令](STITCH-PROMPT.zh-TW.md)\n- [原始 Google Stitch 預覽](preview.html)\n- [原始生成紀錄](STITCH.json)\n- [回到總目錄](../../README.md)\n\n設計分析源自 VoltAgent 的 MIT 開源資料；規格與 AI 指令由本專案以台灣繁體中文重新整理。Google Stitch 原生 HTML、截圖及生成紀錄保留來源原貌，不是品牌官方網站；目前日期限定的參考分析請由網站設計詳情閱讀。\n")
+        (folder/'README.md').write_text(f"# {entry['name']}\n\n{entry['description']}\n\n設計規格與 AI 指令已重新產出為繁體中文（台灣用語），可免費使用，無須登入。\n\n- [延伸設計規格](DESIGN.md)\n- [三則 AI 實作指令](PROMPTS.md)\n- [繁體中文生成指令](STITCH-PROMPT.zh-TW.md)\n- [原始 Google Stitch 預覽](preview.html)\n- [原始生成紀錄](STITCH.json)\n- [回到總目錄](../../README.md)\n\n規格與 AI 指令由本專案以台灣繁體中文重新整理，資料來源與適用授權見[授權與資料來源](../../ATTRIBUTION.md)及 [LICENSE](../../LICENSE)。Google Stitch 原生 HTML、截圖及生成紀錄保留來源原貌，不是品牌官方網站；目前日期限定的參考分析請由網站設計詳情閱讀。\n")
     count = len(json.loads((ROOT/'data/recipes.json').read_text()))
     print(f'Wrote {count * 3} original task prompts across {count} design systems.')
 

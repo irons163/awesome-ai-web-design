@@ -125,11 +125,11 @@ python3 scripts/package_vps.py --output .test-artifacts/vps-ready
 
 ## 來源與授權
 
-本專案以 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) 為基礎，加入繁體中文內容、重新撰寫的 AI 指令、實作規格與可操作的設計目錄，保留原始著作權與 MIT 授權。詳細來源見 [ATTRIBUTION.md](ATTRIBUTION.md)。
+Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，提供繁體中文設計規格、重新撰寫的 AI 實作指令、可操作預覽與下載工具。
 
 設計數值依保存的參考資料與實作建議整理，主要規格會標示依據。每個品牌的觀察日期與範圍見[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)；原始 Stitch HTML、截圖及生成證據保留原貌。
 
-程式與文字依 [MIT](LICENSE) 授權提供。品牌名稱、商標、字型、圖片與影片的權利屬各自權利人；使用時請保留適用的授權與來源聲明。
+程式與文字依 [MIT](LICENSE) 授權提供。第三方資料的適用授權及歷史來源集中於 [授權與資料來源](ATTRIBUTION.md)。品牌名稱、商標、字型、圖片與影片的權利屬各自權利人；使用時請保留適用的授權與來源聲明。
 
 ## 設計目錄
 
