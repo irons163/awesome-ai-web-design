@@ -13,6 +13,16 @@ PROPERTIES = {
     'border': '分隔線及卡片邊框', 'focus': '鍵盤焦點外框',
 }
 COMPOSITIONS = {
+    'colorful-creation': {'name':'視覺創作工具首頁','sections':['精簡導覽','置中漸層主視覺與兩排浮動圖形','工具分類與不等寬功能卡','雙欄產品介紹','雙排橫向範本展示','創意生態系統','漸層行動呼籲與頁尾'],'hero':'紫、藍、青綠垂直漸層搭配置中大標、白色按鈕與兩排漂浮圖形。後續工具區有五個可切換分類與四張不等寬圖片卡。','media_ratio':'4 / 3','image_count':12,'max':1360,'gap':16,'padding':24,'radius':24,'button_radius':10,'hero_desktop':64,'hero_mobile':38,'body':16},
+    'career-explore': {'name':'職涯社群首頁','sections':['白底導覽與左文右插圖主視覺','熱門內容與職缺分類','刊登職缺','軟體工具與遊戲分類','職涯圖文介紹','人脈與學習插圖','適用對象','加入社群及多欄頁尾'],'hero':'白底左側大標及兩個上下排列的膠囊操作，右側大型人物插畫；手機改為上下排列。','media_ratio':'4 / 3','image_count':4,'max':1200,'gap':24,'padding':24,'radius':12,'button_radius':999,'hero_desktop':48,'hero_mobile':32,'body':16},
+    'finance-intro': {'name':'支付服務首頁研究','sections':['白底導覽與淺藍主視覺','個人／公司切換與大幅圖片','交錯雙欄功能介紹','安全性大圖與說明','橫幅圖片','傳送／要求付款示意','應用程式與頁尾'],'hero':'大面積淺藍背景，上方置中個人與公司膠囊切換，接黑色兩行大標與白色圓角圖片卡；圖片僅作公開首頁參考，不提供付款服務。','media_ratio':'16 / 10','image_count':4,'max':1200,'gap':24,'padding':24,'radius':40,'button_radius':999,'hero_desktop':84,'hero_mobile':48,'body':16},
+    'craft-market': {'name':'手作靈感市集','sections':['橘色識別與分類導覽','左右不等寬主題圖片磚','四欄精選主題','季節與節慶商品','禮物及熱門分類','居家指南','Etsy 介紹及頁尾'],'hero':'暖白底與橘色品牌字，下方使用不等寬雙欄主題磚；左磚再分文案與圖片，手機依閱讀順序堆疊。','media_ratio':'4 / 3','image_count':12,'max':1280,'gap':24,'padding':20,'radius':12,'button_radius':999,'hero_desktop':48,'hero_mobile':32,'body':16},
+    'learning-paths': {'name':'學習角色與課程','sections':['白底導覽與學習角色主視覺','學習資料','課程分類','雙欄學習方式與技能介紹','角色切換','社群故事','非營利介紹','常見問題與頁尾'],'hero':'白底與紫藍操作，左側大標及說明、右側學生家長教師直排選擇卡；手機堆疊。','media_ratio':'4 / 3','image_count':4,'max':1200,'gap':24,'padding':24,'radius':8,'button_radius':8,'hero_desktop':48,'hero_mobile':32,'body':16},
+    'creative-suite': {'name':'創意工具展示頁','sections':['精簡導覽','深色大標主視覺','產品分類切換','互動工具示範','功能與頁尾'],'hero':'深色畫布、置中主標與漸層，產品類別以橫向卡片呈現；手機改為可捲動列表。','media_ratio':'16 / 9','image_count':0,'max':1280,'gap':24,'padding':24,'radius':16,'button_radius':999,'hero_desktop':56,'hero_mobile':36,'body':16},
+    'news-grid': {'name':'新聞雜誌編輯網格','sections':['置中刊名及導覽','搜尋與分類','多欄頭條文章','專題卡片','頁尾'],'hero':'以白底、細線和粗標題組織主次文章；桌面三欄，手機依閱讀順序單欄顯示。','media_ratio':'16 / 9','image_count':0,'max':1200,'gap':24,'padding':20,'radius':2,'button_radius':2,'hero_desktop':48,'hero_mobile':32,'body':16},
+    'live-directory': {'name':'直播內容瀏覽','sections':['頂部導覽與搜尋','頻道側欄','特色直播卡','篩選分類','直播卡網格'],'hero':'深色介面搭配紫色重點；主要內容分隔頻道與縮圖，手機收合側欄。','media_ratio':'16 / 9','image_count':6,'max':1440,'gap':16,'padding':16,'radius':8,'button_radius':6,'hero_desktop':40,'hero_mobile':30,'body':16},
+    'meeting-suite': {'name':'協作工具介紹','sections':['導覽','置中漸層主視覺','協作互動面板','功能分頁','產品卡與頁尾'],'hero':'深藍至紫藍漸層、置中大標和圓角按鈕，功能分頁與示意面板提供清楚狀態。','media_ratio':'16 / 10','image_count':0,'max':1200,'gap':24,'padding':24,'radius':16,'button_radius':999,'hero_desktop':56,'hero_mobile':36,'body':16},
+    'travel-search': {'name':'旅遊探索與搜尋','sections':['深藍導覽','旅遊主視覺','目的地搜尋列','分類篩選','目的地卡與頁尾'],'hero':'深藍主視覺搭配黃色外框搜尋列；搜尋表單於手機堆疊，結果以卡片呈現。','media_ratio':'4 / 3','image_count':6,'max':1200,'gap':24,'padding':20,'radius':8,'button_radius':6,'hero_desktop':48,'hero_mobile':32,'body':16},
     'knowledge-portal': {
         'name': '多語言知識入口', 'sections': ['置中名稱與副標', '圖形兩側的語言入口', '搜尋與語言選擇', '其他語言和主題', '頁尾'],
         'hero': '以置中圓形示意圖及對稱語言清單為焦點，搜尋框不超過 450px；手機可改為兩欄清單。',
@@ -300,6 +310,10 @@ def starter_css(profile):
         extra = '.payment-hero{position:relative;isolation:isolate;overflow:hidden;padding-block:96px}.payment-hero::before{content:"";position:absolute;z-index:-1;right:-10%;top:0;width:65%;height:100%;background:linear-gradient(135deg,var(--surface),var(--accent));opacity:.18;clip-path:polygon(28% 0,100% 0,100% 100%,0 70%)}.payment-hero .hero-title{max-width:24ch}.payment-hero p{max-width:58ch}.transaction-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:16px;min-height:56px;align-items:center;padding:16px;border-bottom:1px solid var(--border)}@media(max-width:767px){.payment-hero{padding-block:48px}.transaction-row{grid-template-columns:1fr 1fr}}\n'
     elif profile['slug'] == 'linear.app':
         extra = '.issue-workspace{display:grid;grid-template-columns:220px minmax(0,1fr) 320px;border:1px solid var(--border)}.issue-sidebar,.issue-detail{padding:24px;background:var(--surface);color:var(--on-surface)}.issue-row{display:grid;grid-template-columns:90px minmax(0,1fr) 100px;gap:12px;min-height:56px;padding:16px;border:0;border-bottom:1px solid var(--border);background:var(--canvas);color:var(--ink);text-align:left;width:100%}.issue-row[aria-pressed=true]{background:var(--surface)}@media(max-width:1023px){.issue-workspace{grid-template-columns:180px minmax(0,1fr)}.issue-detail{grid-column:1/-1}}@media(max-width:767px){.issue-workspace{grid-template-columns:minmax(0,1fr)}.issue-row{grid-template-columns:64px minmax(0,1fr)}.issue-row>span:last-child{grid-column:2}.issue-sidebar{padding:16px}}\n'
+    elif profile['slug'] == 'canva':
+        extra = '.feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.feature-grid>.feature:nth-child(1),.feature-grid>.feature:nth-child(4){grid-column:span 2}.feature{min-height:406px;border-radius:24px;overflow:hidden}.tool-tabs{display:flex;overflow-x:auto;gap:4px;border-radius:999px}.template-track{display:grid;grid-auto-flow:column;grid-template-rows:repeat(2,304px);grid-auto-columns:242px;gap:24px;overflow-x:auto}@media(max-width:767px){.feature-grid{grid-template-columns:minmax(0,1fr)}.feature-grid>.feature:nth-child(n){grid-column:auto}.feature{min-height:360px}.template-track{grid-template-rows:repeat(2,240px);grid-auto-columns:190px;gap:12px}}\n'
+    elif profile['slug'] == 'etsy':
+        extra = '.market-hero{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:24px}.market-hero-main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}@media(max-width:767px){.market-hero{grid-template-columns:minmax(0,1fr)}}\n'
     return f'''/* {profile['name']}｜{VERSION} 實作建議；與 TOKENS.json 相同版本。 */
 :root {{
 {colors}
@@ -385,6 +399,7 @@ def documents(profile, entry, lock, review):
     sections = '\n'.join(f'{i+1}. {v}。' for i,v in enumerate(l['sections']))
     css = starter_css(profile)
     color_table = tables(profile)
+    columns = ('首頁主題磚使用 `grid-template-columns: minmax(0,2fr) minmax(0,1fr)`，左側主題磚內的文案與圖片可各占一半；窄版將兩個主題磚堆疊。' if profile['slug'] == 'etsy' else '工具卡片使用三欄等寬格線，第一與第四張跨兩欄，第二與第三張各占一欄；產品介紹採兩欄，窄版堆疊。' if profile['slug'] == 'canva' else '一般雙欄可使用 `repeat(2,minmax(0,1fr))`，不要讓長內容的最小寬度撐開格線。')
     contract = {
         'schema_version':1, 'brand':profile['slug'], 'version':VERSION, 'locale':'zh-TW',
         'colors':profile['colors'], 'typography':t, 'layout':{k:l[k] for k in ['max','gap','padding','radius','media_ratio']},
@@ -436,7 +451,7 @@ def documents(profile, entry, lock, review):
 
 - 內容最大寬度 {l['max']}px；桌面兩側至少 {r['side_desktop_px']}px，窄版兩側 {r['side_mobile_px']}px。
 - 以 {', '.join(str(v) for v in profile['spacing_px'])}px 作間距級距，區段預設間隔 {l['gap']}px。
-- 雙欄均使用 `repeat(2,minmax(0,1fr))`，不要讓長內容的最小寬度撐開格線。交錯區段用明確的 `.reverse` 類別，不用可能受到其他兄弟區段影響的序號選取器。
+- {columns} 交錯區段用明確的 `.reverse` 類別，不用可能受到其他兄弟區段影響的序號選取器。
 - {r['narrow_max_px']}px 以下採單欄、圖片或文字特色先、說明後；768–1023px 可採兩欄卡片；1024px 起卡片最多三欄。這些是本規格明確的建議斷點，不是官網斷點保證。
 - 手機導覽收成 {r['menu_width_percent']}% 寬的選單，按鈕以 aria-expanded 表示；支援鍵盤、Escape 與連結選取後關閉。桌面恢復時清除窄版展開狀態。
 - 圖片比例 `{l['media_ratio']}`，使用 object-fit: cover；無圖片時採下節的文字版，不建立失敗的圖片請求。

@@ -6,7 +6,7 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 
 目錄介面、中文摘要、重新撰寫的 AI 指令、通用工作流程、實作規格、預覽整合、建置程式、說明及測試，由 Awesome AI Web Design 貢獻者製作，採 [MIT 授權](LICENSE)。
 
-84 份延伸設計規格、252 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 2026-11-01 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
+94 份延伸設計規格、282 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 2026-11-01 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
 
 ## 預覽與原始生成紀錄
 
@@ -20,6 +20,8 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 
 品牌名稱、商標、字型、圖片及影片屬各自權利人。這些參考素材不因本專案的程式與文字採 MIT 授權，就一併成為 MIT 授權素材。個別素材保留來源網址、檔案大小及 SHA-256；資料包中的 Markdown 用於說明設計，不包含完整官網媒體或品牌服務。
 
+Canva、LinkedIn、PayPal、Etsy 與 Khan Academy 的首頁參考預覽含各網站公開頁面的圖片或標誌，用來對照該次觀察的版面。這些素材及商標屬於各自權利人，不適用本專案的 MIT 授權；來源與雜湊記錄於原始碼 `data/new-studies/media/reference-2026-11-01/`（各整頁補充素材記錄於對應的 `*-full/` 資料夾）。簡易包與實作包不包含這些圖片。
+
 部分預覽使用固定版本 hls.js 1.7.3 精簡播放器，採 Apache-2.0 授權；套件授權及完整性紀錄隨原始資源保留。原始網站連結、外部服務及受原權利人管理的內容，維持各自目的地。
 
 ## 歷史匯入資料與授權
@@ -31,21 +33,25 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 - 原始著作權：Copyright (c) 2026 VoltAgent；MIT 著作權與授權條文保留於 [LICENSE](LICENSE)。
 - 原始檔案路徑與 SHA-256 記錄於原始碼的 `data/upstream.json`。
 
-## 84 份日期限定研究的來源
+## 94 份日期限定研究的來源
 
 以下日期是既有公開首頁觀察日期，不是本次中文整理時重新檢查官網的日期。每頁限制說明以繁體中文提供；實際比較只涵蓋原紀錄的尺寸與狀態，未宣稱完整互動、所有裝置或品牌後端服務一致。
 
 | 品牌 | 參考日期 | 來源與範圍 |
 | --- | --- | --- |
+| Adobe | 2026-11-01 | [公開來源](https://www.adobe.com/tw/) · [比對紀錄](official-progress.html#adobe) |
 | Airbnb | 2026-10-10 | [公開來源](https://www.airbnb.ca/?locale=en) · [比對紀錄](official-progress.html#airbnb) |
 | Airtable | 2026-10-10 | [公開來源](https://www.airtable.com/) · [比對紀錄](official-progress.html#airtable) |
 | Amazon | 2026-11-01 | [公開來源](https://www.amazon.com/) · [比對紀錄](official-progress.html#amazon) |
 | Apple | 2026-10-10 | [公開來源](https://www.apple.com/) · [比對紀錄](official-progress.html#apple) |
+| BBC | 2026-11-01 | [公開來源](https://www.bbc.com/) · [比對紀錄](official-progress.html#bbc) |
 | Binance | 2026-10-11 | [公開來源](https://www.binance.com/en) · [比對紀錄](official-progress.html#binance) |
 | BMW | 2026-10-10 | [公開來源](https://www.bmw.com.tw/zh/index.html) · [比對紀錄](official-progress.html#bmw) |
 | BMW M | 2026-10-10 | [公開來源](https://www.bmw-m.com/en/index.html) · [比對紀錄](official-progress.html#bmw-m) |
+| Booking.com | 2026-11-01 | [公開來源](https://www.booking.com/) · [比對紀錄](official-progress.html#booking) |
 | Bugatti | 2026-10-11 | [公開來源](https://www.bugatti.com/) · [比對紀錄](official-progress.html#bugatti) |
 | Cal.com | 2026-10-10 | [公開來源](https://cal.com/) · [比對紀錄](official-progress.html#cal) |
+| Canva | 2026-11-01 | [公開來源](https://www.canva.com/zh_tw/) · [比對紀錄](official-progress.html#canva) |
 | Claude | 2026-10-12 | [公開來源](https://claude.com/index.html) · [比對紀錄](official-progress.html#claude) |
 | Clay | 2026-10-10 | [公開來源](https://clay.global/) · [比對紀錄](official-progress.html#clay) |
 | ClickHouse | 2026-10-11 | [公開來源](https://clickhouse.com/) · [比對紀錄](official-progress.html#clickhouse) |
@@ -57,6 +63,7 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 | Discord | 2026-11-01 | [公開來源](https://discord.com/) · [比對紀錄](official-progress.html#discord) |
 | Duolingo | 2026-11-01 | [公開來源](https://www.duolingo.com/) · [比對紀錄](official-progress.html#duolingo) |
 | ElevenLabs | 2026-10-10 | [公開來源](https://elevenlabs.io/) · [比對紀錄](official-progress.html#elevenlabs) |
+| Etsy | 2026-11-01 | [公開來源](https://www.etsy.com/) · [比對紀錄](official-progress.html#etsy) |
 | Expo | 2026-10-10 | [公開來源](https://expo.dev/) · [比對紀錄](official-progress.html#expo) |
 | Ferrari | 2026-10-11 | [公開來源](https://www.ferrari.com/en-US) · [比對紀錄](official-progress.html#ferrari) |
 | Figma | 2026-10-12 | [公開來源](https://www.figma.com/) · [比對紀錄](official-progress.html#figma) |
@@ -68,9 +75,11 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 | IBM | 2026-10-10 | [公開來源](https://www.ibm.com/ca-en) · [比對紀錄](official-progress.html#ibm) |
 | IKEA | 2026-11-01 | [公開來源](https://www.ikea.com.tw/zh) · [比對紀錄](official-progress.html#ikea) |
 | Intercom | 2026-10-10 | [公開來源](https://www.intercom.com/) · [比對紀錄](official-progress.html#intercom) |
+| Khan Academy | 2026-11-01 | [公開來源](https://www.khanacademy.org/) · [比對紀錄](official-progress.html#khan-academy) |
 | Kraken | 2026-10-10 | [公開來源](https://www.kraken.com/ca) · [比對紀錄](official-progress.html#kraken) |
 | Lamborghini | 2026-10-11 | [公開來源](https://www.lamborghini.com/en-en) · [比對紀錄](official-progress.html#lamborghini) |
 | Linear | 2026-10-12 | [公開來源](https://linear.app/) · [比對紀錄](official-progress.html#linear.app) |
+| LinkedIn | 2026-11-01 | [公開來源](https://www.linkedin.com/) · [比對紀錄](official-progress.html#linkedin) |
 | Lovable | 2026-10-11 | [公開來源](https://lovable.dev/) · [比對紀錄](official-progress.html#lovable) |
 | Mastercard | 2026-10-11 | [公開來源](https://www.mastercard.com/tw/zh.html) · [比對紀錄](official-progress.html#mastercard) |
 | Meta | 2026-10-11 | [公開來源](https://www.meta.com/ca/) · [比對紀錄](official-progress.html#meta) |
@@ -87,6 +96,7 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 | NVIDIA | 2026-10-11 | [公開來源](https://www.nvidia.com/en-us/) · [比對紀錄](official-progress.html#nvidia) |
 | Ollama | 2026-10-11 | [公開來源](https://ollama.com/) · [比對紀錄](official-progress.html#ollama) |
 | OpenCode | 2026-10-10 | [公開來源](https://opencode.ai/) · [比對紀錄](official-progress.html#opencode.ai) |
+| PayPal | 2026-11-01 | [公開來源](https://www.paypal.com/tw/home) · [比對紀錄](official-progress.html#paypal) |
 | Pinterest | 2026-10-13 | [公開來源](https://www.pinterest.com/) · [比對紀錄](official-progress.html#pinterest) |
 | PlayStation | 2026-10-11 | [公開來源](https://www.playstation.com/fr-ca/) · [比對紀錄](official-progress.html#playstation) |
 | PostHog | 2026-10-10 | [公開來源](https://posthog.com/) · [比對紀錄](official-progress.html#posthog) |
@@ -109,6 +119,7 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 | Tesla | 2026-10-10 | [公開來源](https://www.tesla.com/) · [比對紀錄](official-progress.html#tesla) |
 | The Verge | 2026-10-13 | [公開來源](https://www.theverge.com/) · [比對紀錄](official-progress.html#theverge) |
 | Together AI | 2026-10-10 | [公開來源](https://www.together.ai/) · [比對紀錄](official-progress.html#together.ai) |
+| Twitch | 2026-11-01 | [公開來源](https://www.twitch.tv/) · [比對紀錄](official-progress.html#twitch) |
 | Uber | 2026-10-11 | [公開來源](https://www.uber.com/ca/en/) · [比對紀錄](official-progress.html#uber) |
 | Vercel | 2026-10-12 | [公開來源](https://vercel.com/) · [比對紀錄](official-progress.html#vercel) |
 | Vodafone | 2026-10-13 | [公開來源](https://www.vodafone.com/) · [比對紀錄](official-progress.html#vodafone) |
@@ -121,3 +132,4 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 | xAI | 2026-10-11 | [公開來源](https://x.ai/) · [比對紀錄](official-progress.html#x.ai) |
 | YouTube | 2026-11-01 | [公開來源](https://www.youtube.com/results?search_query=design) · [比對紀錄](official-progress.html#youtube) |
 | Zapier | 2026-10-11 | [公開來源](https://zapier.com/) · [比對紀錄](official-progress.html#zapier) |
+| Zoom | 2026-11-01 | [公開來源](https://www.zoom.com/zh-tw) · [比對紀錄](official-progress.html#zoom) |

@@ -1,8 +1,8 @@
 # Awesome AI Web Design
 
-**84 套品牌設計參考，附繁體中文設計規格、AI 指令與 CSS 起始檔。**
+**94 套品牌設計參考，附繁體中文設計規格、AI 指令與 CSS 起始檔。**
 
-[開啟網站](https://webdesign.zero2codex.dev/) · [下載 84 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) · [參考來源](https://webdesign.zero2codex.dev/reference-sources.html)
+[開啟網站](https://webdesign.zero2codex.dev/) · [下載 94 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) · [參考來源](https://webdesign.zero2codex.dev/reference-sources.html)
 
 選一套喜歡的設計，下載只含 `DESIGN.md` 與 `PROMPTS.md` 的簡易包，或按「一次複製給 AI」取得兩份完整內容。選一種方式，補上自己的需求就能開始。介面說明、主要設計規格與 AI 指令皆使用繁體中文（台灣用語）；品牌名稱、程式碼與原始預覽保留原文。
 
@@ -13,7 +13,7 @@
 - **找設計**：搜尋品牌與關鍵字，搭配 10 種領域分類及明暗模式篩選。
 - **看預覽**：開啟品牌詳情，查看介面、設計規格、AI 指令與參考日期。
 - **開始實作**：取得角色色碼、字級、間距、版面斷點、元件欄位與互動行為，搭配 CSS 起始檔建立介面。
-- **下載或直接複製**：簡易包只含兩份核心文件；複製版把完整規格與指令合在一起，不需要下載或上傳檔案。含 CSS 等補充檔案的完整包與單份下載放在進階選項；另提供 84 套合集供批次收藏。
+- **下載或直接複製**：簡易包只含兩份核心文件；複製版把完整規格與指令合在一起，不需要下載或上傳檔案。含 CSS 等補充檔案的完整包與單份下載放在進階選項；另提供 94 套合集供批次收藏。
 - **收藏設計**：收藏儲存在目前瀏覽器，重新整理後仍保留，並在同網域的分頁間同步。
 
 網站支援桌面與手機瀏覽。收藏不會同步至其他裝置；品牌預覽中的部分互動使用示範資料。
@@ -58,9 +58,9 @@
 | `README.md`、`SOURCES.json` | 使用說明、參考日期與來源依據。 |
 | `LICENSE`、`ATTRIBUTION.md` | 授權與來源聲明。 |
 
-[84 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) 共 508 個檔案：84 組主要規格、指令、設計數值、CSS 與兩份素材說明，加上共用說明、來源清單、授權及致謝。資料包未附品牌商標、專有字型或完整官網媒體；規格提供系統字型與無圖版做法。
+[94 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) 共 568 個檔案：94 組主要規格、指令、設計數值、CSS 與兩份素材說明，加上共用說明、來源清單、授權及致謝。資料包未附品牌商標、專有字型或完整官網媒體；規格提供系統字型與無圖版做法。
 
-原始碼另保留 84 份延伸設計分析、252 則任務指令，以及 Google Stitch 生成紀錄；新加入的十套公開預覽經修正並重新截圖。網站主要分頁與下載包採用目前的實作規格；延伸分析與生成預覽可供深入研究。
+原始碼另保留 94 份延伸設計分析、282 則任務指令，以及 Google Stitch 生成紀錄；近期新增的公開預覽經修正並重新截圖。網站主要分頁與下載包採用目前的實作規格；延伸分析與生成預覽可供深入研究。
 
 ## 來源與授權
 
@@ -75,7 +75,7 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 以下為原始碼中的延伸分析與任務指令。使用目前的主要規格與實作包，請至[網站設計目錄](https://webdesign.zero2codex.dev/)。
 
 <details>
-<summary>展開全部 84 套設計</summary>
+<summary>展開全部 94 套設計</summary>
 
 <!-- COLLECTION:START -->
 
@@ -136,6 +136,9 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Zapier](design-md/zapier/README.md) | 暖白與亮橙色，將自動化步驟排列清楚。 | [設計規格](design-md/zapier/DESIGN.md) · [AI 指令](design-md/zapier/PROMPTS.md) |
 | [Discord](design-md/discord/README.md) | 藍紫漸層、活潑標題與聊天介面，呈現社群氛圍。 | [設計規格](design-md/discord/DESIGN.md) · [AI 指令](design-md/discord/PROMPTS.md) |
 | [Duolingo](design-md/duolingo/README.md) | 鮮綠按鈕、圓潤插畫與留白，讓學習入口輕鬆易懂。 | [設計規格](design-md/duolingo/DESIGN.md) · [AI 指令](design-md/duolingo/PROMPTS.md) |
+| [Zoom](design-md/zoom/README.md) | 深藍漸層、大型標題與產品卡，傳達團隊協作的流暢感。 | [設計規格](design-md/zoom/DESIGN.md) · [AI 指令](design-md/zoom/PROMPTS.md) |
+| [LinkedIn](design-md/linkedin/README.md) | 白底藍色操作與親切插畫，呈現職涯社群與主題探索。 | [設計規格](design-md/linkedin/DESIGN.md) · [AI 指令](design-md/linkedin/PROMPTS.md) |
+| [Khan Academy](design-md/khan-academy/README.md) | 清楚的雙欄入口與角色選擇卡，讓不同學習需求容易開始。 | [設計規格](design-md/khan-academy/DESIGN.md) · [AI 指令](design-md/khan-academy/PROMPTS.md) |
 
 ### 設計與創作
 
@@ -147,6 +150,8 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Framer](design-md/framer/README.md) | 深色展示舞台與電藍色，突出作品品質。 | [設計規格](design-md/framer/DESIGN.md) · [AI 指令](design-md/framer/PROMPTS.md) |
 | [Miro](design-md/miro/README.md) | 明亮黃色與便箋色彩，讓協作空間有秩序。 | [設計規格](design-md/miro/DESIGN.md) · [AI 指令](design-md/miro/PROMPTS.md) |
 | [Webflow](design-md/webflow/README.md) | 大膽黑白區塊與亮藍色，配合精準版面結構。 | [設計規格](design-md/webflow/DESIGN.md) · [AI 指令](design-md/webflow/PROMPTS.md) |
+| [Adobe](design-md/adobe/README.md) | 深色主視覺與鮮明產品卡，呈現創意工具的多樣性。 | [設計規格](design-md/adobe/DESIGN.md) · [AI 指令](design-md/adobe/PROMPTS.md) |
+| [Canva](design-md/canva/README.md) | 明亮漸層、置中標題與多彩圖形，帶出輕鬆創作感。 | [設計規格](design-md/canva/DESIGN.md) · [AI 指令](design-md/canva/PROMPTS.md) |
 
 ### 金融科技
 
@@ -159,6 +164,7 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Revolut](design-md/revolut/README.md) | 俐落字級與深淺卡片，整理多種金融資訊。 | [設計規格](design-md/revolut/DESIGN.md) · [AI 指令](design-md/revolut/PROMPTS.md) |
 | [Stripe](design-md/stripe/README.md) | 深藍字色、靛紫操作與輕盈的漸層空間。 | [設計規格](design-md/stripe/DESIGN.md) · [AI 指令](design-md/stripe/PROMPTS.md) |
 | [Wise](design-md/wise/README.md) | 鮮綠色與深綠字色，讓數字和步驟清晰可讀。 | [設計規格](design-md/wise/DESIGN.md) · [AI 指令](design-md/wise/PROMPTS.md) |
+| [PayPal](design-md/paypal/README.md) | 清爽淺藍主視覺與黑色大標，突顯簡單直接的服務入口。 | [設計規格](design-md/paypal/DESIGN.md) · [AI 指令](design-md/paypal/PROMPTS.md) |
 
 ### 電商與零售
 
@@ -171,6 +177,8 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Starbucks](design-md/starbucks/README.md) | 深淺綠色、白底與交錯區塊，呈現親切日常感。 | [設計規格](design-md/starbucks/DESIGN.md) · [AI 指令](design-md/starbucks/PROMPTS.md) |
 | [Amazon](design-md/amazon/README.md) | 深色搜尋導覽與豐富卡片，讓大量商品容易瀏覽。 | [設計規格](design-md/amazon/DESIGN.md) · [AI 指令](design-md/amazon/PROMPTS.md) |
 | [IKEA](design-md/ikea/README.md) | 明亮留白、藍色重點與居家圖片磚，整理生活靈感。 | [設計規格](design-md/ikea/DESIGN.md) · [AI 指令](design-md/ikea/PROMPTS.md) |
+| [Booking.com](design-md/booking/README.md) | 深藍主視覺與醒目搜尋列，讓旅行探索從目的地開始。 | [設計規格](design-md/booking/DESIGN.md) · [AI 指令](design-md/booking/PROMPTS.md) |
+| [Etsy](design-md/etsy/README.md) | 暖白底、橘色搜尋與手作主題卡，讓商品探索更有溫度。 | [設計規格](design-md/etsy/DESIGN.md) · [AI 指令](design-md/etsy/PROMPTS.md) |
 
 ### 媒體與科技
 
@@ -193,6 +201,8 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Netflix](design-md/netflix/README.md) | 深色電影感版面，搭配強烈紅色與大幅主視覺。 | [設計規格](design-md/netflix/DESIGN.md) · [AI 指令](design-md/netflix/PROMPTS.md) |
 | [Microsoft](design-md/microsoft/README.md) | 乾淨的產品型錄，以藍色操作與寬幅圖文區塊引導。 | [設計規格](design-md/microsoft/DESIGN.md) · [AI 指令](design-md/microsoft/PROMPTS.md) |
 | [Wikipedia](design-md/wikipedia/README.md) | 置中百科入口，對稱語言清單與簡潔搜尋。 | [設計規格](design-md/wikipedia/DESIGN.md) · [AI 指令](design-md/wikipedia/PROMPTS.md) |
+| [BBC](design-md/bbc/README.md) | 黑白編輯網格與清晰標題，整理多層次的文章內容。 | [設計規格](design-md/bbc/DESIGN.md) · [AI 指令](design-md/bbc/PROMPTS.md) |
+| [Twitch](design-md/twitch/README.md) | 深色介面搭配紫色重點，突出直播內容與頻道瀏覽。 | [設計規格](design-md/twitch/DESIGN.md) · [AI 指令](design-md/twitch/PROMPTS.md) |
 
 ### 汽車
 
