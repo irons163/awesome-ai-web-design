@@ -36,7 +36,7 @@ def compact_catalog_media(root, output, catalog):
     config = json.loads(config_path.read_text())
     if not re.fullmatch(r'https://raw\.githubusercontent\.com/[^/]+/[^/]+/[a-f0-9]{40}/', config['image_base_url']):
         raise ValueError('Catalog media requires an immutable GitHub commit')
-    expected = sorted(item['preview'][key] for item in catalog['designs'] if item['preview']['status'] == 'generated' for key in ('image', 'thumbnail'))
+    expected = sorted(item['preview'][key] for item in catalog['designs'] if item['preview']['status'] == 'generated' and not item['preview'].get('localAssets') for key in ('image', 'thumbnail'))
     if expected != sorted(item['path'] for item in config['assets']):
         raise ValueError('Catalog media allowlist differs from the published collection')
     selected = validated_media(root, output, config)

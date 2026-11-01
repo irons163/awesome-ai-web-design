@@ -86,6 +86,17 @@ async function openHistory(ui,view='image') {
   ui.query(`[data-preview="${view}"]`).click();
 }
 
+test('a modified Stitch web export is identified as adjusted in its history', async t => {
+  const ui = await fixture(t, 'google');
+  ui.revealProgress();
+  await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === 'official-drafts/google.html');
+  await openHistory(ui);
+  assert.match(ui.query('.history-description').textContent, /經修改並重新截圖/);
+  assert.match(ui.query('#preview-image').alt, /調整後的預覽截圖/);
+  assert.equal(ui.query('[data-preview="html"]').textContent, '調整後 HTML');
+  assert.match(ui.query('#preview-actions .preview-note').textContent, /人工調整/);
+});
+
 test('a late combined-copy response cannot replace a different brand or enable a stale copy', async t => {
   const old=studies.find(study=>study.slug==='wired');
   const next=studies.find(study=>study.slug==='pinterest');
@@ -174,7 +185,7 @@ for (const slug of ['pinterest', 'vodafone']) {
     await settleUntil(() => ui.query('#official-preview-link').getAttribute('href') === `official-drafts/${slug}.html`);
     assertOfficialOnly(ui.query);
     assertCurrentStudyStatus(ui.query, slug);
-    assert.match(ui.query('.official-drafts-count').textContent, /74 份參考來源/);
+    assert.equal(ui.query('.official-drafts-count').textContent, `${studies.length} 份參考來源`);
   });
 }
 
@@ -216,7 +227,7 @@ test('all catalog covers and the default detail image depict the same current st
   const ui=await fixture(t,'pinterest');
   assert.equal(ui.query('#catalog').querySelectorAll('img').length,0);
   ui.revealProgress();
-  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===74);
+  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===studies.length);
   for(const study of studies){
     const image=ui.query(`[data-design="${study.slug}"] .card-art img`);
     assert.equal(image.getAttribute('src'),study.cover.src);
@@ -290,9 +301,9 @@ test('a directly opened analysis waits for metadata then reads, copies and downl
   assert.equal(ui.query('#creation-history').open,false);
 });
 
-test('all 74 primary analysis and prompt links match their preview while original files remain in history',async t=>{
+test('all primary analysis and prompt links match their preview while original files remain in history',async t=>{
   const ui=await fixture(t,'pinterest');ui.revealProgress();
-  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===74);
+  await settleUntil(()=>ui.query('#catalog').querySelectorAll('img').length===studies.length);
   for(const study of studies){
     ui.window.location.hash='#/design/'+encodeURIComponent(study.slug);
     await settleUntil(()=>ui.query('#detail-title').textContent===study.name);

@@ -5,7 +5,7 @@ import re
 from html.parser import HTMLParser
 from pathlib import Path
 
-VERSION = '2026-10-20'
+VERSION = '2026-11-01'
 FONT = '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif'
 PROPERTIES = {
     'accent': '主要操作背景', 'on-accent': '主要操作文字', 'canvas': '頁面背景',
@@ -13,6 +13,66 @@ PROPERTIES = {
     'border': '分隔線及卡片邊框', 'focus': '鍵盤焦點外框',
 }
 COMPOSITIONS = {
+    'knowledge-portal': {
+        'name': '多語言知識入口', 'sections': ['置中名稱與副標', '圖形兩側的語言入口', '搜尋與語言選擇', '其他語言和主題', '頁尾'],
+        'hero': '以置中圓形示意圖及對稱語言清單為焦點，搜尋框不超過 450px；手機可改為兩欄清單。',
+        'media_ratio': '1 / 1', 'image_count': 0, 'max': 960, 'gap': 24, 'padding': 20, 'radius': 4, 'button_radius': 4,
+        'hero_desktop': 40, 'hero_mobile': 32, 'body': 16,
+    },
+    'marketplace': {
+        'name': '商品探索型錄', 'sections': ['深色導覽及搜尋', '分類導覽', '主題活動卡', '商品分類與篩選', '示範清單及頁尾'],
+        'hero': '用高對比搜尋列帶出主要任務，活動卡與商品卡以清楚的分類及資訊層級排列。',
+        'media_ratio': '4 / 3', 'image_count': 8, 'max': 1440, 'gap': 16, 'padding': 16, 'radius': 8, 'button_radius': 6,
+        'hero_desktop': 40, 'hero_mobile': 30, 'body': 16,
+    },
+    'community': {
+        'name': '社群聊天介紹頁', 'sections': ['導覽', '漸層主視覺與聊天示意', '頻道或對話示範', '三組特色', '頁尾'],
+        'hero': '深藍紫漸層搭配左側文字及右側聊天面板；窄版改為上下排列，原創示意資料不連線真實服務。',
+        'media_ratio': '16 / 10', 'image_count': 0, 'max': 1200, 'gap': 32, 'padding': 24, 'radius': 18, 'button_radius': 999,
+        'hero_desktop': 56, 'hero_mobile': 36, 'body': 17,
+    },
+    'learning': {
+        'name': '學習入口與練習', 'sections': ['精簡導覽', '原創插畫與主要操作', '學習主題', '示範練習', '學習特色與頁尾'],
+        'hero': '白底與綠色按鈕搭配左圖右文，手機改為上下排列；題目需有可理解的選取與回饋。',
+        'media_ratio': '1 / 1', 'image_count': 0, 'max': 1100, 'gap': 24, 'padding': 24, 'radius': 18, 'button_radius': 14,
+        'hero_desktop': 40, 'hero_mobile': 30, 'body': 17,
+    },
+    'home-inspiration': {
+        'name': '居家靈感與商品', 'sections': ['服務導覽與搜尋', '居家分類', '不等寬靈感磚', '商品卡與收藏', '頁尾'],
+        'hero': '白底、藍色重點與大型搜尋框；活動磚與商品卡在窄版依閱讀順序重新排列。',
+        'media_ratio': '4 / 3', 'image_count': 6, 'max': 1280, 'gap': 20, 'padding': 20, 'radius': 8, 'button_radius': 999,
+        'hero_desktop': 44, 'hero_mobile': 32, 'body': 16,
+    },
+    'search-home': {
+        'name': '置中搜尋首頁', 'sections': ['精簡導覽', '置中品牌與搜尋欄', '搜尋建議與主要操作', '空白或示範結果', '頁尾'],
+        'hero': '以置中的品牌文字及搜尋框為焦點；桌面搜尋框最多 680px，窄版保留兩側 20px，結果使用獨立面板。',
+        'media_ratio': '16 / 9', 'image_count': 0, 'max': 680, 'gap': 24, 'padding': 20, 'radius': 24, 'button_radius': 8,
+        'hero_desktop': 56, 'hero_mobile': 40, 'body': 16,
+    },
+    'video-results': {
+        'name': '影音搜尋結果清單', 'sections': ['導覽與搜尋', '可水平捲動的分類篩選', '影音結果清單', '篩選與無結果狀態'],
+        'hero': '桌面結果以 16:9 縮圖與文字左右並列，窄版改上下排列；搜尋、分類與結果數需同步。',
+        'media_ratio': '16 / 9', 'image_count': 6, 'max': 1280, 'gap': 16, 'padding': 16, 'radius': 12, 'button_radius': 999,
+        'hero_desktop': 32, 'hero_mobile': 26, 'body': 16,
+    },
+    'streaming': {
+        'name': '串流內容介紹頁', 'sections': ['導覽', '置中主標與主要操作', '可橫向瀏覽的內容卡', '服務特色', '可展開的常見問題', '頁尾'],
+        'hero': '深色大幅主視覺搭配置中標題與紅色重點操作，未提供授權圖片時以抽象色塊及文字替代。',
+        'media_ratio': '2 / 3', 'image_count': 6, 'max': 1200, 'gap': 24, 'padding': 24, 'radius': 8, 'button_radius': 4,
+        'hero_desktop': 56, 'hero_mobile': 36, 'body': 17,
+    },
+    'collaboration': {
+        'name': '開發協作介紹頁', 'sections': ['精簡導覽', '置中標題與主要操作', '可切換的程式碼面板', '功能與協作步驟', '頁尾'],
+        'hero': '白底、置中大標與綠色按鈕建立重點；程式碼面板以文字、可切換分頁及複製回饋呈現。',
+        'media_ratio': '16 / 10', 'image_count': 0, 'max': 1200, 'gap': 24, 'padding': 24, 'radius': 8, 'button_radius': 6,
+        'hero_desktop': 48, 'hero_mobile': 32, 'body': 16,
+    },
+    'product-catalog': {
+        'name': '科技產品型錄', 'sections': ['精簡導覽與搜尋', '產品主視覺', '產品分類與關鍵字篩選', '產品資訊卡', '支援資訊與頁尾'],
+        'hero': '桌面左文右圖，窄版改為單欄；產品卡清楚分離名稱、重點規格、價格或未提供狀態。',
+        'media_ratio': '4 / 3', 'image_count': 4, 'max': 1280, 'gap': 24, 'padding': 24, 'radius': 4, 'button_radius': 4,
+        'hero_desktop': 48, 'hero_mobile': 32, 'body': 16,
+    },
     'campaign': {
         'name': '交錯雙欄活動頁', 'sections': ['導覽與主要入口', '一行活動公告', '四組照片與文案交錯區塊', '補充說明', '五組頁尾連結'],
         'hero': '首組以左側照片、右側置中文字呈現；下一組反向。每組各半，不另加右側儀表板。',

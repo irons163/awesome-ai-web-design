@@ -27,7 +27,8 @@ class ImplementationSpecTests(unittest.TestCase):
     def test_every_primary_spec_is_self_contained_and_has_real_values(self):
         data = json.loads((ROOT / 'data/zh-TW/studies.json').read_text())
         profiles = json.loads((ROOT / 'data/implementation/specs.json').read_text())['profiles']
-        self.assertEqual(len(profiles), 74)
+        self.assertEqual(set(profiles), set(data['studies']))
+        self.assertEqual(set(profiles), {item['slug'] for item in json.loads((ROOT / 'data/recipes.json').read_text())})
         for slug, row in data['studies'].items():
             profile = profiles[slug]['profile']
             design = row['documents']['analysis']
@@ -79,7 +80,7 @@ class ImplementationSpecTests(unittest.TestCase):
         self.assertEqual(json.loads((output / 'assets/catalog.json').read_text())['startPrompt'], usage['start_prompt'])
         self.assertEqual(json.loads((output / 'assets/catalog.json').read_text())['copyIntro'], usage['copy_intro'])
         with zipfile.ZipFile(output / 'assets/design-references.zip') as full:
-            self.assertEqual(len(full.namelist()),448)
+            self.assertEqual(len(full.namelist()), 6 * len(studies) + 4)
             full_readme = full.read('README.md').decode()
             self.assertIn('先選一個品牌資料夾', full_readme)
             self.assertEqual(re.findall(r'```text\n(.*?)\n```', full_readme, re.S), [usage['start_prompt']])

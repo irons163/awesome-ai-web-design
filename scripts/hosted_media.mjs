@@ -32,7 +32,7 @@ function validatedMedia(sourceRoot,output,config) {
 export function compactCatalogMedia(root,output,catalog) {
   const configPath=path.join(root,'data/hosting-assets.json'),config=JSON.parse(fs.readFileSync(configPath,'utf8'));
   if(!/^https:\/\/raw\.githubusercontent\.com\/[^/]+\/[^/]+\/[a-f0-9]{40}\/$/.test(config.image_base_url)) throw new Error('Catalog media requires an immutable GitHub commit');
-  const expected=catalog.designs.filter(x=>x.preview.status==='generated').flatMap(x=>[x.preview.image,x.preview.thumbnail]).sort();
+  const expected=catalog.designs.filter(x=>x.preview.status==='generated'&&!x.preview.localAssets).flatMap(x=>[x.preview.image,x.preview.thumbnail]).sort();
   if(JSON.stringify(expected)!==JSON.stringify(config.assets.map(x=>x.path).sort())) throw new Error('Catalog media allowlist differs from the published collection');
   const selected=validatedMedia(root,output,config);
   for(const {file} of selected) fs.unlinkSync(file);

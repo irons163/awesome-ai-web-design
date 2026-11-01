@@ -68,7 +68,8 @@ def stitch_preview(path):
             'provenance': f"design-md/{path.name}/STITCH.json",
             'prompt': f"design-md/{path.name}/STITCH-PROMPT.zh-TW.md",
             'projectId': data['project_id'], 'screenId': data['screen_id'],
-            'title': data['title'], 'width': data['width'], 'height': data['height']}
+            'title': data['title'], 'width': data['width'], 'height': data['height'],
+            **({'localAssets': True, 'modified': True} if data.get('preview_is_modified') else {})}
 
 
 def main():

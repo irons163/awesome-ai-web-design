@@ -6,13 +6,13 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 
 目錄介面、中文摘要、重新撰寫的 AI 指令、通用工作流程、實作規格、預覽整合、建置程式、說明及測試，由 Awesome AI Web Design 貢獻者製作，採 [MIT 授權](LICENSE)。
 
-74 份延伸設計規格、222 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 2026-10-20 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
+84 份延伸設計規格、252 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 2026-11-01 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
 
 ## 預覽與原始生成紀錄
 
-Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專案、畫面識別字及未修改匯出的檔案雜湊。原始 `STITCH-PROMPT.md` 保留當時送出的指令；重新撰寫的 `STITCH-PROMPT.zh-TW.md` 是中文生成參考，沒有宣稱已再次送交生成服務。
+Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記錄可取得的專案與畫面識別字及檔案雜湊。網頁版新增的設計經人工調整並重新截圖，修改範圍及原始匯出的摘要記錄於個別生成紀錄。`STITCH-PROMPT.md` 保留當時送出的指令；重新撰寫的 `STITCH-PROMPT.zh-TW.md` 是中文生成參考，沒有宣稱已再次送交生成服務。
 
-網站主要預覽則依保存的公開官網資料、DOM、樣式、字型、圖片與影片校正，與原生生成稿分開保存。本次文字在地化沒有改寫原始預覽、截圖或媒體，也不把生成服務的精確度宣稱當成視覺驗證。
+既有網站主要預覽依保存的公開官網資料、DOM、樣式、字型、圖片與影片校正，與原生生成稿分開保存。新增設計採明確標示的生成示範，不把生成服務的精確度宣稱當成視覺驗證。
 
 原始完整改寫歷程可由版本 `1a783491c9539c3153c2fc96c16d59131e024f4e` 的來源紀錄溯源；目前每頁的日期、預覽摘要與限制則以 [全部參考紀錄](official-progress.html) 為準。曾出現的生成錯誤、下載失敗、行動版請求回傳桌面稿、影片與動畫差異，仍保留在來源紀錄，不因中文整理而改標為驗收通過。
 
@@ -31,7 +31,7 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 - 原始著作權：Copyright (c) 2026 VoltAgent；MIT 著作權與授權條文保留於 [LICENSE](LICENSE)。
 - 原始檔案路徑與 SHA-256 記錄於原始碼的 `data/upstream.json`。
 
-## 74 份日期限定研究的來源
+## 84 份日期限定研究的來源
 
 以下日期是既有公開首頁觀察日期，不是本次中文整理時重新檢查官網的日期。每頁限制說明以繁體中文提供；實際比較只涵蓋原紀錄的尺寸與狀態，未宣稱完整互動、所有裝置或品牌後端服務一致。
 
@@ -39,6 +39,7 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 | --- | --- | --- |
 | Airbnb | 2026-10-10 | [公開來源](https://www.airbnb.ca/?locale=en) · [比對紀錄](official-progress.html#airbnb) |
 | Airtable | 2026-10-10 | [公開來源](https://www.airtable.com/) · [比對紀錄](official-progress.html#airtable) |
+| Amazon | 2026-11-01 | [公開來源](https://www.amazon.com/) · [比對紀錄](official-progress.html#amazon) |
 | Apple | 2026-10-10 | [公開來源](https://www.apple.com/) · [比對紀錄](official-progress.html#apple) |
 | Binance | 2026-10-11 | [公開來源](https://www.binance.com/en) · [比對紀錄](official-progress.html#binance) |
 | BMW | 2026-10-10 | [公開來源](https://www.bmw.com.tw/zh/index.html) · [比對紀錄](official-progress.html#bmw) |
@@ -53,14 +54,19 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 | Composio | 2026-10-10 | [公開來源](https://composio.dev/) · [比對紀錄](official-progress.html#composio) |
 | Cursor | 2026-10-10 | [公開來源](https://cursor.com/) · [比對紀錄](official-progress.html#cursor) |
 | Dell (1996) | 2026-10-13 | [公開來源](https://www.dell.com/zh-tw) · [比對紀錄](official-progress.html#dell-1996) |
+| Discord | 2026-11-01 | [公開來源](https://discord.com/) · [比對紀錄](official-progress.html#discord) |
+| Duolingo | 2026-11-01 | [公開來源](https://www.duolingo.com/) · [比對紀錄](official-progress.html#duolingo) |
 | ElevenLabs | 2026-10-10 | [公開來源](https://elevenlabs.io/) · [比對紀錄](official-progress.html#elevenlabs) |
 | Expo | 2026-10-10 | [公開來源](https://expo.dev/) · [比對紀錄](official-progress.html#expo) |
 | Ferrari | 2026-10-11 | [公開來源](https://www.ferrari.com/en-US) · [比對紀錄](official-progress.html#ferrari) |
 | Figma | 2026-10-12 | [公開來源](https://www.figma.com/) · [比對紀錄](official-progress.html#figma) |
 | Framer | 2026-10-12 | [公開來源](https://www.framer.com/) · [比對紀錄](official-progress.html#framer) |
+| GitHub | 2026-11-01 | [公開來源](https://github.com/) · [比對紀錄](official-progress.html#github) |
+| Google | 2026-11-01 | [公開來源](https://www.google.com/?hl=zh-TW) · [比對紀錄](official-progress.html#google) |
 | HashiCorp | 2026-10-11 | [公開來源](https://www.hashicorp.com/en) · [比對紀錄](official-progress.html#hashicorp) |
 | HP | 2026-10-11 | [公開來源](https://www.hp.com/ca-en/home.html) · [比對紀錄](official-progress.html#hp) |
 | IBM | 2026-10-10 | [公開來源](https://www.ibm.com/ca-en) · [比對紀錄](official-progress.html#ibm) |
+| IKEA | 2026-11-01 | [公開來源](https://www.ikea.com.tw/zh) · [比對紀錄](official-progress.html#ikea) |
 | Intercom | 2026-10-10 | [公開來源](https://www.intercom.com/) · [比對紀錄](official-progress.html#intercom) |
 | Kraken | 2026-10-10 | [公開來源](https://www.kraken.com/ca) · [比對紀錄](official-progress.html#kraken) |
 | Lamborghini | 2026-10-11 | [公開來源](https://www.lamborghini.com/en-en) · [比對紀錄](official-progress.html#lamborghini) |
@@ -68,11 +74,13 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 | Lovable | 2026-10-11 | [公開來源](https://lovable.dev/) · [比對紀錄](official-progress.html#lovable) |
 | Mastercard | 2026-10-11 | [公開來源](https://www.mastercard.com/tw/zh.html) · [比對紀錄](official-progress.html#mastercard) |
 | Meta | 2026-10-11 | [公開來源](https://www.meta.com/ca/) · [比對紀錄](official-progress.html#meta) |
+| Microsoft | 2026-11-01 | [公開來源](https://www.microsoft.com/zh-tw) · [比對紀錄](official-progress.html#microsoft) |
 | MiniMax | 2026-10-11 | [公開來源](https://www.minimax.io/) · [比對紀錄](official-progress.html#minimax) |
 | Mintlify | 2026-10-10 | [公開來源](https://www.mintlify.com/) · [比對紀錄](official-progress.html#mintlify) |
 | Miro | 2026-10-10 | [公開來源](https://miro.com/) · [比對紀錄](official-progress.html#miro) |
 | Mistral AI | 2026-10-10 | [公開來源](https://mistral.ai/) · [比對紀錄](official-progress.html#mistral.ai) |
 | MongoDB | 2026-10-10 | [公開來源](https://www.mongodb.com/zh-tw) · [比對紀錄](official-progress.html#mongodb) |
+| Netflix | 2026-11-01 | [公開來源](https://www.netflix.com/tw/) · [比對紀錄](official-progress.html#netflix) |
 | Nike | 2026-10-11 | [公開來源](https://www.nike.com/ca/) · [比對紀錄](official-progress.html#nike) |
 | Nintendo (2001) | 2026-10-13 | [公開來源](https://www.nintendo.com/en-ca/) · [比對紀錄](official-progress.html#nintendo-2001) |
 | Notion | 2026-10-12 | [公開來源](https://www.notion.com/) · [比對紀錄](official-progress.html#notion) |
@@ -107,7 +115,9 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 | VoltAgent | 2026-10-11 | [公開來源](https://voltagent.dev/) · [比對紀錄](official-progress.html#voltagent) |
 | Warp | 2026-10-12 | [公開來源](https://www.warp.dev/) · [比對紀錄](official-progress.html#warp) |
 | Webflow | 2026-10-11 | [公開來源](https://webflow.com/) · [比對紀錄](official-progress.html#webflow) |
+| Wikipedia | 2026-11-01 | [公開來源](https://www.wikipedia.org/) · [比對紀錄](official-progress.html#wikipedia) |
 | WIRED | 2026-10-13 | [公開來源](https://www.wired.com/) · [比對紀錄](official-progress.html#wired) |
 | Wise | 2026-10-11 | [公開來源](https://wise.com/) · [比對紀錄](official-progress.html#wise) |
 | xAI | 2026-10-11 | [公開來源](https://x.ai/) · [比對紀錄](official-progress.html#x.ai) |
+| YouTube | 2026-11-01 | [公開來源](https://www.youtube.com/results?search_query=design) · [比對紀錄](official-progress.html#youtube) |
 | Zapier | 2026-10-11 | [公開來源](https://zapier.com/) · [比對紀錄](official-progress.html#zapier) |

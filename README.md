@@ -1,8 +1,8 @@
 # Awesome AI Web Design
 
-**74 套品牌設計參考，附繁體中文設計規格、AI 指令與 CSS 起始檔。**
+**84 套品牌設計參考，附繁體中文設計規格、AI 指令與 CSS 起始檔。**
 
-[開啟網站](https://webdesign.zero2codex.dev/) · [下載 74 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) · [參考來源](https://webdesign.zero2codex.dev/reference-sources.html)
+[開啟網站](https://webdesign.zero2codex.dev/) · [下載 84 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) · [參考來源](https://webdesign.zero2codex.dev/reference-sources.html)
 
 選一套喜歡的設計，下載只含 `DESIGN.md` 與 `PROMPTS.md` 的簡易包，或按「一次複製給 AI」取得兩份完整內容。選一種方式，補上自己的需求就能開始。介面說明、主要設計規格與 AI 指令皆使用繁體中文（台灣用語）；品牌名稱、程式碼與原始預覽保留原文。
 
@@ -13,7 +13,7 @@
 - **找設計**：搜尋品牌與關鍵字，搭配 10 種領域分類及明暗模式篩選。
 - **看預覽**：開啟品牌詳情，查看介面、設計規格、AI 指令與參考日期。
 - **開始實作**：取得角色色碼、字級、間距、版面斷點、元件欄位與互動行為，搭配 CSS 起始檔建立介面。
-- **下載或直接複製**：簡易包只含兩份核心文件；複製版把完整規格與指令合在一起，不需要下載或上傳檔案。含 CSS 等補充檔案的完整包與單份下載放在進階選項；另提供 74 套合集供批次收藏。
+- **下載或直接複製**：簡易包只含兩份核心文件；複製版把完整規格與指令合在一起，不需要下載或上傳檔案。含 CSS 等補充檔案的完整包與單份下載放在進階選項；另提供 84 套合集供批次收藏。
 - **收藏設計**：收藏儲存在目前瀏覽器，重新整理後仍保留，並在同網域的分頁間同步。
 
 網站支援桌面與手機瀏覽。收藏不會同步至其他裝置；品牌預覽中的部分互動使用示範資料。
@@ -58,30 +58,15 @@
 | `README.md`、`SOURCES.json` | 使用說明、參考日期與來源依據。 |
 | `LICENSE`、`ATTRIBUTION.md` | 授權與來源聲明。 |
 
-[74 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) 共 448 個檔案：74 組主要規格、指令、設計數值、CSS 與兩份素材說明，加上共用說明、來源清單、授權及致謝。資料包未附品牌商標、專有字型或完整官網媒體；規格提供系統字型與無圖版做法。
+[84 套合集](https://webdesign.zero2codex.dev/assets/design-references.zip) 共 508 個檔案：84 組主要規格、指令、設計數值、CSS 與兩份素材說明，加上共用說明、來源清單、授權及致謝。資料包未附品牌商標、專有字型或完整官網媒體；規格提供系統字型與無圖版做法。
 
-原始碼另保留 74 份延伸設計分析、222 則任務指令，以及 Google Stitch 的原始 HTML、截圖與生成紀錄。網站主要分頁與下載包採用目前的實作規格；延伸分析與原始預覽可供深入研究。
-
-## 本機開發
-
-需要 Node.js 22.13 以上、pnpm 11.25.0；重新產出內容與執行 Python 測試另需 Python 3.9 以上。
-
-```sh
-git clone https://github.com/irons163/awesome-ai-web-design.git
-cd awesome-ai-web-design
-pnpm install --frozen-lockfile
-pnpm run dev
-```
-
-依終端機顯示的網址開啟網站；本機預設為 [http://127.0.0.1:5173](http://127.0.0.1:5173)。開發伺服器提供主站與同源素材路由，部分預覽素材需連線讀取。
-
-若只需瀏覽原始收藏，可執行 `python3 scripts/serve.py`，再開啟 [http://127.0.0.1:4173](http://127.0.0.1:4173)。此模式不提供主站目前預覽所需的發布路由。請透過伺服器瀏覽，直接開啟 `index.html` 可能受到瀏覽器讀取限制。
+原始碼另保留 84 份延伸設計分析、252 則任務指令，以及 Google Stitch 生成紀錄；新加入的十套公開預覽經修正並重新截圖。網站主要分頁與下載包採用目前的實作規格；延伸分析與生成預覽可供深入研究。
 
 ## 來源與授權
 
 Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，提供繁體中文設計規格、重新撰寫的 AI 實作指令、可操作預覽與下載工具。
 
-設計數值依保存的參考資料與實作建議整理，主要規格會標示依據。每個品牌的觀察日期與範圍見[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)；原始 Stitch HTML、截圖及生成證據保留原貌。
+設計數值依保存的參考資料與實作建議整理，主要規格會標示依據。每個品牌的觀察日期與範圍見[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)；各套 Stitch 生成資訊、原始輸出摘要與公開預覽的調整紀錄，請見對應的 `STITCH.json`。
 
 程式與文字依 [MIT](LICENSE) 授權提供。第三方資料的適用授權及歷史來源集中於 [授權與資料來源](ATTRIBUTION.md)。品牌名稱、商標、字型、圖片與影片的權利屬各自權利人；使用時請保留適用的授權與來源聲明。
 
@@ -90,7 +75,7 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 以下為原始碼中的延伸分析與任務指令。使用目前的主要規格與實作包，請至[網站設計目錄](https://webdesign.zero2codex.dev/)。
 
 <details>
-<summary>展開全部 74 套設計</summary>
+<summary>展開全部 84 套設計</summary>
 
 <!-- COLLECTION:START -->
 
@@ -122,6 +107,7 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Superhuman](design-md/superhuman/README.md) | 深紫與暖白的輕盈對比，聚焦鍵盤效率。 | [設計規格](design-md/superhuman/DESIGN.md) · [AI 指令](design-md/superhuman/PROMPTS.md) |
 | [Vercel](design-md/vercel/README.md) | 黑白幾何與細線網格，凸顯產品精度。 | [設計規格](design-md/vercel/DESIGN.md) · [AI 指令](design-md/vercel/PROMPTS.md) |
 | [Warp](design-md/warp/README.md) | 暖灰終端機與區塊式指令，兼顧工具感與閱讀。 | [設計規格](design-md/warp/DESIGN.md) · [AI 指令](design-md/warp/PROMPTS.md) |
+| [GitHub](design-md/github/README.md) | 清楚的開發工具版面，白底搭配綠色操作與程式面板。 | [設計規格](design-md/github/DESIGN.md) · [AI 指令](design-md/github/PROMPTS.md) |
 
 ### 後端與資料
 
@@ -148,6 +134,8 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Resend](design-md/resend/README.md) | 近黑底色、單色字級與精簡開發者介面。 | [設計規格](design-md/resend/DESIGN.md) · [AI 指令](design-md/resend/PROMPTS.md) |
 | [Slack](design-md/slack/README.md) | 茄紫色配合奶油底與圓角按鈕，突出協作。 | [設計規格](design-md/slack/DESIGN.md) · [AI 指令](design-md/slack/PROMPTS.md) |
 | [Zapier](design-md/zapier/README.md) | 暖白與亮橙色，將自動化步驟排列清楚。 | [設計規格](design-md/zapier/DESIGN.md) · [AI 指令](design-md/zapier/PROMPTS.md) |
+| [Discord](design-md/discord/README.md) | 藍紫漸層、活潑標題與聊天介面，呈現社群氛圍。 | [設計規格](design-md/discord/DESIGN.md) · [AI 指令](design-md/discord/PROMPTS.md) |
+| [Duolingo](design-md/duolingo/README.md) | 鮮綠按鈕、圓潤插畫與留白，讓學習入口輕鬆易懂。 | [設計規格](design-md/duolingo/DESIGN.md) · [AI 指令](design-md/duolingo/PROMPTS.md) |
 
 ### 設計與創作
 
@@ -181,6 +169,8 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Nike](design-md/nike/README.md) | 巨大標題、黑白對比與影像優先的編排。 | [設計規格](design-md/nike/DESIGN.md) · [AI 指令](design-md/nike/PROMPTS.md) |
 | [Shopify](design-md/shopify/README.md) | 黑色與柔綠色面，讓商業展示保有呼吸感。 | [設計規格](design-md/shopify/DESIGN.md) · [AI 指令](design-md/shopify/PROMPTS.md) |
 | [Starbucks](design-md/starbucks/README.md) | 深淺綠色、白底與交錯區塊，呈現親切日常感。 | [設計規格](design-md/starbucks/DESIGN.md) · [AI 指令](design-md/starbucks/PROMPTS.md) |
+| [Amazon](design-md/amazon/README.md) | 深色搜尋導覽與豐富卡片，讓大量商品容易瀏覽。 | [設計規格](design-md/amazon/DESIGN.md) · [AI 指令](design-md/amazon/PROMPTS.md) |
+| [IKEA](design-md/ikea/README.md) | 明亮留白、藍色重點與居家圖片磚，整理生活靈感。 | [設計規格](design-md/ikea/DESIGN.md) · [AI 指令](design-md/ikea/PROMPTS.md) |
 
 ### 媒體與科技
 
@@ -198,6 +188,11 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 | [Uber](design-md/uber/README.md) | 純黑與白色、粗體字級與直接的操作流程。 | [設計規格](design-md/uber/DESIGN.md) · [AI 指令](design-md/uber/PROMPTS.md) |
 | [Vodafone](design-md/vodafone/README.md) | 紅色章節與大字標題，清楚傳達服務。 | [設計規格](design-md/vodafone/DESIGN.md) · [AI 指令](design-md/vodafone/PROMPTS.md) |
 | [WIRED](design-md/wired/README.md) | 報紙式密度、襯線標題與精簡藍色連結。 | [設計規格](design-md/wired/DESIGN.md) · [AI 指令](design-md/wired/PROMPTS.md) |
+| [Google](design-md/google/README.md) | 深色留白與置中搜尋，讓主要操作一眼可見。 | [設計規格](design-md/google/DESIGN.md) · [AI 指令](design-md/google/PROMPTS.md) |
+| [YouTube](design-md/youtube/README.md) | 深色影音介面，清楚排列搜尋、分類與內容卡片。 | [設計規格](design-md/youtube/DESIGN.md) · [AI 指令](design-md/youtube/PROMPTS.md) |
+| [Netflix](design-md/netflix/README.md) | 深色電影感版面，搭配強烈紅色與大幅主視覺。 | [設計規格](design-md/netflix/DESIGN.md) · [AI 指令](design-md/netflix/PROMPTS.md) |
+| [Microsoft](design-md/microsoft/README.md) | 乾淨的產品型錄，以藍色操作與寬幅圖文區塊引導。 | [設計規格](design-md/microsoft/DESIGN.md) · [AI 指令](design-md/microsoft/PROMPTS.md) |
+| [Wikipedia](design-md/wikipedia/README.md) | 置中百科入口，對稱語言清單與簡潔搜尋。 | [設計規格](design-md/wikipedia/DESIGN.md) · [AI 指令](design-md/wikipedia/PROMPTS.md) |
 
 ### 汽車
 

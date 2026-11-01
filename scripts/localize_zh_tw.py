@@ -281,13 +281,13 @@ Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，
 
 目錄介面、中文摘要、重新撰寫的 AI 指令、通用工作流程、實作規格、預覽整合、建置程式、說明及測試，由 Awesome AI Web Design 貢獻者製作，採 [MIT 授權](LICENSE)。
 
-74 份延伸設計規格、222 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 {UPDATED} 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
+{len(locks)} 份延伸設計規格、{len(locks) * 3} 則任務指令、日期限定的主要規格與指令、介面文案及已知差異，於 {UPDATED} 重新產出為繁體中文（台灣用語）。主要規格會標示實作依據；每個品牌的觀察日期與比較範圍以[參考來源](https://webdesign.zero2codex.dev/reference-sources.html)及[全部參考紀錄](official-progress.html)為準。
 
 ## 預覽與原始生成紀錄
 
-Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專案、畫面識別字及未修改匯出的檔案雜湊。原始 `STITCH-PROMPT.md` 保留當時送出的指令；重新撰寫的 `STITCH-PROMPT.zh-TW.md` 是中文生成參考，沒有宣稱已再次送交生成服務。
+Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記錄可取得的專案與畫面識別字及檔案雜湊。網頁版新增的設計經人工調整並重新截圖，修改範圍及原始匯出的摘要記錄於個別生成紀錄。`STITCH-PROMPT.md` 保留當時送出的指令；重新撰寫的 `STITCH-PROMPT.zh-TW.md` 是中文生成參考，沒有宣稱已再次送交生成服務。
 
-網站主要預覽則依保存的公開官網資料、DOM、樣式、字型、圖片與影片校正，與原生生成稿分開保存。本次文字在地化沒有改寫原始預覽、截圖或媒體，也不把生成服務的精確度宣稱當成視覺驗證。
+既有網站主要預覽依保存的公開官網資料、DOM、樣式、字型、圖片與影片校正，與原生生成稿分開保存。新增設計採明確標示的生成示範，不把生成服務的精確度宣稱當成視覺驗證。
 
 原始完整改寫歷程可由版本 `1a783491c9539c3153c2fc96c16d59131e024f4e` 的來源紀錄溯源；目前每頁的日期、預覽摘要與限制則以 [全部參考紀錄](official-progress.html) 為準。曾出現的生成錯誤、下載失敗、行動版請求回傳桌面稿、影片與動畫差異，仍保留在來源紀錄，不因中文整理而改標為驗收通過。
 
@@ -306,7 +306,7 @@ Google Stitch 原始預覽來自實際 MCP 生成；各 `STITCH.json` 記錄專�
 - 原始著作權：Copyright (c) 2026 VoltAgent；MIT 著作權與授權條文保留於 [LICENSE](LICENSE)。
 - 原始檔案路徑與 SHA-256 記錄於原始碼的 `data/upstream.json`。
 
-## 74 份日期限定研究的來源
+## {len(locks)} 份日期限定研究的來源
 
 以下日期是既有公開首頁觀察日期，不是本次中文整理時重新檢查官網的日期。每頁限制說明以繁體中文提供；實際比較只涵蓋原紀錄的尺寸與狀態，未宣稱完整互動、所有裝置或品牌後端服務一致。
 
@@ -353,7 +353,7 @@ def main():
                             documents={kind: documents[kind] for kind in lock['study']},
                             implementation_files={name:dict(path=f'implementation/{slug}/{name}',text=text)
                                                   for name,text in implementation['files'].items()})
-    assert len(output) == 74
+    assert len(output) == len(recipes) and set(output) == {entry['slug'] for entry in recipes}
     (ROOT / 'data/recipes.json').write_text(json.dumps(recipes, ensure_ascii=False, indent=2) + '\n')
     (LOCALE / 'studies.json').write_text(json.dumps(dict(locale='zh-TW', updated=UPDATED, studies=output), ensure_ascii=False, indent=2) + '\n')
     (ROOT / 'data/implementation/specs.json').write_text(json.dumps(dict(version=IMPLEMENTATION_VERSION, profiles=implementation_profiles), ensure_ascii=False, indent=2) + '\n')

@@ -111,11 +111,16 @@ class CollectionTests(unittest.TestCase):
             folder = ROOT / 'design-md' / entry['slug']
             record = json.loads((folder / 'STITCH.json').read_text())
             self.assertEqual(record['provider'], 'Google Stitch')
-            self.assertEqual(record['transport'], 'MCP')
+            self.assertIn(record['transport'], ('MCP', 'web'))
             self.assertEqual(entry['preview']['status'], 'generated')
-            self.assertEqual(record['screen_name'], f"projects/{record['project_id']}/screens/{record['screen_id']}")
-            self.assertNotIn(record['screen_name'], screens)
-            screens.add(record['screen_name'])
+            if record['transport'] == 'MCP':
+                self.assertEqual(record['screen_name'], f"projects/{record['project_id']}/screens/{record['screen_id']}")
+                self.assertNotIn(record['screen_name'], screens)
+                screens.add(record['screen_name'])
+            else:
+                self.assertTrue(record['project_id'])
+                self.assertRegex(record['original_export_sha256'], r'^[a-f0-9]{64}$')
+                self.assertTrue(record['preview_is_modified'])
             for name, checksum in record['files'].items():
                 self.assertEqual(hashlib.sha256((folder / name).read_bytes()).hexdigest(), checksum)
             self.assertNotIn(record['files']['preview.html'], html_hashes)
@@ -203,7 +208,9 @@ class CollectionTests(unittest.TestCase):
                 route=dependency.relative_to((ROOT/'dist/official-drafts').resolve()).as_posix()
                 self.assertTrue(dependency.is_file() or route in media_routes,f'{draft}: {link}')
         metadata=json.loads((ROOT/'dist/assets/official-studies.json').read_text())
-        self.assertEqual(metadata['count'],74)
+        self.assertEqual(metadata['count'], len(metadata['studies']))
+        self.assertEqual({study['slug'] for study in metadata['studies']},
+                         {item['slug'] for item in json.loads((ROOT/'data/recipes.json').read_text())})
         self.assertFalse(metadata['official_consistency_claim'])
         for study in metadata['studies']:
             draft=ROOT/'dist'/study['preview']
@@ -259,8 +266,11 @@ class CollectionTests(unittest.TestCase):
                 relative = local['preview'][key]
                 self.assertEqual(remote['preview'][key], relative)
                 self.assertTrue((ROOT / relative).is_file())
-                self.assertFalse((ROOT / 'dist' / relative).exists())
-                self.assertEqual(media[relative]['sha256'],hashlib.sha256((ROOT/relative).read_bytes()).hexdigest())
+                if local['preview'].get('localAssets'):
+                    self.assertEqual((ROOT / 'dist' / relative).read_bytes(), (ROOT / relative).read_bytes())
+                else:
+                    self.assertFalse((ROOT / 'dist' / relative).exists())
+                    self.assertEqual(media[relative]['sha256'],hashlib.sha256((ROOT/relative).read_bytes()).hexdigest())
             for key in ('html', 'prompt', 'provenance'):
                 self.assertEqual(remote['preview'][key], local['preview'][key])
                 relative = local['preview'][key]

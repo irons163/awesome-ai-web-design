@@ -19,11 +19,12 @@ class LocalizationTests(unittest.TestCase):
         output = ROOT / 'dist'
         metadata = json.loads((output / 'assets/official-studies.json').read_text())
         self.assertEqual(metadata['locale'], 'zh-TW')
-        self.assertEqual(len(metadata['studies']), 74)
+        self.assertEqual({study['slug'] for study in metadata['studies']},
+                         {item['slug'] for item in json.loads((ROOT / 'data/recipes.json').read_text())})
         english_sentence = re.compile(r"(?:[A-Za-z][A-Za-z’'.-]+[ ,]+){5,}[A-Za-z][A-Za-z’'.-]+")
         forbidden = re.compile('默認|用户|數據|組件|服務器|鏈接|登錄|視頻|预覽|鼠標|屏幕|信息')
         with zipfile.ZipFile(output / 'assets/design-references.zip') as archive:
-            self.assertEqual(len(archive.namelist()), 448)
+            self.assertEqual(len(archive.namelist()), 6 * len(metadata['studies']) + 4)
             for study in metadata['studies']:
                 self.assertEqual(study['document_language'], 'zh-TW')
                 self.assertFalse(study['accepted'])

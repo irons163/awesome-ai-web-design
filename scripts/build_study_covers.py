@@ -16,7 +16,7 @@ def main():
     args=parser.parse_args()
     records=json.loads((ROOT/args.source).read_text())['covers']
     expected={r['slug'] for r in json.loads((ROOT/'data/recipes.json').read_text())}
-    if {r['slug'] for r in records}!=expected or len(records)!=74:raise ValueError('Expected all74 current studies')
+    if {r['slug'] for r in records}!=expected or len(records)!=len(expected):raise ValueError('Expected one cover per current study')
     out=ROOT/'assets/current-previews';out.mkdir(exist_ok=True)
     total=0;replaced=[]
     for record in records:
@@ -37,10 +37,10 @@ def main():
         record['source']['dimensions']=list(source.size)
         record['image']={'path':str(path.relative_to(ROOT)),'sha256':sha,'bytes':path.stat().st_size,'width':800,'height':450,'source_crop':crop}
         total+=path.stat().st_size
-    manifest={'method':'Viewport excerpts of actual corrected-study browser rasters, resized to800×450 WebP. Original screenshots and genuine Stitch exports preserved. Each cover is bound to the current preview and review digests; the source crop is explicit.','count':74,'bytes':total,'covers':records}
+    manifest={'method':'Viewport excerpts of actual corrected-study browser rasters, resized to800×450 WebP. Each cover is bound to the current preview and review digests; the source crop is explicit.','count':len(records),'bytes':total,'covers':records}
     (ROOT/'data/study-covers.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
     for file in replaced:
         file.resolve().relative_to(out.resolve());file.unlink(missing_ok=True)
-    print(json.dumps({'covers':74,'bytes':total}))
+    print(json.dumps({'covers':len(records),'bytes':total}))
 
 if __name__=='__main__':main()

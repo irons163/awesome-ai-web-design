@@ -1,3 +1,5 @@
+> 2026-11-01: Five additional Stitch web exports are integrated. Their modified previews have scoped local checks and are not claimed to match the official sites; the earlier 74-study observations below describe the prior collection.
+
 # Validation
 
 The collection is checked locally before publication. This revision replaces the previous token specimens with individual Google Stitch generations over MCP.

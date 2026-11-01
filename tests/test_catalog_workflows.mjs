@@ -9,7 +9,7 @@ const html=read('index.html'),app=read('assets/app.js'),catalog=JSON.parse(read(
 const published=existsSync(new URL('../dist/client/official-progress.html',import.meta.url))?'dist/client/':'dist/';
 const key='awesome-ai-web-design:favorites:v1';
 async function until(predicate){for(let i=0;i<40;i++){if(predicate())return;await delay(5);}assert.fail('Catalog did not reach expected state');}
-async function fixture(t,{hash='',favorites='[]',catalogFailure=false,progressFailure=false,blockedStorage=false,clipboardFailure=false,fallbackCopy=false,documentResponse}={}){
+async function fixture(t,{hash='',favorites='[]',catalogFailure=false,progressFailure=false,blockedStorage=false,clipboardFailure=false,fallbackCopy=false,documentResponse,catalogData=catalog}={}){
  const dom=new JSDOM(html,{url:'https://catalog.test/'+hash,runScripts:'outside-only'});
  t.after(async()=>{await delay(0);dom.window.close();});
  const w=dom.window,q=s=>w.document.querySelector(s);let fail=catalogFailure;
@@ -21,15 +21,25 @@ async function fixture(t,{hash='',favorites='[]',catalogFailure=false,progressFa
  Object.defineProperty(w.navigator,'clipboard',{value:fallbackCopy?undefined:{writeText:async text=>{if(clipboardFailure)throw new Error('Denied');copied.push(text);}}});
  w.document.execCommand=()=>false;
  w.fetch=async file=>{
-  if(file==='assets/catalog.json')return {ok:!fail,json:async()=>structuredClone(catalog)};
+  if(file==='assets/catalog.json')return {ok:!fail,json:async()=>structuredClone(catalogData)};
   if(file==='official-progress.html')return {ok:!progressFailure,text:async()=>read(published+'official-progress.html')};
   if(file.startsWith('official-drafts/'))return documentResponse?documentResponse(file):{ok:true,text:async()=>read(published+file)};
   throw new Error('Unexpected file '+file);
  };
  w.eval(app);
- await until(()=>catalogFailure?!q('#load-error').hidden:q('#catalog').children.length===74);
+ await until(()=>catalogFailure?!q('#load-error').hidden:q('#catalog').children.length===catalogData.designs.length);
  return {w,q,copied,recover(){fail=false;},slugs(){return [...w.document.querySelectorAll('[data-design]')].map(n=>n.dataset.design);},input(value){q('#search').value=value;q('#search').dispatchEvent(new w.Event('input',{bubbles:true}));}};
 }
+
+test('visible collection counts follow the catalog instead of a fixed total',async t=>{
+ const subset={...catalog,count:1,designs:[catalog.designs[0]]};
+ const ui=await fixture(t,{catalogData:subset});
+ const counters=[...ui.w.document.querySelectorAll('[data-design-count]')];
+ assert.ok(counters.length>=5);
+ assert.ok(counters.every(element=>element.textContent==='1'));
+ assert.equal(ui.q('#stitch-count').textContent,'1 套免費設計參考');
+ assert.equal(ui.q('#result-count').textContent,'1 套設計');
+});
 
 test('search, category and mode filters combine and clearing an empty result resets them all',async t=>{
  const ui=await fixture(t);ui.input('  STRIPE  ');assert.deepEqual(ui.slugs(),['stripe']);
@@ -39,7 +49,7 @@ test('search, category and mode filters combine and clearing an empty result res
  const expected=catalog.designs.filter(d=>d.category==='Fintech & Crypto'&&d.mode==='dark').map(d=>d.slug).sort();
  assert.deepEqual(ui.slugs().sort(),expected);assert.ok(expected.includes('binance'));
  ui.input('不存在的設計xyz');assert.equal(ui.q('#empty').hidden,false);
- ui.q('#clear-filters').click();assert.equal(ui.slugs().length,74);assert.equal(ui.q('#mode').value,'all');assert.equal(ui.q('#search').value,'');
+ ui.q('#clear-filters').click();assert.equal(ui.slugs().length,catalog.designs.length);assert.equal(ui.q('#mode').value,'all');assert.equal(ui.q('#search').value,'');
  assert.equal(ui.q('[data-category="all"]').getAttribute('aria-pressed'),'true');
 });
 
@@ -60,7 +70,7 @@ test('blocked storage keeps this-session favorites usable and clearly reports th
 
 test('catalog fetch failure offers a working retry without a false empty-results state',async t=>{
  const ui=await fixture(t,{catalogFailure:true});assert.equal(ui.q('#empty').hidden,true);ui.recover();ui.q('#retry').click();
- await until(()=>ui.q('#catalog').children.length===74);assert.equal(ui.q('#load-error').hidden,true);
+ await until(()=>ui.q('#catalog').children.length===catalog.designs.length);assert.equal(ui.q('#load-error').hidden,true);
 });
 
 test('keyboard search, tabs, Escape close and return focus follow the visible controls',async t=>{
@@ -77,7 +87,7 @@ test('keyboard search, tabs, Escape close and return focus follow the visible co
 
 for(const hash of ['#/design/unknown-design','#/design/%E0%A4%A']){
  test('invalid shared link recovers to the collection: '+hash,async t=>{
-  const ui=await fixture(t,{hash});assert.equal(ui.q('#design-dialog').open,false);assert.equal(ui.w.location.hash,'#collection');assert.match(ui.q('#toast').textContent,/找不到|格式有誤/);assert.equal(ui.slugs().length,74);
+  const ui=await fixture(t,{hash});assert.equal(ui.q('#design-dialog').open,false);assert.equal(ui.w.location.hash,'#collection');assert.match(ui.q('#toast').textContent,/找不到|格式有誤/);assert.equal(ui.slugs().length,catalog.designs.length);
  });
 }
 
@@ -90,8 +100,8 @@ for(const fallbackCopy of [false,true]){
  });
 }
 
-test('all 74 entries support preview, current specs, copy and implementation-pack links through the actual app',async t=>{
- const ui=await fixture(t);await until(()=>ui.q('.official-drafts-count').textContent.includes('74'));
+test('all entries support preview, current specs, copy and implementation-pack links through the actual app',async t=>{
+ const ui=await fixture(t);await until(()=>ui.q('.official-drafts-count').textContent.includes(String(catalog.designs.length)));
  for(const item of catalog.designs){
   ui.w.location.hash='#/design/'+encodeURIComponent(item.slug);await until(()=>ui.q('#detail-title').textContent===item.name);
   assert.equal(ui.q('#current-preview-image').hidden,false,item.slug);assert.match(ui.q('#open-preview').getAttribute('href'),/official-drafts\/.+\.html$/);

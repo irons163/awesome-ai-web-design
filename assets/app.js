@@ -138,6 +138,17 @@ function setPreview(view) {
   previewMode = view;
   const preview = currentDesign.preview;
   const ready = preview.status === 'generated';
+  const modified = preview.modified === true;
+  $('.history-description').textContent = modified
+    ? '此設計由 Google Stitch 網頁版生成，公開預覽經修改並重新截圖；原始輸出摘要及修改說明見生成紀錄。'
+    : '延伸規格與三則任務指令已改為台灣繁體中文；Google Stitch 原始預覽與截圖保留來源原貌。';
+  $('[data-preview="image"]').textContent = modified ? '調整後截圖' : '初稿截圖';
+  $('[data-preview="html"]').textContent = modified ? '調整後 HTML' : '初稿 HTML';
+  $('#open-generation-preview').textContent = modified ? '開啟調整後預覽 ↗' : '開啟 AI 初稿 ↗';
+  $('#download-html').textContent = modified ? '下載調整後 HTML ↗' : '下載初稿 HTML ↗';
+  $('#preview-actions .preview-note').textContent = modified
+    ? '此預覽由 Stitch 生成後經人工調整，部分操作及資料為示範。'
+    : '此處保留早期生成範例，部分按鈕與資料為展示內容。';
   const official = view === 'official' || !$('#creation-history').open;
   const draft = OFFICIAL_DRAFTS[currentDesign.slug];
   $('#official-preview').hidden = false;
@@ -174,7 +185,7 @@ function setPreview(view) {
     $('#preview-image').removeAttribute('src');
   } else if (ready) {
     $('#preview-image').src = preview.image;
-    $('#preview-image').alt = `${currentDesign.name} 風格：${preview.title}，Google Stitch 原始生成截圖`;
+    $('#preview-image').alt = `${currentDesign.name} 風格：${preview.title}，${modified ? '調整後的預覽截圖' : 'Google Stitch 原始生成截圖'}`;
     if (view === 'html') $('#preview-frame').src = preview.html;
     else $('#preview-frame').removeAttribute('src');
     $('#preview-frame').title = `${currentDesign.name} — Stitch 生成的 HTML 頁面`;
@@ -328,6 +339,8 @@ async function loadCatalog() {
     if (!response.ok) throw new Error('Catalog unavailable');
     const data = await response.json();
     if (!Array.isArray(data.designs) || !data.designs.length) throw new Error('Invalid catalog');
+    if (data.count !== data.designs.length) throw new Error('Catalog count does not match its designs');
+    document.querySelectorAll('[data-design-count]').forEach(element => { element.textContent = String(data.count); });
     startPrompt = typeof data.startPrompt === 'string' ? data.startPrompt : '';
     copyIntro = typeof data.copyIntro === 'string' ? data.copyIntro : '';
     $('#start-prompt').textContent = startPrompt || '使用說明暫時無法載入；下載設計包後，可依包內 README.md 開始使用。';
