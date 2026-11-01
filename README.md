@@ -108,21 +108,6 @@ pnpm run build
 
 其他工作流程：[從網站建立設計分析](prompts/analyze-website.md) · [依參考實作](prompts/build-interface.md) · [視覺檢查與修正](prompts/review-interface.md)
 
-## 自行部署
-
-正式網站 [webdesign.zero2codex.dev](https://webdesign.zero2codex.dev/) 使用自有 VPS 與 Caddy 提供 HTTPS。網站為靜態檔案，伺服器不需 Node.js、pnpm 或資料庫；搜尋、篩選、收藏與複製都在瀏覽器執行。
-
-在開發電腦準備完整靜態部署包：
-
-```sh
-node scripts/build_site.mjs --output public
-python3 scripts/package_vps.py --output .test-artifacts/vps-ready
-```
-
-請使用尚不存在或空的輸出目錄。打包時會從完整原始碼還原預覽素材，並依來源清單核對雜湊。產出的 `www/` 可交由 Caddy 或 Nginx 託管；包內附每個檔案的大小、SHA-256 與伺服器設定範本。上傳、HTTPS 與版本切換方式見 [VPS 部署說明](deploy/vps/README.md)。
-
-原 Sites 託管的 Vinext Worker 建置入口仍保留，執行 `pnpm run build` 產生 `dist/client/` 與 `dist/server/`。`pnpm run build:static` 僅整理靜態檔案，大型素材仍需同源路由或 VPS 打包還原後才能完整提供。
-
 ## 來源與授權
 
 Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，提供繁體中文設計規格、重新撰寫的 AI 實作指令、可操作預覽與下載工具。
