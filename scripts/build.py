@@ -82,7 +82,8 @@ def main():
         entry=metadata(recipe,(path/'DESIGN.md').read_text(),profiles[recipe['slug']]['profile'])
         entry['preview'] = stitch_preview(path)
         entries.append(entry)
-    catalog={'version':3,'locale':'zh-TW','generatedCount':sum(e['preview']['status']=='generated' for e in entries),'count':len(entries),'promptCount':len(entries)*3,'categories':CATEGORY_LABELS,'designs':entries}
+    usage=json.loads((ROOT/'data/usage.json').read_text())
+    catalog={'version':3,'locale':'zh-TW','startPrompt':usage['start_prompt'],'copyIntro':usage['copy_intro'],'generatedCount':sum(e['preview']['status']=='generated' for e in entries),'count':len(entries),'promptCount':len(entries)*3,'categories':CATEGORY_LABELS,'designs':entries}
     (ROOT/'assets/catalog.json').write_text(json.dumps(catalog,ensure_ascii=False,separators=(',',':'))+'\n')
     readme=(ROOT/'README.md').read_text()
     collection=''

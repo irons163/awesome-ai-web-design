@@ -75,13 +75,27 @@ class ImplementationSpecTests(unittest.TestCase):
     def test_single_brand_zip_and_full_zip_match_every_public_dependency(self):
         output = ROOT / 'dist'
         studies = json.loads((output / 'assets/official-studies.json').read_text())['studies']
+        usage = json.loads((ROOT / 'data/usage.json').read_text())
+        self.assertEqual(json.loads((output / 'assets/catalog.json').read_text())['startPrompt'], usage['start_prompt'])
+        self.assertEqual(json.loads((output / 'assets/catalog.json').read_text())['copyIntro'], usage['copy_intro'])
         with zipfile.ZipFile(output / 'assets/design-references.zip') as full:
             self.assertEqual(len(full.namelist()),448)
+            full_readme = full.read('README.md').decode()
+            self.assertIn('先選一個品牌資料夾', full_readme)
+            self.assertEqual(re.findall(r'```text\n(.*?)\n```', full_readme, re.S), [usage['start_prompt']])
             for name in ('LICENSE','ATTRIBUTION.md'):
                 self.assertEqual(full.read(name),(ROOT/name).read_bytes())
             for row in studies:
                 self.assertIn('implementation_pack',row)
+                self.assertIn('simple_pack',row)
                 slug = row['slug']
+                with zipfile.ZipFile(output / row['simple_pack']) as simple:
+                    self.assertIsNone(simple.testzip())
+                    self.assertEqual(set(simple.namelist()),{'DESIGN.md','PROMPTS.md'})
+                    for kind,name in [('analysis','DESIGN.md'),('prompts','PROMPTS.md')]:
+                        self.assertEqual(simple.read(name),(output/row['study'][kind]).read_bytes())
+                    self.assertIn((ROOT/'LICENSE').read_bytes(),simple.comment)
+                    self.assertIn(usage['simple_pack_attribution'].encode(),simple.comment)
                 with zipfile.ZipFile(output / row['implementation_pack']) as single:
                     self.assertIsNone(single.testzip())
                     self.assertEqual(len(single.namelist()),10)
@@ -96,7 +110,13 @@ class ImplementationSpecTests(unittest.TestCase):
                         self.assertEqual(hashlib.sha256(expected).hexdigest(),file['sha256'])
                         self.assertEqual(single.read(name),expected)
                         self.assertEqual(full.read(slug+'/'+name),expected)
-                    self.assertIn('不依賴未附上的延伸規格',single.read('README.md').decode())
+                    readme = single.read('README.md').decode()
+                    self.assertIn('不依賴未附上的延伸規格',readme)
+                    self.assertTrue(readme.startswith('# '+row.get('name',slug)+' 設計包\n'), slug)
+                    self.assertIn('不需要再分別下載',readme)
+                    self.assertIn('把解壓後的全部檔案放進去',readme)
+                    self.assertNotIn('選一個品牌資料夾',readme)
+                    self.assertEqual(re.findall(r'```text\n(.*?)\n```',readme,re.S),[usage['start_prompt']],slug)
 
 
 if __name__ == '__main__':

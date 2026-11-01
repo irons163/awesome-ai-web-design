@@ -3,6 +3,8 @@ import unittest
 import hashlib
 import json
 import tempfile
+import shutil
+import subprocess
 from zipfile import ZipFile
 from pathlib import Path
 
@@ -15,6 +17,34 @@ from study_pack import write_study_pack
 
 
 class PublicationTests(unittest.TestCase):
+    @unittest.skipUnless(shutil.which('node'), 'Node is required for cross-builder parity')
+    def test_both_zip_builders_give_the_same_brand_and_collection_instructions(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output=Path(directory);(output/'assets').mkdir();(output/'official-drafts').mkdir()
+            (output/'official-drafts/example-analysis.md').write_text('# 設計規格\n')
+            (output/'official-drafts/example-reproduction-prompt.md').write_text('# AI 指令\n')
+            (output/'implementation/example').mkdir(parents=True)
+            files={}
+            for name in ['ASSETS.json','ASSETS.md','TOKENS.json','starter.css']:
+                data=b'{}\n';relative='implementation/example/'+name
+                (output/relative).write_bytes(data)
+                files[name]=dict(path=relative,sha256=hashlib.sha256(data).hexdigest())
+            study=dict(slug='example',name='範例品牌',date='2026-10-13',preview='official-drafts/example.html',preview_sha256='current',reference_url='https://example.com/',implementation_version='2026-10-20',implementation_files=files,study=dict(analysis='official-drafts/example-analysis.md',prompts='official-drafts/example-reproduction-prompt.md'))
+            write_study_pack(output,[study])
+            paths=['assets/design-references.zip','assets/design-packs/example.zip','assets/design-packs/example-simple.zip']
+            expected={}
+            comments={}
+            for path in paths:
+                with ZipFile(output/path) as archive:
+                    expected[path]={name:archive.read(name) for name in archive.namelist()}
+                    comments[path]=archive.comment
+            subprocess.run([shutil.which('node'),'--input-type=module','-e',"import {writeStudyPack} from './scripts/study_pack.mjs';writeStudyPack(process.argv[1],[JSON.parse(process.argv[2])]);",str(output),json.dumps(study)],cwd=ROOT,check=True,capture_output=True,text=True)
+            for path in paths:
+                with ZipFile(output/path) as archive:
+                    self.assertIsNone(archive.testzip())
+                    self.assertEqual({name:archive.read(name) for name in archive.namelist()},expected[path])
+                    self.assertEqual(archive.comment,comments[path])
+
     def test_download_pack_contains_the_current_files_and_rejects_missing_study_links(self):
         with tempfile.TemporaryDirectory() as directory:
             output=Path(directory);(output/'assets').mkdir();(output/'official-drafts').mkdir()

@@ -86,6 +86,27 @@ async function openHistory(ui,view='image') {
   ui.query(`[data-preview="${view}"]`).click();
 }
 
+test('a late combined-copy response cannot replace a different brand or enable a stale copy', async t => {
+  const old=studies.find(study=>study.slug==='wired');
+  const next=studies.find(study=>study.slug==='pinterest');
+  let resolveOld;
+  const pending=new Promise(resolve=>{resolveOld=resolve;});
+  const ui=await fixture(t,'wired',progress,{[old.study.analysis]:()=>pending});
+  ui.revealProgress();
+  await settleUntil(()=>ui.requested.includes(old.study.analysis));
+  assert.equal(ui.query('#copy-full-reference').disabled,true);
+  ui.window.location.hash='#/design/pinterest';
+  await settleUntil(()=>ui.query('#detail-title').textContent==='Pinterest'&&!ui.query('#copy-full-reference').disabled);
+  const expected=ui.query('#combined-reference-text').textContent;
+  assert.ok(expected.includes(read(published+next.study.analysis).trimEnd()));
+  resolveOld({ok:true,text:async()=> 'STALE_WIRED_DOCUMENT'});
+  await delay(0);
+  assert.equal(ui.query('#combined-reference-text').textContent,expected);
+  ui.query('#copy-full-reference').click();
+  await settleUntil(()=>ui.copied.at(-1)===expected);
+  assert.ok(!ui.copied.at(-1).includes('STALE_WIRED_DOCUMENT'));
+});
+
 function assertCurrentStudyStatus(query, slug) {
   const study = studies.find(item => item.slug === slug);
   assert.ok(study, `Missing published study metadata: ${slug}`);
@@ -301,12 +322,13 @@ for(const [tab,kind,output,copy] of [['document','analysis','#document-text','#c
   });
 
   test(`failed current ${kind} requests stay explicit and can retry without loading the old file`,async t=>{
-    const href=studies.find(row=>row.slug==='pinterest').study[kind];let attempts=0;
-    const ui=await fixture(t,'pinterest',progress,{[href]:()=>({ok:++attempts>1,text:async()=>'# Current content after retry\n'})});
+    const href=studies.find(row=>row.slug==='pinterest').study[kind];let fail=true;
+    const ui=await fixture(t,'pinterest',progress,{[href]:()=>({ok:!fail,text:async()=>'# Current content after retry\n'})});
     ui.revealProgress();await settleUntil(()=>ui.query('#download-design').hidden===false);
     ui.query('#tab-'+tab).click();await settleUntil(()=>ui.query(output).textContent.includes('無法'));
     assert.equal(ui.query(copy).disabled,true);
     assert.ok(!ui.requested.some(path=>path.startsWith('design-md/')));
+    fail=false;
     ui.query('#tab-preview').click();ui.query('#tab-'+tab).click();
     await settleUntil(()=>!ui.query(copy).disabled);
     assert.equal(ui.query(output).textContent,'# Current content after retry\n');

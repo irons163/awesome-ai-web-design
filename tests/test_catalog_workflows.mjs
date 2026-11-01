@@ -5,11 +5,11 @@ import test from 'node:test';
 import {JSDOM} from 'jsdom';
 
 const read = file => readFileSync(new URL('../'+file,import.meta.url),'utf8');
-const html=read('index.html'),app=read('assets/app.js'),catalog=JSON.parse(read('assets/catalog.json'));
+const html=read('index.html'),app=read('assets/app.js'),catalog=JSON.parse(read('assets/catalog.json')),usage=JSON.parse(read('data/usage.json'));
 const published=existsSync(new URL('../dist/client/official-progress.html',import.meta.url))?'dist/client/':'dist/';
 const key='awesome-ai-web-design:favorites:v1';
 async function until(predicate){for(let i=0;i<40;i++){if(predicate())return;await delay(5);}assert.fail('Catalog did not reach expected state');}
-async function fixture(t,{hash='',favorites='[]',catalogFailure=false,blockedStorage=false,clipboardFailure=false,fallbackCopy=false}={}){
+async function fixture(t,{hash='',favorites='[]',catalogFailure=false,progressFailure=false,blockedStorage=false,clipboardFailure=false,fallbackCopy=false,documentResponse}={}){
  const dom=new JSDOM(html,{url:'https://catalog.test/'+hash,runScripts:'outside-only'});
  t.after(async()=>{await delay(0);dom.window.close();});
  const w=dom.window,q=s=>w.document.querySelector(s);let fail=catalogFailure;
@@ -22,8 +22,8 @@ async function fixture(t,{hash='',favorites='[]',catalogFailure=false,blockedSto
  w.document.execCommand=()=>false;
  w.fetch=async file=>{
   if(file==='assets/catalog.json')return {ok:!fail,json:async()=>structuredClone(catalog)};
-  if(file==='official-progress.html')return {ok:true,text:async()=>read(published+'official-progress.html')};
-  if(file.startsWith('official-drafts/'))return {ok:true,text:async()=>read(published+file)};
+  if(file==='official-progress.html')return {ok:!progressFailure,text:async()=>read(published+'official-progress.html')};
+  if(file.startsWith('official-drafts/'))return documentResponse?documentResponse(file):{ok:true,text:async()=>read(published+file)};
   throw new Error('Unexpected file '+file);
  };
  w.eval(app);
@@ -68,8 +68,10 @@ test('keyboard search, tabs, Escape close and return focus follow the visible co
  const trigger=ui.q('a[aria-label="查看 Stripe 設計"]');trigger.focus();ui.w.location.hash='#/design/stripe';
  await until(()=>ui.q('#design-dialog').open);assert.equal(ui.w.document.activeElement.id,'close-dialog');
  ui.q('#tab-preview').dispatchEvent(new ui.w.KeyboardEvent('keydown',{key:'End',bubbles:true,cancelable:true}));
- assert.equal(ui.q('#tab-prompts').getAttribute('aria-selected'),'true');assert.equal(ui.w.document.activeElement.id,'tab-prompts');
- ui.q('#tab-prompts').dispatchEvent(new ui.w.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));assert.equal(ui.q('#tab-preview').tabIndex,0);
+ assert.equal(ui.q('#tab-document').getAttribute('aria-selected'),'true');assert.equal(ui.w.document.activeElement.id,'tab-document');
+ ui.q('#tab-document').dispatchEvent(new ui.w.KeyboardEvent('keydown',{key:'ArrowLeft',bubbles:true,cancelable:true}));assert.equal(ui.w.document.activeElement.id,'tab-prompts');
+ ui.q('#tab-prompts').dispatchEvent(new ui.w.KeyboardEvent('keydown',{key:'Home',bubbles:true,cancelable:true}));assert.equal(ui.w.document.activeElement.id,'tab-preview');
+ ui.q('#tab-preview').dispatchEvent(new ui.w.KeyboardEvent('keydown',{key:'ArrowRight',bubbles:true,cancelable:true}));assert.equal(ui.w.document.activeElement.id,'tab-prompts');
  ui.q('#design-dialog').dispatchEvent(new ui.w.Event('cancel',{cancelable:true}));assert.equal(ui.q('#design-dialog').open,false);assert.equal(ui.w.document.activeElement,trigger);assert.equal(ui.w.location.hash,'#collection');
 });
 
@@ -96,8 +98,94 @@ test('all 74 entries support preview, current specs, copy and implementation-pac
   ui.q('#tab-document').click();await until(()=>!ui.q('#copy-document').disabled);const design=ui.q('#document-text').textContent;
   assert.ok(design.includes('## 色彩角色'),item.slug);ui.q('#copy-document').click();await until(()=>ui.copied.at(-1)===design);
   ui.q('#tab-prompts').click();await until(()=>!ui.q('#copy-current-prompt').disabled);const prompt=ui.q('#current-prompt-text').textContent;
+  assert.equal(ui.q('#individual-downloads').open,false,item.slug);
+  assert.equal(ui.q('#start-prompt').textContent,usage.start_prompt,item.slug);
+  assert.equal(ui.q('#copy-start-prompt').disabled,false,item.slug);
+  ui.q('#download-usage').open=true;ui.q('#copy-start-prompt').click();await until(()=>ui.copied.at(-1)===usage.start_prompt);
+  await until(()=>!ui.q('#copy-full-reference').disabled);
+  ui.q('#copy-full-reference').click();await until(()=>ui.copied.at(-1)===ui.q('#combined-reference-text').textContent);
+  const combined=ui.copied.at(-1);
+  assert.ok(combined.startsWith('# '+item.name+' 網站製作參考\n'),item.slug);
+  assert.ok(combined.includes(usage.copy_intro),item.slug);
+  assert.ok(combined.includes(design.trimEnd()),item.slug);
+  assert.ok(combined.includes(prompt.trimEnd()),item.slug);
+  assert.equal(ui.q('#download-simple-pack').getAttribute('href'),'assets/design-packs/'+encodeURIComponent(item.slug)+'-simple.zip');
+  ui.q('#individual-downloads').open=true;
   assert.ok(prompt.includes('我的產品名稱'),item.slug);ui.q('#copy-current-prompt').click();await until(()=>ui.copied.at(-1)===prompt);
   assert.equal(ui.q('#download-implementation-pack').getAttribute('href'),'assets/design-packs/'+encodeURIComponent(item.slug)+'.zip');
   assert.equal(ui.q('#download-implementation-pack').hidden,false);
  }
+});
+
+test('two equivalent entry points stay in the header while the complete pack is in advanced options',async t=>{
+ const ui=await fixture(t,{hash:'#/design/figma'});
+ await until(()=>!ui.q('#download-simple-pack').hidden);
+ const pack=ui.q('#download-simple-pack');
+ assert.equal(ui.w.document.querySelectorAll('#download-simple-pack').length,1);
+ assert.equal(ui.w.document.querySelectorAll('#copy-full-reference').length,1);
+ assert.equal(pack.closest('[role="tabpanel"]'),null);
+ assert.equal(pack.getAttribute('aria-label'),'下載 Figma 簡易包');
+ assert.equal(pack.getAttribute('download'),'figma-simple.zip');
+ for(const name of ['preview','document','prompts']){
+  ui.q('#tab-'+name).click();assert.equal(pack.hidden,false);
+ }
+ assert.equal(ui.q('#individual-downloads').open,false);
+ for(const selector of ['#download-implementation-pack','#download-design','#download-prompts'])assert.equal(ui.q(selector).closest('details').id,'individual-downloads');
+ ui.q('#tab-preview').click();
+ pack.addEventListener('click',e=>e.preventDefault(),{once:true});pack.click();
+ assert.equal(ui.q('#tab-prompts').getAttribute('aria-selected'),'true');
+ assert.equal(ui.q('#usage-content').hidden,false);
+ assert.equal(ui.q('#download-usage').open,true);
+ assert.equal(ui.q('#panel-prompts').querySelectorAll('.usage-method').length,2);
+});
+
+test('unavailable source metadata cannot advertise a working download or starter copy',async t=>{
+ const ui=await fixture(t,{hash:'#/design/figma',progressFailure:true});
+ await until(()=>ui.q('#pack-status').textContent.includes('無法載入'));
+ assert.equal(ui.q('#download-implementation-pack').hidden,true);
+ assert.equal(ui.q('#download-implementation-pack').hasAttribute('href'),false);
+ assert.equal(ui.q('#usage-content').hidden,true);
+ assert.equal(ui.q('#copy-start-prompt').disabled,true);
+ assert.equal(ui.q('#download-simple-pack').hidden,true);
+ assert.equal(ui.q('#download-simple-pack').hasAttribute('href'),false);
+ assert.equal(ui.q('#copy-full-reference').disabled,true);
+ assert.equal(ui.q('#download-design').hidden,true);
+ assert.equal(ui.q('#download-prompts').hidden,true);
+});
+
+for(const fallbackCopy of [false,true]){
+ test('complete-copy failure leaves both full documents selectable: '+(fallbackCopy?'fallback':'clipboard denial'),async t=>{
+  const ui=await fixture(t,{hash:'#/design/stripe',clipboardFailure:true,fallbackCopy});
+  await until(()=>!ui.q('#copy-full-reference').disabled);ui.q('#copy-full-reference').click();
+  await until(()=>ui.q('#copy-reference-details').open);
+  assert.equal(ui.copied.length,0);
+  assert.equal(ui.q('#tab-prompts').getAttribute('aria-selected'),'true');
+  assert.equal(ui.w.document.activeElement.id,'combined-reference-text');
+  assert.ok(ui.q('#combined-reference-text').textContent.includes('## 色彩角色'));
+  assert.ok(ui.q('#combined-reference-text').textContent.includes('# Stripe AI 實作指令'));
+  assert.match(ui.q('#toast').textContent,/剪貼簿/);
+  assert.equal(ui.w.document.querySelectorAll('textarea').length,0);
+ });
+}
+
+test('a failed combined-copy fetch can retry and never copies only one document',async t=>{
+ let fail=true;
+ const ui=await fixture(t,{hash:'#/design/figma',documentResponse:file=>({ok:!fail,text:async()=>read(published+file)})});
+ await until(()=>ui.q('#copy-full-reference').textContent==='重新載入複製內容');
+ assert.equal(ui.q('#download-simple-pack').hidden,false);
+ assert.equal(ui.q('#combined-reference-text').textContent,'');assert.equal(ui.copied.length,0);
+ fail=false;ui.q('#copy-full-reference').click();
+ await until(()=>ui.q('#copy-full-reference').textContent==='一次複製給 AI');
+ assert.equal(ui.copied.length,0);ui.q('#copy-full-reference').click();
+ await until(()=>ui.copied.length===1);
+ assert.ok(ui.copied[0].includes('## DESIGN.md｜完整設計規格'));
+ assert.ok(ui.copied[0].includes('## PROMPTS.md｜完整 AI 實作指令'));
+});
+
+test('starter copy failure keeps a selectable command and reports no false success',async t=>{
+ const ui=await fixture(t,{hash:'#/design/figma',clipboardFailure:true});
+ await until(()=>!ui.q('#copy-start-prompt').disabled);ui.q('#tab-prompts').click();ui.q('#download-usage').open=true;
+ ui.q('#copy-start-prompt').click();await until(()=>ui.q('#toast').textContent.includes('剪貼簿'));
+ assert.equal(ui.copied.length,0);assert.equal(ui.q('#start-prompt').textContent,usage.start_prompt);
+ assert.equal(ui.w.document.querySelectorAll('textarea').length,0);
 });
