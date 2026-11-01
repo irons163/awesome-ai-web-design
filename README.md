@@ -77,37 +77,6 @@ pnpm run dev
 
 若只需瀏覽原始收藏，可執行 `python3 scripts/serve.py`，再開啟 [http://127.0.0.1:4173](http://127.0.0.1:4173)。此模式不提供主站目前預覽所需的發布路由。請透過伺服器瀏覽，直接開啟 `index.html` 可能受到瀏覽器讀取限制。
 
-## 更新內容與驗證
-
-修改設計方向、元件需求或中文內容後，依序執行：
-
-```sh
-python3 scripts/localize_zh_tw.py
-python3 scripts/build.py
-python3 -m unittest discover -s tests -v
-pnpm run test:preview
-pnpm run test:catalog
-pnpm run test:pinterest
-pnpm run test:media
-pnpm exec tsc --noEmit
-pnpm run build
-```
-
-內容檢查涵蓋 74 組規格與指令、來源雜湊、繁體中文用語及 75 個 ZIP 的解壓內容。操作測試涵蓋搜尋、複合篩選、收藏、剪貼簿、路由、鍵盤與錯誤處理。DOM 測試使用 jsdom；版面與實際操作仍需在瀏覽器檢查。持續整合流程見 [.github/workflows/check.yml](.github/workflows/check.yml)。
-
-`localize_zh_tw.py` 產出繁體中文內容，`build.py` 更新目錄與完整原始收藏 ZIP；兩者不會呼叫 AI 或重新生成預覽。完整原始收藏 ZIP 位於 `assets/all-designs.zip`，供開發用途，不包含在正式網站的「下載全部」中。
-
-| 位置 | 內容 |
-| --- | --- |
-| [data/implementation/](data/implementation/README.md) | 74 組實作方向、元件需求、完整數值與來源依據。 |
-| [data/zh-TW/](data/zh-TW/README.md) | 中文文案、來源鎖定與產出的主要規格。 |
-| `design-md/<slug>/` | 延伸分析、三類任務指令、Stitch 原始預覽與生成紀錄。 |
-| `assets/app.js`、`assets/style.css` | 設計目錄與詳情頁介面。 |
-| `scripts/`、`tests/` | 內容產出、網站建置、部署打包與測試。 |
-| [deploy/vps/](deploy/vps/README.md) | VPS 部署方式、Caddy／Nginx 範本與驗收紀錄。 |
-
-其他工作流程：[從網站建立設計分析](prompts/analyze-website.md) · [依參考實作](prompts/build-interface.md) · [視覺檢查與修正](prompts/review-interface.md)
-
 ## 來源與授權
 
 Awesome AI Web Design 由 [PhilForge](https://philforge.com/) 製作與維護，提供繁體中文設計規格、重新撰寫的 AI 實作指令、可操作預覽與下載工具。
