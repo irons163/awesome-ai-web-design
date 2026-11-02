@@ -20,7 +20,7 @@ Google Stitch 預覽來自實際 MCP 或網頁版生成；各 `STITCH.json` 記�
 
 品牌名稱、商標、字型、圖片及影片屬各自權利人。這些參考素材不因本專案的程式與文字採 MIT 授權，就一併成為 MIT 授權素材。個別素材保留來源網址、檔案大小及 SHA-256；資料包中的 Markdown 用於說明設計，不包含完整官網媒體或品牌服務。
 
-Canva、LinkedIn、PayPal、Etsy 與 Khan Academy 的首頁參考預覽含各網站公開頁面的圖片或標誌，用來對照該次觀察的版面。這些素材及商標屬於各自權利人，不適用本專案的 MIT 授權；來源與雜湊記錄於原始碼 `data/new-studies/media/reference-2026-11-01/`（各整頁補充素材記錄於對應的 `*-full/` 資料夾）。簡易包與實作包不包含這些圖片。
+Google、YouTube、Netflix、GitHub、Microsoft、Wikipedia、Amazon、Discord、Duolingo、IKEA、Adobe、BBC、Twitch、Zoom、Booking.com、Canva、LinkedIn、PayPal、Etsy 與 Khan Academy 的參考預覽含各網站公開頁面的圖片或標誌，用來對照該次觀察的版面。這些素材及商標屬於各自權利人，不適用本專案的 MIT 授權；來源與雜湊記錄於原始碼 `data/new-studies/media/reference-2026-11-01/`。簡易包與實作包不包含這些圖片。
 
 部分預覽使用固定版本 hls.js 1.7.3 精簡播放器，採 Apache-2.0 授權；套件授權及完整性紀錄隨原始資源保留。原始網站連結、外部服務及受原權利人管理的內容，維持各自目的地。
 
